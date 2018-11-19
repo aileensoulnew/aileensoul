@@ -374,10 +374,18 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/user_experience/');
     define('USER_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/user_project/');
     define('USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/user_education/');
+    
     define('JOB_USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_education/');
     define('JOB_USER_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_project/');
     define('JOB_USER_ACTIVITY_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_activity/');
-    
+    define('JOB_USER_AWARD_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_award/');
+    define('JOB_USER_ADDICOURSE_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_addicourse/');
+    define('JOB_USER_RESEARCH_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_research/');
+    define('JOB_USER_PUBLICATION_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_publication/');
+    define('JOB_USER_PATENT_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_patent/');
+    define('JOB_USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_experience/');
+    define('JOB_USER_RESUME_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_resume/');
+
 } else {
     //USER PHOTO 
     define('USER_WEB_IMAGE_URL', BASEURL . 'admin/../uploads/users/main/');
@@ -604,10 +612,18 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/user_experience/');
     define('USER_PROJECT_UPLOAD_URL', BASEURL . 'uploads/user_project/');
     define('USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/user_education/');
+
     define('JOB_USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/job_user_education/');
     define('JOB_USER_PROJECT_UPLOAD_URL', BASEURL . 'uploads/job_user_project/');
     define('JOB_USER_ACTIVITY_UPLOAD_URL', BASEURL . 'uploads/job_user_activity/');
-    
+    define('JOB_USER_AWARD_UPLOAD_URL', BASEURL . 'uploads/job_user_award/');
+    define('JOB_USER_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/job_user_addicourse/');
+    define('JOB_USER_RESEARCH_UPLOAD_URL', BASEURL . 'uploads/job_user_research/');
+    define('JOB_USER_PUBLICATION_UPLOAD_URL', BASEURL . 'uploads/job_user_publication/');
+    define('JOB_USER_PATENT_UPLOAD_URL', BASEURL . 'uploads/job_user_patent/');
+    define('JOB_USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/job_user_experience/');
+    define('JOB_USER_RESUME_UPLOAD_URL', BASEURL . 'uploads/job_user_resume/');
+
 }
 
 

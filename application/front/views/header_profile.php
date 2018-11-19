@@ -36,14 +36,14 @@ if($first_segment == "")
             <div class="email-verify">
                 <span class="email-img"><img src="<?php echo base_url(); ?>assets/images/email.png" alt="Email"></span>
                 <span class="main-txt">
-                    <span class="as-p">
-                        Please verify <span class="none-479">your</span> email address! <?php if($userData['is_new'] == 1){
-                        echo "Check your inbox or spam folder in order to verify yourself.";
+                    <span class="as-p"><?php if($userData['is_new'] == 1){
+                        echo "Please verify your email address! Check your inbox or spam folder in order to verify yourself.";
                     } ?> 
                     </span>
                     <?php
                     if($userData['is_new'] == 0){ ?>
                     <span class="ves_c">
+                        Please Click on the Button to Verify Your Email Address.
                         <span class="fw-50"> <a class="vert_email " onclick="sendmail();" id="vert_email">Verify</a></span>
                     </span>
                 <?php } ?>

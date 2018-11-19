@@ -7197,4 +7197,968 @@ class Job extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
+    public function save_user_award()
+    {
+        $edit_awards = $this->input->post('edit_awards');
+        $awards_file_old = $this->input->post('awards_file_old');
+        $award_title = $this->input->post('award_title');
+        $award_org = $this->input->post('award_org');        
+        $award_date = $this->input->post('award_year').'-'.$this->input->post('award_month').'-'.$this->input->post('award_day');
+        $award_desc = $this->input->post('award_desc');
+        $fileName = $awards_file_old;
+        if(isset($_FILES['award_file']['name']) && $_FILES['award_file']['name'] != "")
+        {
+            $job_user_award_upload_path = $this->config->item('job_user_award_upload_path');
+            $user_award_file_old = $job_user_award_upload_path . $awards_file_old;
+            if (isset($user_award_file_old)) {
+                unlink($user_award_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_award_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['award_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('award_file')){
+                $main_image = $job_user_award_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->job_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards);
+            $user_award = $this->job_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_award()
+    {
+        $award_id = $this->input->post('award_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->job_model->delete_user_award($user_id,$award_id);
+            $user_award = $this->job_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_award()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_award = $this->job_model->get_user_award($userid);
+        $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_addicourse()
+    {
+        $edit_addicourse = $this->input->post('edit_addicourse');
+        $addicourse_file_old = $this->input->post('addicourse_file_old');
+        $addicourse_name = $this->input->post('addicourse_name');
+        $addicourse_org = $this->input->post('addicourse_org');        
+        $addicourse_start_date = $this->input->post('addicourse_s_year').'-'.$this->input->post('addicourse_s_month');
+        $addicourse_end_date = $this->input->post('addicourse_e_year').'-'.$this->input->post('addicourse_e_month');
+        $addicourse_url = $this->input->post('addicourse_url');
+        $fileName = $addicourse_file_old;
+        if(isset($_FILES['addicourse_file']['name']) && $_FILES['addicourse_file']['name'] != "")
+        {
+            $job_user_addicourse_upload_path = $this->config->item('job_user_addicourse_upload_path');
+            $user_addicourse_file_old = $job_user_addicourse_upload_path . $addicourse_file_old;
+            if (isset($user_addicourse_file_old)) {
+                unlink($user_addicourse_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_addicourse_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['addicourse_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('addicourse_file')){
+                $main_image = $job_user_addicourse_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_activity_insert = $this->job_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse);
+            $user_addicourse = $this->job_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_addicourse()
+    {
+        $addicourse_id = $this->input->post('addicourse_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->job_model->delete_user_addicourse($user_id,$addicourse_id);
+            $user_addicourse = $this->job_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_addicourse()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_addicourse = $this->job_model->get_user_addicourse($userid);        
+        $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_research_user()
+    {
+        $edit_research = $this->input->post('edit_research');
+        $research_document_old = ($this->input->post('research_document_old') != "" && $this->input->post('research_document_old') != "undefined" ? $this->input->post('research_document_old') : '');
+        $research_title = $this->input->post('research_title');
+        $research_desc = $this->input->post('research_desc');
+        $research_field = $this->input->post('research_field');
+        if($research_field == 0)
+        {
+            $research_other_field = $this->input->post('research_other_field');
+        }
+        else
+        {
+            $research_other_field = "";
+        }
+            
+        $research_url = $this->input->post('research_url');
+        $research_published_date = $this->input->post('research_year').'-'.$this->input->post('research_month').'-'.$this->input->post('research_day');
+        $fileName = $research_document_old;
+        if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != "")
+        {
+            $job_user_research_upload_path = $this->config->item('job_user_research_upload_path');
+            $research_document_old = $job_user_research_upload_path . $research_document_old;
+            if (isset($research_document_old)) {
+                unlink($research_document_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_research_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('file'))            {
+                $main_image = $job_user_research_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_research = $this->job_model->set_user_research($user_id,$research_title,$research_desc,$research_field,$research_other_field,$research_url,$research_published_date,$fileName,$edit_research);
+            $user_research = $this->job_model->get_user_research($user_id);
+            $ret_arr = array("success"=>1,"user_research"=>$user_research);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_research()
+    {
+        $research_id = $this->input->post('research_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_research_insert = $this->job_model->delete_user_research($user_id,$research_id);
+            $user_research = $this->job_model->get_user_research($user_id);
+            $ret_arr = array("success"=>1,"user_research"=>$user_research);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_research()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_research = $this->job_model->get_user_research($userid);
+        $ret_arr = array("success"=>1,"user_research"=>$user_research);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_publication()
+    {
+        $edit_publication = $this->input->post('edit_publication');        
+        $pub_file_old = ($this->input->post('pub_file_old') != "" && $this->input->post('pub_file_old') != "undefined" ? $this->input->post('pub_file_old') : '');
+        $pub_title = $this->input->post('pub_title');
+        $pub_author = $this->input->post('pub_author');
+        $pub_url = $this->input->post('pub_url');
+        $pub_publisher = $this->input->post('pub_publisher');
+        $pub_desc = $this->input->post('pub_desc');
+        $publication_date = $this->input->post('pub_year_txt').'-'.$this->input->post('pub_month_txt').'-'.$this->input->post('pub_day_txt');
+        $fileName = $pub_file_old;
+        if(isset($_FILES['pub_file']['name']) && $_FILES['pub_file']['name'] != "")
+        {
+            $job_user_publication_upload_path = $this->config->item('job_user_publication_upload_path');
+            $user_publication_file_old = $job_user_publication_upload_path . $pub_file_old;
+            if (isset($user_publication_file_old)) {
+                unlink($user_publication_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_publication_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['pub_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('pub_file'))            {
+                $main_image = $job_user_publication_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_publication = $this->job_model->set_user_publication($user_id,$pub_title,$pub_author,$pub_url,$pub_publisher,$pub_desc,$publication_date,$fileName,$edit_publication);
+            $user_publication = $this->job_model->get_user_publication($user_id);
+            $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_publication()
+    {
+        $publication_id = $this->input->post('publication_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_publication_insert = $this->job_model->delete_user_publication($user_id,$publication_id);
+            $user_publication = $this->job_model->get_user_publication($user_id);
+            $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_publication()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_publication = $this->job_model->get_user_publication($userid);
+        $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_patent()
+    {
+        $edit_patent = $this->input->post('edit_patent');
+        $patent_file_old = ($this->input->post('patent_file_old') != "" && $this->input->post('patent_file_old') != "undefined" ? $this->input->post('patent_file_old') : '');        
+        $patent_title = $this->input->post('patent_title');
+        $patent_creator = $this->input->post('patent_creator');
+        $patent_number = $this->input->post('patent_number');
+        $patent_date = $this->input->post('patent_year').'-'.$this->input->post('patent_month').'-'.$this->input->post('patent_day');
+        $patent_office = $this->input->post('patent_office');
+        $patent_url = $this->input->post('patent_url');
+        $patent_desc = $this->input->post('patent_desc');
+        // $fileName = "";
+        $fileName = $patent_file_old;
+        if(isset($_FILES['patent_file']['name']) && $_FILES['patent_file']['name'] != "")
+        {
+            $job_user_patent_upload_path = $this->config->item('job_user_patent_upload_path');
+            $user_patent_file_old = $job_user_patent_upload_path . $patent_file_old;
+            if (isset($user_patent_file_old)) {
+                unlink($user_patent_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_patent_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['patent_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('patent_file'))            {
+                $main_image = $job_user_patent_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_patent_insert = $this->job_model->set_user_patent($user_id,$patent_title,$patent_creator,$patent_number,$patent_date,$patent_office,$patent_url,$patent_desc,$fileName,$edit_patent);
+            $user_patent = $this->job_model->get_user_patent($user_id);
+            $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_patent()
+    {
+        $patent_id = $this->input->post('patent_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_patent_insert = $this->job_model->delete_user_patent($user_id,$patent_id);
+            $user_patent = $this->job_model->get_user_patent($user_id);
+            $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_patent()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_patent = $this->job_model->get_user_patent($userid);
+        $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    function save_user_links()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $link_type = $this->input->post('link_type');
+        $link_url = $this->input->post('link_url');
+        $personal_link_url = $this->input->post('personal_link_url');
+
+        $this->db->where('user_id', $userid);
+        $this->db->delete('job_user_links');
+
+        if(count($link_type) == count($link_url))
+        {
+            foreach($link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => $link_type[$k]['value'],
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'job_user_links');
+                }
+            }
+        }
+
+        if(count($personal_link_url) > 0)
+        {
+            foreach($personal_link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => "Personal",
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'job_user_links');
+                }
+            }
+        }
+
+        $user_social_links_data = $this->job_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->job_model->get_user_personal_links($userid);        
+        $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_links()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_social_links_data = $this->job_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->job_model->get_user_personal_links($userid);        
+        if(empty($user_social_links_data) && empty($user_personal_links_data))
+        {
+            $ret_arr = array("success"=>0);
+        }
+        else
+        {
+            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data,"user_social_links_data_edit"=>$user_social_links_data,"user_personal_links_data_edit"=>$user_personal_links_data);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_experience()
+    {
+        $edit_exp = $this->input->post('edit_exp');
+        $exp_file_old = $this->input->post('exp_file_old');
+        $exp_company_name = $this->input->post('exp_company_name');
+        $exp_designation = $this->input->post('exp_designation');
+        $exp_company_website = $this->input->post('exp_company_website');
+        $exp_field = $this->input->post('exp_field');        
+        $exp_country = $this->input->post('exp_country');
+        $exp_state = $this->input->post('exp_state');
+        $exp_city = $this->input->post('exp_city');
+        $exp_start_date = $this->input->post('exp_s_year').'-'.$this->input->post('exp_s_month');
+        $exp_end_date = $this->input->post('exp_e_year').'-'.$this->input->post('exp_e_month');
+        $exp_isworking = $this->input->post('exp_isworking');
+        $exp_desc = $this->input->post('exp_desc');
+        $fileName = "";
+        if($exp_isworking == 1)
+        {
+            $exp_end_date = "";
+        }
+        if($exp_field == 0)
+        {
+            $exp_other_field = $this->input->post('exp_other_field');
+        }
+        else
+        {
+            $exp_other_field = "";
+        }
+        $exp_designation_id = "";
+        // foreach ($exp_designation as $title) {
+            $designation = $this->data_model->findJobTitle($exp_designation);
+            if ($designation['title_id'] != '') {
+                $jobTitleId = $designation['title_id'];
+            } else {
+                $data = array();
+                $data['name'] = $title['name'];
+                $data['created_date'] = date('Y-m-d H:i:s', time());
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = 'draft';
+                $data['slug'] = $this->common->clean($title['name']);
+                $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+            }
+            $exp_designation_id = $jobTitleId;
+        // }        
+        $fileName = $exp_file_old;
+        if(isset($_FILES['exp_file']['name']) && $_FILES['exp_file']['name'] != "")
+        {            
+            $job_user_experience_upload_path = $this->config->item('job_user_experience_upload_path');
+            $user_exp_file_old = $job_user_experience_upload_path . $exp_file_old;
+            if (isset($user_exp_file_old)) {
+                unlink($user_exp_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_experience_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['exp_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('exp_file')){
+                $main_image = $job_user_experience_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->job_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp);
+            $user_experience = $this->job_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_experience()
+    {
+        $exp_id = $this->input->post('exp_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->job_model->delete_user_experience($user_id,$exp_id);
+            $user_experience = $this->job_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);
+            $profile_progress = $this->progressbar($user_id);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month,"profile_progress"=>$profile_progress);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_experience()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        
+        $user_experience = $this->job_model->get_user_experience($userid);
+        $year = array();
+        $month = array();
+        foreach ($user_experience as $_user_experience) {
+            $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+            if($_user_experience['exp_isworking'] == 1)
+            {
+                $datetime2 = new DateTime();
+            }
+            else
+            {
+                $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+            }
+            $interval = $datetime1->diff($datetime2);                
+            $year[] = $interval->format('%y');
+            $month[] = $interval->format('%m') + 1;
+        }
+        $years = array_sum($year);
+        $cal_years = array_sum($month);
+        $total_month = $cal_years % 12;
+        $years = $years + intval($cal_years / 12);
+        $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_skills()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $skills = $this->input->post('user_skills');
+        $skill_ids = "";
+        foreach ($skills as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+
+                $contition_array = array('skill' => trim($ski), 'type' => '7');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            }
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+
+                $data = array(
+                    'skill' => $ski,
+                    'status' => '1',
+                    'type' => '7',
+                    'user_id' => $userid,
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }           
+
+            $skill_ids .= $skill_id . ',';
+        }
+        $skill_ids = trim($skill_ids, ',');
+        $data = array('user_skills' => $skill_ids);
+        $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $skills_data = $this->job_model->get_user_skills($userid);
+            $skills_data_edit = $skills_data;
+            $ret_arr = array("success"=>1,"skills_data"=>$skills_data,"skills_data_edit"=>$skills_data_edit);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_skills()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $skills_data = $this->job_model->get_user_skills($userid);
+        $skills_data_edit = $skills_data;
+        $ret_arr = array("success"=>1,"skills_data"=>$skills_data,"skills_data_edit"=>$skills_data_edit);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_skills() {
+        $skills = $this->job_model->get_skills();
+        echo json_encode($skills);
+    }
+
+    public function save_user_hobbies()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $user_hobby = $this->input->post('user_hobby');
+        $user_hobby_txt = "";
+        if(isset($user_hobby) && !empty($user_hobby))
+        {
+            foreach ($user_hobby as $key => $value) {
+                $user_hobby_txt .= $value['hobby'].",";
+            }
+        }
+        $user_hobby_txt = trim($user_hobby_txt,",");
+        $data = array('user_hobbies' => $user_hobby_txt);
+        $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $hobby_data = $this->job_model->get_user_hobbies($userid);
+            $hobby_data_edit = $hobby_data;
+            $ret_arr = array("success"=>1,"hobby_data"=>$hobby_data,"hobby_data_edit"=>$hobby_data_edit);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_hobbies()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $hobby_data = $this->job_model->get_user_hobbies($userid);
+        $hobby_data_edit = $hobby_data;
+        $ret_arr = array("success"=>1,"hobby_data"=>$hobby_data,"hobby_data_edit"=>$hobby_data_edit);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_software()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $user_software = $this->input->post('user_software');
+        $user_software_txt = "";
+        if(isset($user_software) && !empty($user_software))
+        {
+            foreach ($user_software as $key => $value) {
+                $user_software_txt .= $value['software'].",";
+            }
+        }
+        $user_software_txt = trim($user_software_txt,",");
+        $data = array('user_software' => $user_software_txt);
+        $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $software_data = $this->job_model->get_user_software($userid);
+            $software_data_edit = $software_data;
+            $ret_arr = array("success"=>1,"software_data"=>$software_data,"software_data_edit"=>$software_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_software()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $software_data = $this->job_model->get_user_software($userid);
+        $software_data_edit = $software_data;
+        $ret_arr = array("success"=>1,"software_data"=>$software_data,"software_data_edit"=>$software_data_edit);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_resume()
+    {
+        if(isset($_FILES['user_resume_file']['name']) && $_FILES['user_resume_file']['name'] != "")
+        {
+            $user_id = $this->session->userdata('aileenuser');
+            $user_resume = $this->job_model->get_user_resume($user_id);
+            $job_user_resume_upload_path = $this->config->item('job_user_resume_upload_path');
+            $user_exp_file_old = $job_user_resume_upload_path . $user_resume;
+            if (isset($user_exp_file_old)) {
+                @unlink($user_exp_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $job_user_resume_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['user_resume_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('user_resume_file')){
+                $main_image = $job_user_resume_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }            
+            if($user_id != "")
+            {
+                // $user_exp_insert = $this->job_model->set_user_resume($user_id,$fileName);
+                $data = array('user_resume' => $fileName);
+                $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $user_id);
+                $user_resume = $this->job_model->get_user_resume($user_id);
+                $ret_arr = array("success"=>1,"user_resume"=>$user_resume);
+            }
+            else
+            {
+                $ret_arr = array("success"=>0);
+            }
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_resume()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_resume = $this->job_model->get_user_resume($userid);
+        $ret_arr = array("success"=>1,"user_resume"=>$user_resume);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));   
+    }
+
+    public function save_prof_summary()
+    {
+        $prof_summary = $this->input->post('prof_summary');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array('user_professional_summary' => $prof_summary);
+        $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $ret_arr = array("success"=>1,"user_prof_summary"=>$prof_summary);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
+
+    public function get_user_prof_summary()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_prof_summary = $this->job_model->get_user_prof_summary($userid);
+        $ret_arr = array("success"=>1,"user_prof_summary"=>$user_prof_summary);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_language()
+    {
+        $userid = $this->session->userdata('aileenuser');
+
+        $language = $this->input->post('language');
+        $proficiency = $this->input->post('proficiency');        
+        
+        if(isset($language) && isset($proficiency) && !empty($language) && !empty($proficiency))
+        {
+            $this->db->where('user_id', $userid);
+            $this->db->delete('job_user_languages');
+
+            if(count($language) == count($proficiency))
+            {
+                foreach($language as $k=>$v)
+                {                    
+                    if($v['value'] != "")
+                    {                        
+                        $data = array(
+                            'user_id' => $userid,
+                            'language_txt' => $v['value'],
+                            'proficiency' => $proficiency[$k]['value'],
+                            'status' => '1',
+                            'created_date' => date('Y-m-d H:i:s', time()),
+                            'modify_date' => date('Y-m-d H:i:s', time()),
+                        );
+                        $insert_id = $this->common->insert_data($data, 'job_user_languages');
+                    }
+                }
+            }            
+        }
+
+        $user_languages = $this->job_model->get_user_languages($userid);
+        $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_languages()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_languages = $this->job_model->get_user_languages($userid);
+        $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_passion_user()
+    {
+        $passion_user = $this->input->post('passion_user');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array('user_passion' => $passion_user);
+        $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $ret_arr = array("success"=>1,"user_passion"=>$passion_user);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
+
+    public function get_user_passion_user()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_passion = $this->job_model->get_user_passion_user($userid);
+        $ret_arr = array("success"=>1,"user_passion"=>$user_passion);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

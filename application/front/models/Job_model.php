@@ -2023,4 +2023,500 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
     }
+
+    public function set_user_award($userid,$award_title = "",$award_org = "",$award_date = "",$award_desc = "",$award_document = "",$edit_awards = 0)
+    {
+        if($edit_awards == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_award');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $edit_awards);
+            $this->db->update('job_user_award', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_award($userid,$award_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $award_id);
+            $this->db->update('job_user_award', $data);
+            return true;
+    }
+
+    public function get_user_award($userid)
+    {
+        $this->db->select("jua.*,DATE_FORMAT(jua.award_date,'%d %b %Y') as award_date_str")->from("job_user_award jua");
+        $this->db->where('jua.user_id', $userid);
+        $this->db->where('jua.status', '1');
+        $this->db->order_by('jua.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_addicourse($userid,$addicourse_name = "",$addicourse_org = "",$addicourse_start_date = "",$addicourse_end_date = "",$addicourse_url = "",$addicourse_document = "",$edit_addicourse = 0)
+    {
+        if($edit_addicourse == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_addicourse');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $edit_addicourse);
+            $this->db->update('job_user_addicourse', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_addicourse($userid,$addicourse_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $addicourse_id);
+            $this->db->update('job_user_addicourse', $data);
+            return true;
+    }
+
+    public function get_user_addicourse($userid)
+    {
+        $this->db->select("jua.*,DATE_FORMAT(CONCAT(jua.addicourse_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jua.addicourse_end_date,'-1'),'%b %Y') as end_date_str")->from("job_user_addicourse jua");
+        $this->db->where('jua.user_id', $userid);
+        $this->db->where('jua.status', '1');
+        $this->db->order_by('jua.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_research($userid,$research_title = "",$research_desc = "",$research_field = "",$research_other_field = "",$research_url = "",$research_published_date = "",$research_document = "",$edit_research = 0)
+    {
+        if($edit_research == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'research_title' => trim($research_title),
+                'research_desc' => $research_desc,
+                'research_field' => $research_field,
+                'research_other_field' => $research_other_field,
+                'research_url' => $research_url,
+                'research_publish_date' => $research_published_date,
+                'research_document' => $research_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_research');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'research_title' => trim($research_title),
+                'research_desc' => $research_desc,
+                'research_field' => $research_field,
+                'research_other_field' => $research_other_field,
+                'research_url' => $research_url,
+                'research_publish_date' => $research_published_date,
+                'research_document' => $research_document,                 
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_research', $edit_research);
+            $this->db->update('job_user_research', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_research($userid,$research_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_research', $research_id);
+            $this->db->update('job_user_research', $data);
+            return true;
+    }
+
+    public function get_user_research($userid)
+    {
+        $this->db->select("jur.*,it.industry_name as research_field_txt,DATE_FORMAT(jur.research_publish_date,'%d %b %Y') as research_publish_date_str")->from("job_user_research jur");
+        $this->db->join('industry_type it', 'it.industry_id = jur.research_field', 'left');
+        $this->db->where('jur.user_id', $userid);
+        $this->db->where('jur.status', '1');
+        $this->db->order_by('jur.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_publication($userid,$pub_title = "",$pub_author = "",$pub_url = "",$pub_publisher = "",$pub_desc = "",$publication_date = "",$pub_document = "",$edit_publication = 0)
+    {
+        if($edit_publication == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'pub_title' => $pub_title,
+                'pub_author' => $pub_author,
+                'pub_url' => $pub_url,
+                'pub_publisher' => $pub_publisher,
+                'pub_desc' => $pub_desc,
+                'pub_date' => $publication_date,
+                'pub_file' => $pub_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_publication');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'pub_title' => $pub_title,
+                'pub_author' => $pub_author,
+                'pub_url' => $pub_url,
+                'pub_publisher' => $pub_publisher,
+                'pub_desc' => $pub_desc,
+                'pub_date' => $publication_date,
+                'pub_file' => $pub_document,                   
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_publication', $edit_publication);
+            $this->db->update('job_user_publication', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_publication($userid,$publication_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_publication', $publication_id);
+            $this->db->update('job_user_publication', $data);
+            return true;
+    }
+
+    public function get_user_publication($userid)
+    {
+        $this->db->select("jup.*,DATE_FORMAT(jup.pub_date,'%d %b %Y') as pub_date_str")->from("job_user_publication jup");
+        $this->db->where('jup.user_id', $userid);
+        $this->db->where('jup.status', '1');
+        $this->db->order_by('jup.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_patent($userid,$patent_title = "",$patent_creator = "",$patent_number = "",$patent_date = "",$patent_office = "",$patent_url = "",$patent_desc = "",$patent_document = "",$edit_patent = 0)
+    {
+        if($edit_patent == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'patent_title' => trim($patent_title),
+                'patent_creator' => $patent_creator,
+                'patent_number' => $patent_number,
+                'patent_date' => $patent_date,
+                'patent_office' => $patent_office,
+                'patent_url' => $patent_url,
+                'patent_desc' => $patent_desc,
+                'patent_file' => $patent_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_patent');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'patent_title' => trim($patent_title),
+                'patent_creator' => $patent_creator,
+                'patent_number' => $patent_number,
+                'patent_date' => $patent_date,
+                'patent_office' => $patent_office,
+                'patent_url' => $patent_url,
+                'patent_desc' => $patent_desc,
+                'patent_file' => $patent_document,                  
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_patent', $edit_patent);
+            $this->db->update('job_user_patent', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_patent($userid,$patent_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_patent', $patent_id);
+            $this->db->update('job_user_patent', $data);
+            return true;
+    }
+
+    public function get_user_patent($userid)
+    {
+        $this->db->select("jup.*,DATE_FORMAT(jup.patent_date,'%d %b %Y') as patent_date_str")->from("job_user_patent jup");
+        $this->db->where('jup.user_id', $userid);
+        $this->db->where('jup.status', '1');
+        $this->db->order_by('jup.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_links($userid)
+    {
+        $this->db->select("*")->from("job_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_social_links($userid)
+    {
+        $this->db->select("*")->from("job_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type != ','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_personal_links($userid)
+    {
+        $this->db->select("*")->from("job_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function set_user_experience($userid,$exp_company_name = "",$exp_designation = "",$exp_company_website = "",$exp_field = "",$exp_other_field = "",$exp_country = "",$exp_state = "",$exp_city = "",$exp_start_date = "",$exp_end_date = "",$exp_isworking = "",$exp_desc = "",$exp_file = "",$edit_exp = 0)
+    {
+        if($edit_exp == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'exp_company_name' => $exp_company_name,
+                'exp_designation' => $exp_designation,
+                'exp_company_website' => $exp_company_website,
+                'exp_field' => $exp_field,
+                'exp_other_field' => $exp_other_field,
+                'exp_country' => $exp_country,                
+                'exp_state' => $exp_state,                
+                'exp_city' => $exp_city,                
+                'exp_start_date' => $exp_start_date,                
+                'exp_end_date' => $exp_end_date,                
+                'exp_isworking' => $exp_isworking,                
+                'exp_desc' => $exp_desc,                
+                'exp_file' => $exp_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_experience');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'exp_company_name' => $exp_company_name,
+                'exp_designation' => $exp_designation,
+                'exp_company_website' => $exp_company_website,
+                'exp_field' => $exp_field,
+                'exp_other_field' => $exp_other_field,
+                'exp_country' => $exp_country,                
+                'exp_state' => $exp_state,                
+                'exp_city' => $exp_city,                
+                'exp_start_date' => $exp_start_date,                
+                'exp_end_date' => $exp_end_date,                
+                'exp_isworking' => $exp_isworking,                
+                'exp_desc' => $exp_desc,                
+                'exp_file' => $exp_file,                
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_experience', $edit_exp);
+            $this->db->update('job_user_experience', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_experience($userid,$exp_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_experience', $exp_id);
+            $this->db->update('job_user_experience', $data);
+            return true;
+    }
+
+    public function get_user_experience($userid)
+    {
+
+        $this->db->select("jue.id_experience, jue.user_id, jue.exp_company_name, jue.exp_designation,jt.name as designation, jue.exp_company_website, jue.exp_field, jue.exp_other_field, jue.exp_country, jue.exp_state, jue.exp_city, jue.exp_start_date, jue.exp_end_date, DATE_FORMAT(CONCAT(jue.exp_start_date,'-1'),'%b %Y') as start_date_str,DATE_FORMAT(CONCAT(jue.exp_end_date,'-1'),'%b %Y') as end_date_str,jue.exp_isworking, jue.exp_desc, jue.exp_file, jue.status, jue.created_date, jue.modify_date,cr.country_name,st.state_name,ct.city_name")->from("job_user_experience jue");
+        $this->db->join('countries cr', 'cr.country_id = jue.exp_country', 'left');
+        $this->db->join('states st', 'st.state_id = jue.exp_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = jue.exp_city', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = jue.exp_designation', 'left');
+        $this->db->where('jue.user_id', $userid);
+        $this->db->where('jue.status', '1');
+        // $this->db->where('FIND_IN_SET(jt.title_id, jue.exp_designation) !=', 0);
+        // $this->db->group_by('jue.exp_designation,jue.id_experience');
+        $this->db->order_by('jue.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function get_skills() {
+        $this->db->select("s.skill as name")->from("skill s");
+        $this->db->where("(s.type = '1' OR s.type = '2')");
+        $this->db->where('s.status', '1');
+        $this->db->group_by('s.skill');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_user_skills($userid)
+    {
+        $this->db->select("s.skill as name")->from("job_reg jr, skill s");
+        $this->db->where('jr.user_id', $userid);
+        $this->db->where("(s.type = '1' OR s.type = '2')");
+        $this->db->where('FIND_IN_SET(s.skill_id, jr.user_skills) !=', 0);
+        // $this->db->group_by('ui.user_skills', 'uo.location');
+        $query = $this->db->get();
+        $skills_data = $query->result_array();        
+        return $skills_data;
+    }
+
+    public function get_user_hobbies($userid)
+    {
+        $this->db->select("user_hobbies")->from("job_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['user_hobbies'];
+    }
+
+    public function get_user_software($userid)
+    {
+        $this->db->select("user_software")->from("job_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['user_software'];
+    }
+
+    public function get_user_resume($userid)
+    {
+        $this->db->select("user_resume")->from("job_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['user_resume'];
+    }
+
+    public function get_user_prof_summary($userid)
+    {
+        $this->db->select("user_professional_summary")->from("job_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['user_professional_summary'];
+    }
+
+    public function get_user_languages($userid)
+    {
+        $this->db->select("user_id,language_txt as language_name,proficiency,status")->from("job_user_languages");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_passion_user($userid)
+    {
+        $this->db->select("user_passion")->from("job_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['user_passion'];
+    }
 }

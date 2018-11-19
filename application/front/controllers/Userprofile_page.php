@@ -1965,11 +1965,11 @@ class Userprofile_page extends MY_Controller {
                 $jobTitleId = $designation['title_id'];
             } else {
                 $data = array();
-                $data['name'] = $title['name'];
+                $data['name'] = $exp_designation;
                 $data['created_date'] = date('Y-m-d H:i:s', time());
                 $data['modify_date'] = date('Y-m-d H:i:s', time());
                 $data['status'] = 'draft';
-                $data['slug'] = $this->common->clean($title['name']);
+                $data['slug'] = $this->common->clean($exp_designation);
                 $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
             }
             $exp_designation_id = $jobTitleId;

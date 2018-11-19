@@ -641,6 +641,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                         $("#edu_save").removeAttr("style");
                         $("#edu_loader").hide();
                         $("#edu_form")[0].reset();
+                        edu_formdata = new FormData();
                         $scope.user_education = result.user_education;
                         $scope.reset_edu_form();
                         $("#educational-info").modal('hide');
@@ -1120,6 +1121,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                         $scope.project_skill_list = [];
                         $scope.project_partner = [];
                         $("#project_form")[0].reset();
+                        project_formdata = new FormData();
                         $scope.user_projects = result.user_projects;
                         $scope.reset_project_form();
                         $("#dtl-project").modal('hide');
@@ -1519,6 +1521,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                         $("#activity_form")[0].reset();
                         $scope.reset_activity_form();
                         $scope.user_activity = result.user_activity;                        
+                        activity_formdata = new FormData();
                         $("#extra-activity").modal('hide');
                     }
                     else
@@ -1672,4 +1675,3262 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         }
     };
     //Extracurricular Activity End
+
+    //User Achieve & Award Start
+    $scope.award_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#awarddateerror").hide();
+        $("#awarddateerror").html('');
+        var kcyear = document.getElementsByName("award_year")[0],
+        kcmonth = document.getElementsByName("award_month")[0],
+        kcday = document.getElementsByName("award_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#award_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#award_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.award_error = function()
+    {
+        $("#awarddateerror").hide();
+        $("#awarddateerror").html('');
+    };
+
+    var award_formdata = new FormData();
+    $(document).on('change','#award_file', function(e){
+        $("#award_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#award_file_error").html("File size must be less than 10MB.");
+            $("#award_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                award_formdata.append('award_file', $('#award_file')[0].files[0]);
+            }
+            else {
+                $("#award_file_error").html("Invalid file selected.");
+                $("#award_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.award_validate = {
+        rules: {            
+            award_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            award_org: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },           
+            award_month: {
+                required: true,
+            },
+            award_day: {
+                required: true,
+            },
+            award_year: {
+                required: true,
+            },
+            award_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },
+        /*groups: {
+            publication_date: "publication_year publication_month publication_day"
+        },   */     
+        messages: {
+            award_title: {
+                required: "Please enter achievements & awards title",
+            },
+            award_org: {
+                required: "Please enter achievements & awards organization",
+            },
+            award_month: {
+                required: "Please select achievements & awards date",
+            },
+            award_day: {
+                required: "Please select achievements & awards date",
+            },
+            award_year: {
+                required: "Please select achievements & awards date",
+            },
+            award_desc: {
+                required: "Please enter achievements & awards description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_award = function(){
+        if ($scope.award_form.validate()) {
+            $("#user_award_loader").show();
+            $("#user_award_save").attr("style","pointer-events:none;display:none;");
+
+            var award_day = $("#award_day option:selected").val();
+            var award_month = $("#award_month option:selected").val();
+            var award_year = $("#award_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = award_year + '/' + award_month + '/' + award_day;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#awarddateerror").html("Achievements & Award date always less than to today's date.");
+                $("#awarddateerror").show();
+
+                $("#user_award_save").removeAttr("style");
+                $("#user_award_loader").hide();
+                return false;
+            }
+
+            award_formdata.append('edit_awards', $scope.edit_awards);
+            award_formdata.append('awards_file_old', $scope.awards_file_old);
+            award_formdata.append('award_title', $('#award_title').val());
+            award_formdata.append('award_org', $('#award_org').val());            
+            award_formdata.append('award_day', award_day);
+            award_formdata.append('award_month', award_month);
+            award_formdata.append('award_year', award_year);
+            award_formdata.append('award_desc', $('#award_desc').val());
+
+            $http.post(base_url + 'job/save_user_award', award_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $("#user_award_save").removeAttr("style");
+                        $("#user_award_loader").hide();
+                        $("#award_form")[0].reset();
+                        $scope.reset_awards_form();
+                        $scope.user_award = result.user_award;
+                        award_formdata = new FormData();
+                        $("#Achiv-awards").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_award_save").removeAttr("style");
+                        $("#user_award_loader").hide();
+                        $("#award_form")[0].reset();
+                        $("#Achiv-awards").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.get_user_award = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_award',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_award = result.data.user_award;
+                $scope.user_award = user_award;
+                $("#awards-loader").hide();
+                $("#awards-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_award();
+    $scope.view_more_award = 2;
+    $scope.award_view_more = function(){
+        $scope.view_more_award = $scope.user_award.length;
+        $("#view-more-award").hide();
+    };
+
+    $scope.reset_awards_form = function(){        
+        $scope.edit_awards = 0;
+        $scope.awards_file_old = '';
+        $("#Achiv-awards").removeClass("edit-form-cus");
+        $("#award_day").html("");
+        $("#award_year").html("");
+        $("#award_file_error").hide();        
+        $("#award_file_prev").remove();
+        $("#delete_user_award_modal").remove();
+        $("#award_form")[0].reset();
+    };
+    $scope.edit_user_award = function(index){
+        $scope.reset_awards_form();
+        $("#Achiv-awards").addClass("edit-form-cus");
+        var award_arr = $scope.user_award[index];
+        $scope.edit_awards = award_arr.id_award;
+        $("#award_title").val(award_arr.award_title);
+        $("#award_org").val(award_arr.award_org);        
+        var award_date_arr = award_arr.award_date.split("-");
+        award_day = award_date_arr[2];
+        award_month = award_date_arr[1];
+        award_year = award_date_arr[0];
+        $("#award_month").val(award_month);
+        $scope.award_date_fnc(award_day,award_month,award_year);
+
+        $("#award_desc").val(award_arr.award_desc);
+
+        var award_file_name = award_arr.award_file;
+        $scope.awards_file_old = award_file_name;
+        if(award_file_name.trim() != "")
+        {            
+            var filename_arr = award_file_name.split('.');
+            $("#award_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+job_user_activity_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_activity_upload_url+award_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_activity_upload_url+award_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#award_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.award_form.validate();
+        },1000);
+
+        var delete_btn = '<a id="delete_user_award_modal" href="#" data-target="#delete-award-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_award_loader"));
+        $compile(contentbtn)($scope);
+        $("#Achiv-awards").modal("show");
+    };
+
+    $scope.delete_user_award = function(){
+        $("#delete_user_award").attr("style","pointer-events:none;display:none;");
+        $("#user_award_del_loader").show();
+        $("#award-delete-btn").hide();
+        if($scope.edit_awards != 0)
+        {
+            var expdata = $.param({'award_id': $scope.edit_awards});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/delete_user_award',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_award = result.user_award;
+                        $("#delete-award-model").modal('hide');
+                        $("#Achiv-awards").modal('hide');
+                        $("#delete_user_award").removeAttr("style");
+                        $("#user_award_del_loader").hide();
+                        $("#award-delete-btn").show();                        
+                        $scope.reset_awards_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-award-model").modal('hide');
+                        $("#Achiv-awards").modal('hide');
+                        $("#delete_user_award").removeAttr("style");
+                        $("#user_award_del_loader").hide();
+                        $("#award-delete-btn").show();
+                        $scope.reset_awards_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
+    };
+    //User Achieve & Award End
+
+    //Additional Course Start
+    $scope.addicourse_start_year = function(){
+        $("#addicoursedateerror").html("");
+        $("#addicoursedateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+        if($scope.addicourse_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        if($scope.addicourse_s_year != "" && $scope.addicourse_s_year != 0)
+        {            
+            for (var i = yyyy; i >= $scope.addicourse_s_year; i--) {            
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }
+        }
+        var elyear = $('#addicourse_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        var elmonth = $('#addicourse_s_month');
+        elmonth.html($compile(month_opt)($scope));
+    };
+
+    $(document).on('change','#addicourse_e_year', function(e){
+        $("#addicoursedateerror").html("");
+        $("#addicoursedateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#addicourse_e_month').html(month_opt);
+    });
+
+    var addicourse_formdata = new FormData();
+    $(document).on('change','#addicourse_file', function(e){
+        $("#addicourse_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#addicourse_file_error").html("File size must be less than 10MB.");
+            $("#addicourse_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                addicourse_formdata.append('addicourse_file', $('#addicourse_file')[0].files[0]);
+            }
+            else {
+                $("#addicourse_file_error").html("Invalid file selected.");
+                $("#addicourse_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.addicourse_validate = {
+        rules: {            
+            addicourse_name: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            addicourse_org: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },           
+            addicourse_s_year: {
+                required: true,
+            },
+            addicourse_s_month: {
+                required: true,
+            },
+            addicourse_e_year: {
+                required: true,
+            },
+            addicourse_e_month: {
+                required: true,
+            },
+            addicourse_url: {
+                url: true,
+            },
+        },      
+        messages: {
+            addicourse_name: {
+                required: "Please enter additional course name",
+            },
+            addicourse_org: {
+                required: "Please enter additional course organization",
+            },
+            addicourse_s_year: {
+                required: "Please select additional course start date",
+            },
+            addicourse_s_month: {
+                required: "Please select additional course start date",
+            },
+            addicourse_e_year: {
+                required: "Please select additional course end date",
+            },
+            addicourse_e_month: {
+                required: "Please select additional course end date",
+            },
+            addicourse_url: {
+                url: "URL must start with http:// or https://",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_addicourse = function(){
+        $("#addicoursedateerror").html("");
+        $("#addicoursedateerror").hide();
+        if ($scope.addicourse_form.validate()) {
+            $("#user_addicourse_loader").show();
+            $("#user_addicourse_save").attr("style","pointer-events:none;display:none;");
+
+            var addicourse_s_year = $("#addicourse_s_year option:selected").val();
+            var addicourse_s_month = $("#addicourse_s_month option:selected").val();
+
+            var addicourse_e_year = $("#addicourse_e_year option:selected").val();
+            var addicourse_e_month = $("#addicourse_e_month option:selected").val();
+            var activity_date_error = false;
+            if(parseInt(addicourse_e_year) == parseInt(addicourse_s_year))
+            {
+                if(parseInt(addicourse_e_month) <= parseInt(addicourse_s_month))
+                {
+                    activity_date_error = true;
+                }
+            }
+
+            if (activity_date_error == true) {                
+                $("#addicoursedateerror").html("Additional Course date not same or start date is less than end date.");
+                $("#addicoursedateerror").show();
+
+                $("#user_addicourse_save").removeAttr("style");
+                $("#user_addicourse_loader").hide();
+                return false;
+            }
+
+
+            addicourse_formdata.append('edit_addicourse', $scope.edit_addicourse);
+            addicourse_formdata.append('addicourse_file_old', $scope.addicourse_file_old);
+            addicourse_formdata.append('addicourse_name', $('#addicourse_name').val());
+            addicourse_formdata.append('addicourse_org', $('#addicourse_org').val());            
+            addicourse_formdata.append('addicourse_s_year', addicourse_s_year);
+            addicourse_formdata.append('addicourse_s_month', addicourse_s_month);
+            addicourse_formdata.append('addicourse_e_year', addicourse_e_year);
+            addicourse_formdata.append('addicourse_e_month', addicourse_e_month);
+            addicourse_formdata.append('addicourse_url', $('#addicourse_url').val());
+
+            $http.post(base_url + 'job/save_user_addicourse', addicourse_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $("#user_addicourse_save").removeAttr("style");
+                        $("#user_addicourse_loader").hide();
+                        $("#addicourse_form")[0].reset();
+                        $scope.user_addicourse = result.user_addicourse;
+                        addicourse_formdata = new FormData();
+                        $scope.reset_addicourse_form();
+                        $("#additional-course").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_addicourse_save").removeAttr("style");
+                        $("#user_addicourse_loader").hide();
+                        $("#addicourse_form")[0].reset();
+                        $("#additional-course").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.get_user_addicourse = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_addicourse',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_addicourse = result.data.user_addicourse;
+                $scope.user_addicourse = user_addicourse;
+                $("#addicourse-loader").hide();
+                $("#addicourse-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_addicourse();
+    $scope.view_more_ac = 2;
+    $scope.ac_view_more = function(){
+        $scope.view_more_ac = $scope.user_addicourse.length;
+        $("#view-more-addicourse").hide();
+    };
+
+    $scope.reset_addicourse_form = function(){
+        $scope.edit_addicourse = 0;
+        $scope.addicourse_file_old = "";
+        $("#additional-course").removeClass("edit-form-cus");
+        $("#addicourse_s_month").html('');
+        $("#addicourse_e_year").html('');
+        $("#addicourse_e_month").html('');
+        $("#addicourse_file_error").hide();        
+        $("#addicourse_file_prev").remove();
+        $("#delete_user_addicourse_modal").remove();
+        $('#addicourse_file').val('');
+        $("#addicourse_form")[0].reset();
+        addicourse_formdata = new FormData();
+    };
+    $scope.edit_user_addicourse = function(index){
+        $scope.reset_addicourse_form();
+        $("#additional-course").addClass("edit-form-cus");
+        var addicourse_arr = $scope.user_addicourse[index];        
+        $scope.edit_addicourse = addicourse_arr.id_addicourse;
+        $("#addicourse_name").val(addicourse_arr.addicourse_name);
+        $("#addicourse_org").val(addicourse_arr.addicourse_org);
+        var addicourse_start_date = addicourse_arr.addicourse_start_date.split('-');
+        var addicourse_end_date = addicourse_arr.addicourse_end_date.split('-');        
+        $scope.addicourse_s_year = addicourse_start_date[0];
+        $scope.addicourse_start_year();
+        // $scope.exp_s_month = addicourse_start_date[1];
+        setTimeout(function(){
+            $("#addicourse_s_month").val(addicourse_start_date[1]);
+            $("#addicourse_e_year").val(addicourse_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },500);
+        setTimeout(function(){
+            $("#addicourse_e_month").val(addicourse_end_date[1]);
+        },500);        
+
+        $("#addicourse_url").val(addicourse_arr.addicourse_url);
+
+        var addicourse_file_name = addicourse_arr.addicourse_file;
+        $scope.addicourse_file_old = addicourse_file_name;
+        if(addicourse_file_name.trim() != "")
+        {            
+            var filename_arr = addicourse_file_name.split('.');
+            $("#addicourse_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a href="'+job_user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_addicourse_upload_url+addicourse_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#addicourse_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.addicourse_form.validate();
+        },1000); 
+        var delete_btn = '<a id="delete_user_addicourse_modal" href="#" data-target="#delete-addicourse-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_addicourse_loader"));
+        $compile(contentbtn)($scope);
+        $("#additional-course").modal("show");
+    };
+
+    $scope.delete_user_addicourse = function(){
+        $("#delete_user_addicourse").attr("style","pointer-events:none;display:none;");
+        $("#user_addicourse_del_loader").show();
+        $("#addicourse-delete-btn").hide();
+        if($scope.edit_addicourse != 0)
+        {
+            var expdata = $.param({'addicourse_id': $scope.edit_addicourse});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/delete_user_addicourse',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_addicourse = result.user_addicourse;                        
+                        $("#delete-addicourse-model").modal('hide');
+                        $("#additional-course").modal('hide');
+                        $("#delete_user_addicourse").removeAttr("style");
+                        $("#user_addicourse_del_loader").hide();
+                        $("#addicourse-delete-btn").show();                        
+                        $scope.reset_addicourse_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-addicourse-model").modal('hide');
+                        $("#additional-course").modal('hide');
+                        $("#delete_user_addicourse").removeAttr("style");
+                        $("#user_addicourse_del_loader").hide();
+                        $("#addicourse-delete-btn").show();
+                        $scope.reset_addicourse_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
+    };
+    //Additional Course End
+
+    //Research Start
+    $scope.research_pub_fnc = function(dob_day,dob_month,dob_year){
+        $("#recdateerror").hide();
+        $("#recdateerror").html('');
+        var kcyear = document.getElementsByName("research_year")[0],
+        kcmonth = document.getElementsByName("research_month")[0],
+        kcday = document.getElementsByName("research_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#research_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#research_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.research_error = function()
+    {
+        $("#recdateerror").hide();
+        $("#recdateerror").html('');
+    };
+    $scope.research_validate = {
+        rules: {
+            research_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            research_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 50
+            },
+            research_field: {
+                required: true,
+            },
+            research_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#research_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            research_url: {
+                url: true,
+            },
+            research_month: {
+                required: true,
+            },
+            research_day: {
+                required: true,
+            },
+            research_year: {
+                required: true,
+            }
+        },
+        groups: {
+            research_year: "research_year research_month research_day"
+        },
+        messages: {
+            research_title: {
+                required: "Please enter research title",
+            },
+            research_desc: {
+                required: "Please enter description",
+            },
+            research_field: {
+                required: "Please select field",
+            },
+            research_url: {                
+                url: "URL must start with http:// or https://",
+            },            
+            research_day: {
+                required: "Please enter research publishing date",
+            },
+            research_month: {
+                required: "Please enter research publishing date",
+            },
+            research_year: {
+                required: "Please enter research publishing date",
+            },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("type") == "checkbox") {
+                error.insertAfter($("#lbl_term_condi"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    };
+    var research_formdata = new FormData();
+    $(document).on('change','#research_document', function(e){
+        $("#research_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#research_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','docx','doc','PDF'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                research_formdata.append('file', $('#research_document')[0].files[0]);
+            }
+            else {
+                research_formdata.append('file', "");
+                $(this).val("");
+            }         
+        }
+    });
+    $scope.save_user_research = function(){
+        if ($scope.research_form.validate()) {
+            $("#user_research_loader").show();
+            $("#user_research_save").attr("style","pointer-events:none;display:none;");
+
+            var dob_day_txt = $("#research_day option:selected").val();
+            var dob_month_txt = $("#research_month option:selected").val();
+            var dob_year_txt = $("#research_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = dob_year_txt + '/' + dob_month_txt + '/' + dob_day_txt;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#recdateerror").html("Date of publishing always less than to today's date.");
+                $("#recdateerror").show();
+
+                $("#user_research_save").removeAttr("style");
+                $("#user_research_loader").hide();
+                return false;
+            }
+
+            research_formdata.append('edit_research', $scope.edit_research);
+            research_formdata.append('research_document_old', $scope.research_document_old);
+            research_formdata.append('research_title', $('#research_title').val());
+            research_formdata.append('research_desc', $('#research_desc').val());
+            research_formdata.append('research_field', $('#research_field option:selected').val());
+            research_formdata.append('research_other_field', $('#research_other_field').val());
+            research_formdata.append('research_url', $('#research_url').val());
+            
+            research_formdata.append('research_month',$("#research_month option:selected").val());
+            research_formdata.append('research_day',$("#research_day option:selected").val());
+            research_formdata.append('research_year',$("#research_year option:selected").val());
+            $http.post(base_url + 'job/save_research_user', research_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_research = result.user_research;
+                        $("#user_research_save").removeAttr("style");
+                        $("#user_research_loader").hide();
+                        research_formdata = new FormData();
+                        $("#research_form")[0].reset();
+                        $("#research").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_research_save").removeAttr("style");
+                        $("#user_research_loader").hide();
+                        $("#research_form")[0].reset();
+                        $("#research").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.get_user_research = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_research',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.user_research = result.data.user_research;
+                $("#research-loader").hide();
+                $("#research-body").show();
+            }
+
+        });
+    };
+    $scope.get_user_research();
+
+    $scope.view_more_research = 2;
+    $scope.research_view_more = function(){
+        $scope.view_more_research = $scope.user_research.length;
+        $("#view-more-research").hide();
+    };
+    $scope.other_field_research = function()
+    {
+        if($scope.research_field == 0 && $scope.research_field != "")
+        {
+            $("#research_other_field_div").show();
+        }
+        else
+        {
+            $("#research_other_field_div").hide();
+        }
+    }
+
+    $scope.reset_research_form = function(){        
+        $scope.edit_research = 0;
+        $scope.research_file_old = '';
+        $("#research").removeClass("edit-form-cus");
+        $("#research_day").html("");
+        $("#research_year").html("");
+        $("#research_file_error").hide();
+        $("#research_other_field_div").hide();
+        $("#research_doc_prev").remove();
+        $("#delete_user_research_modal").remove();
+        $("#research_form")[0].reset();
+    };
+    $scope.edit_user_research = function(index){
+        $scope.reset_research_form();
+        $("#research").addClass("edit-form-cus");
+        var research_arr = $scope.user_research[index];
+        $scope.edit_research = research_arr.id_research;
+        $("#research_title").val(research_arr.research_title);
+        $("#research_field").val(research_arr.research_field);
+        if(research_arr.research_field == 0)
+        {
+            $("#research_other_field_div").show();
+            $("#research_other_field").val(research_arr.research_other_field);
+        }
+        $("#research_url").val(research_arr.research_url);
+        $("#research_desc").val(research_arr.research_desc);        
+        var research_date_arr = research_arr.research_publish_date.split("-");
+        research_day = research_date_arr[2];
+        research_month = research_date_arr[1];
+        research_year = research_date_arr[0];
+        $("#research_month").val(research_month);
+        $scope.research_pub_fnc(research_day,research_month,research_year);
+
+        var research_file_name = research_arr.research_document;
+        $scope.research_document_old = research_file_name;
+        if(research_file_name.trim() != "")
+        {            
+            var filename_arr = research_file_name.split('.');
+            $("#research_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+job_user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_research_upload_url+research_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_research_upload_url+research_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#research_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.research_form.validate();
+        },1000);
+        var delete_btn = '<a id="delete_user_research_modal" href="#" data-target="#delete-research-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_research_loader"));
+        $compile(contentbtn)($scope);
+        $("#research").modal("show");
+    };
+
+    $scope.delete_user_research = function(){
+        $("#delete_user_research").attr("style","pointer-events:none;display:none;");
+        $("#user_research_del_loader").show();
+        $("#research-delete-btn").hide();
+        if($scope.edit_research != 0)
+        {
+            var expdata = $.param({'research_id': $scope.edit_research});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/delete_user_research',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_research = result.user_research;                        
+                        $("#delete-research-model").modal('hide');
+                        $("#research").modal('hide');
+                        $("#delete_user_research").removeAttr("style");
+                        $("#user_research_del_loader").hide();
+                        $("#research-delete-btn").show();                        
+                        $scope.reset_research_form();
+                    }
+                    else
+                    {
+                        $("#delete-research-model").modal('hide');
+                        $("#research").modal('hide');
+                        $("#delete_user_research").removeAttr("style");
+                        $("#user_research_del_loader").hide();
+                        $("#research-delete-btn").show();
+                        $scope.reset_research_form();
+                    }
+                }
+            });
+        }
+    };
+    //Research End
+
+    // User Publication Start
+    $scope.publication_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#pubdateerror").hide();
+        $("#pubdateerror").html('');
+        var kcyear = document.getElementsByName("publication_year")[0],
+        kcmonth = document.getElementsByName("publication_month")[0],
+        kcday = document.getElementsByName("publication_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#publication_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#publication_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.publication_error = function()
+    {
+        $("#pubdateerror").hide();
+        $("#pubdateerror").html('');
+    };
+
+    var publication_formdata = new FormData();
+    $(document).on('change','#pub_file', function(e){
+        $("#pub_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#pub_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                publication_formdata.append('pub_file', $('#pub_file')[0].files[0]);
+            }
+            else {
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.publication_validate = {
+        rules: {            
+            pub_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            pub_author: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            pub_url: {
+                url: true,                
+            },
+            pub_publisher: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            publication_month: {
+                required: true,
+            },
+            publication_day: {
+                required: true,
+            },
+            publication_year: {
+                required: true,
+            },
+            pub_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },
+        /*groups: {
+            publication_date: "publication_year publication_month publication_day"
+        },   */     
+        messages: {
+            pub_title: {
+                required: "Please enter publication title",
+            },
+            pub_author: {
+                required: "Please enter publication author",
+            },
+            pub_url: {
+                url: "URL must start with http:// or https://",
+            },
+            pub_publisher: {
+                required: "Please enter publisher",
+            },
+            publication_month: {
+                required: "Please select publication date",
+            },
+            publication_day: {
+                required: "Please select publication date",
+            },
+            publication_year: {
+                required: "Please select publication date",
+            },
+            pub_desc: {
+                required: "Please enter publication description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_publication = function(){
+        if ($scope.publication_form.validate()) {
+            $("#user_publication_loader").show();
+            $("#user_publication_save").attr("style","pointer-events:none;display:none;");
+
+            var pub_day_txt = $("#publication_day option:selected").val();
+            var pub_month_txt = $("#publication_month option:selected").val();
+            var pub_year_txt = $("#publication_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = pub_year_txt + '/' + pub_month_txt + '/' + pub_day_txt;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#recdateerror").html("Date of publishing always less than to today's date.");
+                $("#recdateerror").show();
+
+                $("#user_research_save").removeAttr("style");
+                $("#user_research_loader").hide();
+                return false;
+            }
+
+            publication_formdata.append('edit_publication', $scope.edit_publication);
+            publication_formdata.append('pub_file_old', $scope.pub_file_old);
+            publication_formdata.append('pub_title', $('#pub_title').val());
+            publication_formdata.append('pub_author', $('#pub_author').val());
+            publication_formdata.append('pub_url', $('#pub_url').val());
+            publication_formdata.append('pub_publisher', $('#pub_publisher').val());
+            publication_formdata.append('pub_desc', $('#pub_desc').val());            
+            publication_formdata.append('pub_day_txt', pub_day_txt);            
+            publication_formdata.append('pub_month_txt', pub_month_txt);            
+            publication_formdata.append('pub_year_txt', pub_year_txt);            
+
+            $http.post(base_url + 'job/save_user_publication', publication_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $("#user_publication_save").removeAttr("style");
+                        $("#user_publication_loader").hide();
+                        $("#publication_form")[0].reset();
+                        publication_formdata = new FormData();
+                        $scope.user_publication = result.user_publication;                         
+                        $("#publication").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_publication_save").removeAttr("style");
+                        $("#user_publication_loader").hide();
+                        $("#publication_form")[0].reset();
+                        $("#publication").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.get_user_publication = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_publication',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_publication = result.data.user_publication;
+                $scope.user_publication = user_publication;
+                $("#publication-loader").hide();
+                $("#publication-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_publication();
+    $scope.view_more_publication = 2;
+    $scope.publication_view_more = function(){
+        $scope.view_more_publication = $scope.user_publication.length;
+        $("#view-more-publication").hide();
+    };
+
+    $scope.reset_publication_form = function(){        
+        $scope.edit_publication = 0;
+        $scope.pub_file_old = '';
+        $("#publication").removeClass("edit-form-cus");
+        $("#publication_day").html("");
+        $("#publication_year").html("");
+        $("#pub_file_error").hide();        
+        $("#pub_file_prev").remove();
+        $("#delete_user_publication_modal").remove();
+        $("#publication_form")[0].reset();
+    };
+    $scope.edit_user_publication = function(index){
+        $scope.reset_publication_form();
+        $("#publication").addClass("edit-form-cus");
+        var publication_arr = $scope.user_publication[index];
+        $scope.edit_publication = publication_arr.id_publication;
+        $("#pub_title").val(publication_arr.pub_title);
+        $("#pub_author").val(publication_arr.pub_author);        
+        $("#pub_url").val(publication_arr.pub_url);
+        $("#pub_publisher").val(publication_arr.pub_publisher);        
+        var publication_date_arr = publication_arr.pub_date.split("-");
+        publication_day = publication_date_arr[2];
+        publication_month = publication_date_arr[1];
+        publication_year = publication_date_arr[0];
+        $("#publication_month").val(publication_month);
+        $scope.publication_date_fnc(publication_day,publication_month,publication_year);
+
+        $("#pub_desc").val(publication_arr.pub_desc);
+
+        var publication_file_name = publication_arr.pub_file;
+        $scope.pub_file_old = publication_file_name;
+        if(publication_file_name.trim() != "")
+        {            
+            var filename_arr = publication_file_name.split('.');
+            $("#pub_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_publication_upload_url+publication_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#pub_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.publication_form.validate();
+        },1000);
+        var delete_btn = '<a id="delete_user_publication_modal" href="#" data-target="#delete-publication-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_publication_loader"));
+        $compile(contentbtn)($scope);
+        $("#publication").modal("show");
+    };
+
+    $scope.delete_user_publication = function(){
+        $("#delete_user_publication").attr("style","pointer-events:none;display:none;");
+        $("#user_publication_del_loader").show();
+        $("#publication-delete-btn").hide();
+        if($scope.edit_publication != 0)
+        {
+            var expdata = $.param({'publication_id': $scope.edit_publication});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/delete_user_publication',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_publication = result.user_publication;
+                        $("#delete-publication-model").modal('hide');
+                        $("#publication").modal('hide');
+                        $("#delete_user_publication").removeAttr("style");
+                        $("#user_publication_del_loader").hide();
+                        $("#publication-delete-btn").show();                        
+                        $scope.reset_publication_form();
+                    }
+                    else
+                    {
+                        $("#delete-publication-model").modal('hide');
+                        $("#publication").modal('hide');
+                        $("#delete_user_publication").removeAttr("style");
+                        $("#user_publication_del_loader").hide();
+                        $("#publication-delete-btn").show();
+                        $scope.reset_publication_form();
+                    }
+                }
+            });
+        }
+    };
+    // User Publication End
+
+    //User Patent Start
+    $scope.patent_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#patentdateerror").hide();
+        $("#patentdateerror").html('');
+        var kcyear = document.getElementsByName("patent_year")[0],
+        kcmonth = document.getElementsByName("patent_month")[0],
+        kcday = document.getElementsByName("patent_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#patent_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#patent_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.patent_date_error = function()
+    {
+        $("#patentdateerror").hide();
+        $("#patentdateerror").html('');
+    };
+
+    var patent_formdata = new FormData();
+    $(document).on('change','#patent_file', function(e){
+        $("#patent_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#patent_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                patent_formdata.append('patent_file', $('#patent_file')[0].files[0]);
+            }
+            else {
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.patent_validate = {
+        rules: {            
+            patent_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            patent_creator: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            patent_number: {
+                required: true,
+                maxlength: 200,
+            },            
+            patent_month: {
+                required: true,
+            },
+            patent_day: {
+                required: true,
+            },
+            patent_year: {
+                required: true,
+            },
+            patent_office: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            patent_url: {
+                url: true,                
+            },
+            patent_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },
+        /*groups: {
+            publication_date: "publication_year publication_month publication_day"
+        },   */     
+        messages: {
+            patent_title: {
+                required: "Please enter patent title",
+            },
+            patent_creator: {
+                required: "Please enter patent creator",
+            },
+            patent_number: {
+                required: "Please enter patent creator",
+            },
+            patent_month: {
+                required: "Please select patent date",
+            },
+            patent_day: {
+                required: "Please select patent date",
+            },
+            patent_year: {
+                required: "Please select patent date",
+            },
+            patent_office: {
+                required: "Please patent office",
+            },
+            patent_url: {
+                url: "URL must start with http:// or https://",
+            },
+            patent_desc: {
+                required: "Please enter patent description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_patent = function(){
+        if ($scope.patent_form.validate()) {
+            $("#user_patent_loader").show();
+            $("#user_patent_save").attr("style","pointer-events:none;display:none;");
+
+            var patent_day = $("#patent_day option:selected").val();
+            var patent_month = $("#patent_month option:selected").val();
+            var patent_year = $("#patent_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = patent_year + '/' + patent_month + '/' + patent_day;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#patentdateerror").html("Patent date always less than to today's date.");
+                $("#patentdateerror").show();
+
+                $("#user_patent_save").removeAttr("style");
+                $("#user_patent_loader").hide();
+                return false;
+            }
+
+            patent_formdata.append('edit_patent', $scope.edit_patent);
+            patent_formdata.append('patent_file_old', $scope.patent_file_old);
+            patent_formdata.append('patent_title', $('#patent_title').val());
+            patent_formdata.append('patent_creator', $('#patent_creator').val());
+            patent_formdata.append('patent_number', $('#patent_number').val());
+            patent_formdata.append('patent_day', patent_day);
+            patent_formdata.append('patent_month', patent_month);
+            patent_formdata.append('patent_year', patent_year);
+            patent_formdata.append('patent_office', $('#patent_office').val());
+            patent_formdata.append('patent_url', $('#patent_url').val());
+            patent_formdata.append('patent_desc', $('#patent_desc').val());
+
+            $http.post(base_url + 'job/save_user_patent', patent_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $("#user_patent_save").removeAttr("style");
+                        $("#user_patent_loader").hide();
+                        $("#patent_form")[0].reset();
+                        $scope.reset_patent_form();
+                        patent_formdata = new FormData();
+                        $scope.user_patent = result.user_patent;
+                        $("#patent").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_patent_save").removeAttr("style");
+                        $("#user_patent_loader").hide();
+                        $("#patent_form")[0].reset();
+                        $scope.reset_patent_form();
+                        $("#patent").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.get_user_patent = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_patent',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_patent = result.data.user_patent;
+                $scope.user_patent = user_patent;
+                $("#patent-loader").hide();
+                $("#patent-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_patent();
+    $scope.view_more_patent = 2;
+    $scope.patent_view_more = function(){
+        $scope.view_more_patent = $scope.user_patent.length;
+        $("#view-more-patent").hide();
+    };
+    $scope.reset_patent_form = function(){        
+        $scope.edit_patent = 0;
+        $scope.patent_file_old = '';
+        $("#patent").removeClass("edit-form-cus");
+        $("#patent_day").html("");
+        $("#patent_year").html("");
+        $("#patent_doc_prev").remove();
+        $("#delete_user_patent_modal").remove();
+        $("#patent_form")[0].reset();
+    };
+    $scope.edit_user_patent = function(index){
+        $scope.reset_patent_form();        
+        $("#patent").addClass("edit-form-cus");
+        var patent_arr = $scope.user_patent[index];
+        $scope.edit_patent = patent_arr.id_patent;
+        $("#patent_title").val(patent_arr.patent_title);
+        $("#patent_creator").val(patent_arr.patent_creator);
+        $("#patent_number").val(patent_arr.patent_number);        
+        var patent_date_arr = patent_arr.patent_date.split("-");
+        patent_day = patent_date_arr[2];
+        patent_month = patent_date_arr[1];
+        patent_year = patent_date_arr[0];
+        $("#patent_month").val(patent_month);
+        $scope.patent_date_fnc(patent_day,patent_month,patent_year);
+        $("#patent_office").val(patent_arr.patent_office);
+        $("#patent_url").val(patent_arr.patent_url);
+        $("#patent_desc").val(patent_arr.patent_desc);
+
+        var patent_file_name = patent_arr.patent_file;
+        $scope.patent_file_old = patent_file_name;
+        if(patent_file_name.trim() != "")
+        {            
+            var filename_arr = patent_file_name.split('.');
+
+            $("#patent_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a href="'+job_user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_patent_upload_url+patent_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_patent_upload_url+patent_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#patent_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.patent_form.validate();
+        },1000);
+
+        var delete_btn = '<a id="delete_user_patent_modal" href="#" data-target="#delete-patent-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_patent_loader"));
+        $compile(contentbtn)($scope);
+        $("#patent").modal("show");
+    };
+
+    $scope.delete_user_patent = function(){
+        $("#delete_user_patent").attr("style","pointer-events:none;display:none;");
+        $("#user_patent_del_loader").show();
+        $("#patent-delete-btn").hide();
+        if($scope.edit_patent != 0)
+        {
+            var expdata = $.param({'patent_id': $scope.edit_patent});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/delete_user_patent',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_patent = result.user_patent;
+                        $("#delete-patent-model").modal('hide');
+                        $("#patent").modal('hide');
+                        $("#delete_user_patent").removeAttr("style");
+                        $("#user_patent_del_loader").hide();
+                        $("#patent-delete-btn").show();                        
+                        $scope.reset_patent_form();
+                    }
+                    else
+                    {
+                        $("#delete-patent-model").modal('hide');
+                        $("#patent").modal('hide');
+                        $("#delete_user_patent").removeAttr("style");
+                        $("#user_patent_del_loader").hide();
+                        $("#patent-delete-btn").show();
+                        $scope.reset_patent_form();
+                    }
+                }
+            });
+        }
+    };
+    //User Patent End
+
+    //Socila Links Start
+    $scope.social_linksset = {social_links: []};
+
+    $scope.social_linksset.social_links = [];
+    $scope.addNewSocialLinks = function () {
+        // console.log($scope.social_linksset.social_links.length);
+        if($scope.social_linksset.social_links.length < 7)
+        {
+            $scope.social_linksset.social_links.push('');
+            if($scope.social_linksset.social_links.length == 7)
+            {
+                $("#add-new-link").hide();
+            }
+        }
+        else
+        {
+            $("#add-new-link").hide();
+        }
+    };
+
+    $scope.removeSocialLinks = function (z) {
+        //var lastItem = $scope.social_linksset.social_links.length - 1;
+        $scope.social_linksset.social_links.splice(z,1);
+        $("#add-new-link").show();
+    };
+
+    $scope.check_socialurl = function(id){
+        var link_type = $("#link_type"+id+" option:selected").val();
+        var link_url = $("#link_url"+id).val();        
+        if(link_type == "Facebook")
+        {            
+            if(/(http|https):\/\/?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+                return true;
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+        if(link_type == "Google")
+        {            
+            if(/\+[^/]+|\d{21}/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+                return true;
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+        if(link_type == "Instagram")
+        {            
+            if(/https?:\/\/(www\.)?instagram\.com\/([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+                return true;
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+        if(link_type == "LinkedIn")
+        {            
+            if(/(http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+               return true; 
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+        if(link_type == "Pinterest")
+        {            
+            if(/^http(s)?:\/\/(in.)pinterest.com\/(.*)?$/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+                return true;
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+        if(link_type == "GitHub")
+        {            
+            if(/http(s)?:\/\/(www\.)?github\.(com|io)\/[A-z 0-9 _-]+\/?/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+                return true;
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+        if(link_type == "Twitter")
+        {            
+            if(/http(s)?:\/\/(.*\.)?twitter\.com\/[A-z 0-9 _]+\/?/i.test(link_url)){
+                $("#link_url"+id).removeClass("error");
+                return true;
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+                return false;
+            }
+        }
+
+    };
+
+    $scope.personal_linksset = {personal_links: []};
+
+    $scope.personal_linksset.personal_links = [];
+    $scope.addNewPersonalLinks = function () {
+        // console.log($scope.personal_linksset.personal_links.length);
+        if($scope.personal_linksset.personal_links.length < 10)
+        {
+            $scope.personal_linksset.personal_links.push('');
+            if($scope.personal_linksset.personal_links.length == 10)
+            {
+                $("#add-personla-link").hide();
+            }
+        }
+        else
+        {
+            $("#add-personla-link").hide();
+        }
+    };
+
+    $scope.removePersonalLinks = function (z) {
+        //var lastItem = $scope.personal_linksset.personal_links.length - 1;
+        $scope.personal_linksset.personal_links.splice(z,1);
+        $("#add-personla-link").show();
+    };
+    $scope.check_personalurl = function(id){
+        var personal_link_url = $("#personal_link_url"+id).val();
+        //var regexp =   /^(https):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+        var res = personal_link_url.match(/(http(s)?:\/\/.)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        if(res != null)// if (regexp.test(personal_link_url))
+        {
+            $("#personal_link_url"+id).removeClass("error");
+            return true;
+        }
+        else
+        {
+            $("#personal_link_url"+id).addClass("error");
+            return false;
+        }
+    };
+
+    $scope.save_user_links = function(){
+        $("#user_links_loader").show();
+        $("#user_links_save").attr("style","pointer-events:none;display:none;");
+        var link_type = $('.link_type').serializeArray();
+        var link_url = $('.link_url').serializeArray();
+        var err_link = 0;
+        link_url.forEach(function(links,idx) {          
+          if($scope.check_socialurl(idx) === false)
+          {
+            err_link = 1;
+          }
+        });        
+
+        var personal_link_url = $('.personal_link_url').serializeArray();
+        personal_link_url.forEach(function(links,idx) {          
+          if($scope.check_personalurl(idx) === false)
+          {
+            err_link = 1;
+          }
+        });
+        if(err_link == 1)
+        {
+            $("#user_links_save").removeAttr("style");
+            $("#user_links_loader").hide();
+            return;
+        }
+        var updatedata = $.param({'link_type':link_type,'link_url':link_url,'personal_link_url':personal_link_url});
+        $http({
+            method: 'POST',
+            url: base_url + 'job/save_user_links',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {                
+            // $('#main_page_load').show();                
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_social_links_data = result.data.user_social_links_data;
+                user_personal_links_data = result.data.user_personal_links_data;
+                $scope.user_social_links = user_social_links_data;
+                $scope.user_personal_links = user_personal_links_data;
+                $scope.social_linksset.social_links = user_social_links_data;
+                $scope.personal_linksset.personal_links = user_personal_links_data;
+            }
+            $("#user_links_save").removeAttr("style");
+            $("#user_links_loader").hide();
+            $("#social-link").modal('hide');
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+        });
+    };
+
+    get_user_links();
+    function get_user_links()
+    {
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_links',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.user_social_links = result.data.user_social_links_data;
+                $scope.user_personal_links = result.data.user_personal_links_data;
+                $scope.social_linksset.social_links = result.data.user_social_links_data_edit;
+                $scope.personal_linksset.personal_links = result.data.user_personal_links_data_edit;
+            }
+            else
+            {
+                $scope.user_social_links = [];
+                $scope.user_personal_links = [];
+            }
+            $("#social-link-loader").hide();
+            $("#social-link-body").show();
+
+        });
+    }
+    //Socila Links End
+
+    //Experience Start
+    /*$scope.load_jobtitle = [];
+    $scope.loadJobtitle = function ($query) {
+        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+            var load_jobtitle = response.data;
+            return load_jobtitle.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };*/
+
+    $scope.exp_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.exp_designation,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.get_country = function () {
+        $http({
+            method: 'GET',
+            url: base_url + 'userprofile_page/get_country',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {
+            $scope.exp_country_list = data.data;
+        });
+    };
+    $scope.get_country();
+
+    $scope.exp_country_change = function() {
+        $("#exp_state").attr("disabled","disabled");
+        $("#exp_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.exp_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#exp_state").removeAttr("disabled");
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_state_loader").hide();
+            $scope.exp_state_list = data.data;
+            $scope.exp_city_list = [];
+        });
+    }
+
+    $scope.exp_state_change = function() {
+        if($scope.exp_state != "" && $scope.exp_state != 0 && $scope.exp_state != null)
+        {
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.exp_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#exp_city").removeAttr("disabled");
+                $("#exp_city_loader").hide();
+                $scope.exp_city_list = data.data;
+            });
+        }
+    }
+
+    $scope.other_field_fnc = function()
+    {
+        if($scope.exp_field == 0 && $scope.exp_field != "")
+        {
+            $("#exp_other_field_div").show();
+        }
+        else
+        {
+            $("#exp_other_field_div").hide();
+        }
+    }
+
+    $scope.exp_start_year = function(){
+        $("#expdateerror").html("");
+        $("#expdateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+        if($scope.exp_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        for (var i = yyyy; i >= $scope.exp_s_year; i--) {            
+            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        }
+        // $('#exp_e_year').html(year_opt);
+        // var $elyear = $('#exp_e_year').html(year_opt);
+        // $compile($elyear)($scope);
+
+        var elyear = $('#exp_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        // $('#exp_s_month').html(month_opt);
+        // var $elmonth = $('#exp_s_month').html(month_opt);
+        // $compile($elmonth)($scope);
+
+        var elmonth = $('#exp_s_month');
+        elmonth.html($compile(month_opt)($scope));
+    };
+    $(document).on('change','#exp_e_year', function(e){
+        $("#expdateerror").html("");
+        $("#expdateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#exp_e_month').html(month_opt);
+    });
+
+    $scope.exp_designation_fnc = function(){
+        // $("#exp_designation input").removeClass("error");
+        $("#exp_designation .tags").removeAttr("style");
+        $("#exp_designation_err").attr("style","display:none;");
+    };
+
+    $scope.experience_validate = {
+        rules: {            
+            exp_company_name: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            exp_designation: {
+                required: true,
+            },
+            exp_company_website: {
+                url: true,
+            },
+            exp_field: {
+                required: true,
+            },
+            exp_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#exp_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            exp_country: {
+                required: true,
+            },
+            exp_state: {
+                required: true,
+            },
+            exp_city: {
+                required: true,
+            },
+            exp_s_year: {
+                required: true,
+            },
+            exp_s_month: {
+                required: true,
+            },
+            exp_e_year: {
+                required: {
+                    depends: function(element) {
+                        return $("#exp_isworking").is(':checked') ? false : true;
+                    }
+                },
+            },
+            exp_e_month: {
+                required: {
+                    depends: function(element) {
+                        return $("#exp_isworking").is(':checked') ? false : true;
+                    }
+                },
+            },
+            exp_desc: {
+                required: true,
+            },
+            
+        },      
+        messages: {
+            exp_company_name: {
+                required: "Please enter company name",
+            },
+            exp_company_website: {
+                url: "URL must start with http:// or https://",
+            },
+            exp_field: {
+                required: "Please select field",
+            },
+            exp_country: {
+                required: "Please select county",
+            },
+            exp_state: {
+                required: "Please select state",
+            },
+            exp_city: {
+                required: "Please select city",
+            },
+            exp_s_year: {
+                required: "Please select experience start date",
+            },
+            exp_s_month: {
+                required: "Please select experience start date",
+            },
+            exp_e_year: {
+                required: "Please select experience end date",
+            },
+            exp_e_month: {
+                required: "Please select experience end date",
+            },
+            exp_desc: {
+                required: "Please enter experience description",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+    };
+
+    var exp_formdata = new FormData();
+    $(document).on('change','#exp_file', function(e){
+        $("#exp_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#exp_file_error").html("File size must be less than 10MB.");
+            $("#exp_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                exp_formdata.append('exp_file', $('#exp_file')[0].files[0]);
+            }
+            else {
+                $("#exp_file_error").html("Invalid file selected.");
+                $("#exp_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.validate_desig = function(){        
+        if($scope.exp_designation == "" || $scope.exp_designation == undefined)
+        {
+            $("#exp_designation .tags").attr("style","border:1px solid #ff0000;");
+            setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.save_user_exp = function(){
+        var desig = $scope.validate_desig();
+        $("#expdateerror").html("");
+        $("#expdateerror").hide();
+        if ($scope.experience_form.validate() && desig) {
+            $("#user_exp_loader").show();
+            $("#save_user_exp").attr("style","pointer-events:none;display:none;");
+
+            var exp_s_year = $("#exp_s_year option:selected").val();
+            var exp_s_month = $("#exp_s_month option:selected").val();
+
+            var exp_e_year = $("#exp_e_year option:selected").val();
+            var exp_e_month = $("#exp_e_month option:selected").val();
+            var exp_date_error = false;            
+            if(parseInt(exp_e_year) == parseInt(exp_s_year))
+            {
+                if(parseInt(exp_e_month) <= parseInt(exp_s_month))
+                {
+                    exp_date_error = true;
+                }
+            }
+            if($("#exp_isworking:checked").length == 1)
+            {
+                exp_date_error = false;
+            }
+            if (exp_date_error == true) {                
+                $("#expdateerror").html("Experience date not same or start date is less than end date.");
+                $("#expdateerror").show();
+                $("#save_user_exp").removeAttr("style");
+                $("#user_exp_loader").hide();
+                return false;
+            }
+
+            exp_formdata.append('edit_exp', $scope.edit_exp);
+            exp_formdata.append('exp_file_old', $scope.exp_file_old);
+            exp_formdata.append('exp_company_name', $('#exp_company_name').val());
+            exp_formdata.append('exp_designation', $('#exp_designation').val());
+            exp_formdata.append('exp_company_website', $('#exp_company_website').val());
+            exp_formdata.append('exp_field', $('#exp_field option:selected').val());
+            exp_formdata.append('exp_other_field', $('#exp_other_field').val());
+            exp_formdata.append('exp_country', $('#exp_country option:selected').val());
+            exp_formdata.append('exp_state', $('#exp_state option:selected').val());
+            exp_formdata.append('exp_city', $('#exp_city option:selected').val());
+            exp_formdata.append('exp_s_year', exp_s_year);
+            exp_formdata.append('exp_s_month', exp_s_month);
+            exp_formdata.append('exp_e_year', exp_e_year);
+            exp_formdata.append('exp_e_month', exp_e_month);
+            exp_formdata.append('exp_isworking', $("#exp_isworking:checked").length);
+            exp_formdata.append('exp_desc', $('#exp_desc').val());
+
+            $http.post(base_url + 'job/save_user_experience', exp_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        user_experience = result.user_experience;
+                        $scope.user_experience = user_experience;
+                        $scope.exp_years = result.exp_years;
+                        $scope.exp_months = result.exp_months;
+                        $("#save_user_exp").removeAttr("style");
+                        $("#user_exp_loader").hide();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();
+                        $("#experience").modal('hide');
+                    }
+                    else
+                    {
+                        $("#save_user_exp").removeAttr("style");
+                        $("#user_exp_loader").hide();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();
+                        $("#experience").modal('hide');
+                    }
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
+                }
+            });
+        }
+    };
+    $scope.reset_exp_form = function(){
+        $("#experience").removeClass("edit-form-cus");
+        $scope.exp_designation_fnc();
+        $scope.edit_exp = 0;
+        $scope.exp_file_old = '';
+        $scope.exp_state_list = '';
+        $scope.exp_designation = [];
+        $scope.exp_company_website = '';
+        $scope.exp_field = '';
+        $scope.exp_other_field = '';
+        $("#exp_other_field_div").hide(); 
+        // $scope.exp_country = '';
+        $scope.exp_state_list = [];
+        $scope.exp_city_list = [];
+        $scope.exp_s_year = '';
+        $("#exp_s_month").html('');
+        $("#exp_e_year").html('');
+        $("#exp_e_month").html('');
+        
+        // $scope.exp_e_year = '';
+        // $scope.exp_e_month = '';
+        $scope.exp_isworking = '';
+        $("#delete_user_exp_modal").remove();
+        $("#exp_doc_prev").remove();
+        exp_formdata = new FormData();
+        $("#experience_form")[0].reset();
+    };
+    $scope.get_user_experience = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_experience',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_experience = result.data.user_experience;
+                $scope.user_experience = user_experience;
+                $scope.exp_years = result.data.exp_years;
+                $scope.exp_months = result.data.exp_months;
+                $("#exp-loader").hide();
+                $("#exp-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_experience();
+    $scope.view_more_exp = 2;
+    $scope.exp_view_more = function(){
+        $scope.view_more_exp = $scope.user_experience.length;
+        $("#view-more-exp").hide();
+    };
+    
+    $scope.edit_user_exp = function(index){
+
+        $scope.reset_exp_form();
+        $("#experience").addClass("edit-form-cus");
+        // $scope.exp_city_list = [];
+        $scope.edit_exp = $scope.user_experience[index].id_experience;        
+        $("#edit_exp").val($scope.user_experience[index].id_experience);
+        // $scope.exp_company_name = $scope.user_experience[index].exp_company_name;
+        var exp_company_name_txt = $scope.user_experience[index].exp_company_name;
+        $("#exp_company_name").val(exp_company_name_txt);
+        
+        $scope.exp_designation = $scope.user_experience[index].designation;
+        $scope.exp_company_website = $scope.user_experience[index].exp_company_website;
+        $scope.exp_field = $scope.user_experience[index].exp_field;
+        if($scope.exp_field == 0)
+        {
+            $scope.exp_other_field = $scope.user_experience[index].exp_other_field;
+            $("#exp_other_field_div").show();
+        }
+        else
+        {
+            $scope.exp_other_field = "";
+            $("#exp_other_field_div").hide();   
+        }
+        $scope.exp_country = $scope.user_experience[index].exp_country;
+        $("#exp_country").val($scope.user_experience[index].exp_country);
+        // $scope.exp_country_change();
+        var counrtydata = $.param({'country_id': $scope.exp_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#exp_state").removeAttr("disabled");
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_state_loader").hide();
+            $scope.exp_state_list = data.data;
+            $scope.exp_city_list = [];
+            $scope.exp_state = $scope.user_experience[index].exp_state;
+
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.exp_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#exp_city").removeAttr("disabled");
+                $("#exp_city_loader").hide();
+                $scope.exp_city_list = data.data;
+                $scope.exp_city = $scope.user_experience[index].exp_city;
+            });        
+        });
+        // $scope.exp_state_change();        
+
+        var exp_start_date = $scope.user_experience[index].exp_start_date.split('-');
+        var exp_end_date = $scope.user_experience[index].exp_end_date.split('-');        
+        $scope.exp_s_year = exp_start_date[0];
+        $scope.exp_start_year();
+        // $scope.exp_s_month = exp_start_date[1];
+        setTimeout(function(){
+            $("#exp_s_month").val(exp_start_date[1]);
+            $("#exp_e_year").val(exp_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },100);
+        setTimeout(function(){
+            $("#exp_e_month").val(exp_end_date[1]);
+        },500);
+        $scope.exp_isworking = (parseInt($scope.user_experience[index].exp_isworking) == 1 ? true : false);
+        
+        // $scope.exp_desc = $scope.user_experience[index].exp_desc;
+        var exp_desc_txt = $scope.user_experience[index].exp_desc;
+        $("#exp_desc").val(exp_desc_txt);
+        
+        var exp_file_name = $scope.user_experience[index].exp_file;
+        $scope.exp_file_old = exp_file_name;
+        if(exp_file_name.trim() != "")
+        {
+            var filename_arr = exp_file_name.split('.');
+            // console.log(filename_arr);
+            //console.log(filename_arr[filename_arr.length - 1]);
+            $("#exp_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+job_user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_experience_upload_url+exp_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_experience_upload_url+exp_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#exp_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.experience_form.validate();
+        },1000);
+
+        var delete_btn = '<a id="delete_user_exp_modal" href="#" data-target="#delete-exp-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_exp_loader"));
+        $compile(contentbtn)($scope);
+        $("#experience").modal("show");
+    };
+
+    $scope.delete_user_exp = function(){
+        $("#delete_user_exp").attr("style","pointer-events:none;display:none;");
+        $("#user_exp_del_loader").show();
+        $("#exp-delete-btn").hide();
+        if($scope.edit_exp != 0)
+        {
+            var expdata = $.param({'exp_id': $scope.edit_exp});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/delete_user_experience',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        user_experience = result.user_experience;
+                        $scope.user_experience = user_experience;
+                        $scope.exp_years = result.exp_years;
+                        $scope.exp_months = result.exp_months;
+                        $("#delete-exp-model").modal('hide');
+                        $("#experience").modal('hide');
+                        $("#delete_user_exp").removeAttr("style");
+                        $("#user_exp_del_loader").hide();
+                        $("#exp-delete-btn").show();
+                        $scope.reset_exp_form();
+                        var profile_progress = result.profile_progress;
+                        var count_profile_value = profile_progress.user_process_value;
+                        var count_profile = profile_progress.user_process;
+                        $scope.progress_status = profile_progress.progress_status;
+                        $scope.set_progress(count_profile_value,count_profile);
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-exp-model").modal('hide');
+                        $("#experience").modal('hide');
+                        $("#delete_user_exp").removeAttr("style");
+                        $("#user_exp_del_loader").hide();
+                        $("#exp-delete-btn").show();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
+    };
+    
+    //Experience End
+
+    // Skills Start
+    $scope.save_user_skills = function(){
+
+        $("#user_skills_loader").show();
+        $("#user_skills_save").attr("style","pointer-events:none;display:none;");
+        var updatedata = $.param({"user_skills":$scope.edit_user_skills});
+        $http({
+            method: 'POST',
+            url: base_url + 'job/save_user_skills',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            success = result.data.success;
+            if(success == 1)
+            {
+                skills_data = result.data.skills_data;
+                skills_data_edit = result.data.skills_data_edit;
+                $scope.user_skills = skills_data;
+                $scope.edit_user_skills = skills_data_edit;
+            }
+
+            $("#user_skills_save").removeAttr("style");
+            $("#user_skills_loader").hide();
+            $("#skills").modal('hide');
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+            
+            // $("#skills .modal-close").click();
+        });
+        
+    };
+
+    $scope.reset_user_skills = function(){       
+        var edit_user_skills = [];
+        $scope.user_skills.forEach(function(element,catArrIndex) {
+          edit_user_skills[catArrIndex] = {name:element.name};
+        });
+        // $scope.$apply(function () {
+        setTimeout(function(){
+            $scope.edit_user_skills = edit_user_skills;//$scope.user_skills;
+        },100);
+        // });
+    };
+
+    $scope.load_skills = [];
+    $scope.loadSkills = function ($query) {
+        return $http.get(base_url + 'job/get_skills', {cache: true}).then(function (response) {
+            var load_skills = response.data;
+            return load_skills.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+    $scope.get_user_skills = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_skills',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                skills_data = result.data.skills_data;
+                skills_data_edit = result.data.skills_data_edit;
+                $scope.user_skills = skills_data;
+                $scope.edit_user_skills = skills_data_edit;
+                $("#skill-loader").hide();
+                $("#skill-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_skills();
+    // Skills End
+
+    // Hobbies Start
+    $scope.save_user_hobbies = function(){
+        $("#user_hobby_loader").show();
+        $("#user_hobby_save").attr("style","pointer-events:none;display:none;");
+        var updatedata = $.param({"user_hobby":$scope.hobby_txt});
+        $http({
+            method: 'POST',
+            url: base_url + 'job/save_user_hobbies',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            success = result.data.success;
+            if(success == 1)
+            {
+                var user_hobbies = "";
+                var user_hobbies_a = [];
+                var user_hobbies_e = [];
+                if(result.data.hobby_data.trim() != "")
+                {
+                    user_hobbies_a = result.data.hobby_data.split(',');
+                    user_hobbies_e = result.data.hobby_data.split(',');
+                }
+                var edit_hobbies = [];
+                if(result.data.hobby_data !="" && user_hobbies_e.length > 0)
+                {                    
+                    user_hobbies_a.forEach(function(element,jobArrIndex) {
+                      edit_hobbies[jobArrIndex] = {"hobby":element};
+                    });
+                }
+                $scope.hobby_txt = edit_hobbies;
+                $scope.user_hobbies = user_hobbies_a;
+            }
+
+            $("#user_hobby_save").removeAttr("style");
+            $("#user_hobby_loader").hide();
+            $("#hobbies").modal('hide');
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+        });
+    };
+
+    $scope.reset_user_hobbies = function(){
+        var edit_user_hobbies = [];
+        $scope.user_hobbies.forEach(function(element,catArrIndex) {
+          edit_user_hobbies[catArrIndex] = {name:element.name};
+        });
+        // $scope.$apply(function () {
+        setTimeout(function(){
+            $scope.hobby_txt = edit_user_hobbies;
+        },100);
+        // });
+    };
+
+    $scope.get_user_hobbies = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_hobbies',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {                
+                var user_hobbies_a = [];
+                var user_hobbies_e = [];
+                if(result.data.hobby_data.trim() != "")
+                {
+                    user_hobbies_a = result.data.hobby_data.split(',');
+                    user_hobbies_e = result.data.hobby_data.split(',');
+                }
+                var edit_hobbies = [];
+                if(result.data.hobby_data !="" && user_hobbies_e.length > 0)
+                {                    
+                    user_hobbies_e.forEach(function(element,jobArrIndex) {
+                      edit_hobbies[jobArrIndex] = {"hobby":element};
+                    });
+                }
+                $scope.hobby_txt = edit_hobbies;
+                $scope.user_hobbies = user_hobbies_a;                
+                $("#hobbies-loader").hide();
+                $("#hobbies-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_hobbies();
+    // Hobbies End
+
+    // Software Start
+    $scope.save_user_software = function(){
+        $("#user_software_loader").show();
+        $("#user_software_save").attr("style","pointer-events:none;display:none;");
+        var updatedata = $.param({"user_software":$scope.software_txt});
+        $http({
+            method: 'POST',
+            url: base_url + 'job/save_user_software',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            success = result.data.success;
+            if(success == 1)
+            {
+                var user_software = "";
+                var user_software_a = [];
+                var user_software_e = [];
+                if(result.data.software_data.trim() != "")
+                {
+                    user_software_a = result.data.software_data.split(',');
+                    user_software_e = result.data.software_data.split(',');
+                }
+                var edit_software = [];
+                if(result.data.software_data !="" && user_software_e.length > 0)
+                {                    
+                    user_software_a.forEach(function(element,swArrIndex) {
+                      edit_software[swArrIndex] = {"software":element};
+                    });
+                }
+                $scope.software_txt = edit_software;
+                $scope.user_software = user_software_a;
+            }
+
+            $("#user_software_save").removeAttr("style");
+            $("#user_software_loader").hide();
+            $("#software").modal('hide');
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+        });
+    };
+
+    $scope.reset_user_software = function(){
+        var edit_user_software = [];
+        $scope.user_software.forEach(function(element,catArrIndex) {
+          edit_user_software[catArrIndex] = {name:element.name};
+        });
+        // $scope.$apply(function () {
+        setTimeout(function(){
+            $scope.software_txt = edit_user_software;
+        },100);
+        // });
+    };
+
+    $scope.get_user_software = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_software',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {                
+                var user_software_a = [];
+                var user_software_e = [];
+                if(result.data.software_data.trim() != "")
+                {
+                    user_software_a = result.data.software_data.split(',');
+                    user_software_e = result.data.software_data.split(',');
+                }
+                var edit_software = [];
+                if(result.data.software_data !="" && user_software_e.length > 0)
+                {                    
+                    user_software_e.forEach(function(element,jobArrIndex) {
+                      edit_software[jobArrIndex] = {"software":element};
+                    });
+                }
+                $scope.software_txt = edit_software;
+                $scope.user_software = user_software_a;                
+                $("#software-loader").hide();
+                $("#software-body").show();
+            }
+
+        });
+    }
+    $scope.get_user_software();
+    // Software End
+
+    //User resume Start
+    var user_resume_formdata = new FormData();
+    $(document).on('change','#user_resume_file', function(e){
+        $("#user_resume_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#user_resume_error").html("File size must be less than 10MB.");
+            $("#user_resume_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                user_resume_formdata.append('user_resume_file', $('#user_resume_file')[0].files[0]);
+            }
+            else {
+                $("#user_resume_error").html("Invalid file selected.");
+                $("#user_resume_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.user_resume_validate = {
+        rules: {            
+            user_resume_file: {
+                required: true,
+            },            
+        },      
+        messages: {
+            user_resume_file: {
+                required: "Please select resume",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+    };
+
+    $scope.save_user_resume = function(){
+        if ($scope.user_resume_form.validate()) {
+            $("#user_resume_loader").show();
+            $("#save_user_resume").attr("style","pointer-events:none;display:none;");
+
+            $http.post(base_url + 'job/save_user_resume', user_resume_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        user_resume = result.user_resume;
+                        $scope.user_resume = user_resume;
+                        $("#save_user_resume").removeAttr("style");
+                        $("#user_resume_loader").hide();
+                        $scope.reset_user_resume();                        
+                        $("#resume").modal('hide');
+                    }
+                    else
+                    {
+                        $("#save_user_resume").removeAttr("style");
+                        $("#user_resume_loader").hide();
+                        $scope.reset_user_resume();
+                        $("#resume").modal('hide');
+                    }
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
+                }
+            });
+        }
+    };
+
+    $scope.reset_user_resume = function(){
+        exp_file_name = $scope.user_resume;
+        if(exp_file_name.trim() != "")
+        {
+            var filename_arr = exp_file_name.split('.');                    
+            $("#exp_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_resume_upload_url+exp_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#user_resume_error"));
+            $compile(contentTr)($scope);                    
+        }
+        $("#user_resume_form")[0].reset();
+        user_resume_formdata = new FormData();
+    };
+
+    $scope.get_user_resume = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_resume',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.user_resume = result.data.user_resume;                
+                $("#resume-loader").hide();
+                $("#resume-body").show();
+            }
+        });
+    };
+    $scope.get_user_resume();
+    //User resume End
+
+    //Proffessional Summary Start
+    $scope.save_prof_summary = function(){
+        var prof_summary = $("#prof_summary").val();        
+        // if(user_bio != "" && $scope.user_bio != user_bio)
+        {
+            $("#prof_summary_loader").show();
+            $("#prof_summary_save").attr("style","pointer-events:none;display:none;");
+            var updatedata = $.param({'prof_summary':prof_summary});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/save_prof_summary',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    prof_summary = result.data.user_prof_summary;
+                    $scope.prof_summary = prof_summary;                
+                }
+                $("#prof_summary_save").removeAttr("style");
+                $("#prof_summary_loader").hide();
+                $("#prof-summary").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+
+    $scope.get_user_prof_summary = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_prof_summary',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.prof_summary = result.data.user_prof_summary;                
+                $("#prof-summary-loader").hide();
+                $("#prof-summary-body").show();
+            }
+        });
+    };
+    $scope.get_user_prof_summary();
+    //Proffessional Summary End
+
+    //Language Start
+    $scope.languageSet = {language: []};
+
+    $scope.languageSet.language = [];
+    $scope.addNewLanguage = function () {
+        // console.log($scope.languageSet.language.length);
+        if($scope.languageSet.language.length < 99)
+        {
+            $scope.languageSet.language.push('');
+        }
+    };
+
+    $scope.removeLanguage = function (z) {
+        //var lastItem = $scope.languageSet.language.length - 1;
+        $scope.languageSet.language.splice(z,1);
+    };
+    $scope.language = [];
+    $scope.get_languages = function(id) {        
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/get_languages',
+            data: 'q=' + $scope.language[id].lngtxt,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            data = success.data;
+            $scope.lang_search_result = data;
+        });
+    };
+
+    $scope.save_user_language = function(){        
+        {
+            $("#user_language_loader").show();
+            $("#save_user_language").attr("style","pointer-events:none;display:none;");
+            
+            var languages = $('.language').serializeArray();
+            var proficiency = $('.proficiency').serializeArray();
+            
+            var dob = '';//dob_year_txt+'-'+dob_month_txt+'-'+dob_day_txt;        
+            var updatedata = $.param({"language":languages,"proficiency":proficiency});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/save_user_language',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    var user_langs = result.data.user_languages;
+                    $scope.user_languages = user_langs;
+                    $scope.primari_lang = user_langs[0];
+                    $scope.languageSet.language = user_langs.slice(1);
+                }
+                $("#save_user_language").removeAttr("style");
+                $("#user_language_loader").hide();
+                $("#language").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+
+    $scope.get_user_languages = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_languages',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                var user_langs = result.data.user_languages;
+                $scope.user_languages = user_langs;
+                $scope.primari_lang = user_langs[0];
+                $scope.languageSet.language = user_langs.slice(1);               
+            }
+            $("#language-loader").hide();
+            $("#language-body").show();
+        });
+    };
+    $scope.get_user_languages();
+    //Language End
+
+    //Passion and Interest Start
+    $scope.save_passion_user = function(){
+        var passion_user = $("#passion_user").val();        
+        // if(user_bio != "" && $scope.user_bio != user_bio)
+        {
+            $("#passion_user_loader").show();
+            $("#passion_user_save").attr("style","pointer-events:none;display:none;");
+            var updatedata = $.param({'passion_user':passion_user});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/save_passion_user',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    passion_user = result.data.user_passion;
+                    $scope.passion_user = passion_user;                
+                }
+                $("#passion_user_save").removeAttr("style");
+                $("#passion_user_loader").hide();
+                $("#passion-intrest").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+
+    $scope.get_user_passion_user = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_user_passion_user',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.passion_user = result.data.user_passion;                
+                $("#passion-intrest-loader").hide();
+                $("#passion-intrest-body").show();
+            }
+        });
+    };
+    $scope.get_user_passion_user();
+    //Passion and Interest End
 });
