@@ -1842,7 +1842,7 @@
                         </div>
                         <div class="">
                             <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
 									
                                     <label>Start Date</label>
                                     <div class="row">
@@ -1872,7 +1872,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <label>End Date</label>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-6">
@@ -1972,7 +1972,7 @@
                     </div>
                     <div class="">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
 								
                                 <label>Start Date</label>
                                 <div class="row">
@@ -2002,7 +2002,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
                                 <label>End Date</label>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-6">

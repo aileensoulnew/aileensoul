@@ -2448,8 +2448,8 @@ label.cameraButton{min-height:43px;}
 .profile-job-profile-button{background:#f6f6f6;}
 .apply-btn{background:#f6f6f6;}
 .error-page .search-banner{background:none;}
-.post-field .form-group input[type="text"]:focus{box-shadow:none; border-bottom:0px;}
-.post-field .form-group textarea:focus{border-bottom:1px solid #d2d2d2 !important;}
+.post-field .form-group input[type="text"]:focus{box-shadow:none; /*border-bottom:0px;*/}
+.post-field .form-group textarea:focus{/*border-bottom:1px solid #d2d2d2 !important;*/}
 .camer_h i{color:#d2d2d2;}
 .registeration #register_form select.error{color:#7b7b7b !important;}
 .custom_footer_left ul.left-ftr-profiles{z-index:9;}
@@ -2533,7 +2533,8 @@ label.cameraButton{min-height:43px;}
 #article_frm .mce-tinymce.mce-container{border-width:0 !important;}
 #article_frm .mce-tinymce{box-shadow:inherit !important;}
 #article_frm .mce-statusbar.mce-container{border-width: 0px 0px 1px !important;}
-.arti-profile-box{/*border:1px solid #d2d2d2;*/ width:100%; /*border-radius:10px;*/ float:left;/* margin-bottom:15px;*/ overflow:hidden;}
+.arti-profile-box{border:1px solid #d2d2d2; width:100%; border-radius:10px; float:left; margin-bottom:15px; overflow:hidden;}
+.all-user-list .arti-profile-box{border:0px solid #d2d2d2; border-radius:0px; margin-bottom:0px;}
 .arti-profile-box .user-cover-img{position:relative; width:100%; height:130px; overflow:hidden; border-top-left-radius: 4px; border-top-right-radius: 4px;}
 .arti-profile-box .user-cover-img img{position: absolute; left: 50%; top: 50%; width: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); max-width: inherit; height: 100%;}
 .arti-profile-box .user-pr-img{width:80px; height:80px; margin:-50px auto 0; border:3px solid #fff; position:relative; border-radius:100%;}
@@ -2649,6 +2650,7 @@ padding: 4px;}
 .span-select select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
 .span-select{position:relative; width:100%; float:left;} 
 .span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:12px; right:6px; background-size:100%;}
+.span-select select{z-index:9; position:relative; background:transparent;}
 .dtl-more-add{text-align:center;}
 .dtl-more-add a{color:#5c5c5c; letter-spacing:1px;}
 .dtl-about-box textarea{height:60px;}
