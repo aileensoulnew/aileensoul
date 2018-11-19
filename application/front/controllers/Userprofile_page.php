@@ -1286,7 +1286,7 @@ class Userprofile_page extends MY_Controller {
     public function save_research_user()
     {
         $edit_research = $this->input->post('edit_research');
-        $research_document_old = $this->input->post('research_document_old');
+        $research_document_old = ($this->input->post('research_document_old') != "" && $this->input->post('research_document_old') != "undefined" ? $this->input->post('research_document_old') : '');
         $research_title = $this->input->post('research_title');
         $research_desc = $this->input->post('research_desc');
         $research_field = $this->input->post('research_field');
