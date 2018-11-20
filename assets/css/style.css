@@ -2496,9 +2496,9 @@ footer div.pt20{
     }
 }
 @media screen and (-webkit-min-device-pixel-ratio:0){
-    input:focus,select:focus,textarea:focus{
+    /*input:focus,select:focus,textarea:focus{
         font-size:16px
-    }
+    }*/
 }
 
 @media (min-width:1280px){

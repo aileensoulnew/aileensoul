@@ -8537,7 +8537,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#skill-move").appendTo($(".skill-move"));
             $("#social-link-move").appendTo($(".social-link-move"));
             $("#idol-move").appendTo($(".idol-move"));
+            $("#about-move").appendTo($(".about-move"));
+			$(".remove-blank").remove();
         }
+	
 
         $('.modal').on('hidden.bs.modal', function () {
             //If there are any visible            
@@ -8554,7 +8557,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 },200);
             }
         });
-		if (screen.width > 768) {
+		if (screen.width > 767) {
         var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
           containerElem.classList.add('masonry-layout', 'columns-' + columns);
           var columnsElements = [];
@@ -8573,10 +8576,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
               item.classList.add('masonry-item');
             }
           }
+		  
         };
 
         masonryLayout(document.getElementById('gallery'),
         document.querySelectorAll('.gallery-item'), 2);
+		}
+		if (screen.width < 768) {
+			$("#edit-profile-move").appendTo($(".edit-profile-mob"));
 		}
     });
 });

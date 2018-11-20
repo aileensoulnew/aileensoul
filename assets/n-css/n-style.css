@@ -2717,6 +2717,8 @@ max-width: inherit;}
 .dis-list li label{font-size:14px;}
 .dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
 .dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
+.list-ul-cus li label {font-size: 14px; font-weight: normal;
+margin-bottom: 0;}
 .dtl-dis .control__indicator{top:0;}
 .dis-accor .panel-group{width:100%; float:left; margin-bottom:5px;}
 .dtl-dis ul.skill-list{width:100%; float:left; padding-bottom:0; border-bottom:0; padding-top:2px;}
@@ -2901,7 +2903,8 @@ width: 80%; border-radius: 10px; z-index:9;}
 .dtl-modal tags-input .tags .input:focus{border:0px !important;}
 .dtl-modal .form-group input[type="text"]:focus{border:1px solid #1b8ab9;}
 .dtl-modal .span-select select:focus{border:1px solid #1b8ab9;}
-.dtl-modal .form-group textarea[type="text"]:focus{border:1px solid #1b8ab9;}
+.dtl-modal .form-group textarea:focus{border:1px solid #1b8ab9;}
+.dtl-modal textarea:focus{border:1px solid #1b8ab9;}
 .dtl-modal .modal-content .post-field .form-group{padding:0; margin-bottom:15px;}
 .dtl-modal .modal-content .post-field label{margin-bottom:5px;}
 .dtl-modal .form-group label.error{display:none !important;}
