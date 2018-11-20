@@ -217,45 +217,51 @@
                                             <div class="dtl-title">
                                                 <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
                                                 <span>Basic Information</span>
-                                                <a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                                <a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right" ng-click="edit_job_basic_info();" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                             </div>
-                                            <div class="dtl-dis dtl-box-height">
-                                                <ul class="dis-list">                               
-                                                    <li>
-                                                        <span>Job Title</span>
-                                                        Sr. Multimedia Designer
-                                                    </li>
-                                                    <li>
-                                                        <span>Industry</span>
-                                                        IT Field
-                                                    </li>
-                                                    <li>
-                                                        <span>Email</span>
-                                                        harshad2406patoliya@gmail.com
-                                                    </li>
-                                                    <li>
-                                                        <span>Phone Number</span>
-                                                        +91 951005589
-                                                    </li>
-                                                    
-                                                    <li>
-                                                        <span>Date of Birth</span>
-                                                        24 June 1990
-                                                    </li>
-                                                    <li>
-                                                        <span>Gender</span>
-                                                        Male
-                                                    </li>
-                                                    <li>
-                                                        <span>Address</span>
-                                                        f-204, Viswas city-2, rc tech road,
-                                                        ghatlodia,
-                                                        ahmedabad
-                                                    </li>
-                                                </ul>
+                                            <div id="job-info-loader" class="dtl-dis">
+                                                <div class="text-center">
+                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                                </div>
                                             </div>
-                                            <div class="about-more">
-                                                <a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+                                            <div id="job-info-body" style="display: none;">
+                                                <div id="about-detail" class="dtl-dis dtl-box-height">
+                                                    <ul class="dis-list list-ul-cus">                              
+                                                        <li>
+                                                            <span>Job Title</span>
+                                                            <label>{{job_basic_info.work_job_title_txt}}</label>
+                                                        </li>
+                                                        <li>
+                                                            <span>Industry</span>
+                                                            <label ng-if="job_basic_info.field == '0'">{{job_basic_info.other_field}}</label>
+                                                            <label ng-if="job_basic_info.field != '0'">{{job_basic_info.field_txt}}</label>
+                                                        </li>
+                                                        <li>
+                                                            <span>Email</span>
+                                                            <label>{{job_basic_info.email}}</label>
+                                                        </li>
+                                                        <li>
+                                                            <span>Phone Number</span>
+                                                            <label>{{job_basic_info.phnno}}</label>
+                                                        </li>
+                                                        
+                                                        <li>
+                                                            <span>Date of Birth</span>
+                                                            <label>{{job_basic_info.dob_txt}}</label>
+                                                        </li>
+                                                        <li>
+                                                            <span>Gender</span>
+                                                            <label>{{job_basic_info.gender | wordFirstCase}}</label>
+                                                        </li>
+                                                        <li>
+                                                            <span>Address</span>
+                                                            <label>{{job_basic_info.address}}</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div id="view-more-about" class="about-more" style="display: none;">
+                                                <a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                             </div>                                            
                                         </div>
                                     </div>
@@ -1342,152 +1348,166 @@
                         <div class="dtl-title">
                             <span>Basic Information</span>
                         </div>
-                        <div class="dtl-dis">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" placeholder="First Name">
+                        <form name="basic_info_form" id="basic_info_form" ng-validate="basic_info_validate">
+                            <div class="dtl-dis">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" placeholder="First Name" id="basic_fname" name="basic_fname">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" placeholder="Last Name" id="basic_lname" name="basic_lname">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" placeholder="Last Name">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Email </label>
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input type="text" placeholder="Phone Number">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Job Title</label>
-                                <input type="text" placeholder="Job Title">
-                            </div>
-                            
-                            <div class="row">
                                 
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Industry </label>
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Industry</option>
-                                                <option>IT field</option>
-                                                <option>Other</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Gender </label>
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                                <option>Other</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group dtl-dob">
-                                <label>Date of Birth</label>
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Day</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
-                                        </span>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Email </label>
+                                            <input type="text" placeholder="Email" id="basic_email" name="basic_email">
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2015</option>
-                                                <option>2016</option>
-                                                <option>2017</option>
-                                            </select>
-                                        </span>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" placeholder="Phone Number" id="basic_phone" name="basic_phone">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group dtl-dob">
-                                <label>Address / Location</label>
+                                <div class="form-group">
+                                    <label>Job Title</label>
+                                    <!-- <input type="text" placeholder="Job Title"> -->
+                                    <input type="text" placeholder="Enter Job Title" id="basic_jobtitle" name="basic_jobtitle" ng-model="basic_jobtitle" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+                                </div>
+                                
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Country</option>
-                                                <option>America</option>
-                                                <option>India</option>
-                                                <option>Japan</option>
-                                            </select>
-                                        </span>
+                                    
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Field</label>
+                                            <span class="span-select">
+                                                <?php $getFieldList = $this->data_model->getNewFieldList();?>
+                                                <select name="basic_field" id="basic_field" ng-model="basic_field" ng-change="basic_other_field_fnc()">
+                                                        <option value="">Select Field</option>
+                                                    <?php foreach ($getFieldList as $key => $value) { ?>
+                                                        <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+                                                    <?php } ?>
+                                                    <option value="0">Other</option>
+                                                </select>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>State</option>
-                                                <option>Gujrat</option>
-                                                <option>Delhi</option>
-                                                <option>Rajsthaan</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>City</option>
-                                                <option>Ahmedabad</option>
-                                                <option>Rajkot</option>
-                                                <option>Junagadh</option>
-                                            </select>
-                                        </span>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Gender </label>
+                                            <span class="span-select">
+                                                <select id="basic_gender" name="basic_gender" ng-model="basic_gender" >
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div id="basic_other_field_div" class="row" style="display: none;">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                        <label>Other Field</label>
+                                        <input type="text" placeholder="Enter Other Field" id="basic_other_field" name="basic_other_field" ng-model="basic_other_field">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6"></div>
+                                </div>
+                                <div class="form-group dtl-dob">
+                                    <label>Date of Birth</label>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <span class="span-select">
+                                                <select id="dob_month" name="dob_month" ng-model="dob_month" ng-change="dob_fnc('','','')">
+                                                    <option value="">Month</option>
+                                                    <option value="01">Jan</option>
+                                                    <option value="02">Feb</option>
+                                                    <option value="03">Mar</option>
+                                                    <option value="04">Apr</option>
+                                                    <option value="05">May</option>
+                                                    <option value="06">Jun</option>
+                                                    <option value="07">Jul</option>
+                                                    <option value="08">Aug</option>
+                                                    <option value="09">Sep</option>
+                                                    <option value="10">Oct</option>
+                                                    <option value="11">Nov</option>
+                                                    <option value="12">Dec</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <span class="span-select">
+                                                <select id="dob_day" name="dob_day" ng-model="dob_day" ng-click="dob_error()">
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <span class="span-select">
+                                                <select id="dob_year" name="dob_year" ng-model="dob_year" ng-change="dob_fnc('','','')" ng-click="dob_error()">
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <span id="dateerror" class="error" style="display: none;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group dtl-dob">
+                                    <label>Current Location</label>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <span class="span-select">
+                                                <select id="basic_country" name="basic_country" ng-model="basic_country" ng-change="basic_country_change()">
+                                                    <option value="">Country</option>         
+                                                    <option data-ng-repeat='country_item in exp_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <span class="span-select">
+                                                <select id="basic_state" name="basic_state" ng-model="basic_state" ng-change="basic_state_change()" disabled = "disabled">
+                                                    <option value="">State</option>
+                                                    <option data-ng-repeat='state_item in basic_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                                </select>
+                                                <img id="basic_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                            </span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <span class="span-select">
+                                                <select id="basic_city" name="basic_city" ng-model="basic_city" disabled = "disabled">
+                                                    <option value="">City</option>
+                                                    <option data-ng-repeat='city_item in basic_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                                </select>
+                                                <img id="basic_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                            </span>
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div class="form-group">
+                                    <label></label>
+                                    <input type="text" placeholder="Postal Address" id="basic_address" name="basic_address">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label></label>
-                                <input type="text" placeholder="Address / Location">
+                            <div class="dtl-btn">
+                                <!-- <a href="#" class="save"><span>Save</span></a> -->
+                                <a id="save_basic_info" href="#" ng-click="save_basic_info()" class="save"><span>Save</span></a>
+                                <div id="basic_info_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
                             </div>
-                            
-                            
-                        
-                        </div>
-                        <div class="dtl-btn">
-                                <a href="#" class="save"><span>Save</span></a>
-                            </div>
-                    </div>  
-
-
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

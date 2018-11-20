@@ -2519,4 +2519,18 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $about_user_data = $query->row_array();        
         return $about_user_data['user_passion'];
     }
+
+    public function get_job_basic_info($userid)
+    {
+        $this->db->select("jr.fname, jr.lname, jr.email, jr.phnno, jr.dob, jr.gender, jr.country_id, jr.state_id, jr.city_id, jr.address, jr.work_job_title, jr.field, jr.other_field, jt.name as work_job_title_txt, it.industry_name as field_txt,DATE_FORMAT(jr.dob, '%D %M %Y') as dob_txt,cr.country_name,st.state_name,ct.city_name")->from("job_reg jr");
+        $this->db->join('job_title jt', 'jt.title_id = jr.work_job_title', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = jr.field', 'left');
+        $this->db->join('cities ct', 'ct.city_id = jr.city_id', 'left');
+        $this->db->join('states st', 'st.state_id = jr.state_id', 'left');
+        $this->db->join('countries cr', 'cr.country_id = jr.country_id', 'left');
+        $this->db->where('jr.user_id', $userid);
+        $query = $this->db->get();
+        $job_basic_info = $query->row_array();        
+        return $job_basic_info;
+    }
 }

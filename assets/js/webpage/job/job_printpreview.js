@@ -281,7 +281,422 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;    
-    $scope.segment2 = segment2;    
+    $scope.segment2 = segment2;
+
+    $scope.get_job_basic_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_job_basic_info',            
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.job_basic_info = result.data.job_basic_info;
+                $("#job-info-loader").hide();
+                $("#job-info-body").show();
+                setTimeout(function(){
+                    if($("#about-detail").innerHeight() > 155)
+                    {
+                        $("#view-more-about").show();
+                    }
+                    else
+                    {
+                        $("#view-more-about").hide();
+                    }
+                },500);
+            }
+        });
+    };
+    $scope.get_job_basic_info();
+
+    $scope.edit_job_basic_info = function(){
+        $("#basic_fname").val($scope.job_basic_info.fname);
+        $("#basic_lname").val($scope.job_basic_info.lname);
+        $("#basic_email").val($scope.job_basic_info.email);
+        $("#basic_phone").val($scope.job_basic_info.phnno);
+        $("#basic_phone").val($scope.job_basic_info.phnno);
+        $("#basic_jobtitle").val($scope.job_basic_info.work_job_title_txt);
+        $scope.basic_field = $scope.job_basic_info.field;
+        if($scope.job_basic_info.field == 0)
+        {
+            $("#basic_other_field").val($scope.job_basic_info.other_field);
+            $("#basic_other_field_div").show();
+        }
+        $scope.basic_gender = $scope.job_basic_info.gender;
+        dob = $scope.job_basic_info.dob.split('-');
+        $scope.dob_month = dob[1];
+        dob_month = dob[1];            
+        dob_day = dob[2];            
+        dob_year = dob[0];
+        $scope.dob_fnc(dob_day,dob_month,dob_year);
+
+        $scope.basic_country = $scope.job_basic_info.country_id;
+        $("#basic_country").val($scope.job_basic_info.country_id);
+        
+        var counrtydata = $.param({'country_id': $scope.basic_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#basic_state").removeAttr("disabled");
+            $("#basic_city").attr("disabled","disabled");
+            $("#basic_state_loader").hide();
+            $scope.basic_state_list = data.data;
+            $scope.basic_city_list = [];
+            $scope.basic_state = $scope.job_basic_info.state_id;
+
+            $("#basic_city").attr("disabled","disabled");
+            $("#exp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.basic_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#basic_city").removeAttr("disabled");
+                $("#exp_city_loader").hide();
+                $scope.basic_city_list = data.data;
+                $scope.basic_city = $scope.job_basic_info.city_id;
+            });        
+        });
+        $("#basic_address").val($scope.job_basic_info.address);
+    };
+
+    $scope.basic_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.basic_jobtitle,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.basic_info_validate = {
+        rules: {
+            basic_fname: {
+                required: true,
+            },
+            basic_lname: {
+                required: true,
+            },
+            basic_email: {
+                required: true,
+                email:true,
+                remote: {
+                    url: base_url + "job/check_email",
+                    type: "post",
+                    data: {
+                      email: function() {
+                        return $( "#basic_email" ).val();
+                      }
+                    }
+                },
+            },
+            basic_phone: {
+                required: true,
+            },
+            basic_jobtitle: {
+                required: true,
+            },
+            basic_field: {
+                required: true,
+            },
+            basic_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#basic_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            basic_gender: {
+                required: true,
+            },
+            dob_month: {
+                required: true,
+            },
+            dob_day: {
+                required: true,
+            },
+            dob_year: {
+                required: true,
+            },
+            basic_country: {
+                required: true,
+            },
+            basic_state: {
+                required: true,
+            },
+            basic_city: {
+                required: true,
+            },
+            basic_address: {
+                required: true,
+            },
+        },
+        groups: {
+            dob_year: "dob_year dob_month dob_day"
+        },
+        messages: {
+            basic_fname: {
+                required: "Please enter first name",
+            },
+            basic_lname: {
+                required: "Please enter last name",
+            },
+            basic_email: {
+                required: "Please enter email",
+                email: "Please enter valid email id.",
+                remote: "Email already exists",
+            },         
+            basic_phone: {
+                required: "Please enter contact number",
+            },
+            basic_jobtitle: {
+                required: "Please enter job title",
+            },
+            basic_field: {
+                required: "Please select field",
+            },
+            basic_gender: {
+                required: "Please select gender",
+            },
+            dob_day: {
+                required: "Please select date of birth",
+            },
+            dob_month: {
+                required: "Please select date of birth",
+            },
+            dob_year: {
+                required: "Please select date of birth",
+            },
+            basic_country: {
+                required: "Please select county",
+            },
+            basic_state: {
+                required: "Please select state",
+            },
+            basic_city: {
+                required: "Please select city",
+            },
+            basic_address: {
+                required: "Please enter address",
+            },
+        },
+    };
+    $scope.save_basic_info = function(){
+        if ($scope.basic_info_form.validate())
+        {
+            $("#basic_info_loader").show();
+            $("#save_basic_info").attr("style","pointer-events:none;display:none;");
+            var dob_day_txt = $("#dob_day option:selected").val();
+            var dob_month_txt = $("#dob_month option:selected").val();
+            var dob_year_txt = $("#dob_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = dob_year_txt + '/' + dob_month_txt + '/' + dob_day_txt;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#dateerror").html("Date of birth always less than to today's date.");
+                $("#dateerror").show();
+
+                $("#save_basic_info").removeAttr("style");
+                $("#basic_info_loader").hide();
+                return false;
+            }
+            var basic_fname = $("#basic_fname").val();
+            var basic_lname = $("#basic_lname").val();
+            var basic_email = $("#basic_email").val();
+            var basic_phone = $("#basic_phone").val();
+            var basic_jobtitle = $("#basic_jobtitle").val();
+            var basic_field = $scope.basic_field;
+            var basic_other_field = $("#basic_other_field").val();
+            var basic_gender = $("#basic_gender option:selected").val();
+            var dob = dob_year_txt + '-' + dob_month_txt + '-' + dob_day_txt;
+            var basic_country = $("#basic_country option:selected").val();
+            var basic_state = $("#basic_state option:selected").val();
+            var basic_city = $("#basic_city option:selected").val();
+            var basic_address = $("#basic_address").val();
+
+            var updatedata = $.param({'basic_fname':basic_fname,'basic_lname':basic_lname,'basic_email':basic_email,'basic_phone':basic_phone,'basic_jobtitle':basic_jobtitle,'basic_field':basic_field,"basic_other_field":basic_other_field,"basic_gender":basic_gender,"dob":dob,"basic_country":basic_country,"basic_state":basic_state,"basic_city":basic_city,"basic_address":basic_address});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/save_basic_info',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.job_basic_info = result.data.job_basic_info;
+                    $(".profile-head-text").html($scope.job_basic_info.fname+' '+$scope.job_basic_info.lname)
+                }
+                setTimeout(function(){
+                    if($("#about-detail").innerHeight() > 155)
+                    {
+                        $("#view-more-about").show();
+                    }
+                    else
+                    {
+                        $("#view-more-about").hide();
+                    }
+                },500);
+                $("#save_basic_info").removeAttr("style");
+                $("#basic_info_loader").hide();
+                $("#job-basic-info").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+
+    $scope.view_more_about = function(){
+        $("#about-detail").removeClass("dtl-box-height");
+        $("#view-more-about").hide();
+    };
+
+    $scope.basic_other_field_fnc = function()
+    {
+        if($scope.basic_field == 0 && $scope.basic_field != "")
+        {
+            $("#basic_other_field_div").show();
+        }
+        else
+        {
+            $("#basic_other_field_div").hide();
+        }
+    };
+
+    $scope.basic_country_change = function() {
+        $("#basic_state").attr("disabled","disabled");
+        $("#save_basic_info").attr("style","pointer-events:none;");
+        $("#basic_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.basic_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#basic_state").removeAttr("disabled");
+            $("#save_basic_info").removeAttr("style");
+            $("#basic_city").attr("disabled","disabled");
+            $("#basic_state_loader").hide();
+            $scope.basic_state_list = data.data;
+            $scope.basic_city_list = [];
+        });
+    }
+
+    $scope.basic_state_change = function() {
+        if($scope.basic_state != "" && $scope.basic_state != 0 && $scope.basic_state != null)
+        {
+            $("#basic_city").attr("disabled","disabled");
+            $("#save_basic_info").attr("style","pointer-events:none;");
+            $("#basic_city_loader").show();
+            var statedata = $.param({'state_id': $scope.basic_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#basic_city").removeAttr("disabled");
+                $("#save_basic_info").removeAttr("style");
+                $("#basic_city_loader").hide();
+                $scope.basic_city_list = data.data;
+            });
+        }
+    };
+
+    $scope.dob_fnc = function(dob_day,dob_month,dob_year){
+        $("#dateerror").hide();
+        $("#dateerror").html('');
+        var kcyear = document.getElementsByName("dob_year")[0],
+        kcmonth = document.getElementsByName("dob_month")[0],
+        kcday = document.getElementsByName("dob_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#dob_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#dob_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
 
     $(document).on('change','select', function(e){
         $(this).addClass("custom-color");

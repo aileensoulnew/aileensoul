@@ -8161,4 +8161,68 @@ class Job extends MY_Controller {
         $ret_arr = array("success"=>1,"user_passion"=>$user_passion);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_job_basic_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $job_basic_info = $this->job_model->get_job_basic_info($userid);
+        $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));   
+    }
+
+    public function save_basic_info()
+    {
+        $basic_fname = $this->input->post('basic_fname');
+        $basic_lname = $this->input->post('basic_lname');
+        $basic_email = $this->input->post('basic_email');
+        $basic_phone = $this->input->post('basic_phone');
+        $basic_jobtitle = $this->input->post('basic_jobtitle');
+        $basic_field = $this->input->post('basic_field');
+        $basic_other_field = $this->input->post('basic_other_field');
+        $basic_gender = $this->input->post('basic_gender');
+        $dob = $this->input->post('dob');
+        $basic_country = $this->input->post('basic_country');
+        $basic_state = $this->input->post('basic_state');
+        $basic_city = $this->input->post('basic_city');
+        $basic_address = $this->input->post('basic_address');
+
+        if ($basic_jobtitle != " ") {
+            $contition_array = array('name' => $basic_jobtitle);
+            $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            if ($jobdata) {
+                $basic_jobtitle = $jobdata[0]['title_id'];
+            } else {
+                $forslug = $basic_jobtitle;
+                $data = array(
+                    'name' => ucfirst($basic_jobtitle),
+                    'slug' => $this->common->clean($forslug),
+                    'status' => 'draft',
+                );
+                $basic_jobtitle = $this->common->insert_data_getid($data, 'job_title');
+            }
+        }
+        $userid = $this->session->userdata('aileenuser');
+
+        $data1 = array(
+            'fname' => ucfirst($basic_fname),
+            'lname' => ucfirst($basic_lname),
+            'email' => $basic_email,
+            'phnno' => $basic_phone,
+            'work_job_title' => $basic_jobtitle,
+            'field' => $basic_field,
+            'other_field' => $basic_other_field,
+            'gender' => $basic_gender,
+            'dob' => $dob,
+            'country_id' => $basic_country,
+            'state_id' => $basic_state,
+            'city_id' => $basic_city,
+            'address' => $basic_address,            
+            'modified_date' => date('Y-m-d h:i:s', time()),            
+        );
+        $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
+        $job_basic_info = $this->job_model->get_job_basic_info($userid);
+        $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }
