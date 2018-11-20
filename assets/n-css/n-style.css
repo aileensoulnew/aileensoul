@@ -2707,8 +2707,8 @@ overflow: hidden;}
 .dis-list li a:hover{color:#1b8ab9; text-decoration:none;}
 .dis-list li a.dis-more{color:#5c5c5c;}
 .dis-list li a.dis-more:hover{color:#5c5c5c;}
-.dis-list li .screen-shot{width:130px; float: left; position: relative; overflow: hidden; padding-top:5px; height:130px;}
-.add-menu .dis-list li .screen-shot img{position: absolute; left: 50%; top: 50%;
+.dis-list li .screen-shot{width:80px; float: left; position: relative; overflow: hidden; padding-top:5px; height:80px;}
+.dis-list li .screen-shot img{position: absolute; left: 50%; top: 50%;
 width: auto; height: 100%;
 -webkit-transform: translate(-50%,-50%);
 -ms-transform: translate(-50%,-50%);
@@ -2819,6 +2819,8 @@ width: 80%; border-radius: 10px; z-index:9;}
 .inner-dis{word-break: break-all;}
 .dtl-btn .dtl-popup-loader{position: absolute; width: 100%; top: 0; background: #fff; padding: 11px 0; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;}
 .right-add.add-detail .right-add-box{border:0; padding:0; margin:0;}
+.press-rel .dis-middle{padding-top:18px;}
+.press-rel .dis-right{padding-top:15px;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
