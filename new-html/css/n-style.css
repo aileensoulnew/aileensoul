@@ -2691,6 +2691,7 @@ padding: 4px;}
 overflow: hidden;}
 .dtl-dis.dis-accor{padding:0;}
 .dtl-dis.dis-accor .panel-heading{min-height:80px; padding:15px; background:transparent; border-radius:0;}
+.dtl-dis .panel .panel-body{border-left:0px; border-right:0px; border-bottom:0;}
 .dis-accor .panel.panel-default{border-radius:0; border-width:1px 0 0 0; box-shadow:inherit; -webkit-box-shadow:inherit; width:100%; float:left; border-bottom-left-radius:20px; border-bottom-right-radius:20px; margin-top:0; border-color:#d2d2d2;}
 .dis-accor .panel.panel-default:first-child{border-top:0px;}
 .dis-accor .panel-body{padding:20px 0;}
@@ -2969,6 +2970,26 @@ width: 80%; border-radius: 10px; z-index:9;}
 .img-cus{border:0;}
 .img-cus img{width:100%; border-radius:100%; }
 .link-must{font-size:12px;}
+
+.right-cus-imp{float:right;}
+.right-cus-imp .dtl-box{width:320px; margin-bottom:0;}
+.right-cus-imp .dtl-box label{margin-bottom:0; font-size:18px; color:#5c5c5c; width:100%;}
+.right-cus-imp .dtl-box .dis-list{padding-bottom:0;}
+.job-stasus{width:10px; height:10px; background:#7b7b7b; display:inline-block; border-radius: 100%; margin-right: 8px;}	
+span.job-active {background:#42b72a;}
+span.job-passive {background:#ec9a0a;}
+span.job-not {background:#ff0000;}
+.dis-list.cus-status li span{display:inline-block;}
+.dis-list.cus-status li a img{width:20px;}
+div.mm-dropdown {border: 1px solid #ddd; width: 100%; border-radius: 3px;}
+div.mm-dropdown ul {list-style: none; padding: 0; margin: 0; border: 0;}
+div.mm-dropdown ul li, div.mm-dropdown div.textfirst {padding: 0; color: #333; border-bottom: 1px solid #ddd; padding: 5px 15px;}
+div.mm-dropdown div.textfirst img.down { float: right; margin-top: 5px}
+div.mm-dropdown ul li:last-child {border-bottom: 0; }
+div.mm-dropdown ul li { display: none; padding-left: 25px; }
+div.mm-dropdown ul li.main {display: block;}
+div.mm-dropdown ul li img {width: 20px; height: 20px;}
+
 /***  end new job registration form  ***/
 /***  bus timeline  ***/
 .timeline-cus .modal-content{width:95%;}
@@ -3247,7 +3268,7 @@ text-overflow: ellipsis; overflow: hidden;}
 	.cus-inner-middle{width:71%;}
 	.cus-add-post .right-add{width:220px;}
 	.manage-post-custom .right-add{width:180px;}
-	.job_edit_menu{width:100% !important; margin-top:10px; margin-bottom:10px;}
+	.job_edit_menu{/*width:100% !important; margin-top:10px; margin-bottom:10px;*/}
 	.cus-add-post .right-add .right-add-box .adBlock { width: 190px; height: 650px; }
 	.manage-post-custom .right-add .right-add-box .adBlock { width: 170px; height: 600px; }
 	.right-part .right-add-box .adBlock { width: 190px; height: 650px; }
@@ -3523,6 +3544,10 @@ text-overflow: ellipsis; overflow: hidden;}
 	.dis-right{text-align:right;}
 	.dis-right span.pr5{padding-right:0; margin-right:5px;}
 	.timeline-right{width:86%;}
+	.right-cus-imp .dtl-box .dtl-dis{padding:15px;}
+	.res-job-print .job_edit_menu{margin-top:35px; padding-bottom:0; padding-left:15px;}
+	.right-cus-imp .dtl-box{margin-top:23px;}
+	.art-side-menu .flw_msg_btn{margin-top:8px; margin-right:8px;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -3929,7 +3954,7 @@ text-overflow: ellipsis; overflow: hidden;}
 	.middle-part.op-middle{margin-bottom:30px; width:100%; float:left;}
 	.all-contact{border-radius:0; border-left:0; border-right:0;}
 	.art-side-menu .flw_msg_btn ul li{padding:0;}
-	.art-side-menu .flw_msg_btn{margin-top:0; margin:0; border-bottom:1px solid #d2d2d2;}
+	.art-side-menu .flw_msg_btn{margin-top:5px !important; margin:0; border-bottom:1px solid #d2d2d2;}
 	.img-custom .ceo-img img{width:100%;}
 	.fix-feedback.mobile{display:block;}
 	#feed-mob{background:#fff;}
@@ -3954,6 +3979,8 @@ text-overflow: ellipsis; overflow: hidden;}
 	.timeline-right{padding-left:10px; width:83%; padding-top:8px;}
 	.cd-horizontal-timeline .events-content h2{font-size:18px;}
 	.events-content li h2 a img{width:18px;}
+	.right-cus-imp{width:100%;}
+	.right-cus-imp .dtl-box{width:100%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
