@@ -3211,6 +3211,13 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 text-overflow: ellipsis; overflow: hidden;}
 .arti-profile-box .user-info-text p{max-width: 100%; white-space: nowrap;
 text-overflow: ellipsis; overflow: hidden;}
+.pl4{padding-left:4px;}
+.extra-label{padding-left:4px;}
+.form-group {position: relative;}
+.form-control-placeholder {position: absolute; top: 0; padding: 15px 0 0 0px; transition: all 200ms; opacity: 1; }
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 
 /***  media query  ***/
 @media print {
