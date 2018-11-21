@@ -306,6 +306,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 $scope.job_basic_info = result.data.job_basic_info;
                 $("#job-info-loader").hide();
                 $("#job-info-body").show();
+
+                $("#job-status-loader").hide();
+                $("#job-status-body").show();
                 setTimeout(function(){
                     if($("#about-detail").innerHeight() > 155)
                     {

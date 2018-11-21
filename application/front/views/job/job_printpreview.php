@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">        
     <?php $this->load->view('adsense'); ?>
 </head>
     <!-- END HEAD -->
@@ -171,36 +171,75 @@
                             ?>
                         </div>
                     </div>
-                    <?php echo $job_menubar; ?>   
+                    <?php echo $job_menubar; ?>                       
                 </div>
             </div>
-            <div class="container res-job-print mobp0">
-                <div class="job-menu-profile job_edit_menu mob-none">
-                    <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
-                        <h3 class="profile-head-text">
-                            <?php echo ucfirst($job[0]['fname']) . ' ' . ucfirst($job[0]['lname']); ?> 
-                        </h3>
-                    </a>
-                    <div class="profile-text" >
-                        <?php
-                        if ($userid == $id) {
-                            if ($job[0]['designation'] == '') {
-                                ?>
-                                <a id="designation" class="designation" title="Designation">Current Work</a>
-                            <?php } else {
-                                ?> 
-                                <a id="designation" class="designation" title="<?php echo ucwords($job[0]['designation']); ?>"><?php echo ucwords($job[0]['designation']); ?></a>
-                                <?php
+            <div class="container res-job-print mob-plr0">
+                <div class="fw">
+                    <div class="job-menu-profile job_edit_menu mob-none">
+                        <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
+                            <h3 class="profile-head-text">
+                                <?php echo ucfirst($job[0]['fname']) . ' ' . ucfirst($job[0]['lname']); ?> 
+                            </h3>
+                        </a>
+                        <div class="profile-text" >
+                            <?php
+                            if ($userid == $id) {
+                                if ($job[0]['designation'] == '') {
+                                    ?>
+                                    <a id="designation" class="designation" title="Designation">Current Work</a>
+                                <?php } else {
+                                    ?> 
+                                    <a id="designation" class="designation" title="<?php echo ucwords($job[0]['designation']); ?>"><?php echo ucwords($job[0]['designation']); ?></a>
+                                    <?php
+                                }
+                            } else {
+                                if ($job[0]['designation'] == '') {
+                                    ?>
+                                    <a id="designation" style="cursor:default;"> <?php echo "Current Work"; ?> </a> 
+                                <?php } else { ?>
+                                    <a id="designation" style="cursor:default;"> <?php echo ucwords($job[0]['designation']); ?> </a> <?php
+                                }
                             }
-                        } else {
-                            if ($job[0]['designation'] == '') {
-                                ?>
-                                <a id="designation" style="cursor:default;"> <?php echo "Current Work"; ?> </a> 
-                            <?php } else { ?>
-                                <a id="designation" style="cursor:default;"> <?php echo ucwords($job[0]['designation']); ?> </a> <?php
-                            }
-                        }
-                        ?>
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="right-cus-imp">
+                        <div class="dtl-box" >
+                            <div id="job-status-loader" class="dtl-dis">
+                                <div class="text-center">
+                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                </div>
+                            </div>
+                            <div id="job-status-body" style="display: none;">
+                                <div class="dtl-dis">
+                                    <ul class="dis-list cus-status">
+                                        <li>
+                                            <label>
+                                                <span ng-if="job_basic_info.job_active_status == '1'">
+                                                    <span class="job-active"></span>Currently Looking for Job Change
+                                                </span>
+                                                <span ng-if="job_basic_info.job_active_status == '2'">
+                                                    <span class="job-passive"></span>Passively Looking for Job
+                                                </span>
+                                                <span ng-if="job_basic_info.job_active_status == '3'">
+                                                    <span class="job-not"></span>Not Open for Opportunities
+                                                </span>
+                                                <span ng-if="job_basic_info.job_active_status != '1' && job_basic_info.job_active_status != '2' && job_basic_info.job_active_status != '3'">
+                                                    <span class="job-status"></span>Job Search Status
+                                                </span>
+                                                <span class="pull-right">
+                                                    <a href="#" data-target="#imp-content" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2">
+                                                        <img src="<?php echo base_url('assets/n-images/detail/main-edit1.png?ver=' . time()) ?>">
+                                                    </a>
+                                                </span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1134,7 +1173,7 @@
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Software</span><a href="#" data-target="#software" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Software</span><a href="#" data-target="#software" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                             </div>
                                             <div id="software-loader" class="dtl-dis">
                                                 <div class="text-center">
@@ -1145,7 +1184,7 @@
                                                 <div class="dtl-dis">
                                                      <div class="no-info" ng-if="user_software.length < '1'">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                        <span>No Software.</span>
+                                                        <span>Have you learned to use different software? Add them here.</span>
                                                     </div>
                                                     <ul class="skill-list" ng-if="user_software.length > '0'">
                                                         <li ng-repeat="software in user_software">{{software}}</li>
@@ -1174,13 +1213,18 @@
                                                     <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
                                                     
                                                     <li><span class=""></span>Experience</li>
-                                                    <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>About</li>
-                                                    <li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li>
+                                                    <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Languages</li>
                                                     
-                                                    <li class="pl20"><span class=""></span>Social</li>
-                                                    <li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Idol</li>
-                                                    <li class="fw"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Educational info</li>
-                                                    <li class="fw"><span class=""></span>Profile overview</li>
+                                                    <li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Hobbies</li>
+                                                    <li class="pl20"><span class=""></span>Websites</li>
+                                                    
+                                                    <li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Basic info</li>
+                                                    <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li> 
+
+                                                    <li class="fw"><span class=""></span>Educational Info</li>
+                                                    <li class="fw"><span class=""></span>Preferred Job Details</li>
+
+                                                    <li class="fw"><span class=""></span>Professional Summary</li>
                                                 </ul>
                                             </div>
                                             <div class="dtl-edit-bottom"></div>
@@ -1279,7 +1323,7 @@
                                             <div class="dtl-dis">
                                                 <div class="no-info" ng-if="user_languages.length < '1'">
                                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                    <span>No Language.</span>
+                                                    <span>Add languages that you know. Open door of overseas opportunities.</span>
                                                 </div>
                                                 <ul ng-if="user_languages.length > 0" class="known-language">
                                                     <!-- <li><span class="pr5">Hindi</span> - <span class="pl5">Basic</span></li>
@@ -1310,7 +1354,7 @@
                                             <div class="dtl-dis resume-img">
                                                 <div class="no-info" ng-if="user_resume == ''">
                                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                    <span>No Resume.</span>
+                                                    <span>Attach resume to let the recruiter know little more about you.</span>
                                                 </div>
                                                 <a href="<?php echo JOB_USER_RESUME_UPLOAD_URL; ?>{{user_resume}}" ng-if="user_resume != ''" target="_self">
                                                     <img src="<?php echo base_url('assets/n-images/detail/file-up-cus.png?ver=' . time()) ?>">
@@ -1324,7 +1368,7 @@
                                 <div class="rsp-dtl-box ">
                                     <div class="dtl-box">
                                         <div class="dtl-title">
-                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Hobbies</span><a href="#" data-target="#hobbies" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Hobbies</span><a href="#" data-target="#hobbies" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                         </div>
                                         <div id="hobbies-loader" class="dtl-dis">
                                             <div class="text-center">
@@ -1335,7 +1379,7 @@
                                             <div class="dtl-dis">
                                                 <div class="no-info" ng-if="user_hobbies.length < '1'">
                                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                    <span>No Hobbies.</span>
+                                                    <span>Highlight things you love to do when you have leisure time. Ex: Reading, Cooking, Traveling, etc</span>
                                                 </div>
                                                 <ul class="skill-list" ng-if="user_hobbies.length > '0'">
                                                     <li ng-repeat="hobbies in user_hobbies">{{hobbies}}</li>
@@ -3431,6 +3475,64 @@
                 </div>
             </div>
         </div>
+
+        <!-- model Imp-content  -->
+        <div style="display:none;" class="modal fade dtl-modal" id="imp-content" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="modal-body-cus"> 
+                        <div class="dtl-title">
+                            <span>Job Search Status</span>
+                        </div>
+                        <div class="dtl-dis">                                
+                            <div class="form-group">
+                                <!-- Use This! #just fix width+height IMG  -->
+                                <div class="mm-dropdown">
+                                  <div class="textfirst">
+                                    <span ng-if="job_basic_info.job_active_status == '1'">
+                                        <span class="job-active"></span>Currently Looking for Job Change
+                                    </span>
+                                    <span ng-if="job_basic_info.job_active_status == '2'">
+                                        <span class="job-passive"></span>Passively Looking for Job
+                                    </span>
+                                    <span ng-if="job_basic_info.job_active_status == '3'">
+                                        <span class="job-not"></span>Not Open for Opportunities
+                                    </span>
+                                    <span ng-if="job_basic_info.job_active_status != '1' && job_basic_info.job_active_status != '2' && job_basic_info.job_active_status != '3'">
+                                        <span class="job-status"></span>Job Search Status:
+                                    </span>
+                                  </div>
+                                  <ul>
+                                    <li class="input-option" data-value="1">
+                                        <span class="job-active"></span>Currently Looking for Job Change
+                                    </li>
+                                    <li class="input-option" data-value="2">
+                                        <span class="job-passive"></span>Passively Looking for Job
+                                    </li>
+                                    <li class="input-option" data-value="3">
+                                        <span class="job-not"></span>Not Open for Opportunities
+                                    </li>
+                                  </ul>
+                                  <input type="hidden" class="option" name="namesubmit" value="{{job_basic_info.job_active_status}}" />
+                                </div>
+                                <!-- End This -->
+                            </div>
+                            
+                        </div>
+                        <div class="dtl-btn bottom-btn">
+                            <!-- <a href="#" class="save"><span>Save</span></a> -->
+                            <a id="job_imp_save" href="#" ng-click="job_imp_save()" class="save"><span>Save</span></a>
+                            <div id="job_imp_save_loader" class="dtl-popup-loader" style="display: none;">
+                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                            </div>
+                        </div>
+                    </div>  
+
+
+                </div>
+            </div>
+        </div>
         
         <!---  model Basic Information  -->
         <div style="display:none;" class="modal fade dtl-modal" id="user-info-edit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -3536,6 +3638,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- All Model End -->
 
 
@@ -3635,6 +3738,7 @@
         <script src="<?php echo base_url('assets/js/webpage/job/job_printpreview.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/modernizr.custom.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -3651,6 +3755,32 @@
                 });
 
             });
+        </script>
+        <script type="text/javascript">
+            $(function() {
+              // Set
+              var main = $('div.mm-dropdown .textfirst')
+              var li = $('div.mm-dropdown > ul > li.input-option')
+              var inputoption = $("div.mm-dropdown .option")
+              var default_text = 'Job Search Status:';
+
+              // Animation
+              main.click(function() {
+                main.html(default_text);
+                li.toggle();
+              });
+
+              // Insert Data
+              li.click(function() {
+                // hide
+                li.toggle();
+                var livalue = $(this).data('value');
+                var lihtml = $(this).html();
+                main.html(lihtml);
+                inputoption.val(livalue);
+              });
+            });
+
         </script>
 
     </body>
