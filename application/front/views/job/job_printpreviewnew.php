@@ -166,7 +166,7 @@
                     <?php echo $job_menubar; ?>   
                 </div>
             </div>
-            <div class="container res-job-print mobp0">
+            <div class="container res-job-print mob-plr0">
 			<div class="fw">
                 <div class="job-menu-profile job_edit_menu mob-none">
                     <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
