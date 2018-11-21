@@ -218,7 +218,7 @@
                                         <li>
                                             <label>
                                                 <span ng-if="job_basic_info.job_active_status == '1'">
-                                                    <span class="job-active"></span>Currently Looking for Job Change
+                                                    <span class="job-active"></span>Currently Looking for Job
                                                 </span>
                                                 <span ng-if="job_basic_info.job_active_status == '2'">
                                                     <span class="job-passive"></span>Passively Looking for Job
@@ -1222,6 +1222,7 @@
                                                     <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li> 
 
                                                     <li class="fw"><span class=""></span>Educational Info</li>
+                                                    <li class="fw"><span class=""></span>Job Search Status</li>
                                                     <li class="fw"><span class=""></span>Preferred Job Details</li>
 
                                                     <li class="fw"><span class=""></span>Professional Summary</li>
@@ -3491,7 +3492,7 @@
                                 <div class="mm-dropdown">
                                   <div class="textfirst">
                                     <span ng-if="job_basic_info.job_active_status == '1'">
-                                        <span class="job-active"></span>Currently Looking for Job Change
+                                        <span class="job-active"></span>Currently Looking for Job
                                     </span>
                                     <span ng-if="job_basic_info.job_active_status == '2'">
                                         <span class="job-passive"></span>Passively Looking for Job
@@ -3500,12 +3501,12 @@
                                         <span class="job-not"></span>Not Open for Opportunities
                                     </span>
                                     <span ng-if="job_basic_info.job_active_status != '1' && job_basic_info.job_active_status != '2' && job_basic_info.job_active_status != '3'">
-                                        <span class="job-status"></span>Job Search Status:
+                                        Select Status
                                     </span>
                                   </div>
                                   <ul>
                                     <li class="input-option" data-value="1">
-                                        <span class="job-active"></span>Currently Looking for Job Change
+                                        <span class="job-active"></span>Currently Looking for Job
                                     </li>
                                     <li class="input-option" data-value="2">
                                         <span class="job-passive"></span>Passively Looking for Job
@@ -3514,7 +3515,7 @@
                                         <span class="job-not"></span>Not Open for Opportunities
                                     </li>
                                   </ul>
-                                  <input type="hidden" class="option" name="namesubmit" value="{{job_basic_info.job_active_status}}" />
+                                  <input id="job_status" type="hidden" class="option" name="namesubmit" value="{{job_basic_info.job_active_status}}" />
                                 </div>
                                 <!-- End This -->
                             </div>
@@ -3762,7 +3763,7 @@
               var main = $('div.mm-dropdown .textfirst')
               var li = $('div.mm-dropdown > ul > li.input-option')
               var inputoption = $("div.mm-dropdown .option")
-              var default_text = 'Job Search Status:';
+              var default_text = 'Select Status:';
 
               // Animation
               main.click(function() {

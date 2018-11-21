@@ -8324,4 +8324,19 @@ class Job extends MY_Controller {
         $ret_arr = array("success"=>1,"preferred_job_info"=>$preferred_job_info);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function job_imp_save()
+    {
+        $job_status = $this->input->post('job_status');
+        $userid = $this->session->userdata('aileenuser');
+
+        $data1 = array(
+            'job_active_status' => $job_status,
+            'modified_date' => date('Y-m-d h:i:s', time()),            
+        );
+        $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);        
+        $job_basic_info = $this->job_model->get_job_basic_info($userid);
+        $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

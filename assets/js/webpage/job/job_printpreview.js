@@ -5606,4 +5606,55 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $("#preferred_moredetail").val($scope.preferred_job_info.preferred_moredetail);
     };
     //Preferred Job Detail End
+
+    //Job Search Status Start
+    $scope.validate_job_imp = function(){
+        var job_status = $("#job_status").val();
+        console.log(job_status);
+        if(job_status == 1 || job_status == 2 || job_status == 3)
+        {
+            $(".mm-dropdown").attr("style","border: 1px solid #ddd;");
+            return true;
+        }
+        else
+        {
+            $(".mm-dropdown").attr("style","border: 1px solid #f00000;");
+            return false;
+        }
+    };
+
+    $scope.job_imp_save = function(){
+        var pre_loc = $scope.validate_job_imp();
+        if (pre_loc)
+        {
+            $("#job_imp_save_loader").show();
+            $("#job_imp_save").attr("style","pointer-events:none;display:none;");
+            var job_status = $("#job_status").val();
+            var updatedata = $.param({'job_status':job_status});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/job_imp_save',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    $scope.job_basic_info = result.data.job_basic_info;                
+                }
+                $("#job_imp_save").removeAttr("style");
+                $("#job_imp_save_loader").hide();
+                $("#imp-content").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+            
+        }
+    };
+    //Job Search Status Start
 });

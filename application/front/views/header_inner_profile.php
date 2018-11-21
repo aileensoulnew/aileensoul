@@ -854,7 +854,7 @@ if($browser == "Firefox")
     }
     if(is_verify == 0)
     {
-        $('body').addClass("verify-body-inner");
+        // $('body').addClass("verify-body-inner");
     }
   </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
