@@ -318,4 +318,12 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function get_currency_list() {
+        $this->db->select('*')->from('currency');
+        $this->db->order_by('currency_name', 'ASC');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }

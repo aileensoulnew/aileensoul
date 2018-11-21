@@ -1952,7 +1952,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
 
     public function get_user_project($userid)
     {
-        $this->db->select("jup.id_projects, jup.user_id, jup.project_title, jup.project_team, jup.project_role, jup.project_skills, jup.project_field, jup.project_other_field, jup.project_url, jup.project_partner_name, jup.project_start_date, jup.project_end_date, jup.project_desc, jup.project_file, jup.status, jup.created_date, jup.modify_date, DATE_FORMAT(CONCAT(jup.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jup.project_end_date,'-1'),'%b %Y') as end_date_str,it.industry_name as project_field_txt, GROUP_CONCAT(DISTINCT(s.skill)) as project_skills_txt,")->from("job_user_projects jup,skill s");
+        $this->db->select("jup.id_projects, jup.user_id, jup.project_title, jup.project_team, jup.project_role, jup.project_skills, jup.project_field, jup.project_other_field, jup.project_url, jup.project_partner_name, jup.project_start_date, jup.project_end_date, jup.project_desc, jup.project_file, jup.status, jup.created_date, jup.modify_date, DATE_FORMAT(CONCAT(jup.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jup.project_end_date,'-1'),'%b %Y') as end_date_str,it.industry_name as project_field_txt, GROUP_CONCAT(DISTINCT(s.skill)) as project_skills_txt")->from("job_user_projects jup,skill s");
         $this->db->join('industry_type it', 'it.industry_id = jup.project_field', 'left');
         $this->db->where('FIND_IN_SET(s.skill_id, jup.project_skills) !=', 0);
         $this->db->where('jup.user_id', $userid);
@@ -2532,5 +2532,30 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $query = $this->db->get();
         $job_basic_info = $query->row_array();        
         return $job_basic_info;
+    }
+
+    public function get_city()
+    {
+        $this->db->select('c.city_name as city')->from('cities c');
+        $this->db->where('c.status', '1');
+        $this->db->where('c.state_id !=', '0');
+        $this->db->group_by('c.city_name');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_preferred_job_info($userid)
+    {
+        $this->db->select("jr.work_job_title, jt.name as work_job_title_txt, GROUP_CONCAT(DISTINCT(tct.city_name)) as work_job_city_txt,jr.work_job_industry, it.industry_name as work_job_industry_txt, jr.work_job_other_industry,jr.preferred_travel, jr.preferred_cmp_culture, jr.preferred_work_time, jr.exp_salary_amt, jr.exp_salary_currency,c.currency_name, jr.exp_salary_worktype, jr.preferred_moredetail")->from("job_reg jr,cities tct");
+        $this->db->join('job_title jt', 'jt.title_id = jr.work_job_title', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = jr.work_job_industry', 'left');
+        $this->db->join('currency c', 'c.currency_id = jr.exp_salary_currency', 'left');        
+        $this->db->where('jr.user_id', $userid);
+        $this->db->where('FIND_IN_SET(tct.city_id, jr.work_job_city) !=', 0);
+        $this->db->group_by('jr.work_job_city,jr.job_id');
+        $query = $this->db->get();
+        $preferred_job_info = $query->row_array();        
+        return $preferred_job_info;
     }
 }

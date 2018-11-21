@@ -126,7 +126,7 @@ $('#upload').click(function(){
 
 
 //Update Profile Pic Start
-$(document).ready(function () {
+// $(document).ready(function () {
     $("#userimage").validate({
         rules: {
             profilepic: {
@@ -140,7 +140,7 @@ $(document).ready(function () {
         },
       submitHandler: profile_pic
     });
-});
+// });
 $uploadCrop1 = $('#upload-demo-one').croppie({
     enableExif: true,
     viewport: {

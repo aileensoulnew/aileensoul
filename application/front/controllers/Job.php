@@ -8168,7 +8168,7 @@ class Job extends MY_Controller {
         $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
         $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
-        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));   
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
     public function save_basic_info()
@@ -8222,7 +8222,105 @@ class Job extends MY_Controller {
         );
         $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
-        $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
+        $preferred_job_info = $this->job_model->get_preferred_job_info($userid);
+        $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info,"preferred_job_info"=>$preferred_job_info);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_city() {
+        $getCityList = $this->job_model->get_city();
+        echo json_encode($getCityList);
+    }
+
+    public function save_preferred_job()
+    {
+        $preferred_jobtitle = $this->input->post('preferred_jobtitle');
+        $preferred_location = $this->input->post('preferred_location');
+        $city_txt = "";
+        foreach ($preferred_location as $key => $value) {
+            if($value['city'] != "")
+            {
+                $contition_array = array('LOWER(city_name)' => strtolower($value['city']));
+                $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                if ($citydata) {
+                    $city_id = $citydata[0]['city_id'];
+                } else {
+                    $city_slug = $this->create_slug($value['city']);;
+                    $data = array(
+                        'city_name' => $value['city'],
+                        'city_image' => $city_slug.'.png',
+                        'state_id' => '0',
+                        'status' => '2',
+                        'group_id' => '0',
+                        'slug' => $this->common->clean($city_slug),
+                    );
+                    $city_id = $this->common->insert_data_getid($data, 'cities');
+                }
+                $city_txt .= $city_id.",";
+            }
+        }
+        $city_txt = trim($city_txt,",");
+        $preferred_field = $this->input->post('preferred_field');
+        if($preferred_field == 0)
+        {
+            $preferred_other_field = $this->input->post('preferred_other_field');
+        }
+        else
+        {
+            $preferred_other_field = "";
+        }
+        $preferred_travel = $this->input->post('preferred_travel');
+        $preferred_cmp_culture = $this->input->post('preferred_cmp_culture');
+        $preferred_work_time = $this->input->post('preferred_work_time');
+        $exp_salary_amt = $this->input->post('exp_salary_amt');
+        $preferred_currency = $this->input->post('preferred_currency');
+        $exp_salary_worktype = $this->input->post('exp_salary_worktype');
+        $preferred_moredetail = $this->input->post('preferred_moredetail');
+
+        if ($preferred_jobtitle != " ") {
+            $contition_array = array('name' => $preferred_jobtitle);
+            $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            if ($jobdata) {
+                $preferred_jobtitle = $jobdata[0]['title_id'];
+            } else {
+                $forslug = $preferred_jobtitle;
+                $data = array(
+                    'name' => ucfirst($preferred_jobtitle),
+                    'slug' => $this->common->clean($forslug),
+                    'status' => 'draft',
+                );
+                $preferred_jobtitle = $this->common->insert_data_getid($data, 'job_title');
+            }
+        }
+        $userid = $this->session->userdata('aileenuser');
+
+        $data1 = array(
+            'work_job_title' => $preferred_jobtitle,
+            'work_job_city' => $city_txt,
+            'work_job_industry' => $preferred_field,
+            'work_job_other_industry' => $preferred_other_field,
+            'preferred_travel' => $preferred_travel,
+            'preferred_cmp_culture' => $preferred_cmp_culture,
+            'preferred_work_time' => $preferred_work_time,
+            'exp_salary_amt' => $exp_salary_amt,
+            'exp_salary_currency' => $preferred_currency,
+            'exp_salary_worktype' => $exp_salary_worktype,
+            'preferred_moredetail' => $preferred_moredetail,
+            'modified_date' => date('Y-m-d h:i:s', time()),            
+        );
+        $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
+        $preferred_job_info = $this->job_model->get_preferred_job_info($userid);
+        $job_basic_info = $this->job_model->get_job_basic_info($userid);
+        $ret_arr = array("success"=>1,"preferred_job_info"=>$preferred_job_info,"job_basic_info"=>$job_basic_info);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_preferred_job_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $preferred_job_info = $this->job_model->get_preferred_job_info($userid);
+        $ret_arr = array("success"=>1,"preferred_job_info"=>$preferred_job_info);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

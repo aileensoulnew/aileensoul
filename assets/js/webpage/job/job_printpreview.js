@@ -283,6 +283,14 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
     $scope.user_slug = user_data_slug;    
     $scope.segment2 = segment2;
 
+    function load_add_detail()
+    {
+        setTimeout(function(){
+            var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
+            $compile($el)($scope);
+        },1000);        
+    }
+
     $scope.get_job_basic_info = function(){
         $http({
             method: 'POST',
@@ -307,8 +315,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                     {
                         $("#view-more-about").hide();
                     }
-                },500);
+                },500);                
             }
+            load_add_detail();
         });
     };
     $scope.get_job_basic_info();
@@ -5348,4 +5357,249 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
     };
     $scope.get_user_passion_user();
     //Passion and Interest End
+
+    //Preferred Job Detail Start
+    $scope.preferred_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.preferred_jobtitle,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.preferred_job_title_res = data;
+        });
+    };
+    $scope.load_cities = [];
+    $scope.loadCities = function ($query) {
+        return $http.get(base_url + 'job/get_city', {cache: true}).then(function (response) {
+            var load_cities = response.data;
+            return load_cities.filter(function (title) {
+                return title.city.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+    $scope.preferred_other_field_fnc = function()
+    {
+        if($scope.preferred_field == 0 && $scope.preferred_field != "")
+        {
+            $("#preferred_other_field_div").show();
+        }
+        else
+        {
+            $("#preferred_other_field_div").hide();
+        }
+    };
+    $(document).on('keydown','#exp_salary_amt',function (e) {        
+        // Allow: backspace, delete, tab, escape, enter         
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: Ctrl/cmd+r
+            (e.keyCode == 82 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    $scope.view_more_preferred = function(){
+        $("#preferred-detail").removeClass("dtl-box-height");
+        $("#view-more-preferred").hide();
+    };
+
+    $scope.preferred_validate = {
+        rules: {
+            preferred_jobtitle: {
+                required: true,
+            },
+            preferred_field: {
+                required: true,
+            },
+            preferred_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#preferred_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            preferred_travel: {
+                required: true,
+            },
+            preferred_cmp_culture: {
+                required: true,
+            },
+            preferred_work_time: {
+                required: true,
+            },
+            exp_salary_amt: {
+                required: true,
+            },
+            preferred_currency: {
+                required: true,
+            },
+            exp_salary_worktype: {
+                required: true,
+            },
+        },
+        messages: {
+            preferred_jobtitle: {
+                required: "Please enter preferred job title",
+            },
+            preferred_field: {
+                required: "Please select preferred field",
+            },     
+            preferred_travel: {
+                required: "Please select how far are you wiling to travel",
+            },
+            preferred_cmp_culture: {
+                required: "Please select company culture",
+            },
+            preferred_work_time: {
+                required: "Please select work time - schedule",
+            },
+            exp_salary_amt: {
+                required: "Please enter expected salary amount",
+            },
+            preferred_currency: {
+                required: "Please select expected salary currency",
+            },
+            exp_salary_worktype: {
+                required: "Please select expected salary work type",
+            },
+        },
+    };
+
+    $scope.validate_preferredloc = function(){        
+        if($scope.edit_preferred_location == "" || $scope.edit_preferred_location == undefined)
+        {
+            $("#preferred_location .tags").attr("style","border:1px solid #ff0000;");
+            /*setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);*/
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.save_preferred_job = function(){
+        var pre_loc = $scope.validate_preferredloc();
+        if ($scope.preferred_form.validate() && pre_loc)
+        {
+            $("#preferred_job_loader").show();
+            $("#save_preferred_job").attr("style","pointer-events:none;display:none;");
+            var preferred_jobtitle = $("#preferred_jobtitle").val();   
+            var preferred_field = $("#preferred_field option:selected").val();   
+            var preferred_other_field = $("#preferred_other_field").val();   
+            var preferred_travel = $("#preferred_travel option:selected").val();   
+            var preferred_cmp_culture = $("#preferred_cmp_culture option:selected").val();   
+            var preferred_work_time = $("#preferred_work_time option:selected").val();   
+            var exp_salary_amt = $("#exp_salary_amt").val();   
+            var preferred_currency = $("#preferred_currency option:selected").val();   
+            var exp_salary_worktype = $("#exp_salary_worktype option:selected").val();   
+            var preferred_moredetail = $("#preferred_moredetail").val();   
+            
+
+            var updatedata = $.param({'preferred_jobtitle':preferred_jobtitle,'preferred_location':$scope.edit_preferred_location,'preferred_field':preferred_field,'preferred_other_field':preferred_other_field,'preferred_travel':preferred_travel,'preferred_cmp_culture':preferred_cmp_culture,'preferred_work_time':preferred_work_time,'exp_salary_amt':exp_salary_amt,'preferred_currency':preferred_currency,'exp_salary_worktype':exp_salary_worktype,'preferred_moredetail':preferred_moredetail});
+            $http({
+                method: 'POST',
+                url: base_url + 'job/save_preferred_job',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    $scope.preferred_job_info = result.data.preferred_job_info;                
+                }
+                $("#save_preferred_job").removeAttr("style");
+                $("#preferred_job_loader").hide();
+                $("#preferred-job").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+            
+        }
+    };
+    $scope.preferred_location_fnc = function(){
+        $("#preferred_location .tags").attr("style","border:1px solid #cccccc;");
+    };
+    $scope.get_preferred_job_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'job/get_preferred_job_info',            
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.preferred_job_info = result.data.preferred_job_info;
+                $("#preferred-job-loader").hide();
+                $("#preferred-job-body").show();
+                setTimeout(function(){
+                    if($("#preferred-detail").innerHeight() > 155)
+                    {
+                        $("#view-more-preferred").show();
+                    }
+                    else
+                    {
+                        $("#view-more-preferred").hide();
+                    }
+                },500);
+            }
+        });
+    };
+    $scope.get_preferred_job_info();
+
+    $scope.edit_preferred_job_info = function(){
+        $("#preferred_jobtitle").val($scope.job_basic_info.work_job_title_txt);
+
+        var preferred_city = "";
+        if($scope.preferred_job_info.work_job_city_txt.trim() != "")
+        {
+            var preferred_city = $scope.preferred_job_info.work_job_city_txt.split(',');
+        }
+        var edit_preferred_city = [];
+        if(preferred_city.length > 0)
+        {                    
+            preferred_city.forEach(function(element,cityIndex) {
+              edit_preferred_city[cityIndex] = {"city":element};
+            });
+        }
+
+        $scope.edit_preferred_location = edit_preferred_city;
+        $scope.preferred_field = $scope.preferred_job_info.work_job_industry;
+        if($scope.preferred_job_info.work_job_industry == 0)
+        {
+            $("#preferred_other_field").val($scope.preferred_job_info.work_job_other_industry);
+            $("#preferred_other_field_div").show();
+        }
+        $("#preferred_travel").val($scope.preferred_job_info.preferred_travel);
+        $("#preferred_cmp_culture").val($scope.preferred_job_info.preferred_cmp_culture);
+        $("#exp_salary_amt").val($scope.preferred_job_info.exp_salary_amt);
+        $("#preferred_currency").val($scope.preferred_job_info.exp_salary_currency);
+        $("#exp_salary_worktype").val($scope.preferred_job_info.exp_salary_worktype);
+        $("#preferred_moredetail").val($scope.preferred_job_info.preferred_moredetail);
+    };
+    //Preferred Job Detail End
 });
