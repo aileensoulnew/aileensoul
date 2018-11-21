@@ -2975,7 +2975,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .right-cus-imp .dtl-box{width:320px; margin-bottom:0;}
 .right-cus-imp .dtl-box label{margin-bottom:0; font-size:18px; color:#5c5c5c; width:100%;}
 .right-cus-imp .dtl-box .dis-list{padding-bottom:0;}
-.job-stasus{width:10px; height:10px; background:#7b7b7b; display:inline-block; border-radius: 100%; margin-right: 8px;}	
+.job-status{width:10px; height:10px; background:#7b7b7b; display:inline-block; border-radius: 100%; margin-right: 8px;}	
 span.job-active {background:#42b72a;}
 span.job-passive {background:#ec9a0a;}
 span.job-not {background:#ff0000;}
