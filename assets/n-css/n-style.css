@@ -2821,7 +2821,19 @@ width: 80%; border-radius: 10px; z-index:9;}
 .right-add.add-detail .right-add-box{border:0; padding:0; margin:0;}
 .press-rel .dis-middle{padding-top:18px;}
 .press-rel .dis-right{padding-top:15px;}
+.up-down.collapsed img{transform:          rotate(360deg);
+-ms-transform:      rotate(360deg);
+-moz-transform:     rotate(360deg);
+-webkit-transform:  rotate(360deg);
+-o-transform:       rotate(360deg);}
+.up-down img{transform:          rotate(180deg);
+-ms-transform:      rotate(180deg);
+-moz-transform:     rotate(180deg);
+-webkit-transform:  rotate(180deg);
+-o-transform:       rotate(180deg);}
+
 /***  end new details page  ***/
+
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
 .job_reg_main{border-radius:20px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
