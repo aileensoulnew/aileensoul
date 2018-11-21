@@ -7781,7 +7781,8 @@ class Job extends MY_Controller {
             $cal_years = array_sum($month);
             $total_month = $cal_years % 12;
             $years = $years + intval($cal_years / 12);
-            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+            $job_basic_info = $this->job_model->get_job_basic_info($user_id);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month,"job_basic_info"=>$job_basic_info);
         }
         else
         {

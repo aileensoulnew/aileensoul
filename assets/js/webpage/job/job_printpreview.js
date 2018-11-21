@@ -4511,6 +4511,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                     {
                         user_experience = result.user_experience;
                         $scope.user_experience = user_experience;
+                        $scope.job_basic_info = result.job_basic_info;
                         $scope.exp_years = result.exp_years;
                         $scope.exp_months = result.exp_months;
                         $("#save_user_exp").removeAttr("style");
@@ -5554,8 +5555,6 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             if(success == 1)
             {
                 $scope.preferred_job_info = result.data.preferred_job_info;
-                $("#preferred-job-loader").hide();
-                $("#preferred-job-body").show();
                 setTimeout(function(){
                     if($("#preferred-detail").innerHeight() > 155)
                     {
@@ -5567,6 +5566,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                     }
                 },500);
             }
+            $("#preferred-job-loader").hide();
+            $("#preferred-job-body").show();
         });
     };
     $scope.get_preferred_job_info();

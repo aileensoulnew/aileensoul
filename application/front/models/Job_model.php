@@ -2387,6 +2387,14 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
                 'modify_date' => date('Y-m-d H:i:s', time()),
             );
             $insert_id = $this->common->insert_data($data, 'job_user_experience');
+            $data1 = array(
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => "Experience"
+            );
+            $this->db->where('user_id', $userid);            
+            $this->db->update('job_reg', $data1);
+
             return $insert_id;
         }
         else
@@ -2410,6 +2418,13 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $this->db->where('user_id', $userid);
             $this->db->where('id_experience', $edit_exp);
             $this->db->update('job_user_experience', $data);
+            $data1 = array(
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => "Experience"
+            );
+            $this->db->where('user_id', $userid);            
+            $this->db->update('job_reg', $data1);
             return true;
         }
     }
@@ -2522,7 +2537,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
 
     public function get_job_basic_info($userid)
     {
-        $this->db->select("jr.fname, jr.lname, jr.email, jr.phnno, jr.dob, jr.gender, jr.country_id, jr.state_id, jr.city_id, jr.address, jr.work_job_title, jr.field, jr.other_field, jt.name as work_job_title_txt, it.industry_name as field_txt,DATE_FORMAT(jr.dob, '%D %M %Y') as dob_txt,cr.country_name,st.state_name,ct.city_name")->from("job_reg jr");
+        $this->db->select("jr.fname, jr.lname, jr.email, jr.phnno, jr.dob, jr.gender, jr.country_id, jr.state_id, jr.city_id, jr.address, jr.work_job_title, jr.field, jr.other_field, jt.name as work_job_title_txt, it.industry_name as field_txt,DATE_FORMAT(jr.dob, '%D %M %Y') as dob_txt,cr.country_name,st.state_name,ct.city_name,jr.experience,jr.exp_m,jr.exp_y")->from("job_reg jr");
         $this->db->join('job_title jt', 'jt.title_id = jr.work_job_title', 'left');
         $this->db->join('industry_type it', 'it.industry_id = jr.field', 'left');
         $this->db->join('cities ct', 'ct.city_id = jr.city_id', 'left');

@@ -232,7 +232,7 @@
                                                             <label>{{job_basic_info.work_job_title_txt}}</label>
                                                         </li>
                                                         <li>
-                                                            <span>Industry</span>
+                                                            <span>Field</span>
                                                             <label ng-if="job_basic_info.field == '0'">{{job_basic_info.other_field}}</label>
                                                             <label ng-if="job_basic_info.field != '0'">{{job_basic_info.field_txt}}</label>
                                                         </li>
@@ -255,7 +255,9 @@
                                                         </li>
                                                         <li>
                                                             <span>Address</span>
-                                                            <label>{{job_basic_info.address}}</label>
+                                                            <label>{{job_basic_info.address}},</label>
+                                                            <br />
+                                                            <label>{{job_basic_info.city_name}}, {{job_basic_info.state_name}}, {{job_basic_info.country_name}}</label>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -352,7 +354,13 @@
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience <span class="exp-y-m-inner" ng-if="exp_years > '0' || exp_months > '0'">({{exp_years}}year {{exp_months}}month)</span></span><a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png">
+                                                <span>Experience
+                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Fresher'">(Fresher)</span>
+                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (exp_years > '0' || exp_months > '0')">({{exp_years}}year {{exp_months}}month)</span>
+                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (job_basic_info.exp_m || job_basic_info.exp_y)">({{job_basic_info.exp_y}} {{job_basic_info.exp_m}})</span>
+                                                </span>
+                                                    <a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                                             </div>
                                             <div id="exp-loader" class="dtl-dis">
                                                 <div class="text-center">
@@ -552,16 +560,16 @@
                                                             <span>Perferred Location / Region</span>
                                                             <label>{{preferred_job_info.work_job_city_txt}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="preferred_job_info.preferred_travel != '' && preferred_job_info.preferred_travel > '0'">
                                                             <span>How far are you wiling to travel? (In km)</span>
                                                             <label>{{preferred_job_info.preferred_travel}} km</label>
                                                         </li>
                                                         <li>
                                                             <span>Preferred Industry</span>
-                                                            <label ng-if="preferred_job_info.work_job_industry != 0">{{preferred_job_info.work_job_industry_txt}} km</label>
-                                                            <label ng-if="preferred_job_info.work_job_industry == 0">{{preferred_job_info.work_job_other_industry}} km</label>
+                                                            <label ng-if="preferred_job_info.work_job_industry != '0'">{{preferred_job_info.work_job_industry_txt}}</label>
+                                                            <label ng-if="preferred_job_info.work_job_industry == '0'">{{preferred_job_info.work_job_other_industry}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="preferred_job_info.exp_salary_amt != ''">
                                                             <span>Expected Salary</span>
                                                             <label>{{preferred_job_info.exp_salary_amt}}</label>
                                                             <label>{{preferred_job_info.currency_name}}</label>
@@ -569,11 +577,11 @@
                                                             <label ng-if="preferred_job_info.exp_salary_worktype == '2'">Per Month</label>
                                                             <label ng-if="preferred_job_info.exp_salary_worktype == '3'">Per Year</label>                 
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="preferred_job_info.preferred_cmp_culture != ''">
                                                             <span>Company Culture</span>
                                                             <label>{{preferred_job_info.preferred_cmp_culture}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="preferred_job_info.preferred_work_time != ''">
                                                             <span>Work Time / Schedule</span>
                                                             <label>{{preferred_job_info.preferred_work_time}}</label>
                                                         </li>         

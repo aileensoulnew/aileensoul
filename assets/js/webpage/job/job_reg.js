@@ -57,6 +57,20 @@ $(document).ready(function() {
             fresher: {
                 required: true,
             },
+            experience_year: {
+                required: {
+                    depends: function(element) {
+                        return $("input[name='fresher']:checked").val() == "Experience" ? true : false;
+                    }
+                },
+            },            
+            experience_month: {
+                required: {
+                    depends: function(element) {
+                        return $("input[name='fresher']:checked").val() == "Experience" ? true : false;
+                    }
+                },
+            },
             job_title: {
                 required: true,
                 regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
