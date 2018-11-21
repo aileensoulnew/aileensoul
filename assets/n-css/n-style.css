@@ -2969,6 +2969,96 @@ width: 80%; border-radius: 10px; z-index:9;}
 .img-cus{border:0;}
 .img-cus img{width:100%; border-radius:100%; }
 .link-must{font-size:12px;}
+
+.right-cus-imp{float:right;}
+.right-cus-imp .dtl-box{width:320px; margin-bottom:0;}
+.right-cus-imp .dtl-box label{margin-bottom:0; font-size:18px; color:#5c5c5c; width:100%;}
+.right-cus-imp .dtl-box .dis-list{padding-bottom:0;}
+#imp-content select{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0px; padding-left:0;}
+#imp-content select option span{width:10px; height:10px; display:inline-block; border-radius:100%;}
+#imp-content .form-group:label{width:100%;}
+#imp-content .control--radio .control__indicator::after{height:13px; width:13px;}
+#imp-content .control--radio span{width:10px; height:10px; display:inline-block; border-radius:100%; margin-right:10px;}
+#imp-content .control--radio .job-active{background:#42b72a;}
+#imp-content .control--radio .job-passive{background:#ec9a0a;}
+#imp-content .control--radio .job-not{background:#ff0000;}
+#imp-content .form-group label.control{width:100%;}
+#imp-content .dtl-dis .form-group .wrapper-dropdown-3{margin:40px 0;}
+.wrapper-dropdown-3 .dropdown li span{width:10px; height:10px; display:inline-block; margin-right:10px; border-radius:100%;}
+.job-stasus{width:10px; height:10px; background:#7b7b7b; display:inline-block; border-radius: 100%; margin-right: 8px;}	
+span.job-active {background:#42b72a;}
+span.job-passive {background:#ec9a0a;}
+span.job-not {background:#ff0000;}
+.dis-list.cus-status li span{display:inline-block;}
+
+
+.wrapper-dropdown-3 {position: relative; padding: 10px; border: 1px solid #d2d2d2; cursor: pointer; outline: none; color: #5c5c5c; border-radius:4px;}
+.wrapper-dropdown-3:after {position: absolute;
+content: "";
+background: url('../n-images/down-arrow.png');
+width: 12px;
+height: 12px;
+top: 15px;
+right:15px;
+background-size: 100%;}
+.wrapper-dropdown-3 .dropdown {position: absolute; top: 42px; left: 0; right: 0; border-radius: inherit; background:#fff; z-index:9; border: 1px solid #d2d2d2; 
+    /*-webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;*/
+    list-style: none;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+.wrapper-dropdown-3 .dropdown:after {}
+.wrapper-dropdown-3 .dropdown:before {}
+.wrapper-dropdown-3 .dropdown li i {
+    float: right;
+    color: inherit;
+}
+
+.wrapper-dropdown-3 .dropdown li:first-of-type a {
+    border-radius: 7px 7px 0 0;
+}
+
+.wrapper-dropdown-3 .dropdown li:last-of-type a {
+    border: none;
+    border-radius: 0 0 7px 7px;
+}
+
+/* Hover state */
+
+.wrapper-dropdown-3 .dropdown li:hover a {
+    background: #f3f8f8;
+}
+
+/* Active state */
+
+.wrapper-dropdown-3.active .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* No CSS3 support */
+
+.no-opacity       .wrapper-dropdown-3 .dropdown,
+.no-pointerevents .wrapper-dropdown-3 .dropdown {
+    display: none;
+    opacity: 1; /* If opacity support but no pointer-events support */
+    pointer-events: auto; /* If pointer-events support but no pointer-events support */
+}
+
+.no-opacity       .wrapper-dropdown-3.active .dropdown,
+.no-pointerevents .wrapper-dropdown-3.active .dropdown {
+    display: block;
+}
+.wrapper-dropdown-3 .dropdown{padding-bottom:0px;}
+.wrapper-dropdown-3 .dropdown li{padding:5px 10px;}
+.wrapper-dropdown-3 .dropdown li:hover{background:#f6f6f6;}
+.dis-list.cus-status li a img{width:20px;}
 /***  end new job registration form  ***/
 /***  bus timeline  ***/
 .timeline-cus .modal-content{width:95%;}

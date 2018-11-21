@@ -1930,10 +1930,6 @@ label.cameraButton input[accept*=camera]{
     float:left;
     text-align:right
 }
-.modal-close:hover{
-    background-color:#156f95;
-    color:#fff
-}
 .modal-content .message span#field_error{
     width:100%;
     float:left!important;
@@ -1962,14 +1958,7 @@ label.cameraButton input[accept*=camera]{
 .custom_footer_left ul li a:focus{
     color:#1B8AB9!important
 }
-.modal-content .modal-close:hover{
-    color:#fff;
-    background-color:#156f95!important
-}
-.modal-content .modal-close{
-    top:-13px!important;
-    right:-13px!important
-}
+
 .modal-body .message1{
     width:100%!important
 }

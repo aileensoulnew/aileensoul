@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
     <?php $this->load->view('adsense'); ?>
+	<style>
+		
+	</style>
 </head>
     <!-- END HEAD -->
     
@@ -164,6 +167,7 @@
                 </div>
             </div>
             <div class="container res-job-print mobp0">
+			<div class="fw">
                 <div class="job-menu-profile job_edit_menu mob-none">
                     <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
                         <h3 class="profile-head-text">
@@ -192,7 +196,19 @@
                         ?>
                     </div>
                 </div>
-
+			
+				<div class="right-cus-imp">
+					<div class="dtl-box" >
+						<div class="dtl-dis">
+							<ul class="dis-list cus-status">
+								<li>
+									<label><span class="job-stasus"></span>Job acive status<span class="pull-right"><a href="#" data-target="#imp-content" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit1.png?ver=' . time()) ?>"></a></span> </label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
                 <div class="cus-inner-middle mob-clear mobp0">
 					
 				</div>
@@ -3246,6 +3262,40 @@
             </div>
         </div>
         <!-- Model Popup Close -->
+		
+		<!-- imp-content  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="imp-content" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Job acive status</span>
+					</div>
+					<div class="dtl-dis">
+							
+						<div class="form-group">
+					<div id="dd" class="wrapper-dropdown-3" tabindex="1">
+						<span>Job active state</span>
+						<ul class="dropdown">
+							<li><span class="job-active"></span>I am Actively looking for Job</li>
+							<li><span class="job-passive"></span>I am Passively looking for Job</li>
+							<li><span class="job-not"></span>I am not looking for a job.</li>
+						</ul>
+					</div>
+							
+						</div>
+						
+					</div>
+					<div class="dtl-btn bottom-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
 
             <?php echo $login_footer ?>   
             <?php echo $footer; ?>
@@ -3266,6 +3316,8 @@
             <script src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
+			<script src="<?php echo base_url('assets/js/modernizr.custom.js?ver=' . time()); ?>"></script>
+			
 			<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>	
 	<script>
 		var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
@@ -3291,6 +3343,53 @@
 masonryLayout(document.getElementById('gallery'),
 document.querySelectorAll('.gallery-item'), 2);
 
+
 </script>
+<script type="text/javascript">
+			
+			function DropDown(el) {
+				this.dd = el;
+				this.placeholder = this.dd.children('span');
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = '';
+				this.index = -1;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						return false;
+					});
+
+					obj.opts.on('click',function(){
+						var opt = $(this);
+						obj.val = opt.text();
+						obj.index = opt.index();
+						obj.placeholder.text(obj.val);
+					});
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+
+			$(function() {
+
+				var dd = new DropDown( $('#dd') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-3').removeClass('active');
+				});
+
+			});
+
+		</script>
     </body>
 </html>
