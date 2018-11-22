@@ -246,7 +246,7 @@
                 <div class="cus-inner-middle mob-clear mobp0">                                    
                 </div>
                 <div class="fw">
-                    <div class="container mob-plr0 pt20">
+                    <div class="mob-plr0 pt20">
                         <div class="all-detail-custom">
                             <div class="custom-user-list">
                                 <div class="gallery" id="gallery">
@@ -3767,7 +3767,7 @@
               var main = $('div.mm-dropdown .textfirst')
               var li = $('div.mm-dropdown > ul > li.input-option')
               var inputoption = $("div.mm-dropdown .option")
-              var default_text = 'Select Status:';
+              var default_text = 'Select Status';
 
               // Animation
               main.click(function() {
