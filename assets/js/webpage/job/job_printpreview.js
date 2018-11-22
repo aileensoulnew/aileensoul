@@ -323,7 +323,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             load_add_detail();
         });
     };
-    $scope.get_job_basic_info();
+    // $scope.get_job_basic_info();
 
     $scope.edit_job_basic_info = function(){
         $("#basic_fname").val($scope.job_basic_info.fname);
@@ -779,14 +779,14 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $scope.degree_data = success.data.degree_data;
         }, function (error) {});
     };
-    $scope.get_edu_degree();
+    // $scope.get_edu_degree();
 
     $scope.get_edu_university = function(){
         $http.get(base_url + "userprofile_page/get_edu_university").then(function (success) {
             $scope.university_data = success.data.university_data;
         }, function (error) {});
     };
-    $scope.get_edu_university();
+    // $scope.get_edu_university();
 
     $scope.edu_degree_change = function(){
         $("#other_edu").hide();
@@ -1115,7 +1115,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_education();
+    // $scope.get_user_education();
     $scope.view_more_edu = 2;
     $scope.edu_view_more = function(){
         $scope.view_more_edu = $scope.user_education.length;
@@ -1587,7 +1587,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_project();
+    // $scope.get_user_project();
     $scope.view_more_proj = 2;
     $scope.proj_view_more = function(){
         $scope.view_more_proj = $scope.user_projects.length;
@@ -1985,7 +1985,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_activity();
+    // $scope.get_user_activity();
     $scope.view_more_activity = 2;
     $scope.activity_view_more = function(){
         $scope.view_more_activity = $scope.user_activity.length;
@@ -2350,7 +2350,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_award();
+    // $scope.get_user_award();
     $scope.view_more_award = 2;
     $scope.award_view_more = function(){
         $scope.view_more_award = $scope.user_award.length;
@@ -2691,7 +2691,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_addicourse();
+    // $scope.get_user_addicourse();
     $scope.view_more_ac = 2;
     $scope.ac_view_more = function(){
         $scope.view_more_ac = $scope.user_addicourse.length;
@@ -3062,7 +3062,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     };
-    $scope.get_user_research();
+    // $scope.get_user_research();
 
     $scope.view_more_research = 2;
     $scope.research_view_more = function(){
@@ -3443,7 +3443,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_publication();
+    // $scope.get_user_publication();
     $scope.view_more_publication = 2;
     $scope.publication_view_more = function(){
         $scope.view_more_publication = $scope.user_publication.length;
@@ -3818,7 +3818,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_patent();
+    // $scope.get_user_patent();
     $scope.view_more_patent = 2;
     $scope.patent_view_more = function(){
         $scope.view_more_patent = $scope.user_patent.length;
@@ -4136,8 +4136,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         });
     };
 
-    get_user_links();
-    function get_user_links()
+    
+    $scope.get_user_links = function()
     {
         $http({
             method: 'POST',
@@ -4165,7 +4165,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $("#social-link-body").show();
 
         });
-    }
+    };
+    // $scope.get_user_links();
     //Socila Links End
 
     //Experience Start
@@ -4200,7 +4201,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $scope.exp_country_list = data.data;
         });
     };
-    $scope.get_country();
+    // $scope.get_country();
 
     $scope.exp_country_change = function() {
         $("#exp_state").attr("disabled","disabled");
@@ -4592,7 +4593,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_experience();
+    // $scope.get_user_experience();
     $scope.view_more_exp = 2;
     $scope.exp_view_more = function(){
         $scope.view_more_exp = $scope.user_experience.length;
@@ -4842,7 +4843,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_skills();
+    // $scope.get_user_skills();
     // Skills End
 
     // Hobbies Start
@@ -4937,7 +4938,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_hobbies();
+    // $scope.get_user_hobbies();
     // Hobbies End
 
     // Software Start
@@ -5032,7 +5033,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
         });
     }
-    $scope.get_user_software();
+    // $scope.get_user_software();
     // Software End
 
     //User resume Start
@@ -5153,7 +5154,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             }
         });
     };
-    $scope.get_user_resume();
+    // $scope.get_user_resume();
     //User resume End
 
     //Proffessional Summary Start
@@ -5209,7 +5210,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             }
         });
     };
-    $scope.get_user_prof_summary();
+    // $scope.get_user_prof_summary();
     //Proffessional Summary End
 
     //Language Start
@@ -5303,7 +5304,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $("#language-body").show();
         });
     };
-    $scope.get_user_languages();
+    // $scope.get_user_languages();
     //Language End
 
     //Passion and Interest Start
@@ -5359,7 +5360,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             }
         });
     };
-    $scope.get_user_passion_user();
+    // $scope.get_user_passion_user();
     //Passion and Interest End
 
     //Preferred Job Detail Start
@@ -5573,7 +5574,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $("#preferred-job-body").show();
         });
     };
-    $scope.get_preferred_job_info();
+    // $scope.get_preferred_job_info();
 
     $scope.edit_preferred_job_info = function(){
         $("#preferred_jobtitle").val($scope.job_basic_info.work_job_title_txt);
@@ -5657,4 +5658,28 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         }
     };
     //Job Search Status Start
+
+
+    $scope.get_job_basic_info();
+    $scope.get_edu_degree();
+    $scope.get_edu_university();
+    $scope.get_user_education();
+    $scope.get_user_project();
+    $scope.get_user_activity();
+    $scope.get_user_award();
+    $scope.get_user_addicourse();
+    $scope.get_user_research();
+    $scope.get_user_publication();
+    $scope.get_user_patent();
+    $scope.get_user_links();
+    $scope.get_country();
+    $scope.get_user_experience();
+    $scope.get_user_skills();
+    $scope.get_user_hobbies();
+    $scope.get_user_software();
+    $scope.get_user_resume();
+    $scope.get_user_prof_summary();
+    $scope.get_user_languages();
+    $scope.get_user_passion_user();
+    $scope.get_preferred_job_info();
 });

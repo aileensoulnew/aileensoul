@@ -396,7 +396,11 @@
                                                 <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png">
                                                 <span>Experience
                                                     <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Fresher'">(Fresher)</span>
-                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (exp_years > '0' || exp_months > '0')">({{exp_years}}year {{exp_months}}month)</span>
+                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (exp_years > '0' || exp_months > '0')">(
+                                                        <span ng-if="exp_years > '0'">{{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
+                                                        <span ng-if="exp_months > '0'">{{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
+                                                         )
+                                                     </span>
                                                     <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (job_basic_info.exp_m || job_basic_info.exp_y)">({{job_basic_info.exp_y}} {{job_basic_info.exp_m}})</span>
                                                 </span>
                                                     <a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -3739,7 +3743,7 @@
         <script src="<?php echo base_url('assets/js/webpage/job/job_printpreview.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js/modernizr.custom.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/modernizr.custom.js?ver=' . time()); ?>"></script> -->
         <script src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
         <script type="text/javascript">
             $(document).ready(function () {

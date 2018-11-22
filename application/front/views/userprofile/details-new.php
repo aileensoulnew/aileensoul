@@ -222,7 +222,16 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience <span class="exp-y-m-inner" ng-if="exp_years > '0' || exp_months > '0'">({{exp_years}}year {{exp_months}}month)</span></span><a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience 
+                                <span class="exp-y-m-inner" ng-if="exp_years > '0' || exp_months > '0'">
+                                    (
+                                    <span class="exp-y-m-inner" ng-if="exp_years > '0'">
+                                    {{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
+                                    <span class="exp-y-m-inner" ng-if="exp_months > '0'">
+                                    {{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
+                                    )
+                                </span>
+                                </span><a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="exp-loader" class="dtl-dis">
                             <div class="text-center">
