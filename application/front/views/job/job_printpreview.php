@@ -174,7 +174,7 @@
                     <?php echo $job_menubar; ?>                       
                 </div>
             </div>
-            <div class="container res-job-print mob-plr0">
+            <div class="container res-job-print tab-plr0">
                 <div class="fw">
                     <div class="job-menu-profile job_edit_menu mob-none">
                         <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
@@ -214,7 +214,7 @@
                             </div>
                             <div id="job-status-body" style="display: none;">
                                 <div class="dtl-dis">
-                                    <ul class="dis-list cus-status">
+                                    <ul class="dis-list cus-status list-ul-cus">
                                         <li>
                                             <label>
                                                 <span ng-if="job_basic_info.job_active_status == '1'">
@@ -356,7 +356,7 @@
                                                             </div>
                                                             <div id="edu{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li class="select-preview">
                                                                             <span>Duration</span> 
                                                                             <label ng-if="user_edu.start_date_str">{{user_edu.start_date_str}} to</label>
@@ -447,7 +447,7 @@
                                                             </div>
                                                             <div id="exp{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exp-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li class="select-preview">
                                                                             <span>Time Period</span> 
                                                                             <label>{{user_exp.start_date_str}} to</label>
@@ -532,7 +532,7 @@
                                                             </div>
                                                             <div id="project{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="project-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li ng-if="user_proj.project_url != ''">
                                                                             <span>Website</span> 
                                                                             <div class="dis-list-link">
@@ -588,7 +588,7 @@
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Preferred Job Details</span><a href="#" data-target="#preferred-job" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2" ng-click="edit_preferred_job_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>"><span>Preferred Job Details</span><a href="#" data-target="#preferred-job" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2" ng-click="edit_preferred_job_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                             </div>
                                             <div id="preferred-job-loader" class="dtl-dis">
                                                 <div class="text-center">
@@ -650,7 +650,7 @@
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>">
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/pa-int.png?ver=' . time()) ?>">
                                                 <span>Passion and Interest</span>
                                                 <a href="#" data-target="#passion-intrest" data-toggle="modal" class="pull-right">
                                                     <img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>">
@@ -720,7 +720,7 @@
                                                             </div>
                                                             <div id="activity{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="activity-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li class="select-preview">
                                                                             <span>Duration</span> 
                                                                             <label>{{user_ea.start_date_str}} to</label>
@@ -795,7 +795,7 @@
                                                             </div>
                                                             <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li class="select-preview">
                                                                             <span>Date</span> 
                                                                             <label>{{user_awrd.award_date_str}}</label>
@@ -868,7 +868,7 @@
                                                             </div>
                                                             <div id="addicourse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="addicourse-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li>
                                                                             <span>Duration</span> 
                                                                             <label>{{user_course.start_date_str}} to</label>
@@ -904,7 +904,7 @@
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Professional Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Professional Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                             </div>
                                             <div id="prof-summary-loader" class="dtl-dis">
                                                 <div class="text-center">
@@ -972,7 +972,7 @@
                                                             </div>
                                                             <div id="research{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="research-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li>
                                                                             <span>Publishing Date</span> 
                                                                             <label>{{u_research.research_publish_date_str}}</label>
@@ -1051,7 +1051,7 @@
                                                             </div>
                                                             <div id="patent{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="patent-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li>
                                                                             <span>Patent Number</span> 
                                                                             <label>{{user_ptn.patent_number}}</label>
@@ -1138,7 +1138,7 @@
                                                             </div>
                                                             <div id="publication{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="publication-{{$index}}">
                                                                 <div class="panel-body">
-                                                                    <ul class="dis-list">
+                                                                    <ul class="dis-list list-ul-cus">
                                                                         <li class="select-preview">
                                                                             <span>Published Date</span> 
                                                                             <label>{{user_pub.pub_date_str}}</label>
@@ -1180,7 +1180,7 @@
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Software</span><a href="#" data-target="#software" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software</span><a href="#" data-target="#software" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                             </div>
                                             <div id="software-loader" class="dtl-dis">
                                                 <div class="text-center">
@@ -1364,7 +1364,7 @@
                                 <div class="rsp-dtl-box ">
                                     <div id="language-move" class="dtl-box">
                                         <div class="dtl-title">
-                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
                                         </div>
                                         <div id="language-loader" class="dtl-dis">
                                             <div class="text-center">
@@ -1395,7 +1395,7 @@
                                 <div class="rsp-dtl-box ">
                                     <div id="resume-move" class="dtl-box">
                                         <div class="dtl-title">
-                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Resume</span><a href="#" data-target="#resume" data-toggle="modal" class="pull-right" ng-click="reset_user_resume();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/resume.png?ver=' . time()) ?>"><span>Resume</span><a href="#" data-target="#resume" data-toggle="modal" class="pull-right" ng-click="reset_user_resume();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                         </div>
                                         <div id="resume-loader" class="dtl-dis">
                                             <div class="text-center">
@@ -1420,7 +1420,7 @@
                                 <div class="rsp-dtl-box ">
                                     <div id="hobbies-move" class="dtl-box">
                                         <div class="dtl-title">
-                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Hobbies</span><a href="#" data-target="#hobbies" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/hobbies.png?ver=' . time()) ?>"><span>Hobbies</span><a href="#" data-target="#hobbies" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                         </div>
                                         <div id="hobbies-loader" class="dtl-dis">
                                             <div class="text-center">
@@ -2196,8 +2196,10 @@
                                     <!-- <label class="upload-file">
                                         Upload File <input type="file">
                                     </label> -->
+									<div class="upload-file">
                                     <label>Upload File</label>
                                     <input type="file" id="user_resume_file" name="user_resume_file">
+									</div>
                                     <span id="user_resume_error" class="error" style="display: none;"></span>
                                 </div>
                         

@@ -2632,6 +2632,7 @@ padding: 4px;}
 .dtl-title{padding:15px; font-size:20px; border-bottom:1px solid #d2d2d2;}
 .dtl-title .cus-width{width:25px; display:inline-block;}
 .dtl-title span{vertical-align:middle; margin-left:10px;}
+.dtl-title span span{margin-left:0;}
 .dtl-title a{}
 .dtl-dis{padding:15px; width:100%; float:left;}
 .modal-body-cus .dtl-dis{background:#fff;}
@@ -2713,13 +2714,13 @@ overflow: hidden;}
 .dis-list li a:hover{color:#1b8ab9; text-decoration:none;}
 .dis-list li a.dis-more{color:#5c5c5c;}
 .dis-list li a.dis-more:hover{color:#5c5c5c;}
-.dis-list li .screen-shot{width:80px; float: left; position: relative; overflow: hidden; padding-top:5px; height:80px;}
-.dis-list li .screen-shot img{position: absolute; left: 50%; top: 50%;
+.dis-list li .screen-shot{width:80px; float: left; position: relative; overflow: hidden; padding-top:5px;}
+.dis-list li .screen-shot img{/*position: absolute; left: 50%; top: 50%;
 width: auto; height: 100%;
 -webkit-transform: translate(-50%,-50%);
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
-max-width: inherit;}
+max-width: inherit;*/}
 .dis-list li label{font-size:14px;}
 .dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
 .dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
@@ -2761,7 +2762,7 @@ margin-bottom: 0;}
 .dtl-modal .dtl-title{padding:15px 20px;}
 .dtl-modal .dtl-dis{padding:15px 20px;}
 .dtl-modal .form-group label.control{display:inline-block;}
-.dtl-dis.resume-img img{width:50px;}
+.dtl-dis.resume-img img{width:80px;}
 .panel-heading .dis-right a::before{display:none;}
 .job-menu-profile {float: left; padding-left: 31px; width: 18.5%;}
 .rec-dtl .dtl-box{box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); -webkit-box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
@@ -2924,6 +2925,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .dtl-modal tags-input .tags .input:focus{border:0px !important;}
 .dtl-modal .form-group input[type="text"]:focus{border:1px solid #1b8ab9;}
 .dtl-modal .span-select select:focus{border:1px solid #1b8ab9;}
+.dtl-modal .span-select select:active{outline:none;}
 .dtl-modal .form-group textarea:focus{border:1px solid #1b8ab9;}
 .dtl-modal textarea:focus{border:1px solid #1b8ab9;}
 .dtl-modal .modal-content .post-field .form-group{padding:0; margin-bottom:15px;}

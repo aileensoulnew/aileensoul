@@ -99,7 +99,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <ul class="dis-list">
+                                    <ul class="dis-list list-ul-cus">
                                         <!-- <li>
                                             <span>Date of Birth</span>
                                             {{details_data.DOB}}
@@ -182,7 +182,7 @@
                                         </div>
                                         <div id="edu{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li class="select-preview">
                                                         <span>Duration</span> 
                                                         <label>{{user_edu.start_date_str}} to</label>
@@ -272,7 +272,7 @@
                                         </div>
                                         <div id="exp{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exp-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li class="select-preview">
                                                         <span>Time Period</span> 
                                                         <label>{{user_exp.start_date_str}} to</label>
@@ -373,7 +373,7 @@
                                         </div>
                                         <div id="project{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="project-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li ng-if="user_proj.project_url != ''">
                                                         <span>Website</span> 
 														<div class="dis-list-link">
@@ -470,7 +470,7 @@
                                         </div>
                                         <div id="addicourse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="addicourse-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li>
                                                         <span>Duration</span> 
                                                         <label>{{user_course.start_date_str}} to</label>
@@ -547,7 +547,7 @@
                                         </div>
                                         <div id="activity{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="activity-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li class="select-preview">
                                                         <span>Duration</span> 
                                                         <label>{{user_ea.start_date_str}} to</label>
@@ -622,7 +622,7 @@
                                         </div>
                                         <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li class="select-preview">
                                                         <span>Date</span> 
                                                         <label>{{user_awrd.award_date_str}}</label>
@@ -696,7 +696,7 @@
                                         </div>
                                         <div id="publication{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="publication-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li class="select-preview">
                                                         <span>Published Date</span> 
                                                         <label>{{user_pub.pub_date_str}}</label>
@@ -779,7 +779,7 @@
                                         </div>
                                         <div id="patent{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="patent-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li>
                                                         <span>Patent Number</span> 
                                                         <label>{{user_ptn.patent_number}}</label>
@@ -868,7 +868,7 @@
                                         </div>
                                         <div id="research{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="research-{{$index}}">
                                             <div class="panel-body">
-                                                <ul class="dis-list">
+                                                <ul class="dis-list list-ul-cus">
                                                     <li>
                                                         <span>Publishing Date</span> 
                                                         <label>{{u_research.research_publish_date_str}}</label>

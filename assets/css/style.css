@@ -524,7 +524,7 @@ fieldset.full-width{
     border-top:0;
     background-color:#fff
 }
-.common-form fieldset label,.panel-body label{
+.common-form fieldset label/*,.panel-body label*/{
     margin:0 4px 2px;
     padding:0;
     display:block;
