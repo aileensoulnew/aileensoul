@@ -5,13 +5,14 @@
 	<meta name="description" content="<?php echo $metadesc; ?>" />
 	<?php echo $head; ?>
 	<?php if (IS_HIRE_CSS_MINIFY == '0') { ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
+		
 	<?php } else { ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
+		
 	<?php } ?>
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
 	   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
    <?php } ?>
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 <?php $this->load->view('adsense'); ?>
@@ -205,6 +206,7 @@ if ($this->session->userdata('aileenuser')) {
 					?>
 				</div>
 			</div>
+			
 			<div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
 				<div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr">  
 					<?php
@@ -289,8 +291,8 @@ if ($this->session->userdata('aileenuser')) {
 			</div>
 		</div>
 
-		<div>          
-			<div class="job-menu-profile mob-none job_edit_menu">
+	<div>          
+		<div class="job-menu-profile mob-none job_edit_menu new-fw-name">
 				<a title="<?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?>" href="javascript:void(0);">
 					<h3> <?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?></h3>
 				</a>
@@ -319,205 +321,744 @@ if ($this->session->userdata('aileenuser')) {
 					</div>
 				
 				</div>
-				<div class="cus-inner-middle mob-clear mobp0">
-					<div class="tab-add-991">
-						<?php $this->load->view('banner_add'); ?>
+				
+		<div class="cus-inner-middle mob-clear mobp0">
+			<div class="tab-add-991">
+				<?php $this->load->view('banner_add'); ?>
+			</div>
+			<div class="common-form">
+				<!-- Basic information  -->
+				<div class="dtl-box">
+					<div class="dtl-title">
+						<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
+						<span>Basic Information</span>
+						<a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 					</div>
-					<div class="common-form">
-						<div class="job-saved-box">
-							<h3><?php echo $this->lang->line("employer_details"); ?></h3>
-							<?php
-							function text2link($text) {
-								$text = preg_replace('/(((f|ht){1}t(p|ps){1}:\/\/)[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i', '<a href="\\1" target="_blank" rel="nofollow">\\1</a>', $text);
-								$text = preg_replace('/([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i', '\\1<a href="http://\\2" target="_blank" rel="nofollow">\\2</a>', $text);
-								$text = preg_replace('/([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})/i', '<a href="mailto:\\1" rel="nofollow" target="_blank">\\1</a>', $text);
-								return $text;
-							}
-							?>                              
-							<div class="contact-frnd-post">
-								<div class="job-contact-frnd ">
-									<div class="profile-job-post-detail clearfix">
-										<div class="profile-job-post-title clearfix">
-											<div class="profile-job-profile-button clearfix">
-												<div class="profile-job-details">
-													<ul>
-														<li> <p class="details_all_tital "> <?php echo $this->lang->line("basic_info"); ?></p> </li>
-													</ul>
-												</div>
-											</div>
-											<div class="profile-job-profile-menu">
-												<ul class="clearfix">
-													<li> <b><?php echo $this->lang->line("name"); ?></b> <span <?php if(!$this->session->userdata('aileenuser')){?> class="text_blur" <?php }?>> <?php echo $freelancerhiredata[0]['fullname'] . ' ' . $freelancerhiredata[0]['username']; ?> </span>
-													</li>
-													<li> <b><?php echo $this->lang->line("email"); ?> </b><span <?php if(!$this->session->userdata('aileenuser')){?> class="text_blur" <?php }?>> <?php echo $freelancerhiredata[0]['email']; ?></span>
-													</li>
-													<?php
-													if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
-														if ($freelancerhiredata['skyupid']) {
-															?>
-															<li> <b><?php echo $this->lang->line("skype_id"); ?></b> <span <?php if(!$this->session->userdata('aileenuser')){?> class="text_blur" <?php }?>> <?php echo $freelancerhiredata[0]['skyupid']; ?> </span>
-															</li> 
-															<?php
-														} else {
-															echo "";
-														}
-													} else {
-														if ($freelancerhiredata[0]['skyupid']) {
-															?>
-															<li> <b><?php echo $this->lang->line("skype_id"); ?></b> <span <?php if(!$this->session->userdata('aileenuser')){?> class="text_blur" <?php }?>> <?php echo $freelancerhiredata[0]['skyupid']; ?> </span>
-															</li> 
-															<?php
-														} else {
-															?>
-															<li><b><?php echo $this->lang->line("skype_id"); ?></b> <span>
-																<?php echo PROFILENA; ?></span>
-															</li>
-															<?php
-														}
-													}
-													?>
-													<?php
-													if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
-														if ($freelancerhiredata[0]['phone']) {
-															?>
-															<li><b><?php echo $this->lang->line("phone_number"); ?></b> <span <?php if(!$this->session->userdata('aileenuser')){?> class="text_blur" <?php }?>><?php echo $freelancerhiredata[0]['phone']; ?></span> </li>
-															<?php
-														} else {
-															echo "";
-														}
-													} else {
-														if ($freelancerhiredata[0]['phone']) {
-															?>
-															<li><b><?php echo $this->lang->line("phone_number"); ?></b> <span <?php if(!$this->session->userdata('aileenuser')){?> class="text_blur" <?php }?>><?php echo $freelancerhiredata[0]['phone']; ?></span> </li>
-															<?php
-														} else {
-															?>
-															<li><b><?php echo $this->lang->line("phone_number"); ?></b> <span>
-																<?php echo PROFILENA; ?></span>
-															</li>
-															<?php
-														}
-													}
-													?>
-												</ul>
-											</div>
-											<div class="profile-job-post-title clearfix">
-												<div class="profile-job-profile-button clearfix">
-													<div class="profile-job-details">
-														<ul>
-															<li> <p class="details_all_tital "><?php echo $this->lang->line("address"); ?></p> </li>
-														</ul>
-													</div>
-												</div>
-												<div class="profile-job-profile-menu">
-													<ul class="clearfix">
-														<li> <b><?php echo $this->lang->line("country"); ?></b> <span> <?php echo $this->db->get_where('countries', array('country_id' => $freelancerhiredata[0]['country']))->row()->country_name; ?> </span>
-														</li>
-														<li> <b><?php echo $this->lang->line("state"); ?></b><span><?php
-														echo
-														$this->db->get_where('states', array('state_id' => $freelancerhiredata[0]['state']))->row()->state_name;
-														?> </span>
-													</li>
-													<?php
-													if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
-														if ($freelancerhiredata[0]['city']) {
-															?>
-															<li><b><?php echo $this->lang->line("city"); ?></b> <span><?php
-															echo
-															$this->db->get_where('cities', array('city_id' => $freelancerhiredata[0]['city']))->row()->city_name;
-															?></span> </li>
-															<?php
-														} else {
-															echo "";
-														}
-													} else {
-														if ($freelancerhiredata[0]['city']) {
-															?>
-															<li><b><?php echo $this->lang->line("city"); ?></b> <span><?php
-															echo
-															$this->db->get_where('cities', array('city_id' => $freelancerhiredata[0]['city']))->row()->city_name;
-															?></span> </li>
-															<?php
-														} else {
-															?>
-															<li><b><?php echo $this->lang->line("city"); ?></b> <span>
-																<?php echo PROFILENA; ?></span>
-															</li>
-															<?php
-														}
-													}
-													?>
-													<?php
-													if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
-														if ($freelancerhiredata[0]['pincode']) {
-															?>
-															<li> <b><?php echo $this->lang->line("pincode"); ?></b><span><?php echo $freelancerhiredata[0]['pincode']; ?></span>
-															</li>
-															<?php
-														} else {
-															echo "";
-														}
-													} else {
-														if ($freelancerhiredata[0]['pincode']) {
-															?>
-															<li> <b><?php echo $this->lang->line("pincode"); ?></b><span><?php echo $freelancerhiredata[0]['pincode']; ?></span>
-															</li>
-															<?php
-														} else {
-															?>
-															<li><b><?php echo $this->lang->line("pincode"); ?></b> <span>
-																<?php echo PROFILENA; ?></span>
-															</li>
-															<?php
-														}
-													}
-													?>
-												</ul>
-											</div>
-										</div>
-										<div class="profile-job-post-title clearfix">
-											<div class="profile-job-profile-button clearfix">
-												<div class="profile-job-details">
-													<ul>
-														<li><p class="details_all_tital "><?php echo $this->lang->line("professional_information"); ?></p></li>
-													</ul>
-												</div>
-											</div>
-											<div class="profile-job-profile-menu">
-												<ul class="clearfix">
-													<li> <b><?php echo $this->lang->line("professional_information"); ?> </b> <span>
-														<?php if ($freelancerhiredata[0]['professional_info']) { ?>
-															<pre>  <?php echo $this->common->make_links($freelancerhiredata[0]['professional_info']); ?> 
-														</pre>
-														<?php
-													} else {
-														echo PROFILENA;
-													}
-													?>
-												</span>
-											</li>
-										</ul>
-									</div>
-								</div> 
-								<div class="profile-job-post-title clearfix">
-								</div>
+					<div class="dtl-dis">
+						<ul class="dis-list list-ul-cus">
+							<li>
+								<span>Email</span>
+								<label>harshad2406patoliya@gmail.com</label>
+							</li>
+							<li>
+								<span>Phone Number</span>
+								<label>+91 951005589</label>
+							</li>
+							<li>
+								<span>Skype</span>
+								<label>harshad2406</label>
+							</li>
+							<li>
+								<span>Current Position</span>
+								<label>Sr.Multimedia Designer</label>
+							</li>
+							<li>
+								<span>Skills Hired For</span>
+								<label>Lorem ipsum</label>
+							</li>
+							<li>
+								<span>Industry Hired For</span>
+								<label>Lorem ipsum</label>
+							</li>
+							<li>
+								<span>Professional Information about you</span>
+								<label>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. <span class="collapse-text-toggle">Read More</span></label>
+							</li>
+						</ul>
+					</div>
+				</div>			
+			
+				<!-- Basic Company information  -->
+				<div class="dtl-box">
+					<div class="dtl-title">
+						<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>">
+						<span>Company Information</span>
+						<a href="#" data-target="#emp-company-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+					</div>
+					<div class="dtl-dis">
+						<ul class="dis-list list-ul-cus">
+							<li>
+								<span>Company Name</span>
+								<label>Verv system</label>
+							</li>
+							<li>
+								<span>Company Industry</span>
+								<label>IT Field</label>
+							</li>
+							<li>
+								<span>Company Profile</span>
+								<label>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum... <span class="collapse-text-toggle">Read More</span></label>
+							</li>
+							<li>
+								<span>Location</span>
+								<label>Ahmedabad, Gujrat , India</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<!-- Company Information -->
+				<div class="dtl-box">
+					<div class="dtl-title">
+						<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Information</span>
+						<a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+					</div>
+					<div class="dtl-dis">
+						<ul class="dis-list list-ul-cus">
+							<li>
+								<span>Company Name</span>
+								<label>Verv System pvt ltd</label>
+							</li>
+							<li>
+								<span>Industry</span>
+								<label>IT Field</label>
+							</li>
+							<li>
+								<span>Team Size</span>
+								<label>105</label>
+							</li>
+							<li>
+								<span>Timezone</span>
+								<label>GMT 21:45</label>
+							</li>
+							<li>
+								<span>Company Founded</span>
+								<label>June 2008</label>
+							</li>
+							<li>
+								<span>Company Overview</span>
+								<label>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <span class="collapse-text-toggle">Read More</span></label>
+							</li>
+							<li>
+								<span>Services you offer</span>
+								<ul>
+									<li>Web design</li>
+									<li>Graphic design</li>
+									<li>SEO</li>
+								</ul>
+							</li>
+							<li>
+								<span>Total Experience</span>
+								<label>5 Year 7 Month</label>
+							</li>
+							<li>
+								<span>Skills you offer</span>
+								<ul class="skill-list">
+									<li>Devloping</li>
+									<li>Desigining</li>
+									<li>Marketing</li>
+								</ul>
+							</li>
+							<li>
+								<span>Location</span>
+								<label>Ahmedabad, Gujrat , India</label>
+							</li>
+							<li>
+								<span>Company Logo</span>
+								<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<!-- Company Contact Information -->
+				<div class="dtl-box">
+					<div class="dtl-title">
+						<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/contact.png?ver=' . time()) ?>">
+						<span>Company Contact Information</span>
+						<a href="#" data-target="#com-contact-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+					</div>
+					<div class="dtl-dis">
+						<ul class="dis-list list-ul-cus">
+							<li>
+								<span>Company Email </span>
+								<label>harshad2406patoliya@gmail.com</label>
+							</li>
+							<li>
+								<span>Company Phone number</span>
+								<label>+91 951005589</label>
+							</li>
+							<li>
+								<span>Skype</span>
+								<label>harshad2406</label>
+							</li>
+							<li>
+								<span>Website URL</span>
+								<label>www.vervsystem.com</label>
+							</li>
+							<li>
+								<span>Location</span>
+								<label>Ahmedabad, Gujrat , India</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<!-- Reviews  -->
+				<div class="gallery-item">
+					<div class="dtl-box">
+						<div class="dtl-title">
+							<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
+							<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"> 
+								<span>Write a review</span>
+							</a>
+						</div>
+						<div class="dtl-dis">
+							<div class="total-rev">
+								<span class="total-rat">4.8</span> 
+								<span class="rating-star">
+									<input id="input-21b" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
+								</span><span class="rev-count">59 Reviews</span>
 							</div>
+							<ul class="review-list">
+								<li>
+									<div class="review-left">
+										<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+									</div>
+									<div class="review-right">
+										<h4>Yatin Belani</h4>
+										<div class="rating-star-cus">
+											<span class="rating-star">
+											<input id="input-21b" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
+												</span>
+										</div>
+										<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="review-left">
+										<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+									</div>
+									<div class="review-right">
+										<h4>Yatin Belani</h4>
+										<div class="rating-star-cus">
+											<span class="rating-star">
+											<input id="input-21b" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
+												</span>
+										</div>
+										<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="review-left">
+										<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+									</div>
+									<div class="review-right">
+										<h4>Yatin Belani</h4>
+										<div class="rating-star-cus">
+											<span class="rating-star">
+											<input id="input-21b" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
+												</span>
+										</div>
+										<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+										</div>
+									</div>
+								</li>
+										
+							</ul>
+							
 						</div>
 					</div>
 				</div>
+				
+			</div>
+			<div class="banner-add">
+				<?php $this->load->view('banner_add'); ?>
 			</div>
 		</div>
-		<div class="banner-add">
-			<?php $this->load->view('banner_add'); ?>
-		</div>
-	</div>
 		<div class="right-add">
-			<?php $this->load->view('right_add_box'); ?>
+			<div class="dtl-box">
+				<div class="dtl-title">
+					<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>">
+					<span>Edit Profile</span>
+				</div>
+				<div class="dtl-dis dtl-edit-p">
+					<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+				</div>
+			</div>
+			<div class="dtl-box p10 dtl-adv cus-add-block">
+				<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+			</div>
 		</div>
 	</div>
 	</section>
 <?php echo $login_footer ?>
 <?php echo $footer; ?>
+<!---  model basic information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Basic Information</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>First Name</label>
+									<input type="text" placeholder="First Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Last Name</label>
+									<input type="text" placeholder="Last Name">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Email </label>
+									<input type="text" placeholder="Email">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Phone Number</label>
+									<input type="text" placeholder="Phone Number">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Skype </label>
+									<input type="text" placeholder="Skype">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Current Position </label>
+									<input type="text" placeholder="Current Position">
+								</div>
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<label>Skills Hired For </label>
+							<input type="text" placeholder="Skills Hired For">
+						</div>
+						<div class="form-group">
+							<label>Industry Hired For </label>
+							<span class="span-select">
+								<select>
+									<option>Country</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								</select>
+							</span>
+						</div>
+						<div class="form-group">
+							<label>Professional Information about you </label>
+							<textarea type="text" placeholder="Professional Information about you"></textarea>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+						<a href="#" class="save"><span>Save</span></a>
+					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!---  model indivisual company information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="emp-company-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Company Information</span>
+					</div>
+					<div class="dtl-dis">
+						
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Name</label>
+									<input type="text" placeholder="Company Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Industry</label>
+									<span class="span-select">
+										<select>
+											<option>Industry </option>
+											<option>Industry</option>
+											<option>Industry</option>
+											<option>Industry</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Company Profile </label>
+							<textarea type="text" placeholder="Company Profile"></textarea>
+						</div>
+						<div class="row">
+							<label class="col-md-12 fw"> Company Address</label>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>Country</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>State</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>City </option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+						<a href="#" class="save"><span>Save</span></a>
+					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	
+	<!-- Company Information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="com-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Company Information</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Name</label>
+									<input type="text" placeholder="Enter Company Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Industry </label>
+									<span class="span-select">
+										<select>
+											<option>Select Field</option>
+											<option>It Field</option>
+											<option>Design</option>
+											<option>Advertizing</option>
+										</select>
+									</span>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<label>Team Size</label>
+									<input type="text" placeholder="Company Phone number">
+								</div>
+								
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<label>Timezone</label>
+									<span class="span-select">
+										<select class="form-control">
+											<option>Timezone</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="row total-exp">
+							<label class="col-md-12 fw">
+								Company Founded
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Year</option>
+											<option>2014</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+										</select>	
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Month</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>	
+									</span>
+								</div>
+							</div>
+							
+								
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Overview</label>
+									<textarea row="4" type="text" placeholder="Company Overview"></textarea>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+							<label>Service you hire for</label>
+							<textarea type="text" placeholder="Service you hire for"></textarea>
+						</div>
+							</div>
+						</div>
+						
+						
+						<div class="row">
+							<label class="col-md-12 fw">Total Experience</label>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>	
+						<div class="form-group">
+							<label>Skills you hire for</label>
+							<input type="text" placeholder="Skills you hire for">
+						</div>
+						
+						<div class="form-group">
+							<label class="upload-file">
+								Upload Company Logo <input type="file">
+							</label>
+						</div>
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	<!-- Company Contact Information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="com-contact-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Company Contact Information</span>
+					</div>
+					<div class="dtl-dis">
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Email </label>
+									<input type="text" placeholder="Company Email ">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Phone number</label>
+									<input type="text" placeholder="Company Phone number">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Skype</label>
+									<input type="text" placeholder="Skype">
+								</div>
+								
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Website URL</label>
+									<input type="text" placeholder="Enter Website URL">
+								</div>
+							</div>
+						</div>
+					
+						<div class="row total-exp">
+							<label class="col-md-12 fw">
+								Company Address
+							</label>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Country</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+											<option>2018</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>State</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>City</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!-- Reviews  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Reviews</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							<div class="rev-img">
+								<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+							</div>
+							<div class="total-rev-top">
+								<h4>Harshad Patoliya</h4>
+								<span class="rating-star">
+			<input id="input-21b" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea type="text" placeholder="Description"></textarea>
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								<span class="fw">Upload Photo</span> <input type="file">
+							</label>
+						</div>
+				
+					</div>
+					<div class="dtl-btn bottom-btn">
+						<a href="#" class="save"><span>Save</span></a>
+					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
 <!-- model for popup start -->
 <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
 	<div class="modal-dialog modal-lm">
@@ -783,6 +1324,63 @@ if ($this->session->userdata('aileenuser')) {
 	<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_profile.js?ver=' . time()); ?>"></script>
 	<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 <?php } */?>
+<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()) ?>"></script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+<script>
+        jQuery(document).ready(function () {
+            $("#input-21f").rating({
+                starCaptions: function (val) {
+                    if (val < 3) {
+                        return val;
+                    } else {
+                        return 'high';
+                    }
+                },
+                starCaptionClasses: function (val) {
+                    if (val < 3) {
+                        return 'label label-danger';
+                    } else {
+                        return 'label label-success';
+                    }
+                },
+                hoverOnClear: false
+            });
+            var $inp = $('#rating-input');
+
+            $inp.rating({
+                min: 0,
+                max: 5,
+                step: 1,
+                size: 'lg',
+                showClear: false
+            });
+
+            $('#btn-rating-input').on('click', function () {
+                $inp.rating('refresh', {
+                    showClear: true,
+                    disabled: !$inp.attr('disabled')
+                });
+            });
+
+
+            $inp.on('rating.change', function () {
+                alert($('#rating-input').val());
+            });
+
+
+            $('.rb-rating').rating({
+                'showCaption': true,
+                'stars': '3',
+                'min': '0',
+                'max': '3',
+                'step': '1',
+                'size': 'xs',
+                'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
+            });
+            $("#input-21c").rating({
+                min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
+            });
+        });
+    </script>
 </body>
 </html>

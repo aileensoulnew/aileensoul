@@ -1519,8 +1519,6 @@ input[type=number] {
 background-color: #1b8ab9 !important;
 pointer-events: none;}
 .custom_footer_left ul li a:focus{color: #1b8ab9 !important;}
-.modal-content .modal-close:hover{color: #fff;background-color: #156f95 !important;}
-.modal-content .modal-close{top:-13px !important;right: -13px !important;}
 .fw .btn{color:#fff!important;background-color: #1b8ab9 !important; }
 .modal-content{border:none;}
 .btn:focus, .btn.focus{color: #fff!important;}
@@ -1838,7 +1836,7 @@ fieldset.work_type_custom input{height: 30px;min-height: 25px;}
 	/*** end advertise  ***/
 	.sort-emp-detail{width:66%;}
     .work_type_custom label.error{top:22px;right: 18px;padding: 6px 10px !important;}
-
+	.job-menu-profile.new-fw-name{margin-top:30px;}
 
 }
 @media screen and (max-width: 840px) {

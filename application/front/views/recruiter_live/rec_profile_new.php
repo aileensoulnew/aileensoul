@@ -212,7 +212,7 @@
 				
 					<!-- menubar --> 
 					<div class="container rec_res rec-dtl">
-						<div class="job-menu-profile  mob-none job_edit_menu new-rec-name">
+						<div class="job-menu-profile  mob-none job_edit_menu new-fw-name">
 							<a href="javascript:void(0);" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>"><h3><?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?></h3></a>
 							<!-- text head start -->
 							<div class="profile-text" >
@@ -380,7 +380,16 @@
 						</div>
 					</div>
 					<div class="right-add">
-						<div class="dtl-box p10 dtl-adv">
+						<div class="dtl-box">
+							<div class="dtl-title">
+								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
+							</div>
+							<div class="dtl-dis dtl-edit-p">
+								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+								
+							</div>
+						</div>
+						<div class="dtl-box p10 dtl-adv cus-add-block">
 								<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
 							</div>
 						<?php $this->load->view('right_add_box'); ?>
