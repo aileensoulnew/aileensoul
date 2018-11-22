@@ -315,7 +315,8 @@
                     </div>
                 </div>
             </div>
-            <div class="container pt10 mobp0">
+            
+			<div class="container pt10 mobp0">
                 <div class="job-menu-profile mob-none pt-20 job_edit_menu">
                     <a title="<?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?></h3></a>
                     <div class="profile-text pt5">
@@ -343,7 +344,8 @@
                         ?>
                     </div>
                 </div>
-                <div class="cus-inner-middle mob-clear mobp0">
+                
+				<div class="cus-inner-middle mob-clear mobp0">
                     <?php
                     if ($freelancerpostdata['0']['user_id'] == $this->session->userdata('aileenuser')) {
                         if ($count_profile == 100) {
@@ -388,6 +390,7 @@
                         }
                     }
                     ?>
+					
 					<div class="tab-add-991">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
@@ -886,98 +889,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="profile-job-profile-menu">
-                                                        <ul class="clearfix">
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_degree']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("degree"); ?></b> <span><?php echo $this->db->get_where('degree', array('degree_id' => $freelancerpostdata[0]['freelancer_post_degree']))->row()->degree_name; ?> </span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("degree"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-
-                                                            if ($freelancerpostdata[0]['freelancer_post_stream']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("stream"); ?></b><span> <?php echo $this->db->get_where('stream', array('stream_id' => $freelancerpostdata[0]['freelancer_post_stream']))->row()->stream_name; ?> </span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("stream"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_univercity']) {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("university"); ?></b> <span><?php echo $this->db->get_where('university', array('university_id' => $freelancerpostdata[0]['freelancer_post_univercity']))->row()->university_name; ?></span> </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("university"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_collage']) {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("college"); ?></b> <span><?php echo $freelancerpostdata[0]['freelancer_post_collage']; ?></span> </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("college"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                            ?>
-
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_percentage']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("percentage"); ?></b><span> <?php echo $freelancerpostdata[0]['freelancer_post_percentage'] . " %"; ?> </span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("percentage"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_passingyear']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("year_passing"); ?></b><span> <?php echo $freelancerpostdata[0]['freelancer_post_passingyear']; ?> </span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("year_passing"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </ul>
-                                                    </div>
+                                                    
                                                 </div>
                                                 <?php
                                             }
@@ -987,131 +899,14 @@
                                             if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
                                                 if ($freelancerpostdata[0]['freelancer_post_portfolio_attachment'] != "" || $freelancerpostdata[0]['freelancer_post_portfolio'] != "") {
                                                     ?> 
-                                                    <div class="profile-job-profile-button clearfix">
-                                                        <div class="profile-job-details">
-                                                            <ul>
-                                                                <li><p class="details_all_tital "><?php echo $this->lang->line("portfolio"); ?></p> </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="profile-job-profile-menu">
-                                                        <ul class="clearfix">
-
-                                                            <?php
-                                                            if ($this->session->userdata('aileenuser')) {
-
-                                                                if ($freelancerpostdata[0]['freelancer_post_portfolio_attachment'] != "") {
-                                                                    $allowespdf = array('pdf');
-                                                                    $filename = $freelancerpostdata[0]['freelancer_post_portfolio_attachment'];
-                                                                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                                                                    if (in_array($ext, $allowespdf)) {
-                                                                        ?>
-                                                                        <li> <b><?php echo $this->lang->line("attach"); ?></b><span>
-                                                                                <div class="free_attc">
-                                                                                    <a title="pdf" href="<?php echo base_url('freelancer/pdf/' . $freelancerpostdata[0]['user_id']) ?>">
-                                                                                        <img alt="PDF" src="<?php echo base_url('assets/images/PDF.jpg') ?>" > 
-                                                                                    </a>
-                                                                            </span>
-
-                                                                        </li>
-                                                                    <?php } ?>
-
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                            } else {
-                                                                if ($freelancerpostdata[0]['freelancer_post_portfolio_attachment'] != "") {
-                                                                    $allowespdf = array('pdf');
-                                                                    $filename = $freelancerpostdata[0]['freelancer_post_portfolio_attachment'];
-                                                                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                                                                    if (in_array($ext, $allowespdf)) {
-                                                                        ?>
-                                                                        <li> <b><?php echo $this->lang->line("attach"); ?></b><span>
-                                                                                <div class="free_attc">
-                                                                                    <a title="pdf" href="javascript:void(0);">
-                                                                                        <img alt="PDF" src="<?php echo base_url('assets/images/PDF.jpg') ?>" > 
-                                                                                    </a>
-                                                                            </span>
-
-                                                                        </li>
-                                                                    <?php } ?>
-
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                            }
-                                                            ?>
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_portfolio']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("descri"); ?></b> <span><pre>
-                                                                            <?php echo $this->common->make_links($freelancerpostdata[0]['freelancer_post_portfolio']); ?> </pre></span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                echo "";
-                                                            }
-                                                            ?>
-
-                                                        </ul>
-                                                    </div>
+                                                    
+                                                   
                                                     <?php
                                                 }
                                             } else {
                                                 ?>
-                                                <div class="profile-job-profile-button clearfix">
-                                                    <div class="profile-job-details">
-                                                        <ul>
-                                                            <li><p class="details_all_tital "><?php echo $this->lang->line("portfolio"); ?></p> </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-job-profile-menu">
-                                                    <ul class="clearfix">
-                                                        <?php
-                                                        if ($freelancerpostdata[0]['freelancer_post_portfolio_attachment'] != "") {
-                                                            $allowespdf = array('pdf');
-                                                            $filename = $freelancerpostdata[0]['freelancer_post_portfolio_attachment'];
-                                                            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                                                            if (in_array($ext, $allowespdf)) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("attach"); ?></b><span>
-                                                                        <div class="free_attc">
-                                                                            <a title="pdf" href="<?php echo base_url('freelancer/pdf/' . $freelancerpostdata[0]['user_id']) ?>">
-                                                                                <img alt="pdf" src="<?php echo base_url('assets/images/PDF.jpg') ?>" > 
-                                                                            </a>
-                                                                    </span>
-                                                                </li>
-                                                            <?php } ?>
-                                                            <?php
-                                                        } else {
-                                                            ?>
-                                                            <li> <b><?php echo $this->lang->line("attach"); ?></b><span> 
-                                                                    <?php echo PROFILENA; ?>
-                                                                </span>
-
-                                                            </li>
-                                                            <?php
-                                                        }
-
-                                                        if ($freelancerpostdata[0]['freelancer_post_portfolio']) {
-                                                            ?>
-                                                            <li> <b><?php echo $this->lang->line("descri"); ?></b> <span><p>
-                                                                        <?php echo $this->common->make_links($freelancerpostdata[0]['freelancer_post_portfolio']); ?> </p></span>
-                                                            </li>
-                                                            <?php
-                                                        } else {
-                                                            ?>
-                                                            <li> <b><?php echo $this->lang->line("descri"); ?></b><span> 
-                                                                    <?php echo PROFILENA; ?>
-                                                                </span>
-                                                            </li>
-                                                        <?php }
-                                                        ?>
-                                                    </ul>
-                                                </div>
+                                               
+                                              
                                             <?php } ?>
                                         </div>
                                     </div>
