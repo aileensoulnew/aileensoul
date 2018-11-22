@@ -2981,14 +2981,32 @@ span.job-passive {background:#ec9a0a;}
 span.job-not {background:#ff0000;}
 .dis-list.cus-status li span{display:inline-block;}
 .dis-list.cus-status li a img{width:20px;}
-div.mm-dropdown {border: 1px solid #ddd; width: 100%; border-radius: 3px;}
-div.mm-dropdown ul {list-style: none; padding: 0; margin: 0; border: 0;}
-div.mm-dropdown ul li, div.mm-dropdown div.textfirst {padding: 0; color: #333; border-bottom: 1px solid #ddd; padding: 5px 15px;}
+div.mm-dropdown {width: 100%; border:1px solid #d2d2d2; border-radius:4px;}
+div.mm-dropdown ul {list-style: none; padding: 0; margin:-1px 0 0; border: 0;}
+div.mm-dropdown ul li:first-child{border-top:1px solid #d2d2d2;}
+div.mm-dropdown ul li:hover{background:#f6f6f6;}
+div.mm-dropdown ul li:last-child:hover{border-bottom-left-radius:4px; border-bottom-right-radius:4px;}
+div.mm-dropdown ul li, div.mm-dropdown div.textfirst {padding: 0; color: #5c5c5c; padding: 5px 15px; cursor:pointer;}
+div.mm-dropdown div.textfirst{font-size:15px; position:relative;}
+div.mm-dropdown div.textfirst:after{position: absolute;
+content: "";
+background: url('../n-images/down-arrow.png');
+width: 12px;
+height: 12px;
+top: 12px;
+right: 6px;
+background-size: 100%;}
 div.mm-dropdown div.textfirst img.down { float: right; margin-top: 5px}
 div.mm-dropdown ul li:last-child {border-bottom: 0; }
-div.mm-dropdown ul li { display: none; padding-left: 25px; }
+div.mm-dropdown ul li { display: none;}
 div.mm-dropdown ul li.main {display: block;}
 div.mm-dropdown ul li img {width: 20px; height: 20px;}
+.right-cus-imp .dis-list li span{font-size:14px; color:#7b7b7b;}
+.right-cus-imp .dis-list li span span{width:10px; height:10px; display:inline-block; margin-right:5px; border-radius:100%; background:#5c5c5c;}
+span.job-active {background:#42b72a !important; width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
+span.job-passive {background:#ec9a0a !important; width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
+span.job-not {background:#ff0000 !important; width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
+.input-option span{width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
 
 /***  end new job registration form  ***/
 /***  bus timeline  ***/
@@ -3344,11 +3362,13 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.all-detail-custom .right-add .row{margin-left:-15px; margin-right:-15px;}
 	.dtl-adv{display:none;}
 	.rec-dtl .dtl-adv{display:block;}
+	.right-cus-imp .dtl-box{width:462px;}
 }
 @media screen and (max-width: 1024px) {
 
 }
 @media screen and (max-width: 991px) {
+	.tab-plr0{padding-left:0; padding-right:0;}
 	.none-991{display:none;}
 	.post-box-bottom ul li:nth-child(2){display:none;}
 	.bus-inner .right-add{display:none;}
@@ -3555,6 +3575,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.res-job-print .job_edit_menu{margin-top:35px; padding-bottom:0; padding-left:15px;}
 	.right-cus-imp .dtl-box{margin-top:23px;}
 	.art-side-menu .flw_msg_btn{margin-top:8px; margin-right:8px;}
+	.right-cus-imp .dtl-box{width:367px;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -3563,6 +3584,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.mob-comment{display: block;}
 	.mob-border-top-1{border-top:1px solid #d2d2d2;}
 	.questions .custom-user-list h3{border-top:1px solid #d2d2d2 !important; border-bottom:1px solid #d2d2d2 !important;}
+	.res-job-print .pd-767{padding-left:8px; padding-right:8px;}
 	/***  all profile  ***/
 	.custom-box .custom-width{height:auto; border-left:0 !important; border-right:0 !important;}
 	.custom-box .left-box{width:150px; height:150px; margin:0 auto;}
@@ -4374,7 +4396,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.dtl-modal .modal-close{top:15px;}
 	.dtl-btn .save:hover{border-radius:0;}
 	#profile-overview .dtl-btn{/*position:absolute; width:100%; bottom:0;*/}
-	#skills .dtl-btn, .dtl-btn.bottom-btn {position:absolute; width:100%; bottom:0;}
+	#skills .dtl-btn, .dtl-btn.bottom-btn {/*position:absolute; width:100%; bottom:0;*/}
 	.dtl-about-box .width-45{width:44%;}
 	.dtl-about-box .width-10{width:12%;}
 	.dtl-two-btn .dtl-btn .back:hover{border-radius:0;}

@@ -3007,6 +3007,7 @@ span.job-active {background:#42b72a !important; width:12px; height:12px; border-
 span.job-passive {background:#ec9a0a !important; width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
 span.job-not {background:#ff0000 !important; width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
 .input-option span{width:12px; height:12px; border-radius:100%; display:inline-block; margin-right:10px;}
+.upload-file input{margin-top:4px;}
 
 /***  end new job registration form  ***/
 /***  bus timeline  ***/
@@ -3293,14 +3294,14 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.cus-inner-middle{width:71%;}
 	.cus-add-post .right-add{width:220px;}
 	.manage-post-custom .right-add{width:180px;}
-	.job_edit_menu{/*width:100% !important; margin-top:10px; margin-bottom:10px;*/}
+	.new-rec-name{width:100% !important; margin-top:10px; margin-bottom:10px;}
 	.cus-add-post .right-add .right-add-box .adBlock { width: 190px; height: 650px; }
 	.manage-post-custom .right-add .right-add-box .adBlock { width: 170px; height: 600px; }
 	.right-part .right-add-box .adBlock { width: 190px; height: 650px; }
 	.edit_pr_bar .right-add-box .adBlock { width: 190px; height: 650px; }
 	.fixed_right_display {display: block !important; width:207px;}
 	.right_middle_side_posrt .right-add-box .adBlock { width: 190px !important; height: 600px !important; }
-	.all-contact-cus{display:block;}
+	.all-contact-cus{display:block; margin-bottom:15px; width:100%; float:left;}
 	.right-part .all-contact{display:none;}
 	.cus-inner-middle{padding-left:0;}
 	.list-box-custom .nav > li > a{padding:10px 7px;}
@@ -3547,7 +3548,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.edit_pr_bar{display:none;}
 	.new-ld-page .middle-part{left:0;}
 	.job-menu-profile{margin-bottom:0;}
-	.cus-inner-middle{width:100%; padding:0 15px;}
+	.cus-inner-middle{width:100%;/* padding:0 15px;*/}
 	.tab-add-991{display:block;}
 	.art-side-menu .flw_msg_btn{/*margin-top:0;*/}
 	.fix-feedback{bottom:45px; z-index:9;}
@@ -3576,6 +3577,8 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.right-cus-imp .dtl-box{margin-top:23px;}
 	.art-side-menu .flw_msg_btn{margin-top:8px; margin-right:8px;}
 	.right-cus-imp .dtl-box{width:367px;}
+	.container.rec_res{padding-left:0; padding-right:0;}
+	
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -4429,6 +4432,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.cd-horizontal-timeline .events-content em{line-height:1; font-size:15px;}
 	.timeline-right{padding-top:4px; width:83%;}
 	.cd-horizontal-timeline .events-content h2{font-size:16px;}
+	.dtl-dis ul.skill-list li{font-size:11px; padding:0px 10px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

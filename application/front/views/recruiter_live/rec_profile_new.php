@@ -93,7 +93,8 @@
 				   ?>
 				   </div>
 			   </div>
-		   </div>
+			
+		</div>
 		   <div class="container tablate-container art-profile">
 			<?php if ($this->uri->segment(3) == $userid) { ?>
 			<div class="upload-img">
@@ -211,7 +212,7 @@
 				
 					<!-- menubar --> 
 					<div class="container rec_res rec-dtl">
-						<div class="job-menu-profile  mob-none job_edit_menu ">
+						<div class="job-menu-profile  mob-none job_edit_menu new-rec-name">
 							<a href="javascript:void(0);" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>"><h3><?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?></h3></a>
 							<!-- text head start -->
 							<div class="profile-text" >
@@ -309,7 +310,7 @@
 						
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/exp.png?ver=' . time()) ?>"><span>Company Details</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Details</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list">
@@ -579,10 +580,11 @@
 						</div>
 					
 						
-						<div class="form-group dtl-dob ">
+						<div class="dtl-dob ">
 							<label>Company Location</label>
 							<div class="row">
-								<div class="col-md-4 col-sm-4 col-xs-4">
+								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
 									<span class="span-select">
 										<select>
 											<option>Country</option>
@@ -592,7 +594,9 @@
 										</select>
 									</span>
 								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4">
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
 									<span class="span-select">
 										<select>
 											<option>State</option>
@@ -602,7 +606,9 @@
 										</select>
 									</span>
 								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4">
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
 									<span class="span-select">
 										<select>
 											<option>City</option>
@@ -612,13 +618,13 @@
 										</select>
 									</span>
 								</div>
+								</div>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label>Company Profile</label>
-							<textarea row="4" type="text" placeholder="Company Profile">
-							</textarea>
+							<textarea type="text" placeholder="Company Profile"></textarea>
 						</div>
 						<div class="form-group">
 							<label>Other Activities</label>
