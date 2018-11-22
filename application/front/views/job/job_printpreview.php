@@ -359,9 +359,9 @@
                                                                     <ul class="dis-list">
                                                                         <li class="select-preview">
                                                                             <span>Duration</span> 
-                                                                            <label>{{user_edu.start_date_str}} to</label>
-                                                                            <label ng-if="user_edu.end_date_str != '' && user_edu.end_date_str != null">{{user_edu.end_date_str}}</label> 
-                                                                            <label ng-if="user_edu.end_date_str == '' || user_edu.end_date_str == null">Studying</label>
+                                                                            <label ng-if="user_edu.start_date_str">{{user_edu.start_date_str}} to</label>
+                                                                            <label ng-if="user_edu.end_date_str">{{user_edu.end_date_str}}</label> 
+                                                                            <label ng-if="user_edu.edu_end_date != null && user_edu.end_date_str == ''">Studying</label>
                                                                         </li>
                                                                         <li class="select-preview">
                                                                             <span>Board / University</span>
@@ -516,7 +516,7 @@
                                                                     </div>
                                                                     <div class="dis-middle">
                                                                         <h4>{{user_proj.project_title}}</h4>
-                                                                        <p ng-if="user_proj.project_field == '0'"> {{user_proj.project_other_field}}</p>
+                                                                        <p ng-if="user_proj.project_field == '0' && user_proj.project_other_field != ''"> {{user_proj.project_other_field}}</p>
                                                                         <p ng-if="user_proj.project_field != '0'"> {{user_proj.project_field_txt}}</p>
                                                                     </div>
                                                                     <div class="dis-right">
@@ -541,15 +541,15 @@
                                                                         </li>
                                                                         <li class="select-preview">
                                                                             <span>Duration</span> 
-                                                                            <label>{{user_proj.start_date_str}} to</label>
-                                                                            <label ng-if="user_proj.end_date_str != '' && user_proj.end_date_str != null">{{user_proj.end_date_str}}</label> 
-                                                                            <label ng-if="user_proj.end_date_str == '' || user_proj.end_date_str == null">Still Working</label>
+                                                                            <label ng-if="user_proj.start_date_str">{{user_proj.start_date_str}} to</label>
+                                                                            <label ng-if="user_proj.project_end_date != '' && user_proj.end_date_str != '' && user_proj.end_date_str != null">{{user_proj.end_date_str}}</label> 
+                                                                            <label ng-if="user_proj.project_end_date != '' && (user_proj.end_date_str == '' || user_proj.end_date_str == null)">Still Working</label>
                                                                         </li>
-                                                                        <li>
+                                                                        <li ng-if="user_proj.project_team > '0'">
                                                                             <span>Team Size</span>
                                                                             {{user_proj.project_team}}
                                                                         </li>
-                                                                        <li>
+                                                                        <li ng-if="user_proj.project_role">
                                                                             <span>Your Role</span>
                                                                             {{user_proj.project_role}}
                                                                         </li>
@@ -557,11 +557,11 @@
                                                                             <span>Project Partner</span>
                                                                             {{user_proj.project_partner_name}}
                                                                         </li>
-                                                                        <li>
+                                                                        <li ng-if="user_proj.project_skills_txt">
                                                                             <span>Skills Applied</span>
                                                                             {{user_proj.project_skills_txt}}
                                                                         </li>
-                                                                        <li>
+                                                                        <li ng-if="user_proj.project_desc">
                                                                             <span>Description</span>
                                                                             <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_proj.project_desc}}" dd-text-collapse-cond="true">{{user_proj.project_desc}}</label>
                                                                         </li>

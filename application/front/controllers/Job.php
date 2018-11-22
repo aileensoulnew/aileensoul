@@ -8619,4 +8619,47 @@ class Job extends MY_Controller {
         }
         return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
+
+    public function set_old_education()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $edu_data = $this->db->select('*')->get_where('job_graduation', array())->result();
+        echo "<pre>";
+        print_r($edu_data);
+        foreach ($edu_data as $_edu_data) {
+            $cdata = date('Y-m-d h:i:s', time());
+            $data = array(
+                'user_id' => $_edu_data->user_id,
+                'edu_school_college' => $_edu_data->college,
+                'edu_university' => $_edu_data->university,
+                'edu_degree' => $_edu_data->degree,
+                'edu_stream' => $_edu_data->stream,
+                'status' => '1',
+                'created_date' => $cdata,
+                'modify_date' => $cdata,
+            );
+            $this->common->insert_data_getid($data, 'job_user_education');
+        }
+    }
+
+    public function set_old_project()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $project_data = $this->db->select('user_id,project_name,project_description')->get_where('job_reg', array("project_name !=" => ""))->result();
+        echo "<pre>";
+        print_r($project_data);
+        //exit();
+        foreach ($project_data as $_project_data) {
+            $cdata = date('Y-m-d h:i:s', time());
+            $data = array(
+                'user_id' => $_project_data->user_id,
+                'project_title' => $_project_data->project_name,
+                'project_desc' => $_project_data->project_description,
+                'status' => '1',
+                'created_date' => $cdata,
+                'modify_date' => $cdata,
+            );
+            $this->common->insert_data_getid($data, 'job_user_projects');
+        }
+    }
 }

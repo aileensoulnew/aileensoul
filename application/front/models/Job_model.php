@@ -1952,14 +1952,16 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
 
     public function get_user_project($userid)
     {
-        $this->db->select("jup.id_projects, jup.user_id, jup.project_title, jup.project_team, jup.project_role, jup.project_skills, jup.project_field, jup.project_other_field, jup.project_url, jup.project_partner_name, jup.project_start_date, jup.project_end_date, jup.project_desc, jup.project_file, jup.status, jup.created_date, jup.modify_date, DATE_FORMAT(CONCAT(jup.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jup.project_end_date,'-1'),'%b %Y') as end_date_str,it.industry_name as project_field_txt, GROUP_CONCAT(DISTINCT(s.skill)) as project_skills_txt")->from("job_user_projects jup,skill s");
+        $this->db->select("jup.id_projects, jup.user_id, jup.project_title, jup.project_team, jup.project_role, jup.project_skills, jup.project_field, jup.project_other_field, jup.project_url, jup.project_partner_name, jup.project_start_date, jup.project_end_date, jup.project_desc, jup.project_file, jup.status, jup.created_date, jup.modify_date, DATE_FORMAT(CONCAT(jup.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jup.project_end_date,'-1'),'%b %Y') as end_date_str,IF(jup.project_skills != '',it.industry_name,'') as project_field_txt, IF(jup.project_skills != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as project_skills_txt")->from("job_user_projects jup,skill s");
         $this->db->join('industry_type it', 'it.industry_id = jup.project_field', 'left');
-        $this->db->where('FIND_IN_SET(s.skill_id, jup.project_skills) !=', 0);
+        $sql = "IF(jup.project_skills != '', FIND_IN_SET(s.skill_id, jup.project_skills) != '0', '1=1')";
+        $this->db->where($sql);
+        // $this->db->where('FIND_IN_SET(s.skill_id, jup.project_skills) !=', 0);
         $this->db->where('jup.user_id', $userid);
         $this->db->where('jup.status', '1');
         $this->db->group_by('jup.project_skills,jup.id_projects');
         $this->db->order_by('jup.created_date',"desc");
-        $query = $this->db->get();
+        $query = $this->db->get();        
         $user_data_exp = $query->result_array();        
         return $user_data_exp;
     }
