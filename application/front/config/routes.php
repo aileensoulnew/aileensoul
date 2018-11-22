@@ -713,6 +713,7 @@ $route['freelancer/get_filter_data'] = "freelancer/get_filter_data";
 
 $route['freelancer/remove_post'] = "freelancer/remove_post";
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
+$route['freelancer-new/(:any)'] = "freelancer/freelancer_post_profile_new/$1";
 //Freelance Apply Signup End
 
 //$route['job/search'] = "job/job_search";
@@ -721,6 +722,7 @@ $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 //$route['(:any)'] = "job/job_search";
 //$route['(:any)-jobs'] = "job/job_search";//old
 $route['freelance-employer/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
+$route['freelance-employer-new/(:any)'] = "freelancer_hire_live/freelancer_hire_profile_new/$1";
 
 $route['(:any)-jobs'] = "job/job_search_new/$1//1";//Pratik Job By Job Title,Job by Category,Job by Skills
 $route['(:any)-jobs/(:any)'] = "job/job_search_new/$1//1";//Pratik Job By Job Title,Job by Category,Job by Skills
