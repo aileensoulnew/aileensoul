@@ -6948,7 +6948,7 @@ class Job extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        $ret_arr['profile_progress'] = $this->progressbar($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -6967,6 +6967,7 @@ class Job extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -6976,7 +6977,7 @@ class Job extends MY_Controller {
         $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
         
         $user_education = $this->job_model->get_user_education($userid);        
-        $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        $ret_arr = array("success"=>1,"user_education"=>$user_education);        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7660,7 +7661,7 @@ class Job extends MY_Controller {
         $user_social_links_data = $this->job_model->get_user_social_links($userid);        
         $user_personal_links_data = $this->job_model->get_user_personal_links($userid);        
         $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
-        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7788,7 +7789,7 @@ class Job extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        $ret_arr['profile_progress'] = $this->progressbar($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7819,14 +7820,14 @@ class Job extends MY_Controller {
             $years = array_sum($year);
             $cal_years = array_sum($month);
             $total_month = $cal_years % 12;
-            $years = $years + intval($cal_years / 12);
-            $profile_progress = $this->progressbar($user_id);
+            $years = $years + intval($cal_years / 12);            
             $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month,"profile_progress"=>$profile_progress);
         }
         else
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7904,7 +7905,7 @@ class Job extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7947,7 +7948,7 @@ class Job extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7984,8 +7985,7 @@ class Job extends MY_Controller {
         else
         {
             $ret_arr = array("success"=>0);
-        }
-        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        }        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -8076,7 +8076,7 @@ class Job extends MY_Controller {
         {
             $ret_arr = array("success"=>0);   
         }
-        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
 
@@ -8123,7 +8123,7 @@ class Job extends MY_Controller {
 
         $user_languages = $this->job_model->get_user_languages($userid);
         $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
-        $ret_arr['profile_progress'] = $this->progressbar($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -8169,6 +8169,7 @@ class Job extends MY_Controller {
         $userid = $this->db->select('user_id')->get_where('job_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
         $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -8225,6 +8226,7 @@ class Job extends MY_Controller {
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
         $preferred_job_info = $this->job_model->get_preferred_job_info($userid);
         $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info,"preferred_job_info"=>$preferred_job_info);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -8313,6 +8315,7 @@ class Job extends MY_Controller {
         $preferred_job_info = $this->job_model->get_preferred_job_info($userid);
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
         $ret_arr = array("success"=>1,"preferred_job_info"=>$preferred_job_info,"job_basic_info"=>$job_basic_info);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -8337,6 +8340,283 @@ class Job extends MY_Controller {
         $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);        
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
         $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function progressbar_new($user_id)
+    {
+        $contition_array = array('user_id' => $user_id, 'status' => '1', 'is_delete' => '0');
+
+        $job_data = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'fname, lname, email, phnno, dob, gender, country_id, state_id, city_id, address, job_user_image, profile_background, work_job_title, work_job_industry, work_job_other_industry, work_job_city, user_skills, user_hobbies, user_software, user_resume, user_professional_summary, user_passion, field, other_field, preferred_travel, preferred_cmp_culture, preferred_work_time, exp_salary_amt, exp_salary_currency, exp_salary_worktype, job_active_status, progress_new, experience', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+
+        $count = 0;
+        $progress_status = array();
+        $user_image = 0;        
+        if($job_data['job_user_image'] != '')
+        {
+            $user_image = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_image_status'] = $user_image;
+
+        $profile_background = 0;
+        if($job_data['profile_background'] != '')
+        {
+            $profile_background = 1;
+            $count = $count + 3;
+        }
+        $progress_status['profile_background_status'] = $profile_background;
+
+        //Basic Info
+        $fname = 0;
+        if($job_data['fname'] != '')
+        {
+            $fname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['fname_status'] = $fname;
+
+        $lname = 0;
+        if($job_data['lname'] != '')
+        {
+            $lname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['lname_status'] = $lname;
+
+        $email = 0;
+        if($job_data['email'] != '')
+        {
+            $email = 1;
+            $count = $count + 1;
+        }
+        $progress_status['email_status'] = $email;
+
+        $phnno = 0;
+        if($job_data['phnno'] != '')
+        {
+            $phnno = 1;
+            $count = $count + 1;
+        }
+        $progress_status['phnno_status'] = $phnno;
+
+        $dob = 0;
+        if($job_data['dob'] != '')
+        {
+            $dob = 1;
+            $count = $count + 1;
+        }
+        $progress_status['dob_status'] = $dob;
+
+        $gender = 0;
+        if($job_data['gender'] != '')
+        {
+            $gender = 1;
+            $count = $count + 1;
+        }
+        $progress_status['gender_status'] = $gender;
+
+        $country_id = 0;
+        if($job_data['country_id'] != '')
+        {
+            $country_id = 1;
+            $count = $count + 1;
+        }
+        $progress_status['country_status'] = $country_id;
+
+        $state_id = 0;
+        if($job_data['state_id'] != '')
+        {
+            $state_id = 1;
+            $count = $count + 1;
+        }
+        $progress_status['state_status'] = $state_id;
+
+        $city_id = 0;
+        if($job_data['city_id'] != '')
+        {
+            $city_id = 1;
+            $count = $count + 1;
+        }
+        $progress_status['city_status'] = $city_id;
+
+        $address = 0;
+        if($job_data['address'] != '')
+        {
+            $address = 1;
+            $count = $count + 1;
+        }
+        $progress_status['address_status'] = $address;
+
+        $field = 0;
+        if($job_data['field'] > -1 && $job_data['field'] != '')
+        {
+            $field = 1;
+            $count = $count + 1;
+        }
+        $progress_status['field_status'] = $field;
+
+        //Preferred Job Detail
+        $work_job_title = 0;
+        if($job_data['work_job_title'] != '')
+        {
+            $work_job_title = 1;
+            $count = $count + 1;
+        }
+        $progress_status['job_title_status'] = $work_job_title;
+
+        $work_job_city = 0;
+        if($job_data['work_job_city'] != '')
+        {
+            $work_job_city = 1;
+            $count = $count + 1;
+        }
+        $progress_status['job_city_status'] = $work_job_city;
+
+        $work_job_industry = 0;
+        if($job_data['work_job_industry'] > -1 && $job_data['work_job_industry'] != '')
+        {
+            $work_job_industry = 1;
+            $count = $count + 1;
+        }
+        $progress_status['job_industry_status'] = $work_job_industry;
+
+        $preferred_travel = 0;
+        if($job_data['preferred_travel'] != '')
+        {
+            $preferred_travel = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preferred_travel_status'] = $preferred_travel;
+
+        $preferred_cmp_culture = 0;
+        if($job_data['preferred_cmp_culture'] != '')
+        {
+            $preferred_cmp_culture = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preferred_cmp_culture_status'] = $preferred_cmp_culture;
+
+        $preferred_work_time = 0;
+        if($job_data['preferred_work_time'] != '')
+        {
+            $preferred_work_time = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preferred_work_time_status'] = $preferred_work_time;
+
+        $exp_salary_amt = 0;
+        if($job_data['exp_salary_amt'] != '')
+        {
+            $exp_salary_amt = 1;
+            $count = $count + 1;
+        }
+        $progress_status['exp_salary_amt_status'] = $exp_salary_amt;
+
+        $exp_salary_currency = 0;
+        if($job_data['exp_salary_currency'] != '')
+        {
+            $exp_salary_currency = 1;
+            $count = $count + 1;
+        }
+        $progress_status['exp_salary_currency_status'] = $exp_salary_currency;
+
+        $exp_salary_worktype = 0;
+        if($job_data['exp_salary_worktype'] != '')
+        {
+            $exp_salary_worktype = 1;
+            $count = $count + 1;
+        }
+        $progress_status['exp_salary_worktype_status'] = $exp_salary_worktype;
+        
+        $job_active_status = 0;
+        if($job_data['job_active_status'] != '' && $job_data['job_active_status'] != 0)
+        {
+            $job_active_status = 1;
+            $count = $count + 2;
+        }
+        $progress_status['job_active_status_status'] = $job_active_status;
+
+        $user_skills = 0;
+        if($job_data['user_skills'] != '')
+        {
+            $user_skills = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_skills_status'] = $user_skills;
+
+        $user_professional_summary = 0;
+        if($job_data['user_professional_summary'] != '')
+        {
+            $user_professional_summary = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_professional_summary_status'] = $user_professional_summary;
+
+        $user_hobbies = 0;
+        if($job_data['user_hobbies'] != '')
+        {
+            $user_hobbies = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_hobbies_status'] = $user_hobbies;
+
+        $user_education = $this->job_model->get_user_education($user_id);
+        $user_education_status = 0;
+        if(isset($user_education) && !empty($user_education))
+        {
+            $user_education_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_education_status'] = $user_education_status;
+
+        $user_experience_status = 0;
+        $user_experience = $this->job_model->get_user_experience($user_id);
+        // if($job_data['experience'] != '')
+        if(isset($user_experience) && !empty($user_experience))
+        {
+            $user_experience_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_experience_status'] = $user_experience_status;
+        
+        $user_languages = $this->job_model->get_user_languages($user_id);
+        $user_languages_status = 0;
+        if(isset($user_languages) && !empty($user_languages))
+        {
+            $user_languages_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_languages_status'] = $user_languages_status;
+
+        $user_links = $this->job_model->get_user_links($user_id);
+        $user_links_status = 0;
+        if(isset($user_links) && !empty($user_links))
+        {
+            $user_links_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_links_status'] = $user_links_status;
+
+        $user_process = ($count * 100) / 49;        
+        $user_process_value = ($user_process / 100);
+
+        if ($user_process == 100) {
+            //if ($job_data['progress_new'] != 1) {
+                $data = array(
+                    'progress_new' => '1',
+                    'modified_date' => date('Y-m-d h:i:s', time())
+                );
+                $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $user_id);
+            //}
+        } else {
+            $data = array(
+                'progress_new' => '0',
+                'modified_date' => date('Y-m-d h:i:s', time())
+            );
+            $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $user_id);
+        }
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
 }

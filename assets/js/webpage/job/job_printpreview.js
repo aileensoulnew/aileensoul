@@ -320,6 +320,11 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                     }
                 },500);                
             }
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
             load_add_detail();
         });
     };
@@ -332,11 +337,18 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $("#basic_phone").val($scope.job_basic_info.phnno);
         $("#basic_phone").val($scope.job_basic_info.phnno);
         $("#basic_jobtitle").val($scope.job_basic_info.work_job_title_txt);
-        $scope.basic_field = $scope.job_basic_info.field;
-        if($scope.job_basic_info.field == 0)
+        if($scope.job_basic_info.field >= 0)
+        {            
+            $scope.basic_field = $scope.job_basic_info.field;
+            if($scope.job_basic_info.field == 0)
+            {
+                $("#basic_other_field").val($scope.job_basic_info.other_field);
+                $("#basic_other_field_div").show();
+            }
+        }
+        else
         {
-            $("#basic_other_field").val($scope.job_basic_info.other_field);
-            $("#basic_other_field_div").show();
+            $scope.job_basic_info.field = "";
         }
         $scope.basic_gender = $scope.job_basic_info.gender;
         dob = $scope.job_basic_info.dob.split('-');
@@ -719,7 +731,10 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $("#edit-profile-move").appendTo($(".edit-profile-move"));
             $("#skill-move").appendTo($(".skill-move"));
             $("#social-link-move").appendTo($(".social-link-move"));
-            $("#idol-move").appendTo($(".idol-move"));
+            $("#language-move").appendTo($(".language-move"));
+            $("#resume-move").appendTo($(".resume-move"));
+            $("#hobbies-move").appendTo($(".hobbies-move"));
+            $(".remove-blank").remove();
         }
 
         $('.modal').on('hidden.bs.modal', function () {
@@ -1109,10 +1124,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             {
                 user_education = result.data.user_education;
                 $scope.user_education = user_education;
-                $("#edution-loader").hide();
-                $("#edution-body").show();
             }
-
+            $("#edution-loader").hide();
+            $("#edution-body").show();
         });
     }
     // $scope.get_user_education();
@@ -4587,9 +4601,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 $scope.user_experience = user_experience;
                 $scope.exp_years = result.data.exp_years;
                 $scope.exp_months = result.data.exp_months;
-                $("#exp-loader").hide();
-                $("#exp-body").show();
             }
+            $("#exp-loader").hide();
+            $("#exp-body").show();
 
         });
     }
@@ -4837,9 +4851,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 skills_data_edit = result.data.skills_data_edit;
                 $scope.user_skills = skills_data;
                 $scope.edit_user_skills = skills_data_edit;
-                $("#skill-loader").hide();
-                $("#skill-body").show();
             }
+            $("#skill-loader").hide();
+            $("#skill-body").show();
 
         });
     }
@@ -4932,9 +4946,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 }
                 $scope.hobby_txt = edit_hobbies;
                 $scope.user_hobbies = user_hobbies_a;                
-                $("#hobbies-loader").hide();
-                $("#hobbies-body").show();
             }
+            $("#hobbies-loader").hide();
+            $("#hobbies-body").show();
 
         });
     }
@@ -4977,12 +4991,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
             $("#user_software_save").removeAttr("style");
             $("#user_software_loader").hide();
-            $("#software").modal('hide');
-            var profile_progress = result.data.profile_progress;
-            var count_profile_value = profile_progress.user_process_value;
-            var count_profile = profile_progress.user_process;
-            $scope.progress_status = profile_progress.progress_status;
-            $scope.set_progress(count_profile_value,count_profile);
+            $("#software").modal('hide');            
         });
     };
 
@@ -5107,11 +5116,6 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                         $scope.reset_user_resume();
                         $("#resume").modal('hide');
                     }
-                    var profile_progress = result.profile_progress;
-                    var count_profile_value = profile_progress.user_process_value;
-                    var count_profile = profile_progress.user_process;
-                    $scope.progress_status = profile_progress.progress_status;
-                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -5205,9 +5209,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             if(success == 1)
             {
                 $scope.prof_summary = result.data.user_prof_summary;                
-                $("#prof-summary-loader").hide();
-                $("#prof-summary-body").show();
             }
+            $("#prof-summary-loader").hide();
+            $("#prof-summary-body").show();
         });
     };
     // $scope.get_user_prof_summary();
@@ -5332,11 +5336,6 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 $("#passion_user_save").removeAttr("style");
                 $("#passion_user_loader").hide();
                 $("#passion-intrest").modal('hide');
-                var profile_progress = result.data.profile_progress;
-                var count_profile_value = profile_progress.user_process_value;
-                var count_profile = profile_progress.user_process;
-                $scope.progress_status = profile_progress.progress_status;
-                $scope.set_progress(count_profile_value,count_profile);
             });
         }
     };
@@ -5659,6 +5658,31 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
     };
     //Job Search Status Start
 
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                // $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
 
     $scope.get_job_basic_info();
     $scope.get_edu_degree();

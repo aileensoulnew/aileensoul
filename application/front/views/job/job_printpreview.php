@@ -270,7 +270,7 @@
                                                             <span>Job Title</span>
                                                             <label>{{job_basic_info.work_job_title_txt}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="job_basic_info.field >= '0'">
                                                             <span>Field</span>
                                                             <label ng-if="job_basic_info.field == '0'">{{job_basic_info.other_field}}</label>
                                                             <label ng-if="job_basic_info.field != '0'">{{job_basic_info.field_txt}}</label>
@@ -279,24 +279,27 @@
                                                             <span>Email</span>
                                                             <label>{{job_basic_info.email}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="job_basic_info.phnno != ''">
                                                             <span>Phone Number</span>
                                                             <label>{{job_basic_info.phnno}}</label>
                                                         </li>
                                                         
-                                                        <li>
+                                                        <li ng-if="job_basic_info.dob_txt">
                                                             <span>Date of Birth</span>
                                                             <label>{{job_basic_info.dob_txt}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="job_basic_info.gender">
                                                             <span>Gender</span>
                                                             <label>{{job_basic_info.gender | wordFirstCase}}</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="job_basic_info.address != '' || job_basic_info.city_name || job_basic_info.state_name || job_basic_info.country_name">
                                                             <span>Address</span>
                                                             <label>{{job_basic_info.address}},</label>
                                                             <br />
-                                                            <label>{{job_basic_info.city_name}}, {{job_basic_info.state_name}}, {{job_basic_info.country_name}}</label>
+                                                            <label>{{job_basic_info.city_name}}
+                                                            {{job_basic_info.state_name ? ', ' : ''}}{{job_basic_info.state_name}}
+                                                            {{job_basic_info.country_name ? ', ': ''}}
+                                                            {{job_basic_info.country_name}}</label>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1197,6 +1200,31 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Edit Profile -->
+                                    <div class="gallery-item edit-profile-move">
+                                    </div>
+
+                                    <!-- skills  -->
+                                    <div class="gallery-item skill-move">
+                                    </div>
+
+                                    <!-- Social Link  -->
+                                    <div class="gallery-item social-link-move">
+                                    </div>
+
+                                    <!-- language  -->
+                                    <div class="gallery-item language-move">
+                                    </div>
+
+                                    <!-- resume  -->
+                                    <div class="gallery-item resume-move">
+                                    </div>
+
+                                    <!-- Hobbies  -->
+                                    <div class="gallery-item hobbies-move">
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="right-add add-detail">                                
@@ -1204,8 +1232,9 @@
                                     <div class="dtl-box p10 dtl-adv">
                                     </div>
                                 </div>
+                                <!-- Edit Profile -->
                                 <div class="rsp-dtl-box">
-                                    <div class="dtl-box">
+                                    <div id="edit-profile-move" class="dtl-box">
                                         <div class="dtl-title">
                                             <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
                                         </div>
@@ -1213,28 +1242,46 @@
                                             <div class="dtl-edit-top"></div>
                                             <div class="profile-status">
                                                 <ul>
-                                                    <li><span class=""></span>Profile pic</li>
-                                                    <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
-                                                    
-                                                    <li><span class=""></span>Experience</li>
-                                                    <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Languages</li>
-                                                    
-                                                    <li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Hobbies</li>
-                                                    <li class="pl20"><span class=""></span>Websites</li>
-                                                    
-                                                    <li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Basic info</li>
-                                                    <li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li> 
+                                                    <li><span class=""><img ng-if="progress_status.user_image_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
 
-                                                    <li class="fw"><span class=""></span>Educational Info</li>
-                                                    <li class="fw"><span class=""></span>Job Search Status</li>
-                                                    <li class="fw"><span class=""></span>Preferred Job Details</li>
+                                                    <li class="pl20"><span class=""><img ng-if="progress_status.profile_background_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+                                                    
+                                                    <li><span class=""><img ng-if="progress_status.user_experience_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Experience</li>
 
-                                                    <li class="fw"><span class=""></span>Professional Summary</li>
+                                                    <li class="pl20"><span class=""><img ng-if="progress_status.user_languages_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Languages</li>
+                                                    
+                                                    <li><span class=""><img ng-if="progress_status.user_hobbies_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Hobbies</li>
+
+                                                    <li class="pl20"><span class=""><img ng-if="progress_status.user_links_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Websites</li>
+                                                    
+                                                    <li><span class=""><img ng-if="progress_status.fname_status == '1' && progress_status.lname_status == '1' && progress_status.email_status == '1' && progress_status.phnno_status == '1' && progress_status.dob_status == '1' && progress_status.gender_status == '1' && progress_status.country_status == '1' && progress_status.state_status == '1' && progress_status.city_status == '1' && progress_status.address_status == '1' && progress_status.field_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic info</li>
+
+                                                    <li class="pl20"><span class=""><img ng-if="progress_status.user_skills_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li> 
+
+                                                    <li class="fw"><span class=""><img ng-if="progress_status.user_education_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational Info</li>
+
+                                                    <li class="fw"><span class=""><img ng-if="progress_status.job_active_status_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Job Search Status</li>
+
+                                                    <li class="fw"><span class=""><img ng-if="progress_status.job_title_status == '1' && progress_status.job_city_status == '1' && progress_status.job_industry_status == '1' && progress_status.preferred_travel_status == '1' && progress_status.preferred_cmp_culture_status == '1' && progress_status.preferred_work_time_status == '1' && progress_status.exp_salary_amt_status == '1' && progress_status.exp_salary_currency_status == '1' && progress_status.exp_salary_worktype_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Preferred Job Details</li>
+
+                                                    <li class="fw"><span class=""><img ng-if="progress_status.user_professional_summary_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Professional Summary</li>
                                                 </ul>
                                             </div>
                                             <div class="dtl-edit-bottom"></div>
                                             <div class="p20">
-                                                <img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+                                                <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+                                                <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                                    <div class="count_main_progress">
+                                                        <div class="circles">
+                                                            <div class="second circle-1">
+                                                                <div>
+                                                                    <strong></strong>
+                                                                    <span id="progress-txt"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>                                                
                                         </div>
                                     </div>
@@ -1315,7 +1362,7 @@
                                 
                                 <!-- language  -->
                                 <div class="rsp-dtl-box ">
-                                    <div class="dtl-box">
+                                    <div id="language-move" class="dtl-box">
                                         <div class="dtl-title">
                                             <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
                                         </div>
@@ -1346,7 +1393,7 @@
                                 
                                 <!-- resume  -->
                                 <div class="rsp-dtl-box ">
-                                    <div class="dtl-box">
+                                    <div id="resume-move" class="dtl-box">
                                         <div class="dtl-title">
                                             <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Resume</span><a href="#" data-target="#resume" data-toggle="modal" class="pull-right" ng-click="reset_user_resume();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                         </div>
@@ -1371,7 +1418,7 @@
                                 
                                 <!-- Hobbies  -->
                                 <div class="rsp-dtl-box ">
-                                    <div class="dtl-box">
+                                    <div id="hobbies-move" class="dtl-box">
                                         <div class="dtl-title">
                                             <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Hobbies</span><a href="#" data-target="#hobbies" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                         </div>
@@ -2352,7 +2399,7 @@
                         </div>
                         <div class="dtl-dis">
                             <div class="form-group">                                
-                                <tags-input id="software_txt" ng-model="software_txt" display-property="software" placeholder="Professional Summary" replace-spaces-with-dashes="false" template="title-template">
+                                <tags-input id="software_txt" ng-model="software_txt" display-property="software" placeholder="Enter Software" replace-spaces-with-dashes="false" template="title-template">
                                 </tags-input>
                             </div>                    
                         </div>
@@ -3744,7 +3791,7 @@
         <script src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/modernizr.custom.js?ver=' . time()); ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script> -->
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.dtl-edit-bottom').hover(function () {
