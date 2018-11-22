@@ -367,6 +367,7 @@ $route['artist/dashboard'] = "artist_live/art_manage_post";
 
 // $route['artist/details/(:any)'] = "artist_live/artistic_profile/$1";
 $route['artist/p/(:any)/details'] = "artist_live/artistic_profile/$1";
+$route['artist-new/p/(:any)/details'] = "artist_live/artistic_profile_new/$1";
 $route['artist/details'] = "artist_live/artistic_profile";
 
 $route['artist/photos'] = "artist_live/art_photos";
@@ -921,6 +922,7 @@ $route['business/search/(:any)'] = "business_live/business_search/$1";
 $route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";
 
 $route['company/(:any)/details'] = "business_profile_live/business_resume/$1";
+$route['company-new/(:any)/details'] = "business_profile_live/business_resume_new/$1";
 $route['company/(:any)/contacts'] = "business_profile_live/bus_contact/$1";
 $route['company/(:any)/followers'] = "business_profile_live/followers/$1";
 $route['company/(:any)/following'] = "business_profile_live/following/$1";

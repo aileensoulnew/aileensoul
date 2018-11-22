@@ -2078,6 +2078,114 @@ Your browser does not support the audio tag.
         }
     }
 
+    public function business_resume_new($id = "") {
+        $s3 = new S3(awsAccessKey, awsSecretKey);
+        $this->data['slugid'] = $id;
+        $userid = $this->session->userdata('aileenuser');
+        if ($userid) {
+            $this->business_profile_active_check();
+            $this->is_business_profile_register();
+        }
+        if (!$this->session->userdata('aileenuser')) {
+            include ('business_profile_include.php');
+        }
+        if ($id != '') {
+            $id = $this->business_model->removelocationfromslug($id);
+            $contition_array = array('business_profile.business_slug' => $id, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
+            $join_str[0]['table'] = 'countries';
+            $join_str[0]['join_table_id'] = 'countries.country_id';
+            $join_str[0]['from_table_id'] = 'business_profile.country';
+            $join_str[0]['join_type'] = '';
+            $join_str[1]['table'] = 'states';
+            $join_str[1]['join_table_id'] = 'states.state_id';
+            $join_str[1]['from_table_id'] = 'business_profile.state';
+            $join_str[1]['join_type'] = '';
+            $join_str[2]['table'] = 'cities';
+            $join_str[2]['join_table_id'] = 'cities.city_id';
+            $join_str[2]['from_table_id'] = 'business_profile.city';
+            $join_str[2]['join_type'] = 'LEFT';
+            $join_str[3]['table'] = 'business_type';
+            $join_str[3]['join_table_id'] = 'business_type.type_id';
+            $join_str[3]['from_table_id'] = 'business_profile.business_type';
+            $join_str[3]['join_type'] = 'LEFT';
+            $join_str[4]['table'] = 'industry_type';
+            $join_str[4]['join_table_id'] = 'industry_type.industry_id';
+            $join_str[4]['from_table_id'] = 'business_profile.industriyal';
+            $join_str[4]['join_type'] = 'LEFT';
+            $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+        }
+        // else {
+        //     $userid = $this->session->userdata('aileenuser');
+        //     $contition_array = array('business_profile.user_id' => $userid, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
+        //     $join_str[0]['table'] = 'countries';
+        //     $join_str[0]['join_table_id'] = 'countries.country_id';
+        //     $join_str[0]['from_table_id'] = 'business_profile.country';
+        //     $join_str[0]['join_type'] = '';
+        //     $join_str[1]['table'] = 'states';
+        //     $join_str[1]['join_table_id'] = 'states.state_id';
+        //     $join_str[1]['from_table_id'] = 'business_profile.state';
+        //     $join_str[1]['join_type'] = '';
+        //     $join_str[2]['table'] = 'cities';
+        //     $join_str[2]['join_table_id'] = 'cities.city_id';
+        //     $join_str[2]['from_table_id'] = 'business_profile.city';
+        //     $join_str[2]['join_type'] = '';
+        //     $join_str[3]['table'] = 'business_type';
+        //     $join_str[3]['join_table_id'] = 'business_type.type_id';
+        //     $join_str[3]['from_table_id'] = 'business_profile.business_type';
+        //     $join_str[3]['join_type'] = 'LEFT';
+        //     $join_str[4]['table'] = 'industry_type';
+        //     $join_str[4]['join_table_id'] = 'industry_type.industry_id';
+        //     $join_str[4]['from_table_id'] = 'business_profile.industriyal';
+        //     $join_str[4]['join_type'] = 'LEFT';
+        //     $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+        // }
+
+
+        $this->data['business_data']['company_name'] = $business_data[0]['company_name'] == '' ? PROFILENA : $business_data[0]['company_name'];
+        $this->data['business_data']['country_name'] = $business_data[0]['country_name'] == '' ? PROFILENA : $business_data[0]['country_name'];
+        $this->data['business_data']['state_name'] = $business_data[0]['state_name'] == '' ? PROFILENA : $business_data[0]['state_name'];
+        $this->data['business_data']['city_name'] = $business_data[0]['city_name'] == '' ? PROFILENA : $business_data[0]['city_name'];
+        $this->data['business_data']['pincode'] = $business_data[0]['pincode'] == '' ? PROFILENA : $business_data[0]['pincode'];
+        $this->data['business_data']['address'] = $business_data[0]['address'] == '' ? PROFILENA : $business_data[0]['address'];
+        $this->data['business_data']['contact_person'] = $business_data[0]['contact_person'] == '' ? PROFILENA : $business_data[0]['contact_person'];
+        $this->data['business_data']['contact_mobile'] = $business_data[0]['contact_mobile'] == '0' ? PROFILENA : $business_data[0]['contact_mobile'];
+        $this->data['business_data']['contact_email'] = $business_data[0]['contact_email'] == '' ? PROFILENA : $business_data[0]['contact_email'];
+        $this->data['business_data']['contact_website'] = $business_data[0]['contact_website'] == '' ? PROFILENA : $business_data[0]['contact_website'];
+        $this->data['business_data']['business_type'] = $business_data[0]['business_name'] == '' ? PROFILENA : $business_data[0]['business_name'];
+        if ($this->data['business_data']['business_type'] == '--') {
+            $this->data['business_data']['business_type'] = $business_data[0]['other_business_type'];
+        }
+        $this->data['business_data']['industry_name'] = $business_data[0]['industry_name'] == '' ? PROFILENA : $business_data[0]['industry_name'];
+        if ($this->data['business_data']['industry_name'] == '--') {
+            $this->data['business_data']['industry_name'] = $business_data[0]['other_industrial'];
+        }
+        $this->data['business_data']['details'] = $business_data[0]['details'] == '' ? PROFILENA : $business_data[0]['details'];
+
+        if ($id == $slug_data[0]['business_slug'] || $id == '') {
+            $contition_array = array('user_id' => $userid, 'is_delete' => '0');
+            $this->data['busimagedata'] = $this->common->select_data_by_condition('bus_image', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+            $contition_array = array('user_id' => $this->data['business_common_data'][0]['user_id'], 'is_delete' => '0');
+            $this->data['busimagedata'] = $this->common->select_data_by_condition('bus_image', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+        $this->data['company_name'] = $company_name = $this->get_company_name($id);
+
+        $this->data['title'] = ucwords($company_name) . ' | Details' . TITLEPOSTFIX;
+
+        if (count($business_data) == 0) {
+            // $this->load->view('business_profile/notavalible');
+            redirect(base_url("404"),"refresh");
+        } else {
+            if ($this->session->userdata('aileenuser')) {
+                $this->load->view('business_profile_live/business_resume_new', $this->data);
+            } else {                
+                redirect(base_url("company/".$this->data['slugid']),"refresh");
+                // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
+                // $this->load->view('business_profile/business_details', $this->data);
+            }
+        }
+    }
+
     public function business_user_post($id) {
         $s3 = new S3(awsAccessKey, awsSecretKey);
 

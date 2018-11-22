@@ -605,6 +605,51 @@ class Artist_live extends MY_Controller {
         }
     }
 
+    public function artistic_profile_new($slugname = "") {
+        $userid = $this->session->userdata('aileenuser');
+
+        //if user deactive profile then redirect to artist/index untill active profile start
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+
+        $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+            
+        // $artcountrydata = $this->getcountryandskill();
+        if (count($artistic_deactive) > 0) {
+            redirect('find-artist');
+        }
+        //if user deactive profile then redirect to artist/index untill active profile End
+        // $segment3 = explode('-', $this->uri->segment(3));
+        // $slugdata = array_reverse($segment3);
+        // $regid = $slugdata[0];
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
+
+        $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
+        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $this->data['get_url'] = $this->get_url($this->data['artisticdata'][0]['user_id']);
+
+        $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+        $this->data['title'] = $this->data['title'] = $artistic_name . ' | Details' . '- Artistic Profile' . TITLEPOSTFIX;
+
+        if ($userid && count($artistic_deactive) <= 0 && $this->data['artist_isregister']) {
+            if ($this->data['artisticdata']) {
+                $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+                $this->load->view('artist_live/artistic_profile_new', $this->data);
+            } else if (!$this->data['artisticdata'] && $id != $userid) {
+                $this->load->view('artist_live/notavalible');
+            } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
+                redirect('find-artist');
+            }
+        } else {
+            include ('artistic_include.php');
+            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+            $this->data['artistic_common_profile'] = $this->load->view('artist_live/artistic_common_profile', $this->data, true);
+            $this->load->view('artist_live/art_profile_live', $this->data);
+        }
+    }
+
     // ARTIST PTHOTO
     public function art_photos($slugname = "") {
 
