@@ -760,6 +760,22 @@
                 $all_c_no_login = "hide";
             }
             ?>
+            <div class="dashboard-profile <?php echo $all_c_no_login; ?>">
+                <div class="all-user-list">
+                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                        <div class="count_main_progress">
+                            <div class="circles">
+                                <div class="second circle-1">
+                                    <div>
+                                        <strong></strong>
+                                        <span id="progress-txt"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="all-contact <?php echo $all_c_no_login; ?>">
                 <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_blank">All</a></h4>
                 <div class="all-user-list">

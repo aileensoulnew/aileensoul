@@ -2028,8 +2028,43 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 desc = details_data.Designation;
             }
             $scope.$parent.metadesc = "Connect with "+details_data.fullname+", "+desc+" and know more about him only at Aileensoul.com. Join Now!";
+
+            var profile_progress = success.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            if(count_profile == 100)
+            {
+                $("#edit-profile-move").hide();
+            }
+            $scope.set_progress(count_profile_value,count_profile);
         });
     }
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("<a href='"+base_url+user_slug+"/details' target='_self'>Complete your profile to get connected with more people.</a>");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
 
     function getUserDashboardAudio(pagenum) {
         $('#loader').show();
