@@ -8624,8 +8624,6 @@ class Job extends MY_Controller {
     {
         $userid = $this->session->userdata('aileenuser');
         $edu_data = $this->db->select('*')->get_where('job_graduation', array())->result();
-        echo "<pre>";
-        print_r($edu_data);
         foreach ($edu_data as $_edu_data) {
             $cdata = date('Y-m-d h:i:s', time());
             $data = array(
@@ -8645,9 +8643,7 @@ class Job extends MY_Controller {
     public function set_old_project()
     {
         $userid = $this->session->userdata('aileenuser');
-        $project_data = $this->db->select('user_id,project_name,project_description')->get_where('job_reg', array("project_name !=" => ""))->result();
-        echo "<pre>";
-        print_r($project_data);
+        $project_data = $this->db->select('user_id,project_name,project_description')->get_where('job_reg', array("project_name !=" => ""))->result();        
         //exit();
         foreach ($project_data as $_project_data) {
             $cdata = date('Y-m-d h:i:s', time());
