@@ -9,7 +9,7 @@ class User_post_model extends CI_Model {
 
         if ($detailsdata == "student") {
 
-            $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,d.degree_name")->from("user u");
+            $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,ui.profile_background,d.degree_name")->from("user u");
             $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
             $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
             $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
@@ -26,7 +26,7 @@ class User_post_model extends CI_Model {
             $query = $this->db->get();            
             return $result_array = $query->result_array();
         } else {
-            $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,jt.name as title_name")->from("user u");
+            $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,ui.profile_background,jt.name as title_name")->from("user u");
             $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
             $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
             $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');

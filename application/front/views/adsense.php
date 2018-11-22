@@ -24,4 +24,10 @@
 </script>
 <meta name="msvalidate.01" content="41CAD663DA32C530223EE3B5338EC79E" />
 <?php } ?>
-<?php $this->load->view('feedback_fixed'); ?>
+<?php 
+$segment_array = $this->uri->segment_array();
+if(isset($segment_array) && !empty($segment_array))
+{
+	$this->load->view('feedback_fixed');
+}
+?>
