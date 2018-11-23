@@ -211,8 +211,23 @@
                             <?php $this->load->view('banner_add'); ?>
                         </div>
                     </div>
+                    <div class="right-add">
+                        <?php $this->load->view('right_add_box'); ?>                        
+                        <div id="profile-progress" class="edit_profile_progress">
+                            <div class="count_main_progress">
+                                <div class="circles">
+                                    <div class="second circle-1">
+                                        <div>
+                                            <strong></strong>
+                                            <span id="progress-txt"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
                     <?php
-                    if ($count_profile == 100) {
+                    /*if ($count_profile == 100) {
                         if ($job_reg[0]['progressbar'] == 0) {
                             ?>
                             <div class="edit_profile_progress edit_pr_bar complete_profile">
@@ -256,7 +271,7 @@
                         </div>
                         </div>
                         <?php
-                    }
+                    }*/
                     ?>
                 </div>
                 <div class="user-midd-section">
@@ -322,57 +337,29 @@
         <!-- </footer>    -->
 
         <!-- script for skill textbox automatic start-->
-
-<?php
-        if (IS_JOB_JS_MINIFY == '0') {
-            ?>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-       
         <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
-<?php }else{?>
 
-        <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-        
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>"></script>
-
-<?php }?>
         <script>
-                                var base_url = '<?php echo base_url(); ?>';
-                                var count_profile_value = '<?php echo $count_profile_value; ?>';
-                                var count_profile = '<?php echo $count_profile; ?>';
-                                var aileenuser_id = '<?php echo $aileenuser_id; ?>';
-                                var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                var profile_pic = "";
+            var base_url = '<?php echo base_url(); ?>';
+            var count_profile_value = '';// '<?php echo $count_profile_value; ?>';
+            var count_profile = '';// '<?php echo $count_profile; ?>';
+            var aileenuser_id = '<?php echo $aileenuser_id; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var job_slug = '<?php echo $jobdata[0]['slug']; ?>';
+            var profile_pic = "";
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_save_post.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
-<?php
-        /*if (IS_JOB_JS_MINIFY == '0') {
-            ?>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_save_post.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
-<?php }else{?>
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/job_save_post.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
-
-<?php } */?>
-<script>
-    // page scroll top 
+        <!-- <script type="text/javascript" src="<?php //echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script> -->
+        <script>
+            // page scroll top 
             $(document).ready(function () {
                 $('html,body').animate({scrollTop: 300}, 500);
             });
-</script>
+        </script>
     </body>
 </html>

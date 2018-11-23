@@ -2005,7 +2005,14 @@ class Job extends MY_Controller {
         $cityname = $this->db->get_where('cities', array('city_id' => $job_details[0]['city_id']))->row()->city_name;
         $statename = $this->db->get_where('states', array('state_id' => $job_details[0]['state_id']))->row()->state_name;
         $countryname = $this->db->get_where('countries', array('country_id' => $job_details[0]['country_id']))->row()->country_name;
-        $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
+        if($job_details[0]['keyskill'] != '')
+        {
+            $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
+        }
+        else
+        {
+            $skills_name = "";
+        }
         $cityname = ($cityname == ""? ($statename == "" ? $countryname:$statename) :$cityname);
         $this->data['title'] = "Job Seeker " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " In " .$cityname;
         $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".trim($skills_name,",").". Looking for a job change. ";
@@ -2101,7 +2108,16 @@ class Job extends MY_Controller {
         $cityname = $this->db->get_where('cities', array('city_id' => $job_details[0]['city_id']))->row()->city_name;
         $statename = $this->db->get_where('states', array('state_id' => $job_details[0]['state_id']))->row()->state_name;
         $countryname = $this->db->get_where('countries', array('country_id' => $job_details[0]['country_id']))->row()->country_name;
-        $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
+
+        if($job_details[0]['keyskill'] != '')
+        {
+            $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
+        }
+        else
+        {
+            $skills_name = "";
+        }
+
         $cityname = ($cityname == ""? ($statename == "" ? $countryname:$statename) :$cityname);
         $this->data['title'] = "Job Seeker " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " In " .$cityname;
         $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".trim($skills_name,",").". Looking for a job change. ";

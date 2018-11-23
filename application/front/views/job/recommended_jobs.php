@@ -391,7 +391,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 <div class="right-part">
 					<?php $this->load->view('right_add_box'); ?>
                     <div class="edi_origde">
-                        <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                        <div id="profile-progress" class="edit_profile_progress">
                             <div class="count_main_progress">
                                 <div class="circles">
                                     <div class="second circle-1">
