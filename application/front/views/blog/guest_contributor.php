@@ -52,70 +52,28 @@ header("Pragma: no-cache"); // HTTP/1.0
                 -webkit-line-clamp: 1;
             }
         </style>
-        <?php
-            foreach ($blogPost as $blog) {
-        ?>
-            <!-- Open Graph data -->
-            <meta property="og:title" content="<?php echo $blog['title']; ?>" />
-            <meta  property="og:type" content="Blog" />
-            <meta  property="og:image" content="<?php echo base_url($this->config->item('blog_main_upload_path') . $blog['image'] . '?ver=' . time()) ?>" />
-            <meta  property="og:description" content="<?php echo $blog['meta_description']; ?>" />
-            <meta  property="og:url" content="<?php echo base_url('blog/' . $blog['blog_slug']) ?>" />
-            <meta property="og:image:width" content="620" />
-            <meta property="og:image:height" content="541" />
-            <meta property="fb:app_id" content="825714887566997" />
 
-            <!-- for twitter -->
-            <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:site" content="<?php base_url('blog/' . $blog['blog_slug']) ?>">
-            <meta name="twitter:title" content="<?php $blog['title']; ?>">
-            <meta name="twitter:description" content="<?php $blog['meta_description']; ?>">
-            <meta name="twitter:creator" content="By Aileensoul">
-            <meta name="twitter:image" content="http://placekitten.com/250/250">
-            <meta name="twitter:domain" content="<?php base_url('blog/' . $blog['blog_slug']) ?>">
-        <?php
-            }
-        ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/font-awesome.min.css?ver=' . time()); ?>">
 
-        <?php if (IS_OUTSIDE_CSS_MINIFY == '0') { ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
+        <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script> -->
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 
-        <?php } else { ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/blog.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver=' . time()); ?>">
-            
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver=' . time()); ?>">
-
-        <?php } ?>
-
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
-
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>        
-
-        <?php } ?>
-			<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
-			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/font-awesome.min.css?ver=' . time()); ?>">
-    <?php $this->load->view('adsense');
-$cat_cls = "";
-if($category_page == 1)
-{
-		$cat_cls = "blog-cat";
-}?>
-</head>
+    <?php $this->load->view('adsense');?>
+    </head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
-        <body class="no-login blog-m blog-page old-no-login <?php echo $cat_cls; ?>">
+        <body class="no-login blog-m blog-page old-no-login">
     <?php }else{?>
-        <body class="blog-m blog-page <?php echo $cat_cls; ?>">
+        <body class="blog-m blog-page">
     <?php }?>
 
     <?php //$this->load->view('page_loader'); ?>
@@ -154,21 +112,9 @@ if($category_page == 1)
                             <div class="col-md-6 col-sm-6 mob-p0 col-xs-8 fw-479">
                                 <ul class="sub-menu blog-sub-menu">
                                     <li>
-                                    <?php
-                                    if ($this->input->get('q') || $this->uri->segment(2) == 'popular' || $this->uri->segment(2) == 'tag') {
-                                        ?>
-                                        <a class="fs22" href="<?php echo base_url('blog'); ?>">
+                                     <a class="fs22" href="<?php echo base_url('blog'); ?>">
                                             Blog
                                         </a>
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <a class="fs22" href="<?php echo base_url('blog'); ?>">
-                                            Blog
-                                        </a>
-                                        <?php
-                                    }
-                                    ?>
                                     </li>
                                     <li class="dropdown">
             							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
@@ -280,95 +226,72 @@ if($category_page == 1)
                     </div>
                 </div>
             </section>
-            <div id="paddingtop_fixed" class="user-midd-section">                
-                <!-- <input type="hidden" class="page_number" value="1">
-                <input type="hidden" class="total_record" ng-value="total_record">
-                <input type="hidden" class="perpage_record" value="4"> -->
-                <?php if($category_name == "" && $search_keyword == ""){?>
-                <div class="container">
-                    <div class="blog-t">
-                        <h1>Aileensoul Blog</h1>
-                    </div>
-                </div>
-                <?php } ?>
-                <div class="container">
+            <div id="paddingtop_fixed" class="user-midd-section">
+                <div class="container pt15">
                     <div class="custom-user-list">
-						<div class="tab-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
-						<div class="clearfix"></div>
-                        <?php if($category_name != ""){ ?>
-                            <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;"><?php
-                            echo "Category : ".ucwords($category_name)."</h3>";
-                        }
-                        if($search_keyword != ""){ ?>
-                        <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;">Search results of 
-                            <?php echo '' . $search_keyword . ''; ?></h3>
-                        <?php }
-                        if(isset($blogPost) && !empty($blogPost)):
-                            foreach($blogPost as $_blogPost): ?>
-                        <div class="blog-box">
-                            <div class="blog-left-img">
-                                <a class="blog-img" href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">
-                                    <img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_blogPost['image']; ?>">
-                                </a>
-                            </div>
-                            <div class="blog-left-content">
-                                <p class="blog-details-cus">
-                                    <?php
-                                    foreach($_blogPost['blog_category_name'] as $key=>$val):
-                                    $category_url = $this->common->clean($val); ?>
-                                    <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
-                                        <span class="cat text-capitalize">
-                                            <?php
-                                            if($key == 0)
-                                                echo $val;
-                                            if($key > 0)
-                                                echo ", ".$val; ?>
-                                        </span> 
-                                        <!-- <span class="cat text-capitalize" ng-if="($index > 0)">
-                                            , {{ cat_name }}
-                                        </span>  -->
-                                    </a>
-                                    <?php endforeach; ?>
-                                    <span class="blog-date"><?php echo $_blogPost['created_date_formatted']; ?></span> 
-                                    <span><?php echo $_blogPost['name']; ?></span> 
-                                    <?php if($_blogPost['total_comment'] > 0): ?><span><?php echo $_blogPost['total_comment']; ?> comments</span><?php endif; ?>
-                                </p>
-                                <a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">
-                                    <h2><?php echo $_blogPost['title']; ?></h2>
-                                </a>
-                                <span class="blog-text">
-                                    <?php echo substr($_blogPost['description'], 0,150);?><a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">...read more
-                                    </a>
-                                </span>
-                                <p>
-                                    <ul class="social-icon">
-                                        <li>
-                                            <a class="fbk" id="facebook_link" url_encode="<?php echo $_blogPost['social_encodeurl']; ?>" url="<?php echo $_blogPost['social_url']; ?>" title="Facebook" summary="<?php echo $_blogPost['social_summary']; ?>" image="<?php echo $_blogPost['social_image']; ?>">
-                                                <i class="fa fa-facebook-f"></i>
-                                            </a>
-                                        </li>
-                                        <li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="<?php echo $_blogPost['url_encode']; ?>" url="<?php echo $_blogPost['url']; ?>"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="<?php echo $_blogPost['encode_url']; ?>" url="<?php echo $_blogPost['url']; ?>"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="<?php echo $_blogPost['encode_url']; ?>" url="<?php echo $_blogPost['url']; ?>"><i class="fa fa-google"></i></a></li>
-                                    </ul>
-                                </p>
-                            </div>
+                        <div class="post-guid-content job_reg_main fw">
+                            <h1>Guest Post Guidelines</h1>
+                            <div class="p20 fw">
+                                <p>We always welcome people who like to contribute a useful piece of information to our audiences.</p>
+                                <p>To become a guest contributor to our website you need to meet the following criteria:</p>
+                                
+                                <h2 class="pt15">Content Standards</h2>
+                                <ul>
+                                    <li><p>Your article should be around Business networking, Recruitment, Job Search, Freelancing, Artists networking topics.</p></li>
+                                    <li><p>The post should provide realistic points that can be implemented by the readers.</p></li>
+                                    <li><p>The length of the content should be around 1000 words and above.</p></li>
+                                    <li><p>Should not be published elsewhere and should be plagiarism free, grammatically correct, well structured, visually compelling and understandable to the audience.</p></li>
+                                    <li><p>The post should contain some new topic or view and not the same points that rest of the article around the Internet says.</p></li>
+                                    <li><p>Include some image wherever it’s necessary to explain a view.</p></li>
+                                    <li><p>The image should not have copyright issues. (Provide a source of the image.)</p></li>
+                                    <li><p>Should not be a promotional one and containing a lot of links to your website unless it’s mandatory.</p></li>
+                                    
+                                </ul>
+                                <p>P.S. We hold the rights to edit content or remove the hyperlinks mentioned in the article if we think it doesn’t match with the context of the post.</p>
+                                <h2 class="pt15">Submission Procedure</h2>
+                                <ul>
+                                    <li><p>First, send us topic headline with some description and points that explains what the article will be.</p></li>
+                                    <li><p>If we approve your topic, the article must send in word format.</p></li>
+                                    
+                                </ul>
+                                <p>If you think, you meet with our requirement then contact us by submitting below form.</p>
+                                <div class="guide-form">
+                                    <div class="fw job-reg-cus-new">        
+                                        <div class="fw p20">
+                                            <form id="guest_form" name="guest_form" method="post" action="javascript:void(0);">
+                                                <div class="form-group">
+                                                    <input type="text" id="guest_name" name="guest_name" class="form-control" required="" placeholder="First Name">
+                                                    <!-- <label class="form-control-placeholder" for="First Name"></label> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="guest_email" name="guest_email" class="form-control" required="" placeholder="Email Address">
+                                                    <!-- <label class="form-control-placeholder" for="First Name">Email Address</label> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="guest_jobtitle" name="guest_jobtitle" class="form-control" required="" placeholder="Job Title">
+                                                    <!-- <label class="form-control-placeholder" for="First Name">Job Title</label> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="guest_company" name="guest_company" class="form-control" required="" placeholder="Company">
+                                                    <!-- <label class="form-control-placeholder" for="First Name">Company</label> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea type="text" id="guest_desc" name="guest_desc" class="form-control" required="" placeholder="Discription"></textarea>
+                                                    <!-- <label class="form-control-placeholder" for="First Name">Discription</label> -->
+                                                </div>
+                                                <div class="fw text-center pt5">
+                                                    <!-- <a href="javascript:void(0)" onclick="save_guest()" class="btn3">Submit</a> -->
+                                                    <button id="submit_guest" class="btn3" type="submit">Submit</button>
+                                                </div>
+                                                <h6 class="small" style="display: none;" id="error_subscribe">Done</h6>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><b>Disclaimer:</b> Due to many requests we may not be able to respond promptly. You can expect a response from our side within 24-48 hours.
+                                </p>                                
+                            </div>                        
                         </div>
-                        <?php
-                            endforeach;
-                        endif; ?>
-                        <div class="fw pt20 text-center">
-                            <?php echo $links; ?>
-                        </div> 
-						<div class="banner-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
-
-                        <!-- <ul>
-                          <li ng-repeat="todo in filteredTodos">{{todo.text}}</li>
-                        </ul> -->
                     </div>
                     <div class="right-part">
 						<?php $this->load->view('right_add_box'); ?>
@@ -389,14 +312,26 @@ if($category_page == 1)
                     </div>
                 </div>                
             </div>
+            <!-- Bid-modal  -->
+            <div class="modal message-box biderror" id="bidmodal" role="dialog">
+                <div class="modal-dialog modal-lm">
+                    <div class="modal-content">
+                        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                        <div class="modal-body">
+                            <span class="mes">Succefully Submitted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Model Popup Close -->
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php
                 echo $login_footer;
             ?>
         </div>
     </div>
-    <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-    <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+    <!-- <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script> -->
     <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
     <script>
@@ -527,83 +462,78 @@ if($category_page == 1)
                 }
             });
         });
+        $(document).ready(function(){
+            $("#guest_form").validate({
+                rules: {
+                    guest_name: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    guest_email: {
+                        required: true,
+                        email : true,
+                        maxlength: 100
+                    },
+                    guest_jobtitle: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    guest_company: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    guest_desc: {
+                        required: true,
+                        maxlength: 700
+                    },
+                },
+                errorElement : 'label',
+                submitHandler: function (form) {
+                    $("#submit_guest").attr("disabled","disabled");
+                    var guest_name = $("#guest_name").val();
+                    var guest_email = $("#guest_email").val();
+                    var guest_jobtitle = $("#guest_jobtitle").val();
+                    var guest_company = $("#guest_company").val();
+                    var guest_desc = $("#guest_desc").val();
+                    var post_data = {"guest_name":guest_name,"guest_email":guest_email,"guest_jobtitle":guest_jobtitle,"guest_company":guest_company,"guest_desc":guest_desc};
+                    $.ajax({
+                        type: 'POST',
+                        url: base_url + "blog/add_guest",
+                        data: post_data,
+                        dataType: "json",
+                        beforeSend: function () {
+                            // $('#loader').show();
+                        },
+                        complete: function () {
+                            // $('#loader').hide();
+                        },
+                        success: function (data) {                            
+                            $("#guest_form")[0].reset();
+                            $("#submit_guest").removeAttr("disabled");
+                            if(data.success == true)
+                            {
+                                $("#guest_form")[0].reset();
+                                $("#bidmodal .modal-body .mes").html("Successfully Submitted");
+                                $("#bidmodal").modal("show");
+                            }
+
+                            if(data.success == false)
+                            {
+                                $("#bidmodal .modal-body .mes").html("Please try again later");
+                                $("#bidmodal").modal("show");
+                            }
+
+                            if(data.error == true)
+                            {
+                                $("#bidmodal .modal-body .mes").html("Please try again later");
+                                $("#bidmodal").modal("show");
+                            }
+                        }
+                    });
+                }
+            });
+        });
 
     </script>
-
-    <?php // if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <!-- <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
-    <?php // } else { ?>
-            <!-- <script src="<?php //echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
-    <?php // }
-    if($blog_page == 'list'){ ?>
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement":
-            [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url(); ?>",
-                        "name": "Aileensoul"
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url(); ?>blog",
-                        "name": "Blog"
-                    }
-                }
-            ]
-        }
-        </script>
-
-    <?php }
-    elseif($blog_page == 'category'){ ?>
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement":
-            [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url(); ?>",
-                        "name": "Aileensoul"
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url(); ?>blog",
-                        "name": "Blog"
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "item":
-                    {
-                        "@id": "<?php echo current_url(); ?>",
-                        "name": "<?php echo ucwords($category_name); ?>"
-                    }
-                }
-            ]
-        }
-        </script>
-
-    <?php } ?>
-
     </body>
 </html>

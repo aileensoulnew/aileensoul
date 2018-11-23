@@ -485,10 +485,13 @@ $route['blog/recent_blog_list'] = "blog/recent_blog_list";
 
 $route['blog/category/(:any)'] = "blog/index/$1/true";
 $route['blog/category/(:any)/(:num)'] = "blog/index/$1/true";
+$route['blog/add_guest'] = "blog/add_guest";
 
 //$route['blog/tag/(:any)'] = "blog/tagsearch/$1";
 //$route['blog/page/(:any)'] = "blog/index/$1";
 $route['blog/(:any)'] = "blog/index/$1";
+
+$route['guest-contributor'] = "blog/guest_contributor";
 
 //JOB ROUTES SETTINGS
 

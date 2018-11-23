@@ -10,6 +10,7 @@ class Blog extends CI_Controller {
         //AWS access info start
         $this->load->library('S3');
         $this->load->model('blog_model');
+        $this->load->model('email_model');
         //AWS access info end
         include ('include.php');
         include ('main_profile_link.php');
@@ -884,5 +885,62 @@ class Blog extends CI_Controller {
             </div>';
         }
         echo $html;exit;
+    }
+
+    public function guest_contributor()
+    {
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $condition_array = array('status' => 'publish');
+        $recent_blog_list = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());        
+        $this->data['recent_blog_list'] = $recent_blog_list;
+        $this->data['categoryList'] = $this->blog_model->get_blog_cat_list();
+
+        $this->data['title'] = "Guest Post Guidelines | Aileensoul";
+        $this->data['metadesc'] = "Become an authoritative member of Aileensoul by contributing a great blog post that helps the audience in increasing their knowledge.";
+        $this->load->view('blog/guest_contributor', $this->data);
+    }
+
+    public function add_guest()
+    {
+
+        $guest_name = $this->input->post("guest_name");
+        $guest_email = $this->input->post("guest_email");
+        $guest_jobtitle = $this->input->post("guest_jobtitle");
+        $guest_company = $this->input->post("guest_company");
+        $guest_desc = $this->input->post("guest_desc");
+
+        if($guest_name == "" || $guest_email == "" || $guest_jobtitle == "" || $guest_company == "" || $guest_desc == ""){
+            $result_data = array("success"=>false);            
+        }else{
+            
+            $guest_data = array(
+                "guest_name" => $guest_name,
+                "guest_email" => $guest_email,
+                "guest_jobtitle" => $guest_jobtitle,
+                "guest_company" => $guest_company,
+                "guest_desc" => $guest_desc,
+                "status" => '1',
+                "created_date" => date('Y-m-d H:i:s', time()),
+            );            
+            $this->db->insert('blog_guest', $guest_data);
+            $insert_id = $this->db->insert_id();
+            $msg = "";
+            $msg .= '<tr>
+              <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
+                $msg .= '<p style="margin:0; font-family:arial;">Hi,Admin</p>
+                <p style="padding:25px 0 ; font-family:arial; margin:0;">Fullname: ' . $guest_name . '</p>
+                <p style="padding:25px 0 ; font-family:arial; margin:0;">Eamil id: ' . $guest_email . '</p>
+                <p style="padding:25px 0 ; font-family:arial; margin:0;">Job Title: ' . $guest_jobtitle . '</p>
+                <p style="padding:25px 0 ; font-family:arial; margin:0;">Company: ' . $guest_company . '</p>
+                <p style="padding:25px 0 ; font-family:arial; margin:0;">Description: ' . $guest_desc . '</p>
+              </td>
+            </tr>';
+            $subject = "Guest Post";
+            $toemail = "poorti.aileensoul@gmail.com";
+            $mail = $this->email_model->sendEmail($app_name = '', $app_email = '', $toemail, $subject, $msg);
+
+            $result_data = array("success"=>true,"message"=>$insert_id);            
+        }
+        echo json_encode($result_data);
     }
 }

@@ -197,6 +197,9 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             </ul>
                                         </div>
                                     </li>
+                                    <li>
+                                        <a class="fs22" href="<?php echo base_url('guest-contributor'); ?>">Guest Contributor</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-6 col-md-6 col-xs-4 blog-search fw-479">
