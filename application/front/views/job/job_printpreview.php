@@ -249,6 +249,8 @@
                     <div class="mob-plr0 pt20">
                         <div class="all-detail-custom">
                             <div class="custom-user-list">
+								<div class="edit-profile-mob">
+								</div>
                                 <div class="gallery" id="gallery">
 								
 									<!--  00 Professional summary -->
