@@ -7,16 +7,17 @@
         <?php
         if (IS_APPLY_CSS_MINIFY == '0') {
             ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
+            
             <?php
         } else {
             ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
+            
         <?php } ?>
 
         <?php if (!$this->session->userdata('aileenuser')) { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
         <?php } ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <?php $this->load->view('adsense'); ?>
@@ -316,7 +317,7 @@
                 </div>
             </div>
             
-			<div class="container pt10 mobp0">
+			<div class="container mobp0">
                 <div class="job-menu-profile mob-none pt-20 job_edit_menu">
                     <a title="<?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?></h3></a>
                     <div class="profile-text pt5">
@@ -344,645 +345,2304 @@
                         ?>
                     </div>
                 </div>
-                
-				<div class="cus-inner-middle mob-clear mobp0">
-                    <?php
-                    if ($freelancerpostdata['0']['user_id'] == $this->session->userdata('aileenuser')) {
-                        if ($count_profile == 100) {
-                            if ($freepostdata[0]['progressbar'] == 0) {
-                                ?>
-
-                                <div class="mob-progressbar mob-mt10" >
-                                    <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
-                                    <p class="mob-edit-pro">
-
-                                        <a title="Successfully Completed" href="javascript:void(0);"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Successfully Completed</a>      
-
-
-                                    </p>
-                                    <div class="progress skill-bar ">
-                                        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="<?php echo($count_profile); ?>" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="skill"><i class="val"><?php echo(round($count_profile)); ?>%</i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                        } else {
-                            ?>
-                            <div class="mob-progressbar mob-mt10" >
-                                <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
-                                <p class="mob-edit-pro">
-
-
-                                    <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
-
-
-                                </p>
-                                <div class="progress skill-bar ">
-                                    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="<?php echo($count_profile); ?>" aria-valuemin="0" aria-valuemax="100">
-                                        <span class="skill"><i class="val"><?php echo(round($count_profile)); ?>%</i></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <?php
-                        }
-                    }
-                    ?>
-					
-					<div class="tab-add-991">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
-                    <div class="common-form">
-                        <div class="job-saved-box">
-                            <h3><?php echo $this->lang->line("freelancer_details"); ?> </h3>
-                            <div class=" fr rec-edit-pro">
-                                <?php
-
-                                function text2link($text) {
-                                    $text = preg_replace('/(((f|ht){1}t(p|ps){1}:\/\/)[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i', '<a href="\\1" target="_blank" rel="nofollow">\\1</a>', $text);
-                                    $text = preg_replace('/([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i', '\\1<a href="http://\\2" target="_blank" rel="nofollow">\\2</a>', $text);
-                                    $text = preg_replace('/([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})/i', '<a href="mailto:\\1" rel="nofollow" target="_blank">\\1</a>', $text);
-                                    return $text;
-                                }
-                                ?>
-                                <?php
-                                $userid = $this->session->userdata('aileenuser');
-                                if ($freelancerpostdata[0]['user_id'] === $userid) {
-                                    ?>
-                                    <ul>
-                                    </ul>
-<?php } ?>
-                            </div> 
-                            <div class="contact-frnd-post">
-                                <div class="job-contact-frnd ">
-                                    <div class="profile-job-post-detail clearfix">
-                                        <div class="profile-job-post-title clearfix">
-                                            <div class="profile-job-profile-button clearfix">
-                                                <div class="profile-job-details">
-                                                    <ul>
-                                                        <li><p class="details_all_tital "><?php echo $this->lang->line("basic_info"); ?></p> </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="profile-job-profile-menu">
-                                                <ul class="clearfix">
-                                                    <li> <b><?php echo $this->lang->line("name"); ?></b> <span <?php if (!$this->session->userdata('aileenuser')) { ?> class="text_blur" <?php } ?>> <?php echo $freelancerpostdata[0]['freelancer_post_fullname'] . '  ' . $freelancerpostdata[0]['freelancer_post_username']; ?> </span>
-                                                    </li>
-                                                    <li> <b><?php echo $this->lang->line("email"); ?></b><span <?php if (!$this->session->userdata('aileenuser')) { ?> class="text_blur" <?php } ?>> <?php echo $freelancerpostdata[0]['freelancer_post_email']; ?> </span>
-                                                    </li>
-                                                    <?php
-                                                    if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                        if ($freelancerpostdata[0]['freelancer_post_phoneno']) {
-                                                            ?>
-                                                            <li><b><?php echo $this->lang->line("phone_no"); ?></b> <span <?php if (!$this->session->userdata('aileenuser')) { ?> class="text_blur" <?php } ?>><?php echo $freelancerpostdata[0]['freelancer_post_phoneno']; ?></span> </li>
-                                                            <?php
-                                                        } else {
-                                                            echo "";
-                                                        }
-                                                    } else {
-                                                        if ($freelancerpostdata[0]['freelancer_post_phoneno']) {
-                                                            ?>
-                                                            <li><b><?php echo $this->lang->line("phone_no"); ?></b> <span <?php if (!$this->session->userdata('aileenuser')) { ?> class="text_blur" <?php } ?>><?php echo $freelancerpostdata[0]['freelancer_post_phoneno']; ?></span> </li> 
-                                                            <?php
-                                                        } else {
-                                                            ?>
-                                                            <li><b><?php echo $this->lang->line("phone_no"); ?></b> <span>
-                                                            <?php echo PROFILENA; ?></span>
-                                                            </li>
-                                                            <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                    <?php
-                                                    if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                        if ($freelancerpostdata[0]['freelancer_post_skypeid']) {
-                                                            ?>
-                                                            <li> <b><?php echo $this->lang->line("skype_id"); ?></b> <span <?php if (!$this->session->userdata('aileenuser')) { ?> class="text_blur" <?php } ?>> <?php echo $freelancerpostdata[0]['freelancer_post_skypeid']; ?> </span>
-                                                            </li> 
-                                                            <?php
-                                                        } else {
-                                                            echo "";
-                                                        }
-                                                    } else {
-                                                        if ($freelancerpostdata[0]['freelancer_post_skypeid']) {
-                                                            ?>
-                                                            <li> <b><?php echo $this->lang->line("skype_id"); ?></b> <span <?php if (!$this->session->userdata('aileenuser')) { ?> class="text_blur" <?php } ?>> <?php echo $freelancerpostdata[0]['freelancer_post_skypeid']; ?> </span>
-                                                            </li> 
-                                                            <?php
-                                                        } else {
-                                                            ?>
-                                                            <li><b><?php echo $this->lang->line("skype_id"); ?></b> <span>
-                                                            <?php echo PROFILENA; ?></span>
-                                                            </li>
-                                                            <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </ul>
-                                            </div>
-                                            <div class="profile-job-post-title clearfix">
-                                                <div class="profile-job-profile-button clearfix">
-                                                    <div class="profile-job-details">
-                                                        <ul>
-                                                            <li><p class="details_all_tital "><?php echo $this->lang->line("address"); ?></p> </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-job-profile-menu">
-                                                    <ul class="clearfix">
-                                                        <li> <b><?php echo $this->lang->line("country"); ?></b> <span> <?php echo $this->db->get_where('countries', array('country_id' => $freelancerpostdata[0]['freelancer_post_country']))->row()->country_name; ?></span>
-                                                        </li>
-                                                        <li> <b><?php echo $this->lang->line("state"); ?></b><span> <?php
-                                                                echo
-                                                                $this->db->get_where('states', array('state_id' => $freelancerpostdata[0]['freelancer_post_state']))->row()->state_name;
-                                                                ?> </span>
-                                                        </li>
-                                                        <?php
-                                                        if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                            if ($freelancerpostdata[0]['freelancer_post_city']) {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("city"); ?></b> <span><?php
-                                                                        echo
-                                                                        $this->db->get_where('cities', array('city_id' => $freelancerpostdata[0]['freelancer_post_city']))->row()->city_name;
-                                                                        ?></span> </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                            } else {
-                                                                if ($freelancerpostdata[0]['freelancer_post_city']) {
-                                                                    ?>
-                                                                <li><b><?php echo $this->lang->line("city"); ?></b> <span><?php
-                                                                        echo
-                                                                        $this->db->get_where('cities', array('city_id' => $freelancerpostdata[0]['freelancer_post_city']))->row()->city_name;
-                                                                        ?></span> </li>
-                                                                    <?php
-                                                                } else {
-                                                                    ?>
-                                                                <li><b><?php echo $this->lang->line("city"); ?></b> <span>
-                                                                <?php echo PROFILENA; ?></span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        ?>
-                                                        <?php
-                                                        if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                            if ($freelancerpostdata[0]['freelancer_post_pincode']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("pincode"); ?></b><span><?php echo $freelancerpostdata[0]['freelancer_post_pincode']; ?></span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                echo "";
-                                                            }
-                                                        } else {
-                                                            if ($freelancerpostdata[0]['freelancer_post_pincode']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("pincode"); ?></b><span><?php echo $freelancerpostdata[0]['freelancer_post_pincode']; ?></span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("pincode"); ?></b> <span>
-                                                                <?php echo PROFILENA; ?></span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        ?>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="profile-job-post-title clearfix">
-                                                <div class="profile-job-profile-button clearfix">
-                                                    <div class="profile-job-details">
-                                                        <ul>
-                                                            <li><p class="details_all_tital "><?php echo $this->lang->line("professional_info"); ?></p></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-job-profile-menu">
-                                                    <ul class="clearfix">
-<?php $categoryname = $this->db->get_where('category', array('category_id' => $freelancerpostdata[0]['freelancer_post_field']))->row()->category_name; ?>
-                                                        <li> <b><?php echo $this->lang->line("field"); ?></b> <span> <?php echo $categoryname; ?> </span>
-                                                        </li>
-                                                        <?php
-                                                        if ($freelancerpostdata[0]['freelancer_post_area']) {
-                                                            ?>
-                                                            <li> <b><?php echo $this->lang->line("skill"); ?></b><span>
-                                                                    <?php
-                                                                    $aud = $freelancerpostdata[0]['freelancer_post_area'];
-                                                                    $aud_res = explode(',', $aud);
-                                                                    foreach ($aud_res as $skill) {
-
-                                                                        $cache_time = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
-                                                                        $skill1[] = $cache_time;
-                                                                    }
-                                                                    $listFinal = implode(', ', $skill1);
-
-                                                                    if (!$listFinal) {
-
-                                                                        echo $freelancerpostdata[0]['freelancer_post_otherskill'];
-                                                                    } else if (!$freelancerpostdata[0]['freelancer_post_otherskill']) {
-
-                                                                        echo $listFinal;
-                                                                    } else if ($listFinal && $freelancerpostdata[0]['freelancer_post_otherskill']) {
-                                                                        echo $listFinal . ',' . $freelancerpostdata[0]['freelancer_post_otherskill'];
-                                                                    }
-                                                                    ?>     
-                                                                </span>
-                                                            </li>
-                                                        <?php } ?>
-                                                        <?php
-                                                        if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                            if ($freelancerpostdata[0]['freelancer_post_skill_description']) {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("skill_description"); ?></b> <span> <pre><?php echo $this->common->make_links($freelancerpostdata[0]['freelancer_post_skill_description']); ?> </pre> </span> </li>
-                                                                <?php
-                                                            } else {
-                                                                echo "";
-                                                            }
-                                                        } else {
-                                                            if ($freelancerpostdata[0]['freelancer_post_skill_description']) {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("skill_description"); ?></b> <span> <pre><?php echo $this->common->make_links($freelancerpostdata[0]['freelancer_post_skill_description']); ?> </pre> </span> </li>
-    <?php } else { ?>
-
-                                                                <li><b><?php echo $this->lang->line("skill_description"); ?></b> <span> <?php echo PROFILENA; ?> </span> </li>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        ?>
-
-                                                        <li><b><?php echo $this->lang->line("total_experiance"); ?></b> <span>
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_exp_month'] == '12 month' && $freelancerpostdata[0]['freelancer_post_exp_year'] == '0 year') {
-                                                                    echo "1 year";
-                                                                } elseif ($freelancerpostdata[0]['freelancer_post_exp_year'] != '0 year' && $freelancerpostdata[0]['freelancer_post_exp_month'] == '12 month') {
-                                                                    $month = explode(' ', $freelancerpostdata[0]['freelancer_post_exp_year']);
-                                                                    $year = $month[0];
-                                                                    $years = $year + 1;
-                                                                    echo $years . " Years";
-                                                                } else {
-                                                                    echo $freelancerpostdata[0]['freelancer_post_exp_year'] . ' ' . $freelancerpostdata[0]['freelancer_post_exp_month'];
-                                                                }
-                                                                ?>
-                                                            </span> </li>  
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <?php
-                                            if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                $currancy = $this->db->get_where('currency', array('currency_id' => $freelancerpostdata[0]['freelancer_post_ratestate']))->row()->currency_name;
-                                                if ($freelancerpostdata[0]['freelancer_post_hourly'] != "" && $freelancerpostdata[0]['freelancer_post_ratestate'] != "0") {
-                                                    ?>
-                                                    <div class="profile-job-post-title clearfix">
-                                                        <div class="profile-job-profile-button clearfix">
-                                                            <div class="profile-job-details">
-                                                                <ul>
-                                                                    <li>
-                                                                        <p class="details_all_tital "><?php echo $this->lang->line("rate"); ?></p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="profile-job-profile-menu">
-                                                            <ul class="clearfix">
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_hourly']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("hourly"); ?></b> <span> <?php echo $freelancerpostdata[0]['freelancer_post_hourly'] . '  ' . $currancy; ?> </span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                if ($freelancerpostdata[0]['freelancer_post_fixed_rate'] == 1) { ?>
-                                                                    <li> <span class="text-center"><?php echo $this->lang->line("also_work_fixed"); ?></span>
-                                                                    </li>
-                                                             <?php   }
-                                                                ?>
-                                                            </ul>
-                                                        </div>
-                                                    </div> <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <div class="profile-job-post-title clearfix">
-                                                    <div class="profile-job-profile-button clearfix">
-                                                        <div class="profile-job-details">
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="details_all_tital "><?php echo $this->lang->line("rate"); ?></p>
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="profile-job-profile-menu">
-                                                        <ul class="clearfix">
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_hourly']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("hourly"); ?></b> <span> <?php echo $freelancerpostdata[0]['freelancer_post_hourly'] . '  ' . $currancy; ?> </span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("hourly"); ?></b> <span>  <?php echo PROFILENA; ?> </span>
-                                                                </li>
-                                                            <?php } ?>
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_fixed_rate'] == 1) {
-                                                                ?>
-                                                                <li><b><?php echo $this->lang->line("also_work_fixed"); ?></b> 
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                echo "";
-                                                            }
-                                                            ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            <?php }
-                                            ?>
-                                            <?php
-                                            if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                if ($freelancerpostdata[0]['freelancer_post_job_type'] != "" || $freelancerpostdata[0]['freelancer_post_work_hour'] != "") {
-                                                    ?>
-                                                    <div class="profile-job-post-title clearfix">
-                                                        <div class="profile-job-profile-button clearfix">
-                                                            <div class="profile-job-details">
-                                                                <ul>
-                                                                    <li>
-                                                                        <p class="details_all_tital "><?php echo $this->lang->line("avaibility"); ?></p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="profile-job-profile-menu">
-                                                            <ul class="clearfix">
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_job_type']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("timing"); ?></b> <span><?php echo $freelancerpostdata[0]['freelancer_post_job_type']; ?> </span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-
-                                                                if ($freelancerpostdata[0]['freelancer_post_work_hour']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("working_hours_week"); ?></b> <span> <?php echo $freelancerpostdata[0]['freelancer_post_work_hour']; ?></span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?> 
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <div class="profile-job-post-title clearfix">
-                                                    <div class="profile-job-profile-button clearfix">
-                                                        <div class="profile-job-details">
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="details_all_tital "><?php echo $this->lang->line("avaibility"); ?></p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="profile-job-profile-menu">
-                                                        <ul class="clearfix">
-                                                            <?php
-                                                            if ($freelancerpostdata[0]['freelancer_post_job_type']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("timing"); ?></b> <span><?php echo $freelancerpostdata[0]['freelancer_post_job_type']; ?> </span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b>Timing<?php echo $this->lang->line("timing"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                            if ($freelancerpostdata[0]['freelancer_post_work_hour']) {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("working_hours_week"); ?></b> <span> <?php echo $freelancerpostdata[0]['freelancer_post_work_hour']; ?></span>
-                                                                </li>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <li> <b><?php echo $this->lang->line("working_hours_week"); ?></b> <span>
-                                                                        <?php echo PROFILENA; ?>
-                                                                    </span>
-                                                                </li>
-                                                            <?php } ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
-                                            ?>
-                                            <?php
-                                            if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                if ($freelancerpostdata[0]['freelancer_post_degree'] != "0" || $freelancerpostdata[0]['freelancer_post_stream'] != "0" || $freelancerpostdata[0]['freelancer_post_univercity'] != "0" || $freelancerpostdata[0]['freelancer_post_percentage'] != "" || $freelancerpostdata[0]['freelancer_post_passingyear'] != "0") {
-                                                    ?> 
-                                                    <div class="profile-job-post-title clearfix">
-                                                        <div class="profile-job-profile-button clearfix">
-                                                            <div class="profile-job-details">
-                                                                <ul>
-                                                                    <li>
-                                                                        <p class="details_all_tital "><?php echo $this->lang->line("education"); ?></p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="profile-job-profile-menu">
-                                                            <ul class="clearfix">
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_degree']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("degree"); ?></b> <span><?php echo $this->db->get_where('degree', array('degree_id' => $freelancerpostdata[0]['freelancer_post_degree']))->row()->degree_name; ?> </span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?>
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_stream']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("stream"); ?></b><span> <?php echo $this->db->get_where('stream', array('stream_id' => $freelancerpostdata[0]['freelancer_post_stream']))->row()->stream_name; ?> </span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?>
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_univercity']) {
-                                                                    ?>
-                                                                    <li><b><?php echo $this->lang->line("university"); ?></b> <span><?php echo $this->db->get_where('university', array('university_id' => $freelancerpostdata[0]['freelancer_post_univercity']))->row()->university_name; ?></span> </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?>
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_collage']) {
-                                                                    ?>
-                                                                    <li><b><?php echo $this->lang->line("college"); ?></b> <span><?php echo $freelancerpostdata[0]['freelancer_post_collage']; ?></span> </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?>
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_percentage']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("percentage"); ?></b><span> <?php echo $freelancerpostdata[0]['freelancer_post_percentage'] . " %"; ?> </span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?>
-                                                                <?php
-                                                                if ($freelancerpostdata[0]['freelancer_post_passingyear']) {
-                                                                    ?>
-                                                                    <li> <b><?php echo $this->lang->line("year_passing"); ?></b><span> <?php echo $freelancerpostdata[0]['freelancer_post_passingyear']; ?> </span>
-                                                                    </li>
-                                                                    <?php
-                                                                } else {
-                                                                    echo "";
-                                                                }
-                                                                ?>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <div class="profile-job-post-title clearfix">
-                                                    <div class="profile-job-profile-button clearfix">
-                                                        <div class="profile-job-details">
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="details_all_tital "><?php echo $this->lang->line("education"); ?></p>
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <?php
-                                            }
-                                            ?>
-
-                                            <?php
-                                            if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
-                                                if ($freelancerpostdata[0]['freelancer_post_portfolio_attachment'] != "" || $freelancerpostdata[0]['freelancer_post_portfolio'] != "") {
-                                                    ?> 
-                                                    
-                                                   
-                                                    <?php
-                                                }
-                                            } else {
-                                                ?>
-                                               
-                                              
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="banner-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
-                </div>
-                <?php
-                if ($freelancerpostdata['0']['user_id'] == $this->session->userdata('aileenuser')) {
-                    if ($count_profile == 100) {
-                        if ($freepostdata[0]['progressbar'] == 0) {
-                            ?>
-							<div class="edit_pr_bar">
-								<?php $this->load->view('right_add_box'); ?>
-                            <div class="edit_profile_progress complete_profile">
-                                <div class="progre_bar_text">
-                                    <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
-                                </div>
-                                <div class="count_main_progress">
-                                    <div class="circles">
-                                        <div class="second circle-1 ">
-                                            <div class="true_progtree">
-                                                <img alt="Completed" src="<?php echo base_url("assets/img/true.png"); ?>">
-                                            </div>
-                                            <div class="tr_text">
-                                                Successfully Completed
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-							<?php
-                        }
-                    } else {
-                        ?>
-						<div class="right-add">
-								<?php $this->load->view('right_add_box'); ?>
-                        <div class="edit_profile_progress">
-                            <div class="progre_bar_text">
-                                <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
-                            </div>
-                            <div class="count_main_progress">
-                                <div class="circles">
-                                    <div class="second circle-1">
-                                        <div>
-                                            <strong></strong>
-                                            <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information') ?>" class="edit_profile_job">Edit Profile
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-						<?php
-                    }
-                    ?>
-                    <?php
-                }
-                ?>
-				<div class="right-add">
-					<?php $this->load->view('right_add_box'); ?>
-				</div>
+             
+				
             </div>
+		<div class="container mob-plr0 pt20">
+			<div class="all-detail-custom">
+				<div class="custom-user-list">
+					<div class="gallery" id="gallery">
+						<!-- Basic information  -->
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dtl-box-height">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Job Title</span>
+											Sr. Multimedia Designer
+										</li>
+										<li>
+											<span>Field</span>
+											IT Field
+										</li>
+										<li>
+											<span>Email</span>
+											harshad2406patoliya@gmail.com
+										</li>
+										<li>
+											<span>Phone Number</span>
+											+91 951005589
+										</li>
+										<li>
+											<span>Skype</span>
+											harshad2406
+										</li>
+										<li>
+											<span>Timezone</span>
+											GMT 21:45
+										</li>
+										
+										<li>
+											<span>Location</span>
+											Ahmedabad, Gujrat , India
+										</li>
+										
+									</ul>
+								</div>
+								<div class="about-more">
+									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+								</div>
+								
+							</div>
+						</div>
+						
+						<!-- Edution  -->
+						<div class="gallery-item ">
+							<div class="dtl-box edu-info">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dis-accor">
+									<div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="eduOne">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>V</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Vinay mandir high school</h4>
+														<p>Bechalr of engineering</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#educational-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu1" aria-expanded="true" aria-controls="project1">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="edu1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="eduOne">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Duration</span>
+															Feb 2015 to June 2017
+														</li>
+														<li>
+															<span>Board / University</span>
+															Gujrat University
+															
+														</li>
+														<li>
+															<span>Course / Field of Study / Stream</span>
+															Coputer Science
+														</li>
+														
+														
+														<li>
+															<span>Degree Certificate</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="edutwo">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>V</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Vivekanand high school</h4>
+														<p>Gseb board</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#educational-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu2" aria-expanded="true" aria-controls="project2">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="edu2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edutwo">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Duration</span>
+															Feb 2015 to June 2017
+														</li>
+														<li>
+															<span>Board / University</span>
+															Gujrat University
+															
+														</li>
+														<li>
+															<span>Course / Field of Study / Stream</span>
+															Coputer Science
+														</li>
+														
+														
+														<li>
+															<span>Degree Certificate</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Experience  -->
+						
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/exp.png?ver=' . time()) ?>"><span>Experience (4year 5month)</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dis-accor">
+									<div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="expOne">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>V</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Verv System PVT LTD</h4>
+														<p>Working as Sr.multimedia dsigner </p>
+														
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp1" aria-expanded="true" aria-controls="exp1">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="exp1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="expOne">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Time Period</span>
+															Jun 2015 to March 2015
+															
+														</li>
+														<li>
+															<span>Company Location</span>
+															Ahmedabad, India
+															
+														</li>
+														<li>
+															<span>Website</span>
+															<a href="#">www.vervsystem.com</a>
+														</li>
+														<li>
+															<span>Description</span>
+															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+															<a class="dis-more" href="#"><b>See More..</b> </a>
+														</li>
+														<li>
+															<span>Document</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="exptwo">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>V</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Verv System PVT LTD</h4>
+														<p>Working as Sr.multimedia dsigner </p>
+														
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp2" aria-expanded="true" aria-controls="exp2">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="exp2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exptwo">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Time Period</span>
+															Jun 2015 to March 2015
+															
+														</li>
+														<li>
+															<span>Company Location</span>
+															Ahmedabad, India
+														</li>
+														<li>
+															<span>Website</span>
+															<a href="#">www.vervsystem.com</a>
+														</li>
+														<li>
+															<span>Description</span>
+															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+															<a class="dis-more" href="#"><b>See More..</b> </a>
+														</li>
+														<li>
+															<span>Document</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Portfolio / project  -->
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/project.png?ver=' . time()) ?>"><span>Portfolio</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dis-accor">
+									<div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="projectOne">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>A</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Aileensoul (project name)</h4>
+														<p>IT Field</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#dtl-project" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project1" aria-expanded="true" aria-controls="project1">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="project1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="projectOne">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Website</span>
+															<a href="#">WWW.vervsystem.com</a>
+														</li>
+														<li>
+															<span>Duration</span>
+															Feb 2015 to June 2017 (2 year 4 month)
+														</li>
+														<li>
+															<span>Team Size</span>
+															15
+														</li>
+														<li>
+															<span>Your Role</span>
+															Project Manager
+														</li>
+														<li>
+															<span>Project Partner</span>
+															shreenathji production, dhaval & co.
+														</li>
+														
+														<li>
+															<span>Skills Applied</span>
+															PHP, HTML, CSS, Photo shop.
+														</li>
+														
+														<li>
+															<span>Description</span>
+															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+															<a class="dis-more" href="#"><b>See More..</b> </a>
+														</li>
+														<li>
+															<span>Project File</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.png?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="projecttwo">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>H</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>health jump</h4>
+														<p>IT Field</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#dtl-project" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project2" aria-expanded="true" aria-controls="project2">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="project2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="projecttwo">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Duration</span>
+															Feb 2015 to June 2017 (2 year 4 month)
+														</li>
+														<li>
+															<span>Team Size</span>
+															15
+														</li>
+														<li>
+															<span>Site link</span>
+															<a href="#">WWW.vervsystem.com</a>
+														</li>
+														<li>
+															<span>Project Partner</span>
+															shreenathji production, dhaval & co.
+														</li>
+														<li>
+															<span>Your Role</span>
+															Project Manager
+														</li>
+														<li>
+															<span>Skills Applied</span>
+															PHP, HTML, CSS, Photo shop.
+														</li>
+														
+														<li>
+															<span>Description</span>
+															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+															<a class="dis-more" href="#"><b>See More..</b> </a>
+														</li>
+														<li>
+															<span>Screenshot</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<!-- Additional Caurse  -->
+						
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/add-course.png?ver=' . time()) ?>"><span>Additional Caurse</span><a href="#" data-target="#additional-course" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dis-accor">
+									<div class="panel-group" id="course-accordion" role="tablist" aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="courseOne">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>M</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Master of performing art</h4>
+														<p>Upasna Technology</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#additional-course" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#course-accordion" href="#course1" aria-expanded="true" aria-controls="course1">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="course1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="courseOne">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Duration</span>
+															June 2016 to april 2018
+														</li>
+														<li>
+															<span>Website</span>
+															<a href="#">WWW.loremipsum.com</a>
+														</li>
+														
+														<li>
+															<span>Document</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="coursetwo">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>I</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Indian Air force</h4>
+														<p>Air force india</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#additional-course" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#course-accordion" href="#course2" aria-expanded="true" aria-controls="course2">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="course2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="coursetwo">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Duration</span>
+															June 2016 to april 2018
+														</li>
+														<li>
+															<span>Website</span>
+															<a href="#">WWW.loremipsum.com</a>
+														</li>
+														
+														<li>
+															<span>Document</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Rate -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>450 rs Per hour</p>
+									<p>Work On Fixed Rate.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Availability -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Duration per week</span>
+											0 to 25 hrs/week
+										</li>
+										<li>
+											<span>Status</span>
+											Available
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						
+						<!-- Profile Summary -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Profile Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Company Information -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dtl-box-height">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Company Name</span>
+											Verv System pvt ltd
+										</li>
+										<li>
+											<span>Industry</span>
+											IT Field
+										</li>
+										<li>
+											<span>Company Email </span>
+											harshad2406patoliya@gmail.com
+										</li>
+										<li>
+											<span>Company Phone number</span>
+											+91 951005589
+										</li>
+										<li>
+											<span>Skype</span>
+											harshad2406
+										</li>
+										<li>
+											<span>Website URL</span>
+											www.vervsystem.com
+										</li>
+										<li>
+											<span>Team Size</span>
+											105
+										</li>
+										
+										<li>
+											<span>Timezone</span>
+											GMT 21:45
+										</li>
+										<li>
+											<span>Company Founded</span>
+											June 2008
+										</li>
+										<li>
+											<span>Company Overview</span>
+											Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <a href="#">Read More</a>
+										</li>
+										<li>
+											<span>Services you offer</span>
+											<ul>
+												<li>Web design</li>
+												<li>Graphic design</li>
+												<li>SEO</li>
+											</ul>
+										</li>
+										
+										<li>
+											<span>Total Experience</span>
+											5 Year 7 Month
+										</li>
+										<li>
+											<span>Skills you offer</span>
+											<ul class="skill-list">
+												<li>Devloping</li>
+												<li>Desigining</li>
+												<li>Marketing</li>
+											</ul>
+										</li>
+										
+										<li>
+											<span>Location</span>
+											Ahmedabad, Gujrat , India
+										</li>
+										<li>
+											<span>Company Logo</span>
+											<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
+										</li>
+										
+									</ul>
+								</div>
+								<div class="about-more">
+									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+								</div>
+							</div>
+						</div>
+						
+						
+						<!-- Tagline -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Publication -->
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/publication.png?ver=' . time()) ?>"><span>Publication</span><a href="#" data-target="#publication" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dis-accor">
+									<div class="panel-group" id="publication-accordion" role="tablist" aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="publicationOne">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>F</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>How to learn easy maths</h4>
+														<p>Harshad Patoliya</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#publication" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a role="button" data-toggle="collapse" data-parent="#publication-accordion" href="#publication1" aria-expanded="true" aria-controls="publication1">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="publication1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="publicationOne">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Published Date</span>
+															12 june 2016
+														</li>
+														<li>
+															<span>Publisher / Publication</span>
+															Bhavik Publication
+														</li>
+														<li>
+															<span>Website</span>
+															<a href="#">WWW.Loremipsum.com</a>
+														</li>
+														<li>
+															<span>Description</span>
+															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+															<a class="dis-more" href="#"><b>See More..</b> </a>
+														</li>
+														<li>
+															<span>Document</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="publicationtwo">
+												<div class="panel-title">
+													<div class="dis-left">
+														<div class="dis-left-img">
+															<span>H</span>
+														</div>
+													</div>
+													<div class="dis-middle">
+														<h4>Hard Work</h4>
+														<p>Harshad Patoliya</p>
+													</div>
+													<div class="dis-right">
+														<a href="#" data-target="#publication" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>/"></a>
+														<a role="button" data-toggle="collapse" data-parent="#publication-accordion" href="#publication2" aria-expanded="true" aria-controls="publication2">
+															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+														</a>
+													</div>
+                 
+												</div>
+											</div>
+											<div id="publication2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="publicationtwo">
+												<div class="panel-body">
+													<ul class="dis-list">
+														<li>
+															<span>Published Date</span>
+															11 June 2018
+														</li>
+														<li>
+															<span>Publisher / Publication</span>
+															Bhavik Publication
+														</li>
+														<li>
+															<span>Website</span>
+															<a href="#">WWW.Loremipsum.com</a>
+														</li>
+														<li>
+															<span>Description</span>
+															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+															<a class="dis-more" href="#"><b>See More..</b> </a>
+														</li>
+														<li>
+															<span>Document</span>
+															<p class="screen-shot">
+																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+															</p>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						<!-- Reviews  -->
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
+									
+									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
+								</div>
+								<div class="dtl-dis">
+									<div class="total-rev">
+										<span class="total-rat">4.8</span> <span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
+												</span>
+												<span class="rev-count">59 Reviews</span>
+												
+												
+									</div>
+									<ul class="review-list">
+										<li>
+											<div class="review-left">
+												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+											</div>
+											<div class="review-right">
+												<h4>Yatin Belani</h4>
+												<div class="rating-star-cus">
+													<span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
+												</span>
+												</div>
+												<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+									<div class="form-group">
+										
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+				<div class="right-add">
+				
+					
+					<div class="row">
+					<div class="dtl-box p10 dtl-adv">
+						<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+					</div>
+					<div class="rsp-dtl-box">
+						<div class="dtl-box">
+							<div class="dtl-title">
+								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
+							</div>
+							<div class="dtl-dis dtl-edit-p">
+								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+								
+							</div>
+						</div>
+					</div>
+					
+					<!-- skills  -->
+					<div class="rsp-dtl-box">
+						<div class="dtl-box">
+							<div class="dtl-title">
+								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/skill.png?ver=' . time()) ?>"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+							</div>
+							<div class="dtl-dis">
+								<ul class="skill-list">
+									<li>HTML</li>
+									<li>CSS</li>
+									<li>Photoshop</li>
+									<li>Html 5</li>
+									<li>Css 3</li>
+									<li>Less Css</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Social Link  -->
+					<div class="rsp-dtl-box">
+					
+						<div class="dtl-box">
+							<div class="dtl-title">
+								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+							</div>
+							<div class="dtl-dis">
+								<h4>Social</h4>
+								<ul class="social-link-list">
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
+									<li><a href="#"><img src="<?php echo base_url(); ?>n-images/detail/git.png"></a></li>
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
+								</ul>
+								<h4 class="pt20 fw">Personal</h4>
+								<ul class="social-link-list">
+									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a></li>
+									<li><a href="#"><img src="<?php echo base_url(); ?>n-images/detail/pr-web.png"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<!-- language  -->
+						<div class="rsp-dtl-box ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="known-language">
+										<li><span class="pr5">Hindi</span> - <span class="pl5">Basic</span></li>
+										<li><span class="pr5">English</span> - <span class="pl5">Intermediate</span></li>
+										<li><span class="pr5">Gujrati</span> - <span class="pl5">Expert</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					
+					
+					
+				</div>
+			</div>
+			</div>
+		</div>
             <div class="clearfix"></div>
+			
         </section>
 		<div class="bottom-ftr-none">
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
 		</div>
-        <!-- Bid-modal  -->
+		
+	<!---  model basic information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Basic Information</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>First Name</label>
+									<input type="text" placeholder="First Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Last Name</label>
+									<input type="text" placeholder="Last Name">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Job Title </label>
+									<input type="text" placeholder="Job Title">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Field </label>
+									<span class="span-select">
+										<select>
+											<option>Field</option>
+											<option>IT field</option>
+											<option>Other</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Email </label>
+									<input type="text" placeholder="Email">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Phone Number</label>
+									<input type="text" placeholder="Phone Number">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Skype </label>
+									<input type="text" placeholder="Skype">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Time Zone </label>
+									<span class="span-select">
+										<select>
+											<option>Time Zone</option>
+											<option>Time Zone</option>
+											<option>Time Zone</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							
+						</div>
+						
+						
+						<div class="row">
+							<label class="col-md-12 fw">Address</label>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>Country</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>State</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>City </option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+						<a href="#" class="save"><span>Save</span></a>
+					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!---  model Experience  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Experience</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Name</label>
+									<input type="text" placeholder="Enter Company Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Designation / Role</label>
+									<input type="text" placeholder="Enter Designation">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>Company Website</label>
+											<input type="text" placeholder="Enter Company Website">
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>Field </label>
+											<span class="span-select">
+												<select>
+													<option>Select Field</option>
+													<option>It Field</option>
+													<option>Design</option>
+													<option>Advertizing</option>
+												</select>
+											</span>
+										</div>
+									</div>
+								</div>
+					
+						<div class="form-group">
+							<label>Company Location</label>
+							<input type="text" placeholder="Enter Company Location">
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Start Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>End Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control control--checkbox">
+								<input type="checkbox">I currently work here.
+								<div class="control__indicator">
+								</div>
+							</label>
+						</div>
+						<div class="form-group">
+							<label>Description/Roles and Responsibilities</label>
+							<textarea row="4" type="text" placeholder="Description">
+							</textarea>
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								Upload File (work experience certificate) <input type="file">
+							</label>
+						</div>
+						
+						
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!---  model Educational   -->
+	<div style="display:none;" class="modal fade dtl-modal" id="educational-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Educational Info</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							<label>School / College Name</label>
+							<input type="text" placeholder="School / College Name">
+						</div>
+						<div class="form-group">
+							<label>Board / University</label>
+							<input type="text" placeholder="Board / University">
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Degree / Qualification </label>
+									<input type="text" placeholder="Degree / Qualification ">	
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Course / Field of Study / Stream </label>
+									<input type="text" placeholder="Course / Field of Study / Stream">
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Start Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>End Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control control--checkbox">
+								<input type="checkbox">If You are not graduate click here.
+								<div class="control__indicator"></div>
+							</label>
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								Upload File (Educational Certificate)<input type="file">
+							</label>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+
+	<!-- Company Information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="com-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Company Information</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Name</label>
+									<input type="text" placeholder="Enter Company Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Industry </label>
+									<span class="span-select">
+										<select>
+											<option>Select Field</option>
+											<option>It Field</option>
+											<option>Design</option>
+											<option>Advertizing</option>
+										</select>
+									</span>
+								</div>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Email </label>
+									<input type="text" placeholder="Company Email ">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Phone number</label>
+									<input type="text" placeholder="Company Phone number">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Skype</label>
+									<input type="text" placeholder="Skype">
+								</div>
+								
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Website URL</label>
+									<input type="text" placeholder="Enter Website URL">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<label>Team Size</label>
+									<input type="text" placeholder="Company Phone number">
+								</div>
+								
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<label>Timezone</label>
+									<span class="span-select">
+										<select class="form-control">
+											<option>Timezone</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="row total-exp">
+							<label class="col-md-12 fw">
+								Company Founded
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Year</option>
+											<option>2014</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+										</select>	
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Month</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>	
+									</span>
+								</div>
+							</div>
+							
+								
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Company Overview</label>
+									<textarea row="4" type="text" placeholder="Company Overview"></textarea>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+							<label>Services you offer</label>
+							<textarea type="text" placeholder="Services you offer"></textarea>
+						</div>
+							</div>
+						</div>
+						
+						
+						<div class="row">
+							<label class="col-md-12 fw">Total Experience</label>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>	
+						<div class="form-group">
+							<label>Skills you offer</label>
+							<input type="text" placeholder="Skills you offer">
+						</div>
+						<div class="row total-exp">
+							<label class="col-md-12 fw">
+								Company Address
+							</label>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Country</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+											<option>2018</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>State</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>City</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="upload-file">
+								Upload Company Logo <input type="file">
+							</label>
+						</div>
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!-- modal Reviews  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Reviews</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							<div class="rev-img">
+								<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+							</div>
+							<div class="total-rev-top">
+								<h4>Harshad Patoliya</h4>
+								<span class="rating-star">
+			<input id="input-21b" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea type="text" placeholder="Description"></textarea>
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								<span class="fw">Upload Photo</span> <input type="file">
+							</label>
+						</div>
+				
+					</div>
+					<div class="dtl-btn bottom-btn">
+						<a href="#" class="save"><span>Save</span></a>
+					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	
+	<!-- Language  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="language" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Language</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="fw pb20">
+							
+							<div class="row">
+								<div class="">
+									<div class="width-45">
+										<div class="form-group">
+											<label>Language</label>
+											<input placeholder="language" type="text">
+										</div>
+									</div>
+									<div class="width-45">
+										<div class="form-group">
+											<label>Proficiency</label>
+											<span class="span-select">
+												<select>
+													<option>Basic</option>
+													<option>Intermediate</option>
+													<option>Expert</option>
+												</select>
+											</span>
+										</div>
+									</div>
+									<div class="width-10">
+										<label></label>
+										<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>
+										
+									</div>
+									<div class="fw dtl-more-add">
+										<a href="#"><span class="pr10">Add More languages </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+				
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!-- Rate  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="rate" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Rate</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<label>Currency</label>
+									<span class="span-select">
+										<select class="form-control">
+											<option>rs</option>
+											<option>$</option>
+											<option>Pound</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<label>Amount</label>
+									<input type="text" placeholder="Amount">
+								
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<label>Per</label>
+									<span class="span-select">
+										<select class="form-control">
+											<option>Per hour</option>
+											<option>Per Week</option>
+											<option>Per Month</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control control--checkbox">
+								<input type="checkbox">Work On Fixed Rate.
+								<div class="control__indicator">
+								</div>
+							</label>
+						</div>
+				
+					</div>
+					<div class="dtl-btn bottom-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!-- Availability  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="availability" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Availability</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Duration per week</label>
+									<span class="span-select">
+										<select class="form-control">
+											<option>0 to 25 hrs/week</option>
+											<option>B/w 25 to 50 hrs/week</option>
+											<option> More 50 hrs/week </option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Status</label>
+									<span class="span-select">
+										<select class="form-control">
+											<option>Available</option>
+											<option>Will Look</option>
+											<option>Not Available </option>
+											<option>Currently on Leave </option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="dtl-btn bottom-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!-- Tagline  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="tagline" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Tagline</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							
+							<textarea type="text" placeholder="Tagline"></textarea>
+						</div>
+				
+					</div>
+					<div class="dtl-btn bottom-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!-- Profile Summary  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="prof-summary" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Profile Summary</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							
+							<textarea type="text" placeholder="Profile Summary"></textarea>
+						</div>
+				
+					</div>
+					<div class="dtl-btn bottom-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!---  model Projects / Portfolio -->
+	<div style="display:none;" class="modal fade dtl-modal" id="dtl-project" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Portfolio</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Name / Title</label>
+									<input type="text" placeholder="Project Name / Title">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Team Size</label>
+									<input type="text" placeholder="Enter Company Location">	
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Role</label>
+									<input type="text" placeholder="Role">	
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Skills Applied</label>
+									<input type="text" placeholder="Skills Applied">	
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Field </label>
+									<span class="span-select">
+										<select>
+											<option>Project Field</option>
+											<option>It Field</option>
+											<option>Design</option>
+											<option>Advertizing</option>
+										</select>
+									</span>	
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project URL</label>
+									<input type="text" placeholder="Project URL">	
+								</div>
+							</div>
+						</div>
+				
+						<div class="form-group">
+							<label>Tag Project Partner</label>
+							<input type="text" placeholder="Tag Project Partner">
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Start Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>End Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Project Details / Description</label>
+							<textarea type="text" placeholder="Description">
+							</textarea>
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								Upload File (Project certificate) <input type="file">
+							</label>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!---  model Additional Course  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Additional Course</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							<label>Course Name</label>
+							<input type="text" placeholder="Course Name">
+						</div>
+						<div class="form-group">
+							<label>Organization</label>
+							<input type="text" placeholder="Organization">
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Start Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>End Date</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>2012</option>
+													<option>2013</option>
+													<option>2014</option>
+													<option>2015</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>januari</option>
+													<option>Fabruari</option>
+													<option>March</option>
+													<option>April</option>
+												</select>
+											</span>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>URL</label>
+							<input type="text" placeholder="Enter URL">
+						</div>
+						
+						<div class="form-group">
+							<label class="upload-file">
+								Upload File (Additional Course Certificate) <input type="file">
+							</label>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	<!---  model Publication  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="publication" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Publication</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							<label>Title</label>
+							<input type="text" placeholder="Title">
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Author</label>
+									<input type="text" placeholder="Author">	
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>URL</label>
+									<input type="text" placeholder="URL">	
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Publisher / Publication</label>
+							<input type="text" placeholder="Publisher / Publication">
+						</div>
+						<div class="row">
+							<label class="col-md-12 fw">Published Date</label>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>Date</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>Month</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<div class="form-group">
+									<span class="span-select">
+										<select>
+											<option>2016</option>
+											<option>2017</option>
+											<option>2018</option>
+											<option>2019</option>
+											<option>2020</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<div class="form-group">
+							<label>Description</label>
+							<textarea type="text" placeholder="Description"></textarea>
+						</div>
+						
+						<div class="form-group">
+							<label class="upload-file">
+								Upload File (Publication Certificate) <input type="file">
+							</label>
+						</div>
+						
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!---  model Skills  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="skills" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Skills</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="fw pb20">
+							
+							<div class="row">
+								<div class="">
+									<div class="width-45">
+										<div class="form-group">
+											<label>Skills</label>
+											<input placeholder="Skills" type="text">
+										</div>
+									</div>
+									<div class="width-45">
+										<div class="form-group">
+											<label>Proficiency</label>
+											<span class="span-select">
+												<select>
+													<option>Basic</option>
+													<option>Intermediate</option>
+													<option>Expert</option>
+												</select>
+											</span>
+										</div>
+									</div>
+									<div class="width-10">
+										<label></label>
+										<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>
+										
+									</div>
+									<div class="fw dtl-more-add">
+										<a href="#"><span class="pr10">Add More Skills </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+				
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+	<!---  model Social Links  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="social-link" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Social Links</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="fw pb20">
+							
+							<div class="row">
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
+										<div class="form-group">
+											<label>Website</label>
+											<span class="span-select">
+												<select>
+													<option>Facebook</option>
+													<option>Google</option>
+													<option>Instagram</option>
+												</select>
+											</span>
+										</div>
+									</div>
+									<div class="col-md-8 col-sm-8 col-xs-7">
+										<div class="form-group">
+											<label>URL</label>
+											<input type="text" placeholder="URL">
+										</div>
+									</div>
+									
+									<div class="col-md-1 col-sm-1 col-xs-1 pl0">
+										<label></label>
+										<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>
+										
+									</div>
+									<div class="fw dtl-more-add">
+										<a href="#"><span class="pr10">Add More Links </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-11 col-sm-11 col-xs-11">
+								<div class="form-group">
+									<label>Add Personal Website</label>
+									<input type="text" placeholder="Add Personal Website">
+								</div>
+							</div>
+							<div class="col-md-1 col-sm-1 col-xs-1 pl0">
+								<label></label>
+									<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>
+							</div>
+							<div class="fw dtl-more-add pt15">
+										<a href="#"><span class="pr10">Add More Links </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+									</div>
+						</div>
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+        
+		
+		<!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
@@ -1290,5 +2950,89 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
+		<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()) ?>"></script>
+		
+		<script>
+			var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
+			  containerElem.classList.add('masonry-layout', 'columns-' + columns);
+			  var columnsElements = [];
+
+			  for (var i = 1; i <= columns; i++) {
+				var column = document.createElement('div');
+				column.classList.add('masonry-column', 'column-' + i);
+				containerElem.appendChild(column);
+				columnsElements.push(column);
+			  }
+
+			  for (var m = 0; m < Math.ceil(itemsElems.length / columns); m++) {
+				for (var n = 0; n < columns; n++) {
+				  var item = itemsElems[m * columns + n];
+				  columnsElements[n].appendChild(item);
+				  item.classList.add('masonry-item');
+				}
+			  }
+			};
+
+			masonryLayout(document.getElementById('gallery'),
+			document.querySelectorAll('.gallery-item'), 2);
+
+
+			
+			jQuery(document).ready(function () {
+				$("#input-21f").rating({
+					starCaptions: function (val) {
+						if (val < 3) {
+							return val;
+						} else {
+							return 'high';
+						}
+					},
+					starCaptionClasses: function (val) {
+						if (val < 3) {
+							return 'label label-danger';
+						} else {
+							return 'label label-success';
+						}
+					},
+					hoverOnClear: false
+				});
+				var $inp = $('#rating-input');
+
+				$inp.rating({
+					min: 0,
+					max: 5,
+					step: 1,
+					size: 'lg',
+					showClear: false
+				});
+
+				$('#btn-rating-input').on('click', function () {
+					$inp.rating('refresh', {
+						showClear: true,
+						disabled: !$inp.attr('disabled')
+					});
+				});
+
+
+				$inp.on('rating.change', function () {
+					alert($('#rating-input').val());
+				});
+
+
+				$('.rb-rating').rating({
+					'showCaption': true,
+					'stars': '3',
+					'min': '0',
+					'max': '3',
+					'step': '1',
+					'size': 'xs',
+					'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
+				});
+				$("#input-21c").rating({
+					min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
+				});
+			});
+		</script>
     </body>
 </html>

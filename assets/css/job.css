@@ -1019,9 +1019,10 @@ label.cameraButton:active{
     float:right;
     width:100%;
     background-color:#fff;
-    border-radius:3px;
+    border-radius:4px;
     margin:0 0 10px;
-    padding:10px 0
+    padding:26px 0;
+	border:1px solid #d2d2d2;
 }
 .progre_bar_text p{
     font-size:12px;
