@@ -397,8 +397,8 @@
                                                                         <li class="select-preview">
                                                                             <span>Duration</span> 
                                                                             <label ng-if="user_edu.start_date_str">{{user_edu.start_date_str}} to</label>
-                                                                            <label ng-if="user_edu.end_date_str">{{user_edu.end_date_str}}</label> 
-                                                                            <label ng-if="user_edu.edu_end_date != null && user_edu.end_date_str == ''">Studying</label>
+                                                                            <label ng-if="user_edu.end_date_str != null && end_date_str != ''">{{user_edu.end_date_str}}</label> 
+                                                                            <label ng-if="user_edu.end_date_str == null || end_date_str == ''">Pursuing</label>
                                                                         </li>
                                                                         <li class="select-preview">
                                                                             <span>Board / University</span>
@@ -1547,6 +1547,7 @@
                                             <label>Gender </label>
                                             <span class="span-select">
                                                 <select id="basic_gender" name="basic_gender" ng-model="basic_gender" >
+                                                    <option value="">Select Gender</option>
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
                                                     <option value="other">Other</option>

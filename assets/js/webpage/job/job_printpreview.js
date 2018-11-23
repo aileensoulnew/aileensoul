@@ -348,9 +348,17 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         }
         else
         {
-            $scope.job_basic_info.field = "";
+            // $scope.job_basic_info.field = "";
+            $("#basic_field").val('');
         }
-        $scope.basic_gender = $scope.job_basic_info.gender;
+        if($scope.job_basic_info.gender != "")
+        {
+            $scope.basic_gender = $scope.job_basic_info.gender;
+        }
+        else
+        {
+            $("#basic_gender").val('');   
+        }
         dob = $scope.job_basic_info.dob.split('-');
         dob_month = dob[1];            
         if(dob_month != "00")
