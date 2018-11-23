@@ -1122,11 +1122,11 @@ header.profile-header .logo a{color:#5c5c5c;}
     background-image:-webkit-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#e8f3f8 100%);
     background-image:radial-gradient(ellipse farthest-corner at center,#FCFCFF 30%,#e8f3f8 100%)*/
 
-	background: #f6f6f6; 
-	background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 100%);
-	background: -webkit-linear-gradient(top, #f6f6f6 0%,#ffffff 100%);
-	background: linear-gradient(to bottom, #f6f6f6 0%,#ffffff 100%); 
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0 ); 
+	background: #ffffff; 
+	background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 100%);
+	background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); 
 
 }
 .main-banner.gradient-bg{
@@ -2616,7 +2616,7 @@ display: inline-block; content: ""; position: absolute; top: 8px; right: -8px;}
 #featured_img_remove{display:none; float: right; font-size: 22px; width: 30px; height: 30px; position: relative; color: #fff; background: rgba(0,0,0,0.4); margin-top: -30px;
 padding: 4px;}
 .arti-preview-img:hover #featured_img_remove{display:block;}
-.arti-profile-box .user-cover-img .gradient-bg{height:130px;}
+.arti-profile-box .user-cover-img .gradient-bg{height:130px; border-bottom:1px solid #d2d2d2;}
 .article-preview h1, .article-preview h2, .article-preview h3{margin-top:20px; margin-bottom:10px;}
 .article-preview h4, .article-preview h4, .article-preview h6{margin-top:10px; margin-bottom:10px;}
 .article-preview p{margin:0 0 10px;}
@@ -2935,7 +2935,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .dtl-modal .form-group input.error{color:#7b7b7b !important;}
 .dtl-modal .form-group select.error{color:#7b7b7b !important;}
 .dtl-modal .form-group textarea.error{color:#7b7b7b !important;}
-.upload-file .error{font-size:13px; position:absolute; left:0; bottom:-20px; width:100%;}
+.upload-file .error{/*font-size:13px; position:absolute; left:0; bottom:-20px; width:100%;*/}
 .personal-link-info{font-size:12px; color:#7b7b7b;}
 #user_idol_file.error{position:inherit; border:0 !important; color:#ff0000 !important;}
 
