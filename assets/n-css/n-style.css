@@ -335,7 +335,7 @@ font-size: 14px;}
 
 /***  all follow part  ***/
 .all-contact{width:100%; float:left;  border-radius:4px;}
-.all-user-list{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px;}
+.all-user-list{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; margin-bottom:10px;}
 
 
 .all-contact h4 a{color:#5c5c5c;}
@@ -2616,7 +2616,7 @@ display: inline-block; content: ""; position: absolute; top: 8px; right: -8px;}
 #featured_img_remove{display:none; float: right; font-size: 22px; width: 30px; height: 30px; position: relative; color: #fff; background: rgba(0,0,0,0.4); margin-top: -30px;
 padding: 4px;}
 .arti-preview-img:hover #featured_img_remove{display:block;}
-.arti-profile-box .user-cover-img .gradient-bg{height:130px; border-bottom:1px solid #d2d2d2;}
+.arti-profile-box .user-cover-img .gradient-bg{height:130px;}
 .article-preview h1, .article-preview h2, .article-preview h3{margin-top:20px; margin-bottom:10px;}
 .article-preview h4, .article-preview h4, .article-preview h6{margin-top:10px; margin-bottom:10px;}
 .article-preview p{margin:0 0 10px;}
@@ -2935,7 +2935,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .dtl-modal .form-group input.error{color:#7b7b7b !important;}
 .dtl-modal .form-group select.error{color:#7b7b7b !important;}
 .dtl-modal .form-group textarea.error{color:#7b7b7b !important;}
-.upload-file .error{/*font-size:13px; position:absolute; left:0; bottom:-20px; width:100%;*/}
+.upload-file .error{font-size:13px; /*position:absolute; left:0; bottom:-20px; width:100%;*/ color:#ff000;}
 .personal-link-info{font-size:12px; color:#7b7b7b;}
 #user_idol_file.error{position:inherit; border:0 !important; color:#ff0000 !important;}
 
