@@ -391,8 +391,20 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 <div class="right-part">
 					<?php $this->load->view('right_add_box'); ?>
                     <div class="edi_origde">
+                        <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                            <div class="count_main_progress">
+                                <div class="circles">
+                                    <div class="second circle-1">
+                                        <div>
+                                            <strong></strong>
+                                            <span id="progress-txt"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <?php                        
-                        if ($count_profile == 100) {
+                        /*if ($count_profile == 100) {
                             if ($job_reg[0]['progressbar'] == 0) {
                                 ?>
                             <div class="edit_profile_progress complete_profile">
@@ -432,7 +444,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </div>
                         </div>
                         <?php
-                        }
+                        }*/
                         ?>
                     </div>
                     <div class="add-box">
@@ -832,6 +844,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var job_deactive = "<?php echo $job_deactive; ?>";
             var count_profile_value = '<?php echo $count_profile_value; ?>';
             var count_profile = '<?php echo $count_profile; ?>';
+            var job_slug = '<?php echo $jobdata[0]['slug']; ?>';
             var app = angular.module('recommendedJobs', ['ui.bootstrap','angular-google-adsense']);
             
             $(document).ready(function($) {

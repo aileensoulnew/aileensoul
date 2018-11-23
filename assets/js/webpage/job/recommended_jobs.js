@@ -52,6 +52,17 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
     var job_keyword = q;
     var job_location = l;
     var work_time = work_timing;
+
+    $scope.get_job_progress = function() {
+        $http.get(base_url + "job/get_job_progress").then(function (success) {            
+            var profile_progress = success.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;            
+            $scope.set_progress(count_profile_value,count_profile);
+        }, function (error) {});
+    };
+    $scope.get_job_progress();
+
     $.each(work_timing.split("-"), function( index, value ) {
         if(value == 1)
         {
@@ -359,6 +370,32 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
         );
         
     }
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                // $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("<a href='"+base_url+'job-profile/'+job_slug+"'>Complete your profile to get connected with more people</a>.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
    
 });
 
@@ -368,24 +405,3 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
-
-    // NEW HTML SCRIPT
-
-    AOS.init({
-        easing: 'ease-in-out-sine'
-    });
-
-    setInterval(addItem, 100);
-
-    var itemsCounter = 1;
-    var container = document.getElementById('aos-demo');
-
-    function addItem () {
-        if (itemsCounter > 42) return;
-        var item = document.createElement('div');
-        item.classList.add('aos-item');
-        item.setAttribute('data-aos', 'fade-up');
-        item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-        // container.appendChild(item);
-        itemsCounter++;
-    }
