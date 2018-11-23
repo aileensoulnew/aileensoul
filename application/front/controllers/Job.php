@@ -8180,6 +8180,7 @@ class Job extends MY_Controller {
         $basic_email = $this->input->post('basic_email');
         $basic_phone = $this->input->post('basic_phone');
         $basic_jobtitle = $this->input->post('basic_jobtitle');
+        $work_job_title_txt = $basic_jobtitle;
         $basic_field = $this->input->post('basic_field');
         $basic_other_field = $this->input->post('basic_other_field');
         $basic_gender = $this->input->post('basic_gender');
@@ -8205,7 +8206,7 @@ class Job extends MY_Controller {
             }
         }
         $userid = $this->session->userdata('aileenuser');
-
+        $modified_date = date('Y-m-d h:i:s', time());
         $data1 = array(
             'fname' => ucfirst($basic_fname),
             'lname' => ucfirst($basic_lname),
@@ -8220,9 +8221,34 @@ class Job extends MY_Controller {
             'state_id' => $basic_state,
             'city_id' => $basic_city,
             'address' => $basic_address,            
-            'modified_date' => date('Y-m-d h:i:s', time()),            
+            'modified_date' => $modified_date
         );
         $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
+
+        $countryname = $this->db->get_where('countries', array('country_id' => $basic_country))->row()->country_name;
+        $statename = $this->db->get_where('states', array('state_id' => $basic_state))->row()->state_name;
+        $cityname = $this->db->get_where('cities', array('city_id' => $basic_city))->row()->city_name;
+
+        $data = array(
+            'fname' => ucfirst($basic_fname),
+            'lname' => ucfirst($basic_lname),
+            'email' => $basic_email,
+            'phnno' => $basic_phone,
+            'work_job_title' => $basic_jobtitle,
+            'work_job_title_txt' => $work_job_title_txt,
+            'gender' => $basic_gender,
+            'dob' => $dob,
+            'country_id' => $basic_country,
+            'country_name' => $countryname,
+            'state_id' => $basic_state,
+            'state_name' => $statename,
+            'city_id' => $basic_city,
+            'city_name' => $cityname,
+            'address' => $basic_address,            
+            'modified_date' => $modified_date
+        );        
+        $updatedata1 = $this->common->update_data($data, 'job_reg_search_tmp', 'user_id', $userid);
+
         $job_basic_info = $this->job_model->get_job_basic_info($userid);
         $preferred_job_info = $this->job_model->get_preferred_job_info($userid);
         $ret_arr = array("success"=>1,"job_basic_info"=>$job_basic_info,"preferred_job_info"=>$preferred_job_info);
