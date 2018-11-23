@@ -257,7 +257,7 @@
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Professional Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Professional Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                             </div>
                                             <div id="prof-summary-loader" class="dtl-dis">
                                                 <div class="text-center">
@@ -706,7 +706,7 @@
                                             <div class="dtl-title">
                                                 <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/pa-int.png?ver=' . time()) ?>">
                                                 <span>Passion and Interest</span>
-                                                <a href="#" data-target="#passion-intrest" data-toggle="modal" class="pull-right">
+                                                <a href="#" data-target="#passion-intrest" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2">
                                                     <img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>">
                                                 </a>
                                             </div>
@@ -1256,7 +1256,7 @@
                                 </div>
                                 <!-- Edit Profile -->
                                 <div class="rsp-dtl-box">
-                                    <div id="edit-profile-move" class="dtl-box">
+                                    <div id="edit-profile-move" class="dtl-box" ng-if="live_slug == segment2">
                                         <div class="dtl-title">
                                             <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
                                         </div>
@@ -1286,7 +1286,8 @@
 
                                                     <li class="fw"><span class=""><img ng-if="progress_status.job_title_status == '1' && progress_status.job_city_status == '1' && progress_status.job_industry_status == '1' && progress_status.preferred_travel_status == '1' && progress_status.preferred_cmp_culture_status == '1' && progress_status.preferred_work_time_status == '1' && progress_status.exp_salary_amt_status == '1' && progress_status.exp_salary_currency_status == '1' && progress_status.exp_salary_worktype_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Preferred Job Details</li>
 
-                                                    <li class="fw"><span class=""><img ng-if="progress_status.user_professional_summary_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Professional Summary</li>
+                                                    <li class="fw"><span class=""><img ng-if="progress_status.user_professional_summary_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="dtl-edit-bottom"></div>
@@ -1386,7 +1387,7 @@
                                 <div class="rsp-dtl-box ">
                                     <div id="language-move" class="dtl-box">
                                         <div class="dtl-title">
-                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
                                         </div>
                                         <div id="language-loader" class="dtl-dis">
                                             <div class="text-center">
@@ -1417,7 +1418,7 @@
                                 <div class="rsp-dtl-box ">
                                     <div id="resume-move" class="dtl-box">
                                         <div class="dtl-title">
-                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/resume.png?ver=' . time()) ?>"><span>Resume</span><a href="#" data-target="#resume" data-toggle="modal" class="pull-right" ng-click="reset_user_resume();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                            <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/resume.png?ver=' . time()) ?>"><span>Resume</span><a href="#" data-target="#resume" data-toggle="modal" class="pull-right" ng-click="reset_user_resume();" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
                                         </div>
                                         <div id="resume-loader" class="dtl-dis">
                                             <div class="text-center">
@@ -1569,7 +1570,7 @@
                                         <div class="col-md-4 col-sm-4 col-xs-4">
                                             <span class="span-select">
                                                 <select id="dob_month" name="dob_month" ng-model="dob_month" ng-change="dob_fnc('','','')">
-                                                    <option value="">Month</option>
+                                                    <option value="">Select Month</option>
                                                     <option value="01">Jan</option>
                                                     <option value="02">Feb</option>
                                                     <option value="03">Mar</option>

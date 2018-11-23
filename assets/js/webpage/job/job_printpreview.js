@@ -352,44 +352,51 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         }
         $scope.basic_gender = $scope.job_basic_info.gender;
         dob = $scope.job_basic_info.dob.split('-');
-        $scope.dob_month = dob[1];
         dob_month = dob[1];            
-        dob_day = dob[2];            
-        dob_year = dob[0];
-        $scope.dob_fnc(dob_day,dob_month,dob_year);
+        if(dob_month != "00")
+            $scope.dob_month = dob[1];
+            dob_day = dob[2];            
+            dob_year = dob[0];
+        {
+            $scope.dob_fnc(dob_day,dob_month,dob_year);
+        }
 
-        $scope.basic_country = $scope.job_basic_info.country_id;
-        $("#basic_country").val($scope.job_basic_info.country_id);
-        
-        var counrtydata = $.param({'country_id': $scope.basic_country});
-        $http({
-            method: 'POST',
-            url: base_url + 'userprofile_page/get_state_by_country_id',
-            data: counrtydata,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (data) {
-            $("#basic_state").removeAttr("disabled");
-            $("#basic_city").attr("disabled","disabled");
-            $("#basic_state_loader").hide();
-            $scope.basic_state_list = data.data;
-            $scope.basic_city_list = [];
-            $scope.basic_state = $scope.job_basic_info.state_id;
-
-            $("#basic_city").attr("disabled","disabled");
-            $("#exp_city_loader").show();
-            var statedata = $.param({'state_id': $scope.basic_state});
+        var country_id = $scope.job_basic_info.country_id;
+        if(country_id != 0)
+        {            
+            $scope.basic_country = country_id;
+            $("#basic_country").val(country_id);
+            
+            var counrtydata = $.param({'country_id': $scope.basic_country});
             $http({
                 method: 'POST',
-                url: base_url + 'userprofile_page/get_city_by_state_id',
-                data: statedata,
+                url: base_url + 'userprofile_page/get_state_by_country_id',
+                data: counrtydata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function (data) {
-                $("#basic_city").removeAttr("disabled");
-                $("#exp_city_loader").hide();
-                $scope.basic_city_list = data.data;
-                $scope.basic_city = $scope.job_basic_info.city_id;
-            });        
-        });
+                $("#basic_state").removeAttr("disabled");
+                $("#basic_city").attr("disabled","disabled");
+                $("#basic_state_loader").hide();
+                $scope.basic_state_list = data.data;
+                $scope.basic_city_list = [];
+                $scope.basic_state = $scope.job_basic_info.state_id;
+
+                $("#basic_city").attr("disabled","disabled");
+                $("#exp_city_loader").show();
+                var statedata = $.param({'state_id': $scope.basic_state});
+                $http({
+                    method: 'POST',
+                    url: base_url + 'userprofile_page/get_city_by_state_id',
+                    data: statedata,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function (data) {
+                    $("#basic_city").removeAttr("disabled");
+                    $("#exp_city_loader").hide();
+                    $scope.basic_city_list = data.data;
+                    $scope.basic_city = $scope.job_basic_info.city_id;
+                });        
+            });
+        }
         $("#basic_address").val($scope.job_basic_info.address);
     };
 
@@ -681,7 +688,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 year_opt += "<option value='"+i+"'>"+i+"</option>";
             }            
         }
-        $("#dob_year").html(year_opt);
+        var first_chl_year = "<option value=''>Select Year</option>";
+        $("#dob_year").html(first_chl_year+year_opt);
         
         function validate_date(dob_day,dob_month,dob_year) {
             var y = +kcyear.value;
@@ -717,7 +725,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                     day_opt += "<option value='"+i+"'>"+i+"</option>";
                 }
             }
-            $("#dob_day").html(day_opt);
+            var first_chl_day = "<option value=''>Select Day</option>";
+            $("#dob_day").html(first_chl_day+day_opt);
         }
         validate_date(dob_day,dob_month,dob_year);
     };
@@ -1155,7 +1164,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edu_degree = "";
         $scope.edu_stream = "";
         $scope.edu_s_year = "";
-        $("#edu_s_month").html('');
+        $("#edu_s_year").val('');
         $("#edu_s_month").html('');
         $("#edu_e_year").html('');
         $("#edu_e_month").html('');
@@ -1197,6 +1206,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         var edu_start_date = edu_arr.edu_start_date.split('-');
         var edu_end_date = edu_arr.edu_end_date.split('-');        
         $scope.edu_s_year = edu_start_date[0];
+        $("#edu_s_year").val(edu_start_date[0]);
         $scope.edu_start_year();
         // $scope.exp_s_month = edu_start_date[1];
         setTimeout(function(){
@@ -1629,6 +1639,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.project_partner = [];
         
         $scope.project_s_year = "";
+        $("#project_s_year").val('');
         $("#project_s_month").html('');
         $("#project_e_year").html('');
         $("#project_e_month").html('');
@@ -1687,6 +1698,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         var proj_start_date = projects_arr.project_start_date.split('-');
         var proj_end_date = projects_arr.project_end_date.split('-');        
         $scope.project_s_year = proj_start_date[0];
+        $("#project_s_year").val(proj_start_date[0]);
         $scope.project_start_year();
         // $scope.exp_s_month = proj_start_date[1];
         setTimeout(function(){
@@ -2021,6 +2033,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edit_activity = 0;
         $("#extra-activity").removeClass("edit-form-cus");
         $scope.activity_file_old = "";
+        $("#activity_s_year").val();
         $("#activity_s_month").html('');
         $("#activity_e_year").html('');
         $("#activity_e_month").html('');
@@ -2040,7 +2053,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $("#activity_org").val(activity_arr.activity_org);
         var activity_start_date = activity_arr.activity_start_date.split('-');
         var activity_end_date = activity_arr.activity_end_date.split('-');        
-        $scope.activity_s_year = activity_start_date[0];
+        // $scope.activity_s_year = activity_start_date[0];
+        $("#activity_s_year").val(activity_start_date[0]);
         $scope.activity_start_year();
         // $scope.exp_s_month = activity_start_date[1];
         setTimeout(function(){
@@ -2386,6 +2400,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edit_awards = 0;
         $scope.awards_file_old = '';
         $("#Achiv-awards").removeClass("edit-form-cus");
+        $("#award_month").val('');
         $("#award_day").html("");
         $("#award_year").html("");
         $("#award_file_error").hide();        
@@ -2727,6 +2742,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edit_addicourse = 0;
         $scope.addicourse_file_old = "";
         $("#additional-course").removeClass("edit-form-cus");
+        $("#addicourse_s_year").val('');
         $("#addicourse_s_month").html('');
         $("#addicourse_e_year").html('');
         $("#addicourse_e_month").html('');
@@ -2747,6 +2763,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         var addicourse_start_date = addicourse_arr.addicourse_start_date.split('-');
         var addicourse_end_date = addicourse_arr.addicourse_end_date.split('-');        
         $scope.addicourse_s_year = addicourse_start_date[0];
+        $("#addicourse_s_year").val(addicourse_start_date[0]);
         $scope.addicourse_start_year();
         // $scope.exp_s_month = addicourse_start_date[1];
         setTimeout(function(){
@@ -3110,6 +3127,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edit_research = 0;
         $scope.research_file_old = '';
         $("#research").removeClass("edit-form-cus");
+        $("#research_month").val('');
         $("#research_day").html("");
         $("#research_year").html("");
         $("#research_file_error").hide();
@@ -3479,6 +3497,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edit_publication = 0;
         $scope.pub_file_old = '';
         $("#publication").removeClass("edit-form-cus");
+        $("#publication_month").val('');
         $("#publication_day").html("");
         $("#publication_year").html("");
         $("#pub_file_error").hide();        
@@ -3853,6 +3872,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.edit_patent = 0;
         $scope.patent_file_old = '';
         $("#patent").removeClass("edit-form-cus");
+        $("#patent_month").val('');
         $("#patent_day").html("");
         $("#patent_year").html("");
         $("#patent_doc_prev").remove();
@@ -4583,6 +4603,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $scope.exp_state_list = [];
         $scope.exp_city_list = [];
         $scope.exp_s_year = '';
+        $("#exp_s_year").val('');
         $("#exp_s_month").html('');
         $("#exp_e_year").html('');
         $("#exp_e_month").html('');
@@ -4613,6 +4634,9 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 $scope.exp_years = result.data.exp_years;
                 $scope.exp_months = result.data.exp_months;
             }
+            setTimeout(function(){
+                $(".exp-y-m-inner").show();
+            },500);
             $("#exp-loader").hide();
             $("#exp-body").show();
 
@@ -4686,6 +4710,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         var exp_start_date = $scope.user_experience[index].exp_start_date.split('-');
         var exp_end_date = $scope.user_experience[index].exp_end_date.split('-');        
         $scope.exp_s_year = exp_start_date[0];
+        $("#exp_s_year").val(exp_start_date[0]);
         $scope.exp_start_year();
         // $scope.exp_s_month = exp_start_date[1];
         setTimeout(function(){
