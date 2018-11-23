@@ -7884,7 +7884,7 @@ class Job extends MY_Controller {
                 $data = array(
                     'skill' => $ski,
                     'status' => '1',
-                    'type' => '7',
+                    'type' => '4',
                     'user_id' => $userid,
                 );
                 $skill_id = $this->common->insert_data_getid($data, 'skill');
@@ -7893,7 +7893,7 @@ class Job extends MY_Controller {
             $skill_ids .= $skill_id . ',';
         }
         $skill_ids = trim($skill_ids, ',');
-        $data = array('user_skills' => $skill_ids);
+        $data = array('user_skills' => $skill_ids,'keyskill' => $skill_ids);        
         $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
         if($udpate_data)
         {
@@ -8374,7 +8374,7 @@ class Job extends MY_Controller {
     {
         $contition_array = array('user_id' => $user_id, 'status' => '1', 'is_delete' => '0');
 
-        $job_data = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'fname, lname, email, phnno, dob, gender, country_id, state_id, city_id, address, job_user_image, profile_background, work_job_title, work_job_industry, work_job_other_industry, work_job_city, user_skills, user_hobbies, user_software, user_resume, user_professional_summary, user_passion, field, other_field, preferred_travel, preferred_cmp_culture, preferred_work_time, exp_salary_amt, exp_salary_currency, exp_salary_worktype, job_active_status, progress_new, experience', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+        $job_data = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'fname, lname, email, phnno, dob, gender, country_id, state_id, city_id, address, job_user_image, profile_background, keyskill, work_job_title, work_job_industry, work_job_other_industry, work_job_city, user_skills, user_hobbies, user_software, user_resume, user_professional_summary, user_passion, field, other_field, preferred_travel, preferred_cmp_culture, preferred_work_time, exp_salary_amt, exp_salary_currency, exp_salary_worktype, job_active_status, progress_new, experience', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
 
         $count = 0;
         $progress_status = array();
@@ -8565,7 +8565,8 @@ class Job extends MY_Controller {
         $progress_status['job_active_status_status'] = $job_active_status;
 
         $user_skills = 0;
-        if($job_data['user_skills'] != '')
+        // if($job_data['user_skills'] != '')
+        if($job_data['keyskill'] != '')
         {
             $user_skills = 1;
             $count = $count + 3;

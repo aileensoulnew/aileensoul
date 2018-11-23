@@ -1216,7 +1216,7 @@
                                                                         </li>
                                                                         <li ng-if="user_pub.pub_file != '' && user_pub.pub_file != null">
                                                                             <span>Document</span>
-                                                                            <p class="screen-shot" check-file-ext check-file="{{user_pub.pub_file}}" check-file-path="<?php echo "'".addslashes(USER_PUBLICATION_UPLOAD_URL)."'"; ?>">
+                                                                            <p class="screen-shot" check-file-ext check-file="{{user_pub.pub_file}}" check-file-path="<?php echo "'".addslashes(JOB_USER_PUBLICATION_UPLOAD_URL)."'"; ?>">
                                                                             </p>
                                                                         </li>
                                                                     </ul>
@@ -2135,6 +2135,7 @@
                                             <label>Company Culture</label>
                                             <span class="span-select">
                                                 <select id="preferred_cmp_culture" name="preferred_cmp_culture">
+                                                    <option value="">Select Company Culture</option>
                                                     <option value="Traditional">Traditional</option>
                                                     <option value="Corporate">Corporate</option>
                                                     <option value="Start-Up">Start-Up</option>
@@ -2168,7 +2169,7 @@
                                             <span class="span-select">
                                                 <?php $currency = $this->data_model->get_currency_list();?>
                                                 <select name="preferred_currency" id="preferred_currency" ng-model="preferred_currency">
-                                                    <option value="" disabled="">Select Currency</option>
+                                                    <option value="">Select Currency</option>
                                                     <?php foreach ($currency as $key => $value) { ?>
                                                         <option value="<?php echo $value['currency_id']; ?>""><?php echo $value['currency_name']; ?></option>
                                                     <?php } ?>
@@ -2179,6 +2180,7 @@
                                         <div class="col-md-4 col-sm-4 col-xs-4">
                                             <span class="span-select">
                                                 <select id="exp_salary_worktype" name="exp_salary_worktype">
+                                                    <option value="">Select Work Time</option>
                                                     <option value="1">Per hour</option>
                                                     <option value="2">Monthly</option>
                                                     <option value="3">Yearly</option>
@@ -2284,7 +2286,7 @@
                         <div class="dtl-dis">
                             <div class="form-group">                                
                                 <!-- <textarea type="text" placeholder="Passion and Intrest"></textarea> -->
-                                <textarea name="passion_user" id="passion_user" ng-model="passion_user" type="text" placeholder="Passion and Intrest" maxlength="700">{{passion_user}}</textarea>
+                                <textarea name="passion_user" id="passion_user" ng-model="passion_user" type="text" placeholder="Describe your Passion and Interest" maxlength="700">{{passion_user}}</textarea>
                                 <span class="pull-right">{{700 - passion_user.length}}</span>
                             </div>
                     
@@ -2425,7 +2427,7 @@
                         </div>
                         <div class="dtl-dis">
                             <div class="form-group">                                
-                                <tags-input id="software_txt" ng-model="software_txt" display-property="software" placeholder="Enter Software" replace-spaces-with-dashes="false" template="title-template">
+                                <tags-input id="software_txt" ng-model="software_txt" display-property="software" placeholder="Which are the software you know about how to use? Add them here." replace-spaces-with-dashes="false" template="title-template">
                                 </tags-input>
                             </div>                    
                         </div>
@@ -2594,8 +2596,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Project Description</label>
-                                <textarea type="text" placeholder="Enter Project Details" id="project_desc" name="project_desc" minlength="50" maxlength="700"></textarea>
+                                <label>Project Description<span>(Min 50)</span></label>
+                                <textarea type="text" placeholder="Enter Project Details" id="project_desc" name="project_desc" ng- minlength="50" maxlength="700"></textarea>
+                                <span class="pull-right">700</span>                                
                             </div>
                             <div class="form-group">
                                 <div class="upload-file">
@@ -2851,8 +2854,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea type="text" placeholder="Enter Description" id="activity_desc" name="activity_desc"></textarea>
+                                <label>Description(Min 50)</label>
+                                <textarea type="text" maxlength="700" placeholder="Enter Description" id="activity_desc" name="activity_desc"></textarea>
+                                <span class="pull-right">700</span>
                             </div>
                             
                             <div class="form-group">
@@ -2946,7 +2950,9 @@
                                     <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
                                     <div class="form-group">
                                         <span class="span-select">
-                                            <select id="award_day" name="award_day" ng-model="award_day" ng-click="award_error()"></select>
+                                            <select id="award_day" name="award_day" ng-model="award_day" ng-click="award_error()">
+                                                <option value="">Select Year</option>
+                                            </select>
                                         </span>
                                     </div>
                                     </div>
@@ -2954,6 +2960,7 @@
                                     <div class="form-group">
                                         <span class="span-select">
                                             <select id="award_year" name="award_year" ng-model="award_year" ng-change="award_date_fnc('','','')" ng-click="award_error()">
+                                                <option value="">Select Day</option>
                                             </select>
                                         </span>
                                     </div>
@@ -3091,14 +3098,15 @@
                                 </div>
                             </div>                    
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea type="text" placeholder="Enter Description" id="pub_desc" name="pub_desc" minlength="10" maxlength="700"></textarea>
+                                <label>Description(Min 50)</label>
+                                <textarea type="text" placeholder="Enter Description" id="pub_desc" name="pub_desc" minlength="50" maxlength="700"></textarea>
+                                <span class="pull-right">700</span>
                             </div>                    
                             <div class="form-group">
                                 <div class="upload-file">
                                     <label>Upload File (Publication Certificate)</label>
                                     <input type="file" id="pub_file" name="pub_file">
-                                    <span id="pub_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                                    <span id="pub_file_error" class="error" style="display: none;"></span>
                                 </div>
                             </div>                    
                         </div>
@@ -3235,14 +3243,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>Description(Min 50)</label>
                                     <textarea type="text" placeholder="Enter Description" id="patent_desc" name="patent_desc" ng-model="patent_desc"></textarea>
+                                    <span class="pull-right">700</span>
                                 </div>
                                 <div class="form-group">
                                     <div class="upload-file">
                                         <label>Upload File</label>
                                         <input type="file" id="patent_file" name="patent_file">
-                                        <span id="patent_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                                        <span id="patent_file_error" class="error" style="display: none;"></span>
                                     </div>
                                 </div>                        
                             </div>
@@ -3335,8 +3344,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Details</label>
+                                        <label>Details(Min 50)</label>
                                         <textarea placeholder="Enter Details" id="research_desc" name="research_desc" ng-model="research_desc" minlength="20" maxlength="700"></textarea>
+                                        <span class="pull-right">700</span>
                                     </div>
                                     
                                     <div class="">
@@ -3389,7 +3399,7 @@
                                         <div class="upload-file">
                                             <label>Upload File</label>
                                             <input type="file" id="research_document" name="research_document">
-                                            <span id="research_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                                            <span id="research_file_error" class="error" style="display: none;"></span>
                                         </div>
                                     </div>
                                 </div>

@@ -2476,7 +2476,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->select("s.skill as name")->from("job_reg jr, skill s");
         $this->db->where('jr.user_id', $userid);
         $this->db->where("(s.type = '1' OR s.type = '2')");
-        $this->db->where('FIND_IN_SET(s.skill_id, jr.user_skills) !=', 0);
+        $this->db->where('FIND_IN_SET(s.skill_id, jr.keyskill) !=', 0);
+        // $this->db->where('FIND_IN_SET(s.skill_id, jr.user_skills) !=', 0);
         // $this->db->group_by('ui.user_skills', 'uo.location');
         $query = $this->db->get();
         $skills_data = $query->result_array();        

@@ -1902,7 +1902,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             activity_desc: {
                 required: true,
                 maxlength: 700,
-                minlength: 10
+                minlength: 50
             },
         },      
         messages: {
@@ -2171,7 +2171,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 year_opt += "<option value='"+i+"'>"+i+"</option>";
             }            
         }
-        $("#award_year").html(year_opt);
+        var first_chl_year = "<option value=''>Select Year</option>";
+        $("#award_year").html(first_chl_year+year_opt);
         
         function validate_date(dob_day,dob_month,dob_year) {
             var y = +kcyear.value;
@@ -2207,7 +2208,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                     day_opt += "<option value='"+i+"'>"+i+"</option>";
                 }
             }
-            $("#award_day").html(day_opt);
+            var first_chl_day = "<option value=''>Select Day</option>";
+            $("#award_day").html(first_chl_day+day_opt);
         }
         validate_date(dob_day,dob_month,dob_year);
     };
@@ -2998,7 +3000,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
     $(document).on('change','#research_document', function(e){
         $("#research_file_error").hide();
         if(this.files[0].size > 10485760)
-        {
+        {            
+            $("#research_file_error").html("File size must be less than 10MB.");
             $("#research_file_error").show();
             $(this).val("");
             return true;
@@ -3012,6 +3015,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             }
             else {
                 research_formdata.append('file', "");
+                $("#research_file_error").html("Invalid file selected.");                
+                $("#research_file_error").show();
                 $(this).val("");
             }         
         }
@@ -3307,6 +3312,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $("#pub_file_error").hide();
         if(this.files[0].size > 10485760)
         {
+            $("#pub_file_error").html("File size must be less than 10MB.");
             $("#pub_file_error").show();
             $(this).val("");
             return true;
@@ -3319,6 +3325,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 publication_formdata.append('pub_file', $('#pub_file')[0].files[0]);
             }
             else {
+                $("#pub_file_error").html("Invalid file selected.");                
+                $("#pub_file_error").show();
                 $(this).val("");
             }         
         }
@@ -3673,6 +3681,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $("#patent_file_error").hide();
         if(this.files[0].size > 10485760)
         {
+            $("#patent_file_error").html("File size must be less than 10MB.");
             $("#patent_file_error").show();
             $(this).val("");
             return true;
@@ -3685,6 +3694,8 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 patent_formdata.append('patent_file', $('#patent_file')[0].files[0]);
             }
             else {
+                $("#patent_file_error").html("Invalid file selected.");                
+                $("#patent_file_error").show();
                 $(this).val("");
             }         
         }
@@ -3726,7 +3737,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             patent_desc: {
                 required: true,
                 maxlength: 700,
-                minlength: 10
+                minlength: 50
             },
         },
         /*groups: {
@@ -5645,8 +5656,16 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         $("#preferred_travel").val($scope.preferred_job_info.preferred_travel);
         $("#preferred_cmp_culture").val($scope.preferred_job_info.preferred_cmp_culture);
         $("#exp_salary_amt").val($scope.preferred_job_info.exp_salary_amt);
-        $("#preferred_currency").val($scope.preferred_job_info.exp_salary_currency);
-        $("#exp_salary_worktype").val($scope.preferred_job_info.exp_salary_worktype);
+        if($scope.preferred_job_info.exp_salary_currency > 0)
+            $("#preferred_currency").val($scope.preferred_job_info.exp_salary_currency);
+        else
+            $("#preferred_currency").val('');
+
+        if($scope.preferred_job_info.exp_salary_worktype > 0)
+            $("#exp_salary_worktype").val($scope.preferred_job_info.exp_salary_worktype);
+        else
+            $("#exp_salary_worktype").val('');
+
         $("#preferred_moredetail").val($scope.preferred_job_info.preferred_moredetail);
     };
     //Preferred Job Detail End
