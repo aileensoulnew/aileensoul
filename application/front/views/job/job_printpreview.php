@@ -250,9 +250,44 @@
                         <div class="all-detail-custom">
                             <div class="custom-user-list">
                                 <div class="gallery" id="gallery">
-                                    <!-- Basic information  -->
-                                    <div class="gallery-item">
+								
+									<!--  00 Professional summary -->
+                                    <div class="gallery-item ">
                                         <div class="dtl-box">
+                                            <div class="dtl-title">
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Professional Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                            </div>
+                                            <div id="prof-summary-loader" class="dtl-dis">
+                                                <div class="text-center">
+                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                                </div>
+                                            </div>
+                                            <div id="prof-summary-body" style="display: none;">
+                                                <div class="dtl-dis">
+                                                    <div class="no-info" ng-if="prof_summary == ''">
+                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                        <span>Highlight your details. (Let it be either personal or professional)</span>
+                                                    </div>
+                                                    <div class="" ng-if="prof_summary != ''">
+                                                        <h4>Description</h4>
+                                                        <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{prof_summary}}" dd-text-collapse-cond="true">{{prof_summary}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								
+									<!--  01 Edit Profile -->
+                                    <div class="gallery-item edit-profile-move">
+                                    </div>
+									
+									<!--  02 Blank -->
+                                    <div class="gallery-item job-basic-info-move">
+                                    </div>
+								
+                                    <!--  03 Basic information  -->
+                                    <div class="gallery-item remove-blank">
+                                        <div class="dtl-box" id="job-basic-info-move">
                                             <div class="dtl-title">
                                                 <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
                                                 <span>Basic Information</span>
@@ -310,7 +345,7 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Educational info -->
+                                    <!--  04 Educational info -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
@@ -392,19 +427,19 @@
                                     </div>
                                     <!-- Educational End -->
                                     
-                                    <!-- Experience Start -->
+                                    <!--  05 Experience Start -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
                                                 <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png">
                                                 <span>Experience
-                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Fresher'">(Fresher)</span>
-                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (exp_years > '0' || exp_months > '0')">(
+                                                    <span class="exp-y-m-inner" style="display:none;" ng-if="job_basic_info.experience == 'Fresher'">(Fresher)</span>
+                                                    <span class="exp-y-m-inner" style="display:none;" ng-if="job_basic_info.experience == 'Experience' && (exp_years > '0' || exp_months > '0')">(
                                                         <span ng-if="exp_years > '0'">{{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
                                                         <span ng-if="exp_months > '0'">{{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
                                                          )
                                                      </span>
-                                                    <span class="exp-y-m-inner" ng-if="job_basic_info.experience == 'Experience' && (job_basic_info.exp_m || job_basic_info.exp_y)">({{job_basic_info.exp_y}} {{job_basic_info.exp_m}})</span>
+                                                    <span class="exp-y-m-inner" style="display:none;" ng-if="job_basic_info.experience == 'Experience' && (job_basic_info.exp_m || job_basic_info.exp_y)">({{job_basic_info.exp_y}} {{job_basic_info.exp_m}})</span>
                                                 </span>
                                                     <a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                                             </div>
@@ -485,8 +520,87 @@
                                         </div>
                                     </div>
                                     <!-- Experience End -->
+									
+									<!--  06 skills  -->
+                                    <div class="gallery-item skill-move">
+                                    </div>
+									
+									<!--  07 Preferred job detail  -->
+                                    <div class="gallery-item ">
+                                        <div class="dtl-box">
+                                            <div class="dtl-title">
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>"><span>Preferred Job Details</span><a href="#" data-target="#preferred-job" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2" ng-click="edit_preferred_job_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                            </div>
+                                            <div id="preferred-job-loader" class="dtl-dis">
+                                                <div class="text-center">
+                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                                </div>
+                                            </div>
+                                            <div id="preferred-job-body" style="display: none;">
+                                                <div id="preferred-detail" class="dtl-dis dtl-box-height">
+                                                    <ul class="dis-list  list-ul-cus">
+                                                        <li>
+                                                            <span>Preferred Job Title</span>
+                                                            <label>{{job_basic_info.work_job_title_txt}}</label>
+                                                        </li>
+                                                        <li>
+                                                            <span>Perferred Location / Region</span>
+                                                            <label>{{preferred_job_info.work_job_city_txt}}</label>
+                                                        </li>
+                                                        <li ng-if="preferred_job_info.preferred_travel != '' && preferred_job_info.preferred_travel > '0'">
+                                                            <span>How far are you wiling to travel? (In km)</span>
+                                                            <label>{{preferred_job_info.preferred_travel}} km</label>
+                                                        </li>
+                                                        <li ng-if="preferred_job_info.work_job_industry > '-1' && (preferred_job_info.work_job_industry_txt || preferred_job_info.work_job_other_industry)">
+                                                            <span>Preferred Industry</span>
+                                                            <label ng-if="preferred_job_info.work_job_industry != '0'">{{preferred_job_info.work_job_industry_txt}}</label>
+                                                            <label ng-if="preferred_job_info.work_job_industry == '0'">{{preferred_job_info.work_job_other_industry}}</label>
+                                                        </li>
+                                                        <li ng-if="preferred_job_info.exp_salary_amt != ''">
+                                                            <span>Expected Salary</span>
+                                                            <label>{{preferred_job_info.exp_salary_amt}}</label>
+                                                            <label>{{preferred_job_info.currency_name}}</label>
+                                                            <label ng-if="preferred_job_info.exp_salary_worktype == '1'">Per Hours</label>
+                                                            <label ng-if="preferred_job_info.exp_salary_worktype == '2'">Per Month</label>
+                                                            <label ng-if="preferred_job_info.exp_salary_worktype == '3'">Per Year</label>                 
+                                                        </li>
+                                                        <li ng-if="preferred_job_info.preferred_cmp_culture != ''">
+                                                            <span>Company Culture</span>
+                                                            <label>{{preferred_job_info.preferred_cmp_culture}}</label>
+                                                        </li>
+                                                        <li ng-if="preferred_job_info.preferred_work_time != ''">
+                                                            <span>Work Time / Schedule</span>
+                                                            <label>{{preferred_job_info.preferred_work_time}}</label>
+                                                        </li>         
+                                                        <li ng-if="preferred_job_info.preferred_moredetail != ''">
+                                                            <span>More Details</span>
+                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{preferred_job_info.preferred_moredetail}}" dd-text-collapse-cond="true">{{preferred_job_info.preferred_moredetail}}</label>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div id="view-more-preferred" class="about-more" style="display: none;">
+                                                <a href="javascript:void(0);" ng-click="view_more_preferred();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     
-                                    <!-- Project Start -->
+								
+									
+									<!--  08 language  -->
+                                    <div class="gallery-item language-move">
+                                    </div>
+									
+									<!--  09 Hobbies  -->
+                                    <div class="gallery-item hobbies-move">
+                                    </div>
+									
+									<!--  10 Social Link  -->
+                                    <div class="gallery-item social-link-move">
+                                    </div>
+									
+                                    <!--  11 Project Start -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
@@ -584,69 +698,7 @@
                                     </div>
                                     <!-- Project End -->
                                     
-                                    <!-- Preferred job detail  -->
-                                    <div class="gallery-item ">
-                                        <div class="dtl-box">
-                                            <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>"><span>Preferred Job Details</span><a href="#" data-target="#preferred-job" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2" ng-click="edit_preferred_job_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-                                            </div>
-                                            <div id="preferred-job-loader" class="dtl-dis">
-                                                <div class="text-center">
-                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                                </div>
-                                            </div>
-                                            <div id="preferred-job-body" style="display: none;">
-                                                <div id="preferred-detail" class="dtl-dis dtl-box-height">
-                                                    <ul class="dis-list  list-ul-cus">
-                                                        <li>
-                                                            <span>Preferred Job Title</span>
-                                                            <label>{{job_basic_info.work_job_title_txt}}</label>
-                                                        </li>
-                                                        <li>
-                                                            <span>Perferred Location / Region</span>
-                                                            <label>{{preferred_job_info.work_job_city_txt}}</label>
-                                                        </li>
-                                                        <li ng-if="preferred_job_info.preferred_travel != '' && preferred_job_info.preferred_travel > '0'">
-                                                            <span>How far are you wiling to travel? (In km)</span>
-                                                            <label>{{preferred_job_info.preferred_travel}} km</label>
-                                                        </li>
-                                                        <li ng-if="preferred_job_info.work_job_industry > '-1' && (preferred_job_info.work_job_industry_txt || preferred_job_info.work_job_other_industry)">
-                                                            <span>Preferred Industry</span>
-                                                            <label ng-if="preferred_job_info.work_job_industry != '0'">{{preferred_job_info.work_job_industry_txt}}</label>
-                                                            <label ng-if="preferred_job_info.work_job_industry == '0'">{{preferred_job_info.work_job_other_industry}}</label>
-                                                        </li>
-                                                        <li ng-if="preferred_job_info.exp_salary_amt != ''">
-                                                            <span>Expected Salary</span>
-                                                            <label>{{preferred_job_info.exp_salary_amt}}</label>
-                                                            <label>{{preferred_job_info.currency_name}}</label>
-                                                            <label ng-if="preferred_job_info.exp_salary_worktype == '1'">Per Hours</label>
-                                                            <label ng-if="preferred_job_info.exp_salary_worktype == '2'">Per Month</label>
-                                                            <label ng-if="preferred_job_info.exp_salary_worktype == '3'">Per Year</label>                 
-                                                        </li>
-                                                        <li ng-if="preferred_job_info.preferred_cmp_culture != ''">
-                                                            <span>Company Culture</span>
-                                                            <label>{{preferred_job_info.preferred_cmp_culture}}</label>
-                                                        </li>
-                                                        <li ng-if="preferred_job_info.preferred_work_time != ''">
-                                                            <span>Work Time / Schedule</span>
-                                                            <label>{{preferred_job_info.preferred_work_time}}</label>
-                                                        </li>         
-                                                        <li ng-if="preferred_job_info.preferred_moredetail != ''">
-                                                            <span>More Details</span>
-                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{preferred_job_info.preferred_moredetail}}" dd-text-collapse-cond="true">{{preferred_job_info.preferred_moredetail}}</label>
-                                                        </li>
-                                                        
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div id="view-more-preferred" class="about-more" style="display: none;">
-                                                <a href="javascript:void(0);" ng-click="view_more_preferred();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    <!-- Passion and Interest  -->
+                                    <!--  12 Passion and Interest  -->
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
@@ -675,155 +727,7 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Extracurricular Activity Start -->
-                                    <div class="gallery-item">
-                                        <div class="dtl-box">
-                                            <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/extra-activity.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-activity" data-toggle="modal" ng-click="reset_activity_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
-                                            </div>
-                                            <div id="activity-loader" class="dtl-dis">
-                                                <div class="text-center">
-                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                                </div>
-                                            </div>
-                                            <div id="activity-body" style="display: none;">
-                                                <div class="dtl-dis" ng-if="user_activity.length < '1'">
-                                                    <div class="no-info">
-                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                        <span>Enter the activities you were involved in apart from studies.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="dtl-dis dis-accor" ng-if="user_activity.length > '0'">
-                                                    <div class="panel-group" id="activity-accordion" role="tablist" aria-multiselectable="true">
-                                                        <div class="panel panel-default" ng-repeat="user_ea in user_activity" ng-if="$index <= view_more_activity">
-                                                            <div class="panel-heading" role="tab" id="activity-{{$index}}">
-                                                                <div class="panel-title">
-                                                                    <div class="dis-left">
-                                                                        <div class="dis-left-img">
-                                                                            <span>{{user_ea.activity_participate | limitTo:1 | uppercase}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="dis-middle">
-                                                                        <h4>{{user_ea.activity_participate}}</h4>        
-                                                                        <p>{{user_ea.activity_org}}</p>
-                                                                    </div>
-                                                                    <div class="dis-right">
-                                                                        <span role="button" ng-click="edit_user_activity($index)" class="pr5" ng-if="live_slug == segment2">
-                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
-                                                                        </span>
-                                                                        <span role="button" data-toggle="collapse" data-parent="#activity-accordion" href="#activity{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
-                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
-                                                                        </span>
-                                                                    </div>
-                                 
-                                                                </div>
-                                                            </div>
-                                                            <div id="activity{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="activity-{{$index}}">
-                                                                <div class="panel-body">
-                                                                    <ul class="dis-list list-ul-cus">
-                                                                        <li class="select-preview">
-                                                                            <span>Duration</span> 
-                                                                            <label>{{user_ea.start_date_str}} to</label>
-                                                                            <label ng-if="user_ea.end_date_str != '' && user_ea.end_date_str != null">{{user_ea.end_date_str}}</label> 
-                                                                            <label ng-if="user_ea.end_date_str == '' || user_ea.end_date_str == null">Currently active</label>
-                                                                        </li>
-                                                                        <li>
-                                                                            <span>Description</span>
-                                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_ea.activity_desc}}" dd-text-collapse-cond="true">{{user_ea.activity_desc}}</label>
-                                                                        </li>
-                                                                        <li ng-if="user_ea.activity_file != '' && user_ea.activity_file != null">
-                                                                            <span>Document</span>
-                                                                            <p class="screen-shot" check-file-ext check-file="{{user_ea.activity_file}}" check-file-path="<?php echo "'".addslashes(JOB_USER_ACTIVITY_UPLOAD_URL)."'"; ?>">
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="view-more-activity" class="about-more" ng-if="user_activity.length > '3'">
-                                                            <a href="#" ng-click="activity_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Extracurricular Activity End -->
-                                    
-                                    <!-- Achievements & Awards Start -->
-                                    <div class="gallery-item">
-                                        <div class="dtl-box">
-                                            <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
-                                            </div>
-                                            <div id="awards-loader" class="dtl-dis">
-                                                <div class="text-center">
-                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                                </div>
-                                            </div>
-                                            <div id="awards-body" style="display: none;">
-                                                <div class="dtl-dis" ng-if="user_award.length < '1'">
-                                                    <div class="no-info">
-                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                        <span>Showcase the honour you have achieved to profile.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="dtl-dis dis-accor" ng-if="user_award.length > '0'">
-                                                    <div class="panel-group" id="award-accordion" role="tablist" aria-multiselectable="true">
-                                                        <div class="panel panel-default" ng-repeat="user_awrd in user_award" ng-if="$index <= view_more_award">
-                                                            <div class="panel-heading" role="tab" id="award-{{$index}}">
-                                                                <div class="panel-title">
-                                                                    <div class="dis-left">
-                                                                        <div class="dis-left-img">
-                                                                            <span>{{user_awrd.award_title | limitTo:1 | uppercase}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="dis-middle">
-                                                                        <h4>{{user_awrd.award_title}}</h4>        
-                                                                        <p>{{user_awrd.award_org}}</p>
-                                                                    </div>
-                                                                    <div class="dis-right">
-                                                                        <span role="button" ng-click="edit_user_award($index)" class="pr5" ng-if="live_slug == segment2">
-                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
-                                                                        </span>
-                                                                        <span role="button" data-toggle="collapse" data-parent="#award-accordion" href="#award{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
-                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
-                                                                        </span>
-                                                                    </div>
-                                 
-                                                                </div>
-                                                            </div>
-                                                            <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
-                                                                <div class="panel-body">
-                                                                    <ul class="dis-list list-ul-cus">
-                                                                        <li class="select-preview">
-                                                                            <span>Date</span> 
-                                                                            <label>{{user_awrd.award_date_str}}</label>
-                                                                        </li>
-                                                                        <li>
-                                                                            <span>Description</span>
-                                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_awrd.award_desc}}" dd-text-collapse-cond="true">{{user_awrd.award_desc}}</label>
-                                                                        </li>
-                                                                        <li ng-if="user_awrd.award_file != '' && user_awrd.award_file != null">
-                                                                            <span>Document</span>
-                                                                            <p class="screen-shot" check-file-ext check-file="{{user_awrd.award_file}}" check-file-path="<?php echo "'".addslashes(JOB_USER_AWARD_UPLOAD_URL)."'"; ?>">
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="view-more-award" class="about-more" ng-if="user_award.length > '3'">
-                                                            <a href="#" ng-click="award_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Achievements & Awards End -->
-                                    
-                                    <!-- Additional Course Start -->
+									<!--  13 Additional Course Start -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
@@ -899,114 +803,185 @@
                                         </div>
                                     </div>
                                     <!-- Additional Course End -->
-                                    
-                                    <!-- Professional summary -->
-                                    <div class="gallery-item ">
-                                        <div class="dtl-box">
-                                            <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Professional Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-                                            </div>
-                                            <div id="prof-summary-loader" class="dtl-dis">
-                                                <div class="text-center">
-                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                                </div>
-                                            </div>
-                                            <div id="prof-summary-body" style="display: none;">
-                                                <div class="dtl-dis">
-                                                    <div class="no-info" ng-if="prof_summary == ''">
-                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                        <span>Highlight your details. (Let it be either personal or professional)</span>
-                                                    </div>
-                                                    <div class="" ng-if="prof_summary != ''">
-                                                        <h4>Description</h4>
-                                                        <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{prof_summary}}" dd-text-collapse-cond="true">{{prof_summary}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Research Start -->
+									
+									<!--  14 Achievements & Awards Start -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/research.png"><span>Research</span><a href="#" ng-click="reset_research_form();" data-target="#research" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                                             </div>
-                                            <div id="research-loader" class="dtl-dis">
+                                            <div id="awards-loader" class="dtl-dis">
                                                 <div class="text-center">
                                                     <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
                                                 </div>
                                             </div>
-                                            <div id="research-body" style="display: none;">
-                                                <div class="dtl-dis" ng-if="user_research.length < '1'">
+                                            <div id="awards-body" style="display: none;">
+                                                <div class="dtl-dis" ng-if="user_award.length < '1'">
                                                     <div class="no-info">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                        <span>Show your analytics skills by adding your research work.</span>
+                                                        <span>Showcase the honour you have achieved to profile.</span>
                                                     </div>
                                                 </div>
-                                                <div class="dtl-dis dis-accor" ng-if="user_research.length > '0'">
-                                                    <div class="panel-group" id="research-accordion" role="tablist" aria-multiselectable="true">
-                                                        <div class="panel panel-default" ng-repeat="u_research in user_research" ng-if="$index <= view_more_research">
-                                                            <div class="panel-heading" role="tab" id="research-{{$index}}">
+                                                <div class="dtl-dis dis-accor" ng-if="user_award.length > '0'">
+                                                    <div class="panel-group" id="award-accordion" role="tablist" aria-multiselectable="true">
+                                                        <div class="panel panel-default" ng-repeat="user_awrd in user_award" ng-if="$index <= view_more_award">
+                                                            <div class="panel-heading" role="tab" id="award-{{$index}}">
                                                                 <div class="panel-title">
                                                                     <div class="dis-left">
                                                                         <div class="dis-left-img">
-                                                                            <span>{{u_research.research_title | limitTo:1 | uppercase}}</span>
+                                                                            <span>{{user_awrd.award_title | limitTo:1 | uppercase}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="dis-middle">
-                                                                        <h4>{{u_research.research_title}}</h4>        
-                                                                        <p ng-if="u_research.research_field == '0'">{{u_research.research_other_field}}</p>
-                                                                        <p ng-if="u_research.research_field != '0'">{{u_research.research_field_txt}}</p>
+                                                                        <h4>{{user_awrd.award_title}}</h4>        
+                                                                        <p>{{user_awrd.award_org}}</p>
                                                                     </div>
                                                                     <div class="dis-right">
-                                                                        <span role="button" ng-click="edit_user_research($index)" class="pr5" ng-if="live_slug == segment2">
+                                                                        <span role="button" ng-click="edit_user_award($index)" class="pr5" ng-if="live_slug == segment2">
                                                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                                         </span>
-                                                                        <span role="button" data-toggle="collapse" data-parent="#research-accordion" href="#research{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                        <span role="button" data-toggle="collapse" data-parent="#award-accordion" href="#award{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
                                                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
                                                                         </span>
                                                                     </div>
                                  
                                                                 </div>
                                                             </div>
-                                                            <div id="research{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="research-{{$index}}">
+                                                            <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
                                                                 <div class="panel-body">
                                                                     <ul class="dis-list list-ul-cus">
-                                                                        <li>
-                                                                            <span>Publishing Date</span> 
-                                                                            <label>{{u_research.research_publish_date_str}}</label>
-                                                                        </li>                                                
-                                                                        <li ng-if="u_research.research_url != '' && u_research.research_url != null">
-                                                                            <span>Website</span>
-                                                                            <div class="dis-list-link">
-                                                                            <a href="{{u_research.research_url}}" target="_self">{{u_research.research_url}}</a>
-                                                                            </div>
+                                                                        <li class="select-preview">
+                                                                            <span>Date</span> 
+                                                                            <label>{{user_awrd.award_date_str}}</label>
                                                                         </li>
                                                                         <li>
                                                                             <span>Description</span>
-                                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{u_research.research_desc}}" dd-text-collapse-cond="true">{{u_research.research_desc}}</label>
+                                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_awrd.award_desc}}" dd-text-collapse-cond="true">{{user_awrd.award_desc}}</label>
                                                                         </li>
-                                                                        <li ng-if="u_research.research_document != '' && u_research.research_document != null">
+                                                                        <li ng-if="user_awrd.award_file != '' && user_awrd.award_file != null">
                                                                             <span>Document</span>
-                                                                            <p class="screen-shot" check-file-ext check-file="{{u_research.research_document}}" check-file-path="<?php echo "'".addslashes(JOB_USER_RESEARCH_UPLOAD_URL)."'"; ?>">
+                                                                            <p class="screen-shot" check-file-ext check-file="{{user_awrd.award_file}}" check-file-path="<?php echo "'".addslashes(JOB_USER_AWARD_UPLOAD_URL)."'"; ?>">
                                                                             </p>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div id="view-more-research" class="about-more" ng-if="user_research.length > '3'">
-                                                            <a href="#" ng-click="research_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                        <div id="view-more-award" class="about-more" ng-if="user_award.length > '3'">
+                                                            <a href="#" ng-click="award_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Research End -->
+                                    <!-- Achievements & Awards End -->
+									
+                                    <!--  15 Extracurricular Activity Start -->
+                                    <div class="gallery-item">
+                                        <div class="dtl-box">
+                                            <div class="dtl-title">
+                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/extra-activity.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-activity" data-toggle="modal" ng-click="reset_activity_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                            </div>
+                                            <div id="activity-loader" class="dtl-dis">
+                                                <div class="text-center">
+                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                                </div>
+                                            </div>
+                                            <div id="activity-body" style="display: none;">
+                                                <div class="dtl-dis" ng-if="user_activity.length < '1'">
+                                                    <div class="no-info">
+                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                        <span>Enter the activities you were involved in apart from studies.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="dtl-dis dis-accor" ng-if="user_activity.length > '0'">
+                                                    <div class="panel-group" id="activity-accordion" role="tablist" aria-multiselectable="true">
+                                                        <div class="panel panel-default" ng-repeat="user_ea in user_activity" ng-if="$index <= view_more_activity">
+                                                            <div class="panel-heading" role="tab" id="activity-{{$index}}">
+                                                                <div class="panel-title">
+                                                                    <div class="dis-left">
+                                                                        <div class="dis-left-img">
+                                                                            <span>{{user_ea.activity_participate | limitTo:1 | uppercase}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="dis-middle">
+                                                                        <h4>{{user_ea.activity_participate}}</h4>        
+                                                                        <p>{{user_ea.activity_org}}</p>
+                                                                    </div>
+                                                                    <div class="dis-right">
+                                                                        <span role="button" ng-click="edit_user_activity($index)" class="pr5" ng-if="live_slug == segment2">
+                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                                        </span>
+                                                                        <span role="button" data-toggle="collapse" data-parent="#activity-accordion" href="#activity{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                                        </span>
+                                                                    </div>
+                                 
+                                                                </div>
+                                                            </div>
+                                                            <div id="activity{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="activity-{{$index}}">
+                                                                <div class="panel-body">
+                                                                    <ul class="dis-list list-ul-cus">
+                                                                        <li class="select-preview">
+                                                                            <span>Duration</span> 
+                                                                            <label>{{user_ea.start_date_str}} to</label>
+                                                                            <label ng-if="user_ea.end_date_str != '' && user_ea.end_date_str != null">{{user_ea.end_date_str}}</label> 
+                                                                            <label ng-if="user_ea.end_date_str == '' || user_ea.end_date_str == null">Currently active</label>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span>Description</span>
+                                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_ea.activity_desc}}" dd-text-collapse-cond="true">{{user_ea.activity_desc}}</label>
+                                                                        </li>
+                                                                        <li ng-if="user_ea.activity_file != '' && user_ea.activity_file != null">
+                                                                            <span>Document</span>
+                                                                            <p class="screen-shot" check-file-ext check-file="{{user_ea.activity_file}}" check-file-path="<?php echo "'".addslashes(JOB_USER_ACTIVITY_UPLOAD_URL)."'"; ?>">
+                                                                            </p>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="view-more-activity" class="about-more" ng-if="user_activity.length > '3'">
+                                                            <a href="#" ng-click="activity_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Extracurricular Activity End -->
                                     
-                                    <!-- Patent Start -->
+									<!--  16 Software  -->
+                                    <div class="gallery-item ">
+                                        <div class="dtl-box">
+                                            <div class="dtl-title">
+                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software</span><a href="#" data-target="#software" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                            </div>
+                                            <div id="software-loader" class="dtl-dis">
+                                                <div class="text-center">
+                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                                </div>
+                                            </div>
+                                            <div id="software-body" style="display: none;">
+                                                <div class="dtl-dis">
+                                                     <div class="no-info" ng-if="user_software.length < '1'">
+                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                        <span>Have you learned to use different software? Add them here.</span>
+                                                    </div>
+                                                    <ul class="skill-list" ng-if="user_software.length > '0'">
+                                                        <li ng-repeat="software in user_software">{{software}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+									<!--  17 resume  -->
+                                    <div class="gallery-item resume-move">
+                                    </div>
+									
+                                    <!--  18 Patent Start -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
@@ -1093,7 +1068,87 @@
                                     </div>
                                     <!-- Patent End -->
                                     
-                                    <!-- Publication Start -->
+                                    <!--  19 Research Start -->
+                                    <div class="gallery-item">
+                                        <div class="dtl-box">
+                                            <div class="dtl-title">
+                                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/research.png"><span>Research</span><a href="#" ng-click="reset_research_form();" data-target="#research" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                            </div>
+                                            <div id="research-loader" class="dtl-dis">
+                                                <div class="text-center">
+                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                                </div>
+                                            </div>
+                                            <div id="research-body" style="display: none;">
+                                                <div class="dtl-dis" ng-if="user_research.length < '1'">
+                                                    <div class="no-info">
+                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                        <span>Show your analytics skills by adding your research work.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="dtl-dis dis-accor" ng-if="user_research.length > '0'">
+                                                    <div class="panel-group" id="research-accordion" role="tablist" aria-multiselectable="true">
+                                                        <div class="panel panel-default" ng-repeat="u_research in user_research" ng-if="$index <= view_more_research">
+                                                            <div class="panel-heading" role="tab" id="research-{{$index}}">
+                                                                <div class="panel-title">
+                                                                    <div class="dis-left">
+                                                                        <div class="dis-left-img">
+                                                                            <span>{{u_research.research_title | limitTo:1 | uppercase}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="dis-middle">
+                                                                        <h4>{{u_research.research_title}}</h4>        
+                                                                        <p ng-if="u_research.research_field == '0'">{{u_research.research_other_field}}</p>
+                                                                        <p ng-if="u_research.research_field != '0'">{{u_research.research_field_txt}}</p>
+                                                                    </div>
+                                                                    <div class="dis-right">
+                                                                        <span role="button" ng-click="edit_user_research($index)" class="pr5" ng-if="live_slug == segment2">
+                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                                        </span>
+                                                                        <span role="button" data-toggle="collapse" data-parent="#research-accordion" href="#research{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                                        </span>
+                                                                    </div>
+                                 
+                                                                </div>
+                                                            </div>
+                                                            <div id="research{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="research-{{$index}}">
+                                                                <div class="panel-body">
+                                                                    <ul class="dis-list list-ul-cus">
+                                                                        <li>
+                                                                            <span>Publishing Date</span> 
+                                                                            <label>{{u_research.research_publish_date_str}}</label>
+                                                                        </li>                                                
+                                                                        <li ng-if="u_research.research_url != '' && u_research.research_url != null">
+                                                                            <span>Website</span>
+                                                                            <div class="dis-list-link">
+                                                                            <a href="{{u_research.research_url}}" target="_self">{{u_research.research_url}}</a>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span>Description</span>
+                                                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{u_research.research_desc}}" dd-text-collapse-cond="true">{{u_research.research_desc}}</label>
+                                                                        </li>
+                                                                        <li ng-if="u_research.research_document != '' && u_research.research_document != null">
+                                                                            <span>Document</span>
+                                                                            <p class="screen-shot" check-file-ext check-file="{{u_research.research_document}}" check-file-path="<?php echo "'".addslashes(JOB_USER_RESEARCH_UPLOAD_URL)."'"; ?>">
+                                                                            </p>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="view-more-research" class="about-more" ng-if="user_research.length > '3'">
+                                                            <a href="#" ng-click="research_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Research End -->
+                                    
+                                    <!--  20 Publication Start -->
                                     <div class="gallery-item">
                                         <div class="dtl-box">
                                             <div class="dtl-title">
@@ -1176,54 +1231,19 @@
                                     </div>
                                     <!-- Publication End -->
                                     
-                                    <!-- Software  -->
-                                    <div class="gallery-item ">
-                                        <div class="dtl-box">
-                                            <div class="dtl-title">
-                                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software</span><a href="#" data-target="#software" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-                                            </div>
-                                            <div id="software-loader" class="dtl-dis">
-                                                <div class="text-center">
-                                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                                </div>
-                                            </div>
-                                            <div id="software-body" style="display: none;">
-                                                <div class="dtl-dis">
-                                                     <div class="no-info" ng-if="user_software.length < '1'">
-                                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                        <span>Have you learned to use different software? Add them here.</span>
-                                                    </div>
-                                                    <ul class="skill-list" ng-if="user_software.length > '0'">
-                                                        <li ng-repeat="software in user_software">{{software}}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
-                                    <!-- Edit Profile -->
-                                    <div class="gallery-item edit-profile-move">
-                                    </div>
+                                    
 
-                                    <!-- skills  -->
-                                    <div class="gallery-item skill-move">
-                                    </div>
+                                    
 
-                                    <!-- Social Link  -->
-                                    <div class="gallery-item social-link-move">
-                                    </div>
+                                    
 
-                                    <!-- language  -->
-                                    <div class="gallery-item language-move">
-                                    </div>
+                                    
 
-                                    <!-- resume  -->
-                                    <div class="gallery-item resume-move">
-                                    </div>
+                                    
 
-                                    <!-- Hobbies  -->
-                                    <div class="gallery-item hobbies-move">
-                                    </div>
+                                    
 
                                 </div>
                             </div>

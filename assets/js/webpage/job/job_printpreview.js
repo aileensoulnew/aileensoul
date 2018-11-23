@@ -734,6 +734,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             $("#language-move").appendTo($(".language-move"));
             $("#resume-move").appendTo($(".resume-move"));
             $("#hobbies-move").appendTo($(".hobbies-move"));
+            $("#job-basic-info-move").appendTo($(".job-basic-info-move"));
             $(".remove-blank").remove();
         }
 
@@ -776,7 +777,17 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
         masonryLayout(document.getElementById('gallery'),
         document.querySelectorAll('.gallery-item'), 2);
         }
+		if (screen.width < 768) {
+			$("#edit-profile-move").appendTo($(".edit-profile-mob"));
+		}
+		
     });
+	
+	$(document).ready(function () {
+		if (screen.width > 1199) {
+			//$(".remove-blank-main").remove();
+		}
+	});
 
     $scope.load_skills = [];
     $scope.loadSkills = function ($query) {

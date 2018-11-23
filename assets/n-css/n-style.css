@@ -11,6 +11,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .middle-section{padding:95px 0 50px;}
 .single-header .middle-section {padding:75px 0 50px;}
 .middle-section-banner{padding:44px 0 0px !important;}
+.old-no-login .middle-section-banner{padding:60px 0 0px !important;}
 .middle-section-banner.new-ld-page{padding:0 !important;}
 .main-message .middle-section {padding:65px 0 0px;}
 .register .middle-section{padding:90px 0 50px;}
