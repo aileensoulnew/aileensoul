@@ -610,7 +610,7 @@
                                                             <span>How far are you wiling to travel? (In km)</span>
                                                             <label>{{preferred_job_info.preferred_travel}} km</label>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="preferred_job_info.work_job_industry > '-1' && (preferred_job_info.work_job_industry_txt || preferred_job_info.work_job_other_industry)">
                                                             <span>Preferred Industry</span>
                                                             <label ng-if="preferred_job_info.work_job_industry != '0'">{{preferred_job_info.work_job_industry_txt}}</label>
                                                             <label ng-if="preferred_job_info.work_job_industry == '0'">{{preferred_job_info.work_job_other_industry}}</label>
