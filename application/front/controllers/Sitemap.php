@@ -2091,6 +2091,18 @@ class Sitemap extends CI_Controller {
                 <changefreq>'.$freq1.'</changefreq>
                 <lastmod>'.$lastmod1.'</lastmod>
                 </url>
+                <url>
+                <loc>'.base_url().'blog</loc>
+                <priority>0.8</priority>
+                <changefreq>'.$freq1.'</changefreq>
+                <lastmod>'.$lastmod1.'</lastmod>
+                </url>
+                <url>
+                <loc>'.base_url().'guest-contributor</loc>
+                <priority>0.8</priority>
+                <changefreq>'.$freq1.'</changefreq>
+                <lastmod>'.$lastmod1.'</lastmod>
+                </url>
                 </urlset>';
         fwrite($myfile1, $txt1);
         fclose($myfile1);
