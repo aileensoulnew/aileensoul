@@ -404,7 +404,11 @@
 						<div class="gallery-item ">
 							<div class="dtl-box edu-info">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>">
+									<span>Educational Info</span>
+									<a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right">
+										<img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>">
+									</a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
@@ -636,7 +640,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/project.png?ver=' . time()) ?>"><span>Portfolio</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>"><span>Portfolio</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
@@ -926,7 +930,7 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list">
@@ -1187,7 +1191,7 @@
 						
 					</div>
 				</div>
-				<div class="right-add">
+			<div class="right-add">
 				
 					
 				<div class="row">
@@ -1795,13 +1799,13 @@
 								
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Company Overview</label>
 									<textarea row="4" type="text" placeholder="Company Overview"></textarea>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 							<label>Services you offer</label>
 							<textarea type="text" placeholder="Services you offer"></textarea>
@@ -1847,7 +1851,7 @@
 							<label class="col-md-12 fw">
 								Company Address
 							</label>
-							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<span class="span-select">
 										<select class="form-control">
@@ -1860,7 +1864,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<span class="span-select">
 										<select class="form-control">
@@ -2014,7 +2018,7 @@
 					</div>
 					<div class="dtl-dis">
 						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<label>Currency</label>
 									<span class="span-select">
@@ -2026,7 +2030,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<label>Amount</label>
 									<input type="text" placeholder="Amount">
