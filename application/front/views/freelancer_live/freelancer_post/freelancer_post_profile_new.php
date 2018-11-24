@@ -317,7 +317,7 @@
                 </div>
             </div>
             
-			<div class="container mobp0">
+			<div class="container tab-plr0">
                 <div class="job-menu-profile mob-none pt-20 job_edit_menu">
                     <a title="<?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?></h3></a>
                     <div class="profile-text pt5">
@@ -348,7 +348,7 @@
              
 				
             </div>
-		<div class="container mob-plr0 pt20">
+		<div class="container tab-plr0 pt20">
 			<div class="all-detail-custom">
 				<div class="custom-user-list">
 					<div class="gallery" id="gallery">
@@ -1190,7 +1190,7 @@
 				<div class="right-add">
 				
 					
-					<div class="row">
+				<div class="row">
 					<div class="dtl-box p10 dtl-adv">
 						<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
 					</div>

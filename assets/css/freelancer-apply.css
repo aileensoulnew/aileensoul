@@ -1680,7 +1680,7 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
     position: absolute!important;
     z-index: 999 !important;
 }
-
+.job_edit_menu{width:100% !important;}
 /***  media query  ***/
 
 @media screen and (max-width: 1279px) {
@@ -1715,6 +1715,7 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
 	.tablate-potrat-add .fw.text-center{text-align:center;}
 	.left_side_posrt{position:absolute;}
 	/***  end add  ***/
+	
 }
 @media screen and (max-width: 1130px) {
     .custom-right {
@@ -1800,8 +1801,8 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
         margin: 0 auto;
     }
     .job-menu-profile {
-        margin-top: 20px;
-        padding-bottom: 10px;
+        margin-top: 25px !important;
+        padding-bottom: 0px;
     }
     .right_left_box_design {
         padding: 9px 12px 12px 12px !important;
