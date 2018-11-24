@@ -281,7 +281,7 @@ class Recruiter_live extends MY_Controller {
         $this->data['metadesc'] = ucwords($this->data['recdata']['rec_firstname']) . ' ' . ucwords($this->data['recdata']['rec_lastname']) .' is Recruiter at '. ucwords($this->data['recdata']['rec_lastname']) .', currently looking to hire candidate from Aileensoul platform. Follow and contact '. ucwords($this->data['recdata']['rec_firstname']) .' to get latest updates about recent job openings.';
         $this->data['reg_id'] = $id;
         if ($userid) {
-            $this->load->view('recruiter_live/rec_profile', $this->data);
+            $this->load->view('recruiter_live/rec_profile_new', $this->data);
         } else {
             redirect(base_url(),"refresh");
             // $this->load->view('recruiter_live/rec_liveprofile', $this->data);

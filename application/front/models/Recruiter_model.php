@@ -577,6 +577,18 @@ class Recruiter_model extends CI_Model {
             // $this->db->insert('ailee_job_reg_search_tmp', $value);
         }
         echo "Done";
-        
+    }
+
+    public function get_rec_basic_info($user_id = '') {
+        $this->db->select("r.rec_id, r.rec_firstname, r.rec_lastname, r.rec_email, r.rec_job_title, r.slug, r.rec_field,it.industry_name as rec_field_txt, r.rec_other_field, r.rec_skills, r.rec_role_res, r.rec_hire_level, r.rec_exp_year, r.rec_exp_month,jt.name as title_name")->from("recruiter r");
+        $this->db->where('r.user_id', $user_id);
+        $this->db->join('job_title jt', 'jt.title_id = r.rec_job_title');
+        $this->db->join('industry_type it', 'it.industry_id = r.rec_field');
+        $this->db->where('r.is_delete','0');
+        $this->db->where('r.re_status' , '1');
+        $query = $this->db->get();
+        echo $this->db->last_query();exit();
+        $result_array = $query->row_array();
+        return $result_array;
     }
 }

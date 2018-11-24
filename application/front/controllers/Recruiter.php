@@ -7147,6 +7147,12 @@ class Recruiter extends MY_Controller {
 	public function create_search_table()
 	{
 		$this->recruiter_model->create_search_table();
+	}
 
+	public function get_rec_basic_info()
+	{
+		$userid = $this->session->userdata('aileenuser');
+		$recruiter_data = $this->recruiter_model->get_rec_basic_info($userid);
+		$ret_arr = array("success"=>1,"recruiter_data"=>$recruiter_data);
 	}
 }
