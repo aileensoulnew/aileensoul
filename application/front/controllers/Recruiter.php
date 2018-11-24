@@ -5870,7 +5870,7 @@ class Recruiter extends MY_Controller {
         	}
         	else
         	{        		
-            	// redirect(base_url());
+            	redirect(base_url());
         	}
         }
         $this->data['title'] = 'Register to Take Benefit of Employment Service Provided by Aileensoul';
