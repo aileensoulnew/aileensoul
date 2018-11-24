@@ -1367,7 +1367,7 @@
 						
 						<div class="row">
 							<label class="col-md-12 fw">Address</label>
-							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<span class="span-select">
 										<select>
@@ -1379,7 +1379,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<span class="span-select">
 										<select>

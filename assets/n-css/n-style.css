@@ -2850,7 +2850,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .job-reg-cus-new .form-group label{color:#7b7b7b;}
 .job-reg-cus-new .form-group label.error{display:none !important;}
 .job-reg-cus-new .fresher_radio label.error{left: 0; top: 30px; display: block; padding-left: 0px !important;}
-.job-reg-cus-new .form-group input{padding-left:0; padding-right:0; border-width: 0 0 1px 0; border-radius: 0; border-color: #d2d2d2; font-size:16px; position:relative; z-index:9; background:transparent;}
+.job-reg-cus-new .form-group .form-control{padding-left:0; padding-right:0; border-width: 0 0 1px 0; border-radius: 0; border-color: #d2d2d2; font-size:16px; position:relative; z-index:9; background:transparent;}
 .job-reg-cus-new #jobseeker_regform .form-group input.error:focus{border-bottom:1px solid #1b8ab9;}
 .job-reg-cus-new #jobseeker_regform .form-group input:focus{box-shadow:none; border:0px; border-bottom:1px solid #1b8ab9;}
 .job-reg-cus-new #jobseeker_regform .form-group input.error{border:0px; border-bottom:1px solid #ff0000;}
@@ -3252,7 +3252,16 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 .guide-form .form-group textarea{border:0; border-bottom:1px solid #d2d2d2; border-radius:0; height:210px;}
 .post-guid-content ul{padding-left:15px;}
 .owl-carousel .owl-stage-outer{width:100%; float:left;}
-
+#guest_form .form-control.error{border-bottom:1px solid #ff0000;}
+#guest_form .form-control.error:focus{border-bottom:1px solid #1b8ab9;}
+#guest_form .form-control.error::-webkit-input-placeholder {color:#FF0000; }
+#guest_form .form-control.error::-moz-placeholder {color:#FF0000;}
+#guest_form .form-control.error:-moz-placeholder {color:#FF0000; }
+#guest_form .form-control.error::-ms-input-placeholder {color:#FF0000;}
+#guest_form .form-control.error:focus::-webkit-input-placeholder {color:#1b8ab9; }
+#guest_form .form-control.error:focus::-moz-placeholder {color:#1b8ab9;}
+#guest_form .form-control.error:focus:-moz-placeholder {color:#1b8ab9; }
+#guest_form .form-control.error:focus::-ms-input-placeholder {color:#1b8ab9;}
 
 /***  media query  ***/
 @media print {
