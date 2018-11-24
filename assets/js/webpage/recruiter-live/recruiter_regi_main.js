@@ -575,6 +575,9 @@ app.controller('recruiterCreateProfileController', function($scope, $http, $loca
                     },
                 },
             },
+            job_title: {
+                required: true,
+            },
             company_name: {
                 required: true,
                 regx: /^[a-zA-Z0-9\s]*[a-zA-Z][a-zA-Z0-9]*[-@./#&+,\w\s]/
@@ -618,6 +621,9 @@ app.controller('recruiterCreateProfileController', function($scope, $http, $loca
                 required: "Email id is required.",
                 email: "Please enter valid email id.",
                 remote: "Email already exists."
+            },
+            job_title: {
+                required: "Current Position is required.",
             },
             company_name: {
                 required: "Company name is required.",
@@ -663,6 +669,7 @@ app.controller('recruiterCreateProfileController', function($scope, $http, $loca
                     $scope.errorFname = success.data.errors.errorFname;
                     $scope.errorLname = success.data.errors.errorLname;
                     $scope.errorEmail = success.data.errors.errorEmail;
+                    $scope.errorJobtitle = success.data.errors.errorJobtitle;
                     $scope.errorCN = success.data.errors.errorCN;
                     $scope.errorCE = success.data.errors.errorCE;
                     $scope.errorCon = success.data.errors.errorCon;

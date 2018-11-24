@@ -5163,6 +5163,13 @@ class Recruiter extends MY_Controller {
 			$contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
 			$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 			$this->load->view('recruiter/rec_reg', $this->data);
+			$datavl = "error";
+				echo json_encode(
+				array(
+					"okmsg" => $datavl,
+					"segment" => "",
+				));
+				exit();	
 		} else {
 			$contition_array = array('user_id' => $userid, 're_status' => '1', 'is_delete' => '0');
 			$recruiter_data = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
@@ -5179,11 +5186,30 @@ class Recruiter extends MY_Controller {
 			$first_name = $this->input->post('first_name');
 			$last_name = $this->input->post('last_name');
 			$email_reg = $this->input->post('email');
+			$job_title = $this->input->post('job_title');
+			if ($job_title != " ") {
+                $contition_array = array('name' => $job_title);
+                $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                if ($jobdata) {
+                    $jobTitleId = $jobdata[0]['title_id'];
+                } else {
+                    $forslug = $this->input->post('job_title');
+                    $data = array(
+                        'name' => ucfirst($this->input->post('job_title')),
+                        'slug' => $this->common->clean($forslug),
+                        'status' => 'draft',
+                    );
+                    if ($userid) {
+                        $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+                    }
+                }
+            }
 			$user_slug = $this->common->set_slug($first_name . '-' . $last_name, 'slug', 'recruiter');
 			$data = array(
 				'rec_firstname' => $first_name,
 				'rec_lastname' => $last_name,
 				'rec_email' => $email_reg,
+				'rec_job_title' => $jobTitleId,
 				'user_id' => $userid,
 				're_comp_name' => $this->input->post('comp_name'),
 				're_comp_email' => $this->input->post('comp_email'),
@@ -5191,6 +5217,7 @@ class Recruiter extends MY_Controller {
 				're_comp_profile' => trim($this->input->post('comp_profile')),
 				're_comp_country' => $this->input->post('country'),
 				're_comp_state' => $this->input->post('state'),
+				're_comp_city' => $this->input->post('city'),
 				're_comp_city' => $this->input->post('city'),
 				'created_date' => date('y-m-d h:i:s'),
 				're_status' => '1',
@@ -5843,7 +5870,7 @@ class Recruiter extends MY_Controller {
         	}
         	else
         	{        		
-            	redirect(base_url());
+            	// redirect(base_url());
         	}
         }
         $this->data['title'] = 'Register to Take Benefit of Employment Service Provided by Aileensoul';
@@ -5871,7 +5898,10 @@ class Recruiter extends MY_Controller {
 	public function recruiter_create_profile()
 	{
 		$userid = $this->session->userdata('aileenuser');
-		$this->data['rec_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+		// $this->data['rec_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+
+		$this->data['rec_data'] = $this->user_model->getLeftboxData($userid);
+
 		$contition_array = array('status' => '1');
 		$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 		$this->load->view('recruiter_live/recruiter_create_profile', $this->data);
@@ -5892,6 +5922,9 @@ class Recruiter extends MY_Controller {
 
 		if (empty($_POST['email']))
 			$errors['errorEmail'] = 'Email is required.';
+
+		if (empty($_POST['job_title']))
+			$errors['errorJobtitle'] = 'Current Position is required.';
 
 		if (empty($_POST['company_name']))
 			$errors['errorCN'] = 'Company name is required.';
@@ -5921,6 +5954,7 @@ class Recruiter extends MY_Controller {
         		$first_name = trim($_POST['first_name']);
 				$last_name = trim($_POST['last_name']);
 				$email = trim($_POST['email']);
+				$job_title = trim($_POST['job_title']);
 				$company_name = trim($_POST['company_name']);
 				$company_email = trim($_POST['company_email']);
 				$company_number = trim($_POST['company_number']);
@@ -5930,10 +5964,29 @@ class Recruiter extends MY_Controller {
 				$city = trim($_POST['city']);
 				$user_slug = $this->common->set_slug($first_name . '-' . $last_name, 'slug', 'recruiter');
 
+				if ($job_title != " ") {
+	                $contition_array = array('name' => $job_title);
+	                $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+	                if ($jobdata) {
+	                    $jobTitleId = $jobdata[0]['title_id'];
+	                } else {
+	                    $forslug = $this->input->post('job_title');
+	                    $data = array(
+	                        'name' => ucfirst($this->input->post('job_title')),
+	                        'slug' => $this->common->clean($forslug),
+	                        'status' => 'draft',
+	                    );
+	                    if ($userid) {
+	                        $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+	                    }
+	                }
+	            }
+            
 				$data = array(
 					'rec_firstname' => $first_name,
 					'rec_lastname' => $last_name,
 					'rec_email' => $email,
+					'rec_job_title' => $jobTitleId,
 					'user_id' => $userid,
 					're_comp_name' => $company_name,
 					're_comp_email' => $company_email,

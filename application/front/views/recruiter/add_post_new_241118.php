@@ -32,10 +32,10 @@
             <!-- MIDDLE SECTION START -->
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container mobp0">
-                    <div class="tab-add">
-                        <?php $this->load->view('banner_add'); ?>
-                    </div>
-                    <h3 class="col-chang cus-chang text-center p20" style="color: #1b8ab9 !important;">Please post your requirement, so that we can recommend you the candidates</h3>
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
+					<h3 class="col-chang cus-chang pt20">Post your requirement, so that we can recommend you the candidates</h3>
                     <div class="cus-add-post">
                         
                         <div class="custom-user-list">
@@ -54,7 +54,7 @@
                             <div class="common-form custom-form">
                                 
 
-                                <div class="job-saved-box rec-edit-post">
+                                <div class="job-saved-box rec-edit-post post-j-c">
 
 
                                     <?php echo form_open(base_url('recruiter/add_post_store'), array('id' => 'artpost', 'name' => 'artpost', 'class' => 'clearfix form_addedit', 'onsubmit' => "return imgval()")); ?>
@@ -69,27 +69,27 @@
                                     <div class="custom-add-box">
 
                                         <h3>Job Detail</h3>
-                                        <div class="p15 fw">
-                                            <fieldset class="full-width"<?php if ($post_name) { ?> class=" error-msg" <?php } ?> >
+                                        <div class="p20 fw">
+                                            <div class="full-width form-group"<?php if ($post_name) { ?> class=" error-msg" <?php } ?> >
                                                 <label class="control-label">Job Title:<span style="color:red">*</span></label>
                                                 <input type="search" tabindex="3" autofocus id="post_name" name="post_name" value="" placeholder="Enter Job Title" style="text-transform: capitalize;" onfocus="var temp_value = this.value; this.value = ''; this.value = temp_value" maxlength="255">
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('post_name'); ?>
-                                            </fieldset>
-                                            <fieldset class="form-group full-width">
+                                            </div>
+                                            <div class="form-group textarea-cus">
                                                 <label class="control-label">Job Description:<span style="color:red">*</span></label>
                                                 <textarea name="post_desc" id="post_desc" tabindex="4" rows="8" cols="50"  placeholder="Enter Job Description" style="resize: none;"></textarea>
 
                                                 <?php echo form_error('post_desc'); ?>
-                                            </fieldset>
-                                            <fieldset class="full-width" <?php if ($skills) { ?> class="error-msg" <?php } ?>>
+                                            </div>
+                                            <div class="form-group" <?php if ($skills) { ?> class="error-msg" <?php } ?>>
                                                 <label class="control-label">Skills: <span style="color:red">*</span></label>
 
                                                 <input id="skills2" name="skills" tabindex="5" size="90" placeholder="Enter Skills">
 
                                                 <?php echo form_error('skills'); ?>
-                                            </fieldset>
-                                            <fieldset class="full-width" <?php if ($industry) { ?> class="error-msg" <?php } ?> class="two-select-box"> 
+                                            </div>
+                                            <div class="form-group" <?php if ($industry) { ?> class="error-msg" <?php } ?> class="two-select-box"> 
                                                 <label>Industry:<span style="color:red">*</span></label>
                                                 <select name="industry" id="industry" tabindex="6" class="industry1">
 
@@ -104,9 +104,9 @@
 
 
                                                 <?php echo form_error('industry'); ?>
-                                            </fieldset>
+                                            </div>
 
-                                            <fieldset class="form-group full-width">
+                                            <div class="form-group textarea-cus">
                                                 <label class="control-label">Interview process:<span class="optional">(optional)</span></label>
 
 
@@ -114,8 +114,10 @@
                                                 <textarea name="interview" id="interview" rows="4" tabindex="7" cols="50"  placeholder="Enter Interview Process" style="resize: none;"></textarea>
 
                                                
-                                            </fieldset>
-                                            <fieldset <?php if ($month) { ?> class="error-msg" <?php } ?> class="two-select-box1">
+                                            </div>
+											<div class="row">
+											<div class="col-md-6 col-sm- col-xs6">
+                                            <div <?php if ($month) { ?> class="error-msg" <?php } ?> class="two-select-box1 form-group">
 
                                                 <label style="cursor:pointer;" class="control-label">Minimum Experience:<span style="color:red">*</span></label>
 
@@ -152,10 +154,11 @@
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('month'); ?>  <?php echo form_error('year'); ?>
 
-                                            </fieldset>
+                                            </div>
+											</div>
+											<div class="col-md-6 col-sm- col-xs6">
 
-
-                                            <fieldset <?php if ($month) { ?> class="error-msg" <?php } ?> class="two-select-box1">
+                                            <div <?php if ($month) { ?> class="error-msg" <?php } ?> class="form-group">
                                                 <label style="cursor:pointer;" class="control-label">Maximum Experience:<span style="color:red">*</span></label>
 
 
@@ -189,19 +192,36 @@
 
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('month'); ?>  <?php echo form_error('year'); ?>
-                                            </fieldset>
+                                            </div>
+											</div>
+											</div>
 
-                                            <fieldset class="rec_check form-group full-width">
+                                            <div class="rec_check form-group">
                                                 <input  type="checkbox" tabindex="10" id="fresher_nme" name="fresher" value="1"><label for="fresher_nme">Fresher can also apply..!   </label> 
-                                            </fieldset>
-                                            <fieldset id="erroe_nn" class="full-width" <?php if ($degree1) { ?> class="error-msg" <?php } ?>>
+                                            </div>
+											<div class="form-group">
+												<label>Hiring level</label>
+												<span class="span-select">
+													<select>
+														<option>Intern</option>
+														<option>Entry-level</option>
+														<option>Associate</option>
+														<option>Mid-senior</option>
+														<option>Director</option>
+														<option>Executive</option>
+													</select>
+												</span>
+											</div>
+                                            <div id="erroe_nn" class="form-group" <?php if ($degree1) { ?> class="error-msg" <?php } ?>>
                                                 <label>Required Education:<span class="optional">(optional)</span></label> 
 
                                                 <input type="search" tabindex="11" autofocus id="education" name="education" value="" placeholder="Education" style="text-transform: capitalize;" onfocus="var temp_value = this.value; this.value = ''; this.value = temp_value" maxlength="255">
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('education'); ?>
-                                            </fieldset>
-                                            <fieldset <?php if ($emp_type) { ?> class="error-msg" <?php } ?> class="two-select-box1">
+                                            </div>
+											<div class="row">
+											<div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div <?php if ($emp_type) { ?> class="error-msg" <?php } ?> class="form-group">
 
                                                 <label style="cursor:pointer;" class="control-label">Employment Type:<span style="color:red">*</span></label>
 
@@ -214,28 +234,35 @@
                                                 </select>
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('emp_type'); ?>  <?php echo form_error('emp_type'); ?>
-                                            </fieldset>
+                                            </div>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-6">
 
-                                            <fieldset class="" <?php if ($position) { ?> class="error-msg" <?php } ?>>
-                                                <label class="control-label">No Of Position:<span style="color:red">*</span> </label>
+                                            <div class="form-group" <?php if ($position) { ?> class="error-msg" <?php } ?>>
+                                                <label class="control-label">No of Position:<span style="color:red">*</span> </label>
                                                 <input name="position_no" type="text"  id="position" value="1" tabindex="13" placeholder="Enter No of position"/>
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('position'); ?>        
-                                            </fieldset>
-                                            <fieldset class="form-group fw">
-                                                <label class="control-label">Last Date For Apply:<span style="color:red">*</span></label>
+                                            </div>
+											</div>
+											</div>
+                                            <div class="form-group fw">
+                                                <label class="control-label">Mention Job Expire Date:<span style="color:red">*</span></label>
 
                                                 <input type="hidden" id="example2" tabindex="14">
 
                                                 <?php echo form_error('last_date'); ?> 
-                                            </fieldset>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="custom-add-box">
                                         <h3>Salary Information</h3>
-                                        <div class="p15 fw">
-                                            <fieldset <?php if ($salary_type) { ?> class="error-msg" <?php } ?> class="two-select-box1">
+										
+                                        <div class="p20 fw">
+										<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div <?php if ($salary_type) { ?> class="error-msg" <?php } ?> class="form-group">
 
                                                 <label style="cursor:pointer;" class="control-label">Salary Type:<span class="optional">(optional)</span></label>
 
@@ -253,8 +280,10 @@
                                                 <span id="fullname-error"></span>
                                                 <?php echo form_error('salary_type'); ?>  <?php echo form_error('salary_type'); ?>
 
-                                            </fieldset>
-                                            <fieldset class="" <?php if ($currency) { ?> class="error-msg" <?php } ?> class="two-select-box"> 
+                                            </div>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group" <?php if ($currency) { ?> class="error-msg" <?php } ?> class="form-group"> 
                                                 <label>Currency:<span class="optional">(optional)</span></label>
                                                 <select name="currency" id="currency" tabindex="18">
 
@@ -267,24 +296,66 @@
 
 
                                                 <?php echo form_error('currency'); ?>
-                                            </fieldset>
-                                            <fieldset class=" " <?php if ($minsal) { ?> class="error-msg" <?php } ?>>
+                                            </div>
+											</div>
+											</div>
+											<div class="row">
+											<div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group" <?php if ($minsal) { ?> class="error-msg" <?php } ?>>
                                                 <label class="control-label">Minimum Salary:<span class="optional">(optional)</span></label>
                                                 <input name="minsal" type="text" id="minsal" placeholder="Enter Minimum Salary" tabindex="19" /><span id="fullname-error"></span>
                                                 <?php echo form_error('minsal'); ?>
-                                            </fieldset>
+                                            </div>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-6">
 
-                                            <fieldset class="" <?php if ($maxsal) { ?> class="error-msg " <?php } ?>>
+                                            <div class="form-group" <?php if ($maxsal) { ?> class="error-msg " <?php } ?>>
                                                 <label class="control-label">Maximum Salary:<span class="optional">(optional)</span></label>
                                                 <input name="maxsal" type="text" id="maxsal" tabindex="20" placeholder="Enter Maximum Salary" /><span id="fullname-error"></span>
                                                 <?php echo form_error('maxsal'); ?>
-                                            </fieldset>
+                                            </div>
+											</div>
+											</div>
                                         </div>
                                     </div>
                                     <div class="custom-add-box">
-                                        <h3>Job Location</h3>
-                                        <div class="p15 fw">
-                                            <fieldset class="fw" <?php if ($country) { ?> class="error-msg" <?php } ?>>
+                                        <h3>Company Details</h3>
+                                        <div class="p20 fw">
+											<div class="form-group">
+												<label>Company Name</label>
+												<input type="text" placeholder="Enter your company name">
+											</div>
+											<div class="row">
+											<div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
+												<label>Company URL</label>
+												<input type="text" placeholder="Enter Company URL">
+											</div>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
+												<label>Work Schedule type</label>
+												<span class="span-select">
+													<select>
+														<option>Day</option>
+														<option>Night</option>
+														<option>Flexible</option>
+														
+													</select>
+												</span>
+											</div>
+											</div>
+											</div>
+											<div class="form-group textarea-cus">
+												<label>About Company Details / Profile</label>
+												<textarea type="text" placeholder="About Company Details / Profile"></textarea>
+											</div>
+											
+											
+											
+										<div class="row">
+											<div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="form-group" <?php if ($country) { ?> class="error-msg" <?php } ?>>
                                                 <label >Country:<span style="color:red">*</span></label>
                                                 <select style="cursor:pointer;" name="country" id="country" tabindex="21">
                                                     <option value="" selected option disabled>Select Country</option>
@@ -299,35 +370,31 @@
                                                     ?>
                                                 </select> 
                                                 <?php echo form_error('country'); ?>
-                                            </fieldset>
-
-                                            <fieldset class="fw" <?php if ($state) { ?> class="error-msg" <?php } ?>>
+                                            </div>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="form-group" <?php if ($state) { ?> class="error-msg" <?php } ?>>
                                                 <label>State:<span style="color:red">*</span></label>
                                                 <select style="cursor:pointer;" name="state" id="state" tabindex="22">
                                                     <option value="">Select Country First</option>
                                                 </select>
                                                 <?php echo form_error('state'); ?> 
-                                            </fieldset>
-
-                                            <fieldset class="fw" <?php if ($city) { ?> class="error-msg" <?php } ?>>
+                                            </div>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="fw form-group" <?php if ($city) { ?> class="error-msg" <?php } ?>>
                                                 <label>City:</label>
                                                 <select style="cursor:pointer;" name="city" id="city" tabindex="23">
                                                     <option value="">Select State First</option>
                                                 </select>
 
-                                            </fieldset>
-
-
-
-
-
-
-
-
-
-
-
-
+                                            </div>
+											</div>
+										</div>
+											<div class="form-group uplod-file">
+												<label>Upload logo</label>
+												<input type="file">
+											</div>
 
 <!--   <fieldset class="full-width" <?php //if ($other_skill) {          ?> class="error-msg" <?php //}          ?> >
     <label class="control-label">Other Skill: --><!-- <span style="color:red">*</span> --><!-- </label>
@@ -370,10 +437,10 @@
 
 
 
-                                            <fieldset  class="hs-submit full-width">
+                                            <fieldset  class="hs-submit full-width pr20 text-center">
 
 
-                                                <input type="submit" title="Post" id="submit" class="add_post_btns" tabindex="25" name="submit" value="Post">
+                                                <input type="submit" title="Post" id="submit" class="btn1" tabindex="25" name="submit" value="Post">
 
                                             </fieldset>
                                         </div>
@@ -384,13 +451,13 @@
                                 <div class="col-md-1">
                                 </div>
                             </div>
-                            <div class="banner-add">
-                                <?php $this->load->view('banner_add'); ?>
-                            </div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
-                        <div class="right-add">
-                            <?php $this->load->view('right_add_box'); ?>
-                        </div>
+						<div class="right-add">
+							<?php $this->load->view('right_add_box'); ?>
+						</div>
 
                     </div>
                 </div>

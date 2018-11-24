@@ -1,4 +1,5 @@
 <!-- NEW HTML DESIGN -->    
+<?php //print_r($leftbox_data);exit(); ?>
 <div class="search-banner cus-search-bnr">
     <div class="container">
         <div class="row banner-main-div">
@@ -33,14 +34,14 @@
                                                echo trim(ucfirst(strtolower($userdata['last_name'])));
                                            }
                                            ?>" id="last_name" />
-                                        <span id="fullname-error"></span>
+                                        <span id="lastname-error"></span>
                                            <?php echo form_error('last_name'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-6">
                                         <input name="email"  type="text" id="email" tabindex="3" placeholder="Email Address*"  value="<?php
                                             if ($email) {
                                                 echo $email;
@@ -50,47 +51,57 @@
                                             ?>" />
                                         <span id="email-error"></span>                                  
                                         <?php echo form_error('email'); ?>
-                                    </div>                                  
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="job_title"  type="text" id="job_title" tabindex="4" placeholder="Current Position*" value="<?php
+                                                if ($leftbox_data['title_name'] != '') {
+                                                    echo $leftbox_data['title_name'];
+                                                }
+                                                else if ($leftbox_data['degree_name'] != '') {
+                                                    echo $leftbox_data['degree_name'];
+                                                }
+                                                ?>"/>
+                                        <span id="jobtitle-error"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6 com-name-r col-sm-6">
-                                        <input name="comp_name" tabindex="4" autofocus type="text" id="comp_name" placeholder="Company Name*"  value="<?php
+                                        <input name="comp_name" tabindex="5" autofocus type="text" id="comp_name" placeholder="Company Name*"  value="<?php
                                                if ($compname) {
                                                    echo $compname;
                                                }
                                                ?>" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"/>
-                                        <span id="fullname-error"></span>
+                                        <span id="cmpname-error"></span>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="comp_num"  type="text" id="comp_num" tabindex="5" placeholder="Company number (optional)" value="<?php
+                                        <input name="comp_num"  type="text" id="comp_num" tabindex="6" placeholder="Company number (optional)" value="<?php
                                                 if ($compnum) {
                                                     echo $compnum;
                                                 }
                                                 ?>"/>
-                                        <span id="email-error"></span>
+                                        <span id="cmpnum-error"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12 email-cus">
-                                        <input name="comp_email" type="text" tabindex="6" id="comp_email" placeholder="Company Email*" value="<?php
+                                        <input name="comp_email" type="text" tabindex="7" id="comp_email" placeholder="Company Email*" value="<?php
                                                     if ($compemail) {
                                                         echo $compemail;
                                                     }
                                                     ?>" />
-                                        <span id="fullname-error"></span>
-                                      
-                                    </div>                                              
+                                        <span id="cmpemail-error"></span>
+                                    </div>                                    
                                 </div>
                             </div>                                  
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <span class="select-field-custom">
-                                            <select tabindex="7" autofocus name="country" id="country">
+                                            <select tabindex="8" autofocus name="country" id="country">
                                                 <option value="">Select Country*</option>
                                                 <?php
                                                 if (count($countries) > 0) {
@@ -115,7 +126,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <span class="select-field-custom">
-                                            <select name="state" id="state" tabindex="8">
+                                            <select name="state" id="state" tabindex="9">
                                                 <?php
                                                  if ($state1) {
                                                      foreach ($states as $cnt) {
@@ -140,7 +151,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <span class="select-field-custom">
-                                            <select name="city" id="city" tabindex="9">
+                                            <select name="city" id="city" tabindex="10">
                                                     <?php
                                                     if ($city1) {
                                                         foreach ($cities as $cnt) {
@@ -178,14 +189,14 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <textarea id="comp_profile" name="comp_profile" placeholder="Company Profile(optional)" maxlength="2000"><?php if ($comp_profile1) { echo $comp_profile1; } ?></textarea>
+                                        <textarea id="comp_profile" name="comp_profile" placeholder="Company Profile(optional)"  tabindex="11" maxlength="2000"><?php if ($comp_profile1) { echo $comp_profile1; } ?></textarea>
                                     </div>                                      
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button id="submit" class="btn1 recruiter_registration" name="submit" tabindex="11" onclick="return reg_loader();">Register <span class="ajax_load pl10" id="recruiter_loader" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                        <button id="submit" class="btn1 recruiter_registration" name="submit" tabindex="12" onclick="return reg_loader();">Register <span class="ajax_load pl10" id="recruiter_loader" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                         <!-- <img id="recruiter_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;"> -->
                                     </div>                                      
                                 </div>

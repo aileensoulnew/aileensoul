@@ -28,13 +28,26 @@
                                         <label ng-show="errorLname" class="error">{{errorLname}}</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-12">
+                                <div class="col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Email*" value="" maxlength="255" ng-model="user.email" ng-init="user.email ='<?php echo $rec_data['email']; ?>'">
                                         <div id="emtooltip" class="tooltip-custom" style="display: none;">
                                             You will get candidate recommendations, messages from candidate, reminders, and promotional emails on provided email id.
                                         </div>
                                         <label ng-show="errorEmail" class="error">{{errorEmail}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="job_title" id="job_title" tabindex="2" placeholder="Current Position*" maxlength="35" ng-model="user.job_title" ng-init="user.job_title ='<?php
+                                                if ($rec_data['title_name'] != '') {
+                                                    echo $rec_data['title_name'];
+                                                }
+                                                else if ($rec_data['degree_name'] != '') {
+                                                    echo $rec_data['degree_name'];
+                                                }
+                                                ?>'">
+                                        <label ng-show="errorJobtitle" class="error">{{errorJobtitle}}</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-6">

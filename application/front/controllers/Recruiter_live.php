@@ -228,7 +228,7 @@ class Recruiter_live extends MY_Controller {
         $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
         if ($recruiter_deactive) {
-            redirect('recruiter/');
+            redirect('recruiter');
         }
         $sql = "SELECT count(*) as totalpost FROM ailee_rec_post where user_id = '$userid'";
         $query = $this->db->query($sql);        
@@ -248,13 +248,13 @@ class Recruiter_live extends MY_Controller {
         // REDIRECT USER TO REMAIN PROFILE END
         if (count($apply_step) >= 0) {
             if ($apply_step[0]['re_step'] == 1) {
-                redirect('recruiter/signup');
+                redirect('recruiter');
             }
             if ($apply_step[0]['re_step'] == 0) {
-                redirect('recruiter/signup');
+                redirect('recruiter');
             }
         } else {
-            redirect('recruiter/signup');
+            redirect('recruiter');
         }
     }
 
