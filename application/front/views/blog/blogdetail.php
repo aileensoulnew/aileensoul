@@ -123,7 +123,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <div class="sub-header">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 mob-p0 col-xs-8 fw-479">
+                            <div class="col-md-8 col-sm-8 mob-p0 col-xs-8 fw-479">
                                 <ul class="sub-menu blog-sub-menu">
                                     <li>
                                     <?php
@@ -202,7 +202,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-sm-6 col-md-6 col-xs-4 blog-search fw-479">
+                            <div class="col-sm-4 col-md-4 col-xs-4 blog-search fw-479">
                                 <div class="job-search-box1 clearfix hidden-479">        
                                     <form action="<?php echo base_url().'blog';?>" method="get" onsubmit="return formCheckMain()">
                                         <fieldset class="sec_h2 ">

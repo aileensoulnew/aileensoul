@@ -1137,7 +1137,7 @@ a:focus{outline:none;}
 	.sub-menu li.dropdown.open::before{width:14px; height:7px; top:25px;}
 	
 	.blog-page header{min-height:40px;}
-	.blog-page .sub-header{top:42px;}
+	.blog-page .sub-header{top:46px;}
 	#pagination.pagination-button{text-align:center;}
 	.pagination-button a{padding-left:10px; padding-right:10px;}
 	.main-login .no_login_footer{position:relative; margin-bottom:0;}
