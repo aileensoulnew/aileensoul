@@ -3609,7 +3609,8 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.sub-header .sub-menu.blog-sub-menu{padding:7px 0 7px;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open .dropdown-menu{top:30px;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open::before{top:17px;}
-	
+	.review-list li .review-right{width:79%;}
+	.press-rel .dis-middle{padding-top: 10px;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -4055,6 +4056,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open::before{top:14px; left:38px;}
 	.blog-page .web-header .sub-header .sub-menu li ul li a{font-size:15px;}
 	.drop-blog-title{font-size:15px;}
+	
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4429,9 +4431,10 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.mob-plr0{padding-left:0; padding-right:0;}
 	.dtl-box{border-radius:0;}
 	.dtl-dis.dis-accor .panel-heading{min-height:50px;}
-	.dis-middle h4{margin-bottom:0; line-height:1;}
+	.dis-middle h4{margin-bottom:0; /*line-height:1;*/}
 	.dis-right .pr5 img{width:16px;}
-	.dis-right img{width:13px;}
+	.job-opening .dis-right a img{width:16px;}
+	.dis-right img{}
 	.dis-right{width:40px;}
 	.edit-user-info a img{width:20px;}
 	.edit-user-info{top:85px; right:9px;}
@@ -4461,7 +4464,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.dtl-modal .modal-content .form-control{font-size:12px;}
 	.dtl-modal .modal-content .form-group textarea{font-size:12px;}
 	.dtl-modal .modal-content .form-group select{font-size:12px;}
-	.dtl-dis h4{font-size:14px;}
+	.dtl-dis h4{font-size:13px;}
 	.dtl-dis .known-language{padding-bottom:10px;}
 	.about-more{font-size:15px;}
 	.about-more a img{width:12px;}
@@ -4485,6 +4488,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.modal-body-cus .rev-img{width:50px;}
 	.modal-body-cus .total-rev-top h4{padding-top:0; font-size:16px; line-height:1.6;}
 	.modal-body-cus .total-rev-top .rating-sm{font-size:18px;}
+	.press-rel .dis-middle{padding-top:8px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

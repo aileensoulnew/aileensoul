@@ -26,7 +26,7 @@
         <section>
            <?php echo $business_common; ?>
             <div class="user-midd-section">
-                <div class="container mob-plr0 pt20">
+                <div class="container tab-plr0 pt20">
                     <div class="all-detail-custom">
                         <div class="custom-user-list">
 							<div class="tab-add-991">
@@ -58,7 +58,7 @@
 											2018
 										</li>
 										<li>
-											<span>Specialties / Extra Benefits / Ambience / Facilities Tags</span>
+											<span>Specialties / Extra Benefits / Ambience/ Facilities Tags</span>
 											Lorem ipsum
 										</li>
 										
@@ -212,7 +212,7 @@
 														
 													</div>
 													<div class="dis-right">
-														<a href="#" data-target="#dtl-project" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a href="#" data-target="#bus-portfolio" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
 														<a role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project1" aria-expanded="false" aria-controls="project1" class="collapsed">
 															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
 														</a>
@@ -253,7 +253,7 @@
 														
 													</div>
 													<div class="dis-right">
-														<a href="#" data-target="#dtl-project" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a href="#" data-target="#bus-portfolio" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
 														<a role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project2" aria-expanded="false" aria-controls="project2" class="collapsed">
 															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
 														</a>
@@ -311,7 +311,7 @@
 														
 													</div>
 													<div class="dis-right">
-														<a href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>n-images/detail/detial-edit.png"></a>
+														<a href="#" data-target="#member-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>n-images/detail/detial-edit.png"></a>
 														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp1" aria-expanded="false" aria-controls="exp1" class="collapsed up-down">
 															<img src="<?php echo base_url('assets/n-images/detail/
 															down-arrow.png?ver=' . time()) ?>">
@@ -366,7 +366,7 @@
 														
 													</div>
 													<div class="dis-right">
-														<a href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+														<a href="#" data-target="#member-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
 														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp2" aria-expanded="false" aria-controls="exp2" class="collapsed up-down">
 															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
 														</a>
@@ -490,7 +490,7 @@
 						
 						<!-- 09 Job Openings  -->
 						<div class="gallery-item">
-							<div class="dtl-box">
+							<div class="dtl-box job-opening">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-opning.png?ver=' . time()) ?>"><span>Job Openings </span><a href="#" data-target="#" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
@@ -886,7 +886,7 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
-									<label>Specialties / Extra Benefits / Facilities</label>
+									<label>Specialties / Extra Benefits<span class="hidden-xs"> / Facilities</span></label>
 									<input type="text" placeholder="Extra Benefits-tags">
 								</div>
 							</div>
@@ -1080,7 +1080,7 @@
 							<textarea type="text" placeholder="Street Address"></textarea>
 						</div>
 						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<label>Country</label>
 									<span class="span-select">
@@ -1094,7 +1094,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<label>State</label>
 									<span class="span-select">
@@ -1108,7 +1108,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 								<div class="form-group">
 									<label>City</label>
 									<span class="span-select">
@@ -1323,7 +1323,7 @@
 							</span>
 						</div>
 						<div class="row">
-							<div class="col-md-5 col-sm-5 col-xs-5 ">
+							<div class="col-md-5 col-sm-5 col-xs-5 fw-479">
 								<div class="form-group">
 									<label>Hours of Operation </label>
 									<span class="span-select">
@@ -1335,7 +1335,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3">
+							<div class="col-md-3 col-sm-3 col-xs-5">
 								<div class="form-group">
 									<label>Time</label>
 									<span class="span-select">
@@ -1348,7 +1348,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3">
+							<div class="col-md-3 col-sm-3 col-xs-5">
 								<div class="form-group">
 									<label>Time</label>
 									<span class="span-select">
@@ -1361,7 +1361,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-1 col-sm-1 col-xs-1">
+							<div class="col-md-1 col-sm-1 col-xs-2">
 								<div class="form-group">
 									
 									<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>

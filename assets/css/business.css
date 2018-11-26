@@ -2045,7 +2045,7 @@ label.cameraButton:active{
     font-size:28px
 }
 .form-group{
-    margin-bottom:0
+   /* margin-bottom:0*/
 }
 .close:focus,.close:hover{
     color:#000;
