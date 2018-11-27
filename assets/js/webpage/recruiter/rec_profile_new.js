@@ -279,7 +279,7 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
     $scope.$parent.title = "Details | Aileensoul";
     $scope.rec_skills_list = [];
     // $scope.old_count_profile = 0;
-    // $scope.user_id = user_id;
+    $scope.user_id = user_id;
     // $scope.live_slug = live_slug;    
     // $scope.user_slug = user_data_slug;    
     // $scope.segment2 = segment2;
@@ -292,11 +292,13 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
         },1000);        
     }
 
+    //Recruiter Basic Info Start
     $scope.get_rec_basic_info = function(){
+        var userdata = $.param({'user_id': user_id});
         $http({
             method: 'POST',
             url: base_url + 'recruiter/get_rec_basic_info',            
-            //data: ,//Pratik
+            data: userdata,//Pratik
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (result) {
@@ -321,4 +323,404 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
         });
     };
     $scope.get_rec_basic_info();
+
+    $scope.rec_other_field_fnc = function()
+    {
+        if($scope.rec_field == 0 && $scope.rec_field != "")
+        {
+            $("#rec_other_field_div").show();
+        }
+        else
+        {
+            $("#rec_other_field_div").hide();
+        }
+    };
+
+    $scope.rec_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.rec_jotitle,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.edit_rec_basic_info = function(){
+        $("#rec_firstname").val($scope.rec_basic_info.rec_firstname);
+        $("#rec_lastname").val($scope.rec_basic_info.rec_lastname);
+        $("#rec_jotitle").val($scope.rec_basic_info.title_name);
+        $("#rec_field").val($scope.rec_basic_info.rec_field);
+        $scope.rec_field = $scope.rec_basic_info.rec_field;
+        if($scope.rec_basic_info.rec_field == 0)
+        {
+            $("#rec_other_field_div").show();
+            $("#rec_other_field").val($scope.rec_basic_info.rec_other_field);
+        }
+        var rec_skills = "";
+        if($scope.rec_basic_info.rec_skills_txt.trim() != "")
+        {
+            var rec_skills = $scope.rec_basic_info.rec_skills_txt.split(',');
+        }
+        var edit_rec_skills = [];
+        if(rec_skills.length > 0)
+        {                    
+            rec_skills.forEach(function(element,cityIndex) {
+              edit_rec_skills[cityIndex] = {"name":element};
+            });
+        }
+        $scope.rec_skill_list = edit_rec_skills;
+        
+        $("#rec_role_res").val($scope.rec_basic_info.rec_role_res);
+        $("#rec_hire_level").val($scope.rec_basic_info.rec_hire_level);
+        $("#rec_exp_year").val($scope.rec_basic_info.rec_exp_year);
+        $("#rec_exp_month").val($scope.rec_basic_info.rec_exp_month);
+    };
+
+    $scope.load_skills = [];
+    $scope.loadSkills = function ($query) {
+        return $http.get(base_url + 'userprofile_page/get_skills', {cache: true}).then(function (response) {
+            var load_skills = response.data;
+            return load_skills.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.rec_info_validate = {
+        rules: {
+            rec_firstname: {
+                required: true,
+            },
+            rec_lastname: {
+                required: true,
+            },            
+            rec_jotitle: {
+                required: true,
+            },
+            rec_field: {
+                required: true,
+            },
+            rec_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#rec_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            rec_role_res: {
+                required: true,
+            },
+            rec_hire_level: {
+                required: true,
+            },
+            rec_exp_year: {
+                required: true,
+            },
+            rec_exp_month: {
+                required: true,
+            },
+        },
+        messages: {
+            rec_firstname: {
+                required: "Please enter first name",
+            },
+            rec_lastname: {
+                required: "Please enter last name",
+            },
+            rec_jotitle: {
+                required: "Please enter job title",
+            },
+            rec_field: {
+                required: "Please select field",
+            },
+            rec_role_res: {
+                required: "Please enter role and responsibilities",
+            },
+            rec_hire_level: {
+                required: "Please select hired levels",
+            },
+            rec_exp_year: {
+                required: "Please select experience",
+            },
+            rec_exp_month: {
+                required: "Please select experience",
+            },
+        },
+    };
+    $scope.validate_rec_skills = function(){        
+        if($scope.rec_skill_list == "" || $scope.rec_skill_list == undefined)
+        {
+            $("#rec_skill_list .tags").attr("style","border:1px solid #ff0000;");
+            setTimeout(function(){
+                $("#rec_skill_err").attr("style","display:block;");            
+            },100);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.rec_skills_fnc = function(){
+        // $("#exp_designation input").removeClass("error");
+        $("#rec_skill_list .tags").removeAttr("style");
+        $("#rec_skill_err").attr("style","display:none;");
+    };
+    $scope.save_rec_info = function(){
+        var rec_skills = $scope.validate_rec_skills();
+        if ($scope.rec_info_form.validate() && rec_skills)
+        {
+            $("#rec_info_loader").show();
+            $("#save_rec_info").attr("style","pointer-events:none;display:none;");
+            
+            var rec_firstname = $("#rec_firstname").val();
+            var rec_lastname = $("#rec_lastname").val();
+            var rec_jotitle = $("#rec_jotitle").val();
+            var rec_field = $scope.rec_field;
+            var rec_other_field = $("#rec_other_field").val();
+            var rec_skill_list = $scope.rec_skill_list;
+            var rec_role_res = $("#rec_role_res").val();
+            var rec_hire_level = $('#rec_hire_level option:selected').val();
+            var rec_exp_year = $('#rec_exp_year option:selected').val();
+            var rec_exp_month = $('#rec_exp_month option:selected').val();
+
+            var updatedata = $.param({'rec_firstname':rec_firstname,'rec_lastname':rec_lastname,'rec_jotitle':rec_jotitle,'rec_field':rec_field,'rec_other_field':rec_other_field,'rec_skill_list':rec_skill_list,"rec_role_res":rec_role_res,"rec_hire_level":rec_hire_level,"rec_exp_year":rec_exp_year,"rec_exp_month":rec_exp_month});
+            $http({
+                method: 'POST',
+                url: base_url + 'recruiter/save_rec_info',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.rec_basic_info = result.data.recruiter_data;
+                    $(".job-menu-profile a h3").html($scope.rec_basic_info.rec_firstname+' '+$scope.rec_basic_info.rec_lastname)
+                }
+                $("#save_rec_info").removeAttr("style");
+                $("#rec_info_loader").hide();
+                $("#job-basic-info").modal('hide');
+                // var profile_progress = result.data.profile_progress;
+                // var count_profile_value = profile_progress.user_process_value;
+                // var count_profile = profile_progress.user_process;
+                // $scope.progress_status = profile_progress.progress_status;
+                // $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+    //Recruiter Basic Info End
+
+    //Recruiter Company Start
+    $scope.get_country = function () {
+        $http({
+            method: 'GET',
+            url: base_url + 'userprofile_page/get_country',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {
+            $scope.rec_country_list = data.data;
+        });
+    };
+    $scope.get_country();
+
+    $scope.re_comp_country_change = function() {
+        $("#re_comp_state").attr("disabled","disabled");
+        $("#re_comp_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.re_comp_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#re_comp_state").removeAttr("disabled");
+            $("#re_comp_city").attr("disabled","disabled");
+            $("#re_comp_state_loader").hide();
+            $scope.re_comp_state_list = data.data;
+            $scope.re_comp_city_list = [];
+        });
+    }
+
+    $scope.re_comp_state_change = function() {
+        if($scope.re_comp_state != "" && $scope.re_comp_state != 0 && $scope.re_comp_state != null)
+        {
+            $("#re_comp_city").attr("disabled","disabled");
+            $("#re_comp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.re_comp_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#re_comp_city").removeAttr("disabled");
+                $("#re_comp_city_loader").hide();
+                $scope.re_comp_city_list = data.data;
+            });
+        }
+    }
+    $scope.get_rec_company_info = function(){
+        var userdata = $.param({'user_id': user_id});
+        $http({
+            method: 'POST',
+            url: base_url + 'recruiter/get_rec_company_info',            
+            data: userdata,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.rec_comp_data = result.data.rec_comp_data;
+                if($scope.rec_comp_data.re_comp_other_activity != '')
+                {
+                    $scope.re_comp_other_activity_list = $scope.rec_comp_data.re_comp_other_activity.split(',');
+                }
+                $("#rec-comp-loader").hide();
+                $("#rec-comp-body").show();                               
+            }
+            // var profile_progress = result.data.profile_progress;
+            // var count_profile_value = profile_progress.user_process_value;
+            // var count_profile = profile_progress.user_process;
+            // $scope.progress_status = profile_progress.progress_status;
+            // $scope.set_progress(count_profile_value,count_profile);
+            // load_add_detail();
+        });
+    };
+    $scope.get_rec_company_info();
+
+    $scope.re_comp_other_field_fnc = function()
+    {
+        if($scope.re_comp_field == 0 && $scope.re_comp_field != "")
+        {
+            $("#re_comp_field_div").show();
+        }
+        else
+        {
+            $("#re_comp_field_div").hide();
+        }
+    };
+
+    $scope.edit_rec_comp_info = function(){
+        $("#re_comp_name").val($scope.rec_comp_data.re_comp_name);
+        $("#re_comp_email").val($scope.rec_comp_data.re_comp_email);
+        $("#re_comp_phone").val($scope.rec_comp_data.re_comp_phone > 0 ? $scope.rec_comp_data.re_comp_phone : '');
+        $("#re_comp_site").val($scope.rec_comp_data.re_comp_site);
+        $("#re_comp_size").val($scope.rec_comp_data.re_comp_size > 0 ? $scope.rec_comp_data.re_comp_size:'');
+        if($scope.rec_comp_data.re_comp_field > -1)
+        {            
+            $("#re_comp_field").val($scope.rec_comp_data.re_comp_field);
+            $scope.re_comp_field = $scope.rec_comp_data.re_comp_field;
+            if($scope.rec_comp_data.re_comp_field == 0)
+            {
+                $("#re_comp_field_div").show();
+                $("#re_comp_other_field").val($scope.rec_comp_data.re_comp_other_field);
+            }
+        }
+        else
+        {
+            $scope.re_comp_field = "";
+        }
+        $("#re_comp_culture").val($scope.rec_comp_data.re_comp_culture);
+
+        var re_comp_other_arr = "";
+        if($scope.rec_comp_data.re_comp_other_activity.trim() != "")
+        {
+            var re_comp_other_arr = $scope.rec_comp_data.re_comp_other_activity.split(',');
+        }
+        var edit_re_comp_other_activity = [];
+        if(re_comp_other_arr.length > 0)
+        {                    
+            re_comp_other_arr.forEach(function(element,cityIndex) {
+              edit_re_comp_other_activity[cityIndex] = {"activity":element};
+            });
+        }
+        $scope.re_comp_other_activity_txt = edit_re_comp_other_activity;
+
+        $("#re_comp_profile").val($scope.rec_comp_data.re_comp_profile);
+
+        $scope.re_comp_country = $scope.rec_comp_data.re_comp_country;
+        $("#re_comp_country").val($scope.rec_comp_data.re_comp_country);
+        // $scope.exp_country_change();
+        var counrtydata = $.param({'country_id': $scope.re_comp_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#re_comp_state").removeAttr("disabled");
+            $("#re_comp_city").attr("disabled","disabled");
+            $("#re_comp_state_loader").hide();
+            $scope.re_comp_state_list = data.data;
+            $scope.re_comp_city_list = [];
+            $scope.re_comp_state = $scope.rec_comp_data.re_comp_state;
+
+            $("#re_comp_city").attr("disabled","disabled");
+            $("#re_comp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.re_comp_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#re_comp_city").removeAttr("disabled");
+                $("#re_comp_city_loader").hide();
+                $scope.re_comp_city_list = data.data;
+                $scope.re_comp_city = $scope.rec_comp_data.re_comp_city;
+            });        
+        });
+
+        var comp_logo_name =  $scope.rec_comp_data.comp_logo;        
+        $scope.comp_logo_old = comp_logo_name;
+        if(comp_logo_name != null && comp_logo_name.trim() != "")
+        {
+            var filename_arr = comp_logo_name.split('.');
+            // console.log(filename_arr);
+            //console.log(filename_arr[filename_arr.length - 1]);
+            $("#logo_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+
+            var inner_html = '<p id="logo_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+rec_profile_thumb_upload_url+comp_logo_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#re_comp_logo_error"));
+            $compile(contentTr)($scope);
+        }
+    };
+
+    var re_comp_formdata = new FormData();
+    $(document).on('change','#re_comp_logo', function(e){
+        $("#re_comp_logo_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#re_comp_logo_error").html("File size must be less than 10MB.");
+            $("#re_comp_logo_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                re_comp_formdata.append('re_comp_logo', $('#re_comp_logo')[0].files[0]);
+            }
+            else {
+                $("#re_comp_logo_error").html("Invalid file selected.");
+                $("#re_comp_logo_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+    //Recruiter Company End
 });

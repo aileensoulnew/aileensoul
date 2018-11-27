@@ -4,15 +4,9 @@
 	<title><?php echo $title; ?></title>
 	<meta name="description" content="<?php echo $metadesc; ?>" />
 	<?php echo $head; ?>
-	<?php
-	if (IS_REC_CSS_MINIFY == '0') { ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
-		<?php
-	} else { ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
-	<?php }?>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <style type="text/css">
@@ -265,7 +259,10 @@
 					<!-- Basic information  -->
 					<div class="dtl-box">
 						<div class="dtl-title">
-							<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+							<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span>
+							<?php if ($this->uri->segment(3) == $userid) { ?>
+							<a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right" ng-click="edit_rec_basic_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+							<?php } ?>
 						</div>
 						<div id="rec-info-loader" class="dtl-dis">
                             <div class="text-center">
@@ -316,59 +313,77 @@
 					<!-- Company Details  -->
 					<div class="dtl-box">
 						<div class="dtl-title">
-							<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Details</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+							<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Details</span>
+							<?php if ($this->uri->segment(3) == $userid) { ?>
+							<a href="#" data-target="#experience" data-toggle="modal" class="pull-right" ng-click="edit_rec_comp_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+							<?php } ?>
 						</div>
-						<div class="dtl-dis">
-							<ul class="dis-list">
-								<li>
-									<span>Company Name</span>
-									Verve system pvt ltd
-								</li>
-								<li>
-									<span>Company Email Id</span>
-									info@verve.com
-								</li>
-								<li>
-									<span>Company Phone number</span>
-									+91 9874563210
-								</li>
-								<li>
-									<span>Company Website URL</span>
-									<a href="#">www.vervesystem.com</a>
-								</li>
-								<li>
-									<span>Company Size</span>
-									108
-								</li>
-								<li>
-									<span>Industry Type </span>
-									IT Sector
-								</li>
-								<li>
-									<span>Company Culture </span>
-									Corporate
-								</li>
-								<li>
-									<span>Company Location</span>
-									Ahmedabad , Gujarat , India
-								</li>
-								<li>
-									<span>Company Profile</span>
-									With jQuery, I am looking to find the anchor tag in div i.e. div1 anchor tag. I need to add a class to it on button click. Follow Answer ...
-								</li>
-								<li>
-									<span>Other Activities</span>
-									<ul class="skill-list">
-										<li>Plying game</li>
-										<li>Annual function</li>
-										<li>Csr activity</li>
-									</ul>
-								</li>
-								<li>
-									<span>Company Logo</span>
-									<img style="width:50px;" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>">
-								</li>
-							</ul>
+						<div id="rec-comp-loader" class="dtl-dis">
+                            <div class="text-center">
+                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                            </div>
+                        </div>
+                        <div id="rec-comp-body" style="display: none;">
+							<div class="dtl-dis">
+								<ul class="dis-list">
+									<li ng-if="rec_comp_data.re_comp_name">
+										<span>Company Name</span>
+										<label>{{rec_comp_data.re_comp_name}}</label>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_email">
+										<span>Company Email Id</span>
+										<label>{{rec_comp_data.re_comp_email}}</label>
+									</li ng-if="rec_comp_data.re_comp_phone">
+									<li ng-if="rec_comp_data.re_comp_phone > '0'">
+										<span>Company Phone number</span>
+										<label>{{rec_comp_data.re_comp_phone}}</label>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_site">
+										<span>Company Website URL</span>
+										<a href="{{rec_comp_data.re_comp_site}}">{{rec_comp_data.re_comp_site}}</a>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_size > '0'">
+										<span>Company Size</span>
+										<label>{{rec_comp_data.re_comp_size}}</label>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_field > '-1'">
+										<span>Industry Type </span>
+										<label>{{rec_comp_data.re_comp_field_txt}}</label>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_culture > '0'">
+										<span>Company Culture</span>
+										<label ng-if="rec_comp_data.re_comp_culture == '1'">Traditional</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '2'">Corporate</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '3'">Start</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '4'">Free Spirit</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '5'">Don't Specify</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '6'">Others</label>
+									</li>
+									<li>
+										<span>Company Location</span>
+										<label>{{rec_comp_data.city_name}}
+										{{rec_comp_data.city_name != '' && rec_comp_data.state_name != '' ? ', ':''}}
+										{{rec_comp_data.state_name}}
+										{{rec_comp_data.state_name != '' && rec_comp_data.country_name != '' ? ', ':''}}
+										{{rec_comp_data.country_name}}</label>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_profile != ''">
+										<span>Company Profile</span>
+										<label>{{rec_comp_data.re_comp_profile}}</label>
+									</li>
+									<li ng-if="rec_comp_data.re_comp_other_activity != ''">
+										<span>Other Activities</span>
+										<ul class="skill-list" ng-if="re_comp_other_activity_list.length > '0'">
+											<li ng-repeat="rec_activity in re_comp_other_activity_list">{{rec_activity}}</li>
+										</ul>
+									</li>
+									<li ng-if="rec_comp_data.comp_logo">
+										<span>Company Logo</span>
+										<a href="<?php echo REC_PROFILE_THUMB_UPLOAD_URL; ?>{{rec_comp_data.comp_logo}}" target="_self">
+										<img style="width:50px;" src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL; ?>{{rec_comp_data.comp_logo}}"></a>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -405,98 +420,124 @@
 					<div class="dtl-title">
 						<span>Basic Information</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>First Name</label>
-									<input type="text" placeholder="First Name">
+					<form name="rec_info_form" id="rec_info_form" ng-validate="rec_info_validate">
+						<div class="dtl-dis">
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>First Name</label>
+										<input type="text" placeholder="First Name" id="rec_firstname" name="rec_firstname">
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Last Name</label>
+										<input type="text" placeholder="Last Name" id="rec_lastname" name="rec_lastname">
+									</div>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Last Name</label>
-									<input type="text" placeholder="Last Name">
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Current Position</label>
+										<!-- <input type="text" placeholder="Current Position" id="rec_jotitle" name="rec_jotitle"> -->
+										<input type="text" placeholder="Enter Job Title" id="rec_jotitle" name="rec_jotitle" ng-model="rec_jotitle" ng-keyup="rec_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Current Position </label>
-									<input type="text" placeholder="Current Position">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Industry Hired For</label>
-									<span class="span-select">
-										<select>
-											<option>industry name</option>
-											<option>IT sector</option>
-											<option>Factory</option>
-											<option>Industry</option>
-										</select>
-									</span>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Industry Hired For</label>
+										<span class="span-select">
+											<?php $getFieldList = $this->data_model->getNewFieldList();?>
+	                                        <select name="rec_field" id="rec_field" ng-model="rec_field" ng-change="rec_other_field_fnc()">
+	                                                <option value="">Select Field</option>
+	                                            <?php foreach ($getFieldList as $key => $value) { ?>
+	                                                <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+	                                            <?php } ?>
+	                                            <option value="0">Other</option>
+	                                        </select>
+										</span>
 
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label>Skills Hired For</label>
-							<input type="text" placeholder="Role & Responsibilities">
-						</div>
-						<div class="form-group">
-							<label>Role & Responsibilities</label>
-							<textarea type="text" placeholder="Role & Responsibilities"></textarea>
-						</div>
-						<div class="form-group">
-							<label>Hired Levels</label>
-							<span class="span-select">
-								<select>
-									<option>Intern</option>
-									<option>Entry-level</option>
-									<option>Associate</option>
-									<option>Mid-senior</option>
-									<option>Director</option>
-									<option>Executive</option>
-								</select>
-							</span>
-						</div>
-						<div class="">
+							<div id="rec_other_field_div" class="row" style="display: none;">
+								<div class="col-md-6 col-sm-6"></div>
+	                            <div class="col-md-6 col-sm-6">
+	                                <div class="form-group">
+	                                <label>Other Field</label>
+	                                <input type="text" placeholder="Enter Other Field" id="rec_other_field" name="rec_other_field" ng-model="rec_other_field">
+	                                </div>
+	                            </div>                            
+	                        </div>
 							<div class="form-group">
-								<label>Total Experience</label>
-								<div class="row">
-									<div class="col-md-6 col-sm-6 col-xs-6">
-										<span class="span-select">
-											<select>
-												<option>Year</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-											</select>
-										</span>
-									</div>
-									<div class="col-md-6 col-sm-6 col-xs-6">
-										<span class="span-select">
-											<select>
-												<option>Month</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-											</select>
-										</span>
+								<label>Skills Hired For</label>
+								<!-- <input type="text" placeholder="Skills Hired"> -->
+								<tags-input id="rec_skill_list" ng-model="rec_skill_list" display-property="name" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" ng-keyup="rec_skills_fnc()">
+                                    <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                </tags-input>                        
+                                <script type="text/ng-template" id="title-template">
+                                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                </script>
+                                <script type="text/ng-template" id="title-autocomplete-template">
+                                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                </script>
+                                <label id="rec_skill_err" for="rec_skill_list" class="error" style="display: none;">Please enter skills</label>
+							</div>
+							<div class="form-group">
+								<label>Role & Responsibilities</label>
+								<textarea type="text" placeholder="Role & Responsibilities" id="rec_role_res" name="rec_role_res"></textarea>
+							</div>
+							<div class="form-group">
+								<label>Hired Levels</label>
+								<span class="span-select">
+									<select id="rec_hire_level" name="rec_hire_level">
+										<option value="">Select Hired Levels</option>
+										<option value="1">Intern</option>
+										<option value="2">Entry-level</option>
+										<option value="3">Associate</option>
+										<option value="4">Mid-senior</option>
+										<option value="5">Director</option>
+										<option value="6">Executive</option>
+									</select>
+								</span>
+							</div>
+							<div class="">
+								<div class="form-group">
+									<label>Total Experience</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select id="rec_exp_year" name="rec_exp_year">
+													<option value="">Year</option>
+													<?php for($y=1;$y<=20;$y++){ ?>
+														<option value="<?php echo $y; ?>"><?php echo $y; ?></option>
+													<?php } ?>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select id="rec_exp_month" name="rec_exp_month">
+													<option value="">Month</option>
+													<?php for($m=1;$m<=11;$m++){ ?>
+														<option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+													<?php } ?>
+												</select>
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
+						<div class="dtl-btn">
+							<!-- <a href="#" class="save"><span>Save</span></a> -->
+							<a id="save_rec_info" href="#" ng-click="save_rec_info()" class="save"><span>Save</span></a>
+                            <div id="rec_info_loader" class="dtl-popup-loader" style="display: none;">
+                                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                            </div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -511,136 +552,145 @@
 					<div class="dtl-title">
 						<span>Company Details</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Company Name</label>
-							<input type="text" placeholder="Enter Company Name">
-						</div>
-
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Company Email Id</label>
-									<input type="text" placeholder="Enter Company Website">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Company Phone number</label>
-									<input type="text" placeholder="Enter Company Website">
-								</div>
+					<form name="rec_comp_form" id="rec_comp_form" ng-validate="rec_comp_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<label>Company Name</label>
+								<input type="text" placeholder="Enter Company Name" id="re_comp_name" name="re_comp_name">
 							</div>
 
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Company Website URL</label>
-									<input type="text" placeholder="Enter Company Website">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Company Size</label>
-									<input type="text" placeholder="Enter Company Website">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Industry Type </label>
-									<span class="span-select">
-										<select>
-											<option>Select Field</option>
-											<option>It Field</option>
-											<option>Design</option>
-											<option>Advertizing</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Company Culture </label>
-									<span class="span-select">
-										<select>
-											<option>Traditional</option>
-											<option>Corporate</option>
-											<option>Start-Up</option>
-											<option>Free Spirit</option>
-											<option>Don't Specify</option>
-											<option>others</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="dtl-dob ">
-							<label>Company Location</label>
 							<div class="row">
-								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>Country</option>
-											<option>America</option>
-											<option>India</option>
-											<option>Japan</option>
-										</select>
-									</span>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Company Email Id</label>
+										<input type="text" placeholder="Enter Company Website" id="re_comp_email" name="re_comp_email">
+									</div>
 								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Company Phone number</label>
+										<input type="text" placeholder="Enter Phone number" id="re_comp_phone" name="re_comp_phone">
+									</div>
 								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>State</option>
-											<option>Gujrat</option>
-											<option>Delhi</option>
-											<option>Rajsthaan</option>
-										</select>
-									</span>
+
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Company Website URL</label>
+										<input type="text" placeholder="Enter Company Website" id="re_comp_site" name="re_comp_site">
+									</div>
 								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Company Size</label>
+										<input type="text" placeholder="Enter Company Website" id="re_comp_size" name="re_comp_size">
+									</div>
 								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>City</option>
-											<option>Ahmedabad</option>
-											<option>Rajkot</option>
-											<option>Junagadh</option>
-										</select>
-									</span>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Industry Type </label>
+										<span class="span-select">
+											<?php $getFieldList = $this->data_model->getNewFieldList();?>
+	                                        <select name="re_comp_field" id="re_comp_field" ng-model="re_comp_field" ng-change="re_comp_other_field_fnc()">
+	                                                <option value="">Select Field</option>
+	                                            <?php foreach ($getFieldList as $key => $value) { ?>
+	                                                <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+	                                            <?php } ?>
+	                                            <option value="0">Other</option>
+	                                        </select>
+										</span>
+									</div>
 								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Company Culture </label>
+										<span class="span-select">
+											<select id="re_comp_culture" name="re_comp_culture">
+												<option value="">Select Company Culture</option>
+												<option value="1">Traditional</option>
+												<option value="2">Corporate</option>
+												<option value="3">Start-Up</option>
+												<option value="4">Free Spirit</option>
+												<option value="5">Don't Specify</option>
+												<option value="0">Others</option>
+											</select>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div id="re_comp_field_div" class="row" style="display: none;">
+	                            <div class="col-md-6 col-sm-6">
+	                                <div class="form-group">
+	                                <label>Other Field</label>
+	                                <input type="text" placeholder="Enter Other Field" id="re_comp_other_field" name="re_comp_other_field" ng-model="re_comp_other_field">
+	                                </div>
+	                            </div>                            
+								<div class="col-md-6 col-sm-6"></div>
+	                        </div>
+
+							<div class="dtl-dob ">
+								<label>Company Location</label>
+								<div class="row">
+									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+										<div class="form-group">
+											<span class="span-select">
+												<select id="re_comp_country" name="re_comp_country" ng-model="re_comp_country" ng-change="re_comp_country_change()">
+                                                    <option value="">Country</option>         
+                                                    <option data-ng-repeat='country_item in rec_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                </select>
+											</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+										<div class="form-group">
+											<span class="span-select">
+												<select id="re_comp_state" name="re_comp_state" ng-model="re_comp_state" ng-change="re_comp_state_change()" disabled = "disabled">
+                                                    <option value="">State</option>
+                                                    <option data-ng-repeat='state_item in re_comp_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                                </select>
+                                                <img id="re_comp_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+											</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+										<div class="form-group">
+											<span class="span-select">
+												<select id="re_comp_city" name="re_comp_city" ng-model="re_comp_city" disabled = "disabled">
+                                                    <option value="">City</option>
+                                                    <option data-ng-repeat='city_item in re_comp_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                                </select>
+                                                <img id="re_comp_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>Company Profile</label>
+								<textarea type="text" placeholder="Company Profile" id="re_comp_profile" name="re_comp_profile"></textarea>
+							</div>
+							<div class="form-group">
+								<label>Other Activities</label>
+								<!-- <input type="text" placeholder="Company Profile"> -->
+								<tags-input id="re_comp_other_activity_txt" ng-model="re_comp_other_activity_txt" display-property="activity" placeholder="Company Other Activities" replace-spaces-with-dashes="false" template="title-template"></tags-input>
+							</div>
+							<div class="form-group">
+								<div class="upload-file">
+									<label>Upload Company Logo</label>
+									<input type="file" id="re_comp_logo" name="re_comp_logo">
+									<span id="re_comp_logo_error" class="error" style="display: none;"></span>
 								</div>
 							</div>
 						</div>
-
-						<div class="form-group">
-							<label>Company Profile</label>
-							<textarea type="text" placeholder="Company Profile"></textarea>
+						<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
 						</div>
-						<div class="form-group">
-							<label>Other Activities</label>
-							<input type="text" placeholder="Company Profile">
-						</div>
-						<div class="form-group">
-							<label class="upload-file">
-								Upload Company Logo<input type="file">
-							</label>
-						</div>
-
-
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
+					</form>
 				</div>
-
 
             </div>
         </div>
@@ -655,8 +705,10 @@
 				<div class="modal-body">
 					<span class="mes">
 						<div id="popup-form">
-							<div class="fw" id="profi_loader"  style="display:none;" style="text-align:center;" ><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
-							<form id ="userimage" name ="userimage" class ="clearfix" enctype="multipart/form-data" method="post">
+							<div class="fw" id="profi_loader" style="display:none;text-align:center;" >
+								<img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/>
+							</div>
+							<form id="userimage" name="userimage" class="clearfix" enctype="multipart/form-data" method="post">
 								<div class="fw">
 									<input type="file" name="profilepic" accept="image/gif, image/jpeg, image/png" id="upload-one" >
 								</div>
@@ -699,6 +751,8 @@
 		var header_all_profile = '<?php echo $header_all_profile; ?>';
 		var base_url = '<?php echo base_url(); ?>';
 		var jobdata = <?php echo json_encode($jobtitle); ?>;
+		var user_id = <?php echo $this->uri->segment(3); ?>;
+		var rec_profile_thumb_upload_url = "<?php echo REC_PROFILE_THUMB_UPLOAD_URL; ?>";
 		var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
 		var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 		var app = angular.module("userRecProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
@@ -706,14 +760,16 @@
 	<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 
 	<!-- FIELD VALIDATION JS END -->
+	<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_profile_new.js'); ?>"></script>
+	
 	<?php
 	if ($this->uri->segment(3) != $userid) { ?>
 		<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
 	<?php } else {?>
 		<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
 	<?php }?>
+	
 	<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_profile.js'); ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_profile_new.js'); ?>"></script>
 	<script type="text/javascript">
         $(document).ready(function () {
             $('.dtl-edit-bottom').hover(function () {

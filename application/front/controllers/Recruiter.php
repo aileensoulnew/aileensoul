@@ -7151,9 +7151,120 @@ class Recruiter extends MY_Controller {
 
 	public function get_rec_basic_info()
 	{
-		$userid = $this->session->userdata('aileenuser');
+		$user_id = $this->input->post('user_id');
+		if($user_id != '')
+		{
+			$userid = $user_id;
+		}
+		else
+		{
+			$userid = $this->session->userdata('aileenuser');			
+		}
 		$recruiter_data = $this->recruiter_model->get_rec_basic_info($userid);
 		$ret_arr = array("success"=>1,"recruiter_data"=>$recruiter_data);
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+	}
+
+	public function save_rec_info()
+    {
+    	$userid = $this->session->userdata('aileenuser');
+        $rec_firstname = $this->input->post('rec_firstname');
+        $rec_lastname = $this->input->post('rec_lastname');
+        $rec_jotitle = $this->input->post('rec_jotitle');
+        $rec_field = $this->input->post('rec_field');
+        if($rec_field == 0)
+        {
+        	$rec_other_field = $this->input->post('rec_other_field');        	
+        }
+        else
+        {
+        	$rec_other_field = "";
+        }
+        $rec_skill_list = $this->input->post('rec_skill_list');
+        $rec_role_res = $this->input->post('rec_role_res');
+        $rec_hire_level = $this->input->post('rec_hire_level');
+        $rec_exp_year = $this->input->post('rec_exp_year');
+        $rec_exp_month = $this->input->post('rec_exp_month');
+
+        if (trim($rec_jotitle) != "") {
+            $contition_array = array('name' => $rec_jotitle);
+            $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            if ($jobdata) {
+                $rec_jotitle = $jobdata[0]['title_id'];
+            } else {
+                $forslug = $rec_jotitle;
+                $data = array(
+                    'name' => ucfirst($rec_jotitle),
+                    'slug' => $this->common->clean($forslug),
+                    'status' => 'draft',
+                );
+                $rec_jotitle = $this->common->insert_data_getid($data, 'job_title');
+            }
+        }
+
+        $rec_skill_ids = "";
+        foreach ($rec_skill_list as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+
+                $contition_array = array('skill' => trim($ski), 'type' => '7');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            }
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+
+                $data = array(
+                    'skill' => $ski,
+                    'status' => '1',
+                    'type' => '4',
+                    'user_id' => $userid,
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }           
+
+            $rec_skill_ids .= $skill_id . ',';
+        }
+        $rec_skill_ids = trim($rec_skill_ids, ',');
+
+        $modified_date = date('Y-m-d h:i:s', time());
+        $data1 = array(
+            'rec_firstname' => ucfirst($rec_firstname),
+            'rec_lastname' => ucfirst($rec_lastname),
+            'rec_job_title' => $rec_jotitle,
+            'rec_field' => $rec_field,
+            'rec_other_field' => $rec_other_field,
+            'rec_skills' => $rec_skill_ids,
+            'rec_role_res' => $rec_role_res,
+            'rec_hire_level' => $rec_hire_level,
+            'rec_exp_year' => $rec_exp_year,
+            'rec_exp_month' => $rec_exp_month,            
+            'modify_date' => $modified_date
+        );
+        $update_data = $this->common->update_data($data1, 'recruiter', 'user_id', $userid);
+
+        $recruiter_data = $this->recruiter_model->get_rec_basic_info($userid);
+		$ret_arr = array("success"=>1,"recruiter_data"=>$recruiter_data);
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_rec_company_info()
+	{
+		$user_id = $this->input->post('user_id');
+		if($user_id != '')
+		{
+			$userid = $user_id;
+		}
+		else
+		{
+			$userid = $this->session->userdata('aileenuser');			
+		}
+		$rec_comp_data = $this->recruiter_model->get_rec_company_info($userid);
+		$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
 		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
 	}
 }

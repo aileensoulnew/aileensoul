@@ -594,4 +594,20 @@ class Recruiter_model extends CI_Model {
         $result_array = $query->row_array();
         return $result_array;
     }
+
+    public function get_rec_company_info($user_id = '') {
+        $this->db->select("r.rec_id, r.re_comp_name, r.re_comp_email, r.re_comp_phone, r.re_comp_site, r.re_comp_size, r.re_comp_field, r.re_comp_other_field, r.re_comp_culture, r.re_comp_country, r.re_comp_state, r.re_comp_city, r.re_comp_profile, r.re_comp_other_activity, r.comp_logo,it.industry_name as re_comp_field_txt, cr.country_name, st.state_name, ct.city_name")->from("recruiter r");
+        $this->db->where('r.user_id', $user_id);        
+        $this->db->join('industry_type it', 'it.industry_id = r.re_comp_field','left');
+        $this->db->join('countries cr', 'cr.country_id = r.re_comp_country', 'left');
+        $this->db->join('states st', 'st.state_id = r.re_comp_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = r.re_comp_city', 'left');
+        $this->db->where('r.is_delete','0');
+        $this->db->where('r.re_status' , '1');        
+        $this->db->group_by('r.rec_skills,r.rec_id');
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 }
