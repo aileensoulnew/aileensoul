@@ -152,8 +152,11 @@
                                     <?php 
                                     if($_businessList['details'] != ""): ?>
                                     <li>
-                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">
-                                            <?php echo substr($_businessList['details'], 0,110); ?>...<a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>"> Read more</a></p>
+                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content view-more-expand" style="position: relative;">
+                                            <?php echo $_businessList['details']; ?>
+                                            <?php if(strlen($_businessList['details']) > 100): ?><a class="read-more-post" href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" style="bottom: 3px;">&nbsp;...Read more</a>
+                                            <?php endif; ?>
+                                        </p>
                                     </li>
                                     <?php endif; ?>
                                 </ul>
