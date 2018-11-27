@@ -30,7 +30,7 @@
 					<div class="all-detail-custom">
 					
 						<div class="custom-user-list">
-							<div class="edit-profile-mob">
+							<div class="edit-custom-move">
 								
 							</div>
 					<div class="all-detail-custom">
@@ -50,10 +50,16 @@
 						</div>
 						
 						<!--  02 Edit profile  -->
-						<div class="gallery-item">
+						<div id="edit-custom-move" class="gallery-item edit-profile-move">
+							<div class="abailability-move">
+							</div>
 						</div>
 						
 						<!--  03 Basic information  -->
+						<div class="gallery-item">
+						</div>
+						
+						<!--  04 Basic information  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -87,15 +93,15 @@
 							</div>
 						</div>
 						
-						<!--  04 Language  -->
-						<div class="gallery-item">
+						<!--  05 Language  -->
+						<div class="gallery-item language-move">
 						</div>
 						
-						<!--  05 Type of talant  -->
-						<div class="gallery-item">
+						<!--  06 Type of talant  -->
+						<div class="gallery-item type-talant-move">
 						</div>
 						
-						<!--  06 Educational Info  -->
+						<!--  07 Educational Info  -->
 						<div class="gallery-item">
 							<div class="dtl-box edu-info">
 								<div class="dtl-title">
@@ -203,7 +209,7 @@
 							</div>
 						</div>
 						
-						<!--  07  Experience  -->
+						<!--  08  Experience  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -323,7 +329,7 @@
 							</div>
 						</div>
 						
-						<!--  08 Portfolio  -->
+						<!--  09 Portfolio  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -419,17 +425,17 @@
 							</div>
 						</div>
 						
-						<!--  09 social profile  -->
-						<div class="gallery-item">
+						<!--  10 social profile  -->
+						<div class="gallery-item social-link-move">
 						</div>
 						
-						<!--  10 Preferred Work   -->
+						<!--  11 Preferred Work   -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/pre-work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" data-target="#preferred-work" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis">
+								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list list-ul-cus">
 										<li class="select-preview">
 											<span>Work Type</span>
@@ -453,10 +459,13 @@
 										</li>
 									</ul>
 								</div>
+								<div class="about-more">
+									<a href="#">View More <img src="http://localhost/aileensoulnew/aileensoul/assets/n-images/detail/down-arrow.png?ver=1543301672"></a>
+								</div>
 							</div>
 						</div>
 						
-						<!--  11 Specialities  -->
+						<!--  12 Specialities  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -484,11 +493,36 @@
 							</div>
 						</div>
 						
-						<!--  12 software  -->
-						<div class="gallery-item">
+						<!--  13 blank div  -->
+						<div class="gallery-item" >
 						</div>
 						
-						<!--  13 Achievements and Awards  -->
+						<!--  14 software  -->
+						<div class="gallery-item software-move" >
+						
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software / Instrument/ Skills</span><a href="#" data-target="#art-sof" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list list-ul-cus">
+										<li class="fw">
+											<span>Tags</span>
+											<ul	class="skill-list">
+												<li>HTML</li>
+												<li>HTML</li>
+												<li>HTML</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+								
+							</div>
+					
+						
+						</div>
+						
+						<!--  15 Achievements and Awards  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -589,7 +623,7 @@
 							</div>
 						</div>
 						
-						<!--  14 Additional Course  -->
+						<!--  16 Additional Course  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -694,13 +728,24 @@
 					<div class="right-add">
 					<!-- Availability  -->
 						<div class="rsp-dtl-box">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
+							<div class="dtl-box" id="abailability-move">
+							
 								<div class="dtl-dis">
-									
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+									<ul class="dis-list cus-status list-ul-cus">
+                                        <li>
+                                            <label class="fw">
+                                                <!-- ngIf: job_basic_info.job_active_status == '1' --><span ng-if="job_basic_info.job_active_status == '1'" class="ng-scope">
+                                                    <span class="job-active"></span>Open for work
+                                                </span><!-- end ngIf: job_basic_info.job_active_status == '1' -->
+                                                <!-- ngIf: job_basic_info.job_active_status == '2' -->
+                                                <!-- ngIf: job_basic_info.job_active_status == '3' -->
+                                                <!-- ngIf: job_basic_info.job_active_status != '1' && job_basic_info.job_active_status != '2' && job_basic_info.job_active_status != '3' -->
+												<span class="pull-right">
+                                                <a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit1.png?ver=' . time()) ?>"></a>
+												</span>
+                                            </label>
+                                        </li>
+                                    </ul>
 								</div>
 							</div>
 						</div>
@@ -711,7 +756,7 @@
 							
 					<!-- edit profile  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box">
+						<div class="dtl-box" id="edit-profile-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 							</div>
@@ -744,7 +789,7 @@
 					<!-- Social Link  -->
 					<div class="rsp-dtl-box">
 					
-						<div class="dtl-box">
+						<div class="dtl-box" id="social-link-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>"><span>Social Profile</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 							</div>
@@ -769,8 +814,8 @@
 					</div>
 					
 					<!-- language  -->
-					<div class="rsp-dtl-box">
-						<div class="rsp-dtl-box ">
+				
+						<div class="rsp-dtl-box " id="language-move">
 							<div class="dtl-box">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
@@ -784,32 +829,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					
-					<!-- Software / Instrument/ Skills  -->
-						<div class="rsp-dtl-box">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software / Instrument/ Skills</span><a href="#" data-target="#art-sof" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list list-ul-cus">
-										<li class="fw">
-											<span>Tags</span>
-											<ul	class="skill-list">
-												<li>HTML</li>
-												<li>HTML</li>
-												<li>HTML</li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-								
-							</div>
-						</div>
 					
 					<!-- Type of Talent / Category  -->
-						<div class="rsp-dtl-box">
+						<div class="rsp-dtl-box" id="type-talant-move">
 							<div class="dtl-box">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/talent.png?ver=' . time()) ?>"><span>Type of Talent / Category</span><a href="#" data-target="#talent" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
@@ -828,6 +850,10 @@
 								</div>
 							</div>
 						</div>
+					
+					
+					
+					
 					
 						
 					</div>	
@@ -1147,14 +1173,15 @@
                                   </div>
                                   <ul>
                                     <li class="input-option" data-value="1">
-                                        <span class="job-active"></span>Currently Looking for Job
+                                        <span class="job-active"></span>Open for Work
                                     </li>
                                     <li class="input-option" data-value="2">
-                                        <span class="job-passive"></span>Passively Looking for Job
+                                        <span class="job-passive"></span>Open for Collaboration
                                     </li>
                                     <li class="input-option" data-value="3">
-                                        <span class="job-not"></span>Not Open for Opportunities
+                                        <span class="job-not"></span>Not Now
                                     </li>
+									
                                   </ul>
                                   <input id="job_status" type="hidden" class="option" name="namesubmit" value="{{job_basic_info.job_active_status}}" />
                                 </div>
@@ -1986,6 +2013,8 @@
 			<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 			<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
 			<script>
+	$(document).ready(function () {
+	if (screen.width > 768) {
 		var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
   containerElem.classList.add('masonry-layout', 'columns-' + columns);
   var columnsElements = [];
@@ -2009,7 +2038,10 @@
 masonryLayout(document.getElementById('gallery'),
 document.querySelectorAll('.gallery-item'), 2);
 
-
+	}
+	
+		
+	});
 			
     </script>
 	<script type="text/javascript">
@@ -2036,6 +2068,20 @@ document.querySelectorAll('.gallery-item'), 2);
                 inputoption.val(livalue);
               });
             });
+			
+	$(document).ready(function () {
+        if (screen.width <= 1199) {
+            $("#edit-profile-move").appendTo($(".edit-profile-move"));
+            $("#social-link-move").appendTo($(".social-link-move"));
+            $("#language-move").appendTo($(".language-move"));
+            $("#type-talant-move").appendTo($(".type-talant-move"));
+            $("#abailability-move").appendTo($(".abailability-move"));
+            $(".remove-blank").remove();
+        }
+		if (screen.width < 768) {
+			$("#edit-custom-move").appendTo($(".edit-custom-move"));
+		}
+	});
 
         </script>
 		
