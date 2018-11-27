@@ -29,8 +29,8 @@
                 <div class="container tab-plr0 pt20">
                     <div class="all-detail-custom">
                         <div class="custom-user-list">
-							<div class="tab-add-991">
-								<?php $this->load->view('banner_add'); ?>
+							<div class="edit-custom-move">
+								
 							</div>
 					<div class="gallery" id="gallery">
 						<!-- 01 Basic information  -->
@@ -105,7 +105,15 @@
 							</div>
 						</div>
 						
-						<!-- 02 Address Information  -->
+						<!-- 02 Edit profile  -->
+						<div class="gallery-item edit-profile-move" >
+						</div>
+						
+						<!-- 03 blank div  -->
+						<div class="gallery-item" >
+						</div>
+						
+						<!-- 04 Address Information  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -147,7 +155,7 @@
 							</div>
 						</div>
 						
-						<!-- 03 Contact Information  -->
+						<!-- 05 Contact Information  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -191,7 +199,15 @@
 							</div>
 						</div>
 						
-						<!-- 04 Business Portfolio  -->
+						<!-- 06 Social Profile  -->
+						<div class="gallery-item social-link-move" >
+						</div>
+						
+						<!-- 07 hours of oparation  -->
+						<div class="gallery-item hour-move" >
+						</div>
+						
+						<!-- 08 Business Portfolio  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -287,9 +303,9 @@
 							</div>
 						</div>
 						
-						<!-- 05 hour of opration  -->
 						
-						<!-- 06 Key Members Information  -->
+						
+						<!-- 09 Key Members Information  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -412,7 +428,40 @@
 							</div>
 						</div>
 						
-						<!-- 07 Reviews  -->
+						<!-- 10 How Business Name Started?  -->
+						<div class="gallery-item bus-name-started">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>How Business Name Started?</span><a href="#" data-target="#bus-name-started" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dtl-box-height">
+									<div class="bus-story">
+										<img src="<?php echo base_url('assets/n-images/detail/14.jpg?ver=' . time()) ?>">
+									</div>
+									<ul class="dis-list">
+										<li>
+											<span>Description</span>
+											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+											<a class="dis-more" href="#"><b>See More..</b> </a>
+										</li>
+									
+										<li>
+											<span>What differentiate you from your competitiors</span>
+											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+											<a class="dis-more" href="#"><b>See More..</b> </a>
+										</li>
+								
+									</ul>
+								</div>
+								<div class="about-more">
+									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+								</div>
+								
+							</div>
+						</div>
+						
+						
+						<!-- 11 Reviews  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -456,39 +505,8 @@
 							</div>
 						</div>
 						
-						<!-- 08 How Business Name Started?  -->
-						<div class="gallery-item bus-name-started">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>How Business Name Started?</span><a href="#" data-target="#bus-name-started" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis dtl-box-height">
-									<div class="bus-story">
-										<img src="<?php echo base_url('assets/n-images/detail/14.jpg?ver=' . time()) ?>">
-									</div>
-									<ul class="dis-list">
-										<li>
-											<span>Description</span>
-											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-											<a class="dis-more" href="#"><b>See More..</b> </a>
-										</li>
-									
-										<li>
-											<span>What differentiate you from your competitiors</span>
-											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-											<a class="dis-more" href="#"><b>See More..</b> </a>
-										</li>
-								
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
-								
-							</div>
-						</div>
 						
-						<!-- 09 Job Openings  -->
+						<!-- 12 Job Openings  -->
 						<div class="gallery-item">
 							<div class="dtl-box job-opening">
 								<div class="dtl-title">
@@ -543,62 +561,7 @@
 							</div>
 						</div>
 						
-						<!-- 10 menu  -->
-						
-						<!-- 11 News / Press Release  -->
-						<div class="gallery-item">
-							<div class="dtl-box press-rel">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/news.png?ver=' . time()) ?>"><span>News / Press Release</span><a href="#" data-target="#press-release" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis dis-accor">
-									<div class="panel-group">
-			<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="panel-title">
-				<a href="#">
-				<div class="dis-left">
-					<div class="dis-left-img img-cus">
-						<img src="<?php echo base_url('assets/n-images/detail/press-rel.png?ver=' . time()) ?>">
-					</div>
-				</div>
-				<div class="dis-middle">
-					<h4>Digital marketing executive</h4>
-				</div>
-				</a>
-				<div class="dis-right">
-					<a href="#" href="#" data-target="#press-release" data-toggle="modal"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-				</div>
-            </div>
-		</div>
-											
-			</div>
-			<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="panel-title">
-				<a href="#">
-				<div class="dis-left">
-					<div class="dis-left-img img-cus">
-						<img src="<?php echo base_url('assets/n-images/detail/press-rel.png?ver=' . time()) ?>">
-					</div>
-				</div>
-				<div class="dis-middle">
-					<h4>Digital marketing executive</h4>
-				</div>
-				</a>
-				<div class="dis-right">
-					<a href="#" href="#" data-target="#press-release" data-toggle="modal"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-				</div>
-            </div>
-		</div>
-			</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						<!-- 12 Achievements and Awards  -->
+						<!-- 13 Achievements and Awards  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -699,7 +662,71 @@
 							</div>
 						</div>
 						
-					
+						<!-- 14 Timeline  -->
+						<div class="gallery-item timeline-move" >
+						</div>
+						
+						<!-- 03 blank div  -->
+						<div class="gallery-item news-move" >
+						</div>
+						
+						<!-- 15 News / Press Release  -->
+						<div class="gallery-item">
+							<div class="dtl-box press-rel" id="news-move">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/news.png?ver=' . time()) ?>"><span>News / Press Release</span><a href="#" data-target="#press-release" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis dis-accor">
+									<div class="panel-group">
+			<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title">
+				<a href="#">
+				<div class="dis-left">
+					<div class="dis-left-img img-cus">
+						<img src="<?php echo base_url('assets/n-images/detail/press-rel.png?ver=' . time()) ?>">
+					</div>
+				</div>
+				<div class="dis-middle">
+					<h4>Digital marketing executive</h4>
+				</div>
+				</a>
+				<div class="dis-right">
+					<a href="#" href="#" data-target="#press-release" data-toggle="modal"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+				</div>
+            </div>
+		</div>
+											
+			</div>
+			<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title">
+				<a href="#">
+				<div class="dis-left">
+					<div class="dis-left-img img-cus">
+						<img src="<?php echo base_url('assets/n-images/detail/press-rel.png?ver=' . time()) ?>">
+					</div>
+				</div>
+				<div class="dis-middle">
+					<h4>Digital marketing executive</h4>
+				</div>
+				</a>
+				<div class="dis-right">
+					<a href="#" href="#" data-target="#press-release" data-toggle="modal"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+				</div>
+            </div>
+		</div>
+			</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+						<!-- 16 Add menu  -->
+						<div class="gallery-item menu-move" >
+						</div>
+						
 					</div>
                             <div class="banner-add">
 								<?php $this->load->view('banner_add'); ?>
@@ -709,10 +736,43 @@
 							<div class="dtl-box p10 dtl-adv">
 								<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
 							</div>
+							
+							<!-- edit profile  -->
+					<div class="rsp-dtl-box">
+						<div class="dtl-box" id="edit-profile-move">
+							<div class="dtl-title">
+								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
+							</div>
+							<div class="dtl-dis dtl-edit-p">
+								<div class="dtl-edit-top"></div>
+								<div class="profile-status">
+									<ul>
+										<li><span class=""></span>Profile pic</li>
+										<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
+										
+										<li><span class=""></span>Experience</li>
+										<li class="pl20"><span class=""><img src="n-images/detail/c.png"></span>About</li>
+										<li><span class=""><img src="n-images/detail/c.png"></span>skills</li>
+										
+										<li class="pl20"><span class=""></span>Social</li>
+										<li><span class=""><img src="n-images/detail/c.png"></span>Idol</li>
+										<li class="fw"><span class=""><img src="n-images/detail/c.png"></span>Educational info</li>
+										<li class="fw"><span class=""></span>Profile overview</li>
+									</ul>
+								</div>
+								<div class="dtl-edit-bottom"></div>
+								<div class="p20">
+								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+								</div>
+								
+							</div>
+						</div>
+					</div>
+							
 							<!-- Social Link  -->
 					<div class="rsp-dtl-box">
 					
-						<div class="dtl-box">
+						<div class="dtl-box" id="social-link-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>"><span>Social Profile</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 							</div>
@@ -738,7 +798,7 @@
 					
 					<!-- Timeline  -->
 						<div class="rsp-dtl-box">
-							<div class="dtl-box">
+							<div class="dtl-box" id="timeline-move">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/timeline.png?ver=' . time()) ?>"><span>Timeline</span><a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
@@ -757,7 +817,7 @@
 					
 					<!-- Hours of Operation  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box">
+						<div class="dtl-box" id="hour-move">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" data-target="#hours-opration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
@@ -781,7 +841,7 @@
 					
 					<!-- Add Menu  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box add-menu">
+						<div class="dtl-box add-menu" id="menu-move">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/menu.png?ver=' . time()) ?>"><span>Add Menu</span><a href="#" data-target="#add-menu" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
@@ -1994,6 +2054,8 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>	
 <script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
 	<script>
+	$(document).ready(function () {
+	if (screen.width > 768) {
 		var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
   containerElem.classList.add('masonry-layout', 'columns-' + columns);
   var columnsElements = [];
@@ -2016,7 +2078,8 @@
 
 masonryLayout(document.getElementById('gallery'),
 document.querySelectorAll('.gallery-item'), 2);
-
+	}
+	});
 
 
 		// mcustom scroll bar
@@ -2088,6 +2151,21 @@ document.querySelectorAll('.gallery-item'), 2);
                 min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
             });
         });
+		
+		$(document).ready(function () {
+			if (screen.width <= 1199) {
+				$("#edit-profile-move").appendTo($(".edit-profile-move"));
+				$("#social-link-move").appendTo($(".social-link-move"));
+				$("#timeline-move").appendTo($(".timeline-move"));
+				$("#hour-move").appendTo($(".hour-move"));
+				$("#menu-move").appendTo($(".menu-move"));
+				$("#news-move").appendTo($(".news-move"));
+				$(".remove-blank").remove();
+			}
+			if (screen.width < 768) {
+				$("#edit-profile-move").appendTo($(".edit-custom-move"));
+			}
+		});
     </script>
 
     </body>

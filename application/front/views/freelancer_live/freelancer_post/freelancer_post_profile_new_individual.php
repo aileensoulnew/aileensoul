@@ -351,8 +351,30 @@
 		<div class="container tab-plr0 pt20">
 			<div class="all-detail-custom">
 				<div class="custom-user-list">
+					<div class="edit-profile-mob">
+					</div>
 					<div class="gallery" id="gallery">
-						<!-- Basic information  -->
+						<!--  01 Profile Summary -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Profile Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!--  02 Edit profile -->
+						<div class="gallery-item edit-profile-move">
+						</div>
+						
+						<!--  03 Blank div -->
+						<div class="gallery-item remove-blank">
+						</div>
+						
+						<!--  04 Basic information  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -400,7 +422,7 @@
 							</div>
 						</div>
 						
-						<!-- Edution  -->
+						<!--  05 Edution  -->
 						<div class="gallery-item ">
 							<div class="dtl-box edu-info">
 								<div class="dtl-title">
@@ -515,8 +537,7 @@
 							</div>
 						</div>
 						
-						<!-- Experience  -->
-						
+						<!--  06 Experience  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -636,7 +657,19 @@
 							</div>
 						</div>
 						
-						<!-- Portfolio / project  -->
+						<!--  07 skill -->
+						<div class="gallery-item skill-move">
+						</div>
+						
+						<!--  08 Language -->
+						<div class="gallery-item language-move">
+						</div>
+						
+						<!--  09 Social link (website) -->
+						<div class="gallery-item social-link-move">
+						</div>
+						
+						<!--  10 Portfolio / project  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -778,8 +811,106 @@
 							</div>
 						</div>
 					
-						<!-- Additional Caurse  -->
 						
+					
+						<!--  11 Tagline -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!--  12 blank div  -->
+						<div class="gallery-item">
+						</div>
+						
+						<!--  13 Rate -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>450 rs Per hour</p>
+									<p>Work On Fixed Rate.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!--  14 Availability -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Duration per week</span>
+											0 to 25 hrs/week
+										</li>
+										<li>
+											<span>Status</span>
+											Available
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						
+						<!--  15 Reviews  -->
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
+									
+									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
+								</div>
+								<div class="dtl-dis">
+									<div class="total-rev">
+										<span class="total-rat">4.8</span> <span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
+												</span>
+												<span class="rev-count">59 Reviews</span>
+												
+												
+									</div>
+									<ul class="review-list">
+										<li>
+											<div class="review-left">
+												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+											</div>
+											<div class="review-right">
+												<h4>Yatin Belani</h4>
+												<div class="rating-star-cus">
+													<span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
+												</span>
+												</div>
+												<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+									<div class="form-group">
+										
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+					
+						<!--  16 Additional Caurse  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -878,157 +1009,8 @@
 							</div>
 						</div>
 						
-						<!-- Rate -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<p>450 rs Per hour</p>
-									<p>Work On Fixed Rate.</p>
-								</div>
-							</div>
-						</div>
 						
-						<!-- Availability -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Duration per week</span>
-											0 to 25 hrs/week
-										</li>
-										<li>
-											<span>Status</span>
-											Available
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						
-						
-						<!-- Profile Summary -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Profile Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Company Information -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Company Name</span>
-											Verv System pvt ltd
-										</li>
-										<li>
-											<span>Industry</span>
-											IT Field
-										</li>
-										<li>
-											<span>Company Email </span>
-											harshad2406patoliya@gmail.com
-										</li>
-										<li>
-											<span>Company Phone number</span>
-											+91 951005589
-										</li>
-										<li>
-											<span>Skype</span>
-											harshad2406
-										</li>
-										<li>
-											<span>Website URL</span>
-											www.vervsystem.com
-										</li>
-										<li>
-											<span>Team Size</span>
-											105
-										</li>
-										
-										<li>
-											<span>Timezone</span>
-											GMT 21:45
-										</li>
-										<li>
-											<span>Company Founded</span>
-											June 2008
-										</li>
-										<li>
-											<span>Company Overview</span>
-											Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <a href="#">Read More</a>
-										</li>
-										<li>
-											<span>Services you offer</span>
-											<ul>
-												<li>Web design</li>
-												<li>Graphic design</li>
-												<li>SEO</li>
-											</ul>
-										</li>
-										
-										<li>
-											<span>Total Experience</span>
-											5 Year 7 Month
-										</li>
-										<li>
-											<span>Skills you offer</span>
-											<ul class="skill-list">
-												<li>Devloping</li>
-												<li>Desigining</li>
-												<li>Marketing</li>
-											</ul>
-										</li>
-										
-										<li>
-											<span>Location</span>
-											Ahmedabad, Gujrat , India
-										</li>
-										<li>
-											<span>Company Logo</span>
-											<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
-										</li>
-										
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
-							</div>
-						</div>
-						
-						
-						<!-- Tagline -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Publication -->
+						<!--  17 Publication -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -1144,50 +1126,6 @@
 						</div>
 						
 						
-						<!-- Reviews  -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
-									
-									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
-								</div>
-								<div class="dtl-dis">
-									<div class="total-rev">
-										<span class="total-rat">4.8</span> <span class="rating-star">
-			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
-												</span>
-												<span class="rev-count">59 Reviews</span>
-												
-												
-									</div>
-									<ul class="review-list">
-										<li>
-											<div class="review-left">
-												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-											</div>
-											<div class="review-right">
-												<h4>Yatin Belani</h4>
-												<div class="rating-star-cus">
-													<span class="rating-star">
-			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
-												</span>
-												</div>
-												<div class="review-dis">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
-												</div>
-											</div>
-										</li>
-										
-									</ul>
-									<div class="form-group">
-										
-									</div>
-									
-								</div>
-							</div>
-						</div>
-						
 						
 					</div>
 				</div>
@@ -1199,7 +1137,7 @@
 						<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
 					</div>
 					<div class="rsp-dtl-box">
-						<div class="dtl-box">
+						<div class="dtl-box" id="edit-profile-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 							</div>
@@ -1212,7 +1150,7 @@
 					
 					<!-- skills  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box">
+						<div class="dtl-box" id="skill-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/skill.png?ver=' . time()) ?>"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 							</div>
@@ -1232,7 +1170,7 @@
 					<!-- Social Link  -->
 					<div class="rsp-dtl-box">
 					
-						<div class="dtl-box">
+						<div class="dtl-box" id="social-link-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 							</div>
@@ -1258,7 +1196,7 @@
 					
 					<!-- language  -->
 						<div class="rsp-dtl-box ">
-							<div class="dtl-box">
+							<div class="dtl-box" id="language-move">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
@@ -1678,236 +1616,6 @@
         </div>
     </div>
 	
-
-	<!-- Company Information  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="com-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                <div class="modal-body-cus"> 
-					<div class="dtl-title">
-						<span>Company Information</span>
-					</div>
-					<div class="dtl-dis">
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Company Name</label>
-									<input type="text" placeholder="Enter Company Name">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Industry </label>
-									<span class="span-select">
-										<select>
-											<option>Select Field</option>
-											<option>It Field</option>
-											<option>Design</option>
-											<option>Advertizing</option>
-										</select>
-									</span>
-								</div>
-								
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Company Email </label>
-									<input type="text" placeholder="Company Email ">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Company Phone number</label>
-									<input type="text" placeholder="Company Phone number">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Skype</label>
-									<input type="text" placeholder="Skype">
-								</div>
-								
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Website URL</label>
-									<input type="text" placeholder="Enter Website URL">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="form-group">
-									<label>Team Size</label>
-									<input type="text" placeholder="Company Phone number">
-								</div>
-								
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="form-group">
-									<label>Timezone</label>
-									<span class="span-select">
-										<select class="form-control">
-											<option>Timezone</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						
-						
-						<div class="row total-exp">
-							<label class="col-md-12 fw">
-								Company Founded
-							</label>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="form-group">
-									<span class="span-select">
-										<select class="form-control">
-											<option>Year</option>
-											<option>2014</option>
-											<option>2015</option>
-											<option>2016</option>
-											<option>2017</option>
-										</select>	
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="form-group">
-									<span class="span-select">
-										<select class="form-control">
-											<option>Month</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>	
-									</span>
-								</div>
-							</div>
-							
-								
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Company Overview</label>
-									<textarea row="4" type="text" placeholder="Company Overview"></textarea>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-							<label>Services you offer</label>
-							<textarea type="text" placeholder="Services you offer"></textarea>
-						</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-							<label class="col-md-12 fw">Total Experience</label>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>	
-						<div class="form-group">
-							<label>Skills you offer</label>
-							<input type="text" placeholder="Skills you offer">
-						</div>
-						<div class="row total-exp">
-							<label class="col-md-12 fw">
-								Company Address
-							</label>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select class="form-control">
-											<option>Country</option>
-											<option>2015</option>
-											<option>2016</option>
-											<option>2017</option>
-											<option>2018</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select class="form-control">
-											<option>State</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select class="form-control">
-											<option>City</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="upload-file">
-								Upload Company Logo <input type="file">
-							</label>
-						</div>
-					</div>
-					<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
-						</div>
-				</div>	
-
-
-            </div>
-        </div>
-    </div>
-	
 	<!-- modal Reviews  -->
 	<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -1949,8 +1657,6 @@
             </div>
         </div>
     </div>
-	
-	
 	
 	<!-- Language  -->
 	<div style="display:none;" class="modal fade dtl-modal" id="language" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -2958,6 +2664,8 @@
 		<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()) ?>"></script>
 		
 		<script>
+		$(document).ready(function () {
+		if (screen.width > 768) {
 			var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
 			  containerElem.classList.add('masonry-layout', 'columns-' + columns);
 			  var columnsElements = [];
@@ -2980,7 +2688,8 @@
 
 			masonryLayout(document.getElementById('gallery'),
 			document.querySelectorAll('.gallery-item'), 2);
-
+		}
+		});
 
 			
 			jQuery(document).ready(function () {
@@ -3036,6 +2745,20 @@
 				$("#input-21c").rating({
 					min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
 				});
+			});
+			
+			$(document).ready(function () {
+				if (screen.width <= 1199) {
+					$("#edit-profile-move").appendTo($(".edit-profile-move"));
+					$("#social-link-move").appendTo($(".social-link-move"));
+					$("#skill-move").appendTo($(".skill-move"));
+					$("#language-move").appendTo($(".language-move"));
+					$("#menu-move").appendTo($(".menu-move"));
+					$(".remove-blank").remove();
+				}
+				if (screen.width < 768) {
+					$("#edit-profile-move").appendTo($(".edit-profile-mob"));
+				}
 			});
 		</script>
     </body>

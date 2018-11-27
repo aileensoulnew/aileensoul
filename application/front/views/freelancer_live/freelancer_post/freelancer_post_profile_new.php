@@ -351,30 +351,53 @@
 		<div class="container tab-plr0 pt20">
 			<div class="all-detail-custom">
 				<div class="custom-user-list">
+					<div class="edit-custom-move">
+					</div>
 					<div class="gallery" id="gallery">
-						<!-- Basic information  -->
+						
+						<!--  01 Company Overview -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Company Overview</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!--  02 Edit profile -->
+						<div class="gallery-item edit-profile-move">
+						</div>
+						
+						<!--  03 Blank div -->
+						<div class="gallery-item">
+						</div>
+						
+						<!--  04 Company Information -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list">
 										
 										<li>
-											<span>Job Title</span>
-											Sr. Multimedia Designer
+											<span>Company Name</span>
+											Verv System pvt ltd
 										</li>
 										<li>
-											<span>Field</span>
+											<span>Industry</span>
 											IT Field
 										</li>
 										<li>
-											<span>Email</span>
+											<span>Company Email </span>
 											harshad2406patoliya@gmail.com
 										</li>
 										<li>
-											<span>Phone Number</span>
+											<span>Company Phone number</span>
 											+91 951005589
 										</li>
 										<li>
@@ -382,13 +405,55 @@
 											harshad2406
 										</li>
 										<li>
+											<span>Website URL</span>
+											www.vervsystem.com
+										</li>
+										<li>
+											<span>Team Size</span>
+											105
+										</li>
+										
+										<li>
 											<span>Timezone</span>
 											GMT 21:45
+										</li>
+										<li>
+											<span>Company Founded</span>
+											June 2008
+										</li>
+										<li>
+											<span>Company Overview</span>
+											Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <a href="#">Read More</a>
+										</li>
+										<li>
+											<span>Services you offer</span>
+											<ul>
+												<li>Web design</li>
+												<li>Graphic design</li>
+												<li>SEO</li>
+											</ul>
+										</li>
+										
+										<li>
+											<span>Total Experience</span>
+											5 Year 7 Month
+										</li>
+										<li>
+											<span>Skills you offer</span>
+											<ul class="skill-list">
+												<li>Devloping</li>
+												<li>Desigining</li>
+												<li>Marketing</li>
+											</ul>
 										</li>
 										
 										<li>
 											<span>Location</span>
 											Ahmedabad, Gujrat , India
+										</li>
+										<li>
+											<span>Company Logo</span>
+											<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
 										</li>
 										
 									</ul>
@@ -396,247 +461,18 @@
 								<div class="about-more">
 									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
 								</div>
-								
 							</div>
 						</div>
 						
-						<!-- Edution  -->
-						<div class="gallery-item ">
-							<div class="dtl-box edu-info">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/edution.png?ver=' . time()) ?>">
-									<span>Educational Info</span>
-									<a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right">
-										<img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>">
-									</a>
-								</div>
-								<div class="dtl-dis dis-accor">
-									<div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="eduOne">
-												<div class="panel-title">
-													<div class="dis-left">
-														<div class="dis-left-img">
-															<span>V</span>
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Vinay mandir high school</h4>
-														<p>Bechalr of engineering</p>
-													</div>
-													<div class="dis-right">
-														<a href="#" data-target="#educational-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-														<a role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu1" aria-expanded="true" aria-controls="project1">
-															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
-														</a>
-													</div>
-                 
-												</div>
-											</div>
-											<div id="edu1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="eduOne">
-												<div class="panel-body">
-													<ul class="dis-list">
-														<li>
-															<span>Duration</span>
-															Feb 2015 to June 2017
-														</li>
-														<li>
-															<span>Board / University</span>
-															Gujrat University
-															
-														</li>
-														<li>
-															<span>Course / Field of Study / Stream</span>
-															Coputer Science
-														</li>
-														
-														
-														<li>
-															<span>Degree Certificate</span>
-															<p class="screen-shot">
-																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-															</p>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="edutwo">
-												<div class="panel-title">
-													<div class="dis-left">
-														<div class="dis-left-img">
-															<span>V</span>
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Vivekanand high school</h4>
-														<p>Gseb board</p>
-													</div>
-													<div class="dis-right">
-														<a href="#" data-target="#educational-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-														<a role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu2" aria-expanded="true" aria-controls="project2">
-															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
-														</a>
-													</div>
-                 
-												</div>
-											</div>
-											<div id="edu2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edutwo">
-												<div class="panel-body">
-													<ul class="dis-list">
-														<li>
-															<span>Duration</span>
-															Feb 2015 to June 2017
-														</li>
-														<li>
-															<span>Board / University</span>
-															Gujrat University
-															
-														</li>
-														<li>
-															<span>Course / Field of Study / Stream</span>
-															Coputer Science
-														</li>
-														
-														
-														<li>
-															<span>Degree Certificate</span>
-															<p class="screen-shot">
-																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-															</p>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+						<!--  05 skill -->
+						<div class="gallery-item skill-move">
 						</div>
 						
-						<!-- Experience  -->
-						
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/exp.png?ver=' . time()) ?>"><span>Experience (4year 5month)</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis dis-accor">
-									<div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="expOne">
-												<div class="panel-title">
-													<div class="dis-left">
-														<div class="dis-left-img">
-															<span>V</span>
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Verv System PVT LTD</h4>
-														<p>Working as Sr.multimedia dsigner </p>
-														
-													</div>
-													<div class="dis-right">
-														<a href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp1" aria-expanded="true" aria-controls="exp1">
-															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
-														</a>
-													</div>
-                 
-												</div>
-											</div>
-											<div id="exp1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="expOne">
-												<div class="panel-body">
-													<ul class="dis-list">
-														<li>
-															<span>Time Period</span>
-															Jun 2015 to March 2015
-															
-														</li>
-														<li>
-															<span>Company Location</span>
-															Ahmedabad, India
-															
-														</li>
-														<li>
-															<span>Website</span>
-															<a href="#">www.vervsystem.com</a>
-														</li>
-														<li>
-															<span>Description</span>
-															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-															<a class="dis-more" href="#"><b>See More..</b> </a>
-														</li>
-														<li>
-															<span>Document</span>
-															<p class="screen-shot">
-																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-															</p>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="exptwo">
-												<div class="panel-title">
-													<div class="dis-left">
-														<div class="dis-left-img">
-															<span>V</span>
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Verv System PVT LTD</h4>
-														<p>Working as Sr.multimedia dsigner </p>
-														
-													</div>
-													<div class="dis-right">
-														<a href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp2" aria-expanded="true" aria-controls="exp2">
-															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
-														</a>
-													</div>
-                 
-												</div>
-											</div>
-											<div id="exp2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exptwo">
-												<div class="panel-body">
-													<ul class="dis-list">
-														<li>
-															<span>Time Period</span>
-															Jun 2015 to March 2015
-															
-														</li>
-														<li>
-															<span>Company Location</span>
-															Ahmedabad, India
-														</li>
-														<li>
-															<span>Website</span>
-															<a href="#">www.vervsystem.com</a>
-														</li>
-														<li>
-															<span>Description</span>
-															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-															<a class="dis-more" href="#"><b>See More..</b> </a>
-														</li>
-														<li>
-															<span>Document</span>
-															<p class="screen-shot">
-																<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-															</p>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+						<!--  06 Social link (website) -->
+						<div class="gallery-item social-link-move">
 						</div>
 						
-						<!-- Portfolio / project  -->
+						<!--  07 Portfolio / project  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -777,9 +613,102 @@
 								</div>
 							</div>
 						</div>
-					
-						<!-- Additional Caurse  -->
 						
+						<!--  08 Tagline -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!--  09 Rate -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<p>450 rs Per hour</p>
+									<p>Work On Fixed Rate.</p>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<!--  10 Availability -->
+						<div class="gallery-item ">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Duration per week</span>
+											0 to 25 hrs/week
+										</li>
+										<li>
+											<span>Status</span>
+											Available
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<!--  11 Reviews  -->
+						<div class="gallery-item">
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
+									
+									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
+								</div>
+								<div class="dtl-dis">
+									<div class="total-rev">
+										<span class="total-rat">4.8</span> <span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
+												</span>
+												<span class="rev-count">59 Reviews</span>
+												
+												
+									</div>
+									<ul class="review-list">
+										<li>
+											<div class="review-left">
+												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+											</div>
+											<div class="review-right">
+												<h4>Yatin Belani</h4>
+												<div class="rating-star-cus">
+													<span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
+												</span>
+												</div>
+												<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+									<div class="form-group">
+										
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+					
+						<!--  12 Additional Caurse  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -878,157 +807,7 @@
 							</div>
 						</div>
 						
-						<!-- Rate -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<p>450 rs Per hour</p>
-									<p>Work On Fixed Rate.</p>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Availability -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Duration per week</span>
-											0 to 25 hrs/week
-										</li>
-										<li>
-											<span>Status</span>
-											Available
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						
-						
-						<!-- Profile Summary -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Profile Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Company Information -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Company Name</span>
-											Verv System pvt ltd
-										</li>
-										<li>
-											<span>Industry</span>
-											IT Field
-										</li>
-										<li>
-											<span>Company Email </span>
-											harshad2406patoliya@gmail.com
-										</li>
-										<li>
-											<span>Company Phone number</span>
-											+91 951005589
-										</li>
-										<li>
-											<span>Skype</span>
-											harshad2406
-										</li>
-										<li>
-											<span>Website URL</span>
-											www.vervsystem.com
-										</li>
-										<li>
-											<span>Team Size</span>
-											105
-										</li>
-										
-										<li>
-											<span>Timezone</span>
-											GMT 21:45
-										</li>
-										<li>
-											<span>Company Founded</span>
-											June 2008
-										</li>
-										<li>
-											<span>Company Overview</span>
-											Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <a href="#">Read More</a>
-										</li>
-										<li>
-											<span>Services you offer</span>
-											<ul>
-												<li>Web design</li>
-												<li>Graphic design</li>
-												<li>SEO</li>
-											</ul>
-										</li>
-										
-										<li>
-											<span>Total Experience</span>
-											5 Year 7 Month
-										</li>
-										<li>
-											<span>Skills you offer</span>
-											<ul class="skill-list">
-												<li>Devloping</li>
-												<li>Desigining</li>
-												<li>Marketing</li>
-											</ul>
-										</li>
-										
-										<li>
-											<span>Location</span>
-											Ahmedabad, Gujrat , India
-										</li>
-										<li>
-											<span>Company Logo</span>
-											<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
-										</li>
-										
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
-							</div>
-						</div>
-						
-						
-						<!-- Tagline -->
-						<div class="gallery-item ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Publication -->
+						<!--  13 Publication -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -1144,49 +923,6 @@
 						</div>
 						
 						
-						<!-- Reviews  -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
-									
-									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
-								</div>
-								<div class="dtl-dis">
-									<div class="total-rev">
-										<span class="total-rat">4.8</span> <span class="rating-star">
-			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
-												</span>
-												<span class="rev-count">59 Reviews</span>
-												
-												
-									</div>
-									<ul class="review-list">
-										<li>
-											<div class="review-left">
-												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-											</div>
-											<div class="review-right">
-												<h4>Yatin Belani</h4>
-												<div class="rating-star-cus">
-													<span class="rating-star">
-			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
-												</span>
-												</div>
-												<div class="review-dis">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
-												</div>
-											</div>
-										</li>
-										
-									</ul>
-									<div class="form-group">
-										
-									</div>
-									
-								</div>
-							</div>
-						</div>
 						
 						
 					</div>
@@ -1198,8 +934,10 @@
 					<div class="dtl-box p10 dtl-adv">
 						<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
 					</div>
+					
+					<!-- edit profile  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box">
+						<div class="dtl-box" id="edit-profile-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 							</div>
@@ -1212,7 +950,7 @@
 					
 					<!-- skills  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box">
+						<div class="dtl-box" id="skill-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/skill.png?ver=' . time()) ?>"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 							</div>
@@ -1232,7 +970,7 @@
 					<!-- Social Link  -->
 					<div class="rsp-dtl-box">
 					
-						<div class="dtl-box">
+						<div class="dtl-box" id="social-link-move">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 							</div>
@@ -1256,22 +994,6 @@
 						</div>
 					</div>
 					
-					<!-- language  -->
-						<div class="rsp-dtl-box ">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<ul class="known-language">
-										<li><span class="pr5">Hindi</span> - <span class="pl5">Basic</span></li>
-										<li><span class="pr5">English</span> - <span class="pl5">Intermediate</span></li>
-										<li><span class="pr5">Gujrati</span> - <span class="pl5">Expert</span></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					
 					
 					
 				</div>
@@ -1285,400 +1007,7 @@
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
 		</div>
-		
-	<!---  model basic information  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                <div class="modal-body-cus"> 
-					<div class="dtl-title">
-						<span>Basic Information</span>
-					</div>
-					<div class="dtl-dis">
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>First Name</label>
-									<input type="text" placeholder="First Name">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Last Name</label>
-									<input type="text" placeholder="Last Name">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Job Title </label>
-									<input type="text" placeholder="Job Title">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Field </label>
-									<span class="span-select">
-										<select>
-											<option>Field</option>
-											<option>IT field</option>
-											<option>Other</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Email </label>
-									<input type="text" placeholder="Email">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Phone Number</label>
-									<input type="text" placeholder="Phone Number">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Skype </label>
-									<input type="text" placeholder="Skype">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Time Zone </label>
-									<span class="span-select">
-										<select>
-											<option>Time Zone</option>
-											<option>Time Zone</option>
-											<option>Time Zone</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							
-						</div>
-						
-						
-						<div class="row">
-							<label class="col-md-12 fw">Address</label>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>Country</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>State</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>City </option>
-											<option>2015</option>
-											<option>2016</option>
-											<option>2017</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
-				</div>	
-
-
-            </div>
-        </div>
-    </div>
 	
-	<!---  model Experience  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                <div class="modal-body-cus"> 
-					<div class="dtl-title">
-						<span>Experience</span>
-					</div>
-					<div class="dtl-dis">
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Company Name</label>
-									<input type="text" placeholder="Enter Company Name">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Designation / Role</label>
-									<input type="text" placeholder="Enter Designation">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-									<div class="col-md-6 col-sm-6">
-										<div class="form-group">
-											<label>Company Website</label>
-											<input type="text" placeholder="Enter Company Website">
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6">
-										<div class="form-group">
-											<label>Field </label>
-											<span class="span-select">
-												<select>
-													<option>Select Field</option>
-													<option>It Field</option>
-													<option>Design</option>
-													<option>Advertizing</option>
-												</select>
-											</span>
-										</div>
-									</div>
-								</div>
-					
-						<div class="form-group">
-							<label>Company Location</label>
-							<input type="text" placeholder="Enter Company Location">
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Start Date</label>
-									<div class="row">
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Year</option>
-													<option>2012</option>
-													<option>2013</option>
-													<option>2014</option>
-													<option>2015</option>
-												</select>
-											</span>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Month</option>
-													<option>januari</option>
-													<option>Fabruari</option>
-													<option>March</option>
-													<option>April</option>
-												</select>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>End Date</label>
-									<div class="row">
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Year</option>
-													<option>2012</option>
-													<option>2013</option>
-													<option>2014</option>
-													<option>2015</option>
-												</select>
-											</span>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Month</option>
-													<option>januari</option>
-													<option>Fabruari</option>
-													<option>March</option>
-													<option>April</option>
-												</select>
-											</span>
-										</div>
-									</div>	
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control control--checkbox">
-								<input type="checkbox">I currently work here.
-								<div class="control__indicator">
-								</div>
-							</label>
-						</div>
-						<div class="form-group">
-							<label>Description/Roles and Responsibilities</label>
-							<textarea row="4" type="text" placeholder="Description">
-							</textarea>
-						</div>
-						<div class="form-group">
-							<label class="upload-file">
-								Upload File (work experience certificate) <input type="file">
-							</label>
-						</div>
-						
-						
-					</div>
-					<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
-						</div>
-				</div>	
-
-
-            </div>
-        </div>
-    </div>
-	
-	<!---  model Educational   -->
-	<div style="display:none;" class="modal fade dtl-modal" id="educational-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                <div class="modal-body-cus"> 
-					<div class="dtl-title">
-						<span>Educational Info</span>
-					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>School / College Name</label>
-							<input type="text" placeholder="School / College Name">
-						</div>
-						<div class="form-group">
-							<label>Board / University</label>
-							<input type="text" placeholder="Board / University">
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Degree / Qualification </label>
-									<input type="text" placeholder="Degree / Qualification ">	
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Course / Field of Study / Stream </label>
-									<input type="text" placeholder="Course / Field of Study / Stream">
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Start Date</label>
-									<div class="row">
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Year</option>
-													<option>2012</option>
-													<option>2013</option>
-													<option>2014</option>
-													<option>2015</option>
-												</select>
-											</span>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Month</option>
-													<option>januari</option>
-													<option>Fabruari</option>
-													<option>March</option>
-													<option>April</option>
-												</select>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>End Date</label>
-									<div class="row">
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Year</option>
-													<option>2012</option>
-													<option>2013</option>
-													<option>2014</option>
-													<option>2015</option>
-												</select>
-											</span>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-6">
-											<span class="span-select">
-												<select>
-													<option>Month</option>
-													<option>januari</option>
-													<option>Fabruari</option>
-													<option>March</option>
-													<option>April</option>
-												</select>
-											</span>
-										</div>
-									</div>	
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="control control--checkbox">
-								<input type="checkbox">If You are not graduate click here.
-								<div class="control__indicator"></div>
-							</label>
-						</div>
-						<div class="form-group">
-							<label class="upload-file">
-								Upload File (Educational Certificate)<input type="file">
-							</label>
-						</div>
-						
-					</div>
-					<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
-						</div>
-				</div>	
-
-
-            </div>
-        </div>
-    </div>
-	
-
 	<!-- Company Information  -->
 	<div style="display:none;" class="modal fade dtl-modal" id="com-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -2958,6 +2287,8 @@
 		<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()) ?>"></script>
 		
 		<script>
+		$(document).ready(function () {
+		if (screen.width > 768) {
 			var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
 			  containerElem.classList.add('masonry-layout', 'columns-' + columns);
 			  var columnsElements = [];
@@ -2980,7 +2311,8 @@
 
 			masonryLayout(document.getElementById('gallery'),
 			document.querySelectorAll('.gallery-item'), 2);
-
+		}
+		});
 
 			
 			jQuery(document).ready(function () {
@@ -3036,6 +2368,19 @@
 				$("#input-21c").rating({
 					min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
 				});
+			});
+			$(document).ready(function () {
+				if (screen.width <= 1199) {
+					$("#edit-profile-move").appendTo($(".edit-profile-move"));
+					$("#social-link-move").appendTo($(".social-link-move"));
+					$("#skill-move").appendTo($(".skill-move"));
+					$("#social-link-move").appendTo($(".social-link-move"));
+					$("#menu-move").appendTo($(".menu-move"));
+					$(".remove-blank").remove();
+				}
+				if (screen.width < 768) {
+					$("#edit-profile-move").appendTo($(".edit-custom-move"));
+				}
 			});
 		</script>
     </body>
