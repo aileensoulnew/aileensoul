@@ -591,9 +591,7 @@ header h2{
     text-align:center;
     margin:0;
     color:#1b8ab9;
-    border-bottom:1px solid #c7c7c7;
     font-size:24px;
-    font-family:robotoregular
 }
 .login .form-group select,.login .form-group select:focus{
     width:70px;

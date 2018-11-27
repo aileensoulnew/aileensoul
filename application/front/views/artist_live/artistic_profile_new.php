@@ -40,7 +40,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bio.png?ver=' . time()) ?>"><span>Bio</span><a href="#" data-target="#bio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Bio</span><a href="#" data-target="#bio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
 									<h4>About</h4>
@@ -433,7 +433,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/pre-work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" data-target="#preferred-work" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" data-target="#preferred-work" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list list-ul-cus">
@@ -469,7 +469,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/speci.png?ver=' . time()) ?>"><span>Specialities</span><a href="#" data-target="#specialities" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>"><span>Specialities</span><a href="#" data-target="#specialities" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list list-ul-cus">
@@ -834,7 +834,7 @@
 						<div class="rsp-dtl-box" id="type-talant-move">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/talent.png?ver=' . time()) ?>"><span>Type of Talent / Category</span><a href="#" data-target="#talent" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/cat.png?ver=' . time()) ?>"><span>Type of Talent / Category</span><a href="#" data-target="#talent" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list list-ul-cus">

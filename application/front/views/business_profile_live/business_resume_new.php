@@ -309,7 +309,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Key Members Information</span><a href="#" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>"><span>Key Members Information</span><a href="#" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
@@ -432,7 +432,7 @@
 						<div class="gallery-item bus-name-started">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>How Business Name Started?</span><a href="#" data-target="#bus-name-started" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-start.png?ver=' . time()) ?>"><span>How Business Name Started?</span><a href="#" data-target="#bus-name-started" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<div class="bus-story">
@@ -510,7 +510,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box job-opening">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-opning.png?ver=' . time()) ?>"><span>Job Openings </span><a href="#" data-target="#" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>"><span>Job Openings </span><a href="#" data-target="#" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group">
@@ -819,7 +819,7 @@
 					<div class="rsp-dtl-box">
 						<div class="dtl-box" id="hour-move">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" data-target="#hours-opration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/ho-op.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" data-target="#hours-opration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list">

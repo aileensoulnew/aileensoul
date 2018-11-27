@@ -71,14 +71,14 @@
 
 
 
-<div class="middle-section free-work-reg-cus">
+<div class="middle-section free-hire-reg-cus">
 	<div class="container">
-		<div class="fw">
+		<div class="">
 		<div class="title-div">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#register">Create an Account</a></li>
 				<li><a data-toggle="tab" href="#basic-information">Basic Information</a></li>
-				<li><a data-toggle="tab" href="#free-emp-registration">Freelancer Registration</a></li>
+				<li><a data-toggle="tab" href="#free-hire-registration">Employer Registration</a></li>
 			</ul>
 		</div>
 		<div class="tab-content">
@@ -412,13 +412,12 @@
 					</div>
 				</div>
 			</div>
-			<div id="free-emp-registration" class="tab-pane fade final-reg-form">
+			<div id="free-hire-registration" class="tab-pane fade final-reg-form">
 				<div class="inner-form">
-					
 					<div class="login">
 						<div class="title">
-                            <h1>Freelancer Registration</h1>
-							<p>Complete your profile to start getting job recommendation right in your inbox.</p>
+                            <h1>Employer Registration</h1>
+							<p>Complete your profile to connect with skilled freelancer</p>
                         </div>
 						<div class="ind-com">
 							<div class="vertical-m-box">
@@ -442,9 +441,6 @@
 							</div>
 						</div>
 						
-						<div class="">
-							
-						</div>
 						<form>
 							<h2 class="text-center">Individual</h2>
 							<div class="row">
@@ -462,99 +458,16 @@
 									<div class="form-group left-tooltip">
 										<input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Email*" value="" maxlength="255">
 										<div class="tooltip-custom">
-											You will get job recommendations, recruiter messages, reminders, and promotional emails on provided email id
+											You will get freelancer recommendations, messages from freelancer, reminders, and promotional emails on provided email id.
 										</div>
 										
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input class="form-control" type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Phone Number" maxlength="35">
+										<input class="form-control" type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Current Potion" maxlength="35">
 										<div class="tooltip-custom">
-											Enter a valid phone number so that people can contact you for work offers.
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-sm-6 col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="Current Position" id="Current Position" tabindex="2" placeholder="Current Position" maxlength="35">
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-6">
-									<div class="form-group fw">
-										<span class="select-field-custom">
-											<select name="state" id="state" tabindex="10">
-												<option value="" selected="selected">Select Field</option>
-												<option value="382">IT Sector</option>
-												<option value="1">IT Sector</option>
-												
-											</select>
-										</span>
-									</div>
-								</div>
-								<div class="fw">
-									<div id="exp_data">
-										<label class="pl15">Total Experience<span class="red">*</span>:</label>
-										<div class="col-sm-6 col-md-6">
-											<div class="form-group fw">
-												<span class="select-field-custom">
-												<select tabindex="6" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
-													<option value="" selected="" option="" disabled="">Year</option>
-													<option value="0 year">0 year</option>
-													<option value="1 year">1 year</option>
-													<option value="2 year">2 year</option>
-													<option value="3 year">3 year</option>
-													<option value="4 year">4 year</option>
-													<option value="5 year">5 year</option>
-													<option value="6 year">6 year</option>
-													<option value="7 year">7 year</option>
-													<option value="8 year">8 year</option>
-													<option value="9 year">9 year</option>
-													<option value="10 year">10 year</option>
-													<option value="11 year">11 year</option>
-													<option value="12 year">12 year</option>
-													<option value="13 year">13 year</option>
-													<option value="14 year">14 year</option>
-													<option value="15 year">15 year</option>
-													<option value="16 year">16 year</option>
-													<option value="17 year">17 year</option>
-													<option value="18 year">18 year</option>
-													<option value="19 year">19 year</option>
-													<option value="20 year">20 year</option>
-												</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-sm-6 col-md-6">
-											<div class="form-group fw">	
-												<span class="select-field-custom">
-												<select tabindex="7" id="experience_month" class="experience_month keyskil">
-													<option>Month</option>
-													<option>0 month</option>
-													<option>1 month</option>
-													<option>2 month</option>
-													<option>3 month</option>
-													<option>4 month</option>
-													<option>5 month</option>
-													<option>6 month</option>
-													<option>7 month</option>
-													<option>8 month</option>
-													<option>9 month</option>
-													<option>10 month</option>
-													<option>11 month</option>
-													<option>12 month</option>
-												</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-12">
-									<div class="form-group">
-										<input class="form-control" type="text" name="skills" id="skills" tabindex="2" placeholder="Skills*" maxlength="35">
-										<div class="tooltip-custom">
-											Enter your best skills to get relevant job offers
+											Enter a valid phone number so that freelancer can contact you.
 										</div>
 									</div>
 								</div>
@@ -606,8 +519,15 @@
 								</div>
 								
 								</div>
-							
 								
+								<div class="col-sm-12 col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" tabindex="2" placeholder="Enter Professional Information"></textarea>
+										<div class="tooltip-custom">
+											Enter your professional background and details so that it helps in building trust with freelancer as that will help them know more about you.
+										</div>
+									</div>
+								</div>
 								
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
@@ -625,14 +545,14 @@
 							<div class="row">
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input class="form-control" type="text" name="first_name" id="first_name" tabindex="1" placeholder="Company Name*" maxlength="35">
+										<input class="form-control" type="text" name="first_name" id="first_name" tabindex="1" placeholder="Company Name" maxlength="35">
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
 										<input class="form-control" type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Company Number" maxlength="35">
 										<div class="tooltip-custom">
-											Enter a valid phone number so that people can contact you for work offers.
+											Enter a valid phone number so that freelancer can contact you.
 										</div>
 									</div>
 								</div>
@@ -640,113 +560,27 @@
 									<div class="form-group left-tooltip">
 										<input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Company Email*" value="" maxlength="255">
 										<div class="tooltip-custom">
-											You will get job recommendations, recruiter messages, reminders, and promotional emails on provided email id
+											You will get freelancer recommendations, messages from freelancer, reminders, and promotional emails on provided email id.
 										</div>
 										
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input class="form-control" type="text" name="last_name" id="last_name" tabindex="2" placeholder="Website url" maxlength="35">
+										<input class="form-control" type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Current URL" maxlength="35">
+										
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-										<input class="form-control" type="text" name="skills" id="skills" tabindex="2" placeholder="Skills*" maxlength="35">
+										<textarea class="form-control" tabindex="2" placeholder="Company Overview"></textarea>
 										<div class="tooltip-custom">
-											Enter your best skills to get relevant job offers
+											Enter your professional background and details so that it helps in building trust with freelancer as that will help them know more about you.
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-12">
-									<div class="form-group fw">
-										<span class="select-field-custom">
-											<select name="field" tabindex="10">
-												<option value="" selected="selected">Select Industry*</option>
-												<option value="382">Accounting & Consulting</option>
-												<option value="1">Admin Support</option>
-												<option value="303">Customer Service</option>
-												<option value="328">Data Science & Analytics</option>
-												<option value="351">Design & Creative</option>
-												<option value="3">Engineering & Architecture</option>
-												<option value="4">Legal </option>
-												<option value="5">Sales & Marketing</option>
-												<option value="343">Translation</option>
-												<option value="6">Website, Mobile, Software Development, IT & Networking</option>
-												<option value="7">Writing & Content</option>
-												<option value="321">Other</option>
-												
-											</select>
-										</span>
-									</div>
-								</div>
-								
-							
-								<div class="fw">
-									<div id="exp_data">
-										<label class="pl15">Total Experience<span class="red">*</span>:</label>
-										<div class="col-sm-6 col-md-6">
-											<div class="form-group fw">
-												<span class="select-field-custom">
-												<select tabindex="6" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
-													<option value="" selected="" option="" disabled="">Year</option>
-													<option value="0 year">0 year</option>
-													<option value="1 year">1 year</option>
-													<option value="2 year">2 year</option>
-													<option value="3 year">3 year</option>
-													<option value="4 year">4 year</option>
-													<option value="5 year">5 year</option>
-													<option value="6 year">6 year</option>
-													<option value="7 year">7 year</option>
-													<option value="8 year">8 year</option>
-													<option value="9 year">9 year</option>
-													<option value="10 year">10 year</option>
-													<option value="11 year">11 year</option>
-													<option value="12 year">12 year</option>
-													<option value="13 year">13 year</option>
-													<option value="14 year">14 year</option>
-													<option value="15 year">15 year</option>
-													<option value="16 year">16 year</option>
-													<option value="17 year">17 year</option>
-													<option value="18 year">18 year</option>
-													<option value="19 year">19 year</option>
-													<option value="20 year">20 year</option>
-												</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-sm-6 col-md-6">
-											<div class="form-group fw">	
-												<span class="select-field-custom">
-												<select tabindex="7" id="experience_month" class="experience_month keyskil">
-													<option>Month</option>
-													<option>0 month</option>
-													<option>1 month</option>
-													<option>2 month</option>
-													<option>3 month</option>
-													<option>4 month</option>
-													<option>5 month</option>
-													<option>6 month</option>
-													<option>7 month</option>
-													<option>8 month</option>
-													<option>9 month</option>
-													<option>10 month</option>
-													<option>11 month</option>
-													<option>12 month</option>
-												</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-sm-12 col-md-12">
-									<div class="form-group">
-										<textarea placeholder="Company Overview"></textarea>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-12">
-									<label>Company Address</label>
+									<label>Location</label>
 									<div class="row">
 									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 									<div class="form-group fw">
@@ -791,6 +625,11 @@
 									</div>
 									</div>
 								</div>
+								
+								</div>
+								
+								
+								
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
 									   <div class="job_reg text-center">
@@ -801,7 +640,7 @@
 									</div>
 								</div>
 							</div>
-						</form>                     
+						</form> 
 					</div>
 				</div>
 			</div>
@@ -809,7 +648,7 @@
 		</div>
 	</div>	
 
-	<footer class="reg-footer-custom fw">    
+	<footer class="reg-footer-custom">    
         <div class="container pt20">
             <div class="row">
 				<div class="fw text-center">
@@ -840,6 +679,7 @@
     </footer>
 </div>
 
+	
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
