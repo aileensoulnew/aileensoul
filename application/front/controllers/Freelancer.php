@@ -2083,6 +2083,48 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile_new', $this->data);
     }
 
+    public function freelancer_post_profile_new_individual($id = "") {
+        if (is_numeric($id)) {
+            
+        } else {
+            $id = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $id, 'status' => 1))->row()->user_id;
+        }
+        $userid = $this->session->userdata('aileenuser');
+        if($userid == "")
+        {
+            redirect(base_url());
+        }
+
+        //code for check user deactivate start
+        $this->freelancer_apply_deactivate_check();
+        //code for check user deactivate end
+        if ($id == $userid || $id == '') {
+            // code for display page start
+            $this->freelancer_apply_check();
+            // code for display page end
+
+            $this->progressbar();
+
+            $contition_array = array('user_id' => $userid, 'status' => '1', 'free_post_step' => '7');
+            $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname, freelancer_post_username, freelancer_post_skypeid, freelancer_post_email, freelancer_post_phoneno, freelancer_post_country, freelancer_post_state, freelancer_post_city,freelancer_post_pincode, freelancer_post_field, freelancer_post_area, freelancer_post_skill_description, freelancer_post_hourly, freelancer_post_ratestate, freelancer_post_fixed_rate, freelancer_post_job_type, freelancer_post_work_hour, freelancer_post_degree, freelancer_post_stream, freelancer_post_univercity, freelancer_post_collage, freelancer_post_percentage, freelancer_post_passingyear, freelancer_post_portfolio_attachment, freelancer_post_portfolio, user_id, freelancer_post_user_image, designation, freelancer_post_otherskill, freelancer_post_exp_month, freelancer_post_exp_year,freelancer_apply_slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+            $contition_array = array('user_id' => $id, 'free_post_step' => '7', 'status' => '1');
+            $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname, freelancer_post_username, freelancer_post_skypeid, freelancer_post_email, freelancer_post_phoneno, freelancer_post_country, freelancer_post_state, freelancer_post_city, freelancer_post_pincode, freelancer_post_field, freelancer_post_area, freelancer_post_skill_description, freelancer_post_hourly, freelancer_post_ratestate, freelancer_post_fixed_rate, freelancer_post_job_type, freelancer_post_work_hour, freelancer_post_degree, freelancer_post_stream, freelancer_post_univercity, freelancer_post_collage, freelancer_post_percentage, freelancer_post_passingyear, freelancer_post_portfolio_attachment, freelancer_post_portfolio, user_id, freelancer_post_user_image,  designation, freelancer_post_otherskill, freelancer_post_exp_month, freelancer_post_exp_year,freelancer_apply_slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+
+        $contition_array = array('status' => '1', 'is_delete' => '0','category_id'=>$apply_data[0]['freelancer_post_field']);
+        $field = $this->common->select_data_by_search('category', $search_condition = array(), $contition_array, $data = 'category_name', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str5 = '', $groupby = '')[0]['category_name'];
+        
+
+
+        // print_r($apply_data);exit;
+        $skills = $this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        $this->data['title'] = "Freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) . " Profile";
+        $this->data['metadesc'] = "Connect with freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) ." on Aileensoul. Field: ".$field.". Skills: ".$skills.". Experience: ".($apply_data[0]['freelancer_post_exp_year']) . " " . ($apply_data[0]['freelancer_post_exp_month']).".";
+
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile_new_individual', $this->data);
+    }
+
     //FREELANCER_APPLY PROFILE PAGE END
 
     //FREELANCER_APPLY DEACTIVATE START
