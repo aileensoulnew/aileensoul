@@ -60,61 +60,23 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
+									<ul class="dis-list list-ul-cus">
 										<li>
-											<span>Business Type </span>
-											Lorem Ipsum
+											<span>Art category </span>
+											<label>Music</label>
 										</li>
 										<li>
-											<span>Business Description</span>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. <a href="#">Read More</a>
+											<span>Gender</span>
+											<label>Male</label>
 										</li>
 										<li>
-											<span>Total Employees</span>
-											150
+											<span>Date of Birth</span>
+											<label>24/6/1990</label>
 										</li>
 										<li>
-											<span>Year Founded / Established</span>
-											2018
+											<span>Location</span>
+											<label>2018</label>
 										</li>
-										<li>
-											<span>Specialties / Extra Benefits / Ambience / Facilities Tags</span>
-											Lorem ipsum
-										</li>
-										
-										<li>
-											<span>Payment Mode Accepted</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Business Keywords</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Mission</span>
-											Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. <a href="#">Read More</a>
-										</li>
-										<li>
-											<span>Legal Name</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Services / Products you offer (Tags)</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Area Served</span>
-											Ahmedabad, Gandhinagar, Rajkot
-										</li>
-										<li>
-											<span>Tagline</span>
-											Aliquam feugiat turpis a erat sagittis pharetra.
-										</li>
-										<li>
-											<span>Formerly Knowns as</span>
-											Lorem ipsum
-										</li>
-										
 										
 									</ul>
 								</div>
@@ -163,7 +125,7 @@
 											</div>
 											<div id="edu1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="eduOne">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Duration</span>
 																Feb 2015 to June 2017
@@ -210,7 +172,7 @@
 											</div>
 											<div id="edu2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edutwo">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Duration</span>
 																Feb 2015 to June 2017
@@ -273,7 +235,7 @@
 											</div>
 											<div id="exp1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="expOne">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Time Period</span>
 															Jun 2015 to March 2015
@@ -327,7 +289,7 @@
 											</div>
 											<div id="exp2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exptwo">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Time Period</span>
 															Jun 2015 to March 2015
@@ -392,7 +354,7 @@
 											</div>
 											<div id="project1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="projectOne" aria-expanded="false" style="height: 0px;">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														
 														<li>
 															<span>Description</span>
@@ -433,7 +395,7 @@
 											</div>
 											<div id="project2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="projecttwo" aria-expanded="false">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														
 														<li>
 															<span>Description</span>
@@ -468,7 +430,7 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/pre-work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" data-target="#preferred-work" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
-									<ul class="dis-list">
+									<ul class="dis-list list-ul-cus">
 										<li class="select-preview">
 											<span>Work Type</span>
 											<label>Category</label>
@@ -501,7 +463,7 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/speci.png?ver=' . time()) ?>"><span>Specialities</span><a href="#" data-target="#specialities" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
-									<ul class="dis-list">
+									<ul class="dis-list list-ul-cus">
 										
 										<li class="fw">
 											<span>Tags</span>
@@ -557,7 +519,7 @@
 											</div>
 											<div id="awards1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="awardsOne">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Date</span>
 															24 June 2018
@@ -601,7 +563,7 @@
 											</div>
 											<div id="awards2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="awardstwo">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Date</span>
 															24 June 2018
@@ -658,7 +620,7 @@
 											</div>
 											<div id="course1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="courseOne">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Duration</span>
 															June 2016 to april 2018
@@ -701,7 +663,7 @@
 											</div>
 											<div id="course2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="coursetwo">
 												<div class="panel-body">
-													<ul class="dis-list">
+													<ul class="dis-list list-ul-cus">
 														<li>
 															<span>Duration</span>
 															June 2016 to april 2018
@@ -831,7 +793,7 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software / Instrument/ Skills</span><a href="#" data-target="#art-sof" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
-									<ul class="dis-list">
+									<ul class="dis-list list-ul-cus">
 										<li class="fw">
 											<span>Tags</span>
 											<ul	class="skill-list">
@@ -853,7 +815,7 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/talent.png?ver=' . time()) ?>"><span>Type of Talent / Category</span><a href="#" data-target="#talent" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis">
-									<ul class="dis-list">
+									<ul class="dis-list list-ul-cus">
 										<li class="fw">
 											<span>Skills</span>
 											<ul	class="skill-list">
