@@ -580,14 +580,17 @@ class Recruiter_model extends CI_Model {
     }
 
     public function get_rec_basic_info($user_id = '') {
-        $this->db->select("r.rec_id, r.rec_firstname, r.rec_lastname, r.rec_email, r.rec_job_title, r.slug, r.rec_field,it.industry_name as rec_field_txt, r.rec_other_field, r.rec_skills, r.rec_role_res, r.rec_hire_level, r.rec_exp_year, r.rec_exp_month,jt.name as title_name")->from("recruiter r");
+        $this->db->select("r.rec_id, r.rec_firstname, r.rec_lastname, r.rec_email, r.rec_job_title, r.slug, r.rec_field,it.industry_name as rec_field_txt, r.rec_other_field, r.rec_skills, r.rec_role_res, r.rec_hire_level, r.rec_exp_year, r.rec_exp_month,jt.name as title_name, IF(r.rec_skills != '' , GROUP_CONCAT(DISTINCT(s.skill)) ,'')as rec_skills_txt")->from("recruiter r, skill s");
         $this->db->where('r.user_id', $user_id);
-        $this->db->join('job_title jt', 'jt.title_id = r.rec_job_title');
-        $this->db->join('industry_type it', 'it.industry_id = r.rec_field');
+        $this->db->join('job_title jt', 'jt.title_id = r.rec_job_title','left');
+        $this->db->join('industry_type it', 'it.industry_id = r.rec_field','left');
         $this->db->where('r.is_delete','0');
         $this->db->where('r.re_status' , '1');
+        $sql = " IF(r.rec_skills != '' , FIND_IN_SET(s.skill_id, r.rec_skills) !=0 , 1=1) ";
+        $this->db->where($sql);
+        $this->db->group_by('r.rec_skills,r.rec_id');
         $query = $this->db->get();
-        echo $this->db->last_query();exit();
+        // echo $this->db->last_query();exit();
         $result_array = $query->row_array();
         return $result_array;
     }

@@ -7154,5 +7154,6 @@ class Recruiter extends MY_Controller {
 		$userid = $this->session->userdata('aileenuser');
 		$recruiter_data = $this->recruiter_model->get_rec_basic_info($userid);
 		$ret_arr = array("success"=>1,"recruiter_data"=>$recruiter_data);
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
 	}
 }

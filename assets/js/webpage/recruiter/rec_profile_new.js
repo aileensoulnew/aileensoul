@@ -277,6 +277,7 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.user = {};
     $scope.$parent.title = "Details | Aileensoul";
+    $scope.rec_skills_list = [];
     // $scope.old_count_profile = 0;
     // $scope.user_id = user_id;
     // $scope.live_slug = live_slug;    
@@ -303,7 +304,11 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
             success = result.data.success;
             if(success == 1)
             {
-                $scope.rec_basic_info = result.data.rec_basic_info;
+                $scope.rec_basic_info = result.data.recruiter_data;
+                if($scope.rec_basic_info.rec_skills_txt != '')
+                {
+                    $scope.rec_skills_list = $scope.rec_basic_info.rec_skills_txt.split(',');
+                }
                 $("#rec-info-loader").hide();
                 $("#rec-info-body").show();                               
             }

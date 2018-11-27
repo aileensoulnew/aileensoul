@@ -15,6 +15,41 @@
 	<?php }?>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+    <style type="text/css">
+		.keyskill_border_active {
+			border: 3px solid #f00 !important;
+		}
+		#skills-error{
+			margin-top: 40px !important;
+		}
+		#minmonth-error{
+			margin-top: 40px; margin-right: 9px;
+		}
+		#minyear-error{
+			margin-top: 42px !important;margin-right: 9px;
+		}
+		#maxmonth-error{
+			margin-top: 42px !important;margin-right: 9px;
+		}
+		#maxyear-error{
+			margin-top: 42px !important;margin-right: 9px;
+		}
+		#minmonth-error{
+			margin-top: 39px !important;
+		}
+		#minyear-error{
+			margin-top: auto !important;
+		}
+		#maxmonth-error{
+			margin-top: 39px !important;
+		}
+		#maxyear-error{
+			margin-top: auto !important;
+		}
+		#example2-error{
+			margin-top: 40px !important
+		}
+	</style>
     <?php $this->load->view('adsense');?>
 	</head>
 	<body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
@@ -239,34 +274,39 @@
                         </div>
                         <div id="rec-info-body" style="display: none;">
 							<div class="dtl-dis">
-								<ul class="dis-list">
-									<li>
+								<ul class="dis-list list-ul-cus">
+									<li ng-if="rec_basic_info.title_name">
 										<span>Current Position</span>
-										Sr. Multimedia Designer
+										<label>{{rec_basic_info.title_name}}</label>
 									</li>
-									<li>
+									<li ng-if="rec_basic_info.rec_role_res">
 										<span>Role & Responsibilities</span>
-										Manage team
+										<label>{{rec_basic_info.rec_role_res}}</label>
 									</li>
-									<li>
+									<li ng-if="rec_basic_info.rec_exp_year > '0' || rec_basic_info.rec_exp_month > '0'">
 										<span>Total Experience</span>
-										5 years 5 month
+										<label ng-if="rec_basic_info.rec_exp_year > '0'">{{rec_basic_info.rec_exp_year}} Year{{rec_basic_info.rec_exp_year > '1' ? 's' : ''}}</label>
+										<label ng-if="rec_basic_info.rec_exp_month > '0'">{{rec_basic_info.rec_exp_month}} Month{{rec_basic_info.rec_exp_month > '1' ? 's' : ''}}</label>
+										
 									</li>
-									<li>
+									<li ng-if="rec_basic_info.rec_skills != ''">
 										<span>Skills Hired For</span>
-										<ul class="skill-list">
-											<li>HTML</li>
-											<li>PHP</li>
-											<li>CSS</li>
+										<ul class="skill-list" ng-if="rec_skills_list.length > '0'">
+											<li ng-repeat="rec_skills in rec_skills_list">{{rec_skills}}</li>
 										</ul>
 									</li>
-									<li>
+									<li ng-if="rec_basic_info.rec_field">
 										<span>Industry Hired For</span>
-										IT sector
+										<label>{{rec_basic_info.rec_field_txt}}</label>
 									</li>
-									<li>
+									<li ng-if="rec_basic_info.rec_hire_level">
 										<span>Hired Levels</span>
-										Director
+										<label ng-if="rec_basic_info.rec_hire_level == '1'">Intern</label>
+										<label ng-if="rec_basic_info.rec_hire_level == '2'">Entry-level</label>
+										<label ng-if="rec_basic_info.rec_hire_level == '3'">Associate</label>
+										<label ng-if="rec_basic_info.rec_hire_level == '4'">Mid-senior</label>
+										<label ng-if="rec_basic_info.rec_hire_level == '5'">Director</label>
+										<label ng-if="rec_basic_info.rec_hire_level == '6'">Executive</label>
 									</li>
 								</ul>
 							</div>
@@ -689,41 +729,6 @@
             });
 
         });
-    </script>
-	<style type="text/css">
-		.keyskill_border_active {
-			border: 3px solid #f00 !important;
-		}
-		#skills-error{
-			margin-top: 40px !important;
-		}
-		#minmonth-error{
-			margin-top: 40px; margin-right: 9px;
-		}
-		#minyear-error{
-			margin-top: 42px !important;margin-right: 9px;
-		}
-		#maxmonth-error{
-			margin-top: 42px !important;margin-right: 9px;
-		}
-		#maxyear-error{
-			margin-top: 42px !important;margin-right: 9px;
-		}
-		#minmonth-error{
-			margin-top: 39px !important;
-		}
-		#minyear-error{
-			margin-top: auto !important;
-		}
-		#maxmonth-error{
-			margin-top: 39px !important;
-		}
-		#maxyear-error{
-			margin-top: auto !important;
-		}
-		#example2-error{
-			margin-top: 40px !important
-		}
-	</style>
+    </script>	
 </body>
 </html>
