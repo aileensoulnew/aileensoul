@@ -143,7 +143,7 @@ class Blog_Model extends CI_Model {
                 FROM ailee_blog b, ailee_blog_category bc 
                 WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
                 b.id IN (". $result['blog_related_id'] .") 
-                GROUP BY b.blog_category_id ORDER BY b.id DESC";
+                GROUP BY b.id,b.blog_category_id ORDER BY b.id DESC";
             $query = $this->db->query($sql);
             $result['related_post'] = $query->result_array();
             foreach ($result['related_post'] as $key => $value) {

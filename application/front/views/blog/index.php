@@ -339,7 +339,7 @@ if($category_page == 1)
                                     <h2><?php echo $_blogPost['title']; ?></h2>
                                 </a>
                                 <span class="blog-text">
-                                    <?php echo substr($_blogPost['description'], 0,150);?><a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">...read more
+                                    <?php echo substr(strip_tags($_blogPost['description']), 0,150);?><a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">...read more
                                     </a>
                                 </span>
                                 <p>

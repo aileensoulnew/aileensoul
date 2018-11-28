@@ -80,6 +80,12 @@ header("Pragma: no-cache"); // HTTP/1.0
 	                -webkit-box-orient: vertical;
 	                -webkit-line-clamp: 1;
 	            }
+                td a {
+                    word-break: break-word;
+                }
+                .blog-scroll-a td, th{
+                    padding: 2px 2px 3px 5px;
+                }
             </style>
     <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>

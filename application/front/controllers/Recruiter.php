@@ -572,6 +572,7 @@ class Recruiter extends MY_Controller {
 
 			$userid = $this->session->userdata('aileenuser');
 
+			$this->data['rec_comp_data'] = $this->recruiter_model->get_rec_company_info($userid);
 				//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
 			$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 			$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
@@ -670,6 +671,9 @@ class Recruiter extends MY_Controller {
 
 	public function add_post_store() {
 
+		print_r($_POST);
+		print_r($_FILES);exit();
+
 		$this->recruiter_apply_check();
 
 		$userid = $this->session->userdata('aileenuser');
@@ -682,6 +686,8 @@ class Recruiter extends MY_Controller {
 		}
 			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
+
+		// $hiring_level = $this->input->post('hiring_level');
 
 		$position = $this->input->post('position_no');
 		$min_year = $this->input->post('minyear');

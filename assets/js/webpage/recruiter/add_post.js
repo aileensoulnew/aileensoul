@@ -1,15 +1,9 @@
-
-$(function () {
-
-
+$(function() {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
-
     var today = yyyy;
-
-
     $("#example2").dateDropdowns({
         submitFieldName: 'last_date',
         submitFormat: "dd/mm/yyyy",
@@ -20,146 +14,103 @@ $(function () {
         dayLabel: 'DD',
         monthLabel: 'MM',
         yearLabel: 'YYYY',
-
         //startDate: today,
-
     });
-
 });
 
-
 function imgval() {
-//
-//    var skill_main = document.getElementById("skills").value;
-//    var skill_other = document.getElementById("other_skill").value;
-//
-//
-//    if (skill_main == '' && skill_other == '') {
-//
-//        $('#artpost .select2-selection').addClass("keyskill_border_active").style('border', '1px solid #f00');
-//    }
+    //
+    //    var skill_main = document.getElementById("skills").value;
+    //    var skill_other = document.getElementById("other_skill").value;
+    //
+    //
+    //    if (skill_main == '' && skill_other == '') {
+    //
+    //        $('#artpost .select2-selection').addClass("keyskill_border_active").style('border', '1px solid #f00');
+    //    }
 }
-
-$.validator.addMethod("regx", function (value, element, regexpr) {
+$.validator.addMethod("regx", function(value, element, regexpr) {
     //return value == '' || value.trim().length != 0; 
-    if (!value)
-    {
+    if (!value) {
         return true;
-    } else
-    {
+    } else {
         return regexpr.test(value);
     }
     // return regexpr.test(value);
 }, "Only space, only number and only special characters are not allow.");
-
-jQuery.validator.addMethod("noSpace", function (value, element) {
+jQuery.validator.addMethod("noSpace", function(value, element) {
     return value == '' || value.trim().length != 0;
 }, "No space please and don't leave it empty");
-
-$.validator.addMethod("reg_candidate", function (value, element, regexpr) {
+$.validator.addMethod("reg_candidate", function(value, element, regexpr) {
     return regexpr.test(value);
 }, "Float Number Is Not Allowed");
-
 //for min max value validator start
-
 // $.validator.addMethod("greaterThan",
 //     function (value, element, param) {
-
-
-$.validator.addMethod("greaterThan",
-        function (value, element, param) {
-            var $otherElement = $(param);
-            if (!value)
-            {
-                return true;
-            } else
-            {
-                return parseInt(value, 10) > parseInt($otherElement.val(), 10);
-            }
+$.validator.addMethod("greaterThan", function(value, element, param) {
+    var $otherElement = $(param);
+    if (!value) {
+        return true;
+    } else {
+        return parseInt(value, 10) > parseInt($otherElement.val(), 10);
+    }
+});
+$.validator.addMethod("greaterThan1", function(value, element, param) {
+    var $min = $(param);
+    if (this.settings.onfocusout) {
+        $min.off(".validate-greaterThan").on("blur.validate-greaterThan", function() {
+            $(element).valid();
         });
-
-$.validator.addMethod("greaterThan1",
-        function (value, element, param) {
-            var $min = $(param);
-            if (this.settings.onfocusout) {
-                $min.off(".validate-greaterThan").on("blur.validate-greaterThan", function () {
-                    $(element).valid();
-                });
-            }
-            if (!value)
-            {
-                return true;
-            } else
-            {
-                return parseFloat(value) > parseFloat($min.val());
-                // return (value) > ($min.val());
-            }
-        }, "Maximum experience must be greater than minimum experience.");
-
-
-
-$.validator.addMethod("greaterThanmonth",
-        function (value, element, param) {
-            //alert(value); alert(element); alert(param);alert("#maxyear");
-            var $maxyear = $('#maxyear');
-            var maxyear = parseInt($maxyear.val());
-
-            var $minyear = $('#minyear');
-            var minyear = parseInt($minyear.val());
-
-            var $min = $(param);
-            if (this.settings.onfocusout) {
-                $min.off(".validate-greaterThan").on("blur.validate-greaterThan", function () {
-                    $(element).valid();
-                });
-            }
-            if (!value)
-            {
-                return true;
-            } else if ((maxyear == minyear))
-            {
-                //if((maxyear == minyear) ){// alert("gaai");
-                return parseInt(value) >= parseInt($min.val());
-            } else
-            {
-                return true;
-            }
-
-        }, "Max month must be greater than min month.");
-
-
-
+    }
+    if (!value) {
+        return true;
+    } else {
+        return parseFloat(value) > parseFloat($min.val());
+        // return (value) > ($min.val());
+    }
+}, "Maximum experience must be greater than minimum experience.");
+$.validator.addMethod("greaterThanmonth", function(value, element, param) {
+    //alert(value); alert(element); alert(param);alert("#maxyear");
+    var $maxyear = $('#maxyear');
+    var maxyear = parseInt($maxyear.val());
+    var $minyear = $('#minyear');
+    var minyear = parseInt($minyear.val());
+    var $min = $(param);
+    if (this.settings.onfocusout) {
+        $min.off(".validate-greaterThan").on("blur.validate-greaterThan", function() {
+            $(element).valid();
+        });
+    }
+    if (!value) {
+        return true;
+    } else if ((maxyear == minyear)) {
+        //if((maxyear == minyear) ){// alert("gaai");
+        return parseInt(value) >= parseInt($min.val());
+    } else {
+        return true;
+    }
+}, "Max month must be greater than min month.");
 // for date validtaion start
-
-jQuery.validator.addMethod("isValid", function (value, element) {
-
-
+jQuery.validator.addMethod("isValid", function(value, element) {
     var todaydate = new Date();
     var dd = todaydate.getDate();
     var mm = todaydate.getMonth() + 1; //January is 0!
     var yyyy = todaydate.getFullYear();
-
     if (dd < 10) {
         dd = '0' + dd
     }
-
     if (mm < 10) {
         mm = '0' + mm
     }
-
     var todaydate = dd + '/' + mm + '/' + yyyy;
-
     var lastDate = $("input[name=last_date]").val();
     //alert(lastDate); alert(todaydate);
-
     lastDate = lastDate.split("/");
     var lastdata_new = lastDate[1] + "/" + lastDate[0] + "/" + lastDate[2];
     var lastdata_new_one = new Date(lastdata_new).getTime();
-
     todaydate = todaydate.split("/");
     var todaydate_new = todaydate[1] + "/" + todaydate[0] + "/" + todaydate[2];
     var todaydate_new_one = new Date(todaydate_new).getTime();
-
     if (lastdata_new_one >= todaydate_new_one) {
         $('.day').addClass('error');
         $('.month').addClass('error');
@@ -171,38 +122,30 @@ jQuery.validator.addMethod("isValid", function (value, element) {
         $('.year').removeClass('error');
         return false;
     }
-
     //return lastdata_new_one >= todaydate_new_one;
 }, "Last date should be grater than or equal to today date.");
-
 //date validation end
-
 //   validation border is not show in last date start
-$.validator.addMethod("required1", function (value, element, regexpr) {
+$.validator.addMethod("required1", function(value, element, regexpr) {
     //return value == '' || value.trim().length != 0; 
-
-    if (!value)
-    {
+    if (!value) {
         $('.day').addClass('error');
         $('.month').addClass('error');
-        $('.year').addClass('error');        
+        $('.year').addClass('error');
         return false;
-    }
-    else
-    {
-        setTimeout(function(){            
+    } else {
+        setTimeout(function() {
             $('.day').removeClass('error');
             $('.month').removeClass('error');
             $('.year').removeClass('error');
-        },100);
+        }, 100);
         return true;
     }
-
     // return regexpr.test(value);
 }, "Last date of apply is required.");
 //   validation border is not show in last date end  
 //pattern validation at salary start//
-$.validator.addMethod("pattern", function (value, element, param) {
+$.validator.addMethod("pattern", function(value, element, param) {
     if (this.optional(element)) {
         return true;
     }
@@ -211,33 +154,23 @@ $.validator.addMethod("pattern", function (value, element, param) {
     }
     return param.test(value);
 }, "Salary is not in correct format.");
-
 //pattern validation at salary end//
-
-$(document).ready(function () {
-
-    $.validator.addMethod("regnum", function (value, element, regexpr) {
+$(document).ready(function() {
+    $.validator.addMethod("regnum", function(value, element, regexpr) {
         return regexpr.test(value);
     }, "Please enter a valid pasword.");
-
     $("#artpost").validate({
         //ignore: [],
-
         ignore: '*:not([name])',
         rules: {
-
             post_name: {
-
                 required: true,
                 regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
-
             },
             skills: {
-
                 required: true,
                 regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
             },
-
             position_no: {
                 required: true,
                 number: true,
@@ -246,67 +179,45 @@ $(document).ready(function () {
                 maxlength: 4,
                 range: [1, 1000]
             },
-
             minyear: {
-
                 required: true
             },
-
             post_desc: {
-
                 required: true,
                 maxlength: 2500
-
             },
-
             interview: {
-
                 maxlength: 2500
-
             },
-
             country: {
-
                 required: true
-
             },
             state: {
-
                 required: true
-
             },
             maxyear: {
-
                 required: true,
                 greaterThan1: "#minyear"
-                        //required:true 
+                //required:true 
             },
-
             emp_type: {
-
                 required: true
-
-
+            },
+            hiring_level: {
+                required: true
             },
             industry: {
-
                 required: true
-
-
             },
-
             last_date: {
-
                 required1: "Last date of apply is required.",
                 isValid: 'Last date should be grater than and equal to today date.'
-
             },
             minsal: {
                 // required: true,
                 //number:true,
                 maxlength: 11,
                 pattern: /^([0-9]\d*)(\\d+)?$/
-
             },
             maxsal: {
                 // required: true,
@@ -316,359 +227,146 @@ $(document).ready(function () {
                 maxlength: 11,
                 pattern: /^([0-9]\d*)(\\d+)?$/
             },
-
+            comp_name: {
+                required: true,
+            },
+            comp_schedule: {
+                required: true,
+            },
         },
-
         messages: {
-
             post_name: {
-
-                required: "Job title  is required."
+                required: "Job title is required."
             },
             skills: {
-
-                required: "Skill  is required."
+                required: "Skill is required."
             },
-
             position_no: {
                 required: "You have to select minimum 1 position."
             },
             minyear: {
-
                 required: "Minimum experience is required."
             },
-
             post_desc: {
-
                 required: "Post description is required."
-
             },
             country: {
-
                 required: "Country is required."
-
             },
             state: {
-
                 required: "State is required."
-
             },
             maxyear: {
-
                 required: "Maximum experience is required."
-                        // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
-
+                // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
             },
-
             industry: {
-
                 required: "Industry is required."
-                        // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
-
+                // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
             },
-
             emp_type: {
-
                 required: "Employment type is required."
-                        // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
-
+                // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
             },
-
+            hiring_level: {
+                required: "Hiring level is required."
+                // greaterThan1:"Maximum Year Experience should be grater than Minimum Year"
+            },
             last_date: {
-
                 required: "Last date for apply required."
             },
-
             maxsal: {
                 required: "Maximum salary is required.",
                 greaterThan: "Maximum salary should be grater than minimum salary."
             },
-
             minsal: {
                 required: "Minimum salary is required."
             },
-
+            comp_name: {
+                required: "Company Name is required",
+            },
+            comp_schedule: {
+                required: "Work Schedule type is required",
+            },
         }
-
     });
-
-
 });
-
-//alert(data);
-
-// EDUCATION AUTOCOMPLETE DATA START
-
-//$(function () {
-//    function split(val) {
-//        return val.split(/,\s*/);
-//    }
-//    function extractLast(term) {
-//        return split(term).pop();
-//    }
-//
-//    $("#education").bind("keydown", function (event) {
-//        if (event.keyCode === $.ui.keyCode.TAB &&
-//                $(this).autocomplete("instance").menu.active) {
-//            event.preventDefault();
-//        }
-//    })
-//            .autocomplete({
-//                minLength: 0,
-//                source: function (request, response) {
-//                    // delegate back to autocomplete, but extract the last term
-//                    $.getJSON(base_url + "general/get_degree", {term: extractLast(request.term)}, response);
-//                },
-//                focus: function () {
-//                    // prevent value inserted on focus
-//                    return false;
-//                },
-//                select: function (event, ui) {
-//
-//                    var terms = split(this.value);
-//                    if (terms.length <= 20) {
-//                        // remove the current input
-//                        terms.pop();
-//                        // add the selected item
-//                        terms.push(ui.item.value);
-//                        // add placeholder to get the comma-and-space at the end
-//                        terms.push("");
-//                        this.value = terms.join(", ");
-//                        return false;
-//                    } else {
-//                        var last = terms.pop();
-//                        $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
-//                        $(this).effect("highlight", {}, 1000);
-//                        $(this).attr("style", "border: solid 1px red;");
-//                        return false;
-//                    }
-//                }
-//
-//
-//
-//            });
-//});
-
-// EDUCATION AUTOCOMPLETE DATA END
-
-
-//$(function () {
-//    // alert('hi');
-//    $("#tags").autocomplete({
-//        source: function (request, response) {
-//            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-//            response($.grep(data, function (item) {
-//                return matcher.test(item.label);
-//            }));
-//        },
-//        minLength: 1,
-//        select: function (event, ui) {
-//            event.preventDefault();
-//            $("#tags").val(ui.item.label);
-//            $("#selected-tag").val(ui.item.label);
-//            // window.location.href = ui.item.value;
-//        }
-//        ,
-//        focus: function (event, ui) {
-//            event.preventDefault();
-//            $("#tags").val(ui.item.label);
-//        }
-//    });
-//});
-
-
-//$(function () {
-//    // alert('hi');
-//    $("#searchplace").autocomplete({
-//        source: function (request, response) {
-//            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-//            response($.grep(data1, function (item) {
-//                return matcher.test(item.label);
-//            }));
-//        },
-//        minLength: 1,
-//        select: function (event, ui) {
-//            event.preventDefault();
-//            $("#searchplace").val(ui.item.label);
-//            $("#selected-tag").val(ui.item.label);
-//            // window.location.href = ui.item.value;
-//        }
-//        ,
-//        focus: function (event, ui) {
-//            event.preventDefault();
-//            $("#searchplace").val(ui.item.label);
-//        }
-//    });
-//});
-
-//$(function () {
-//    // alert('hi');
-//    $("#tags1").autocomplete({
-//        source: function (request, response) {
-//            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-//            response($.grep(data, function (item) {
-//                return matcher.test(item.label);
-//            }));
-//        },
-//        minLength: 1,
-//        select: function (event, ui) {
-//            event.preventDefault();
-//            $("#tags1").val(ui.item.label);
-//            $("#selected-tag").val(ui.item.label);
-//            // window.location.href = ui.item.value;
-//        }
-//        ,
-//        focus: function (event, ui) {
-//            event.preventDefault();
-//            $("#tags1").val(ui.item.label);
-//        }
-//    });
-//});
-
-//$(function () {
-//    // alert('hi');
-//    $("#searchplace1").autocomplete({
-//        source: function (request, response) {
-//            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-//            response($.grep(data1, function (item) {
-//                return matcher.test(item.label);
-//            }));
-//        },
-//        minLength: 1,
-//        select: function (event, ui) {
-//            event.preventDefault();
-//            $("#searchplace1").val(ui.item.label);
-//            $("#selected-tag").val(ui.item.label);
-//            // window.location.href = ui.item.value;
-//        }
-//        ,
-//        focus: function (event, ui) {
-//            event.preventDefault();
-//            $("#searchplace1").val(ui.item.label);
-//        }
-//    });
-//});
-
-$(function () {
-
+$(function() {
     $("#post_name").autocomplete({
-        source: function (request, response) {
+        source: function(request, response) {
             var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-            response($.grep(jobdata, function (item) {
+            response($.grep(jobdata, function(item) {
                 return matcher.test(item.label);
             }));
         },
         minLength: 1,
-        select: function (event, ui) {
+        select: function(event, ui) {
             event.preventDefault();
             $("#post_name").val(ui.item.label);
             $("#selected-tag").val(ui.item.label);
             // window.location.href = ui.item.value;
-        }
-        ,
-        focus: function (event, ui) {
+        },
+        focus: function(event, ui) {
             event.preventDefault();
             $("#post_name").val(ui.item.label);
         }
     });
 });
-
-$(function () {
+$(function() {
     function split(val) {
         return val.split(/,\s*/);
     }
+
     function extractLast(term) {
         return split(term).pop();
     }
-
-    $("#skills2").bind("keydown", function (event) {
-        if (event.keyCode === $.ui.keyCode.TAB &&
-                $(this).autocomplete("instance").menu.active) {
+    $("#skills2").bind("keydown", function(event) {
+        if (event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active) {
             event.preventDefault();
         }
-    })
-            .autocomplete({
-                minLength: 2,
-                source: function (request, response) {
-                    // delegate back to autocomplete, but extract the last term
-                    $.getJSON(base_url + "general/get_skill", {term: extractLast(request.term)}, response);
-                },
-                focus: function () {
-                    // prevent value inserted on focus
+    }).autocomplete({
+        minLength: 2,
+        source: function(request, response) {
+            // delegate back to autocomplete, but extract the last term
+            $.getJSON(base_url + "general/get_skill", {
+                term: extractLast(request.term)
+            }, response);
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function(event, ui) {
+            var text = this.value;
+            var terms = split(this.value);
+            text = text == null || text == undefined ? "" : text;
+            var checked = (text.indexOf(ui.item.value + ', ') > -1 ? 'checked' : '');
+            if (checked == 'checked') {
+                terms.push(ui.item.value);
+                this.value = terms.split(", ");
+            } //if end
+            else {
+                if (terms.length <= 20) {
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
                     return false;
-                },
-                select: function (event, ui) {
-
-                    var text = this.value;
-                    var terms = split(this.value);
-
-                    text = text == null || text == undefined ? "" : text;
-                    var checked = (text.indexOf(ui.item.value + ', ') > -1 ? 'checked' : '');
-                    if (checked == 'checked') {
-
-                        terms.push(ui.item.value);
-                        this.value = terms.split(", ");
-                    }//if end
-
-                    else {
-                        if (terms.length <= 20) {
-                            // remove the current input
-                            terms.pop();
-                            // add the selected item
-                            terms.push(ui.item.value);
-                            // add placeholder to get the comma-and-space at the end
-                            terms.push("");
-                            this.value = terms.join(", ");
-                            return false;
-                        } else {
-                            var last = terms.pop();
-                            $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
-                            $(this).effect("highlight", {}, 1000);
-                            $(this).attr("style", "border: solid 1px red;");
-                            return false;
-                        }
-                    }
-                }//end else
-
-
-            });
+                } else {
+                    var last = terms.pop();
+                    $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                    $(this).effect("highlight", {}, 1000);
+                    $(this).attr("style", "border: solid 1px red;");
+                    return false;
+                }
+            }
+        } //end else
+    });
 });
-
-//function check() {
-//    var keyword = $.trim(document.getElementById('tags1').value);
-//    var place = $.trim(document.getElementById('searchplace1').value);
-//    if (keyword == "" && place == "") {
-//        return false;
-//    }
-//}
-
-//function checkvalue() {
-//alert("hi");
-
-//    var searchkeyword = $.trim(document.getElementById('rec_search_title').value);
-//    var searchplace = $.trim(document.getElementById('rec_search_loc').value);
-// alert(searchkeyword);
-// alert(searchplace);
-//    if (searchkeyword == "" && searchplace == "") {
-//alert('Please enter Keyword');
-//        return false;
-//    }
-//}
-
-//function checkvalue_search() {
-//
-//    var searchkeyword = $.trim(document.getElementById('tags').value);
-//    var searchplace = $.trim(document.getElementById('searchplace').value);
-//    // alert(searchkeyword);
-//
-//    if (searchkeyword == "" && searchplace == "")
-//    {
-//        //  alert('Please enter Keyword');
-//        return false;
-//    }
-//}
 //Leave Page on add and edit post page start
-
 function home(clicked_id, searchkeyword, searchplace) {
     $('.biderror .mes').html("<div class='pop_content'> Do you want to leave this page?<div class='model_ok_cancel'><a class='okbtn' id=" + clicked_id + " onClick='home_profile(" + clicked_id + ',' + '"' + searchkeyword + '"' + ',' + '"' + searchplace + '"' + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
     $('#bidmodal').modal('show');
@@ -676,143 +374,107 @@ function home(clicked_id, searchkeyword, searchplace) {
 }
 
 function home1(link) {
-//        $('.biderror .mes').html("<div class='pop_content'> Do you want to leave this page?<div class='model_ok_cancel'><a class='okbtn' id='' onClick='window.location=" + link + "' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+    //        $('.biderror .mes').html("<div class='pop_content'> Do you want to leave this page?<div class='model_ok_cancel'><a class='okbtn' id='' onClick='window.location=" + link + "' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
     $('.biderror .mes').html("<div class='pop_content'> Do you want to leave this page?<div class='model_ok_cancel'>Yes<a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
     $('#bidmodal').modal('show');
-
     document.getElementById('acon').style.display = 'block !important';
     return false;
 }
 
 function home_profile(clicked_id, searchkeyword, searchplace) {
-
     var url, data;
-
-
     if (clicked_id == 4) {
         url = base_url + "search/recruiter_search";
-
-
         data = 'id=' + clicked_id + '&skills=' + searchkeyword + '&searchplace=' + searchplace;
-
     }
-
-
     $.ajax({
         type: 'POST',
         url: url,
         data: data,
-        success: function (data) {
-            if (clicked_id == 1)
-            {
+        success: function(data) {
+            if (clicked_id == 1) {
                 // alert("hsjdh");
-
                 window.location = base_url + "recommended-candidates";
-            } else if (clicked_id == 2)
-            {
+            } else if (clicked_id == 2) {
                 window.location = base_url + "recruiter/profile";
-            } else if (clicked_id == 3)
-            {
+            } else if (clicked_id == 3) {
                 window.location = base_url + "recruiter/basic-information";
-            } else if (clicked_id == 4)
-            {
-                if (searchkeyword == "")
-                {
-
+            } else if (clicked_id == 4) {
+                if (searchkeyword == "") {
                     window.location = base_url + "search/recruiter_search/" + 0 + "/" + searchplace;
-
-                } else if (searchplace == "")
-                {
-
+                } else if (searchplace == "") {
                     window.location = base_url + "search/recruiter_search/" + searchkeyword + "/" + 0;
-                } else
-                {
+                } else {
                     window.location = base_url + "search/recruiter_search/" + searchkeyword + "/" + searchplace;
                 }
-
-            } else if (clicked_id == 5)
-            {
-
+            } else if (clicked_id == 5) {
                 document.getElementById('acon').style.display = 'block';
-
-            } else if (clicked_id == 6)
-            {
+            } else if (clicked_id == 6) {
                 window.location = base_url + "profile";
-            } else if (clicked_id == 7)
-            {
+            } else if (clicked_id == 7) {
                 window.location = base_url + "change-password";
-            } else if (clicked_id == 8)
-            {
+            } else if (clicked_id == 8) {
                 window.location = base_url + "logout";
-            } else if (clicked_id == 9)
-            {
+            } else if (clicked_id == 9) {
                 location.href = 'javascript:history.back()';
-            } else
-            {
+            } else {
                 alert("edit profilw");
             }
-
         }
     });
-
-
 }
-
 var modal = document.getElementById('myModal');
-
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 // When the user clicks the button, open the modal 
 //    btn.onclick = function () {
 //        modal.style.display = "block";
 //    }
-
 // When the user clicks on <span> (x), close the modal
 // span.onclick = function () {
 //     modal.style.display = "none";
 // }
-
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
 
-function checkvalue(val)
-{
-
-    if (val == 1308)
-    {
+function checkvalue(val) {
+    if (val == 1308) {
         document.getElementById("other_skill1").hidden = false;
-
         $('#other_skill').prop('required', true);
-    } else
-    {
+    } else {
         document.getElementById("other_skill1").hidden = true;
-
         $('#other_skill').prop('required', false);
     }
-
-
 }
+$(document).ready(function() {
 
-
-$(document).ready(function () {
-    $('#country').on('change', function () {
+    setTimeout(function(){
+        if(country_id != '')
+        {
+            $('#country').val(country_id).change();
+        }
+    },1000);
+    
+    $('#country').on('change', function() {
         var countryID = $(this).val();
         if (countryID) {
             $.ajax({
                 type: 'POST',
                 url: base_url + "job_profile/ajax_data",
                 data: 'country_id=' + countryID,
-                success: function (html) {
+                success: function(html) {
                     $('#state').html(html);
                     $('#city').html('<option value="">Select state first</option>');
+                    if(state_id != '')
+                    {
+                        $('#state').val(state_id).change();
+                    }
                 }
             });
         } else {
@@ -820,16 +482,19 @@ $(document).ready(function () {
             $('#city').html('<option value="">Select state first</option>');
         }
     });
-
-    $('#state').on('change', function () {
+    $('#state').on('change', function() {
         var stateID = $(this).val();
         if (stateID) {
             $.ajax({
                 type: 'POST',
                 url: base_url + "job_profile/ajax_data",
                 data: 'state_id=' + stateID,
-                success: function (html) {
+                success: function(html) {
                     $('#city').html(html);
+                    if(city_id != '')
+                    {
+                        $('#city').val(city_id).change();
+                    }
                 }
             });
         } else {
@@ -837,117 +502,39 @@ $(document).ready(function () {
         }
     });
 });
-
-//$(document).ready(function () {
-
-//Transforms the listbox visually into a Select2.
-//    $("#lstColors").select2({
-//        placeholder: "Select a Color",
-//        width: "200px"
-//    });
-
-//Initialize the validation object which will be called on form submit.
-//    var validobj = $("#frm").validate({
-//        onkeyup: false,
-//        errorClass: "myErrorClass",
-//
-//        //put error message behind each form element
-//        errorPlacement: function (error, element) {
-//            var elem = $(element);
-//            error.insertAfter(element);
-//        },
-//
-//        highlight: function (element, errorClass, validClass) {
-//            var elem = $(element);
-//            if (elem.hasClass("select2-offscreen")) {
-//                $("#s2id_" + elem.attr("id") + " ul").addClass(errorClass);
-//            } else {
-//                elem.addClass(errorClass);
-//            }
-//        },
-
-//When removing make the same adjustments as when adding
-//        unhighlight: function (element, errorClass, validClass) {
-//            var elem = $(element);
-//            if (elem.hasClass("select2-offscreen")) {
-//                $("#s2id_" + elem.attr("id") + " ul").removeClass(errorClass);
-//            } else {
-//                elem.removeClass(errorClass);
-//            }
-//        }
-//    });
-
-//If the change event fires we want to see if the form validates.
-//But we don't want to check before the form has been submitted by the user
-//initially.
-//    $(document).on("change", ".select2-offscreen", function () {
-//        if (!$.isEmptyObject(validobj.submitted)) {
-//            validobj.form();
-//        }
-//    });
-
-//A select2 visually resembles a textbox and a dropdown.  A textbox when
-//unselected (or searching) and a dropdown when selecting. This code makes
-//the dropdown portion reflect an error if the textbox portion has the
-//error class. If no error then it cleans itself up.
-//    $(document).on("select2-opening", function (arg) {
-//        var elem = $(arg.target);
-//        if ($("#s2id_" + elem.attr("id") + " ul").hasClass("myErrorClass")) {
-//            //jquery checks if the class exists before adding.
-//            $(".select2-drop ul").addClass("myErrorClass");
-//        } else {
-//            $(".select2-drop ul").removeClass("myErrorClass");
-//        }
-//    });
-//});
-
-
-
-
 //Click on University other option process Start 
-$(document).on('change', '#industry', function (event) {
-
+$(document).on('change', '#industry', function(event) {
     //alert(111);
     var item = $(this);
     var uni = (item.val());
-    if (uni == 288)
-    {
+    if (uni == 288) {
         $.fancybox.open('<div class="message"><h2>Add Industry</h2><input type="text" name="other_indu" id="other_indu"><a id="indus" class="btn">OK</a></div>');
-
-        $('.message #indus').on('click', function () {
+        $('.message #indus').on('click', function() {
             var $textbox = $('.message').find('input[type="text"]'),
-                    textVal = $textbox.val();
+                textVal = $textbox.val();
             $.ajax({
                 type: 'POST',
                 url: base_url + "recruiter/recruiter_other_industry",
                 dataType: 'json',
                 data: 'other_industry=' + textVal,
-                success: function (response) {
-
-                    if (response.select == 0)
-                    {
+                success: function(response) {
+                    if (response.select == 0) {
                         $.fancybox.open('<div class="message"><h2>Written industry already available in industry Selection</h2><button data-fancybox-close="" class="btn">OK</button></div>');
-                    } else if (response.select == 1)
-                    {
+                    } else if (response.select == 1) {
                         $.fancybox.open('<div class="message"><h2>Empty industry is not valid</h2><button data-fancybox-close="" class="btn">OK</button></div>');
-                    } else
-                    {
+                    } else {
                         $.fancybox.close();
                         $('#industry').html(response.select1);
                         $('#industry').html(response.select);
                     }
                 }
             });
-
         });
     }
-
 });
 
-function leave_page(clicked_id)
-{
-//alert(clicked_id);
-
+function leave_page(clicked_id) {
+    //alert(clicked_id);
     var post_name = document.getElementById('post_name').value;
     var skills = document.getElementById('skills2').value;
     var position = document.getElementById('position').value;
@@ -966,89 +553,53 @@ function leave_page(clicked_id)
     var minsal = document.getElementById('minsal').value;
     var maxsal = document.getElementById('maxsal').value;
     var currency = document.getElementById('currency').value;
-
     var searchkeyword = $.trim(document.getElementById('rec_search_title').value);
     var searchplace = $.trim(document.getElementById('rec_search_loc').value);
     //   alert(datepicker);
-
-    if (post_name == "" && skills == "" && minyear == "" && maxyear == "" && industry == "" && emp_type == "" && education == "" && post_desc == "" && interview == "" && country == "" && state == "" && salary_type == "" && datepicker == "" && minsal == "" && maxsal == "" && currency == "" && searchkeyword == "" && searchplace == "")
-    {
+    if (post_name == "" && skills == "" && minyear == "" && maxyear == "" && industry == "" && emp_type == "" && education == "" && post_desc == "" && interview == "" && country == "" && state == "" && salary_type == "" && datepicker == "" && minsal == "" && maxsal == "" && currency == "" && searchkeyword == "" && searchplace == "") {
         //alert("hi");
-        if (clicked_id == 1)
-        {
+        if (clicked_id == 1) {
             location.href = base_url + "recommended-candidates";
         }
-        if (clicked_id == 2)
-        {
+        if (clicked_id == 2) {
             location.href = base_url + "recruiter/profile";
         }
-        if (clicked_id == 3)
-        {
+        if (clicked_id == 3) {
             location.href = base_url + "recruiter/basic-information";
         }
-        if (clicked_id == 4)
-
-        {
-
-
-            if (searchkeyword == "" && searchplace == "")
-            {
+        if (clicked_id == 4) {
+            if (searchkeyword == "" && searchplace == "") {
                 return checkvalue_search;
-            } else
-            {
-                if (searchkeyword == "")
-                {
+            } else {
+                if (searchkeyword == "") {
                     location.href = base_url + 'recruiter_search/' + 0 + '/' + searchplace;
-
-                } else if (searchplace == "")
-                {
+                } else if (searchplace == "") {
                     location.href = base_url + 'search/recruiter_search/' + searchkeyword + '/' + 0;
-                } else
-                {
+                } else {
                     location.href = base_url + 'search/recruiter_search/' + searchkeyword + '/' + searchplace;
                 }
-
-
             }
         }
-        if (clicked_id == 5)
-        {
-
-
-
-
-
+        if (clicked_id == 5) {
             document.getElementById('acon').style.display = 'block !important';
-
-
         }
-        if (clicked_id == 6)
-        {
+        if (clicked_id == 6) {
             location.href = base_url + "profile";
         }
-        if (clicked_id == 7)
-        {
+        if (clicked_id == 7) {
             location.href = base_url + "change-password";
         }
-        if (clicked_id == 8)
-        {
+        if (clicked_id == 8) {
             location.href = base_url + "logout";
         }
-        if (clicked_id == 9)
-        {
+        if (clicked_id == 9) {
             location.href = 'javascript:history.back()';
-
         }
-
-    } else
-    {
+    } else {
         return home(clicked_id, searchkeyword, searchplace);
-
     }
-
 }
-
-$('.header ul li #abody ul li a').click(function () {
+$('.header ul li #abody ul li a').click(function() {
     var post_name = document.getElementById('post_name').value;
     var skills = document.getElementById('skills2').value;
     var position = document.getElementById('position').value;
@@ -1067,20 +618,13 @@ $('.header ul li #abody ul li a').click(function () {
     var minsal = document.getElementById('minsal').value;
     var maxsal = document.getElementById('maxsal').value;
     var currency = document.getElementById('currency').value;
-
     var searchkeyword = $.trim(document.getElementById('rec_search_title').value);
     var searchplace = $.trim(document.getElementById('rec_search_loc').value);
     //  alert(datepicker);
     var all_clicked_href = $(this).attr('href');
-
-    if (post_name == "" && skills == "" && minyear == "" && maxyear == "" && industry == "" && emp_type == "" && education == "" && post_desc == "" && interview == "" && country == "" && state == "" && salary_type == "" && datepicker == "" && minsal == "" && maxsal == "" && currency == "" && searchkeyword == "" && searchplace == "")
-    {
+    if (post_name == "" && skills == "" && minyear == "" && maxyear == "" && industry == "" && emp_type == "" && education == "" && post_desc == "" && interview == "" && country == "" && state == "" && salary_type == "" && datepicker == "" && minsal == "" && maxsal == "" && currency == "" && searchkeyword == "" && searchplace == "") {
         location.href = all_clicked_href;
-    } else
-    {
+    } else {
         home1(all_clicked_href);
     }
 });
-
-
-
