@@ -328,15 +328,15 @@ class Recruiter extends MY_Controller {
 				$job['max_height'] = $this->config->item('rec_profile_main_max_height');
 				$this->load->library('upload');
 				$this->upload->initialize($job);
-			//Uploading Image
+				//Uploading Image
 				$this->upload->do_upload('comp_logo');
-			//Getting Uploaded Image File Data
+				//Getting Uploaded Image File Data
 				$imgdata = $this->upload->data();
 				$imgerror = $this->upload->display_errors();
 
 				if ($imgerror == '') {
 
-			//Configuring Thumbnail 
+					//Configuring Thumbnail 
 					$job_thumb['image_library'] = 'gd2';
 					$job_thumb['source_image'] = $job['upload_path'] . $imgdata['file_name'];
 					$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
@@ -349,10 +349,10 @@ class Recruiter extends MY_Controller {
 					$job_thumb['quality'] = "100%";
 					$job_thumb['x_axis'] = '0';
 					$job_thumb['y_axis'] = '0';
-			//Loading Image Library
+					//Loading Image Library
 					$this->load->library('image_lib', $job_thumb);
 					$dataimage = $imgdata['file_name'];
-			//Creating Thumbnail
+					//Creating Thumbnail
 
 					$main_image = $this->config->item('rec_profile_main_upload_path') . $imgdata['file_name'];
 					$thumb_image = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
@@ -389,7 +389,6 @@ class Recruiter extends MY_Controller {
 				}
 			}
 			if ($error) {
-
 				$this->session->set_flashdata('error', $error[0]);
 				$redirect_url = site_url('recruiter');
 				redirect($redirect_url, 'refresh');
@@ -398,29 +397,28 @@ class Recruiter extends MY_Controller {
 				$rec_reg_prev_image = $this->data['recdata']['comp_logo'];
 				$logoimage = $_FILES['comp_logo']['name'];
 
-
 				$image_hidden_primary = $this->input->post('image_hidden_logo');
 
 				if ($rec_reg_prev_image != '') {
 					$rec_image_main_path = $this->config->item('rec_profile_main_upload_path');
 					$rec_bg_full_image = $rec_image_main_path . $rec_reg_prev_image;
 					if (isset($rec_bg_full_image)) {
-				//delete image from folder when user change image start
+						//delete image from folder when user change image start
 						if ($image_hidden_primary == $rec_reg_prev_image && $logoimage != "") {
 
 							unlink($rec_bg_full_image);
 						}
-				//delete image from folder when user change image End
+						//delete image from folder when user change image End
 					}
 
 					$rec_image_thumb_path = $this->config->item('rec_profile_thumb_upload_path');
 					$rec_bg_thumb_image = $rec_image_thumb_path . $rec_reg_prev_image;
 					if (isset($job_bg_thumb_image)) {
-				//delete image from folder when user change image Start
+						//delete image from folder when user change image Start
 						if ($image_hidden_primary == $rec_reg_prev_image && $logoimage != "") {
 							unlink($rec_bg_thumb_image);
 						}
-				//delete image from folder when user change image End
+						//delete image from folder when user change image End
 					}
 				}
 				$logo = $imgdata['file_name'];
@@ -7162,6 +7160,7 @@ class Recruiter extends MY_Controller {
 		}
 		$recruiter_data = $this->recruiter_model->get_rec_basic_info($userid);
 		$ret_arr = array("success"=>1,"recruiter_data"=>$recruiter_data);
+		$ret_arr['profile_progress'] = $this->progressbar($userid);
 		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
 	}
 
@@ -7232,7 +7231,7 @@ class Recruiter extends MY_Controller {
         $rec_skill_ids = trim($rec_skill_ids, ',');
 
         $modified_date = date('Y-m-d h:i:s', time());
-        $data1 = array(
+        $data = array(
             'rec_firstname' => ucfirst($rec_firstname),
             'rec_lastname' => ucfirst($rec_lastname),
             'rec_job_title' => $rec_jotitle,
@@ -7245,10 +7244,17 @@ class Recruiter extends MY_Controller {
             'rec_exp_month' => $rec_exp_month,            
             'modify_date' => $modified_date
         );
-        $update_data = $this->common->update_data($data1, 'recruiter', 'user_id', $userid);
+        $update_data = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
+
+        $data1 = array(
+			'rec_firstname' => ucfirst($rec_firstname),
+            'rec_lastname' => ucfirst($rec_lastname),
+		);
+		$insert_id1 = $this->common->update_data($data1, 'rec_post_search_tmp', 'user_id', $userid);
 
         $recruiter_data = $this->recruiter_model->get_rec_basic_info($userid);
 		$ret_arr = array("success"=>1,"recruiter_data"=>$recruiter_data);
+		$ret_arr['profile_progress'] = $this->progressbar($userid);
 		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -7267,4 +7273,367 @@ class Recruiter extends MY_Controller {
 		$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
 		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
 	}
+
+	public function save_rec_comp_info()
+	{
+		$userid = $this->session->userdata('aileenuser');
+		$comp_logo_old = $this->input->post('comp_logo_old');
+		$re_comp_name = $this->input->post('re_comp_name');
+		$re_comp_email = $this->input->post('re_comp_email');
+		$re_comp_phone = $this->input->post('re_comp_phone');
+		$re_comp_site = $this->input->post('re_comp_site');
+		$re_comp_size = $this->input->post('re_comp_size');
+		$re_comp_field = $this->input->post('re_comp_field');
+		if($re_comp_field == 0)
+		{
+			$re_comp_other_field = $this->input->post('re_comp_other_field');
+		}
+		else
+		{
+			$re_comp_other_field = "";
+		}
+		$re_comp_culture = $this->input->post('re_comp_culture');
+		$re_comp_country = $this->input->post('re_comp_country');
+		$re_comp_state = $this->input->post('re_comp_state');
+		$re_comp_city = $this->input->post('re_comp_city');
+		$re_comp_profile = $this->input->post('re_comp_profile');
+		$re_comp_other_activity_txt = json_decode($this->input->post('re_comp_other_activity_txt'));
+		$logo_name = '';
+		if($_FILES['re_comp_logo']['name'] != '')
+		{
+			$logo = '';
+			$job['upload_path'] = $this->config->item('rec_profile_main_upload_path');
+			$job['allowed_types'] = $this->config->item('rec_profile_main_allowed_types');
+			$job['max_size'] = $this->config->item('rec_profile_main_max_size');
+			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
+			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
+			$this->load->library('upload');
+			$this->upload->initialize($job);
+			//Uploading Image
+			$this->upload->do_upload('re_comp_logo');
+			//Getting Uploaded Image File Data
+			$imgdata = $this->upload->data();
+			$imgerror = $this->upload->display_errors();
+
+			if ($imgerror == '') {
+
+				//Configuring Thumbnail 
+				$job_thumb['image_library'] = 'gd2';
+				$job_thumb['source_image'] = $job['upload_path'] . $imgdata['file_name'];
+				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
+				$job_thumb['create_thumb'] = TRUE;
+				$job_thumb['maintain_ratio'] = TRUE;
+				$job_thumb['thumb_marker'] = '';
+				$job_thumb['width'] = $this->config->item('rec_profile_thumb_width');
+				$job_thumb['height'] = 2;
+				$job_thumb['master_dim'] = 'width';
+				$job_thumb['quality'] = "100%";
+				$job_thumb['x_axis'] = '0';
+				$job_thumb['y_axis'] = '0';
+				//Loading Image Library
+				$this->load->library('image_lib', $job_thumb);
+				$dataimage = $imgdata['file_name'];
+				//Creating Thumbnail
+
+				$main_image = $this->config->item('rec_profile_main_upload_path') . $imgdata['file_name'];
+				$thumb_image = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
+
+
+				$s3 = new S3(awsAccessKey, awsSecretKey);
+				$s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+				$abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+
+				//  echo $main_image;die();
+				// $thumb_image = $rec_image_thumb_path . $imageName;
+				copy($main_image, $thumb_image);
+				$abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+
+				if ($_SERVER['HTTP_HOST'] != "localhost") {
+					if (isset($main_image)) {
+						unlink($main_image);
+					}
+					if (isset($thumb_image)) {
+						unlink($thumb_image);
+					}
+				}
+
+				$this->image_lib->resize();
+				$thumberror = $this->image_lib->display_errors();
+			} else {
+				$thumberror = '';
+			}
+			if ($imgerror != '' || $thumberror != '') {
+				$error[0] = $imgerror;
+				$error[1] = $thumberror;
+			} else {
+				$error = array();
+			}
+			if ($error) {
+				$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
+				return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+				
+			} else {
+				$rec_reg_prev_image = $comp_logo_old;
+				$logoimage = $_FILES['re_comp_logo']['name'];
+
+				if ($rec_reg_prev_image != '') {
+					$rec_image_main_path = $this->config->item('rec_profile_main_upload_path');
+					$rec_bg_full_image = $rec_image_main_path . $rec_reg_prev_image;
+					if (isset($rec_bg_full_image)) {
+						//delete image from folder when user change image start
+						if ($rec_reg_prev_image != '' && $logoimage != "") {
+							unlink($rec_bg_full_image);
+						}
+						//delete image from folder when user change image End
+					}
+
+					$rec_image_thumb_path = $this->config->item('rec_profile_thumb_upload_path');
+					$rec_bg_thumb_image = $rec_image_thumb_path . $rec_reg_prev_image;
+					if (isset($job_bg_thumb_image)) {
+						//delete image from folder when user change image Start
+						if ($rec_reg_prev_image != '' && $logoimage != "") {
+							unlink($rec_bg_thumb_image);
+						}
+						//delete image from folder when user change image End
+					}
+				}
+				$logo_name = $imgdata['file_name'];
+			}
+		}
+		else
+		{
+			$logo_name = $comp_logo_old;
+		}
+		$other_activity_txt = '';
+		foreach ($re_comp_other_activity_txt as $key => $value) {
+			$other_activity_txt .= $value->activity.",";
+		}
+		$other_activity_txt = trim($other_activity_txt,",");
+		$data = array(
+			're_comp_name' => $re_comp_name,
+			're_comp_email' => $re_comp_email,
+			're_comp_phone' => $re_comp_phone,
+			're_comp_site' => $re_comp_site,
+			're_comp_size' => $re_comp_size,
+			're_comp_field' => $re_comp_field,
+			're_comp_other_field' => $re_comp_other_field,
+			're_comp_culture' => $re_comp_culture,
+			're_comp_country' => $re_comp_country,
+			're_comp_state' => $re_comp_state,
+			're_comp_city' => $re_comp_city,
+			're_comp_profile' => trim($re_comp_profile),
+			're_comp_other_activity' => $other_activity_txt,
+			'comp_logo' => $logo_name,
+			'modify_date' => date('y-m-d h:i:s'),			
+		);
+		$insert_id = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
+		$data = array(
+			'rec_comp_name' => $re_comp_name,
+			'rec_comp_logo' => $logo_name
+		);
+		$insert_id1 = $this->common->update_data($data, 'rec_post_search_tmp', 'user_id', $userid);
+
+		$rec_comp_data = $this->recruiter_model->get_rec_company_info($userid);
+		$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
+		$ret_arr['profile_progress'] = $this->progressbar($userid);
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+	}
+
+	public function progressbar($user_id)
+    {
+        $contition_array = array('user_id' => $user_id, 're_status' => '1', 'is_delete' => '0');
+        $rec_data = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '
+        	rec_id, user_id, recruiter_user_image, profile_background, rec_firstname, rec_lastname, rec_job_title, rec_field, rec_skills, rec_role_res, rec_hire_level, rec_exp_year, rec_exp_month, re_comp_name, re_comp_email, re_comp_phone, re_comp_size, re_comp_field, re_comp_culture, re_comp_country, re_comp_state, re_comp_city, re_comp_profile, progress', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+
+        $count = 0;
+        $progress_status = array();
+
+        $user_image = 0;        
+        if($rec_data['recruiter_user_image'] != '')
+        {
+            $user_image = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_image_status'] = $user_image;
+
+        $user_bg = 0;        
+        if($rec_data['profile_background'] != '')
+        {
+            $user_bg = 1;
+            $count = $count + 3;
+        }
+        $progress_status['profile_background_status'] = $user_bg;
+
+        $user_fname = 0;        
+        if($rec_data['rec_firstname'] != '')
+        {
+            $user_fname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_fname_status'] = $user_fname;
+
+        $user_lname = 0;        
+        if($rec_data['rec_lastname'] != '')
+        {
+            $user_lname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_lname_status'] = $user_lname;
+
+        $user_jobtitle = 0;        
+        if($rec_data['rec_job_title'] != '')
+        {
+            $user_jobtitle = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_jobtitle_status'] = $user_jobtitle;
+
+        $user_field = 0;        
+        if($rec_data['rec_field'] > '-1')
+        {
+            $user_field = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_field_status'] = $user_field;
+
+        $user_skill = 0;        
+        if($rec_data['rec_skills'] != '')
+        {
+            $user_skill = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_skill_status'] = $user_skill;
+
+        $user_roleres = 0;        
+        if($rec_data['rec_role_res'] != '')
+        {
+            $user_roleres = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_roleres_status'] = $user_roleres;
+
+        $user_hirelevel = 0;        
+        if($rec_data['rec_hire_level'] != '')
+        {
+            $user_hirelevel = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_hirelevel_status'] = $user_hirelevel;
+
+        $user_expyear = 0;        
+        if($rec_data['rec_exp_year'] > 0)
+        {
+            $user_expyear = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_expyear_status'] = $user_expyear;
+
+        $user_expmonth = 0;        
+        if($rec_data['rec_exp_month'] > 0)
+        {
+            $user_expmonth = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_expmonth_status'] = $user_expmonth;
+
+        $user_compname = 0;        
+        if($rec_data['re_comp_name'] != '')
+        {
+            $user_compname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compname_status'] = $user_compname;
+
+        $user_compemail = 0;        
+        if($rec_data['re_comp_email'] != '')
+        {
+            $user_compemail = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compemail_status'] = $user_compemail;
+
+        $user_compphone = 0;        
+        if($rec_data['re_comp_phone'] != 0)
+        {
+            $user_compphone = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compphone_status'] = $user_compphone;
+
+        $user_compsize = 0;        
+        if($rec_data['re_comp_size'] > 0)
+        {
+            $user_compsize = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compsize_status'] = $user_compsize;
+
+        $user_compfield = 0;        
+        if($rec_data['re_comp_field'] > '-1')
+        {
+            $user_compfield = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compfield_status'] = $user_compfield;
+
+        $user_compculture = 0;        
+        if($rec_data['re_comp_culture'] > '0')
+        {
+            $user_compculture = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compculture_status'] = $user_compculture;
+
+        $user_compcounrty = 0;        
+        if($rec_data['re_comp_country'] != '')
+        {
+            $user_compcounrty = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compcounrty_status'] = $user_compcounrty;
+
+        $user_compstate = 0;        
+        if($rec_data['re_comp_state'] != '')
+        {
+            $user_compstate = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compstate_status'] = $user_compstate;
+
+        $user_compcity = 0;        
+        if($rec_data['re_comp_city'] != '')
+        {
+            $user_compcity = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compcity_status'] = $user_compcity;
+
+        $user_compprofile = 0;        
+        if($rec_data['re_comp_profile'] != '')
+        {
+            $user_compprofile = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_compprofile_status'] = $user_compprofile;
+
+        $user_process = ($count * 100) / 25;
+        $user_process_value = ($user_process / 100);
+
+        if ($user_process == 100) {
+            //if ($job_data['progress_new'] != 1) {
+                $data = array(
+                    'progress' => '1',
+                    'modify_date' => date('Y-m-d h:i:s', time())
+                );
+                $updatedata = $this->common->update_data($data, 'recruiter', 'user_id', $user_id);
+            //}
+        } else {
+            $data = array(
+                'progress' => '0',
+                'modify_date' => date('Y-m-d h:i:s', time())
+            );
+            $updatedata = $this->common->update_data($data, 'recruiter', 'user_id', $user_id);
+        }
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
+    }
 }

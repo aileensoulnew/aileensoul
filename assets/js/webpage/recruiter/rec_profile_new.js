@@ -314,12 +314,12 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
                 $("#rec-info-loader").hide();
                 $("#rec-info-body").show();                               
             }
-            // var profile_progress = result.data.profile_progress;
-            // var count_profile_value = profile_progress.user_process_value;
-            // var count_profile = profile_progress.user_process;
-            // $scope.progress_status = profile_progress.progress_status;
-            // $scope.set_progress(count_profile_value,count_profile);
-            // load_add_detail();
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+            load_add_detail();
         });
     };
     $scope.get_rec_basic_info();
@@ -505,11 +505,11 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
                 $("#save_rec_info").removeAttr("style");
                 $("#rec_info_loader").hide();
                 $("#job-basic-info").modal('hide');
-                // var profile_progress = result.data.profile_progress;
-                // var count_profile_value = profile_progress.user_process_value;
-                // var count_profile = profile_progress.user_process;
-                // $scope.progress_status = profile_progress.progress_status;
-                // $scope.set_progress(count_profile_value,count_profile);
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             });
         }
     };
@@ -584,12 +584,6 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
                 $("#rec-comp-loader").hide();
                 $("#rec-comp-body").show();                               
             }
-            // var profile_progress = result.data.profile_progress;
-            // var count_profile_value = profile_progress.user_process_value;
-            // var count_profile = profile_progress.user_process;
-            // $scope.progress_status = profile_progress.progress_status;
-            // $scope.set_progress(count_profile_value,count_profile);
-            // load_add_detail();
         });
     };
     $scope.get_rec_company_info();
@@ -647,6 +641,7 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
         $scope.re_comp_country = $scope.rec_comp_data.re_comp_country;
         $("#re_comp_country").val($scope.rec_comp_data.re_comp_country);
         // $scope.exp_country_change();
+        $("#save_rec_comp_info").attr("style","pointer-events:none;");
         var counrtydata = $.param({'country_id': $scope.re_comp_country});
         $http({
             method: 'POST',
@@ -674,6 +669,7 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
                 $("#re_comp_city_loader").hide();
                 $scope.re_comp_city_list = data.data;
                 $scope.re_comp_city = $scope.rec_comp_data.re_comp_city;
+                $("#save_rec_comp_info").removeAttr("style");
             });        
         });
 
@@ -722,5 +718,140 @@ app.controller('userRecProfileController', function ($scope, $http, $location,$c
             }         
         }
     });
+
+    $scope.re_comp_other_activity_fnc = function(){        
+        $("#re_comp_other_activity_txt .tags").removeAttr("style");
+        $("#re_comp_other_activity_err").attr("style","display:none;");
+    };
+
+    /*$scope.validate_activity = function(){        
+        if($scope.re_comp_other_activity_txt == "" || $scope.re_comp_other_activity_txt == undefined)
+        {
+            $("#re_comp_other_activity_txt .tags").attr("style","border:1px solid #ff0000;");
+            setTimeout(function(){
+                $("#re_comp_other_activity_err").attr("style","display:block;");            
+            },100);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };*/
+
+    $scope.rec_comp_validate = {
+        rules: {
+            re_comp_name: {
+                required: true,
+            },
+            re_comp_email: {
+                required: true,
+                email:true,
+            },            
+            re_comp_phone: {
+                required: true,
+            },
+            re_comp_size: {
+                required: true,
+            },
+            re_comp_field: {
+                required: true,
+            },
+            re_comp_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#re_comp_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            re_comp_country: {
+                required: true,
+            },
+            re_comp_state: {
+                required: true,
+            },
+            re_comp_city: {
+                required: true,
+            },
+            re_comp_profile: {
+                required: true,
+            },
+        },
+    };
+
+    $scope.save_rec_comp_info = function(){
+        // var rec_other_activity = $scope.validate_activity();
+        if ($scope.rec_comp_form.validate())
+        {
+            $("#rec_comp_info_loader").show();
+            $("#save_rec_comp_info").attr("style","pointer-events:none;display:none;");
+            
+            re_comp_formdata.append('comp_logo_old', $scope.comp_logo_old);
+            re_comp_formdata.append('re_comp_name', $('#re_comp_name').val());
+            re_comp_formdata.append('re_comp_email', $('#re_comp_email').val());
+            re_comp_formdata.append('re_comp_phone', $('#re_comp_phone').val());
+            re_comp_formdata.append('re_comp_site', $('#re_comp_site').val());
+            re_comp_formdata.append('re_comp_size', $('#re_comp_size').val());
+            re_comp_formdata.append('re_comp_field', $('#re_comp_field option:selected').val());
+            re_comp_formdata.append('re_comp_other_field', $('#re_comp_other_field').val());
+            re_comp_formdata.append('re_comp_culture', $('#re_comp_culture option:selected').val());
+            re_comp_formdata.append('re_comp_country', $('#re_comp_country option:selected').val());
+            re_comp_formdata.append('re_comp_state', $('#re_comp_state option:selected').val());
+            re_comp_formdata.append('re_comp_city', $('#re_comp_city option:selected').val());
+            re_comp_formdata.append('re_comp_profile', $('#re_comp_profile').val());
+            re_comp_formdata.append('re_comp_other_activity_txt', JSON.stringify($scope.re_comp_other_activity_txt));
+
+            $http.post(base_url + 'recruiter/save_rec_comp_info', re_comp_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.rec_comp_data = result.data.rec_comp_data;
+                    if($scope.rec_comp_data.re_comp_other_activity != '')
+                    {
+                        $scope.re_comp_other_activity_list = $scope.rec_comp_data.re_comp_other_activity.split(',');
+                    }
+                }
+                $("#rec_comp_info_loader").hide();
+                $("#save_rec_comp_info").removeAttr("style");
+                $("#experience").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
     //Recruiter Company End
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                // $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
 });

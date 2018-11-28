@@ -1232,21 +1232,6 @@
                                         </div>
                                     </div>
                                     <!-- Publication End -->
-                                    
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
                                 </div>
                             </div>
                             <div class="right-add add-detail">                                
@@ -1286,7 +1271,7 @@
 
                                                     <li class="fw"><span class=""><img ng-if="progress_status.job_title_status == '1' && progress_status.job_city_status == '1' && progress_status.job_industry_status == '1' && progress_status.preferred_travel_status == '1' && progress_status.preferred_cmp_culture_status == '1' && progress_status.preferred_work_time_status == '1' && progress_status.exp_salary_amt_status == '1' && progress_status.exp_salary_currency_status == '1' && progress_status.exp_salary_worktype_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Preferred Job Details</li>
 
-                                                    <li class="fw"><span class=""><img ng-if="progress_status.user_professional_summary_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>
+                                                    <li class="fw"><span class=""><img ng-if="progress_status.user_professional_summary_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Professional Summary
                                                     </li>
                                                 </ul>
                                             </div>

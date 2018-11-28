@@ -43,7 +43,7 @@ define('ADS_BREAK', '4');
 
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('BASEURL', 'http://localhost/aileensoulnew/aileensoul/');
-    define('IMAGEPATHFROM', 'uploads'); //upload,s3bucket 
+    define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
     define('OPENFIRELINK', 'http://127.0.0.1:7070/http-bind/');
     define('OPENFIRESERVER', '127.0.0.1');
     define('OPENFIRESERVERDASH', '127-0-0-1');

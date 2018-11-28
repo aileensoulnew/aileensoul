@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="author-btn">
                                     <div class="user-btns">
-                                        <a class="btn3" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                        <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
                                     </div>
                                 </div>
                             </div>
@@ -801,7 +801,7 @@
                                 </div>
                                 <div class="author-btn">
                                     <div class="user-btns">
-                                        <a class="btn3" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                        <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
                                     </div>
                                 </div>
                             </div>
@@ -980,7 +980,7 @@
                                             </a>
                                         </li>
                                         <li class="pl15">
-                                            <a href="article.html">
+                                            <a href="<?php echo base_url('new-article'); ?>" target="_self">
                                                 <img src="<?php echo base_url('assets/n-images/article.png') ?>"><span><span class="none-479">Post</span> <span>Article</span></span>
                                             </a>
                                         </li>

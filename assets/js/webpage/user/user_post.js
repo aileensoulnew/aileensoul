@@ -2204,7 +2204,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }).then(function (success) {
             if (success.data.message == 1) {
                 var index = $scope.contactSuggetion.indexOf(contact);
-                $('#item-' + user_id + ' button.follow-btn').html('Request Sent');
+                $('.addtobtn-' + user_id).html('Request Sent');
+                $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
 //                $('.owl-carousel').trigger('next.owl.carousel');
             }
         });

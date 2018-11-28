@@ -97,13 +97,16 @@
 					} else {
 					    $user_id = $this->uri->segment(3);
 					}
-					$contition_array    = array('user_id' => $user_id, 'is_delete' => '0', 're_status' => '1');
-					$image              = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-					$image_ori          = $image[0]['profile_background'];
-					$filename           = $this->config->item('rec_bg_main_upload_path') . $image[0]['profile_background'];
-					$s3                 = new S3(awsAccessKey, awsSecretKey);
-					$this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-					if ($info && $image[0]['profile_background'] != '') {
+
+					$contition_array = array('user_id' => $user_id, 'is_delete' => '0', 're_status' => '1');
+					$image = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+					
+					$image_ori = $image[0]['profile_background'];
+					$filename = $this->config->item('rec_bg_main_upload_path') . $image[0]['profile_background'];
+					// print_r(REC_BG_MAIN_UPLOAD_URL.$image[0]['profile_background']);exit();
+					// $s3                 = new S3(awsAccessKey, awsSecretKey);
+					// $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+					if ($image[0]['profile_background'] != '') {
 					    ?>
 						<img src = "<?php echo REC_BG_MAIN_UPLOAD_URL . $image[0]['profile_background']; ?>" name="image_src" id="image_src" alt="<?php echo $image[0]['profile_background']; ?>"/>
 					<?php
@@ -128,10 +131,12 @@
 				<!--PROFILE PIC CODE START-->
 				<div class="profile-pho">
 					<div class="user-pic padd_img">
-						<?php $filename = $this->config->item('rec_profile_thumb_upload_path').$recdata['recruiter_user_image'];
-						$s3 = new S3(awsAccessKey, awsSecretKey);
-						$this->data['info']     = $info     = $s3->getObjectInfo(bucket, $filename);
-						if ($recdata['recruiter_user_image'] != '' && $info) { ?>
+						<?php 
+						// print_r($recdata);exit();
+						$filename = $this->config->item('rec_profile_thumb_upload_path').$recdata['recruiter_user_image'];
+						// $s3 = new S3(awsAccessKey, awsSecretKey);
+						// $this->data['info']     = $info     = $s3->getObjectInfo(bucket, $filename);
+						if ($recdata['recruiter_user_image'] != '') { ?>
 							<img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL . $recdata['recruiter_user_image']; ?>" alt="<?php echo $recdata['recruiter_user_image']; ?>" >
 						<?php
 						} else {
@@ -348,16 +353,17 @@
 									</li>
 									<li ng-if="rec_comp_data.re_comp_field > '-1'">
 										<span>Industry Type </span>
-										<label>{{rec_comp_data.re_comp_field_txt}}</label>
+										<label ng-if="rec_comp_data.re_comp_field != '0'">{{rec_comp_data.re_comp_field_txt}}</label>
+										<label ng-if="rec_comp_data.re_comp_field == '0'">{{rec_comp_data.re_comp_other_field}}</label>
 									</li>
 									<li ng-if="rec_comp_data.re_comp_culture > '0'">
 										<span>Company Culture</span>
-										<label ng-if="rec_comp_data.re_comp_culture == '1'">Traditional</label>
-										<label ng-if="rec_comp_data.re_comp_culture == '2'">Corporate</label>
-										<label ng-if="rec_comp_data.re_comp_culture == '3'">Start</label>
-										<label ng-if="rec_comp_data.re_comp_culture == '4'">Free Spirit</label>
-										<label ng-if="rec_comp_data.re_comp_culture == '5'">Don't Specify</label>
-										<label ng-if="rec_comp_data.re_comp_culture == '6'">Others</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '2'">Traditional</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '3'">Corporate</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '4'">Start-Up</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '5'">Free Spirit</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '6'">Don't Specify</label>
+										<label ng-if="rec_comp_data.re_comp_culture == '1'">Others</label>
 									</li>
 									<li>
 										<span>Company Location</span>
@@ -397,11 +403,41 @@
 						<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 					</div>
 					<div class="dtl-dis dtl-edit-p">
-						<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+						<div class="dtl-edit-top"></div>
+                        <div class="profile-status">
+                            <ul>
+                                <li><span class=""><img ng-if="progress_status.user_image_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+
+                                <li class="pl20"><span class=""><img ng-if="progress_status.profile_background_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+                                
+                                <li class="fw"><span class=""><img ng-if="progress_status.user_fname_status == '1' && progress_status.user_lname_status == '1' && progress_status.user_jobtitle_status == '1' && progress_status.user_field_status == '1' && progress_status.user_skill_status == '1' && progress_status.user_roleres_status == '1' && progress_status.user_hirelevel_status == '1' && progress_status.user_expyear_status == '1' && progress_status.user_expmonth_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic Information</li>
+                                
+                                <li class="fw"><span class=""><img ng-if="progress_status.user_compname_status == '1' && progress_status.user_compemail_status == '1' && progress_status.user_compphone_status == '1' && progress_status.user_compsize_status == '1' && progress_status.user_compfield_status == '1' && progress_status.user_compculture_status == '1' && progress_status.user_compcounrty_status == '1' && progress_status.user_compstate_status == '1' && progress_status.user_compcity_status == '1' && progress_status.user_compprofile_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Company Details</li>
+
+                                
+                            </ul>
+                        </div>
+                        <div class="dtl-edit-bottom"></div>
+                        <div class="p20">
+                            <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+                            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                <div class="count_main_progress">
+                                    <div class="circles">
+                                        <div class="second circle-1">
+                                            <div>
+                                                <strong></strong>
+                                                <span id="progress-txt"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
-				<div class="dtl-box p10 dtl-adv cus-add-block">
-					<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+				<div class="right-add-box"> 
+					<div class="dtl-box p10 dtl-adv cus-add-block" style="margin: 0">
+					</div>
 				</div>
 				<?php $this->load->view('right_add_box');?>
 			</div>
@@ -577,14 +613,14 @@
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
-										<label>Company Website URL</label>
+										<label>Company Website <span class="link-must">(Must be http:// or https://)</span></label>
 										<input type="text" placeholder="Enter Company Website" id="re_comp_site" name="re_comp_site">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>Company Size</label>
-										<input type="text" placeholder="Enter Company Website" id="re_comp_size" name="re_comp_size">
+										<input type="text" placeholder="Enter Company Size" id="re_comp_size" name="re_comp_size">
 									</div>
 								</div>
 							</div>
@@ -610,12 +646,12 @@
 										<span class="span-select">
 											<select id="re_comp_culture" name="re_comp_culture">
 												<option value="">Select Company Culture</option>
-												<option value="1">Traditional</option>
-												<option value="2">Corporate</option>
-												<option value="3">Start-Up</option>
-												<option value="4">Free Spirit</option>
-												<option value="5">Don't Specify</option>
-												<option value="0">Others</option>
+												<option value="2">Traditional</option>
+												<option value="3">Corporate</option>
+												<option value="4">Start-Up</option>
+												<option value="5">Free Spirit</option>
+												<option value="6">Don't Specify</option>
+												<option value="1">Others</option>
 											</select>
 										</span>
 									</div>
@@ -676,7 +712,8 @@
 							<div class="form-group">
 								<label>Other Activities</label>
 								<!-- <input type="text" placeholder="Company Profile"> -->
-								<tags-input id="re_comp_other_activity_txt" ng-model="re_comp_other_activity_txt" display-property="activity" placeholder="Company Other Activities" replace-spaces-with-dashes="false" template="title-template"></tags-input>
+								<tags-input id="re_comp_other_activity_txt" ng-model="re_comp_other_activity_txt" display-property="activity" placeholder="Company Other Activities" replace-spaces-with-dashes="false" template="title-template" ng-keyup="re_comp_other_activity_fnc()"></tags-input>
+								<label id="re_comp_other_activity_err" for="re_comp_other_activity_txt" class="error" style="display: none;">Please enter other activity</label>
 							</div>
 							<div class="form-group">
 								<div class="upload-file">
@@ -687,7 +724,11 @@
 							</div>
 						</div>
 						<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
+							<!-- <a href="#" class="save"><span>Save</span></a> -->
+							<a id="save_rec_comp_info" href="#" ng-click="save_rec_comp_info()" class="save"><span>Save</span></a>
+                            <div id="rec_comp_info_loader" class="dtl-popup-loader" style="display: none;">
+                                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                            </div>
 						</div>
 					</form>
 				</div>

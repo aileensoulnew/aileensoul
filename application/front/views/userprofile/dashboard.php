@@ -816,7 +816,7 @@
                                     </div>
                                     <div class="author-btn">
                                         <div class="user-btns">
-                                            <a class="btn3" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                            <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
                                         </div>
                                     </div>
                                 </div>
