@@ -2871,7 +2871,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .total-exp{color:#7b7b7b;}
 
 .custom-add-box{box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border:0; border-radius:15px;} 
-.custom-user-list h3{border: 0px; box-shadow: 0px; border-radius: 0; background: transparent !important; border-bottom: 1px solid #d2d2d2;}
+.custom-user-list .job_reg_main h3{border: 0px; box-shadow: 0px; border-radius: 0; background: transparent !important; border-bottom: 1px solid #d2d2d2;}
 .rec-edit-post .hs-submit .btn1{border-radius:20px; border:0px !important;}
 .rec-edit-post .hs-submit{text-align:center;}
 .uplod-file input{padding-left:0;}
@@ -4496,6 +4496,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.press-rel .dis-middle{padding-top:8px;}
 	.vertical-m-box .m-box{width:100%;}
 	.vertical-m-box .m-box:first-child{border-bottom:1px solid #d2d2d2; border-right:0;}
+	.post-job-cus .btn3{font-size:14px; padding:5px 30px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
