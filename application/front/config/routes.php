@@ -909,6 +909,7 @@ $route['edit-article/(:any)'] = 'article/edit_article/$1';
 $route['article-preview/(:any)'] = 'article/article_preview/$1';
 $route['article/(:any)'] = 'article/article_published/$1';
 $route['o/(:any)'] = 'user_post/opprtunity_detail/$1';
+$route['noscript'] = 'Userprofile/noscript';
 $route['(:any)'] = 'Userprofile';
 
 

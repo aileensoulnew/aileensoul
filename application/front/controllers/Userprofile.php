@@ -183,4 +183,9 @@ class Userprofile extends MY_Controller {
         echo json_encode($post_data);
     }
 
+    public function noscript()
+    {
+        $this->load->view('noscript');   
+    }
+
 }

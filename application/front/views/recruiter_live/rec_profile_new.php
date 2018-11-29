@@ -398,6 +398,7 @@
 				</div>
 			</div>
 			<div class="right-add">
+				<?php if ($this->uri->segment(3) == $userid) { ?>
 				<div class="dtl-box">
 					<div class="dtl-title">
 						<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
@@ -435,6 +436,7 @@
                         </div>
 					</div>
 				</div>
+				<?php } ?>
 				<div class="right-add-box"> 
 					<div class="dtl-box p10 dtl-adv cus-add-block" style="margin: 0">
 					</div>

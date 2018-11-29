@@ -4101,11 +4101,11 @@ class Job extends MY_Controller {
 
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
-// job seeker detail
+        // job seeker detail
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// post detail
+        // post detail
         $join_str[0]['table'] = 'job_apply';
         $join_str[0]['join_table_id'] = 'job_apply.post_id';
         $join_str[0]['from_table_id'] = 'rec_post.post_id';
@@ -4125,14 +4125,19 @@ class Job extends MY_Controller {
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
         if ($postdetail) {
-
+            
             foreach ($postdetail1 as $post) {
                 $return_html .= '<div class="all-job-box" id="postdata' . $post['app_id'] . '">
                                     <div class="all-job-top">';
 
-                $cache_time_1 = $this->db->get_where('recruiter', array(
-                            'user_id' => $post['user_id']
-                        ))->row()->comp_logo;
+                if($post['comp_logo'] != '')
+                {
+                    $cache_time_1 = $post['comp_logo'];
+                }
+                else
+                {
+                    $cache_time_1 = $this->db->get_where('recruiter', array('user_id' => $post['user_id']))->row()->comp_logo;
+                }                            
 
                 $cache_time = $this->db->get_where('job_title', array(
                             'title_id' => $post['post_name']
@@ -4155,14 +4160,18 @@ class Job extends MY_Controller {
                 }
                 $return_html .= '<div class="post-img">
                                             <a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
-                if ($cache_time_1) {
-                    if (IMAGEPATHFROM == 'upload') {
-                        if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
+                if ($cache_time_1)
+                {
+                    if (IMAGEPATHFROM == 'upload')
+                    {
+                        /*if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
                             $return_html .= '<img src="' . base_url('assets/images/commen-img.png') . '">';
-                        } else {
+                        } else {*/
                             $return_html .= '<img src="' . REC_PROFILE_THUMB_UPLOAD_URL . $cache_time_1 . '">';
-                        }
-                    } else {
+                        //}
+                    }
+                    else
+                    {
                         $filename = $this->config->item('rec_profile_thumb_upload_path') . $cache_time_1;
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
@@ -4172,16 +4181,21 @@ class Job extends MY_Controller {
                             $return_html .= '<img src="' . base_url('assets/images/commen-img.png') . '">';
                         }
                     }
-                } else {
+                }
+                else
+                {
                     $return_html .= '<img src="' . base_url('assets/images/commen-img.png') . '">';
                 }
-                $return_html .= '</a>
-                                        </div>';
+                $return_html .= '</a></div>';
 
-
-                $cache_time1 = $this->db->get_where('recruiter', array(
-                            'user_id' => $post['user_id']
-                        ))->row()->re_comp_name;
+                if($post['comp_name'] != '')
+                {
+                    $cache_time1 = $post['comp_name'];
+                }
+                else
+                {
+                    $cache_time1 = $this->db->get_where('recruiter', array('user_id' => $post['user_id']))->row()->re_comp_name;
+                }
 
                 $cache_time2 = $this->db->get_where('recruiter', array(
                             'user_id' => $post['user_id']
@@ -4265,18 +4279,18 @@ class Job extends MY_Controller {
 
                 $return_html .= ' </p>
 
-</div>
-</div>';
+            </div>
+            </div>';
             }
         } else {
             $return_html .= '<div class="art-img-nn">
-    <div class="art_no_post_img">
-        <img src="' . base_url('assets/img/job-no.png') . '">
-    </div>
-    <div class="art_no_post_text">
-        No  Saved Job Available.
-    </div>
-</div>';
+            <div class="art_no_post_img">
+                <img src="' . base_url('assets/img/job-no.png') . '">
+            </div>
+            <div class="art_no_post_text">
+                No  Saved Job Available.
+            </div>
+        </div>';
         }
 
         echo $return_html;
@@ -4325,9 +4339,15 @@ class Job extends MY_Controller {
                 $return_html .= '<div class="all-job-box" id="removeapply' . $post['app_id'] . '">
                                     <div class="all-job-top">';
 
-                $cache_time_1 = $this->db->get_where('recruiter', array(
-                            'user_id' => $post['user_id']
-                        ))->row()->comp_logo;
+                if($post['comp_logo'] != '')
+                {
+                    $cache_time_1 = $post['comp_logo'];
+                }
+                else
+                {
+                    $cache_time_1 = $this->db->get_where('recruiter', array('user_id' => $post['user_id']))->row()->comp_logo;
+                }
+
                 $cache_time = $this->db->get_where('job_title', array(
                             'title_id' => $post['post_name']
                         ))->row()->name;
@@ -4352,11 +4372,11 @@ class Job extends MY_Controller {
                                             <a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
-                        if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
+                        /*if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
                             $return_html .= '<img src="' . base_url('assets/images/commen-img.png') . '">';
-                        } else {
+                        } else {*/
                             $return_html .= '<img src="' . REC_PROFILE_THUMB_UPLOAD_URL . $cache_time_1 . '">';
-                        }
+                        //}
                     } else {
                         $filename = $this->config->item('rec_profile_thumb_upload_path') . $cache_time_1;
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4373,10 +4393,14 @@ class Job extends MY_Controller {
                 $return_html .= '</a>
                                         </div>';
 
-
-                $cache_time1 = $this->db->get_where('recruiter', array(
-                            'user_id' => $post['user_id']
-                        ))->row()->re_comp_name;
+                if($post['comp_name'] != '')
+                {
+                    $cache_time1 = $post['comp_name'];
+                }
+                else
+                {
+                    $cache_time1 = $this->db->get_where('recruiter', array('user_id'=>$post['user_id']))->row()->re_comp_name;
+                }
 
                 $cache_time2 = $this->db->get_where('recruiter', array(
                             'user_id' => $post['user_id']

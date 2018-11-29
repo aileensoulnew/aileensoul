@@ -671,8 +671,8 @@ class Recruiter extends MY_Controller {
 
 	public function add_post_store() {
 
-		print_r($_POST);
-		print_r($_FILES);exit();
+		// print_r($_POST);
+		// print_r($_FILES);exit();
 
 		$this->recruiter_apply_check();
 
@@ -687,30 +687,122 @@ class Recruiter extends MY_Controller {
 			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
 
-		// $hiring_level = $this->input->post('hiring_level');
+		
 
-		$position = $this->input->post('position_no');
+		$jobtitle = $this->input->post('post_name');
+		$post_Desc = $this->input->post('post_desc');
+		$skills = $this->input->post('skills');
+		$industry = $this->input->post('industry');
+		$interview = $this->input->post('interview');
 		$min_year = $this->input->post('minyear');
 		$max_year = $this->input->post('maxyear');
 		$fresher = $this->input->post('fresher');
-		$industry = $this->input->post('industry');
+		$education = $this->input->post('education');
+		$position = $this->input->post('position_no');
 		$emp_type = $this->input->post('emp_type');
-		$post_Desc = $this->input->post('post_desc');
-		$interview = $this->input->post('interview');
+		$hiring_level = $this->input->post('hiring_level');//New field 28-11-18
+		$bod = $this->input->post('last_date');
+		$bod = str_replace('/', '-', $bod);
+		$salary_type = $this->input->post('salary_type');
+		$currency = $this->input->post('currency');
+		$min_sal = $this->input->post('minsal');
+		$max_sal = $this->input->post('maxsal');
+
+		$comp_name = $this->input->post('comp_name');//New field 28-11-18
+		$comp_url = $this->input->post('comp_url');//New field 28-11-18
+		$comp_schedule = $this->input->post('comp_schedule');//New field 28-11-18
+		$comp_profile = $this->input->post('comp_profile');//New field 28-11-18
 		$country = $this->input->post('country');
 		$state = $this->input->post('state');
 		$city = $this->input->post('city');
-		$salary_type = $this->input->post('salary_type');
-		$min_sal = $this->input->post('minsal');
-		$max_sal = $this->input->post('maxsal');
-		$currency = $this->input->post('currency');
-		$bod = $this->input->post('last_date');
-		$bod = str_replace('/', '-', $bod);
+		$comp_logo_old = $this->input->post('comp_logo_old');//New field 28-11-18
+
+		$logo_name = '';
+		if($_FILES['comp_logo']['name'] != '')
+		{
+			$logo = '';
+			$job['upload_path'] = $this->config->item('rec_profile_main_upload_path');
+			$job['allowed_types'] = $this->config->item('rec_profile_main_allowed_types');
+			$job['max_size'] = $this->config->item('rec_profile_main_max_size');
+			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
+			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
+			$this->load->library('upload');
+			$this->upload->initialize($job);
+			//Uploading Image
+			$this->upload->do_upload('comp_logo');
+			//Getting Uploaded Image File Data
+			$imgdata = $this->upload->data();
+			$imgerror = $this->upload->display_errors();
+
+			if ($imgerror == '') {
+
+				//Configuring Thumbnail
+				$new_image_name = time().$imgdata['file_name'];
+				$job_thumb['image_library'] = 'gd2';
+				$job_thumb['source_image'] = $job['upload_path'] . $imgdata['file_name'];
+				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') .$new_image_name;
+				$job_thumb['create_thumb'] = TRUE;
+				$job_thumb['maintain_ratio'] = TRUE;
+				$job_thumb['thumb_marker'] = '';
+				$job_thumb['width'] = $this->config->item('rec_profile_thumb_width');
+				$job_thumb['height'] = 2;
+				$job_thumb['master_dim'] = 'width';
+				$job_thumb['quality'] = "100%";
+				$job_thumb['x_axis'] = '0';
+				$job_thumb['y_axis'] = '0';
+				//Loading Image Library
+				$this->load->library('image_lib', $job_thumb);
+				$dataimage = $imgdata['file_name'];
+				//Creating Thumbnail
+
+				$main_image = $this->config->item('rec_profile_main_upload_path') . $imgdata['file_name'];
+				$thumb_image = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
 
 
-		// job title start  
+				$s3 = new S3(awsAccessKey, awsSecretKey);
+				$s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+				$abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
 
-		$jobtitle = $this->input->post('post_name');
+				//  echo $main_image;die();
+				// $thumb_image = $rec_image_thumb_path . $imageName;
+				copy($main_image, $thumb_image);
+				$abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+
+				if ($_SERVER['HTTP_HOST'] != "localhost") {
+					if (isset($main_image)) {
+						unlink($main_image);
+					}
+					if (isset($thumb_image)) {
+						unlink($thumb_image);
+					}
+				}
+
+				$this->image_lib->resize();
+				$thumberror = $this->image_lib->display_errors();
+			} else {
+				$thumberror = '';
+			}
+			if ($imgerror != '' || $thumberror != '') {
+				$error[0] = $imgerror;
+				$error[1] = $thumberror;
+			} else {
+				$error = array();
+			}
+			if ($error) {
+				$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
+				return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+				
+			} else {				
+				$logo_name = $new_image_name;
+			}
+		}
+		else
+		{
+			$logo_name = $comp_logo_old;
+		}
+
+
+		// job title start
 		if ($jobtitle != " ") {
 			$contition_array = array('name' => trim($jobtitle));
 			$jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
@@ -726,8 +818,7 @@ class Recruiter extends MY_Controller {
 			}
 		}
 
-		// skills  start   
-		$skills = $this->input->post('skills');
+		// skills  start
 		$skills = explode(',', $skills);
 		if (count($skills) > 0) {
 
@@ -758,8 +849,6 @@ class Recruiter extends MY_Controller {
 		$skills = implode(',', $skill1);
 
 		// education data start
-
-		$education = $this->input->post('education');
 		$education = explode(',', $education);
 		if (count($education) > 0) {
 
@@ -810,6 +899,12 @@ class Recruiter extends MY_Controller {
 			'max_sal' => $max_sal,
 			'post_currency' => $currency,
 			'salary_type' => $salary_type,
+			'hiring_level' => $hiring_level,
+			'comp_name' => $comp_name,
+			'comp_url' => $comp_url,
+			'comp_schedule' => $comp_schedule,
+			'comp_profile' => $comp_profile,
+			'comp_logo' => $logo_name,
 			'is_delete' => '0',
 			'created_date' => date('y-m-d h:i:s'),
 			'user_id' => $userid,
@@ -893,7 +988,6 @@ class Recruiter extends MY_Controller {
 
 		$insert_id1 = $this->common->insert_data_getid($data, 'rec_post_search_tmp');
 
-
 		if ($insert_id) {
 			$this->session->set_flashdata('success', 'your post inserted successfully');
 			redirect('recommended-candidates', 'refresh');
@@ -958,7 +1052,6 @@ class Recruiter extends MY_Controller {
 			redirect('recruiter/');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
-
 
 		$contition_array = array('status' => '1', 'type' => '1');
 		$this->data['skill'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = 'skill', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1054,6 +1147,98 @@ class Recruiter extends MY_Controller {
 	// RECRUITER EDIT POST INSERT START
 	public function update_post($id = "") {
 		$this->recruiter_apply_check();
+
+
+		$hiring_level = $this->input->post('hiring_level');//New field 28-11-18
+		$comp_name = $this->input->post('comp_name');//New field 28-11-18
+		$comp_url = $this->input->post('comp_url');//New field 28-11-18
+		$comp_schedule = $this->input->post('comp_schedule');//New field 28-11-18
+		$comp_profile = $this->input->post('comp_profile');//New field 28-11-18
+		$comp_logo_old = $this->input->post('comp_logo_old');//New field 28-11-18
+
+		$logo_name = '';
+		if($_FILES['comp_logo']['name'] != '')
+		{
+			$logo = '';
+			$job['upload_path'] = $this->config->item('rec_profile_main_upload_path');
+			$job['allowed_types'] = $this->config->item('rec_profile_main_allowed_types');
+			$job['max_size'] = $this->config->item('rec_profile_main_max_size');
+			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
+			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
+			$this->load->library('upload');
+			$this->upload->initialize($job);
+			//Uploading Image
+			$this->upload->do_upload('comp_logo');
+			//Getting Uploaded Image File Data
+			$imgdata = $this->upload->data();
+			$imgerror = $this->upload->display_errors();
+
+			if ($imgerror == '') {
+
+				//Configuring Thumbnail
+				$new_image_name = time().$imgdata['file_name'];
+				$job_thumb['image_library'] = 'gd2';
+				$job_thumb['source_image'] = $job['upload_path'] . $imgdata['file_name'];
+				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') .$new_image_name;
+				$job_thumb['create_thumb'] = TRUE;
+				$job_thumb['maintain_ratio'] = TRUE;
+				$job_thumb['thumb_marker'] = '';
+				$job_thumb['width'] = $this->config->item('rec_profile_thumb_width');
+				$job_thumb['height'] = 2;
+				$job_thumb['master_dim'] = 'width';
+				$job_thumb['quality'] = "100%";
+				$job_thumb['x_axis'] = '0';
+				$job_thumb['y_axis'] = '0';
+				//Loading Image Library
+				$this->load->library('image_lib', $job_thumb);
+				$dataimage = $imgdata['file_name'];
+				//Creating Thumbnail
+
+				$main_image = $this->config->item('rec_profile_main_upload_path') . $imgdata['file_name'];
+				$thumb_image = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
+
+
+				$s3 = new S3(awsAccessKey, awsSecretKey);
+				$s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+				$abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+
+				//  echo $main_image;die();
+				// $thumb_image = $rec_image_thumb_path . $imageName;
+				copy($main_image, $thumb_image);
+				$abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+
+				if ($_SERVER['HTTP_HOST'] != "localhost") {
+					if (isset($main_image)) {
+						unlink($main_image);
+					}
+					if (isset($thumb_image)) {
+						unlink($thumb_image);
+					}
+				}
+
+				$this->image_lib->resize();
+				$thumberror = $this->image_lib->display_errors();
+			} else {
+				$thumberror = '';
+			}
+			if ($imgerror != '' || $thumberror != '') {
+				$error[0] = $imgerror;
+				$error[1] = $thumberror;
+			} else {
+				$error = array();
+			}
+			if ($error) {
+				$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
+				return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+				
+			} else {				
+				$logo_name = $new_image_name;
+			}
+		}
+		else
+		{
+			$logo_name = $comp_logo_old;
+		}
 
 		$skill = $this->input->post('skills');
 
@@ -1181,6 +1366,12 @@ class Recruiter extends MY_Controller {
 			'max_sal' => trim($this->input->post('maxsal')),
 			'post_currency' => $this->input->post('currency'),
 			'salary_type' => $this->input->post('salary_type'),
+			'hiring_level' => $hiring_level,
+			'comp_name' => $comp_name,
+			'comp_url' => $comp_url,
+			'comp_schedule' => $comp_schedule,
+			'comp_profile' => $comp_profile,
+			'comp_logo' => $logo_name,
 			'modify_date' => date('y-m-d h:i:s')
 		);
 		$update = $this->common->update_data($data, 'rec_post', 'post_id', $id);		
@@ -2147,7 +2338,7 @@ class Recruiter extends MY_Controller {
 			$join_str[0]['from_table_id'] = 'rec_post.user_id';
 			$join_str[0]['join_type'] = '';
 
-			$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,country,post_currency,salary_type';
+			$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,country,post_currency,salary_type,rec_post.comp_name,rec_post.comp_logo';
 
 			$contition_array = array('rec_post.user_id' => $userid, 'rec_post.is_delete' => '0');
 			$rec_postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = 'post_id', $orderby = 'desc', $limit, $offset, $join_str, $groupby = '');
@@ -2166,7 +2357,7 @@ class Recruiter extends MY_Controller {
 			$join_str[0]['from_table_id'] = 'rec_post.user_id';
 			$join_str[0]['join_type'] = '';
 
-			$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,country,post_currency,salary_type';
+			$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,country,post_currency,salary_type,rec_post.comp_name,rec_post.comp_logo';
 			$contition_array = array('rec_post.user_id' => $id, 'rec_post.is_delete' => '0', 'recruiter.re_step' => '3');
 			$rec_postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = 'post_id', $orderby = 'desc', $limit, $offset, $join_str, $groupby = '');
 			$rec_postdata1 = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = 'post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
@@ -2194,9 +2385,14 @@ class Recruiter extends MY_Controller {
 						$rec_post .= '<div class="all-job-box" id="removepost'.$post['post_id'].'">
 						<div class="all-job-top">';
 
-						$cache_time_1 = $this->db->get_where('recruiter', array(
-							'user_id' => $post['user_id']
-						))->row()->comp_logo;
+						if($post['comp_logo'] != '')
+		                {
+		                    $cache_time_1 = $post['comp_logo'];
+		                }
+		                else
+		                {
+		                    $cache_time_1 = $this->db->get_where('recruiter', array('user_id' => $post['user_id']))->row()->comp_logo;
+		                }
 
 						$cache_time = $this->db->get_where('job_title', array(
 							'title_id' => $post['post_name']
@@ -2226,12 +2422,12 @@ class Recruiter extends MY_Controller {
 
 							if (IMAGEPATHFROM == 'upload') {
 
-								if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time_1)) {
+								/*if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time_1)) {
 
 									$rec_post .= '<img src="' . base_url('assets/images/commen-img.png') . '" alt="commonimage">';
-								} else {
+								} else {*/
 									$rec_post .= '<img src="' . REC_PROFILE_THUMB_UPLOAD_URL . $cache_time_1 . '" alt="' . $cache_time . '">';
-								}
+								// }
 							} else {
 								//  $rec_post .= '<img src="' . $this->config->item('rec_profile_thumb_upload_path') . $cache_time_1 . '" alt="' . $cache_time_1 . '">';
 								$filename = $this->config->item('rec_profile_thumb_upload_path') . $cache_time_1;
@@ -2255,10 +2451,14 @@ class Recruiter extends MY_Controller {
 						}
 						$rec_post .= '</div>';
 
-
-						$cache_time1 = $this->db->get_where('recruiter', array(
-							'user_id' => $post['user_id']
-						))->row()->re_comp_name;
+						if($post['comp_name'] != '')
+		                {
+		                    $cache_time1 = $post['comp_name'];
+		                }
+		                else
+		                {
+		                    $cache_time1 = $this->db->get_where('recruiter', array('user_id'=>$post['user_id']))->row()->re_comp_name;
+		                }
 
 						$cache_time2 = $this->db->get_where('recruiter', array(
 							'user_id' => $post['user_id']
@@ -2365,11 +2565,17 @@ class Recruiter extends MY_Controller {
 					foreach ($rec_postdata as $post) {
 
 						$rec_post .= '<div class="all-job-box" id="removepost'.$post['post_id'] . '">
-						<div class="all-job-top">';
+						<div class="all-job-top">';						
 
-						$cache_time_1 = $this->db->get_where('recruiter', array(
-							'user_id' => $post['user_id']
-						))->row()->comp_logo;
+						if($post['comp_logo'] != '')
+		                {
+		                    $cache_time_1 = $post['comp_logo'];
+		                }
+		                else
+		                {
+		                    $cache_time_1 = $this->db->get_where('recruiter', array('user_id' => $post['user_id']))->row()->comp_logo;
+		                }
+
 						$cache_time = $this->db->get_where('job_title', array(
 							'title_id' => $post['post_name']
 						))->row()->name;
@@ -2432,11 +2638,16 @@ class Recruiter extends MY_Controller {
 						<div class="cus-profile" onclick="upload_company_logo(' . $post['user_id'] . ');">
 						<img src="' . base_url() . 'assets/img/cam.png" title="Upload Company Logo" alt="cameraimage">
 						</div>
-						</div>';
+						</div>';					
 
-						$cache_time1 = $this->db->get_where('recruiter', array(
-							'user_id' => $post['user_id']
-						))->row()->re_comp_name;
+						if($post['comp_name'] != '')
+		                {
+		                    $cache_time1 = $post['comp_name'];
+		                }
+		                else
+		                {
+		                    $cache_time1 = $this->db->get_where('recruiter', array('user_id'=>$post['user_id']))->row()->re_comp_name;
+		                }
 
 						$cache_time2 = $this->db->get_where('recruiter', array(
 							'user_id' => $post['user_id']
@@ -4976,7 +5187,7 @@ class Recruiter extends MY_Controller {
 		$join_str[0]['from_table_id'] = 'rec_post.user_id';
 		$join_str[0]['join_type'] = '';
 
-		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type';
+		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type,rec_post.comp_name,rec_post.comp_logo';
 		$contition_array = array('post_id' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'rec_post.user_id' => $userid);
 		$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 

@@ -314,7 +314,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         if (count($postdata) > 0) {
                             foreach ($postdata as $post) {
                                 $post_last_date_txt = $post['post_last_date'];
-                                $comp_name_txt = $post['re_comp_name'];
+                                if($post['comp_name'] != '')
+                                {
+                                    $comp_name_txt = $post['comp_name'];
+                                }
+                                else
+                                {
+                                    $comp_name_txt = $post['re_comp_name'];
+                                }
+
                                 $date1=date_create(date('y-m-d'));
                                 $date2=date_create($post_last_date_txt);
                                 $diff=date_diff($date1,$date2);
@@ -324,14 +332,20 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     <div class="all-job-top">
                                         <div class="post-img">
                                             <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
-                                                <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $comp_name_txt; ?>">
                                             <?php else: ?>
-                                                <a title="<?php echo $post['re_comp_name']; ?>" href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>">
+                                                <a title="<?php echo $comp_name_txt; ?>" href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>">
                                                 <?php
                                                     endif;
-                                                $cache_time = $this->db->get_where('recruiter', array(
-                                                            'user_id' => $post['user_id']
-                                                        ))->row()->comp_logo;
+
+                                                if($post['comp_logo'] != '')
+                                                {
+                                                    $cache_time = $post['comp_logo'];
+                                                }
+                                                else
+                                                {                                                    
+                                                    $cache_time = $this->db->get_where('recruiter', array('user_id' => $post['user_id']))->row()->comp_logo;
+                                                }
                                                 if ($cache_time) {
                                                     if (IMAGEPATHFROM == 'upload') {
                                                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) { 
@@ -369,18 +383,18 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                                             <p>
                                                 <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
-                                                    <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                    <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $comp_name_txt; ?>">
                                                     <?php else: ?>
-                                                        <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo $post['re_comp_name']; ?>">
+                                                        <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo $comp_name_txt; ?>">
                                                     <?php endif;
-                                                    $out = strlen($post['re_comp_name']) > 40 ? substr($post['re_comp_name'], 0, 40) . "..." : $post['re_comp_name'];
+                                                    $out = strlen($comp_name_txt) > 40 ? substr($comp_name_txt, 0, 40) . "..." : $comp_name_txt;
                                                     echo $out;
                                                     ?>
                                                 </a>
                                             </p>
                                             <p>
                                                 <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
-                                                    <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                    <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $comp_name_txt; ?>">
                                                 <?php else: ?>
 
                                                     <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo ucfirst(strtolower($post['rec_firstname'])) . ' ' . ucfirst(strtolower($post['rec_lastname'])); ?>">
