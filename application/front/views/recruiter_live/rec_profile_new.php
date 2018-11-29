@@ -297,7 +297,7 @@
 											<li ng-repeat="rec_skills in rec_skills_list">{{rec_skills}}</li>
 										</ul>
 									</li>
-									<li ng-if="rec_basic_info.rec_field">
+									<li ng-if="rec_basic_info.rec_field > '-1'">
 										<span>Industry Hired For</span>
 										<label>{{rec_basic_info.rec_field_txt}}</label>
 									</li>
@@ -383,7 +383,7 @@
 											<li ng-repeat="rec_activity in re_comp_other_activity_list">{{rec_activity}}</li>
 										</ul>
 									</li>
-									<li ng-if="rec_comp_data.comp_logo">
+									<li ng-if="rec_comp_data.comp_logo && rec_comp_data.comp_logo != 'null'">
 										<span>Company Logo</span>
 										<a href="<?php echo REC_PROFILE_THUMB_UPLOAD_URL; ?>{{rec_comp_data.comp_logo}}" target="_self">
 										<img style="width:50px;" src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL; ?>{{rec_comp_data.comp_logo}}"></a>
@@ -397,7 +397,7 @@
 					<?php $this->load->view('banner_add');?>
 				</div>
 			</div>
-			<div class="right-add">
+			<div class="right-add add-detail">
 				<?php if ($this->uri->segment(3) == $userid) { ?>
 				<div class="dtl-box">
 					<div class="dtl-title">
@@ -441,7 +441,7 @@
 					<div class="dtl-box p10 dtl-adv cus-add-block" style="margin: 0">
 					</div>
 				</div>
-				<?php $this->load->view('right_add_box');?>
+				<?php //$this->load->view('right_add_box');?>
 			</div>
 			<div class="clearfix"></div>
 		</div>

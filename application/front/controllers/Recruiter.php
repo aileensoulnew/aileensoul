@@ -684,10 +684,7 @@ class Recruiter extends MY_Controller {
 		if ($recruiter_deactive) {
 			redirect('recruiter/');
 		}
-			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
-
-
-		
+		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
 		$jobtitle = $this->input->post('post_name');
 		$post_Desc = $this->input->post('post_desc');
@@ -740,7 +737,7 @@ class Recruiter extends MY_Controller {
 				$new_image_name = time().$imgdata['file_name'];
 				$job_thumb['image_library'] = 'gd2';
 				$job_thumb['source_image'] = $job['upload_path'] . $imgdata['file_name'];
-				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') .$new_image_name;
+				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') .$imgdata['file_name'];
 				$job_thumb['create_thumb'] = TRUE;
 				$job_thumb['maintain_ratio'] = TRUE;
 				$job_thumb['thumb_marker'] = '';
@@ -788,12 +785,10 @@ class Recruiter extends MY_Controller {
 			} else {
 				$error = array();
 			}
-			if ($error) {
-				$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
-				return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+			if ($error) {				
 				
 			} else {				
-				$logo_name = $new_image_name;
+				$logo_name = $imgdata['file_name'];
 			}
 		}
 		else
@@ -1179,7 +1174,7 @@ class Recruiter extends MY_Controller {
 				$new_image_name = time().$imgdata['file_name'];
 				$job_thumb['image_library'] = 'gd2';
 				$job_thumb['source_image'] = $job['upload_path'] . $imgdata['file_name'];
-				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') .$new_image_name;
+				$job_thumb['new_image'] = $this->config->item('rec_profile_thumb_upload_path') .$imgdata['file_name'];
 				$job_thumb['create_thumb'] = TRUE;
 				$job_thumb['maintain_ratio'] = TRUE;
 				$job_thumb['thumb_marker'] = '';
@@ -1196,7 +1191,6 @@ class Recruiter extends MY_Controller {
 
 				$main_image = $this->config->item('rec_profile_main_upload_path') . $imgdata['file_name'];
 				$thumb_image = $this->config->item('rec_profile_thumb_upload_path') . $imgdata['file_name'];
-
 
 				$s3 = new S3(awsAccessKey, awsSecretKey);
 				$s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
@@ -1227,12 +1221,10 @@ class Recruiter extends MY_Controller {
 			} else {
 				$error = array();
 			}
-			if ($error) {
-				$ret_arr = array("success"=>1,"rec_comp_data"=>$rec_comp_data);
-				return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+			if ($error) {				
 				
 			} else {				
-				$logo_name = $new_image_name;
+				$logo_name = $imgdata['file_name'];
 			}
 		}
 		else
@@ -2597,16 +2589,6 @@ class Recruiter extends MY_Controller {
 							$cityname = '';
 						}
 
-			//                        $rec_post .= '<div class="post-img">
-			//                                            <a href="' . base_url() . '' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
-			//                        if ($cache_time_1) {
-			//                            $rec_post .= '<img src="' . base_url($this->config->item('rec_profile_thumb_upload_path') . $cache_time_1) . '" alt=' . $cache_time_1 . '>';
-			//                        } else {
-			//                            $rec_post .= '<img src="' . base_url('assets/images/commen-img.png') . '" alt="commonimage">';
-			//                        }
-			//                        $rec_post .= '</a>
-			//                                        </div>';
-
 						$rec_post .= '<div class="post-img">
 						
 						<a href="javascript:void(0);"  title="Upload Company Logo">';
@@ -2634,11 +2616,7 @@ class Recruiter extends MY_Controller {
 						} else {
 							$rec_post .= '<img src="' . base_url('assets/images/commen-img.png') . '" alt="commonimage">';
 						}
-						$rec_post .= '</a>
-						<div class="cus-profile" onclick="upload_company_logo(' . $post['user_id'] . ');">
-						<img src="' . base_url() . 'assets/img/cam.png" title="Upload Company Logo" alt="cameraimage">
-						</div>
-						</div>';					
+						$rec_post .= '</a></div>';
 
 						if($post['comp_name'] != '')
 		                {

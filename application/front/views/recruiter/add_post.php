@@ -307,7 +307,7 @@
 											</div>
 											<div class="form-group textarea-cus">
 												<label>About Company Details / Profile</label>
-												<textarea type="text" placeholder="About Company Details / Profile" id="comp_profile" name="comp_profile"><?php echo $rec_comp_data['re_comp_profile'] ?></textarea>
+												<textarea type="text" placeholder="About Company Details / Profile" id="comp_profile" name="comp_profile" rows="6"><?php echo $rec_comp_data['re_comp_profile'] ?></textarea>
 											</div>
                                             <div class="row">
     											<div class="col-md-4 col-sm-4 col-xs-4">
@@ -350,7 +350,9 @@
 											<div class="form-group uplod-file">
 												<label>Upload logo</label>
                                                 <input type="file" id="comp_logo" name="comp_logo">
+                                                <?php if($rec_comp_data['comp_logo'] != ''): ?>
                                                 <img style="width:100px;" src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL.$rec_comp_data['comp_logo']; ?>">
+                                                <?php endif; ?>
                                                 <input type="hidden" id="comp_logo_old" name="comp_logo_old" value="<?php echo $rec_comp_data['comp_logo']; ?>" />
 											</div>
                                             <input type="hidden" id="tagSelect" tabindex="24" value="brown,red,green" style="width:300px;" />
