@@ -202,7 +202,7 @@ if (($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'home'))
 
 
                                                 <!-- Edit Profile popup show on different page of Recruiter Start -->
-                                                <?php if (($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'add-post') || ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'edit-post')) { ?>
+                                                <?php /*if (($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'add-post') || ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'edit-post')) { ?>
 
                                                     <a onclick="return leave_page(3)" title="Leave Page"><span class="icon-edit-profile edit_data"></span>  
                                                         <span>Edit Profile </span></a>
@@ -212,7 +212,7 @@ if (($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'home'))
                                                     <a href="<?php echo base_url('recruiter/basic-information'); ?>" title="Basic Information"><span class="icon-edit-profile edit_data"></span>  
                                                         <span>Edit Profile </span></a>
 
-                                                <?php } ?>
+                                                <?php }*/ ?>
 
                                                 <!-- Edit Profile popup show on different page of Recruiter Start -->
 

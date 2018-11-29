@@ -435,7 +435,7 @@
                                 <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image == ''">
                                 <div class="article-post-text">
                                     <h3>{{post.article_data.article_title}}</h3>
-                                    <p>Aileensoul</p>
+                                    <p>{{post.user_data.fullname}}'s Article on Aileensoul</p>
                                 </div>
                             </a>                            
                         </div>
