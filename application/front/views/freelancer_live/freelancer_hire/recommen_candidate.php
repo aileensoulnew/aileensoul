@@ -18,7 +18,34 @@
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
         <?php //echo $header; ?>
-        <?php echo $freelancer_hire_header2; ?>
+        <?php echo $freelancer_hire_header2;
+        if($freehiredata['is_indivdual_company'] == '2')
+        {
+            $fullname = ucwords($freehiredata['comp_name']);
+            if($freehiredata['company_field'] != 0)
+            {
+                $designation = $this->db->get_where('industry_type', array('industry_id' => $freehiredata['company_field']))->row()->industry_name;
+            }
+            else
+            {
+                $designation = $freehiredata['company_other_field'];
+            }
+            $sub_fullname = substr($fullname, 0, 1);
+            $no_img_name = $sub_fullname;
+        }
+        else
+        {
+            $fname = $freehiredata['fullname'];
+            $lname = $freehiredata['username'];
+            $fullname = ucwords($fname) . ' ' . ucwords($lname);
+
+            $designation = $freehiredata['designation'];
+
+            $sub_fname = substr($fname, 0, 1);
+            $sub_lname = substr($lname, 0, 1);
+            $no_img_name = $sub_fname.$sub_lname;
+        }
+        ?>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container padding-360">
@@ -48,17 +75,13 @@
 
                                                 <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  tabindex="-1" aria-hidden="true" rel="noopener" title="<?php echo $freehiredata['fullname'] . " " . $freehiredata['username']; ?>">
                                                     <?php
-                                                    $fname = $freehiredata['fullname'];
-                                                    $lname = $freehiredata['username'];
-                                                    $sub_fname = substr($fname, 0, 1);
-                                                    $sub_lname = substr($lname, 0, 1);
 
                                                     if ($freehiredata['freelancer_hire_user_image']) {
                                                         if (IMAGEPATHFROM == 'upload') {
                                                             if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freehiredata['freelancer_hire_user_image'])) {
                                                                 ?>
                                                                 <div class="post-img-profile">
-                                                                    <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                    <?php echo ucfirst($no_img_name); ?>
                                                                 </div>
                                                             <?php } else {
                                                                 ?>
@@ -75,7 +98,7 @@
                                                             <?php } else {
                                                                 ?>
                                                                 <div class="post-img-profile">
-                                                                    <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                    <?php echo ucfirst($no_img_name); ?>
                                                                 </div> 
                                                                 <?php
                                                             }
@@ -83,7 +106,7 @@
                                                     } else {
                                                         ?>
                                                         <div class="post-img-profile">
-                                                            <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                            <?php echo ucfirst($no_img_name); ?>
                                                         </div>
                                                         <?php
                                                     }
@@ -92,13 +115,13 @@
                                             </div>
                                             <div class="right_left_box_design ">
                                                 <span class="profile-company-name ">
-                                                    <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $freehiredata['fullname'] . " " . $freehiredata['username']; ?>"> <?php echo ucwords($freehiredata['fullname']) . ' ' . ucwords($freehiredata['username']); ?></a>  
+                                                    <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $fullname; ?>"> <?php echo $fullname; ?></a>  
                                                 </span>
-                                                <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
+
                                                 <div class="profile-boxProfile-name">
                                                     <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $freehiredata['fullname'] . " " . $freehiredata['username']; ?>"><?php
-                                                        if ($freehiredata['designation']) {
-                                                            echo $freehiredata['designation'];
+                                                        if ($designation) {
+                                                            echo $designation;
                                                         } else {
                                                             echo "Designation";
                                                         }

@@ -3,7 +3,7 @@
 $userid = $this->session->userdata('aileenuser');
 $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email,ui.user_image,u.user_id,ui.profile_background,ui.profile_background_main');
 
-$select_data = 'profile_background,username,fullname,freelancer_hire_user_image,profile_background,profile_background_main,designation,freelancer_hire_slug,free_hire_step';
+$select_data = 'profile_background,username,fullname,freelancer_hire_user_image,profile_background,profile_background_main,designation,freelancer_hire_slug,free_hire_step,is_indivdual_company,comp_name,company_field,company_other_field';
 $this->data['freehiredata'] = $this->freelancer_hire_model->getfreelancerhiredata($userid, $select_data);
 $this->data['free_hire_login_slug'] = (count($this->data['freehiredata']) > 0) ? $this->data['freehiredata']['freelancer_hire_slug'] : '';
 

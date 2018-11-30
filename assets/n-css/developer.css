@@ -1,0 +1,8 @@
+.job-reg-cus-new #freelancer_hire_individual_regi .error {
+    border: none;
+    border-bottom: 1px #ff0000 solid !important;
+}
+.job-reg-cus-new #freelancer_hire_company_regi .error {
+    border: none;
+    border-bottom: 1px #ff0000 solid !important;
+}

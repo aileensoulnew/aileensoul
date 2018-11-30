@@ -9,6 +9,7 @@ class Freelancer_hire_live extends MY_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('email_model');
 		$this->load->model('user_model');
+		$this->load->model('data_model');
 		$this->load->model('user_post_model');
 		
 		$this->load->model('freelancer_hire_model');
@@ -136,8 +137,8 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-			$this->data['title'] = "Opportunities | Aileensoul";
-			$this->load->view('freelancer_hire_live/index', $this->data);
+			$this->data['title'] = "Create Freelance Employer Account | Aileensoul";
+			$this->load->view('freelancer_hire_live/new_freelance_emp_reg', $this->data);
 	   }
     }
 
@@ -3262,5 +3263,145 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
         $count = $result[0]['total'];
         return $count;
+    }
+
+    public function save_individual()
+    {
+    	$userid = $this->session->userdata('aileenuser');
+
+    	$first_name = trim($this->input->post('first_name'));
+    	$last_name = trim($this->input->post('last_name'));
+    	$first_lastname = $first_name . $last_name;
+    	$email_id = trim($this->input->post('email_id'));
+    	$current_position = trim($this->input->post('current_position'));
+    	$individual_country = trim($this->input->post('individual_country'));
+    	$individual_state = trim($this->input->post('individual_state'));
+    	$individual_city = trim($this->input->post('individual_city'));
+    	$prof_info = trim($this->input->post('prof_info'));
+    	$freelancer_hire_slug = $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg');
+
+    	$data = array(
+			'fullname' 				=> $first_name,
+			'username' 				=> $last_name,
+			'email' 				=> $email_id,
+			'freelancer_hire_slug' 	=> $freelancer_hire_slug,
+			'phone' 				=> '',
+			'country' 				=> $individual_country,
+			'state' 				=> $individual_state,
+			'city' 					=> $individual_city,
+			'professional_info' 	=> $prof_info,
+			'status' 				=> '1',
+			'is_delete' 			=> '0',
+			'created_date' 			=> date('Y-m-d h:i:s'),
+			'user_id' 				=> $userid,
+			'free_hire_step' 		=> '3',
+			'is_indivdual_company' 	=> '1'
+		);
+		$insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
+		if($insert_id)
+		{
+			if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com")
+			{
+				//Openfire Username Generate Start
+				$authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+				$api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+				$op_un_ps = "fh_".str_replace("-", "_", $freelancer_hire_slug);
+				$properties = array();
+				$username = $op_un_ps;
+				$password = $op_un_ps;
+				$name = ucwords($first_name." ".$last_name);
+				$email = $email_id;
+				$result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+			}
+
+			//Send Promotional Mail Start
+			$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+			$this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+			$email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);
+			$subject = $first_name.", Get the Work Done by Skilled Freelancer";
+			$send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+			//Send Promotional Mail End
+			$ret_arr = array("success"=>1);
+		}
+		else
+		{
+			$ret_arr = array("success"=>0);
+		}
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_company()
+    {
+    	$userid = $this->session->userdata('aileenuser');
+
+    	$comp_name = trim($this->input->post('comp_name'));
+    	$comp_number = trim($this->input->post('comp_number'));    	
+    	$comp_email = trim($this->input->post('comp_email'));
+    	$comp_website = trim($this->input->post('comp_website'));
+    	$company_field = trim($this->input->post('company_field'));
+    	if($company_field == 0)
+    	{
+    		$company_other_field = trim($this->input->post('company_other_field'));
+    	}
+    	else
+    	{
+    		$company_other_field = "";
+    	}
+    	$company_country = trim($this->input->post('company_country'));
+    	$company_state = trim($this->input->post('company_state'));
+    	$company_city = trim($this->input->post('company_city'));
+    	$comp_overview = trim($this->input->post('comp_overview'));
+
+    	$freelancer_hire_slug = $this->setcategory_slug($comp_name, 'freelancer_hire_slug', 'freelancer_hire_reg');
+
+    	$data = array(
+			'comp_name' 			=> $comp_name,
+			'comp_number' 			=> $comp_number,
+			'comp_email' 			=> $comp_email,
+			'freelancer_hire_slug' 	=> $freelancer_hire_slug,			
+			'company_field' 		=> $company_field,
+			'company_other_field' 	=> $company_other_field,
+			'company_country' 		=> $company_country,
+			'company_state' 		=> $company_state,
+			'company_city' 			=> $company_city,
+			'comp_overview' 		=> $comp_overview,
+			'status' 				=> '1',
+			'is_delete' 			=> '0',
+			'created_date' 			=> date('Y-m-d h:i:s'),
+			'user_id' 				=> $userid,
+			'free_hire_step' 		=> '3',
+			'is_indivdual_company' 	=> '2'
+		);
+		$insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
+		if($insert_id)
+		{
+			if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com")
+			{
+				//Openfire Username Generate Start
+				$authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+				$api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+				$op_un_ps = "fh_".str_replace("-", "_", $freelancer_hire_slug);
+				$properties = array();
+				$username = $op_un_ps;
+				$password = $op_un_ps;
+				$name = ucwords($comp_name);
+				$email = $comp_email;
+				$result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+			}
+
+			//Send Promotional Mail Start
+			$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+			$this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+			$email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);
+			$subject = $comp_name.", Get the Work Done by Skilled Freelancer";
+			$send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+			//Send Promotional Mail End
+			$ret_arr = array("success"=>1);
+		}
+		else
+		{
+			$ret_arr = array("success"=>0);
+		}
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

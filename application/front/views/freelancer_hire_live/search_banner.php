@@ -6,8 +6,9 @@
                 <p class="pb20">Find and get the work done by skilled freelancer from across the world through collaborative platform</p>
                 <!--img class="pt20" src="n-images/free-hire-bnr.png"-->
             </div>
-            <div class="col-md-6 col-sm-12 banner-right">
-                <div class="reg-form-box">
+            <div class="col-md-6 right-bnr hidden-xs"><!-- col-md-6 col-sm-12 banner-right -->
+                <img src="<?php echo base_url(); ?>assets/n-images/free-hire.png">
+                <div class="reg-form-box hide">
                     <div class="reg-form">
                         <h3>Register in Freelance Employer Profile <span class="db">It's free and hardly takes a minute</span></h3>
                         <?php echo form_open(base_url('freelancer_hire/hire_registation_insert'), array('id' => 'freelancerhire_regform', 'name' => 'freelancerhire_regform', 'class' => 'clearfix')); ?>
@@ -147,5 +148,12 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="bottom-bnr-div">
+    <div class="container">
+        <p>Find and Hire a Freelancers
+            <a class="btn-1 pull-right" href="<?php echo base_url('freelance-employer/signup'); ?>" target="_self">Create Freelance Employer Profile</a>
+        </p>
     </div>
 </div>
