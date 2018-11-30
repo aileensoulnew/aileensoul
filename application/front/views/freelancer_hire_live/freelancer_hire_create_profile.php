@@ -69,42 +69,39 @@
                                     <div class="col-sm-12 col-md-12">
                                         <label>Location</label>
                                         <div class="row">
-                                        <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                        <div class="form-group fw">
-                                            
-                                            <span class="select-field-custom">              
-                                                <select id="individual_country" name="individual_country" ng-model="individual_country" ng-change="individual_country_change()">
-                                                    <option value="">Select Country</option>         
-                                                    <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
-                                                </select>
-                                            </span>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                        <div class="form-group fw">
-                                            
-                                            <span class="select-field-custom">              
-                                                <select id="individual_state" name="individual_state" ng-model="individual_state" ng-change="individual_state_change()" disabled = "disabled">
-                                                    <option value="">Select State</option>
-                                                    <option data-ng-repeat='state_item in individual_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
-                                                </select>
-                                                <img id="individual_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;"> 
-                                            </span>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                        <div class="form-group fw">                 
-                                            <span class="select-field-custom">              
-                                                <select id="individual_city" name="individual_city" ng-model="individual_city" disabled = "disabled">
-                                                    <option value="">City</option>
-                                                    <option data-ng-repeat='city_item in individual_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
-                                                </select>
-                                                <img id="individual_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
-                                            </span>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    
+                                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                                <div class="form-group fw">
+                                                    <span class="select-field-custom">              
+                                                        <select id="individual_country" name="individual_country" ng-model="individual_country" ng-change="individual_country_change()">
+                                                            <option value="">Select Country</option>         
+                                                            <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                                <div class="form-group fw">                     
+                                                    <span class="select-field-custom">              
+                                                        <select id="individual_state" name="individual_state" ng-model="individual_state" ng-change="individual_state_change()" disabled = "disabled">
+                                                            <option value="">Select State</option>
+                                                            <option data-ng-repeat='state_item in individual_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                                        </select>
+                                                        <img id="individual_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;"> 
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                                <div class="form-group fw">                 
+                                                    <span class="select-field-custom">              
+                                                        <select id="individual_city" name="individual_city" ng-model="individual_city" disabled = "disabled">
+                                                            <option value="">Select City</option>
+                                                            <option data-ng-repeat='city_item in individual_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                                        </select>
+                                                        <img id="individual_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>                                    
                                     </div>
                                     
                                     <div class="col-sm-12 col-md-12">
@@ -190,41 +187,41 @@
                                     <div class="col-sm-12 col-md-12">
                                         <label>Location</label>
                                         <div class="row">
-                                        <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                        <div class="form-group fw">
-                                            
-                                            <span class="select-field-custom">
-                                                <select id="company_country" name="company_country" ng-model="company_country" ng-change="company_country_change()">
-                                                    <option value="">Select Country</option>         
-                                                    <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
-                                                </select>
-                                            </span>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                                <div class="form-group fw">
+                                                    
+                                                    <span class="select-field-custom">
+                                                        <select id="company_country" name="company_country" ng-model="company_country" ng-change="company_country_change()">
+                                                            <option value="">Select Country</option>         
+                                                            <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                                <div class="form-group fw">
+                                                    
+                                                    <span class="select-field-custom">
+                                                        <select id="company_state" name="company_state" ng-model="company_state" ng-change="company_state_change()" disabled = "disabled">
+                                                            <option value="">Select State</option>
+                                                            <option data-ng-repeat='state_item in company_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                                        </select>
+                                                        <img id="company_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                                <div class="form-group fw">                 
+                                                    <span class="select-field-custom">
+                                                        <select id="company_city" name="company_city" ng-model="company_city" disabled = "disabled">
+                                                            <option value="">Select City</option>
+                                                            <option data-ng-repeat='city_item in company_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                                        </select>
+                                                        <img id="company_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                        <div class="form-group fw">
-                                            
-                                            <span class="select-field-custom">
-                                                <select id="company_state" name="company_state" ng-model="company_state" ng-change="company_state_change()" disabled = "disabled">
-                                                    <option value="">Select State</option>
-                                                    <option data-ng-repeat='state_item in company_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
-                                                </select>
-                                                <img id="company_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
-                                            </span>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                        <div class="form-group fw">                 
-                                            <span class="select-field-custom">
-                                                <select id="company_city" name="company_city" ng-model="company_city" disabled = "disabled">
-                                                    <option value="">City</option>
-                                                    <option data-ng-repeat='city_item in company_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
-                                                </select>
-                                                <img id="company_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
-                                            </span>
-                                        </div>
-                                        </div>
-                                    </div>
                                     
                                     </div>
                                     <div class="col-sm-12 col-md-12">
