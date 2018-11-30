@@ -3128,7 +3128,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         	}
         	else
         	{        		
-            	redirect(base_url());
+            	// redirect(base_url());
         	}
         }
         $this->data['title'] = "Signup to Hire Freelancers | Aileensoul";

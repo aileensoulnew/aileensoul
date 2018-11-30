@@ -6,3 +6,10 @@
     border: none;
     border-bottom: 1px #ff0000 solid !important;
 }
+.ind-com .vertical-m-box .m-box a h4{
+	border: none;
+}
+.d-c-c{
+	position: absolute;
+	right: 0px;
+}
