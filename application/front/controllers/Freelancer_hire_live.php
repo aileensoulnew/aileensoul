@@ -1140,19 +1140,33 @@ public function freelancer_hire_profile($id = "") {
 		$this->freelancer_hire_check();
 			// code for display page end
 		$contition_array = array('user_id' => $userid, 'status' => '1');
-		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation, is_indivdual_company,comp_name,company_field,company_other_field', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	} else {
 		$contition_array = array('user_id' => $id, 'status' => '1', 'free_hire_step' => '3');
-		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation, is_indivdual_company,comp_name,company_field,company_other_field', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	}
-	$cityname = $this->db->get_where('cities', array('city_id' => $hire_data[0]['city']))->row()->city_name;
-	$statename = $this->db->get_where('states', array('state_id' => $hire_data[0]['state']))->row()->state_name;
-	$countryname = $this->db->get_where('countries', array('country_id' => $hire_data[0]['country']))->row()->country_name;
 
-	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " Freelance Recruiter | Aileensoul";
+	if($hire_data[0]['is_indivdual_company'] == 1)
+	{
 
-	$this->data['metadesc'] = "View ".ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
-	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_profile', $this->data);
+		$cityname = $this->db->get_where('cities', array('city_id' => $hire_data[0]['city']))->row()->city_name;
+		$statename = $this->db->get_where('states', array('state_id' => $hire_data[0]['state']))->row()->state_name;
+		$countryname = $this->db->get_where('countries', array('country_id' => $hire_data[0]['country']))->row()->country_name;
+		$fullname = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']);
+	}
+	else
+	{
+		$cityname = $this->db->get_where('cities', array('city_id' => $hire_data[0]['company_city']))->row()->city_name;
+		$statename = $this->db->get_where('states', array('state_id' => $hire_data[0]['company_state']))->row()->state_name;
+		$countryname = $this->db->get_where('countries', array('country_id' => $hire_data[0]['company_country']))->row()->country_name;
+		$fullname = ucfirst($hire_data[0]['comp_name']);
+		
+	}
+
+	$this->data['title'] = ucfirst($fullname) . " Freelance Recruiter | Aileensoul";
+
+	$this->data['metadesc'] = "View ".ucfirst($fullname) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_profile_new', $this->data);
 }
 
 public function freelancer_hire_profile_new($id = "") {
@@ -1202,15 +1216,24 @@ public function freelancer_hire_post($id = "") {
 		$this->freelancer_hire_check();
 			// code for display page end
 		$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug';
+		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug,is_indivdual_company,comp_name,company_field,company_other_field';
 		$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 	} else {
 		$userid = $id;
 		$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug';
+		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug,is_indivdual_company,comp_name,company_field,company_other_field';
 		$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 	}
-	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Projects | Employer Profile " . TITLEPOSTFIX;
+	if($hire_data[0]['is_indivdual_company'] == 1)
+	{
+		$fullname = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']);
+	}
+	else
+	{
+		$fullname = ucfirst($hire_data[0]['comp_name']);
+		
+	}
+	$this->data['title'] = ucfirst($fullname) . " | Projects | Employer Profile " . TITLEPOSTFIX;
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_post', $this->data);
 }
 
@@ -1485,10 +1508,19 @@ public function freelancer_save() {
 	$this->freelancer_hire_check();
 		// code for display page end
 	$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-	$data = 'username,fullname,designation,freelancer_hire_user_image,user_id';
+	$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,is_indivdual_company,comp_name,company_field,company_other_field';
 	$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+	if($hire_data[0]['is_indivdual_company'] == 1)
+	{
+		$fullname = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']);
+	}
+	else
+	{
+		$fullname = ucfirst($hire_data[0]['comp_name']);
+		
+	}
 
-	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Saved Freelancer | Employer Profile" . TITLEPOSTFIX;
+	$this->data['title'] = ucfirst($fullname) . " | Saved Freelancer | Employer Profile" . TITLEPOSTFIX;
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_save', $this->data);
 }
 
@@ -1781,7 +1813,7 @@ public function user_image_insert1() {
 
 	$update = $this->common->update_data($data, 'freelancer_hire_reg', 'user_id', $userid);
 
-	if ($_SERVER['HTTP_HOST'] == 'localhost') {
+	if ($_SERVER['HTTP_HOST'] != 'localhost') {
 		if (isset($upload_image)) {
 			unlink($upload_image);
 		}
@@ -3403,5 +3435,11 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 			$ret_arr = array("success"=>0);
 		}
 		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_review()
+    {
+    	print_r($_POST);
+    	print_r($_FILES);
     }
 }

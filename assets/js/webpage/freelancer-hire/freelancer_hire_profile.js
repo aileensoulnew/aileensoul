@@ -8,14 +8,14 @@ $(document).on('keydown', function (e) {
 //ALL POPUP CLOSE USING ESC END
 
 //CODE FOR DESIGNATION START
-function divClicked() {
+/*function divClicked() {
     var divHtml = $(this).html();
     var editableText = $("<textarea />");
     editableText.val(divHtml);
     $(this).replaceWith(editableText);
     editableText.focus();
     editableText.blur(editableTextBlurred);
-}
+}*/
 
 function editableTextBlurred() {
     var html = $(this).val();
@@ -38,7 +38,7 @@ function editableTextBlurred() {
     });
 }
 $(document).ready(function () {
-    $("a.designation").click(divClicked);
+    // $("a.designation").click(divClicked);
 });
 //CODE FOR DESIGNATION END
 
