@@ -12,7 +12,7 @@ app.controller('freelanceHireProfileController', function ($scope, $http) {
         }
         else
         {
-            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var ext = $(this).val().split('.');        
             if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
                 fh_formdata.append('review_file', $('#review_file')[0].files[0]);
@@ -47,10 +47,12 @@ app.controller('freelanceHireProfileController', function ($scope, $http) {
     $scope.save_review = function(){
         if ($scope.freelancer_hire_profile_review.validate())
         {
-            // $("#company_loader").show();
-            // $("#save_company").attr("style","pointer-events:none;display:none;");
-            // $("#back_company").attr("style","pointer-events:none;display:none;");
+            $("#review_loader").show();
+            $("#save_review").attr("style","pointer-events:none;display:none;");
 
+            fh_formdata.append('from_user_id', from_user_id);
+            fh_formdata.append('to_user_id', to_user_id);
+            fh_formdata.append('review_star', $('#review_star').val());
             fh_formdata.append('review_star', $('#review_star').val());
             fh_formdata.append('review_desc', $('#review_desc').val());
 
@@ -64,17 +66,40 @@ app.controller('freelanceHireProfileController', function ($scope, $http) {
                 success = result.data.success;
                 if(success == 1)
                 {
-                    window.location = base_url + "post-freelance-project";
+                    $("#review_loader").hide();
+                    $("#save_review").removeAttr("style");
+                    $("#reviews").modal("hide");
                 }
                 else if(success == 0)
-                {
-                    $("#freelancer_loader").hide();
-                    $("#save_individual").removeAttr("style");
-                    $("#back_individual").removeAttr("style");
-                    $("#error-modal").modal("show");
+                {                    
+                    $("#reviews").modal("hide");
                 }
             });
         }
     };
+
+    $scope.get_review = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'freelancer_hire_live/get_review',            
+            data: 'to_user_id=' + to_user_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.review_data = result.data.review_data;
+                $("#review-loader").hide();
+                $("#review-body").show();
+                setTimeout(function(){
+                    $("#rating-1").rating({min:0.5, max:5, step:0.5, size:'sm'});
+                    $(".user-rating").rating({min:0.5, max:5, step:0.5, size:'lg'});
+                },1000);
+            }
+        });
+    };
+    $scope.get_review();
 
 });

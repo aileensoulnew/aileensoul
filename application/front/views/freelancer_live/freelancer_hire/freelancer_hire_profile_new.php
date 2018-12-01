@@ -15,6 +15,7 @@
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/developer.css?ver=' . time()); ?>" />
 <?php $this->load->view('adsense'); ?>
 </head>
 <?php if (!$this->session->userdata('aileenuser')) { ?>
@@ -47,9 +48,11 @@
 	}
 	?>
 	<?php
+	$fh_userid = $freelancerhiredata[0]['user_id'];
+	$login_userid = $this->session->userdata('aileenuser');
 	if ($this->session->userdata('aileenuser')) {
 		if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
-			echo $freelancer_post_header2;
+			echo $freelancer_post_header2;//freelancer_live/freelancer_post/freelancer_post_header2_new
 		} else {
 			echo $freelancer_hire_header2;
 		}
@@ -268,9 +271,17 @@
 									// if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(2) == 'projects' || $this->uri->segment(2) == 'employer-details' || $this->uri->segment(2) == 'add-projects' || $this->uri->segment(2) == 'saved-freelancer') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) {
 									if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '' && $freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser'))) {
 										?>
+										<?php if($this->session->userdata('aileenuser')){ ?>
 										<li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(2) == 'saved-freelancer')) { ?> class="active" <?php } ?>><a title="Saved Freelancer" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>"><?php echo $this->lang->line("saved_freelancer"); ?></a>
 										</li>
-									<?php } ?>
+									<?php }
+										else
+										{ ?>
+											<li><a title="Saved Freelancer" href="javascript:void(0);"><?php echo $this->lang->line("saved_freelancer"); ?></a>
+										</li>
+
+										<?php }
+									} ?>
 									</ul>                          
 									<?php
 									$userid = $this->session->userdata('aileenuser');
@@ -349,7 +360,9 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
 									<span>Basic Information</span>
+									<?php if($fh_userid == $login_userid): ?>
 									<a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<?php endif; ?>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list list-ul-cus">
@@ -390,7 +403,9 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>">
 									<span>Company Information</span>
+									<?php if($fh_userid == $login_userid): ?>
 									<a href="#" data-target="#emp-company-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<?php endif; ?>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list list-ul-cus">
@@ -420,7 +435,9 @@
 							<div class="dtl-box">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Information</span>
+									<?php if($fh_userid == $login_userid): ?>
 									<a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<?php endif; ?>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list list-ul-cus">
@@ -485,7 +502,9 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/contact.png?ver=' . time()) ?>">
 									<span>Company Contact Information</span>
+									<?php if($fh_userid == $login_userid): ?>
 									<a href="#" data-target="#com-contact-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<?php endif; ?>
 								</div>
 								<div class="dtl-dis">
 									<ul class="dis-list list-ul-cus">
@@ -518,19 +537,28 @@
 								<div class="dtl-box">
 									<div class="dtl-title">
 										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
-										<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"> 
+										<?php if($login_userid != '' && $fh_userid != $login_userid): ?>
+										<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()); ?>"> 
 											<span>Write a review</span>
 										</a>
+										<?php endif; ?>
 									</div>
 									<div class="dtl-dis">
+
+										<div class="no-info" ng-if="review_data.length < '1'">
+											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+											<span>Lorem ipsum its a dummy text and its user to for all.</span>
+										</div>
+										<div ng-if="review_data.length > '0'">
 										<div class="total-rev">
 											<span class="total-rat">4.8</span> 
 											<span class="rating-star">
-												<input id="rating-1" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="" readonly="readonly">
+												<input id="rating-1" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required title="" readonly="readonly">
 											</span><span class="rev-count">59 Reviews</span>
 										</div>
+										</div>
 										<ul class="review-list">
-											<li>
+											<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
 												<div class="review-left">
 													<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
 												</div>
@@ -538,7 +566,7 @@
 													<h4>Yatin Belani</h4>
 													<div class="rating-star-cus">
 														<span class="rating-star">
-														<input id="rating-2" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="" readonly="readonly">
+														<input id="rating-{{$index}}" value="2" type="number" class="rating user-rating" class="rating" min=1 max=10 step=2 data-size="lg" data-rtl="true" readonly="readonly">
 															</span>
 													</div>
 													<div class="review-dis">
@@ -546,39 +574,6 @@
 													</div>
 												</div>
 											</li>
-											<li>
-												<div class="review-left">
-													<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-												</div>
-												<div class="review-right">
-													<h4>Yatin Belani</h4>
-													<div class="rating-star-cus">
-														<span class="rating-star">
-														<input id="rating-3" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="" readonly="readonly">
-															</span>
-													</div>
-													<div class="review-dis">
-																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="review-left">
-													<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-												</div>
-												<div class="review-right">
-													<h4>Yatin Belani</h4>
-													<div class="rating-star-cus">
-														<span class="rating-star">
-														<input id="rating-4" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="" readonly="readonly">
-															</span>
-													</div>
-													<div class="review-dis">
-																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
-													</div>
-												</div>
-											</li>
-													
 										</ul>
 										
 									</div>
@@ -1038,7 +1033,7 @@
 	    </div>
 	    <?php endif; ?>
 		
-		
+		<?php if($login_userid != '' && $fh_userid != $login_userid): ?>
 		<!-- Reviews  -->
 		<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1052,10 +1047,16 @@
 							<div class="dtl-dis">
 								<div class="form-group">
 									<div class="rev-img">
-										<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+										<?php if($fh_login_data['freelancer_post_user_image'] != ''):?>
+										<img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL.$fh_login_data['freelancer_post_user_image']; ?>">
+										<?php else: ?>
+										<div class="post-img-profile">
+											<?php echo ucwords(substr($fh_login_data['freelancer_post_fullname'], 0,1).' '.substr($fh_login_data['freelancer_post_username'], 0,1)); ?>
+										</div>
+										<?php endif; ?>
 									</div>
 									<div class="total-rev-top">
-										<h4>Harshad Patoliya</h4>
+										<h4><?php echo ucwords($fh_login_data['freelancer_post_fullname'].' '.$fh_login_data['freelancer_post_username']); ?></h4>
 										<span class="rating-star">
 											<input id="review_star" value="5" type="text" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required title="" name="review_star">
 										</span>
@@ -1069,12 +1070,16 @@
 									<div class="upload-file">
 										<span class="fw">Upload Photo</span>
 										<input type="file" id="review_file" name="review_file">
-										<span id="exp_file_error" class="error" style="display: none;"></span>
+										<span id="review_file_error" class="error" style="display: none;"></span>
 									</div>
 								</div>						
 							</div>
 							<div class="dtl-btn bottom-btn">
-								<a href="#" class="save" ng-click="save_review();"><span>Save</span></a>
+								<!-- <a href="#" class="save" ng-click="save_review();"><span>Save</span></a> -->
+								<a id="save_review" href="#" ng-click="save_review()" class="save"><span>Save</span></a>
+                                <div id="review_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
 							</div>
 						</form>
 					</div>	
@@ -1083,6 +1088,7 @@
 	            </div>
 	        </div>
 	    </div>
+		<?php endif; ?>
 		
 		<!-- model for popup start -->
 		<div class="modal fade message-box biderror" id="bidmodal" role="dialog">
@@ -1120,200 +1126,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- Model Popup Close -->
-		<!-- register -->
-		<div class="modal fade register-model login" data-backdrop="static" data-keyboard="false" id="register" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content inner-form1">
-				<!--<button type="button" class="modal-close" data-dismiss="modal">&times;</button>-->       
-					<div class="modal-body">
-						<div class="clearfix">
-							<div class="">
-								<div class="title">
-									<h1 class="tlh1">Sign up First and Register in Employer Profile</h1>
-								</div>
-								<div class="main-form">
-									<form role="form" name="register_form" id="register_form" method="post">
-										<div class="row">
-											<div class="col-sm-6 col-md-6">
-												<div class="form-group">
-													<input tabindex="101" autofocus="" type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
-												</div>
-											</div>
-											<div class="col-sm-6 col-md-6">
-												<div class="form-group">
-													<input tabindex="102" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<input tabindex="103" type="text" name="email_reg" id="email_reg" class="form-control input-sm" placeholder="Email Address" autocomplete="new-email">
-										</div>
-										<div class="form-group">
-											<input tabindex="104" type="password" name="password_reg" id="password_reg" class="form-control input-sm" placeholder="Password" autocomplete="new-password">
-										</div>
-										<div class="form-group dob">
-											<label class="d_o_b"> Date Of Birth :</label>
-											<span>
-												<select tabindex="105" class="day" name="selday" id="selday">
-													<option value="" disabled selected value>Day</option>
-													<?php
-													for ($i = 1; $i <= 31; $i++) {
-														?>
-														<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-														<?php
-													}
-													?>
-												</select>
-											</span>
-											<span>
-												<select tabindex="106" class="month" name="selmonth" id="selmonth">
-													<option value="" disabled selected value>Month</option>
-													<option value="1">Jan</option>
-													<option value="2">Feb</option>
-													<option value="3">Mar</option>
-													<option value="4">Apr</option>
-													<option value="5">May</option>
-													<option value="6">Jun</option>
-													<option value="7">Jul</option>
-													<option value="8">Aug</option>
-													<option value="9">Sep</option>
-													<option value="10">Oct</option>
-													<option value="11">Nov</option>
-													<option value="12">Dec</option>
-												</select>
-											</span>
-											<span>
-												<select tabindex="107" class="year" name="selyear" id="selyear">
-													<option value="" disabled selected value>Year</option>
-													<?php
-													for($i = date('Y'); $i >= 1900; $i--) {
-														?>
-														<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-														<?php
-													} ?>
-												</select>
-											</span>
-										</div>
-										<div class="dateerror" style="color:#f00; display: block;"></div>
-										<div class="form-group gender-custom">
-											<select tabindex="108" class="gender"  onchange="changeMe(this)" name="selgen" id="selgen">
-												<option value="" disabled selected value>Gender</option>
-												<option value="M">Male</option>
-												<option value="F">Female</option>
-											</select>
-										</div>
-										<p class="form-text" style="margin-bottom: 10px;">
-											By Clicking on create an account button you agree our <a tabindex="109" title="Terms and Condition" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="110" title="Privacy policy" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
-										</p>
-										<p>
-											<button tabindex="111" class="btn1">Create an account</button>
-										</p>
-										<div class="sign_in pt10">
-											<p>
-												Already have an account ? <a title="Log In" tabindex="112" onClick="login_profile();" href="javascript:void(0);"> Log In </a>
-											</p>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- register -->
-		<!-- Login  -->
-		<div class="modal fade login" id="login" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content login-frm">
-					<!--<button type="button" class="modal-close" data-dismiss="modal">&times;</button>-->       
-					<div class="modal-body">
-						<div class="right-main">
-							<div class="right-main-inner">
-								<div class="">
-									<div class="title">
-										<h1 class="ttc tlh2">Welcome To Aileensoul</h1>
-									</div>
-									<form role="form" name="login_form" id="login_form" method="post">
-										<div class="form-group">
-											<input type="email" value="<?php echo $email; ?>" name="email_login" id="email_login" autofocus="" class="form-control input-sm" placeholder="Email Address*">
-											<div id="error2" style="display:block;">
-												<?php
-												if ($this->session->flashdata('erroremail')) {
-													echo $this->session->flashdata('erroremail');
-												}
-												?>
-											</div>
-											<div id="errorlogin"></div> 
-										</div>
-										<div class="form-group">
-											<input type="password" name="password_login" id="password_login" class="form-control input-sm" placeholder="Password*">
-											<div id="error1" style="display:block;">
-												<?php
-												if ($this->session->flashdata('errorpass')) {
-													echo $this->session->flashdata('errorpass');
-												}
-												?>
-											</div>
-											<div id="errorpass"></div> 
-										</div>
-										<p class="pt-20 ">
-											<button class="btn1" onclick="login()">Login</button>
-										</p>
-										<p class=" text-center">
-											<a title="Forgot Password" href="javascript:void(0)" data-toggle="modal" onclick="forgot_profile();" id="myBtn">Forgot Password ?</a>
-										</p>
-										<p class="pt15 text-center">
-											Don't have an account? <a title="Create an account" class="db-479" href="javascript:void(0);" data-toggle="modal" onclick="create_profile();">Create an account</a>
-										</p>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Login -->
-		<!-- model for forgot password start -->
-		<div class="modal fade login" id="forgotPassword" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content login-frm">
-					<button type="button" class="modal-close" data-dismiss="modal" onclick="login_profile1();">&times;</button>       
-					<div class="modal-body">
-						<div class="right-main">
-							<div class="right-main-inner">
-								<div class="">
-									<div id="forgotbuton"></div> 
-									<div class="title">
-										<p class="ttc tlh2">Forgot Password</p>
-									</div>
-									<?php
-									$form_attribute = array('name' => 'forgot', 'method' => 'post', 'class' => 'forgot_password', 'id' => 'forgot_password');
-									echo form_open('profile/forgot_password', $form_attribute);
-									?>
-									<div class="form-group">
-										<input type="email" value="" name="forgot_email" id="forgot_email" class="form-control input-sm" placeholder="Email Address*">
-										<div id="error2" style="display:block;">
-											<?php
-											if ($this->session->flashdata('erroremail')) {
-												echo $this->session->flashdata('erroremail');
-											}
-											?>
-										</div>
-										<div id="errorlogin"></div> 
-									</div>
-									<p class="pt-20 text-center">
-										<input class="btn btn-theme btn1" type="submit" name="submit" value="Submit" style="width:105px; margin:0px auto;" /> 
-									</p>
-								</div>
-							</div>						
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- Model Popup Close -->		
 	</div>
 
 
@@ -1335,7 +1148,9 @@
 		var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
 		var base_url = '<?php echo base_url(); ?>';
 		var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
-		var segment3 = '<?php echo $this->uri->segment(3); ?>'
+		var segment3 = '<?php echo $this->uri->segment(3); ?>';
+		var from_user_id = '<?php echo $fh_login_data['user_id']; ?>';
+		var to_user_id = '<?php echo $freelancerhiredata[0]['user_id']; ?>';
 		var header_all_profile = '<?php echo $header_all_profile; ?>';
 		var app = angular.module("freelanceHireProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
 		$('#main_loader').hide();

@@ -386,6 +386,8 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('JOB_USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_experience/');
     define('JOB_USER_RESUME_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_resume/');
 
+    define('REVIEW_UPLOAD_URL', BUCKETLINK . 'uploads/rating/');
+
 } else {
     //USER PHOTO 
     define('USER_WEB_IMAGE_URL', BASEURL . 'admin/../uploads/users/main/');
@@ -623,6 +625,8 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('JOB_USER_PATENT_UPLOAD_URL', BASEURL . 'uploads/job_user_patent/');
     define('JOB_USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/job_user_experience/');
     define('JOB_USER_RESUME_UPLOAD_URL', BASEURL . 'uploads/job_user_resume/');
+
+    define('REVIEW_UPLOAD_URL', BASEURL . 'uploads/rating/');
 
 }
 

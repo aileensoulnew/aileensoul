@@ -969,3 +969,5 @@ $config['job_user_publication_upload_path'] = 'uploads/job_user_publication/';
 $config['job_user_patent_upload_path'] = 'uploads/job_user_patent/';
 $config['job_user_experience_upload_path'] = 'uploads/job_user_experience/';
 $config['job_user_resume_upload_path'] = 'uploads/job_user_resume/';
+
+$config['review_upload_path'] = 'uploads/rating/';

@@ -15,6 +15,8 @@ class Freelancer_hire_live extends MY_Controller {
 		$this->load->model('freelancer_hire_model');
 		$this->load->model('freelancer_apply_model');
 		$this->lang->load('message', 'english');
+		$this->load->library('upload');
+
 		//AWS access info start
 		$this->load->library('S3');
 		//AWS access info end
@@ -127,18 +129,25 @@ class Freelancer_hire_live extends MY_Controller {
 			redirect('hire-freelancer', refresh);
 		} else {
 			$userid = $this->session->userdata('aileenuser');
-			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-			$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-			$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-			$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-			$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-			$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-			$this->data['title'] = "Create Freelance Employer Account | Aileensoul";
-			$this->load->view('freelancer_hire_live/new_freelance_emp_reg', $this->data);
+			if($userid)
+			{				
+				$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+				$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+				$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+				$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+				$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+				$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+				$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+				$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+				$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+				$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
+				$this->data['title'] = "Create Freelance Employer Account | Aileensoul";
+				$this->load->view('freelancer_hire_live/new_freelance_emp_reg', $this->data);
+			}
+			else
+			{
+				redirect(base_url());
+			}
 	   }
     }
 
@@ -1132,6 +1141,7 @@ public function freelancer_hire_profile($id = "") {
 		$id = $this->db->select('user_id')->get_where('freelancer_hire_reg', array('freelancer_hire_slug' => $id, 'status' => '1'))->row()->user_id;
 	}
 	$userid = $this->session->userdata('aileenuser');
+	$login_userid = $this->session->userdata('aileenuser');
 		//check user deactivate start
 	$this->freelancer_hire_deactivate_check();
 		//check user deactivate end
@@ -1145,6 +1155,10 @@ public function freelancer_hire_profile($id = "") {
 		$contition_array = array('user_id' => $id, 'status' => '1', 'free_hire_step' => '3');
 		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation, is_indivdual_company,comp_name,company_field,company_other_field', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	}
+
+	$select_data ='freelancer_post_fullname,freelancer_post_username,freelancer_post_user_image,profile_background,profile_background_main,designation,freelancer_apply_slug,free_post_step,user_id,progressbar';
+
+	$fh_login_data = $this->data['fh_login_data'] = $this->freelancer_apply_model->getfreelancerapplydata($login_userid, $select_data);
 
 	if($hire_data[0]['is_indivdual_company'] == 1)
 	{
@@ -3439,7 +3453,64 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
     public function save_review()
     {
-    	print_r($_POST);
-    	print_r($_FILES);
+    	$from_user_id = $this->input->post('from_user_id');
+        $to_user_id = $this->input->post('to_user_id');
+        $review_star = $this->input->post('review_star');
+        $review_desc = $this->input->post('review_desc');
+
+        $fileName = "";
+        if(isset($_FILES['review_file']['name']) && $_FILES['review_file']['name'] != "")
+        {
+        	$review_upload_path = $this->config->item('review_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $review_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['review_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('review_file')){
+                $main_image = $review_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+
+        if($from_user_id != '' && $to_user_id != '')
+        {
+            $user_project_insert = $this->freelancer_hire_model->set_save_review($from_user_id,$to_user_id,$review_star,$review_desc,$fileName);
+            $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
+            $ret_arr = array("success"=>1,"review_data"=>$review_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_review()
+    {
+    	$to_user_id = $this->input->post('to_user_id');
+    	if($to_user_id != '')
+        {            
+            $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
+            $ret_arr = array("success"=>1,"review_data"=>$review_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0,"review_data"=>array());
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

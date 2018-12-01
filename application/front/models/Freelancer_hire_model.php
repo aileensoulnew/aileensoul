@@ -320,4 +320,31 @@ class Freelancer_hire_model extends CI_Model {
         }
         echo "Done";
     }
+
+    public function set_save_review($from_user_id,$to_user_id,$review_star,$review_desc ='',$fileName = '')
+    {
+        $data = array(
+            'to_user_id' => $to_user_id,
+            'from_user_id' => $from_user_id,
+            'review_star' => $review_star,
+            'review_desc' => $review_desc,
+            'review_file' => $fileName,    
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'freelancer_review');
+        return $insert_id;
+    }
+
+    public function get_save_review($to_user_id)
+    {
+        $this->db->select("fp.freelancer_post_fullname as first_name,fp.freelancer_post_username as last_name,freelancer_post_user_image as user_image,fr.*")->from('freelancer_review fr');
+        $this->db->join('freelancer_post_reg fp', 'fp.user_id = fr.from_user_id', 'left');
+        $this->db->where('fr.to_user_id', $to_user_id);
+        $this->db->where('fr.status', '1');                
+        $query = $this->db->get();
+        $result_array = $query->result();
+        return $result_array;
+    }
 }

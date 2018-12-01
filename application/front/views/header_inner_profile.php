@@ -271,10 +271,10 @@ if($browser == "Firefox")
                         <li class="dropdown user-id">
                             <a href="javascript:void(0);" title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <?php
-                                    if ($session_user['aileenuser_userimage'] != '')
+                                    if ($userData['user_image'] != '')
                                     {?>
                                         <span class="usr-img profile-brd" id="header-main-profile-pic">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $session_user['aileenuser_userimage'] ?>" alt="<?php echo $session_user['aileenuser_firstname'] ?>">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['user_image'] ?>">
                                         </span>
                                     <?php
                                     }
