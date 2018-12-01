@@ -744,9 +744,9 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
     $scope.save_individual = function(){
         if ($scope.freelancer_hire_individual_regi.validate())
         {
-            $("#freelancer_loader").show();
-            $("#save_individual").attr("style","pointer-events:none;display:none;");
-            $("#back_individual").attr("style","pointer-events:none;display:none;");
+            $("#freelancer_loader").attr("style","display:inline-block;");
+            $("#save_individual").attr("style","pointer-events:none;");
+            $("#back_individual").attr("style","pointer-events:none;");
 
             var first_name = $("#first_name").val();
             var last_name = $("#last_name").val();
@@ -772,8 +772,8 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
                     window.location = base_url + "post-freelance-project";
                 }
                 else if(success == 0)
-                {
-                    $("#freelancer_loader").hide();
+                {                    
+                    $("#freelancer_loader").attr("style","display:none;");
                     $("#save_individual").removeAttr("style");
                     $("#back_individual").removeAttr("style");
                     $("#error-modal").modal("show");
@@ -854,6 +854,124 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
                 $("#save_company").removeAttr("style");
                 $("#company_city_loader").hide();
                 $scope.company_city_list = data.data;
+            });
+        }
+    };
+
+    $scope.freelancer_hire_company_regi_validate = {
+        rules: {
+            comp_name: {
+                required: true,
+            },
+            comp_number: {
+                required: true,
+            },
+            comp_email: {
+                required: true,
+                email:true,
+                remote: {
+                    url: base_url + "freelancer_hire_live/check_email",
+                    type: "post",
+                    data: {
+                      email: function() {
+                        return $( "#comp_email" ).val();
+                      }
+                    }
+                },
+            },
+            comp_website: {
+                url: true,
+            },
+            company_field: {
+                required: true,
+            },
+            company_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#company_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            company_country: {
+                required: true,
+            },
+            company_state: {
+                required: true,
+            },
+            company_city: {
+                required: true,
+            },
+            comp_overview: {
+                required: true,
+            },
+        },
+        messages: {
+            comp_name: {
+                required: "Please enter company name",
+            },
+            comp_number: {
+                required: "Please enter company number",
+            },
+            comp_email: {
+                required: "Please enter email",
+                email: "Please enter valid email id.",
+                remote: "Email already exists",
+            },
+            company_country: {
+                required: "Please select county",
+            },
+            company_state: {
+                required: "Please select state",
+            },
+            company_city: {
+                required: "Please select city",
+            },
+            comp_overview: {
+                required: "Please enter company company overview",
+            },
+        },
+    };
+
+    $scope.save_company = function(){
+        if ($scope.freelancer_hire_company_regi.validate())
+        {            
+            $("#company_loader").attr("style","display:inline-block;");
+            $("#save_company").attr("style","pointer-events:none;");
+            $("#back_company").attr("style","pointer-events:none;");
+
+            var comp_name = $("#comp_name").val();
+            var comp_number = $("#comp_number").val();
+            var comp_email = $("#comp_email").val();
+            var comp_website = $("#comp_website").val();
+            var company_field = $("#company_field").val();
+            var company_other_field = $("#company_other_field").val();
+            var comp_website = $("#comp_website").val();
+            var company_country = $("#company_country option:selected").val();
+            var company_state = $("#company_state option:selected").val();
+            var company_city = $("#company_city option:selected").val();
+            var comp_overview = $("#comp_overview").val();
+
+            var updatedata = $.param({'comp_name':comp_name,'comp_number':comp_number,'comp_email':comp_email,'comp_website':comp_website,'company_field':company_field,'company_other_field':company_other_field,"company_country":company_country,"company_state":company_state,"company_city":company_city,"comp_overview":comp_overview});
+            $http({
+                method: 'POST',
+                url: base_url + 'freelancer_hire_live/save_company',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    window.location = base_url + "post-freelance-project";
+                }
+                else if(success == 0)
+                {
+                    $("#company_loader").attr("style","display:none;");
+                    $("#save_individual").removeAttr("style");
+                    $("#back_individual").removeAttr("style");
+                    $("#error-modal").modal("show");
+                }
             });
         }
     };

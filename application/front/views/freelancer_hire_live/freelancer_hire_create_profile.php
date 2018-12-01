@@ -120,7 +120,7 @@
                                         
                                               <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
                                               <a id="back_individual" href="#" ng-click="back_to_main();" class="btn3">Back</a>  
-                                              <button id="save_individual" ng-click="save_individual();" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                              <button id="save_individual" ng-click="save_individual();" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="freelancer_loader" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                            </div>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
                                         <div class="form-group">
                                            <div class="job_reg text-center">       
                                               <a id="back_company" href="#" ng-click="back_to_main();" class="btn3">Back</a>  
-                                              <button id="save_company" ng-click="save_company();" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                              <button id="save_company" ng-click="save_company();" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="company_loader" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                            </div>
                                         </div>
                                     </div>
