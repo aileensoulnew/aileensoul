@@ -327,6 +327,13 @@ class Recruiter extends MY_Controller {
 				$job['max_width'] = $this->config->item('rec_profile_main_max_width');
 				$job['max_height'] = $this->config->item('rec_profile_main_max_height');
 				$this->load->library('upload');
+				$store = $_FILES['comp_logo']['name'];
+	            $store_ext = explode('.', $store);        
+	            $store_ext = $store_ext[count($store_ext)-1];
+	            $fileName = time().'_file_' . random_string('numeric', 4) . '.' . $store_ext;
+	            
+	            $job['file_name'] = $fileName;
+
 				$this->upload->initialize($job);
 				//Uploading Image
 				$this->upload->do_upload('comp_logo');
@@ -724,6 +731,11 @@ class Recruiter extends MY_Controller {
 			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
 			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
 			$this->load->library('upload');
+			$store = $_FILES['comp_logo']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = time().'_file_' . random_string('numeric', 4) . '.' . $store_ext;
+            $job['file_name'] = $fileName;
 			$this->upload->initialize($job);
 			//Uploading Image
 			$this->upload->do_upload('comp_logo');
@@ -1161,6 +1173,11 @@ class Recruiter extends MY_Controller {
 			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
 			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
 			$this->load->library('upload');
+			$store = $_FILES['comp_logo']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = time().'_file_' . random_string('numeric', 4) . '.' . $store_ext;
+            $job['file_name'] = $fileName;
 			$this->upload->initialize($job);
 			//Uploading Image
 			$this->upload->do_upload('comp_logo');
@@ -4365,6 +4382,11 @@ class Recruiter extends MY_Controller {
 			$recruiter['max_width'] = $this->config->item('rec_profile_main_max_width');
 			$recruiter['max_height'] = $this->config->item('rec_profile_main_max_height');
 			$this->load->library('upload');
+			$store = $_FILES['profilepic']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = time().'_file_' . random_string('numeric', 4) . '.' . $store_ext;
+            $recruiter['file_name'] = $fileName;
 			$this->upload->initialize($recruiter);
 			//Uploading Image
 			$this->upload->do_upload('profilepic');
@@ -5950,6 +5972,11 @@ class Recruiter extends MY_Controller {
 			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
 			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
 			$this->load->library('upload');
+			$store = $_FILES['companylogo']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = time().'_file_' . random_string('numeric', 4) . '.' . $store_ext;
+            $job['file_name'] = $fileName;
 			$this->upload->initialize($job);
 			//Uploading Image
 			$this->upload->do_upload('companylogo');
@@ -7503,6 +7530,12 @@ class Recruiter extends MY_Controller {
 			$job['max_width'] = $this->config->item('rec_profile_main_max_width');
 			$job['max_height'] = $this->config->item('rec_profile_main_max_height');
 			$this->load->library('upload');
+			
+			$store = $_FILES['re_comp_logo']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = time().'_file_' . random_string('numeric', 4) . '.' . $store_ext;
+            $job['file_name'] = $fileName;
 			$this->upload->initialize($job);
 			//Uploading Image
 			$this->upload->do_upload('re_comp_logo');
