@@ -549,12 +549,12 @@
 											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
 											<span>Lorem ipsum its a dummy text and its user to for all.</span>
 										</div>
-										<div ng-if="review_data.length > '0'">
+										<div ng-if="review_data.length > '0' && review_count > '0'">
 										<div class="total-rev">
 											<span class="total-rat">4.8</span> 
 											<span class="rating-star">
 												<input id="rating-1" type="number" value="4">
-											</span><span class="rev-count">59 Reviews</span>
+											</span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
 										</div>
 										</div>
 										<ul class="review-list">

@@ -344,7 +344,18 @@ class Freelancer_hire_model extends CI_Model {
         $this->db->where('fr.to_user_id', $to_user_id);
         $this->db->where('fr.status', '1');
         $query = $this->db->get();
-        $result_array = $query->result();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_review_avarage($to_user_id)
+    {
+        $this->db->select("review_star,count(from_user_id) as rating_count")->from('freelancer_review');        
+        $this->db->where('to_user_id', $to_user_id);
+        $this->db->where('status', '1');
+        $this->db->group_by('review_star');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
         return $result_array;
     }
 

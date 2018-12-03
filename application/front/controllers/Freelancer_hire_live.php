@@ -3507,6 +3507,11 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         {            
             $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
             $review_count = $this->freelancer_hire_model->get_review_count($to_user_id);
+            $review_avarage = $this->freelancer_hire_model->get_review_avarage($to_user_id);
+            print_r($review_avarage);
+            
+            echo $total = array_sum($review_avarage['rating_count']);
+            exit();
             $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review']);
         }
         else

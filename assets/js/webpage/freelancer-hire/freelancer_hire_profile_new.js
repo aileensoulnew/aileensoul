@@ -96,6 +96,7 @@ app.controller('freelanceHireProfileController', function ($scope, $http) {
             if(success == 1)
             {
                 $scope.review_data = result.data.review_data;
+                $scope.review_count = result.data.review_count;
                 $("#review-loader").hide();
                 $("#review-body").show();
                 setTimeout(function(){
