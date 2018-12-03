@@ -1,3 +1,8 @@
+app.filter('wordFirstCase', function () {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
 app.controller('freelanceHireProfileController', function ($scope, $http) {
     
     var fh_formdata = new FormData();
@@ -94,8 +99,8 @@ app.controller('freelanceHireProfileController', function ($scope, $http) {
                 $("#review-loader").hide();
                 $("#review-body").show();
                 setTimeout(function(){
-                    $("#rating-1").rating({min:0.5, max:5, step:0.5, size:'sm'});
-                    $(".user-rating").rating({min:0.5, max:5, step:0.5, size:'lg'});
+                    $("#rating-1").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
+                    $(".user-rating").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
                 },1000);
             }
         });

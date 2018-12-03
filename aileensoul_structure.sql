@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `ailee_admin`
 --
 
-CREATE TABLE `ailee_admin` (
+CREATE TABLE IF NOT EXISTS `ailee_admin` (
   `admin_id` int(20) UNSIGNED NOT NULL,
   `admin_role` enum('1','2') NOT NULL COMMENT '1: admin 2: subadmin',
   `admin_username` varchar(100) NOT NULL DEFAULT '',
@@ -48,7 +48,7 @@ CREATE TABLE `ailee_admin` (
 -- Table structure for table `ailee_advertise_with_us`
 --
 
-CREATE TABLE `ailee_advertise_with_us` (
+CREATE TABLE IF NOT EXISTS `ailee_advertise_with_us` (
   `id` int(11) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `ailee_advertise_with_us` (
 -- Table structure for table `ailee_artistic_post_comment`
 --
 
-CREATE TABLE `ailee_artistic_post_comment` (
+CREATE TABLE IF NOT EXISTS `ailee_artistic_post_comment` (
   `artistic_post_comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `art_post_id` int(11) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `ailee_artistic_post_comment` (
 -- Table structure for table `ailee_art_category`
 --
 
-CREATE TABLE `ailee_art_category` (
+CREATE TABLE IF NOT EXISTS `ailee_art_category` (
   `category_id` int(11) NOT NULL,
   `art_category` varchar(255) NOT NULL,
   `status` enum('0','1') NOT NULL COMMENT '1.active 0.deactive',
@@ -98,7 +98,7 @@ CREATE TABLE `ailee_art_category` (
 -- Table structure for table `ailee_art_comment_image_like`
 --
 
-CREATE TABLE `ailee_art_comment_image_like` (
+CREATE TABLE IF NOT EXISTS `ailee_art_comment_image_like` (
   `image_comment_like_id` int(11) NOT NULL,
   `post_image_comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `ailee_art_comment_image_like` (
 -- Table structure for table `ailee_art_other_category`
 --
 
-CREATE TABLE `ailee_art_other_category` (
+CREATE TABLE IF NOT EXISTS `ailee_art_other_category` (
   `other_category_id` int(11) NOT NULL,
   `other_category` varchar(255) NOT NULL,
   `status` enum('0','1') NOT NULL COMMENT '1.active 0.deactive',
@@ -128,7 +128,7 @@ CREATE TABLE `ailee_art_other_category` (
 -- Table structure for table `ailee_art_post`
 --
 
-CREATE TABLE `ailee_art_post` (
+CREATE TABLE IF NOT EXISTS `ailee_art_post` (
   `art_post_id` int(11) NOT NULL,
   `art_post` varchar(255) DEFAULT NULL,
   `art_description` text,
@@ -149,7 +149,7 @@ CREATE TABLE `ailee_art_post` (
 -- Table structure for table `ailee_art_post_image_comment`
 --
 
-CREATE TABLE `ailee_art_post_image_comment` (
+CREATE TABLE IF NOT EXISTS `ailee_art_post_image_comment` (
   `post_image_comment_id` int(11) NOT NULL,
   `post_image_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE `ailee_art_post_image_comment` (
 -- Table structure for table `ailee_art_post_image_like`
 --
 
-CREATE TABLE `ailee_art_post_image_like` (
+CREATE TABLE IF NOT EXISTS `ailee_art_post_image_like` (
   `post_image_like_id` int(11) NOT NULL,
   `post_image_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE `ailee_art_post_image_like` (
 -- Table structure for table `ailee_art_reg`
 --
 
-CREATE TABLE `ailee_art_reg` (
+CREATE TABLE IF NOT EXISTS `ailee_art_reg` (
   `art_id` int(11) NOT NULL,
   `art_name` varchar(50) NOT NULL,
   `art_lastname` varchar(255) NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE `ailee_art_reg` (
 -- Table structure for table `ailee_art_reg_search_tmp`
 --
 
-CREATE TABLE `ailee_art_reg_search_tmp` (
+CREATE TABLE IF NOT EXISTS `ailee_art_reg_search_tmp` (
   `art_id` int(11) NOT NULL,
   `art_name` varchar(50) NOT NULL,
   `art_lastname` varchar(255) NOT NULL,
@@ -258,7 +258,7 @@ CREATE TABLE `ailee_art_reg_search_tmp` (
 -- Table structure for table `ailee_blog`
 --
 
-CREATE TABLE `ailee_blog` (
+CREATE TABLE IF NOT EXISTS `ailee_blog` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL COMMENT 'Blog Creator Name',
   `blog_category_id` varchar(11) NOT NULL,
@@ -280,7 +280,7 @@ CREATE TABLE `ailee_blog` (
 -- Table structure for table `ailee_blog_category`
 --
 
-CREATE TABLE `ailee_blog_category` (
+CREATE TABLE IF NOT EXISTS `ailee_blog_category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `create_date` datetime NOT NULL,
@@ -294,7 +294,7 @@ CREATE TABLE `ailee_blog_category` (
 -- Table structure for table `ailee_blog_comment`
 --
 
-CREATE TABLE `ailee_blog_comment` (
+CREATE TABLE IF NOT EXISTS `ailee_blog_comment` (
   `id` int(11) NOT NULL,
   `blog_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -310,7 +310,7 @@ CREATE TABLE `ailee_blog_comment` (
 -- Table structure for table `ailee_blog_guest`
 --
 
-CREATE TABLE `ailee_blog_guest` (
+CREATE TABLE IF NOT EXISTS `ailee_blog_guest` (
   `id_blog_guest` int(11) NOT NULL,
   `guest_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `guest_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -327,7 +327,7 @@ CREATE TABLE `ailee_blog_guest` (
 -- Table structure for table `ailee_blog_tag`
 --
 
-CREATE TABLE `ailee_blog_tag` (
+CREATE TABLE IF NOT EXISTS `ailee_blog_tag` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `created_date` datetime NOT NULL,
@@ -341,7 +341,7 @@ CREATE TABLE `ailee_blog_tag` (
 -- Table structure for table `ailee_blog_visit`
 --
 
-CREATE TABLE `ailee_blog_visit` (
+CREATE TABLE IF NOT EXISTS `ailee_blog_visit` (
   `id` int(11) NOT NULL,
   `blog_id` int(11) NOT NULL,
   `visiter_date` datetime NOT NULL
@@ -353,7 +353,7 @@ CREATE TABLE `ailee_blog_visit` (
 -- Table structure for table `ailee_business_profile`
 --
 
-CREATE TABLE `ailee_business_profile` (
+CREATE TABLE IF NOT EXISTS `ailee_business_profile` (
   `business_profile_id` int(11) NOT NULL,
   `company_name` varchar(255) NOT NULL,
   `country` int(11) NOT NULL,
@@ -389,7 +389,7 @@ CREATE TABLE `ailee_business_profile` (
 -- Table structure for table `ailee_business_profile_post`
 --
 
-CREATE TABLE `ailee_business_profile_post` (
+CREATE TABLE IF NOT EXISTS `ailee_business_profile_post` (
   `business_profile_post_id` int(11) NOT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `product_description` text CHARACTER SET utf8,
@@ -410,7 +410,7 @@ CREATE TABLE `ailee_business_profile_post` (
 -- Table structure for table `ailee_business_profile_post_comment`
 --
 
-CREATE TABLE `ailee_business_profile_post_comment` (
+CREATE TABLE IF NOT EXISTS `ailee_business_profile_post_comment` (
   `business_profile_post_comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `business_profile_post_id` int(11) NOT NULL,
@@ -429,7 +429,7 @@ CREATE TABLE `ailee_business_profile_post_comment` (
 -- Table structure for table `ailee_business_profile_save`
 --
 
-CREATE TABLE `ailee_business_profile_save` (
+CREATE TABLE IF NOT EXISTS `ailee_business_profile_save` (
   `save_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -446,7 +446,7 @@ CREATE TABLE `ailee_business_profile_save` (
 -- Table structure for table `ailee_business_profile_search_tmp`
 --
 
-CREATE TABLE `ailee_business_profile_search_tmp` (
+CREATE TABLE IF NOT EXISTS `ailee_business_profile_search_tmp` (
   `business_profile_id` int(11) NOT NULL,
   `company_name` varchar(255) NOT NULL,
   `country` int(11) NOT NULL,
@@ -486,7 +486,7 @@ CREATE TABLE `ailee_business_profile_search_tmp` (
 -- Table structure for table `ailee_business_type`
 --
 
-CREATE TABLE `ailee_business_type` (
+CREATE TABLE IF NOT EXISTS `ailee_business_type` (
   `type_id` int(11) NOT NULL,
   `business_name` varchar(200) NOT NULL,
   `status` int(1) NOT NULL,
@@ -501,7 +501,7 @@ CREATE TABLE `ailee_business_type` (
 -- Table structure for table `ailee_bus_comment_image_like`
 --
 
-CREATE TABLE `ailee_bus_comment_image_like` (
+CREATE TABLE IF NOT EXISTS `ailee_bus_comment_image_like` (
   `image_comment_like_id` int(11) NOT NULL,
   `post_image_comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -516,7 +516,7 @@ CREATE TABLE `ailee_bus_comment_image_like` (
 -- Table structure for table `ailee_bus_image`
 --
 
-CREATE TABLE `ailee_bus_image` (
+CREATE TABLE IF NOT EXISTS `ailee_bus_image` (
   `bus_image_id` int(11) NOT NULL,
   `image_name` text NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -530,7 +530,7 @@ CREATE TABLE `ailee_bus_image` (
 -- Table structure for table `ailee_bus_post_image_comment`
 --
 
-CREATE TABLE `ailee_bus_post_image_comment` (
+CREATE TABLE IF NOT EXISTS `ailee_bus_post_image_comment` (
   `post_image_comment_id` int(11) NOT NULL,
   `post_image_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -546,7 +546,7 @@ CREATE TABLE `ailee_bus_post_image_comment` (
 -- Table structure for table `ailee_bus_post_image_like`
 --
 
-CREATE TABLE `ailee_bus_post_image_like` (
+CREATE TABLE IF NOT EXISTS `ailee_bus_post_image_like` (
   `post_image_like_id` int(11) NOT NULL,
   `post_image_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -561,7 +561,7 @@ CREATE TABLE `ailee_bus_post_image_like` (
 -- Table structure for table `ailee_bus_showvideo`
 --
 
-CREATE TABLE `ailee_bus_showvideo` (
+CREATE TABLE IF NOT EXISTS `ailee_bus_showvideo` (
   `id` int(11) NOT NULL,
   `post_files_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -575,7 +575,7 @@ CREATE TABLE `ailee_bus_showvideo` (
 -- Table structure for table `ailee_category`
 --
 
-CREATE TABLE `ailee_category` (
+CREATE TABLE IF NOT EXISTS `ailee_category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL,
   `category_image` varchar(255) NOT NULL,
@@ -594,7 +594,7 @@ CREATE TABLE `ailee_category` (
 -- Table structure for table `ailee_cities`
 --
 
-CREATE TABLE `ailee_cities` (
+CREATE TABLE IF NOT EXISTS `ailee_cities` (
   `city_id` int(11) NOT NULL,
   `city_name` varchar(30) NOT NULL,
   `city_image` varchar(255) NOT NULL,
@@ -610,7 +610,7 @@ CREATE TABLE `ailee_cities` (
 -- Table structure for table `ailee_college`
 --
 
-CREATE TABLE `ailee_college` (
+CREATE TABLE IF NOT EXISTS `ailee_college` (
   `college_id` int(11) NOT NULL,
   `university_id` int(11) NOT NULL,
   `college_name` varchar(255) NOT NULL,
@@ -626,7 +626,7 @@ CREATE TABLE `ailee_college` (
 -- Table structure for table `ailee_contact_person`
 --
 
-CREATE TABLE `ailee_contact_person` (
+CREATE TABLE IF NOT EXISTS `ailee_contact_person` (
   `contact_id` int(11) NOT NULL,
   `contact_from_id` int(11) DEFAULT NULL COMMENT 'user id',
   `contact_to_id` int(11) DEFAULT NULL COMMENT 'user id',
@@ -644,7 +644,7 @@ CREATE TABLE `ailee_contact_person` (
 -- Table structure for table `ailee_contact_us`
 --
 
-CREATE TABLE `ailee_contact_us` (
+CREATE TABLE IF NOT EXISTS `ailee_contact_us` (
   `contact_id` int(11) NOT NULL,
   `contact_name` varchar(50) NOT NULL,
   `contact_email` varchar(200) NOT NULL,
@@ -661,7 +661,7 @@ CREATE TABLE `ailee_contact_us` (
 -- Table structure for table `ailee_countries`
 --
 
-CREATE TABLE `ailee_countries` (
+CREATE TABLE IF NOT EXISTS `ailee_countries` (
   `country_id` int(11) NOT NULL,
   `country_name` varchar(150) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0:Blocked, 1:Active',
@@ -674,7 +674,7 @@ CREATE TABLE `ailee_countries` (
 -- Table structure for table `ailee_currency`
 --
 
-CREATE TABLE `ailee_currency` (
+CREATE TABLE IF NOT EXISTS `ailee_currency` (
   `currency_id` int(11) NOT NULL,
   `currency_name` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `created_date` datetime NOT NULL,
@@ -690,7 +690,7 @@ CREATE TABLE `ailee_currency` (
 -- Table structure for table `ailee_degree`
 --
 
-CREATE TABLE `ailee_degree` (
+CREATE TABLE IF NOT EXISTS `ailee_degree` (
   `degree_id` int(11) NOT NULL,
   `degree_name` varchar(255) NOT NULL,
   `created_date` datetime NOT NULL,
@@ -708,7 +708,7 @@ CREATE TABLE `ailee_degree` (
 -- Table structure for table `ailee_emails`
 --
 
-CREATE TABLE `ailee_emails` (
+CREATE TABLE IF NOT EXISTS `ailee_emails` (
   `emailid` int(11) NOT NULL,
   `vartitle` text,
   `uniquename` varchar(765) DEFAULT NULL,
@@ -725,7 +725,7 @@ CREATE TABLE `ailee_emails` (
 -- Table structure for table `ailee_emails_seo`
 --
 
-CREATE TABLE `ailee_emails_seo` (
+CREATE TABLE IF NOT EXISTS `ailee_emails_seo` (
   `emailid` int(11) NOT NULL,
   `vartitle` text,
   `uniquename` varchar(765) DEFAULT NULL,
@@ -742,7 +742,7 @@ CREATE TABLE `ailee_emails_seo` (
 -- Table structure for table `ailee_email_settings`
 --
 
-CREATE TABLE `ailee_email_settings` (
+CREATE TABLE IF NOT EXISTS `ailee_email_settings` (
   `esetting_id` int(11) NOT NULL,
   `host_name` varchar(150) DEFAULT NULL,
   `out_going_port` varchar(765) DEFAULT NULL,
@@ -759,7 +759,7 @@ CREATE TABLE `ailee_email_settings` (
 -- Table structure for table `ailee_feedback`
 --
 
-CREATE TABLE `ailee_feedback` (
+CREATE TABLE IF NOT EXISTS `ailee_feedback` (
   `feedback_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -776,7 +776,7 @@ CREATE TABLE `ailee_feedback` (
 -- Table structure for table `ailee_feedback_general`
 --
 
-CREATE TABLE `ailee_feedback_general` (
+CREATE TABLE IF NOT EXISTS `ailee_feedback_general` (
   `id` int(11) NOT NULL,
   `feedback_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `feedback_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -791,7 +791,7 @@ CREATE TABLE `ailee_feedback_general` (
 -- Table structure for table `ailee_follow`
 --
 
-CREATE TABLE `ailee_follow` (
+CREATE TABLE IF NOT EXISTS `ailee_follow` (
   `follow_id` int(11) NOT NULL,
   `follow_type` enum('1','2') DEFAULT NULL COMMENT '1: artistic 2: business profile',
   `follow_from` int(11) DEFAULT NULL,
@@ -805,7 +805,7 @@ CREATE TABLE `ailee_follow` (
 -- Table structure for table `ailee_freelancer_apply`
 --
 
-CREATE TABLE `ailee_freelancer_apply` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_apply` (
   `app_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -823,7 +823,7 @@ CREATE TABLE `ailee_freelancer_apply` (
 -- Table structure for table `ailee_freelancer_hire_reg`
 --
 
-CREATE TABLE `ailee_freelancer_hire_reg` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_hire_reg` (
   `reg_id` int(10) NOT NULL,
   `username` varchar(20) NOT NULL,
   `fullname` varchar(50) NOT NULL,
@@ -865,7 +865,7 @@ CREATE TABLE `ailee_freelancer_hire_reg` (
 -- Table structure for table `ailee_freelancer_post`
 --
 
-CREATE TABLE `ailee_freelancer_post` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_post` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_name` varchar(255) NOT NULL,
@@ -897,7 +897,7 @@ CREATE TABLE `ailee_freelancer_post` (
 -- Table structure for table `ailee_freelancer_post_live`
 --
 
-CREATE TABLE `ailee_freelancer_post_live` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_post_live` (
   `post_id` int(11) NOT NULL,
   `post_name` varchar(255) NOT NULL,
   `post_field_req` varchar(255) NOT NULL,
@@ -925,7 +925,7 @@ CREATE TABLE `ailee_freelancer_post_live` (
 -- Table structure for table `ailee_freelancer_post_reg`
 --
 
-CREATE TABLE `ailee_freelancer_post_reg` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_post_reg` (
   `freelancer_post_reg_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `freelancer_post_fullname` varchar(255) NOT NULL,
@@ -975,7 +975,7 @@ CREATE TABLE `ailee_freelancer_post_reg` (
 -- Table structure for table `ailee_freelancer_post_reg_search_tmp`
 --
 
-CREATE TABLE `ailee_freelancer_post_reg_search_tmp` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_post_reg_search_tmp` (
   `freelancer_post_reg_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `freelancer_post_fullname` varchar(255) NOT NULL,
@@ -1030,7 +1030,7 @@ CREATE TABLE `ailee_freelancer_post_reg_search_tmp` (
 -- Table structure for table `ailee_freelancer_post_search_tmp`
 --
 
-CREATE TABLE `ailee_freelancer_post_search_tmp` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_post_search_tmp` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_name` varchar(255) NOT NULL,
@@ -1068,7 +1068,7 @@ CREATE TABLE `ailee_freelancer_post_search_tmp` (
 -- Table structure for table `ailee_freelancer_review`
 --
 
-CREATE TABLE `ailee_freelancer_review` (
+CREATE TABLE IF NOT EXISTS `ailee_freelancer_review` (
   `id_review` int(11) NOT NULL,
   `to_user_id` int(11) NOT NULL COMMENT 'who rated by other / opposite user',
   `from_user_id` int(11) NOT NULL COMMENT 'who give rating / login user',
@@ -1086,7 +1086,7 @@ CREATE TABLE `ailee_freelancer_review` (
 -- Table structure for table `ailee_gov_category`
 --
 
-CREATE TABLE `ailee_gov_category` (
+CREATE TABLE IF NOT EXISTS `ailee_gov_category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `image` text NOT NULL,
@@ -1102,7 +1102,7 @@ CREATE TABLE `ailee_gov_category` (
 -- Table structure for table `ailee_gov_post`
 --
 
-CREATE TABLE `ailee_gov_post` (
+CREATE TABLE IF NOT EXISTS `ailee_gov_post` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL COMMENT 'government category id',
@@ -1129,7 +1129,7 @@ CREATE TABLE `ailee_gov_post` (
 -- Table structure for table `ailee_industry_type`
 --
 
-CREATE TABLE `ailee_industry_type` (
+CREATE TABLE IF NOT EXISTS `ailee_industry_type` (
   `industry_id` int(10) NOT NULL,
   `type_id` text NOT NULL,
   `industry_name` varchar(200) NOT NULL,
@@ -1147,7 +1147,7 @@ CREATE TABLE `ailee_industry_type` (
 -- Table structure for table `ailee_job_add_edu`
 --
 
-CREATE TABLE `ailee_job_add_edu` (
+CREATE TABLE IF NOT EXISTS `ailee_job_add_edu` (
   `edu_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `board_primary` varchar(255) DEFAULT NULL,
@@ -1186,7 +1186,7 @@ CREATE TABLE `ailee_job_add_edu` (
 -- Table structure for table `ailee_job_add_workexp`
 --
 
-CREATE TABLE `ailee_job_add_workexp` (
+CREATE TABLE IF NOT EXISTS `ailee_job_add_workexp` (
   `work_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `experience` varchar(255) DEFAULT NULL,
@@ -1206,7 +1206,7 @@ CREATE TABLE `ailee_job_add_workexp` (
 -- Table structure for table `ailee_job_apply`
 --
 
-CREATE TABLE `ailee_job_apply` (
+CREATE TABLE IF NOT EXISTS `ailee_job_apply` (
   `app_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -1224,7 +1224,7 @@ CREATE TABLE `ailee_job_apply` (
 -- Table structure for table `ailee_job_graduation`
 --
 
-CREATE TABLE `ailee_job_graduation` (
+CREATE TABLE IF NOT EXISTS `ailee_job_graduation` (
   `job_graduation_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `degree` int(11) NOT NULL,
@@ -1244,7 +1244,7 @@ CREATE TABLE `ailee_job_graduation` (
 -- Table structure for table `ailee_job_industry`
 --
 
-CREATE TABLE `ailee_job_industry` (
+CREATE TABLE IF NOT EXISTS `ailee_job_industry` (
   `industry_id` int(11) NOT NULL,
   `industry_name` varchar(256) NOT NULL,
   `industry_image` varchar(255) NOT NULL,
@@ -1263,7 +1263,7 @@ CREATE TABLE `ailee_job_industry` (
 -- Table structure for table `ailee_job_reg`
 --
 
-CREATE TABLE `ailee_job_reg` (
+CREATE TABLE IF NOT EXISTS `ailee_job_reg` (
   `job_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `fname` varchar(255) NOT NULL,
@@ -1342,7 +1342,7 @@ CREATE TABLE `ailee_job_reg` (
 -- Table structure for table `ailee_job_reg_search_tmp`
 --
 
-CREATE TABLE `ailee_job_reg_search_tmp` (
+CREATE TABLE IF NOT EXISTS `ailee_job_reg_search_tmp` (
   `job_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `fname` varchar(255) NOT NULL,
@@ -1411,7 +1411,7 @@ CREATE TABLE `ailee_job_reg_search_tmp` (
 -- Table structure for table `ailee_job_title`
 --
 
-CREATE TABLE `ailee_job_title` (
+CREATE TABLE IF NOT EXISTS `ailee_job_title` (
   `title_id` int(11) NOT NULL,
   `name` text NOT NULL,
   `job_title_img` varchar(255) NOT NULL,
@@ -1427,7 +1427,7 @@ CREATE TABLE `ailee_job_title` (
 -- Table structure for table `ailee_job_user_addicourse`
 --
 
-CREATE TABLE `ailee_job_user_addicourse` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_addicourse` (
   `id_addicourse` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `addicourse_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1447,7 +1447,7 @@ CREATE TABLE `ailee_job_user_addicourse` (
 -- Table structure for table `ailee_job_user_award`
 --
 
-CREATE TABLE `ailee_job_user_award` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_award` (
   `id_award` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `award_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1466,7 +1466,7 @@ CREATE TABLE `ailee_job_user_award` (
 -- Table structure for table `ailee_job_user_education`
 --
 
-CREATE TABLE `ailee_job_user_education` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_education` (
   `id_education` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `edu_school_college` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1491,7 +1491,7 @@ CREATE TABLE `ailee_job_user_education` (
 -- Table structure for table `ailee_job_user_experience`
 --
 
-CREATE TABLE `ailee_job_user_experience` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_experience` (
   `id_experience` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `exp_company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1518,7 +1518,7 @@ CREATE TABLE `ailee_job_user_experience` (
 -- Table structure for table `ailee_job_user_extra_activity`
 --
 
-CREATE TABLE `ailee_job_user_extra_activity` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_extra_activity` (
   `id_extra_activity` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `activity_participate` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1538,7 +1538,7 @@ CREATE TABLE `ailee_job_user_extra_activity` (
 -- Table structure for table `ailee_job_user_languages`
 --
 
-CREATE TABLE `ailee_job_user_languages` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_languages` (
   `user_id` int(11) NOT NULL,
   `language_txt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `proficiency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1553,7 +1553,7 @@ CREATE TABLE `ailee_job_user_languages` (
 -- Table structure for table `ailee_job_user_links`
 --
 
-CREATE TABLE `ailee_job_user_links` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_links` (
   `user_id` int(11) NOT NULL,
   `user_links_txt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_links_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Facebook,Google,Instagram,LinkedIn,Pinterest,GitHub,Twitter,Personal',
@@ -1568,7 +1568,7 @@ CREATE TABLE `ailee_job_user_links` (
 -- Table structure for table `ailee_job_user_patent`
 --
 
-CREATE TABLE `ailee_job_user_patent` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_patent` (
   `id_patent` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `patent_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1590,7 +1590,7 @@ CREATE TABLE `ailee_job_user_patent` (
 -- Table structure for table `ailee_job_user_projects`
 --
 
-CREATE TABLE `ailee_job_user_projects` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_projects` (
   `id_projects` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1616,7 +1616,7 @@ CREATE TABLE `ailee_job_user_projects` (
 -- Table structure for table `ailee_job_user_publication`
 --
 
-CREATE TABLE `ailee_job_user_publication` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_publication` (
   `id_publication` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `pub_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1637,7 +1637,7 @@ CREATE TABLE `ailee_job_user_publication` (
 -- Table structure for table `ailee_job_user_research`
 --
 
-CREATE TABLE `ailee_job_user_research` (
+CREATE TABLE IF NOT EXISTS `ailee_job_user_research` (
   `id_research` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `research_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1658,7 +1658,7 @@ CREATE TABLE `ailee_job_user_research` (
 -- Table structure for table `ailee_language`
 --
 
-CREATE TABLE `ailee_language` (
+CREATE TABLE IF NOT EXISTS `ailee_language` (
   `language_id` int(11) NOT NULL,
   `language_name` varchar(50) NOT NULL,
   `status` enum('1','0') NOT NULL COMMENT '0:Blocked, 1:Active'
@@ -1670,7 +1670,7 @@ CREATE TABLE `ailee_language` (
 -- Table structure for table `ailee_messages`
 --
 
-CREATE TABLE `ailee_messages` (
+CREATE TABLE IF NOT EXISTS `ailee_messages` (
   `id` int(11) NOT NULL,
   `message` text NOT NULL,
   `message_file` text NOT NULL,
@@ -1695,7 +1695,7 @@ CREATE TABLE `ailee_messages` (
 -- Table structure for table `ailee_notification`
 --
 
-CREATE TABLE `ailee_notification` (
+CREATE TABLE IF NOT EXISTS `ailee_notification` (
   `not_id` int(11) NOT NULL,
   `not_type` enum('1','2','3','4','5','6','7','8','9','10','11') NOT NULL COMMENT '1: request, 2:chat message ,3: apply ,4: save ,5: like ,6: comment ,7; contactus ,8: follow ,9: Shortlisted, 10:Artilce accept, 11:Artilce reject',
   `not_from_id` int(11) NOT NULL COMMENT 'sender 1: admin 2:company 3:client 4: Driver',
@@ -1715,7 +1715,7 @@ CREATE TABLE `ailee_notification` (
 -- Table structure for table `ailee_pages`
 --
 
-CREATE TABLE `ailee_pages` (
+CREATE TABLE IF NOT EXISTS `ailee_pages` (
   `page_id` int(11) NOT NULL,
   `page_name` varchar(100) NOT NULL,
   `page_title` varchar(200) NOT NULL,
@@ -1735,7 +1735,7 @@ CREATE TABLE `ailee_pages` (
 -- Table structure for table `ailee_post_article`
 --
 
-CREATE TABLE `ailee_post_article` (
+CREATE TABLE IF NOT EXISTS `ailee_post_article` (
   `id_post_article` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `status` enum('publish','draft','delete','reject') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1760,7 +1760,7 @@ CREATE TABLE `ailee_post_article` (
 -- Table structure for table `ailee_post_article_media`
 --
 
-CREATE TABLE `ailee_post_article_media` (
+CREATE TABLE IF NOT EXISTS `ailee_post_article_media` (
   `id` int(11) NOT NULL,
   `post_article_id` int(11) NOT NULL,
   `image_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1773,7 +1773,7 @@ CREATE TABLE `ailee_post_article_media` (
 -- Table structure for table `ailee_post_files`
 --
 
-CREATE TABLE `ailee_post_files` (
+CREATE TABLE IF NOT EXISTS `ailee_post_files` (
   `post_files_id` int(11) NOT NULL,
   `file_name` varchar(255) DEFAULT NULL,
   `insert_profile` enum('1','2') DEFAULT NULL COMMENT '1.artistic, 2.business_profile',
@@ -1790,7 +1790,7 @@ CREATE TABLE `ailee_post_files` (
 -- Table structure for table `ailee_recruiter`
 --
 
-CREATE TABLE `ailee_recruiter` (
+CREATE TABLE IF NOT EXISTS `ailee_recruiter` (
   `rec_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `rec_firstname` varchar(255) NOT NULL,
@@ -1840,7 +1840,7 @@ CREATE TABLE `ailee_recruiter` (
 -- Table structure for table `ailee_rec_post`
 --
 
-CREATE TABLE `ailee_rec_post` (
+CREATE TABLE IF NOT EXISTS `ailee_rec_post` (
   `post_id` int(11) NOT NULL,
   `post_name` varchar(255) NOT NULL,
   `post_description` text NOT NULL,
@@ -1881,7 +1881,7 @@ CREATE TABLE `ailee_rec_post` (
 -- Table structure for table `ailee_rec_post_login`
 --
 
-CREATE TABLE `ailee_rec_post_login` (
+CREATE TABLE IF NOT EXISTS `ailee_rec_post_login` (
   `post_id` int(11) NOT NULL,
   `post_name` varchar(255) NOT NULL,
   `post_description` text NOT NULL,
@@ -1916,7 +1916,7 @@ CREATE TABLE `ailee_rec_post_login` (
 -- Table structure for table `ailee_rec_post_search_tmp`
 --
 
-CREATE TABLE `ailee_rec_post_search_tmp` (
+CREATE TABLE IF NOT EXISTS `ailee_rec_post_search_tmp` (
   `post_id` int(11) NOT NULL,
   `post_name` varchar(255) NOT NULL,
   `post_name_txt` varchar(255) NOT NULL,
@@ -1968,7 +1968,7 @@ CREATE TABLE `ailee_rec_post_search_tmp` (
 -- Table structure for table `ailee_report`
 --
 
-CREATE TABLE `ailee_report` (
+CREATE TABLE IF NOT EXISTS `ailee_report` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -1984,7 +1984,7 @@ CREATE TABLE `ailee_report` (
 -- Table structure for table `ailee_save`
 --
 
-CREATE TABLE `ailee_save` (
+CREATE TABLE IF NOT EXISTS `ailee_save` (
   `save_id` int(11) NOT NULL,
   `from_id` int(11) DEFAULT NULL,
   `to_id` int(11) DEFAULT NULL,
@@ -2001,7 +2001,7 @@ CREATE TABLE `ailee_save` (
 -- Table structure for table `ailee_search_info`
 --
 
-CREATE TABLE `ailee_search_info` (
+CREATE TABLE IF NOT EXISTS `ailee_search_info` (
   `keyword_id` int(10) NOT NULL,
   `search_keyword` varchar(255) DEFAULT NULL,
   `search_location` varchar(50) DEFAULT NULL,
@@ -2018,7 +2018,7 @@ CREATE TABLE `ailee_search_info` (
 -- Table structure for table `ailee_sem`
 --
 
-CREATE TABLE `ailee_sem` (
+CREATE TABLE IF NOT EXISTS `ailee_sem` (
   `semid` int(11) NOT NULL,
   `semfieldname` varchar(50) NOT NULL,
   `semfieldvalue` text NOT NULL,
@@ -2032,7 +2032,7 @@ CREATE TABLE `ailee_sem` (
 -- Table structure for table `ailee_seo`
 --
 
-CREATE TABLE `ailee_seo` (
+CREATE TABLE IF NOT EXISTS `ailee_seo` (
   `seoid` int(11) NOT NULL,
   `seofieldname` varchar(50) NOT NULL,
   `seofieldvalue` text NOT NULL,
@@ -2046,7 +2046,7 @@ CREATE TABLE `ailee_seo` (
 -- Table structure for table `ailee_seo_mail_list`
 --
 
-CREATE TABLE `ailee_seo_mail_list` (
+CREATE TABLE IF NOT EXISTS `ailee_seo_mail_list` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL
@@ -2058,7 +2058,7 @@ CREATE TABLE `ailee_seo_mail_list` (
 -- Table structure for table `ailee_showvideo`
 --
 
-CREATE TABLE `ailee_showvideo` (
+CREATE TABLE IF NOT EXISTS `ailee_showvideo` (
   `id` int(11) NOT NULL,
   `post_files_id` int(11) NOT NULL,
   `insert_profile` int(11) NOT NULL COMMENT '1.artistic,2.business_profile',
@@ -2073,7 +2073,7 @@ CREATE TABLE `ailee_showvideo` (
 -- Table structure for table `ailee_site_settings`
 --
 
-CREATE TABLE `ailee_site_settings` (
+CREATE TABLE IF NOT EXISTS `ailee_site_settings` (
   `site_id` int(11) NOT NULL,
   `site_name` varchar(255) NOT NULL,
   `site_url` varchar(255) NOT NULL,
@@ -2090,7 +2090,7 @@ CREATE TABLE `ailee_site_settings` (
 -- Table structure for table `ailee_skill`
 --
 
-CREATE TABLE `ailee_skill` (
+CREATE TABLE IF NOT EXISTS `ailee_skill` (
   `skill_id` int(11) NOT NULL,
   `skill` varchar(255) DEFAULT NULL,
   `skill_image` varchar(255) NOT NULL,
@@ -2106,7 +2106,7 @@ CREATE TABLE `ailee_skill` (
 -- Table structure for table `ailee_states`
 --
 
-CREATE TABLE `ailee_states` (
+CREATE TABLE IF NOT EXISTS `ailee_states` (
   `state_id` int(11) NOT NULL,
   `state_name` varchar(30) NOT NULL,
   `country_id` int(11) NOT NULL,
@@ -2119,7 +2119,7 @@ CREATE TABLE `ailee_states` (
 -- Table structure for table `ailee_stream`
 --
 
-CREATE TABLE `ailee_stream` (
+CREATE TABLE IF NOT EXISTS `ailee_stream` (
   `stream_id` int(11) NOT NULL,
   `degree_id` int(11) NOT NULL,
   `stream_name` varchar(255) NOT NULL,
@@ -2136,7 +2136,7 @@ CREATE TABLE `ailee_stream` (
 -- Table structure for table `ailee_subscription`
 --
 
-CREATE TABLE `ailee_subscription` (
+CREATE TABLE IF NOT EXISTS `ailee_subscription` (
   `subscription_id` int(11) NOT NULL,
   `email` varchar(60) DEFAULT NULL,
   `status` enum('1','0') DEFAULT '1' COMMENT '1-active\n0-not active'
@@ -2148,7 +2148,7 @@ CREATE TABLE `ailee_subscription` (
 -- Table structure for table `ailee_sub_category`
 --
 
-CREATE TABLE `ailee_sub_category` (
+CREATE TABLE IF NOT EXISTS `ailee_sub_category` (
   `sub_category_id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `sub_category_name` varchar(200) DEFAULT NULL,
@@ -2163,7 +2163,7 @@ CREATE TABLE `ailee_sub_category` (
 -- Table structure for table `ailee_sub_industry_type`
 --
 
-CREATE TABLE `ailee_sub_industry_type` (
+CREATE TABLE IF NOT EXISTS `ailee_sub_industry_type` (
   `sub_industry_id` int(11) NOT NULL,
   `industry_id` int(11) NOT NULL,
   `sub_industry_name` varchar(200) NOT NULL,
@@ -2178,7 +2178,7 @@ CREATE TABLE `ailee_sub_industry_type` (
 -- Table structure for table `ailee_tags`
 --
 
-CREATE TABLE `ailee_tags` (
+CREATE TABLE IF NOT EXISTS `ailee_tags` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `created_date` datetime NOT NULL,
@@ -2194,7 +2194,7 @@ CREATE TABLE `ailee_tags` (
 -- Table structure for table `ailee_university`
 --
 
-CREATE TABLE `ailee_university` (
+CREATE TABLE IF NOT EXISTS `ailee_university` (
   `university_id` int(11) NOT NULL,
   `university_name` varchar(255) NOT NULL,
   `created_date` datetime NOT NULL,
@@ -2210,7 +2210,7 @@ CREATE TABLE `ailee_university` (
 -- Table structure for table `ailee_unsubscribe_reason`
 --
 
-CREATE TABLE `ailee_unsubscribe_reason` (
+CREATE TABLE IF NOT EXISTS `ailee_unsubscribe_reason` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `reason` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2224,7 +2224,7 @@ CREATE TABLE `ailee_unsubscribe_reason` (
 -- Table structure for table `ailee_user`
 --
 
-CREATE TABLE `ailee_user` (
+CREATE TABLE IF NOT EXISTS `ailee_user` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -2249,7 +2249,7 @@ CREATE TABLE `ailee_user` (
 -- Table structure for table `ailee_user_addicourse`
 --
 
-CREATE TABLE `ailee_user_addicourse` (
+CREATE TABLE IF NOT EXISTS `ailee_user_addicourse` (
   `id_addicourse` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `addicourse_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2269,7 +2269,7 @@ CREATE TABLE `ailee_user_addicourse` (
 -- Table structure for table `ailee_user_article`
 --
 
-CREATE TABLE `ailee_user_article` (
+CREATE TABLE IF NOT EXISTS `ailee_user_article` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL COMMENT 'Table : ailee_user_post',
   `title` varchar(255) NOT NULL,
@@ -2283,7 +2283,7 @@ CREATE TABLE `ailee_user_article` (
 -- Table structure for table `ailee_user_ask_question`
 --
 
-CREATE TABLE `ailee_user_ask_question` (
+CREATE TABLE IF NOT EXISTS `ailee_user_ask_question` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `question` text NOT NULL,
@@ -2302,7 +2302,7 @@ CREATE TABLE `ailee_user_ask_question` (
 -- Table structure for table `ailee_user_award`
 --
 
-CREATE TABLE `ailee_user_award` (
+CREATE TABLE IF NOT EXISTS `ailee_user_award` (
   `id_award` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `award_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2321,7 +2321,7 @@ CREATE TABLE `ailee_user_award` (
 -- Table structure for table `ailee_user_contact`
 --
 
-CREATE TABLE `ailee_user_contact` (
+CREATE TABLE IF NOT EXISTS `ailee_user_contact` (
   `id` int(11) NOT NULL,
   `from_id` int(11) NOT NULL COMMENT 'sender user id',
   `to_id` int(11) NOT NULL COMMENT 'receiver user id',
@@ -2337,7 +2337,7 @@ CREATE TABLE `ailee_user_contact` (
 -- Table structure for table `ailee_user_education`
 --
 
-CREATE TABLE `ailee_user_education` (
+CREATE TABLE IF NOT EXISTS `ailee_user_education` (
   `id_education` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `edu_school_college` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2362,7 +2362,7 @@ CREATE TABLE `ailee_user_education` (
 -- Table structure for table `ailee_user_experience`
 --
 
-CREATE TABLE `ailee_user_experience` (
+CREATE TABLE IF NOT EXISTS `ailee_user_experience` (
   `id_experience` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `exp_company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2389,7 +2389,7 @@ CREATE TABLE `ailee_user_experience` (
 -- Table structure for table `ailee_user_extra_activity`
 --
 
-CREATE TABLE `ailee_user_extra_activity` (
+CREATE TABLE IF NOT EXISTS `ailee_user_extra_activity` (
   `id_extra_activity` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `activity_participate` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2409,7 +2409,7 @@ CREATE TABLE `ailee_user_extra_activity` (
 -- Table structure for table `ailee_user_follow`
 --
 
-CREATE TABLE `ailee_user_follow` (
+CREATE TABLE IF NOT EXISTS `ailee_user_follow` (
   `id` int(11) NOT NULL,
   `follow_from` int(11) NOT NULL,
   `follow_to` int(11) NOT NULL,
@@ -2424,7 +2424,7 @@ CREATE TABLE `ailee_user_follow` (
 -- Table structure for table `ailee_user_idol`
 --
 
-CREATE TABLE `ailee_user_idol` (
+CREATE TABLE IF NOT EXISTS `ailee_user_idol` (
   `id_idol` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_idol_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2440,7 +2440,7 @@ CREATE TABLE `ailee_user_idol` (
 -- Table structure for table `ailee_user_ignore`
 --
 
-CREATE TABLE `ailee_user_ignore` (
+CREATE TABLE IF NOT EXISTS `ailee_user_ignore` (
   `id` int(11) NOT NULL,
   `profile` enum('1','2') DEFAULT NULL COMMENT '1: artistic 2: business profile',
   `user_from` int(11) DEFAULT NULL,
@@ -2453,7 +2453,7 @@ CREATE TABLE `ailee_user_ignore` (
 -- Table structure for table `ailee_user_info`
 --
 
-CREATE TABLE `ailee_user_info` (
+CREATE TABLE IF NOT EXISTS `ailee_user_info` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_image` text NOT NULL,
@@ -2477,7 +2477,7 @@ CREATE TABLE `ailee_user_info` (
 -- Table structure for table `ailee_user_invite`
 --
 
-CREATE TABLE `ailee_user_invite` (
+CREATE TABLE IF NOT EXISTS `ailee_user_invite` (
   `invite_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `post_id` int(11) DEFAULT NULL,
@@ -2492,7 +2492,7 @@ CREATE TABLE `ailee_user_invite` (
 -- Table structure for table `ailee_user_languages`
 --
 
-CREATE TABLE `ailee_user_languages` (
+CREATE TABLE IF NOT EXISTS `ailee_user_languages` (
   `user_id` int(11) NOT NULL,
   `language_txt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `proficiency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2507,7 +2507,7 @@ CREATE TABLE `ailee_user_languages` (
 -- Table structure for table `ailee_user_links`
 --
 
-CREATE TABLE `ailee_user_links` (
+CREATE TABLE IF NOT EXISTS `ailee_user_links` (
   `user_id` int(11) NOT NULL,
   `user_links_txt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_links_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Facebook,Google,Instagram,LinkedIn,Pinterest,GitHub,Twitter,Personal',
@@ -2522,7 +2522,7 @@ CREATE TABLE `ailee_user_links` (
 -- Table structure for table `ailee_user_login`
 --
 
-CREATE TABLE `ailee_user_login` (
+CREATE TABLE IF NOT EXISTS `ailee_user_login` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `email` text NOT NULL,
@@ -2538,7 +2538,7 @@ CREATE TABLE `ailee_user_login` (
 -- Table structure for table `ailee_user_opportunity`
 --
 
-CREATE TABLE `ailee_user_opportunity` (
+CREATE TABLE IF NOT EXISTS `ailee_user_opportunity` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL COMMENT 'Table : ailee_user_post',
   `opptitle` varchar(255) NOT NULL,
@@ -2557,7 +2557,7 @@ CREATE TABLE `ailee_user_opportunity` (
 -- Table structure for table `ailee_user_patent`
 --
 
-CREATE TABLE `ailee_user_patent` (
+CREATE TABLE IF NOT EXISTS `ailee_user_patent` (
   `id_patent` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `patent_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2579,7 +2579,7 @@ CREATE TABLE `ailee_user_patent` (
 -- Table structure for table `ailee_user_post`
 --
 
-CREATE TABLE `ailee_user_post` (
+CREATE TABLE IF NOT EXISTS `ailee_user_post` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL COMMENT 'Table : ailee_user',
   `post_for` enum('simple','opportunity','article','question','profile_update','cover_update') NOT NULL,
@@ -2595,7 +2595,7 @@ CREATE TABLE `ailee_user_post` (
 -- Table structure for table `ailee_user_post_comment`
 --
 
-CREATE TABLE `ailee_user_post_comment` (
+CREATE TABLE IF NOT EXISTS `ailee_user_post_comment` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
@@ -2611,7 +2611,7 @@ CREATE TABLE `ailee_user_post_comment` (
 -- Table structure for table `ailee_user_post_comment_like`
 --
 
-CREATE TABLE `ailee_user_post_comment_like` (
+CREATE TABLE IF NOT EXISTS `ailee_user_post_comment_like` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
@@ -2626,7 +2626,7 @@ CREATE TABLE `ailee_user_post_comment_like` (
 -- Table structure for table `ailee_user_post_delete`
 --
 
-CREATE TABLE `ailee_user_post_delete` (
+CREATE TABLE IF NOT EXISTS `ailee_user_post_delete` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -2639,7 +2639,7 @@ CREATE TABLE `ailee_user_post_delete` (
 -- Table structure for table `ailee_user_post_file`
 --
 
-CREATE TABLE `ailee_user_post_file` (
+CREATE TABLE IF NOT EXISTS `ailee_user_post_file` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL COMMENT 'Table: ailee_user_post',
   `file_type` enum('image','video','audio','pdf') NOT NULL,
@@ -2653,7 +2653,7 @@ CREATE TABLE `ailee_user_post_file` (
 -- Table structure for table `ailee_user_post_like`
 --
 
-CREATE TABLE `ailee_user_post_like` (
+CREATE TABLE IF NOT EXISTS `ailee_user_post_like` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
@@ -2668,7 +2668,7 @@ CREATE TABLE `ailee_user_post_like` (
 -- Table structure for table `ailee_user_profession`
 --
 
-CREATE TABLE `ailee_user_profession` (
+CREATE TABLE IF NOT EXISTS `ailee_user_profession` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `designation` int(11) NOT NULL,
@@ -2683,7 +2683,7 @@ CREATE TABLE `ailee_user_profession` (
 -- Table structure for table `ailee_user_profile_update`
 --
 
-CREATE TABLE `ailee_user_profile_update` (
+CREATE TABLE IF NOT EXISTS `ailee_user_profile_update` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `data_key` enum('profile_picture','cover_picture') NOT NULL,
@@ -2697,7 +2697,7 @@ CREATE TABLE `ailee_user_profile_update` (
 -- Table structure for table `ailee_user_projects`
 --
 
-CREATE TABLE `ailee_user_projects` (
+CREATE TABLE IF NOT EXISTS `ailee_user_projects` (
   `id_projects` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2723,7 +2723,7 @@ CREATE TABLE `ailee_user_projects` (
 -- Table structure for table `ailee_user_publication`
 --
 
-CREATE TABLE `ailee_user_publication` (
+CREATE TABLE IF NOT EXISTS `ailee_user_publication` (
   `id_publication` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `pub_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2744,7 +2744,7 @@ CREATE TABLE `ailee_user_publication` (
 -- Table structure for table `ailee_user_readunread_message`
 --
 
-CREATE TABLE `ailee_user_readunread_message` (
+CREATE TABLE IF NOT EXISTS `ailee_user_readunread_message` (
   `id` int(11) NOT NULL,
   `from_jid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `to_jid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2757,7 +2757,7 @@ CREATE TABLE `ailee_user_readunread_message` (
 -- Table structure for table `ailee_user_research`
 --
 
-CREATE TABLE `ailee_user_research` (
+CREATE TABLE IF NOT EXISTS `ailee_user_research` (
   `id_research` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `research_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2778,7 +2778,7 @@ CREATE TABLE `ailee_user_research` (
 -- Table structure for table `ailee_user_simple_post`
 --
 
-CREATE TABLE `ailee_user_simple_post` (
+CREATE TABLE IF NOT EXISTS `ailee_user_simple_post` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL COMMENT 'Table : ailee_user_post',
   `description` text NOT NULL,
@@ -2791,7 +2791,7 @@ CREATE TABLE `ailee_user_simple_post` (
 -- Table structure for table `ailee_user_student`
 --
 
-CREATE TABLE `ailee_user_student` (
+CREATE TABLE IF NOT EXISTS `ailee_user_student` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `current_study` int(11) NOT NULL,
@@ -2807,7 +2807,7 @@ CREATE TABLE `ailee_user_student` (
 -- Table structure for table `ailee_user_visit`
 --
 
-CREATE TABLE `ailee_user_visit` (
+CREATE TABLE IF NOT EXISTS `ailee_user_visit` (
   `id` int(11) NOT NULL,
   `ip` varchar(22) NOT NULL,
   `insert_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -2819,7 +2819,7 @@ CREATE TABLE `ailee_user_visit` (
 -- Table structure for table `ofconparticipant`
 --
 
-CREATE TABLE `ofconparticipant` (
+CREATE TABLE IF NOT EXISTS `ofconparticipant` (
   `conversationID` bigint(20) NOT NULL,
   `joinedDate` bigint(20) NOT NULL,
   `leftDate` bigint(20) DEFAULT NULL,
@@ -2834,7 +2834,7 @@ CREATE TABLE `ofconparticipant` (
 -- Table structure for table `ofconversation`
 --
 
-CREATE TABLE `ofconversation` (
+CREATE TABLE IF NOT EXISTS `ofconversation` (
   `conversationID` bigint(20) NOT NULL,
   `room` varchar(255) DEFAULT NULL,
   `isExternal` tinyint(4) NOT NULL,
@@ -2849,7 +2849,7 @@ CREATE TABLE `ofconversation` (
 -- Table structure for table `ofextcomponentconf`
 --
 
-CREATE TABLE `ofextcomponentconf` (
+CREATE TABLE IF NOT EXISTS `ofextcomponentconf` (
   `subdomain` varchar(255) NOT NULL,
   `wildcard` tinyint(4) NOT NULL,
   `secret` varchar(255) DEFAULT NULL,
@@ -2862,7 +2862,7 @@ CREATE TABLE `ofextcomponentconf` (
 -- Table structure for table `ofgroup`
 --
 
-CREATE TABLE `ofgroup` (
+CREATE TABLE IF NOT EXISTS `ofgroup` (
   `groupName` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2873,7 +2873,7 @@ CREATE TABLE `ofgroup` (
 -- Table structure for table `ofgroupprop`
 --
 
-CREATE TABLE `ofgroupprop` (
+CREATE TABLE IF NOT EXISTS `ofgroupprop` (
   `groupName` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `propValue` text NOT NULL
@@ -2885,7 +2885,7 @@ CREATE TABLE `ofgroupprop` (
 -- Table structure for table `ofgroupuser`
 --
 
-CREATE TABLE `ofgroupuser` (
+CREATE TABLE IF NOT EXISTS `ofgroupuser` (
   `groupName` varchar(50) NOT NULL,
   `username` varchar(100) NOT NULL,
   `administrator` tinyint(4) NOT NULL
@@ -2897,7 +2897,7 @@ CREATE TABLE `ofgroupuser` (
 -- Table structure for table `ofid`
 --
 
-CREATE TABLE `ofid` (
+CREATE TABLE IF NOT EXISTS `ofid` (
   `idType` int(11) NOT NULL,
   `id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2908,7 +2908,7 @@ CREATE TABLE `ofid` (
 -- Table structure for table `ofmessagearchive`
 --
 
-CREATE TABLE `ofmessagearchive` (
+CREATE TABLE IF NOT EXISTS `ofmessagearchive` (
   `messageID` bigint(20) DEFAULT NULL,
   `conversationID` bigint(20) NOT NULL,
   `fromJID` varchar(255) CHARACTER SET latin1 NOT NULL,
@@ -2926,7 +2926,7 @@ CREATE TABLE `ofmessagearchive` (
 -- Table structure for table `ofmucaffiliation`
 --
 
-CREATE TABLE `ofmucaffiliation` (
+CREATE TABLE IF NOT EXISTS `ofmucaffiliation` (
   `roomID` bigint(20) NOT NULL,
   `jid` text NOT NULL,
   `affiliation` tinyint(4) NOT NULL
@@ -2938,7 +2938,7 @@ CREATE TABLE `ofmucaffiliation` (
 -- Table structure for table `ofmucconversationlog`
 --
 
-CREATE TABLE `ofmucconversationlog` (
+CREATE TABLE IF NOT EXISTS `ofmucconversationlog` (
   `roomID` bigint(20) NOT NULL,
   `messageID` bigint(20) NOT NULL,
   `sender` text NOT NULL,
@@ -2955,7 +2955,7 @@ CREATE TABLE `ofmucconversationlog` (
 -- Table structure for table `ofmucmember`
 --
 
-CREATE TABLE `ofmucmember` (
+CREATE TABLE IF NOT EXISTS `ofmucmember` (
   `roomID` bigint(20) NOT NULL,
   `jid` text NOT NULL,
   `nickname` varchar(255) DEFAULT NULL,
@@ -2972,7 +2972,7 @@ CREATE TABLE `ofmucmember` (
 -- Table structure for table `ofmucroom`
 --
 
-CREATE TABLE `ofmucroom` (
+CREATE TABLE IF NOT EXISTS `ofmucroom` (
   `serviceID` bigint(20) NOT NULL,
   `roomID` bigint(20) NOT NULL,
   `creationDate` char(15) NOT NULL,
@@ -3005,7 +3005,7 @@ CREATE TABLE `ofmucroom` (
 -- Table structure for table `ofmucroomprop`
 --
 
-CREATE TABLE `ofmucroomprop` (
+CREATE TABLE IF NOT EXISTS `ofmucroomprop` (
   `roomID` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `propValue` text NOT NULL
@@ -3017,7 +3017,7 @@ CREATE TABLE `ofmucroomprop` (
 -- Table structure for table `ofmucservice`
 --
 
-CREATE TABLE `ofmucservice` (
+CREATE TABLE IF NOT EXISTS `ofmucservice` (
   `serviceID` bigint(20) NOT NULL,
   `subdomain` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -3030,7 +3030,7 @@ CREATE TABLE `ofmucservice` (
 -- Table structure for table `ofmucserviceprop`
 --
 
-CREATE TABLE `ofmucserviceprop` (
+CREATE TABLE IF NOT EXISTS `ofmucserviceprop` (
   `serviceID` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `propValue` text NOT NULL
@@ -3042,7 +3042,7 @@ CREATE TABLE `ofmucserviceprop` (
 -- Table structure for table `ofoffline`
 --
 
-CREATE TABLE `ofoffline` (
+CREATE TABLE IF NOT EXISTS `ofoffline` (
   `username` varchar(64) CHARACTER SET latin1 NOT NULL,
   `messageID` bigint(20) NOT NULL,
   `creationDate` char(15) CHARACTER SET latin1 NOT NULL,
@@ -3056,7 +3056,7 @@ CREATE TABLE `ofoffline` (
 -- Table structure for table `ofpresence`
 --
 
-CREATE TABLE `ofpresence` (
+CREATE TABLE IF NOT EXISTS `ofpresence` (
   `username` varchar(64) NOT NULL,
   `offlinePresence` text,
   `offlineDate` char(15) NOT NULL
@@ -3068,7 +3068,7 @@ CREATE TABLE `ofpresence` (
 -- Table structure for table `ofprivacylist`
 --
 
-CREATE TABLE `ofprivacylist` (
+CREATE TABLE IF NOT EXISTS `ofprivacylist` (
   `username` varchar(64) NOT NULL,
   `name` varchar(100) NOT NULL,
   `isDefault` tinyint(4) NOT NULL,
@@ -3081,7 +3081,7 @@ CREATE TABLE `ofprivacylist` (
 -- Table structure for table `ofprivate`
 --
 
-CREATE TABLE `ofprivate` (
+CREATE TABLE IF NOT EXISTS `ofprivate` (
   `username` varchar(64) NOT NULL,
   `name` varchar(100) NOT NULL,
   `namespace` varchar(200) NOT NULL,
@@ -3094,7 +3094,7 @@ CREATE TABLE `ofprivate` (
 -- Table structure for table `ofproperty`
 --
 
-CREATE TABLE `ofproperty` (
+CREATE TABLE IF NOT EXISTS `ofproperty` (
   `name` varchar(100) NOT NULL,
   `propValue` text NOT NULL,
   `encrypted` int(11) DEFAULT NULL
@@ -3106,7 +3106,7 @@ CREATE TABLE `ofproperty` (
 -- Table structure for table `ofpubsubaffiliation`
 --
 
-CREATE TABLE `ofpubsubaffiliation` (
+CREATE TABLE IF NOT EXISTS `ofpubsubaffiliation` (
   `serviceID` varchar(100) NOT NULL,
   `nodeID` varchar(100) NOT NULL,
   `jid` varchar(255) NOT NULL,
@@ -3119,7 +3119,7 @@ CREATE TABLE `ofpubsubaffiliation` (
 -- Table structure for table `ofpubsubdefaultconf`
 --
 
-CREATE TABLE `ofpubsubdefaultconf` (
+CREATE TABLE IF NOT EXISTS `ofpubsubdefaultconf` (
   `serviceID` varchar(100) NOT NULL,
   `leaf` tinyint(4) NOT NULL,
   `deliverPayloads` tinyint(4) NOT NULL,
@@ -3146,7 +3146,7 @@ CREATE TABLE `ofpubsubdefaultconf` (
 -- Table structure for table `ofpubsubitem`
 --
 
-CREATE TABLE `ofpubsubitem` (
+CREATE TABLE IF NOT EXISTS `ofpubsubitem` (
   `serviceID` varchar(100) NOT NULL,
   `nodeID` varchar(100) NOT NULL,
   `id` varchar(100) NOT NULL,
@@ -3161,7 +3161,7 @@ CREATE TABLE `ofpubsubitem` (
 -- Table structure for table `ofpubsubnode`
 --
 
-CREATE TABLE `ofpubsubnode` (
+CREATE TABLE IF NOT EXISTS `ofpubsubnode` (
   `serviceID` varchar(100) NOT NULL,
   `nodeID` varchar(100) NOT NULL,
   `leaf` tinyint(4) NOT NULL,
@@ -3199,7 +3199,7 @@ CREATE TABLE `ofpubsubnode` (
 -- Table structure for table `ofpubsubnodegroups`
 --
 
-CREATE TABLE `ofpubsubnodegroups` (
+CREATE TABLE IF NOT EXISTS `ofpubsubnodegroups` (
   `serviceID` varchar(100) NOT NULL,
   `nodeID` varchar(100) NOT NULL,
   `rosterGroup` varchar(100) NOT NULL
@@ -3211,7 +3211,7 @@ CREATE TABLE `ofpubsubnodegroups` (
 -- Table structure for table `ofpubsubnodejids`
 --
 
-CREATE TABLE `ofpubsubnodejids` (
+CREATE TABLE IF NOT EXISTS `ofpubsubnodejids` (
   `serviceID` varchar(100) NOT NULL,
   `nodeID` varchar(100) NOT NULL,
   `jid` varchar(255) NOT NULL,
@@ -3224,7 +3224,7 @@ CREATE TABLE `ofpubsubnodejids` (
 -- Table structure for table `ofpubsubsubscription`
 --
 
-CREATE TABLE `ofpubsubsubscription` (
+CREATE TABLE IF NOT EXISTS `ofpubsubsubscription` (
   `serviceID` varchar(100) NOT NULL,
   `nodeID` varchar(100) NOT NULL,
   `id` varchar(100) NOT NULL,
@@ -3248,7 +3248,7 @@ CREATE TABLE `ofpubsubsubscription` (
 -- Table structure for table `ofremoteserverconf`
 --
 
-CREATE TABLE `ofremoteserverconf` (
+CREATE TABLE IF NOT EXISTS `ofremoteserverconf` (
   `xmppDomain` varchar(255) NOT NULL,
   `remotePort` int(11) DEFAULT NULL,
   `permission` varchar(10) NOT NULL
@@ -3260,7 +3260,7 @@ CREATE TABLE `ofremoteserverconf` (
 -- Table structure for table `ofroster`
 --
 
-CREATE TABLE `ofroster` (
+CREATE TABLE IF NOT EXISTS `ofroster` (
   `rosterID` bigint(20) NOT NULL,
   `username` varchar(64) NOT NULL,
   `jid` varchar(1024) NOT NULL,
@@ -3276,7 +3276,7 @@ CREATE TABLE `ofroster` (
 -- Table structure for table `ofrostergroups`
 --
 
-CREATE TABLE `ofrostergroups` (
+CREATE TABLE IF NOT EXISTS `ofrostergroups` (
   `rosterID` bigint(20) NOT NULL,
   `rank` tinyint(4) NOT NULL,
   `groupName` varchar(255) NOT NULL
@@ -3288,7 +3288,7 @@ CREATE TABLE `ofrostergroups` (
 -- Table structure for table `ofrrds`
 --
 
-CREATE TABLE `ofrrds` (
+CREATE TABLE IF NOT EXISTS `ofrrds` (
   `id` varchar(100) NOT NULL,
   `updatedDate` bigint(20) NOT NULL,
   `bytes` mediumblob
@@ -3300,7 +3300,7 @@ CREATE TABLE `ofrrds` (
 -- Table structure for table `ofsaslauthorized`
 --
 
-CREATE TABLE `ofsaslauthorized` (
+CREATE TABLE IF NOT EXISTS `ofsaslauthorized` (
   `username` varchar(64) NOT NULL,
   `principal` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -3311,7 +3311,7 @@ CREATE TABLE `ofsaslauthorized` (
 -- Table structure for table `ofsecurityauditlog`
 --
 
-CREATE TABLE `ofsecurityauditlog` (
+CREATE TABLE IF NOT EXISTS `ofsecurityauditlog` (
   `msgID` bigint(20) NOT NULL,
   `username` varchar(64) NOT NULL,
   `entryStamp` bigint(20) NOT NULL,
@@ -3326,7 +3326,7 @@ CREATE TABLE `ofsecurityauditlog` (
 -- Table structure for table `ofuser`
 --
 
-CREATE TABLE `ofuser` (
+CREATE TABLE IF NOT EXISTS `ofuser` (
   `username` varchar(64) NOT NULL,
   `storedKey` varchar(32) DEFAULT NULL,
   `serverKey` varchar(32) DEFAULT NULL,
@@ -3346,7 +3346,7 @@ CREATE TABLE `ofuser` (
 -- Table structure for table `ofuserflag`
 --
 
-CREATE TABLE `ofuserflag` (
+CREATE TABLE IF NOT EXISTS `ofuserflag` (
   `username` varchar(64) NOT NULL,
   `name` varchar(100) NOT NULL,
   `startTime` char(15) DEFAULT NULL,
@@ -3359,7 +3359,7 @@ CREATE TABLE `ofuserflag` (
 -- Table structure for table `ofuserprop`
 --
 
-CREATE TABLE `ofuserprop` (
+CREATE TABLE IF NOT EXISTS `ofuserprop` (
   `username` varchar(64) NOT NULL,
   `name` varchar(100) NOT NULL,
   `propValue` text NOT NULL
@@ -3371,7 +3371,7 @@ CREATE TABLE `ofuserprop` (
 -- Table structure for table `ofvcard`
 --
 
-CREATE TABLE `ofvcard` (
+CREATE TABLE IF NOT EXISTS `ofvcard` (
   `username` varchar(64) NOT NULL,
   `vcard` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -3382,7 +3382,7 @@ CREATE TABLE `ofvcard` (
 -- Table structure for table `ofversion`
 --
 
-CREATE TABLE `ofversion` (
+CREATE TABLE IF NOT EXISTS `ofversion` (
   `name` varchar(50) NOT NULL,
   `version` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -4449,782 +4449,3 @@ ALTER TABLE `ofversion`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `ailee_admin`
---
-ALTER TABLE `ailee_admin`
-  MODIFY `admin_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ailee_advertise_with_us`
---
-ALTER TABLE `ailee_advertise_with_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ailee_artistic_post_comment`
---
-ALTER TABLE `ailee_artistic_post_comment`
-  MODIFY `artistic_post_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
-
---
--- AUTO_INCREMENT for table `ailee_art_category`
---
-ALTER TABLE `ailee_art_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `ailee_art_comment_image_like`
---
-ALTER TABLE `ailee_art_comment_image_like`
-  MODIFY `image_comment_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ailee_art_other_category`
---
-ALTER TABLE `ailee_art_other_category`
-  MODIFY `other_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `ailee_art_post`
---
-ALTER TABLE `ailee_art_post`
-  MODIFY `art_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=557;
-
---
--- AUTO_INCREMENT for table `ailee_art_post_image_comment`
---
-ALTER TABLE `ailee_art_post_image_comment`
-  MODIFY `post_image_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `ailee_art_post_image_like`
---
-ALTER TABLE `ailee_art_post_image_like`
-  MODIFY `post_image_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- AUTO_INCREMENT for table `ailee_art_reg`
---
-ALTER TABLE `ailee_art_reg`
-  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
-
---
--- AUTO_INCREMENT for table `ailee_art_reg_search_tmp`
---
-ALTER TABLE `ailee_art_reg_search_tmp`
-  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
-
---
--- AUTO_INCREMENT for table `ailee_blog`
---
-ALTER TABLE `ailee_blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT for table `ailee_blog_category`
---
-ALTER TABLE `ailee_blog_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `ailee_blog_comment`
---
-ALTER TABLE `ailee_blog_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ailee_blog_guest`
---
-ALTER TABLE `ailee_blog_guest`
-  MODIFY `id_blog_guest` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ailee_blog_tag`
---
-ALTER TABLE `ailee_blog_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ailee_blog_visit`
---
-ALTER TABLE `ailee_blog_visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
-
---
--- AUTO_INCREMENT for table `ailee_business_profile`
---
-ALTER TABLE `ailee_business_profile`
-  MODIFY `business_profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3739;
-
---
--- AUTO_INCREMENT for table `ailee_business_profile_post`
---
-ALTER TABLE `ailee_business_profile_post`
-  MODIFY `business_profile_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=950;
-
---
--- AUTO_INCREMENT for table `ailee_business_profile_post_comment`
---
-ALTER TABLE `ailee_business_profile_post_comment`
-  MODIFY `business_profile_post_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=407;
-
---
--- AUTO_INCREMENT for table `ailee_business_profile_save`
---
-ALTER TABLE `ailee_business_profile_save`
-  MODIFY `save_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ailee_business_profile_search_tmp`
---
-ALTER TABLE `ailee_business_profile_search_tmp`
-  MODIFY `business_profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3738;
-
---
--- AUTO_INCREMENT for table `ailee_business_type`
---
-ALTER TABLE `ailee_business_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `ailee_bus_comment_image_like`
---
-ALTER TABLE `ailee_bus_comment_image_like`
-  MODIFY `image_comment_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `ailee_bus_image`
---
-ALTER TABLE `ailee_bus_image`
-  MODIFY `bus_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=906;
-
---
--- AUTO_INCREMENT for table `ailee_bus_post_image_comment`
---
-ALTER TABLE `ailee_bus_post_image_comment`
-  MODIFY `post_image_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- AUTO_INCREMENT for table `ailee_bus_post_image_like`
---
-ALTER TABLE `ailee_bus_post_image_like`
-  MODIFY `post_image_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `ailee_bus_showvideo`
---
-ALTER TABLE `ailee_bus_showvideo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ailee_category`
---
-ALTER TABLE `ailee_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
-
---
--- AUTO_INCREMENT for table `ailee_cities`
---
-ALTER TABLE `ailee_cities`
-  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49369;
-
---
--- AUTO_INCREMENT for table `ailee_college`
---
-ALTER TABLE `ailee_college`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `ailee_contact_person`
---
-ALTER TABLE `ailee_contact_person`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=345;
-
---
--- AUTO_INCREMENT for table `ailee_contact_us`
---
-ALTER TABLE `ailee_contact_us`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
-
---
--- AUTO_INCREMENT for table `ailee_countries`
---
-ALTER TABLE `ailee_countries`
-  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
-
---
--- AUTO_INCREMENT for table `ailee_currency`
---
-ALTER TABLE `ailee_currency`
-  MODIFY `currency_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
-
---
--- AUTO_INCREMENT for table `ailee_degree`
---
-ALTER TABLE `ailee_degree`
-  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=427;
-
---
--- AUTO_INCREMENT for table `ailee_emails`
---
-ALTER TABLE `ailee_emails`
-  MODIFY `emailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `ailee_emails_seo`
---
-ALTER TABLE `ailee_emails_seo`
-  MODIFY `emailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `ailee_email_settings`
---
-ALTER TABLE `ailee_email_settings`
-  MODIFY `esetting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ailee_feedback`
---
-ALTER TABLE `ailee_feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT for table `ailee_feedback_general`
---
-ALTER TABLE `ailee_feedback_general`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `ailee_follow`
---
-ALTER TABLE `ailee_follow`
-  MODIFY `follow_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10035;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_apply`
---
-ALTER TABLE `ailee_freelancer_apply`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8005;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_hire_reg`
---
-ALTER TABLE `ailee_freelancer_hire_reg`
-  MODIFY `reg_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_post`
---
-ALTER TABLE `ailee_freelancer_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_post_reg`
---
-ALTER TABLE `ailee_freelancer_post_reg`
-  MODIFY `freelancer_post_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7746;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_post_reg_search_tmp`
---
-ALTER TABLE `ailee_freelancer_post_reg_search_tmp`
-  MODIFY `freelancer_post_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7744;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_post_search_tmp`
---
-ALTER TABLE `ailee_freelancer_post_search_tmp`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
-
---
--- AUTO_INCREMENT for table `ailee_freelancer_review`
---
-ALTER TABLE `ailee_freelancer_review`
-  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ailee_gov_category`
---
-ALTER TABLE `ailee_gov_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `ailee_gov_post`
---
-ALTER TABLE `ailee_gov_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ailee_industry_type`
---
-ALTER TABLE `ailee_industry_type`
-  MODIFY `industry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
-
---
--- AUTO_INCREMENT for table `ailee_job_add_edu`
---
-ALTER TABLE `ailee_job_add_edu`
-  MODIFY `edu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=743;
-
---
--- AUTO_INCREMENT for table `ailee_job_add_workexp`
---
-ALTER TABLE `ailee_job_add_workexp`
-  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=983;
-
---
--- AUTO_INCREMENT for table `ailee_job_apply`
---
-ALTER TABLE `ailee_job_apply`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2890;
-
---
--- AUTO_INCREMENT for table `ailee_job_graduation`
---
-ALTER TABLE `ailee_job_graduation`
-  MODIFY `job_graduation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=963;
-
---
--- AUTO_INCREMENT for table `ailee_job_industry`
---
-ALTER TABLE `ailee_job_industry`
-  MODIFY `industry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=590;
-
---
--- AUTO_INCREMENT for table `ailee_job_reg`
---
-ALTER TABLE `ailee_job_reg`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8878;
-
---
--- AUTO_INCREMENT for table `ailee_job_reg_search_tmp`
---
-ALTER TABLE `ailee_job_reg_search_tmp`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8877;
-
---
--- AUTO_INCREMENT for table `ailee_job_title`
---
-ALTER TABLE `ailee_job_title`
-  MODIFY `title_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4118;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_addicourse`
---
-ALTER TABLE `ailee_job_user_addicourse`
-  MODIFY `id_addicourse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_award`
---
-ALTER TABLE `ailee_job_user_award`
-  MODIFY `id_award` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_education`
---
-ALTER TABLE `ailee_job_user_education`
-  MODIFY `id_education` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=947;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_experience`
---
-ALTER TABLE `ailee_job_user_experience`
-  MODIFY `id_experience` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_extra_activity`
---
-ALTER TABLE `ailee_job_user_extra_activity`
-  MODIFY `id_extra_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_patent`
---
-ALTER TABLE `ailee_job_user_patent`
-  MODIFY `id_patent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_projects`
---
-ALTER TABLE `ailee_job_user_projects`
-  MODIFY `id_projects` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_publication`
---
-ALTER TABLE `ailee_job_user_publication`
-  MODIFY `id_publication` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `ailee_job_user_research`
---
-ALTER TABLE `ailee_job_user_research`
-  MODIFY `id_research` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ailee_language`
---
-ALTER TABLE `ailee_language`
-  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=340;
-
---
--- AUTO_INCREMENT for table `ailee_messages`
---
-ALTER TABLE `ailee_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
-
---
--- AUTO_INCREMENT for table `ailee_notification`
---
-ALTER TABLE `ailee_notification`
-  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=433;
-
---
--- AUTO_INCREMENT for table `ailee_pages`
---
-ALTER TABLE `ailee_pages`
-  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `ailee_post_article`
---
-ALTER TABLE `ailee_post_article`
-  MODIFY `id_post_article` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
-
---
--- AUTO_INCREMENT for table `ailee_post_article_media`
---
-ALTER TABLE `ailee_post_article_media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `ailee_post_files`
---
-ALTER TABLE `ailee_post_files`
-  MODIFY `post_files_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1717;
-
---
--- AUTO_INCREMENT for table `ailee_recruiter`
---
-ALTER TABLE `ailee_recruiter`
-  MODIFY `rec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=925;
-
---
--- AUTO_INCREMENT for table `ailee_rec_post`
---
-ALTER TABLE `ailee_rec_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
-
---
--- AUTO_INCREMENT for table `ailee_rec_post_login`
---
-ALTER TABLE `ailee_rec_post_login`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `ailee_rec_post_search_tmp`
---
-ALTER TABLE `ailee_rec_post_search_tmp`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
-
---
--- AUTO_INCREMENT for table `ailee_report`
---
-ALTER TABLE `ailee_report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `ailee_save`
---
-ALTER TABLE `ailee_save`
-  MODIFY `save_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=853;
-
---
--- AUTO_INCREMENT for table `ailee_search_info`
---
-ALTER TABLE `ailee_search_info`
-  MODIFY `keyword_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7790;
-
---
--- AUTO_INCREMENT for table `ailee_sem`
---
-ALTER TABLE `ailee_sem`
-  MODIFY `semid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_seo`
---
-ALTER TABLE `ailee_seo`
-  MODIFY `seoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_seo_mail_list`
---
-ALTER TABLE `ailee_seo_mail_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
-
---
--- AUTO_INCREMENT for table `ailee_showvideo`
---
-ALTER TABLE `ailee_showvideo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `ailee_site_settings`
---
-ALTER TABLE `ailee_site_settings`
-  MODIFY `site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ailee_skill`
---
-ALTER TABLE `ailee_skill`
-  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16191;
-
---
--- AUTO_INCREMENT for table `ailee_states`
---
-ALTER TABLE `ailee_states`
-  MODIFY `state_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4687;
-
---
--- AUTO_INCREMENT for table `ailee_stream`
---
-ALTER TABLE `ailee_stream`
-  MODIFY `stream_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=986;
-
---
--- AUTO_INCREMENT for table `ailee_subscription`
---
-ALTER TABLE `ailee_subscription`
-  MODIFY `subscription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `ailee_sub_category`
---
-ALTER TABLE `ailee_sub_category`
-  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
-
---
--- AUTO_INCREMENT for table `ailee_sub_industry_type`
---
-ALTER TABLE `ailee_sub_industry_type`
-  MODIFY `sub_industry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1248;
-
---
--- AUTO_INCREMENT for table `ailee_tags`
---
-ALTER TABLE `ailee_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `ailee_university`
---
-ALTER TABLE `ailee_university`
-  MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1031;
-
---
--- AUTO_INCREMENT for table `ailee_unsubscribe_reason`
---
-ALTER TABLE `ailee_unsubscribe_reason`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `ailee_user`
---
-ALTER TABLE `ailee_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16228;
-
---
--- AUTO_INCREMENT for table `ailee_user_addicourse`
---
-ALTER TABLE `ailee_user_addicourse`
-  MODIFY `id_addicourse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_user_article`
---
-ALTER TABLE `ailee_user_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ailee_user_ask_question`
---
-ALTER TABLE `ailee_user_ask_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
-
---
--- AUTO_INCREMENT for table `ailee_user_award`
---
-ALTER TABLE `ailee_user_award`
-  MODIFY `id_award` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_user_contact`
---
-ALTER TABLE `ailee_user_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
-
---
--- AUTO_INCREMENT for table `ailee_user_education`
---
-ALTER TABLE `ailee_user_education`
-  MODIFY `id_education` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_user_experience`
---
-ALTER TABLE `ailee_user_experience`
-  MODIFY `id_experience` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `ailee_user_extra_activity`
---
-ALTER TABLE `ailee_user_extra_activity`
-  MODIFY `id_extra_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `ailee_user_follow`
---
-ALTER TABLE `ailee_user_follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31455;
-
---
--- AUTO_INCREMENT for table `ailee_user_idol`
---
-ALTER TABLE `ailee_user_idol`
-  MODIFY `id_idol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `ailee_user_ignore`
---
-ALTER TABLE `ailee_user_ignore`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=448;
-
---
--- AUTO_INCREMENT for table `ailee_user_info`
---
-ALTER TABLE `ailee_user_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15841;
-
---
--- AUTO_INCREMENT for table `ailee_user_invite`
---
-ALTER TABLE `ailee_user_invite`
-  MODIFY `invite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
-
---
--- AUTO_INCREMENT for table `ailee_user_login`
---
-ALTER TABLE `ailee_user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15841;
-
---
--- AUTO_INCREMENT for table `ailee_user_opportunity`
---
-ALTER TABLE `ailee_user_opportunity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
-
---
--- AUTO_INCREMENT for table `ailee_user_patent`
---
-ALTER TABLE `ailee_user_patent`
-  MODIFY `id_patent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `ailee_user_post`
---
-ALTER TABLE `ailee_user_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1111;
-
---
--- AUTO_INCREMENT for table `ailee_user_post_comment`
---
-ALTER TABLE `ailee_user_post_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=459;
-
---
--- AUTO_INCREMENT for table `ailee_user_post_comment_like`
---
-ALTER TABLE `ailee_user_post_comment_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT for table `ailee_user_post_delete`
---
-ALTER TABLE `ailee_user_post_delete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
-
---
--- AUTO_INCREMENT for table `ailee_user_post_file`
---
-ALTER TABLE `ailee_user_post_file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=735;
-
---
--- AUTO_INCREMENT for table `ailee_user_post_like`
---
-ALTER TABLE `ailee_user_post_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
-
---
--- AUTO_INCREMENT for table `ailee_user_profession`
---
-ALTER TABLE `ailee_user_profession`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
-
---
--- AUTO_INCREMENT for table `ailee_user_profile_update`
---
-ALTER TABLE `ailee_user_profile_update`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
-
---
--- AUTO_INCREMENT for table `ailee_user_projects`
---
-ALTER TABLE `ailee_user_projects`
-  MODIFY `id_projects` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `ailee_user_publication`
---
-ALTER TABLE `ailee_user_publication`
-  MODIFY `id_publication` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_user_readunread_message`
---
-ALTER TABLE `ailee_user_readunread_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT for table `ailee_user_research`
---
-ALTER TABLE `ailee_user_research`
-  MODIFY `id_research` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `ailee_user_simple_post`
---
-ALTER TABLE `ailee_user_simple_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=515;
-
---
--- AUTO_INCREMENT for table `ailee_user_student`
---
-ALTER TABLE `ailee_user_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `ailee_user_visit`
---
-ALTER TABLE `ailee_user_visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=900;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

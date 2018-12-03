@@ -553,24 +553,31 @@
 										<div class="total-rev">
 											<span class="total-rat">4.8</span> 
 											<span class="rating-star">
-												<input id="rating-1" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required title="" readonly="readonly">
+												<input id="rating-1" type="number" value="4">
 											</span><span class="rev-count">59 Reviews</span>
 										</div>
 										</div>
 										<ul class="review-list">
 											<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
-												<div class="review-left">
-													<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+												<div class="review-left" ng-if="!review_list.user_image">
+													<div class="rev-img">
+														<div class="post-img-profile">
+															{{review_list.first_name | limitTo:1}} {{review_list.last_name |  limitTo:1}}
+														</div>
+													</div>
+												</div>
+												<div class="review-left" ng-if="review_list.user_image">
+													<img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
 												</div>
 												<div class="review-right">
-													<h4>Yatin Belani</h4>
+													<h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
 													<div class="rating-star-cus">
 														<span class="rating-star">
-														<input id="rating-{{$index}}" value="2" type="number" class="rating user-rating" class="rating" min=1 max=10 step=2 data-size="lg" data-rtl="true" readonly="readonly">
+														<input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
 															</span>
 													</div>
-													<div class="review-dis">
-																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+													<div class="review-dis" ng-if="review_list.review_desc">
+														{{review_list.review_desc}}
 													</div>
 												</div>
 											</li>
@@ -1058,7 +1065,7 @@
 									<div class="total-rev-top">
 										<h4><?php echo ucwords($fh_login_data['freelancer_post_fullname'].' '.$fh_login_data['freelancer_post_username']); ?></h4>
 										<span class="rating-star">
-											<input id="review_star" value="5" type="text" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required title="" name="review_star">
+											<input id="review_star" value="5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
 										</span>
 									</div>
 								</div>

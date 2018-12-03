@@ -3490,7 +3490,8 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         {
             $user_project_insert = $this->freelancer_hire_model->set_save_review($from_user_id,$to_user_id,$review_star,$review_desc,$fileName);
             $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
-            $ret_arr = array("success"=>1,"review_data"=>$review_data);
+            $review_count = $this->freelancer_hire_model->get_review_count($to_user_id);
+            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review']);
         }
         else
         {
@@ -3505,7 +3506,8 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
     	if($to_user_id != '')
         {            
             $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
-            $ret_arr = array("success"=>1,"review_data"=>$review_data);
+            $review_count = $this->freelancer_hire_model->get_review_count($to_user_id);
+            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review']);
         }
         else
         {
