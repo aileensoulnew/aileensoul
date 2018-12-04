@@ -343,6 +343,7 @@ class Freelancer_hire_model extends CI_Model {
         $this->db->join('freelancer_post_reg fp', 'fp.user_id = fr.from_user_id', 'left');
         $this->db->where('fr.to_user_id', $to_user_id);
         $this->db->where('fr.status', '1');
+        $this->db->order_by('fr.created_date', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
@@ -368,5 +369,59 @@ class Freelancer_hire_model extends CI_Model {
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array;
+    }
+
+    public function get_cmp_company_cont_info($to_user_id)
+    {
+        $this->db->select("fh.comp_email, fh.comp_skype, fh.comp_number, fh.comp_website, fh.company_country, fh.company_state, fh.company_city, cr.country_name, st.state_name, ct.city_name")->from('freelancer_hire_reg fh');
+        $this->db->join('countries cr', 'cr.country_id = fh.company_country', 'left');
+        $this->db->join('states st', 'st.state_id = fh.company_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fh.company_city', 'left');
+        $this->db->where('fh.user_id', $to_user_id);
+        $this->db->where('fh.status', '1');
+        $this->db->where('fh.is_delete', '0');
+        $query = $this->db->get();
+        $row_array = $query->row_array();
+        return $row_array;
+    }
+
+    public function get_cmp_company_info($to_user_id)
+    {
+        $this->db->select("fh.comp_name, fh.company_field, fh.company_other_field, fh.company_country, fh.company_state, fh.company_city, fh.comp_team, fh.comp_founded_year, fh.comp_founded_month, fh.comp_overview, fh.comp_service_offer, fh.comp_exp_year, fh.comp_exp_month, fh.comp_skills_offer, fh.comp_logo, cr.country_name, st.state_name, ct.city_name, it.industry_name as company_field_txt,IF(fh.comp_skills_offer != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as comp_skills_offer_txt")->from('freelancer_hire_reg fh,skill s');
+        $this->db->join('countries cr', 'cr.country_id = fh.company_country', 'left');
+        $this->db->join('states st', 'st.state_id = fh.company_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fh.company_city', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = fh.company_field', 'left');
+        $sql = "IF(fh.comp_skills_offer != '', FIND_IN_SET(s.skill_id, fh.comp_skills_offer) != '0', '1=1')";
+        $this->db->where($sql);
+        $this->db->where('fh.user_id', $to_user_id);
+        $this->db->where('fh.status', '1');
+        $this->db->where('fh.is_delete', '0');
+        $this->db->group_by('fh.comp_skills_offer,fh.reg_id');        
+        $query = $this->db->get();
+        $row_array = $query->row_array();
+        return $row_array;
+    }
+
+    public function set_save_cmp_comp_info($userid,$comp_name = "", $company_field = "", $company_other_field = "", $comp_skill_ids = "", $comp_team = "", $comp_founded_year = "", $comp_founded_month = "", $comp_overview  = "",$comp_service_offer  = "",$comp_exp_year  = "",$comp_exp_month = "", $fileName = "")
+    {
+         $data = array(
+                'comp_name' => $comp_name,
+                'company_field' => $company_field,
+                'company_other_field' => $company_other_field,
+                'comp_team  ' => $comp_team ,
+                'comp_skills_offer' => $comp_skill_ids,
+                'comp_founded_year' => $comp_founded_year,
+                'comp_founded_month' => $comp_founded_month,                
+                'comp_overview' => $comp_overview,                
+                'comp_service_offer' => $comp_service_offer,                
+                'comp_exp_year' => $comp_exp_year,                
+                'comp_exp_month' => $comp_exp_month,                
+                'comp_logo' => $fileName,
+                'modified_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->update('freelancer_hire_reg', $data);
+            return true;
     }
 }

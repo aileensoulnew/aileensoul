@@ -12,6 +12,7 @@
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
 	   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
    <?php } ?>
+   <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
@@ -436,64 +437,72 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>"><span>Company Information</span>
 									<?php if($fh_userid == $login_userid): ?>
-									<a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="#" data-target="#com-info" data-toggle="modal" class="pull-right" ng-click="edit_cmp_comp_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									<?php endif; ?>
-								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list list-ul-cus">
-										<li>
-											<span>Company Name</span>
-											<label>Verv System pvt ltd</label>
-										</li>
-										<li>
-											<span>Industry</span>
-											<label>IT Field</label>
-										</li>
-										<li>
-											<span>Team Size</span>
-											<label>105</label>
-										</li>
-										<li>
-											<span>Timezone</span>
-											<label>GMT 21:45</label>
-										</li>
-										<li>
-											<span>Company Founded</span>
-											<label>June 2008</label>
-										</li>
-										<li>
-											<span>Company Overview</span>
-											<label>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <span class="collapse-text-toggle">Read More</span></label>
-										</li>
-										<li>
-											<span>Services you offer</span>
-											<ul>
-												<li>Web design</li>
-												<li>Graphic design</li>
-												<li>SEO</li>
-											</ul>
-										</li>
-										<li>
-											<span>Total Experience</span>
-											<label>5 Year 7 Month</label>
-										</li>
-										<li>
-											<span>Skills you offer</span>
-											<ul class="skill-list">
-												<li>Devloping</li>
-												<li>Desigining</li>
-												<li>Marketing</li>
-											</ul>
-										</li>
-										<li>
-											<span>Location</span>
-											<label>Ahmedabad, Gujrat , India</label>
-										</li>
-										<li>
-											<span>Company Logo</span>
-											<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
-										</li>
-									</ul>
+								</div>								
+								<div id="cmp-comp-info-loader" class="dtl-dis">
+	                                <div class="text-center">
+	                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+	                                </div>
+	                            </div>
+	                            <div id="cmp-comp-info-body" style="display: none;">
+	                            	<div class="dtl-dis" ng-if="!cmp_company_info">
+										<div class="no-info">
+											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+											<span>Lorem ipsum its a dummy text and its user to for all.</span>
+										</div>
+									</div>
+									<div class="dtl-dis" ng-if="cmp_company_info">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="cmp_company_info.comp_name">
+												<span>Company Name</span>
+												<label>{{cmp_company_info.comp_name}}</label>
+											</li>
+											<li ng-if="cmp_company_info.company_field || cmp_company_info.company_other_field">
+												<span>Industry</span>
+												<label ng-if="cmp_company_info.company_field > '0'">{{cmp_company_info.company_field_txt}}</label>
+												<label ng-if="cmp_company_info.company_field == '0' && cmp_company_info.company_other_field">{{cmp_company_info.cmp_company_info.company_other_field}}</label>
+											</li>
+											<li ng-if="cmp_company_info.comp_team">
+												<span>Team Size</span>
+												<label>{{cmp_company_info.comp_team}}</label>
+											</li>										
+											<li ng-if="cmp_company_info.comp_founded_year > '0' || cmp_company_info.comp_founded_month > '0'">
+												<span>Company Founded</span>
+												<label>{{all_months[cmp_company_info.comp_founded_month - '1']}}</label>
+												<label>{{cmp_company_info.comp_founded_year}}</label>
+											</li>
+											<li ng-if="cmp_company_info.comp_overview">
+												<span>Company Overview</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="200" dd-text-collapse-text="{{cmp_company_info.comp_overview}}" dd-text-collapse-cond="true">{{cmp_company_info.comp_overview}}</label>
+											</li>
+											<li ng-if="cmp_company_info.comp_service_offer">
+												<span>Services you offer</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="200" dd-text-collapse-text="{{cmp_company_info.comp_service_offer}}" dd-text-collapse-cond="true">{{cmp_company_info.comp_service_offer}}</label>
+											</li>
+											<li ng-if="cmp_company_info.comp_exp_year > '0' || cmp_company_info.comp_exp_month > '0'">
+												<span>Total Experience</span>
+												<label>{{cmp_company_info.comp_exp_year}} Year{{cmp_company_info.comp_exp_year > '1' ? 's' : ''}}</label>
+												<label>{{cmp_company_info.comp_exp_month}} Month{{cmp_company_info.comp_exp_month > '1' ? 's' : ''}}</label>
+											</li>
+											<li ng-if="cmp_company_info.comp_skills_offer">
+												<span>Skills you offer</span>
+												<ul class="skill-list">
+													<li ng-repeat="skill in cmp_company_info.comp_skills_offer_txt.split(',')">{{skill}}</li>
+												</ul>
+											</li>
+											<li ng-if="cmp_company_cont_info.city_name != '' || cmp_company_cont_info.state_name != '' || cmp_company_cont_info.country_name != ''">
+												<span>Location</span>
+												<label ng-if="cmp_company_cont_info.city_name != ''">{{cmp_company_cont_info.city_name}}{{cmp_company_cont_info.city_name != '' && cmp_company_cont_info.state_name != '' ? ',' : ''}}</label>
+												<label ng-if="cmp_company_cont_info.state_name != ''"> {{cmp_company_cont_info.state_name}}{{cmp_company_cont_info.state_name != '' && cmp_company_cont_info.country_name != '' ? ',' : ''}}</label>
+												<label ng-if="cmp_company_cont_info.country_name != ''"> {{cmp_company_cont_info.country_name}}</label>
+											</li>
+											<li ng-if="cmp_company_info.comp_logo">
+												<span>Company Logo</span>
+												<a href="<?php echo FREE_HIRE_COMP_LOGO_UPLOAD_URL; ?>{{cmp_company_info.comp_logo}}" target="_blank"><img style="width:80px;" src="<?php echo FREE_HIRE_COMP_LOGO_UPLOAD_URL; ?>{{cmp_company_info.comp_logo}}"></a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							
@@ -503,32 +512,41 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/contact.png?ver=' . time()) ?>">
 									<span>Company Contact Information</span>
 									<?php if($fh_userid == $login_userid): ?>
-									<a href="#" data-target="#com-contact-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="#" data-target="#com-contact-info" data-toggle="modal" class="pull-right" ng-click="edit_cmp_comp_con_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									<?php endif; ?>
 								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list list-ul-cus">
-										<li>
-											<span>Company Email </span>
-											<label>harshad2406patoliya@gmail.com</label>
-										</li>
-										<li>
-											<span>Company Phone number</span>
-											<label>+91 951005589</label>
-										</li>
-										<li>
-											<span>Skype</span>
-											<label>harshad2406</label>
-										</li>
-										<li>
-											<span>Website URL</span>
-											<label>www.vervsystem.com</label>
-										</li>
-										<li>
-											<span>Location</span>
-											<label>Ahmedabad, Gujrat , India</label>
-										</li>
-									</ul>
+								<div id="cmp-comp-cont-info-loader" class="dtl-dis">
+	                                <div class="text-center">
+	                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+	                                </div>
+	                            </div>
+	                            <div id="cmp-comp-cont-info-body" style="display: none;">
+									<div class="dtl-dis">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="cmp_company_cont_info.comp_email">
+												<span>Company Email </span>
+												<label>{{cmp_company_cont_info.comp_email}}</label>
+											</li>
+											<li ng-if="cmp_company_cont_info.comp_number">
+												<span>Company Phone number</span>
+												<label>{{cmp_company_cont_info.comp_number}}</label>
+											</li>
+											<li ng-if="cmp_company_cont_info.comp_skype">
+												<span>Skype</span>
+												<label>{{cmp_company_cont_info.comp_skype}}</label>
+											</li>
+											<li ng-if="cmp_company_cont_info.comp_website">
+												<span>Website URL</span>
+												<label>{{cmp_company_cont_info.comp_website}}</label>
+											</li>
+											<li ng-if="cmp_company_cont_info.city_name != '' || cmp_company_cont_info.state_name != '' || cmp_company_cont_info.country_name != ''">
+												<span>Location</span>
+												<label ng-if="cmp_company_cont_info.city_name != ''">{{cmp_company_cont_info.city_name}}{{cmp_company_cont_info.city_name != '' && cmp_company_cont_info.state_name != '' ? ',' : ''}}</label>
+												<label ng-if="cmp_company_cont_info.state_name != ''"> {{cmp_company_cont_info.state_name}}{{cmp_company_cont_info.state_name != '' && cmp_company_cont_info.country_name != '' ? ',' : ''}}</label>
+												<label ng-if="cmp_company_cont_info.country_name != ''"> {{cmp_company_cont_info.country_name}}</label>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<?php endif; ?>
@@ -543,46 +561,52 @@
 										</a>
 										<?php endif; ?>
 									</div>
-									<div class="dtl-dis">
-
-										<div class="no-info" ng-if="review_data.length < '1'">
-											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-											<span>Lorem ipsum its a dummy text and its user to for all.</span>
-										</div>
-										<div ng-if="review_data.length > '0' && review_count > '0'">
-										<div class="total-rev">
-											<span class="total-rat">4.8</span> 
-											<span class="rating-star">
-												<input id="rating-1" type="number" value="4">
-											</span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
-										</div>
-										</div>
-										<ul class="review-list">
-											<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
-												<div class="review-left" ng-if="!review_list.user_image">
-													<div class="rev-img">
-														<div class="post-img-profile">
-															{{review_list.first_name | limitTo:1}} {{review_list.last_name |  limitTo:1}}
+									<div id="review-loader" class="dtl-dis">
+		                                <div class="text-center">
+		                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+		                                </div>
+		                            </div>
+		                            <div id="review-body" style="display: none;">
+										<div class="dtl-dis">
+											<div class="no-info" ng-if="review_data.length < '1'">
+												<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+												<span>Lorem ipsum its a dummy text and its user to for all.</span>
+											</div>
+											<div ng-if="review_data.length > '0' && review_count > '0'">
+											<div class="total-rev">
+												<span class="total-rat">{{avarage_review}}</span> 
+												<span class="rating-star">
+													<input id="rating-1" type="number" value="{{avarage_review}}">
+												</span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
+											</div>
+											</div>
+											<ul class="review-list">
+												<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
+													<div class="review-left" ng-if="!review_list.user_image">
+														<div class="rev-img">
+															<div class="post-img-profile">
+																{{review_list.first_name | limitTo:1}} {{review_list.last_name |  limitTo:1}}
+															</div>
 														</div>
 													</div>
-												</div>
-												<div class="review-left" ng-if="review_list.user_image">
-													<img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
-												</div>
-												<div class="review-right">
-													<h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
-													<div class="rating-star-cus">
-														<span class="rating-star">
-														<input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
-															</span>
+													<div class="review-left" ng-if="review_list.user_image">
+														<img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
 													</div>
-													<div class="review-dis" ng-if="review_list.review_desc">
-														{{review_list.review_desc}}
+													<div class="review-right">
+														<h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
+														<div class="rating-star-cus">
+															<span class="rating-star">
+															<input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
+																</span>
+														</div>
+														<div class="review-dis" ng-if="review_list.review_desc">
+															{{review_list.review_desc}}
+														</div>
 													</div>
-												</div>
-											</li>
-										</ul>
-										
+												</li>
+											</ul>
+											
+										</div>
 									</div>
 								</div>
 							</div>
@@ -795,50 +819,64 @@
 						<div class="dtl-title">
 							<span>Company Information</span>
 						</div>
+						<form name="cmp_comp_info_form" id="cmp_comp_info_form" ng-validate="cmp_comp_info_validate">
 						<div class="dtl-dis">
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Company Name</label>
-										<input type="text" placeholder="Enter Company Name">
+										<input type="text" placeholder="Enter Company Name" id="comp_name" name="comp_name">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Industry </label>
 										<span class="span-select">
-											<select>
-												<option>Select Field</option>
-												<option>It Field</option>
-												<option>Design</option>
-												<option>Advertizing</option>
+											<?php $getFieldList = $this->data_model->getNewFieldList();?>
+											<select class="form-control" name="company_field" id="company_field" ng-model="company_field" ng-change="other_field_fnc()">
+                                                    <option value="">Select Field</option>
+                                                <?php foreach ($getFieldList as $key => $value) { ?>
+                                                    <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+                                                <?php } ?>
+                                                <option value="0">Other</option>
 											</select>
 										</span>
 									</div>
 									
 								</div>
 							</div>
+							<div id="company_other_field_div" class="row" style="display: none;">
+                                <div class="col-md-6 col-sm-6"></div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                    <label>Other Field</label>
+                                    <input type="text" placeholder="Enter Other Field" id="company_other_field" name="company_other_field" ng-model="company_other_field">
+                                    </div>
+                                </div>
+                            </div>
 							
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
 										<label>Team Size</label>
-										<input type="text" placeholder="Company Phone number">
-									</div>
-									
+										<input type="text" placeholder="Enter Team Size" id="comp_team" name="comp_team" ng-model="comp_team" numbers-only maxlength="5">
+									</div>									
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
-										<label>Timezone</label>
-										<span class="span-select">
-											<select class="form-control">
-												<option>Timezone</option>
-												<option>januari</option>
-												<option>Fabruari</option>
-												<option>March</option>
-												<option>April</option>
-											</select>
-										</span>
+										<label>Skills you hire for</label>
+										<!-- <input type="text" placeholder="Skills you hire for" id="comp_skills_offer" id="comp_skills_offer"> -->
+										<tags-input id="comp_skills_offer" ng-model="comp_skills_offer" display-property="name" placeholder="Skills you hire for" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" ng-keyup="comp_skills_fnc()">
+                                            <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                        </tags-input>                        
+                                        <script type="text/ng-template" id="title-template">
+                                            <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                        </script>
+                                        <script type="text/ng-template" id="title-autocomplete-template">
+                                            <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                        </script>
+                                        <label id="comp_skills_offer_err" for="comp_skills_offer" class="error" style="display: none;">Please enter skills</label>
+                                </tags-input>
 									</div>
 								</div>
 							</div>
@@ -851,12 +889,14 @@
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
 										<span class="span-select">
-											<select class="form-control">
-												<option>Year</option>
-												<option>2014</option>
-												<option>2015</option>
-												<option>2016</option>
-												<option>2017</option>
+											<select class="form-control" id="comp_founded_year" name="comp_founded_year" ng-model="comp_founded_year" ng-change="comp_founded_year_change();">
+												<option value="">Year</option>
+												<?php
+												$y = date("Y");
+												for ($i=$y; $i > $y - 100; $i--) { ?>
+													<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+												<?php
+												} ?>
 											</select>	
 										</span>
 									</div>
@@ -864,31 +904,25 @@
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
 										<span class="span-select">
-											<select class="form-control">
-												<option>Month</option>
-												<option>januari</option>
-												<option>Fabruari</option>
-												<option>March</option>
-												<option>April</option>
+											<select class="form-control" id="comp_founded_month" name="comp_founded_month">
+												<option value="">Select Month</option>
 											</select>	
 										</span>
 									</div>
 								</div>
-								
-									
 							</div>
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Company Overview</label>
-										<textarea row="4" type="text" placeholder="Company Overview"></textarea>
+										<textarea row="4" type="text" placeholder="Company Overview" id="comp_overview" name="comp_overview"></textarea>
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
-								<label>Service you hire for</label>
-								<textarea type="text" placeholder="Service you hire for"></textarea>
-							</div>
+										<label>Service you hire for</label>
+										<textarea type="text" placeholder="Service you hire for" id="comp_service_offer" name="comp_service_offer"></textarea>
+									</div>
 								</div>
 							</div>
 							
@@ -898,12 +932,13 @@
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
 										<span class="span-select">
-											<select>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
+											<select class="form-control" id="comp_exp_year" name="comp_exp_year">
+												<option value="">Select Year</option>
+												<?php												
+												for ($j=1; $j <= 20; $j++) { ?>
+													<option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+												<?php
+												} ?>
 											</select>
 										</span>
 									</div>
@@ -911,31 +946,35 @@
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
 										<span class="span-select">
-											<select>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
+											<select class="form-control" id="comp_exp_month" name="comp_exp_month">
+												<option value="">Select Month</option>
+												<?php												
+												for ($k=1; $k <= 11; $k++) { ?>
+													<option value="<?php echo $k; ?>"><?php echo $k; ?></option>
+												<?php
+												} ?>
 											</select>
 										</span>
 									</div>
 								</div>
-							</div>	
-							<div class="form-group">
-								<label>Skills you hire for</label>
-								<input type="text" placeholder="Skills you hire for">
 							</div>
 							
 							<div class="form-group">
-								<label class="upload-file">
-									Upload Company Logo <input type="file">
-								</label>
+								<div class="upload-file">
+									<span class="fw">Upload Company Logo</span>
+									<input type="file" id="comp_logo" name="comp_logo">
+									<span id="comp_logo_error" class="error" style="display: none;"></span>
+								</div>
 							</div>
 						</div>
 						<div class="dtl-btn">
-								<a href="#" class="save"><span>Save</span></a>
+							<!-- <a href="#" class="save"><span>Save</span></a> -->
+							<a id="save_cmp_comp_info" href="#" ng-click="save_cmp_comp_info()" class="save"><span>Save</span></a>
+							<div id="cmp_comp_info_loader" class="dtl-popup-loader" style="display: none;">
+								<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
 							</div>
+						</div>
+						</form>
 					</div>	
 
 
@@ -951,87 +990,84 @@
 						<div class="dtl-title">
 							<span>Company Contact Information</span>
 						</div>
-						<div class="dtl-dis">
+						<form name="cmp_comp_con_info_form" id="cmp_comp_con_info_form" ng-validate="cmp_comp_con_info_validate">
+							<div class="dtl-dis">
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>Company Email </label>
+											<input type="text" placeholder="Company Email" id="cmp_company_email" name="cmp_company_email" maxlength="255">
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>Company Phone number</label>
+											<input type="text" placeholder="Company Phone number" id="cmp_company_number" name="cmp_company_number" ng-model="cmp_company_number" numbers-only maxlength="15">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>Skype</label>
+											<input type="text" placeholder="Skype" id="cmp_company_skype" name="cmp_company_skype" maxlength="255">
+										</div>
+										
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>Website <span class="link-must">(Must be http:// or https://)</span></label>
+											<input type="text" placeholder="Enter Website URL" id="cmp_company_website" name="cmp_company_website" maxlength="255">
+										</div>
+									</div>
+								</div>
 							
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>Company Email </label>
-										<input type="text" placeholder="Company Email ">
+								<div class="row total-exp">
+									<label class="col-md-12 fw">
+										Company Address
+									</label>
+									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+										<div class="form-group">
+											<span class="span-select">
+												<select id="company_country" name="company_country" ng-model="company_country" ng-change="comp_country_change()">
+	                                                <option value="">Country</option>         
+	                                                <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+	                                            </select>
+											</span>
+										</div>
 									</div>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>Company Phone number</label>
-										<input type="text" placeholder="Company Phone number">
+									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+										<div class="form-group">
+											<span class="span-select">
+												<select id="company_state" name="company_state" ng-model="company_state" ng-change="comp_state_change()" disabled = "disabled">
+	                                                <option value="">State</option>
+	                                                <option data-ng-repeat='state_item in company_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+	                                            </select>
+	                                            <img id="company_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+											</span>
+										</div>
 									</div>
-								</div>
+									<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+										<div class="form-group">
+											<span class="span-select">
+												<select id="company_city" name="company_city" ng-model="company_city" disabled = "disabled">
+	                                                <option value="">City</option>
+	                                                <option data-ng-repeat='city_item in company_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+	                                            </select>
+	                                            <img id="company_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+											</span>
+										</div>
+									</div>
+								</div>						
 							</div>
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>Skype</label>
-										<input type="text" placeholder="Skype">
-									</div>
-									
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>Website URL</label>
-										<input type="text" placeholder="Enter Website URL">
-									</div>
-								</div>
+							<div class="dtl-btn">
+								<!-- <a href="#" class="save"><span>Save</span></a> -->
+								<a id="save_cmp_comp_con_info" href="#" ng-click="save_cmp_comp_con_info()" class="save" style="pointer-events: none;"><span>Save</span></a>
+                                <div id="cmp_comp_con_info_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
 							</div>
-						
-							<div class="row total-exp">
-								<label class="col-md-12 fw">
-									Company Address
-								</label>
-								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-									<div class="form-group">
-										<span class="span-select">
-											<select class="form-control">
-												<option>Country</option>
-												<option>2015</option>
-												<option>2016</option>
-												<option>2017</option>
-												<option>2018</option>
-											</select>
-										</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-									<div class="form-group">
-										<span class="span-select">
-											<select class="form-control">
-												<option>State</option>
-												<option>januari</option>
-												<option>Fabruari</option>
-												<option>March</option>
-												<option>April</option>
-											</select>
-										</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-									<div class="form-group">
-										<span class="span-select">
-											<select class="form-control">
-												<option>City</option>
-												<option>januari</option>
-												<option>Fabruari</option>
-												<option>March</option>
-												<option>April</option>
-											</select>
-										</span>
-									</div>
-								</div>
-							</div>
-						
-						</div>
-						<div class="dtl-btn">
-								<a href="#" class="save"><span>Save</span></a>
-							</div>
+						</form>
 					</div>	
 
 
@@ -1159,6 +1195,9 @@
 		var from_user_id = '<?php echo $fh_login_data['user_id']; ?>';
 		var to_user_id = '<?php echo $freelancerhiredata[0]['user_id']; ?>';
 		var header_all_profile = '<?php echo $header_all_profile; ?>';
+		
+		var free_hire_comp_logo_upload_url = '<?php echo FREE_HIRE_COMP_LOGO_UPLOAD_URL; ?>';
+
 		var app = angular.module("freelanceHireProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
 		$('#main_loader').hide();
 		// $('#main_page_load').show();

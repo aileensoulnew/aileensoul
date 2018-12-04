@@ -971,3 +971,5 @@ $config['job_user_experience_upload_path'] = 'uploads/job_user_experience/';
 $config['job_user_resume_upload_path'] = 'uploads/job_user_resume/';
 
 $config['review_upload_path'] = 'uploads/rating/';
+
+$config['free_hire_comp_logo_upload_path'] = 'uploads/freelancer_hire_comp_logo/';

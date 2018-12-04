@@ -3490,8 +3490,20 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         {
             $user_project_insert = $this->freelancer_hire_model->set_save_review($from_user_id,$to_user_id,$review_star,$review_desc,$fileName);
             $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
+            
             $review_count = $this->freelancer_hire_model->get_review_count($to_user_id);
-            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review']);
+            $review_avarage = $this->freelancer_hire_model->get_review_avarage($to_user_id);
+            
+            $sum_star = 0;
+            $sum_count = 0;
+            foreach ($review_avarage as $key => $value) {
+            	$sum_star = $sum_star + ($value['rating_count'] * $value['review_star']);
+            	$sum_count = $sum_count + $value['rating_count'];
+            }                       
+            $avarage_review = round($sum_star / $sum_count,1);
+            
+            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review'],"avarage_review"=>$avarage_review);
+
         }
         else
         {
@@ -3506,17 +3518,196 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
     	if($to_user_id != '')
         {            
             $review_data = $this->freelancer_hire_model->get_save_review($to_user_id);
-            $review_count = $this->freelancer_hire_model->get_review_count($to_user_id);
-            $review_avarage = $this->freelancer_hire_model->get_review_avarage($to_user_id);
-            print_r($review_avarage);
-            
-            echo $total = array_sum($review_avarage['rating_count']);
-            exit();
-            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review']);
+            if(!empty($review_data))
+            {            	
+	            $review_count = $this->freelancer_hire_model->get_review_count($to_user_id);
+	            $review_avarage = $this->freelancer_hire_model->get_review_avarage($to_user_id);
+	            
+	            $sum_star = 0;
+	            $sum_count = 0;
+	            foreach ($review_avarage as $key => $value) {
+	            	$sum_star = $sum_star + ($value['rating_count'] * $value['review_star']);
+	            	$sum_count = $sum_count + $value['rating_count'];
+	            }                       
+	            $avarage_review = round($sum_star / $sum_count,1);
+	            
+	            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review'],"avarage_review"=>$avarage_review);
+            }
+            else
+            {
+            	$ret_arr = array("success"=>1,"review_data"=>$review_data);
+            }
         }
         else
         {
             $ret_arr = array("success"=>0,"review_data"=>array());
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_cmp_company_cont_info()
+    {
+    	$to_user_id = $this->input->post('to_user_id');
+    	if($to_user_id != '')
+        {            
+            $cmp_company_cont_info = $this->freelancer_hire_model->get_cmp_company_cont_info($to_user_id);
+            $ret_arr = array("success"=>1,"cmp_company_cont_info"=>$cmp_company_cont_info);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0,"cmp_company_cont_info"=>array());
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_cmp_company_info()
+    {
+    	$to_user_id = $this->input->post('to_user_id');
+    	if($to_user_id != '')
+        {            
+            $cmp_company_info = $this->freelancer_hire_model->get_cmp_company_info($to_user_id);
+            $ret_arr = array("success"=>1,"cmp_company_info"=>$cmp_company_info);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0,"cmp_company_cont_info"=>array());
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_cmp_comp_con_info()
+    {
+    	$userid = $this->session->userdata('aileenuser');
+
+    	$cmp_company_email = trim($this->input->post('cmp_company_email'));
+    	$cmp_company_number = trim($this->input->post('cmp_company_number'));    	
+    	$cmp_company_skype = trim($this->input->post('cmp_company_skype'));
+    	$cmp_company_website = trim($this->input->post('cmp_company_website'));    	
+    	$company_country = trim($this->input->post('company_country'));
+    	$company_state = trim($this->input->post('company_state'));
+    	$company_city = trim($this->input->post('company_city'));
+
+    	$data = array(
+			'comp_email' 			=> $cmp_company_email,
+			'comp_number' 			=> $cmp_company_number,
+			'comp_skype' 			=> $cmp_company_skype,
+			'comp_website' 			=> $cmp_company_website,
+			'company_country' 		=> $company_country,
+			'company_state' 		=> $company_state,
+			'company_city' 			=> $company_city,			
+			'modified_date' 		=> date('Y-m-d h:i:s'),
+		);
+		$updatdata = $this->freelancer_hire_model->update_data($data, 'freelancer_hire_reg', 'user_id', $userid);
+		if($updatdata)
+		{
+			$cmp_company_cont_info = $this->freelancer_hire_model->get_cmp_company_cont_info($userid);
+            $ret_arr = array("success"=>1,"cmp_company_cont_info"=>$cmp_company_cont_info);
+		}
+		else
+		{
+			$ret_arr = array("success"=>0);
+		}
+		return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_cmp_comp_info()
+    {
+    	$userid = $this->session->userdata('aileenuser');
+    	$comp_logo_old = $this->input->post('comp_logo_old');
+    	$comp_name = $this->input->post('comp_name');
+        $company_field = $this->input->post('company_field');
+        
+        $comp_skills_offer = json_decode($this->input->post('comp_skills_offer'),TRUE);
+
+        $comp_team = $this->input->post('comp_team');
+        $comp_founded_year = $this->input->post('comp_founded_year');
+        $comp_founded_month = $this->input->post('comp_founded_month');
+        $comp_overview = $this->input->post('comp_overview');
+        $comp_service_offer = $this->input->post('comp_service_offer');
+        $comp_exp_year = $this->input->post('comp_exp_year');
+        $comp_exp_month = $this->input->post('comp_exp_month');
+
+        if($company_field == 0)
+        {
+            $company_other_field = $this->input->post('company_other_field');
+        }
+        else
+        {
+            $company_other_field = "";
+        }
+        
+        $comp_skill_ids = "";
+        foreach ($comp_skills_offer as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+
+                $contition_array = array('skill' => trim($ski), 'type' => '7');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            }
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+
+                $data = array(
+                    'skill' => $ski,
+                    'status' => '1',
+                    'type' => '7',
+                    'user_id' => $userid,
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }           
+
+            $comp_skill_ids .= $skill_id . ',';
+        }
+        $comp_skill_ids = trim($comp_skill_ids, ',');
+
+        $fileName = $comp_logo_old;
+        if(isset($_FILES['comp_logo']['name']) && $_FILES['comp_logo']['name'] != "")
+        {
+        	$free_hire_comp_logo_upload_path = $this->config->item('free_hire_comp_logo_upload_path');
+
+            if ($comp_logo_old != '') {
+        		$comp_logo_old = $free_hire_comp_logo_upload_path . $comp_logo_old;
+                @unlink($comp_logo_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_hire_comp_logo_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['comp_logo']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('comp_logo')){
+                $main_image = $free_hire_comp_logo_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+
+        if($userid != '')
+        {
+            $cmp_company_info_insert = $this->freelancer_hire_model->set_save_cmp_comp_info($userid,$comp_name, $company_field, $company_other_field, $comp_skill_ids, $comp_team, $comp_founded_year, $comp_founded_month, $comp_overview ,$comp_service_offer ,$comp_exp_year ,$comp_exp_month, $fileName);
+
+            $cmp_company_info = $this->freelancer_hire_model->get_cmp_company_info($userid);
+            $ret_arr = array("success"=>1,"cmp_company_info"=>$cmp_company_info);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }

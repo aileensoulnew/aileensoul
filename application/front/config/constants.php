@@ -386,6 +386,8 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('JOB_USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_experience/');
     define('JOB_USER_RESUME_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_resume/');
 
+    define('FREE_HIRE_COMP_LOGO_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_comp_logo/');
+
     define('REVIEW_UPLOAD_URL', BUCKETLINK . 'uploads/rating/');
 
 } else {
@@ -625,6 +627,8 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('JOB_USER_PATENT_UPLOAD_URL', BASEURL . 'uploads/job_user_patent/');
     define('JOB_USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/job_user_experience/');
     define('JOB_USER_RESUME_UPLOAD_URL', BASEURL . 'uploads/job_user_resume/');
+
+    define('FREE_HIRE_COMP_LOGO_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_comp_logo/');
 
     define('REVIEW_UPLOAD_URL', BASEURL . 'uploads/rating/');
 

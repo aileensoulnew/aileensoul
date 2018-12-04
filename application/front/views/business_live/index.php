@@ -263,6 +263,14 @@
             var q = '';
             var l = '';
             var app = angular.module('', ['ui.bootstrap']);
+
+            $(window).on("load",function(){
+                $(".custom-scroll").mCustomScrollbar({
+                    autoHideScrollbar:true,
+                    theme:"minimal"
+                });
+            });
+            
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
