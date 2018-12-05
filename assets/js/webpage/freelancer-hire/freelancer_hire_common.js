@@ -132,7 +132,7 @@ $('#upload-one').on('change', function() {
     }
     reader.readAsDataURL(this.files[0]);
 });
-$(document).ready(function() {
+// $(document).ready(function() {
     $("#userimage").validate({
         rules: {
             profilepic: {
@@ -182,7 +182,7 @@ $(document).ready(function() {
         });
         //    });
     }
-});
+// });
 //CODE FOR PROFILE PIC UPLOAD WITH CROP END
 //CODE FOR UPLOAD PROFILE PIC START
 function updateprofilepopup(id) {

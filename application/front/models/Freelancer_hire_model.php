@@ -424,4 +424,35 @@ class Freelancer_hire_model extends CI_Model {
             $this->db->update('freelancer_hire_reg', $data);
             return true;
     }
+
+    public function get_individual_company_info($to_user_id)
+    {
+        $this->db->select("fh.comp_name, fh.company_field, it.industry_name as company_field_txt, fh.company_other_field, fh.comp_overview, fh.country, fh.state, fh.city, cr.country_name, st.state_name, ct.city_name")->from('freelancer_hire_reg fh');
+        $this->db->join('countries cr', 'cr.country_id = fh.country', 'left');
+        $this->db->join('states st', 'st.state_id = fh.state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fh.city', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = fh.company_field', 'left');
+        $this->db->where('fh.user_id', $to_user_id);
+        $this->db->where('fh.status', '1');
+        $this->db->where('fh.is_delete', '0');
+        $query = $this->db->get();
+        $row_array = $query->row_array();
+        return $row_array;
+    }
+
+    public function get_individual_basic_info($to_user_id)
+    {
+        $this->db->select("fh.fullname as first_name,fh.username as last_name,fh.email, fh.phone, fh.skyupid, fh.current_position, jt.name as current_position_txt, fh.individual_skills, fh.individual_industry, it.industry_name as individual_industry_txt, fh.individual_other_industry, fh.professional_info,IF(fh.individual_skills != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as individual_skills_txt")->from('freelancer_hire_reg fh,skill s');
+        $this->db->join('job_title jt', 'jt.title_id = fh.current_position', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = fh.individual_industry', 'left');
+        $sql = "IF(fh.individual_skills != '', FIND_IN_SET(s.skill_id, fh.individual_skills) != '0', '1=1')";
+        $this->db->where($sql);
+        $this->db->where('fh.user_id', $to_user_id);
+        $this->db->where('fh.status', '1');
+        $this->db->where('fh.is_delete', '0');
+        $this->db->group_by('fh.individual_skills,fh.reg_id');        
+        $query = $this->db->get();
+        $row_array = $query->row_array();
+        return $row_array;
+    }
 }

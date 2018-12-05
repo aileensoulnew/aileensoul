@@ -283,7 +283,7 @@ class Freelancer extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $freelancerpost_deactive = $this->data['freelancerpost_deactive'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
         if ($freelancerpost_deactive) {
-            redirect('freelance-work');
+            redirect('freelance-jobs');
         }
         //IF USER DEACTIVATE PROFILE THEN REDIRECT TO freelancer/freelancer_post/freelancer_post_basic_information END  
     }
@@ -1276,7 +1276,7 @@ class Freelancer extends MY_Controller {
                 
             }
         } else {
-            redirect('freelance-work');
+            redirect('freelance-jobs');
         }
     }
 

@@ -203,29 +203,7 @@
 					<div class="job-menu-profile mob-block">
 						<a title="<?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?>" href="javascript:void(0);">
 							<h3> <?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?></h3>
-						</a>
-						<div class="profile-text">
-							<?php
-							if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) {
-								if ($designation == '') {
-									?>
-									<a title="<?php echo $this->lang->line("designation"); ?>" id="designation" href="javascript:void(0);" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-								<?php } else { ?> 
-									<a id="designation" href="javascript:void(0);" class="designation" title="<?php echo ucwords($designation); ?>"><?php echo ucwords($designation); ?></a>
-									<?php
-								}
-							} else {
-								if ($designation == '') {
-									?>
-									<?php echo $this->lang->line("designation"); ?>
-								<?php } else {
-									?>
-									<a id="designation" style="cursor: default;" class="designation" title="<?php echo ucwords($designation); ?>"><?php echo ucwords($designation); ?></a>
-									<?php
-								}
-							}
-							?>
-						</div>
+						</a>						
 					</div>
 					
 					<div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
@@ -321,34 +299,10 @@
 				</div>
 				<div>          
 					<div class="job-menu-profile mob-none job_edit_menu new-fw-name">
-							<a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
-								<h3> <?php echo ucwords($fullname); ?></h3>
-							</a>
-							<div class="profile-text">
-								<?php
-								if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) {
-									if ($designation == '') {
-										?>
-										<a title="<?php echo $this->lang->line("designation"); ?>" id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-									<?php } else { ?> 
-										<a id="designation" class="designation" title="<?php echo ucwords($designation); ?>"><?php echo ucwords($designation); ?></a>
-										<?php
-									}
-								} else {
-									if ($designation == '') {
-										?>
-										<?php echo $this->lang->line("designation"); ?>
-									<?php } else {
-										?>
-										<a style="cursor: default;"  title=" <?php echo ucwords($designation); ?>">
-											<?php echo ucwords($designation); ?> </a>
-											<?php
-										}
-									}
-									?>
-								</div>
-							
-							</div>
+						<a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
+							<h3> <?php echo ucwords($fullname); ?></h3>
+						</a>
+					</div>
 							
 					<div class="cus-inner-middle mob-clear mobp0">
 						<div class="tab-add-991">
@@ -362,40 +316,56 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
 									<span>Basic Information</span>
 									<?php if($fh_userid == $login_userid): ?>
-									<a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right" ng-click="edit_individual_basic_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									<?php endif; ?>
 								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list list-ul-cus">
-										<li>
-											<span>Email</span>
-											<label>harshad2406patoliya@gmail.com</label>
-										</li>
-										<li>
-											<span>Phone Number</span>
-											<label>+91 951005589</label>
-										</li>
-										<li>
-											<span>Skype</span>
-											<label>harshad2406</label>
-										</li>
-										<li>
-											<span>Current Position</span>
-											<label>Sr.Multimedia Designer</label>
-										</li>
-										<li>
-											<span>Skills Hired For</span>
-											<label>Lorem ipsum</label>
-										</li>
-										<li>
-											<span>Industry Hired For</span>
-											<label>Lorem ipsum</label>
-										</li>
-										<li>
-											<span>Professional Information about you</span>
-											<label>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. <span class="collapse-text-toggle">Read More</span></label>
-										</li>
-									</ul>
+								<div id="individual-basic-info-loader" class="dtl-dis">
+	                                <div class="text-center">
+	                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+	                                </div>
+	                            </div>
+	                            <div id="individual-basic-info-body" style="display: none;">
+	                            	<div class="dtl-dis" ng-if="!individual_basic_info">
+										<div class="no-info">
+											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+											<span>Lorem ipsum its a dummy text and its user to for all.</span>
+										</div>
+									</div>
+									<div class="dtl-dis" ng-if="individual_basic_info">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="individual_basic_info.email">
+												<span>Email</span>
+												<label>{{individual_basic_info.email}}</label>
+											</li>
+											<li ng-if="individual_basic_info.phone">
+												<span>Phone Number</span>
+												<label>{{individual_basic_info.phone}}</label>
+											</li>
+											<li ng-if="individual_basic_info.skyupid">
+												<span>Skype</span>
+												<label>{{individual_basic_info.skyupid}}</label>
+											</li>
+											<li ng-if="individual_basic_info.current_position_txt">
+												<span>Current Position</span>
+												<label>{{individual_basic_info.current_position_txt}}</label>
+											</li>
+											<li ng-if="individual_basic_info.individual_skills">
+												<span>Skills Hired For</span>
+												<ul class="skill-list">
+													<li ng-repeat="skill in individual_basic_info.individual_skills_txt.split(',')">{{skill}}</li>
+												</ul>
+											</li>
+											<li ng-if="individual_basic_info.individual_industry_txt !='' || individual_basic_info.individual_other_industry !=''">
+												<span>Industry Hired For</span>
+												<label ng-if="individual_basic_info.individual_industry != '0'">{{individual_basic_info.individual_industry_txt}}</label>
+												<label ng-if="individual_basic_info.individual_industry == '0'">{{individual_basic_info.individual_other_industry}}</label>
+											</li>
+											<li ng-if="individual_basic_info.professional_info">
+												<span>Professional Information about you</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="200" dd-text-collapse-text="{{individual_basic_info.professional_info}}" dd-text-collapse-cond="true">{{individual_basic_info.professional_info}}</label>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>			
 						
@@ -405,28 +375,44 @@
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-details.png?ver=' . time()) ?>">
 									<span>Company Information</span>
 									<?php if($fh_userid == $login_userid): ?>
-									<a href="#" data-target="#emp-company-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="#" data-target="#emp-company-info" data-toggle="modal" class="pull-right" ng-click="edit_individual_comp_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									<?php endif; ?>
 								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list list-ul-cus">
-										<li>
-											<span>Company Name</span>
-											<label>Verv system</label>
-										</li>
-										<li>
-											<span>Company Industry</span>
-											<label>IT Field</label>
-										</li>
-										<li>
-											<span>Company Profile</span>
-											<label>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum... <span class="collapse-text-toggle">Read More</span></label>
-										</li>
-										<li>
-											<span>Location</span>
-											<label>Ahmedabad, Gujrat , India</label>
-										</li>
-									</ul>
+								<div id="individual-comp-info-loader" class="dtl-dis">
+	                                <div class="text-center">
+	                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+	                                </div>
+	                            </div>
+	                            <div id="individual-comp-info-body" style="display: none;">
+	                            	<div class="dtl-dis" ng-if="!individual_company_info">
+										<div class="no-info">
+											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+											<span>Lorem ipsum its a dummy text and its user to for all.</span>
+										</div>
+									</div>
+									<div class="dtl-dis" ng-if="individual_company_info">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="individual_company_info.comp_name">
+												<span>Company Name</span>
+												<label>{{individual_company_info.comp_name}}</label>
+											</li>
+											<li ng-if="individual_company_info.company_field_txt || individual_company_info.company_other_field">
+												<span>Company Industry</span>
+												<label ng-if="individual_company_info.company_field > '0'">{{individual_company_info.company_field_txt}}</label>
+												<label ng-if="individual_company_info.company_field == '0'">{{individual_company_info.company_other_field}}</label>
+											</li>
+											<li ng-if="individual_company_info.comp_name">
+												<span>Company Profile</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="200" dd-text-collapse-text="{{individual_company_info.comp_overview}}" dd-text-collapse-cond="true">{{individual_company_info.comp_overview}}</label>
+											</li>
+											<li>
+												<span>Location</span>
+												<label ng-if="individual_company_info.city_name != ''">{{individual_company_info.city_name}}{{individual_company_info.city_name != '' && individual_company_info.state_name != '' ? ',' : ''}}</label>
+												<label ng-if="individual_company_info.state_name != ''"> {{individual_company_info.state_name}}{{individual_company_info.state_name != '' && individual_company_info.country_name != '' ? ',' : ''}}</label>
+												<label ng-if="individual_company_info.country_name != ''"> {{individual_company_info.country_name}}</label>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<?php
@@ -555,7 +541,7 @@
 								<div class="dtl-box">
 									<div class="dtl-title">
 										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
-										<?php if($login_userid != '' && $fh_userid != $login_userid): ?>
+										<?php if(isset($fh_login_data) && !empty($fh_login_data) && $login_userid != '' && $fh_userid != $login_userid): ?>
 										<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()); ?>"> 
 											<span>Write a review</span>
 										</a>
@@ -616,18 +602,60 @@
 							<?php $this->load->view('banner_add'); ?>
 						</div>
 					</div>
-					<div class="right-add">
+					<div class="right-add add-detail">
+						<?php if($fh_userid == $login_userid): ?>
 						<div class="dtl-box">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>">
 								<span>Edit Profile</span>
 							</div>
 							<div class="dtl-dis dtl-edit-p">
-								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+								<!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+								<div class="dtl-edit-top"></div>
+		                        <div class="profile-status">
+		                            <ul>
+		                                <li><span class=""><img ng-if="progress_status.user_image_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+
+		                                <li class="pl20"><span class=""><img ng-if="progress_status.profile_background_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+		                                <?php if($is_copm_indu == 1){  ?>
+
+		                                	<li class="fw"><span class=""><img ng-if="progress_status.user_fname_status == '1' && progress_status.user_lname_status == '1' && progress_status.user_email_status == '1' && progress_status.user_phone_status == '1' && progress_status.user_skyupid_status == '1' && progress_status.user_current_position_status == '1' && progress_status.user_individual_skills_status == '1' && progress_status.user_individual_industry_status == '1' && progress_status.user_professional_info_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic Information</li>
+		                                
+		                                	<li class="fw"><span class=""><img ng-if="progress_status.user_comp_name_status == '1' && progress_status.user_company_field_status == '1' && progress_status.user_comp_overview_status == '1' && progress_status.user_country_status == '1' && progress_status.user_state_status == '1' && progress_status.user_city_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Company Details</li>
+
+		                                <?php } ?>
+		                                <?php if($is_copm_indu == 2){  ?>
+
+		                                	<li class="fw"><span class=""><img ng-if="progress_status.user_comp_name_status == '1' && progress_status.user_company_field_status == '1' && progress_status.user_comp_team_status == '1' && progress_status.user_comp_founded_year_status == '1' && progress_status.user_comp_founded_month_status == '1' && progress_status.user_comp_overview_status == '1' && progress_status.user_comp_service_offer_status == '1' && progress_status.user_comp_exp_year_status == '1' && progress_status.user_comp_exp_month_status == '1' && progress_status.user_comp_skills_offer_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic Information</li>
+		                                
+		                                	<li class="fw"><span class=""><img ng-if="progress_status.user_comp_email_status == '1' && progress_status.user_comp_number_status == '1' && progress_status.user_company_country_status == '1' && progress_status.user_company_state_status == '1' && progress_status.user_company_city_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Company Details</li>
+		                                	
+		                                <?php } ?>
+		                            </ul>
+		                        </div>
+		                        <div class="dtl-edit-bottom"></div>
+		                        <div class="p20">
+		                            <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+		                            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+		                                <div class="count_main_progress">
+		                                    <div class="circles">
+		                                        <div class="second circle-1">
+		                                            <div>
+		                                                <strong></strong>
+		                                                <span id="progress-txt"></span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
 							</div>
 						</div>
-						<div class="dtl-box p10 dtl-adv cus-add-block">
-							<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+						<?php endif; ?>
+						<div class="right-add-box"> 
+							<div class="dtl-box p10 dtl-adv cus-add-block" style="margin: 0">
+								<!-- <img src="<?php //echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>"> -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -645,18 +673,19 @@
 						<div class="dtl-title">
 							<span>Basic Information</span>
 						</div>
+						<form name="individual_basic_info_form" id="individual_basic_info_form" ng-validate="individual_basic_info_validate">
 						<div class="dtl-dis">
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>First Name</label>
-										<input type="text" placeholder="First Name">
+										<input type="text" placeholder="First Name" id="individual_first_name" name="individual_first_name" maxlength="255">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>Last Name</label>
-										<input type="text" placeholder="Last Name">
+										<input type="text" placeholder="Last Name" id="individual_last_name" name="individual_last_name" maxlength="255">
 									</div>
 								</div>
 							</div>
@@ -664,13 +693,13 @@
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>Email </label>
-										<input type="text" placeholder="Email">
+										<input type="text" placeholder="Email" id="individual_email" name="individual_email" maxlength="255">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>Phone Number</label>
-										<input type="text" placeholder="Phone Number">
+										<input type="text" placeholder="Phone Number" id="individual_phone" name="individual_phone" ng-model="individual_phone" numbers-only  maxlength="15">
 									</div>
 								</div>
 							</div>
@@ -678,41 +707,64 @@
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>Skype </label>
-										<input type="text" placeholder="Skype">
+										<input type="text" placeholder="Skype" id="individual_skype" name="individual_skype" maxlength="255">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
 										<label>Current Position </label>
-										<input type="text" placeholder="Current Position">
+										<input type="text" class="form-control" id="individual_position" name="individual_position" ng-model="individual_position" ng-keyup="current_position_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" placeholder="Current Position" maxlength="255">
 									</div>
 								</div>
 								
 							</div>
 							<div class="form-group">
 								<label>Skills Hired For </label>
-								<input type="text" placeholder="Skills Hired For">
+								<!-- <input type="text" placeholder="Skills Hired For"> -->
+
+                                <tags-input id="individual_skills" ng-model="individual_skills" display-property="name" placeholder="Skills Hired For" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" ng-keyup="individual_skills_fnc()">
+		                            <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+		                        </tags-input>                        
+		                        <script type="text/ng-template" id="title-template">
+		                            <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+		                        </script>
+		                        <script type="text/ng-template" id="title-autocomplete-template">
+		                            <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+		                        </script>
+
+                                <label id="individual_skills_err" for="individual_skills" class="error" style="display: none;">Please enter skills</label>
 							</div>
 							<div class="form-group">
 								<label>Industry Hired For </label>
 								<span class="span-select">
-									<select>
-										<option>Country</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select>
+									<?php $getFieldList = $this->data_model->getNewFieldList();?>
+										<select class="form-control" name="individual_industry" id="individual_industry" ng-model="individual_industry" ng-change="other_individual_industry()">
+                                            <option value="">Select Company Industry</option>
+	                                        <?php foreach ($getFieldList as $key => $value) { ?>
+	                                            <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+	                                        <?php } ?>
+	                                        <option value="0">Other</option>
+                                       	</select>
 								</span>
 							</div>
+							<div id="individual_other_field_div" class="form-group" style="display: none;">
+                                <label>Other Field</label>
+                                <input type="text" placeholder="Enter Other Field" id="individual_other_industry" name="individual_other_industry" maxlength="255">
+                            </div>
 							<div class="form-group">
 								<label>Professional Information about you </label>
-								<textarea type="text" placeholder="Professional Information about you"></textarea>
+								<textarea type="text" placeholder="Professional Information about you" id="individual_prof_info" name="individual_prof_info" ng-model="individual_prof_info" maxlength="700"></textarea>
+								<span class="pull-right">{{700 - individual_prof_info.length}}</span>
 							</div>
 							
 						</div>
 						<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
+							<a id="save_individual_basic_info" href="#" ng-click="save_individual_basic_info()" class="save"><span>Save</span></a>
+							<div id="individual_basic_info_loader" class="dtl-popup-loader" style="display: none;">
+								<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+							</div>
 						</div>
+						</form>
 					</div>	
 
 
@@ -729,69 +781,76 @@
 						<div class="dtl-title">
 							<span>Company Information</span>
 						</div>
+						<form name="individual_comp_info_form" id="individual_comp_info_form" ng-validate="individual_comp_info_validate">
 						<div class="dtl-dis">
-							
-							
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Company Name</label>
-										<input type="text" placeholder="Company Name">
+										<input type="text" placeholder="Company Name" id="individual_comp_name" name="individual_comp_name" maxlength="255">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Company Industry</label>
 										<span class="span-select">
-											<select>
-												<option>Industry </option>
-												<option>Industry</option>
-												<option>Industry</option>
-												<option>Industry</option>
-											</select>
+											<?php $getFieldList = $this->data_model->getNewFieldList();?>
+											<select class="form-control" name="individual_comp_industry" id="individual_comp_industry" ng-model="individual_comp_industry" ng-change="other_individual_comp_industry()">
+                                                <option value="">Select Company Industry</option>
+                                            <?php foreach ($getFieldList as $key => $value) { ?>
+                                                <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+                                            <?php } ?>
+                                            <option value="0">Other</option>
+										</select>
 										</span>
 									</div>
 								</div>
 							</div>
+							<div id="individual_other_field_div" class="row" style="display: none;">
+                                <div class="col-md-6 col-sm-6"></div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                    <label>Other Field</label>
+                                    <input type="text" placeholder="Enter Other Field" id="individual_other_comp_industry" name="individual_other_comp_industry" maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
 							<div class="form-group">
 								<label>Company Profile </label>
-								<textarea type="text" placeholder="Company Profile"></textarea>
+								<textarea type="text" placeholder="Company Profile" id="individual_comp_overview" name="individual_comp_overview" ng-model="individual_comp_overview" maxlength="700"></textarea>
+								<span class="pull-right">{{700 - individual_comp_overview.length}}</span>
 							</div>
 							<div class="row">
 								<label class="col-md-12 fw"> Company Address</label>
 								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 									<div class="form-group">
 										<span class="span-select">
-											<select>
-												<option>Country</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-											</select>
+											<select id="individual_country" name="individual_country" ng-model="individual_country" ng-change="individual_country_change()">
+                                                <option value="">Country</option>         
+                                                <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                            </select>
 										</span>
 									</div>
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 									<div class="form-group">
 										<span class="span-select">
-											<select>
-												<option>State</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-											</select>
+											<select id="individual_state" name="individual_state" ng-model="individual_state" ng-change="individual_state_change()" disabled = "disabled">
+                                                <option value="">State</option>
+                                                <option data-ng-repeat='state_item in individual_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                            </select>
+                                            <img id="individual_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
 										</span>
 									</div>
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 									<div class="form-group">
 										<span class="span-select">
-											<select>
-												<option>City </option>
-												<option>2015</option>
-												<option>2016</option>
-												<option>2017</option>
-											</select>
+											<select id="individual_city" name="individual_city" ng-model="individual_city" disabled = "disabled">
+                                                <option value="">City</option>
+                                                <option data-ng-repeat='city_item in individual_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                            </select>
+                                            <img id="individual_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
 										</span>
 									</div>
 								</div>
@@ -799,12 +858,14 @@
 							
 						</div>
 						<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
+							<a id="save_individual_comp_info" href="#" ng-click="save_individual_comp_info()" class="save"><span>Save</span></a>
+							<div id="individual_comp_info_loader" class="dtl-popup-loader" style="display: none;">
+								<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+							</div>
 						</div>
-					</div>	
-
-
-	            </div>
+						</form>
+					</div>
+				</div>
 	        </div>
 	    </div>
 		<?php endif; ?>
@@ -825,7 +886,7 @@
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Company Name</label>
-										<input type="text" placeholder="Enter Company Name" id="comp_name" name="comp_name">
+										<input type="text" placeholder="Enter Company Name" id="comp_name" name="comp_name" maxlength="255">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6">
@@ -850,7 +911,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                     <label>Other Field</label>
-                                    <input type="text" placeholder="Enter Other Field" id="company_other_field" name="company_other_field" ng-model="company_other_field">
+                                    <input type="text" placeholder="Enter Other Field" id="company_other_field" name="company_other_field" ng-model="company_other_field" maxlength="255">
                                     </div>
                                 </div>
                             </div>
@@ -879,8 +940,7 @@
                                 </tags-input>
 									</div>
 								</div>
-							</div>
-							
+							</div>						
 							
 							<div class="row total-exp">
 								<label class="col-md-12 fw">
@@ -915,13 +975,15 @@
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Company Overview</label>
-										<textarea row="4" type="text" placeholder="Company Overview" id="comp_overview" name="comp_overview"></textarea>
+										<textarea row="4" type="text" placeholder="Company Overview" id="comp_overview" name="comp_overview" ng-model="comp_overview" maxlength="700"></textarea>
+										<span class="pull-right">{{700 - comp_overview.length}}</span>                    
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>Service you hire for</label>
-										<textarea type="text" placeholder="Service you hire for" id="comp_service_offer" name="comp_service_offer"></textarea>
+										<textarea type="text" placeholder="Service you hire for" id="comp_service_offer" name="comp_service_offer" ng-model="comp_service_offer" maxlength="700"></textarea>
+										<span class="pull-right">{{700 - comp_service_offer.length}}</span>                    
 									</div>
 								</div>
 							</div>
@@ -1076,7 +1138,7 @@
 	    </div>
 	    <?php endif; ?>
 		
-		<?php if($login_userid != '' && $fh_userid != $login_userid): ?>
+		<?php if(isset($fh_login_data) && !empty($fh_login_data) && $login_userid != '' && $fh_userid != $login_userid): ?>
 		<!-- Reviews  -->
 		<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1107,7 +1169,8 @@
 								</div>
 								<div class="form-group">
 									<label>Description</label>
-									<textarea type="text" placeholder="Description" id="review_desc" name="review_desc"></textarea>
+									<textarea type="text" placeholder="Description" id="review_desc" name="review_desc" maxlength="700" ng-model="review_desc"></textarea>
+									<span class="pull-right">{{700 - review_desc.length}}</span>
 								</div>
 								<div class="form-group">
 									<div class="upload-file">
@@ -1177,6 +1240,7 @@
 	<script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
 	<script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 	<script src="<?php echo base_url('assets/js/masonry.pkgd.min.js?ver=' . time()); ?>"></script>
+	<script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -1215,5 +1279,20 @@
 <?php } */?>
 	<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()) ?>"></script>
 	<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>	
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $('.dtl-edit-bottom').hover(function () {
+                $('.profile-status').addClass('hover-bottom');
+            }, function () {
+                $('.profile-status').removeClass('hover-bottom');
+            });
+            
+            $('.dtl-edit-top').hover(function () {
+                $('.profile-status').addClass('hover-top');
+            }, function () {
+                $('.profile-status').removeClass('hover-top');
+            });
+        });
+    </script>	
 </body>
 </html>

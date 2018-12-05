@@ -16,3 +16,14 @@
 .rev-img .post-img-profile{
 	border-radius: 100%;
 }
+.blog-page .comment-box .post-head .post-img{
+	background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+.blog-page .all-comment-result{
+	width: 100%
+}

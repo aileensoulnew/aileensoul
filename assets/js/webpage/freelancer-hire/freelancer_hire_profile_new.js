@@ -97,6 +97,15 @@ app.filter('wordFirstCase', function () {
 app.controller('freelanceHireProfileController', function ($scope, $http,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.all_months = all_months;
+
+    function load_add_detail()
+    {
+        setTimeout(function(){
+            var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
+            $compile($el)($scope);
+        },1000);        
+    }
+
     var fh_formdata = new FormData();
     $(document).on('change','#review_file', function(e){
         $("#review_file_error").hide();
@@ -212,61 +221,8 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
                 },1000);
             }
         });
-    };    
-
-    $scope.get_cmp_company_cont_info = function(){
-        $http({
-            method: 'POST',
-            url: base_url + 'freelancer_hire_live/get_cmp_company_cont_info',            
-            data: 'to_user_id=' + to_user_id,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
-        .then(function (result) {
-            $('body').removeClass("body-loader");
-            success = result.data.success;
-            if(success == 1)
-            {
-                $scope.cmp_company_cont_info = result.data.cmp_company_cont_info;
-                $("#cmp-comp-cont-info-loader").hide();
-                $("#cmp-comp-cont-info-body").show();
-            }
-        });
     };
 
-    $scope.get_cmp_company_info = function(){
-        $http({
-            method: 'POST',
-            url: base_url + 'freelancer_hire_live/get_cmp_company_info',            
-            data: 'to_user_id=' + to_user_id,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
-        .then(function (result) {
-            $('body').removeClass("body-loader");
-            success = result.data.success;
-            if(success == 1)
-            {
-                $scope.cmp_company_info = result.data.cmp_company_info;
-                $("#cmp-comp-info-loader").hide();
-                $("#cmp-comp-info-body").show();
-            }
-        });
-    };
-
-    $scope.get_review();
-    $scope.get_cmp_company_cont_info();
-    $scope.get_cmp_company_info();
-
-    $scope.other_field_fnc = function()
-    {
-        if($scope.company_field == 0 && $scope.company_field != "")
-        {
-            $("#company_other_field_div").show();
-        }
-        else
-        {
-            $("#company_other_field_div").hide();
-        }
-    };
 
     $scope.get_country = function () {
         $http({
@@ -277,8 +233,8 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
             $scope.country_list = data.data;
         });
     };
-
     $scope.get_country();
+    //Company Start
     $scope.comp_country_change = function() {
         $("#company_state").attr("disabled","disabled");
         $("#company_state_loader").show();
@@ -313,6 +269,62 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
                 $("#company_city_loader").hide();
                 $scope.company_city_list = data.data;
             });
+        }
+    };
+
+    $scope.get_cmp_company_cont_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'freelancer_hire_live/get_cmp_company_cont_info',            
+            data: 'to_user_id=' + to_user_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.cmp_company_cont_info = result.data.cmp_company_cont_info;
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+                $("#cmp-comp-cont-info-loader").hide();
+                $("#cmp-comp-cont-info-body").show();
+            }
+            load_add_detail();
+        });
+    };
+
+    $scope.get_cmp_company_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'freelancer_hire_live/get_cmp_company_info',            
+            data: 'to_user_id=' + to_user_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.cmp_company_info = result.data.cmp_company_info;
+                $("#cmp-comp-info-loader").hide();
+                $("#cmp-comp-info-body").show();
+            }
+        });
+    };
+
+    $scope.other_field_fnc = function()
+    {
+        if($scope.company_field == 0 && $scope.company_field != "")
+        {
+            $("#company_other_field_div").show();
+        }
+        else
+        {
+            $("#company_other_field_div").hide();
         }
     };
 
@@ -427,11 +439,11 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
                 $("#save_cmp_comp_con_info").removeAttr("style");
                 $("#cmp_comp_con_info_loader").hide();
                 $("#com-contact-info").modal('hide');
-                /*var profile_progress = result.data.profile_progress;
+                var profile_progress = result.data.profile_progress;
                 var count_profile_value = profile_progress.user_process_value;
                 var count_profile = profile_progress.user_process;
                 $scope.progress_status = profile_progress.progress_status;
-                $scope.set_progress(count_profile_value,count_profile);*/
+                $scope.set_progress(count_profile_value,count_profile);
             });
         }
     };
@@ -510,11 +522,13 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
         if($scope.cmp_company_info.comp_overview != "")
         {
             $("#comp_overview").val($scope.cmp_company_info.comp_overview);
+            $scope.comp_overview = $scope.cmp_company_info.comp_overview;
         }
 
         if($scope.cmp_company_info.comp_service_offer != "")
         {
             $("#comp_service_offer").val($scope.cmp_company_info.comp_service_offer);
+            $scope.comp_service_offer = $scope.cmp_company_info.comp_service_offer;
         }
 
         if($scope.cmp_company_info.comp_exp_year > 0)
@@ -670,6 +684,11 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
                     $("#save_cmp_comp_info").removeAttr("style");                    
                     $scope.cmp_company_info = result.data.cmp_company_info;
                     $("#com-info").modal("hide");
+                    var profile_progress = result.data.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
                 else if(success == 0)
                 {                    
@@ -678,4 +697,434 @@ app.controller('freelanceHireProfileController', function ($scope, $http,$compil
             });
         }
     };
+    //Company End
+
+    //Indiviaul Start
+    $scope.individual_country_change = function() {
+        $("#individual_state").attr("disabled","disabled");
+        $("#individual_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.individual_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#individual_state").removeAttr("disabled");
+            $("#individual_city").attr("disabled","disabled");
+            $("#individual_state_loader").hide();
+            $scope.individual_state_list = data.data;
+            $scope.individual_city_list = [];
+        });
+    };
+
+    $scope.individual_state_change = function() {
+        if($scope.individual_state != "" && $scope.individual_state != 0 && $scope.individual_state != null)
+        {
+            $("#individual_city").attr("disabled","disabled");
+            $("#individual_city_loader").show();
+            var statedata = $.param({'state_id': $scope.individual_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#individual_city").removeAttr("disabled");
+                $("#individual_city_loader").hide();
+                $scope.individual_city_list = data.data;
+            });
+        }
+    };
+
+    $scope.other_individual_comp_industry = function(){
+        if($scope.individual_comp_industry == 0 && $scope.individual_comp_industry != "")
+        {
+            $("#individual_other_field_div").show();
+        }
+        else
+        {
+            $("#individual_other_field_div").hide();
+        }
+    };
+
+    $scope.get_individual_company_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'freelancer_hire_live/get_individual_company_info',            
+            data: 'to_user_id=' + to_user_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.individual_company_info = result.data.individual_company_info;
+                $("#individual-comp-info-loader").hide();
+                $("#individual-comp-info-body").show();
+            }
+        });
+    };
+
+    $scope.edit_individual_comp_info = function(){
+        $("#individual_comp_name").val($scope.individual_company_info.comp_name);
+        $scope.individual_comp_industry = $scope.individual_company_info.company_field;
+        $("#individual_comp_industry").val($scope.individual_company_info.company_field);
+        if($scope.individual_comp_industry == '0')
+        {
+            $("#individual_other_field_div").show();
+            $("#individual_other_comp_industry").val($scope.individual_company_info.company_other_field)
+        }
+
+        $("#individual_comp_overview").val($scope.individual_company_info.comp_overview);
+        $scope.individual_comp_overview = $scope.individual_company_info.comp_overview;
+
+        $scope.individual_country = $scope.individual_company_info.country;
+        $("#individual_country").val($scope.individual_company_info.country);
+        // $scope.exp_country_change();
+        var counrtydata = $.param({'country_id': $scope.individual_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#individual_state").removeAttr("disabled");
+            $("#individual_city").attr("disabled","disabled");
+            $("#individual_state_loader").hide();
+            $scope.individual_state_list = data.data;
+            $scope.individual_city_list = [];
+            $scope.individual_state = $scope.individual_company_info.state;
+
+            $("#individual_city").attr("disabled","disabled");
+            $("#individual_city_loader").show();
+            var statedata = $.param({'state_id': $scope.individual_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#individual_city").removeAttr("disabled");
+                $("#save_individual_comp_info").removeAttr("style");
+                $("#individual_city_loader").hide();
+                $scope.individual_city_list = data.data;
+                $scope.individual_city = $scope.individual_company_info.city;
+            });        
+        });
+    };
+
+    $scope.individual_comp_info_validate = {
+        rules: {
+            individual_comp_name: {
+                required: true,
+            },
+            individual_comp_industry: {
+                required: true,
+            },
+            individual_other_comp_industry: {
+                required: {
+                    depends: function(element) {
+                        return $("#individual_comp_industry option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            individual_comp_overview: {
+                required: true,
+            },
+            individual_country: {
+                required: true,
+            },
+            individual_state: {
+                required: true,
+            },
+            individual_city: {
+                required: true,
+            },
+        },
+    };
+    $scope.save_individual_comp_info = function(){
+        if ($scope.individual_comp_info_form.validate())
+        {
+            $("#individual_comp_info_loader").show();
+            $("#save_individual_comp_info").attr("style","pointer-events:none;display:none;");
+            var individual_comp_name = $("#individual_comp_name").val();
+            var individual_comp_industry = $("#individual_comp_industry option:selected").val();
+            var individual_other_comp_industry = $("#individual_other_comp_industry").val();
+            var individual_comp_overview = $("#individual_comp_overview").val();
+            var individual_country = $("#individual_country option:selected").val();
+            var individual_state = $("#individual_state option:selected").val();
+            var individual_city = $("#individual_city option:selected").val();
+
+            var updatedata = $.param({
+                "individual_comp_name":individual_comp_name,
+                "individual_comp_industry":individual_comp_industry,
+                "individual_other_comp_industry":individual_other_comp_industry,
+                "individual_comp_overview":individual_comp_overview,
+                "individual_country":individual_country,
+                "individual_state":individual_state,
+                "individual_city":individual_city
+            });
+
+            $http({
+                method: 'POST',
+                url: base_url + 'freelancer_hire_live/save_individual_comp_info',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    $scope.individual_company_info = result.data.individual_company_info;                    
+                }
+                $("#save_individual_comp_info").removeAttr("style");
+                $("#individual_comp_info_loader").hide();
+                $("#emp-company-info").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+
+    $scope.get_individual_basic_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'freelancer_hire_live/get_individual_basic_info',            
+            data: 'to_user_id=' + to_user_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.individual_basic_info = result.data.individual_basic_info;
+                $("#individual-basic-info-loader").hide();
+                $("#individual-basic-info-body").show();
+            }
+        });
+    };
+
+    $scope.current_position_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.individual_position,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.other_individual_industry = function(){
+        if($scope.individual_industry == 0 && $scope.individual_industry != "")
+        {
+            $("#individual_other_field_div").show();
+        }
+        else
+        {
+            $("#individual_other_field_div").hide();
+        }
+    };
+
+    $scope.edit_individual_basic_info = function(){
+        $("#individual_first_name").val($scope.individual_basic_info.first_name);
+        $("#individual_last_name").val($scope.individual_basic_info.last_name);
+        $("#individual_email").val($scope.individual_basic_info.email);
+        $("#individual_phone").val($scope.individual_basic_info.phone);
+        $("#individual_skype").val($scope.individual_basic_info.skyupid);
+        $("#individual_position").val($scope.individual_basic_info.current_position_txt);
+        
+        var individual_skill = "";
+        if($scope.individual_basic_info.individual_skills_txt.trim() != "")
+        {
+            var individual_skill = $scope.individual_basic_info.individual_skills_txt.split(',');
+        }
+        var edit_individual_skill = [];
+        if(individual_skill.length > 0)
+        {                    
+            individual_skill.forEach(function(element,skillIndex) {
+              edit_individual_skill[skillIndex] = {"name":element};
+            });
+        }
+        $scope.individual_skills = edit_individual_skill;
+
+        $("#individual_industry").val($scope.individual_basic_info.individual_industry);
+        $scope.individual_industry = $scope.individual_basic_info.individual_industry;
+        if($scope.individual_industry == 0)
+        {
+            $("#individual_other_field_div").show();
+            $("#individual_other_industry").val($scope.individual_basic_info.individual_other_industry);
+        }
+        $("#individual_prof_info").val($scope.individual_basic_info.professional_info);
+        $scope.individual_prof_info = $scope.individual_basic_info.professional_info;
+    };
+
+    $scope.individual_basic_info_validate = {
+        rules: {
+            individual_first_name: {
+                required: true,
+            },
+            individual_last_name: {
+                required: true,
+            },
+            individual_email: {
+                required: true,                
+                email: true,
+                remote: {
+                    url: base_url + "freelancer_hire_live/check_email",
+                    type: "post",
+                    data: {
+                      email: function() {
+                        return $( "#individual_email" ).val();
+                      }
+                    }
+                },
+            },
+            individual_phone: {
+                required: true,
+            },
+            individual_skype: {
+                required: true,
+            },
+            individual_position: {
+                required: true,
+            },
+            individual_industry: {
+                required: true,
+            },
+            individual_other_industry: {
+                required: {
+                    depends: function(element) {
+                        return $("#individual_industry option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            individual_prof_info: {
+                required: true,
+            },
+        },
+    };
+
+    $scope.validate_individual_skills = function(){
+        if($scope.individual_skills == "" || $scope.individual_skills == undefined)
+        {
+            $("#individual_skills .tags").attr("style","border:1px solid #ff0000;");
+            /*setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);*/
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.individual_skills_fnc = function(){
+        // $("#exp_designation input").removeClass("error");
+        $("#individual_skills .tags").removeAttr("style");        
+    };
+
+    $scope.save_individual_basic_info = function(){
+        var individual_skills_validate = $scope.validate_individual_skills();
+        if ($scope.individual_basic_info_form.validate() && individual_skills_validate)
+        {
+            $("#individual_basic_info_loader").show();
+            $("#save_individual_basic_info").attr("style","pointer-events:none;display:none;");
+
+            var individual_first_name = $("#individual_first_name").val();
+            var individual_last_name = $("#individual_last_name").val();
+            var individual_email = $("#individual_email").val();
+            var individual_phone = $("#individual_phone").val();
+            var individual_skype = $("#individual_skype").val();
+            var individual_position = $("#individual_position").val();
+            var individual_skills = $scope.individual_skills;
+            var individual_industry = $("#individual_industry option:selected").val();
+            var individual_other_industry = $("#individual_other_industry").val();
+            var individual_prof_info = $("#individual_prof_info").val();
+
+            var updatedata = $.param({
+                "individual_first_name":individual_first_name,
+                "individual_last_name":individual_last_name,
+                "individual_email":individual_email,
+                "individual_phone":individual_phone,
+                "individual_skype":individual_skype,
+                "individual_position":individual_position,
+                "individual_skills":individual_skills,
+                "individual_industry":individual_industry,
+                "individual_other_industry":individual_other_industry,
+                "individual_prof_info":individual_prof_info,
+            });
+
+            $http({
+                method: 'POST',
+                url: base_url + 'freelancer_hire_live/save_individual_basic_info',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    $scope.individual_basic_info = result.data.individual_basic_info;
+                    $(".job-menu-profile a h3").html($scope.individual_basic_info.first_name+' '+$scope.individual_basic_info.last_name);
+                }
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+
+                $("#save_individual_basic_info").removeAttr("style");
+                $("#individual_basic_info_loader").hide();
+                $("#job-basic-info").modal('hide');
+                /*var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);*/
+            });
+        }
+    };
+    //Indiviaul End
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                // $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
+
+    $scope.get_review();
+    $scope.get_cmp_company_cont_info();
+    $scope.get_cmp_company_info();
+    $scope.get_individual_company_info();
+    $scope.get_individual_basic_info();
 });
