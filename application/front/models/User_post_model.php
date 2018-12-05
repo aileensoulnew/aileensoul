@@ -19,6 +19,8 @@ class User_post_model extends CI_Model {
             $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
             $condition = '(us.current_study = (select us.current_study from ailee_user_student where user_id=' . $user_id . ') AND us.city = (select us.city from ailee_user_student where user_id=' . $user_id . '))';
             $this->db->where($condition);
+            $this->db->where('ui.user_image != ""');
+            $this->db->where('ui.profile_background != ""');
             $this->db->order_by('us.current_study', 'asc');
           //  $this->db->order_by('us.city', 'asc');
 
@@ -32,6 +34,8 @@ class User_post_model extends CI_Model {
             $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
             $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
             $this->db->where('u.user_id !=', $user_id);
+            $this->db->where('ui.user_image != ""');
+            $this->db->where('ui.profile_background != ""');
             $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
             $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
             $condition = '(up.designation IN (select up.designation from ailee_user_profession where user_id=' . $user_id . ') OR up.city = (select up.city from ailee_user_profession where user_id=' . $user_id . ') OR up.field = (select up.field from ailee_user_profession where user_id=' . $user_id . '))';
