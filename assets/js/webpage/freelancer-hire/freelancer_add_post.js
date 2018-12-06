@@ -267,9 +267,6 @@ $(document).ready(function () {
                 processData:false,
                 dataType: 'json',    
                 success: function(res) {
-                    $("#submit").removeAttr("disabled");
-                    $("#submit").removeAttr("style");
-                    $("#post_loader").hide();                    
                     if(res.success == 1)
                     {
                         window.location = base_url + "hire-freelancer";
@@ -277,6 +274,9 @@ $(document).ready(function () {
                     else
                     {
                         $("#bidmodal .modal-body .mes").html("Sorry!! Your project not posted. Please try again later.");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").removeAttr("style");
+                        $("#post_loader").hide();                    
                     }
                 }
             });

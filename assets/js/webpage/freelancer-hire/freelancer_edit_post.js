@@ -156,7 +156,6 @@ $(document).ready(function () {
             post_name: {
                 required: true,
                 regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
-
             },
             skills: {
                 required: true,
@@ -170,45 +169,139 @@ $(document).ready(function () {
                 regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
             },
             last_date: {
-                required1: true,
+                required1: "Last date of apply is required.",
                 isValid: 'Last date should be grater than and equal to today date'
             },
-
-            country: {
+            add_project_type: {
                 required: true,
             },
-            state: {
+            add_project_duration: {
                 required: true,
+            },
+            add_project_hours: {
+                required: true,
+            },
+            add_project_freelancer_type: {
+                required: true,
+            },
+            add_project_freelancer: {
+                required: true,
+            },
+            add_project_eng_level: {
+                required: true,
+            },
+            add_project_location: {
+                required: true,
+            },
+            rating: {
+                required: true,
+            },            
+            currency:{
+                required: {
+                    depends: function(element) {
+                        return $("input[name='rating']:checked").val() == 0 || $("input[name='rating']:checked").val() == 1 ? true : false;
+                    }
+                },
+            },
+            rate:{
+                required: {
+                    depends: function(element) {                        
+                        return $("input[name='rating']:checked").val() == 0 || $("input[name='rating']:checked").val() == 1 ? true : false;
+                    }
+                },
             }
 
         },
-
         messages: {
-
             post_name: {
                 required: "Project name is required.",
             },
+
             skills: {
-                required: "Skill is required",
+                required: "Skill is required"
             },
+
             fields_req: {
                 required: "Please select field of requirement",
             },
-
             post_desc: {
                 required: "Project description  is required.",
             },
             last_date: {
-                required: "Last date of apply is required.",
+                //required: "Last Date of apply is required.",
             },
-
-            country: {
-                required: "Please select country"
+            add_project_type: {
+                required: "Please select project type",
             },
-            state: {
-                required: "Please select state"
+            add_project_duration: {
+                required: "Please select project duration",
+            },
+            add_project_hours: {
+                required: "Please select hours per week",
+            },
+            add_project_freelancer_type: {
+                required: "Please select freelancer type",
+            },
+            add_project_freelancer: {
+                required: "Please enter number of freelancer",
+            },
+            add_project_eng_level: {
+                required: "Please select english level",
+            },
+            add_project_location: {
+                required: "Please select location",
+            },
+            rating: {
+                required: "Please select work type"
+            },
+            currency:{
+                required: "Please select currency"
+            },
+            rate:{
+                required: "Please enter rate"
             }
-        }
+
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr("name") == "rating") {
+                error.insertAfter("#rating_div");
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function(form) {
+            $("#submit").attr("disabled","disabled");
+            $("#submit").attr("style","pointer-events: none;display:none;");
+            $("#post_loader").show();
+            var form = $('#postinfo')[0];
+            var formData = new FormData(form);
+            formData.append('post_id', post_id);
+            formData.append('add_project_file', $('#add_project_file')[0].files[0]);
+
+            $.ajax({
+                url: base_url + "freelancer_hire/freelancer_edit_post_insert_new",
+                type: "POST",             
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData:false,
+                dataType: 'json',    
+                success: function(res) {
+                    if(res.success == 1)
+                    {
+                        window.location = base_url + "hire-freelancer";
+                    }
+                    else
+                    {
+                        $("#bidmodal .modal-body .mes").html("Sorry!! Your project not posted. Please try again later.");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").removeAttr("style");
+                        $("#post_loader").hide();                    
+                    }
+                }
+            });
+            return false;
+        },
     });
 });
 // FORM FILL UP VALIDATION END

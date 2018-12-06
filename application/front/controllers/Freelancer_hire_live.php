@@ -2138,8 +2138,12 @@ public function freelancer_edit_post($id) {
 	$this->freelancer_hire_check();
 		// code for display page end
 
-	$contition_array = array('post_id' => $id, 'is_delete' => '0');
+	$contition_array = array('post_id' => $id, 'is_delete' => '0','user_id'=>$userid);
 	$userdata = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+	if(empty($userdata))
+	{
+		redirect(base_url("freelance-employer/projects"));
+	}
 
 		//for getting univesity data Start
 	$contition_array = array('is_delete' => '0', 'category_name !=' => "Other");
