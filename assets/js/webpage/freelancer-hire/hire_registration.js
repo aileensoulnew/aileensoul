@@ -73,11 +73,9 @@ $(document).ready(function () {
                     url: base_url + "registration/check_email",
                     type: "post",
                     data: {
-                        email_reg: function () {
-                            // alert("hi");
+                        email: function () {
                             return $("#email_reg").val();
                         },
-
                     },
                 },
             },
@@ -289,7 +287,7 @@ $(document).ready(function () {
                     url: site + "freelancer_hire/check_email",
                     type: "post",
                     data: {
-                        email_reg1: function () {
+                        email: function () {
                             return $("#email_reg1").val();
                         },
 //                        'aileensoulnewfrontcsrf': get_csrf_hash,

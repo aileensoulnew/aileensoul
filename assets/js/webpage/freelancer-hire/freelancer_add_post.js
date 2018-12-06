@@ -25,13 +25,12 @@ function check() {
 // CHECK SEARCH KEYWORD AND LOCATION BLANK END
 //CODE FOR VALIDATION OF SKILL AND OTHER SKILL START
 function imgval() {
-    $("#postinfo .select2-selection").removeClass("keyskill_border_active");
+    /*$("#postinfo .select2-selection").removeClass("keyskill_border_active");
     var skill_main = document.getElementById("skills").value;
     var skill_other = document.getElementById("other_skill").value;
     if (skill_main == '' && skill_other == '') {
         $("#postinfo .select2-selection").addClass("keyskill_border_active");
-    }
-
+    }*/
 }
 //CODE FOR VALIDATION OF SKILL AND OTHER SKILL END
 // FORM FILL UP VALIDATION START
@@ -105,6 +104,31 @@ $.validator.addMethod("regx_num_space", function (value, element, regexpr) {
     // return regexpr.test(value);
 }, "Please add proper Estimated time. Eg: '3 month' or '3 Year' ");
 //VALIDATION FOR ESTIMATE TIME NOT ACCEPT ONLY NUMBER END
+
+$(document).on('change','#add_project_file', function(e){
+    $("#add_project_file_error").hide();
+    if(this.files[0].size > 10485760)
+    {
+        $("#add_project_file_error").html("File size must be less than 10MB.");
+        $("#add_project_file_error").show();
+        $(this).val("");
+        return true;
+    }
+    else
+    {
+        var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+        var ext = $(this).val().split('.');        
+        if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+            // fh_formdata.append('add_project_file', $('#add_project_file')[0].files[0]);
+        }
+        else {
+            $("#add_project_file_error").html("Invalid file selected.");
+            $("#add_project_file_error").show();
+            $(this).val("");
+        }         
+    }
+});
+
 $(document).ready(function () {
     $("#postinfo").validate({
         ignore: '*:not([name])',
@@ -128,23 +152,43 @@ $(document).ready(function () {
                 required1: "Last date of apply is required.",
                 isValid: 'Last date should be grater than and equal to today date'
             },
-//            currency: {
-//                required: true,
-//            },
-//            rate: {
-//                required: true,
-//            },
-            country: {
+            add_project_type: {
                 required: true,
             },
-            state: {
+            add_project_duration: {
                 required: true,
             },
-            est_time: {
-                regx_num_space: /^[0-9][a-zA-Z\s]+$/
+            add_project_hours: {
+                required: true,
+            },
+            add_project_freelancer_type: {
+                required: true,
+            },
+            add_project_freelancer: {
+                required: true,
+            },
+            add_project_eng_level: {
+                required: true,
+            },
+            add_project_location: {
+                required: true,
             },
             rating: {
                 required: true,
+            },            
+            currency:{
+                required: {
+                    depends: function(element) {
+                        return $("input[name='rating']:checked").val() == 0 || $("input[name='rating']:checked").val() == 1 ? true : false;
+                    }
+                },
+            },
+            rate:{
+                required: {
+                    depends: function(element) {                        
+                        return $("input[name='rating']:checked").val() == 0 || $("input[name='rating']:checked").val() == 1 ? true : false;
+                    }
+                },
             }
 
         },
@@ -167,20 +211,35 @@ $(document).ready(function () {
             last_date: {
                 //required: "Last Date of apply is required.",
             },
-//            currency: {
-//                required: "Please select currency type",
-//            },
-//            rate: {
-//                required: "Rate is required",
-//            },
-            country: {
-                required: "Please select country"
+            add_project_type: {
+                required: "Please select project type",
             },
-            state: {
-                required: "Please select state"
+            add_project_duration: {
+                required: "Please select project duration",
+            },
+            add_project_hours: {
+                required: "Please select hours per week",
+            },
+            add_project_freelancer_type: {
+                required: "Please select freelancer type",
+            },
+            add_project_freelancer: {
+                required: "Please enter number of freelancer",
+            },
+            add_project_eng_level: {
+                required: "Please select english level",
+            },
+            add_project_location: {
+                required: "Please select location",
             },
             rating: {
                 required: "Please select work type"
+            },
+            currency:{
+                required: "Please select currency"
+            },
+            rate:{
+                required: "Please enter rate"
             }
 
         },
@@ -191,9 +250,42 @@ $(document).ready(function () {
                 error.insertAfter(element);
             }
         },
+        submitHandler: function(form) {
+            $("#submit").attr("disabled","disabled");
+            $("#submit").attr("style","pointer-events: none;display:none;");
+            $("#post_loader").show();
+            var form = $('#postinfo')[0];
+            var formData = new FormData(form);
+            formData.append('add_project_file', $('#add_project_file')[0].files[0]);
+
+            $.ajax({
+                url: base_url + "freelancer_hire/freelancer_add_post_insert_new",
+                type: "POST",             
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData:false,
+                dataType: 'json',    
+                success: function(res) {
+                    $("#submit").removeAttr("disabled");
+                    $("#submit").removeAttr("style");
+                    $("#post_loader").hide();                    
+                    if(res.success == 1)
+                    {
+                        window.location = base_url + "hire-freelancer";
+                    }
+                    else
+                    {
+                        $("#bidmodal .modal-body .mes").html("Sorry!! Your project not posted. Please try again later.");
+                    }
+                }
+            });
+            return false;
+        },
 
     });
 });
+
 // FORM FILL UP VALIDATION END
 // CODE FOR COUNTRY,STATE, CITY CODE START
 $(document).ready(function () {
@@ -294,9 +386,9 @@ $(function () {
 
         //startDate: today,
     });
-    $(".day").attr('tabindex', 12);
-    $(".month").attr('tabindex', 13);
-    $(".year").attr('tabindex', 14);
+    $(".day").attr('tabindex', 7);
+    $(".month").attr('tabindex', 8);
+    $(".year").attr('tabindex', 9);
 
 });
 //SCRIPT FOR DATEPICKER END 
@@ -418,9 +510,19 @@ $(document).on('change', '.field_other', function (event) {
 });
 
 function remove_validation() {
-
     $("#other_field").removeClass("keyskill_border_active");
     $('#field_error').remove();
+}
 
+function category_other_field(cat_val)
+{
+    if(cat_val.trim() != '' && cat_val == 0)
+    {
+        $("#other_field_div").show();
+    }
+    else
+    {
+        $("#other_field_div").hide();
+    }
 }
 //SCRIPT FOR ADD OTHER FILED END

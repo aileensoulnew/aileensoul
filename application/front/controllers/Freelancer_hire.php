@@ -16,6 +16,7 @@ class Freelancer_hire extends MY_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
+        $this->load->library('upload');
         include ('main_profile_link.php');
         include ('freelancer_hire_include.php');
         include "openfireapi/vendor/autoload.php";
@@ -1991,8 +1992,8 @@ class Freelancer_hire extends MY_Controller {
         $this->form_validation->set_rules('fields_req', 'Field ', 'required');
         $this->form_validation->set_rules('skills', 'Skill', 'required');
         // $this->form_validation->set_rules('latdate', 'Last date ', 'required');
-//        $this->form_validation->set_rules('rate', 'Rate', 'required');
-//        $this->form_validation->set_rules('currency', 'Currency', 'required');
+        // $this->form_validation->set_rules('rate', 'Rate', 'required');
+        // $this->form_validation->set_rules('currency', 'Currency', 'required');
         $this->form_validation->set_rules('rating', 'Work type', 'required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -3198,6 +3199,178 @@ class Freelancer_hire extends MY_Controller {
     public function freelancer_create_search_table()
     {
         $this->freelancer_hire_model->freelancer_create_search_table();
+    }
+
+    public function freelancer_add_post_insert_new()
+    {
+        /*print_r($_POST);
+        print_r($_FILES);
+        exit();*/
+
+        $userid = $this->session->userdata('aileenuser');
+        $skills = $this->input->post('skills');
+        $skills = explode(',', $skills);
+
+        $datereplace = $this->input->post('last_date');
+        $lastdate = str_replace('/', '-', $datereplace);
+
+        $fileName = "";
+        if(isset($_FILES['add_project_file']['name']) && $_FILES['add_project_file']['name'] != "")
+        {
+            $free_hire_post_file_upload_path = $this->config->item('free_hire_post_file_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_hire_post_file_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['add_project_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('add_project_file')){
+                $main_image = $free_hire_post_file_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+
+        //skill code start
+        if (count($skills) > 0) {
+            foreach ($skills as $ski) {
+                if ($ski != " ") {
+                    $contition_array = array('skill' => trim($ski), 'type' => '1');
+                    $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+                    if (count($skilldata) < 0) {
+                        $contition_array = array('skill' => trim($ski), 'type' => '5');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    }
+                    if ($skilldata) {
+                        $skill[] = $skilldata[0]['skill_id'];
+                    } else {
+                        $data = array(
+                            'skill' => trim($ski),
+                            'status' => '1',
+                            'type' => '5',
+                            'user_id' => $userid,
+                        );
+                        $skill[] = $this->common->insert_data_getid($data, 'skill');
+                    }
+                }
+            }
+            $skill = array_unique($skill, SORT_REGULAR);
+            $skills = implode(',', $skill);
+        }
+        //skill code end
+        $fields_req = $this->input->post('fields_req');
+        if($fields_req == 0)
+        {
+            $fields_req_other = $this->input->post('other_field');
+        }
+        else
+        {
+            $fields_req_other = "";
+        }
+        $post_name = trim($this->input->post('post_name'));
+        $data = array(
+            'post_name' => trim($this->input->post('post_name')),
+            'post_description' => trim($this->input->post('post_desc')),
+            'post_field_req' => trim($fields_req),
+            'post_field_req_other' => trim($fields_req_other),
+            'post_skill' => $skills,
+            'post_other_skill' => trim($this->input->post('other_skill')),
+            // 'post_est_time' => trim($this->input->post('est_time')),
+            'post_rate' => trim($this->input->post('rate')),
+            'post_currency' => trim($this->input->post('currency')),
+            'post_rating_type' => trim($this->input->post('rating')),
+            'post_exp_month' => trim($this->input->post('month')),
+            'post_exp_year' => trim($this->input->post('year')),
+            'post_last_date' => $lastdate,
+            'post_slug' => $this->common->clean($post_name),
+            'post_file' => $fileName,
+            'post_type' => trim($this->input->post('add_project_type')),
+            'post_duration' => trim($this->input->post('add_project_duration')),
+            'post_hours' => trim($this->input->post('add_project_hours')),
+            'post_freelancer_type' => trim($this->input->post('add_project_freelancer_type')),
+            'post_freelancer' => trim($this->input->post('add_project_freelancer')),
+            'post_website' => trim($this->input->post('add_project_website')),
+            'post_eng_level' => trim($this->input->post('add_project_eng_level')),
+            'post_location_type ' => trim($this->input->post('add_project_location')),
+            'post_askque' => trim($this->input->post('add_project_askque')),
+            'user_id' => $userid,
+            'created_date' => date('Y-m-d', time()),
+            'status' => '1',
+            'is_delete' => '0'
+        );
+
+        $insert_id = $this->common->insert_data_getid($data, 'freelancer_post');
+        if ($insert_id) {
+            if(trim($data['post_field_req']) != "" && $data['post_field_req'] != 0)
+            {
+                $field_name = $this->db->get_where('category', array('category_id' => $data['post_field_req']))->row()->category_name;
+                $data['category_name'] = trim($field_name);
+            }            
+
+            if($data['post_skill'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$data['post_skill']) as $skk => $skv) {
+                    if($skv != "" && $skv != "26")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $data['post_skill_txt'] = trim($skill_name,",");
+            }
+            
+            if(trim($data['post_currency']) != "")
+            {
+                $currency_name = $this->db->get_where('currency', array('currency_id' => $data['post_currency'], 'status' => '1'))->row()->currency_name;
+
+                $data['currency_name'] = trim($currency_name);
+            }
+
+            $fa_regi = $this->db->get_where('freelancer_hire_reg', array('user_id' => $data['user_id']))->row();
+
+            if(trim($fa_regi->country) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $fa_regi->country, 'status' => '1'))->row()->country_name;
+
+                $data['country_name'] = trim($country_name);
+            }
+
+            if(trim($fa_regi->state) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $fa_regi->state, 'status' => '1'))->row()->state_name;
+
+                $data['state_name'] = trim($state_name);
+            }
+
+            if(trim($fa_regi->city) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $fa_regi->city, 'status' => '1'))->row()->city_name;
+
+                $data['city_name'] = trim($city_name);
+            }
+            $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_search_tmp');
+
+            $ret_arr = array("success"=>1);
+        } else {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
 }

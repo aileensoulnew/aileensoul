@@ -27,3 +27,13 @@
 .blog-page .all-comment-result{
 	width: 100%
 }
+
+.article-post-text h3{
+    font-size: 15px;
+    letter-spacing: 0;
+    font-weight: bold;
+    color: #7b7b7b;
+}
+.article-post-text p{
+    font-size: 13px;
+}

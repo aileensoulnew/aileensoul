@@ -53,7 +53,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             }
         </style>
         <?php
-            foreach ($blogPost as $blog) {
+            /*foreach ($blogPost as $blog) {
         ?>
             <!-- Open Graph data -->
             <meta property="og:title" content="<?php echo $blog['title']; ?>" />
@@ -74,32 +74,19 @@ header("Pragma: no-cache"); // HTTP/1.0
             <meta name="twitter:image" content="http://placekitten.com/250/250">
             <meta name="twitter:domain" content="<?php base_url('blog/' . $blog['blog_slug']) ?>">
         <?php
-            }
+            }*/
         ?>
 
-        <?php if (IS_OUTSIDE_CSS_MINIFY == '0') { ?>
+        
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">       
 
-        <?php } else { ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/blog.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver=' . time()); ?>">
-            
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver=' . time()); ?>">
-
-        <?php } ?>
-
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
+        
             <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
 
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>        
-
-        <?php } ?>
 			<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">

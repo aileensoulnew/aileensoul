@@ -387,6 +387,7 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('JOB_USER_RESUME_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_resume/');
 
     define('FREE_HIRE_COMP_LOGO_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_comp_logo/');
+    define('FREE_HIRE_POST_FILE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_post_file/');
 
     define('REVIEW_UPLOAD_URL', BUCKETLINK . 'uploads/rating/');
 
@@ -629,6 +630,7 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('JOB_USER_RESUME_UPLOAD_URL', BASEURL . 'uploads/job_user_resume/');
 
     define('FREE_HIRE_COMP_LOGO_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_comp_logo/');
+    define('FREE_HIRE_POST_FILE_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_post_file/');
 
     define('REVIEW_UPLOAD_URL', BASEURL . 'uploads/rating/');
 
