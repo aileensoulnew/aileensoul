@@ -126,7 +126,7 @@ class User_post extends MY_Controller {
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_user_id))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
+                if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -185,7 +185,7 @@ class User_post extends MY_Controller {
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_user_id))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
+                if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -321,7 +321,7 @@ class User_post extends MY_Controller {
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
 
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
+                        if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                         }
@@ -485,7 +485,7 @@ class User_post extends MY_Controller {
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
 
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
+                        if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                         }
@@ -804,7 +804,7 @@ class User_post extends MY_Controller {
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
 
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
+                        if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                         }
