@@ -1329,7 +1329,8 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			} else {
 				$text = '';
 			}
-			$city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
+
+			$city = $this->db->select("IF(is_indivdual_company = '1',city,company_city) as city")->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
 			$cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
 
 			if ($cityname != '') {
@@ -1356,7 +1357,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			<p class="pb5">
 			<span class="location">';
 			$return_html .= '<span><img alt="location" class="pr5" src="' . base_url('assets/images/location.png') . '">';
-			$country = $this->db->select('country')->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country;
+			$country = $this->db->select("IF(is_indivdual_company = '1',city,company_country) as country")->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country;
 			$countryname = $this->db->select('country_name')->get_where('countries', array('country_id' => $country))->row()->country_name;
 			if ($cityname || $countryname) {
 				if ($cityname) {
@@ -2173,9 +2174,17 @@ public function freelancer_edit_post($id) {
 	$this->data['skill_2'] = implode(',', $detailes);
 		//Retrieve skill data End
 	$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-	$data = 'username,fullname';
+	$data = 'username,fullname,comp_name,is_indivdual_company';
 	$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . TITLEPOSTFIX;
+	if($hire_data[0]['is_indivdual_company'] == '1')
+	{
+		$fullname = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']);
+	}
+	else
+	{
+		$fullname = ucfirst($hire_data[0]['comp_name']);
+	}
+	$this->data['title'] =  $fullname. TITLEPOSTFIX;
 
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_edit_post', $this->data);
 }
@@ -3183,7 +3192,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         	}
         	else
         	{        		
-            	// redirect(base_url());
+            	redirect(base_url());
         	}
         }
         $this->data['title'] = "Signup to Hire Freelancers | Aileensoul";

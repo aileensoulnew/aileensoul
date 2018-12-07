@@ -201,8 +201,8 @@
 						</div>
 					</div>
 					<div class="job-menu-profile mob-block">
-						<a title="<?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?>" href="javascript:void(0);">
-							<h3> <?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?></h3>
+						<a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
+							<h3> <?php echo ucwords($fullname); ?></h3>
 						</a>						
 					</div>
 					
@@ -556,7 +556,11 @@
 										<div class="dtl-dis">
 											<div class="no-info" ng-if="review_data.length < '1'">
 												<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-												<span>Lorem ipsum its a dummy text and its user to for all.</span>
+												<?php if(isset($fh_login_data) && !empty($fh_login_data) && $login_userid != '' && $fh_userid != $login_userid): ?>
+												<span>Be the first to post your review.</span>
+												<?php else: ?>
+													<span>There are no reviews right now.</span>
+												<?php endif; ?>
 											</div>
 											<div ng-if="review_data.length > '0' && review_count > '0'">
 											<div class="total-rev">

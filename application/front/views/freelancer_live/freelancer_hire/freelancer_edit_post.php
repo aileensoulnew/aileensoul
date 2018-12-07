@@ -62,7 +62,7 @@
                                         <?php echo form_error('post_name'); ?>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group big-textarea">
                                         <label><?php echo $this->lang->line("project_description"); ?>:<span style="color:red">*</span></label>
                                         <textarea row="8" style="resize: none; overflow: auto;" tabindex="2" name="post_desc" id="post_desc" placeholder="Enter description"><?php echo $freelancerpostdata[0]['post_description']; ?></textarea>
                                         <?php echo form_error('post_desc'); ?>

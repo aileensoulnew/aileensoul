@@ -864,7 +864,7 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
                 required: true,
             },
             comp_number: {
-                required: true,
+                number: true,
             },
             comp_email: {
                 required: true,

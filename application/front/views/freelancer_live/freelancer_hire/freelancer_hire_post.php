@@ -22,6 +22,35 @@
             } else {
                 echo $freelancer_hire_header2;
             }
+
+            if($freelancr_user_data[0]['is_indivdual_company'] == '2')
+            {
+                $is_copm_indu = 2;
+                $fullname = ucwords($freelancr_user_data[0]['comp_name']);
+                if($freelancr_user_data[0]['company_field'] != 0)
+                {
+                    $designation = $this->db->get_where('industry_type', array('industry_id' => $freelancr_user_data[0]['company_field']))->row()->industry_name;
+                }
+                else
+                {
+                    $designation = $freelancr_user_data[0]['company_other_field'];
+                }
+                $sub_fullname = substr($fullname, 0, 1);
+                $no_img_name = $sub_fullname;
+            }
+            else
+            {
+                $is_copm_indu = 1;
+                $fname = $freelancr_user_data[0]['fullname'];
+                $lname = $freelancr_user_data[0]['username'];
+                $fullname = ucwords($fname) . ' ' . ucwords($lname);
+
+                $designation = $freelancr_user_data[0]['designation'];
+
+                $sub_fname = substr($fname, 0, 1);
+                $sub_lname = substr($lname, 0, 1);
+                $no_img_name = $sub_fname.$sub_lname;
+            }
             ?>
             <section class="custom-row">
                 <div class="container" id="paddingtop_fixed">
@@ -99,24 +128,13 @@
                     <div class="profile-photo">
                         <div class="profile-pho">
                             <div class="user-pic padd_img">
-                                <?php
-                                $fname = $freelancr_user_data[0]['fullname'];
-                                $lname = $freelancr_user_data[0]['username'];
-                                $sub_fname = substr($fname, 0, 1);
-                                $sub_lname = substr($lname, 0, 1);
+                                <?php                                
                                 if ($freelancr_user_data[0]['freelancer_hire_user_image']) {
-                                    if (IMAGEPATHFROM == 'upload') {
-                                        if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'])) {
-                                            ?>  
-                                            <div class="post-img-user">
-                                                <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
-                                            </div>
-                                        <?php } else {
+                                    if (IMAGEPATHFROM == 'upload') {                                        
                                             ?>
                                             <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freelancr_user_data[0]['fullname'] . " " . $freelancr_user_data[0]['username']; ?>" >
 
-                                            <?php
-                                        }
+                                            <?php                                        
                                     } else {
                                         $filename = $this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'];
                                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -126,7 +144,7 @@
                                             <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freelancr_user_data[0]['fullname'] . " " . $freelancr_user_data[0]['username']; ?>" >
                                         <?php } else { ?>
                                             <div class="post-img-user">
-                                                <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                <?php echo ucfirst(strtolower($no_img_name)); ?>
                                             </div>
                                             <?php
                                         }
@@ -134,7 +152,7 @@
                                 } else {
                                     ?>
                                     <div class="post-img-user">
-                                        <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                        <?php echo ucfirst(strtolower($no_img_name)); ?>
                                     </div>
                                 <?php } ?>
                                 <?php if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
@@ -144,32 +162,9 @@
                         </div>
 
                         <div class="job-menu-profile mob-block">
-                            <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">  <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
-                            <div class="profile-text">
-                                <?php
-                                if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) {
-                                    if ($freelancr_user_data[0]['designation'] == '') {
-                                        ?>
-                                        <a title="<?php echo $this->lang->line("designation"); ?>" id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-
-                                    <?php } else { ?> 
-                                        <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>
-                                        <?php
-                                    }
-                                } else {
-                                    if ($freelancr_user_data[0]['designation'] == '') {
-                                        echo $this->lang->line("designation");
-                                        ?>
-
-                                    <?php } else { ?>
-
-                                        <?php echo ucwords($freelancr_user_data[0]['designation']); ?>
-
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </div>
+                            <a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);"> 
+                                <h3> <?php echo ucwords($fullname); ?></h3>
+                            </a>                            
                         </div>
                         <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
                             <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr">  
@@ -236,30 +231,9 @@
      
                     <div class="container mobp0">
                         <div class="job-menu-profile mob-none pt20 job_edit_menu">
-                            <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">  <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
-                            <div class="profile-text">
-                                <?php
-                                if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) {
-                                    if ($freelancr_user_data[0]['designation'] == '') {
-                                        ?>
-                                        <a title="<?php echo $this->lang->line("designation"); ?>" id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-
-                                    <?php } else { ?> 
-                                        <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>
-                                        <?php
-                                    }
-                                } else {
-                                    if ($freelancr_user_data[0]['designation'] == '') {
-                                        ?>
-                                        <?php echo $this->lang->line("designation"); ?>
-                                        <?php
-                                    } else {
-                                        echo ucwords($freelancr_user_data[0]['designation']);
-                                    }
-                                }
-                                ?>
-                            </div>
-
+                            <a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
+                                <h3><?php echo ucwords($fullname); ?></h3>
+                            </a>
                       
                         </div>
                         <div class="cus-inner-middle mob-clear mobp0">

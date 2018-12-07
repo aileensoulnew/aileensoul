@@ -20,14 +20,14 @@
                                 <div class="m-box middle-left">
                                     <a id="regi-individual" href="javascript:void(0);" ng-click="open_form(1);">
                                         <span class="indi-img"></span>
-                                        <p>Lorem ipsum its a dummy text</p>
+                                        <p>Are you working as Independent?</p>
                                         <h4>Individual</h4>
                                     </a>
                                 </div>
                                 <div class="m-box middle-right">
                                     <a id="regi-company" href="javascript:void(0);" ng-click="open_form(2);">
                                         <span class="com-img"></span>
-                                        <p>Lorem ipsum its a dummy text</p>
+                                        <p>Are you an Organization?</p>
                                         <h4>Company</h4>
                                     </a>
                                 </div>

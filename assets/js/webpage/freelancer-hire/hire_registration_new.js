@@ -272,7 +272,7 @@ app.controller('freelanceHireCompanyRegiController', function ($scope, $http) {
                 required: true,
             },
             comp_number: {
-                required: true,
+                number: true,
             },
             comp_email: {
                 required: true,
