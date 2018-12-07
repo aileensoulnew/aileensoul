@@ -1245,10 +1245,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             {
                 foreach (explode(" ", $value) as $k => $v)
                 {                    
-                    $sql_skill .= "post_skill_txt LIKE '%".$v."%' OR ";
-                    $sql_jt .= "post_name_txt LIKE '%".$v."%' OR ";
-                    $sql_cn .= "rec_comp_name LIKE '%".$v."%' OR ";
-                    $sql_it .= "industry_name LIKE '%".$v."%' OR ";
+                    $sql_skill .= "LOWER(post_skill_txt) LIKE '%".strtolower($v)."%' OR ";
+                    $sql_jt .= "LOWER(post_name_txt) LIKE '%".strtolower($v)."%' OR ";
+                    $sql_cn .= "LOWER(rec_comp_name) LIKE '%".strtolower($v)."%' OR ";
+                    $sql_it .= "LOWER(industry_name) LIKE '%".strtolower($v)."%' OR ";
                 }
             }
         }
@@ -1732,6 +1732,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         set_time_limit(0);
         ini_set("memory_limit","512M");
         echo "<pre>";
+        
+        $sql1 = "TRUNCATE TABLE ailee_rec_post_search_tmp;";
+        $query1 = $this->db->query($sql1);
+
         $sql = "SELECT * from ailee_rec_post WHERE status = '1' AND is_delete = '0' ORDER BY post_id DESC";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
