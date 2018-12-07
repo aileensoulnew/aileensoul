@@ -618,6 +618,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $start = 0;
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name) as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.comp_logo,r.user_id,IF(rp.city>0,ct.city_name,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city,IF(rp.comp_name != '',rp.comp_name,r.re_comp_name) as re_comp_name,IF(rp.comp_logo != '',rp.comp_logo,r.comp_logo) as comp_logo")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
+        $this->db->join('job_industry ji', 'ji.industry_id = rp.industry_type', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
         $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
@@ -628,8 +629,14 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('r.is_delete', '0');
         if(isset($job_skills) && !empty($job_skills))
         {
-            $skills_id = $job_skills['skill_id'];
-            $this->db->where('FIND_IN_SET(' . $skills_id . ',rp.post_skill) > 0');
+            $skills_id = $job_skills['skill_id'];            
+
+            /*if(isset($job_company_id) && !empty($job_company_id) && !is_numeric($job_company_id[count($job_company_id) - 1]))
+            {*/
+            $ser_val = implode(" ", $job_company_id);
+            $sql1 = "(jt.name LIKE '%".trim($ser_val)."%' OR FIND_IN_SET(". $skills_id .",rp.post_skill) > 0)";
+            // }
+            $this->db->where($sql1);
         }
         else if(isset($job_category) && !empty($job_category))
         {
@@ -656,7 +663,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $city_id_2 = $search_location_arr['city_id'];
             $this->db->where('rp.city',$city_id_2);
         }
-        $sql = "";        
+        $sql = "";
+        /*if(isset($job_company_id) && !empty($job_company_id) && !is_numeric($job_company_id[count($job_company_id) - 1]))
+        {
+            $ser_val = implode(" ", $job_company_id);
+            $sql .= "jt.name LIKE '%".trim($ser_val)."%' OR ";
+        }*/
         if(isset($company_id) && !empty($company_id))
         {
             if(is_array($company_id))
@@ -748,7 +760,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
-        //echo $this->db->last_query();exit;
+        // echo $this->db->last_query();
         $result_array = $query->result_array();
 
         foreach ($result_array as $key => $value) {
@@ -789,7 +801,9 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         if(isset($job_skills) && !empty($job_skills))
         {
             $skills_id = $job_skills['skill_id'];
-            $this->db->where('FIND_IN_SET(' . $skills_id . ',rp.post_skill) > 0');
+            $ser_val = implode(" ", $job_company_id);
+            $sql1 = "(jt.name LIKE '%".trim($ser_val)."%' OR FIND_IN_SET(". $skills_id .",rp.post_skill) > 0)";
+            $this->db->where($sql1);
         }
         else if(isset($job_category) && !empty($job_category))
         {
@@ -817,6 +831,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $this->db->where('rp.city',$city_id_2);
         }
         $sql = "";
+        
         if(isset($company_id) && !empty($company_id))
         {
             if(is_array($company_id))

@@ -265,7 +265,7 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
                     <div class="all-job-box" ng-repeat="job in searchJob">
                         <div class="all-job-top">
                             <div class="post-img">
-                                <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
+                                <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo"><img ng-src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
                                 <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                             </div>
                             <div class="job-top-detail">

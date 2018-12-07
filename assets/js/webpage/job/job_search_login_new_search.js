@@ -81,8 +81,8 @@ app.controller('jobSearchController', function($scope, $http, $window) {
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
     var isProcessing = false;
     angular.element($window).bind("scroll", function(e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
-            isLoadingData = true;
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.5) {            
+            // isProcessing = true;
             var page = $scope.jobs.page_number;
             var total_record = $scope.jobs.total_record;
             var perpage_record = $scope.jobs.perpage_record;
