@@ -39,7 +39,7 @@ app.controller('noJobRegController', function ($scope, $http,$window) {
     var isProcessing = false;
     
     angular.element($window).bind("scroll", function (e) {        
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.5) {
             isLoadingData = true;
             var page = $scope.jobs.page_number;
             var total_record = $scope.jobs.total_record;
