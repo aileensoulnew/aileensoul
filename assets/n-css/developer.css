@@ -48,6 +48,14 @@
 #freelanceapplyinfo .form-group input.error,#freelanceapplyinfo .form-group textarea.error,#freelanceapplyinfo .form-group select.error{
     border: none;
     border-bottom: 1px #ff0000 solid !important;
-}#freelanceapplyinfo .form-group label.error{
+}
+#freelanceapplyinfo .form-group label.error{
+    display: none !important;
+}
+.freelancer-regi-form-cus .form-group input.error,.freelancer-regi-form-cus .form-group textarea.error,.freelancer-regi-form-cus .form-group select.error{
+    border: none;
+    border-bottom: 1px #ff0000 solid !important;
+}
+.freelancer-regi-form-cus .form-group label.error{
     display: none !important;
 }

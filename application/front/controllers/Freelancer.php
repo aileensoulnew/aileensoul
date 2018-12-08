@@ -2790,6 +2790,7 @@ class Freelancer extends MY_Controller {
 
         $contition_array = array('status' => '1', 'type' => '1');
         $this->data['skill1'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = 'skill', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
         $this->data['title'] = "Registration | Freelancer Profile" . TITLEPOSTFIX;
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         if ($this->session->userdata('aileenuser')) {
@@ -2799,7 +2800,15 @@ class Freelancer extends MY_Controller {
         if ($hireuser) {
             redirect('recommended-freelance-work', refresh);
         } else {
-            $this->load->view('freelancer_live/freelancer_post/registation', $this->data);
+            if($userid != "")
+            {                
+                $this->data['user_data'] = $this->user_model->getLeftboxData($userid);
+                $this->load->view('freelancer_live/freelancer_post/registation', $this->data);
+            }
+            else
+            {
+                redirect(base_url('freelancer/create-account'));
+            }
         }
     }
 
@@ -3528,7 +3537,8 @@ class Freelancer extends MY_Controller {
     }
 
     public function save_individual()
-    {        
+    {
+        // print_r($this->input->post());exit();
         $userid = $this->session->userdata('aileenuser');        
 
         $first_name = trim($this->input->post('first_name'));
