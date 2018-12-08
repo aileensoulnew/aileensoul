@@ -676,7 +676,7 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
     });
 
     $scope.experience_year_change = function(){
-        var ind_year = $("#experience_year option:selected").val();
+        /*var ind_year = $("#experience_year option:selected").val();
         if(ind_year == '0 year')
         {
             $("#experience_month option[value='0 month']").attr("disabled","disabled");
@@ -684,11 +684,11 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
         else
         {
             $("#experience_month option[value='0 month']").removeAttr('disabled');
-        }
+        }*/
     };
 
     $scope.experience_month_change = function(){
-        var ind_month = $("#experience_month option:selected").val();
+        /*var ind_month = $("#experience_month option:selected").val();
         if(ind_month == '0 month')
         {
             $("#experience_year option[value='0 year']").attr("disabled","disabled");
@@ -696,7 +696,7 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
         else
         {
             $("#experience_year option[value='0 year']").removeAttr('disabled');
-        }
+        }*/
     };
 
     $scope.freelanceapplyRegiValidate = {
@@ -914,7 +914,7 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
     };
 
     $scope.comp_exp_year_change = function(){
-        var cmp_year = $("#comp_exp_year option:selected").val();
+        /*var cmp_year = $("#comp_exp_year option:selected").val();
         if(cmp_year == '0')
         {
             $("#comp_exp_month option[value='0']").attr("disabled","disabled");
@@ -922,11 +922,11 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
         else
         {
             $("#comp_exp_month option[value='0']").removeAttr('disabled');
-        }
+        }*/
     };
 
     $scope.comp_exp_month_change = function(){
-        var cmp_year = $("#comp_exp_month option:selected").val();
+        /*var cmp_year = $("#comp_exp_month option:selected").val();
         if(cmp_year == '0')
         {
             $("#comp_exp_year option[value='0']").attr("disabled","disabled");
@@ -934,7 +934,7 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
         else
         {
             $("#comp_exp_year option[value='0']").removeAttr('disabled');
-        }
+        }*/
     };
 
     $scope.freelanceapplyCompanyRegiValidate = {
