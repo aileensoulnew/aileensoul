@@ -13,6 +13,7 @@ class Freelancer extends MY_Controller {
         $this->load->library('form_validation');
         $this->load->model('email_model');
         $this->load->model('user_model');
+        $this->load->model('data_model');
         $this->load->model('freelancer_apply_model');
         $this->load->model('freelancer_hire_model');
         $this->lang->load('message', 'english');
@@ -3372,6 +3373,323 @@ class Freelancer extends MY_Controller {
         $result['freelancer_skills'] = $this->freelancer_apply_model->get_filter_skills($limitstart,30);
         $result['freelancer_experience'] = $this->freelancer_apply_model->get_filter_experience($limitstart,$limit);
         echo json_encode($result);
+    }
+
+    public function save_company()
+    {
+        $userid = $this->session->userdata('aileenuser');        
+
+        $comp_name = trim($this->input->post('comp_name'));        
+        $first_lastname = strtolower($comp_name);
+        $comp_number = trim($this->input->post('comp_number'));
+        $email = trim($this->input->post('email'));
+        $comp_website = trim($this->input->post('comp_website'));
+        $country = trim($this->input->post('country'));
+        $state = trim($this->input->post('state'));
+        $city = trim($this->input->post('city'));
+        $field = trim($this->input->post('field'));
+        $comp_overview = trim($this->input->post('comp_overview'));
+        
+        $experience_year = trim($this->input->post('experience_year'));
+        $experience_month = trim($this->input->post('experience_month'));
+
+        $skill1 = trim($this->input->post('skills'));
+
+        $skills = explode(',', $skill1);
+        if (count($skills) > 0) {
+            foreach ($skills as $skk=>$ski) {
+                if (trim($ski) != "") {
+                    $contition_array = array('skill' => trim($ski), 'type' => '1');
+                    $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if (count($skilldata) < 0) {
+                        $contition_array = array('skill' => trim($ski), 'type' => '5');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    }
+                    if ($skilldata) {
+                        $skill[] = $skilldata[0]['skill_id'];
+                    } else {
+                        $data = array(
+                            'skill' => trim($ski),
+                            'status' => '1',
+                            'type' => '5',
+                            'user_id' => $userid,
+                        );
+                        $skill[] = $this->common->insert_data_getid($data, 'skill');
+                    }
+                }
+            }
+            $skill = array_unique($skill, SORT_REGULAR);
+            $skills = implode(',', $skill);
+        }
+        
+        $user_slug = $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg');
+        $data = array(
+            'comp_name' => $comp_name,
+            'comp_number' => $comp_number,
+            'comp_email' => $email,
+            'comp_website' => $comp_website,
+            'comp_exp_month' => $experience_month,
+            'comp_exp_year' => $experience_year,
+            'comp_overview' => $comp_overview,
+            'freelancer_post_country' => $country,
+            'freelancer_post_state' => $state,
+            'freelancer_post_city' => $city,
+            'freelancer_post_field' => $field,
+            'freelancer_post_area' => $skills,
+            'freelancer_apply_slug' => $user_slug,
+            'is_indivdual_company' => '1',
+            'user_id' => $userid,
+            'created_date' => date('Y-m-d', time()),
+            'status' => '1',
+            'is_delete' => '0',
+            'free_post_step' => '7'
+        );
+        $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
+        if ($insert_id) {
+            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "fa_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
+            }
+
+            //Send Promotional Mail Start
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+            $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+            $this->userdata['firstname'] = $first_name;
+            
+            $email_html = $this->load->view('email_template/freelancer',$this->userdata,TRUE);                
+
+            $subject = $first_name.", Here’s How to Not Miss Great Opportunities.";
+
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+            //Send Promotional Mail End
+
+            if(trim($data['freelancer_post_field']) != "")
+            {
+                $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
+                $data['freelancer_post_field_txt'] = trim($field_name);
+            }            
+
+            if($data['freelancer_post_area'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$data['freelancer_post_area']) as $skk => $skv) {
+                    if($skv != "")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $data['freelancer_post_area_txt'] = trim($skill_name,",");
+            }
+            if(trim($data['freelancer_post_country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $data['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                $data['country_name'] = trim($country_name);
+            }
+
+            if(trim($data['freelancer_post_state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $data['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                $data['state_name'] = trim($state_name);
+            }
+
+            if(trim($data['freelancer_post_city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $data['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                $data['city_name'] = trim($city_name);
+            }
+
+            $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_reg_search_tmp');
+
+            $ret_arr = array("success"=>1);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_individual()
+    {        
+        $userid = $this->session->userdata('aileenuser');        
+
+        $first_name = trim($this->input->post('first_name'));
+        $last_name = trim($this->input->post('last_name'));
+        $first_lastname = strtolower($first_name . $last_name);
+        $email = trim($this->input->post('email'));
+        $current_position = trim($this->input->post('current_position'));
+        $country = trim($this->input->post('country'));
+        $state = trim($this->input->post('state'));
+        $city = trim($this->input->post('city'));
+        $field = trim($this->input->post('field'));
+        $phoneno = trim($this->input->post('phoneno'));
+        $experience_year = trim($this->input->post('experience_year'));
+        $experience_month = trim($this->input->post('experience_month'));
+        $skill1 = trim($this->input->post('skills'));
+        
+
+        $job_title = $this->data_model->findJobTitle($current_position);
+        if ($job_title['title_id'] != '') {
+            $jobTitleId = $job_title['title_id'];
+        } else {
+            $data = array();
+            $data['name'] = $current_position;
+            $data['created_date'] = date('Y-m-d H:i:s', time());
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $data['status'] = 'draft';
+            $data['slug'] = $this->common->clean($current_position);
+            $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+        }
+
+        $skills = explode(',', $skill1);
+        if (count($skills) > 0) {
+            foreach ($skills as $skk=>$ski) {
+                if (trim($ski) != "") {
+                    $contition_array = array('skill' => trim($ski), 'type' => '1');
+                    $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if (count($skilldata) < 0) {
+                        $contition_array = array('skill' => trim($ski), 'type' => '5');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    }
+                    if ($skilldata) {
+                        $skill[] = $skilldata[0]['skill_id'];
+                    } else {
+                        $data = array(
+                            'skill' => trim($ski),
+                            'status' => '1',
+                            'type' => '5',
+                            'user_id' => $userid,
+                        );
+                        $skill[] = $this->common->insert_data_getid($data, 'skill');
+                    }
+                }
+            }
+            $skill = array_unique($skill, SORT_REGULAR);
+            $skills = implode(',', $skill);
+        }
+        
+        $user_slug = $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg');
+        $data = array(
+            'freelancer_post_fullname' => $first_name,
+            'freelancer_post_username' => $last_name,
+            'freelancer_post_email' => $email,
+            'freelancer_post_country' => $country,
+            'freelancer_post_state' => $state,
+            'freelancer_post_city' => $city,
+            'freelancer_post_field' => $field,
+            'freelancer_post_area' => $skills,
+            'freelancer_post_exp_month' => $experience_month,
+            'freelancer_post_exp_year' => $experience_year,
+            'freelancer_apply_slug' => $user_slug,
+            'current_position' => $jobTitleId,
+            'is_indivdual_company' => '1',
+            'user_id' => $userid,
+            'created_date' => date('Y-m-d', time()),
+            'status' => '1',
+            'is_delete' => '0',
+            'free_post_step' => '7'
+        );
+        $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
+        if ($insert_id) {
+            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "fa_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
+            }
+
+            //Send Promotional Mail Start
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+            $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+            $this->userdata['firstname'] = $first_name;
+            
+            $email_html = $this->load->view('email_template/freelancer',$this->userdata,TRUE);                
+
+            $subject = $first_name.", Here’s How to Not Miss Great Opportunities.";
+
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+            //Send Promotional Mail End
+
+            if(trim($data['freelancer_post_field']) != "")
+            {
+                $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
+                $data['freelancer_post_field_txt'] = trim($field_name);
+            }            
+
+            if($data['freelancer_post_area'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$data['freelancer_post_area']) as $skk => $skv) {
+                    if($skv != "")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $data['freelancer_post_area_txt'] = trim($skill_name,",");
+            }
+            if(trim($data['freelancer_post_country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $data['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                $data['country_name'] = trim($country_name);
+            }
+
+            if(trim($data['freelancer_post_state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $data['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                $data['state_name'] = trim($state_name);
+            }
+
+            if(trim($data['freelancer_post_city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $data['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                $data['city_name'] = trim($city_name);
+            }
+
+            $data['current_position_txt'] = trim($current_position);
+
+            $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_reg_search_tmp');
+
+            $ret_arr = array("success"=>1);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
 }

@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
@@ -79,6 +80,26 @@
             </div>
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>            
+        </div>
+        <div class="modal fade message-box biderror" id="error-modal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class='pop_content'>
+                                <span>Please Try Again Later !</span>
+                                <p class='poppup-btns pt20'>
+                                    <span id="project-delete-btn">
+                                        <a href="<?php echo base_url('freelance-employer'); ?>" class="btn1">
+                                            <span>OK</span>
+                                        </a>
+                                    </span>                                    
+                                </p>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>

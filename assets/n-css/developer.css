@@ -37,3 +37,17 @@
 .article-post-text p{
     font-size: 13px;
 }
+#freelanceapplyinfocompany .form-group input.error,#freelanceapplyinfocompany .form-group textarea.error,#freelanceapplyinfocompany .form-group select.error{
+    border: none;
+    border-bottom: 1px #ff0000 solid !important;
+}
+#freelanceapplyinfocompany .form-group label.error{
+    display: none !important;
+}
+
+#freelanceapplyinfo .form-group input.error,#freelanceapplyinfo .form-group textarea.error,#freelanceapplyinfo .form-group select.error{
+    border: none;
+    border-bottom: 1px #ff0000 solid !important;
+}#freelanceapplyinfo .form-group label.error{
+    display: none !important;
+}

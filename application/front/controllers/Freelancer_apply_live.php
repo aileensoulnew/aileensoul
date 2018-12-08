@@ -130,7 +130,7 @@ class Freelancer_apply_live extends MY_Controller {
             }
             else
             {                
-                redirect(base_url());
+                // redirect(base_url());
             }
         }
         $this->data['title'] = "Signup to get Freelancing Jobs | Aileensoul";
@@ -159,7 +159,8 @@ class Freelancer_apply_live extends MY_Controller {
     public function freelancer_apply_create_profile()
     {
         $userid = $this->session->userdata('aileenuser');
-        $this->data['user_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        // $this->data['user_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        $this->data['user_data'] = $this->user_model->getLeftboxData($userid);
         
         $contition_array = array('status' => '1');
         $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');

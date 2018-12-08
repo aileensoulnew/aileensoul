@@ -716,6 +716,8 @@ $route['freelancer/registation_insert_new'] = "freelancer/registation_insert_new
 $route['freelancer/get_filter_data'] = "freelancer/get_filter_data";
 
 $route['freelancer/remove_post'] = "freelancer/remove_post";
+$route['freelancer/save_individual'] = "freelancer/save_individual";
+$route['freelancer/save_company'] = "freelancer/save_company";
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 $route['freelancer-new/(:any)'] = "freelancer/freelancer_post_profile_new/$1";
 $route['freelancer-new-individual/(:any)'] = "freelancer/freelancer_post_profile_new_individual/$1";
