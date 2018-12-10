@@ -391,6 +391,12 @@ if (IMAGEPATHFROM == 's3bucket') {
 
     define('REVIEW_UPLOAD_URL', BUCKETLINK . 'uploads/rating/');
 
+    define('FREE_APPLY_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_education/');
+    define('FREE_APPLY_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_experience/');
+    define('FREE_APPLY_ADDICOURSE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_addicourse/');
+    define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_publication/');
+    define('FREE_APPLY_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_project/');
+
 } else {
     //USER PHOTO 
     define('USER_WEB_IMAGE_URL', BASEURL . 'admin/../uploads/users/main/');
@@ -633,6 +639,12 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('FREE_HIRE_POST_FILE_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_post_file/');
 
     define('REVIEW_UPLOAD_URL', BASEURL . 'uploads/rating/');
+
+    define('FREE_APPLY_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_education/');
+    define('FREE_APPLY_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_experience/');
+    define('FREE_APPLY_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_addicourse/');
+    define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_publication/');
+    define('FREE_APPLY_PROJECT_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_project/');
 
 }
 

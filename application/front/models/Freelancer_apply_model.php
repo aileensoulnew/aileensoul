@@ -1094,4 +1094,454 @@ class Freelancer_apply_model extends CI_Model {
         }
         echo "Done";
     }
+
+    public function get_user_education($userid)
+    {
+        $this->db->select("fue.id_education, fue.user_id, fue.edu_school_college, fue.edu_university, fue.edu_other_university, fue.edu_degree, fue.edu_other_degree, fue.edu_stream, fue.edu_other_stream, fue.edu_start_date, fue.edu_end_date, fue.edu_nograduate, fue.edu_file, fue.status, fue.created_date, fue.modify_date, d.degree_name, s.stream_name, u.university_name, DATE_FORMAT(CONCAT(fue.edu_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(fue.edu_end_date,'-1'),'%b %Y') as end_date_str")->from("freelancer_user_education fue");
+        $this->db->join('degree d', 'd.degree_id = fue.edu_degree', 'left');
+        $this->db->join('stream s', 's.stream_id = fue.edu_stream', 'left');
+        $this->db->join('university u', 'u.university_id = fue.edu_university', 'left');
+        $this->db->where('fue.user_id', $userid);
+        $this->db->where('fue.status', '1');
+        $this->db->order_by('fue.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function set_user_education($userid,$edu_school_college = "",$edu_university = "",$edu_other_university = "",$edu_degree = "",$edu_stream = "",$edu_other_degree = "",$edu_other_stream = "",$edu_start_date = "",$edu_end_date = "",$edu_nograduate = "",$edu_file = "",$edit_edu = 0)
+    {
+        if($edit_edu == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'freelancer_user_education');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edit_edu);
+            $this->db->update('freelancer_user_education', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_education($userid,$edu_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edu_id);
+            $this->db->update('freelancer_user_education', $data);
+            return true;
+    }
+
+    public function set_user_experience($userid,$exp_company_name = "",$exp_designation = "",$exp_company_website = "",$exp_field = "",$exp_other_field = "",$exp_country = "",$exp_state = "",$exp_city = "",$exp_start_date = "",$exp_end_date = "",$exp_isworking = "",$exp_desc = "",$exp_file = "",$edit_exp = 0)
+    {
+        if($edit_exp == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'exp_company_name' => $exp_company_name,
+                'exp_designation' => $exp_designation,
+                'exp_company_website' => $exp_company_website,
+                'exp_field' => $exp_field,
+                'exp_other_field' => $exp_other_field,
+                'exp_country' => $exp_country,                
+                'exp_state' => $exp_state,                
+                'exp_city' => $exp_city,                
+                'exp_start_date' => $exp_start_date,                
+                'exp_end_date' => $exp_end_date,                
+                'exp_isworking' => $exp_isworking,                
+                'exp_desc' => $exp_desc,                
+                'exp_file' => $exp_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'freelancer_user_experience');
+            $data1 = array(
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => "Experience"
+            );
+            $this->db->where('user_id', $userid);            
+            $this->db->update('job_reg', $data1);
+
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'exp_company_name' => $exp_company_name,
+                'exp_designation' => $exp_designation,
+                'exp_company_website' => $exp_company_website,
+                'exp_field' => $exp_field,
+                'exp_other_field' => $exp_other_field,
+                'exp_country' => $exp_country,                
+                'exp_state' => $exp_state,                
+                'exp_city' => $exp_city,                
+                'exp_start_date' => $exp_start_date,                
+                'exp_end_date' => $exp_end_date,                
+                'exp_isworking' => $exp_isworking,                
+                'exp_desc' => $exp_desc,                
+                'exp_file' => $exp_file,                
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_experience', $edit_exp);
+            $this->db->update('freelancer_user_experience', $data);
+            $data1 = array(
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => "Experience"
+            );
+            $this->db->where('user_id', $userid);            
+            $this->db->update('job_reg', $data1);
+            return true;
+        }
+    }
+
+    public function delete_user_experience($userid,$exp_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_experience', $exp_id);
+            $this->db->update('freelancer_user_experience', $data);
+            return true;
+    }
+
+    public function get_user_experience($userid)
+    {
+
+        $this->db->select("fue.id_experience, fue.user_id, fue.exp_company_name, fue.exp_designation,jt.name as designation, fue.exp_company_website, fue.exp_field, fue.exp_other_field, fue.exp_country, fue.exp_state, fue.exp_city, fue.exp_start_date, fue.exp_end_date, DATE_FORMAT(CONCAT(fue.exp_start_date,'-1'),'%b %Y') as start_date_str,DATE_FORMAT(CONCAT(fue.exp_end_date,'-1'),'%b %Y') as end_date_str,fue.exp_isworking, fue.exp_desc, fue.exp_file, fue.status, fue.created_date, fue.modify_date,cr.country_name,st.state_name,ct.city_name")->from("freelancer_user_experience fue");
+        $this->db->join('countries cr', 'cr.country_id = fue.exp_country', 'left');
+        $this->db->join('states st', 'st.state_id = fue.exp_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fue.exp_city', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = fue.exp_designation', 'left');
+        $this->db->where('fue.user_id', $userid);
+        $this->db->where('fue.status', '1');
+        // $this->db->where('FIND_IN_SET(jt.title_id, fue.exp_designation) !=', 0);
+        // $this->db->group_by('fue.exp_designation,fue.id_experience');
+        $this->db->order_by('fue.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function set_user_addicourse($userid,$addicourse_name = "",$addicourse_org = "",$addicourse_start_date = "",$addicourse_end_date = "",$addicourse_url = "",$addicourse_document = "",$edit_addicourse = 0)
+    {
+        if($edit_addicourse == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'freelancer_user_addicourse');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $edit_addicourse);
+            $this->db->update('freelancer_user_addicourse', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_addicourse($userid,$addicourse_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $addicourse_id);
+            $this->db->update('freelancer_user_addicourse', $data);
+            return true;
+    }
+
+    public function get_user_addicourse($userid)
+    {
+        $this->db->select("fua.*,DATE_FORMAT(CONCAT(fua.addicourse_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(fua.addicourse_end_date,'-1'),'%b %Y') as end_date_str")->from("freelancer_user_addicourse fua");
+        $this->db->where('fua.user_id', $userid);
+        $this->db->where('fua.status', '1');
+        $this->db->order_by('fua.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_publication($userid,$pub_title = "",$pub_author = "",$pub_url = "",$pub_publisher = "",$pub_desc = "",$publication_date = "",$pub_document = "",$edit_publication = 0)
+    {
+        if($edit_publication == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'pub_title' => $pub_title,
+                'pub_author' => $pub_author,
+                'pub_url' => $pub_url,
+                'pub_publisher' => $pub_publisher,
+                'pub_desc' => $pub_desc,
+                'pub_date' => $publication_date,
+                'pub_file' => $pub_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'freelancer_user_publication');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'pub_title' => $pub_title,
+                'pub_author' => $pub_author,
+                'pub_url' => $pub_url,
+                'pub_publisher' => $pub_publisher,
+                'pub_desc' => $pub_desc,
+                'pub_date' => $publication_date,
+                'pub_file' => $pub_document,                   
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_publication', $edit_publication);
+            $this->db->update('freelancer_user_publication', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_publication($userid,$publication_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_publication', $publication_id);
+            $this->db->update('freelancer_user_publication', $data);
+            return true;
+    }
+
+    public function get_user_publication($userid)
+    {
+        $this->db->select("jup.*,DATE_FORMAT(jup.pub_date,'%d %b %Y') as pub_date_str")->from("freelancer_user_publication jup");
+        $this->db->where('jup.user_id', $userid);
+        $this->db->where('jup.status', '1');
+        $this->db->order_by('jup.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_languages($userid)
+    {
+        $this->db->select("user_id,language_txt as language_name,proficiency,status")->from("freelancer_user_languages");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_links($userid)
+    {
+        $this->db->select("*")->from("freelancer_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_social_links($userid)
+    {
+        $this->db->select("*")->from("freelancer_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type != ','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_personal_links($userid)
+    {
+        $this->db->select("*")->from("freelancer_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_skills() {
+        $this->db->select("s.skill as name")->from("skill s");
+        $this->db->where("(s.type = '1' OR s.type = '5')");
+        $this->db->where('s.status', '1');
+        $this->db->group_by('s.skill');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_user_skills($userid)
+    {
+        $this->db->select("s.skill as name")->from("freelancer_post_reg fpr, skill s");
+        $this->db->where('fpr.user_id', $userid);
+        $this->db->where("(s.type = '1' OR s.type = '5')");
+        $this->db->where('FIND_IN_SET(s.skill_id, fpr.freelancer_post_area) !=', 0);
+        // $this->db->where('FIND_IN_SET(s.skill_id, fpr.user_skills) !=', 0);
+        // $this->db->group_by('ui.user_skills', 'uo.location');
+        $query = $this->db->get();
+        $skills_data = $query->result_array();        
+        return $skills_data;
+    }
+
+    public function set_user_project($userid,$project_title = "",$project_team = "",$project_role = "",$project_skill_ids = "",$project_field = "",$project_other_field = "",$project_url = "",$project_partner_name = "",$project_start_date = "",$project_end_date = "",$project_desc = "",$project_file = "",$edit_project = 0)
+    {
+        if($edit_project == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'project_title' => $project_title,
+                'project_team' => $project_team,
+                'project_role' => $project_role,
+                'project_skills' => $project_skill_ids,
+                'project_field' => $project_field,
+                'project_other_field' => $project_other_field,                
+                'project_url' => $project_url,                
+                'project_partner_name' => $project_partner_name,                
+                'project_start_date' => $project_start_date,                
+                'project_end_date' => $project_end_date,                
+                'project_desc' => $project_desc,        
+                'project_file' => $project_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'freelancer_user_projects');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'project_title' => $project_title,
+                'project_team' => $project_team,
+                'project_role' => $project_role,
+                'project_skills' => $project_skill_ids,
+                'project_field' => $project_field,
+                'project_other_field' => $project_other_field,                
+                'project_url' => $project_url,                
+                'project_partner_name' => $project_partner_name,                
+                'project_start_date' => $project_start_date,                
+                'project_end_date' => $project_end_date,                
+                'project_desc' => $project_desc,        
+                'project_file' => $project_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_projects', $edit_project);
+            $this->db->update('freelancer_user_projects', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_project($userid,$project_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_projects', $project_id);
+            $this->db->update('freelancer_user_projects', $data);
+            return true;
+    }
+
+    public function get_user_project($userid)
+    {
+        $this->db->select("fup.id_projects, fup.user_id, fup.project_title, fup.project_team, fup.project_role, fup.project_skills, fup.project_field, fup.project_other_field, fup.project_url, fup.project_partner_name, fup.project_start_date, fup.project_end_date, fup.project_desc, fup.project_file, fup.status, fup.created_date, fup.modify_date, DATE_FORMAT(CONCAT(fup.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(fup.project_end_date,'-1'),'%b %Y') as end_date_str,IF(fup.project_skills != '',it.industry_name,'') as project_field_txt, IF(fup.project_skills != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as project_skills_txt")->from("freelancer_user_projects fup,skill s");
+        $this->db->join('industry_type it', 'it.industry_id = fup.project_field', 'left');
+        $sql = "IF(fup.project_skills != '', FIND_IN_SET(s.skill_id, fup.project_skills) != '0', '1=1')";
+        $this->db->where($sql);
+        // $this->db->where('FIND_IN_SET(s.skill_id, fup.project_skills) !=', 0);
+        $this->db->where('fup.user_id', $userid);
+        $this->db->where('fup.status', '1');
+        $this->db->group_by('fup.project_skills,fup.id_projects');
+        $this->db->order_by('fup.created_date',"desc");
+        $query = $this->db->get();        
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function get_user_prof_summary($userid)
+    {
+        $this->db->select("freelancer_post_skill_description")->from("freelancer_post_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['freelancer_post_skill_description'];
+    }
+
+    public function get_user_company_overview($userid)
+    {
+        $this->db->select("comp_overview")->from("freelancer_post_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['comp_overview'];
+    }
 }

@@ -718,6 +718,44 @@ $route['freelancer/get_filter_data'] = "freelancer/get_filter_data";
 $route['freelancer/remove_post'] = "freelancer/remove_post";
 $route['freelancer/save_individual'] = "freelancer/save_individual";
 $route['freelancer/save_company'] = "freelancer/save_company";
+
+$route['freelancer/get_user_education'] = "freelancer/get_user_education";
+$route['freelancer/save_user_education'] = "freelancer/save_user_education";
+$route['freelancer/delete_user_education'] = "freelancer/delete_user_education";
+
+$route['freelancer/get_user_experience'] = "freelancer/get_user_experience";
+$route['freelancer/save_user_experience'] = "freelancer/save_user_experience";
+$route['freelancer/delete_user_experience'] = "freelancer/delete_user_experience";
+
+$route['freelancer/get_user_addicourse'] = "freelancer/get_user_addicourse";
+$route['freelancer/save_user_addicourse'] = "freelancer/save_user_addicourse";
+$route['freelancer/delete_user_addicourse'] = "freelancer/delete_user_addicourse";
+
+$route['freelancer/get_user_publication'] = "freelancer/get_user_publication";
+$route['freelancer/save_user_publication'] = "freelancer/save_user_publication";
+$route['freelancer/delete_user_publication'] = "freelancer/delete_user_publication";
+
+$route['freelancer/get_user_languages'] = "freelancer/get_user_languages";
+$route['freelancer/save_user_language'] = "freelancer/save_user_language";
+
+$route['freelancer/get_user_links'] = "freelancer/get_user_links";
+$route['freelancer/save_user_links'] = "freelancer/save_user_links";
+
+$route['freelancer/get_freelancer_skills'] = "freelancer/get_freelancer_skills";
+$route['freelancer/get_user_skills'] = "freelancer/get_user_skills";
+$route['freelancer/save_user_skills'] = "freelancer/save_user_skills";
+
+$route['freelancer/save_user_project'] = "freelancer/save_user_project";
+$route['freelancer/get_user_project'] = "freelancer/get_user_project";
+$route['freelancer/delete_user_project'] = "freelancer/delete_user_project";
+
+$route['freelancer/save_prof_summary'] = "freelancer/save_prof_summary";
+$route['freelancer/get_user_prof_summary'] = "freelancer/get_user_prof_summary";
+
+$route['freelancer/save_company_overview'] = "freelancer/save_company_overview";
+$route['freelancer/get_user_company_overview'] = "freelancer/get_user_company_overview";
+
+
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 $route['freelancer-new/(:any)'] = "freelancer/freelancer_post_profile_new/$1";
 $route['freelancer-new-individual/(:any)'] = "freelancer/freelancer_post_profile_new_individual/$1";

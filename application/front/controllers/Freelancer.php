@@ -17,6 +17,7 @@ class Freelancer extends MY_Controller {
         $this->load->model('freelancer_apply_model');
         $this->load->model('freelancer_hire_model');
         $this->lang->load('message', 'english');
+        $this->load->library('upload');
         $this->load->library('S3');
         include ('main_profile_link.php');
         include ('freelancer_include.php');
@@ -2023,10 +2024,10 @@ class Freelancer extends MY_Controller {
             $this->progressbar();
 
             $contition_array = array('user_id' => $userid, 'status' => '1', 'free_post_step' => '7');
-            $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname, freelancer_post_username, freelancer_post_skypeid, freelancer_post_email, freelancer_post_phoneno, freelancer_post_country, freelancer_post_state, freelancer_post_city,freelancer_post_pincode, freelancer_post_field, freelancer_post_area, freelancer_post_skill_description, freelancer_post_hourly, freelancer_post_ratestate, freelancer_post_fixed_rate, freelancer_post_job_type, freelancer_post_work_hour, freelancer_post_degree, freelancer_post_stream, freelancer_post_univercity, freelancer_post_collage, freelancer_post_percentage, freelancer_post_passingyear, freelancer_post_portfolio_attachment, freelancer_post_portfolio, user_id, freelancer_post_user_image, designation, freelancer_post_otherskill, freelancer_post_exp_month, freelancer_post_exp_year,freelancer_apply_slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         } else {
             $contition_array = array('user_id' => $id, 'free_post_step' => '7', 'status' => '1');
-            $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname, freelancer_post_username, freelancer_post_skypeid, freelancer_post_email, freelancer_post_phoneno, freelancer_post_country, freelancer_post_state, freelancer_post_city, freelancer_post_pincode, freelancer_post_field, freelancer_post_area, freelancer_post_skill_description, freelancer_post_hourly, freelancer_post_ratestate, freelancer_post_fixed_rate, freelancer_post_job_type, freelancer_post_work_hour, freelancer_post_degree, freelancer_post_stream, freelancer_post_univercity, freelancer_post_collage, freelancer_post_percentage, freelancer_post_passingyear, freelancer_post_portfolio_attachment, freelancer_post_portfolio, user_id, freelancer_post_user_image,  designation, freelancer_post_otherskill, freelancer_post_exp_month, freelancer_post_exp_year,freelancer_apply_slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
 
         $contition_array = array('status' => '1', 'is_delete' => '0','category_id'=>$apply_data[0]['freelancer_post_field']);
@@ -2039,7 +2040,7 @@ class Freelancer extends MY_Controller {
         $this->data['title'] = "Freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) . " Profile";
         $this->data['metadesc'] = "Connect with freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) ." on Aileensoul. Field: ".$field.". Skills: ".$skills.". Experience: ".($apply_data[0]['freelancer_post_exp_year']) . " " . ($apply_data[0]['freelancer_post_exp_month']).".";
 
-        $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile_new', $this->data);
     }
 
     public function freelancer_post_profile_new($id = "") {
@@ -3417,11 +3418,14 @@ class Freelancer extends MY_Controller {
                     if ($skilldata) {
                         $skill[] = $skilldata[0]['skill_id'];
                     } else {
+                        $skill_slug = $this->common->clean($ski);
                         $data = array(
                             'skill' => trim($ski),
                             'status' => '1',
                             'type' => '5',
                             'user_id' => $userid,
+                            'skill_image' => $skill_slug.".png",
+                            'skill_slug' => $skill_slug
                         );
                         $skill[] = $this->common->insert_data_getid($data, 'skill');
                     }
@@ -3446,7 +3450,7 @@ class Freelancer extends MY_Controller {
             'freelancer_post_field' => $field,
             'freelancer_post_area' => $skills,
             'freelancer_apply_slug' => $user_slug,
-            'is_indivdual_company' => '1',
+            'is_indivdual_company' => '2',
             'user_id' => $userid,
             'created_date' => date('Y-m-d', time()),
             'status' => '1',
@@ -3582,11 +3586,14 @@ class Freelancer extends MY_Controller {
                     if ($skilldata) {
                         $skill[] = $skilldata[0]['skill_id'];
                     } else {
+                        $skill_slug = $this->common->clean($ski);
                         $data = array(
                             'skill' => trim($ski),
                             'status' => '1',
                             'type' => '5',
                             'user_id' => $userid,
+                            'skill_image' => $skill_slug.".png",
+                            'skill_slug' => $skill_slug
                         );
                         $skill[] = $this->common->insert_data_getid($data, 'skill');
                     }
@@ -3699,6 +3706,842 @@ class Freelancer extends MY_Controller {
             $ret_arr = array("success"=>0);
         }
 
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_education()
+    {
+        $edit_edu = $this->input->post('edit_edu');
+        $edu_file_old = $this->input->post('edu_file_old');
+        $edu_school_college = $this->input->post('edu_school_college');
+        $edu_university = $this->input->post('edu_university');
+        if($edu_university == 0)
+        {
+            $edu_other_university = $this->input->post('edu_other_university');
+        }
+        else
+        {
+            $edu_other_university = "";
+        }
+        $edu_degree = $this->input->post('edu_degree');
+        $edu_stream = $this->input->post('edu_stream');
+        if($edu_degree == 0)
+        {            
+            $edu_other_degree = $this->input->post('edu_other_degree');
+            $edu_other_stream = $this->input->post('edu_other_stream');
+        }
+        else
+        {
+            $edu_other_degree = "";
+            $edu_other_stream = "";
+        }
+        $edu_start_date = $this->input->post('edu_s_year').'-'.$this->input->post('edu_s_month');
+        $edu_end_date = $this->input->post('edu_e_year').'-'.$this->input->post('edu_e_month');
+        $edu_nograduate = $this->input->post('edu_nograduate');
+        if($edu_nograduate == 1)
+        {
+            $edu_end_date = "";
+        }
+
+        $fileName = $edu_file_old;
+        if(isset($_FILES['edu_file']['name']) && $_FILES['edu_file']['name'] != "")
+        {
+            $free_apply_education_upload_path = $this->config->item('free_apply_education_upload_path');
+            $user_edu_file_old = $free_apply_education_upload_path . $edu_file_old;
+            if (isset($user_edu_file_old)) {
+                unlink($user_edu_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_apply_education_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['edu_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('edu_file')){
+                $main_image = $free_apply_education_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_project_insert = $this->freelancer_apply_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName,$edit_edu);
+            $user_education = $this->freelancer_apply_model->get_user_education($user_id);            
+            $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_education()
+    {
+        $edu_id = $this->input->post('edu_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->freelancer_apply_model->delete_user_education($user_id,$edu_id);
+            $user_education = $this->freelancer_apply_model->get_user_education($user_id);
+            $profile_progress = $this->progressbar($user_id);              
+            $ret_arr = array("success"=>1,"user_education"=>$user_education,"profile_progress"=>$profile_progress);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_education()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        
+        $user_education = $this->freelancer_apply_model->get_user_education($userid);        
+        $ret_arr = array("success"=>1,"user_education"=>$user_education);        
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_experience()
+    {
+        $edit_exp = $this->input->post('edit_exp');
+        $exp_file_old = $this->input->post('exp_file_old');
+        $exp_company_name = $this->input->post('exp_company_name');
+        $exp_designation = $this->input->post('exp_designation');
+        $exp_company_website = $this->input->post('exp_company_website');
+        $exp_field = $this->input->post('exp_field');        
+        $exp_country = $this->input->post('exp_country');
+        $exp_state = $this->input->post('exp_state');
+        $exp_city = $this->input->post('exp_city');
+        $exp_start_date = $this->input->post('exp_s_year').'-'.$this->input->post('exp_s_month');
+        $exp_end_date = $this->input->post('exp_e_year').'-'.$this->input->post('exp_e_month');
+        $exp_isworking = $this->input->post('exp_isworking');
+        $exp_desc = $this->input->post('exp_desc');
+        $fileName = "";
+        if($exp_isworking == 1)
+        {
+            $exp_end_date = "";
+        }
+        if($exp_field == 0)
+        {
+            $exp_other_field = $this->input->post('exp_other_field');
+        }
+        else
+        {
+            $exp_other_field = "";
+        }
+        $exp_designation_id = "";
+        // foreach ($exp_designation as $title) {
+            $designation = $this->data_model->findJobTitle($exp_designation);
+            if ($designation['title_id'] != '') {
+                $jobTitleId = $designation['title_id'];
+            } else {
+                $data = array();
+                $data['name'] = $title['name'];
+                $data['created_date'] = date('Y-m-d H:i:s', time());
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = 'draft';
+                $data['slug'] = $this->common->clean($title['name']);
+                $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+            }
+            $exp_designation_id = $jobTitleId;
+        // }        
+        $fileName = $exp_file_old;
+        if(isset($_FILES['exp_file']['name']) && $_FILES['exp_file']['name'] != "")
+        {            
+            $free_apply_experience_upload_path = $this->config->item('free_apply_experience_upload_path');
+            $user_exp_file_old = $free_apply_experience_upload_path . $exp_file_old;
+            if (isset($user_exp_file_old)) {
+                unlink($user_exp_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_apply_experience_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['exp_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('exp_file')){
+                $main_image = $free_apply_experience_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->freelancer_apply_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp);
+            $user_experience = $this->freelancer_apply_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_experience()
+    {
+        $exp_id = $this->input->post('exp_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->freelancer_apply_model->delete_user_experience($user_id,$exp_id);
+            $user_experience = $this->freelancer_apply_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);            
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month,"profile_progress"=>$profile_progress);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_experience()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        
+        $user_experience = $this->freelancer_apply_model->get_user_experience($userid);
+        $year = array();
+        $month = array();
+        foreach ($user_experience as $_user_experience) {
+            $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+            if($_user_experience['exp_isworking'] == 1)
+            {
+                $datetime2 = new DateTime();
+            }
+            else
+            {
+                $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+            }
+            $interval = $datetime1->diff($datetime2);                
+            $year[] = $interval->format('%y');
+            $month[] = $interval->format('%m') + 1;
+        }
+        $years = array_sum($year);
+        $cal_years = array_sum($month);
+        $total_month = $cal_years % 12;
+        $years = $years + intval($cal_years / 12);
+        $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_addicourse()
+    {
+        $edit_addicourse = $this->input->post('edit_addicourse');
+        $addicourse_file_old = $this->input->post('addicourse_file_old');
+        $addicourse_name = $this->input->post('addicourse_name');
+        $addicourse_org = $this->input->post('addicourse_org');        
+        $addicourse_start_date = $this->input->post('addicourse_s_year').'-'.$this->input->post('addicourse_s_month');
+        $addicourse_end_date = $this->input->post('addicourse_e_year').'-'.$this->input->post('addicourse_e_month');
+        $addicourse_url = $this->input->post('addicourse_url');
+        $fileName = $addicourse_file_old;
+        if(isset($_FILES['addicourse_file']['name']) && $_FILES['addicourse_file']['name'] != "")
+        {
+            $free_apply_addicourse_upload_path = $this->config->item('free_apply_addicourse_upload_path');
+            $user_addicourse_file_old = $free_apply_addicourse_upload_path . $addicourse_file_old;
+            if (isset($user_addicourse_file_old)) {
+                unlink($user_addicourse_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_apply_addicourse_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['addicourse_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('addicourse_file')){
+                $main_image = $free_apply_addicourse_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_activity_insert = $this->freelancer_apply_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse);
+            $user_addicourse = $this->freelancer_apply_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_addicourse()
+    {
+        $addicourse_id = $this->input->post('addicourse_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->freelancer_apply_model->delete_user_addicourse($user_id,$addicourse_id);
+            $user_addicourse = $this->freelancer_apply_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_addicourse()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_addicourse = $this->freelancer_apply_model->get_user_addicourse($userid);        
+        $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_publication()
+    {
+        $edit_publication = $this->input->post('edit_publication');        
+        $pub_file_old = ($this->input->post('pub_file_old') != "" && $this->input->post('pub_file_old') != "undefined" ? $this->input->post('pub_file_old') : '');
+        $pub_title = $this->input->post('pub_title');
+        $pub_author = $this->input->post('pub_author');
+        $pub_url = $this->input->post('pub_url');
+        $pub_publisher = $this->input->post('pub_publisher');
+        $pub_desc = $this->input->post('pub_desc');
+        $publication_date = $this->input->post('pub_year_txt').'-'.$this->input->post('pub_month_txt').'-'.$this->input->post('pub_day_txt');
+        $fileName = $pub_file_old;
+        if(isset($_FILES['pub_file']['name']) && $_FILES['pub_file']['name'] != "")
+        {
+            $free_apply_publication_upload_path = $this->config->item('free_apply_publication_upload_path');
+            $user_publication_file_old = $free_apply_publication_upload_path . $pub_file_old;
+            if (isset($user_publication_file_old)) {
+                unlink($user_publication_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_apply_publication_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['pub_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('pub_file'))            {
+                $main_image = $free_apply_publication_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_publication = $this->freelancer_apply_model->set_user_publication($user_id,$pub_title,$pub_author,$pub_url,$pub_publisher,$pub_desc,$publication_date,$fileName,$edit_publication);
+            $user_publication = $this->freelancer_apply_model->get_user_publication($user_id);
+            $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_publication()
+    {
+        $publication_id = $this->input->post('publication_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_publication_insert = $this->freelancer_apply_model->delete_user_publication($user_id,$publication_id);
+            $user_publication = $this->freelancer_apply_model->get_user_publication($user_id);
+            $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_publication()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_publication = $this->freelancer_apply_model->get_user_publication($userid);
+        $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_language()
+    {
+        $userid = $this->session->userdata('aileenuser');
+
+        $language = $this->input->post('language');
+        $proficiency = $this->input->post('proficiency');        
+        
+        if(isset($language) && isset($proficiency) && !empty($language) && !empty($proficiency))
+        {
+            $this->db->where('user_id', $userid);
+            $this->db->delete('freelancer_user_languages');
+
+            if(count($language) == count($proficiency))
+            {
+                foreach($language as $k=>$v)
+                {                    
+                    if($v['value'] != "")
+                    {                        
+                        $data = array(
+                            'user_id' => $userid,
+                            'language_txt' => $v['value'],
+                            'proficiency' => $proficiency[$k]['value'],
+                            'status' => '1',
+                            'created_date' => date('Y-m-d H:i:s', time()),
+                            'modify_date' => date('Y-m-d H:i:s', time()),
+                        );
+                        $insert_id = $this->common->insert_data($data, 'freelancer_user_languages');
+                    }
+                }
+            }            
+        }
+
+        $user_languages = $this->freelancer_apply_model->get_user_languages($userid);
+        $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_languages()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_languages = $this->freelancer_apply_model->get_user_languages($userid);
+        $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    function save_user_links()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $link_type = $this->input->post('link_type');
+        $link_url = $this->input->post('link_url');
+        $personal_link_url = $this->input->post('personal_link_url');
+
+        $this->db->where('user_id', $userid);
+        $this->db->delete('freelancer_user_links');
+
+        if(count($link_type) == count($link_url))
+        {
+            foreach($link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => $link_type[$k]['value'],
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'freelancer_user_links');
+                }
+            }
+        }
+
+        if(count($personal_link_url) > 0)
+        {
+            foreach($personal_link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => "Personal",
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'freelancer_user_links');
+                }
+            }
+        }
+
+        $user_social_links_data = $this->freelancer_apply_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->freelancer_apply_model->get_user_personal_links($userid);        
+        $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_links()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_social_links_data = $this->freelancer_apply_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->freelancer_apply_model->get_user_personal_links($userid);        
+        if(empty($user_social_links_data) && empty($user_personal_links_data))
+        {
+            $ret_arr = array("success"=>0);
+        }
+        else
+        {
+            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data,"user_social_links_data_edit"=>$user_social_links_data,"user_personal_links_data_edit"=>$user_personal_links_data);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_skills()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $skills = $this->input->post('user_skills');
+        $skill_ids = "";
+        $skill_names = "";
+        foreach ($skills as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+                $contition_array = array('skill' => trim($ski), 'type' => '5');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            }
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+                $skill_slug = $this->common->clean($ski);
+                $data = array(
+                    'skill' => trim($ski),
+                    'status' => '1',
+                    'type' => '5',
+                    'user_id' => $userid,
+                    'skill_image' => $skill_slug.".png",
+                    'skill_slug' => $skill_slug
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }
+            $skill_names .= $ski. ',';
+            $skill_ids .= $skill_id . ',';
+        }
+        $skill_ids = trim($skill_ids, ',');
+        $skill_names = trim($skill_names, ',');
+        $data = array('freelancer_post_area' => $skill_ids);
+        $udpate_data = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $data1 = array('freelancer_post_area' => $skill_ids,'freelancer_post_area_txt' => $skill_names);
+            $udpate_data1 = $this->common->update_data($data1, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
+
+            $skills_data = $this->freelancer_apply_model->get_user_skills($userid);
+            $skills_data_edit = $skills_data;
+            $ret_arr = array("success"=>1,"skills_data"=>$skills_data,"skills_data_edit"=>$skills_data_edit);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_skills()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        $skills_data = $this->freelancer_apply_model->get_user_skills($userid);
+        $skills_data_edit = $skills_data;
+        $ret_arr = array("success"=>1,"skills_data"=>$skills_data,"skills_data_edit"=>$skills_data_edit);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_freelancer_skills() {
+        $skills = $this->freelancer_apply_model->get_skills();
+        echo json_encode($skills);
+    }
+
+    public function save_user_project()
+    {
+        $edit_project = $this->input->post('edit_project');
+        $project_file_old = $this->input->post('project_file_old');
+        $project_title = $this->input->post('project_title');
+        $project_team = $this->input->post('project_team');
+        $project_role = $this->input->post('project_role');
+        $project_skill_list = json_decode($this->input->post('project_skill_list'),TRUE);
+        $project_field = $this->input->post('project_field');        
+        $project_url = $this->input->post('project_url');
+        $project_partner = json_decode($this->input->post('project_partner'),TRUE);
+        $project_start_date = $this->input->post('project_s_year').'-'.$this->input->post('project_s_month');
+        $project_end_date = $this->input->post('project_e_year').'-'.$this->input->post('project_e_month');
+        $project_desc = $this->input->post('project_desc');
+        
+        if($project_field == 0)
+        {
+            $project_other_field = $this->input->post('project_other_field');
+        }
+        else
+        {
+            $project_other_field = "";
+        }
+        
+        $project_skill_ids = "";
+        foreach ($project_skill_list as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+
+                $contition_array = array('skill' => trim($ski), 'type' => '7');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            }
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+
+                $skill_slug = $this->common->clean($ski);
+                $data = array(
+                    'skill' => trim($ski),
+                    'status' => '1',
+                    'type' => '5',
+                    'user_id' => $userid,
+                    'skill_image' => $skill_slug.".png",
+                    'skill_slug' => $skill_slug
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }           
+
+            $project_skill_ids .= $skill_id . ',';
+        }
+        $project_skill_ids = trim($project_skill_ids, ',');
+
+        $project_partner_name = "";
+        if(isset($project_partner) && !empty($project_partner))
+        {
+            foreach ($project_partner as $_project_partner) {
+                if(trim($_project_partner['p_name']) != "")
+                {
+                    $project_partner_name .= $_project_partner['p_name'].",";
+                }
+            }
+        }
+        $project_partner_name = trim($project_partner_name, ',');
+
+        $fileName = $project_file_old;
+        if(isset($_FILES['project_file']['name']) && $_FILES['project_file']['name'] != "")
+        {
+            $free_apply_project_upload_path = $this->config->item('free_apply_project_upload_path');
+            $user_proj_file_old = $free_apply_project_upload_path . $project_file_old;
+            if (isset($user_proj_file_old)) {
+                unlink($user_proj_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $free_apply_project_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['project_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('project_file')){
+                $main_image = $free_apply_project_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_project_insert = $this->freelancer_apply_model->set_user_project($user_id,$project_title,$project_team,$project_role,$project_skill_ids,$project_field,$project_other_field,$project_url,$project_partner_name,$project_start_date,$project_end_date,$project_desc,$fileName,$edit_project);
+            $user_projects = $this->freelancer_apply_model->get_user_project($user_id);            
+            $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_project()
+    {
+        $project_id = $this->input->post('project_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->freelancer_apply_model->delete_user_project($user_id,$project_id);
+            $user_projects = $this->freelancer_apply_model->get_user_project($user_id);
+            $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_project()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+
+        $user_projects = $this->freelancer_apply_model->get_user_project($userid);        
+        $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_prof_summary()
+    {
+        $prof_summary = $this->input->post('prof_summary');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array('freelancer_post_skill_description' => $prof_summary);
+        $udpate_data = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $data1 = array('freelancer_post_skill_description' => $prof_summary);
+            $udpate_data1 = $this->common->update_data($data1, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
+            $ret_arr = array("success"=>1,"user_prof_summary"=>$prof_summary);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
+
+    public function get_user_prof_summary()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+
+        $user_prof_summary = $this->freelancer_apply_model->get_user_prof_summary($userid);
+        $ret_arr = array("success"=>1,"user_prof_summary"=>$user_prof_summary);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_company_overview()
+    {
+        $company_overview = $this->input->post('company_overview');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array('comp_overview' => $company_overview);
+        $udpate_data = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $data1 = array('comp_overview' => $company_overview);
+            $udpate_data1 = $this->common->update_data($data1, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
+            $ret_arr = array("success"=>1,"user_company_overview"=>$company_overview);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
+
+    public function get_user_company_overview()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $user_slug,'status' => '1'))->row('user_id');
+        
+        $user_company_overview = $this->freelancer_apply_model->get_user_company_overview($userid);
+        $ret_arr = array("success"=>1,"user_company_overview"=>$user_company_overview);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 

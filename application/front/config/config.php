@@ -974,3 +974,9 @@ $config['review_upload_path'] = 'uploads/rating/';
 
 $config['free_hire_comp_logo_upload_path'] = 'uploads/freelancer_hire_comp_logo/';
 $config['free_hire_post_file_upload_path'] = 'uploads/freelancer_hire_post_file/';
+
+$config['free_apply_education_upload_path'] = 'uploads/freelancer_hire_user_education/';
+$config['free_apply_experience_upload_path'] = 'uploads/freelancer_hire_user_experience/';
+$config['free_apply_addicourse_upload_path'] = 'uploads/freelancer_hire_user_addicourse/';
+$config['free_apply_publication_upload_path'] = 'uploads/freelancer_hire_user_publication/';
+$config['free_apply_project_upload_path'] = 'uploads/freelancer_hire_user_project/';

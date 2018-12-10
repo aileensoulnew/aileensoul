@@ -27,7 +27,21 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
         <?php //echo $header; ?>
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
-        <?php echo $freelancer_post_header2; ?>
+        <?php echo $freelancer_post_header2;
+        if($freelancerdata[0]['is_indivdual_company'] == '1')
+        {
+            $first_name = ucwords($freelancerdata[0]['freelancer_post_fullname']);
+            $last_name = ucwords($freelancerdata[0]['freelancer_post_username']);
+            $fullname = $first_name.' '.$last_name;
+            $name_no_img = strtoupper(substr($first_name, 0,1).' '.substr($last_name, 0,1));
+        }
+        else
+        {
+            $fullname = ucwords($freelancerdata[0]['comp_name']);
+            $name_no_img = strtoupper(substr($fullname, 0,1));
+        }
+
+        ?>
         <section>
             <div class="user-midd-section " id="paddingtop_fixed">
                 <div class="container padding-360">
@@ -69,16 +83,12 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                                        $info = $s3->getObjectInfo(bucket, $filename);
                                                        if ($info) {
                                                            ?>
-                                                        <img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL . $freelancerdata[0]['freelancer_post_user_image']; ?>" alt="<?php echo $freelancerdata[0]['freelancer_post_fullname'] . ' ' . $freelancerdata[0]['freelancer_post_username']; ?>" >
+                                                        <img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL . $freelancerdata[0]['freelancer_post_user_image']; ?>" alt="<?php echo $fullname; ?>" >
                                                         <?php
                                                     } else {
-                                                        $fname = $freelancerdata[0]['freelancer_post_fullname'];
-                                                        $lname = $freelancerdata[0]['freelancer_post_username'];
-                                                        $sub_fname = substr($fname, 0, 1);
-                                                        $sub_lname = substr($lname, 0, 1);
                                                         ?>
                                                         <div class="post-img-profile">
-                                                            <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                            <?php echo ucfirst($name_no_img); ?>
                                                         </div>
                                                         <?php
                                                     }
@@ -87,9 +97,9 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                             </div>
                                             <div class="right_left_box_design">
                                                 <span class="profile-company-name">
-                                                    <a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php echo ucwords($freelancerdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerdata[0]['freelancer_post_username']); ?></a>
+                                                    <a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php echo ucwords($fullname); ?></a>
                                                 </span>
-                                                <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
+                                                <?php //$category = $this->db->get_where('category', array('category_id' => $freelancerdata[0]['freelancer_post_field']))->row()->category_name; ?>
                                                 <div class="profile-boxProfile-name">
                                                     <a  href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php
                                                         if ($freepostdata['designation']) {
