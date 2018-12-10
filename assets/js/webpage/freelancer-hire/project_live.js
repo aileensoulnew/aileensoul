@@ -46,4 +46,9 @@ function apply_post(abc, xyz) {
         }
     });
 }
+function signuppopup()
+{
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>To Complete This Step, You Have to Register in the Job Profile.</h2><p class='poppup-btns'><a class='btn1' href='"+base_url+"freelancer/signup'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
+}
 //CODE FOR APPLY POST END

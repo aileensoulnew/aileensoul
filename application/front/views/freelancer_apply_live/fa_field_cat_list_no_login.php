@@ -211,13 +211,28 @@
                                         <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: <?php echo $_searchFA['AppliedCount']; ?></span>
                                         <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: <?php echo $_searchFA['ShortListedCount']; ?></span></span>
                                         <p class="pull-right">
-                                            <?php if($userid != ""): ?>
-                                                <a href="<?php echo base_url('freelance-work/profile/live-post/').$_searchFA['post_id']; ?>" class="btn4">Save</a>
-                                                <a href="<?php echo base_url('freelance-work/profile/live-post/').$_searchFA['post_id']; ?>" class="btn4">Apply</a>
-                                            <?php else: ?>
-                                                <a href="javascript:void(0)" onclick="savepopup(<?php echo $_searchFA['post_id']; ?>)" class="btn4">Save</a>
-                                                <a href="javascript:void(0)" onclick="applypopup(<?php echo $_searchFA['post_id']; ?>,<?php echo $_searchFA['user_id']; ?>)" class="btn4">Apply</a>
-                                            <?php endif; ?>
+                                            <?php 
+                                            // if($userid_login != ""  && $this->freelance_apply_profile_set == 1)
+                                            if($_searchFA['apply_post'] == 1)
+                                            { ?>
+                                                <a href="javascript:void(0);" class="btn4 applied">Applied</a>
+                                            <?php
+                                            }
+                                            else if($_searchFA['saved_post'] == 1 && $_searchFA['apply_post'] == 0){ ?>
+                                                <a href="javascript:void(0);" class="btn4 saved">Saved</a>
+                                                <a href="javascript:void(0)" onclick="applypopup(<?php echo $_searchFA['post_id']; ?>,<?php echo $_searchFA['user_id']; ?>)" class="btn4 applypost<?php echo $_searchFA['post_id']; ?>">Apply</a>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                                if($userid_login != ""  && $this->freelance_apply_profile_set == 0): ?>
+                                                    <a href="javascript:void(0);" onclick="signuppopup();" class="btn4">Save</a>
+                                                    <a href="javascript:void(0);" onclick="signuppopup();" class="btn4">Apply</a>
+                                                <?php else: ?>
+                                                    <a href="javascript:void(0)" onclick="savepopup(<?php echo $_searchFA['post_id']; ?>)" class="btn4 savedpost<?php echo $_searchFA['post_id']; ?>">Save</a>
+                                                    <a href="javascript:void(0)" onclick="applypopup(<?php echo $_searchFA['post_id']; ?>,<?php echo $_searchFA['user_id']; ?>)" class="btn4 applypost<?php echo $_searchFA['post_id']; ?>">Apply</a>
+                                                <?php endif;
+                                            }?>
                                         </p>
                                     </div>
                                 </div>

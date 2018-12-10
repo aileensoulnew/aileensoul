@@ -288,7 +288,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
     };
 });  */
 
-function savepopup(id) {        
+/*function savepopup(id) {        
     $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
     $('#bidmodal').modal('show');
 }
@@ -296,8 +296,12 @@ function applypopup(postid, userid)
 {
     $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
     $('#bidmodal').modal('show');
+}*/
+function signuppopup()
+{
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>To Complete This Step, You Have to Register in the Job Profile.</h2><p class='poppup-btns'><a class='btn1' href='"+base_url+"freelancer/signup'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
 }
-
 $(document).ready(function(){
     $("#pagination").on("click", "a", function(e){
         console.log();
@@ -315,3 +319,68 @@ function applyJobFilter() {
         event.preventDefault();
     });
 }
+
+//apply post start
+    function applypopup(postid, userid)
+    {
+        
+        if(login_user_id == "")
+        {
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+            $('#bidmodal').modal('show');
+        }
+        else
+        {                
+            var html = "<div class='pop_content'>Do you want to apply for this work?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onclick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>";
+            $('.biderror .mes').html(html);
+            $('#bidmodal').modal('show');
+        }
+        
+    }
+
+    function apply_post(abc, xyz) {
+        var alldata = 'all';
+        var user = xyz;
+        $.ajax({
+            type: 'POST',
+            url:  base_url + "freelancer/apply_insert",
+            data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
+            success: function (data) {
+                $('.savedpost' + abc).hide();                
+                $('.applypost' + abc).html("Applied");
+                $('.applypost' + abc).attr('disabled', 'disabled');
+                $('.applypost' + abc).attr('onclick', 'myFunction()');
+                $('.applypost' + abc).addClass('applied');
+            }
+        });
+    }
+    //apply post end
+
+    //save post start 
+    function savepopup(id) {
+        
+        if(login_user_id == "")
+        {           
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+            $('#bidmodal').modal('show');
+        }
+        else
+        {
+            save_post(id);
+            $('.biderror .mes').html("<div class='pop_content'>Project successfully saved.");
+            $('#bidmodal').modal('show');
+        }
+    }
+
+    function save_post(id)
+    {
+        $.ajax({
+            type: 'POST',
+            url:  base_url + "freelancer/save_user",
+            data: 'post_id=' + id,
+            success: function (data) {
+                $('.' + 'savedpost' + id).html(data).addClass('saved');
+            }
+        });
+
+    }

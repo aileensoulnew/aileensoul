@@ -425,8 +425,8 @@
 
 
 		<?php } else { ?> 
-		<a href="<?php echo base_url('freelance-work/profile/live-post/' . $post['post_id']); ?>"  class= "applypost btn4"> Apply</a>
-		<a href="<?php echo base_url('freelance-work/profile/live-post/' . $post['post_id']); ?>"  class="btn4">Save</a>
+		<a href="javascript:void(0);" onclick="signuppopup();" class= "applypost btn4"> Apply</a>
+		<a href="javascript:void(0);" onclick="signuppopup();" class="btn4">Save</a>
 		<?php } ?>
 
 		<?php
@@ -555,8 +555,8 @@
 		?>
 
 		<?php } else { ?> 
-		<a href="<?php echo base_url('freelance-work/profile/live-post/' . $post['post_id']); ?>"  class= "applypost btn4"> Apply</a>
-		<a href="<?php echo base_url('freelance-work/profile/live-post/' . $post['post_id']); ?>"  class="btn4">Save</a>
+		<a href="javascript:void(0);" onclick="signuppopup();" class= "applypost btn4"> Apply</a>
+		<a href="javascript:void(0);" onclick="signuppopup();" class="btn4">Save</a>
 		<?php } ?>
 
 		<?php
@@ -765,35 +765,18 @@
 </body>
 
 <!-- END FOOTER -->			
-<?php
-if (IS_APPLY_JS_MINIFY == '0') {
-?>
+
 <!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script> -->
 <!-- FIELD VALIDATION JS START -->
+<script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+
 <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script> 
 <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
 <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-<?php
-} else {
-?>
-<!-- <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script> -->
-<!-- FIELD VALIDATION JS START -->
-<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
-<script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script> 
-<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-<?php } ?>
 
-<script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-<?php
-if (IS_REC_JS_MINIFY == '0') {
-?>
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-<?php
-} else {
-?>				
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/croppie_bootstrap_validate.min.js?ver=' . time()); ?>"></script>
-<?php } ?>
 
 <script>
 var base_url = '<?php echo base_url(); ?>';

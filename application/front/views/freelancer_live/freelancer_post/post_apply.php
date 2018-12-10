@@ -364,8 +364,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         </p>
                                         <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 0">
                                             <?php if($userid_login != "" && $this->freelance_apply_profile_set == 0): ?>
-                                                <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
-                                                <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
+                                                <a href="javascript:void(0);" ng-click="signuppopup();" class="btn4">Save</a>
+                                                <a href="javascript:void(0);" ng-click="signuppopup();" class="btn4">Apply</a>
                                             <?php else: ?>
                                                 <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4 savedpost{{applypost.post_id}}">Save</a>
                                                 <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
@@ -696,7 +696,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
         </script>
 
         <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-        <!-- <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script> -->
+        <!-- <script async type="text/javascript" src="<?php //echo base_url('assets/js/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/post_apply_new.js?ver=' . time()); ?>"></script>
