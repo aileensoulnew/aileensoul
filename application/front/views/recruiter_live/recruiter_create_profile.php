@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="company_email" id="company_email" tabindex="5" placeholder="Company Email*" maxlength="35" ng-model="user.company_email">
+                                        <input class="form-control" type="text" name="company_email" id="company_email" tabindex="5" placeholder="Company Email*" maxlength="255" ng-model="user.company_email">
                                         <div id="cetooltip" class="tooltip-custom" style="display: none;">
                                             Enter a working email id on which candidate can contact you or send emails.
                                         </div>

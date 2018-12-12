@@ -1544,4 +1544,168 @@ class Freelancer_apply_model extends CI_Model {
         $about_user_data = $query->row_array();        
         return $about_user_data['comp_overview'];
     }
+
+    public function get_user_tagline($userid)
+    {
+        $this->db->select("tagline")->from("freelancer_post_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['tagline'];
+    }
+
+    public function get_user_availability($userid)
+    {
+        $this->db->select("freelancer_avail_week,freelancer_avail_status")->from("freelancer_post_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_availability = $query->row_array();        
+        return $user_availability;
+    }
+
+    public function get_user_rate($userid)
+    {
+        $this->db->select("fpr.rate_currency,fpr.rate_amt,fpr.rate_type,c.currency_name")->from("freelancer_post_reg fpr");
+        $this->db->join('currency c', 'c.currency_id = fpr.rate_currency', 'left');
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_availability = $query->row_array();        
+        return $user_availability;
+    }
+
+    public function set_save_review($from_user_id,$to_user_id,$review_star,$review_desc ='',$fileName = '')
+    {
+        $data = array(
+            'to_user_id' => $to_user_id,
+            'from_user_id' => $from_user_id,
+            'review_star' => $review_star,
+            'review_desc' => $review_desc,
+            'review_file' => $fileName,    
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'freelancer_review');
+        return $insert_id;
+    }
+
+    public function get_save_review($to_user_id)
+    {
+        $this->db->select("IF(fh.is_indivdual_company = '1',fh.fullname,fh.comp_name) as first_name,IF(fh.is_indivdual_company = '1',fh.username,'') as last_name, freelancer_hire_user_image as user_image,fr.*")->from('freelancer_review fr');
+        $this->db->join('freelancer_hire_reg fh', 'fh.user_id = fr.from_user_id', 'left');
+        $this->db->where('fr.to_user_id', $to_user_id);
+        $this->db->where('fr.status', '1');
+        $this->db->order_by('fr.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_review_avarage($to_user_id)
+    {
+        $this->db->select("review_star,count(from_user_id) as rating_count")->from('freelancer_review');        
+        $this->db->where('to_user_id', $to_user_id);
+        $this->db->where('status', '1');
+        $this->db->group_by('review_star');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_review_count($to_user_id)
+    {
+        $this->db->select("COUNT(*) total_review")->from('freelancer_review fr');
+        $this->db->join('freelancer_post_reg fp', 'fp.user_id = fr.from_user_id', 'left');
+        $this->db->where('fr.to_user_id', $to_user_id);
+        $this->db->where('fr.status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function get_company_info($to_user_id)
+    {
+        $select_data = "fpr.comp_name,fpr.comp_number,fpr.comp_email,fpr.comp_skypeid,fpr.comp_website,fpr.comp_exp_year,fpr.comp_exp_month,fpr.comp_teamsize,fpr.comp_founded_year,fpr.comp_founded_month,fpr.comp_service_offer,fpr.comp_logo,fpr.freelancer_post_city,ct.city_name,fpr.freelancer_post_state,st.state_name,fpr.freelancer_post_country,cr.country_name,c.category_name as freelancer_post_field_txt,fpr.freelancer_post_field";
+        $this->db->select($select_data)->from('freelancer_post_reg fpr');        
+        $this->db->join('cities ct', 'ct.city_id = fpr.freelancer_post_city', 'left');
+        $this->db->join('states st', 'st.state_id = fpr.freelancer_post_state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fpr.freelancer_post_country', 'left');
+        $this->db->join('category c', 'c.category_id = fpr.freelancer_post_field', 'left');
+        $this->db->where(array('fpr.is_delete' => '0', 'fpr.status' => '1'));
+        $this->db->where('fpr.user_id', $to_user_id);
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function set_save_company_info($userid,$comp_name,$comp_field,$comp_email = "",$comp_skype = "",$comp_number = "",$comp_teamsize = "",$comp_website = "",$comp_founded_year = "",$comp_founded_month = "",$comp_service_offer = "",$comp_exp_year = "",$comp_exp_month = "",$company_country = "",$company_state = "",$company_city = "",$fileName = "")
+    {
+            $data = array(
+                'comp_name'             => $comp_name,
+                'freelancer_post_field' => $comp_field,
+                'comp_email'            => $comp_email,
+                'comp_skypeid'          => $comp_skype ,
+                'comp_number'           => $comp_number,
+                'comp_teamsize'         => $comp_teamsize,
+                'comp_website'          => $comp_website,
+                'comp_founded_year'     => $comp_founded_year,
+                'comp_founded_month'    => $comp_founded_month,
+                'comp_service_offer'    => $comp_service_offer,                
+                'comp_exp_year'         => $comp_exp_year,                
+                'comp_exp_month'        => $comp_exp_month,                
+                'freelancer_post_country' => $company_country,                
+                'freelancer_post_state' => $company_state,                
+                'freelancer_post_city'  => $company_city,                
+                'comp_logo'             => $fileName,
+                'modify_date'         => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->update('freelancer_post_reg', $data);
+
+            if(trim($data['freelancer_post_country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $data['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                $data['country_name'] = trim($country_name);
+            }
+
+            if(trim($data['freelancer_post_state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $data['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                $data['state_name'] = trim($state_name);
+            }
+
+            if(trim($data['freelancer_post_city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $data['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                $data['city_name'] = trim($city_name);
+            }
+            if(trim($data['freelancer_post_field']) != "")
+            {
+                $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
+                $data['freelancer_post_field_txt'] = trim($field_name);
+            }
+
+            $this->db->where('user_id', $userid);
+            $this->db->update('freelancer_post_reg_search_tmp', $data);
+            return true;
+    }
+
+    public function get_basic_info($to_user_id)
+    {
+        $select_data = "fpr.freelancer_post_fullname as first_name,fpr.freelancer_post_username as last_name,fpr.current_position,jt.name as current_position_txt,c.category_name as freelancer_post_field_txt,fpr.freelancer_post_field,fpr.freelancer_post_email,fpr.freelancer_post_phoneno,fpr.freelancer_post_skypeid,fpr.freelancer_post_city,ct.city_name,fpr.freelancer_post_state,st.state_name,fpr.freelancer_post_country,cr.country_name";
+        $this->db->select($select_data)->from('freelancer_post_reg fpr');        
+        $this->db->join('cities ct', 'ct.city_id = fpr.freelancer_post_city', 'left');
+        $this->db->join('states st', 'st.state_id = fpr.freelancer_post_state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fpr.freelancer_post_country', 'left');
+        $this->db->join('category c', 'c.category_id = fpr.freelancer_post_field', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = fpr.current_position', 'left');
+        $this->db->where(array('fpr.is_delete' => '0', 'fpr.status' => '1'));
+        $this->db->where('fpr.user_id', $to_user_id);
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 }

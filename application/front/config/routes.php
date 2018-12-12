@@ -755,6 +755,23 @@ $route['freelancer/get_user_prof_summary'] = "freelancer/get_user_prof_summary";
 $route['freelancer/save_company_overview'] = "freelancer/save_company_overview";
 $route['freelancer/get_user_company_overview'] = "freelancer/get_user_company_overview";
 
+$route['freelancer/save_user_tagline'] = "freelancer/save_user_tagline";
+$route['freelancer/get_user_tagline'] = "freelancer/get_user_tagline";
+
+$route['freelancer/save_user_availability'] = "freelancer/save_user_availability";
+$route['freelancer/get_user_availability'] = "freelancer/get_user_availability";
+
+$route['freelancer/save_user_rate'] = "freelancer/save_user_rate";
+$route['freelancer/get_user_rate'] = "freelancer/get_user_rate";
+
+$route['freelancer/save_review'] = "freelancer/save_review";
+$route['freelancer/get_review'] = "freelancer/get_review";
+
+$route['freelancer/get_company_info'] = "freelancer/get_company_info";
+$route['freelancer/save_company_info'] = "freelancer/save_company_info";
+
+$route['freelancer/get_basic_info'] = "freelancer/get_basic_info";
+$route['freelancer/save_user_basic'] = "freelancer/save_user_basic";
 
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 $route['freelancer-new/(:any)'] = "freelancer/freelancer_post_profile_new/$1";

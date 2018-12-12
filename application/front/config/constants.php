@@ -391,11 +391,12 @@ if (IMAGEPATHFROM == 's3bucket') {
 
     define('REVIEW_UPLOAD_URL', BUCKETLINK . 'uploads/rating/');
 
-    define('FREE_APPLY_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_education/');
-    define('FREE_APPLY_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_experience/');
-    define('FREE_APPLY_ADDICOURSE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_addicourse/');
-    define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_publication/');
-    define('FREE_APPLY_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_hire_user_project/');
+    define('FREE_APPLY_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_user_education/');
+    define('FREE_APPLY_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_user_experience/');
+    define('FREE_APPLY_ADDICOURSE_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_user_addicourse/');
+    define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_user_publication/');
+    define('FREE_APPLY_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_user_project/');
+    define('FREE_APPLY_COMP_LOGO_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_comp_logo/');
 
 } else {
     //USER PHOTO 
@@ -640,11 +641,12 @@ if (IMAGEPATHFROM == 's3bucket') {
 
     define('REVIEW_UPLOAD_URL', BASEURL . 'uploads/rating/');
 
-    define('FREE_APPLY_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_education/');
-    define('FREE_APPLY_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_experience/');
-    define('FREE_APPLY_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_addicourse/');
-    define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_publication/');
-    define('FREE_APPLY_PROJECT_UPLOAD_URL', BASEURL . 'uploads/freelancer_hire_user_project/');
+    define('FREE_APPLY_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_education/');
+    define('FREE_APPLY_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_experience/');
+    define('FREE_APPLY_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_addicourse/');
+    define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_publication/');
+    define('FREE_APPLY_PROJECT_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_project/');
+    define('FREE_APPLY_COMP_LOGO_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_comp_logo/');
 
 }
 

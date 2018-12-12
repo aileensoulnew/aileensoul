@@ -58,6 +58,19 @@
                 $fa_profile = 1;
             }
         }
+        if(isset($fa_data))
+        {
+            if($fa_data['is_indivdual_company'] == '1')
+            {
+                $fa_fullname = $fa_data['fullname'].' '.$fa_data['username'];
+                $fa_no_img = strtoupper(substr($fa_data['fullname'], 0,1).' '.substr($fa_data['username'], 0,1));
+            }
+            else
+            {
+                $fa_fullname = $fa_data['comp_name'];
+                $fa_no_img = strtoupper(substr($fa_fullname, 0,1));
+            }
+        }
         $segment_array = $this->uri->segment_array();
         $user_slug = $segment_array[count($segment_array)];
 
@@ -319,46 +332,50 @@
                         <div class="gallery-item">
                             <div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/about.png"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/about.png"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right" ng-click="edit_basic_info();"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
                                 </div>
-                                <div class="dtl-dis dtl-box-height">
-                                    <ul class="dis-list">
-                                        
-                                        <li>
-                                            <span>Job Title</span>
-                                            Sr. Multimedia Designer
-                                        </li>
-                                        <li>
-                                            <span>Field</span>
-                                            IT Field
-                                        </li>
-                                        <li>
-                                            <span>Email</span>
-                                            harshad2406patoliya@gmail.com
-                                        </li>
-                                        <li>
-                                            <span>Phone Number</span>
-                                            +91 951005589
-                                        </li>
-                                        <li>
-                                            <span>Skype</span>
-                                            harshad2406
-                                        </li>
-                                        <li>
-                                            <span>Timezone</span>
-                                            GMT 21:45
-                                        </li>
-                                        
-                                        <li>
-                                            <span>Location</span>
-                                            Ahmedabad, Gujrat , India
-                                        </li>
-                                        
-                                    </ul>
+                                <div id="basic-info-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
                                 </div>
-                                <div class="about-more">
-                                    <a href="#">View More <img src="<?php echo base_url().'assets/'; ?>n-images/detail/down-arrow.png"></a>
+                                <div id="basic-info-body" style="display: none;">
+                                    <div id="basic-detail" class="dtl-dis dtl-box-height">
+                                        <ul class="dis-list">                                        
+                                            <li ng-if="basic_info.current_position">
+                                                <span>Job Title</span>
+                                                <label>{{basic_info.current_position_txt}}</label>
+                                            </li>
+                                            <li ng-if="basic_info.freelancer_post_field">
+                                                <span>Field</span>
+                                                <label>{{basic_info.freelancer_post_field_txt}}</label>
+                                            </li>
+                                            <li ng-if="basic_info.freelancer_post_email">
+                                                <span>Email</span>
+                                                <label>{{basic_info.freelancer_post_email}}</label>
+                                            </li>
+                                            <li ng-if="basic_info.freelancer_post_phoneno && basic_info.freelancer_post_phoneno > '0'">
+                                                <span>Phone Number</span>
+                                                <label>{{basic_info.freelancer_post_phoneno}}</label>
+                                            </li>
+                                            <li ng-if="basic_info.freelancer_post_skypeid">
+                                                <span>Skype</span>
+                                                <label>{{basic_info.freelancer_post_skypeid}}</label>
+                                            </li>                                            
+                                            
+                                            <li ng-if="basic_info.city_name != '' || basic_info.state_name != '' || basic_info.country_name != ''">
+                                                <span>Location</span>
+                                                <label ng-if="basic_info.city_name != ''">{{basic_info.city_name}}{{basic_info.city_name != '' && basic_info.state_name != '' ? ',' : ''}}</label>
+                                                <label ng-if="basic_info.state_name != ''"> {{basic_info.state_name}}{{basic_info.state_name != '' && basic_info.country_name != '' ? ',' : ''}}</label>
+                                                <label ng-if="basic_info.country_name != ''"> {{basic_info.country_name}}</label>
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>                                
                                 </div>
+                                    <div id="view-more-basic" class="about-more" style="display: none;">
+                                        <a href="#" ng-click="view_more_basic();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                    </div>
                                 
                             </div>
                         </div>
@@ -450,13 +467,6 @@
                                 <div class="dtl-title">
                                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png">
                                     <span>Experience
-                                        <!-- <span class="exp-y-m-inner" style="display:none;" ng-if="job_basic_info.experience == 'Fresher'">(Fresher)</span>
-                                        <span class="exp-y-m-inner" style="display:none;" ng-if="job_basic_info.experience == 'Experience' && (exp_years > '0' || exp_months > '0')">(
-                                            <span ng-if="exp_years > '0'">{{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
-                                            <span ng-if="exp_months > '0'">{{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
-                                             )
-                                         </span>
-                                        <span class="exp-y-m-inner" style="display:none;" ng-if="job_basic_info.experience == 'Experience' && (job_basic_info.exp_m || job_basic_info.exp_y)">({{job_basic_info.exp_y}} {{job_basic_info.exp_m}})</span> -->
                                         <span class="exp-y-m-inner" style="display:none;" ng-if="(exp_years > '0' || exp_months > '0')">(
                                             <span ng-if="exp_years > '0'">{{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
                                             <span ng-if="exp_months > '0'">{{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
@@ -608,88 +618,75 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right" ng-click="edit_company_info()"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Company Name</span>
-											Verv System pvt ltd
-										</li>
-										<li>
-											<span>Industry</span>
-											IT Field
-										</li>
-										<li>
-											<span>Company Email </span>
-											harshad2406patoliya@gmail.com
-										</li>
-										<li>
-											<span>Company Phone number</span>
-											+91 951005589
-										</li>
-										<li>
-											<span>Skype</span>
-											harshad2406
-										</li>
-										<li>
-											<span>Website URL</span>
-											www.vervsystem.com
-										</li>
-										<li>
-											<span>Team Size</span>
-											105
-										</li>
-										
-										<li>
-											<span>Timezone</span>
-											GMT 21:45
-										</li>
-										<li>
-											<span>Company Founded</span>
-											June 2008
-										</li>
-										<li>
-											<span>Company Overview</span>
-											Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.. <a href="#">Read More</a>
-										</li>
-										<li>
-											<span>Services you offer</span>
-											<ul>
-												<li>Web design</li>
-												<li>Graphic design</li>
-												<li>SEO</li>
-											</ul>
-										</li>
-										
-										<li>
-											<span>Total Experience</span>
-											5 Year 7 Month
-										</li>
-										<li>
-											<span>Skills you offer</span>
-											<ul class="skill-list">
-												<li>Devloping</li>
-												<li>Desigining</li>
-												<li>Marketing</li>
-											</ul>
-										</li>
-										
-										<li>
-											<span>Location</span>
-											Ahmedabad, Gujrat , India
-										</li>
-										<li>
-											<span>Company Logo</span>
-											<a href="#"><img style="width:80px;" src="<?php echo base_url('assets/n-images/detail/pr-web.png?ver=' . time()) ?>"></a>
-										</li>
-										
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
+                                <div id="comp-info-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="comp-info-body" style="display: none;">
+    								<div id="conpany-detail" class="dtl-dis dtl-box-height">
+    									<ul class="dis-list list-ul-cus">
+    										<li>
+    											<span>Company Name</span>
+    											<label>{{company_info.comp_name}}</label>
+    										</li>
+    										<li>
+    											<span>Industry</span>
+    											<label>{{company_info.freelancer_post_field_txt}}</label>
+    										</li>
+    										<li>
+    											<span>Company Email </span>
+    											<label>{{company_info.comp_email}}</label>
+    										</li>
+    										<li ng-if="company_info.comp_number">
+    											<span>Company Phone number</span>
+    											<label>{{company_info.comp_number}}</label>
+    										</li>
+    										<li ng-if="company_info.comp_skypeid">
+    											<span>Skype</span>
+    											<label>{{company_info.comp_skypeid}}</label>
+    										</li>
+    										<li ng-if="company_info.comp_website">
+    											<span>Website URL</span>
+    											<label>{{company_info.comp_website}}</label>
+    										</li>
+    										<li ng-if="company_info.comp_teamsize && company_info.comp_teamsize > '0'">
+    											<span>Team Size</span>
+    											{{company_info.comp_teamsize}}
+    										</li>										
+    										<li ng-if="company_info.comp_founded_year && company_info.comp_founded_month">
+    											<span>Company Founded</span>
+                                                <label>{{all_months[company_info.comp_founded_month - '1']}}</label>
+                                                <label>{{company_info.comp_founded_year}}</label>
+    										</li>										
+    										<li ng-if="company_info.comp_website">
+    											<span>Services you offer</span>
+    											<label>{{company_info.comp_website}}</label>
+    										</li>					
+                                            <li ng-if="company_info.comp_exp_year > '0' || company_info.comp_exp_month > '0'">
+                                                    <span>Total Experience</span>
+                                                    <label>{{company_info.comp_exp_year}} Year{{company_info.comp_exp_year > '1' ? 's' : ''}}</label>
+                                                    <label>{{company_info.comp_exp_month}} Month{{company_info.comp_exp_month > '1' ? 's' : ''}}</label>
+                                                </li>
+    										<li ng-if="company_info.city_name != '' || company_info.state_name != '' || company_info.country_name != ''">
+    											<span>Location</span>
+    											<label ng-if="company_info.city_name != ''">{{company_info.city_name}}{{company_info.city_name != '' && company_info.state_name != '' ? ',' : ''}}</label>
+                                                <label ng-if="company_info.state_name != ''"> {{company_info.state_name}}{{company_info.state_name != '' && company_info.country_name != '' ? ',' : ''}}</label>
+                                                <label ng-if="company_info.country_name != ''"> {{company_info.country_name}}</label>
+    										</li>
+    										<li ng-if="company_info.comp_logo">
+    											<span>Company Logo</span>
+    											<a href="<?php echo FREE_APPLY_COMP_LOGO_UPLOAD_URL; ?>{{company_info.comp_logo}}" target="_blank"><img style="width:80px;" ng-src="<?php echo FREE_APPLY_COMP_LOGO_UPLOAD_URL; ?>{{company_info.comp_logo}}"></a>
+    										</li>
+    										
+    									</ul>
+    								</div>
+                                </div>
+                                <div id="view-more-about" class="about-more" style="display: none;">
+                                    <a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>  
 							</div>
 						</div>
                         <?php endif; ?>
@@ -805,9 +802,23 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis">
-									<p>Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all.</p>
-								</div>
+                                <div id="tagline-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="tagline-body" style="display: none;">
+                                    <div class="dtl-dis">
+                                        <div class="no-info" ng-if="user_tagline == ''">
+                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                            <span>No Tagline</span>
+                                        </div>
+                                        <div class="" ng-if="user_tagline != ''">
+                                            <h4>Description</h4>
+                                            <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{user_tagline}}" dd-text-collapse-cond="true">{{user_tagline}}</p>
+                                        </div>
+                                    </div>
+                                </div>
 							</div>
 						</div>
 						
@@ -815,12 +826,30 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right" ng-click="edit_user_rate();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis">
-									<p>450 rs Per hour</p>
-									<p>Work On Fixed Rate.</p>
-								</div>
+                                <div id="rate-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="rate-body" style="display: none;">
+    								<div class="dtl-dis">
+                                        <div class="no-info" ng-if="!user_rate.rate_currency && !user_rate.rate_amt && !user_rate.rate_type">
+                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                            <span>No Rate</span>
+                                        </div>
+                                        <div class="" ng-if="user_rate.rate_currency || user_rate.rate_amt || user_rate.rate_type">
+                                            <p>
+                                                <label ng-if="user_rate.rate_amt">{{user_rate.rate_amt}}</label>
+                                                <label ng-if="user_rate.rate_currency">{{user_rate.currency_name | limitTo:3}}</label>
+                                                <label ng-if="user_rate.rate_type == '1'">Per Hour</label>
+                                                <label ng-if="user_rate.rate_type == '2'">Per Week</label>
+                                                <label ng-if="user_rate.rate_type == '3'">Per Month</label>
+                                            </p>
+                                        </div>
+    								</div>
+                                </div>
 							</div>
 						</div>
 
@@ -828,66 +857,100 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right" ng-click="edit_user_availability();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Duration per week</span>
-											0 to 25 hrs/week
-										</li>
-										<li>
-											<span>Status</span>
-											Available
-										</li>
-									</ul>
-								</div>
+                                <div id="availability-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="availability-body" style="display: none;">
+    								<div class="dtl-dis">
+                                        <div class="no-info" ng-if="!user_availability.freelancer_avail_week && !user_availability.freelancer_avail_status">
+                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                            <span>No Availability</span>
+                                        </div>
+    									<ul class="dis-list list-ul-cus" ng-if="user_availability.freelancer_avail_week || user_availability.freelancer_avail_status">
+    										<li ng-if="user_availability.freelancer_avail_week">
+    											<span>Duration per week</span>
+                                                <label ng-if="user_availability.freelancer_avail_week == '1'">0 to 25 hrs/week</label>
+                                                <label ng-if="user_availability.freelancer_avail_week == '2'">B/w 25 to 50 hrs/week</label>
+    											<label ng-if="user_availability.freelancer_avail_week == '3'">More 50 hrs/week</label>
+    										</li>
+    										<li ng-if="user_availability.freelancer_avail_status">
+    											<span>Status</span>
+    											<label ng-if="user_availability.freelancer_avail_status == '1'">Available</label>
+                                                <label ng-if="user_availability.freelancer_avail_status == '2'">Will Look</label>
+                                                <label ng-if="user_availability.freelancer_avail_status == '3'">Not Available</label>
+                                                <label ng-if="user_availability.freelancer_avail_status == '4'">Currently on Leave</label>
+    										</li>
+    									</ul>
+    								</div>
+                                </div>
 							</div>
 						</div>
 						
+                        
 						<!--  11 Reviews  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>"><span>Reviews</span>
-									
-									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
+                                    <?php if($fh_profile == 1): ?>
+									   <a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>"> <span>Write a review</span></a>
+                                    <?php endif; ?>
 								</div>
-								<div class="dtl-dis">
-									<div class="total-rev">
-										<span class="total-rat">4.8</span>
-                                        <span class="rating-star">
-                                            <div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
-												</span>
-												<span class="rev-count">59 Reviews</span>
-												
-												
-									</div>
-									<ul class="review-list">
-										<li>
-											<div class="review-left">
-												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-											</div>
-											<div class="review-right">
-												<h4>Yatin Belani</h4>
-												<div class="rating-star-cus">
-													<span class="rating-star">
-                                                        <div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
-												</span>
-												</div>
-												<div class="review-dis">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
-												</div>
-											</div>
-										</li>
-										
-									</ul>
-									<div class="form-group">
-										
-									</div>
-									
-								</div>
+								<div id="review-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="review-body" style="display: none;">
+                                    <div class="dtl-dis">
+                                        <div class="no-info" ng-if="review_data.length < '1'">
+                                            <img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+                                            <?php if(isset($fh_login_data) && !empty($fh_login_data) && $login_userid != '' && $fh_userid != $login_userid): ?>
+                                            <span>Be the first to post your review.</span>
+                                            <?php else: ?>
+                                                <span>There are no reviews right now.</span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div ng-if="review_data.length > '0' && review_count > '0'">
+                                        <div class="total-rev">
+                                            <span class="total-rat">{{avarage_review}}</span> 
+                                            <span class="rating-star">
+                                                <input id="rating-1" type="number" value="{{avarage_review}}">
+                                            </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
+                                        </div>
+                                        </div>
+                                        <ul class="review-list">
+                                            <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
+                                                <div class="review-left" ng-if="!review_list.user_image">
+                                                    <div class="rev-img">
+                                                        <div class="post-img-profile">
+                                                            {{review_list.first_name | limitTo:1}} {{review_list.last_name |  limitTo:1}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="review-left" ng-if="review_list.user_image">
+                                                    <img ng-src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
+                                                </div>
+                                                <div class="review-right">
+                                                    <h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
+                                                    <div class="rating-star-cus">
+                                                        <span class="rating-star">
+                                                        <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
+                                                            </span>
+                                                    </div>
+                                                    <div class="review-dis" ng-if="review_list.review_desc">
+                                                        {{review_list.review_desc}}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
 							</div>
 						</div>
 						
@@ -1052,12 +1115,17 @@
 
                     </div>
 				</div>
-			<div class="right-add">			
+			<div class="right-add add-detail">			
 					
 				<div class="row">
-					<div class="dtl-box p10 dtl-adv">
-						<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
-					</div>
+                    <div class="right-add-box"> 
+                        <div class="dtl-box p10 dtl-adv cus-add-block">
+                            <!-- <img src="<?php //echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>"> -->
+                        </div>
+                    </div>
+					<!-- <div class="dtl-box p10 dtl-adv">
+						<img src="<?php //echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+					</div> -->
 					
 					<!-- edit profile  -->
 					<div class="rsp-dtl-box">
@@ -1193,127 +1261,119 @@
                         <div class="dtl-title">
                             <span>Basic Information</span>
                         </div>
-                        <div class="dtl-dis">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" placeholder="First Name">
+                        <form name="basic_info_form" id="basic_info_form" ng-validate="basic_info_validate">
+                            <div class="dtl-dis">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" placeholder="First Name" id="first_name" name="first_name" maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" placeholder="Last Name" id="last_name" name="last_name" maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" placeholder="Last Name">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Job Title </label>
+                                            <input type="text" class="form-control" id="current_position" name="current_position" ng-model="current_position" ng-keyup="current_position_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" placeholder="Job Title" maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Field</label>
+                                            <span class="span-select">
+                                                <select id="basic_field" name="basic_field" ng-model="basic_field" class="form-control">
+                                                    <option value="" selected="selected" disabled="">Select Field</option>
+                                                    <?php
+                                                    if (count($category_data) > 0) {
+                                                        foreach ($category_data as $cnt) {
+                                                            ?>
+                                                            <option value="<?php echo $cnt['category_id']; ?>"><?php echo $cnt['category_name']; ?></option>
+                                                        <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Email </label>
+                                            <input type="text" placeholder="Email" id="basic_email" name="basic_email" maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Job Title </label>
-                                        <input type="text" placeholder="Job Title">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Skype </label>
+                                            <input type="text" placeholder="Skype" id="basic_skype" name="basic_skype" maxlength="255">
+                                        </div>
                                     </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" placeholder="Phone Number" id="basic_phoneno" name="basic_phoneno" ng-model="basic_phoneno" numbers-only maxlength="15">
+                                        </div>
+                                    </div>                                
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Field </label>
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Field</option>
-                                                <option>IT field</option>
-                                                <option>Other</option>
-                                            </select>
-                                        </span>
+                                
+                                <div class="row">
+                                    <label class="col-md-12 fw">Address</label>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+                                        <div class="form-group">
+                                            <span class="span-select">
+                                                <select id="basic_country" name="basic_country" ng-model="basic_country" ng-change="basic_country_change()" class="form-control">
+                                                    <option value="">Country</option>         
+                                                    <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+                                        <div class="form-group">
+                                            <span class="span-select">
+                                                <select id="basic_state" name="basic_state" ng-model="basic_state" ng-change="basic_state_change()" disabled = "disabled" class="form-control">
+                                                    <option value="">State</option>
+                                                    <option data-ng-repeat='state_item in basic_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                                </select>
+                                                <img id="basic_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;z-index: 9;">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+                                        <div class="form-group">
+                                            <span class="span-select">
+                                                <select id="basic_city" name="basic_city" ng-model="basic_city" disabled = "disabled" class="form-control">
+                                                    <option value="">City</option>
+                                                    <option data-ng-repeat='city_item in basic_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                                </select>
+                                                <img id="basic_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;z-index: 9;">
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 
                             </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Email </label>
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input type="text" placeholder="Phone Number">
-                                    </div>
+                            <div class="dtl-btn">
+                                <a id="save_user_basic" href="#" ng-click="save_user_basic()" class="save"><span>Save</span></a>
+                                <div id="user_basic_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Skype </label>
-                                        <input type="text" placeholder="Skype">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Time Zone </label>
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Time Zone</option>
-                                                <option>Time Zone</option>
-                                                <option>Time Zone</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            
-                            
-                            <div class="row">
-                                <label class="col-md-12 fw">Address</label>
-                                <div class="col-md-4 col-sm-4 col-xs-4 hw-479">
-                                    <div class="form-group">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Country</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-4 hw-479">
-                                    <div class="form-group">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>State</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-                                    <div class="form-group">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>City </option>
-                                                <option>2015</option>
-                                                <option>2016</option>
-                                                <option>2017</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="dtl-btn">
-                            <a href="#" class="save"><span>Save</span></a>
-                        </div>
-                    </div>  
-
-
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1392,7 +1452,7 @@
                                             <span class="span-select">
                                                 <select id="exp_country" name="exp_country" ng-model="exp_country" ng-change="exp_country_change()">
                                                     <option value="">Country</option>         
-                                                    <option data-ng-repeat='country_item in exp_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                    <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
                                                 </select>
                                             </span>
                                             </div>
@@ -1725,227 +1785,209 @@
     					<div class="dtl-title">
     						<span>Company Information</span>
     					</div>
-    					<div class="dtl-dis">
-    						<div class="row">
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Company Name</label>
-    									<input type="text" placeholder="Enter Company Name">
-    								</div>
-    							</div>
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Industry </label>
-    									<span class="span-select">
-    										<select>
-    											<option>Select Field</option>
-    											<option>It Field</option>
-    											<option>Design</option>
-    											<option>Advertizing</option>
-    										</select>
-    									</span>
-    								</div>
-    								
-    							</div>
+                        <form name="company_info_form" id="company_info_form" ng-validate="company_info_validate">
+        					<div class="dtl-dis">
+        						<div class="row">
+        							<div class="col-md-6 col-sm-6">
+        								<div class="form-group">
+        									<label>Company Name</label>
+        									<input type="text" placeholder="Enter Company Name" id="comp_name" name="comp_name" maxlength="255">
+        								</div>
+        							</div>
+        							<div class="col-md-6 col-sm-6">
+        								<div class="form-group">
+        									<label>Industry </label>
+        									<span class="span-select">
+                                                <select id="comp_field" name="comp_field" tabindex="6" ng-model="comp_field">
+                                                    <option value="">Select Industry</option>
+                                                    <?php
+                                                    if (count($category_data) > 0) {
+                                                        foreach($category_data as $cnt)
+                                                        { ?>
+                                                            <option value="<?php echo $cnt['category_id']; ?>"><?php echo $cnt['category_name']; ?></option>
+                                                        <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>    										
+        									</span>
+        								</div>
+        								
+        							</div>
+        						</div>
+        						<div class="row">
+        							<div class="col-md-12 col-sm-12">
+        								<div class="form-group">
+        									<label>Company Email </label>
+        									<input type="text" placeholder="Company Email" id="comp_email" name="comp_email" maxlength="255">
+        								</div>
+        							</div>
+        							
+        						</div>
+        						<div class="row">
+        							<div class="col-md-6 col-sm-6">
+        								<div class="form-group">
+        									<label>Skype</label>
+        									<input type="text" placeholder="Skype" id="comp_skype" name="comp_skype" maxlength="20">
+        								</div>
+        								
+        							</div>
+        							<div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Company Phone number</label>
+                                            <input type="text" placeholder="Company Phone number" name="comp_number" id="comp_number" ng-model="comp_number" numbers-only maxlength="15">
+                                        </div>
+        							</div>
+        						</div>
+        						<div class="row">
+        							<div class="col-md-6 col-sm-6 col-xs-6">
+        								<div class="form-group">
+        									<label>Team Size</label>
+        									<input type="text" placeholder="Team Size" id="comp_teamsize" name="comp_teamsize" maxlength="5">
+        								</div>
+        								
+        							</div>
+        							<div class="col-md-6 col-sm-6 col-xs-6">
+        								<div class="form-group">
+                                            <label>Website URL<span class="link-must">(Must be http:// or https://)</span></label>
+                                            <input type="text" placeholder="Enter Website URL" name="comp_website" id="comp_website" maxlength="255">
+                                        </div>
+        							</div>
+        						</div>
+        						<div class="row total-exp">
+        							<label class="col-md-12 fw">
+        								Company Founded
+        							</label>
+        							<div class="col-md-6 col-sm-6 col-xs-6">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select class="form-control" id="comp_founded_year" name="comp_founded_year" ng-model="comp_founded_year" ng-change="comp_founded_year_change();">
+                                                    <option value="">Select Year</option>
+                                                    <?php
+                                                    $y = date("Y");
+                                                    for ($i=$y; $i > $y - 100; $i--) { ?>
+                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php
+                                                    } ?>
+                                                </select>	
+        									</span>
+        								</div>
+        							</div>
+        							<div class="col-md-6 col-sm-6 col-xs-6">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select class="form-control" id="comp_founded_month" name="comp_founded_month">
+                                                    <option value="">Select Month</option>
+                                                </select>	
+        									</span>
+        								</div>
+        							</div>
+        							
+        								
+        						</div>
+        						<div class="row">    							
+        							<div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Services you offer</label>
+                                            <textarea type="text" placeholder="Service you hire for" id="comp_service_offer" name="comp_service_offer" ng-model="comp_service_offer" maxlength="700"></textarea>
+                                            <span class="pull-right">{{700 - comp_service_offer.length}}</span>
+                                        </div>
+                                    </div>
+        						</div>
+        						
+        						
+        						<div class="row">
+        							<label class="col-md-12 fw">Total Experience</label>
+        							<div class="col-md-6 col-sm-6 col-xs-6">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select class="form-control" id="comp_exp_year" name="comp_exp_year">
+                                                    <option value="">Select Year</option>
+                                                    <?php                                               
+                                                    for ($j=0; $j <= 20; $j++) { ?>
+                                                        <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+                                                    <?php
+                                                    } ?>
+                                                </select>
+        									</span>
+        								</div>
+        							</div>
+        							<div class="col-md-6 col-sm-6 col-xs-6">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select class="form-control" id="comp_exp_month" name="comp_exp_month">
+                                                    <option value="">Select Month</option>
+                                                    <?php                                               
+                                                    for ($k=0; $k <= 11; $k++) { ?>
+                                                        <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
+                                                    <?php
+                                                    } ?>
+                                                </select>
+        									</span>
+        								</div>
+        							</div>
+        						</div>	
+        						
+        						<div class="row total-exp">
+        							<label class="col-md-12 fw">
+        								Company Address
+        							</label>
+        							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select id="company_country" name="company_country" ng-model="company_country" ng-change="comp_country_change()" class="form-control">
+                                                    <option value="">Country</option>         
+                                                    <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                                </select>
+        									</span>
+        								</div>
+        							</div>
+        							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select id="company_state" name="company_state" ng-model="company_state" ng-change="comp_state_change()" disabled = "disabled" class="form-control">
+                                                        <option value="">State</option>
+                                                        <option data-ng-repeat='state_item in company_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                                    </select>
+                                                    <img id="company_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;z-index: 9;">
+        									</span>
+        								</div>
+        							</div>
+        							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+        								<div class="form-group">
+        									<span class="span-select">
+        										<select id="company_city" name="company_city" ng-model="company_city" disabled = "disabled" class="form-control">
+                                                    <option value="">City</option>
+                                                    <option data-ng-repeat='city_item in company_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                                </select>
+                                                <img id="company_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;z-index: 9;">
+        									</span>
+        								</div>
+        							</div>
+        						</div>
+        						
+        						<div class="form-group">
+                                    <div class="upload-file">
+                                        <span class="fw">Upload Company Logo</span>
+                                        <input type="file" id="comp_logo" name="comp_logo">
+                                        <span id="comp_logo_error" class="error" style="display: none;"></span>
+                                    </div>
+        						</div>
+        					</div>
+        					<div class="dtl-btn">
+    							<a id="save_company_info" href="#" ng-click="save_company_info()" class="save"><span>Save</span></a>
+                                <div id="company_info_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
     						</div>
-    						<div class="row">
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Company Email </label>
-    									<input type="text" placeholder="Company Email ">
-    								</div>
-    							</div>
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Company Phone number</label>
-    									<input type="text" placeholder="Company Phone number">
-    								</div>
-    							</div>
-    						</div>
-    						<div class="row">
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Skype</label>
-    									<input type="text" placeholder="Skype">
-    								</div>
-    								
-    							</div>
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Website URL</label>
-    									<input type="text" placeholder="Enter Website URL">
-    								</div>
-    							</div>
-    						</div>
-    						<div class="row">
-    							<div class="col-md-6 col-sm-6 col-xs-6">
-    								<div class="form-group">
-    									<label>Team Size</label>
-    									<input type="text" placeholder="Company Phone number">
-    								</div>
-    								
-    							</div>
-    							<div class="col-md-6 col-sm-6 col-xs-6">
-    								<div class="form-group">
-    									<label>Timezone</label>
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>Timezone</option>
-    											<option>januari</option>
-    											<option>Fabruari</option>
-    											<option>March</option>
-    											<option>April</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    						</div>
-    						
-    						
-    						<div class="row total-exp">
-    							<label class="col-md-12 fw">
-    								Company Founded
-    							</label>
-    							<div class="col-md-6 col-sm-6 col-xs-6">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>Year</option>
-    											<option>2014</option>
-    											<option>2015</option>
-    											<option>2016</option>
-    											<option>2017</option>
-    										</select>	
-    									</span>
-    								</div>
-    							</div>
-    							<div class="col-md-6 col-sm-6 col-xs-6">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>Month</option>
-    											<option>januari</option>
-    											<option>Fabruari</option>
-    											<option>March</option>
-    											<option>April</option>
-    										</select>	
-    									</span>
-    								</div>
-    							</div>
-    							
-    								
-    						</div>
-    						<div class="row">
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    									<label>Company Overview</label>
-    									<textarea row="4" type="text" placeholder="Company Overview"></textarea>
-    								</div>
-    							</div>
-    							<div class="col-md-6 col-sm-6">
-    								<div class="form-group">
-    							<label>Services you offer</label>
-    							<textarea type="text" placeholder="Services you offer"></textarea>
-    						</div>
-    							</div>
-    						</div>
-    						
-    						
-    						<div class="row">
-    							<label class="col-md-12 fw">Total Experience</label>
-    							<div class="col-md-6 col-sm-6 col-xs-6">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select>
-    											<option>1</option>
-    											<option>2</option>
-    											<option>3</option>
-    											<option>4</option>
-    											<option>5</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    							<div class="col-md-6 col-sm-6 col-xs-6">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select>
-    											<option>1</option>
-    											<option>2</option>
-    											<option>3</option>
-    											<option>4</option>
-    											<option>5</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    						</div>	
-    						<div class="form-group">
-    							<label>Skills you offer</label>
-    							<input type="text" placeholder="Skills you offer">
-    						</div>
-    						<div class="row total-exp">
-    							<label class="col-md-12 fw">
-    								Company Address
-    							</label>
-    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>Country</option>
-    											<option>2015</option>
-    											<option>2016</option>
-    											<option>2017</option>
-    											<option>2018</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>State</option>
-    											<option>januari</option>
-    											<option>Fabruari</option>
-    											<option>March</option>
-    											<option>April</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-    								<div class="form-group">
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>City</option>
-    											<option>januari</option>
-    											<option>Fabruari</option>
-    											<option>March</option>
-    											<option>April</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    						</div>
-    						
-    						<div class="form-group">
-    							<label class="upload-file">
-    								Upload Company Logo <input type="file">
-    							</label>
-    						</div>
-    					</div>
-    					<div class="dtl-btn">
-    							<a href="#" class="save"><span>Save</span></a>
-    						</div>
-    				</div>	
-
-
+                        </form>
+    				</div>
                 </div>
             </div>
         </div>
         <?php endif; ?>
     	
+        <?php if($fh_profile == '1'): ?>
     	<!-- modal Reviews  -->
     	<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     		<div class="modal-dialog">
@@ -1955,38 +1997,50 @@
     					<div class="dtl-title">
     						<span>Reviews</span>
     					</div>
-    					<div class="dtl-dis">
-    						<div class="form-group">
-    							<div class="rev-img">
-    								<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-    							</div>
-    							<div class="total-rev-top">
-    								<h4>Harshad Patoliya</h4>
-    								<span class="rating-star">
-    			<input id="input-21b" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
-    								</span>
-    							</div>
-    						</div>
-    						<div class="form-group">
-    							<label>Description</label>
-    							<textarea type="text" placeholder="Description"></textarea>
-    						</div>
-    						<div class="form-group">
-    							<label class="upload-file">
-    								<span class="fw">Upload Photo</span> <input type="file">
-    							</label>
-    						</div>
-    				
-    					</div>
-    					<div class="dtl-btn bottom-btn">
-    						<a href="#" class="save"><span>Save</span></a>
-    					</div>
-    				</div>	
-
-
+                        <form id="freelancer_hire_profile_review" name="freelancer_hire_profile_review" ng-validate="freelancer_hire_profile_review_validate">
+        					<div class="dtl-dis">
+        						<div class="form-group">    							
+                                    <div class="rev-img">
+                                        <?php if($fa_data['freelancer_hire_user_image'] != ''):?>
+                                        <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL.$fa_data['freelancer_hire_user_image']; ?>">
+                                        <?php else: ?>
+                                        <div class="post-img-profile">
+                                            <?php echo ucwords(substr($fa_no_img)); ?>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="total-rev-top">
+                                        <h4><?php echo ucwords($fa_fullname); ?></h4>
+                                        <span class="rating-star">
+                                            <input id="review_star" value="5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
+                                        </span>
+                                    </div>
+        						</div>
+        						<div class="form-group">
+        							<label>Description</label>
+        							<textarea type="text" placeholder="Description" id="review_desc" name="review_desc" maxlength="700" ng-model="review_desc"></textarea>
+                                    <span class="pull-right">{{700 - review_desc.length}}</span>
+        						</div>
+        						<div class="form-group">
+        							<div class="upload-file">
+                                        <span class="fw">Upload Photo</span>
+                                        <input type="file" id="review_file" name="review_file">
+                                        <span id="review_file_error" class="error" style="display: none;"></span>
+                                    </div>
+        						</div>    				
+        					</div>
+        					<div class="dtl-btn bottom-btn">
+        						<a id="save_review" href="#" ng-click="save_review()" class="save"><span>Save</span></a>
+                                <div id="review_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
+        					</div>
+                        </form>
+    				</div>
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     	
     	
     	
@@ -2081,52 +2135,51 @@
     					<div class="dtl-title">
     						<span>Rate</span>
     					</div>
-    					<div class="dtl-dis">
-    						<div class="row">
-    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-    								<div class="form-group">
-    									<label>Currency</label>
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>rs</option>
-    											<option>$</option>
-    											<option>Pound</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-    								<div class="form-group">
-    									<label>Amount</label>
-    									<input type="text" placeholder="Amount">
-    								
-    								</div>
-    							</div>
-    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-    								<div class="form-group">
-    									<label>Per</label>
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>Per hour</option>
-    											<option>Per Week</option>
-    											<option>Per Month</option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
+                        <form name="rate_form" id="rate_form" ng-validate="rate_validate">
+        					<div class="dtl-dis">
+        						<div class="row">
+        							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+        								<div class="form-group">
+        									<label>Currency</label>
+        									<span class="span-select">
+        										<?php $currency = $this->data_model->get_currency_list();?>
+                                                <select class="form-control" name="rate_currency" id="rate_currency" ng-model="rate_currency">
+                                                    <option value="">Select Currency</option>
+                                                    <?php foreach ($currency as $key => $value) { ?>
+                                                        <option value="<?php echo $value['currency_id']; ?>""><?php echo $value['currency_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+        									</span>
+        								</div>
+        							</div>
+        							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+        								<div class="form-group">
+        									<label>Amount</label>
+        									<input type="text" placeholder="Amount" id="rate_amt" name="rate_amt" ng-model="rate_amt" numbers-only>
+                                        </div>
+        							</div>
+        							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+        								<div class="form-group">
+        									<label>Per</label>
+        									<span class="span-select">
+        										<select class="form-control" id="rate_type" name="rate_type">
+                                                    <option value="">Select Rate Type</option>
+        											<option value="1">Per hour</option>
+        											<option value="2">Per Week</option>
+        											<option value="3">Per Month</option>
+        										</select>
+        									</span>
+        								</div>
+        							</div>
+        						</div>
+        					</div>
+        					<div class="dtl-btn bottom-btn">
+    							<a id="save_user_rate" href="javascript:void(0);" ng-click="save_user_rate()" class="save"><span>Save</span></a>
+                                <div id="user_rate_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
     						</div>
-    						<div class="form-group">
-    							<label class="control control--checkbox">
-    								<input type="checkbox">Work On Fixed Rate.
-    								<div class="control__indicator">
-    								</div>
-    							</label>
-    						</div>
-    				
-    					</div>
-    					<div class="dtl-btn bottom-btn">
-    							<a href="#" class="save"><span>Save</span></a>
-    						</div>
+                        </form>
     				</div>	
 
 
@@ -2144,41 +2197,46 @@
     					<div class="dtl-title">
     						<span>Availability</span>
     					</div>
-    					<div class="dtl-dis">
-    						<div class="row">
-    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-    								<div class="form-group">
-    									<label>Duration per week</label>
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>0 to 25 hrs/week</option>
-    											<option>B/w 25 to 50 hrs/week</option>
-    											<option> More 50 hrs/week </option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-    								<div class="form-group">
-    									<label>Status</label>
-    									<span class="span-select">
-    										<select class="form-control">
-    											<option>Available</option>
-    											<option>Will Look</option>
-    											<option>Not Available </option>
-    											<option>Currently on Leave </option>
-    										</select>
-    									</span>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    					<div class="dtl-btn bottom-btn">
-    							<a href="#" class="save"><span>Save</span></a>
-    						</div>
-    				</div>	
-
-
+                        <form name="availability_form" id="availability_form" ng-validate="availability_validate">
+        					<div class="dtl-dis">
+        						<div class="row">
+        							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+        								<div class="form-group">
+        									<label>Duration per week</label>
+        									<span class="span-select">
+        										<select class="form-control" id="freelancer_avail_week" name="freelancer_avail_week">
+                                                    <option value="">Select Duration per week</option>
+        											<option value="1">0 to 25 hrs/week</option>
+        											<option value="2">B/w 25 to 50 hrs/week</option>
+        											<option value="3"> More 50 hrs/week </option>
+        										</select>
+        									</span>
+        								</div>
+        							</div>
+        							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+        								<div class="form-group">
+        									<label>Status</label>
+        									<span class="span-select">
+        										<select class="form-control" id="freelancer_avail_status" name="freelancer_avail_status">
+                                                    <option value="">Select Status</option>
+        											<option value="1">Available</option>
+        											<option value="2">Will Look</option>
+        											<option value="3">Not Available </option>
+        											<option value="4">Currently on Leave </option>
+        										</select>
+        									</span>
+        								</div>
+        							</div>
+        						</div>
+        					</div>
+        					<div class="dtl-btn bottom-btn">
+                                <a id="save_user_availability" href="javascript:void(0);" ng-click="save_user_availability()" class="save"><span>Save</span></a>
+                                <div id="user_availability_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
+                            </div>
+                        </form>
+    				</div>
                 </div>
             </div>
         </div>
@@ -2194,17 +2252,18 @@
     					</div>
     					<div class="dtl-dis">
     						<div class="form-group">
-    							
-    							<textarea type="text" placeholder="Tagline"></textarea>
+                                <textarea name="user_tagline" id="user_tagline" ng-model="user_tagline" type="text" placeholder="Tagline" maxlength="700">{{user_tagline}}</textarea>
+                                <span class="pull-right">{{700 - user_tagline.length}}</span>
     						</div>
     				
     					</div>
     					<div class="dtl-btn bottom-btn">
-    							<a href="#" class="save"><span>Save</span></a>
-    						</div>
-    				</div>	
-
-
+                            <a id="user_tagline_save" href="#" ng-click="save_user_tagline()" class="save"><span>Save</span></a>
+                            <div id="user_tagline_loader" class="dtl-popup-loader" style="display: none;">
+                                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                            </div>
+                        </div>
+    				</div>
                 </div>
             </div>
         </div>
@@ -2872,228 +2931,7 @@
             </div>
         </div>
         <!-- Model Popup Close -->
-        <!-- register -->
-
-        <div class="modal fade register-model login" data-backdrop="static" data-keyboard="false" id="register" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content inner-form1">
-                    <!--<button type="button" class="modal-close" data-dismiss="modal">&times;</button>-->       
-                    <div class="modal-body">
-                        <div class="clearfix">
-                            <div class="">
-                                <div class="title"><h1 class="tlh1">Sign up First and Register in Employer Profile</h1></div>
-                                <div class="main-form">
-                                    <form role="form" name="register_form" id="register_form" method="post">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input tabindex="101" autofocus="" type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input tabindex="102" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input tabindex="103" type="text" name="email_reg" id="email_reg" class="form-control input-sm" placeholder="Email Address" autocomplete="new-email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input tabindex="104" type="password" name="password_reg" id="password_reg" class="form-control input-sm" placeholder="Password" autocomplete="new-password">
-
-                                        </div>
-                                        <div class="form-group dob">
-                                            <label class="d_o_b"> Date Of Birth :</label>
-                                            <span><select tabindex="105" class="day" name="selday" id="selday">
-                                                    <option value="" disabled selected value>Day</option>
-                                                    <?php
-                                                    for ($i = 1; $i <= 31; $i++) {
-                                                        ?>
-                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </select></span>
-                                            <span>
-                                                <select tabindex="106" class="month" name="selmonth" id="selmonth">
-                                                    <option value="" disabled selected value>Month</option>
-                                                    //<?php
-                 // for($i = 1; $i <= 12; $i++){
-                 
-                                                    ?>
-                                                    <option value="1">Jan</option>
-                                                    <option value="2">Feb</option>
-                                                    <option value="3">Mar</option>
-                                                    <option value="4">Apr</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">Jun</option>
-                                                    <option value="7">Jul</option>
-                                                    <option value="8">Aug</option>
-                                                    <option value="9">Sep</option>
-                                                    <option value="10">Oct</option>
-                                                    <option value="11">Nov</option>
-                                                    <option value="12">Dec</option>
-                                                    //<?php
-                 // }
-                 
-                                                    ?>
-                                                </select></span>
-                                            <span>
-                                                <select tabindex="107" class="year" name="selyear" id="selyear">
-                                                    <option value="" disabled selected value>Year</option>
-                                                    <?php
-                                                    for ($i = date('Y'); $i >= 1900; $i--) {
-                                                        ?>
-                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                        <?php
-                                                    }
-                                                    ?>
-
-                                                </select>
-                                            </span>
-                                        </div>
-                                        <div class="dateerror" style="color:#f00; display: block;"></div>
-
-                                        <div class="form-group gender-custom">
-                                            <span><select tabindex="108" class="gender"  onchange="changeMe(this)" name="selgen" id="selgen">
-                                                    <option value="" disabled selected value>Gender</option>
-                                                    <option value="M">Male</option>
-                                                    <option value="F">Female</option>
-                                                </select>
-                                            </span>
-                                        </div>
-
-                                        <p class="form-text" style="margin-bottom: 10px;">
-                                            By Clicking on create an account button you agree our
-                                            <a tabindex="109" title="Terms and Condition" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="110" title="Privacy policy" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
-                                        </p>
-                                        <p>
-                                            <button tabindex="111" class="btn1">Create an account</button>
-
-                                        </p>
-                                        <div class="sign_in pt10">
-                                            <p>
-                                                Already have an account ? <a title=" Log In" tabindex="112" onClick="login_profile();" href="javascript:void(0);"> Log In </a>
-                                            </p>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- register -->
-
-        <!-- Login  -->
-        <div class="modal fade login" id="login" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content login-frm">
-                    <!--<button type="button" class="modal-close" data-dismiss="modal">&times;</button>-->       
-                    <div class="modal-body">
-                        <div class="right-main">
-                            <div class="right-main-inner">
-                                <div class="">
-                                    <div class="title">
-                                        <h1 class="ttc tlh2">Welcome To Aileensoul</h1>
-                                    </div>
-
-                                    <form role="form" name="login_form" id="login_form" method="post">
-
-                                        <div class="form-group">
-                                            <input type="email" value="<?php echo $email; ?>" name="email_login" id="email_login" autofocus="" class="form-control input-sm" placeholder="Email Address*">
-                                            <div id="error2" style="display:block;">
-                                                <?php
-                                                if ($this->session->flashdata('erroremail')) {
-                                                    echo $this->session->flashdata('erroremail');
-                                                }
-                                                ?>
-                                            </div>
-                                            <div id="errorlogin"></div> 
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password_login" id="password_login" class="form-control input-sm" placeholder="Password*">
-                                            <div id="error1" style="display:block;">
-                                                <?php
-                                                if ($this->session->flashdata('errorpass')) {
-                                                    echo $this->session->flashdata('errorpass');
-                                                }
-                                                ?>
-                                            </div>
-                                            <div id="errorpass"></div> 
-                                        </div>
-
-                                        <p class="pt-20 ">
-                                            <button class="btn1" onclick="login()">Login</button>
-                                        </p>
-
-                                        <p class=" text-center">
-                                            <a title="Forgot Password" href="javascript:void(0)" data-toggle="modal" onclick="forgot_profile();" id="myBtn">Forgot Password ?</a>
-                                        </p>
-
-                                        <p class="pt15 text-center">
-                                            Don't have an account? <a title="Create an account" class="db-479" href="javascript:void(0);" data-toggle="modal" onclick="register_profile();">Create an account</a>
-                                        </p>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <!-- Login -->
-        <!-- model for forgot password start -->
-        <div class="modal fade login" id="forgotPassword" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content login-frm">
-                    <button type="button" class="modal-close" data-dismiss="modal" onclick="login_profile1();">&times;</button>       
-                    <div class="modal-body">
-                        <div class="right-main">
-                            <div class="right-main-inner">
-                                <div class="">
-                                    <div id="forgotbuton"></div> 
-                                    <div class="title">
-                                        <p class="ttc tlh2">Forgot Password</p>
-                                    </div>
-                                    <?php
-                                    $form_attribute = array('name' => 'forgot', 'method' => 'post', 'class' => 'forgot_password', 'id' => 'forgot_password');
-                                    echo form_open('profile/forgot_password', $form_attribute);
-                                    ?>
-                                    <div class="form-group">
-                                        <input type="email" value="" name="forgot_email" id="forgot_email" class="form-control input-sm" placeholder="Email Address*">
-                                        <div id="error2" style="display:block;">
-                                            <?php
-                                            if ($this->session->flashdata('erroremail')) {
-                                                echo $this->session->flashdata('erroremail');
-                                            }
-                                            ?>
-                                        </div>
-                                        <div id="errorlogin"></div> 
-                                    </div>
-
-                                    <p class="pt-20 text-center">
-                                        <input class="btn btn-theme btn1" type="submit" name="submit" value="Submit" style="width:105px; margin:0px auto;" /> 
-                                    </p>
-
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
    
         <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
@@ -3119,11 +2957,17 @@
             var user_slug = '<?php echo $user_slug; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
 
+            var from_user_id = '<?php echo $fa_data['user_id']; ?>';
+            var to_user_id = '<?php echo $freelancerpostdata['0']['user_id']; ?>';
+
+            
+
             var free_apply_education_upload_url = '<?php echo FREE_APPLY_EDUCATION_UPLOAD_URL; ?>';
             var free_apply_experience_upload_url = '<?php echo FREE_APPLY_EXPERIENCE_UPLOAD_URL; ?>';
             var free_apply_addicourse_upload_url = '<?php echo FREE_APPLY_ADDICOURSE_UPLOAD_URL; ?>';
             var free_apply_publication_upload_url = '<?php echo FREE_APPLY_PUBLICATION_UPLOAD_URL; ?>';
             var free_apply_project_upload_url = '<?php echo FREE_APPLY_PROJECT_UPLOAD_URL; ?>';
+            var free_apply_comp_logo_upload_url = '<?php echo FREE_APPLY_COMP_LOGO_UPLOAD_URL; ?>';
 
             var app = angular.module("freelanceApplyProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
         </script>
@@ -3163,7 +3007,7 @@
 		}
 		});
 
-        jQuery(document).ready(function () {
+        /*jQuery(document).ready(function () {
 				$("#input-21f").rating({
 					starCaptions: function (val) {
 						if (val < 3) {
@@ -3216,7 +3060,7 @@
 				$("#input-21c").rating({
 					min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
 				});
-		});
+		});*/
         $(document).ready(function () {
 				if (screen.width <= 1199) {
 					$("#edit-profile-move").appendTo($(".edit-profile-move"));
