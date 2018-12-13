@@ -1399,7 +1399,7 @@ class Freelancer extends MY_Controller {
         // code for display page start
         $this->freelancer_apply_check();
         // code for display page end
-        $this->progressbar();
+        // $this->progressbar();
         // job seeker detail
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1412,7 +1412,18 @@ class Freelancer extends MY_Controller {
         $contition_array = array('freelancer_apply.job_delete' => '0', 'freelancer_apply.user_id' => $userid);
         $postdata = $this->data['postdata'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data = 'freelancer_post.*, freelancer_apply.app_id, freelancer_apply.user_id as userid, freelancer_apply.modify_date, freelancer_apply.created_date ', $sortby = 'freelancer_apply.modify_date', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-        $this->data['title'] = ucfirst($jobdata[0]['freelancer_post_fullname']) . " " . ucfirst($jobdata[0]['freelancer_post_username']) . " | Applied Projects | Freelancer Profile" . TITLEPOSTFIX;
+        $contition_array = array('user_id' => $userid, 'status' => '1', 'free_post_step' => '7');
+        $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        if($apply_data[0]['is_indivdual_company'] == '1')
+        {
+            $fullname = ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']);
+        }
+        else
+        {
+            $fullname = ucfirst($apply_data[0]['comp_name']);   
+        }
+
+        $this->data['title'] = ucfirst($fullname). " | Applied Projects | Freelancer Profile" . TITLEPOSTFIX;
         $this->load->view('freelancer_live/freelancer_post/freelancer_applied_post', $this->data);
     }
 
@@ -1700,12 +1711,22 @@ class Freelancer extends MY_Controller {
         // code for display page start
         $this->freelancer_apply_check();
         // code for display page end
-        $this->progressbar();
+        // $this->progressbar();
         // job seeker detail
-        $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1', 'free_post_step' => '7');
-        $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname,freelancer_post_username', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $contition_array = array('user_id' => $userid, 'status' => '1', 'free_post_step' => '7');
+        $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->data['title'] = ucfirst($jobdata[0]['freelancer_post_fullname']) . " " . ucfirst($jobdata[0]['freelancer_post_username']) . " | Saved Projects | Freelancer Profile " . TITLEPOSTFIX;
+        $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1', 'free_post_step' => '7');
+        $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname,freelancer_post_username,is_indivdual_company,comp_name', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        if($jobdata[0]['is_indivdual_company'] == '1')
+        {
+            $fullname = ucfirst($jobdata[0]['freelancer_post_fullname']) . " " . ucfirst($jobdata[0]['freelancer_post_username']);
+        }
+        else
+        {
+            $fullname = ucfirst($jobdata[0]['comp_name']);   
+        }
+        $this->data['title'] =  $fullname. " | Saved Projects | Freelancer Profile " . TITLEPOSTFIX;
         $this->load->view('freelancer_live/freelancer_post/freelancer_save_post', $this->data);
     }
 
@@ -2031,7 +2052,7 @@ class Freelancer extends MY_Controller {
             $this->freelancer_apply_check();
             // code for display page end
 
-            $this->progressbar();
+            // $this->progressbar();
 
             $contition_array = array('user_id' => $userid, 'status' => '1', 'free_post_step' => '7');
             $apply_data = $this->data['freelancerpostdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -5278,5 +5299,13 @@ class Freelancer extends MY_Controller {
             $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $user_id);
         }
         return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
+    }
+
+    public function get_freelancer_apply_progress()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $profile_progress = $this->progressbar_new($userid);
+        $ret_arr = array("success"=>1,"profile_progress"=>$profile_progress);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

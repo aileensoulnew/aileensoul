@@ -178,3 +178,47 @@ $(document).ready(function () {
     $('html,body').animate({scrollTop: 265}, 100);
 });
 //FOR SCROLL PAGE AT PERTICULAR POSITION JS END
+
+function get_freelancer_apply_progress() {
+    $.ajax({
+        type: 'POST',
+        url: base_url +'freelancer/get_freelancer_apply_progress',
+        data: '',
+        dataType: "JSON",
+        success: function (data) {            
+            // data = JSON.parse(data);
+            var profile_progress = data.profile_progress;
+            count_profile_value = profile_progress.user_process_value;
+            count_profile = profile_progress.user_process;            
+            set_progress(count_profile_value,count_profile);
+            
+        }
+    });
+}
+
+function set_progress(count_profile_value,count_profile)
+{
+    if(count_profile == 100)
+    {
+        $("#profile-progress").show();
+        $("#progress-txt").html("Hurray! Your profile is complete.");
+        setTimeout(function(){
+            // $("#edit-profile-move").hide();
+        },5000);
+    }
+    else
+    {
+        $("#edit-profile-move").show();
+        $("#profile-progress").show();                
+        $("#progress-txt").html("<a href='"+base_url+'freelancer/'+freelancer_apply_slug+"'>Complete your profile to get connected with more people</a>.");   
+    }
+    // if($scope.old_count_profile < 100)
+    {
+        $('.second.circle-1').circleProgress({
+            value: count_profile_value //with decimal point
+        }).on('circle-animation-progress', function(event, progress) {
+            $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+        });
+    }
+}
+get_freelancer_apply_progress();

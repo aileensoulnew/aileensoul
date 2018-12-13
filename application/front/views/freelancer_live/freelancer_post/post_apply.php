@@ -398,61 +398,23 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                             <div id="loader" style="display:none;"><p style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>"/></p></div>
                         </div>
 
-                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-
+                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
 							<?php $this->load->view('right_add_box'); ?>
                             <div class="edi_origde">
-                                    <?php
-                                    
-                                    if ($count_profile == 100) {
-                                        if ($freepostdata[0]['progressbar'] == 0) {
-                                            ?>
-                                            <div class="edit_profile_progress complete_profile">
-                                                <div class="progre_bar_text">
-                                                    <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
-                                                </div>
-                                                <div class="count_main_progress">
-                                                    <div class="circles">
-                                                        <div class="second circle-1 ">
-                                                            <div class="true_progtree">
-                                                                <img alt="Completed" src="<?php echo base_url("assets/img/true.png"); ?>">
-                                                            </div>
-                                                            <div class="tr_text">
-                                                                Successfully Completed
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                    } else {
-                                        ?>
-                                        <div class="edit_profile_progress">
-                                            <div class="progre_bar_text">
-                                                <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
-                                            </div>
-                                            <div class="count_main_progress">
-                                                <div class="circles">
-                                                    <div class="second circle-1">
-                                                        <div>
-                                                            <strong></strong>
-
-                                                            <a href="<?php echo base_url('freelancer/basic-information') ?>" class="edit_profile_job">Edit Profile</a>
-
-                                                        </div>
-                                                    </div>
+                                <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                    <div class="count_main_progress">
+                                        <div class="circles">
+                                            <div class="second circle-1">
+                                                <div>
+                                                    <strong></strong>
+                                                    <span id="progress-txt"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
-                                    }
-                                    ?>
+                                    </div>
+                                </div>
                             </div>
-                            
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -702,6 +664,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
             var title = '<?php echo $title; ?>';
             var login_user_id = '<?php echo $userid; ?>';
             var fa_profile_set = '<?php echo $this->freelance_apply_profile_set; ?>';
+            var freelancer_apply_slug = '<?php echo $fa_slug; ?>';
             var app = angular.module('FARecommendedProject', ['ui.bootstrap','angular-google-adsense']);
         </script>
 
