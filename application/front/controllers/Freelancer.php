@@ -3800,7 +3800,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -3819,7 +3819,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -3939,7 +3939,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -3977,7 +3977,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4206,7 +4206,7 @@ class Freelancer extends MY_Controller {
 
         $user_languages = $this->freelancer_apply_model->get_user_languages($userid);
         $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4270,7 +4270,7 @@ class Freelancer extends MY_Controller {
         $user_social_links_data = $this->freelancer_apply_model->get_user_social_links($userid);        
         $user_personal_links_data = $this->freelancer_apply_model->get_user_personal_links($userid);        
         $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4341,7 +4341,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4516,7 +4516,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);   
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
 
@@ -4609,7 +4609,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);   
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
 
@@ -4643,7 +4643,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);   
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
 
@@ -4834,7 +4834,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 

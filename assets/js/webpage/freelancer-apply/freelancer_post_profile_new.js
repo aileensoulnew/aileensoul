@@ -2286,7 +2286,6 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
 
     // Skills Start
     $scope.save_user_skills = function(){
-
         $("#user_skills_loader").show();
         $("#user_skills_save").attr("style","pointer-events:none;display:none;");
         var updatedata = $.param({"user_skills":$scope.edit_user_skills});
@@ -2313,11 +2312,9 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             var count_profile_value = profile_progress.user_process_value;
             var count_profile = profile_progress.user_process;
             $scope.progress_status = profile_progress.progress_status;
-            $scope.set_progress(count_profile_value,count_profile);
-            
+            $scope.set_progress(count_profile_value,count_profile);            
             // $("#skills .modal-close").click();
-        });
-        
+        });        
     };
 
     $scope.reset_user_skills = function(){
@@ -2693,8 +2690,6 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
 
         });
     }
-    
-    // $scope.get_user_project();
 
     $scope.view_more_proj = 2;
     $scope.proj_view_more = function(){
