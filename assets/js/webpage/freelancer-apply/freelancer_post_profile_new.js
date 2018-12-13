@@ -125,6 +125,8 @@ app.filter('wordFirstCase', function () {
 app.controller('freelanceApplyProfileController', function ($scope, $http,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.all_months = all_months;
+    $scope.fa_profile = fa_profile;
+    $scope.fh_profile = fh_profile;
 
     function load_add_detail()
     {

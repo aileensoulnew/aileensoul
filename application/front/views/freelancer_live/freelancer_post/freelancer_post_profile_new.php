@@ -332,7 +332,10 @@
                         <div class="gallery-item">
                             <div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/about.png"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right" ng-click="edit_basic_info();"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/about.png"><span>Basic Information</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                    <a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right" ng-click="edit_basic_info();"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="basic-info-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -384,7 +387,10 @@
                         <div class="gallery-item">
                             <div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" ng-click="reset_edu_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                    <a href="#" data-target="#educational-info" data-toggle="modal" ng-click="reset_edu_form();" class="pull-right" ng-if="fa_profile == '1' && fh_profile == '0'"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="edution-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -414,7 +420,7 @@
                                                             <p ng-if="user_edu.edu_degree != '0'">{{user_edu.degree_name}}</p>
                                                         </div>
                                                         <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_edu($index)" class="pr5" ng-if="live_slug == segment2">
+                                                            <span role="button" ng-click="edit_user_edu($index)" class="pr5" ng-if="fa_profile == '1' && fh_profile == '0'">
                                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                             </span>
                                                             <span role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
@@ -473,7 +479,9 @@
                                              )
                                          </span>
                                     </span>
-                                        <a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" ng-if="fa_profile == '1' && fh_profile == '0'" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="exp-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -502,7 +510,7 @@
                                                             <p>{{user_exp.designation}}</p>
                                                         </div>
                                                         <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_exp($index)" class="pr5" ng-if="live_slug == segment2">
+                                                            <span role="button" ng-click="edit_user_exp($index)" class="pr5" ng-if="fa_profile == '1' && fh_profile == '0'">
                                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                             </span>
                                                             <span role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
@@ -556,7 +564,10 @@
                         <div class="gallery-item ">
                             <div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/edution.png"><span>Profile Summary</span><a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/edution.png"><span>Profile Summary</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="prof-summary-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -583,7 +594,10 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Company Overview</span><a href="#" data-target="#company-overview" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Company Overview</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#company-overview" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                    <?php endif; ?>
 								</div>
                                 <div id="company-overview-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -618,7 +632,10 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span><a href="#" data-target="#com-info" data-toggle="modal" class="pull-right" ng-click="edit_company_info()"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/company-info.png?ver=' . time()) ?>"><span>Company Information</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#com-info" data-toggle="modal" class="pull-right" ng-click="edit_company_info()"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                    <?php endif; ?>
 								</div>
                                 <div id="comp-info-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -703,7 +720,10 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>"><span>Portfolio</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>"><span>Portfolio</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                    <?php endif; ?>
 								</div>
 								<div id="project-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -733,7 +753,7 @@
                                                             <p ng-if="user_proj.project_field != '0'"> {{user_proj.project_field_txt}}</p>
                                                         </div>
                                                         <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_project($index)" class="pr5" ng-if="live_slug == segment2">
+                                                            <span role="button" ng-click="edit_user_project($index)" class="pr5" ng-if="fa_profile == '1' && fh_profile == '0'">
                                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                             </span>
                                                             <span role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
@@ -800,7 +820,10 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span><a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/tagline.png?ver=' . time()) ?>"><span>Tagline</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#tagline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                    <?php endif; ?>
 								</div>
                                 <div id="tagline-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -826,7 +849,10 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span><a href="#" data-target="#rate" data-toggle="modal" class="pull-right" ng-click="edit_user_rate();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/rate.png?ver=' . time()) ?>"><span>Rate</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#rate" data-toggle="modal" class="pull-right" ng-click="edit_user_rate();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                    <?php endif ?>
 								</div>
                                 <div id="rate-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -857,7 +883,10 @@
 						<div class="gallery-item ">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span><a href="#" data-target="#availability" data-toggle="modal" class="pull-right" ng-click="edit_user_availability();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/availability.png?ver=' . time()) ?>"><span>Availability</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#availability" data-toggle="modal" class="pull-right" ng-click="edit_user_availability();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+                                    <?php endif; ?>
 								</div>
                                 <div id="availability-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -959,7 +988,10 @@
 						<div class="gallery-item">
                             <div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/add-course.png"><span>Additional Course</span><a href="#" data-target="#additional-course" data-toggle="modal" ng-click="reset_addicourse_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/add-course.png"><span>Additional Course</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#additional-course" data-toggle="modal" ng-click="reset_addicourse_form();" class="pull-right" ng-if="fa_profile == '1' && fh_profile == '0'"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="addicourse-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -988,7 +1020,7 @@
                                                             <p>{{user_course.addicourse_org}}</p>
                                                         </div>
                                                         <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_addicourse($index)" class="pr5" ng-if="live_slug == segment2">
+                                                            <span role="button" ng-click="edit_user_addicourse($index)" class="pr5" ng-if="fa_profile == '1' && fh_profile == '0'">
                                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                             </span>
                                                             <span role="button" data-toggle="collapse" data-parent="#addicourse-accordion" href="#addicourse{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
@@ -1035,7 +1067,10 @@
 						<div class="gallery-item">
                             <div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/publication.png"><span>Publication</span><a href="#" data-target="#publication" data-toggle="modal" ng-click="reset_publication_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/publication.png"><span>Publication</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#publication" data-toggle="modal" ng-click="reset_publication_form();" class="pull-right" ng-if="fa_profile == '1' && fh_profile == '0'"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="publication-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -1064,7 +1099,7 @@
                                                             <p>{{user_pub.pub_author}}</p>
                                                         </div>
                                                         <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_publication($index)" class="pr5" ng-if="live_slug == segment2">
+                                                            <span role="button" ng-click="edit_user_publication($index)" class="pr5" ng-if="fa_profile == '1' && fh_profile == '0'">
                                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                             </span>
                                                             <span role="button" data-toggle="collapse" data-parent="#publication-accordion" href="#publication{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed"> 
@@ -1128,6 +1163,7 @@
 					</div> -->
 					
 					<!-- edit profile  -->
+                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
 					<div class="rsp-dtl-box">
 						<div class="dtl-box" id="edit-profile-move">
 							<div class="dtl-title">
@@ -1189,12 +1225,16 @@
 							</div>
 						</div>
 					</div>
+                    <?php endif; ?>
 					
 					<!-- skills  -->
 					<div class="rsp-dtl-box">
 						<div id="skill-move" class="dtl-box">
                             <div class="dtl-title">
-                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/skill.png"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right" ng-click="reset_user_skills();" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/skill.png"><span>Skills</span>
+                                <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                    <a href="#" data-target="#skills" data-toggle="modal" class="pull-right" ng-click="reset_user_skills();" ng-if="fa_profile == '1' && fh_profile == '0'"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                                <?php endif; ?>
                             </div>
                             <div id="skill-loader" class="dtl-dis">
                                 <div class="text-center">
@@ -1219,7 +1259,10 @@
 					<div class="rsp-dtl-box">
                         <div id="social-link-move" class="dtl-box">
                             <div class="dtl-title">
-                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                                <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span>
+                                <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                    <a href="#" data-target="#social-link" data-toggle="modal" class="pull-right" ng-if="fa_profile == '1' && fh_profile == '0'"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                                <?php endif; ?>
                             </div>
                             <div id="social-link-loader" class="dtl-dis">
                                 <div class="text-center">
@@ -1267,7 +1310,10 @@
                     <div class="rsp-dtl-box ">
                         <div id="language-move" class="dtl-box">
                             <div class="dtl-title">
-                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span>
+                                <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                    <a href="#" data-target="#language" data-toggle="modal" class="pull-right" ng-if="fa_profile == '1' && fh_profile == '0'"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                <?php endif; ?>
                             </div>
                             <div id="language-loader" class="dtl-dis">
                                 <div class="text-center">
@@ -3011,7 +3057,8 @@
             var to_user_id = '<?php echo $freelancerpostdata['0']['user_id']; ?>';
             var is_indivdual_company = '<?php echo $is_indivdual_company; ?>';
 
-            
+            var fa_profile = '<?php echo $fa_profile; ?>';
+            var fh_profile = '<?php echo $fh_profile; ?>';
 
             var free_apply_education_upload_url = '<?php echo FREE_APPLY_EDUCATION_UPLOAD_URL; ?>';
             var free_apply_experience_upload_url = '<?php echo FREE_APPLY_EXPERIENCE_UPLOAD_URL; ?>';
