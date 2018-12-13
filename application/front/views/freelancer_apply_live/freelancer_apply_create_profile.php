@@ -245,7 +245,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" name="comp_website" id="comp_website" tabindex="17" placeholder="Website url" maxlength="255">
+                                            <input class="form-control" type="text" name="comp_website" id="comp_website" tabindex="17" placeholder="Website" maxlength="255">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-12">

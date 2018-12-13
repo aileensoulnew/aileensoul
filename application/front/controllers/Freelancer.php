@@ -5278,7 +5278,7 @@ class Freelancer extends MY_Controller {
             }
             $progress_status['user_comp_logo_status'] = $user_comp_logo;
 
-            $user_process = ($count * 100) / 24;
+            $user_process = ($count * 100) / 28;
         }
 
         $user_process_value = ($user_process / 100);

@@ -3558,9 +3558,6 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
                 required: true,
                 email:true,
             },
-            comp_skype: {
-                required: true,
-            },
             comp_number: {
                 required: true,
             },
@@ -3899,7 +3896,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#profile-progress").show();
             $("#progress-txt").html("Hurray! Your profile is complete.");
             setTimeout(function(){
-                // $("#edit-profile-move").hide();
+                $("#edit-profile-move").hide();
             },5000);
         }
         else

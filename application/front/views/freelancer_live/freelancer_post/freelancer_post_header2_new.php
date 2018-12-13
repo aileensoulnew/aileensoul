@@ -164,7 +164,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 										</svg>
 									View Profile </a>
 								</li>
-								<li><a href="<?php echo base_url('freelancer/basic-information'); ?>">
+								<!-- <li><a href="<?php //echo base_url('freelancer/basic-information'); ?>">
 									<svg x="0px" y="0px" width="15px" height="15px" viewBox="0 0 485.219 485.22">
 										<g>
 											<path d="M467.476,146.438l-21.445,21.455L317.35,39.23l21.445-21.457c23.689-23.692,62.104-23.692,85.795,0l42.886,42.897
@@ -179,7 +179,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 										</g>
 										</svg>
 										Edit Profile </a>
-								</li>
+								</li> -->
 								<!-- <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
 							</ul>
 						</li>
@@ -242,7 +242,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 						<ul class="dropdown-menu account">
 							<li>Freelancer Account</li>
 							<li><a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
-							<li><a href="<?php echo base_url('freelancer/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
+							<!-- <li><a href="<?php echo base_url('freelancer/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li> -->
 						</ul>
 					</li>
 				</ul>
