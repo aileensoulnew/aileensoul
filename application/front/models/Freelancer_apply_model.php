@@ -1592,8 +1592,8 @@ class Freelancer_apply_model extends CI_Model {
     public function get_save_review($to_user_id)
     {
         $this->db->select("IF(fh.is_indivdual_company = '1',fh.fullname,fh.comp_name) as first_name,IF(fh.is_indivdual_company = '1',fh.username,'') as last_name, freelancer_hire_user_image as user_image,fr.*")->from('freelancer_review fr');
-        $this->db->join('freelancer_hire_reg fh', 'fh.user_id = fr.from_user_id', 'left');
-        $this->db->where('fr.to_user_id', $to_user_id);
+        $this->db->join('freelancer_hire_reg fh', 'fh.user_id = fr.to_user_id', 'left');
+        $this->db->where('fr.from_user_id', $to_user_id);
         $this->db->where('fr.status', '1');
         $this->db->order_by('fr.created_date', 'desc');
         $query = $this->db->get();
@@ -1603,8 +1603,8 @@ class Freelancer_apply_model extends CI_Model {
 
     public function get_review_avarage($to_user_id)
     {
-        $this->db->select("review_star,count(from_user_id) as rating_count")->from('freelancer_review');        
-        $this->db->where('to_user_id', $to_user_id);
+        $this->db->select("review_star,count(to_user_id) as rating_count")->from('freelancer_review');        
+        $this->db->where('from_user_id', $to_user_id);
         $this->db->where('status', '1');
         $this->db->group_by('review_star');
         $query = $this->db->get();
@@ -1615,8 +1615,8 @@ class Freelancer_apply_model extends CI_Model {
     public function get_review_count($to_user_id)
     {
         $this->db->select("COUNT(*) total_review")->from('freelancer_review fr');
-        $this->db->join('freelancer_post_reg fp', 'fp.user_id = fr.from_user_id', 'left');
-        $this->db->where('fr.to_user_id', $to_user_id);
+        $this->db->join('freelancer_post_reg fp', 'fp.user_id = fr.to_user_id', 'left');
+        $this->db->where('fr.from_user_id', $to_user_id);
         $this->db->where('fr.status', '1');
         $query = $this->db->get();
         $result_array = $query->row_array();

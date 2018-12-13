@@ -84,7 +84,7 @@
             <div id="regi-form-individual" class="container mob-plr0">
                 <div class="job_reg_page_fprm">
                     <div class="job_reg_main fw job-reg-cus-new">
-                        <h3>Indivdual</h3>
+                        <h3>Individual</h3>
                         <div class="fw p20">
                             <form id="freelancer_apply_individual_regi" name="freelancer_apply_individual_regi" ng-validate="freelancer_apply_individual_regi_validate">
                                 <div class="row">
