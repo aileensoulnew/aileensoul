@@ -1134,8 +1134,58 @@
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 							</div>
 							<div class="dtl-dis dtl-edit-p">
-								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
-								
+								<!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+                                <div class="dtl-edit-top"></div>
+                                <div class="profile-status">
+                                    <ul>
+                                        <li><span class=""><img ng-if="progress_status.user_image_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.profile_background_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+                                        
+                                        <li><span class=""><img ng-if="progress_status.user_availability_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Availability</li>
+
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.user_skills_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Skills</li>
+
+                                        <li><span class=""><img ng-if="progress_status.user_languages_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Languages</li>
+
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.user_rate_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Rate</li>
+
+                                        <li><span class=""><img ng-if="progress_status.user_links_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Social</li>
+
+                                        <?php if($is_indivdual_company == 1){  ?>   
+
+                                            <li class="fw"><span class=""><img ng-if="progress_status.user_experience_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Experience</li>
+
+                                            <li class="fw"><span class=""><img ng-if="progress_status.user_education_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
+
+                                            <li class="fw"><span class=""><img ng-if="progress_status.user_fname_status == '1' && progress_status.user_lname_status == '1' && progress_status.user_current_position_status == '1' && progress_status.user_individual_field_status == '1' && progress_status.user_email_status == '1' && progress_status.user_skyupid_status == '1' && progress_status.user_phone_status == '1' && progress_status.user_country_status == '1' && progress_status.user_state_status == '1' && progress_status.user_city_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic Information</li>
+                                            
+                                            <li class="fw"><span class=""><img ng-if="progress_status.user_prof_summary_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile overview</li>
+                                        <?php } ?>
+
+                                        <?php if($is_indivdual_company == 2){  ?>
+
+                                            <li class="fw"><span class=""><img ng-if="progress_status.user_comp_name_status == '1' && progress_status.user_company_field_status == '1' && progress_status.user_comp_email_status == '1' && progress_status.user_comp_skypeid_status == '1' && progress_status.user_comp_number_status == '1' && progress_status.user_comp_team_status == '1' && progress_status.user_comp_website_status == '1' && progress_status.user_comp_founded_year_status == '1' && progress_status.user_comp_founded_month_status == '1' && progress_status.user_comp_service_offer_status == '1' && progress_status.user_comp_exp_year_status == '1' && progress_status.user_comp_exp_month_status == '1' && progress_status.user_company_country_status == '1' && progress_status.user_company_state_status == '1' && progress_status.user_company_city_status == '1' && progress_status.user_comp_logo_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Company Information</li>
+                                            
+                                            <li class="fw"><span class=""><img ng-if="progress_status.user_comp_overview_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Company overview</li>
+
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                                <div class="dtl-edit-bottom"></div>                                
+                                <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> edit_profile_progress-->
+                                <div id="profile-progress" class="" style="display: none;">
+                                    <div class="count_main_progress">
+                                        <div class="circles">
+                                            <div class="second circle-1">
+                                                <div>
+                                                    <strong></strong>
+                                                    <span id="progress-txt"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                							
 							</div>
 						</div>
 					</div>
@@ -2959,6 +3009,7 @@
 
             var from_user_id = '<?php echo $fa_data['user_id']; ?>';
             var to_user_id = '<?php echo $freelancerpostdata['0']['user_id']; ?>';
+            var is_indivdual_company = '<?php echo $is_indivdual_company; ?>';
 
             
 
@@ -3006,74 +3057,33 @@
 			document.querySelectorAll('.gallery-item'), 2);
 		}
 		});
-
-        /*jQuery(document).ready(function () {
-				$("#input-21f").rating({
-					starCaptions: function (val) {
-						if (val < 3) {
-							return val;
-						} else {
-							return 'high';
-						}
-					},
-					starCaptionClasses: function (val) {
-						if (val < 3) {
-							return 'label label-danger';
-						} else {
-							return 'label label-success';
-						}
-					},
-					hoverOnClear: false
-				});
-				var $inp = $('#rating-input');
-
-				$inp.rating({
-					min: 0,
-					max: 5,
-					step: 1,
-					size: 'lg',
-					showClear: false
-				});
-
-				$('#btn-rating-input').on('click', function () {
-					$inp.rating('refresh', {
-						showClear: true,
-						disabled: !$inp.attr('disabled')
-					});
-				});
-
-
-				$inp.on('rating.change', function () {
-					alert($('#rating-input').val());
-				});
-
-
-				$('.rb-rating').rating({
-					'showCaption': true,
-					'stars': '3',
-					'min': '0',
-					'max': '3',
-					'step': '1',
-					'size': 'xs',
-					'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
-				});
-				$("#input-21c").rating({
-					min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
-				});
-		});*/
+       
         $(document).ready(function () {
-				if (screen.width <= 1199) {
-					$("#edit-profile-move").appendTo($(".edit-profile-move"));
-					$("#social-link-move").appendTo($(".social-link-move"));
-					$("#skill-move").appendTo($(".skill-move"));
-					$("#social-link-move").appendTo($(".social-link-move"));
-					$("#menu-move").appendTo($(".menu-move"));
-					$(".remove-blank").remove();
-				}
-				if (screen.width < 768) {
-					$("#edit-profile-move").appendTo($(".edit-custom-move"));
-				}
+			if (screen.width <= 1199) {
+				$("#edit-profile-move").appendTo($(".edit-profile-move"));
+				$("#social-link-move").appendTo($(".social-link-move"));
+				$("#skill-move").appendTo($(".skill-move"));
+				$("#social-link-move").appendTo($(".social-link-move"));
+				$("#menu-move").appendTo($(".menu-move"));
+				$(".remove-blank").remove();
+			}
+			if (screen.width < 768) {
+				$("#edit-profile-move").appendTo($(".edit-custom-move"));
+			}
 		});
+        $(document).ready(function () {
+            $('.dtl-edit-bottom').hover(function () {
+                $('.profile-status').addClass('hover-bottom');
+            }, function () {
+                $('.profile-status').removeClass('hover-bottom');
+            });
+            
+            $('.dtl-edit-top').hover(function () {
+                $('.profile-status').addClass('hover-top');
+            }, function () {
+                $('.profile-status').removeClass('hover-top');
+            });
+        });
 		</script>
     </body>
 </html>

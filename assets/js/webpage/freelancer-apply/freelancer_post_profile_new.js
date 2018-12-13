@@ -618,9 +618,9 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             });
         }
     };
-    $scope.get_edu_degree();
-    $scope.get_edu_university();
-    $scope.get_user_education();
+    // $scope.get_edu_degree();
+    // $scope.get_edu_university();
+    // $scope.get_user_education();
     //Education End
 
     //Experience Start
@@ -891,7 +891,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         }
     });
 
-    $scope.validate_desig = function(){        
+    $scope.validate_desig = function(){
         if($scope.exp_designation == "" || $scope.exp_designation == undefined)
         {
             $("#exp_designation .tags").attr("style","border:1px solid #ff0000;");
@@ -1218,8 +1218,8 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         }
     };
 
-    $scope.get_user_experience();
-    $scope.get_country();
+    // $scope.get_user_experience();
+    // $scope.get_country();
     
     //Experience End
 
@@ -1573,7 +1573,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             });
         }
     };
-    $scope.get_user_addicourse();
+    // $scope.get_user_addicourse();
     //Additional Course End
 
     // User Publication Start
@@ -1845,7 +1845,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         $("#view-more-publication").hide();
     };
 
-    $scope.reset_publication_form = function(){        
+    $scope.reset_publication_form = function(){
         $scope.edit_publication = 0;
         $scope.pub_file_old = '';
         $("#publication").removeClass("edit-form-cus");
@@ -1943,7 +1943,6 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             });
         }
     };
-    $scope.get_user_publication();
     // User Publication End
 
     //Language Start
@@ -1963,7 +1962,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         $scope.languageSet.language.splice(z,1);
     };
     $scope.language = [];
-    $scope.get_languages = function(id) {        
+    $scope.get_languages = function(id) {
         $http({
             method: 'POST',
             url: base_url + 'general_data/get_languages',
@@ -1977,7 +1976,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         });
     };
 
-    $scope.save_user_language = function(){        
+    $scope.save_user_language = function(){
         {
             $("#user_language_loader").show();
             $("#save_user_language").attr("style","pointer-events:none;display:none;");
@@ -2037,7 +2036,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#language-body").show();
         });
     };
-    $scope.get_user_languages();
+    // $scope.get_user_languages();
     //Language End
 
     //Socila Links Start
@@ -2282,7 +2281,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
 
         });
     };
-    $scope.get_user_links();
+    // $scope.get_user_links();
     //Socila Links End
 
     // Skills Start
@@ -2321,7 +2320,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         
     };
 
-    $scope.reset_user_skills = function(){       
+    $scope.reset_user_skills = function(){
         var edit_user_skills = [];
         $scope.user_skills.forEach(function(element,catArrIndex) {
           edit_user_skills[catArrIndex] = {name:element.name};
@@ -2365,7 +2364,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
 
         });
     }
-    $scope.get_user_skills();
+    // $scope.get_user_skills();
     // Skills End
 
     //Project Start
@@ -2381,7 +2380,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         }
     }
 
-    $scope.project_start_year = function(){        
+    $scope.project_start_year = function(){
         $("#projdateerror").html("");
         $("#projdateerror").hide();
         var todaydate = new Date();
@@ -2579,7 +2578,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         }
     });
 
-    $scope.validate_proj_skills = function(){        
+    $scope.validate_proj_skills = function(){
         if($scope.project_skill_list == "" || $scope.project_skill_list == undefined)
         {
             $("#project_skill_list .tags").attr("style","border:1px solid #ff0000;");
@@ -2695,7 +2694,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         });
     }
     
-    $scope.get_user_project();
+    // $scope.get_user_project();
 
     $scope.view_more_proj = 2;
     $scope.proj_view_more = function(){
@@ -2914,7 +2913,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#prof-summary-body").show();
         });
     };
-    $scope.get_user_prof_summary();
+    // $scope.get_user_prof_summary();
     //Proffessional Summary End
 
     //Company Overview Start
@@ -2970,7 +2969,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#company-overview-body").show();
         });
     };
-    $scope.get_user_company_overview();
+    // $scope.get_user_company_overview();
     //Company Overview End
 
     //Company Tagline Start
@@ -2997,12 +2996,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
                 }
                 $("#user_tagline_save").removeAttr("style");
                 $("#user_tagline_loader").hide();
-                $("#tagline").modal('hide');
-                var profile_progress = result.data.profile_progress;
-                var count_profile_value = profile_progress.user_process_value;
-                var count_profile = profile_progress.user_process;
-                $scope.progress_status = profile_progress.progress_status;
-                $scope.set_progress(count_profile_value,count_profile);
+                $("#tagline").modal('hide');                
             });
         }
     };
@@ -3026,7 +3020,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#tagline-body").show();
         });
     };
-    $scope.get_user_tagline();
+    // $scope.get_user_tagline();
     //Company Tagline End
 
     //Availability Start
@@ -3108,7 +3102,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#availability-body").show();
         });
     };
-    $scope.get_user_availability();
+    // $scope.get_user_availability();
     //Availability End
 
     //Rate Start
@@ -3198,7 +3192,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             $("#rate-body").show();
         });
     };
-    $scope.get_user_rate();
+    // $scope.get_user_rate();
     //Rate End
 
     //Review Start
@@ -3318,7 +3312,7 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
             }
         });
     };
-    $scope.get_review();
+    // $scope.get_review();
     //Review End
 
     //Company Information Start
@@ -3412,16 +3406,16 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
                         $("#view-more-about").hide();
                     }
                 },500); 
-                // var profile_progress = result.data.profile_progress;
-                // var count_profile_value = profile_progress.user_process_value;
-                // var count_profile = profile_progress.user_process;
-                // $scope.progress_status = profile_progress.progress_status;
-                // $scope.set_progress(count_profile_value,count_profile);
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             }
             load_add_detail();
         });
     };
-    $scope.get_company_info();
+    // $scope.get_company_info();
 
     $scope.view_more_about = function(){
         $("#conpany-detail").removeClass("dtl-box-height");
@@ -3700,16 +3694,16 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
                         $("#view-more-basic").hide();
                     }
                 },500); 
-                // var profile_progress = result.data.profile_progress;
-                // var count_profile_value = profile_progress.user_process_value;
-                // var count_profile = profile_progress.user_process;
-                // $scope.progress_status = profile_progress.progress_status;
-                // $scope.set_progress(count_profile_value,count_profile);
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             }
             load_add_detail();
         });
     };
-    $scope.get_basic_info();
+    // $scope.get_basic_info();
 
     $scope.view_more_basic = function(){
         $("#basic-detail").removeClass("dtl-box-height");
@@ -3901,5 +3895,60 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         }
     };
     //Basic Information End
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                // $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
+
+
+    $scope.get_edu_degree();
+    $scope.get_edu_university();
+    $scope.get_country();
+
+    $scope.get_user_addicourse();
+    $scope.get_user_publication();
+    $scope.get_user_languages();
+    $scope.get_user_links();
+    $scope.get_user_skills();
+    $scope.get_user_project();
+    $scope.get_user_tagline();
+    $scope.get_user_availability();
+    $scope.get_user_rate();
+    $scope.get_review();
+    
+    if(is_indivdual_company == '2')
+    {
+        $scope.get_company_info();
+        $scope.get_user_company_overview();
+    }
+    if(is_indivdual_company == '1')
+    {
+        $scope.get_basic_info();
+        $scope.get_user_prof_summary();
+        $scope.get_user_education();
+        $scope.get_user_experience();
+    }
 
 });

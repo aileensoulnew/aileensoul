@@ -134,7 +134,7 @@ document.getElementById('upload-demo-one').style.display = 'block';
     }
     reader.readAsDataURL(this.files[0]);
 });
-$(document).ready(function () {
+// $(function () {
     $("#userimage").validate({
         rules: {
             profilepic: {
@@ -149,7 +149,7 @@ $(document).ready(function () {
         submitHandler: profile_pic
     });
     function profile_pic() {
-//    $('.upload-result-one').on('click', function (ev) {
+        // $('.upload-result-one').on('click', function (ev) {
         $uploadCrop1.croppie('result', {
             type: 'canvas',
             size: 'viewport'
@@ -175,14 +175,14 @@ $(document).ready(function () {
                     document.getElementById('upload-one').value = null;
                     document.getElementById('upload-demo-one').style.display = 'none';
                     $('.cr-image').attr('src', '#');
-//                    html = '<img src="' + resp + '" />';
-//                    $("#upload-demo-i").html(html);
+                   // html = '<img src="' + resp + '" />';
+                   // $("#upload-demo-i").html(html);
                 }
             });
         });
-//    });
+        // });
     }
-});
+// });
 //CODE FOR PROFILE PIC UPLOAD WITH CROP END
 
 //COVER IMAGE CODE START

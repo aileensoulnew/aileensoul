@@ -1929,7 +1929,7 @@ class Freelancer extends MY_Controller {
         }
 
 
-        $data = $_POST['image'];
+        /*$data = $_POST['image'];
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $user_bg_path = $this->config->item('free_post_profile_main_upload_path');
@@ -1939,6 +1939,16 @@ class Freelancer extends MY_Controller {
         file_put_contents($user_bg_path . $imageName, $data);
         $success = file_put_contents($file, $data);
         $main_image = $user_bg_path . $imageName;
+        $main_image_size = filesize($main_image);*/
+
+        $data = $_POST['image'];
+        $data = str_replace('data:image/png;base64,', '', $data);
+        $data = str_replace(' ', '+', $data);
+        $user_bg_path = $this->config->item('free_post_profile_main_upload_path');
+        $imageName = time() . '.png';
+        $data = base64_decode($data);
+        $main_image = $user_bg_path . $imageName;
+        $success = file_put_contents($main_image, $data);
         $main_image_size = filesize($main_image);
 
         if (IMAGEPATHFROM == 's3bucket') {
@@ -1963,7 +1973,7 @@ class Freelancer extends MY_Controller {
 
         $update = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
         $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
-        if ($_server['HTTP_HOST'] != 'localhost') {
+        if ($_SERVER['HTTP_HOST'] != 'localhost') {
             if (isset($main_image)) {
                 unlink($main_image);
             }
@@ -1974,7 +1984,7 @@ class Freelancer extends MY_Controller {
         if ($update) {
 
             $contition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
-            $freelancerpostdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+            $freelancerpostdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
             $userimage .= '<img src="' . FREE_POST_PROFILE_MAIN_UPLOAD_URL . $freelancerpostdata[0]['freelancer_post_user_image'] . '" alt="User Image" >';
             $userimage .= '<a title = "update profile pic" href="javascript:void(0);" onclick="updateprofilepopup();" class="cusome_upload"><img alt="Upload profile pic" src="' . base_url('assets/img/cam.png') . '">';
             $userimage .= $this->lang->line("update_profile_picture");
@@ -3802,7 +3812,7 @@ class Freelancer extends MY_Controller {
         {
             $user_exp_insert = $this->freelancer_apply_model->delete_user_education($user_id,$edu_id);
             $user_education = $this->freelancer_apply_model->get_user_education($user_id);
-            $profile_progress = $this->progressbar($user_id);              
+            // $profile_progress = $this->progressbar_new($user_id);              
             $ret_arr = array("success"=>1,"user_education"=>$user_education,"profile_progress"=>$profile_progress);
         }
         else
@@ -3961,7 +3971,7 @@ class Freelancer extends MY_Controller {
             $cal_years = array_sum($month);
             $total_month = $cal_years % 12;
             $years = $years + intval($cal_years / 12);            
-            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month,"profile_progress"=>$profile_progress);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
         }
         else
         {
@@ -4748,12 +4758,12 @@ class Freelancer extends MY_Controller {
         {            
             $company_info = $this->freelancer_apply_model->get_company_info($to_user_id);
             $ret_arr = array("success"=>1,"company_info"=>$company_info);
-            // $ret_arr['profile_progress'] = $this->progressbar($to_user_id);
         }
         else
         {
             $ret_arr = array("success"=>0,"company_info"=>array());
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($to_user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4824,7 +4834,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar($userid);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4835,12 +4845,12 @@ class Freelancer extends MY_Controller {
         {            
             $basic_info = $this->freelancer_apply_model->get_basic_info($to_user_id);
             $ret_arr = array("success"=>1,"basic_info"=>$basic_info);
-            // $ret_arr['profile_progress'] = $this->progressbar($to_user_id);
         }
         else
         {
             $ret_arr = array("success"=>0,"basic_info"=>array());
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($to_user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -4927,7 +4937,346 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar($userid);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function progressbar_new($user_id)
+    {
+        $contition_array = array('user_id' => $user_id, 'status' => '1', 'is_delete' => '0');
+        $fa_data = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '
+            *', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+
+        $count = 0;
+        $progress_status = array();
+
+        $user_image = 0;        
+        if($fa_data['freelancer_post_user_image'] != '')
+        {
+            $user_image = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_image_status'] = $user_image;
+
+        $user_bg = 0;        
+        if($fa_data['profile_background'] != '')
+        {
+            $user_bg = 1;
+            $count = $count + 3;
+        }
+        $progress_status['profile_background_status'] = $user_bg;
+
+        $user_availability = 0;
+        if($fa_data['freelancer_avail_week'] > 0 && $fa_data['freelancer_avail_status'] > 0)
+        {
+            $user_availability = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_availability_status'] = $user_availability;
+
+        $user_rate = 0;
+        if($fa_data['rate_currency'] > 0 && $fa_data['rate_amt'] > 0 && $fa_data['rate_type'] > 0)
+        {
+            $user_rate = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_rate_status'] = $user_rate;
+
+        $languages_data = $this->freelancer_apply_model->get_user_languages($user_id);
+        $user_languages = 0;
+        if(isset($languages_data) && !empty($languages_data))
+        {
+            $user_languages = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_languages_status'] = $user_languages;
+
+        $user_links = $this->freelancer_apply_model->get_user_links($user_id);
+        $user_links_status = 0;
+        if(isset($user_links) && !empty($user_links))
+        {
+            $user_links_status = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_links_status'] = $user_links_status;
+
+        $user_skills = 0;
+        if($fa_data['freelancer_post_area'] != '')
+        {
+            $user_skills = 1;
+            $count = $count + 1;
+        }
+        
+        $progress_status['user_skills_status'] = $user_skills;
+
+        if($fa_data['is_indivdual_company'] == '1')
+        {
+            $user_fname = 0;
+            if($fa_data['freelancer_post_fullname'] != '')
+            {
+                $user_fname = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_fname_status'] = $user_fname;
+
+            $user_lname = 0;
+            if($fa_data['freelancer_post_username'] != '')
+            {
+                $user_lname = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_lname_status'] = $user_lname;
+
+            $user_current_position = 0;
+            if($fa_data['current_position'] != '')
+            {
+                $user_current_position = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_current_position_status'] = $user_current_position;
+
+            $user_individual_industry = 0;
+            if($fa_data['freelancer_post_field'] != 0)
+            {
+                $user_individual_industry = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_individual_field_status'] = $user_individual_industry;
+
+            $user_email = 0;
+            if($fa_data['freelancer_post_email'] != '')
+            {
+                $user_email = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_email_status'] = $user_email;
+
+            $user_skyupid = 0;
+            if($fa_data['freelancer_post_skypeid'] != '')
+            {
+                $user_skyupid = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_skyupid_status'] = $user_skyupid;
+
+            $user_phone = 0;
+            if($fa_data['freelancer_post_phoneno'] != '')
+            {
+                $user_phone = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_phone_status'] = $user_phone;
+
+            $user_country = 0;
+            if($fa_data['freelancer_post_country'] != '')
+            {
+                $user_country = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_country_status'] = $user_country;
+
+            $user_state = 0;
+            if($fa_data['freelancer_post_state'] != '')
+            {
+                $user_state = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_state_status'] = $user_state;
+
+            $user_city = 0;
+            if($fa_data['freelancer_post_city'] != '')
+            {
+                $user_city = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_city_status'] = $user_city;
+
+            $education_data = $this->freelancer_apply_model->get_user_education($user_id);
+            $user_education = 0;
+            if(isset($education_data) && !empty($education_data))
+            {
+                $user_education = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_education_status'] = $user_education;
+
+            $user_prof_summary = 0;
+            if($fa_data['freelancer_post_skill_description'] != '')
+            {
+                $user_prof_summary = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_prof_summary_status'] = $user_prof_summary;
+
+            $experience_data = $this->freelancer_apply_model->get_user_experience($user_id);
+            $user_experience = 0;
+            if(isset($experience_data) && !empty($experience_data))
+            {
+                $user_experience = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_experience_status'] = $user_experience;
+            
+            $user_process = ($count * 100) / 24;
+        }
+        if($fa_data['is_indivdual_company'] == '2')
+        {
+            $user_comp_overview = 0;
+            if($fa_data['comp_overview'] != '')
+            {
+                $user_comp_overview = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_overview_status'] = $user_comp_overview;
+
+            $user_comp_name = 0;
+            if($fa_data['comp_name'] != '')
+            {
+                $user_comp_name = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_name_status'] = $user_comp_name;
+
+            $user_company_field = 0;
+            if($fa_data['freelancer_post_field'] != 0)
+            {
+                $user_company_field = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_company_field_status'] = $user_company_field;
+
+            $user_comp_email = 0;
+            if($fa_data['comp_email'] != '')
+            {
+                $user_comp_email = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_email_status'] = $user_comp_email;
+
+            $user_comp_skypeid = 0;
+            if($fa_data['comp_skypeid'] != '')
+            {
+                $user_comp_skypeid = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_skypeid_status'] = $user_comp_skypeid;
+
+            $user_comp_number = 0;
+            if($fa_data['comp_number'] != '')
+            {
+                $user_comp_number = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_number_status'] = $user_comp_number;
+
+            $user_comp_team = 0;
+            if($fa_data['comp_teamsize'] != '')
+            {
+                $user_comp_team = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_team_status'] = $user_comp_team;
+
+            $user_comp_website = 0;
+            if($fa_data['comp_website'] != '')
+            {
+                $user_comp_website = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_website_status'] = $user_comp_website;
+
+            $user_comp_founded_year = 0;
+            if($fa_data['comp_founded_year'] != '')
+            {
+                $user_comp_founded_year = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_founded_year_status'] = $user_comp_founded_year;
+
+            $user_comp_founded_month = 0;
+            if($fa_data['comp_founded_month'] != '')
+            {
+                $user_comp_founded_month = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_founded_month_status'] = $user_comp_founded_month;
+
+            $user_comp_service_offer = 0;
+            if($fa_data['comp_service_offer'] != '')
+            {
+                $user_comp_service_offer = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_service_offer_status'] = $user_comp_service_offer;
+
+            $user_comp_exp_year = 0;
+            if($fa_data['comp_exp_year'] != '')
+            {
+                $user_comp_exp_year = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_exp_year_status'] = $user_comp_exp_year;
+
+            $user_comp_exp_month = 0;
+            if($fa_data['comp_exp_month'] != '')
+            {
+                $user_comp_exp_month = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_exp_month_status'] = $user_comp_exp_month;
+
+            $user_company_country = 0;
+            if($fa_data['freelancer_post_country'] != '')
+            {
+                $user_company_country = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_company_country_status'] = $user_company_country;
+
+            $user_company_state = 0;
+            if($fa_data['freelancer_post_state'] != '')
+            {
+                $user_company_state = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_company_state_status'] = $user_company_state;
+
+            $user_company_city = 0;
+            if($fa_data['freelancer_post_city'] != '')
+            {
+                $user_company_city = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_company_city_status'] = $user_company_city;
+
+            $user_comp_logo = 0;
+            if($fa_data['comp_logo'] != '')
+            {
+                $user_comp_logo = 1;
+                $count = $count + 1;
+            }
+            $progress_status['user_comp_logo_status'] = $user_comp_logo;
+
+            $user_process = ($count * 100) / 24;
+        }
+
+        $user_process_value = ($user_process / 100);
+
+        if ($user_process == 100) {
+            //if ($job_data['progress_new'] != 1) {
+                $data = array(
+                    'progressbar' => '1',
+                    'modify_date' => date('Y-m-d h:i:s', time())
+                );
+                $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $user_id);
+            //}
+        } else {
+            $data = array(
+                'progressbar' => '0',
+                'modify_date' => date('Y-m-d h:i:s', time())
+            );
+            $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $user_id);
+        }
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
 }
