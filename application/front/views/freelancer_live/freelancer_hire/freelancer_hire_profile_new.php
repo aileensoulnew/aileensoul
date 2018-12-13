@@ -1142,7 +1142,17 @@
 	    </div>
 	    <?php endif; ?>
 		
-		<?php if(isset($fh_login_data) && !empty($fh_login_data) && $login_userid != '' && $fh_userid != $login_userid): ?>
+		<?php if(isset($fh_login_data) && !empty($fh_login_data) && $login_userid != '' && $fh_userid != $login_userid):
+		if($fh_login_data['is_indivdual_company'] == '1')
+        {
+            $fa_fullname = $fh_login_data['freelancer_post_fullname'].' '.$fh_login_data['freelancer_post_username'];
+            $fa_no_img = strtoupper(substr($fh_login_data['freelancer_post_fullname'], 0,1).' '.substr($fh_login_data['freelancer_post_username'], 0,1));
+        }
+        else
+        {
+            $fa_fullname = $fh_login_data['comp_name'];
+            $fa_no_img = strtoupper(substr($fa_fullname, 0,1));
+        } ?>
 		<!-- Reviews  -->
 		<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1160,12 +1170,12 @@
 										<img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL.$fh_login_data['freelancer_post_user_image']; ?>">
 										<?php else: ?>
 										<div class="post-img-profile">
-											<?php echo ucwords(substr($fh_login_data['freelancer_post_fullname'], 0,1).' '.substr($fh_login_data['freelancer_post_username'], 0,1)); ?>
+											<?php echo ucwords($fa_no_img); ?>
 										</div>
 										<?php endif; ?>
 									</div>
 									<div class="total-rev-top">
-										<h4><?php echo ucwords($fh_login_data['freelancer_post_fullname'].' '.$fh_login_data['freelancer_post_username']); ?></h4>
+										<h4><?php echo ucwords($fa_fullname); ?></h4>
 										<span class="rating-star">
 											<input id="review_star" value="5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
 										</span>

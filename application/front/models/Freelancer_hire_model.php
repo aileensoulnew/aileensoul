@@ -339,7 +339,7 @@ class Freelancer_hire_model extends CI_Model {
 
     public function get_save_review($to_user_id)
     {
-        $this->db->select("fp.freelancer_post_fullname as first_name,fp.freelancer_post_username as last_name,freelancer_post_user_image as user_image,fr.*")->from('freelancer_review fr');
+        $this->db->select("IF(fp.is_indivdual_company = '1',fp.freelancer_post_fullname,fp.comp_name) as first_name,IF(fp.is_indivdual_company = '1',fp.freelancer_post_username,'') as last_name,fp.freelancer_post_user_image as user_image,fr.*")->from('freelancer_review fr');
         $this->db->join('freelancer_post_reg fp', 'fp.user_id = fr.from_user_id', 'left');
         $this->db->where('fr.to_user_id', $to_user_id);
         $this->db->where('fr.status', '1');

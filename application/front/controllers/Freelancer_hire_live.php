@@ -1156,9 +1156,7 @@ public function freelancer_hire_profile($id = "") {
 		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation, is_indivdual_company,comp_name,company_field,company_other_field', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	}
 
-	$select_data ='freelancer_post_fullname,freelancer_post_username,freelancer_post_user_image,profile_background,profile_background_main,designation,freelancer_apply_slug,free_post_step,user_id,progressbar';
-
-	$fh_login_data = $this->data['fh_login_data'] = $this->freelancer_apply_model->getfreelancerapplydata($login_userid, $select_data);	
+	$fh_login_data = $this->data['fh_login_data'] = $this->freelancer_apply_model->getfreelancerapplydata($login_userid, $select_data = "*");	
 
 	if(empty($fh_login_data) && $id != $userid)
 	{
