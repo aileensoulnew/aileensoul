@@ -27,7 +27,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
         <?php //echo $header; ?>
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
-        <?php echo $freelancer_post_header2;
+        <?php echo $freelancer_post_header2;        
         if($freelancerdata[0]['is_indivdual_company'] == '1')
         {
             $first_name = ucwords($freelancerdata[0]['freelancer_post_fullname']);
@@ -76,7 +76,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         <div class="profile-boxProfileCard-content clearfix">
                                             <div class="left_side_box_img buisness-profile-txext">
                                                 <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" 
-                                                   href="<?php echo base_url('freelancer/').$fa_slug; ?>" title="<?php echo $freelancerdata[0]['freelancer_post_fullname'] . ' ' . $freelancerdata[0]['freelancer_post_username']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+                                                   href="<?php echo base_url('freelancer/').$fa_slug; ?>" title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
                                                        <?php
                                                        $filename = $this->config->item('free_post_profile_main_upload_path') . $freelancerdata[0]['freelancer_post_user_image'];
                                                        $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -102,9 +102,14 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                                 <?php //$category = $this->db->get_where('category', array('category_id' => $freelancerdata[0]['freelancer_post_field']))->row()->category_name; ?>
                                                 <div class="profile-boxProfile-name">
                                                     <a  href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php
-                                                        if ($freepostdata['designation']) {
-                                                            echo ucwords($freepostdata['designation']);
-                                                        } else {
+                                                        if ($freelancerdata[0]['current_position'] > 0) {
+                                                            $current_pos = $this->db->get_where('job_title', array('title_id' => $freelancerdata[0]['current_position']))->row()->name;
+                                                            echo ucwords($current_pos);
+                                                        }
+                                                        elseif ($freelancerdata[0]['freelancer_post_field'] > 0) {
+                                                            echo $field_name = $this->db->get_where('category', array('category_id' => $freelancerdata[0]['freelancer_post_field']))->row()->category_name;
+                                                        }
+                                                        else {
                                                             echo $this->lang->line("designation");
                                                         }
                                                         ?></a>

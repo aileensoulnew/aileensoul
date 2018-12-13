@@ -121,6 +121,14 @@ class Freelancer_hire_live extends MY_Controller {
 		}
 		$this->data['isfreelancerhireactivate'] = false;
 		// Check Freelancer Hire is activate or not
+
+		$contition_array = array('is_delete' => '0', 'category_name !=' => "Other");
+        $search_condition = "( status = '1')";
+        $this->data['category_data'] = $this->common->select_data_by_search('category', $search_condition, $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('is_delete' => '0', 'status' => '1', 'category_name' => "Other");
+        $this->data['category_otherdata'] = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        
 		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
 		if ($freelancerhiredata) {
 			$this->data['isfreelancerhireactivate'] = true;			

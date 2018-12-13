@@ -19,6 +19,7 @@
         <div id="main_page_load" style="display: block;">
         <?php //echo $header; ?>
         <?php echo $freelancer_hire_header2;
+        // print_r($freehiredata);exit();
         if($freehiredata['is_indivdual_company'] == '2')
         {
             $fullname = ucwords($freehiredata['comp_name']);
@@ -38,8 +39,11 @@
             $fname = $freehiredata['fullname'];
             $lname = $freehiredata['username'];
             $fullname = ucwords($fname) . ' ' . ucwords($lname);
-
-            $designation = $freehiredata['designation'];
+            $designation = "";
+            if($freehiredata['current_position'] > 0)
+            {
+                $designation = $this->db->get_where('job_title', array('title_id' => $freehiredata['current_position']))->row()->name;
+            }
 
             $sub_fname = substr($fname, 0, 1);
             $sub_lname = substr($lname, 0, 1);

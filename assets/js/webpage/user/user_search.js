@@ -12,16 +12,16 @@ app.directive("owlCarousel", function () {
                     video: true,
                     responsive: {
                         0: {
-                            items: 2
+                            items: 1
                         },
                         600: {
-                            items: 2
+                            items: 1
                         },
                         960: {
-                            items: 2,
+                            items: 1,
                         },
                         1200: {
-                            items: 2
+                            items: 1
                         }
                     }
                 };
@@ -233,7 +233,9 @@ app.controller('searchController', function ($scope, $http,$compile) {
         }).then(function (success) {
             if (success.data.message == 1) {
                 $('#item-' + user_id + ' button.follow-btn').html('Request Send');
-                $('.owl-carousel').trigger('next.owl.carousel');
+                $('.addtobtn-' + user_id).html('Request Send');
+                $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
+                // $('.owl-carousel').trigger('next.owl.carousel');
             }
         });
     }
