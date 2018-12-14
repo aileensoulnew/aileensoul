@@ -1191,6 +1191,14 @@ public function freelancer_hire_profile($id = "") {
 	$this->data['title'] = ucfirst($fullname) . " Freelance Recruiter | Aileensoul";
 
 	$this->data['metadesc'] = "View ".ucfirst($fullname) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
+	
+	$contition_array = array('is_delete' => '0', 'category_name !=' => "Other");
+	$search_condition = "((is_other = '2' AND user_id = $userid) OR (status = '1'))";
+	$this->data['category_data'] = $this->common->select_data_by_search('category', $search_condition, $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+	$contition_array = array('is_delete' => '0', 'status' => '1', 'category_name' => "Other");
+	$this->data['category_otherdata'] = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_profile_new', $this->data);
 }
 

@@ -387,11 +387,11 @@ class Freelancer_hire_model extends CI_Model {
 
     public function get_cmp_company_info($to_user_id)
     {
-        $this->db->select("fh.comp_name, fh.company_field, fh.company_other_field, fh.company_country, fh.company_state, fh.company_city, fh.comp_team, fh.comp_founded_year, fh.comp_founded_month, fh.comp_overview, fh.comp_service_offer, fh.comp_exp_year, fh.comp_exp_month, fh.comp_skills_offer, fh.comp_logo, cr.country_name, st.state_name, ct.city_name, it.industry_name as company_field_txt,IF(fh.comp_skills_offer != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as comp_skills_offer_txt")->from('freelancer_hire_reg fh,skill s');
+        $this->db->select("fh.comp_name, fh.company_field, fh.company_other_field, fh.company_country, fh.company_state, fh.company_city, fh.comp_team, fh.comp_founded_year, fh.comp_founded_month, fh.comp_overview, fh.comp_service_offer, fh.comp_exp_year, fh.comp_exp_month, fh.comp_skills_offer, fh.comp_logo, cr.country_name, st.state_name, ct.city_name, c.category_name as company_field_txt,IF(fh.comp_skills_offer != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as comp_skills_offer_txt")->from('freelancer_hire_reg fh,skill s');
         $this->db->join('countries cr', 'cr.country_id = fh.company_country', 'left');
         $this->db->join('states st', 'st.state_id = fh.company_state', 'left');
         $this->db->join('cities ct', 'ct.city_id = fh.company_city', 'left');
-        $this->db->join('industry_type it', 'it.industry_id = fh.company_field', 'left');
+        $this->db->join('category c', 'c.category_id = fh.company_field', 'left');
         $sql = "IF(fh.comp_skills_offer != '', FIND_IN_SET(s.skill_id, fh.comp_skills_offer) != '0', '1=1')";
         $this->db->where($sql);
         $this->db->where('fh.user_id', $to_user_id);
@@ -427,11 +427,11 @@ class Freelancer_hire_model extends CI_Model {
 
     public function get_individual_company_info($to_user_id)
     {
-        $this->db->select("fh.comp_name, fh.company_field, it.industry_name as company_field_txt, fh.company_other_field, fh.comp_overview, fh.country, fh.state, fh.city, cr.country_name, st.state_name, ct.city_name")->from('freelancer_hire_reg fh');
+        $this->db->select("fh.comp_name, fh.company_field, c.category_name as company_field_txt, fh.company_other_field, fh.comp_overview, fh.country, fh.state, fh.city, cr.country_name, st.state_name, ct.city_name")->from('freelancer_hire_reg fh');
         $this->db->join('countries cr', 'cr.country_id = fh.country', 'left');
         $this->db->join('states st', 'st.state_id = fh.state', 'left');
         $this->db->join('cities ct', 'ct.city_id = fh.city', 'left');
-        $this->db->join('industry_type it', 'it.industry_id = fh.company_field', 'left');
+        $this->db->join('category c', 'c.category_id = fh.company_field', 'left');
         $this->db->where('fh.user_id', $to_user_id);
         $this->db->where('fh.status', '1');
         $this->db->where('fh.is_delete', '0');
@@ -442,9 +442,9 @@ class Freelancer_hire_model extends CI_Model {
 
     public function get_individual_basic_info($to_user_id)
     {
-        $this->db->select("fh.fullname as first_name,fh.username as last_name,fh.email, fh.phone, fh.skyupid, fh.current_position, jt.name as current_position_txt, fh.individual_skills, fh.individual_industry, it.industry_name as individual_industry_txt, fh.individual_other_industry, fh.professional_info,IF(fh.individual_skills != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as individual_skills_txt")->from('freelancer_hire_reg fh,skill s');
+        $this->db->select("fh.fullname as first_name,fh.username as last_name,fh.email, fh.phone, fh.skyupid, fh.current_position, jt.name as current_position_txt, fh.individual_skills, fh.individual_industry, c.category_name as individual_industry_txt, fh.individual_other_industry, fh.professional_info,IF(fh.individual_skills != '',GROUP_CONCAT(DISTINCT(s.skill)),'') as individual_skills_txt")->from('freelancer_hire_reg fh,skill s');
         $this->db->join('job_title jt', 'jt.title_id = fh.current_position', 'left');
-        $this->db->join('industry_type it', 'it.industry_id = fh.individual_industry', 'left');
+        $this->db->join('category c', 'c.category_id = fh.individual_industry', 'left');
         $sql = "IF(fh.individual_skills != '', FIND_IN_SET(s.skill_id, fh.individual_skills) != '0', '1=1')";
         $this->db->where($sql);
         $this->db->where('fh.user_id', $to_user_id);

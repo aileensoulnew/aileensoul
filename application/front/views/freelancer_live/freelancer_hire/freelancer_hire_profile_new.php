@@ -743,11 +743,15 @@
 								<span class="span-select">
 									<?php $getFieldList = $this->data_model->getNewFieldList();?>
 										<select class="form-control" name="individual_industry" id="individual_industry" ng-model="individual_industry" ng-change="other_individual_industry()">
-                                            <option value="">Select Company Industry</option>
-	                                        <?php foreach ($getFieldList as $key => $value) { ?>
-	                                            <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
-	                                        <?php } ?>
-	                                        <option value="0">Other</option>
+                                            <?php
+                                            if (count($category_data) > 0) {
+                                                foreach ($category_data as $cnt) {
+                                                    ?>
+                                                    <option value="<?php echo $cnt['category_id']; ?>"><?php echo $cnt['category_name']; ?></option>
+                                                <?php
+                                                }
+                                            }
+                                            ?>
                                        	</select>
 								</span>
 							</div>
@@ -801,10 +805,15 @@
 											<?php $getFieldList = $this->data_model->getNewFieldList();?>
 											<select class="form-control" name="individual_comp_industry" id="individual_comp_industry" ng-model="individual_comp_industry" ng-change="other_individual_comp_industry()">
                                                 <option value="">Select Company Industry</option>
-                                            <?php foreach ($getFieldList as $key => $value) { ?>
-                                                <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
-                                            <?php } ?>
-                                            <option value="0">Other</option>
+	                                            <?php
+	                                            if (count($category_data) > 0) {
+	                                                foreach ($category_data as $cnt) {
+	                                                    ?>
+	                                                    <option value="<?php echo $cnt['category_id']; ?>"><?php echo $cnt['category_name']; ?></option>
+	                                                <?php
+	                                                }
+	                                            }
+	                                            ?>
 										</select>
 										</span>
 									</div>
@@ -900,25 +909,21 @@
 											<?php $getFieldList = $this->data_model->getNewFieldList();?>
 											<select class="form-control" name="company_field" id="company_field" ng-model="company_field" ng-change="other_field_fnc()">
                                                     <option value="">Select Field</option>
-                                                <?php foreach ($getFieldList as $key => $value) { ?>
-                                                    <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
-                                                <?php } ?>
-                                                <option value="0">Other</option>
+	                                                <?php
+                                                    if (count($category_data) > 0) {
+                                                        foreach ($category_data as $cnt) {
+                                                            ?>
+                                                            <option value="<?php echo $cnt['category_id']; ?>"><?php echo $cnt['category_name']; ?></option>
+                                                        <?php
+                                                        }
+                                                    }
+                                                    ?>
 											</select>
 										</span>
 									</div>
 									
 								</div>
 							</div>
-							<div id="company_other_field_div" class="row" style="display: none;">
-                                <div class="col-md-6 col-sm-6"></div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                    <label>Other Field</label>
-                                    <input type="text" placeholder="Enter Other Field" id="company_other_field" name="company_other_field" ng-model="company_other_field" maxlength="255">
-                                    </div>
-                                </div>
-                            </div>
 							
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
