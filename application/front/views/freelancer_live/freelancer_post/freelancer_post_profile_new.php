@@ -835,7 +835,7 @@
                                     <div class="dtl-dis">
                                         <div class="no-info" ng-if="user_tagline == ''">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>No Tagline</span>
+                                            <span>A tagline to attract more project.</span>
                                         </div>
                                         <div class="" ng-if="user_tagline != ''">
                                             <h4>Description</h4>
@@ -864,7 +864,7 @@
     								<div class="dtl-dis">
                                         <div class="no-info" ng-if="!user_rate.rate_currency && !user_rate.rate_amt && !user_rate.rate_type">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>No Rate</span>
+                                            <span>Add the wages you charge.</span>
                                         </div>
                                         <div class="" ng-if="user_rate.rate_currency || user_rate.rate_amt || user_rate.rate_type">
                                             <p>
@@ -898,7 +898,7 @@
     								<div class="dtl-dis">
                                         <div class="no-info" ng-if="!user_availability.freelancer_avail_week && !user_availability.freelancer_avail_status">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>No Availability</span>
+                                            <span>Add your availability for work to let the employer easily connect with you.</span>
                                         </div>
     									<ul class="dis-list list-ul-cus" ng-if="user_availability.freelancer_avail_week || user_availability.freelancer_avail_status">
     										<li ng-if="user_availability.freelancer_avail_week">

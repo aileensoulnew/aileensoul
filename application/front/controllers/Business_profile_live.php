@@ -20,6 +20,7 @@ class Business_profile_live extends MY_Controller {
         $this->load->helper('smiley');
         //AWS access info start
         $this->load->library('S3');
+        $this->load->library('upload');
         //AWS access info end
         $userid = $this->session->userdata('aileenuser');
         // $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="profile.html" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="'. base_url("artist/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("business-profile/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("job/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("recruiter/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("freelance/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
@@ -2004,34 +2005,8 @@ Your browser does not support the audio tag.
             $join_str[4]['join_table_id'] = 'industry_type.industry_id';
             $join_str[4]['from_table_id'] = 'business_profile.industriyal';
             $join_str[4]['join_type'] = 'LEFT';
-            $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+            $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial,business_profile.business_slug,business_profile.user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
         }
-        // else {
-        //     $userid = $this->session->userdata('aileenuser');
-        //     $contition_array = array('business_profile.user_id' => $userid, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
-        //     $join_str[0]['table'] = 'countries';
-        //     $join_str[0]['join_table_id'] = 'countries.country_id';
-        //     $join_str[0]['from_table_id'] = 'business_profile.country';
-        //     $join_str[0]['join_type'] = '';
-        //     $join_str[1]['table'] = 'states';
-        //     $join_str[1]['join_table_id'] = 'states.state_id';
-        //     $join_str[1]['from_table_id'] = 'business_profile.state';
-        //     $join_str[1]['join_type'] = '';
-        //     $join_str[2]['table'] = 'cities';
-        //     $join_str[2]['join_table_id'] = 'cities.city_id';
-        //     $join_str[2]['from_table_id'] = 'business_profile.city';
-        //     $join_str[2]['join_type'] = '';
-        //     $join_str[3]['table'] = 'business_type';
-        //     $join_str[3]['join_table_id'] = 'business_type.type_id';
-        //     $join_str[3]['from_table_id'] = 'business_profile.business_type';
-        //     $join_str[3]['join_type'] = 'LEFT';
-        //     $join_str[4]['table'] = 'industry_type';
-        //     $join_str[4]['join_table_id'] = 'industry_type.industry_id';
-        //     $join_str[4]['from_table_id'] = 'business_profile.industriyal';
-        //     $join_str[4]['join_type'] = 'LEFT';
-        //     $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-        // }
-
 
         $this->data['business_data']['company_name'] = $business_data[0]['company_name'] == '' ? PROFILENA : $business_data[0]['company_name'];
         $this->data['business_data']['country_name'] = $business_data[0]['country_name'] == '' ? PROFILENA : $business_data[0]['country_name'];
@@ -2052,6 +2027,8 @@ Your browser does not support the audio tag.
             $this->data['business_data']['industry_name'] = $business_data[0]['other_industrial'];
         }
         $this->data['business_data']['details'] = $business_data[0]['details'] == '' ? PROFILENA : $business_data[0]['details'];
+        $this->data['business_data']['business_slug'] = $business_data[0]['business_slug'];
+        $this->data['business_data']['user_id'] = $business_data[0]['user_id'];
 
         if ($id == $slug_data[0]['business_slug'] || $id == '') {
             $contition_array = array('user_id' => $userid, 'is_delete' => '0');
@@ -2062,6 +2039,8 @@ Your browser does not support the audio tag.
         }
         $this->data['company_name'] = $company_name = $this->get_company_name($id);
 
+        $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
+
         $this->data['title'] = ucwords($company_name) . ' | Details' . TITLEPOSTFIX;
 
         if (count($business_data) == 0) {
@@ -2069,7 +2048,7 @@ Your browser does not support the audio tag.
             redirect(base_url("404"),"refresh");
         } else {
             if ($this->session->userdata('aileenuser')) {
-                $this->load->view('business_profile_live/business_resume', $this->data);
+                $this->load->view('business_profile_live/business_resume_new', $this->data);
             } else {                
                 redirect(base_url("company/".$this->data['slugid']),"refresh");
                 // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
@@ -11530,5 +11509,310 @@ Your browser does not support the audio tag.
         $this->load->view('business_live/business_create_profile', $this->data);
     }
 
+    function save_user_links()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $link_type = $this->input->post('link_type');
+        $link_url = $this->input->post('link_url');
+        $personal_link_url = $this->input->post('personal_link_url');
+
+        $this->db->where('user_id', $userid);
+        $this->db->delete('business_user_links');
+
+        if(count($link_type) == count($link_url))
+        {
+            foreach($link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => $link_type[$k]['value'],
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'business_user_links');
+                }
+            }
+        }
+
+        if(count($personal_link_url) > 0)
+        {
+            foreach($personal_link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => "Personal",
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'business_user_links');
+                }
+            }
+        }
+
+        $user_social_links_data = $this->business_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->business_model->get_user_personal_links($userid);        
+        $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_links()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_social_links_data = $this->business_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->business_model->get_user_personal_links($userid);        
+        if(empty($user_social_links_data) && empty($user_personal_links_data))
+        {
+            $ret_arr = array("success"=>0);
+        }
+        else
+        {
+            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data,"user_social_links_data_edit"=>$user_social_links_data,"user_personal_links_data_edit"=>$user_personal_links_data);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_award()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $user_award = $this->business_model->get_user_award($userid);
+        $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_award()
+    {
+        $edit_awards = $this->input->post('edit_awards');
+        $awards_file_old = $this->input->post('awards_file_old');
+        $award_title = $this->input->post('award_title');
+        $award_org = $this->input->post('award_org');        
+        $award_date = $this->input->post('award_year').'-'.$this->input->post('award_month').'-'.$this->input->post('award_day');
+        $award_desc = $this->input->post('award_desc');
+        $fileName = $awards_file_old;
+        if(isset($_FILES['award_file']['name']) && $_FILES['award_file']['name'] != "")
+        {
+            $business_user_award_upload_path = $this->config->item('business_user_award_upload_path');
+            $user_award_file_old = $business_user_award_upload_path . $awards_file_old;
+            if (isset($user_award_file_old)) {
+                unlink($user_award_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $business_user_award_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['award_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('award_file')){
+                $main_image = $business_user_award_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->business_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards);
+            $user_award = $this->business_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_award()
+    {
+        $award_id = $this->input->post('award_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->business_model->delete_user_award($user_id,$award_id);
+            $user_award = $this->business_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_press_release()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $user_press_release = $this->business_model->get_user_press_release($userid);
+        $ret_arr = array("success"=>1,"user_press_release"=>$user_press_release);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_press_release()
+    {
+        $edit_press_release = $this->input->post('edit_press_release');
+        $press_rel_title = $this->input->post('press_rel_title');
+        $press_rel_link = $this->input->post('press_rel_link');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->business_model->save_press_release($user_id,$press_rel_title,$press_rel_link,$edit_press_release);
+            $user_press_release = $this->business_model->get_user_press_release($user_id);
+            $ret_arr = array("success"=>1,"user_press_release"=>$user_press_release);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_press_release()
+    {
+        $edit_press_release_id = $this->input->post('edit_press_release_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->business_model->delete_press_release($user_id,$edit_press_release_id);
+            $user_press_release = $this->business_model->get_user_press_release($user_id);
+            $ret_arr = array("success"=>1,"user_press_release"=>$user_press_release);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_portfolio()
+    {
+        $edit_portfolio_id = $this->input->post('edit_portfolio_id');
+        $portfolio_file_old = $this->input->post('portfolio_file_old');
+        $portfolio_title = $this->input->post('portfolio_title');
+        $portfolio_desc = $this->input->post('portfolio_desc');
+        $fileName = $portfolio_file_old;
+        if(isset($_FILES['portfolio_file']['name']) && $_FILES['portfolio_file']['name'] != "")
+        {
+            $business_user_portfolio_upload_path = $this->config->item('business_user_portfolio_upload_path');
+            $user_portfolio_file_old = $business_user_portfolio_upload_path . $portfolio_file_old;
+            if (isset($user_portfolio_file_old)) {
+                unlink($user_portfolio_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $business_user_portfolio_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['portfolio_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('portfolio_file')){
+                $main_image = $business_user_portfolio_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->business_model->save_portfolio($user_id,$portfolio_title,$portfolio_desc,$fileName,$edit_portfolio_id);
+            $user_portfolio = $this->business_model->get_portfolio($user_id);
+            $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_portfolio()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $user_portfolio = $this->business_model->get_portfolio($user_id);
+        $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_portfolio()
+    {
+        $edit_portfolio_id = $this->input->post('edit_portfolio_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $portfolio_delete = $this->business_model->delete_portfolio($user_id,$edit_portfolio_id);
+            $user_portfolio = $this->business_model->get_portfolio($user_id);
+            $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_review()
+    {
+        $to_user_id = $this->input->post('to_user_id');
+        if($to_user_id != '')
+        {            
+            $review_data = $this->business_model->get_save_review($to_user_id);
+            if(!empty($review_data))
+            {               
+                $review_count = $this->business_model->get_review_count($to_user_id);
+                $review_avarage = $this->business_model->get_review_avarage($to_user_id);
+                
+                $sum_star = 0;
+                $sum_count = 0;
+                foreach ($review_avarage as $key => $value) {
+                    $sum_star = $sum_star + ($value['rating_count'] * $value['review_star']);
+                    $sum_count = $sum_count + $value['rating_count'];
+                }                       
+                $avarage_review = round($sum_star / $sum_count,1);
+                
+                $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review'],"avarage_review"=>$avarage_review);
+            }
+            else
+            {
+                $ret_arr = array("success"=>1,"review_data"=>$review_data);
+            }
+        }
+        else
+        {
+            $ret_arr = array("success"=>0,"review_data"=>array());
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
     
 }

@@ -981,3 +981,6 @@ $config['free_apply_addicourse_upload_path'] = 'uploads/freelancer_apply_user_ad
 $config['free_apply_publication_upload_path'] = 'uploads/freelancer_apply_user_publication/';
 $config['free_apply_project_upload_path'] = 'uploads/freelancer_apply_user_project/';
 $config['free_apply_comp_logo_upload_path'] = 'uploads/freelancer_apply_comp_logo/';
+
+$config['business_user_award_upload_path'] = 'uploads/business_user_award/';
+$config['business_user_portfolio_upload_path'] = 'uploads/business_user_portfolio/';

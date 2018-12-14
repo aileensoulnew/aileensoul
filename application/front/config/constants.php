@@ -398,6 +398,9 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('FREE_APPLY_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_user_project/');
     define('FREE_APPLY_COMP_LOGO_UPLOAD_URL', BUCKETLINK . 'uploads/freelancer_apply_comp_logo/');
 
+    define('BUSINESS_USER_AWARD_UPLOAD_URL', BUCKETLINK . 'uploads/business_user_award/');
+    define('BUSINESS_USER_PORTFOLIO_UPLOAD_URL', BUCKETLINK . 'uploads/business_user_portfolio/');
+
 } else {
     //USER PHOTO 
     define('USER_WEB_IMAGE_URL', BASEURL . 'admin/../uploads/users/main/');
@@ -647,6 +650,9 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('FREE_APPLY_PUBLICATION_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_publication/');
     define('FREE_APPLY_PROJECT_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_user_project/');
     define('FREE_APPLY_COMP_LOGO_UPLOAD_URL', BASEURL . 'uploads/freelancer_apply_comp_logo/');
+
+    define('BUSINESS_USER_AWARD_UPLOAD_URL', BASEURL . 'uploads/business_user_award/');
+    define('BUSINESS_USER_PORTFOLIO_UPLOAD_URL', BASEURL . 'uploads/business_user_portfolio/');
 
 }
 

@@ -139,7 +139,7 @@
                             <div class="arti-profile-box">
                                 <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
                                     <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                        <img src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                     </a>
                                 </div>
                                 <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
@@ -771,7 +771,7 @@
                             <div class="arti-profile-box">
                                 <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
                                     <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                        <img src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                     </a>
                                 </div>
                                 <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">

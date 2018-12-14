@@ -842,4 +842,233 @@ class Business_model extends CI_Model {
         echo "Done";
     }
 
+    public function get_user_links($userid)
+    {
+        $this->db->select("*")->from("business_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_social_links($userid)
+    {
+        $this->db->select("*")->from("business_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type != ','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_personal_links($userid)
+    {
+        $this->db->select("*")->from("business_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function set_user_award($userid,$award_title = "",$award_org = "",$award_date = "",$award_desc = "",$award_document = "",$edit_awards = 0)
+    {
+        if($edit_awards == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'business_user_award');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $edit_awards);
+            $this->db->update('business_user_award', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_award($userid,$award_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $award_id);
+            $this->db->update('business_user_award', $data);
+            return true;
+    }
+
+    public function get_user_award($userid)
+    {
+        $this->db->select("ua.*,DATE_FORMAT(ua.award_date,'%d %b %Y') as award_date_str")->from("business_user_award ua");
+        $this->db->where('ua.user_id', $userid);
+        $this->db->where('ua.status', '1');
+        $this->db->order_by('ua.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_press_release($userid)
+    {
+        $this->db->select("*")->from("business_user_news_press_release");
+        $this->db->where('user_id', $userid);
+        $this->db->where('status', '1');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function save_press_release($user_id,$press_rel_title = "",$press_rel_link = "",$edit_press_release = 0)
+    {
+        if($edit_press_release == 0)
+        {
+            $data = array(
+                'user_id' => $user_id,
+                'news_press_release_title' => $press_rel_title,
+                'news_press_release_link' => $press_rel_link,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'business_user_news_press_release');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'news_press_release_title' => $press_rel_title,
+                'news_press_release_link' => $press_rel_link,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $user_id);
+            $this->db->where('id_news_press_release', $edit_press_release);
+            $this->db->update('business_user_news_press_release', $data);
+            return true;
+        }
+    }
+
+    public function delete_press_release($user_id,$edit_press_release_id)    
+    {
+        $data = array(                
+            'status' => "0",
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->where('id_news_press_release', $edit_press_release_id);
+        $this->db->update('business_user_news_press_release', $data);
+        return true;
+    }
+
+    public function save_portfolio($userid,$portfolio_title = "",$portfolio_desc = "",$portfolio_file = "",$edit_portfolio_id = 0)
+    {
+        if($edit_portfolio_id == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'portfolio_title' => $portfolio_title,
+                'portfolio_desc' => $portfolio_desc,                
+                'portfolio_file' => $portfolio_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'business_user_portfolio');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'portfolio_title' => $portfolio_title,
+                'portfolio_desc' => $portfolio_desc,                
+                'portfolio_file' => $portfolio_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_portfolio', $edit_portfolio_id);
+            $this->db->update('business_user_portfolio', $data);
+            return true;
+        }
+    }
+
+    public function delete_portfolio($userid,$edit_portfolio_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_portfolio', $edit_portfolio_id);
+            $this->db->update('business_user_portfolio', $data);
+            return true;
+    }
+
+    public function get_portfolio($userid)
+    {
+        $this->db->select("*")->from("business_user_portfolio");
+        $this->db->where('user_id', $userid);
+        $this->db->where('status', '1');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_save_review($to_user_id)
+    {
+        $this->db->select("bp.company_name,bp.business_user_image as user_image,br.*")->from('business_review br');
+        $this->db->join('business_profile bp', 'bp.user_id = br.from_user_id', 'left');
+        $this->db->where('br.to_user_id', $to_user_id);
+        $this->db->where('br.status', '1');
+        $this->db->order_by('br.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_review_avarage($to_user_id)
+    {
+        $this->db->select("review_star,count(from_user_id) as rating_count")->from('business_review');        
+        $this->db->where('to_user_id', $to_user_id);
+        $this->db->where('status', '1');
+        $this->db->group_by('review_star');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_review_count($to_user_id)
+    {
+        $this->db->select("COUNT(*) total_review")->from('business_review br');
+        $this->db->join('business_profile bp', 'bp.user_id = br.from_user_id', 'left');
+        $this->db->where('br.to_user_id', $to_user_id);
+        $this->db->where('br.status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 }
