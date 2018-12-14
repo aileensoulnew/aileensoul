@@ -130,7 +130,7 @@ class Freelancer_apply_live extends MY_Controller {
             }
             else
             {                
-                // redirect(base_url());
+                redirect(base_url());
             }
         }
         $this->data['title'] = "Signup to get Freelancing Jobs | Aileensoul";

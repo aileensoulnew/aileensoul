@@ -1191,7 +1191,7 @@ public function freelancer_hire_profile($id = "") {
 	$this->data['title'] = ucfirst($fullname) . " Freelance Recruiter | Aileensoul";
 
 	$this->data['metadesc'] = "View ".ucfirst($fullname) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
-	
+
 	$contition_array = array('is_delete' => '0', 'category_name !=' => "Other");
 	$search_condition = "((is_other = '2' AND user_id = $userid) OR (status = '1'))";
 	$this->data['category_data'] = $this->common->select_data_by_search('category', $search_condition, $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -3237,6 +3237,14 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         $this->data['fh_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
         $contition_array = array('status' => '1');
         $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('is_delete' => '0', 'category_name !=' => "Other");
+        $search_condition = "( status = '1')";
+        $this->data['category_data'] = $this->common->select_data_by_search('category', $search_condition, $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('is_delete' => '0', 'status' => '1', 'category_name' => "Other");
+        $this->data['category_otherdata'] = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        
         $this->load->view('freelancer_hire_live/freelancer_hire_create_profile', $this->data);
     }
     public function hire_registation_insert_new() {

@@ -159,14 +159,18 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <?php $getFieldList = $this->data_model->getNewFieldList(); ?>
+                                        <div class="form-group">                    
                                             <select name="company_field" id="company_field" ng-model="company_field" ng-change="company_other_field_fnc()" style="width: 100%">
-                                                    <option value="">Select Field</option>
-                                                <?php foreach ($getFieldList as $key => $value) { ?>
-                                                    <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
-                                                <?php } ?>
-                                                <option value="0">Other</option>
+                                                <option value="">Select Field</option>
+                                                    <?php
+                                                if (count($category_data) > 0) {
+                                                    foreach ($category_data as $cnt) {
+                                                        ?>
+                                                        <option value="<?php echo $cnt['category_id']; ?>"><?php echo $cnt['category_name']; ?></option>
+                                                    <?php
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
