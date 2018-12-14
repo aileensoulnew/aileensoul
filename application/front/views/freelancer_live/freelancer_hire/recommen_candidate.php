@@ -25,7 +25,7 @@
             $fullname = ucwords($freehiredata['comp_name']);
             if($freehiredata['company_field'] != 0)
             {
-                $designation = $this->db->get_where('industry_type', array('industry_id' => $freehiredata['company_field']))->row()->industry_name;
+                $designation = $this->db->get_where('category', array('category_id' => $freehiredata['company_field']))->row()->category_name;
             }
             else
             {
