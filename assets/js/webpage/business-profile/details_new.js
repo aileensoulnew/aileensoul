@@ -116,6 +116,11 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
         }
     };
 }]);
+app.filter('wordFirstCase', function () {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
 app.controller('businessProfileController', function ($scope, $http, $location, $window,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.all_months = all_months;
@@ -984,8 +989,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     $scope.edit_portfolio = function(index){
         $scope.reset_portfolio();
         $("#bus-portfolio").addClass("edit-form-cus");
-        var portfolio_data = $scope.user_portfolio[index];
-        console.log(portfolio_data);
+        var portfolio_data = $scope.user_portfolio[index];        
         $scope.edit_portfolio_id = portfolio_data.id_portfolio;
         $("#portfolio_title").val(portfolio_data.portfolio_title);
         $("#portfolio_desc").val(portfolio_data.portfolio_desc);
@@ -1079,15 +1083,266 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $scope.review_count = result.data.review_count;
                 $scope.avarage_review = result.data.avarage_review;                
                 setTimeout(function(){
-                    // $("#rating-1").val($scope.avarage_review);
-                    // $("#rating-1").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
-                    // $(".user-rating").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
-                    // $("#review-loader").hide();
-                    // $("#review-body").show();
+                    $("#avarage_review").val($scope.avarage_review);
+                    $("#avarage_review").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
+                    $(".user-rating").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
+                    $("#review-loader").hide();
+                    $("#review-body").show();
                 },1000);
             }
         });
     };
     $scope.get_review();
+
+    var business_review_formdata = new FormData();
+    $(document).on('change','#review_file', function(e){
+        $("#review_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#review_file_error").html("File size must be less than 10MB.");
+            $("#review_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                business_review_formdata.append('review_file', $('#review_file')[0].files[0]);
+            }
+            else {
+                $("#review_file_error").html("Invalid file selected.");
+                $("#review_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.business_review_validate = {
+        rules: {
+            review_star: {
+                required: true,
+            },
+            review_desc: {
+                required: true,
+            },
+        },
+        messages: {
+            review_star: {
+                required: "Please select start",
+            },
+            review_desc: {
+                required: "Please enter rating review description",
+            },
+        },
+    };
+
+    $scope.save_review = function(){
+        if ($scope.business_review.validate())
+        {
+            $("#review_loader").show();
+            $("#save_review").attr("style","pointer-events:none;display:none;");
+
+            business_review_formdata.append('from_user_id', from_user_id);
+            business_review_formdata.append('to_user_id', to_user_id);
+            business_review_formdata.append('review_star', $('#review_star').val());
+            business_review_formdata.append('review_star', $('#review_star').val());
+            business_review_formdata.append('review_desc', $('#review_desc').val());
+
+            $http.post(base_url + 'business_profile_live/save_review', business_review_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })            
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                $("#business_review")[0].reset();
+                if(success == 1)
+                {
+                    $("#review_loader").hide();
+                    $("#save_review").removeAttr("style");
+                    $scope.review_data = result.data.review_data;
+                    $scope.review_count = result.data.review_count;
+                    $scope.avarage_review = result.data.avarage_review;                
+                    setTimeout(function(){
+                        // $("#rating-1").val($scope.avarage_review);
+                        $("#avarage_review").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
+                        $('#avarage_review').rating('update', $scope.avarage_review);
+                        $(".user-rating").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
+                    },1000);
+
+                    $("#reviews").modal("hide");
+                }
+                else if(success == 0)
+                {                    
+                    $("#reviews").modal("hide");
+                }
+            });
+        }
+    };
     // Review End
+
+    //How Business Name Started Start
+    $story_upload = $('#story-upload').croppie({
+        enableExif: true,
+        enableResize: true,
+        showZoomer:false,
+        viewport: {
+            width: 1250,
+            height: 300,
+            type: 'square'
+        },
+        boundary: {
+            width: 1250,
+            height: 300
+        }
+    });
+    $(document).on('change','#story_file', function(e){
+    // $('#story_file').on('change', function() {    
+        // document.getElementById('upload-demo-one').style.display = 'block';
+        $("#story-upload").show();
+        $("#upload-file").addClass("story_sel_img");
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $story_upload.croppie('bind', {
+                url: e.target.result
+            }).then(function() {
+                // console.log('jQuery bind complete');
+            });
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+    
+    $scope.story_form_validate = {
+        rules: {
+            story_desc: {
+                required: true,
+            },
+            story_diff: {
+                required: true,
+            },
+        },
+    };
+
+    $scope.save_business_story = function(){
+        if ($scope.story_form.validate()) {
+            $("#save_business_story_loader").show();
+            $("#save_business_story").attr("style","pointer-events:none;display:none;");
+            $story_upload.croppie('result', {
+                type: 'canvas',
+                size: 'viewport',
+            }).then(function(resp) {
+
+                var story_desc = $("#story_desc").val();
+                var story_diff = $("#story_diff").val();
+                var story_file = resp;
+                var insert_data = $.param({'story_desc':story_desc,'story_diff':story_diff,'story_file':story_file});
+
+                $http({
+                    method: 'POST',
+                    url: base_url + 'business_profile_live/save_business_story',                
+                    data: insert_data,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .then(function (result) {                
+                    // $('#main_page_load').show();                
+                    success = result.data.success;
+                    if(success == 1)
+                    {
+                        $scope.story_data = result.data.story_data;
+                    }
+                    $("#save_business_story").removeAttr("style");
+                    $("#save_business_story_loader").hide();
+                    $("#bus-name-started").modal('hide');
+                });
+            });
+        }
+    };
+
+    $scope.get_business_story = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_business_story',            
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.story_data = result.data.story_data;
+                $("#story-loader").hide();
+                $("#story-body").show();
+            }
+        });
+    };
+    $scope.get_business_story();
+
+
+    $scope.edit_business_story = function(){        
+        // $("#bus-portfolio").addClass("edit-form-cus");
+        if($scope.story_data)
+        {
+            $("#story_desc").val($scope.story_data.story_desc);
+            $("#story_diff").val($scope.story_data.story_diff);
+
+            var story_file_name = $scope.story_data.story_file;        
+            if(story_file_name.trim() != "")
+            {
+                $("#upload-file").show();
+                var filename_arr = story_file_name.split('.');
+                $("#story_file_prev").remove();
+                var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+                var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+                var fileExt = filename_arr[filename_arr.length - 1];
+                /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                    var inner_html = '<p id="story_file_prev" class="screen-shot"><a href="'+business_user_story_upload_url+story_file_name+'" target="_blank"><img style="width: 100px;" src="'+business_user_story_upload_url+story_file_name+'"></a></p>';
+                }
+                else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                    var inner_html = '<p id="story_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+business_user_story_upload_url+story_file_name+'" target="_blank"><img src="'+business_user_story_upload_url+story_file_name+'" style="width:100%;"></a></p>';   
+                // }
+
+                var contentTr = angular.element(inner_html);
+                contentTr.insertAfter($("#upload-file"));
+                $compile(contentTr)($scope);
+            }
+            setTimeout(function(){  
+                $scope.award_form.validate();
+            },1000);
+        }
+
+        $("#bus-name-started").modal("show");
+    };
+
+    $scope.open_business_story = function(){        
+        // $("#bus-portfolio").addClass("edit-form-cus");
+        if($scope.story_data)
+        {
+            var story_file_name = $scope.story_data.story_file;        
+            if(story_file_name.trim() != "")
+            {
+                var filename_arr = story_file_name.split('.');
+                $("#story_file_prev1").remove();
+                var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+                var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+                var fileExt = filename_arr[filename_arr.length - 1];
+                /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                    var inner_html = '<p id="story_file_prev" class="screen-shot"><a href="'+business_user_story_upload_url+story_file_name+'" target="_blank"><img style="width: 100px;" src="'+business_user_story_upload_url+story_file_name+'"></a></p>';
+                }
+                else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                    var inner_html = '<p id="story_file_prev1" class="screen-shot"><a class="file-preview-cus" href="'+business_user_story_upload_url+story_file_name+'" target="_blank"><img src="'+business_user_story_upload_url+story_file_name+'" style="width:100%;"></a></p>';   
+                // }
+
+                var contentTr = angular.element(inner_html);
+                contentTr.insertAfter($("#upload-file1"));
+                $compile(contentTr)($scope);
+            }
+        }
+
+        $("#bus-name-started-display").modal("show");
+    };
+    //How Business Name Started End
 });

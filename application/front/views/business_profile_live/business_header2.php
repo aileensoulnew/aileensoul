@@ -639,17 +639,17 @@ echo $header_inner_profile ?>
 	        }
 
 	        setTimeout(function(){
-	            unread_message_count_business();
+	            //unread_message_count_business();
 	        }, 5000);
 	    })
 	    .fail(function() {
 	        setTimeout(function(){
-	            unread_message_count_business();
+	            //unread_message_count_business();
 	        }, 5000);
 	    });	    
 	}
 	setTimeout(function(){
-	    unread_message_count_business();
+	    //unread_message_count_business();
 	}, 1000);
 </script>
 

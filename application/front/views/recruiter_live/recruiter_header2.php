@@ -645,17 +645,17 @@ $userid = $this->session->userdata('aileenuser');
 	        }
 
 	        setTimeout(function(){
-	            unread_message_count_rec();
+	            // unread_message_count_rec();
 	        }, 5000);
 	    })
 	    .fail(function() {
 	        setTimeout(function(){
-	            unread_message_count_rec();
+	            // unread_message_count_rec();
 	        }, 5000);
 	    });
 	}
 	setTimeout(function(){
-	    unread_message_count_rec();
+	    // unread_message_count_rec();
 	}, 1000);
 </script>
 <!-- all popup close close using esc end -->

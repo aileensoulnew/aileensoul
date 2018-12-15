@@ -394,10 +394,10 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 					$('#userlist').html(data.leftbar);
 					$('.notification_data_in_h2').html(data.headertwo);
 					$('.seemsg').html(data.seeall);
-					setTimeout(
+					/*setTimeout(
 						chatmsg,
 						10000000000000
-						);
+						);*/
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 				}           
@@ -786,16 +786,16 @@ function unread_message_count_fa()
         }
 
         setTimeout(function(){
-            unread_message_count_fa();
+            // unread_message_count_fa();
         }, 5000);
     })
     .fail(function() {
         setTimeout(function(){
-            unread_message_count_fa();
+            // unread_message_count_fa();
         }, 5000);
     });
 }
 setTimeout(function(){
-    unread_message_count_fa();
+    // unread_message_count_fa();
 }, 1000);
 </script>

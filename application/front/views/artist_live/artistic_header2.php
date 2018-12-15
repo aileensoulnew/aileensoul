@@ -300,10 +300,10 @@ $userid = $this->session->userdata('aileenuser');
 			$('#userlist').html(data.leftbar);
 			$('.notification_data_in_h2').html(data.headertwo);
 			 $('.seemsg').html(data.seeall);
-			 setTimeout(
+			 /*setTimeout(
 					 chatmsg,
 					 100000
-					 );
+					 );*/
 		 },
 		 error: function (XMLHttpRequest, textStatus, errorThrown) {
 		 }
@@ -514,16 +514,16 @@ $userid = $this->session->userdata('aileenuser');
 	        }
 
 	        setTimeout(function(){
-	            unread_message_count_artist();
+	            // unread_message_count_artist();
 	        }, 5000);
 	    })
 	    .fail(function() {
 	        setTimeout(function(){
-	            unread_message_count_artist();
+	            // unread_message_count_artist();
 	        }, 5000);
 	    });
 	}
 	setTimeout(function(){
-	    unread_message_count_artist();
+	    // unread_message_count_artist();
 	}, 1000);
 </script>

@@ -7,6 +7,7 @@
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/developer.css?ver=' . time()); ?>" />
         <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
         <?php $this->load->view('adsense'); ?>
@@ -14,8 +15,12 @@
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
-        <?php echo $header; ?>
-        <?php echo $business_header2; ?>
+        <?php
+	        echo $header; 
+	        echo $business_header2;
+	        $from_user_id = $login_bussiness_data->user_id;
+	        $to_user_id = $business_data['user_id'];
+	    ?>
         <section>
            <?php echo $business_common; ?>
             <div class="user-midd-section">
@@ -30,7 +35,9 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
+									<span>Basic Information</span>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id"  data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list">
@@ -110,7 +117,9 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/address-info.png?ver=' . time()) ?>"><span>Address Information</span><a href="#" data-target="#add-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/address-info.png?ver=' . time()) ?>">
+									<span>Address Information</span>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#add-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list">
@@ -152,7 +161,9 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/contact.png?ver=' . time()) ?>"><span>Contact Information</span><a href="#" data-target="#contact-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/contact.png?ver=' . time()) ?>">
+									<span>Contact Information</span>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#contact-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<ul class="dis-list">
@@ -204,7 +215,9 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>"><span>Business Portfolio</span><a href="javascript:void(0);" data-target="#bus-portfolio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>">
+									<span>Business Portfolio</span>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#bus-portfolio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
 								<div id="portfolio-loader" class="dtl-dis">
 		                            <div class="text-center">
@@ -232,7 +245,7 @@
 															<h4>{{portfolio.portfolio_title}}</h4>
 														</div>
 														<div class="dis-right">
-															<a href="javascript:void(0);" class="pr5" ng-click="edit_portfolio($index);">
+															<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" class="pr5" ng-click="edit_portfolio($index);">
 																<img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>">
 															</a>
 															<span role="button" data-toggle="collapse" data-parent="#project-accordion" href="#p{{$index}}" aria-expanded="false" aria-controls="p{{$index}}" class="collapsed up-down">
@@ -273,7 +286,9 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>"><span>Key Members Information</span><a href="#" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>">
+									<span>Key Members Information</span>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
@@ -305,21 +320,19 @@
 													<ul class="dis-list">
 														<li>
 															<span>Gender</span>
-															Male
-															
+															Male					
 														</li>
 														<li>
 															<span>Social Links</span>
 															<ul class="social-link-list pt5">
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
-								</ul>
-															
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
+															</ul>					
 														</li>
 														
 														<li>
@@ -365,17 +378,15 @@
 														<li>
 															<span>Social Links</span>
 															<ul class="social-link-list pt5">
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png?ver=' . time()) ?>"></a></li>
-									<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
-								</ul>
-															
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png?ver=' . time()) ?>"></a></li>
+																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
+															</ul>					
 														</li>
-														
 														<li>
 															<span>Biography</span>
 															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
@@ -396,29 +407,43 @@
 						<div class="gallery-item bus-name-started">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-start.png?ver=' . time()) ?>"><span>How Business Name Started?</span><a href="#" data-target="#bus-name-started" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-start.png?ver=' . time()) ?>">
+									<span>How This Business Started?</span>
+									<span href="#" ng-if="from_user_id == to_user_id" ng-click="edit_business_story();" class="pull-right" style="cursor: pointer;"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></span>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<div class="bus-story">
-										<img src="<?php echo base_url('assets/n-images/detail/14.jpg?ver=' . time()) ?>">
+								<div id="story-loader" class="dtl-dis">
+	                                <div class="text-center">
+	                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+	                                </div>
+	                            </div>
+	                            <div id="story-body" style="display: none;">
+	                            	<div class="no-info" ng-if="!story_data">
+										<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+										<span>Tell the story of your business name.</span>
 									</div>
-									<ul class="dis-list">
-										<li>
-											<span>Description</span>
-											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-											<a class="dis-more" href="#"><b>See More..</b> </a>
-										</li>
+									<div class="dtl-dis dtl-box-height" ng-if="story_data">
+										<div class="bus-story" ng-if="story_data.story_file">
+											<img ng-src="<?php echo BUSINESS_USER_STORY_UPLOAD_URL;?>{{story_data.story_file}}">
+										</div>
+										<div class="bus-story" ng-if="!story_data.story_file">
+											<div class="gradient-bg"></div>
+										</div>
+										<ul class="dis-list list-ul-cus">
+											<li>
+												<span>Description</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_desc}}" dd-text-collapse-cond="true">{{story_data.story_desc}}</label>
+											</li>
+										
+											<li>
+												<span>What differentiate you from your competitiors</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_diff}}" dd-text-collapse-cond="true">{{story_data.story_diff}}</label>
+											</li>
 									
-										<li>
-											<span>What differentiate you from your competitiors</span>
-											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-											<a class="dis-more" href="#"><b>See More..</b> </a>
-										</li>
-								
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+										</ul>
+									</div>
+									<div class="about-more" ng-if="story_data">
+										<a href="#" ng-click="open_business_story();">View More </a>
+									</div>
 								</div>
 								
 							</div>
@@ -435,34 +460,56 @@
 										<span>Write a review</span>
 									</a>
 								</div>
-								<div class="dtl-dis">
-									<div class="total-rev">
-										<span class="total-rat">4.8</span>
-										<span class="rating-star">
-											<input id="input-21b" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
-										</span>
-										<span class="rev-count">59 Reviews</span>
+								<div id="review-loader" class="dtl-dis">
+		                                <div class="text-center">
+		                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+		                                </div>
+		                            </div>
+		                            <div id="review-body" style="display: none;">
+										<div class="dtl-dis">
+			                            	<div class="no-info" ng-if="review_data.length < '1'">
+												<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+												<?php if($from_user_id != $to_user_id): ?>
+												<span>Be the first to post your review.</span>
+												<?php else: ?>
+													<span>There are no reviews right now.</span>
+												<?php endif; ?>
+											</div>
+											<div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
+												<span class="total-rat">{{avarage_review}}</span>
+												<span class="rating-star">
+													<input id="avarage_review" type="number" value="{{avarage_review}}">
+												</span>
+												</span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
+											</div>
+											<ul class="review-list">
+												<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
+													<div class="review-left" ng-if="!review_list.user_image">
+														<div class="rev-img">
+															<div class="post-img-profile">
+																{{review_list.company_name | limitTo:1}}
+															</div>
+														</div>
+													</div>
+													<div class="review-left" ng-if="review_list.user_image">
+														<img ng-src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
+													</div>
+													<div class="review-right">
+														<h4>{{review_list.company_name | wordFirstCase}}</h4>
+														<div class="rating-star-cus">
+															<span class="rating-star">
+															<input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
+																</span>
+														</div>
+														<div class="review-dis" ng-if="review_list.review_desc">
+															{{review_list.review_desc}}
+														</div>
+													</div>
+												</li>
+											</ul>
+											<div class="form-group"></div>
+										</div>
 									</div>
-									<ul class="review-list">
-										<li>
-											<div class="review-left">
-												<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>user-pic.jpg">
-											</div>
-											<div class="review-right">
-												<h4>Yatin Belani</h4>
-												<div class="rating-star-cus">
-													<span class="rating-star">
-														<input id="input-21b" value="2" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
-													</span>
-												</div>
-												<div class="review-dis">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="form-group"></div>
-								</div>
 							</div>
 						</div>
 						
@@ -471,7 +518,9 @@
 						<div class="gallery-item">
 							<div class="dtl-box job-opening">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>"><span>Job Openings </span><a href="#" data-target="#" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>">
+									<span>Job Openings </span>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group">
@@ -526,7 +575,9 @@
 						<div class="gallery-item">
 		                    <div class="dtl-box">
 		                        <div class="dtl-title">
-		                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+		                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png">
+		                            <span>Achievements & Awards</span>
+		                            <a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
 		                        </div>
 		                        <div id="awards-loader" class="dtl-dis">
 		                            <div class="text-center">
@@ -608,7 +659,7 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/news.png?ver=' . time()) ?>">
 									<span>News / Press Release</span>
-									<a href="#" data-target="#press-release" data-toggle="modal" class="pull-right" ng-click="reset_press_release();"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#press-release" data-toggle="modal" class="pull-right" ng-click="reset_press_release();"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
 								<div id="press-release-loader" class="dtl-dis">
 		                            <div class="text-center">
@@ -638,7 +689,7 @@
 															</div>
 														</a>
 														<div class="dis-right">
-															<a href="#" ng-click="edit_press_release($index)"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
+															<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" ng-click="edit_press_release($index)"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
 														</div>
 													</div>
 												</div>
@@ -667,147 +718,147 @@
 							</div>
 							
 							<!-- edit profile  -->
-					<div class="rsp-dtl-box">
-						<div class="dtl-box" id="edit-profile-move">
-							<div class="dtl-title">
-								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
-							</div>
-							<div class="dtl-dis dtl-edit-p">
-								<div class="dtl-edit-top"></div>
-								<div class="profile-status">
-									<ul>
-										<li><span class=""></span>Profile pic</li>
-										<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
+							<div class="rsp-dtl-box">
+								<div class="dtl-box" id="edit-profile-move">
+									<div class="dtl-title">
+										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
+									</div>
+									<div class="dtl-dis dtl-edit-p">
+										<div class="dtl-edit-top"></div>
+										<div class="profile-status">
+											<ul>
+												<li><span class=""></span>Profile pic</li>
+												<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
+												
+												<li><span class=""></span>Experience</li>
+												<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>About</li>
+												<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li>
+												
+												<li class="pl20"><span class=""></span>Social</li>
+												<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Idol</li>
+												<li class="fw"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Educational info</li>
+												<li class="fw"><span class=""></span>Profile overview</li>
+											</ul>
+										</div>
+										<div class="dtl-edit-bottom"></div>
+										<div class="p20">
+										<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+										</div>
 										
-										<li><span class=""></span>Experience</li>
-										<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>About</li>
-										<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li>
-										
-										<li class="pl20"><span class=""></span>Social</li>
-										<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Idol</li>
-										<li class="fw"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Educational info</li>
-										<li class="fw"><span class=""></span>Profile overview</li>
-									</ul>
+									</div>
 								</div>
-								<div class="dtl-edit-bottom"></div>
-								<div class="p20">
-								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
-								</div>
-								
 							</div>
-						</div>
-					</div>
 							
 							<!-- Social Link  -->
-					<div class="rsp-dtl-box">
-						<div id="social-link-move" class="dtl-box">
-			                <div class="dtl-title">
-			                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Social Profile</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
-			                </div>
-			                <div id="social-link-loader" class="dtl-dis">
-			                    <div class="text-center">
-			                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-			                    </div>
-			                </div>
-			                <div id="social-link-body" style="display: none;">
-			                    <div class="dtl-dis">
-			                        <div class="no-info" ng-if="user_social_links.length < '1' && user_personal_links.length < '1'">
-			                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-			                            <span>Enter your social profile links. Let people stay connected with you on other platforms too.</span>
-			                        </div>
-			                        <div class="social-links" ng-if="user_social_links.length > '0'">
-			                            <h4>Social</h4>
-			                            <ul class="social-link-list">
-			                                <li ng-repeat="social_links in user_social_links">
-			                                    <a href="{{social_links.user_links_txt}}" target="_self">
-			                                        <img ng-if="social_links.user_links_type == 'Facebook'" src="<?php echo base_url(); ?>assets/n-images/detail/fb.png">
-			                                        <img ng-if="social_links.user_links_type == 'Google'" src="<?php echo base_url(); ?>assets/n-images/detail/g-plus.png">
-			                                        <img ng-if="social_links.user_links_type == 'LinkedIn'" src="<?php echo base_url(); ?>assets/n-images/detail/in.png">
-			                                        <img ng-if="social_links.user_links_type == 'Pinterest'" src="<?php echo base_url(); ?>assets/n-images/detail/pin.png">
-			                                        <img ng-if="social_links.user_links_type == 'Instagram'" src="<?php echo base_url(); ?>assets/n-images/detail/insta.png">
-			                                        <img ng-if="social_links.user_links_type == 'GitHub'" src="<?php echo base_url(); ?>assets/n-images/detail/git.png">
-			                                        <img ng-if="social_links.user_links_type == 'Twitter'" src="<?php echo base_url(); ?>assets/n-images/detail/twt.png">
-			                                    </a>
-			                                </li>
-			                            </ul>
-			                        </div>
-			                        <div class="social-links" ng-if="user_personal_links.length > '0'">
-			                            <h4 class="pt20 fw">Personal</h4>
-			                            <ul class="social-link-list">
-			                                <li ng-repeat="user_p_links in user_personal_links">
-			                                    <a href="{{user_p_links.user_links_txt}}" target="_self">
-			                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/pr-web.png">
-			                                    </a>
-			                                </li>
-			                            </ul>
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-					</div>
+							<div class="rsp-dtl-box">
+								<div id="social-link-move" class="dtl-box">
+					                <div class="dtl-title">
+					                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Social Profile</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+					                </div>
+					                <div id="social-link-loader" class="dtl-dis">
+					                    <div class="text-center">
+					                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+					                    </div>
+					                </div>
+					                <div id="social-link-body" style="display: none;">
+					                    <div class="dtl-dis">
+					                        <div class="no-info" ng-if="user_social_links.length < '1' && user_personal_links.length < '1'">
+					                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+					                            <span>Enter your social profile links. Let people stay connected with you on other platforms too.</span>
+					                        </div>
+					                        <div class="social-links" ng-if="user_social_links.length > '0'">
+					                            <h4>Social</h4>
+					                            <ul class="social-link-list">
+					                                <li ng-repeat="social_links in user_social_links">
+					                                    <a href="{{social_links.user_links_txt}}" target="_self">
+					                                        <img ng-if="social_links.user_links_type == 'Facebook'" src="<?php echo base_url(); ?>assets/n-images/detail/fb.png">
+					                                        <img ng-if="social_links.user_links_type == 'Google'" src="<?php echo base_url(); ?>assets/n-images/detail/g-plus.png">
+					                                        <img ng-if="social_links.user_links_type == 'LinkedIn'" src="<?php echo base_url(); ?>assets/n-images/detail/in.png">
+					                                        <img ng-if="social_links.user_links_type == 'Pinterest'" src="<?php echo base_url(); ?>assets/n-images/detail/pin.png">
+					                                        <img ng-if="social_links.user_links_type == 'Instagram'" src="<?php echo base_url(); ?>assets/n-images/detail/insta.png">
+					                                        <img ng-if="social_links.user_links_type == 'GitHub'" src="<?php echo base_url(); ?>assets/n-images/detail/git.png">
+					                                        <img ng-if="social_links.user_links_type == 'Twitter'" src="<?php echo base_url(); ?>assets/n-images/detail/twt.png">
+					                                    </a>
+					                                </li>
+					                            </ul>
+					                        </div>
+					                        <div class="social-links" ng-if="user_personal_links.length > '0'">
+					                            <h4 class="pt20 fw">Personal</h4>
+					                            <ul class="social-link-list">
+					                                <li ng-repeat="user_p_links in user_personal_links">
+					                                    <a href="{{user_p_links.user_links_txt}}" target="_self">
+					                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/pr-web.png">
+					                                    </a>
+					                                </li>
+					                            </ul>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
 					
-					<!-- Timeline  -->
-						<div class="rsp-dtl-box">
-							<div class="dtl-box" id="timeline-move">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/timeline.png?ver=' . time()) ?>"><span>Timeline</span><a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<div class="no-info">
-										<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-										<span>Lorem ipsum its a dummy text and its user to for all.</span>
+							<!-- Timeline  -->
+							<div class="rsp-dtl-box">
+								<div class="dtl-box" id="timeline-move">
+									<div class="dtl-title">
+										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/timeline.png?ver=' . time()) ?>"><span>Timeline</span><a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									</div>
-									<div class="fw dtl-more-add">
-										<a href="#" data-target="#timeline-cus" data-toggle="modal"><span class="pr10">Add Timeline </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+									<div class="dtl-dis">
+										<div class="no-info">
+											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+											<span>Lorem ipsum its a dummy text and its user to for all.</span>
+										</div>
+										<div class="fw dtl-more-add">
+											<a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline-cus" data-toggle="modal"><span class="pr10">Add Timeline </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+										</div>
 									</div>
+									
 								</div>
-								
 							</div>
-						</div>
 					
-					<!-- Hours of Operation  -->
-					<div class="rsp-dtl-box">
-						<div class="dtl-box" id="hour-move">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/ho-op.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" data-target="#hours-opration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list">
+							<!-- Hours of Operation  -->
+							<div class="rsp-dtl-box">
+								<div class="dtl-box" id="hour-move">
+										<div class="dtl-title">
+											<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/ho-op.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" ng-if="from_user_id == to_user_id" data-target="#hours-opration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+										</div>
+										<div class="dtl-dis">
+											<ul class="dis-list">
+												
+												<li>
+													<span>Hours of Operation</span>
+													 Mon - Sun : 9:00 AM
+												</li>
+												<li>
+													<span>Select opening hours</span>
+													Always open
+												</li>
+												
+											</ul>
+										</div>
 										
-										<li>
-											<span>Hours of Operation</span>
-											 Mon - Sun : 9:00 AM
-										</li>
-										<li>
-											<span>Select opening hours</span>
-											Always open
-										</li>
-										
-									</ul>
-								</div>
-								
+									</div>
 							</div>
-					</div>
 					
-					<!-- Add Menu  -->
-					<div class="rsp-dtl-box">
-						<div class="dtl-box add-menu" id="menu-move">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/menu.png?ver=' . time()) ?>"><span>Add Menu</span><a href="#" data-target="#add-menu" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div class="dtl-dis">
-									<ul class="dis-list">
-										<li>
-											
-											<p class="screen-shot">
-												<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-											</p>
-										</li>
-									</ul>
-								</div>
-								
+							<!-- Add Menu  -->
+							<div class="rsp-dtl-box">
+								<div class="dtl-box add-menu" id="menu-move">
+										<div class="dtl-title">
+											<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/menu.png?ver=' . time()) ?>"><span>Add Menu</span><a href="#" data-target="#add-menu" ng-if="from_user_id == to_user_id" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+										</div>
+										<div class="dtl-dis">
+											<ul class="dis-list">
+												<li>
+													
+													<p class="screen-shot">
+														<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
+													</p>
+												</li>
+											</ul>
+										</div>
+										
+									</div>
 							</div>
-					</div>
 							
 							
 						</div>
@@ -1483,76 +1534,128 @@
 					<div class="dtl-title">
 						<span>Reviews</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<div class="rev-img">
-								<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+					<form id="business_review" name="business_review" ng-validate="business_review_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<div class="rev-img">
+									<?php if($login_bussiness_data->business_user_image != ''): ?>
+									<img src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL.$login_bussiness_data->business_user_image; ?>">
+									<?php else: ?>
+										<div class="post-img-profile">
+											<?php echo strtoupper(substr($login_bussiness_data->company_name, 0,1)); ?>
+										</div>
+									<?php endif; ?>
+								</div>
+								<div class="total-rev-top">
+									<h4><?php echo $login_bussiness_data->company_name; ?></h4>
+									<span class="rating-star">
+										<input id="review_star" value="5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
+									</span>
+								</div>
 							</div>
-							<div class="total-rev-top">
-								<h4>Harshad Patoliya</h4>
-								<span class="rating-star">
-			<input id="input-21b" value="4" type="text" class="rating" data-min=0 data-max=5 data-step=0.2 data-size="sm" required title="">
-								</span>
+							<div class="form-group">
+								<label>Description</label>
+								<textarea type="text" placeholder="Description" id="review_desc" name="review_desc" maxlength="700" ng-model="review_desc"></textarea>
+								<span class="pull-right">{{700 - review_desc.length}}</span>
+							</div>
+							<div class="form-group">
+								<div class="upload-file">
+									<span class="fw">Upload Photo</span>
+									<input type="file" id="review_file" name="review_file">
+									<span id="review_file_error" class="error" style="display: none;"></span>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Description</label>
-							<textarea type="text" placeholder="Description"></textarea>
+						<div class="dtl-btn bottom-btn">
+							<a id="save_review" href="#" ng-click="save_review()" class="save">
+								<span>Save</span>
+							</a>
+	                        <div id="review_loader" class="dtl-popup-loader" style="display: none;">
+	                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+	                        </div>
 						</div>
-						<div class="form-group">
-							<label class="upload-file">
-								<span class="fw">Upload Photo</span> <input type="file">
-							</label>
-						</div>
-				
-					</div>
-					<div class="dtl-btn bottom-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
-				</div>	
-
-
-            </div>
+					</form>
+				</div>
+			</div>
         </div>
     </div>
 	
 	
 	<!---  model How Business Name Started?  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="bus-name-started" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal timeline-cus bus-start-cus" id="bus-name-started" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
                 <div class="modal-body-cus"> 
 					<div class="dtl-title">
-						<span>How Business Name Started?</span>
+						<span>How <?php echo ucwords($business_data['company_name']); ?> Started?</span>
 					</div>
-					<div class="dtl-dis">
-						<a href="#"><div class="bus-story no-img-upload">
-							<label class="upload-file">
-								<img src="<?php echo base_url('assets/n-images/detail/bus-story-upload.png?ver=' . time()) ?>">
+					<form id="story_form" name="story_form" ng-validate="story_form_validate">
+						<div class="dtl-dis">						
+							<div class="bus-story no-img-upload" style="float: left;width: 100%;">
+								<label class="upload-file">
+									<img class="story_u_f" src="<?php echo base_url('assets/n-images/detail/bus-story-upload.png?ver=' . time()) ?>">
+									<input type="file" id="story_file" name="story_file">
+									<span id="upload-file" style="display: none;">Change</span>
+								</label>
+							</div>
+							<div id="story-upload" class="s-u-p"></div>
+							<img id="upload_img" src="{{story_image}}" style="display: none;">
+							<div class="form-group">
+								<label>Description</label>
+								<textarea maxlength="2000" type="text" id="story_desc" name="story_desc" ng-model="story_desc" placeholder="Describe your business struggle story"></textarea>
+								<span class="pull-right">{{2000 - story_desc.length}}</span>
+							</div>
+							<div class="form-group">
+								<label>What differentiate you from your competitiors</label>
+								<textarea maxlength="2000" type="text" id="story_diff" name="story_diff" ng-model="story_diff" placeholder="What differentiate you from your competitiors"></textarea>
+								<span class="pull-right">{{2000 - story_diff.length}}</span>
+							</div>
+						</div>
+						<div class="dtl-btn bottom-btn">
+							<a id="save_business_story" href="#" ng-click="save_business_story()" class="save">
+								<span>Save</span>
+							</a>
+	                        <div id="save_business_story_loader" class="dtl-popup-loader" style="display: none;">
+	                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+	                        </div>
+						</div>
+					</form>
+				</div>
+			</div>
+        </div>
+    </div>
+
+    <div style="display:none;" class="modal fade dtl-modal timeline-cus bus-start-cus" id="bus-name-started-display" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>How <?php echo ucwords($business_data['company_name']); ?> Started?</span>
+					</div>					
+					<div class="dtl-dis">						
+						<div class="bus-story no-img-upload" style="float: left;width: 100%;">
+							<label class="upload-file">									
+								<span id="upload-file1" style="display: none;">Change</span>
 							</label>
-						</div></a>
-						<div class="bus-story">
-							<img src="<?php echo base_url('assets/n-images/detail/14.jpg?ver=' . time()) ?>">
+						</div>												
+						<div class="form-group">
+							<h4>Description</h4>
+							<label>{{story_data.story_desc}}</label>
 						</div>
 						<div class="form-group">
-									<label>Description</label>
-									<textarea type="text" placeholder="Describe your business struggle story"></textarea>
-								</div>
-						<div class="form-group">
-									<label>What differentiate you from your competitiors</label>
-									<textarea type="text" placeholder="What differentiate you from your competitiors"></textarea>
-								</div>
-						
-						
+							<h4>Difference between <?php echo ucwords($business_data['company_name']); ?> and competitiors</h4>
+							<label>{{story_data.story_diff}}</label>
+						</div>
 					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
+					<div class="dtl-btn bottom-btn">
+						<a href="#" class="save" data-dismiss="modal">
+							<span>Close</span>
+						</a>                        
 					</div>
-				</div>	
-
-
-            </div>
+				</div>
+			</div>
         </div>
     </div>
 	
@@ -2097,6 +2200,7 @@
 
         var business_user_award_upload_url = '<?php echo BUSINESS_USER_AWARD_UPLOAD_URL; ?>';
         var business_user_portfolio_upload_url = '<?php echo BUSINESS_USER_PORTFOLIO_UPLOAD_URL; ?>';
+        var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
         $('#main_loader').hide();
         // $('#main_page_load').show();
         $('body').removeClass("body-loader");
@@ -2144,61 +2248,6 @@
 		})(jQuery);
 	</script>
 	<script>
-        /*jQuery(document).ready(function () {
-            $("#input-21f").rating({
-                starCaptions: function (val) {
-                    if (val < 3) {
-                        return val;
-                    } else {
-                        return 'high';
-                    }
-                },
-                starCaptionClasses: function (val) {
-                    if (val < 3) {
-                        return 'label label-danger';
-                    } else {
-                        return 'label label-success';
-                    }
-                },
-                hoverOnClear: false
-            });
-            var $inp = $('#rating-input');
-
-            $inp.rating({
-                min: 0,
-                max: 5,
-                step: 1,
-                size: 'lg',
-                showClear: false
-            });
-
-            $('#btn-rating-input').on('click', function () {
-                $inp.rating('refresh', {
-                    showClear: true,
-                    disabled: !$inp.attr('disabled')
-                });
-            });
-
-
-            $inp.on('rating.change', function () {
-                alert($('#rating-input').val());
-            });
-
-
-            $('.rb-rating').rating({
-                'showCaption': true,
-                'stars': '3',
-                'min': '0',
-                'max': '3',
-                'step': '1',
-                'size': 'xs',
-                'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
-            });
-            $("#input-21c").rating({
-                min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
-            });
-        });*/
-		
 		$(document).ready(function ()
 		{
 			if (screen.width <= 1199)

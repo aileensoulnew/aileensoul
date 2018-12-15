@@ -1071,4 +1071,30 @@ class Business_model extends CI_Model {
         $result_array = $query->row_array();
         return $result_array;
     }
+
+    public function set_save_review($from_user_id,$to_user_id,$review_star,$review_desc ='',$fileName = '')
+    {
+        $data = array(
+            'to_user_id' => $to_user_id,
+            'from_user_id' => $from_user_id,
+            'review_star' => $review_star,
+            'review_desc' => $review_desc,
+            'review_file' => $fileName,    
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'business_review');
+        return $insert_id;
+    }
+
+    public function get_business_story($user_id)
+    {
+        $this->db->select("*")->from('business_user_how_start');        
+        $this->db->where('user_id', $user_id);
+        $this->db->where('status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        return $result_array;
+    }
 }

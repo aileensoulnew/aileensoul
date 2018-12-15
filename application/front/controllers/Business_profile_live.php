@@ -11814,5 +11814,147 @@ Your browser does not support the audio tag.
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_review()
+    {
+        $from_user_id = $this->input->post('from_user_id');
+        $to_user_id = $this->input->post('to_user_id');
+        $review_star = $this->input->post('review_star');
+        $review_desc = $this->input->post('review_desc');
+
+        $fileName = "";
+        if(isset($_FILES['review_file']['name']) && $_FILES['review_file']['name'] != "")
+        {
+            $review_upload_path = $this->config->item('review_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $review_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['review_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('review_file')){
+                $main_image = $review_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+
+        if($from_user_id != '' && $to_user_id != '')
+        {
+            $user_project_insert = $this->business_model->set_save_review($from_user_id,$to_user_id,$review_star,$review_desc,$fileName);
+            $review_data = $this->business_model->get_save_review($to_user_id);
+            
+            $review_count = $this->business_model->get_review_count($to_user_id);
+            $review_avarage = $this->business_model->get_review_avarage($to_user_id);
+            
+            $sum_star = 0;
+            $sum_count = 0;
+            foreach ($review_avarage as $key => $value) {
+                $sum_star = $sum_star + ($value['rating_count'] * $value['review_star']);
+                $sum_count = $sum_count + $value['rating_count'];
+            }                       
+            $avarage_review = round($sum_star / $sum_count,1);
+            
+            $ret_arr = array("success"=>1,"review_data"=>$review_data,"review_count"=>$review_count['total_review'],"avarage_review"=>$avarage_review);
+
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_business_story()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $data = $this->input->post('story_file');
+        // $data = $_POST['story_file'];
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+
+        $contition_array = array('user_id' => $user_id);
+        $story_data = $this->common->select_data_by_condition('business_user_how_start', $contition_array, $sel_data = 'story_file', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $story_file = (isset($story_data) && !empty($story_data) ? $story_data[0]['story_file'] : '');
+        if($data != "")
+        {
+
+            if ($story_file != '') {
+                $business_user_story_upload_path = $this->config->item('business_user_story_upload_path');
+                $story_image = $business_user_story_upload_path . $user_reg_prev_image;
+                if (isset($story_image)) {
+                    @unlink($story_image);
+                }            
+            }
+            
+            $story_file_path = $this->config->item('business_user_story_upload_path');
+            $story_file = time() . '.png';
+            $data = base64_decode($data);
+            $file = $story_file_path . $story_file;
+            file_put_contents($story_file_path . $story_file, $data);
+            $success = file_put_contents($file, $data);
+            $main_image = $story_file_path . $story_file;
+            $main_image_size = filesize($main_image);        
+
+            $s3 = new S3(awsAccessKey, awsSecretKey);
+            $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+            if (IMAGEPATHFROM == 's3bucket') {
+                $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+            }
+        }
+
+        $story_desc = $this->input->post('story_desc');        
+        $story_diff = $this->input->post('story_diff');
+        $t_date =  date('Y-m-d H:i:s', time());
+        
+        if(isset($story_data) && !empty($story_data))
+        {
+            $update_data = array(
+                'story_desc'    => $story_desc,
+                'story_diff'    => $story_diff,
+                'story_file'    => $story_file,                
+                'modify_date'   => $t_date,
+            );
+            $update = $this->common->update_data($update_data, 'business_user_how_start', 'user_id', $user_id);
+        }
+        else
+        {            
+            $data = array(
+                'user_id'       => $user_id,
+                'story_desc'    => $story_desc,
+                'story_diff'    => $story_diff,
+                'story_file'    => $story_file,
+                'status'        => '1',
+                'created_date'  => $t_date,
+                'modify_date'   => $t_date,
+            );
+            $insert_id = $this->common->insert_data_getid($data, 'business_user_how_start');
+        }
+
+        $story_data = $this->business_model->get_business_story($user_id);
+        $ret_arr = array("success"=>1,"story_data"=>$story_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_business_story()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $story_data = $this->business_model->get_business_story($user_id);
+        $ret_arr = array("success"=>1,"story_data"=>$story_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
     
 }
