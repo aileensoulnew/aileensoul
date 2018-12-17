@@ -5243,11 +5243,18 @@ class Recruiter extends MY_Controller {
 		// if ($url == $this->uri->segment(3)) {
 		// echo $url." == ".$this->uri->segment_array()[count($this->uri->segment_array())];exit;
 		//if ($url == $this->uri->segment_array()[count($this->uri->segment_array())]) {
+		if(isset($postdata) && !empty($postdata))
+		{			
 			if ($this->session->userdata('aileenuser')) {
 				$this->load->view('job/rec_post', $this->data);
 			} else {
 				$this->load->view('job/rec_post_login', $this->data);
 			}
+		}
+		else
+		{
+			$this->load->view('404', $this->data);
+		}
 		/*} else {
 			redirect(base_url().$url, refresh);
 		}*/

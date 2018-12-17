@@ -727,7 +727,7 @@
             "@context": "http://schema.org",
             "@type": "JobPosting",
             "title": "<?php echo $opp_data['opptitle']; ?>",
-            "description": "<?php echo htmlentities($opp_data['opportunity']); ?>",
+            "description": "Description: <?php echo htmlentities($opp_data['opportunity']); ?>",
             "industry": "<?php echo ($opp_data['field'] != "" ? ucwords($opp_data['field']) : ($opp_data['other_field'] != "" ? $opp_data['other_field'] : "Other")); ?>",
             "datePosted": "<?php echo date('Y-m-d', strtotime($opp_data['created_date'])); ?>",
             "jobLocation": [
