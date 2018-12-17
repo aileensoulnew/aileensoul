@@ -121,6 +121,23 @@ app.filter('wordFirstCase', function () {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
+app.filter('slugify', function () {
+    return function (input) {
+        if (!input)
+            return;
+
+        // make lower case and trim
+        var slug = input.toLowerCase().trim();
+
+        // replace invalid chars with spaces
+        slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
+
+        // replace multiple spaces or hyphens with a single hyphen
+        slug = slug.replace(/[\s-]+/g, '-');
+
+        return slug;
+    };
+});
 app.controller('businessProfileController', function ($scope, $http, $location, $window,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.all_months = all_months;
@@ -625,7 +642,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $("#view-more-award").hide();
     };
 
-    $scope.reset_awards_form = function(){        
+    $scope.reset_awards_form = function(){
         $scope.edit_awards = 0;
         $scope.awards_file_old = '';
         $("#Achiv-awards").removeClass("edit-form-cus");
@@ -1200,8 +1217,6 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }
     });
     $(document).on('change','#story_file', function(e){
-    // $('#story_file').on('change', function() {    
-        // document.getElementById('upload-demo-one').style.display = 'block';
         $("#story-upload").show();
         $("#upload-file").addClass("story_sel_img");
         var reader = new FileReader();
@@ -1282,7 +1297,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     $scope.get_business_story();
 
 
-    $scope.edit_business_story = function(){        
+    $scope.edit_business_story = function(){
         // $("#bus-portfolio").addClass("edit-form-cus");
         if($scope.story_data)
         {
@@ -1317,7 +1332,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $("#bus-name-started").modal("show");
     };
 
-    $scope.open_business_story = function(){        
+    $scope.open_business_story = function(){
         // $("#bus-portfolio").addClass("edit-form-cus");
         if($scope.story_data)
         {
@@ -1345,4 +1360,656 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $("#bus-name-started-display").modal("show");
     };
     //How Business Name Started End
+
+    //Timeline Start
+    $scope.set_timeline = function()
+    {
+        var timelines = $('.cd-horizontal-timeline'),
+            eventsMinDistance = 100;
+
+        (timelines.length > 0) && initTimeline(timelines);
+
+        function initTimeline(timelines) {
+            timelines.each(function(){
+                var timeline = $(this),
+                    timelineComponents = {};
+                //cache timeline components 
+                timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
+                timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
+                timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
+                timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+                timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
+                timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
+                timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
+                timelineComponents['eventsContent'] = timeline.children('.events-content');
+
+                //assign a left postion to the single events along the timeline
+                setDatePosition(timelineComponents, eventsMinDistance);
+                //assign a width to the timeline
+                var timelineTotWidth = setTimelineWidth(timelineComponents, eventsMinDistance);
+                //the timeline has been initialize - show it
+                timeline.addClass('loaded');
+
+                //detect click on the next arrow
+                timelineComponents['timelineNavigation'].on('click', '.next', function(event){
+                    event.preventDefault();
+                    updateSlide(timelineComponents, timelineTotWidth, 'next');
+                });
+                //detect click on the prev arrow
+                timelineComponents['timelineNavigation'].on('click', '.prev', function(event){
+                    event.preventDefault();
+                    updateSlide(timelineComponents, timelineTotWidth, 'prev');
+                });
+                //detect click on the a single event - show new event content
+                timelineComponents['eventsWrapper'].on('click', 'a', function(event){
+                    event.preventDefault();
+                    timelineComponents['timelineEvents'].removeClass('selected');
+                    $(this).addClass('selected');
+                    updateOlderEvents($(this));
+                    updateFilling($(this), timelineComponents['fillingLine'], timelineTotWidth);
+                    updateVisibleContent($(this), timelineComponents['eventsContent']);
+                });
+
+                //on swipe, show next/prev event content
+                timelineComponents['eventsContent'].on('swipeleft', function(){
+                    var mq = checkMQ();
+                    ( mq == 'mobile' ) && showNewContent(timelineComponents, timelineTotWidth, 'next');
+                });
+                timelineComponents['eventsContent'].on('swiperight', function(){
+                    var mq = checkMQ();
+                    ( mq == 'mobile' ) && showNewContent(timelineComponents, timelineTotWidth, 'prev');
+                });
+
+                //keyboard navigation
+                /*$(document).keyup(function(event){
+                    if(event.which=='37' && elementInViewport(timeline.get(0)) ) {
+                        showNewContent(timelineComponents, timelineTotWidth, 'prev');
+                    } else if( event.which=='39' && elementInViewport(timeline.get(0))) {
+                        showNewContent(timelineComponents, timelineTotWidth, 'next');
+                    }
+                });*/
+            });
+        }
+
+        function updateSlide(timelineComponents, timelineTotWidth, string) {
+            //retrieve translateX value of timelineComponents['eventsWrapper']
+            var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
+                wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
+            //translate the timeline to the left('next')/right('prev') 
+            (string == 'next') 
+                ? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
+                : translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
+        }
+
+        function showNewContent(timelineComponents, timelineTotWidth, string) {
+            //go from one event to the next/previous one
+            var visibleContent =  timelineComponents['eventsContent'].find('.selected'),
+                newContent = ( string == 'next' ) ? visibleContent.next() : visibleContent.prev();
+
+            if ( newContent.length > 0 ) { //if there's a next/prev event - show it
+                var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
+                    newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
+                
+                updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
+                updateVisibleContent(newEvent, timelineComponents['eventsContent']);
+                newEvent.addClass('selected');
+                selectedDate.removeClass('selected');
+                updateOlderEvents(newEvent);
+                updateTimelinePosition(string, newEvent, timelineComponents);
+            }
+        }
+
+        function updateTimelinePosition(string, event, timelineComponents) {
+            //translate timeline to the left/right according to the position of the selected event
+            var eventStyle = window.getComputedStyle(event.get(0), null),
+                eventLeft = Number(eventStyle.getPropertyValue("left").replace('px', '')),
+                timelineWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', '')),
+                timelineTotWidth = Number(timelineComponents['eventsWrapper'].css('width').replace('px', ''));
+            var timelineTranslate = getTranslateValue(timelineComponents['eventsWrapper']);
+
+            if( (string == 'next' && eventLeft > timelineWidth - timelineTranslate) || (string == 'prev' && eventLeft < - timelineTranslate) ) {
+                translateTimeline(timelineComponents, - eventLeft + timelineWidth/2, timelineWidth - timelineTotWidth);
+            }
+        }
+
+        function translateTimeline(timelineComponents, value, totWidth) {
+            var eventsWrapper = timelineComponents['eventsWrapper'].get(0);
+            value = (value > 0) ? 0 : value; //only negative translate value
+            value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value; //do not translate more than timeline width
+            setTransformValue(eventsWrapper, 'translateX', value+'px');
+            //update navigation arrows visibility
+            (value == 0 ) ? timelineComponents['timelineNavigation'].find('.prev').addClass('inactive') : timelineComponents['timelineNavigation'].find('.prev').removeClass('inactive');
+            (value == totWidth ) ? timelineComponents['timelineNavigation'].find('.next').addClass('inactive') : timelineComponents['timelineNavigation'].find('.next').removeClass('inactive');
+        }
+
+        function updateFilling(selectedEvent, filling, totWidth) {
+            //change .filling-line length according to the selected event
+            var eventStyle = window.getComputedStyle(selectedEvent.get(0), null),
+                eventLeft = eventStyle.getPropertyValue("left"),
+                eventWidth = eventStyle.getPropertyValue("width");
+            eventLeft = Number(eventLeft.replace('px', '')) + Number(eventWidth.replace('px', ''))/2;
+            var scaleValue = eventLeft/totWidth;
+            setTransformValue(filling.get(0), 'scaleX', scaleValue);
+        }
+
+        function setDatePosition(timelineComponents, min) {
+            for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
+                var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
+                    distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
+                timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
+            }
+        }
+
+        function setTimelineWidth(timelineComponents, width) {
+            var timeSpan = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][timelineComponents['timelineDates'].length-1]),
+                timeSpanNorm = timeSpan/timelineComponents['eventsMinLapse'],
+                timeSpanNorm = Math.round(timeSpanNorm) + 4,
+                totalWidth = timeSpanNorm*width;
+            timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
+            updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);
+            updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents);
+        
+            return totalWidth;
+        }
+
+        function updateVisibleContent(event, eventsContent) {
+            var eventDate = event.data('date'),
+                visibleContent = eventsContent.find('.selected'),
+                selectedContent = eventsContent.find('[data-date="'+ eventDate +'"]'),
+                selectedContentHeight = selectedContent.height();
+
+            if (selectedContent.index() > visibleContent.index()) {
+                var classEnetering = 'selected enter-right',
+                    classLeaving = 'leave-left';
+            } else {
+                var classEnetering = 'selected enter-left',
+                    classLeaving = 'leave-right';
+            }
+
+            selectedContent.attr('class', classEnetering);
+            visibleContent.attr('class', classLeaving).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
+                visibleContent.removeClass('leave-right leave-left');
+                selectedContent.removeClass('enter-left enter-right');
+            });
+            eventsContent.css('height', selectedContentHeight+'px');
+        }
+
+        function updateOlderEvents(event) {
+            event.parent('li').prevAll('li').children('a').addClass('older-event').end().end().nextAll('li').children('a').removeClass('older-event');
+        }
+
+        function getTranslateValue(timeline) {
+            var timelineStyle = window.getComputedStyle(timeline.get(0), null),
+                timelineTranslate = timelineStyle.getPropertyValue("-webkit-transform") ||
+                    timelineStyle.getPropertyValue("-moz-transform") ||
+                    timelineStyle.getPropertyValue("-ms-transform") ||
+                    timelineStyle.getPropertyValue("-o-transform") ||
+                    timelineStyle.getPropertyValue("transform");
+
+            if( timelineTranslate.indexOf('(') >=0 ) {
+                var timelineTranslate = timelineTranslate.split('(')[1];
+                timelineTranslate = timelineTranslate.split(')')[0];
+                timelineTranslate = timelineTranslate.split(',');
+                var translateValue = timelineTranslate[4];
+            } else {
+                var translateValue = 0;
+            }
+
+            return Number(translateValue);
+        }
+
+        function setTransformValue(element, property, value) {
+            element.style["-webkit-transform"] = property+"("+value+")";
+            element.style["-moz-transform"] = property+"("+value+")";
+            element.style["-ms-transform"] = property+"("+value+")";
+            element.style["-o-transform"] = property+"("+value+")";
+            element.style["transform"] = property+"("+value+")";
+        }
+
+        //based on http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+        function parseDate(events) {
+            var dateArrays = [];
+            events.each(function(){
+                var singleDate = $(this),
+                    dateComp = singleDate.data('date').split('T');
+                if( dateComp.length > 1 ) { //both DD/MM/YEAR and time are provided
+                    var dayComp = dateComp[0].split('/'),
+                        timeComp = dateComp[1].split(':');
+                } else if( dateComp[0].indexOf(':') >=0 ) { //only time is provide
+                    var dayComp = ["2000", "0", "0"],
+                        timeComp = dateComp[0].split(':');
+                } else { //only DD/MM/YEAR
+                    var dayComp = dateComp[0].split('/'),
+                        timeComp = ["0", "0"];
+                }
+                var newDate = new Date(dayComp[2], dayComp[1]-1, dayComp[0], timeComp[0], timeComp[1]);
+                dateArrays.push(newDate);
+            });
+            return dateArrays;
+        }
+
+        function daydiff(first, second) {
+            return Math.round((second-first));
+        }
+
+        function minLapse(dates) {
+            //determine the minimum distance among events
+            var dateDistances = [];
+            for (i = 1; i < dates.length; i++) { 
+                var distance = daydiff(dates[i-1], dates[i]);
+                dateDistances.push(distance);
+            }
+            return Math.min.apply(null, dateDistances);
+        }
+
+        /*
+            How to tell if a DOM element is visible in the current viewport?
+            http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+        */
+        function elementInViewport(el) {
+            var top = el.offsetTop;
+            var left = el.offsetLeft;
+            var width = el.offsetWidth;
+            var height = el.offsetHeight;
+
+            while(el.offsetParent) {
+                el = el.offsetParent;
+                top += el.offsetTop;
+                left += el.offsetLeft;
+            }
+
+            return (
+                top < (window.pageYOffset + window.innerHeight) &&
+                left < (window.pageXOffset + window.innerWidth) &&
+                (top + height) > window.pageYOffset &&
+                (left + width) > window.pageXOffset
+            );
+        }
+
+        function checkMQ() {
+            //check if mobile or desktop device
+            return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
+        }
+
+    };
+
+    $scope.selected_timeline = 0;
+    $scope.select_timeline_item = 0;
+    $scope.select_timeline = function(idx){
+        $scope.select_timeline_item = idx;
+    };
+    $scope.get_business_timeline = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_business_timeline',
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.timeline_data = result.data.timeline_data;
+                setTimeout(function(){
+                    $scope.set_timeline();
+                },1000);
+                $("#timeline-loader").hide();
+                $("#timeline-body").show();
+            }
+        });
+    };
+    $scope.get_business_timeline();
+
+    $scope.timeline_error = function()
+    {
+        $("#timelinedateerror").hide();
+        $("#timelinedateerror").html('');
+    };
+
+    $scope.timeline_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#timelinedateerror").hide();
+        $("#timelinedateerror").html('');
+        var kcyear = document.getElementsByName("timeline_year")[0],
+        kcmonth = document.getElementsByName("timeline_month")[0],
+        kcday = document.getElementsByName("timeline_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#timeline_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#timeline_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+
+    var timeline_formdata = new FormData();
+    $(document).on('change','#timeline_file', function(e){
+        $("#timeline_file_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#timeline_file_error").html("File size must be less than 10MB.");
+            $("#timeline_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                timeline_formdata.append('timeline_file', $('#timeline_file')[0].files[0]);
+            }
+            else {
+                $("#timeline_file_error").html("Invalid file selected.");
+                $("#timeline_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.timeline_validate = {
+        rules: {            
+            timeline_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            timeline_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+            timeline_month: {
+                required: true,
+            },
+            timeline_day: {
+                required: true,
+            },
+            timeline_year: {
+                required: true,
+            },
+        },
+    };
+    $scope.edit_timeline_id = 0;
+    $scope.timeline_file_old = "";
+    $scope.save_timeline = function(){
+        if ($scope.timeline_form.validate()) {
+            $("#timeline_loader").show();
+            $("#save_timeline").attr("style","pointer-events:none;display:none;");
+
+            var timeline_day = $("#timeline_day option:selected").val();
+            var timeline_month = $("#timeline_month option:selected").val();
+            var timeline_year = $("#timeline_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = timeline_year + '/' + timeline_month + '/' + timeline_day;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#timelinedateerror").html("Timeline date always less than to today's date.");
+                $("#timelinedateerror").show();
+
+                $("#user_timeline_save").removeAttr("style");
+                $("#user_timeline_loader").hide();
+                return false;
+            }
+
+            timeline_formdata.append('edit_timeline_id', $scope.edit_timeline_id);
+            timeline_formdata.append('timeline_file_old', $scope.timeline_file_old);
+            timeline_formdata.append('timeline_title', $('#timeline_title').val());
+            timeline_formdata.append('timeline_day', timeline_day);
+            timeline_formdata.append('timeline_month', timeline_month);
+            timeline_formdata.append('timeline_year', timeline_year);
+            timeline_formdata.append('timeline_desc', $('#timeline_desc').val());            
+            
+            $http.post(base_url + 'business_profile_live/save_timeline', timeline_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $("#save_timeline").removeAttr("style");
+                        $("#timeline_loader").hide();
+                        $("#timeline_form")[0].reset();                        
+                        $scope.timeline_data = result.timeline_data;
+                        setTimeout(function(){
+                            $scope.set_timeline();
+                            // $scope.selected_timeline = 0;
+                        },1000);
+                        $("#timeline").modal('hide');
+                    }
+                    else
+                    {
+                        $("#save_timeline").removeAttr("style");
+                        $("#timeline_loader").hide();
+                        $("#timeline_form")[0].reset();
+                        $("#timeline").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.reset_timeline_form = function(){
+        $scope.edit_timeline_id = 0;
+        $scope.timeline_file_old = '';
+        $("#timeline").removeClass("edit-form-cus");
+        $("#timeline_day").html("");
+        $("#timeline_year").html("");
+        $("#timeline_file_error").hide();        
+        $("#timeline_file_prev").remove();
+        $("#delete_user_timeline_modal").remove();
+        $("#timeline_form")[0].reset();
+        timeline_formdata = new FormData();
+    };
+    $scope.edit_timeline = function(main_index,inner_index){
+        $scope.reset_timeline_form();
+        $("#timeline").addClass("edit-form-cus");        
+        var timeline_arr = $scope.timeline_data[main_index].timeline_inner_data[inner_index];
+        $scope.edit_timeline_id = timeline_arr.id_timeline;
+        $("#timeline_title").val(timeline_arr.timeline_title);
+        $("#timeline_desc").val(timeline_arr.timeline_desc);        
+        var timeline_date_arr = timeline_arr.timeline_date.split("-");
+        timeline_day = timeline_date_arr[2];
+        timeline_month = timeline_date_arr[1];
+        timeline_year = timeline_date_arr[0];
+        $("#timeline_month").val(timeline_month);
+        $scope.timeline_date_fnc(timeline_day,timeline_month,timeline_year);
+
+        var timeline_file_name = timeline_arr.timeline_file;
+        $scope.timeline_file_old = timeline_file_name;
+        if(timeline_file_name.trim() != "")
+        {            
+            var filename_arr = timeline_file_name.split('.');
+            $("#timeline_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="timeline_file_prev" class="screen-shot"><a href="'+business_user_timeline_upload_url+timeline_file_name+'" target="_blank"><img style="width: 100px;" src="'+business_user_timeline_upload_url+timeline_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="timeline_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+business_user_timeline_upload_url+timeline_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#timeline_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.timeline_form.validate();
+        },1000);
+
+        var delete_btn = '<a id="delete_user_timeline_modal" href="#" data-target="#delete-timeline-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#timeline_loader"));
+        $compile(contentbtn)($scope);
+        $("#timeline").modal("show");
+    };
+
+    $scope.delete_timeline = function(){
+        $("#delete_timeline").attr("style","pointer-events:none;display:none;");
+        $("#delete_timeline_loader").show();
+        $("#timeline-delete-btn").hide();
+        if($scope.edit_timeline_id != 0)
+        {
+            var expdata = $.param({'edit_timeline_id': $scope.edit_timeline_id});
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/delete_timeline',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.timeline_data = result.timeline_data;
+                        $("#delete-timeline-model").modal('hide');
+                        $("#timeline").modal('hide');
+                        $("#delete_timeline").removeAttr("style");
+                        $("#delete_timeline_loader").hide();
+                        $("#timeline-delete-btn").show();                        
+                        $scope.reset_timeline_form();                       
+                    }
+                    else
+                    {
+                        $("#delete-timeline-model").modal('hide');
+                        $("#timeline").modal('hide');
+                        $("#delete_timeline").removeAttr("style");
+                        $("#delete_timeline_loader").hide();
+                        $("#timeline-delete-btn").show();
+                        $scope.reset_timeline_form();
+                    }
+                }
+            });
+        }
+    };
+    //Timeline End
+
+    //Job Opening Start
+    $scope.get_business_job_opening = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_business_job_opening',
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.jobs_data = result.data.jobs_data;
+                $scope.rec_profile = result.data.rec_profile;
+                $("#jobs-loader").hide();
+                $("#jobs-body").show();
+            }
+        });
+    };
+    $scope.get_business_job_opening();
+    //Job Opening End
+
+    //Hours of Operation Start
+    $scope.change_opening_hour = function()
+    {
+        if($scope.opening_hour == '2')
+        {
+            $("#specified_day_div").show();
+        }
+        else
+        {
+            $("#specified_day_div").hide();
+        }
+    };
+
+    $scope.opening_hourset = {opening_hour: []};
+
+    $scope.opening_hourset.opening_hour = [];
+    $scope.add_new_opening_hour = function () {
+        // console.log($scope.opening_hourset.opening_hour.length);
+        if($scope.opening_hourset.opening_hour.length < 7)
+        {
+            $scope.opening_hourset.opening_hour.push('');
+            if($scope.opening_hourset.opening_hour.length == 7)
+            {
+                $("#add-new-hours").hide();
+            }
+        }
+        else
+        {
+            $("#add-new-hours").hide();
+        }
+    };
+
+    $scope.remove_opening_hour = function (z) {
+        //var lastItem = $scope.opening_hourset.opening_hour.length - 1;
+        $scope.opening_hourset.opening_hour.splice(z,1);
+        $("#add-new-hours").show();
+    };
+    //Hours of Operation End
 });

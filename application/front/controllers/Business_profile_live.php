@@ -11956,5 +11956,107 @@ Your browser does not support the audio tag.
         $ret_arr = array("success"=>1,"story_data"=>$story_data);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
-    
+
+    public function get_business_timeline()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $timeline_data = $this->business_model->get_business_timeline($user_id);
+        $ret_arr = array("success"=>1,"timeline_data"=>$timeline_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_timeline()    
+    {
+        /*print_r($_POST);
+        print_r($_FILES);
+        exit();*/
+
+        $edit_timeline_id = $this->input->post('edit_timeline_id');
+        $timeline_file_old = $this->input->post('timeline_file_old');
+        $timeline_title = $this->input->post('timeline_title');
+        $timeline_desc = $this->input->post('timeline_desc');        
+        $timeline_date = $this->input->post('timeline_year').'-'.$this->input->post('timeline_month').'-'.$this->input->post('timeline_day');
+
+        $fileName = $timeline_file_old;
+        if(isset($_FILES['timeline_file']['name']) && $_FILES['timeline_file']['name'] != "")
+        {
+            $business_user_timeline_upload_path = $this->config->item('business_user_timeline_upload_path');
+            $user_timeline_file_old = $business_user_timeline_upload_path . $timeline_file_old;
+            if (isset($user_timeline_file_old)) {
+                unlink($user_timeline_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $business_user_timeline_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['timeline_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('timeline_file')){
+                $main_image = $business_user_timeline_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_timeline_insert = $this->business_model->save_timeline($user_id,$timeline_title,$timeline_desc,$timeline_date,$fileName,$edit_timeline_id);
+            $timeline_data = $this->business_model->get_business_timeline($user_id);
+            $ret_arr = array("success"=>1,"timeline_data"=>$timeline_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_timeline()
+    {
+        $edit_timeline_id = $this->input->post('edit_timeline_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $portfolio_delete = $this->business_model->delete_timeline($user_id,$edit_timeline_id);
+            $timeline_data = $this->business_model->get_business_timeline($user_id);
+            $ret_arr = array("success"=>1,"timeline_data"=>$timeline_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_business_job_opening()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_data = $this->db->select('company_name,user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row();
+        $company_name = $user_data->company_name;
+        $user_id = $user_data->user_id;
+        $jobs_data = $this->business_model->get_business_job_opening($company_name);
+        $rec_profile = $this->business_model->check_recruiter_profile($user_id);        
+        if(isset($rec_profile) && !empty($rec_profile))
+        {
+            $rec_prof = 1;
+        }
+        else
+        {
+            $rec_prof = 0;
+        }
+        $ret_arr = array("success"=>1,"jobs_data"=>$jobs_data,"rec_profile"=>$rec_prof);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

@@ -401,6 +401,7 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('BUSINESS_USER_AWARD_UPLOAD_URL', BUCKETLINK . 'uploads/business_user_award/');
     define('BUSINESS_USER_PORTFOLIO_UPLOAD_URL', BUCKETLINK . 'uploads/business_user_portfolio/');
     define('BUSINESS_USER_STORY_UPLOAD_URL', BUCKETLINK . 'uploads/business_user_story/');
+    define('BUSINESS_USER_TIMELINE_UPLOAD_URL', BUCKETLINK . 'uploads/business_user_timeline/');
 
 } else {
     //USER PHOTO 
@@ -655,6 +656,7 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('BUSINESS_USER_AWARD_UPLOAD_URL', BASEURL . 'uploads/business_user_award/');
     define('BUSINESS_USER_PORTFOLIO_UPLOAD_URL', BASEURL . 'uploads/business_user_portfolio/');
     define('BUSINESS_USER_STORY_UPLOAD_URL', BASEURL . 'uploads/business_user_story/');
+    define('BUSINESS_USER_TIMELINE_UPLOAD_URL', BASEURL . 'uploads/business_user_timeline/');
 
 }
 

@@ -20,6 +20,8 @@
 	        echo $business_header2;
 	        $from_user_id = $login_bussiness_data->user_id;
 	        $to_user_id = $business_data['user_id'];
+
+	        $time_array = array("1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30","5:00","5:30","6:00","6:30","7:00","7:30","8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30");
 	    ?>
         <section>
            <?php echo $business_common; ?>
@@ -520,50 +522,47 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>">
 									<span>Job Openings </span>
-									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<a href="<?php echo base_url('recruiter'); ?>" ng-if="from_user_id == to_user_id && rec_profile == '0'" class="pull-right" target="_self"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<a href="<?php echo base_url('post-job'); ?>" ng-if="from_user_id == to_user_id && rec_profile == '1'" class="pull-right" target="_self"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis dis-accor">
-									<div class="panel-group">
-										<div class="panel panel-default">
-											<div class="panel-heading">
-												<div class="panel-title">
-													<a href="#">
-													<div class="dis-left">
-														<div class="dis-left-img img-cus">
-															<img src="<?php echo base_url('assets/n-images/detail/job-def.png?ver=' . time()) ?>">
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Digital marketing executive</h4>
-														<p>Conception I Technology</p>
-													</div>
-													</a>
-													<div class="dis-right">
-														<a href="#"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-													</div>
-									            </div>
-											</div>
-																		
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading">
-												<div class="panel-title">
-													<a href="#">
-													<div class="dis-left">
-														<div class="dis-left-img img-cus">
-															<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Digital marketing executive</h4>
-														<p>Conception I Technology</p>
-													</div>
-													</a>
-													<div class="dis-right">
-														<a href="#"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-													</div>
-									            </div>
-											</div>
+								<div id="jobs-loader" class="dtl-dis">
+		                            <div class="text-center">
+		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+		                            </div>
+		                        </div>
+		                        <div id="jobs-body" style="display: none;">
+		                        	<div class="dtl-dis" ng-if="jobs_data.length < '1'">
+		                                <div class="no-info" ng-if="from_user_id == to_user_id && rec_profile == '0'">
+		                                	<a href="<?php echo base_url('recruiter'); ?>" target="_self"><span>Create Recruiter profile</span></a>
+		                                </div>
+		                                <div class="no-info" ng-if="from_user_id == to_user_id && rec_profile == '1'">
+		                                	<span>Post the career opportunities at your company</span>
+		                                	<a href="<?php echo base_url('post-job'); ?>" target="_self"><span>Post Current Opening</span></a>
+		                                </div>
+		                                <div class="no-info" ng-if="from_user_id != to_user_id">
+		                                	<span>There's no job opening right now. Check after some time.</span>
+		                                </div>
+		                            </div>
+									<div class="dtl-dis dis-accor" ng-if="jobs_data.length > '0'">
+										<div class="panel-group">
+											<div class="panel panel-default" ng-repeat="job in jobs_data"><!-- inner div -->
+												<div class="panel-heading">
+													<div class="panel-title">
+														<a href="<?php echo base_url(); ?>{{job.post_name_txt | slugify}}-job-vacancy-in-{{job.slug_city}}-{{job.user_id}}-{{job.post_id}}" target="_self">
+															<div class="dis-left">
+																<div class="dis-left-img img-cus">
+																	<img ng-if="!job.comp_logo" src="<?php echo base_url('assets/n-images/detail/job-def.png?ver=' . time()) ?>">
+																	<img ng-if="job.comp_logo" ng-src="<?php echo REC_PROFILE_MAIN_UPLOAD_URL; ?>{{job.comp_logo}}">
+																</div>
+															</div>
+															<div class="dis-middle">
+																<h4>{{job.post_name_txt}}</h4>
+																<p>{{job.comp_name}}</p>
+															</div>
+														</a>
+										            </div>
+												</div>						
+											</div><!-- inner div -->
 										</div>
 									</div>
 								</div>
@@ -801,15 +800,15 @@
 							<div class="rsp-dtl-box">
 								<div class="dtl-box" id="timeline-move">
 									<div class="dtl-title">
-										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/timeline.png?ver=' . time()) ?>"><span>Timeline</span><a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/timeline.png?ver=' . time()) ?>"><span>Timeline</span><a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline-cus" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 									</div>
 									<div class="dtl-dis">
-										<div class="no-info">
+										<div class="no-info" ng-if="!timeline_data">
 											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-											<span>Lorem ipsum its a dummy text and its user to for all.</span>
+											<span>Show{{from_user_id == to_user_id ? ' your ' : ' '}}business greatest achievements and events.</span>
 										</div>
-										<div class="fw dtl-more-add">
-											<a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline-cus" data-toggle="modal"><span class="pr10">Add Timeline </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+										<div class="fw dtl-more-add" ng-if="timeline_data">
+											<a href="#" data-target="#timeline-cus" data-toggle="modal"><span class="pr10">{{from_user_id == to_user_id ? 'Add' : 'View'}} Timeline </span><img ng-if="from_user_id == to_user_id" src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
 										</div>
 									</div>
 									
@@ -1422,71 +1421,472 @@
 						<div class="form-group">
 							<label>Select opening hours</label>
 							<span class="span-select">
-								<select>
-									<option>Always open</option>
-									<option>On Specified Days</option>
-									<option>Appointment needed</option>
+								<select id="opening_hour" name="opening_hour" ng-model="opening_hour" ng-change="change_opening_hour();">
+									<option value="">Select opening hours</option>
+									<option value="1">Always open</option>
+									<option value="2">On Specified Days</option>
+									<option value="3">Appointment needed</option>
 								</select>
 							</span>
 						</div>
-						<div class="row">
-							<div class="col-md-5 col-sm-5 col-xs-5 fw-479">
-								<div class="form-group">
-									<label>Hours of Operation </label>
-									<span class="span-select">
-										<select>
-											<option>Sunday</option>
-											<option>Monday</option>
-											<option>Tuesday</option>
-										</select>
-									</span>
+						<div id="specified_day_div" class="row" style="display: none;">
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Sunday</span>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-5">
-								<div class="form-group">
-									<label>Time</label>
-									<span class="span-select">
-										<select>
-											<option>9:00 AM </option>
-											<option>1:00 PM</option>
-											<option>5:00 PM</option>
-											<option>7:00 PM</option>
-										</select>
-									</span>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
 							</div>
-							<div class="col-md-3 col-sm-3 col-xs-5">
-								<div class="form-group">
-									<label>Time</label>
-									<span class="span-select">
-										<select>
-											<option>9:00 AM </option>
-											<option>1:00 PM</option>
-											<option>5:00 PM</option>
-											<option>7:00 PM</option>
-										</select>
-									</span>
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Monday</span>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-1 col-sm-1 col-xs-2">
-								<div class="form-group">
-									
-									<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
 							</div>
-							<div class="fw dtl-more-add">
-								<a href="#"><span class="pr10">Add More Days </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control control--checkbox">
-								<input type="checkbox">I am willing to relocate
-								<div class="control__indicator">
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Tuesday</span>
+									</div>
 								</div>
-							</label>
-						</div>
-						
-						
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
+							</div>
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Wednesday</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
+							</div>
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Thursday</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
+							</div>
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Friday</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
+							</div>
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+										<span>Saturday</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>From</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>To</label>
+												<span class="span-select">
+													<select>
+														<?php foreach ($time_array as $key => $value) { ?>
+															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+														<?php 
+														} ?>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<span class="span-select">
+													<select>
+														<option>AM</option>
+														<option>PM</option>
+													</select>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>								
+							</div>
+
+
+						</div>						
 					</div>
 					<div class="dtl-btn">
 						<a href="#" class="save"><span>Save</span></a>
@@ -1600,7 +2000,7 @@
 								</label>
 							</div>
 							<div id="story-upload" class="s-u-p"></div>
-							<img id="upload_img" src="{{story_image}}" style="display: none;">
+							<img id="upload_img" ng-src="{{story_image}}" style="display: none;">
 							<div class="form-group">
 								<label>Description</label>
 								<textarea maxlength="2000" type="text" id="story_desc" name="story_desc" ng-model="story_desc" placeholder="Describe your business struggle story"></textarea>
@@ -1667,221 +2067,60 @@
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
                 <div class="modal-body-cus"> 
-					<div class="dtl-title">
-						
-						<a href="#" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital"> Add Timeline</soan></a>
+					<div class="dtl-title">						
+						<a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital"> Add Timeline</soan></a>
+						<a href="#" ng-if="from_user_id != to_user_id" class=""><span class="timeline-tital">Timeline</soan></a>
 					</div>
-					<div class="dtl-dis">
+					<div class="dtl-dis" ng-if="!timeline_data">
+                        <div class="no-info">
+                            <a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital"> Add Timeline</soan></a>
+                        </div>
+                    </div>
+					<div class="dtl-dis" ng-if="timeline_data">
 						<section class="cd-horizontal-timeline">
-		<div class="timeline">
-			<div class="events-wrapper">
-				<div class="events">
-					<ol>
-						<li><a href="#0" data-date="16/01/2014" class="selected">16 Jan<span> </span></a> </li>
-						<li><a href="#0" data-date="16/02/2014">16 Feb<span> </span></a></li>
-						<li><a href="#0" data-date="16/03/2014">16 Mar<span> </span></a></li>
-						<li><a href="#0" data-date="16/04/2014">16 April<span> </span></a></li>
-						<li><a href="#0" data-date="16/05/2014">16 May<span></span></a></li>
-						<li><a href="#0" data-date="16/06/2014">16 June<span> </span></a></li>
-						<li><a href="#0" data-date="16/07/2014">16 July<span> </span></a></li>
-						<li><a href="#0" data-date="16/08/2014">16 August<span> </span></a></li>
-						<li><a href="#0" data-date="16/09/2014">16 September<span></span></a></li>
-						<li><a href="#0" data-date="16/10/2014">16 Octomber<span> </span></a></li>
-						<li><a href="#0" data-date="16/11/2014">16 November<span> </span></a></li>
-						
-					</ol>
+							<div class="timeline">
+								<div class="events-wrapper">
+									<div class="events">
+										<ol>
+											<!-- <li><a href="#0" data-date="16/01/2014" class="selected">16 Jan<span> </span></a> </li> -->
+											<li ng-repeat="timeline in timeline_data"><a href="#0" data-date="{{timeline.timeline_date_a}}" ng-class="$index == selected_timeline ? 'selected' : ''" ng-click="select_timeline($index);">{{timeline.timeline_date_li}}<span> </span></a> </li>
+										</ol>
 
-					<span class="filling-line" aria-hidden="true"></span>
-				</div> <!-- .events -->
-			</div> <!-- .events-wrapper -->
-				
-			<ul class="cd-timeline-navigation">
-				<li><a href="#0" class="prev inactive"></a></li>
-				<li><a href="#0" class="next"></a></li>
-			</ul> <!-- .cd-timeline-navigation -->
-		</div> <!-- .timeline -->
+										<span class="filling-line" aria-hidden="true"></span>
+									</div> <!-- .events -->
+								</div> <!-- .events-wrapper -->
+									
+								<ul class="cd-timeline-navigation">
+									<li><a href="#0" class="prev inactive"></a></li>
+									<li><a href="#0" class="next"></a></li>
+								</ul> <!-- .cd-timeline-navigation -->
+							</div> <!-- .timeline -->
 
-		<div class="events-content">
-			<ol>
-				<li class="selected" data-date="16/01/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/def-timeline.png?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
+							<div class="events-content">
+								<ol>
+									<li ng-class="$index == selected_timeline ? 'selected' : ''" ng-repeat="timeline in timeline_data" data-date="{{timeline.timeline_date_a}}" ng-init="main_index=$index">
+										<div ng-repeat="timeline_in_data in timeline.timeline_inner_data" ng-init="inner_index=$index">
+											<div class="fw pb20">
+												<div class="timeline-left">
+													<img ng-if="!timeline_in_data.timeline_file" src="<?php echo base_url('assets/n-images/detail/def-timeline.png?ver=' . time()) ?>">
 
-				<li data-date="16/02/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2015</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/03/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/def-timeline.png?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/04/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/def-timeline.png?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/05/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/06/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/07/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/08/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/09/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/def-timeline.png?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/10/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-
-				<li data-date="16/11/2014">
-					<div class="fw pb20">
-						<div class="timeline-left">
-							<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-						</div>
-						<div class="timeline-right">
-							<h2>Horizontal Timeline <a href="#" data-target="#timeline" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
-							<em>January 16th, 2014</em>
-						</div>
-						
-					</div>
-					<p>	
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-					</p>
-				</li>
-			</ol>
-		</div> <!-- .events-content -->
-	</section>
-						
+													<img ng-if="timeline_in_data.timeline_file" ng-src="<?php echo BUSINESS_USER_TIMELINE_UPLOAD_URL; ?>{{timeline_in_data.timeline_file}}">
+												</div>
+												<div class="timeline-right">
+													<h2>{{timeline_in_data.timeline_title}}<a ng-if="from_user_id == to_user_id" href="javascript:void(0);" ng-click="edit_timeline(main_index,inner_index);" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit.png?ver=' . time()) ?>"></a></h2>
+													<em>{{timeline_in_data.timeline_date_str}}</em>
+												</div>
+												
+											</div>
+											<p>
+												{{timeline_in_data.timeline_desc}}
+											</p>
+										</div>
+									</li>
+									
+								</ol>
+							</div> <!-- .events-content -->
+						</section>						
 					</div>	
 				</div>	
             </div>
@@ -1897,77 +2136,105 @@
 					<div class="dtl-title">
 						<span>Timeline</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Achievements Title</label>
-							<input type="text" placeholder="Achievements  Title">
-						</div>
-						
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="form-group">
-									<label>Day</label>
-									<span class="span-select">
-										<select>
-											<option>Date</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</span>
-								</div>
+					<form name="timeline_form" id="timeline_form" ng-validate="timeline_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<label>Achievements Title</label>
+								<input type="text" placeholder="Achievements Title" id="timeline_title" name="timeline_title" ng-model="timeline_title">
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="form-group">
-									<label>Nonth</label>
-									<span class="span-select">
-										<select>
-											<option>Month</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="form-group">
-									<label>year</label>
-									<span class="span-select">
-										<select>
-											<option>2016</option>
-											<option>2017</option>
-											<option>2018</option>
-											<option>2019</option>
-											<option>2020</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="form-group big-textarea">
-							<label>Description</label>
-							<textarea type="text" placeholder="Description"></textarea>
-						</div>
-						<div class="form-group">
-							<label class="upload-file">
-								Upload File () <input type="file">
-							</label>
-						</div>
-						
-						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
-				</div>	
+							
+							<div class="row">
+	                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
+										<label>Month</label>
+		                                <span class="span-select">
+		                                    <select id="timeline_month" name="timeline_month" ng-model="timeline_month" ng-change="timeline_date_fnc('','','')">
+		                                        <option value="">Month</option>
+		                                        <option value="01">Jan</option>
+		                                        <option value="02">Feb</option>
+		                                        <option value="03">Mar</option>
+		                                        <option value="04">Apr</option>
+		                                        <option value="05">May</option>
+		                                        <option value="06">Jun</option>
+		                                        <option value="07">Jul</option>
+		                                        <option value="08">Aug</option>
+		                                        <option value="09">Sep</option>
+		                                        <option value="10">Oct</option>
+		                                        <option value="11">Nov</option>
+		                                        <option value="12">Dec</option>
+		                                    </select>
+		                                </span>
+		                            </div>
+	                            </div>
+	                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
+										<label>Day</label>
+		                                <span class="span-select">
+		                                    <select id="timeline_day" name="timeline_day" ng-model="timeline_day" ng-click="timeline_error()"></select>
+		                                </span>
+		                            </div>
+	                            </div>
+	                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
+										<label>Year</label>
+		                                <span class="span-select">
+		                                    <select id="timeline_year" name="timeline_year" ng-model="timeline_year" ng-change="timeline_date_fnc('','','')" ng-click="timeline_error()">
+		                                    </select>
+		                                </span>
+		                            </div>
+	                            </div>
+	                            <div class="col-md-12 col-sm-12">
+	                                <span id="timelinedateerror" class="error" style="display: none;"></span>
+	                            </div>
+	                        </div>
 
-
-            </div>
+							<div class="form-group big-textarea">
+								<label>Description</label>
+								<textarea type="text" placeholder="Description" id="timeline_desc" name="timeline_desc" ng-model="timeline_desc"></textarea>
+								<span>{{700 - timeline_desc.length}}</span>
+							</div>
+							<div class="form-group">
+								<div class="upload-file">
+									<span class="fw">Upload Photo</span>
+									<input type="file" id="timeline_file" name="timeline_file">
+									<span id="timeline_file_error" class="error" style="display: none;"></span>
+								</div>
+							</div>
+						</div>
+						<div class="dtl-btn">
+							<a id="save_timeline" href="#" ng-click="save_timeline()" class="save"><span>Save</span></a>
+							<div id="timeline_loader"  class="dtl-popup-loader" style="display: none;">
+		                    	<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
         </div>
     </div>
+    <div class="modal fade message-box biderror" id="delete-timeline-model" role="dialog">
+	    <div class="modal-dialog modal-lm">
+	        <div class="modal-content">
+	            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+	            <div class="modal-body">
+	                <span class="mes">
+	                    <div class='pop_content'>
+	                        <span>Are you sure you want to delete timeline ?</span>
+	                        <p class='poppup-btns pt20'>
+	                            <span id="timeline-delete-btn">
+	                                <a id="delete_timeline" href="#" ng-click="delete_timeline()" class="btn1">
+	                                    <span>Delete</span>
+	                                </a> 
+	                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+	                            </span>
+	                            <img id="delete_timeline_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+	                        </p>
+	                    </div>
+	                </span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	
 	<!---  model News / Press Release  -->
 	<div style="display:none;" class="modal fade dtl-modal" id="press-release" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -2178,7 +2445,7 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
     
-    <script src="<?php echo base_url('assets/js/timeline.js?ver=' . time()); ?>"></script>
+    <!-- <script src="<?php //echo base_url('assets/js/timeline.js?ver=' . time()); ?>"></script> -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
 	<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
 
@@ -2201,6 +2468,7 @@
         var business_user_award_upload_url = '<?php echo BUSINESS_USER_AWARD_UPLOAD_URL; ?>';
         var business_user_portfolio_upload_url = '<?php echo BUSINESS_USER_PORTFOLIO_UPLOAD_URL; ?>';
         var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
+        var business_user_timeline_upload_url = '<?php echo BUSINESS_USER_TIMELINE_UPLOAD_URL; ?>';
         $('#main_loader').hide();
         // $('#main_page_load').show();
         $('body').removeClass("body-loader");
@@ -2264,6 +2532,15 @@
 				$("#edit-profile-move").appendTo($(".edit-custom-move"));
 			}
 		});
+
+	    // un-track $modal windows on hide
+	    $(document).on('hidden.bs.modal', function (e, $modal) {
+	    	if($('.modal.in').length > 0)
+	    	{
+	    		$("body").removeClass('modal-open');
+	    		$("body").addClass('modal-open');
+	    	}
+	    });
     </script>
 
     </body>

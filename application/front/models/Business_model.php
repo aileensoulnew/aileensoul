@@ -1093,6 +1093,101 @@ class Business_model extends CI_Model {
         $this->db->select("*")->from('business_user_how_start');        
         $this->db->where('user_id', $user_id);
         $this->db->where('status', '1');
+        $this->db->order_by('created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        return $result_array;
+    }
+
+    public function get_business_timeline($user_id)
+    {
+        $this->db->select("timeline_date,DATE_FORMAT(timeline_date,'%e/%c/%Y') as timeline_date_a,DATE_FORMAT(timeline_date,'%e %b') as timeline_date_li")->from('business_user_timeline');       
+        $this->db->where('user_id', $user_id);
+        $this->db->where('status', '1');
+        $this->db->group_by('timeline_date');
+        $this->db->order_by('timeline_date');
+        $query = $this->db->get();
+        $result_datewise = $query->result_array();
+        foreach ($result_datewise as $key => $value) {            
+            $this->db->select("*,DATE_FORMAT(timeline_date,'%e/%c/%Y') as timeline_date_a,DATE_FORMAT(timeline_date,'%e %b') as timeline_date_li,DATE_FORMAT(timeline_date,'%D %M, %Y') as timeline_date_str")->from('business_user_timeline');       
+            $this->db->where('timeline_date', $value['timeline_date']);
+            $this->db->where('user_id', $user_id);
+            $this->db->where('status', '1');
+            $qur = $this->db->get();
+            $result_array = $qur->result_array();            
+            $result_datewise[$key]['timeline_inner_data'] = $result_array;
+        }
+        return $result_datewise;
+    }
+
+    public function save_timeline($user_id,$timeline_title = "",$timeline_desc = "",$timeline_date = "",$timeline_file = "",$edit_timeline_id = 0)
+    {
+        if($edit_timeline_id == 0)
+        {
+            $data = array(
+                'user_id' => $user_id,
+                'timeline_title' => $timeline_title,
+                'timeline_desc' => $timeline_desc,                
+                'timeline_file' => $timeline_file,                
+                'timeline_date' => $timeline_date,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'business_user_timeline');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'timeline_title' => $timeline_title,
+                'timeline_desc' => $timeline_desc,                
+                'timeline_file' => $timeline_file,
+                'timeline_date' => $timeline_date,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $user_id);
+            $this->db->where('id_timeline', $edit_timeline_id);
+            $this->db->update('business_user_timeline', $data);
+            return true;
+        }
+    }
+
+    public function delete_timeline($userid,$edit_timeline_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_timeline', $edit_timeline_id);
+            $this->db->update('business_user_timeline', $data);
+            return true;
+    }
+
+    public function get_business_job_opening($company_name)
+    {
+        $this->db->select("rp.*, IFNULL(jt.name, rp.post_name) as post_name_txt,IF(rp.city>0,ct.city_name,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city, ct.city_name, cr.country_name,st.state_name")->from('rec_post rp');
+        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
+        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
+        $this->db->where('LOWER(rp.comp_name)', trim(strtolower($company_name)));
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->order_by('rp.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->result_array();        
+        return $result_array;
+    }
+
+    public function check_recruiter_profile($user_id)
+    {
+        $this->db->select("*")->from('recruiter');        
+        $this->db->where('user_id', $user_id);
+        $this->db->where('re_status', '1');
+        $this->db->where('is_delete', '0');        
+        $this->db->where('re_step', '3');        
         $query = $this->db->get();
         $result_array = $query->row_array();        
         return $result_array;
