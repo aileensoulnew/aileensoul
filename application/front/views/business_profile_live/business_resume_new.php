@@ -839,24 +839,37 @@
 							<!-- Add Menu  -->
 							<div class="rsp-dtl-box">
 								<div class="dtl-box add-menu" id="menu-move">
-										<div class="dtl-title">
-											<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/menu.png?ver=' . time()) ?>"><span>Add Menu</span><a href="#" data-target="#add-menu" ng-if="from_user_id == to_user_id" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-										</div>
-										<div class="dtl-dis">
-											<ul class="dis-list">
-												<li>
-													
-													<p class="screen-shot">
-														<img src="<?php echo base_url('assets/n-images/detail/art-img.jpg?ver=' . time()) ?>">
-													</p>
-												</li>
-											</ul>
-										</div>
-										
+									<div class="dtl-title">
+										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/menu.png?ver=' . time()) ?>"><span>Add Menu</span><a href="#" data-target="#add-menu" ng-if="from_user_id == to_user_id" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									</div>
+									<div class="dtl-dis">
+										<ul class="dis-list">
+											<li>
+												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+												</p>
+											</li>
+											<li>
+												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+												</p>
+											</li>
+											<li>
+												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+												</p>
+											</li>
+											<li>
+												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+												</p>
+											</li>
+											
+										</ul>
+									</div>
+								</div>
 							</div>
-							
-							
+
 						</div>
 					</div>
 				</div>
@@ -1979,19 +1992,83 @@
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
                 <div class="modal-body-cus"> 
 					<div class="dtl-title">
-						<span>Add Menu</span>
+						<a href="#" data-target="#add-menu-img" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital">Add Menu</span></a>
 					</div>
 					<div class="dtl-dis">
-						<div class="form-group">
-							<label class="upload-file">
-								Upload File () <input type="file">
-							</label>
+						<div class="menu-privew">
+							<ul>
+								<li>
+									<p>
+										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+									</p>
+								</li>
+								<li>
+									<p>
+										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+									</p>
+								</li>
+								<li>
+									<p>
+										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+									</p>
+								</li>
+								<li>
+									<p>
+										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+									</p>
+								</li>
+								<li>
+									<p>
+										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+									</p>
+								</li>
+								<li>
+									<p>
+										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+									</p>
+								</li>
+								
+							</ul>
 						</div>
-						
 					</div>
 					<div class="dtl-btn">
 						<a href="#" class="save"><span>Save</span></a>
 					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+
+    <!---  model add menu img  -->
+	<div style="display:none;" class="modal fade dtl-modal " id="add-menu-img" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Add Menu</span>
+					</div>
+					<form id="business_menu_frm" name="business_menu_frm" ng-validate="business_menu_frm_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<div class="upload-file">
+		                            <label>Upload File</label>
+		                            <input type="file" id="menu_file_name" name="menu_file_name">
+		                            <span id="menu_file_name_error" class="error" style="display: none;"></span>
+		                        </div>
+							</div>
+						</div>
+						<div class="dtl-btn">
+							<a id="save_menu" href="#" ng-click="save_menu()" class="save">
+								<span>Save</span>
+							</a>
+	                        <div id="menu_loader" class="dtl-popup-loader" style="display: none;">
+	                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+	                        </div>
+						</div>
+					</form>
 				</div>	
 
 

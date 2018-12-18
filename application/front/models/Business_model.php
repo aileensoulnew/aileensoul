@@ -1405,4 +1405,18 @@ class Business_model extends CI_Model {
         $this->db->update('business_profile_search_tmp', $data);
         return true;
     }
+
+    public function save_menu($user_id,$file_name = "")
+    {
+        $curr_date = date('Y-m-d H:i:s', time());
+        $data = array(
+            'user_id' => $user_id,
+            'file_name' => $file_name,                
+            'status' => '1',
+            'created_date' => $curr_date,
+            'modify_date' => $curr_date,
+        );
+        $insert_id = $this->common->insert_data($data, 'business_user_menu');
+        return $insert_id;
+    }
 }

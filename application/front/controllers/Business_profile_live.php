@@ -12239,4 +12239,49 @@ Your browser does not support the audio tag.
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_menu()
+    {
+        // print_r($_FILES);exit();
+        $fileName = "";
+        if(isset($_FILES['menu_file_name']['name']) && $_FILES['menu_file_name']['name'] != "")
+        {
+            $business_user_menu_upload_path = $this->config->item('business_user_menu_upload_path');
+            
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $business_user_menu_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['menu_file_name']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('menu_file_name')){
+                $main_image = $business_member_img_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {            
+            $member_insert = $this->business_model->save_menu($user_id,$fileName);
+            //$key_member_data = $this->business_model->get_key_member($user_id);
+            $ret_arr = array("success"=>1,"key_member_data"=>"");
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

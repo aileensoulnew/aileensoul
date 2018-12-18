@@ -2738,4 +2738,63 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     };
     //Business Contact Information End
 
+    //Business Menu Start
+    var menu_formdata = new FormData();
+    $(document).on('change','#menu_file_name', function(e){
+        $("#menu_file_name_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#menu_file_name_error").html("File size must be less than 10MB.");
+            $("#menu_file_name_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                menu_formdata.append('menu_file_name', $('#menu_file_name')[0].files[0]);
+            }
+            else {
+                $("#menu_file_name_error").html("Invalid file selected.");
+                $("#menu_file_name_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+    $scope.business_menu_frm_validate = {
+        rules: {
+            menu_file_name: {
+                required: true,
+            },            
+        },
+    };
+    $scope.save_menu = function(){
+        if ($scope.business_menu_frm.validate()) {
+            $("#menu_loader").show();
+            $("#save_menu").attr("style","pointer-events:none;display:none;");
+            $http.post(base_url + 'business_profile_live/save_menu', menu_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.menu_data = result.menu_data;
+                    }
+                    $("#save_menu").removeAttr("style");
+                    $("#menu_loader").hide();
+                    $("#business_menu_frm")[0].reset();
+                    menu_formdata = new FormData();
+                    $("#add-menu-img").modal('hide');
+                }
+            });
+        }
+    };
+    //Business Menu End
+
 });
