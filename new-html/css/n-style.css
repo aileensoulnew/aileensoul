@@ -2734,6 +2734,7 @@ width: auto; height: 100%;
 transform: translate(-50%,-50%);
 max-width: inherit;}
 .dis-list li label{font-size:14px;}
+.dis-list li label em{font-style:normal;}
 .dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
 .dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
 .list-ul-cus li label {font-size: 14px; font-weight: normal;
@@ -2857,6 +2858,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 #add-menu .dtl-title img {width:20px; margin-top:0;}
 #add-menu .dtl-title a {color:#5c5c5c;}
 #add-menu .dtl-title a span{padding-left:10px;}
+.modal-body-cus .control--radio .control__indicator::after{width:13px; height:13px;}
 
 /***  end new details page  ***/
 

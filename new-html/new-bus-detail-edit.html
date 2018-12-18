@@ -628,18 +628,26 @@
 											<span>Year Founded / Established</span>
 											2018
 										</li>
-										<li>
+										<li class="fw">
 											<span>Specialties / Extra Benefits / Ambience / Facilities Tags</span>
-											Lorem ipsum
+											<ul class="skill-list">
+												<li>Lorem</li>
+												<li>Ipsum</li>
+												<li>Dummy text</li>
+											</ul>
 										</li>
 										
 										<li>
 											<span>Payment Mode Accepted</span>
 											Lorem ipsum
 										</li>
-										<li>
+										<li class="fw">
 											<span>Business Keywords</span>
-											Lorem ipsum
+											<ul class="skill-list">
+												<li>Lorem</li>
+												<li>Ipsum</li>
+												<li>Dummy text</li>
+											</ul>
 										</li>
 										<li>
 											<span>Mission</span>
@@ -649,9 +657,13 @@
 											<span>Legal Name</span>
 											Lorem ipsum
 										</li>
-										<li>
+										<li class="fw">
 											<span>Services / Products you offer (Tags)</span>
-											Lorem ipsum
+											<ul class="skill-list">
+												<li>Lorem</li>
+												<li>Ipsum</li>
+												<li>Dummy text</li>
+											</ul>
 										</li>
 										<li>
 											<span>Area Served</span>
@@ -686,27 +698,19 @@
 									<ul class="dis-list">
 										
 										<li>
-											<span>Street Address</span>
-											E-912, titanium city centr,
+											<span>Location</span>
+											<label>E-912, titanium city centr,
 											120 ft ring road, nr.shyamal cross road,
-											ahmedabad.
+											ahmedabad. <em>Ahmedabad, Gujarat, India.</em> <em>380015</em> </label>
+											
 										</li>
 										<li>
-											<span>Location</span>
-											Ahmedabad, Gujarat, India
+											<span>No. of Locations</span>
+											1 Locations
 										</li>
 										<li>
-											<span>Pincode</span>
-											380015
-										</li>
-										<li>
-											<span>Map Coordinates</span>
-											Lorem ipsum
-										</li>
-										
-										<li>
-											<span>Location</span>
-											Lorem ipsum
+											<span>Address Type</span>
+											Headquaters
 										</li>
 										
 									</ul>
@@ -1712,20 +1716,14 @@
 							<label>Pincode</label>
 							<input type="text" placeholder="Pincode">
 						</div>
+						
 						<div class="form-group">
-							<label class="control control--checkbox">
-								<input type="checkbox">Customers visit my business at my street address.
-								<div class="control__indicator">
-								</div>
-							</label>
-						</div>
-						<div class="form-group">
-							<label>No. of locations</label>
+							<label>No. of Locations</label>
 							<span class="span-select">
 								<select>
-									<option>1 location</option>
-									<option>1-5 locations</option>
-									<option>5+ locations</option>
+									<option>1 Location</option>
+									<option>1-5 Locations</option>
+									<option>5+ Locations</option>
 									<option>None-online only</option>
 									<option>None-I travel to my customers</option>
 									
@@ -1734,13 +1732,15 @@
 							
 						</div>
 						<div class="form-group">
-							<label>Differentiate Headquaters and Other location</label>
-							<label class="control control--radio">Headquaters
-								<input type="radio" id="gen" name="headquaters" value="h">
+							<label class="fw">Is this Headquarters Address or Another Office Location?</label>
+							<label class="control control--radio pr20">
+								Headquaters
+								<input class="gen-male" tabindex="8" type="radio" id="gen" name="gender" value="M" checked="">
 								<div class="control__indicator"></div>
 							</label>
-							<label class="control control--radio">Other location
-								<input type="radio" id="gen1" name="other-location" value="o">
+							<label class="control control--radio">
+								Other location
+								<input type="radio" id="gen" name="gender" value="F">
 								<div class="control__indicator"></div>
 							</label>
 						</div>
