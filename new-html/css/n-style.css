@@ -93,7 +93,8 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .all-profile-box ul li:last-child{border-bottom:0;}
 .all-profile-box ul li .all-pr-img{width:30px; height:30px; float:left; border:1px solid #d2d2d2;}
 .all-profile-box ul li .all-pr-img img{width:100%;}
-.all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:15px; padding:4px 0 0 15px; letter-spacing:1px;}
+.all-profile-box ul li span{width:89%; /*float:left;*/ color:#2c2c2c; font-size:15px; padding:3px 0 0 15px; display:inline-block;}
+.all-profile-box ul li span span{width:auto; padding-left:5px; font-size:13px; vertical-align:bottom; line-height:1; color:#7b7b7b;}
 .all-profile-box .all-pr-list li a{width:100%; float:left; padding:10px;}
 .left-part .all-profile-box .all-pr-list li a{padding:5px 10px;}
 /***  inner profiles left box  ***/
@@ -330,7 +331,7 @@ font-size: 14px;}
 
 /***  right part  ***/
 .right-part{width:320px; position:fixed; margin-left:930px; float:left;}
-
+.blog-page.blog-cat .right-part{position:relative; margin-left:15px;}
 .add-box{border:1px solid #d2d2d2; border-radius:4px; text-align:center; padding:6px 0; margin-bottom:10px; width:100%; float:left;}
 
 /***  all follow part  ***/
@@ -1127,6 +1128,13 @@ header.profile-header .logo a{color:#5c5c5c;}
 	background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 100%);
 	background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 100%); 
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); 
+
+}
+.left-part .user-profile-box .gradient-bg{background: #ffffff; 
+	background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 100%);
+	background: -webkit-linear-gradient(top, #f6f6f6 0%,#ffffff 100%);
+	background: linear-gradient(to bottom, #f6f6f6 0%,#ffffff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0 ); 
 
 }
 .main-banner.gradient-bg{
@@ -2047,6 +2055,8 @@ body.reg-form-cus{padding-bottom:0;}
 .reg-form-cus .title p{letter-spacing:1px; color:#5c5c5c;}
 
 .tooltip-custom{position:absolute; width:200px; right:-250px; font-size:12px; color:#5c5c5c; line-height:1.5; background:#fff; padding:5px; text-align: center; border-radius: 10px; bottom:0; border-bottom-left-radius:0; letter-spacing:1px;}
+#emtooltip.tooltip-custom{left:-250px; border-bottom-left-radius:10px;  border-bottom-right-radius:0;}
+#emtooltip.tooltip-custom::before{right:-11px; left:auto; background:url('../n-images/tooltip-arrow-right.png?version=@{cache-version}');}
 .tooltip-custom:before{content: ""; font-family: FontAwesome; left: -11px; position: absolute; bottom:0;
 color: #fff; font-size: 25px; background:url('../n-images/tooltip-arrow-down.png?version=@{cache-version}'); width:15px; height:15px;}
 .left-tooltip .tooltip-custom{left:-250px;}
@@ -2184,7 +2194,7 @@ body.sitemap{background:#f6f6f6; border:0px;}
 /***  end art bus css  ***/
 
 /***  job css  ***/
-.message button.modal-close{background:none !important; color:#5c5c5c !important; border:0 !important; top:0 !important; right:0 !important;}
+.message button.modal-close{/*background:none !important; color:#5c5c5c !important; border:0 !important; top:0 !important; right:0 !important;*/}
 .message button.modal-close:hover{background:none !important;}
 .message button.modal-close:focus{outline:none !important;}
 .cnclbtn, .okbtn{transition: all .2s; color: #fff; padding: 8px 18px; background-color: #1b8ab9 !important;
@@ -3616,6 +3626,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open::before{top:17px;}
 	.review-list li .review-right{width:79%;}
 	.press-rel .dis-middle{padding-top: 10px;}
+	.common-form .rec_check input[type="checkbox"]{margin:-3px 5px 0 0 !important;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -4061,7 +4072,8 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open::before{top:14px; left:38px;}
 	.blog-page .web-header .sub-header .sub-menu li ul li a{font-size:15px;}
 	.drop-blog-title{font-size:15px;}
-	
+	.rec-add-post .job_reg_main{border-radius:0;}
+	.rec-add-post .cus-chang{padding:15px; text-align:center;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

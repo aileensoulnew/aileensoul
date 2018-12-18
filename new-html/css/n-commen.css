@@ -225,7 +225,58 @@ pointer-events: none;}
 border-radius: 50%; background: #5c5c5c; border:1px solid #fff;}
 .control--radio input:disabled ~ .control__indicator:after {background: #7b7b7b;}
 .add-anonymously{display:inline-block; padding:9px 15px 0;}
-/***  end custom check box and radio buttons  ***/
+
+.select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 15px;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  background: #e6e6e6;
+  color: #7b7b7b;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.select select::-ms-expand {
+  display: none;
+}
+.select select:hover,
+.select select:focus {
+  color: #000;
+  background: #ccc;
+}
+.select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.select__arrow {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0 5px;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+.select select:hover ~ .select__arrow,
+.select select:focus ~ .select__arrow {
+  border-top-color: #000;
+}
+.select select:disabled ~ .select__arrow {
+  border-top-color: #ccc;
+}
+/***  end custom check box and radio buttons select box  ***/
 
 /***  form css  ***/
 label {font-size: 16px; font-weight: 400;}
@@ -482,7 +533,7 @@ background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%
 .dropdown-menu.profile-dropdown li{padding:0;}
 .dropdown-menu.profile-dropdown li a{padding:8px 10px; line-height:1;}
 .dropdown-menu.profile-dropdown li a:hover{background:#1b8ab9; color:#fff !important;}
-.mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
+.mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3) !important;}
 .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
 .mCS-minimal.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCS-minimal.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar {background-color:rgba(0,0,0,0.6);}
@@ -958,6 +1009,22 @@ a:focus{outline:none;}
   .sub-header .dropdown.open .dropdown-menu{top:26px;}
   .sub-menu li.dropdown.open::before{height:10px;}
 }
+/***  profile progress bar  ***/
+.show-more-container {overflow: hidden;}
+.show-more-collapse, .show-more-expand {text-align: center;display: none;}
+.show-more-expanded > .show-more-collapse {display: inherit;}
+.show-more-collapsed > .show-more-expand {display: inherit;}
+.edit_profile_progress {width: 100%;}
+.edit_profile_progress {float: right; width: 100%; padding: 9px 0;}
+.progre_bar_text {padding: 0 17px;}
+.circles {padding-top: 5px; text-align: center; }
+.circle-1 {width: 175px; margin: 0 6px 6px; display: inline-block; position: relative; text-align: center; line-height: 1.2;}
+.circle-1 canvas {vertical-align: middle; width: 175px; height: 175px; border: 1px solid transparent; display: #000;}
+.circle-1 strong {position: absolute; top: 54px; left: 5px; width: 100%; text-align: center; line-height: 40px; font-size: 28px;}
+#progress-txt{position: absolute; top: 94px; width: 100%; text-align: center; left: 0; font-size:12px; padding: 0 21px; font-weight:bold; color:#939393;}
+#progress-txt a{color:#7b7b7b;}
+/***  end profile progress bar  ***/
+
 
 
 /***  media query  ***/
@@ -1051,7 +1118,7 @@ a:focus{outline:none;}
     .modal-dialog{margin:15px 0;}
     .mobp0{padding: 0;}
 	.mobmt15{margin-top:15px;}
-	label{font-size:14px;}
+	label{font-size:13px;}
 	.no-login #paddingtop_fixed{padding-top:90px !important;}
 	.right-header .dropdown.user-id .dropdown-menu{right:-6px !important;}
     .common-form h3{border-left:0; border-right:0; border-radius:0; font-size:18px;}
@@ -1070,7 +1137,7 @@ a:focus{outline:none;}
 	.sub-menu li.dropdown.open::before{width:14px; height:7px; top:25px;}
 	
 	.blog-page header{min-height:40px;}
-	.blog-page .sub-header{top:42px;}
+	.blog-page .sub-header{top:46px;}
 	#pagination.pagination-button{text-align:center;}
 	.pagination-button a{padding-left:10px; padding-right:10px;}
 	.main-login .no_login_footer{position:relative; margin-bottom:0;}
@@ -1118,6 +1185,7 @@ a:focus{outline:none;}
 	.fw-539.left-header h2.logo{float:none;}
 }
 @media screen and (max-width: 479px) {
+	.mob-pr0{padding-right:0;}
 	.main-login .middle-main{padding:40px 0 80px;}
 	.fw-479{width:100%; float:left;}
 	.none-479{display:none !important;}
