@@ -1575,7 +1575,7 @@ class Sitemap extends CI_Controller {
                 $total_artist = $this->artistic_model->artistListLocationCategoryTotalRec($jcv['category_id'],$value['location_id'],$art_category = array(),$art_location = array());
                 if($total_artist > 0)
                 {
-                    $txt .= '<url><loc>'.base_url().$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
+                    $txt .= '<url><loc>'.base_url().'artist/'.$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
                     if($sitemap_counter == SITEMAP_LIMIT)
                     {
                         $sitemap_counter = 1;
