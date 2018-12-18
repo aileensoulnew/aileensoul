@@ -1995,196 +1995,196 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             sun_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sun_to_time option:selected").val() != "" ? true : false;
                     }
                 },
             },
             sun_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sun_from_time option:selected").val() != "" ? true : false;
                     }
                 },
             },
             sun_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sun_from_time option:selected").val() != "" ? true : false;
                     }
                 },
             },
             sun_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sun_to_time option:selected").val() != "" ? true : false;
                     }
                 },
             },
             mon_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#mon_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             mon_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#mon_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             mon_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#mon_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             mon_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#mon_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             tue_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#tue_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             tue_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#tue_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             tue_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#tue_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             tue_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#tue_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             wed_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#wed_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             wed_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#wed_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             wed_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#wed_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             wed_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#wed_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             thu_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#thu_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             thu_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#thu_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             thu_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#thu_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             thu_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#thu_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             fri_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#fri_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             fri_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#fri_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             fri_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#fri_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             fri_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#fri_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             sat_from_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sat_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             sat_from_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sat_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             sat_to_time: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sat_from_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
             sat_to_ap: {
                 required: {
                     depends: function(element) {
-                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                        return $("#sat_to_time option:selected").val() != '' ? true : false;
                     }
                 },
             },
@@ -2361,4 +2361,5 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $("#hours-opration").modal('show');
     };
     //Hours of Operation End
+
 });

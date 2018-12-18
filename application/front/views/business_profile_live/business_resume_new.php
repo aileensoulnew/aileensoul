@@ -834,23 +834,30 @@
 						                            <span ng-if="from_user_id != to_user_id">Company operating hours.</span>
 						                        </div>
 												<ul class="dis-list list-ul-cus" ng-if="bus_opening_hours">
-													<li ng-if="bus_opening_hours.opening_hour == '2'">
-														<span>Hours of Operation</span>
-														<label>Sunday : {{bus_opening_hours.sun_from_time}} {{bus_opening_hours.sun_from_ap}} to {{bus_opening_hours.sun_to_time}} {{bus_opening_hours.sun_to_ap}}</label>
-														<label>Monday : {{bus_opening_hours.mon_from_time}} {{bus_opening_hours.mon_from_ap}} to {{bus_opening_hours.mon_to_time}} {{bus_opening_hours.mon_to_ap}}</label>
-														<label>Tuesday : {{bus_opening_hours.tue_from_time}} {{bus_opening_hours.tue_from_ap}} to {{bus_opening_hours.tue_to_time}} {{bus_opening_hours.tue_to_ap}}</label>
-														<label>Wednesday : {{bus_opening_hours.wed_from_time}} {{bus_opening_hours.wed_from_ap}} to {{bus_opening_hours.wed_to_time}} {{bus_opening_hours.wed_to_ap}}</label>
-														<label>Thursday : {{bus_opening_hours.thu_from_time}} {{bus_opening_hours.thu_from_ap}} to {{bus_opening_hours.thu_to_time}} {{bus_opening_hours.thu_to_ap}}</label>
-														<label>Friday : {{bus_opening_hours.fri_from_time}} {{bus_opening_hours.fri_from_ap}} to {{bus_opening_hours.fri_to_time}} {{bus_opening_hours.fri_to_ap}}</label>
-														<label>Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</label>
-													</li>
 													<li ng-if="bus_opening_hours.opening_hour">
 														<span>Opening hours</span>
 														<label ng-if="bus_opening_hours.opening_hour == '1'">Always open</label>
 														<label ng-if="bus_opening_hours.opening_hour == '2'">On Specified Days</label>
 														<label ng-if="bus_opening_hours.opening_hour == '3'">Appointment needed</label>
 													</li>
-													
+													<li ng-if="bus_opening_hours.opening_hour == '2'">
+														<span ng-if="bus_opening_hours.sun_from_time || bus_opening_hours.sun_from_ap || bus_opening_hours.sun_to_time || bus_opening_hours.sun_to_ap || 
+														bus_opening_hours.mon_from_time || bus_opening_hours.mon_from_ap || bus_opening_hours.mon_to_time || bus_opening_hours.mon_to_ap || 
+														bus_opening_hours.tue_from_time || bus_opening_hours.tue_from_ap || bus_opening_hours.tue_to_time || bus_opening_hours.tue_to_ap || 
+														bus_opening_hours.wed_from_time || bus_opening_hours.wed_from_ap || bus_opening_hours.wed_to_time || bus_opening_hours.wed_to_ap || 
+														bus_opening_hours.thu_from_time || bus_opening_hours.thu_from_ap || bus_opening_hours.thu_to_time || bus_opening_hours.thu_to_ap || 
+														bus_opening_hours.fri_from_time || bus_opening_hours.fri_from_ap || bus_opening_hours.fri_to_time || bus_opening_hours.fri_to_ap || 
+														bus_opening_hours.sat_from_time || bus_opening_hours.sat_from_ap || bus_opening_hours.sat_to_time || bus_opening_hours.sat_to_ap">Days</span>
+
+														<label ng-if="bus_opening_hours.sun_from_time && bus_opening_hours.sun_from_ap && bus_opening_hours.sun_to_time && bus_opening_hours.sun_to_ap">Sunday : {{bus_opening_hours.sun_from_time}} {{bus_opening_hours.sun_from_ap}} to {{bus_opening_hours.sun_to_time}} {{bus_opening_hours.sun_to_ap}}</label>
+
+														<label ng-if="bus_opening_hours.mon_from_time && bus_opening_hours.mon_from_ap && bus_opening_hours.mon_to_time && bus_opening_hours.mon_to_ap">Monday : {{bus_opening_hours.mon_from_time}} {{bus_opening_hours.mon_from_ap}} to {{bus_opening_hours.mon_to_time}} {{bus_opening_hours.mon_to_ap}}</label>
+														<label ng-if="bus_opening_hours.tue_from_time && bus_opening_hours.tue_from_ap && bus_opening_hours.tue_to_time && bus_opening_hours.tue_to_ap">Tuesday : {{bus_opening_hours.tue_from_time}} {{bus_opening_hours.tue_from_ap}} to {{bus_opening_hours.tue_to_time}} {{bus_opening_hours.tue_to_ap}}</label>
+														<label ng-if="bus_opening_hours.wed_from_time && bus_opening_hours.wed_from_ap && bus_opening_hours.wed_to_time && bus_opening_hours.wed_to_ap">Wednesday : {{bus_opening_hours.wed_from_time}} {{bus_opening_hours.wed_from_ap}} to {{bus_opening_hours.wed_to_time}} {{bus_opening_hours.wed_to_ap}}</label>
+														<label ng-if="bus_opening_hours.thu_from_time && bus_opening_hours.thu_from_ap && bus_opening_hours.thu_to_time && bus_opening_hours.thu_to_ap">Thursday : {{bus_opening_hours.thu_from_time}} {{bus_opening_hours.thu_from_ap}} to {{bus_opening_hours.thu_to_time}} {{bus_opening_hours.thu_to_ap}}</label>
+														<label ng-if="bus_opening_hours.fri_from_time && bus_opening_hours.fri_from_ap && bus_opening_hours.fri_to_time && bus_opening_hours.fri_to_ap">Friday : {{bus_opening_hours.fri_from_time}} {{bus_opening_hours.fri_from_ap}} to {{bus_opening_hours.fri_to_time}} {{bus_opening_hours.fri_to_ap}}</label>
+														<label ng-if="bus_opening_hours.sat_from_time && bus_opening_hours.sat_from_ap && bus_opening_hours.sat_to_time && bus_opening_hours.sat_to_ap">Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</label>
+													</li>
 												</ul>
 											</div>
 										</div>
@@ -1133,30 +1140,39 @@
 							<div class="">
 								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
 									<div class="form-group">
-										<label>Website</label>
-										<span class="span-select">
-											<select>
-												<option>Facebook</option>
-												<option>Google</option>
-												<option>Instagram</option>
-											</select>
-										</span>
+										<label>Website</label>										
 									</div>
 								</div>
 								<div class="col-md-8 col-sm-8 col-xs-7">
 									<div class="form-group">
 										<label>URL</label>
-										<input type="text" placeholder="URL">
+									</div>
+								</div>																
+							</div>
+
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
+									<div class="form-group">
+										<label>LinkedIn</label>
 									</div>
 								</div>
-								<div class="col-md-1 col-sm-1 col-xs-1 pl0">
-									<label></label>
-									<a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url('assets/n-images/detail/dtl-delet.png?ver=' . time()) ?>"></a>
-										
+								<div class="col-md-9 col-sm-9 col-xs-7">
+									<div class="form-group">										
+										<input type="text" placeholder="URL">
+									</div>
+								</div>																
+							</div>
+							<div class="">
+								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
+									<div class="form-group">
+										<label>Twitter</label>
+									</div>
 								</div>
-								<div class="fw dtl-more-add">
-									<a href="#"><span class="pr10">Add More Links </span><img src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
-								</div>
+								<div class="col-md-9 col-sm-9 col-xs-7">
+									<div class="form-group">										
+										<input type="text" placeholder="URL">
+									</div>
+								</div>																
 							</div>
 						</div>
 						
