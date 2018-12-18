@@ -2592,8 +2592,150 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 }
             });
         }
-    };
-   
+    };   
     //Business Key Members Information End
+
+    //Business Contact Information Start
+    $scope.get_contact_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_contact_info',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.contact_info_data = result.data.contact_info_data;
+
+                setTimeout(function(){
+                    if($("#about-detail").innerHeight() > 155)
+                    {
+                        $("#view-more-about").show();
+                    }
+                    else
+                    {
+                        $("#view-more-about").hide();
+                    }
+                },500);
+            }
+            $("#contact-loader").hide();
+            $("#contact-body").show();
+
+        });
+    }
+    $scope.get_contact_info();
+
+    $scope.view_more_about = function(){
+        $("#about-detail").removeClass("dtl-box-height");
+        $("#view-more-about").hide();
+    };
+
+    $scope.edit_contact_info = function(){
+        $("#contact_person").val($scope.contact_info_data.contact_person);
+        $("#contact_job_title").val($scope.contact_info_data.contact_job_title_txt);
+        $("#contact_mobile").val($scope.contact_info_data.contact_mobile);
+        $("#contact_email").val($scope.contact_info_data.contact_email);
+        $("#contact_website").val($scope.contact_info_data.contact_website);
+        $("#contact_fax").val($scope.contact_info_data.contact_fax);
+        $("#contact_tollfree").val($scope.contact_info_data.contact_tollfree);
+        $("#contact-info").modal('show');
+    };
+
+    $scope.contact_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.contact_job_title,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.contact_info_validate = {
+        rules: {
+            contact_person: {
+                required: true,
+            },
+            contact_job_title: {
+                required: true,
+            },
+            contact_mobile: {
+                required: true,
+            },
+            contact_email: {
+                required: true,
+                email: true,
+                remote: {
+                    url: base_url + "business_profile_live/check_email",
+                    type: "post",
+                    data: {
+                      email: function() {
+                        return $( "#contact_email").val();
+                      }
+                    }
+                },
+            },
+            contact_website: {
+                url: true,
+            },
+            contact_fax: {
+                required: true,
+            },
+            contact_tollfree: {
+                required: true,
+            },
+        },
+    };
+
+    $scope.save_contact_info = function(){
+        if ($scope.contact_info_form.validate()) {
+            $("#save_contact_info_loader").show();
+            $("#save_contact_info").attr("style","pointer-events:none;display:none;");
+
+            var contact_person = $("#contact_person").val();
+            var contact_job_title = $("#contact_job_title").val();
+            var contact_mobile = $("#contact_mobile").val();
+            var contact_email = $("#contact_email").val();
+            var contact_website = $("#contact_website").val();
+            var contact_fax = $("#contact_fax").val();
+            var contact_tollfree = $("#contact_tollfree").val();
+            
+            var insert_data = $.param({
+                'contact_person':contact_person,
+                'contact_job_title':contact_job_title,
+                'contact_mobile':contact_mobile,
+                'contact_email':contact_email,
+                'contact_website':contact_website,
+                'contact_fax':contact_fax,
+                'contact_tollfree':contact_tollfree
+            });
+
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/save_contact_info',                
+                data: insert_data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.contact_info_data = result.data.contact_info_data;
+                }
+                $("#save_contact_info").removeAttr("style");
+                $("#save_contact_info_loader").hide();
+                $("#contact-info").modal('hide'); 
+            });
+            
+        }
+    };
+    //Business Contact Information End
 
 });

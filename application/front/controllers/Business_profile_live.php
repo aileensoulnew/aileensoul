@@ -12191,4 +12191,52 @@ Your browser does not support the audio tag.
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_contact_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $contact_info_data = $this->business_model->get_contact_info($user_id);
+        $ret_arr = array("success"=>1,"contact_info_data"=>$contact_info_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_contact_info()
+    {
+        $contact_person = $this->input->post('contact_person');
+        $contact_job_title = $this->input->post('contact_job_title');
+        $contact_mobile = $this->input->post('contact_mobile');
+        $contact_email = $this->input->post('contact_email');
+        $contact_website = $this->input->post('contact_website');
+        $contact_fax = $this->input->post('contact_fax');
+        $contact_tollfree = $this->input->post('contact_tollfree');
+
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            if ($contact_job_title != " ") {
+                $contition_array = array('name' => $contact_job_title);
+                $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                if ($jobdata) {
+                    $jobtitle = $jobdata[0]['title_id'];
+                } else {
+                    $forslug = $contact_job_title;
+                    $data = array(
+                        'name' => ucfirst($contact_job_title),
+                        'slug' => $this->common->clean($forslug),
+                        'status' => 'draft',
+                    );
+                    $jobtitle = $this->common->insert_data_getid($data, 'job_title');
+                }
+            }
+            $member_insert = $this->business_model->save_contact_info($user_id,$contact_person,$jobtitle,$contact_mobile,$contact_email,$contact_website,$contact_fax,$contact_tollfree);
+            $contact_info_data = $this->business_model->get_contact_info($user_id);
+            $ret_arr = array("success"=>1,"contact_info_data"=>$contact_info_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

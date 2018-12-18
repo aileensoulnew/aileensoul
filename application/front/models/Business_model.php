@@ -1313,6 +1313,7 @@ class Business_model extends CI_Model {
         $this->db->select("bk.*, jt.name as member_job_title_txt")->from('business_key_member bk');
         $this->db->join('job_title jt', 'jt.title_id = bk.member_job_title', 'left');
         $this->db->where('bk.status', '1');
+        $this->db->where('bk.user_id', $user_id);
         $this->db->order_by('bk.created_date', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();        
@@ -1368,6 +1369,40 @@ class Business_model extends CI_Model {
         $this->db->where('user_id', $user_id);
         $this->db->where('id_key_member', $edit_member_id);
         $this->db->update('business_key_member', $data);
+        return true;
+    }
+
+    public function get_contact_info($user_id)
+    {
+        $this->db->select("bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.contact_job_title,bp.contact_fax,bp.contact_tollfree, IF(jt.name != '',jt.name,'') as contact_job_title_txt")->from('business_profile bp');
+        $this->db->join('job_title jt', 'jt.title_id = bp.contact_job_title', 'left');
+        $this->db->where('bp.user_id', $user_id);
+        $this->db->where('bp.status', '1');
+        $this->db->where('bp.is_deleted', '0');
+        $this->db->where('bp.business_step', '4');
+        $this->db->order_by('bp.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        return $result_array;
+    }
+
+    public function save_contact_info($user_id,$contact_person = "",$jobtitle = "",$contact_mobile = "",$contact_email = "",$contact_website = "",$contact_fax = "",$contact_tollfree = "")    
+    {
+        $data = array(                
+            'contact_person' => $contact_person,
+            'contact_job_title' => $jobtitle,
+            'contact_mobile' => $contact_mobile,
+            'contact_email' => $contact_email,
+            'contact_website' => $contact_website,
+            'contact_fax' => $contact_fax,
+            'contact_tollfree' => $contact_tollfree,
+            'modified_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('business_profile', $data);
+
+        $this->db->where('user_id', $user_id);
+        $this->db->update('business_profile_search_tmp', $data);
         return true;
     }
 }

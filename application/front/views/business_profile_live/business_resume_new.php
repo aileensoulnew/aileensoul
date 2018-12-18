@@ -165,43 +165,59 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/contact.png?ver=' . time()) ?>">
 									<span>Contact Information</span>
-									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#contact-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id"ng-click="edit_contact_info();" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Contact Person Name / Owner Name</span>
-											Yatin Belani
-										</li>
-										<li>
-											<span>Designation / Role</span>
-											MD
-										</li>
-										<li>
-											<span>Contact Number (Add)</span>
-											+91 9874563210
-										</li>
-										<li>
-											<span>Fax Number</span>
-											65412398
-										</li>
-										
-										<li>
-											<span>Toll Free Number</span>
-											1800 00 1122
-										</li>
-										<li>
-											<span>Email Id</span>
-											Loremipsum@gmail.com
-										</li>
-										
-									</ul>
+								<div id="contact-loader" class="dtl-dis">
+		                            <div class="text-center">
+		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+		                            </div>
+		                        </div>
+		                        <div id="contact-body" style="display: none;">
+		                            <div class="dtl-dis" ng-if="!contact_info_data.contact_person && !contact_info_data.contact_job_title && !contact_info_data.contact_mobile && !contact_info_data.contact_email && !contact_info_data.contact_website && !contact_info_data.contact_fax && !contact_info_data.contact_tollfree">
+		                                <div class="no-info">
+		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+		                                    <span>Add contact information so that customer can get in touch.</span>
+		                                </div>
+		                            </div>		                        
+									<div id="about-detail" class="dtl-dis dtl-box-height" ng-if="contact_info_data.contact_person || contact_info_data.contact_job_title || contact_info_data.contact_mobile || contact_info_data.contact_email || contact_info_data.contact_website || contact_info_data.contact_fax || contact_info_data.contact_tollfree">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="contact_info_data.contact_person">
+												<span>Contact Person Name / Owner Name</span>
+												{{contact_info_data.contact_person}}
+											</li>
+											<li ng-if="contact_info_data.contact_job_title">
+												<span>Designation / Role</span>
+												{{contact_info_data.contact_job_title_txt}}
+											</li>
+											<li ng-if="contact_info_data.contact_mobile">
+												<span>Contact Number</span>
+												{{contact_info_data.contact_mobile}}
+											</li>
+											<li ng-if="contact_info_data.contact_fax">
+												<span>Fax Number</span>
+												{{contact_info_data.contact_fax}}
+											</li>
+
+											<li ng-if="contact_info_data.contact_website">
+												<span>Website</span>
+												<a href="{{contact_info_data.contact_website}}" target="_self">{{contact_info_data.contact_website}}</a>
+											</li>
+											
+											<li ng-if="contact_info_data.contact_tollfree">
+												<span>Toll Free Number</span>
+												{{contact_info_data.contact_tollfree}}
+											</li>
+											<li ng-if="contact_info_data.contact_email">
+												<span>Email Id</span>
+												{{contact_info_data.contact_email}}
+											</li>
+											
+										</ul>
+									</div>
 								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
-								
+								<div id="view-more-about" class="about-more" style="display: none;">
+                                    <a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>
 							</div>
 						</div>
 						
@@ -1089,7 +1105,7 @@
 							</div>
 							<div class="form-group">
 								<label>Biography</label>
-								<textarea type="text" placeholder="Biography" id="member_bio" name="member_bio" maxlength="700"></textarea>
+								<textarea type="text" placeholder="Biography" id="member_bio" name="member_bio" ng-model="member_bio" maxlength="700"></textarea>
 								<span class="pull-right">{{700 - member_bio.length}}</span>
 							</div>
 							
@@ -1282,68 +1298,68 @@
 					<div class="dtl-title">
 						<span>Contact Information</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Contact Person Name / Owner Name</label>
-							<input type="text" placeholder="Contact Person Name / Owner Name">
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Designation / Role </label>
-									<input type="text" placeholder="Designation / Role">
+					<form name="contact_info_form" id="contact_info_form" ng-validate="contact_info_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<label>Contact Person Name / Owner Name</label>
+								<input type="text" placeholder="Contact Person Name / Owner Name" id="contact_person" name="contact_person" maxlength="255">
+							</div>						
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Designation / Role </label>
+										<input type="text" placeholder="Designation / Role" id="contact_job_title" name="contact_job_title" ng-model="contact_job_title" ng-keyup="contact_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="255">
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Contact Number (Add) </label>
-									<input type="text" placeholder="Contact Number (Add)">
-								</div>
-							</div>
-							
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Email Id</label>
-									<input type="text" placeholder="Email Id">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Website</label>
-									<input type="text" placeholder="Website">
-								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Contact Number</label>
+										<input type="text" placeholder="Contact Number" id="contact_mobile" name="contact_mobile" maxlength="15" ng-model="contact_mobile" numbers-only>
+									</div>
+								</div>							
 							</div>
 							
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Fax Number</label>
-									<input type="text" placeholder="Fax Number">
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Email Id</label>
+										<input type="text" placeholder="Email Id" id="contact_email" name="contact_email" maxlength="255">
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Website <span class="link-must">(Must be http:// or https://)</span></label>
+										<input type="text" placeholder="Website" id="contact_website" name="contact_website" maxlength="255">
+									</div>
+								</div>
+								
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Fax Number</label>
+										<input type="text" placeholder="Fax Number" id="contact_fax" name="contact_fax" maxlength="20">
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Toll Free Number</label>
+										<input type="text" placeholder="Toll Free Number" id="contact_tollfree" name="contact_tollfree" maxlength="30">
+									</div>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Toll Free Number</label>
-									<input type="text" placeholder="Toll Free Number">
-								</div>
-							</div>
-							
 						</div>
-						
-						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
-				</div>	
-
-
-            </div>
+						<div class="dtl-btn">
+							<a id="save_contact_info" href="#" ng-click="save_contact_info()" class="save">
+								<span>Save</span>
+							</a>
+	                        <div id="save_contact_info_loader" class="dtl-popup-loader" style="display: none;">
+	                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+	                        </div>
+						</div>
+					</form>
+				</div>
+			</div>
         </div>
     </div>
 	
