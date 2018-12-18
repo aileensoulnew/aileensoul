@@ -1307,4 +1307,67 @@ class Business_model extends CI_Model {
         }
         return $result_array;
     }
+
+    public function get_key_member($user_id)
+    {
+        $this->db->select("bk.*, jt.name as member_job_title_txt")->from('business_key_member bk');
+        $this->db->join('job_title jt', 'jt.title_id = bk.member_job_title', 'left');
+        $this->db->where('bk.status', '1');
+        $this->db->order_by('bk.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->result_array();        
+        return $result_array;
+    }
+
+    public function save_member($user_id,$member_name = "",$jobtitle = "",$member_gender = "",$member_bio = "",$linkedin_url = "",$twitter_url = "",$member_img = "",$edit_member_id = 0)
+    {
+        if($edit_member_id == 0)
+        {
+            $curr_date = date('Y-m-d H:i:s', time());
+            $data = array(
+                'user_id' => $user_id,
+                'member_name' => $member_name,
+                'member_job_title' => $jobtitle,                
+                'member_gender' => $member_gender,                
+                'member_bio' => $member_bio,                
+                'linkedin_url' => $linkedin_url,                
+                'twitter_url' => $twitter_url,                
+                'member_img' => $member_img,                
+                'status' => '1',
+                'created_date' => $curr_date,
+                'modify_date' => $curr_date,
+            );
+            $insert_id = $this->common->insert_data($data, 'business_key_member');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'member_name' => $member_name,
+                'member_job_title' => $jobtitle,                
+                'member_gender' => $member_gender,                
+                'member_bio' => $member_bio,                
+                'linkedin_url' => $linkedin_url,                
+                'twitter_url' => $twitter_url,                
+                'member_img' => $member_img,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $user_id);
+            $this->db->where('id_key_member', $edit_member_id);
+            $this->db->update('business_key_member', $data);
+            return true;
+        }
+    }
+
+    public function delete_member($user_id,$edit_member_id)    
+    {
+        $data = array(                
+            'status' => "0",
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->where('id_key_member', $edit_member_id);
+        $this->db->update('business_key_member', $data);
+        return true;
+    }
 }

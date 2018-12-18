@@ -986,3 +986,4 @@ $config['business_user_award_upload_path'] = 'uploads/business_user_award/';
 $config['business_user_portfolio_upload_path'] = 'uploads/business_user_portfolio/';
 $config['business_user_story_upload_path'] = 'uploads/business_user_story/';
 $config['business_user_timeline_upload_path'] = 'uploads/business_user_timeline/';
+$config['business_member_img_upload_path'] = 'uploads/business_member_img/';

@@ -2362,4 +2362,238 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     };
     //Hours of Operation End
 
+    //Business Key Members Information Start
+    $scope.edit_member_id = 0;
+
+    $scope.basic_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.member_job_title,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    var key_member_formdata = new FormData();
+    $(document).on('change','#member_img', function(e){
+        $("#member_img_error").hide();
+        if(this.files[0].size > 10485760)
+        {
+            $("#member_img_error").html("File size must be less than 10MB.");
+            $("#member_img_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                key_member_formdata.append('member_img', $('#member_img')[0].files[0]);
+            }
+            else {
+                $("#member_img_error").html("Invalid file selected.");
+                $("#member_img_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Please check your input."
+    );
+
+    $scope.business_member_validate = {
+        rules: {            
+            member_name: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            member_job_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            member_gender: {
+                required: true,
+            },
+            member_bio: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+            linkedin_url: {
+                regex: /(http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i
+            },
+            twitter_url: {
+                regex: /http(s)?:\/\/(.*\.)?twitter\.com\/[A-z 0-9 _]+\/?/i
+            },
+        },
+    };
+    $scope.save_member = function(){
+        if ($scope.business_member_form.validate()) {
+            $("#member_loader").show();
+            $("#save_member").attr("style","pointer-events:none;display:none;");
+
+            key_member_formdata.append('edit_member_id', $scope.edit_member_id);
+            key_member_formdata.append('member_file_old', $scope.member_file_old);
+            key_member_formdata.append('member_name', $('#member_name').val());
+            key_member_formdata.append('member_job_title', $('#member_job_title').val());
+            key_member_formdata.append('member_gender', $("#member_gender option:selected").val());
+            key_member_formdata.append('member_bio', $('#member_bio').val());
+            key_member_formdata.append('linkedin_url', $('#linkedin_url').val());
+            key_member_formdata.append('twitter_url', $('#twitter_url').val());
+            
+            $http.post(base_url + 'business_profile_live/save_member', key_member_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $("#save_member").removeAttr("style");
+                        $("#member_loader").hide();
+                        $("#business_member_form")[0].reset();
+                        // $scope.reset_awards_form();
+                        $scope.key_member_data = result.key_member_data;
+                        $("#member-info").modal('hide');
+                    }
+                    else
+                    {
+                        $("#save_member").removeAttr("style");
+                        $("#member_loader").hide();
+                        $("#business_member_form")[0].reset();
+                        $("#member-info").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+
+    $scope.reset_member = function(){
+        $scope.edit_member_id = 0;
+        $scope.member_file_old = '';
+        $("#member-info").removeClass("edit-form-cus");
+        $("#member_img_error").hide();        
+        $("#member_img_prev").remove();
+        $("#delete_member_modal").remove();
+        $("#business_member_form")[0].reset();
+        key_member_formdata = new FormData();
+    };
+
+    $scope.get_key_member = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_key_member',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.key_member_data = result.data.key_member_data;
+            }
+            $("#key-member-loader").hide();
+            $("#key-member-body").show();
+
+        });
+    }
+    $scope.get_key_member();
+
+    $scope.view_more_km = 2;
+    $scope.km_view_more = function(){
+        $scope.view_more_km = $scope.key_member_data.length;
+        $("#view-more-km").hide();
+    };
+
+    $scope.edit_member = function(index){
+        $scope.reset_member();
+        $("#member-info").addClass("edit-form-cus");
+        var member_data = $scope.key_member_data[index];        
+        $scope.edit_member_id = member_data.id_key_member;
+        $("#member_name").val(member_data.member_name);
+        $("#member_job_title").val(member_data.member_job_title_txt);
+        $("#member_gender").val(member_data.member_gender);
+        $("#member_bio").val(member_data.member_bio);
+        $("#linkedin_url").val(member_data.linkedin_url);
+        $("#twitter_url").val(member_data.twitter_url);
+
+        var member_img_name = member_data.member_img;
+        $scope.member_file_old = member_img_name;
+        if(member_img_name.trim() != "")
+        {            
+            var filename_arr = member_img_name.split('.');
+            $("#member_img_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="member_img_prev" class="screen-shot"><a href="'+business_member_img_upload_url+member_img_name+'" target="_blank"><img style="width: 100px;" src="'+business_member_img_upload_url+member_img_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="member_img_prev" class="screen-shot"><a class="file-preview-cus" href="'+business_member_img_upload_url+member_img_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#member_img_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.award_form.validate();
+        },1000);
+
+        var delete_btn = '<a id="delete_member_modal" href="#" data-target="#delete-member-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#member_loader"));
+        $compile(contentbtn)($scope);
+        $("#member-info").modal("show");
+    };
+
+    $scope.delete_member = function(){
+        $("#delete_member").attr("style","pointer-events:none;display:none;");
+        $("#delete_member_loader").show();
+        $("#member-delete-btn").hide();
+        if($scope.edit_member_id != 0)
+        {
+            var expdata = $.param({'edit_member_id': $scope.edit_member_id});
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/delete_member',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.key_member_data = result.key_member_data;                        
+                    }
+                    $("#delete-member-model").modal('hide');
+                    $("#member-info").modal('hide');
+                    $("#delete_member").removeAttr("style");
+                    $("#delete_member_loader").hide();
+                    $("#member-delete-btn").show();
+                    $scope.reset_portfolio();
+                }
+            });
+        }
+    };
+   
+    //Business Key Members Information End
+
 });

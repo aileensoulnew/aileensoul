@@ -12095,4 +12095,100 @@ Your browser does not support the audio tag.
         $ret_arr = array("success"=>1,"bus_opening_hours"=>$bus_opening_hours);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_key_member()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $key_member_data = $this->business_model->get_key_member($user_id);
+        $ret_arr = array("success"=>1,"key_member_data"=>$key_member_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_member()
+    {
+        $edit_member_id = $this->input->post('edit_member_id');
+        $member_file_old = $this->input->post('member_file_old');
+        $member_name = $this->input->post('member_name');
+        $member_job_title = $this->input->post('member_job_title');
+        $member_gender = $this->input->post('member_gender');
+        $member_bio = $this->input->post('member_bio');
+        $linkedin_url = $this->input->post('linkedin_url');
+        $twitter_url = $this->input->post('twitter_url');
+        $fileName = $portfolio_file_old;
+        if(isset($_FILES['member_img']['name']) && $_FILES['member_img']['name'] != "")
+        {
+            $business_member_img_upload_path = $this->config->item('business_member_img_upload_path');
+            $user_member_img_old = $business_member_img_upload_path . $member_img_old;
+            if (isset($user_member_img_old)) {
+                unlink($user_member_img_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $business_member_img_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['member_img']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('member_img')){
+                $main_image = $business_member_img_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            if ($member_job_title != " ") {
+                $contition_array = array('name' => $member_job_title);
+                $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                if ($jobdata) {
+                    $jobtitle = $jobdata[0]['title_id'];
+                } else {
+                    $forslug = $member_job_title;
+                    $data = array(
+                        'name' => ucfirst($member_job_title),
+                        'slug' => $this->common->clean($forslug),
+                        'status' => 'draft',
+                    );
+                    $jobtitle = $this->common->insert_data_getid($data, 'job_title');
+                }
+            }
+            $member_insert = $this->business_model->save_member($user_id,$member_name,$jobtitle,$member_gender,$member_bio,$linkedin_url,$twitter_url,$fileName,$edit_member_id);
+            $key_member_data = $this->business_model->get_key_member($user_id);
+            $ret_arr = array("success"=>1,"key_member_data"=>$key_member_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_member()
+    {
+        $edit_member_id = $this->input->post('edit_member_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $portfolio_delete = $this->business_model->delete_member($user_id,$edit_member_id);
+            $key_member_data = $this->business_model->get_key_member($user_id);
+            $ret_arr = array("success"=>1,"key_member_data"=>$key_member_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

@@ -290,118 +290,73 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>">
 									<span>Key Members Information</span>
-									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+									<span ng-if="from_user_id == to_user_id" data-target="#member-info" ng-click="reset_member();" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></span>
 								</div>
-								<div class="dtl-dis dis-accor">
-									<div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="expOne">
-												<div class="panel-title">
-													<div class="dis-left">
-														<div class="dis-left-img img-cus">
-															<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
+								<div id="key-member-loader" class="dtl-dis">
+	                                <div class="text-center">
+	                                    <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+	                                </div>
+	                            </div>
+	                            <div id="key-member-body" style="display: none;">
+	                            	<div class="no-info" ng-if="key_member_data.length < '1'">
+										<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+										<span>Add the key people who are on-board with you.</span>
+									</div>
+									<div class="dtl-dis dis-accor" ng-if="key_member_data.length > '0'">
+										<div class="panel-group" id="member-accordion" role="tablist" aria-multiselectable="true">
+											<div class="panel panel-default" ng-repeat="member in key_member_data" ng-if="$index <= view_more_km">
+												<div class="panel-heading" role="tab" id="expOne">
+													<div class="panel-title">
+														<div class="dis-left">
+															<div class="dis-left-img" ng-class="member.member_img ? 'img-cus' : ''">
+																<img ng-if="member.member_img" ng-src="<?php echo BUSINESS_MEMBER_IMG_UPLOAD_URL;?>{{member.member_img}}">
+																<span ng-if="!member.member_img">{{member.member_name | limitTo:1 | uppercase}}</span>
+															</div>
 														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Yatin Belani</h4>
-														<p>Working as Sr.multimedia dsigner </p>
-														
-													</div>
-													<div class="dis-right">
-														<a href="#" data-target="#member-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>n-images/detail/detial-edit.png"></a>
-														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp1" aria-expanded="false" aria-controls="exp1" class="collapsed up-down">
-															<img src="<?php echo base_url('assets/n-images/detail/
-															down-arrow.png?ver=' . time()) ?>">
-														</a>
-													</div>
-                 
-												</div>
-											</div>
-											<div id="exp1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="expOne" aria-expanded="false" style="height: 0px;">
-												<div class="panel-body">
-													<ul class="dis-list">
-														<li>
-															<span>Gender</span>
-															Male					
-														</li>
-														<li>
-															<span>Social Links</span>
-															<ul class="social-link-list pt5">
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
-															</ul>					
-														</li>
-														
-														<li>
-															<span>Biography</span>
-															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-															<a class="dis-more" href="#"><b>See More..</b> </a>
-														</li>
-													
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="exptwo">
-												<div class="panel-title">
-													<div class="dis-left">
-														<div class="dis-left-img img-cus">
-															<img src="<?php echo base_url('assets/n-images/detail/user-pic.jpg?ver=' . time()) ?>">
-														</div>
-													</div>
-													<div class="dis-middle">
-														<h4>Verv System PVT LTD</h4>
-														<p>Working as Sr.multimedia dsigner </p>
-														
-													</div>
-													<div class="dis-right">
-														<a href="#" data-target="#member-info" data-toggle="modal" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>"></a>
-														<a role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp2" aria-expanded="false" aria-controls="exp2" class="collapsed up-down">
-															<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
-														</a>
-													</div>
-                 
-												</div>
-											</div>
-											<div id="exp2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exptwo" aria-expanded="false">
-												<div class="panel-body">
-													<ul class="dis-list">
-														<li>
-															<span>Gender</span>
-															Male
+														<div class="dis-middle">
+															<h4>{{member.member_name}}</h4>
+															<p>Working as {{member.member_job_title_txt}}</p>
 															
-														</li>
-														<li>
-															<span>Social Links</span>
-															<ul class="social-link-list pt5">
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png?ver=' . time()) ?>"></a></li>
-																<li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
-															</ul>					
-														</li>
-														<li>
-															<span>Biography</span>
-															Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-															<a class="dis-more" href="#"><b>See More..</b> </a>
-														</li>
-													
-													</ul>
+														</div>
+														<div class="dis-right">
+															<a href="javascript:void(0);" ng-click="edit_member($index);" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>n-images/detail/detial-edit.png"></a>
+															<span role="button" data-toggle="collapse" data-parent="#member-accordion" href="#mem{{$index}}" aria-expanded="false" aria-controls="mem{{$index}}" class="collapsed up-down">
+																<img src="<?php echo base_url('assets/n-images/detail/
+																down-arrow.png?ver=' . time()) ?>">
+															</span>
+														</div>	                 
+													</div>
+												</div>
+												<div id="mem{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="expOne" aria-expanded="false" style="height: 0px;">
+													<div class="panel-body">
+														<ul class="dis-list list-ul-cus">
+															<li ng-if="member.member_gender">
+																<span>Gender</span>
+																<label ng-if="member.member_gender == '1'">Male</label>
+																<label ng-if="member.member_gender == '2'">Female</label>
+																<label ng-if="member.member_gender == '3'">Other</label>
+															</li>
+															<li ng-if="member.linkedin_url || member.twitter_url">
+																<span>Social Links</span>
+																<ul class="social-link-list pt5">
+																	<li ng-if="member.linkedin_url"><a href="{{member.linkedin_url}}" target="_self"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
+																	<li ng-if="member.twitter_url"><a href="{{member.twitter_url}}" target="_self"><img src="<?php echo base_url('assets/n-images/detail/twt.png?ver=' . time()) ?>"></a></li>
+																</ul>					
+															</li>
+															<li ng-if="member.member_bio">
+																<span>Biography</span>
+																<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{member.member_bio}}" dd-text-collapse-cond="true">{{member.member_bio}}</label>
+															</li>				
+														</ul>
+													</div>
 												</div>
 											</div>
+											<div id="view-more-km" class="about-more" ng-if="key_member_data.length > 3">
+		                                        <a href="#" ng-click="km_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+		                                    </div>
 										</div>
 									</div>
-								</div>
-								
+								</div>								
 							</div>
 						</div>
 						
@@ -1105,92 +1060,125 @@
 					<div class="dtl-title">
 						<span>Key Members Information</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Name</label>
-							<input type="text" placeholder="Name">
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Job Title</label>
-									<input type="text" placeholder="Job Title">
-								</div>
+					<form name="business_member_form" id="business_member_form" ng-validate="business_member_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" placeholder="Name" id="member_name" name="member_name" maxlength="255">
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Gender </label>
-									<span class="span-select">
-										<select>
-											<option>Male</option>
-											<option>Female</option>
-											<option>Other</option>
-										</select>
-									</span>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Job Title</label>
+										<input type="text" placeholder="Enter Job Title" id="member_job_title" name="member_job_title" ng-model="member_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="255">
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Gender </label>
+										<span class="span-select">
+											<select id="member_gender" name="member_gender">
+												<option value="">Select Gender</option>
+												<option value="1">Male</option>
+												<option value="2">Female</option>
+												<option value="3">Other</option>
+											</select>
+										</span>
+									</div>
+								</div>								
+							</div>
+							<div class="form-group">
+								<label>Biography</label>
+								<textarea type="text" placeholder="Biography" id="member_bio" name="member_bio" maxlength="700"></textarea>
+								<span class="pull-right">{{700 - member_bio.length}}</span>
+							</div>
+							
+							<div class="row pb20">
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
+										<div class="form-group">
+											<label>Website</label>
+										</div>
+									</div>
+									<div class="col-md-8 col-sm-8 col-xs-7">
+										<div class="form-group">
+											<label>URL</label>
+										</div>
+									</div>																
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
+										<div class="form-group">
+											<label>LinkedIn</label>
+										</div>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-7">
+										<div class="form-group">
+											<input type="text" placeholder="URL" id="linkedin_url" name="linkedin_url" maxlength="255">
+										</div>
+									</div>																
+								</div>
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
+										<div class="form-group">
+											<label>Twitter</label>
+										</div>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-7">
+										<div class="form-group">
+											<input type="text" placeholder="URL" id="twitter_url" name="twitter_url" maxlength="255">
+										</div>
+									</div>															
 								</div>
 							</div>
 							
-						</div>
-						<div class="form-group">
-							<label>Biography</label>
-							<textarea type="text" placeholder="Biography"></textarea>
-						</div>
-						
-						<div class="row pb20">
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
-									<div class="form-group">
-										<label>Website</label>										
-									</div>
-								</div>
-								<div class="col-md-8 col-sm-8 col-xs-7">
-									<div class="form-group">
-										<label>URL</label>
-									</div>
-								</div>																
-							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
-									<div class="form-group">
-										<label>LinkedIn</label>
-									</div>
-								</div>
-								<div class="col-md-9 col-sm-9 col-xs-7">
-									<div class="form-group">										
-										<input type="text" placeholder="URL">
-									</div>
-								</div>																
-							</div>
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
-									<div class="form-group">
-										<label>Twitter</label>
-									</div>
-								</div>
-								<div class="col-md-9 col-sm-9 col-xs-7">
-									<div class="form-group">										
-										<input type="text" placeholder="URL">
-									</div>
-								</div>																
+							<div class="form-group">
+								<div class="upload-file">
+		                            <label>Upload Photo of key member</label>
+		                            <input type="file" id="member_img" name="member_img">
+		                            <span id="member_img_error" class="error" style="display: none;"></span>
+		                        </div>
 							</div>
 						</div>
-						
-						<div class="form-group">
-							<label class="upload-file">
-								Upload Photo of key member <input type="file">
-							</label>
+						<div class="dtl-btn">
+							<a id="save_member" href="javascript:void(0);" ng-click="save_member()" class="save">
+								<span>Save</span>
+							</a>
+							<div id="member_loader"  class="dtl-popup-loader" style="display: none;">
+		                    	<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+							</div>
 						</div>
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
+					</form>
 				</div>	
 
 
             </div>
         </div>
     </div>
+    <div class="modal fade message-box biderror" id="delete-member-model" role="dialog">
+	    <div class="modal-dialog modal-lm">
+	        <div class="modal-content">
+	            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+	            <div class="modal-body">
+	                <span class="mes">
+	                    <div class='pop_content'>
+	                        <span>Are you sure you want to delete member ?</span>
+	                        <p class='poppup-btns pt20'>
+	                            <span id="member-delete-btn">
+	                                <a id="delete_member" href="javascript:void(0);" ng-click="delete_member()" class="btn1">
+	                                    <span>Delete</span>
+	                                </a> 
+	                                <a class='btn1' href="javascript:void(0);" data-dismiss="modal">Cancel</a>
+	                            </span>
+	                            <img id="delete_member_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+	                        </p>
+	                    </div>
+	                </span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	
 	<!---  model Address Information  -->
 	<div style="display:none;" class="modal fade dtl-modal" id="add-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -2539,6 +2527,7 @@
         var business_user_portfolio_upload_url = '<?php echo BUSINESS_USER_PORTFOLIO_UPLOAD_URL; ?>';
         var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
         var business_user_timeline_upload_url = '<?php echo BUSINESS_USER_TIMELINE_UPLOAD_URL; ?>';
+        var business_member_img_upload_url = '<?php echo BUSINESS_MEMBER_IMG_UPLOAD_URL; ?>';
         $('#main_loader').hide();
         // $('#main_page_load').show();
         $('body').removeClass("body-loader");
@@ -2604,12 +2593,14 @@
 		});
 
 	    // un-track $modal windows on hide
-	    $(document).on('hidden.bs.modal', function (e, $modal) {
-	    	if($('.modal.in').length > 0)
-	    	{
-	    		$("body").removeClass('modal-open');
-	    		$("body").addClass('modal-open');
-	    	}
+	    $(document).on('hide.bs.modal', function (e, $modal) {
+	    	setTimeout(function(){
+		    	if($('.modal.in').length > 0)
+		    	{
+		    		$("body").removeClass('modal-open');
+		    		$("body").addClass('modal-open');
+		    	}
+	    	},100);
 	    });
     </script>
 
