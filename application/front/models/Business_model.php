@@ -1192,4 +1192,119 @@ class Business_model extends CI_Model {
         $result_array = $query->row_array();        
         return $result_array;
     }
+
+    public function save_opening_hours($user_id,$opening_hour = '', $sunday_time = '', $monday_time = '', $tuesday_time = '', $wednesday_time = '', $thursday_time = '', $friday_time = '', $saturday_time = '')
+    {
+        $cur_datetime = date('Y-m-d H:i:s', time());
+        $this->db->select("*")->from('business_opening_hours');        
+        $this->db->where('user_id', $user_id);
+        $this->db->where('status', '1');        
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $data_array = array(
+                'opening_hour' => $opening_hour,
+                'sunday_time' => $sunday_time,
+                'monday_time' => $monday_time,
+                'tuesday_time' => $tuesday_time,
+                'wednesday_time' => $wednesday_time,
+                'thursday_time' => $thursday_time,
+                'friday_time' => $friday_time,
+                'saturday_time' => $saturday_time,
+                'modify_date' => $cur_datetime
+            );
+            
+            $this->db->where('user_id', $user_id);            
+            $this->db->update('business_opening_hours', $data_array);
+            return true;
+        }
+        else
+        {
+            $data_array = array(
+                'user_id' => $user_id,
+                'opening_hour' => $opening_hour,
+                'sunday_time' => $sunday_time,
+                'monday_time' => $monday_time,
+                'tuesday_time' => $tuesday_time,
+                'wednesday_time' => $wednesday_time,
+                'thursday_time' => $thursday_time,
+                'friday_time' => $friday_time,
+                'saturday_time' => $saturday_time,
+                'status' => '1',
+                'created_date' => $cur_datetime,
+                'modify_date' => $cur_datetime
+            );
+            $insert_id = $this->common->insert_data($data_array, 'business_opening_hours');
+            return $insert_id;   
+        }
+    }
+
+    public function get_opening_hours($user_id)
+    {
+        $this->db->select("*")->from('business_opening_hours');        
+        $this->db->where('user_id', $user_id);
+        $this->db->where('status', '1');
+        $this->db->order_by('created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        if(isset($result_array) && !empty($result_array))
+        {
+            $sunday_array = explode("to", $result_array['sunday_time']);
+            $sun_from_time_arr = explode("-", $sunday_array[0]);
+            $result_array['sun_from_time'] = $sun_from_time_arr[0];
+            $result_array['sun_from_ap'] = $sun_from_time_arr[1];
+            $sun_to_time_arr = explode("-", $sunday_array[1]);
+            $result_array['sun_to_time'] = $sun_to_time_arr[0];
+            $result_array['sun_to_ap'] = $sun_to_time_arr[1];
+
+            $monday_array = explode("to", $result_array['monday_time']);
+            $mon_from_time_arr = explode("-", $monday_array[0]);
+            $result_array['mon_from_time'] = $mon_from_time_arr[0];
+            $result_array['mon_from_ap'] = $mon_from_time_arr[1];
+            $mon_to_time_arr = explode("-", $monday_array[1]);
+            $result_array['mon_to_time'] = $mon_to_time_arr[0];
+            $result_array['mon_to_ap'] = $mon_to_time_arr[1];
+
+            $tuesday_array = explode("to", $result_array['tuesday_time']);
+            $tue_from_time_arr = explode("-", $tuesday_array[0]);
+            $result_array['tue_from_time'] = $tue_from_time_arr[0];
+            $result_array['tue_from_ap'] = $tue_from_time_arr[1];
+            $tue_to_time_arr = explode("-", $tuesday_array[1]);
+            $result_array['tue_to_time'] = $tue_to_time_arr[0];
+            $result_array['tue_to_ap'] = $tue_to_time_arr[1];
+
+            $wednesday_array = explode("to", $result_array['wednesday_time']);
+            $wed_from_time_arr = explode("-", $wednesday_array[0]);
+            $result_array['wed_from_time'] = $wed_from_time_arr[0];
+            $result_array['wed_from_ap'] = $wed_from_time_arr[1];
+            $wed_to_time_arr = explode("-", $wednesday_array[1]);
+            $result_array['wed_to_time'] = $wed_to_time_arr[0];
+            $result_array['wed_to_ap'] = $wed_to_time_arr[1];
+
+            $thursday_array = explode("to", $result_array['thursday_time']);
+            $thu_from_time_arr = explode("-", $thursday_array[0]);
+            $result_array['thu_from_time'] = $thu_from_time_arr[0];
+            $result_array['thu_from_ap'] = $thu_from_time_arr[1];
+            $thu_to_time_arr = explode("-", $thursday_array[1]);
+            $result_array['thu_to_time'] = $thu_to_time_arr[0];
+            $result_array['thu_to_ap'] = $thu_to_time_arr[1];
+
+            $friday_array = explode("to", $result_array['friday_time']);
+            $fri_from_time_arr = explode("-", $friday_array[0]);
+            $result_array['fri_from_time'] = $fri_from_time_arr[0];
+            $result_array['fri_from_ap'] = $fri_from_time_arr[1];
+            $fri_to_time_arr = explode("-", $friday_array[1]);
+            $result_array['fri_to_time'] = $fri_to_time_arr[0];
+            $result_array['fri_to_ap'] = $fri_to_time_arr[1];
+
+            $saturday_array = explode("to", $result_array['saturday_time']);
+            $sat_from_time_arr = explode("-", $saturday_array[0]);
+            $result_array['sat_from_time'] = $sat_from_time_arr[0];
+            $result_array['sat_from_ap'] = $sat_from_time_arr[1];
+            $sat_to_time_arr = explode("-", $saturday_array[1]);
+            $result_array['sat_to_time'] = $sat_to_time_arr[0];
+            $result_array['sat_to_ap'] = $sat_to_time_arr[1];
+        }
+        return $result_array;
+    }
 }

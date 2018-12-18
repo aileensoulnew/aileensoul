@@ -1519,7 +1519,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 		$return_html .= '<div class="art-img-nn">
 		<div class="art_no_post_img">
 
-		<img alt="No Projects" src="../assets/img/free-no1.png">
+		<img alt="No Projects" src="'.base_url('assets/img/free-no1.png').'">
 
 		</div>
 		<div class="art_no_post_text">';

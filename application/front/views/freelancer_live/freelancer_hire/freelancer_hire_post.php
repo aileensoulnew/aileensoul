@@ -113,7 +113,7 @@
                     </div>
 
                 </div>	
-                <div class=" container tablate-container art-profile">    
+                <div class="container tablate-container art-profile">    
                     <?php if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
                         <div class="upload-img">
 
@@ -194,7 +194,6 @@
                                             </li>
                                         <?php } ?>
 
-
                                     </ul>
 
                                     <?php
@@ -221,15 +220,15 @@
                                                     ?>
                                                 </li>
 
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
+                                            </ul>
+                                        </div>
+                                    <?php } ?>
                             </div>
                         </div>
                     </div>
+                </div>
 
-     
-                    <div class="container mobp0">
+                <div class="container mobp0">
                         <div class="job-menu-profile mob-none pt20 job_edit_menu">
                             <a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
                                 <h3><?php echo ucwords($fullname); ?></h3>

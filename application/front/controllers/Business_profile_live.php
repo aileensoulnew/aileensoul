@@ -12059,4 +12059,40 @@ Your browser does not support the audio tag.
         $ret_arr = array("success"=>1,"jobs_data"=>$jobs_data,"rec_profile"=>$rec_prof);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_opening_hours()
+    {
+        $opening_hour = $this->input->post('opening_hour');
+              
+        $sunday_time = ($opening_hour == '2' ? $this->input->post('sun_from_time').'-'.$this->input->post('sun_from_ap').'to'.$this->input->post('sun_to_time').'-'.$this->input->post('sun_to_ap') : '');
+        $monday_time = ($opening_hour == '2' ? $this->input->post('mon_from_time').'-'.$this->input->post('mon_from_ap').'to'.$this->input->post('mon_to_time').'-'.$this->input->post('mon_to_ap') : '');
+        $tuesday_time =  ($opening_hour == '2' ? $this->input->post('tue_from_time').'-'.$this->input->post('tue_from_ap').'to'.$this->input->post('tue_to_time').'-'.$this->input->post('tue_to_ap') : '');
+        $wednesday_time =  ($opening_hour == '2' ? $this->input->post('wed_from_time').'-'.$this->input->post('wed_from_ap').'to'.$this->input->post('wed_to_time').'-'.$this->input->post('sun_to_ap') : '');
+        $thursday_time =  ($opening_hour == '2' ? $this->input->post('thu_from_time').'-'.$this->input->post('thu_from_ap').'to'.$this->input->post('thu_to_time').'-'.$this->input->post('thu_to_ap') : '');
+        $friday_time =  ($opening_hour == '2' ? $this->input->post('fri_from_time').'-'.$this->input->post('fri_from_ap').'to'.$this->input->post('fri_to_time').'-'.$this->input->post('fri_to_ap') : '');
+        $saturday_time =  ($opening_hour == '2' ? $this->input->post('sat_from_time').'-'.$this->input->post('sat_from_ap').'to'.$this->input->post('sat_to_time').'-'.$this->input->post('sat_to_ap') : '');
+        
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_timeline_insert = $this->business_model->save_opening_hours($user_id,$opening_hour, $sunday_time, $monday_time, $tuesday_time, $wednesday_time, $thursday_time, $friday_time, $saturday_time);
+            $bus_opening_hours = $this->business_model->get_opening_hours($user_id);
+            $ret_arr = array("success"=>1,"bus_opening_hours"=>$bus_opening_hours);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+
+    }
+
+    public function get_opening_hours()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $bus_opening_hours = $this->business_model->get_opening_hours($user_id);
+        $ret_arr = array("success"=>1,"bus_opening_hours"=>$bus_opening_hours);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

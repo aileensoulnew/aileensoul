@@ -1987,29 +1987,378 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }
     };
 
-    $scope.opening_hourset = {opening_hour: []};
+    $scope.opening_hours_validate = {
+        rules: {            
+            opening_hour: {
+                required: true,               
+            },
+            sun_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sun_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sun_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sun_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            mon_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            mon_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            mon_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            mon_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            tue_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            tue_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            tue_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            tue_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            wed_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            wed_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            wed_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            wed_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            thu_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            thu_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            thu_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            thu_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            fri_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            fri_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            fri_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            fri_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sat_from_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sat_from_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sat_to_time: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+            sat_to_ap: {
+                required: {
+                    depends: function(element) {
+                        return $("#opening_hour option:selected").val() == 2 ? true : false;
+                    }
+                },
+            },
+        },
+    };
+    $scope.save_opening_hours = function(){
+        if ($scope.opening_hours_form.validate()) {
+            $("#opening_hours_loader").show();
+            $("#save_opening_hours").attr("style","pointer-events:none;display:none;");
 
-    $scope.opening_hourset.opening_hour = [];
-    $scope.add_new_opening_hour = function () {
-        // console.log($scope.opening_hourset.opening_hour.length);
-        if($scope.opening_hourset.opening_hour.length < 7)
-        {
-            $scope.opening_hourset.opening_hour.push('');
-            if($scope.opening_hourset.opening_hour.length == 7)
-            {
-                $("#add-new-hours").hide();
-            }
-        }
-        else
-        {
-            $("#add-new-hours").hide();
+            var opening_hour = $("#opening_hour option:selected").val();
+
+            var insert_data = $.param({
+                'opening_hour': opening_hour,
+                'sun_from_time': $("#sun_from_time option:selected").val(),
+                'sun_from_ap': $("#sun_from_ap option:selected").val(),
+                'sun_to_time': $("#sun_to_time option:selected").val(),
+                'sun_to_ap': $("#sun_to_ap option:selected").val(),
+
+                'mon_from_time': $("#mon_from_time option:selected").val(),
+                'mon_from_ap': $("#mon_from_ap option:selected").val(),
+                'mon_to_time': $("#mon_to_time option:selected").val(),
+                'mon_to_ap': $("#mon_to_ap option:selected").val(),
+
+                'tue_from_time': $("#tue_from_time option:selected").val(),
+                'tue_from_ap': $("#tue_from_ap option:selected").val(),
+                'tue_to_time': $("#tue_to_time option:selected").val(),
+                'tue_to_ap': $("#tue_to_ap option:selected").val(),
+
+                'wed_from_time': $("#wed_from_time option:selected").val(),
+                'wed_from_ap': $("#wed_from_ap option:selected").val(),
+                'wed_to_time': $("#wed_to_time option:selected").val(),
+                'wed_to_ap': $("#wed_to_ap option:selected").val(),
+
+                'thu_from_time': $("#thu_from_time option:selected").val(),
+                'thu_from_ap': $("#thu_from_ap option:selected").val(),
+                'thu_to_time': $("#thu_to_time option:selected").val(),
+                'thu_to_ap': $("#thu_to_ap option:selected").val(),
+
+                'fri_from_time': $("#fri_from_time option:selected").val(),
+                'fri_from_ap': $("#fri_from_ap option:selected").val(),
+                'fri_to_time': $("#fri_to_time option:selected").val(),
+                'fri_to_ap': $("#fri_to_ap option:selected").val(),
+
+                'sat_from_time': $("#sat_from_time option:selected").val(),
+                'sat_from_ap': $("#sat_from_ap option:selected").val(),
+                'sat_to_time': $("#sat_to_time option:selected").val(),
+                'sat_to_ap': $("#sat_to_ap option:selected").val()                
+            });
+
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/save_opening_hours',                
+                data: insert_data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.bus_opening_hours = result.data.bus_opening_hours;
+                }
+                $("#save_opening_hours").removeAttr("style");
+                $("#opening_hours_loader").hide();
+                $("#hours-opration").modal('hide'); 
+            });
         }
     };
 
-    $scope.remove_opening_hour = function (z) {
-        //var lastItem = $scope.opening_hourset.opening_hour.length - 1;
-        $scope.opening_hourset.opening_hour.splice(z,1);
-        $("#add-new-hours").show();
+    $scope.get_opening_hours = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_opening_hours',
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.bus_opening_hours = result.data.bus_opening_hours;                
+            }
+            $("#hours-loader").hide();
+            $("#hours-body").show();
+        });
+    };
+    $scope.get_opening_hours();
+
+    $scope.edit_opening_hours = function(main_index,inner_index){
+        var opening_hours_arr = $scope.bus_opening_hours;
+        if(opening_hours_arr)
+        {
+            $("#opening_hour").val(opening_hours_arr.opening_hour);
+            if(opening_hours_arr.opening_hour == 2)
+            {
+                $("#specified_day_div").show();
+                $("#sun_from_time").val(opening_hours_arr.sun_from_time);
+                $("#sun_from_ap").val(opening_hours_arr.sun_from_ap);
+                $("#sun_to_time").val(opening_hours_arr.sun_to_time);
+                $("#sun_to_ap").val(opening_hours_arr.sun_to_ap);
+
+                $("#mon_from_time").val(opening_hours_arr.mon_from_time);
+                $("#mon_from_ap").val(opening_hours_arr.mon_from_ap);
+                $("#mon_to_time").val(opening_hours_arr.mon_to_time);
+                $("#mon_to_ap").val(opening_hours_arr.mon_to_ap);
+
+                $("#tue_from_time").val(opening_hours_arr.tue_from_time);
+                $("#tue_from_ap").val(opening_hours_arr.tue_from_ap);
+                $("#tue_to_time").val(opening_hours_arr.tue_to_time);
+                $("#tue_to_ap").val(opening_hours_arr.tue_to_ap);
+
+                $("#wed_from_time").val(opening_hours_arr.wed_from_time);
+                $("#wed_from_ap").val(opening_hours_arr.wed_from_ap);
+                $("#wed_to_time").val(opening_hours_arr.wed_to_time);
+                $("#wed_to_ap").val(opening_hours_arr.wed_to_ap);
+
+                $("#thu_from_time").val(opening_hours_arr.thu_from_time);
+                $("#thu_from_ap").val(opening_hours_arr.thu_from_ap);
+                $("#thu_to_time").val(opening_hours_arr.thu_to_time);
+                $("#thu_to_ap").val(opening_hours_arr.thu_to_ap);
+
+                $("#fri_from_time").val(opening_hours_arr.fri_from_time);
+                $("#fri_from_ap").val(opening_hours_arr.fri_from_ap);
+                $("#fri_to_time").val(opening_hours_arr.fri_to_time);
+                $("#fri_to_ap").val(opening_hours_arr.fri_to_ap);
+
+                $("#sat_from_time").val(opening_hours_arr.sat_from_time);
+                $("#sat_from_ap").val(opening_hours_arr.sat_from_ap);
+                $("#sat_to_time").val(opening_hours_arr.sat_to_time);
+                $("#sat_to_ap").val(opening_hours_arr.sat_to_ap);
+            }
+            else
+            {
+                $("#specified_day_div").hide();
+                $("#sun_from_time").val('');
+                $("#sun_from_ap").val('');
+                $("#sun_to_time").val('');
+                $("#sun_to_ap").val('');
+
+                $("#mon_from_time").val('');
+                $("#mon_from_ap").val('');
+                $("#mon_to_time").val('');
+                $("#mon_to_ap").val('');
+
+                $("#tue_from_time").val('');
+                $("#tue_from_ap").val('');
+                $("#tue_to_time").val('');
+                $("#tue_to_ap").val('');
+
+                $("#wed_from_time").val('');
+                $("#wed_from_ap").val('');
+                $("#wed_to_time").val('');
+                $("#wed_to_ap").val('');
+
+                $("#thu_from_time").val('');
+                $("#thu_from_ap").val('');
+                $("#thu_to_time").val('');
+                $("#thu_to_ap").val('');
+
+                $("#fri_from_time").val('');
+                $("#fri_from_ap").val('');
+                $("#fri_to_time").val('');
+                $("#fri_to_ap").val('');
+
+                $("#sat_from_time").val('');
+                $("#sat_from_ap").val('');
+                $("#sat_to_time").val('');
+                $("#sat_to_ap").val('');
+            }
+            
+        }
+        $("#hours-opration").modal('show');
     };
     //Hours of Operation End
 });

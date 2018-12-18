@@ -819,21 +819,40 @@
 							<div class="rsp-dtl-box">
 								<div class="dtl-box" id="hour-move">
 										<div class="dtl-title">
-											<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/ho-op.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" ng-if="from_user_id == to_user_id" data-target="#hours-opration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+											<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/ho-op.png?ver=' . time()) ?>"><span>Hours of Operation</span><a href="#" ng-if="from_user_id == to_user_id" ng-click="edit_opening_hours();" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 										</div>
-										<div class="dtl-dis">
-											<ul class="dis-list">
-												
-												<li>
-													<span>Hours of Operation</span>
-													 Mon - Sun : 9:00 AM
-												</li>
-												<li>
-													<span>Select opening hours</span>
-													Always open
-												</li>
-												
-											</ul>
+										<div id="hours-loader" class="dtl-dis">
+						                    <div class="text-center">
+						                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+						                    </div>
+						                </div>
+						                <div id="hours-body" style="display: none;">
+											<div class="dtl-dis">
+						                        <div class="no-info" ng-if="!bus_opening_hours">
+						                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+						                            <span ng-if="from_user_id == to_user_id">Add your company operating hours.</span>
+						                            <span ng-if="from_user_id != to_user_id">Company operating hours.</span>
+						                        </div>
+												<ul class="dis-list list-ul-cus" ng-if="bus_opening_hours">
+													<li ng-if="bus_opening_hours.opening_hour == '2'">
+														<span>Hours of Operation</span>
+														<label>Sunday : {{bus_opening_hours.sun_from_time}} {{bus_opening_hours.sun_from_ap}} to {{bus_opening_hours.sun_to_time}} {{bus_opening_hours.sun_to_ap}}</label>
+														<label>Monday : {{bus_opening_hours.mon_from_time}} {{bus_opening_hours.mon_from_ap}} to {{bus_opening_hours.mon_to_time}} {{bus_opening_hours.mon_to_ap}}</label>
+														<label>Tuesday : {{bus_opening_hours.tue_from_time}} {{bus_opening_hours.tue_from_ap}} to {{bus_opening_hours.tue_to_time}} {{bus_opening_hours.tue_to_ap}}</label>
+														<label>Wednesday : {{bus_opening_hours.wed_from_time}} {{bus_opening_hours.wed_from_ap}} to {{bus_opening_hours.wed_to_time}} {{bus_opening_hours.wed_to_ap}}</label>
+														<label>Thursday : {{bus_opening_hours.thu_from_time}} {{bus_opening_hours.thu_from_ap}} to {{bus_opening_hours.thu_to_time}} {{bus_opening_hours.thu_to_ap}}</label>
+														<label>Friday : {{bus_opening_hours.fri_from_time}} {{bus_opening_hours.fri_from_ap}} to {{bus_opening_hours.fri_to_time}} {{bus_opening_hours.fri_to_ap}}</label>
+														<label>Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</label>
+													</li>
+													<li ng-if="bus_opening_hours.opening_hour">
+														<span>Opening hours</span>
+														<label ng-if="bus_opening_hours.opening_hour == '1'">Always open</label>
+														<label ng-if="bus_opening_hours.opening_hour == '2'">On Specified Days</label>
+														<label ng-if="bus_opening_hours.opening_hour == '3'">Appointment needed</label>
+													</li>
+													
+												</ul>
+											</div>
 										</div>
 										
 									</div>
@@ -1417,480 +1436,515 @@
 					<div class="dtl-title">
 						<span>Hours of Operation</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Select opening hours</label>
-							<span class="span-select">
-								<select id="opening_hour" name="opening_hour" ng-model="opening_hour" ng-change="change_opening_hour();">
-									<option value="">Select opening hours</option>
-									<option value="1">Always open</option>
-									<option value="2">On Specified Days</option>
-									<option value="3">Appointment needed</option>
-								</select>
-							</span>
+					<form name="opening_hours_form" id="opening_hours_form" ng-validate="opening_hours_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<label>Select opening hours</label>
+								<span class="span-select">
+									<select id="opening_hour" name="opening_hour" ng-model="opening_hour" ng-change="change_opening_hour();">
+										<option value="">Select opening hours</option>
+										<option value="1">Always open</option>
+										<option value="2">On Specified Days</option>
+										<option value="3">Appointment needed</option>
+									</select>
+								</span>
+							</div>
+							<div id="specified_day_div" class="row" style="display: none;">
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<label>Days</label>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>From</label>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>&nbsp;</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>To</label>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>&nbsp;</label>	
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Sunday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sun_from_time" name="sun_from_time" ng-model="sun_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sun_from_ap" name="sun_from_ap" ng-model="sun_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sun_to_time" name="sun_to_time" ng-model="sun_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sun_to_ap" name="sun_to_ap" ng-model="sun_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Monday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="mon_from_time" name="mon_from_time" ng-model="mon_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="mon_from_ap" name="mon_from_ap" ng-model="mon_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="mon_to_time" name="mon_to_time" ng-model="mon_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="mon_to_ap" name="mon_to_ap" ng-model="mon_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Tuesday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="tue_from_time" name="tue_from_time" ng-model="tue_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="tue_from_ap" name="tue_from_ap" ng-model="tue_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="tue_to_time" name="tue_to_time" ng-model="tue_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="tue_to_ap" name="tue_to_ap" ng-model="tue_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Wednesday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="wed_from_time" name="wed_from_time" ng-model="wed_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="wed_from_ap" name="wed_from_ap" ng-model="wed_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="wed_to_time" name="wed_to_time" ng-model="wed_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="wed_to_ap" name="wed_to_ap" ng-model="wed_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Thursday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="thu_from_time" name="thu_from_time" ng-model="thu_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="thu_from_ap" name="thu_from_ap" ng-model="thu_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="thu_to_time" name="thu_to_time" ng-model="thu_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="thu_to_ap" name="thu_to_ap" ng-model="thu_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Friday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="fri_from_time" name="fri_from_time" ng-model="fri_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="fri_from_ap" name="fri_from_ap" ng-model="fri_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="fri_to_time" name="fri_to_time" ng-model="fri_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="fri_to_ap" name="fri_to_ap" ng-model="fri_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+
+								<div class="">
+									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+										<div class="form-group">
+											<span>Saturday</span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sat_from_time" name="sat_from_time" ng-model="sat_from_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sat_from_ap" name="sat_from_ap" ng-model="sat_from_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-3 col-xs-2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sat_to_time" name="sat_to_time" ng-model="sat_to_time">
+															<option value="">Select</option>
+															<?php foreach ($time_array as $key => $value) { ?>
+																<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+															<?php 
+															} ?>
+														</select>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<span class="span-select">
+														<select id="sat_to_ap" name="sat_to_ap" ng-model="sat_to_ap">
+															<option value="">Select</option>
+															<option value="AM">AM</option>
+															<option value="PM">PM</option>
+														</select>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>								
+								</div>
+							</div>						
 						</div>
-						<div id="specified_day_div" class="row" style="display: none;">
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Sunday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
+						<div class="dtl-btn">
+							<div class="dtl-btn bottom-btn">
+								<a id="save_opening_hours" href="#" ng-click="save_opening_hours()" class="save">
+									<span>Save</span>
+								</a>
+		                        <div id="opening_hours_loader" class="dtl-popup-loader" style="display: none;">
+		                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+		                        </div>
 							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Monday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Tuesday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Wednesday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Thursday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Friday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<div class="">
-								<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
-									<div class="form-group">
-										<label>Day</label>
-										<span>Saturday</span>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>From</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-3 col-xs-2">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>To</label>
-												<span class="span-select">
-													<select>
-														<?php foreach ($time_array as $key => $value) { ?>
-															<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-														<?php 
-														} ?>
-													</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>&nbsp;</label>
-												<span class="span-select">
-													<select>
-														<option>AM</option>
-														<option>PM</option>
-													</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-
-
-						</div>						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
+						</div>
+					</form>
 				</div>	
 
 
