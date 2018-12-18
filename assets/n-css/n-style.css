@@ -3626,6 +3626,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open::before{top:17px;}
 	.review-list li .review-right{width:79%;}
 	.press-rel .dis-middle{padding-top: 10px;}
+	.common-form .rec_check input[type="checkbox"]{margin:-3px 5px 0 0 !important;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -4071,7 +4072,8 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.blog-page .sub-header .blog-sub-menu .dropdown.open::before{top:14px; left:38px;}
 	.blog-page .web-header .sub-header .sub-menu li ul li a{font-size:15px;}
 	.drop-blog-title{font-size:15px;}
-	
+	.rec-add-post .job_reg_main{border-radius:0;}
+	.rec-add-post .cus-chang{padding:15px; text-align:center;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

@@ -92,7 +92,7 @@
                 <!-- cover image end-->
 
 
-                <div class="profile-photo">
+                <div class="profile-photo 123">
                     <div class="profile-pho">
                         <div class="user-pic padd_img">
                             <?php
@@ -226,8 +226,8 @@
                         </div>
                     </div>
                 </div>
-
-
+	
+			</div>
 
 
                 <div  class="add-post-button mob-block">

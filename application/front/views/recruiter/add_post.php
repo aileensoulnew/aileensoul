@@ -14,7 +14,7 @@
         <noscript><meta http-equiv="refresh" content="0; URL=<?php echo base_url('noscript'); ?>"/></noscript>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer freeh3">        
+    <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer freeh3 rec-add-post">        
         <?php if ($recdata['re_step'] == 3) { ?>
             <?php echo $recruiter_header2; ?>
         <?php } ?>
@@ -171,7 +171,7 @@
                                                 <input  type="checkbox" tabindex="10" id="fresher_nme" name="fresher" value="1"><label for="fresher_nme">Fresher can also apply..!   </label> 
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <div id="erroe_nn" class="form-group" <?php if ($degree1) { ?> class="error-msg" <?php } ?>>
                                                         <label>Required Education:<span class="optional">(optional)</span></label> 
 
@@ -180,7 +180,7 @@
                                                         <?php echo form_error('education'); ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group" <?php if ($position) { ?> class="error-msg" <?php } ?>>
                                                         <label class="control-label">No of Vacancies:<span style="color:red">*</span> </label>
                                                         <input name="position_no" type="text"  id="position" value="" tabindex="13" placeholder="Enter No of Vacancies"/>
@@ -190,7 +190,7 @@
                                                 </div>
                                             </div>
 											<div class="row">
-    											<div class="col-md-6 col-sm-6 col-xs-6">
+    											<div class="col-md-6 col-sm-6 col-xs-12">
                                                     <div <?php if ($emp_type) { ?> class="error-msg" <?php } ?> class="form-group">
 
                                                         <label style="cursor:pointer;" class="control-label">Employment Type:<span style="color:red">*</span></label>
@@ -204,7 +204,7 @@
                                                         <?php echo form_error('emp_type'); ?>  <?php echo form_error('emp_type'); ?>
                                                     </div>
     											</div>    											
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label>Hiring level<span style="color:red">*</span></label>
                                                         <span class="span-select">
@@ -263,14 +263,14 @@
 											<div class="row">
     											<div class="col-md-6 col-sm-6 col-xs-6">
                                                     <div class="form-group" <?php if ($minsal) { ?> class="error-msg" <?php } ?>>
-                                                        <label class="control-label">Minimum Salary:<span class="optional">(optional)</span></label>
+                                                        <label class="control-label">Min<span class="none-479">imum</span> Salary:<span class="optional">(optional)</span></label>
                                                         <input name="minsal" type="text" id="minsal" placeholder="Enter Minimum Salary" tabindex="19" /><span id="fullname-error"></span>
                                                         <?php echo form_error('minsal'); ?>
                                                     </div>
     											</div>
     											<div class="col-md-6 col-sm-6 col-xs-6">
                                                     <div class="form-group" <?php if ($maxsal) { ?> class="error-msg " <?php } ?>>
-                                                        <label class="control-label">Maximum Salary:<span class="optional">(optional)</span></label>
+                                                        <label class="control-label">Max<span class="none-479">imum</span> Salary:<span class="optional">(optional)</span></label>
                                                         <input name="maxsal" type="text" id="maxsal" tabindex="20" placeholder="Enter Maximum Salary" /><span id="fullname-error"></span>
                                                         <?php echo form_error('maxsal'); ?>
                                                     </div>
@@ -286,13 +286,13 @@
 												<input type="text" placeholder="Enter your company name" id="comp_name" name="comp_name" value="<?php echo $rec_comp_data['re_comp_name'] ?>">
 											</div>
 											<div class="row">
-    											<div class="col-md-6 col-sm-6 col-xs-6">
+    											<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
         											<div class="form-group">
         												<label>Company URL</label>
         												<input type="text" placeholder="Enter Company URL" id="comp_url" name="comp_url" value="<?php echo $rec_comp_data['re_comp_site'] ?>">
         											</div>
     											</div>
-    											<div class="col-md-6 col-sm-6 col-xs-6">
+    											<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
         											<div class="form-group">
         												<label>Work Schedule type<span style="color:red">*</span></label>
         												<span class="span-select">
@@ -310,7 +310,7 @@
 												<textarea type="text" placeholder="About Company Details / Profile" id="comp_profile" name="comp_profile" rows="6"><?php echo $rec_comp_data['re_comp_profile'] ?></textarea>
 											</div>
                                             <div class="row">
-    											<div class="col-md-4 col-sm-4 col-xs-4">
+    											<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
                                                     <div class="form-group" <?php if ($country) { ?> class="error-msg" <?php } ?>>
                                                         <label >Country:<span style="color:red">*</span></label>
                                                         <select style="cursor:pointer;" name="country" id="country" tabindex="21">
@@ -328,7 +328,7 @@
                                                         <?php echo form_error('country'); ?>
                                                     </div>
     											</div>
-    											<div class="col-md-4 col-sm-4 col-xs-4">
+    											<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
                                                     <div class="form-group" <?php if ($state) { ?> class="error-msg" <?php } ?>>
                                                         <label>State:<span style="color:red">*</span></label>
                                                         <select style="cursor:pointer;" name="state" id="state" tabindex="22">
@@ -337,7 +337,7 @@
                                                         <?php echo form_error('state'); ?> 
                                                     </div>
     											</div>
-    											<div class="col-md-4 col-sm-4 col-xs-4">
+    											<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
                                                     <div class="fw form-group" <?php if ($city) { ?> class="error-msg" <?php } ?>>
                                                         <label>City:</label>
                                                         <select style="cursor:pointer;" name="city" id="city" tabindex="23">
