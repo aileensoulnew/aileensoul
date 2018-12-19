@@ -12275,13 +12275,22 @@ Your browser does not support the audio tag.
         if($user_id != "")
         {            
             $member_insert = $this->business_model->save_menu($user_id,$fileName);
-            //$key_member_data = $this->business_model->get_key_member($user_id);
-            $ret_arr = array("success"=>1,"key_member_data"=>"");
+            $menu_info_data = $this->business_model->get_menu_info($user_id);
+        $ret_arr = array("success"=>1,"menu_info_data"=>$menu_info_data);
         }
         else
         {
             $ret_arr = array("success"=>0);
         }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_menu_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $menu_info_data = $this->business_model->get_menu_info($user_id);
+        $ret_arr = array("success"=>1,"menu_info_data"=>$menu_info_data);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

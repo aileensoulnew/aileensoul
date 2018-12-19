@@ -842,30 +842,26 @@
 									<div class="dtl-title">
 										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/menu.png?ver=' . time()) ?>"><span>Add Menu</span><a href="#" data-target="#add-menu" ng-if="from_user_id == to_user_id" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 									</div>
-									<div class="dtl-dis">
-										<ul class="dis-list">
-											<li>
-												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
-													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-												</p>
-											</li>
-											<li>
-												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
-													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-												</p>
-											</li>
-											<li>
-												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
-													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-												</p>
-											</li>
-											<li>
-												<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
-													<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-												</p>
-											</li>
-											
-										</ul>
+									<div id="menu-loader" class="dtl-dis">
+					                    <div class="text-center">
+					                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+					                    </div>
+					                </div>
+					                <div id="menu-body" style="display: none;">
+					                	<div class="no-info" ng-if="menu_info_data.length < '1'">
+											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+											<span>
+											Show what product or service {{from_user_id == to_user_id ? 'you offer' : ' '}}</span>
+										</div>
+										<div class="dtl-dis" ng-if="menu_info_data.length > '0'">
+											<ul class="dis-list">
+												<li ng-repeat="menu_info in menu_info_data | limitTo:6">
+													<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+														<img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
+													</p>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1992,54 +1988,45 @@
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
                 <div class="modal-body-cus"> 
 					<div class="dtl-title">
-						<a href="#" data-target="#add-menu-img" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital">Add Menu</span></a>
+						<a href="#" ng-if="from_user_id == to_user_id" data-target="#add-menu-img" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital">Add Menu</span></a>
 					</div>
 					<div class="dtl-dis">
 						<div class="menu-privew">
 							<ul>
-								<li>
-									<p>
-										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
+								<li ng-repeat="menu_info in menu_info_data">
+									<p ng-click="openModal();currentSlide($index + 1)">
+										<img src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
 									</p>
 								</li>
-								<li>
-									<p>
-										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-									</p>
-								</li>
-								<li>
-									<p>
-										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-									</p>
-								</li>
-								<li>
-									<p>
-										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-									</p>
-								</li>
-								<li>
-									<p>
-										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-									</p>
-								</li>
-								<li>
-									<p>
-										<img src="<?php echo base_url('assets/n-images/art-img.jpg'); ?>">
-									</p>
-								</li>
-								
 							</ul>
 						</div>
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
-				</div>	
-
-
-            </div>
+					</div>					
+				</div>
+			</div>
         </div>
     </div>
+
+    <div id="myModalPhotos" class="modal modal2" style="display: none;">
+		<button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal()">×</button>
+		<div class="modal-dialog">
+	        <div class="modal-content">
+	        	<div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+	        		<img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+	            </div>
+		 		<div class="mySlides" ng-repeat="menu_info in menu_info_data">
+		 			<div class="numbertext"></div>
+		 			<div class="slider_img_p">	 				
+		 				<img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL ?>{{menu_info.file_name}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">	                    
+		 			</div>
+		 		</div>	 		
+		 	</div>
+		 	<div class="caption-container">
+		 		<p id="caption"></p>
+		 	</div>
+		</div> 
+	 	<a class="prev" style="left:0px;" ng-click="plusSlides(-1)">&#10094;</a>
+		<a class="next" ng-click="plusSlides(1)">&#10095;</a>
+	</div>
 
     <!---  model add menu img  -->
 	<div style="display:none;" class="modal fade dtl-modal " id="add-menu-img" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

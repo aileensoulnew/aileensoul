@@ -1419,4 +1419,16 @@ class Business_model extends CI_Model {
         $insert_id = $this->common->insert_data($data, 'business_user_menu');
         return $insert_id;
     }
+
+    public function get_menu_info($user_id)
+    {
+        $this->db->select("*")->from('business_user_menu');        
+        $this->db->where('user_id', $user_id);
+        $this->db->where('status', '1');
+        $this->db->order_by('created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->result_array();        
+        return $result_array;
+    }
+
 }

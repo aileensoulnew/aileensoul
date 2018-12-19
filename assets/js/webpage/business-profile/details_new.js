@@ -2784,7 +2784,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     result = result.data;
                     if(result.success == '1')
                     {
-                        $scope.menu_data = result.menu_data;
+                        $scope.menu_info_data = result.menu_info_data;
                     }
                     $("#save_menu").removeAttr("style");
                     $("#menu_loader").hide();
@@ -2795,6 +2795,78 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             });
         }
     };
+
+    $scope.get_menu_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_menu_info',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.menu_info_data = result.data.menu_info_data;
+            }
+            $("#menu-loader").hide();
+            $("#menu-body").show();
+
+        });
+    }
+    $scope.get_menu_info();
+
+    $scope.openModal = function() {
+        document.getElementById('myModalPhotos').style.display = "block";
+        // $("body").addClass("modal-open");
+    };
+    $scope.closeModal = function() {    
+        document.getElementById('myModalPhotos').style.display = "none";
+        // $("body").removeClass("modal-open");
+    };
+    //var slideIndex = 1;
+    //showSlides(slideIndex);
+    $scope.plusSlides = function(n) {    
+        showSlides(slideIndex += n);
+    };
+    $scope.currentSlide = function(n) {    
+        showSlides(slideIndex = n);
+    };
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        //var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        var elem = $("#element_load_"+slideIndex);
+
+        $("#myModalPhotos #all_image_loader").hide();
+        if (!elem.prop('complete')) {
+            $("#myModalPhotos #all_image_loader").show();
+            elem.on('load', function() {
+                $("#myModalPhotos #all_image_loader").hide();
+                // console.log("Loaded!");
+                // console.log(this.complete);
+            });
+        }
+        /*for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }*/
+        slides[slideIndex - 1].style.display = "block";
+        //dots[slideIndex - 1].className += " active";
+        //captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
     //Business Menu End
 
 });
