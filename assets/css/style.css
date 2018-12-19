@@ -546,11 +546,11 @@ fieldset.full-width{
     line-height:1
 }
 .common-form fieldset.hs-submit input:focus{
-    color:#fff!important
+    /*color:#fff!important*/
 }
 .common-form fieldset input:focus{
-    border:1px solid #1b8ab9!important;
-    color:#1b8ab9!important
+   /* border:1px solid #1b8ab9!important;
+    color:#1b8ab9!important*/
 }
 .common-form fieldset input:focus+label{
     color: #1b8ab9 !important;
