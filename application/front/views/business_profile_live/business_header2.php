@@ -2,7 +2,7 @@
 <div id="business_mob_search" class="modal fade mob-search-popup" role="dialog">
     <form onsubmit="businesssearchMobileSubmit()" method="get" action="javascript:void(0)">
         <div class="new-search-input1">
-        	<input id="m_tags" class="tags ui-autocomplete-input" name="skills" placeholder="Search by Company, Category, or Products" autocomplete="off" type="text">
+        	<input id="m_tags" class="tags ui-autocomplete-input ccp_search" name="skills" placeholder="Search by Company, Category, or Products" autocomplete="off" type="text">
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
         </div>
 		<div class="new-search-btn">
@@ -215,7 +215,7 @@ echo $header_inner_profile ?>
                     <div class="job-search-box1 clearfix">
                         <form onsubmit="businesssearchSubmit()" method="get" action="javascript:void(0)">
                             <fieldset class="sec_h2">
-                                <input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Company, Category, or Products" autocomplete="off" type="text">
+                                <input id="tags" class="tags ui-autocomplete-input ccp_search" name="skills" placeholder="Company, Category, or Products" autocomplete="off" type="text">
                             </fieldset>
                             <fieldset class="sec_h2">
                                 <input id="searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
@@ -296,7 +296,7 @@ echo $header_inner_profile ?>
 	<div class="container">
 		<div class="search-mob-block">
 		    <a href="#" data-toggle="modal" data-target="#business_mob_search">
-		        <input type="search" readonly="true" id="tags1" class="tags" name="skills" value="" placeholder="Search..." />
+		        <input type="search" readonly="true" id="tags1" class="tags ccp_search" name="skills" value="" placeholder="Search..." />
 		    </a>        
 		</div>
 	</div>

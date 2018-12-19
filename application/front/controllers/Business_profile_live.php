@@ -2041,6 +2041,12 @@ Your browser does not support the audio tag.
 
         $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
 
+        $contition_array = array('status' => '1');
+        $this->data['business_types'] = $businesstypedata = $this->common->select_data_by_condition('business_type', $contition_array, $data = '*', $sortby = 'business_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('status' => '1');
+        $this->data['business_category'] = $industriyaldata = $this->common->select_data_by_condition('industry_type', $contition_array, $data = '*', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
         $this->data['title'] = ucwords($company_name) . ' | Details' . TITLEPOSTFIX;
 
         if (count($business_data) == 0) {
@@ -12291,6 +12297,54 @@ Your browser does not support the audio tag.
         $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
         $menu_info_data = $this->business_model->get_menu_info($user_id);
         $ret_arr = array("success"=>1,"menu_info_data"=>$menu_info_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_address_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $address_info_data = $this->business_model->get_address_info($user_id);
+        $ret_arr = array("success"=>1,"address_info_data"=>$address_info_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_address_info()
+    {
+        $address_country = $this->input->post('address_country');
+        $address_state = $this->input->post('address_state');
+        $address_city = $this->input->post('address_city');
+        $address_address = $this->input->post('address_address');
+        $address_pincode = $this->input->post('address_pincode');
+        $address_no_location = $this->input->post('address_no_location');
+        $address_office_location = $this->input->post('address_office_location');
+
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $address_insert = $this->business_model->save_address_info($user_id,$address_country,$address_state,$address_city,$address_address,$address_pincode,$address_no_location,$address_office_location);
+            $address_info_data = $this->business_model->get_address_info($user_id);
+            $ret_arr = array("success"=>1,"address_info_data"=>$address_info_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function searchCityList() {
+        $citySearch = $_POST['q'];
+        $getCityList = $this->business_model->searchCityList($citySearch);
+        echo json_encode($getCityList);
+    }
+
+    public function get_business_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
+        $business_info_data = $this->business_model->get_business_info($user_id);
+        $ret_arr = array("success"=>1,"business_info_data"=>$business_info_data);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

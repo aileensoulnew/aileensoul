@@ -1431,4 +1431,68 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
+    public function get_address_info($user_id)
+    {
+        $this->db->select("bp.country, bp.state, bp.city, bp.pincode, bp.address, ct.city_name, st.state_name, cr.country_name, bp.business_no_location, bp.business_office_location")->from('business_profile bp');
+        $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
+        $this->db->join('states st', 'st.state_id = bp.state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
+        $this->db->where('bp.user_id', $user_id);
+        $this->db->where('bp.status', '1');
+        $this->db->where('bp.is_deleted', '0');
+        $this->db->where('bp.business_step', '4');
+        $this->db->order_by('bp.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        return $result_array;
+    }
+
+    public function save_address_info($user_id,$address_country = "",$address_state = "",$address_city = "",$address_address = "",$address_pincode = "",$address_no_location = "",$address_office_location = "")    
+    {
+        $data = array(                
+            'country' => $address_country,
+            'state' => $address_state,
+            'city' => $address_city,
+            'pincode' => $address_pincode,
+            'address' => $address_address,
+            'business_no_location' => $address_no_location,
+            'business_office_location' => $address_office_location,
+            'modified_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('business_profile', $data);
+
+        $this->db->where('user_id', $user_id);
+        $this->db->update('business_profile_search_tmp', $data);
+        return true;
+    }
+
+    function searchCityList($search_keyword = '') {
+        $this->db->select('c.city_id,c.city_name')->from('cities c');
+        $sql = "c.city_name LIKE '".$search_keyword."%' AND c.status = '1' AND c.state_id != '0'";
+        $this->db->where($sql);
+        $this->db->limit('20');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_business_info($user_id)
+    {
+        $this->db->select("bp.company_name, bp.business_type, bp.other_business_type, bp.industriyal, bp.other_industrial, bp.details, bp.business_tot_emp, bp.business_year_found, bp.business_ext_benifit, bp.business_pay_mode, bp.business_keyword, bp.business_mission, bp.business_legal_name, bp.business_ser_pro, bp.business_serve_area, bp.business_tagline, bp.business_formly_known,bt.business_name as business_type_txt,it.industry_name as industriyal_txt,IF(bp.business_serve_area != '',GROUP_CONCAT(DISTINCT(ct.city_name)),'') as business_serve_area_txt")->from('business_profile bp,cities ct');
+        $this->db->join('business_type bt', 'bt.type_id = bp.business_type', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');
+        $sql = "IF(bp.business_serve_area != '', FIND_IN_SET(ct.city_id, bp.business_serve_area) != '0', '1=1')";
+        $this->db->where($sql);
+        $this->db->where('bp.user_id', $user_id);
+        $this->db->where('bp.status', '1');
+        $this->db->where('bp.is_deleted', '0');
+        $this->db->where('bp.business_step', '4');
+        $this->db->group_by('bp.business_serve_area,bp.business_profile_id');
+        $this->db->order_by('bp.created_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        return $result_array;
+    }
+
 }

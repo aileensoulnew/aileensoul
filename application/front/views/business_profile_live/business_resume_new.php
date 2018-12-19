@@ -4,6 +4,7 @@
     	<title><?php echo $title; ?></title>
     	<?php echo $head; ?>
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
+    	<link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
@@ -39,70 +40,93 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
 									<span>Basic Information</span>
-									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id"  data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="#" ng-if="from_user_id == to_user_id"  data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
-										<li>
-											<span>Business Type </span>
-											Lorem Ipsum
-										</li>
-										<li>
-											<span>Business Description</span>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. <a href="#">Read More</a>
-										</li>
-										<li>
-											<span>Total Employees</span>
-											150
-										</li>
-										<li>
-											<span>Year Founded / Established</span>
-											2018
-										</li>
-										<li>
-											<span>Specialties / Extra Benefits / Ambience/ Facilities Tags</span>
-											Lorem ipsum
-										</li>
-										
-										<li>
-											<span>Payment Mode Accepted</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Business Keywords</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Mission</span>
-											Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. <a href="#">Read More</a>
-										</li>
-										<li>
-											<span>Legal Name</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Services / Products you offer (Tags)</span>
-											Lorem ipsum
-										</li>
-										<li>
-											<span>Area Served</span>
-											Ahmedabad, Gandhinagar, Rajkot
-										</li>
-										<li>
-											<span>Tagline</span>
-											Aliquam feugiat turpis a erat sagittis pharetra.
-										</li>
-										<li>
-											<span>Formerly Knowns as</span>
-											Lorem ipsum
-										</li>
-										
-										
-									</ul>
+								<div id="business-loader" class="dtl-dis">
+		                            <div class="text-center">
+		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+		                            </div>
+		                        </div>
+		                        <div id="business-body" style="display: none;">
+									<div id="business-detail" class="dtl-dis">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="business_info_data.business_type">
+												<span>Business Type </span>
+												<label ng-if="business_info_data.business_type > '0'">{{business_info_data.business_type_txt}}</label>
+												<label ng-if="business_info_data.business_type == '0'">{{business_info_data.other_business_type}}</label>
+											</li>
+											<li ng-if="business_info_data.details != ''">
+												<span>Business Description</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{business_info_data.details}}" dd-text-collapse-cond="true">{{business_info_data.details}}</label>
+											</li>
+											<li ng-if="business_info_data.business_tot_emp">
+												<span>Total Employees</span>
+												<label ng-if="business_info_data.business_tot_emp == '1'">1 to 10</label>
+												<label ng-if="business_info_data.business_tot_emp == '2'">10 to 30</label>
+												<label ng-if="business_info_data.business_tot_emp == '3'">30 to 50</label>
+												<label ng-if="business_info_data.business_tot_emp == '4'">More than 50</label>
+											</li>
+											<li ng-if="business_info_data.business_year_found">
+												<span>Year Founded / Established</span>
+												{{business_info_data.business_year_found}}
+											</li>
+											<li class="fw">
+												<span>Specialties / Extra Benefits / Ambience / Facilities Tags</span>
+												<ul class="skill-list">
+													<li>Lorem</li>
+													<li>Ipsum</li>
+													<li>Dummy text</li>
+												</ul>
+											</li>
+											<li ng-if="business_info_data.business_pay_mode">
+												<span>Payment Mode Accepted</span>
+												<label ng-if="business_info_data.business_pay_mode == '1'">Cash</label>
+												<label ng-if="business_info_data.business_pay_mode == '2'">Online</label>
+												<label ng-if="business_info_data.business_pay_mode == '3'">Card</label>
+												<label ng-if="business_info_data.business_pay_mode == '4'">Wallate</label>
+											</li>
+											<li class="fw">
+												<span>Business Keywords</span>
+												<ul class="skill-list">
+													<li>Lorem</li>
+													<li>Ipsum</li>
+													<li>Dummy text</li>
+												</ul>
+											</li>
+											<li ng-if="business_info_data.business_mission != ''">
+												<span>Mission</span>
+												<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{business_info_data.business_mission}}" dd-text-collapse-cond="true">{{business_info_data.business_mission}}</label>
+											</li>
+											<li ng-if="business_info_data.business_legal_name != ''">
+												<span>Legal Name</span>
+												{{business_info_data.business_legal_name}}
+											</li>
+											<li class="fw">
+												<span>Services / Products you offer (Tags)</span>
+												<ul class="skill-list">
+													<li>Lorem</li>
+													<li>Ipsum</li>
+													<li>Dummy text</li>
+												</ul>
+											</li>
+											<li>
+												<span>Area Served</span>
+												Ahmedabad, Gandhinagar, Rajkot
+											</li>
+											<li ng-if="business_info_data.business_tagline != ''">
+												<span>Tagline</span>
+												{{business_info_data.business_tagline}}
+											</li>
+											<li ng-if="business_info_data.business_formly_known != ''">
+												<span>Formerly Knowns as</span>
+												{{business_info_data.business_formly_known}}
+											</li>
+										</ul>
+									</div>
 								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
+								<div id="view-more-business" class="about-more" style="display: none;">
+                                    <a href="#" ng-click="view_more_business();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>
 								
 							</div>
 						</div>
@@ -119,42 +143,49 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/address-info.png?ver=' . time()) ?>">
-									<span>Address Information</span>
-									<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" data-target="#add-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/address-info.png"><span>Address Information</span><a href="#" ng-click="edit_address_info();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list">
-										
-										<li>
-											<span>Street Address</span>
-											E-912, titanium city centr,
-											120 ft ring road, nr.shyamal cross road,
-											ahmedabad.
-										</li>
-										<li>
-											<span>Location</span>
-											Ahmedabad, Gujarat, India
-										</li>
-										<li>
-											<span>Pincode</span>
-											380015
-										</li>
-										<li>
-											<span>Map Coordinates</span>
-											Lorem ipsum
-										</li>
-										
-										<li>
-											<span>Location</span>
-											Lorem ipsum
-										</li>
-										
-									</ul>
+								<div id="address-loader" class="dtl-dis">
+		                            <div class="text-center">
+		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+		                            </div>
+		                        </div>
+		                        <div id="address-body" style="display: none;">
+									<div id="address-detail" class="dtl-dis">
+										<ul class="dis-list list-ul-cus">
+											<li ng-if="address_info_data.address != '' || address_info_data.country_name || address_info_data.state_name || address_info_data.city_name || address_info_data.pincode">
+												<span>Location</span>
+												<label>
+													{{address_info_data.address != '' ? address_info_data.address : ''}},
+													<em ng-if="address_info_data.country_name || address_info_data.state_name || address_info_data.city_name">
+														{{address_info_data.city_name != '' ? address_info_data.city_name : ''}}
+														{{address_info_data.city_name != '' && address_info_data.state_name != '' ? ',' : ''}}
+														{{address_info_data.state_name != '' ? address_info_data.state_name : ''}}
+														{{address_info_data.state_name != '' && address_info_data.country_name != '' ? ',' : ''}}
+														{{address_info_data.country_name != '' ? address_info_data.country_name : ''}}
+													</em>												
+													<em ng-if="address_info_data.pincode">{{address_info_data.pincode}}.</em>
+												</label>
+											</li>
+											<li ng-if="address_info_data.business_no_location">
+												<span>No. of Locations</span>
+												<label ng-if="address_info_data.business_no_location == '1'">1 Location</label>
+												<label ng-if="address_info_data.business_no_location == '2'">1-5 Locations</label>
+												<label ng-if="address_info_data.business_no_location == '3'">5+ Locations</label>
+												<label ng-if="address_info_data.business_no_location == '4'">None-online only</label>
+												<label ng-if="address_info_data.business_no_location == '5'">None-I travel to my customers</label>
+											</li>
+											<li ng-if="address_info_data.business_office_location">
+												<span>Address Type</span>
+												<label ng-if="address_info_data.business_office_location == '1'">Headquaters</label>
+												<label ng-if="address_info_data.business_office_location == '2'">Other location</label>
+											</li>											
+										</ul>
+									</div>
 								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
+								<div id="view-more-address" class="about-more" style="display: none;">
+                                    <a href="#" ng-click="view_more_address();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>
 								
 							</div>
 						</div>
@@ -452,7 +483,6 @@
 												<span class="total-rat">{{avarage_review}}</span>
 												<span class="rating-star">
 													<input id="avarage_review" type="number" value="{{avarage_review}}">
-												</span>
 												</span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
 											</div>
 											<ul class="review-list">
@@ -885,52 +915,69 @@
 					<div class="dtl-dis">
 						<div class="form-group">
 							<label>Business Name</label>
-							<input type="text" placeholder="Business Name">
+							<input type="text" placeholder="Business Name" id="business_name" name="business_name" maxlength="255">
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
-									<label>Business Type </label>
+									<label>Business Type</label>
 									<span class="span-select">
-										<select>
-											<option>Business Type </option>
-											<option>Business Type </option>
-											<option>Business Type </option>
+										<select id="business_type" name="business_type" ng-model="business_type" ng-change="other_business_type_fnc();">
+											<option value="">Select Business Type</option>
+											<?php foreach ($business_types as $key => $value) { ?>
+												<option value="<?php echo $value['type_id']; ?>"><?php echo $value['business_name']; ?></option>
+											<?php } ?>
+											<option value="0">Other</option>
 										</select>
 									</span>
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
-									<label>Business Category / Industry </label>
+									<label>Business Category / Industry</label>
 									<span class="span-select">
-										<select>
-											<option>Business Category</option>
-											<option>Business Category</option>
-											<option>Business Category</option>
+										<select id="business_category" name="business_category" ng-model="business_category" ng-change="other_business_category_fnc();">
+											<option value="">Select Category / Industry</option>
+											<?php foreach ($business_category as $key => $value) { ?>
+												<option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
+											<?php } ?>
+											<option value="0">Other</option>
 										</select>
 									</span>
 								</div>
 							</div>
-							
 						</div>
-						
-						
+						<div id="other_div" class="row" style="display: none;">
+							<div id="other_business_type_div" class="col-md-6 col-sm-6 col-xs-6 fw-479" style="display: none;">
+								<div class="form-group">
+									<label>Other business type</label>
+									<input type="text" placeholder="Extra Benefits-tags" id="other_business_type" name="other_business_type" maxlength="255">
+								</div>
+							</div>
+							<div id="other_business_category_div" class="col-md-6 col-sm-6 col-xs-6 fw-479" style="display: none;">
+								<div class="form-group">
+									<label>Other category</label>
+									<input type="text" placeholder="Extra Benefits-tags" id="other_business_category" name="other_business_category" maxlength="255">
+								</div>
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label>Business Description </label>
-							<textarea type="text" placeholder="Business Description" class="big-"></textarea>
+							<textarea type="text" placeholder="Business Description" class="big-textarea" id="business_desc" name="business_desc" maxlength="700"></textarea>
 						</div>
 						
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
-									<label>Total Employees </label>
+									<label>Total Employees</label>
 									<span class="span-select">
-										<select>
-											<option>1 to 10</option>
-											<option>10 to 30</option>
-											<option>30 to 50</option>
-											<option>More than 50</option>
+										<select id="business_tot_emp" name="business_tot_emp">
+											<option value="">Select Total Employees</option>
+											<option value="1">1 to 10</option>
+											<option value="2">10 to 30</option>
+											<option value="3">30 to 50</option>
+											<option value="4">More than 50</option>
 										</select>
 									</span>
 								</div>
@@ -939,11 +986,14 @@
 								<div class="form-group">
 									<label>Year Founded / Established</label>
 									<span class="span-select">
-										<select>
-											<option>2014 </option>
-											<option>2015</option>
-											<option>2016</option>
-											<option>2017</option>
+										<select id="business_year_found" name="business_year_found">
+											<option value="">Select</option>
+											<?php 
+											$year = date('Y');
+											for ($i = $year; $i >= $year - 100; $i--) { ?>
+												<option value="<?php echo  $i; ?>"><?php echo  $i; ?></option>
+											<?php 
+											} ?>
 										</select>
 									</span>
 								</div>
@@ -953,60 +1003,63 @@
 							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
 									<label>Specialties / Extra Benefits<span class="hidden-xs"> / Facilities</span></label>
-									<input type="text" placeholder="Extra Benefits-tags">
+									<!-- <input type="text" placeholder="Extra Benefits-tags"> -->
+									<tags-input id="business_ext_benifit" ng-model="business_ext_benifit" display-property="benifit" placeholder="Extra Benefits" replace-spaces-with-dashes="false" template="title-template">
+                                	</tags-input>
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
 									<label>Payment Mode Accepted</label>
 									<span class="span-select">
-										<select>
-											<option>Cash  </option>
-											<option>Online </option>
-											<option>Card </option>
-											<option>Wallate</option>
+										<select id="business_pay_mode" name="business_pay_mode">
+											<option value="">Select</option>
+											<option value="1">Cash</option>
+											<option value="2">Online</option>
+											<option value="3">Card</option>
+											<option value="4">Wallate</option>
 										</select>
 									</span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Business Keywords</label>
-							<input type="text" placeholder="Business Keywords">
+							<label>Business Keywords</label>							
+							<tags-input id="business_keyword" ng-model="business_keyword" display-property="keyword" placeholder="Business Keywords" replace-spaces-with-dashes="false" template="title-template">
+							</tags-input>
 						</div>
 						<div class="form-group">
 							<label>Mission</label>
-							<textarea type="text" placeholder="Mission"></textarea>
+							<textarea type="text" placeholder="Mission" id="business_mission" name="business_mission"></textarea>
 						</div>
 						<div class="form-group">
 							<label>Legal Name</label>
-							<input type="text" placeholder="Legal Name">
+							<input type="text" placeholder="Legal Name" id="business_legal_name" name="business_legal_name">
 						</div>
 						<div class="form-group">
 							<label>Services / Products you offer (Tags)</label>
-							<input type="text" placeholder="Services / Products you offer (Tags)">
+							<!-- <input type="text" placeholder="Services / Products you offer (Tags)"> -->
+							<tags-input id="business_ser_pro" ng-model="business_ser_pro" display-property="services" placeholder="Services / Products" replace-spaces-with-dashes="false" template="title-template">
+							</tags-input>
 						</div>
 						<div class="form-group">
-							<label>Area Served (City)</label>
-							<input type="text" placeholder="Area Served">
+							<label>Area Served (City)</label>							
+							<input type="text" placeholder="Area Served" id="business_serve_area" name="business_serve_area" ng-model="business_serve_area" ng-keyup="business_serve_area_list()" typeahead="item as item.city_name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="255">
 						</div>
 						<div class="form-group">
 							<label>Tagline</label>
-							<input type="text" placeholder="Tagline">
+							<input type="text" placeholder="Tagline" id="business_tagline" name="business_tagline">
 						</div>
 						<div class="form-group">
 							<label>Formerly Knowns as</label>
-							<input type="text" placeholder="Formerly Knowns as">
-						</div>
-						
+							<input type="text" placeholder="Formerly Knowns as" id="business_formly_known" name="business_formly_known">
+						</div>						
 					</div>
 					<div class="dtl-btn">
 						<a href="#" class="save"><span>Save</span></a>
 					</div>
-				</div>	
-
-
-            </div>
+				</div>
+			</div>
         </div>
     </div>
 	
@@ -1214,83 +1267,91 @@
 					<div class="dtl-title">
 						<span>Address Information</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Street Address</label>
-							<textarea type="text" placeholder="Street Address"></textarea>
-						</div>
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<label>Country</label>
-									<span class="span-select">
-										<select>
-											<option>Date</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</span>
+					<form name="address_info_form" id="address_info_form" ng-validate="address_info_validate">
+						<div class="dtl-dis">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<div class="form-group">
+										<label>Country</label>
+										<span class="span-select">
+											<select id="address_country" name="address_country" ng-model="address_country" ng-change="address_country_change()">
+	                                            <option value="">Country</option>         
+	                                            <option data-ng-repeat='country_item in country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+	                                        </select>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<div class="form-group">
+										<label>State</label>
+										<span class="span-select">
+											<select id="address_state" name="address_state" ng-model="address_state" ng-change="address_state_change()" disabled = "disabled">
+	                                            <option value="">State</option>
+	                                            <option data-ng-repeat='state_item in address_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+	                                        </select>
+	                                        <img id="address_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+										</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<div class="form-group">
+										<label>City</label>
+										<span class="span-select">
+											<select id="address_city" name="address_city" ng-model="address_city" disabled = "disabled">
+	                                            <option value="">City</option>
+	                                            <option data-ng-repeat='city_item in address_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+	                                        </select>
+	                                        <img id="address_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+										</span>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<label>State</label>
-									<span class="span-select">
-										<select>
-											<option>Month</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
+							<div class="form-group">
+								<label>Street Address</label>
+								<textarea type="text" placeholder="Street Address" id="address_address" name="address_address" maxlength="700"></textarea>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<label>City</label>
-									<span class="span-select">
-										<select>
-											<option>2016</option>
-											<option>2017</option>
-											<option>2018</option>
-											<option>2019</option>
-											<option>2020</option>
-										</select>
-									</span>
-								</div>
+							<div class="form-group">
+								<label>Pincode</label>
+								<input type="text" placeholder="Pincode" id="address_pincode" name="address_pincode" maxlength="20">
 							</div>
+							
+							<div class="form-group">
+								<label>No. of Locations</label>
+								<span class="span-select">
+									<select id="address_no_location" name="address_no_location">
+										<option value="">Select</option>
+										<option value="1">1 Location</option>
+										<option value="2">1-5 Locations</option>
+										<option value="3">5+ Locations</option>
+										<option value="4">None-online only</option>
+										<option value="5">None-I travel to my customers</option>
+									</select>
+								</span>
+								
+							</div>
+							<div class="form-group o-l-e-c">
+								<label class="fw">Is this Headquarters Address or Another Office Location?</label>
+								<label class="control control--radio pr20">
+									Headquaters
+									<input class="gen-male" type="radio" id="gen" name="address_office_location" value="1" ng-model="address_office_location">
+									<div class="control__indicator"></div>
+								</label>
+								<label id="other-loc" class="control control--radio">
+									Other location
+									<input type="radio" id="gen" name="address_office_location" value="2" ng-model="address_office_location">
+									<div class="control__indicator"></div>
+								</label>
+							</div>							
 						</div>
-						<div class="form-group">
-							<label>Pincode</label>
-							<input type="text" placeholder="Pincode">
+						<div class="dtl-btn">
+							<a id="save_address_info" href="#" ng-click="save_address_info()" class="save">
+								<span>Save</span>
+							</a>
+	                        <div id="save_address_info_loader" class="dtl-popup-loader" style="display: none;">
+	                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+	                        </div>
 						</div>
-						<div class="form-group">
-							<label>Map Coordinates</label>
-							<input type="text" placeholder="Map Coordinates">
-						</div>
-						<div class="form-group">
-							<label class="control control--checkbox">
-								<input type="checkbox">Customers visit my business at my street address.
-								<div class="control__indicator">
-								</div>
-							</label>
-						</div>
-						<div class="form-group">
-							<label>No. of locations 1-5 locations 5+ locations None-online only None-I travel to my customers </label>
-							<input type="text" placeholder="Business Type ">
-						</div>
-						<div class="form-group">
-							<label>Differentiate Headquaters and Other location</label>
-							<input type="text" placeholder="Business Type ">
-						</div>
-						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
+					</form>
 				</div>	
 
 
@@ -1995,7 +2056,7 @@
 							<ul>
 								<li ng-repeat="menu_info in menu_info_data">
 									<p ng-click="openModal();currentSlide($index + 1)">
-										<img src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
+										<img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
 									</p>
 								</li>
 							</ul>
@@ -2551,30 +2612,29 @@
 	        </div>
 	    </div>
 	</div>
-	
 		
-            <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
-                <div class="modal-dialog modal-lm">
-                    <div class="modal-content">
-                        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
-                        <div class="modal-body">
-                            <!--<img class="icon" src="images/dollar-icon.png" alt="" />-->
-                            <span class="mes"></span>
-                        </div>
-                    </div>
+    <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
+        <div class="modal-dialog modal-lm">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+                <div class="modal-body">
+                    <!--<img class="icon" src="images/dollar-icon.png" alt="" />-->
+                    <span class="mes"></span>
                 </div>
             </div>
-            <div class="modal fade message-box" id="query" role="dialog">
-                <div class="modal-dialog modal-lm">
-                    <div class="modal-content">
-                        <button type="button" class="profile-modal-close" id="query" data-dismiss="modal">&times;</button>       
-                        <div class="modal-body">
-                            <span class="mes">
-                            </span>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="modal fade message-box" id="query" role="dialog">
+        <div class="modal-dialog modal-lm">
+            <div class="modal-content">
+                <button type="button" class="profile-modal-close" id="query" data-dismiss="modal">&times;</button>       
+                <div class="modal-body">
+                    <span class="mes">
+                    </span>
                 </div>
             </div>
+        </div>
+    </div>
         
     <?php echo $login_footer ?>
     <?php echo $footer; ?>
@@ -2586,6 +2646,8 @@
     <!-- <script src="<?php //echo base_url('assets/js/timeline.js?ver=' . time()); ?>"></script> -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
 	<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
+
+	<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -2616,7 +2678,6 @@
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details_new.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details.js?ver=' . time()); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
 	<script>
 		$(document).ready(function () {
 			if (screen.width > 768)
@@ -2682,6 +2743,9 @@
 		    	}
 	    	},100);
 	    });
+    </script>
+    <script type="text/ng-template" id="title-template">
+        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
     </script>
 
     </body>

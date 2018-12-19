@@ -6,7 +6,7 @@ $(function () {
         return split(term).pop();
     }
     /* first box */
-    $(".tags").bind("keydown", function (event) {
+    $(".ccp_search").bind("keydown", function (event) {
         if (event.keyCode === $.ui.keyCode.TAB &&
                 $(this).autocomplete("instance").menu.active) {
             event.preventDefault();

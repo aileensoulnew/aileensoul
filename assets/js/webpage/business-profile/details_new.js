@@ -2869,4 +2869,278 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     }
     //Business Menu End
 
+    //Business Address Information Start
+    $scope.get_address_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_address_info',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.address_info_data = result.data.address_info_data;
+
+                setTimeout(function(){
+                    if($("#address-detail").innerHeight() > 155)
+                    {
+                        $("#address-detail").addClass("dtl-box-height");
+                        $("#view-more-address").show();
+                    }
+                    else
+                    {
+                        $("#view-more-address").hide();
+                    }
+                },500);
+            }
+            $("#address-loader").hide();
+            $("#address-body").show();
+
+        });
+    }
+    $scope.get_address_info();
+
+    $scope.view_more_address = function(){
+        $("#address-detail").removeClass("dtl-box-height");
+        $("#view-more-address").hide();
+    };
+
+    $scope.address_country_change = function() {
+        $("#address_state").attr("disabled","disabled");
+        $("#save_address_info").attr("style","pointer-events:none;");
+        $("#address_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.address_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#address_state").removeAttr("disabled");
+            $("#save_address_info").removeAttr("style");
+            $("#address_city").attr("disabled","disabled");
+            $("#address_state_loader").hide();
+            $scope.address_state_list = data.data;
+            $scope.address_city_list = [];
+        });
+    }
+
+    $scope.address_state_change = function() {
+        if($scope.address_state != "" && $scope.address_state != 0 && $scope.address_state != null)
+        {
+            $("#address_city").attr("disabled","disabled");
+            $("#save_address_info").attr("style","pointer-events:none;");
+            $("#address_city_loader").show();
+            var statedata = $.param({'state_id': $scope.address_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#address_city").removeAttr("disabled");
+                $("#save_address_info").removeAttr("style");
+                $("#address_city_loader").hide();
+                $scope.address_city_list = data.data;
+            });
+        }
+    };
+    $scope.get_country = function () {
+        $http({
+            method: 'GET',
+            url: base_url + 'userprofile_page/get_country',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {
+            $scope.country_list = data.data;
+        });
+    };
+    $scope.get_country();
+
+    $scope.edit_address_info = function(){
+        var country_id = $scope.address_info_data.country;
+        $("#save_address_info").attr("style","pointer-events:none;");
+        if(country_id != 0)
+        {
+            $scope.address_country = country_id;
+            $("#address_country").val(country_id);
+            
+            var counrtydata = $.param({'country_id': $scope.address_country});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_state_by_country_id',
+                data: counrtydata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#address_state").removeAttr("disabled");
+                $("#address_city").attr("disabled","disabled");
+                $("#address_state_loader").hide();
+                $scope.address_state_list = data.data;
+                $scope.address_city_list = [];
+                $scope.address_state = $scope.address_info_data.state;
+
+                $("#address_city").attr("disabled","disabled");
+                $("#address_city_loader").show();
+                var statedata = $.param({'state_id': $scope.address_state});
+                $http({
+                    method: 'POST',
+                    url: base_url + 'userprofile_page/get_city_by_state_id',
+                    data: statedata,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function (data) {
+                    $("#address_city").removeAttr("disabled");
+                    $("#address_city_loader").hide();
+                    $scope.address_city_list = data.data;
+                    $scope.address_city = $scope.address_info_data.city;
+                    $("#address_city").val($scope.address_info_data.city);
+                    $("#save_address_info").removeAttr("style");
+                });        
+            });
+        }
+        $("#address_address").val($scope.address_info_data.address);
+        $("#address_pincode").val($scope.address_info_data.pincode);
+        $("#address_no_location").val($scope.address_info_data.business_no_location);
+        // $("#address_office_location").val($scope.address_info_data.business_office_location);
+        $scope.address_office_location = $scope.address_info_data.business_office_location;
+        
+        $("#add-info").modal('show');
+    };
+
+    $scope.address_info_validate = {
+        rules: {
+            address_country: {
+                required: true,
+            },
+            address_state: {
+                required: true,
+            },
+            address_city: {
+                required: true,
+            },
+            address_address: {
+                required: true,
+            },
+            address_pincode: {
+                required: true,
+            },
+            address_no_location: {
+                required: true,
+            },
+            address_office_location: {
+                required: true,
+            },
+        },
+
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "address_office_location") {
+                error.insertAfter("#other-loc");                
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    };
+
+    $scope.save_address_info = function(){
+        if ($scope.address_info_form.validate()) {
+            $("#save_address_info_loader").show();
+            $("#save_address_info").attr("style","pointer-events:none;display:none;");
+
+            var address_country = $("#address_country option:selected").val();
+            var address_state = $("#address_state option:selected").val();
+            var address_city = $("#address_city option:selected").val();
+            var address_address = $("#address_address").val();
+            var address_pincode = $("#address_pincode").val();
+            var address_no_location = $("#address_no_location option:selected").val();
+            var address_office_location = $scope.address_office_location;
+            
+            var insert_data = $.param({
+                'address_country':address_country,
+                'address_state':address_state,
+                'address_city':address_city,
+                'address_address':address_address,
+                'address_pincode':address_pincode,
+                'address_no_location':address_no_location,
+                'address_office_location':address_office_location
+            });
+
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/save_address_info',                
+                data: insert_data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.address_info_data = result.data.address_info_data;
+                }
+                $("#save_address_info").removeAttr("style");
+                $("#save_address_info_loader").hide();
+                $("#add-info").modal('hide'); 
+            });
+            
+        }
+    };
+    //Business Address Information End
+
+    //Business Basic Information Start
+
+    $scope.business_serve_area_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/searchCityList',
+            data: 'q=' + $scope.business_serve_area,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.get_business_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_live/get_business_info',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.business_info_data = result.data.business_info_data;
+
+                setTimeout(function(){
+                    if($("#business-detail").innerHeight() > 155)
+                    {
+                        $("#business-detail").addClass("dtl-box-height");
+                        $("#view-more-business").show();
+                    }
+                    else
+                    {
+                        $("#view-more-business").hide();
+                    }
+                },500);
+            }
+            $("#business-loader").hide();
+            $("#business-body").show();
+
+        });
+    }
+    $scope.get_business_info();
+
+    $scope.view_more_business = function(){
+        $("#business-detail").removeClass("dtl-box-height");
+        $("#view-more-business").hide();
+    };
+
+    //Business Basic Information End
+
 });
