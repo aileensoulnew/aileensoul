@@ -69,20 +69,20 @@
             </div>
             </div>
         </div>
-		<div class="container">
+		<!--div class="container">
 				<div class="banner-add">
 					<?php $this->load->view('banner_add'); ?>
 				</div>
-			</div>
+			</div-->
             <section class="middle-main">
                 <div class="container">
                     <div class="pt10">
                         <div class="titlea">
                             <h1 class="pb20">About Aileensoul</h1>
                         </div>
-                        <div class="about-content">
+                        <div class="about-content text-center">
                           <p>
-							<img class="pull-right" src="<?php echo base_url('assets/img/about-1.jpg') ?>">
+							
                             Founded in 2017, Aileensoul is a new age portal that amalgamates a variety of career-oriented services into a single unified platform with an aim to address the needs of  jobseekers, recruiters, business professionals, freelancers and artists - all under one roof! Introduced to fulfil one of the most fundamental and important aspects of an individual’s life - one’s desire to land a rewarding and successful career for himself or herself - Aileensoul’s futuristic platform serves to launch and advance the careers of first-time jobseekers, experienced business professionals/consultants and upcoming/veteran artists. 
                          </p>    
                         
@@ -109,7 +109,7 @@
                             <h1 class="pb20">Our Mission</h1>
                         </div>
                         <div class="about-content">
-						<img style="width:100%;" src="<?php echo base_url('assets/img/about-2.jpg') ?>">
+					
                            
                         <p class="text-center">
                          Make the world more transparent for opportunities.
@@ -125,7 +125,7 @@
                             <h1 class="pb20">Our Vision</h1>
                         </div>
                         <div class="about-content text-center">
-							<img style="width:100%;" src="<?php echo base_url('assets/img/about-3.jpg') ?>">
+							
                                 A place where everyone will learn, earn and grow.                              
 
                         </div>
@@ -138,22 +138,21 @@
                             <h1 class="pb20">Our Leadership</h1>
                         </div>
                        <div class="about-content text-center">
-					   <img style="width:100%;" src="<?php echo base_url('assets/img/about-4.jpg') ?>" alt="aboutus-image">
-                           
+							<div class="all-tem pt10">
+							   <ul class="new-abput-page">
+								<li class="img-custom">
+									<div class="ceo-img">
+										<img src="<?php echo base_url('assets/n-images/user-pic.jpg') ?>">
+									</div>
+									<div class="text-custom">
+										<h4>Dhaval Shah</h4>
+										<p>Chief Executive Officer</p>
+									</div>
+								</li>
+							   </ul> 
+							</div>
                         </div>
-                        <div class="all-tem">
-                           <ul class="new-abput-page">
-							<li class="img-custom">
-								<div class="ceo-img">
-									<img src="<?php echo base_url('assets/n-images/user-pic.jpg') ?>">
-								</div>
-                                <div class="text-custom">
-                                    <h4>Dhaval Shah</h4>
-                                    <p>Chief Executive Officer</p>
-                                </div>
-                            </li>
-                           </ul>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
