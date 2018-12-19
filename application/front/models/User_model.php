@@ -149,7 +149,7 @@ class User_model extends CI_Model {
         $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_profession up");        
         if($field == 0)
         {
-            if($other_field != ""){
+            if(trim($other_field) != ""){
                 $of_sql = "";
                 foreach (explode(" ", $other_field) as $key => $value) {
                     if($value != ""){                    

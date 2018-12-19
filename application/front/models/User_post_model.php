@@ -361,13 +361,49 @@ class User_post_model extends CI_Model {
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
         $this->db->select("COUNT(up.id) as post_count")->from("user_post up");
-        if ($getUserProfessionData && $getSameFieldProUser) {
-            $this->db->where('up.user_id IN (' . $getSameFieldProUser . ')');
-        } elseif ($getUserStudentData && $getSameFieldStdUser) {
-            $this->db->where('up.user_id IN (' . $getSameFieldStdUser . ')');
+        if ($getUserProfessionData && $getSameFieldProUser > 0) {
+            $field = $getUserProfessionData['field'];
+            $other_field = $getUserProfessionData['other_field'];
+            $getSameFieldProUser_sql = "SELECT GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user FROM ailee_user_profession up WHERE ";
+            if($field == 0)
+            {
+                if($other_field != ""){
+                    $of_sql = "";
+                    foreach (explode(" ", $other_field) as $key => $value) {
+                        if($value != ""){                    
+                            $of_sql .= " other_field LIKE '%".$value."%' OR";
+                        }
+                    }
+                    $getSameFieldProUser_sql .= "(".trim($of_sql," OR").")";
+                }
+                else
+                {
+                    // $this->db->where("up.field =" . $field);
+                    $getSameFieldProUser_sql .= "up.field =". $field;
+                }
+            }
+            else
+            {
+                // $this->db->where("up.field =" . $field);
+                $getSameFieldProUser_sql .= "up.field =". $field;
+            }
+
+            $this->db->where('up.user_id IN (' . $getSameFieldProUser_sql . ')');
+        } elseif ($getUserStudentData && $getSameFieldStdUser > 0) {
+
+            $current_study = $getUserStudentData['current_study'];
+            $getSameFieldStdUser_sql = "SELECT GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user FROM ailee_user_student us WHERE ";
+            $getSameFieldStdUser_sql .= "us.current_study =". $current_study;
+
+            $this->db->where('up.user_id IN (' . $getSameFieldStdUser_sql . ')');
         }
         if ($getDeleteUserPost) {
-            $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
+            
+            $current_study = $getUserStudentData['current_study'];
+            $getDeleteUserPost_sql = "SELECT GROUP_CONCAT(CONCAT('''', `post_id`, '''' )) AS group_post FROM ailee_user_post_delete upd WHERE ";
+            $getDeleteUserPost_sql .= "upd.user_id =". $user_id;
+
+            $this->db->where('up.id NOT IN (' . $getDeleteUserPost_sql . ')');
         }
         $this->db->where('up.status', 'publish');
         $this->db->where('up.is_delete', '0');

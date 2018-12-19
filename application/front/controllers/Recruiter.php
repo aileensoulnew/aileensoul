@@ -5058,8 +5058,8 @@ class Recruiter extends MY_Controller {
 		$other_industry = $_POST['other_industry'];
 		$this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
-		$contition_array = array('is_delete' => '0', 'industry_name' => $other_industry);
-		$search_condition = "((status = '2' AND user_id = $userid) OR (status = '1'))";
+		$contition_array = array('is_other' => '0','is_delete' => '0', 'industry_name' => $other_industry);
+		$search_condition = "(status = '1')";
 		$userdata = $this->data['userdata'] = $this->common->select_data_by_search('job_industry', $search_condition, $contition_array, $data = '*', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 		$count = count($userdata);
 
@@ -5075,8 +5075,7 @@ class Recruiter extends MY_Controller {
 				);
 				$insert_id = $this->common->insert_data_getid($data, 'job_industry');
 				if ($insert_id) {
-
-					$contition_array = array('is_delete' => '0', 'industry_name !=' => "Other");
+					$contition_array = array('is_delete' => '0', 'is_other' => '0', 'industry_name !=' => "Others");
 					$search_condition = "((status = '2' AND user_id = $userid) OR (status = '1'))";
 					$university = $this->data['university'] = $this->common->select_data_by_search('job_industry', $search_condition, $contition_array, $data = '*', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 					if (count($university) > 0) {
@@ -5088,8 +5087,9 @@ class Recruiter extends MY_Controller {
 							}
 							$select .= '>' . $st['industry_name'] . '</option>';
 						}
+						$select .= '<option value="'.$insert_id.'" selected>'.$other_industry.'</option>';
 					}
-		//For Getting Other at end
+					// For Getting Other at end
 					$contition_array = array('is_delete' => '0', 'status' => '1', 'industry_name' => "Other");
 					$university_otherdata = $this->common->select_data_by_condition('job_industry', $contition_array, $data = '*', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 					$select .= '<option value="' . $university_otherdata[0]['industry_id'] . '">' . $university_otherdata[0]['industry_name'] . '</option>';
