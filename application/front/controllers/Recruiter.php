@@ -697,6 +697,7 @@ class Recruiter extends MY_Controller {
 		$post_Desc = $this->input->post('post_desc');
 		$skills = $this->input->post('skills');
 		$industry = $this->input->post('industry');
+		$other_industry = $this->input->post('other_industry');
 		$interview = $this->input->post('interview');
 		$min_year = $this->input->post('minyear');
 		$max_year = $this->input->post('maxyear');
@@ -808,6 +809,28 @@ class Recruiter extends MY_Controller {
 			$logo_name = $comp_logo_old;
 		}
 
+		//Other Industry
+		if($industry == 288)
+		{
+			$contition_array = array('LOWER(industry_name)' => trim(strtolower($other_industry)));
+			$indu_data = $this->common->select_data_by_condition('job_industry', $contition_array, $data = 'industry_id,industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+			if ($indu_data) {
+				$industry = $indu_data[0]['industry_id'];
+			} else {
+				$industry_slug = $this->common->create_slug($other_industry);
+				$data = array(
+					'industry_name' => $other_industry,
+					'industry_image' => $industry_slug.".png",
+					'industry_slug' => $industry_slug,
+					'created_date' => date('Y-m-d h:i:s', time()),
+					'status' => '2',
+					'is_delete' => '0',
+					'is_other' => '1',
+					'user_id' => $userid
+				);
+				$industry = $this->common->insert_data_getid($data, 'job_industry');
+			}
+		}
 
 		// job title start
 		if ($jobtitle != " ") {
@@ -969,7 +992,7 @@ class Recruiter extends MY_Controller {
 
         if(trim($data['industry_type']) != "")
         {
-            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $data['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $data['industry_type']))->row()->industry_name;
 
             $data['industry_name'] = trim($industry_name);
         }
@@ -1355,6 +1378,31 @@ class Recruiter extends MY_Controller {
 		$edudata = implode(',', $edudata1);
 		// education data end
 
+		//Other Industry
+		$industry = trim($this->input->post('industry'));
+		$other_industry = $this->input->post('other_industry');
+		if($industry == 288)
+		{
+			$contition_array = array('LOWER(industry_name)' => trim(strtolower($other_industry)));
+			$indu_data = $this->common->select_data_by_condition('job_industry', $contition_array, $data = 'industry_id,industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+			if ($indu_data) {
+				$industry = $indu_data[0]['industry_id'];
+			} else {
+				$industry_slug = $this->common->create_slug($other_industry);
+				$data = array(
+					'industry_name' => $other_industry,
+					'industry_image' => $industry_slug.".png",
+					'industry_slug' => $industry_slug,
+					'created_date' => date('Y-m-d h:i:s', time()),
+					'status' => '2',
+					'is_delete' => '0',
+					'is_other' => '1',
+					'user_id' => $userid
+				);
+				$industry = $this->common->insert_data_getid($data, 'job_industry');
+			}
+		}
+
 		$data = array(
 			'post_name' => $jobtitle,
 			'post_description' => trim($this->input->post('post_desc')),
@@ -1367,7 +1415,7 @@ class Recruiter extends MY_Controller {
 			'min_year' => $this->input->post('minyear'),
 			'max_year' => $this->input->post('maxyear'),
 			'interview_process' => trim($this->input->post('interview')),
-			'industry_type' => trim($this->input->post('industry')),
+			'industry_type' => $industry,
 			'emp_type' => $this->input->post('emp_type'),
 			'degree_name' => $edudata,
 			'fresher' => $this->input->post('fresher'),
@@ -1433,7 +1481,7 @@ class Recruiter extends MY_Controller {
 
         if(trim($data['industry_type']) != "")
         {
-            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $data['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $data['industry_type']))->row()->industry_name;
 
             $data['industry_name'] = trim($industry_name);
         }

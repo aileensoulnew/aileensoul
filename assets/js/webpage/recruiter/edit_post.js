@@ -214,6 +214,13 @@ jQuery.noConflict();
                 industry: {
                     required: true
                 },
+                other_industry: {
+                    required: {
+                        depends: function(element) {
+                            return $("#industry option:selected").val() == 288 ? true : false;
+                        }
+                    },
+                },
                 post_desc: {
                     required: true,
                     regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
@@ -278,6 +285,9 @@ jQuery.noConflict();
                 },
                 industry: {
                     required: "Industry is required."
+                },
+                other_industry: {
+                    required: "Other Industry is required."
                 },
                 post_desc: {
                     required: "Post description is required."
@@ -592,7 +602,8 @@ $(document).on('change', '#industry', function(event) {
     var item = $(this);
     var uni = (item.val());
     if (uni == 288) {
-        $.fancybox.open('<div class="message"><h2>Add Industry</h2><input type="text" name="other_indu" id="other_indu"><a id="indus" class="btn">OK</a></div>');
+        $("#other_industry_div").show();
+        /*$.fancybox.open('<div class="message"><h2>Add Industry</h2><input type="text" name="other_indu" id="other_indu"><a id="indus" class="btn">OK</a></div>');
         $('.message #indus').on('click', function() {
             var $textbox = $('.message').find('input[type="text"]'),
                 textVal = $textbox.val();
@@ -613,7 +624,11 @@ $(document).on('change', '#industry', function(event) {
                     }
                 }
             });
-        });
+        });*/
+    }
+    else
+    {
+        $("#other_industry_div").hide();
     }
 });
 $(function() {

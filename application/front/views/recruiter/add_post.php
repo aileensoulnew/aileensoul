@@ -89,6 +89,11 @@
                                                 <?php echo form_error('industry'); ?>
                                             </div>
 
+                                            <div id="other_industry_div" class="form-group" style="display: none;">
+                                                <label class="control-label">Other Industry:</label>
+                                                <input id="other_industry" name="other_industry" tabindex="6" size="90" maxlength="255" placeholder="Enter Other Industry">
+                                            </div>
+
                                             <div class="form-group textarea-cus">
                                                 <label class="control-label">Interview process:<span class="optional">(optional)</span></label>
                                                 <textarea name="interview" id="interview" rows="4" tabindex="7" cols="50"  placeholder="Enter Interview Process" style="resize: none;"></textarea>                                               

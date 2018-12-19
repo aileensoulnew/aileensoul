@@ -89,12 +89,13 @@
             								<div class="form-group"> 
                                                 <label>Industry:<span style="color:red">*</span></label>
                                                 <select name="industry" id="industry" tabindex="4">
-                                                    <option value="" selected option disabled>Select Industry</option>
+                                                    <option value="">Select Industry</option>
                                                     <?php
+                                                    $is_selected = 0;
                                                     if (count($industry) > 0) {
                                                         foreach ($industry as $indu) {
                                                             if ($postdata[0]['industry_type']) { ?>
-                                                                <option value="<?php echo $indu['industry_id']; ?>" <?php if ($indu['industry_id'] == $postdata[0]['industry_type']) echo 'selected'; ?>><?php echo $indu['industry_name']; ?></option>
+                                                                <option value="<?php echo $indu['industry_id']; ?>" <?php if ($indu['industry_id'] == $postdata[0]['industry_type']){echo 'selected'; $is_selected = 1; }?>><?php echo $indu['industry_name']; ?></option>
                                                             <?php }else {
                                                                 ?>
                                                                 <option value="<?php echo $indu['industry_id']; ?>"><?php echo $indu['industry_name']; ?></option>
@@ -103,9 +104,14 @@
                                                         }
                                                     }
                                                     ?>
-                                                    <option value="<?php echo $industry_otherdata[0]['industry_id']; ?> "><?php echo $industry_otherdata[0]['industry_name']; ?></option>   
+                                                    <option value="<?php echo $industry_otherdata[0]['industry_id']; ?>" <?php if($is_selected == 0){ echo "selected";} ?>><?php echo $industry_otherdata[0]['industry_name']; ?></option>   
                                                 </select>
                                                 <?php echo form_error('industry'); ?>
+                                            </div>
+                                            <div id="other_industry_div" class="form-group" style=";<?php if($is_selected == 1){ echo "display: none";} ?>">
+                                                <?php $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $postdata[0]['industry_type']))->row()->industry_name; ?>
+                                                <label class="control-label">Other Industry:</label>
+                                                <input id="other_industry" name="other_industry" tabindex="6" size="90" maxlength="255" placeholder="Enter Other Industry" value="<?php echo $industry_name; ?>">
                                             </div>
                                             <div class="form-group textarea-cus">
                                                 <label class="control-label">Interview process:<span class="optional">(optional)</span></label>
