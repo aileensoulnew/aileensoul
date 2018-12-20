@@ -677,7 +677,7 @@
 											<div class="panel panel-default" ng-repeat="press_release in user_press_release" ng-if="$index <= view_more_pr">
 												<div class="panel-heading">
 													<div class="panel-title">
-														<a href="#">
+														<a href="{{press_release.news_press_release_link}}" target="_self">
 															<div class="dis-left">
 																<div class="dis-left-img img-cus">
 																	<img src="<?php echo base_url('assets/n-images/detail/press-rel.png?ver=' . time()) ?>">

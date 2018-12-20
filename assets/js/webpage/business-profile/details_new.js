@@ -1850,6 +1850,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                             // $scope.selected_timeline = 0;
                         },1000);
                     }
+                    timeline_formdata = new FormData();
                     $("#save_timeline").removeAttr("style");
                     $("#timeline_loader").hide();
                     $("#timeline_form")[0].reset();
@@ -3507,7 +3508,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $("#profile-progress").show();
             $("#progress-txt").html("Hurray! Your profile is complete.");
             setTimeout(function(){
-                // $("#edit-profile-move").hide();
+                $("#edit-profile-move").hide();
             },5000);
         }
         else
