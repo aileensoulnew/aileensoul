@@ -2097,7 +2097,12 @@
 								</li>
 							</ul>
 						</div>
-					</div>					
+					</div>
+					<div class="dtl-btn bottom-btn">
+						<a href="#" class="save" data-dismiss="modal">
+							<span>Close</span>
+						</a>                        
+					</div>
 				</div>
 			</div>
         </div>
