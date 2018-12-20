@@ -1571,34 +1571,34 @@
 								</span>
 							</div>
 							<div id="specified_day_div" class="row" style="display: none;">
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<label>Days</label>
+											<label>Day<span class="hidden-xs">s</span></label>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<label>From</label>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6">
 												<div class="form-group">
 													<label>&nbsp;</label>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<label>To</label>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6">
 												<div class="form-group">
 													<label>&nbsp;</label>	
 												</div>
@@ -1606,15 +1606,15 @@
 										</div>
 									</div>								
 								</div>
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Sunday</span>
+											<span>Sun<span class="hidden-xs">day</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sun_from_time" name="sun_from_time" ng-model="sun_from_time">
@@ -1627,7 +1627,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sun_from_ap" name="sun_from_ap" ng-model="sun_from_ap">
@@ -1640,9 +1640,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sun_to_time" name="sun_to_time" ng-model="sun_to_time">
@@ -1655,7 +1655,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sun_to_ap" name="sun_to_ap" ng-model="sun_to_ap">
@@ -1670,15 +1670,15 @@
 									</div>								
 								</div>
 
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Monday</span>
+											<span>Mon<span class="hidden-xs">day</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="mon_from_time" name="mon_from_time" ng-model="mon_from_time">
@@ -1691,7 +1691,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="mon_from_ap" name="mon_from_ap" ng-model="mon_from_ap">
@@ -1704,9 +1704,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="mon_to_time" name="mon_to_time" ng-model="mon_to_time">
@@ -1719,7 +1719,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="mon_to_ap" name="mon_to_ap" ng-model="mon_to_ap">
@@ -1734,15 +1734,15 @@
 									</div>								
 								</div>
 
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Tuesday</span>
+											<span>Tue<span class="hidden-xs">sday</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="tue_from_time" name="tue_from_time" ng-model="tue_from_time">
@@ -1755,7 +1755,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="tue_from_ap" name="tue_from_ap" ng-model="tue_from_ap">
@@ -1768,9 +1768,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="tue_to_time" name="tue_to_time" ng-model="tue_to_time">
@@ -1783,7 +1783,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="tue_to_ap" name="tue_to_ap" ng-model="tue_to_ap">
@@ -1798,15 +1798,15 @@
 									</div>								
 								</div>
 
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Wednesday</span>
+											<span>Wed<span class="hidden-xs">nesday</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="wed_from_time" name="wed_from_time" ng-model="wed_from_time">
@@ -1819,7 +1819,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="wed_from_ap" name="wed_from_ap" ng-model="wed_from_ap">
@@ -1832,9 +1832,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="wed_to_time" name="wed_to_time" ng-model="wed_to_time">
@@ -1847,7 +1847,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="wed_to_ap" name="wed_to_ap" ng-model="wed_to_ap">
@@ -1862,15 +1862,15 @@
 									</div>								
 								</div>
 
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Thursday</span>
+											<span>Thu<span class="hidden-xs">rsday</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="thu_from_time" name="thu_from_time" ng-model="thu_from_time">
@@ -1883,7 +1883,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="thu_from_ap" name="thu_from_ap" ng-model="thu_from_ap">
@@ -1896,9 +1896,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="thu_to_time" name="thu_to_time" ng-model="thu_to_time">
@@ -1911,7 +1911,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="thu_to_ap" name="thu_to_ap" ng-model="thu_to_ap">
@@ -1926,15 +1926,15 @@
 									</div>								
 								</div>
 
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Friday</span>
+											<span>Fri<span class="hidden-xs">day</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="fri_from_time" name="fri_from_time" ng-model="fri_from_time">
@@ -1947,7 +1947,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="fri_from_ap" name="fri_from_ap" ng-model="fri_from_ap">
@@ -1960,9 +1960,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="fri_to_time" name="fri_to_time" ng-model="fri_to_time">
@@ -1975,7 +1975,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="fri_to_ap" name="fri_to_ap" ng-model="fri_to_ap">
@@ -1990,15 +1990,15 @@
 									</div>								
 								</div>
 
-								<div class="">
-									<div class="col-md-3 col-sm-3 col-xs-3 fw-479">
+								<div class="fw">
+									<div class="col-md-3 col-sm-3 col-xs-2">
 										<div class="form-group">
-											<span>Saturday</span>
+											<span>Sat<span class="hidden-xs">urday</span></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sat_from_time" name="sat_from_time" ng-model="sat_from_time">
@@ -2011,7 +2011,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sat_from_ap" name="sat_from_ap" ng-model="sat_from_ap">
@@ -2024,9 +2024,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-3 col-xs-2">
+									<div class="col-md-4 col-sm-4 col-xs-5">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sat_to_time" name="sat_to_time" ng-model="sat_to_time">
@@ -2039,7 +2039,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-6 col-xs-6 day-div-pd">
 												<div class="form-group">
 													<span class="span-select">
 														<select id="sat_to_ap" name="sat_to_ap" ng-model="sat_to_ap">
@@ -2055,7 +2055,7 @@
 								</div>
 							</div>						
 						</div>
-						<div class="dtl-btn">
+						
 							<div class="dtl-btn bottom-btn">
 								<a id="save_opening_hours" href="#" ng-click="save_opening_hours()" class="save">
 									<span>Save</span>
@@ -2064,7 +2064,7 @@
 		                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
 		                        </div>
 							</div>
-						</div>
+						
 					</form>
 				</div>	
 

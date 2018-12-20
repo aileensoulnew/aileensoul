@@ -2643,7 +2643,8 @@ padding: 4px;}
 .dtl-title .cus-width{width:25px; display:inline-block;}
 .dtl-title span{vertical-align:middle; margin-left:10px;}
 .dtl-title span span{margin-left:0;}
-.dtl-title a{}
+.dtl-title span.pull-right{cursor:pointer;}
+
 .dtl-dis{padding:15px; width:100%; float:left;}
 .modal-body-cus .dtl-dis{background:#fff;}
 .no-info{text-align:left;}
@@ -2746,6 +2747,7 @@ margin-bottom: 0;}
 .dtl-dis ul.social-link-list{width:100%; float:left; padding-bottom:0; border-bottom:0;}
 .dtl-dis ul.social-link-list li{float:left; margin-right:6px;}
 .dtl-dis ul.social-link-list li img{width:25px;}
+.dtl-modal .form-group.o-l-e-c label.error{left:0; padding-left:0 !important;}
 .idol-box ul{border-bottom:0; padding-bottom:0;}
 
 .idol-box ul li{ float:left; width:100%; margin-bottom:15px; display:flex; align-items:center; padding-top:2px;} 
@@ -2859,7 +2861,8 @@ width: 80%; border-radius: 10px; z-index:9;}
 #add-menu .dtl-title a {color:#5c5c5c;}
 #add-menu .dtl-title a span{padding-left:10px;}
 .modal-body-cus .control--radio .control__indicator::after{width:13px; height:13px;}
-
+#specified_day_div .span-select select{padding-left:2px;}
+#specified_day_div .span-select::after{width:9px; height:9px;}
 /***  end new details page  ***/
 
 /***  new job registration form  ***/
@@ -4492,7 +4495,7 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	.dtl-modal .dtl-title{padding:15px;}
 	.dtl-modal .dtl-dis{padding:15px;}
 	.dtl-modal .dlt-img{margin-top:37px; width:15px;}
-	#social-link .span-select select{padding-left:1px;}
+	#social-link .span-select select{/*padding-left:1px;*/}
 	.job_reg_main{box-shadow:none; border-top:1px solid #d2d2d2; border-bottom:1px solid #d2d2d2; border-radius:0;}
 	.span-select .form-control{padding-left:5px;}
 	.dtl-modal .modal-dialog{padding:0 !important;}
@@ -4533,6 +4536,9 @@ font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
 	#add-menu .modal-content{width:100%;}
 	.dtl-dis .menu-privew li{width: 32%; height: 100px; float: left; margin: 2px 2px;}
 	#add-menu.dtl-modal .dtl-dis{padding:0;}
+	.day-div-pd{padding-left:2px; padding-right:15px;}
+	#specified_day_div .span-select select{font-size:11px !important; padding-right:10px; padding-left:0;}
+	#specified_day_div .span-select::after{width:7px; height:7px; top:14px; right:4px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
