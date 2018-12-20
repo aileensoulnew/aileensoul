@@ -12121,7 +12121,7 @@ Your browser does not support the audio tag.
         $member_bio = $this->input->post('member_bio');
         $linkedin_url = $this->input->post('linkedin_url');
         $twitter_url = $this->input->post('twitter_url');
-        $fileName = $portfolio_file_old;
+        $fileName = $member_file_old;
         if(isset($_FILES['member_img']['name']) && $_FILES['member_img']['name'] != "")
         {
             $business_member_img_upload_path = $this->config->item('business_member_img_upload_path');
@@ -12155,6 +12155,7 @@ Your browser does not support the audio tag.
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
+            $jobtitle = "";
             if ($member_job_title != " ") {
                 $contition_array = array('name' => $member_job_title);
                 $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
@@ -12272,7 +12273,7 @@ Your browser does not support the audio tag.
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('menu_file_name')){
-                $main_image = $business_member_img_upload_path . $fileName;
+                $main_image = $business_user_menu_upload_path . $fileName;
                 $s3 = new S3(awsAccessKey, awsSecretKey);
                 $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
                 if (IMAGEPATHFROM == 's3bucket') {
