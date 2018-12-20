@@ -12733,4 +12733,11 @@ Your browser does not support the audio tag.
         }
         return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
+    public function get_business_profile_progress()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $profile_progress = $this->progressbar_new($userid);
+        $ret_arr = array("success"=>1,"profile_progress"=>$profile_progress);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }
