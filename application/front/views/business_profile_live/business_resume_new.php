@@ -717,7 +717,7 @@
 							</div>
 							
 							<!-- edit profile  -->
-							<div class="rsp-dtl-box">
+							<div class="rsp-dtl-box" ng-if="from_user_id == to_user_id">
 								<div class="dtl-box" id="edit-profile-move">
 									<div class="dtl-title">
 										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
@@ -2711,6 +2711,7 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details_new.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+    <!-- <script src="<?php //echo base_url('assets/js/jquery.mobile.custom.min.js?ver=' . time()); ?>"></script> -->
 	<script>
 		$(document).ready(function () {
 			if (screen.width > 768)

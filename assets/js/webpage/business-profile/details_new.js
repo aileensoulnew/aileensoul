@@ -1662,7 +1662,9 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             {
                 $scope.timeline_data = result.data.timeline_data;
                 setTimeout(function(){
-                    $scope.set_timeline();
+                    if ($scope.timeline_data.length > '0') {
+                        $scope.set_timeline();
+                    }
                 },1000);
                 $("#timeline-loader").hide();
                 $("#timeline-body").show();

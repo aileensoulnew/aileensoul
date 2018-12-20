@@ -189,7 +189,7 @@ echo $header_inner_profile ?>
 										</svg>
 										View Profile </a>
 									</li>
-                                    <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>">
+                                    <!-- <li><a href="<?php //echo base_url('business-profile/registration/business-information'); ?>">
 										<svg x="0px" y="0px" width="15px" height="15px" viewBox="0 0 485.219 485.22">
 										<g>
 											<path d="M467.476,146.438l-21.445,21.455L317.35,39.23l21.445-21.457c23.689-23.692,62.104-23.692,85.795,0l42.886,42.897
@@ -204,7 +204,7 @@ echo $header_inner_profile ?>
 										</g>
 										</svg>
 										Edit Profile </a>
-									</li>
+									</li> -->
                                     <!-- <li class="hidden"><a onclick="deactivate(<?php //echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
                                 </ul>
                             </li>
@@ -270,15 +270,13 @@ echo $header_inner_profile ?>
 					
 					<li class="dropdown user-id">
 						<a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							
-
 							<span class="pr-name"><span> Account</span></span>
 						</a>
 						<ul class="dropdown-menu account">
 							<li>Business Account</li>
 							<li><a href="<?php echo base_url('company/' . $business_login_slug_with_location); ?>">
 								<span class="icon-view-profile edit_data"></span> View Profile</a></li>
-							<li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
+							<!-- <li><a href="<?php //echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li> -->
 						</ul>
 					</li>
 					<?php } ?>
