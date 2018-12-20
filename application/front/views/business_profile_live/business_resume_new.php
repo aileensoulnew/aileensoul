@@ -379,7 +379,7 @@
 																<label ng-if="member.member_gender == '2'">Female</label>
 																<label ng-if="member.member_gender == '3'">Other</label>
 															</li>
-															<li ng-if="member.linkedin_url || member.twitter_url">
+															<li class="fw" ng-if="member.linkedin_url || member.twitter_url">
 																<span>Social Links</span>
 																<ul class="social-link-list pt5">
 																	<li ng-if="member.linkedin_url"><a href="{{member.linkedin_url}}" target="_self"><img src="<?php echo base_url('assets/n-images/detail/in.png?ver=' . time()) ?>"></a></li>
@@ -423,10 +423,10 @@
 										<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any story.</span>
 									</div>
 									<div class="dtl-dis dtl-box-height" ng-if="story_data">
-										<div class="bus-story" ng-if="story_data.story_file">
+										<div class="bus-story" ng-if="story_data.story_file" ng-click="open_business_story();">
 											<img ng-src="<?php echo BUSINESS_USER_STORY_UPLOAD_URL;?>{{story_data.story_file}}">
 										</div>
-										<div class="bus-story" ng-if="!story_data.story_file">
+										<div class="bus-story" ng-if="!story_data.story_file" ng-click="open_business_story();">
 											<div class="gradient-bg"></div>
 										</div>
 										<ul class="dis-list list-ul-cus">
@@ -707,10 +707,8 @@
 						</div>
 						
 					</div>
-                            <div class="banner-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
-                        </div>
+
+						</div>
 						<div class="right-add add-detail">
 							<div class="right-add-box">
 								<div class="dtl-box p10 dtl-adv"></div>
@@ -1034,7 +1032,7 @@
 												<option value="1">Cash</option>
 												<option value="2">Online</option>
 												<option value="3">Card</option>
-												<option value="4">Wallate</option>
+												<option value="4">Wallet</option>
 											</select>
 										</span>
 									</div>
@@ -2300,15 +2298,15 @@
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
                 <div class="modal-body-cus"> 
 					<div class="dtl-title">						
-						<a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital"> Add Timeline</soan></a>
-						<a href="#" ng-if="from_user_id != to_user_id" class=""><span class="timeline-tital">Timeline</soan></a>
+						<a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital"> Add Timeline</span></a>
+						<a href="#" ng-if="from_user_id != to_user_id" class=""><span class="timeline-tital">Timeline</span></a>
 					</div>
-					<div class="dtl-dis" ng-if="!timeline_data">
-                        <div class="no-info">
-                            <a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital"> Add Timeline</soan></a>
+					<div class="dtl-dis" ng-if="timeline_data.length < '1'">
+                        <div class="no-timeline">
+                            <a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/no-timeline1.jpg?ver=' . time()) ?>"><span class="timeline-tital"><h2>Add Timeline</h2></span></a>
                         </div>
                     </div>
-					<div class="dtl-dis" ng-if="timeline_data">
+					<div class="dtl-dis" ng-if="timeline_data.length > '0'">
 						<section class="cd-horizontal-timeline">
 							<div class="timeline">
 								<div class="events-wrapper">
