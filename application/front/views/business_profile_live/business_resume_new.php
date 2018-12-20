@@ -40,7 +40,7 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
 									<span>Basic Information</span>
-									<a href="#" ng-if="from_user_id == to_user_id"  data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<a href="#" ng-if="from_user_id == to_user_id" ng-click="edit_business();" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div id="business-loader" class="dtl-dis">
 		                            <div class="text-center">
@@ -70,12 +70,10 @@
 												<span>Year Founded / Established</span>
 												{{business_info_data.business_year_found}}
 											</li>
-											<li class="fw">
+											<li class="fw" ng-if="business_info_data.business_ext_benifit">
 												<span>Specialties / Extra Benefits / Ambience / Facilities Tags</span>
 												<ul class="skill-list">
-													<li>Lorem</li>
-													<li>Ipsum</li>
-													<li>Dummy text</li>
+													<li ng-repeat="benefits in business_info_data.business_ext_benifit.split(',')">{{benefits}}</li>
 												</ul>
 											</li>
 											<li ng-if="business_info_data.business_pay_mode">
@@ -85,12 +83,10 @@
 												<label ng-if="business_info_data.business_pay_mode == '3'">Card</label>
 												<label ng-if="business_info_data.business_pay_mode == '4'">Wallate</label>
 											</li>
-											<li class="fw">
+											<li class="fw" ng-if="business_info_data.business_keyword">
 												<span>Business Keywords</span>
 												<ul class="skill-list">
-													<li>Lorem</li>
-													<li>Ipsum</li>
-													<li>Dummy text</li>
+													<li ng-repeat="keywords in business_info_data.business_keyword.split(',')">{{keywords}}</li>
 												</ul>
 											</li>
 											<li ng-if="business_info_data.business_mission != ''">
@@ -101,17 +97,15 @@
 												<span>Legal Name</span>
 												{{business_info_data.business_legal_name}}
 											</li>
-											<li class="fw">
+											<li class="fw" ng-if="business_info_data.business_ser_pro">
 												<span>Services / Products you offer (Tags)</span>
 												<ul class="skill-list">
-													<li>Lorem</li>
-													<li>Ipsum</li>
-													<li>Dummy text</li>
+													<li ng-repeat="ser_pro in business_info_data.business_ser_pro.split(',')">{{ser_pro}}</li>
 												</ul>
 											</li>
-											<li>
+											<li ng-if="business_info_data.business_serve_area_txt">
 												<span>Area Served</span>
-												Ahmedabad, Gandhinagar, Rajkot
+												<label>{{business_info_data.business_serve_area_txt}}</label>
 											</li>
 											<li ng-if="business_info_data.business_tagline != ''">
 												<span>Tagline</span>
@@ -143,7 +137,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/address-info.png"><span>Address Information</span><a href="#" ng-click="edit_address_info();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+									<img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/address-info.png"><span>Address Information</span><a href="#" ng-if="from_user_id == to_user_id" ng-click="edit_address_info();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
 								</div>
 								<div id="address-loader" class="dtl-dis">
 		                            <div class="text-center">
@@ -277,7 +271,8 @@
 		                            <div class="dtl-dis" ng-if="user_portfolio.length < '1'">
 		                                <div class="no-info">
 		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-		                                    <span>Attract more business opportunities by attaching your company portfolio.</span>
+		                                    <span ng-if="from_user_id == to_user_id">Attract more business opportunities by attaching your company portfolio.</span>
+		                                    <span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any portfolio.</span>
 		                                </div>
 		                            </div>
 									<div class="dtl-dis dis-accor">
@@ -347,7 +342,8 @@
 	                            <div id="key-member-body" style="display: none;">
 	                            	<div class="no-info" ng-if="key_member_data.length < '1'">
 										<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-										<span>Add the key people who are on-board with you.</span>
+										<span ng-if="from_user_id == to_user_id">Add the key people who are on-board with you.</span>
+										<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any members yet.</span>
 									</div>
 									<div class="dtl-dis dis-accor" ng-if="key_member_data.length > '0'">
 										<div class="panel-group" id="member-accordion" role="tablist" aria-multiselectable="true">
@@ -423,7 +419,8 @@
 	                            <div id="story-body" style="display: none;">
 	                            	<div class="no-info" ng-if="!story_data">
 										<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-										<span>Tell the story of your business name.</span>
+										<span ng-if="from_user_id == to_user_id">Tell the story of your business name.</span>
+										<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any story.</span>
 									</div>
 									<div class="dtl-dis dtl-box-height" ng-if="story_data">
 										<div class="bus-story" ng-if="story_data.story_file">
@@ -588,7 +585,8 @@
 		                            <div class="dtl-dis" ng-if="user_award.length < '1'">
 		                                <div class="no-info">
 		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-		                                    <span>Showcase the honour you have achieved to profile.</span>
+		                                    <span ng-if="from_user_id == to_user_id">Showcase the honour you have achieved to profile.</span>
+		                                    <span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any achievements & awards.</span>
 		                                </div>
 		                            </div>
 		                            <div class="dtl-dis dis-accor" ng-if="user_award.length > '0'">
@@ -670,7 +668,8 @@
 		                            <div class="dtl-dis" ng-if="user_press_release.length < '1'">
 		                                <div class="no-info">
 		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-		                                    <span>Add the news or press release related your business.</span>
+		                                    <span ng-if="from_user_id == to_user_id">Add the news or press release related your business.</span>
+		                                    <span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any news.</span>
 		                                </div>
 		                            </div>
 									<div class="dtl-dis dis-accor" ng-if="user_press_release.length > '0'">
@@ -712,9 +711,9 @@
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                         </div>
-						<div class="right-add">
-							<div class="dtl-box p10 dtl-adv">
-								<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+						<div class="right-add add-detail">
+							<div class="right-add-box">
+								<div class="dtl-box p10 dtl-adv"></div>
 							</div>
 							
 							<!-- edit profile  -->
@@ -727,22 +726,37 @@
 										<div class="dtl-edit-top"></div>
 										<div class="profile-status">
 											<ul>
-												<li><span class=""></span>Profile pic</li>
-												<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
+												<li><span class=""><img ng-if="progress_status.user_image_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+												<li class="pl20"><span class=""><img ng-if="progress_status.profile_background_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
 												
-												<li><span class=""></span>Experience</li>
-												<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>About</li>
-												<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li>
+												<li><span class=""><img ng-if="progress_status.company_name_status == '1' && progress_status.business_type_status == '1' && progress_status.industriyal_status == '1' && progress_status.details_status == '1' && progress_status.business_tot_emp_status == '1' && progress_status.business_year_found_status == '1' && progress_status.business_pay_mode_status == '1' && progress_status.business_mission_status == '1' && progress_status.business_legal_name_status == '1' && progress_status.business_ser_pro_status == '1' && progress_status.business_serve_area_status == '1' && progress_status.business_tagline_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic Info</li>
+												<li class="pl20"><span class=""><img ng-if="progress_status.timeline_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Timeline</li>
+
+												<li><span class=""><img ng-if="progress_status.contact_person_status == '1' && progress_status.contact_mobile_status == '1' && progress_status.contact_email_status == '1' && progress_status.contact_job_title_status == '1'" src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Contact Info</li>
+												<li class="pl20"><span class=""><img ng-if="progress_status.country_status == '1' && progress_status.state_status == '1' && progress_status.city_status == '1' && progress_status.pincode_status == '1' && progress_status.address_status == '1' && progress_status.business_no_location_status == '1' && progress_status.business_office_location_status == '1'" src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Address</li>
+
+												<li><span class=""><img ng-if="progress_status.key_member_status == '1'" src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Key Members</li>
+												<li class="pl20"><span class=""><img ng-if="progress_status.user_links_status == '1'" src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Social</li>
 												
-												<li class="pl20"><span class=""></span>Social</li>
-												<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Idol</li>
-												<li class="fw"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Educational info</li>
-												<li class="fw"><span class=""></span>Profile overview</li>
+												<li class="fw"><span class=""><img ng-if="progress_status.story_data_status == '1'" src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Business Started</li>
+												<li class="fw"><span class=""><img ng-if="progress_status.hours_operation_status == '1'" src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Hours of Operation</li>
 											</ul>
 										</div>
 										<div class="dtl-edit-bottom"></div>
 										<div class="p20">
-										<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
+											<!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+											<div id="profile-progress" class="edit_profile_progress" style="display: none;">
+				                                <div class="count_main_progress">
+				                                    <div class="circles">
+				                                        <div class="second circle-1">
+				                                            <div>
+				                                                <strong></strong>
+				                                                <span id="progress-txt"></span>
+				                                            </div>
+				                                        </div>
+				                                    </div>
+				                                </div>
+				                            </div>
 										</div>
 										
 									</div>
@@ -764,7 +778,8 @@
 					                    <div class="dtl-dis">
 					                        <div class="no-info" ng-if="user_social_links.length < '1' && user_personal_links.length < '1'">
 					                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-					                            <span>Enter your social profile links. Let people stay connected with you on other platforms too.</span>
+					                            <span ng-if="from_user_id == to_user_id">Enter your social profile links. Let people stay connected with you on other platforms too.</span>
+					                            <span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any social links.</span>
 					                        </div>
 					                        <div class="social-links" ng-if="user_social_links.length > '0'">
 					                            <h4>Social</h4>
@@ -804,11 +819,12 @@
 										<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/timeline.png?ver=' . time()) ?>"><span>Timeline</span><a href="#" ng-if="from_user_id == to_user_id" data-target="#timeline-cus" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
 									</div>
 									<div class="dtl-dis">
-										<div class="no-info" ng-if="!timeline_data">
+										<div class="no-info" ng-if="timeline_data.length < '1'">
 											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-											<span>Show{{from_user_id == to_user_id ? ' your ' : ' '}}business greatest achievements and events.</span>
+											<span ng-if="from_user_id == to_user_id">Show your business greatest achievements and events.</span>
+											<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any achievements.</span>
 										</div>
-										<div class="fw dtl-more-add" ng-if="timeline_data">
+										<div class="fw dtl-more-add" ng-if="timeline_data.length > '0'">
 											<a href="#" data-target="#timeline-cus" data-toggle="modal"><span class="pr10">{{from_user_id == to_user_id ? 'Add' : 'View'}} Timeline </span><img ng-if="from_user_id == to_user_id" src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
 										</div>
 									</div>
@@ -832,7 +848,7 @@
 						                        <div class="no-info" ng-if="!bus_opening_hours">
 						                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
 						                            <span ng-if="from_user_id == to_user_id">Add your company operating hours.</span>
-						                            <span ng-if="from_user_id != to_user_id">Company operating hours.</span>
+						                            <span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added operating hours.</span>
 						                        </div>
 												<ul class="dis-list list-ul-cus" ng-if="bus_opening_hours">
 													<li ng-if="bus_opening_hours.opening_hour">
@@ -880,8 +896,8 @@
 					                <div id="menu-body" style="display: none;">
 					                	<div class="no-info" ng-if="menu_info_data.length < '1'">
 											<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-											<span>
-											Show what product or service {{from_user_id == to_user_id ? 'you offer' : ' '}}</span>
+											<span ng-if="from_user_id == to_user_id">Show what product or service you offer.</span>
+											<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any menu.</span>
 										</div>
 										<div class="dtl-dis" ng-if="menu_info_data.length > '0'">
 											<ul class="dis-list">
@@ -912,152 +928,169 @@
 					<div class="dtl-title">
 						<span>Basic Information</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Business Name</label>
-							<input type="text" placeholder="Business Name" id="business_name" name="business_name" maxlength="255">
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Business Type</label>
-									<span class="span-select">
-										<select id="business_type" name="business_type" ng-model="business_type" ng-change="other_business_type_fnc();">
-											<option value="">Select Business Type</option>
-											<?php foreach ($business_types as $key => $value) { ?>
-												<option value="<?php echo $value['type_id']; ?>"><?php echo $value['business_name']; ?></option>
-											<?php } ?>
-											<option value="0">Other</option>
-										</select>
-									</span>
+					<form name="business_info_form" id="business_info_form" ng-validate="business_info_validate">
+						<div class="dtl-dis">
+							<div class="form-group">
+								<label>Business Name</label>
+								<input type="text" placeholder="Business Name" id="business_name" name="business_name" maxlength="255">
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Business Type</label>
+										<span class="span-select">
+											<select id="business_type" name="business_type" ng-model="business_type" ng-change="other_business_type_fnc();">
+												<option value="">Select Business Type</option>
+												<?php foreach ($business_types as $key => $value) { ?>
+													<option value="<?php echo $value['type_id']; ?>"><?php echo $value['business_name']; ?></option>
+												<?php } ?>
+												<option value="0">Other</option>
+											</select>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Business Category / Industry</label>
+										<span class="span-select">
+											<select id="business_category" name="business_category" ng-model="business_category" ng-change="other_business_category_fnc();">
+												<option value="">Select Category / Industry</option>
+												<?php foreach ($business_category as $key => $value) { ?>
+													<option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
+												<?php } ?>
+												<option value="0">Other</option>
+											</select>
+										</span>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Business Category / Industry</label>
-									<span class="span-select">
-										<select id="business_category" name="business_category" ng-model="business_category" ng-change="other_business_category_fnc();">
-											<option value="">Select Category / Industry</option>
-											<?php foreach ($business_category as $key => $value) { ?>
-												<option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
-											<?php } ?>
-											<option value="0">Other</option>
-										</select>
-									</span>
+							<div id="other_div" class="row" style="display: none;">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div id="other_business_type_div" class="form-group" style="display: none;">
+										<label>Other business type</label>
+										<input type="text" placeholder="Other business type" id="other_business_type" name="other_business_type" maxlength="255">
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div id="other_business_category_div" class="form-group" style="display: none;">
+										<label>Other category</label>
+										<input type="text" placeholder="Other category" id="other_business_category" name="other_business_category" maxlength="255">
+									</div>
 								</div>
 							</div>
-						</div>
-						<div id="other_div" class="row" style="display: none;">
-							<div id="other_business_type_div" class="col-md-6 col-sm-6 col-xs-6 fw-479" style="display: none;">
-								<div class="form-group">
-									<label>Other business type</label>
-									<input type="text" placeholder="Extra Benefits-tags" id="other_business_type" name="other_business_type" maxlength="255">
-								</div>
-							</div>
-							<div id="other_business_category_div" class="col-md-6 col-sm-6 col-xs-6 fw-479" style="display: none;">
-								<div class="form-group">
-									<label>Other category</label>
-									<input type="text" placeholder="Extra Benefits-tags" id="other_business_category" name="other_business_category" maxlength="255">
-								</div>
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label>Business Description </label>
-							<textarea type="text" placeholder="Business Description" class="big-textarea" id="business_desc" name="business_desc" maxlength="700"></textarea>
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Total Employees</label>
-									<span class="span-select">
-										<select id="business_tot_emp" name="business_tot_emp">
-											<option value="">Select Total Employees</option>
-											<option value="1">1 to 10</option>
-											<option value="2">10 to 30</option>
-											<option value="3">30 to 50</option>
-											<option value="4">More than 50</option>
-										</select>
-									</span>
+							<div class="form-group">
+								<label>Business Description </label>
+								<textarea type="text" placeholder="Business Description" class="big-textarea" id="business_desc" name="business_desc" maxlength="700"></textarea>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Total Employees</label>
+										<span class="span-select">
+											<select id="business_tot_emp" name="business_tot_emp">
+												<option value="">Select Total Employees</option>
+												<option value="1">1 to 10</option>
+												<option value="2">10 to 30</option>
+												<option value="3">30 to 50</option>
+												<option value="4">More than 50</option>
+											</select>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Year Founded / Established</label>
+										<span class="span-select">
+											<select id="business_year_found" name="business_year_found">
+												<option value="">Select</option>
+												<?php 
+												$year = date('Y');
+												for ($i = $year; $i >= $year - 100; $i--) { ?>
+													<option value="<?php echo  $i; ?>"><?php echo  $i; ?></option>
+												<?php 
+												} ?>
+											</select>
+										</span>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Year Founded / Established</label>
-									<span class="span-select">
-										<select id="business_year_found" name="business_year_found">
-											<option value="">Select</option>
-											<?php 
-											$year = date('Y');
-											for ($i = $year; $i >= $year - 100; $i--) { ?>
-												<option value="<?php echo  $i; ?>"><?php echo  $i; ?></option>
-											<?php 
-											} ?>
-										</select>
-									</span>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Specialties / Extra Benefits<span class="hidden-xs"> / Facilities</span></label>
+										<!-- <input type="text" placeholder="Extra Benefits-tags"> -->
+										<tags-input id="business_ext_benifit" ng-model="business_ext_benifit" display-property="benifit" placeholder="Extra Benefits" replace-spaces-with-dashes="false" template="title-template" ng-keyup="business_ext_benifit_fnc()">
+	                                	</tags-input>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+									<div class="form-group">
+										<label>Payment Mode Accepted</label>
+										<span class="span-select">
+											<select id="business_pay_mode" name="business_pay_mode">
+												<option value="">Select</option>
+												<option value="1">Cash</option>
+												<option value="2">Online</option>
+												<option value="3">Card</option>
+												<option value="4">Wallate</option>
+											</select>
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Specialties / Extra Benefits<span class="hidden-xs"> / Facilities</span></label>
-									<!-- <input type="text" placeholder="Extra Benefits-tags"> -->
-									<tags-input id="business_ext_benifit" ng-model="business_ext_benifit" display-property="benifit" placeholder="Extra Benefits" replace-spaces-with-dashes="false" template="title-template">
-                                	</tags-input>
-								</div>
+							<div class="form-group">
+								<label>Business Keywords</label>							
+								<tags-input id="business_keyword" ng-model="business_keyword" display-property="keyword" placeholder="Business Keywords" replace-spaces-with-dashes="false" template="title-template" ng-keyup="business_keyword_fnc()">
+								</tags-input>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Payment Mode Accepted</label>
-									<span class="span-select">
-										<select id="business_pay_mode" name="business_pay_mode">
-											<option value="">Select</option>
-											<option value="1">Cash</option>
-											<option value="2">Online</option>
-											<option value="3">Card</option>
-											<option value="4">Wallate</option>
-										</select>
-									</span>
-								</div>
+							<div class="form-group">
+								<label>Mission</label>
+								<textarea type="text" placeholder="Mission" id="business_mission" name="business_mission" maxlength="700"></textarea>
+							</div>
+							<div class="form-group">
+								<label>Legal Name</label>
+								<input type="text" placeholder="Legal Name" id="business_legal_name" name="business_legal_name">
+							</div>
+							<div class="form-group">
+								<label>Services / Products you offer (Tags)</label>
+								<!-- <input type="text" placeholder="Services / Products you offer (Tags)"> -->
+								<tags-input id="business_ser_pro" ng-model="business_ser_pro" display-property="services" placeholder="Services / Products" replace-spaces-with-dashes="false" template="title-template" ng-keyup="business_ser_pro_fnc()">
+								</tags-input>
+							</div>
+							<div class="form-group">
+								<label>Area Served (City)</label>							
+								<!-- <input type="text" placeholder="Area Served" id="business_serve_area" name="business_serve_area" ng-model="business_serve_area" maxlength="255"> -->
+								<tags-input id="business_serve_area" ng-model="business_serve_area" display-property="city" placeholder="Area Served" replace-spaces-with-dashes="false" template="title-template" ng-keyup="business_serve_area_fnc()" on-tag-added="onKeyup()">
+                                        <auto-complete source="loadCities($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                    </tags-input>                        
+                                    <script type="text/ng-template" id="title-template">
+                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                    </script>
+                                    <script type="text/ng-template" id="title-autocomplete-template">
+                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                    </script>
+								</tags-input>
+							</div>
+							<div class="form-group">
+								<label>Tagline</label>
+								<input type="text" placeholder="Tagline" id="business_tagline" name="business_tagline">
+							</div>
+							<div class="form-group">
+								<label>Formerly Knowns as</label>
+								<input type="text" placeholder="Formerly Knowns as" id="business_formly_known" name="business_formly_known">
+							</div>						
+						</div>
+						<div class="dtl-btn">
+							<a id="save_business" href="javascript:void(0);" ng-click="save_business()" class="save">
+								<span>Save</span>
+							</a>
+							<div id="save_business_loader"  class="dtl-popup-loader" style="display: none;">
+		                    	<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Business Keywords</label>							
-							<tags-input id="business_keyword" ng-model="business_keyword" display-property="keyword" placeholder="Business Keywords" replace-spaces-with-dashes="false" template="title-template">
-							</tags-input>
-						</div>
-						<div class="form-group">
-							<label>Mission</label>
-							<textarea type="text" placeholder="Mission" id="business_mission" name="business_mission"></textarea>
-						</div>
-						<div class="form-group">
-							<label>Legal Name</label>
-							<input type="text" placeholder="Legal Name" id="business_legal_name" name="business_legal_name">
-						</div>
-						<div class="form-group">
-							<label>Services / Products you offer (Tags)</label>
-							<!-- <input type="text" placeholder="Services / Products you offer (Tags)"> -->
-							<tags-input id="business_ser_pro" ng-model="business_ser_pro" display-property="services" placeholder="Services / Products" replace-spaces-with-dashes="false" template="title-template">
-							</tags-input>
-						</div>
-						<div class="form-group">
-							<label>Area Served (City)</label>							
-							<input type="text" placeholder="Area Served" id="business_serve_area" name="business_serve_area" ng-model="business_serve_area" ng-keyup="business_serve_area_list()" typeahead="item as item.city_name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="255">
-						</div>
-						<div class="form-group">
-							<label>Tagline</label>
-							<input type="text" placeholder="Tagline" id="business_tagline" name="business_tagline">
-						</div>
-						<div class="form-group">
-							<label>Formerly Knowns as</label>
-							<input type="text" placeholder="Formerly Knowns as" id="business_formly_known" name="business_formly_known">
-						</div>						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
+					</form>
 				</div>
 			</div>
         </div>
@@ -1147,8 +1180,8 @@
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 									<div class="form-group">
-										<label>Job Title</label>
-										<input type="text" placeholder="Enter Job Title" id="member_job_title" name="member_job_title" ng-model="member_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="255">
+										<label>Designation</label>
+										<input type="text" placeholder="Enter Designation" id="member_job_title" name="member_job_title" ng-model="member_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="255">
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
@@ -2646,8 +2679,7 @@
     <!-- <script src="<?php //echo base_url('assets/js/timeline.js?ver=' . time()); ?>"></script> -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
 	<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
-
-	<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+	<script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -2678,6 +2710,7 @@
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details_new.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details.js?ver=' . time()); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
 	<script>
 		$(document).ready(function () {
 			if (screen.width > 768)
@@ -2744,6 +2777,21 @@
 	    	},100);
 	    });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dtl-edit-bottom').hover(function () {
+                $('.profile-status').addClass('hover-bottom');
+            }, function () {
+                $('.profile-status').removeClass('hover-bottom');
+            });
+            
+            $('.dtl-edit-top').hover(function () {
+                $('.profile-status').addClass('hover-top');
+            }, function () {
+                $('.profile-status').removeClass('hover-top');
+            });
+        });
+    </script>	
     <script type="text/ng-template" id="title-template">
         <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
     </script>

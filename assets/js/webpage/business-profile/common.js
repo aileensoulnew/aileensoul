@@ -112,7 +112,7 @@ $('#upload-one').on('change', function () {
     }
     reader.readAsDataURL(this.files[0]);
 });
-$(document).ready(function () {
+// $(document).ready(function () {
     $("#userimage").validate({
         rules: {
             profilepic: {
@@ -126,8 +126,7 @@ $(document).ready(function () {
         },
         submitHandler: profile_pic
     });
-    function profile_pic() {
-//    $('.upload-result-one').on('click', function (ev) {
+    function profile_pic() {        
         $uploadCrop1.croppie('result', {
             type: 'canvas',
             size: 'viewport'
@@ -140,7 +139,7 @@ $(document).ready(function () {
                 data: {"image": resp},
                 beforeSend: function () {
                     // $('.loader').show();
-//                    document.getElementById('profile_loader').style.display = 'block';
+                   // document.getElementById('profile_loader').style.display = 'block';
                     $('#profile_loader').show();
                 },
                 complete: function () {
@@ -152,14 +151,13 @@ $(document).ready(function () {
                     $(".user-pic").html(data);
                     document.getElementById('upload-one').value = null;
                     document.getElementById('upload-demo-one').value = '';
-//                    html = '<img src="' + resp + '" />';
-//                    $("#upload-demo-i").html(html);
+                   // html = '<img src="' + resp + '" />';
+                   // $("#upload-demo-i").html(html);
                 }
             });
         });
-//    });
     }
-});
+// });
 
 
 function updateprofilepopup(id) {

@@ -127,8 +127,12 @@
             </div>
         </div>
         <div class="media-box articles-cs">
-            <div class="dash-left-title">
-                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
+            <div class="dash-left-title">                
+                <?php if($user_id != ""): ?>
+                    <h3><a href="<?php echo base_url(); ?>{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
+                <?php else: ?>
+                    <h3><a href="#" data-toggle="modal" data-target="#regmodal"><i class="fa fa-file"></i> Article</a></h3>
+            <?php endif; ?>
             </div>
             <div class="media-display" >
                 <div class="all-meda" ng-repeat="articleData in postArticleData">

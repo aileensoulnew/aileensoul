@@ -1495,4 +1495,41 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
+    public function save_business($user_id,$business_name = "",$business_type = "",$other_business_type = "",$business_category = "",$other_business_category = "",$business_desc = "",$business_tot_emp = "",$business_year_found,$business_ext_benifit_txt = "",$business_pay_mode = "",$business_keyword_txt = "",$business_mission = "",$business_legal_name = "",$business_ser_pro_txt = "",$city_txt = "",$business_tagline = "",$business_formly_known = "")    
+    {
+        $data = array(                
+            'company_name' => $business_name,
+            'business_type' => $business_type,
+            'other_business_type' => $other_business_type,
+            'industriyal' => $business_category,
+            'other_industrial' => $other_business_category,
+            'details' => $business_desc,
+            'business_tot_emp' => $business_tot_emp,
+            'business_year_found' => $business_year_found,
+            'business_ext_benifit' => $business_ext_benifit_txt,
+            'business_pay_mode' => $business_pay_mode,
+            'business_keyword' => $business_keyword_txt,
+            'business_mission' => $business_mission,
+            'business_legal_name' => $business_legal_name,
+            'business_ser_pro' => $business_ser_pro_txt,
+            'business_serve_area' => $city_txt,
+            'business_tagline' => $business_tagline,
+            'business_formly_known' => $business_formly_known,
+            'modified_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('business_profile', $data);
+
+        $industriyal = "";
+        if(trim($data['industriyal']) != "" && $data['industriyal'] != 0)
+        {
+            $industriyal = $this->db->get_where('industry_type', array('industry_id' => $data['industriyal'], 'status' => '1'))->row()->industry_name;
+        }
+        $data['industry_name'] = trim($industriyal);
+        
+        $this->db->where('user_id', $user_id);
+        $this->db->update('business_profile_search_tmp', $data);
+        return true;
+    }
+
 }

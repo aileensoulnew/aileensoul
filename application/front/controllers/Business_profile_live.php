@@ -11566,7 +11566,7 @@ Your browser does not support the audio tag.
         $user_social_links_data = $this->business_model->get_user_social_links($userid);        
         $user_personal_links_data = $this->business_model->get_user_personal_links($userid);        
         $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -11951,6 +11951,7 @@ Your browser does not support the audio tag.
 
         $story_data = $this->business_model->get_business_story($user_id);
         $ret_arr = array("success"=>1,"story_data"=>$story_data);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -11974,10 +11975,6 @@ Your browser does not support the audio tag.
 
     public function save_timeline()    
     {
-        /*print_r($_POST);
-        print_r($_FILES);
-        exit();*/
-
         $edit_timeline_id = $this->input->post('edit_timeline_id');
         $timeline_file_old = $this->input->post('timeline_file_old');
         $timeline_title = $this->input->post('timeline_title');
@@ -12026,6 +12023,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -12043,6 +12041,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -12089,6 +12088,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
 
     }
@@ -12178,6 +12178,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -12195,6 +12196,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -12243,6 +12245,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -12330,6 +12333,7 @@ Your browser does not support the audio tag.
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -12345,6 +12349,388 @@ Your browser does not support the audio tag.
         $user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $user_slug))->row('user_id');        
         $business_info_data = $this->business_model->get_business_info($user_id);
         $ret_arr = array("success"=>1,"business_info_data"=>$business_info_data);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_business()
+    {
+        $business_name = $this->input->post('business_name');
+        $business_type = $this->input->post('business_type');
+        if($business_type == 0)
+        {
+            $other_business_type = $this->input->post('other_business_type');
+        }
+        else
+        {
+            $other_business_type = "";
+        }
+        $business_category = $this->input->post('business_category');
+        if($business_category == 0)
+        {
+            $other_business_category = $this->input->post('other_business_category');
+        }
+        else
+        {
+            $other_business_category = "";
+        }
+        $business_desc = $this->input->post('business_desc');
+        $business_tot_emp = $this->input->post('business_tot_emp');
+        $business_year_found = $this->input->post('business_year_found');
+        
+        $business_ext_benifit_arr = $this->input->post('business_ext_benifit');
+        $business_ext_benifit_txt = "";
+        if(isset($business_ext_benifit_arr))
+        {
+            foreach ($business_ext_benifit_arr as $key => $value) {
+                $business_ext_benifit_txt .= $value['benifit'].",";
+            }
+        }
+        $business_ext_benifit_txt = trim($business_ext_benifit_txt,",");
+
+        $business_pay_mode = $this->input->post('business_pay_mode');
+
+        $business_keyword_arr = $this->input->post('business_keyword');
+        $business_keyword_txt = "";
+        if(isset($business_keyword_arr))
+        {
+            foreach ($business_keyword_arr as $key => $value) {
+                $business_keyword_txt .= $value['keyword'].",";
+            }
+        }
+        $business_keyword_txt = trim($business_keyword_txt,",");
+        $business_mission = $this->input->post('business_mission');
+        $business_legal_name = $this->input->post('business_legal_name');
+        $business_ser_pro_arr = $this->input->post('business_ser_pro');
+        $business_ser_pro_txt = "";
+        if(isset($business_ser_pro_arr))
+        {
+            foreach ($business_ser_pro_arr as $key => $value) {
+                $business_ser_pro_txt .= $value['services'].",";
+            }
+        }
+        $business_ser_pro_txt = trim($business_ser_pro_txt,",");
+        $business_serve_area = $this->input->post('business_serve_area');        
+        $city_txt = "";
+        if(isset($business_serve_area))
+        {
+            foreach ($business_serve_area as $key => $value) {
+                if($value['city'] != "")
+                {
+                    $contition_array = array('LOWER(city_name)' => strtolower($value['city']));
+                    $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if ($citydata) {
+                        $city_id = $citydata[0]['city_id'];
+                    } else {
+                        $city_slug = $this->create_slug($value['city']);;
+                        $data = array(
+                            'city_name' => $value['city'],
+                            'city_image' => $city_slug.'.png',
+                            'state_id' => '0',
+                            'status' => '2',
+                            'group_id' => '0',
+                            'slug' => $this->common->clean($city_slug),
+                        );
+                        $city_id = $this->common->insert_data_getid($data, 'cities');
+                    }
+                    $city_txt .= $city_id.",";
+                }
+            }
+        }
+        $city_txt = trim($city_txt,",");
+        $business_tagline = $this->input->post('business_tagline');
+        $business_formly_known = $this->input->post('business_formly_known');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $address_insert = $this->business_model->save_business($user_id,$business_name,$business_type,$other_business_type,$business_category,$other_business_category,$business_desc,$business_tot_emp,$business_year_found,$business_ext_benifit_txt,$business_pay_mode,$business_keyword_txt,$business_mission,$business_legal_name,$business_ser_pro_txt,$city_txt,$business_tagline,$business_formly_known);
+            $business_info_data = $this->business_model->get_business_info($user_id);
+            $ret_arr = array("success"=>1,"business_info_data"=>$business_info_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function progressbar_new($user_id)
+    {
+        $contition_array = array('user_id' => $user_id, 'status' => '1', 'is_deleted' => '0');
+
+        $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_user_image, profile_background, company_name, business_type, industriyal, details, business_tot_emp, business_year_found, business_pay_mode, business_mission, business_legal_name, business_ser_pro, business_serve_area, business_tagline, country, state, city, pincode, address, business_no_location, business_office_location, contact_person, contact_mobile, contact_email, contact_job_title', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+
+        $count = 0;
+        $progress_status = array();
+        $user_image = 0;        
+        if($business_data['business_user_image'] != '')
+        {
+            $user_image = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_image_status'] = $user_image;
+
+        $profile_background = 0;
+        if($business_data['profile_background'] != '')
+        {
+            $profile_background = 1;
+            $count = $count + 3;
+        }
+        $progress_status['profile_background_status'] = $profile_background;
+
+        //Basic Info
+        $company_name = 0;
+        if($business_data['company_name'] != '')
+        {
+            $company_name = 1;
+            $count = $count + 1;
+        }
+        $progress_status['company_name_status'] = $company_name;
+
+        $business_type = 0;
+        if($business_data['business_type'] > -1)
+        {
+            $business_type = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_type_status'] = $business_type;
+
+        $industriyal = 0;
+        if($business_data['industriyal'] > -1)
+        {
+            $industriyal = 1;
+            $count = $count + 1;
+        }
+        $progress_status['industriyal_status'] = $industriyal;
+
+        $details = 0;
+        if($business_data['details'] != '')
+        {
+            $details = 1;
+            $count = $count + 1;
+        }
+        $progress_status['details_status'] = $details;
+
+        $business_tot_emp = 0;
+        if($business_data['business_tot_emp'] > 0)
+        {
+            $business_tot_emp = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_tot_emp_status'] = $business_tot_emp;
+
+        $business_year_found = 0;
+        if($business_data['business_year_found'] != '')
+        {
+            $business_year_found = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_year_found_status'] = $business_year_found;
+
+        $business_pay_mode = 0;
+        if($business_data['business_pay_mode'] > 0)
+        {
+            $business_pay_mode = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_pay_mode_status'] = $business_pay_mode;
+
+        $business_mission = 0;
+        if($business_data['business_mission'] != '')
+        {
+            $business_mission = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_mission_status'] = $business_mission;
+
+        $business_legal_name = 0;
+        if($business_data['business_legal_name'] != '')
+        {
+            $business_legal_name = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_legal_name_status'] = $business_legal_name;
+
+        $business_ser_pro = 0;
+        if($business_data['business_ser_pro'] != '')
+        {
+            $business_ser_pro = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_ser_pro_status'] = $business_ser_pro;
+
+        $business_serve_area = 0;
+        if($business_data['business_serve_area'] != '')
+        {
+            $business_serve_area = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_serve_area_status'] = $business_serve_area;
+
+        $business_tagline = 0;
+        if($business_data['business_tagline'] != '')
+        {
+            $business_tagline = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_tagline_status'] = $business_tagline;
+
+
+        //Address Info
+        $country = 0;
+        if($business_data['country'] != '')
+        {
+            $country = 1;
+            $count = $count + 1;
+        }
+        $progress_status['country_status'] = $country;
+
+        $state = 0;
+        if($business_data['state'] != '')
+        {
+            $state = 1;
+            $count = $count + 1;
+        }
+        $progress_status['state_status'] = $state;
+
+        $city = 0;
+        if($business_data['city'] > -1)
+        {
+            $city = 1;
+            $count = $count + 1;
+        }
+        $progress_status['city_status'] = $city;
+
+        $pincode = 0;
+        if($business_data['pincode'] != '')
+        {
+            $pincode = 1;
+            $count = $count + 1;
+        }
+        $progress_status['pincode_status'] = $pincode;
+
+        $address = 0;
+        if($business_data['address'] != '')
+        {
+            $address = 1;
+            $count = $count + 1;
+        }
+        $progress_status['address_status'] = $address;
+
+        $business_no_location = 0;
+        if($business_data['business_no_location'] > -1)
+        {
+            $business_no_location = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_no_location_status'] = $business_no_location;
+
+        $business_office_location = 0;
+        if($business_data['business_office_location'] > -1)
+        {
+            $business_office_location = 1;
+            $count = $count + 1;
+        }
+        $progress_status['business_office_location_status'] = $business_office_location;
+
+        //Contact Inforamtion
+        $contact_person = 0;
+        if($business_data['contact_person'] != '')
+        {
+            $contact_person = 1;
+            $count = $count + 1;
+        }
+        $progress_status['contact_person_status'] = $contact_person;
+
+        $contact_mobile = 0;
+        if($business_data['contact_mobile'] != '')
+        {
+            $contact_mobile = 1;
+            $count = $count + 1;
+        }
+        $progress_status['contact_mobile_status'] = $contact_mobile;
+        
+        $contact_email = 0;
+        if($business_data['contact_email'] != '')
+        {
+            $contact_email = 1;
+            $count = $count + 1;
+        }
+        $progress_status['contact_email_status'] = $contact_email;
+
+        $contact_job_title = 0;        
+        if($business_data['contact_job_title'] > -1)
+        {
+            $contact_job_title = 1;
+            $count = $count + 1;
+        }
+        $progress_status['contact_job_title_status'] = $contact_job_title;
+        
+
+        $story_data = $this->business_model->get_business_story($user_id);
+        $story_data_status = 0;
+        if(isset($story_data) && !empty($story_data))
+        {
+            $story_data_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['story_data_status'] = $story_data_status;
+
+        $key_member_data = $this->business_model->get_key_member($user_id);
+        $key_member_status = 0;
+        if(isset($key_member_data) && !empty($key_member_data))
+        {
+            $key_member_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['key_member_status'] = $key_member_status;
+        
+        $bus_hours_operation = $this->business_model->get_opening_hours($user_id);
+        $hours_operation_status = 0;
+        if(isset($bus_hours_operation) && !empty($bus_hours_operation))
+        {
+            $hours_operation_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['hours_operation_status'] = $hours_operation_status;
+
+        $timeline_data = $this->business_model->get_business_timeline($user_id);
+        $timeline_status = 0;
+        if(isset($timeline_data) && !empty($timeline_data))
+        {
+            $timeline_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['timeline_status'] = $timeline_status;
+
+        $user_links = $this->business_model->get_user_links($user_id);
+        $user_links_status = 0;
+        if(isset($user_links) && !empty($user_links))
+        {
+            $user_links_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_links_status'] = $user_links_status;
+        
+        $user_process = ($count * 100) / 44;        
+        $user_process_value = ($user_process / 100);
+
+        if ($user_process == 100) {
+            //if ($business_data['progress_new'] != 1) {
+                $data = array(
+                    'progress_new' => '1',
+                    'modified_date' => date('Y-m-d h:i:s', time())
+                );
+                $updatedata = $this->common->update_data($data, 'business_profile', 'user_id', $user_id);
+            //}
+        } else {
+            $data = array(
+                'progress_new' => '0',
+                'modified_date' => date('Y-m-d h:i:s', time())
+            );
+            $updatedata = $this->common->update_data($data, 'business_profile', 'user_id', $user_id);
+        }
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
 }

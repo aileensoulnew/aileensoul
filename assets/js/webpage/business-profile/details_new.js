@@ -144,6 +144,14 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     $scope.from_user_id = from_user_id;
     $scope.to_user_id = to_user_id;
 
+    function load_add_detail()
+    {
+        setTimeout(function(){
+            var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
+            $compile($el)($scope);
+        },1000);        
+    }
+
     //Socila Links Start
     $scope.social_linksset = {social_links: []};
 
@@ -1235,9 +1243,6 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             story_desc: {
                 required: true,
             },
-            story_diff: {
-                required: true,
-            },
         },
     };
 
@@ -1271,6 +1276,11 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#save_business_story").removeAttr("style");
                     $("#save_business_story_loader").hide();
                     $("#bus-name-started").modal('hide');
+                    var profile_progress = result.data.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 });
             });
         }
@@ -1832,23 +1842,21 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     result = result.data;
                     if(result.success == '1')
                     {
-                        $("#save_timeline").removeAttr("style");
-                        $("#timeline_loader").hide();
-                        $("#timeline_form")[0].reset();                        
                         $scope.timeline_data = result.timeline_data;
                         setTimeout(function(){
                             $scope.set_timeline();
                             // $scope.selected_timeline = 0;
                         },1000);
-                        $("#timeline").modal('hide');
                     }
-                    else
-                    {
-                        $("#save_timeline").removeAttr("style");
-                        $("#timeline_loader").hide();
-                        $("#timeline_form")[0].reset();
-                        $("#timeline").modal('hide');
-                    }
+                    $("#save_timeline").removeAttr("style");
+                    $("#timeline_loader").hide();
+                    $("#timeline_form")[0].reset();
+                    $("#timeline").modal('hide');
+                    var profile_progress = result.data.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -1929,22 +1937,19 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     if(result.success == '1')
                     {
                         $scope.timeline_data = result.timeline_data;
-                        $("#delete-timeline-model").modal('hide');
-                        $("#timeline").modal('hide');
-                        $("#delete_timeline").removeAttr("style");
-                        $("#delete_timeline_loader").hide();
-                        $("#timeline-delete-btn").show();                        
-                        $scope.reset_timeline_form();                       
                     }
-                    else
-                    {
-                        $("#delete-timeline-model").modal('hide');
-                        $("#timeline").modal('hide');
-                        $("#delete_timeline").removeAttr("style");
-                        $("#delete_timeline_loader").hide();
-                        $("#timeline-delete-btn").show();
-                        $scope.reset_timeline_form();
-                    }
+                    
+                    $("#delete-timeline-model").modal('hide');
+                    $("#timeline").modal('hide');
+                    $("#delete_timeline").removeAttr("style");
+                    $("#delete_timeline_loader").hide();
+                    $("#timeline-delete-btn").show();
+                    $scope.reset_timeline_form();
+                    var profile_progress = result.data.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -2250,7 +2255,12 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 }
                 $("#save_opening_hours").removeAttr("style");
                 $("#opening_hours_loader").hide();
-                $("#hours-opration").modal('hide'); 
+                $("#hours-opration").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             });
         }
     };
@@ -2463,20 +2473,17 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     result = result.data;
                     if(result.success == '1')
                     {
-                        $("#save_member").removeAttr("style");
-                        $("#member_loader").hide();
-                        $("#business_member_form")[0].reset();
-                        // $scope.reset_awards_form();
                         $scope.key_member_data = result.key_member_data;
-                        $("#member-info").modal('hide');
                     }
-                    else
-                    {
-                        $("#save_member").removeAttr("style");
-                        $("#member_loader").hide();
-                        $("#business_member_form")[0].reset();
-                        $("#member-info").modal('hide');
-                    }
+                    $("#save_member").removeAttr("style");
+                    $("#member_loader").hide();
+                    $("#business_member_form")[0].reset();
+                    $("#member-info").modal('hide');
+                    var profile_progress = result.data.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -2589,6 +2596,11 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#delete_member_loader").hide();
                     $("#member-delete-btn").show();
                     $scope.reset_portfolio();
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -2684,12 +2696,6 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             contact_website: {
                 url: true,
             },
-            contact_fax: {
-                required: true,
-            },
-            contact_tollfree: {
-                required: true,
-            },
         },
     };
 
@@ -2732,6 +2738,11 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#save_contact_info").removeAttr("style");
                 $("#save_contact_info_loader").hide();
                 $("#contact-info").modal('hide'); 
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             });
             
         }
@@ -3082,6 +3093,11 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#save_address_info").removeAttr("style");
                 $("#save_address_info_loader").hide();
                 $("#add-info").modal('hide'); 
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             });
             
         }
@@ -3131,6 +3147,12 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             }
             $("#business-loader").hide();
             $("#business-body").show();
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+            load_add_detail();
 
         });
     }
@@ -3141,6 +3163,365 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $("#view-more-business").hide();
     };
 
+    $scope.other_business_type_fnc = function()
+    {
+        if($scope.business_type != '' && $scope.business_type == 0)
+        {
+            $("#other_div").show();
+            $("#other_business_type_div").show();
+        }
+        else
+        {
+            $("#other_business_type_div").hide();
+            if($scope.business_category != '' && $scope.business_category != 0)
+            {
+                $("#other_div").hide();
+            }
+        }
+    }
+    $scope.other_business_category_fnc = function()
+    {
+        if($scope.business_category != '' && $scope.business_category == 0)
+        {
+            $("#other_div").show();
+            $("#other_business_category_div").show();
+        }
+        else
+        {
+            $("#other_business_category_div").hide();
+            if($scope.business_type != '' && $scope.business_type != 0)
+            {
+                $("#other_div").hide();
+            }
+        }
+    }
+
+    $scope.load_cities = [];
+    $scope.loadCities = function ($query) {
+        return $http.get(base_url + 'job/get_city', {cache: true}).then(function (response) {
+            var load_cities = response.data;
+            return load_cities.filter(function (title) {
+                return title.city.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.validate_business_ext_benifit = function(){
+        if($scope.business_ext_benifit == "" || $scope.business_ext_benifit == undefined)
+        {
+            $("#business_ext_benifit .tags").attr("style","border:1px solid #ff0000;");
+            /*setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);*/
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.validate_business_keyword = function(){
+        if($scope.business_keyword == "" || $scope.business_keyword == undefined)
+        {
+            $("#business_keyword .tags").attr("style","border:1px solid #ff0000;");
+            /*setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);*/
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.validate_business_ser_pro = function(){
+        if($scope.business_ser_pro == "" || $scope.business_ser_pro == undefined)
+        {
+            $("#business_ser_pro .tags").attr("style","border:1px solid #ff0000;");
+            /*setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);*/
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.validate_business_serve_area = function(){
+        if($scope.business_serve_area == "" || $scope.business_serve_area == undefined)
+        {
+            $("#business_serve_area .tags").attr("style","border:1px solid #ff0000;");
+            /*setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);*/
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.business_info_validate = {
+        rules: {
+            business_name: {
+                required: true,
+            },
+            business_type: {
+                required: true,
+            },
+            other_business_type: {
+                required: {
+                    depends: function(element) {
+                        return $("#business_type option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            business_category: {
+                required: true,
+            },
+            other_business_category: {
+                required: {
+                    depends: function(element) {
+                        return $("#business_category option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            business_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+            business_tot_emp: {
+                required: true,
+            },
+            business_year_found: {
+                required: true,
+            },
+            business_pay_mode: {
+                required: true,
+            },
+            business_mission: {
+                required: true,
+            },
+            business_legal_name: {
+                required: true,
+            },
+            business_tagline: {
+                required: true,
+            },
+        },
+    };
+
+    $scope.save_business = function(){
+        // var validate_bus_key = $scope.validate_business_keyword();
+        var validate_bus_ser_pro = $scope.validate_business_ser_pro();
+        var validate_bus_searce_area = $scope.validate_business_serve_area();
+        if ($scope.business_info_form.validate() && validate_bus_ser_pro && validate_bus_searce_area)
+        {
+            $("#save_business_loader").show();
+            $("#save_business").attr("style","pointer-events:none;display:none;");
+            var business_name = $("#business_name").val();
+            var business_type = $("#business_type option:selected").val();
+            var other_business_type = $("#other_business_type").val();
+            var business_category = $("#business_category option:selected").val();
+            var other_business_category = $("#other_business_category").val();
+            var business_desc = $("#business_desc").val();
+            var business_tot_emp = $("#business_tot_emp option:selected").val();
+            var business_year_found = $("#business_year_found option:selected").val();
+            var business_ext_benifit = $scope.business_ext_benifit;
+            var business_pay_mode = $("#business_pay_mode option:selected").val();
+            var business_keyword = $scope.business_keyword;
+            var business_mission = $("#business_mission").val();
+            var business_legal_name = $("#business_legal_name").val();
+            var business_ser_pro = $scope.business_ser_pro;
+            var business_serve_area = $scope.business_serve_area;
+            var business_tagline = $("#business_tagline").val();
+            var business_formly_known = $("#business_formly_known").val();
+
+            var update_data = $.param({
+                'business_name':business_name,
+                'business_type':business_type,
+                'other_business_type':other_business_type,
+                'business_category':business_category,
+                'other_business_category':other_business_category,
+                'business_desc':business_desc,
+                'business_tot_emp':business_tot_emp,
+                'business_year_found':business_year_found,
+                'business_ext_benifit':business_ext_benifit,
+                'business_pay_mode':business_pay_mode,
+                'business_keyword':business_keyword,
+                'business_mission':business_mission,
+                'business_legal_name':business_legal_name,
+                'business_ser_pro':business_ser_pro,
+                'business_serve_area':business_serve_area,
+                'business_tagline':business_tagline,
+                'business_formly_known':business_formly_known,
+            });
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/save_business',                
+                data: update_data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    $scope.business_info_data = result.data.business_info_data;
+                    $(".profile-left h1.profile-head-text a").html($scope.business_info_data.company_name);
+                    var categoy_name = "";
+                    if($scope.business_info_data.industriyal > '0')
+                    {
+                        categoy_name = $scope.business_info_data.industriyal_txt;
+                    }
+                    else
+                    {
+                        categoy_name = $scope.business_info_data.other_industrial;   
+                    }
+                    $(".profile-left h2.profile-head-text_dg a").html(categoy_name);
+                }
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+                $("#save_business").removeAttr("style");
+                $("#save_business_loader").hide();
+                $("#job-basic-info").modal('hide');
+            });
+            
+        }
+    };
+    $scope.business_ext_benifit_fnc = function(){
+        $("#business_ext_benifit .tags").attr("style","border:1px solid #cccccc;");
+    };
+    $scope.business_keyword_fnc = function(){
+        $("#business_keyword .tags").attr("style","border:1px solid #cccccc;");
+    };
+    $scope.business_ser_pro_fnc = function(){
+        $("#business_ser_pro .tags").attr("style","border:1px solid #cccccc;");
+    };
+    $scope.business_serve_area_fnc = function(){
+        $("#business_serve_area .tags").attr("style","border:1px solid #cccccc;");
+    };
+    $scope.edit_business = function(){
+        var business_arr = $scope.business_info_data;
+        $("#business_name").val(business_arr.company_name);
+        $("#business_type").val(business_arr.business_type);
+        if(business_arr.business_type == '0')
+        {
+            $("#other_div").show();
+            $("#other_business_type_div").show();
+            $("#other_business_type").val(business_arr.other_business_type);
+        }
+        $("#business_category").val(business_arr.industriyal);
+        if(business_arr.industriyal == '0')
+        {
+            $("#other_div").show();
+            $("#other_business_category_div").show();
+            $("#other_business_category").val(business_arr.other_industrial);
+        }
+        $("#business_desc").val(business_arr.details);
+        $("#business_tot_emp").val(business_arr.business_tot_emp);
+        $("#business_year_found").val(business_arr.business_year_found);
+
+        var ext_benifit_arr = "";
+        if(business_arr.business_ext_benifit.trim() != "")
+        {
+            var ext_benifit_arr = business_arr.business_ext_benifit.split(',');
+        }
+
+        var edit_business_ext_benifit = [];
+        if(ext_benifit_arr.length > 0)
+        {                    
+            ext_benifit_arr.forEach(function(element,idx) {
+              edit_business_ext_benifit[idx] = {"benifit":element};
+            });
+        }
+        $scope.business_ext_benifit = edit_business_ext_benifit;
+
+        $("#business_pay_mode").val(business_arr.business_pay_mode);
+
+        var keyword_arr = "";
+        if(business_arr.business_keyword.trim() != "")
+        {
+            var keyword_arr = business_arr.business_keyword.split(',');
+        }
+
+        var edit_business_keyword = [];
+        if(keyword_arr.length > 0)
+        {                    
+            keyword_arr.forEach(function(element,idx) {
+              edit_business_keyword[idx] = {"keyword":element};
+            });
+        }
+        $scope.business_keyword = edit_business_keyword;
+
+        $("#business_mission").val(business_arr.business_mission);
+        $("#business_legal_name").val(business_arr.business_legal_name);
+
+        var ser_pro_arr = "";
+        if(business_arr.business_ser_pro.trim() != "")
+        {
+            var ser_pro_arr = business_arr.business_ser_pro.split(',');
+        }
+
+        var edit_business_ser_pro = [];
+        if(ser_pro_arr.length > 0)
+        {                    
+            ser_pro_arr.forEach(function(element,idx) {
+              edit_business_ser_pro[idx] = {"services":element};
+            });
+        }
+        $scope.business_ser_pro = edit_business_ser_pro;
+
+        var serve_area_arr = "";
+        if(business_arr.business_serve_area_txt.trim() != "")
+        {
+            var serve_area_arr = business_arr.business_serve_area_txt.split(',');
+        }
+
+        var edit_business_serve_area = [];
+        if(serve_area_arr.length > 0)
+        {                    
+            serve_area_arr.forEach(function(element,idx) {
+              edit_business_serve_area[idx] = {"city":element};
+            });
+        }
+        $scope.business_serve_area = edit_business_serve_area;
+
+        $("#business_tagline").val(business_arr.business_tagline);
+        $("#business_formly_known").val(business_arr.business_formly_known);
+
+        $("#job-basic-info").modal('show');
+    };
     //Business Basic Information End
 
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                // $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
 });
