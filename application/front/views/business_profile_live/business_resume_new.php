@@ -1211,7 +1211,7 @@
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-7">
 										<div class="form-group">
-											<label>URL</label>
+											<label>URL <span class="personal-link-info">(must start with http:// or https://)</span></label>
 										</div>
 									</div>																
 								</div>
@@ -1497,7 +1497,7 @@
 	                                </div>
 	                                <div class="col-md-8 col-sm-8 col-xs-7">
 	                                    <div class="form-group">
-	                                        <label>URL</label>
+	                                        <label>URL <span class="personal-link-info">(must start with http:// or https://)</span></label>
 	                                        <input type="text" placeholder="Enter URL" id="link_url{{$index}}" class="link_url" name="link_url" ng-keyup="check_socialurl($index)" ng-value="field.user_links_txt">
 	                                    </div>
 	                                </div>
@@ -2082,7 +2082,12 @@
 					<div class="dtl-title">
 						<a href="#" ng-if="from_user_id == to_user_id" data-target="#add-menu-img" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/detail/detail-add1.png?ver=' . time()) ?>"><span class="timeline-tital">Add Menu</span></a>
 					</div>
-					<div class="dtl-dis">
+					<div class="dtl-dis" ng-if="menu_info_data.length < '1'">
+                        <div class="no-timeline">
+                            <a href="#" ng-if="from_user_id == to_user_id" data-target="#add-menu-img" data-toggle="modal" class=""><img src="<?php echo base_url('assets/n-images/no-menu.jpg?ver=' . time()) ?>"><span class="timeline-tital"><h2>Add Menu</h2></span></a>
+                        </div>
+                    </div>
+					<div class="dtl-dis" ng-if="menu_info_data.length > '0'">
 						<div class="menu-privew">
 							<ul>
 								<li ng-repeat="menu_info in menu_info_data">
