@@ -71,7 +71,7 @@ function ajax_business_home_post(pagenum) {
         dataType: "html",
         beforeSend: function () {
             if (pagenum == 'undefined') {
-                // $(".business-all-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+                // $(".business-all-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
             } else {
                 $('#loader').show();
             }
@@ -109,7 +109,7 @@ function ajax_business_home_three_user_list() {
         data: '',
         dataType: "html",
         beforeSend: function () {
-            $(".profile-boxProfileCard_follow").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+            $(".profile-boxProfileCard_follow").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
         },
         success: function (data) {
             $('.loader').remove();
@@ -1856,3 +1856,46 @@ function check_no_post_data() {
     }
 
 }
+function get_business_profile_progress() {
+    $.ajax({
+        type: 'POST',
+        url: base_url +'business_profile_live/get_business_profile_progress',
+        data: '',
+        dataType: "JSON",
+        success: function (data) {            
+            // data = JSON.parse(data);
+            var profile_progress = data.profile_progress;
+            count_profile_value = profile_progress.user_process_value;
+            count_profile = profile_progress.user_process;            
+            set_progress(count_profile_value,count_profile);
+            
+        }
+    });
+}
+
+function set_progress(count_profile_value,count_profile)
+{
+    if(count_profile == 100)
+    {
+        $("#profile-progress").show();
+        $("#progress-txt").html("Hurray! Your profile is complete.");
+        setTimeout(function(){
+            // $("#edit-profile-move").hide();
+        },5000);
+    }
+    else
+    {
+        $("#edit-profile-move").show();
+        $("#profile-progress").show();                
+        $("#progress-txt").html("<a href='"+base_url+'company/'+business_slug+"/details'>Complete your profile to get connected with more people</a>.");   
+    }
+    // if($scope.old_count_profile < 100)
+    {
+        $('.second.circle-1').circleProgress({
+            value: count_profile_value //with decimal point
+        }).on('circle-animation-progress', function(event, progress) {
+            $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+        });
+    }
+}
+get_business_profile_progress();

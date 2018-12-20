@@ -416,7 +416,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 						</div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 							<?php $this->load->view('right_add_box'); ?>
-                            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                            <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
                                 <div class="count_main_progress">
                                     <div class="circles">
                                         <div class="second circle-1">
