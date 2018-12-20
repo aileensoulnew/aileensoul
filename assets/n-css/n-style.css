@@ -2962,6 +2962,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .personal-link-info{font-size:12px; color:#7b7b7b;}
 #user_idol_file.error{position:inherit; border:0 !important; color:#ff0000 !important;}
 .menu-privew{width:100%; float:left;}
+.menu-privew li p img{cursor:pointer;}
 .dtl-dis .menu-privew ul{width:100%; float:left; text-align:center;}
 .dtl-dis .menu-privew li{width:180px; display:inline-block; position: relative; overflow: hidden; height:180px; margin:5px; padding:0;}
 .menu-privew li img{position: absolute; left: 50%; top: 50%; width: auto; height: 100%;
