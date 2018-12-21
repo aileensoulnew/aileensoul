@@ -711,8 +711,8 @@ if($browser == "Firefox")
     var is_verify = "<?php echo $userData['user_verify']; ?>";
 
     function Notificationheader() {
-        getNotification();
-        notheader();
+        // getNotification();
+        // notheader();
     }
     function getNotification() {
         // first click alert('here'); 
@@ -763,13 +763,13 @@ if($browser == "Firefox")
                 $(".noti_count").html("");
             }
             setTimeout(function(){
-                get_notification_unread_count();
+                // get_notification_unread_count();
             }, 5000);
-        }).fail(function() {
+        });/*.fail(function() {
             setTimeout(function(){
                 get_notification_unread_count();
             }, 5000);
-        });
+        });*/
 
         /*$.ajax({
             type: 'POST',
@@ -809,18 +809,18 @@ if($browser == "Firefox")
             }
 
             setTimeout(function(){
-                unread_message_count();
+                // unread_message_count();
             }, 5000);
-        })
+        });/*
         .fail(function() {
             setTimeout(function(){
                 unread_message_count();
             }, 5000);
-        });
+        });*/
     }
     setTimeout(function(){
-        get_notification_unread_count();
-        unread_message_count();
+        // get_notification_unread_count();
+        // unread_message_count();
     }, 1000);    
     /*window.setInterval(function(){
       get_notification_unread_count();

@@ -65,7 +65,7 @@ function check() {
 
 
 $(document).ready(function () {
-    $('#country').on('change', function () {
+    /*$('#country').on('change', function () {
         var countryID = $(this).val();
         if (countryID) {
             $.ajax({
@@ -97,7 +97,7 @@ $(document).ready(function () {
         } else {
             $('#city').html('<option value="">Select state first</option>');
         }
-    });
+    });*/
 });
 $(document).ready(function () {
     var input1 = $("#business_address");

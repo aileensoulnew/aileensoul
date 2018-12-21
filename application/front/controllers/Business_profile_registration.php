@@ -410,7 +410,7 @@ class Business_profile_registration extends MY_Controller {
                 {
                     //Send Promotional Mail Start
                     $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
-                    $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                    $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data_sel = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
                     $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 

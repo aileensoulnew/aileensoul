@@ -733,8 +733,8 @@ if($first_segment == "")
     });
 
    function Notificationheader() {
-        getNotification();
-        notheader();
+        // getNotification();
+        // notheader();
 
     }
     function getNotification() {
@@ -788,13 +788,14 @@ if($first_segment == "")
                 $(".noti_count").html("");
             }
             setTimeout(function(){
-                get_notification_unread_count();
+                // get_notification_unread_count();
             }, 5000);
-        }).fail(function() {
+        });
+        /*.fail(function() {
             setTimeout(function(){
                 get_notification_unread_count();
             }, 5000);
-        });
+        });*/
         /*$.ajax({
             type: 'POST',
             url: '<?php //echo base_url() . "notification/get_notification_unread_count" ?>',
@@ -833,19 +834,19 @@ if($first_segment == "")
             }
 
             setTimeout(function(){
-                unread_message_count();
+                // unread_message_count();
             }, 5000);
-        })
+        });/*
         .fail(function() {
             setTimeout(function(){
                 unread_message_count();
             }, 5000);
-        });
+        });*/
     }
 
     setTimeout(function(){
-        get_notification_unread_count();
-        unread_message_count();
+        // get_notification_unread_count();
+        // unread_message_count();
     }, 1000);
     
     /*window.setInterval(function(){
