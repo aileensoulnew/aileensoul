@@ -12314,7 +12314,24 @@ Your browser does not support the audio tag.
         {            
             $member_insert = $this->business_model->save_menu($user_id,$fileName);
             $menu_info_data = $this->business_model->get_menu_info($user_id);
-        $ret_arr = array("success"=>1,"menu_info_data"=>$menu_info_data);
+            $ret_arr = array("success"=>1,"menu_info_data"=>$menu_info_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_menu()
+    {
+        $menu_id = $this->input->post('menu_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $menu_delete_id = $this->business_model->delete_menu($user_id,$menu_id);
+            $menu_info_data = $this->business_model->get_menu_info($user_id);
+            $ret_arr = array("success"=>1,"menu_info_data"=>$menu_info_data);
         }
         else
         {

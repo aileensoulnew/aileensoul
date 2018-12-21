@@ -823,7 +823,11 @@
 											<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any achievements.</span>
 										</div>
 										<div class="fw dtl-more-add" ng-if="timeline_data.length > '0'">
-											<a href="#" data-target="#timeline-cus" data-toggle="modal"><span class="pr10">{{from_user_id == to_user_id ? 'Add' : 'View'}} Timeline </span><img ng-if="from_user_id == to_user_id" src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>"></a>
+											<a href="#" data-target="#timeline-cus" data-toggle="modal">
+												<span class="pr10" ng-if="from_user_id == to_user_id">{{timeline_data.length > '0' ? 'View' : 'Add'}} Timeline </span>
+												<span class="pr10" ng-if="from_user_id != to_user_id">View Timeline </span>
+												<img ng-if="from_user_id == to_user_id" src="<?php echo base_url('assets/n-images/detail/inr-add.png?ver=' . time()) ?>">
+											</a>
 										</div>
 									</div>
 									
@@ -2091,6 +2095,7 @@
 						<div class="menu-privew">
 							<ul>
 								<li ng-repeat="menu_info in menu_info_data">
+									<button class="btn" style="z-index: 9;position: absolute;left: 0;background: #f6f6f66b;top: 0px;color: #1b8ab9;" ng-click="delete_menu_popup($index);"><i class="fa fa-trash" aria-hidden="true"></i></button>
 									<p ng-click="openModal();currentSlide($index + 1)">
 										<img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
 									</p>
@@ -2164,6 +2169,30 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade message-box biderror" id="delete-menu-model" role="dialog">
+	    <div class="modal-dialog modal-lm">
+	        <div class="modal-content">
+	            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+	            <div class="modal-body">
+	                <span class="mes">
+	                    <div class='pop_content'>
+	                        <span>Are you sure you want to delete ?</span>
+	                        <p class='poppup-btns pt20'>
+	                            <span id="menu-delete-btn">
+	                                <a id="delete_menu" href="#" ng-click="delete_menu()" class="btn1">
+	                                    <span>Delete</span>
+	                                </a> 
+	                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+	                            </span>
+	                            <img id="delete_menu_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+	                        </p>
+	                    </div>
+	                </span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	
 	<!-- modal Reviews  -->
 	<div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

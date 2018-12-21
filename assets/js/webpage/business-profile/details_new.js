@@ -2809,6 +2809,40 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             });
         }
     };
+    $scope.menu_id = 0;
+    $scope.delete_menu_popup = function(idx){        
+        $scope.menu_id = $scope.menu_info_data[idx].id_user_menu;
+        $("#delete-menu-model").modal('show');
+    };
+
+    $scope.delete_menu = function(){
+        $("#delete_menu").attr("style","pointer-events:none;display:none;");
+        $("#delete_menu_loader").show();
+        $("#menu-delete-btn").hide();
+        if($scope.menu_id != 0)
+        {
+            var deldata = $.param({'menu_id': $scope.menu_id});
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_live/delete_menu',
+                data: deldata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.menu_info_data = result.menu_info_data;
+                    }
+                    menu_formdata = new FormData();
+                    $("#delete-menu-model").modal('hide');
+                    $("#delete_menu").removeAttr("style");
+                    $("#delete_menu_loader").hide();
+                    $("#menu-delete-btn").show();
+                }
+            });
+        }
+    };
 
     $scope.get_menu_info = function(){
         $http({

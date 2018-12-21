@@ -1420,6 +1420,18 @@ class Business_model extends CI_Model {
         return $insert_id;
     }
 
+    public function delete_menu($user_id,$menu_id)    
+    {
+        $data = array(                
+            'status' => "0",
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->where('id_user_menu', $menu_id);
+        $this->db->update('business_user_menu', $data);
+        return true;
+    }
+
     public function get_menu_info($user_id)
     {
         $this->db->select("*")->from('business_user_menu');        
