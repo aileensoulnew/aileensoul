@@ -362,7 +362,7 @@
 															
 														</div>
 														<div class="dis-right">
-															<a href="javascript:void(0);" ng-click="edit_member($index);" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>n-images/detail/detial-edit.png"></a>
+															<a ng-if="from_user_id == to_user_id" href="javascript:void(0);" ng-click="edit_member($index);" class="pr5"><img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>n-images/detail/detial-edit.png"></a>
 															<span role="button" data-toggle="collapse" data-parent="#member-accordion" href="#mem{{$index}}" aria-expanded="false" aria-controls="mem{{$index}}" class="collapsed up-down">
 																<img src="<?php echo base_url('assets/n-images/detail/
 																down-arrow.png?ver=' . time()) ?>">
@@ -2095,7 +2095,7 @@
 						<div class="menu-privew">
 							<ul>
 								<li ng-repeat="menu_info in menu_info_data">
-									<button class="btn" style="z-index: 9;position: absolute;left: 0;background: #f6f6f66b;top: 0px;color: #1b8ab9;" ng-click="delete_menu_popup($index);"><i class="fa fa-trash" aria-hidden="true"></i></button>
+									<button ng-if="from_user_id == to_user_id" class="btn" style="z-index: 9;position: absolute;left: 0;background: #f6f6f66b;top: 0px;color: #1b8ab9;" ng-click="delete_menu_popup($index);"><i class="fa fa-trash" aria-hidden="true"></i></button>
 									<p ng-click="openModal();currentSlide($index + 1)">
 										<img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
 									</p>
