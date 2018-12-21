@@ -405,6 +405,12 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('BUSINESS_MEMBER_IMG_UPLOAD_URL', BUCKETLINK . 'uploads/business_member_img/');
     define('BUSINESS_USER_MENU_IMG_UPLOAD_URL', BUCKETLINK . 'uploads/business_menu_img/');
 
+    define('ART_USER_PORTFOLIO_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_portfolio/');
+    define('ART_USER_AWARD_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_award/');
+    define('ART_USER_ADDICOURSE_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_addicourse/');
+    define('ART_USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_experience/');
+    define('ART_USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_education/');
+
 } else {
     //USER PHOTO 
     define('USER_WEB_IMAGE_URL', BASEURL . 'admin/../uploads/users/main/');
@@ -661,6 +667,12 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('BUSINESS_USER_TIMELINE_UPLOAD_URL', BASEURL . 'uploads/business_user_timeline/');
     define('BUSINESS_MEMBER_IMG_UPLOAD_URL', BASEURL . 'uploads/business_member_img/');
     define('BUSINESS_USER_MENU_IMG_UPLOAD_URL', BASEURL . 'uploads/business_menu_img/');
+
+    define('ART_USER_PORTFOLIO_UPLOAD_URL', BASEURL . 'uploads/art_user_portfolio/');
+    define('ART_USER_AWARD_UPLOAD_URL', BASEURL . 'uploads/art_user_award/');
+    define('ART_USER_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/art_user_addicourse/');
+    define('ART_USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/art_user_experience/');
+    define('ART_USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/art_user_education/');
 
 }
 

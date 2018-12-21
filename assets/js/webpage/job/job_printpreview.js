@@ -2444,10 +2444,10 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
             /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
-                var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+job_user_activity_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_activity_upload_url+award_file_name+'"></a></p>';
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+job_user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+job_user_award_upload_url+award_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="award_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_activity_upload_url+award_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+job_user_award_upload_url+award_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -5584,6 +5584,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
                 if(success == 1)
                 {                    
                     $scope.preferred_job_info = result.data.preferred_job_info;                
+                    $scope.job_basic_info = result.data.job_basic_info;                
                 }
                 $("#save_preferred_job").removeAttr("style");
                 $("#preferred_job_loader").hide();

@@ -988,3 +988,9 @@ $config['business_user_story_upload_path'] = 'uploads/business_user_story/';
 $config['business_user_timeline_upload_path'] = 'uploads/business_user_timeline/';
 $config['business_member_img_upload_path'] = 'uploads/business_member_img/';
 $config['business_user_menu_upload_path'] = 'uploads/business_menu_img/';
+
+$config['art_education_upload_path'] = 'uploads/art_user_education/';
+$config['art_experience_upload_path'] = 'uploads/art_user_experience/';
+$config['art_addicourse_upload_path'] = 'uploads/art_user_addicourse/';
+$config['art_user_award_upload_path'] = 'uploads/art_user_award/';
+$config['art_user_portfolio_upload_path'] = 'uploads/art_user_portfolio/';

@@ -17,6 +17,7 @@ class Artist_live extends MY_Controller {
         $this->load->model('data_model');
         $this->load->model('artistic_model');
         $this->load->library('S3');
+        $this->load->library('upload');
 
 
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
@@ -586,18 +587,23 @@ class Artist_live extends MY_Controller {
         $slugdata = $this->getdatafromslug($slugname);
         $regid = $slugdata['art_id'];
 
+        
+        $contition_array = array('user_id' => $userid, 'status' => '1', 'art_step' => '4');
+        $this->data['login_art_data'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+
         $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
-        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
 
         $this->data['get_url'] = $this->get_url($this->data['artisticdata'][0]['user_id']);
 
-        $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+        $this->data['artistic_name'] = $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
         $this->data['title'] = $this->data['title'] = $artistic_name . ' | Details' . '- Artistic Profile' . TITLEPOSTFIX;
 
         if ($userid && count($artistic_deactive) <= 0 && $this->data['artist_isregister']) {
             if ($this->data['artisticdata']) {
                 $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
-                $this->load->view('artist_live/artistic_profile', $this->data);
+                $this->load->view('artist_live/artistic_profile_new', $this->data);
             } else if (!$this->data['artisticdata'] && $id != $userid) {
                 $this->load->view('artist_live/notavalible');
             } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
@@ -608,7 +614,8 @@ class Artist_live extends MY_Controller {
             $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->data['artistic_common_profile'] = $this->load->view('artist_live/artistic_common_profile', $this->data, true);
-            $this->load->view('artist_live/art_profile_live', $this->data);
+            // $this->load->view('artist_live/art_profile_live', $this->data);
+            redirect(base_url('artist/p/'.$slugname));
         }
     }
 
@@ -2129,5 +2136,789 @@ class Artist_live extends MY_Controller {
     public function art_create_search_table()
     {
         $this->artistic_model->art_create_search_table();
+    }
+
+    public function save_user_education()
+    {
+        $edit_edu = $this->input->post('edit_edu');
+        $edu_file_old = $this->input->post('edu_file_old');
+        $edu_school_college = $this->input->post('edu_school_college');
+        $edu_university = $this->input->post('edu_university');
+        if($edu_university == 0)
+        {
+            $edu_other_university = $this->input->post('edu_other_university');
+        }
+        else
+        {
+            $edu_other_university = "";
+        }
+        $edu_degree = $this->input->post('edu_degree');
+        $edu_stream = $this->input->post('edu_stream');
+        if($edu_degree == 0)
+        {            
+            $edu_other_degree = $this->input->post('edu_other_degree');
+            $edu_other_stream = $this->input->post('edu_other_stream');
+        }
+        else
+        {
+            $edu_other_degree = "";
+            $edu_other_stream = "";
+        }
+        $edu_start_date = $this->input->post('edu_s_year').'-'.$this->input->post('edu_s_month');
+        $edu_end_date = $this->input->post('edu_e_year').'-'.$this->input->post('edu_e_month');
+        $edu_nograduate = $this->input->post('edu_nograduate');
+        if($edu_nograduate == 1)
+        {
+            $edu_end_date = "";
+        }
+
+        $fileName = $edu_file_old;
+        if(isset($_FILES['edu_file']['name']) && $_FILES['edu_file']['name'] != "")
+        {
+            $art_education_upload_path = $this->config->item('art_education_upload_path');
+            $user_edu_file_old = $art_education_upload_path . $edu_file_old;
+            if (isset($user_edu_file_old)) {
+                unlink($user_edu_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $art_education_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['edu_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('edu_file')){
+                $main_image = $art_education_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_project_insert = $this->artistic_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName,$edit_edu);
+            $user_education = $this->artistic_model->get_user_education($user_id);            
+            $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_education()
+    {
+        $edu_id = $this->input->post('edu_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->artistic_model->delete_user_education($user_id,$edu_id);
+            $user_education = $this->artistic_model->get_user_education($user_id);            
+            $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_education()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        
+        $user_education = $this->artistic_model->get_user_education($userid);        
+        $ret_arr = array("success"=>1,"user_education"=>$user_education);        
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_addicourse()
+    {
+        $edit_addicourse = $this->input->post('edit_addicourse');
+        $addicourse_file_old = $this->input->post('addicourse_file_old');
+        $addicourse_name = $this->input->post('addicourse_name');
+        $addicourse_org = $this->input->post('addicourse_org');        
+        $addicourse_start_date = $this->input->post('addicourse_s_year').'-'.$this->input->post('addicourse_s_month');
+        $addicourse_end_date = $this->input->post('addicourse_e_year').'-'.$this->input->post('addicourse_e_month');
+        $addicourse_url = $this->input->post('addicourse_url');
+        $fileName = $addicourse_file_old;
+        if(isset($_FILES['addicourse_file']['name']) && $_FILES['addicourse_file']['name'] != "")
+        {
+            $art_addicourse_upload_path = $this->config->item('art_addicourse_upload_path');
+            $user_addicourse_file_old = $art_addicourse_upload_path . $addicourse_file_old;
+            if (isset($user_addicourse_file_old)) {
+                unlink($user_addicourse_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $art_addicourse_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['addicourse_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('addicourse_file')){
+                $main_image = $art_addicourse_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_activity_insert = $this->artistic_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse);
+            $user_addicourse = $this->artistic_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_addicourse()
+    {
+        $addicourse_id = $this->input->post('addicourse_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->artistic_model->delete_user_addicourse($user_id,$addicourse_id);
+            $user_addicourse = $this->artistic_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_addicourse()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_addicourse = $this->artistic_model->get_user_addicourse($userid);        
+        $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_award()
+    {
+        $edit_awards = $this->input->post('edit_awards');
+        $awards_file_old = $this->input->post('awards_file_old');
+        $award_title = $this->input->post('award_title');
+        $award_org = $this->input->post('award_org');        
+        $award_date = $this->input->post('award_year').'-'.$this->input->post('award_month').'-'.$this->input->post('award_day');
+        $award_desc = $this->input->post('award_desc');
+        $fileName = $awards_file_old;
+        if(isset($_FILES['award_file']['name']) && $_FILES['award_file']['name'] != "")
+        {
+            $art_user_award_upload_path = $this->config->item('art_user_award_upload_path');
+            $user_award_file_old = $art_user_award_upload_path . $awards_file_old;
+            if (isset($user_award_file_old)) {
+                unlink($user_award_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $art_user_award_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['award_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('award_file')){
+                $main_image = $art_user_award_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->artistic_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards);
+            $user_award = $this->artistic_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_award()
+    {
+        $award_id = $this->input->post('award_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->artistic_model->delete_user_award($user_id,$award_id);
+            $user_award = $this->artistic_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_award()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_award = $this->artistic_model->get_user_award($userid);
+        $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_experience()
+    {
+        $edit_exp = $this->input->post('edit_exp');
+        $exp_file_old = $this->input->post('exp_file_old');
+        $exp_company_name = $this->input->post('exp_company_name');
+        $exp_designation = $this->input->post('exp_designation');
+        $exp_company_website = $this->input->post('exp_company_website');
+        $exp_field = $this->input->post('exp_field');        
+        $exp_country = $this->input->post('exp_country');
+        $exp_state = $this->input->post('exp_state');
+        $exp_city = $this->input->post('exp_city');
+        $exp_start_date = $this->input->post('exp_s_year').'-'.$this->input->post('exp_s_month');
+        $exp_end_date = $this->input->post('exp_e_year').'-'.$this->input->post('exp_e_month');
+        $exp_isworking = $this->input->post('exp_isworking');
+        $exp_desc = $this->input->post('exp_desc');
+        $fileName = "";
+        if($exp_isworking == 1)
+        {
+            $exp_end_date = "";
+        }
+        if($exp_field == 0)
+        {
+            $exp_other_field = $this->input->post('exp_other_field');
+        }
+        else
+        {
+            $exp_other_field = "";
+        }
+        $exp_designation_id = "";
+        // foreach ($exp_designation as $title) {
+            $designation = $this->data_model->findJobTitle($exp_designation);
+            if ($designation['title_id'] != '') {
+                $jobTitleId = $designation['title_id'];
+            } else {
+                $data = array();
+                $data['name'] = $title['name'];
+                $data['created_date'] = date('Y-m-d H:i:s', time());
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = 'draft';
+                $data['slug'] = $this->common->clean($title['name']);
+                $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+            }
+            $exp_designation_id = $jobTitleId;
+        // }        
+        $fileName = $exp_file_old;
+        if(isset($_FILES['exp_file']['name']) && $_FILES['exp_file']['name'] != "")
+        {            
+            $art_experience_upload_path = $this->config->item('art_experience_upload_path');
+            $user_exp_file_old = $art_experience_upload_path . $exp_file_old;
+            if (isset($user_exp_file_old)) {
+                unlink($user_exp_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $art_experience_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['exp_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('exp_file')){
+                $main_image = $art_experience_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->artistic_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp);
+            $user_experience = $this->artistic_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);            
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_experience()
+    {
+        $exp_id = $this->input->post('exp_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->artistic_model->delete_user_experience($user_id,$exp_id);
+            $user_experience = $this->artistic_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);            
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_experience()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        
+        $user_experience = $this->artistic_model->get_user_experience($userid);
+        $year = array();
+        $month = array();
+        foreach ($user_experience as $_user_experience) {
+            $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+            if($_user_experience['exp_isworking'] == 1)
+            {
+                $datetime2 = new DateTime();
+            }
+            else
+            {
+                $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+            }
+            $interval = $datetime1->diff($datetime2);                
+            $year[] = $interval->format('%y');
+            $month[] = $interval->format('%m') + 1;
+        }
+        $years = array_sum($year);
+        $cal_years = array_sum($month);
+        $total_month = $cal_years % 12;
+        $years = $years + intval($cal_years / 12);
+        $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_portfolio()
+    {
+        $edit_portfolio_id = $this->input->post('edit_portfolio_id');
+        $portfolio_file_old = $this->input->post('portfolio_file_old');
+        $portfolio_title = $this->input->post('portfolio_title');
+        $portfolio_desc = $this->input->post('portfolio_desc');
+        $fileName = $portfolio_file_old;
+        if(isset($_FILES['portfolio_file']['name']) && $_FILES['portfolio_file']['name'] != "")
+        {
+            $art_user_portfolio_upload_path = $this->config->item('art_user_portfolio_upload_path');
+            $user_portfolio_file_old = $art_user_portfolio_upload_path . $portfolio_file_old;
+            if (isset($user_portfolio_file_old)) {
+                unlink($user_portfolio_file_old);
+            }
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $art_user_portfolio_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['portfolio_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('portfolio_file')){
+                $main_image = $art_user_portfolio_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->artistic_model->save_portfolio($user_id,$portfolio_title,$portfolio_desc,$fileName,$edit_portfolio_id);
+            $user_portfolio = $this->artistic_model->get_portfolio($user_id);
+            $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_portfolio()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_portfolio = $this->artistic_model->get_portfolio($user_id);
+        $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_portfolio()
+    {
+        $edit_portfolio_id = $this->input->post('edit_portfolio_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $portfolio_delete = $this->artistic_model->delete_portfolio($user_id,$edit_portfolio_id);
+            $user_portfolio = $this->artistic_model->get_portfolio($user_id);
+            $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    function save_user_links()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $link_type = $this->input->post('link_type');
+        $link_url = $this->input->post('link_url');
+        $personal_link_url = $this->input->post('personal_link_url');
+
+        $this->db->where('user_id', $userid);
+        $this->db->delete('art_user_links');
+
+        if(count($link_type) == count($link_url))
+        {
+            foreach($link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => $link_type[$k]['value'],
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'art_user_links');
+                }
+            }
+        }
+
+        if(count($personal_link_url) > 0)
+        {
+            foreach($personal_link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => "Personal",
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'art_user_links');
+                }
+            }
+        }
+
+        $user_social_links_data = $this->artistic_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->artistic_model->get_user_personal_links($userid);        
+        $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_links()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_social_links_data = $this->artistic_model->get_user_social_links($user_id);        
+        $user_personal_links_data = $this->artistic_model->get_user_personal_links($user_id);        
+        if(empty($user_social_links_data) && empty($user_personal_links_data))
+        {
+            $ret_arr = array("success"=>0);
+        }
+        else
+        {
+            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data,"user_social_links_data_edit"=>$user_social_links_data,"user_personal_links_data_edit"=>$user_personal_links_data);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_language()
+    {
+        $userid = $this->session->userdata('aileenuser');
+
+        $language = $this->input->post('language');
+        $proficiency = $this->input->post('proficiency');        
+        
+        if(isset($language) && isset($proficiency) && !empty($language) && !empty($proficiency))
+        {
+            $this->db->where('user_id', $userid);
+            $this->db->delete('art_user_languages');
+
+            if(count($language) == count($proficiency))
+            {
+                foreach($language as $k=>$v)
+                {                    
+                    if($v['value'] != "")
+                    {                        
+                        $data = array(
+                            'user_id' => $userid,
+                            'language_txt' => $v['value'],
+                            'proficiency' => $proficiency[$k]['value'],
+                            'status' => '1',
+                            'created_date' => date('Y-m-d H:i:s', time()),
+                            'modify_date' => date('Y-m-d H:i:s', time()),
+                        );
+                        $insert_id = $this->common->insert_data($data, 'art_user_languages');
+                    }
+                }
+            }            
+        }
+
+        $user_languages = $this->artistic_model->get_user_languages($userid);
+        $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_languages()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_languages = $this->artistic_model->get_user_languages($user_id);
+        $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_art_bio()
+    {
+        $user_bio = $this->input->post('user_bio');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array('art_desc_art' => $user_bio);
+        $udpate_data = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $udpate_data = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
+            $ret_arr = array("success"=>1,"user_bio"=>$user_bio);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
+
+    public function get_user_bio()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $user_bio = $this->artistic_model->get_user_bio($user_id);
+        $ret_arr = array("success"=>1,"user_bio"=>$user_bio);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_specialities()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $art_speciality_data = $this->artistic_model->get_user_specialities($user_id);
+        $ret_arr = array("success"=>1,"art_speciality_data"=>$art_speciality_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_speciality()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $speciality_txt = $this->input->post('speciality_txt');
+        $speciality_desc = $this->input->post('speciality_desc');        
+        $user_spl_tag_txt = "";
+        if(isset($speciality_txt) && !empty($speciality_txt))
+        {
+            foreach ($speciality_txt as $key => $value) {
+                $user_spl_tag_txt .= $value['speciality'].",";
+            }
+        }
+        $user_spl_tag_txt = trim($user_spl_tag_txt,",");
+
+        $data = array('art_spl_tags' => $user_spl_tag_txt,'art_spl_desc' => $speciality_desc);        
+        $udpate_data = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
+        if($udpate_data)
+        {
+            $udpate_data = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $user_id);
+            $art_speciality_data = $this->artistic_model->get_user_specialities($user_id);
+            $ret_arr = array("success"=>1,"art_speciality_data"=>$art_speciality_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_soft_inst_skill_data()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $art_soft_inst_skill = $this->artistic_model->get_user_soft_inst_skill_data($user_id);
+        $ret_arr = array("success"=>1,"art_soft_inst_skill"=>$art_soft_inst_skill);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_soft_inst_skill()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $soft_inst_skill_txt = $this->input->post('soft_inst_skill_txt');        
+        $soft_inst_skill_tags = "";
+        if(isset($soft_inst_skill_txt) && !empty($soft_inst_skill_txt))
+        {
+            foreach ($soft_inst_skill_txt as $key => $value) {
+                $soft_inst_skill_tags .= $value['sis'].",";
+            }
+        }
+        $soft_inst_skill_tags = trim($soft_inst_skill_tags,",");
+
+        $data = array('art_soft_inst_skill' => $soft_inst_skill_tags);        
+        $udpate_data = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
+        if($udpate_data)
+        {
+            $udpate_data = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $user_id);
+            $art_soft_inst_skill = $this->artistic_model->get_user_soft_inst_skill_data($user_id);
+            $ret_arr = array("success"=>1,"art_soft_inst_skill"=>$art_soft_inst_skill);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_talent_cat_data()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $art_talent_category = $this->artistic_model->get_user_talent_cat_data($user_id);
+        $ret_arr = array("success"=>1,"art_talent_category"=>$art_talent_category);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_talent_cat()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $talent_cat_txt = $this->input->post('talent_cat_txt');        
+        $talent_cat_tags = "";
+        if(isset($talent_cat_txt) && !empty($talent_cat_txt))
+        {
+            foreach ($talent_cat_txt as $key => $value) {
+                $talent_cat_tags .= $value['tal_cat'].",";
+            }
+        }
+        $talent_cat_tags = trim($talent_cat_tags,",");
+
+        $data = array('art_talent_category' => $talent_cat_tags);        
+        $udpate_data = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
+        if($udpate_data)
+        {
+            $udpate_data = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $user_id);
+            $art_talent_category = $this->artistic_model->get_user_talent_cat_data($user_id);
+            $ret_arr = array("success"=>1,"art_talent_category"=>$art_talent_category);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

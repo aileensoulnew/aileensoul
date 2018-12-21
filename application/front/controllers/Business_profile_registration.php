@@ -418,7 +418,7 @@ class Business_profile_registration extends MY_Controller {
                     
                     $email_html = $this->load->view('email_template/business',$this->userdata,TRUE);                
 
-                    $subject = $userdata['company_name']." is Now Live on Aileensoul Platform ";
+                    $subject = $userdata[0]['company_name']." is Now Live on Aileensoul Platform ";
 
                     $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
                     //Send Promotional Mail End

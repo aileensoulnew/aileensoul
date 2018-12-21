@@ -876,4 +876,422 @@ class Artistic_model extends CI_Model {
         $result_array = $query->row()->total_record;
         return $result_array;
     }
+    
+    public function set_user_education($userid,$edu_school_college = "",$edu_university = "",$edu_other_university = "",$edu_degree = "",$edu_stream = "",$edu_other_degree = "",$edu_other_stream = "",$edu_start_date = "",$edu_end_date = "",$edu_nograduate = "",$edu_file = "",$edit_edu = 0)
+    {
+        if($edit_edu == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'art_user_education');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edit_edu);
+            $this->db->update('art_user_education', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_education($userid,$edu_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edu_id);
+            $this->db->update('art_user_education', $data);
+            return true;
+    }
+
+    public function get_user_education($userid)
+    {
+        $this->db->select("jue.id_education, jue.user_id, jue.edu_school_college, jue.edu_university, jue.edu_other_university, jue.edu_degree, jue.edu_other_degree, jue.edu_stream, jue.edu_other_stream, jue.edu_start_date, jue.edu_end_date, jue.edu_nograduate, jue.edu_file, jue.status, jue.created_date, jue.modify_date, d.degree_name, s.stream_name, u.university_name, DATE_FORMAT(CONCAT(jue.edu_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jue.edu_end_date,'-1'),'%b %Y') as end_date_str")->from("art_user_education jue");
+        $this->db->join('degree d', 'd.degree_id = jue.edu_degree', 'left');
+        $this->db->join('stream s', 's.stream_id = jue.edu_stream', 'left');
+        $this->db->join('university u', 'u.university_id = jue.edu_university', 'left');
+        $this->db->where('jue.user_id', $userid);
+        $this->db->where('jue.status', '1');
+        $this->db->order_by('jue.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function set_user_addicourse($userid,$addicourse_name = "",$addicourse_org = "",$addicourse_start_date = "",$addicourse_end_date = "",$addicourse_url = "",$addicourse_document = "",$edit_addicourse = 0)
+    {
+        if($edit_addicourse == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'art_user_addicourse');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $edit_addicourse);
+            $this->db->update('art_user_addicourse', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_addicourse($userid,$addicourse_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $addicourse_id);
+            $this->db->update('art_user_addicourse', $data);
+            return true;
+    }
+
+    public function get_user_addicourse($userid)
+    {
+        $this->db->select("jua.*,DATE_FORMAT(CONCAT(jua.addicourse_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jua.addicourse_end_date,'-1'),'%b %Y') as end_date_str")->from("art_user_addicourse jua");
+        $this->db->where('jua.user_id', $userid);
+        $this->db->where('jua.status', '1');
+        $this->db->order_by('jua.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_award($userid,$award_title = "",$award_org = "",$award_date = "",$award_desc = "",$award_document = "",$edit_awards = 0)
+    {
+        if($edit_awards == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'art_user_award');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $edit_awards);
+            $this->db->update('art_user_award', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_award($userid,$award_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $award_id);
+            $this->db->update('art_user_award', $data);
+            return true;
+    }
+
+    public function get_user_award($userid)
+    {
+        $this->db->select("jua.*,DATE_FORMAT(jua.award_date,'%d %b %Y') as award_date_str")->from("art_user_award jua");
+        $this->db->where('jua.user_id', $userid);
+        $this->db->where('jua.status', '1');
+        $this->db->order_by('jua.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_experience($userid,$exp_company_name = "",$exp_designation = "",$exp_company_website = "",$exp_field = "",$exp_other_field = "",$exp_country = "",$exp_state = "",$exp_city = "",$exp_start_date = "",$exp_end_date = "",$exp_isworking = "",$exp_desc = "",$exp_file = "",$edit_exp = 0)
+    {
+        if($edit_exp == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'exp_company_name' => $exp_company_name,
+                'exp_designation' => $exp_designation,
+                'exp_company_website' => $exp_company_website,
+                'exp_field' => $exp_field,
+                'exp_other_field' => $exp_other_field,
+                'exp_country' => $exp_country,                
+                'exp_state' => $exp_state,                
+                'exp_city' => $exp_city,                
+                'exp_start_date' => $exp_start_date,                
+                'exp_end_date' => $exp_end_date,                
+                'exp_isworking' => $exp_isworking,                
+                'exp_desc' => $exp_desc,                
+                'exp_file' => $exp_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'art_user_experience');
+            $data1 = array(
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => "Experience"
+            );
+            $this->db->where('user_id', $userid);            
+            $this->db->update('job_reg', $data1);
+
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'exp_company_name' => $exp_company_name,
+                'exp_designation' => $exp_designation,
+                'exp_company_website' => $exp_company_website,
+                'exp_field' => $exp_field,
+                'exp_other_field' => $exp_other_field,
+                'exp_country' => $exp_country,                
+                'exp_state' => $exp_state,                
+                'exp_city' => $exp_city,                
+                'exp_start_date' => $exp_start_date,                
+                'exp_end_date' => $exp_end_date,                
+                'exp_isworking' => $exp_isworking,                
+                'exp_desc' => $exp_desc,                
+                'exp_file' => $exp_file,                
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_experience', $edit_exp);
+            $this->db->update('art_user_experience', $data);
+            $data1 = array(
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => "Experience"
+            );
+            $this->db->where('user_id', $userid);            
+            $this->db->update('job_reg', $data1);
+            return true;
+        }
+    }
+
+    public function delete_user_experience($userid,$exp_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_experience', $exp_id);
+            $this->db->update('art_user_experience', $data);
+            return true;
+    }
+
+    public function get_user_experience($userid)
+    {
+
+        $this->db->select("jue.id_experience, jue.user_id, jue.exp_company_name, jue.exp_designation,jt.name as designation, jue.exp_company_website, jue.exp_field, jue.exp_other_field, jue.exp_country, jue.exp_state, jue.exp_city, jue.exp_start_date, jue.exp_end_date, DATE_FORMAT(CONCAT(jue.exp_start_date,'-1'),'%b %Y') as start_date_str,DATE_FORMAT(CONCAT(jue.exp_end_date,'-1'),'%b %Y') as end_date_str,jue.exp_isworking, jue.exp_desc, jue.exp_file, jue.status, jue.created_date, jue.modify_date,cr.country_name,st.state_name,ct.city_name")->from("art_user_experience jue");
+        $this->db->join('countries cr', 'cr.country_id = jue.exp_country', 'left');
+        $this->db->join('states st', 'st.state_id = jue.exp_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = jue.exp_city', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = jue.exp_designation', 'left');
+        $this->db->where('jue.user_id', $userid);
+        $this->db->where('jue.status', '1');
+        // $this->db->where('FIND_IN_SET(jt.title_id, jue.exp_designation) !=', 0);
+        // $this->db->group_by('jue.exp_designation,jue.id_experience');
+        $this->db->order_by('jue.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function save_portfolio($userid,$portfolio_title = "",$portfolio_desc = "",$portfolio_file = "",$edit_portfolio_id = 0)
+    {
+        if($edit_portfolio_id == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'portfolio_title' => $portfolio_title,
+                'portfolio_desc' => $portfolio_desc,                
+                'portfolio_file' => $portfolio_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'art_user_portfolio');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'portfolio_title' => $portfolio_title,
+                'portfolio_desc' => $portfolio_desc,                
+                'portfolio_file' => $portfolio_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_portfolio', $edit_portfolio_id);
+            $this->db->update('art_user_portfolio', $data);
+            return true;
+        }
+    }
+
+    public function delete_portfolio($userid,$edit_portfolio_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_portfolio', $edit_portfolio_id);
+            $this->db->update('art_user_portfolio', $data);
+            return true;
+    }
+
+    public function get_portfolio($userid)
+    {
+        $this->db->select("*")->from("art_user_portfolio");
+        $this->db->where('user_id', $userid);
+        $this->db->where('status', '1');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_links($userid)
+    {
+        $this->db->select("*")->from("art_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_social_links($userid)
+    {
+        $this->db->select("*")->from("art_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type != ','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_personal_links($userid)
+    {
+        $this->db->select("*")->from("art_user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type','Personal');
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_languages($userid)
+    {
+        $this->db->select("user_id,language_txt as language_name,proficiency,status")->from("art_user_languages");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function get_user_bio($userid)
+    {
+        $this->db->select("art_desc_art")->from("art_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['art_desc_art'];
+    }
+
+    public function get_user_specialities($userid)
+    {
+        $this->db->select("art_spl_tags,art_spl_desc")->from("art_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $return_array = $query->row_array();        
+        return $return_array;
+    }
+
+    public function get_user_soft_inst_skill_data($userid)
+    {
+        $this->db->select("art_soft_inst_skill")->from("art_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['art_soft_inst_skill'];
+    }
+
+    public function get_user_talent_cat_data($userid)
+    {
+        $this->db->select("art_talent_category")->from("art_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['art_talent_category'];
+    }
 }
