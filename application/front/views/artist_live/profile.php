@@ -48,7 +48,7 @@
    <div class="middle-section">
       <div class="container mob-plr0">
          <div class="job_reg_page_fprm">
-            <div class="common-form job_reg_main">
+            <div class="common-form job_reg_main post-job-cus">
                <h3>Welcome in Artistic Profile</h3>
                <?php echo form_open(base_url('artist/profile_insert'), array('id' => 'artinfo','name' => 'artinfo','class' => 'clearfix', 'onsubmit' => "return validation_other(event)")); ?>
                <?php
@@ -88,14 +88,14 @@
                            </div>
                      </div>
                      <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group vali_er">
                            <label >Phone number <font  color="red">*</font> :</label>
                            <input type="text" name="phoneno" id="phoneno" tabindex="4" placeholder="Enter phone number" value="<?php echo $job[0]['user_email'];?>" maxlength="255">
                            <?php echo form_error('phoneno'); ?>
                         </div>
                      </div>
                   </div>                  
-                  <div class="form-group <?php if($skills) {  ?> error-msg <?php } ?>">
+                  <div class="form-group vali_er <?php if($skills) {  ?> error-msg <?php } ?>">
                      <label>Art category:<span style="color:red">*</span></label>
                      <span class="span-select">
                         <select name="skills[]" id="skills" multiple>
@@ -127,11 +127,11 @@
                      </div>
                   </div>
                   <div class="row total-exp">
-                     <div class="col-md-12">
+                     <!--div class="col-md-12">
                         Location:
-                     </div>                     
-                     <div class="col-md-4 col-sm-4 col-xs-4 <?php if($country) { echo 'error-msg';} ?>">
-                        <div class="form-group">
+                     </div-->                     
+                     <div class="col-md-4 col-sm-4 col-xs-4 fw-479 <?php if($country) { echo 'error-msg';} ?>">
+                        <div class="form-group vali_er">
                            <label>Country:<span style="color:red">*</span></label>
                            <span class="span-select">
                               <select class="form-control" name="country" id="country" tabindex="5">
@@ -150,9 +150,9 @@
                            </div>
                      </div>
                      
-                     <div class="col-md-4 col-sm-4 col-xs-4 <?php if($state) {   echo 'error-msg'; } ?>">
-                        <div class="form-group">
-                           <label>state:<span style="color:red">*</span></label>
+                     <div class="col-md-4 col-sm-4 col-xs-4 fw-479 <?php if($state) {   echo 'error-msg'; } ?>">
+                        <div class="form-group vali_er">
+                           <label>State:<span style="color:red">*</span></label>
                            <span class="span-select">
                               <select class="form-control" name="state" id="state" tabindex="6">
                                  <?php
@@ -177,8 +177,8 @@
                         </div>
                      </div>
 
-                     <div class="col-md-4 col-sm-4 col-xs-4 <?php if($city) { echo 'error-msg'; } ?>">
-                        <div class="form-group">
+                     <div class="col-md-4 col-sm-4 col-xs-4 fw-479 <?php if($city) { echo 'error-msg'; } ?>">
+                        <div class="form-group vali_er">
                            <label> City:<span style="color:red">*</span></label>
                               <select name="city" id="city" tabindex="7">
                                  <?php

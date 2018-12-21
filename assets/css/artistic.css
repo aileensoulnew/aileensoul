@@ -4073,7 +4073,7 @@ div .comment {
 .profile-job-post-location-name-rec .fl.search_button{float:right;}
 .profile-job-post-location-name-rec .fl.search_button button{margin-right:0;}
 #InboxBody ul.notification_data_in_h2{float: none!important;}
-
+label{margin-bottom:3px;}
 /***  select dropdown css  ***/
 .multi-select-container {
 	width:100%;
@@ -4085,7 +4085,7 @@ div .comment {
     position: absolute;
     left: 0;
     top: 1.1em;
-    z-index: 9;
+    z-index: 99;
     float: left;
     min-width: 100%;
     background: #fff;
