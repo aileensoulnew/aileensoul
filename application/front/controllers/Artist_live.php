@@ -349,7 +349,14 @@ class Artist_live extends MY_Controller {
         if (count($recuser) > 0) {
             redirect('artist-profile', refresh);
         } else {
-            $this->load->view('artist_live/profile', $this->data);
+            if($userid)
+            {
+                $this->load->view('artist_live/profile', $this->data);
+            }
+            else
+            {
+                redirect('find-artist', refresh);
+            }
         }
     }
 
