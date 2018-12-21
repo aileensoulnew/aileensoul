@@ -241,6 +241,13 @@ $(document).ready(function() {
                 required: "Skill is required.",
             },
         },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "skills[]") {
+                error.insertAfter(".multi-select-menu");                
+            } else {
+                error.insertAfter(element);
+            }
+        },
     });
 });
 $(document).ready(function() {
