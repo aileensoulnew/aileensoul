@@ -2963,6 +2963,9 @@ width: 80%; border-radius: 10px; z-index:9;}
 #user_idol_file.error{position:inherit; border:0 !important; color:#ff0000 !important;}
 .menu-privew{width:100%; float:left;}
 .menu-privew li p img{cursor:pointer;}
+.menu-privew li button{display:none; padding:5px; background: rgba(0,0,0,0.5) !important;}
+.menu-privew li button i{color:#fff; font-size:0px; background:url('../n-images/detail/delete.png'); width:16px; height:16px; display:block;}
+.menu-privew li:hover button{display:block;}
 .dtl-dis .menu-privew ul{width:100%; float:left; text-align:center;}
 .dtl-dis .menu-privew li{width:180px; display:inline-block; position: relative; overflow: hidden; height:180px; margin:5px; padding:0;}
 .menu-privew li img{position: absolute; left: 50%; top: 50%; width: auto; height: 100%;
