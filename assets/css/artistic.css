@@ -4140,7 +4140,7 @@ label{margin-bottom:3px;}
 }
 
 .multi-select-button:after {
-    content: "";
+    /*content: "";
     display: inline-block;
     width: 0;
     height: 0;
@@ -4151,7 +4151,7 @@ label{margin-bottom:3px;}
     vertical-align: 0.1em;
 	position:absolute;
 	top:15px;
-	right:10px;
+	right:10px;*/
 }
 
 .multi-select-container--open .multi-select-menu {
