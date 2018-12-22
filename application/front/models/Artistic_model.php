@@ -1294,4 +1294,128 @@ class Artistic_model extends CI_Model {
         $about_user_data = $query->row_array();        
         return $about_user_data['art_talent_category'];
     }
+
+    public function get_user_art_imp_data($userid)
+    {
+        $this->db->select("art_active_status")->from("art_reg");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data['art_active_status'];
+    }
+
+    public function get_artist_basic_info($userid)
+    {
+        $this->db->select("a.art_name,a.art_lastname,a.art_skill,a.other_skill,a.art_gender,a.art_email,a.art_phnno,a.art_dob,a.art_country,a.art_state,a.art_city,oc.other_category as other_category_txt,GROUP_CONCAT(DISTINCT(ac.art_category)) as art_category_txt,DATE_FORMAT(a.art_dob,'%d/%M/%Y') as art_dob_txt, cr.country_name, st.state_name, ct.city_name")->from("art_reg a,art_category ac");
+        $this->db->join('countries cr', 'cr.country_id = a.art_country', 'left');
+        $this->db->join('states st', 'st.state_id = a.art_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = a.art_city', 'left');
+        $this->db->join('art_other_category oc', 'oc.other_category_id = a.other_skill', 'left');
+        $this->db->where(array('a.user_id' => $userid, 'a.is_delete' => '0', 'a.status' => '1'));
+        $this->db->where('FIND_IN_SET(ac.category_id, a.art_skill) !=', 0);
+        $this->db->group_by('a.art_skill,a.art_id');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function art_basic_info_save($user_id, $art_fname = "", $art_lname = "", $art_email = "", $art_gender = "", $birth_date = "", $art_phnno = "", $art_basic_country = "", $art_basic_state = "", $art_basic_city = "", $category = "", $art_other_category_id = "")
+    {
+        $data = array(                
+            'art_name' => $art_fname,
+            'art_lastname' => $art_lname,
+            'art_email' => $art_email,
+            'art_gender' => $art_gender,
+            'art_dob' => $birth_date,
+            'art_phnno' => $art_phnno,
+            'art_country' => $art_basic_country,
+            'art_state' => $art_basic_state,
+            'art_city' => $art_basic_city,
+            'art_skill' => $category,
+            'other_skill' => $art_other_category_id,
+            'modified_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('art_reg', $data);
+
+        $skill_name = "";
+        foreach (explode(',',$data['art_skill']) as $skk => $skv) {
+            if($skv != "" && $skv != "26")
+            {
+                $s_name = $this->db->get_where('art_category', array('category_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->art_category;
+                if(trim($s_name) != "")
+                {
+                    $skill_name .= $s_name.",";
+                }
+            }
+
+            if($skv != "" && $skv == "26")
+            {                        
+                $os_name = $this->db->get_where('art_other_category', array('other_category_id' => $data['other_skill'], 'status' => '1' , 'is_delete' => '0'))->row()->other_category;                        
+                if(trim($os_name) != "")
+                {
+                    $skill_name .= $os_name.",";
+                }
+                $skill_name;
+            }
+        }
+        $data['art_skill_txt'] = trim($skill_name,",");        
+        $this->db->where('user_id', $user_id);
+        $this->db->update('art_reg_search_tmp', $data);
+        return true;
+    }
+
+    public function get_artist_preferred_info($userid)
+    {
+        $this->db->select("a.preffered_skills, a.preffered_country, a.preffered_state, a.preffered_city, a.preffered_availability, cr.country_name as preffered_country_name, st.state_name as preffered_state_name, ct.city_name as preffered_city_name")->from("art_reg a,art_category ac");
+        $this->db->join('countries cr', 'cr.country_id = a.preffered_country', 'left');
+        $this->db->join('states st', 'st.state_id = a.preffered_state', 'left');
+        $this->db->join('cities ct', 'ct.city_id = a.preffered_city', 'left');
+        $this->db->where(array('a.user_id' => $userid, 'a.is_delete' => '0', 'a.status' => '1'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function art_preferred_info_save($user_id,$category = "",$art_other_category_id = "",$preferred_skill_tags = "",$art_preffered_country = "",$art_preffered_state = "",$art_preffered_city = "",$preffered_availability = "")
+    {
+        $data = array(
+            'preffered_skills' => $preferred_skill_tags,
+            'preffered_country' => $art_preffered_country,
+            'preffered_state' => $art_preffered_state,
+            'preffered_city' => $art_preffered_city,
+            'preffered_availability' => $preffered_availability,
+            'art_skill' => $category,
+            'other_skill' => $art_other_category_id,
+            'modified_date' => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('art_reg', $data);
+
+        $skill_name = "";
+        foreach (explode(',',$data['art_skill']) as $skk => $skv) {
+            if($skv != "" && $skv != "26")
+            {
+                $s_name = $this->db->get_where('art_category', array('category_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->art_category;
+                if(trim($s_name) != "")
+                {
+                    $skill_name .= $s_name.",";
+                }
+            }
+
+            if($skv != "" && $skv == "26")
+            {                        
+                $os_name = $this->db->get_where('art_other_category', array('other_category_id' => $data['other_skill'], 'status' => '1' , 'is_delete' => '0'))->row()->other_category;                        
+                if(trim($os_name) != "")
+                {
+                    $skill_name .= $os_name.",";
+                }
+                $skill_name;
+            }
+        }
+        $data['art_skill_txt'] = trim($skill_name,",");        
+        $this->db->where('user_id', $user_id);
+        $this->db->update('art_reg_search_tmp', $data);
+        return true;
+    }
 }

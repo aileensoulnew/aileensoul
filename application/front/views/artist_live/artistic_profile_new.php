@@ -77,31 +77,45 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" class="pull-right" ng-click="edit_art_basic_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list list-ul-cus">
-										<li>
-											<span>Art category </span>
-											<label>Music</label>
-										</li>
-										<li>
-											<span>Gender</span>
-											<label>Male</label>
-										</li>
-										<li>
-											<span>Date of Birth</span>
-											<label>24/6/1990</label>
-										</li>
-										<li>
-											<span>Location</span>
-											<label>2018</label>
-										</li>
-										
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+                                <div id="art-info-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="art-info-body" style="display: none;">
+    								<div id="about-detail" class="dtl-dis">
+    									<ul class="dis-list list-ul-cus">
+    										<li>
+    											<span>Art category</span>
+    											<label>{{artist_basic_info.art_category_txt | removeOther}}{{artist_basic_info.art_category_txt != 'other' && artist_basic_info.art_category_txt != '' ? ',' : ''}}{{artist_basic_info.other_category_txt}}</label>
+    										</li>
+    										<li ng-if="artist_basic_info.art_gender">
+    											<span>Gender</span>
+                                                <label ng-if="artist_basic_info.art_gender =='1'">Male</label>
+                                                <label ng-if="artist_basic_info.art_gender =='2'">Female</label>
+    											<label ng-if="artist_basic_info.art_gender =='3'">Other</label>
+    										</li>
+    										<li ng-if="artist_basic_info.art_dob">
+    											<span>Date of Birth</span>
+    											<label>{{artist_basic_info.art_dob_txt}}</label>
+    										</li>
+    										<li>
+    											<span>Location</span>
+    											<label ng-if="artist_basic_info.country_name || artist_basic_info.state_name || artist_basic_info.city_name">
+                                                    {{artist_basic_info.city_name != '' ? artist_basic_info.city_name : ''}}
+                                                    {{artist_basic_info.city_name != '' && artist_basic_info.state_name != '' ? ',' : ''}}
+                                                    {{artist_basic_info.state_name != '' ? artist_basic_info.state_name : ''}}
+                                                    {{artist_basic_info.state_name != '' && artist_basic_info.country_name != '' ? ',' : ''}}
+                                                    {{artist_basic_info.country_name != '' ? artist_basic_info.country_name : ''}}
+                                                </label>
+    										</li>    										
+    									</ul>
+    								</div>
+                                </div>
+								<div id="view-more-about" class="about-more" style="display: none;">
+									<a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
 								</div>
 								
 							</div>
@@ -362,34 +376,48 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" data-target="#preferred-work" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" class="pull-right" ng-click="edit_art_preferred_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
-								<div class="dtl-dis dtl-box-height">
-									<ul class="dis-list list-ul-cus">
-										<li class="select-preview">
-											<span>Work Type</span>
-											<label>Category</label>
-										</li>
-										<li class="fw">
-											<span>Skills</span>
-											<ul	class="skill-list">
-												<li>HTML</li>
-												<li>HTML</li>
-												<li>HTML</li>
-											</ul>
-										</li>
-										<li>
-											<span>Preferred Location</span>
-											Ahmedabad , Gujarat , India
-										</li>
-										<li class="select-preview">
-											<span>Availability</span>
-											<label>Full Time</label>
-										</li>
-									</ul>
-								</div>
-								<div class="about-more">
-									<a href="#">View More <img src="http://localhost/aileensoulnew/aileensoul/assets/n-images/detail/down-arrow.png?ver=1543301672"></a>
+                                <div id="art-preffered-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="art-preffered-body" style="display: none;">
+    								<div id="preffered-detail" class="dtl-dis">
+    									<ul class="dis-list list-ul-cus">
+    										<li class="select-preview">
+    											<span>Preferred Category</span>
+                                                <label>{{artist_basic_info.art_category_txt | removeOther}}{{artist_basic_info.art_category_txt != 'other' && artist_basic_info.art_category_txt != '' ? ',' : ''}}{{artist_basic_info.other_category_txt}}</label>
+    										</li>
+    										<li class="fw" ng-if="artist_preferred_info.preffered_skills">
+    											<span>Skills</span>
+    											<ul	class="skill-list">
+    												<li ng-repeat="pref_skill in artist_preferred_info.preffered_skills.split(',')">{{pref_skill}}</li>
+    											</ul>
+    										</li>
+    										<li ng-if="artist_preferred_info.preffered_country_name || artist_preferred_info.preffered_state_name || artist_preferred_info.preffered_city_name">
+    											<span>Preferred Location</span>
+    											<label ng-if="artist_preferred_info.preffered_country_name || artist_preferred_info.preffered_state_name || artist_preferred_info.preffered_city_name">
+                                                    {{artist_preferred_info.preffered_city_name != '' ? artist_preferred_info.preffered_city_name : ''}}
+                                                    {{artist_preferred_info.preffered_city_name != '' && artist_preferred_info.preffered_state_name != '' ? ',' : ''}}
+                                                    {{artist_preferred_info.preffered_state_name != '' ? artist_preferred_info.preffered_state_name : ''}}
+                                                    {{artist_preferred_info.preffered_state_name != '' && artist_preferred_info.preffered_country_name != '' ? ',' : ''}}
+                                                    {{artist_preferred_info.preffered_country_name != '' ? artist_preferred_info.preffered_country_name : ''}}
+                                                </label>
+    										</li>
+    										<li class="select-preview" ng-if="artist_preferred_info.preffered_availability">
+    											<span>Availability</span>
+                                                <label ng-if="artist_preferred_info.preffered_availability == '1'">Full Time</label>
+                                                <label ng-if="artist_preferred_info.preffered_availability == '2'">Part Time</label>
+                                                <label ng-if="artist_preferred_info.preffered_availability == '3'">Contract</label>
+    											<label ng-if="artist_preferred_info.preffered_availability == '4'">Freelance</label>
+    										</li>
+    									</ul>
+    								</div>
+                                </div>
+								<div id="view-more-preffered" class="about-more" style="display: none;">
+									<a href="#" ng-click="view_more_preffered();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
 								</div>
 							</div>
 						</div>
@@ -629,12 +657,18 @@
 									<ul class="dis-list cus-status list-ul-cus">
                                         <li>
                                             <label class="fw">
-                                                <!-- ngIf: job_basic_info.job_active_status == '1' --><span ng-if="job_basic_info.job_active_status == '1'" class="ng-scope">
+                                                <span ng-if="art_imp_data == '1'">
                                                     <span class="job-active"></span>Open for work
-                                                </span><!-- end ngIf: job_basic_info.job_active_status == '1' -->
-                                                <!-- ngIf: job_basic_info.job_active_status == '2' -->
-                                                <!-- ngIf: job_basic_info.job_active_status == '3' -->
-                                                <!-- ngIf: job_basic_info.job_active_status != '1' && job_basic_info.job_active_status != '2' && job_basic_info.job_active_status != '3' -->
+                                                </span>
+                                                <span ng-if="art_imp_data == '2'">
+                                                    <span class="job-passive"></span>Open for Collaboration
+                                                </span>
+                                                <span ng-if="art_imp_data == '3'">
+                                                    <span class="job-not"></span>Not now
+                                                </span>
+                                                <span ng-if="art_imp_data != '1' && art_imp_data != '2' && art_imp_data != '3'">
+                                                    <span class="job-status"></span>Artist Availability Status
+                                                </span>
 												<span class="pull-right">
                                                 <a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit1.png?ver=' . time()) ?>"></a>
 												</span>
@@ -729,8 +763,7 @@
 			                </div>
 			            </div>
 					</div>
-					
-					<!-- language  -->
+                        <!-- language  -->
 				
 						<div class="rsp-dtl-box " id="language-move">
 							<div class="dtl-box">
@@ -757,8 +790,8 @@
                                 </div>
                             </div>
 						</div>
-					
-					<!-- Type of Talent / Category  -->
+
+                        <!-- Type of Talent / Category  -->
 						<div class="rsp-dtl-box" id="type-talant-move">
 							<div class="dtl-box">
 								<div class="dtl-title">
@@ -788,15 +821,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					
-					
-					
-					
-					
-						
-					</div>	
-						
+						</div>	
+					</div>
 					</div>
 				</div>
 			</section>
@@ -813,164 +839,170 @@
 					<div class="dtl-title">
 						<span>Basic Information</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Name</label>
-									<input type="text" placeholder="Name">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Last Name</label>
-									<input type="text" placeholder="Last Name">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Art category</label>
-									<span class="span-select">
-										<select>
-											<option>IT Sector </option>
-											<option>Female </option>
-											<option>Other </option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Gender</label>
-									<span class="span-select">
-										<select>
-											<option>Male </option>
-											<option>Female </option>
-											<option>Other </option>
-										</select>
-									</span>
-								</div>
-							</div>
-							
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Email</label>
-									<input type="text" placeholder="Email">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
-								<div class="form-group">
-									<label>Phone number</label>
-									<input type="text" placeholder="Phone number">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<label>Date of Birth</label>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="form-group">
-									
-									<span class="span-select">
-										<select>
-											<option>Date</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="form-group">
-									
-									<span class="span-select">
-										<select>
-											<option>Month</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="form-group">
-									
-									<span class="span-select">
-										<select>
-											<option>year</option>
-											<option>2017</option>
-											<option>2018</option>
-											<option>2019</option>
-											<option>2020</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<label>Country</label>
-									<span class="span-select">
-										<select>
-											<option>Date</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<label>State</label>
-									<span class="span-select">
-										<select>
-											<option>Month</option>
-											<option>januari</option>
-											<option>Fabruari</option>
-											<option>March</option>
-											<option>April</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<label>City</label>
-									<span class="span-select">
-										<select>
-											<option>2016</option>
-											<option>2017</option>
-											<option>2018</option>
-											<option>2019</option>
-											<option>2020</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						
-						
-					</div>
-					<div class="dtl-btn">
-						<a href="#" class="save"><span>Save</span></a>
-					</div>
-				</div>	
+                    <form name="art_basic_info_form" id="arts_basic_info_form" ng-validate="arts_basic_info_validate">
+    					<div class="dtl-dis">
+    						<div class="row">
+    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+    								<div class="form-group">
+    									<label>First Name</label>
+    									<input type="text" placeholder="Name" id="art_fname" name="art_fname" maxlength="255">
+    								</div>
+    							</div>
+    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+    								<div class="form-group">
+    									<label>Last Name</label>
+    									<input type="text" placeholder="Last Name" id="art_lname" name="art_lname" maxlength="255">
+    								</div>
+    							</div>
+    						</div>
+    						<div class="row">
+    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+    								<div class="form-group">
+    									<label>Art category</label>
+    									<span class="span-select">
+    										<select name="skills[]" id="skills" tabindex="1" autofocus multiple>
+                                                <?php foreach($art_category as $_art_category){  ?>
+    											<option onchange="return otherchange(<?php echo $_art_category['category_id']; ?>);" value="<?php echo $_art_category['category_id']; ?>"><?php echo ucwords(ucfirst($_art_category['art_category'])); ?></option>
+                                                <?php } ?>
+                                            </select>
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+    								<div class="form-group">
+    									<label>Gender</label>
+    									<span class="span-select">
+    										<select id="art_gender" name="art_gender">
+                                                <option value="">Select Gender</option>
+    											<option value="1">Male </option>
+    											<option value="2">Female </option>
+    											<option value="3">Other </option>
+    										</select>
+    									</span>
+    								</div>
+    							</div>							
+    						</div>
 
-
+                            <div id="other_category_div" class="row" style="display: none;">
+                                <div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+                                    <div class="form-group">
+                                        <label>Other Category</label>
+                                        <input type="text" placeholder="Other Category" id="art_other_category" name="art_other_category" maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+                                </div>
+                            </div>
+    						
+    						<div class="row">
+    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+    								<div class="form-group">
+    									<label>Email</label>
+    									<input type="text" placeholder="Email" id="art_email" name="art_email" maxlength="255">
+    								</div>
+    							</div>
+    							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+    								<div class="form-group">
+    									<label>Phone number</label>
+    									<input type="text" placeholder="Phone number" id="art_phnno" name="art_phnno" ng-model="art_phnno" numbers-only maxlength="15">
+    								</div>
+    							</div>
+    						</div>
+    						<div class="row">
+    							<div class="col-md-12">
+    								<label>Date of Birth</label>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4">
+    								<div class="form-group">    									
+    									<span class="span-select">
+    										<select id="art_dob_month" name="art_dob_month" ng-model="art_dob_month" ng-change="art_dob_date_fnc('','','')">
+                                                <option value="">Month</option>
+                                                <option value="01">Jan</option>
+                                                <option value="02">Feb</option>
+                                                <option value="03">Mar</option>
+                                                <option value="04">Apr</option>
+                                                <option value="05">May</option>
+                                                <option value="06">Jun</option>
+                                                <option value="07">Jul</option>
+                                                <option value="08">Aug</option>
+                                                <option value="09">Sep</option>
+                                                <option value="10">Oct</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dec</option>
+                                            </select>
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4">
+    								<div class="form-group">
+    									
+    									<span class="span-select">
+    										<select id="art_dob_day" name="art_dob_day" ng-model="art_dob_day" ng-click="art_dob_error()">
+                                            </select>
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4">
+    								<div class="form-group">
+                                        <span class="span-select">
+    										<select id="art_dob_year" name="art_dob_year" ng-model="art_dob_year" ng-change="art_dob_date_fnc('','','')" ng-click="art_dob_error()">
+                                            </select>
+    									</span>
+    								</div>
+    							</div>
+                                <div class="col-md-12 col-sm-12">
+                                    <span id="artdobdateerror" class="error" style="display: none;"></span>
+                                </div>
+    						</div>
+    						
+    						<div class="row">
+    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+    								<div class="form-group">
+    									<label>Country</label>
+    									<span class="span-select">
+    										<select id="art_basic_country" name="art_basic_country" ng-model="art_basic_country" ng-change="art_basic_country_change()">
+                                                <option value="">Country</option>         
+                                                <option data-ng-repeat='country_item in exp_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                            </select>
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+    								<div class="form-group">
+    									<label>State</label>
+    									<span class="span-select">
+    										<select id="art_basic_state" name="art_basic_state" ng-model="art_basic_state" ng-change="art_basic_state_change()" disabled = "disabled">
+                                                <option value="">State</option>
+                                                <option data-ng-repeat='state_item in art_basic_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                            </select>
+                                            <img id="art_basic_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+    								<div class="form-group">
+    									<label>City</label>
+    									<span class="span-select">
+    										<select id="art_basic_city" name="art_basic_city" ng-model="art_basic_city" disabled = "disabled">
+                                                <option value="">City</option>
+                                                <option data-ng-repeat='city_item in art_basic_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                            </select>
+                                            <img id="art_basic_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+    									</span>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    					<div class="dtl-btn">
+    						<a id="art_basic_info_save" href="javascript:void(0);" ng-click="art_basic_info_save()" class="save">
+                                <span>Save</span>
+                            </a>
+                            <div id="art_basic_info_save_loader"  class="dtl-popup-loader" style="display: none;">
+                                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                            </div>
+    					</div>
+                    </form>
+				</div>
             </div>
         </div>
     </div>
@@ -1131,16 +1163,16 @@
                             <!-- Use This! #just fix width+height IMG  -->
                             <div class="mm-dropdown">
                               <div class="textfirst">
-                                <span ng-if="job_basic_info.job_active_status == '1'">
+                                <span ng-if="art_imp_data == '1'">
                                     <span class="job-active"></span>Open for Work
                                 </span>
-                                <span ng-if="job_basic_info.job_active_status == '2'">
+                                <span ng-if="art_imp_data == '2'">
                                     <span class="job-passive"></span>Open for Collaboration
                                 </span>
-                                <span ng-if="job_basic_info.job_active_status == '3'">
+                                <span ng-if="art_imp_data == '3'">
                                     <span class="job-not"></span>Not Now
                                 </span>
-                                <span ng-if="job_basic_info.job_active_status != '1' && job_basic_info.job_active_status != '2' && job_basic_info.job_active_status != '3'">
+                                <span ng-if="art_imp_data != '1' && art_imp_data != '2' && art_imp_data != '3'">
                                     Select Status
                                 </span>
                               </div>
@@ -1156,7 +1188,7 @@
                                 </li>
 								
                               </ul>
-                              <input id="job_status" type="hidden" class="option" name="namesubmit" value="{{job_basic_info.job_active_status}}" />
+                              <input id="art_status" type="hidden" class="option" name="namesubmit" value="{{art_imp_data}}" />
                             </div>
                             <!-- End This -->
                         </div>
@@ -1164,9 +1196,9 @@
                     </div>
                     <div class="dtl-btn bottom-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
-                        <a id="job_imp_save" href="#" ng-click="job_imp_save()" class="save"><span>Save</span></a>
-                        <div id="job_imp_save_loader" class="dtl-popup-loader" style="display: none;">
-                        <img src="http://localhost/aileensoulnew/aileensoul/assets/images/loader.gif" alt="Loader">
+                        <a id="art_imp_save" href="#" ng-click="art_imp_save()" class="save"><span>Save</span></a>
+                        <div id="art_imp_save_loader" class="dtl-popup-loader" style="display: none;">
+                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
                         </div>
                     </div>
                 </div>  
@@ -1186,83 +1218,85 @@
 					<div class="dtl-title">
 						<span>Preferred Work</span>
 					</div>
-					<div class="dtl-dis">
-						<div class="form-group">
-							<label>Work Type</label>
-							<span class="span-select">
-								<select>
-									<option>Category</option>
-									<option>IT Sector</option>
-									<option>IT Sector</option>
-									<option>IT Sector</option>
-									<option>IT Sector</option>
-								</select>
-							</span>
-						</div>
-						<div class="form-group">
-							<label>Skills</label>
-							<input type="text" placeholder="Skills">
-						</div>
-						<div class="row">
-							<div class="col-md-12 fw">
-								<label>Preferred Location</label>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>Country</option>
-											<option>India</option>
-											<option>Pakistan</option>
-											<option>Nepal</option>
-											<option>Bhutan</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>State</option>
-											<option>Gujarat</option>
-											<option>Rajastan</option>
-											<option>Delhi</option>
-											<option>Panjab</option>
-										</select>
-									</span>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
-								<div class="form-group">
-									<span class="span-select">
-										<select>
-											<option>City</option>
-											<option>Ahmedabad</option>
-											<option>Rajkot</option>
-											<option>Baroda</option>
-											<option>Rajkot</option>
-										</select>
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label>Availability</label>
-							<span class="span-select">
-								<select>
-									<option>Full time</option>
-									<option>Part time</option>
-									<option>Contract</option>
-									<option>Freelance</option>
-								</select>
-							</span>
-						</div>
-						
-					</div>
-					<div class="dtl-btn">
-							<a href="#" class="save"><span>Save</span></a>
-						</div>
+                    <form name="art_preferred_info_form" id="arts_preferred_info_form" ng-validate="arts_preferred_info_validate">
+    					<div class="dtl-dis">
+    						<div class="form-group">
+    							<label>Preferred Category</label>
+    							<span class="span-select">
+    								<select name="pref_cate[]" id="pref_cate" tabindex="1" autofocus multiple>
+                                        <?php foreach($art_category as $_art_category){  ?>
+                                        <option onchange="return other_change_pref_cate(<?php echo $_art_category['category_id']; ?>);" value="<?php echo $_art_category['category_id']; ?>"><?php echo ucwords(ucfirst($_art_category['art_category'])); ?></option>
+                                        <?php } ?>
+                                    </select>
+    							</span>
+    						</div>
+                            <div id="other_pref_cate_div" class="form-group" style="display: none;">
+                                <label>Other Category</label>
+                                <input type="text" placeholder="Other Category" id="art_other_pref_cate" name="art_other_pref_cate" maxlength="255">
+                            </div>
+    						<div class="form-group">
+    							<label>Skills</label>
+    							<tags-input id="preferred_skill_txt" ng-model="preferred_skill_txt" display-property="pref_skill" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" ng-keyup="preferred_skill_fnc()"></tags-input>
+    						</div>
+    						<div class="row">
+    							<div class="col-md-12 fw">
+    								<label>Preferred Location</label>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+    								<div class="form-group">
+    									<span class="span-select">
+    										<select id="art_preffered_country" name="art_preffered_country" ng-model="art_preffered_country" ng-change="art_preffered_country_change()">
+                                                <option value="">Country</option>         
+                                                <option data-ng-repeat='country_item in exp_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                            </select>
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+    								<div class="form-group">
+    									<span class="span-select">
+    										<select id="art_preffered_state" name="art_preffered_state" ng-model="art_preffered_state" ng-change="art_preffered_state_change()" disabled = "disabled">
+                                                <option value="">State</option>
+                                                <option data-ng-repeat='state_item in art_preffered_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                            </select>
+                                            <img id="art_preffered_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+    									</span>
+    								</div>
+    							</div>
+    							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+    								<div class="form-group">
+    									<span class="span-select">
+    										<select id="art_preffered_city" name="art_preffered_city" ng-model="art_preffered_city" disabled = "disabled">
+                                                <option value="">City</option>
+                                                <option data-ng-repeat='city_item in art_preffered_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                            </select>
+                                            <img id="art_preffered_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+    									</span>
+    								</div>
+    							</div>
+    						</div>
+    						<div class="form-group">
+    							<label>Availability</label>
+    							<span class="span-select">
+    								<select id="preffered_availability" name="preffered_availability">
+                                        <option value="">Select Availability</option>
+    									<option value="1">Full time</option>
+    									<option value="2">Part time</option>
+    									<option value="3">Contract</option>
+    									<option value="4">Freelance</option>
+    								</select>
+    							</span>
+    						</div>						
+    					</div>
+    					<div class="dtl-btn">
+    						<a id="art_preferred_info_save" href="javascript:void(0);" ng-click="art_preferred_info_save()" class="save">
+                                <span>Save</span>
+                            </a>
+                            <div id="art_preferred_info_save_loader"  class="dtl-popup-loader" style="display: none;">
+                                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                            </div>
+    					</div>
+                    </form>
 				</div>	
 
 
@@ -1858,7 +1892,7 @@
                                 <div class="form-group">
                                     <span class="span-select">
                                         <select id="award_day" name="award_day" ng-model="award_day" ng-click="award_error()">
-                                            <option value="">Select Year</option>
+                                            <option value="">Select Day</option>
                                         </select>
                                     </span>
                                 </div>
@@ -1867,7 +1901,7 @@
                                 <div class="form-group">
                                     <span class="span-select">
                                         <select id="award_year" name="award_year" ng-model="award_year" ng-change="award_date_fnc('','','')" ng-click="award_error()">
-                                            <option value="">Select Day</option>
+                                            <option value="">Select Year</option>
                                         </select>
                                     </span>
                                 </div>
@@ -2184,6 +2218,7 @@
 			<!-- script for skill textbox automatic start (option 2)-->
 			<script  src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
 			<script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
+            <script src="<?php echo base_url('assets/js/jquery.multi-select.js?ver=' . time()); ?>"></script>
 			<script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>
 			<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
 			<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>

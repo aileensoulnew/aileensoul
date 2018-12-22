@@ -5673,8 +5673,7 @@ app.controller('userJobProfileController', function ($scope, $http, $location,$c
 
     //Job Search Status Start
     $scope.validate_job_imp = function(){
-        var job_status = $("#job_status").val();
-        console.log(job_status);
+        var job_status = $("#job_status").val();        
         if(job_status == 1 || job_status == 2 || job_status == 3)
         {
             $(".mm-dropdown").attr("style","border: 1px solid #ddd;");

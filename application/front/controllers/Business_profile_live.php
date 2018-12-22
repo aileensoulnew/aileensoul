@@ -246,6 +246,8 @@ class Business_profile_live extends MY_Controller {
                 $this->data['is_eligable_for_post'] = 1;
             }
         }
+
+        $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
         
         $company_name = $this->get_company_name($id);
         $industry_name = $this->db->get_where('industry_type', array('industry_id' => $business_data[0]['industriyal'], 'status' => '1'))->row()->industry_name;

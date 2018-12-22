@@ -599,6 +599,8 @@ class Artist_live extends MY_Controller {
 
         $this->data['artistic_name'] = $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
         $this->data['title'] = $this->data['title'] = $artistic_name . ' | Details' . '- Artistic Profile' . TITLEPOSTFIX;
+        $contition_array = array('status' => '1');
+        $this->data['art_category'] = $this->common->select_data_by_condition('art_category', $contition_array, $data = 'category_id,art_category', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         if ($userid && count($artistic_deactive) <= 0 && $this->data['artist_isregister']) {
             if ($this->data['artisticdata']) {
@@ -2919,6 +2921,161 @@ class Artist_live extends MY_Controller {
             $ret_arr = array("success"=>0);
         }
         // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_art_imp_data()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $art_imp_data = $this->artistic_model->get_user_art_imp_data($user_id);
+        $ret_arr = array("success"=>1,"art_imp_data"=>$art_imp_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function art_imp_save()
+    {
+        $art_status = $this->input->post('art_status');
+        $user_id = $this->session->userdata('aileenuser');
+
+        $data1 = array(
+            'art_active_status' => $art_status,
+            'modified_date' => date('Y-m-d h:i:s', time()),            
+        );
+        $insert_id = $this->common->update_data($data1, 'art_reg', 'user_id', $user_id);
+        $insert_id = $this->common->update_data($data1, 'art_reg_search_tmp', 'user_id', $user_id);
+        $art_imp_data = $this->artistic_model->get_user_art_imp_data($user_id);
+        $ret_arr = array("success"=>1,"art_imp_data"=>$art_imp_data);
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_artist_basic_info()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $user_id = $this->db->select('user_id')->get_where('art_reg', array('slug' => $user_slug,'status' => '1'))->row('user_id');
+        $artist_basic_info = $this->artistic_model->get_artist_basic_info($user_id);
+        $artist_preferred_info = $this->artistic_model->get_artist_preferred_info($user_id);
+        $ret_arr = array("success"=>1,"artist_basic_info"=>$artist_basic_info,"artist_preferred_info"=>$artist_preferred_info);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function art_basic_info_save()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $art_fname = $this->input->post('art_fname');
+        $art_lname = $this->input->post('art_lname');
+        $art_email = $this->input->post('art_email');
+        $art_gender = $this->input->post('art_gender');
+        $birth_date = $this->input->post('art_dob_year').'-'.$this->input->post('art_dob_month').'-'.$this->input->post('art_dob_day');
+        $art_phnno = $this->input->post('art_phnno');        
+        $art_basic_country = $this->input->post('art_basic_country');
+        $art_basic_state = $this->input->post('art_basic_state');
+        $art_basic_city = $this->input->post('art_basic_city');
+        $art_category = $this->input->post('art_category');        
+        if(in_array("26", $art_category))
+        {
+            $art_other_category = $this->input->post('art_other_category');            
+            $contition_array = array('other_category' => $art_other_category, 'status' => '1');
+            $exist_other = $this->common->select_data_by_condition('art_other_category', $contition_array, $data = 'other_category,other_category_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if ($art_other_category) {
+                if ($exist_other) {
+                    $art_other_category_id = $exist_other[0]['other_category_id'];
+                } else {
+
+                    $data1 = array(
+                        'other_category' => $art_other_category,
+                        'status' => '1',
+                        'is_delete' => '0',
+                        'user_id' => $user_id,
+                        'created_date' => date('Y-m-d', time()),
+                    );
+                    $art_other_category_id = $this->common->insert_data_getid($data1, 'art_other_category');
+                }
+            }
+        }
+        else
+        {
+            $art_other_category_id = "";
+        }
+        $category = implode(",", $art_category);
+
+        if($user_id != "")
+        {
+            $basic_info_insert = $this->artistic_model->art_basic_info_save($user_id, $art_fname, $art_lname, $art_email, $art_gender, $birth_date, $art_phnno, $art_basic_country, $art_basic_state, $art_basic_city, $category, $art_other_category_id);
+            $artist_basic_info = $this->artistic_model->get_artist_basic_info($user_id);
+            $artist_preferred_info = $this->artistic_model->get_artist_preferred_info($user_id);
+            $ret_arr = array("success"=>1,"artist_basic_info"=>$artist_basic_info,"artist_preferred_info"=>$artist_preferred_info);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function art_preferred_info_save()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+
+        $art_category = $this->input->post('pref_cate');        
+        if(in_array("26", $art_category))
+        {
+            $art_other_category = $this->input->post('art_other_pref_cate');            
+            $contition_array = array('other_category' => $art_other_category, 'status' => '1');
+            $exist_other = $this->common->select_data_by_condition('art_other_category', $contition_array, $data = 'other_category,other_category_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if ($art_other_category) {
+                if ($exist_other) {
+                    $art_other_category_id = $exist_other[0]['other_category_id'];
+                } else {
+
+                    $data1 = array(
+                        'other_category' => $art_other_category,
+                        'status' => '1',
+                        'is_delete' => '0',
+                        'user_id' => $user_id,
+                        'created_date' => date('Y-m-d', time()),
+                    );
+                    $art_other_category_id = $this->common->insert_data_getid($data1, 'art_other_category');
+                }
+            }
+        }
+        else
+        {
+            $art_other_category_id = "";
+        }
+        $category = implode(",", $art_category);
+
+        $preferred_skill_txt = $this->input->post('preferred_skill_txt');
+        $art_preffered_country = $this->input->post('art_preffered_country');
+        $art_preffered_state = $this->input->post('art_preffered_state');
+        $art_preffered_city = $this->input->post('art_preffered_city');
+        $preffered_availability = $this->input->post('preffered_availability');
+
+        $preferred_skill_tags = "";
+        if(isset($preferred_skill_txt) && !empty($preferred_skill_txt))
+        {
+            foreach ($preferred_skill_txt as $key => $value) {
+                $preferred_skill_tags .= $value['pref_skill'].",";
+            }
+        }
+        $preferred_skill_tags = trim($preferred_skill_tags,",");
+
+        if($user_id != "")
+        {
+            $basic_info_insert = $this->artistic_model->art_preferred_info_save($user_id, $category, $art_other_category_id, $preferred_skill_tags ,$art_preffered_country ,$art_preffered_state ,$art_preffered_city ,$preffered_availability);
+            $artist_basic_info = $this->artistic_model->get_artist_basic_info($user_id);
+            $artist_preferred_info = $this->artistic_model->get_artist_preferred_info($user_id);
+            $ret_arr = array("success"=>1,"artist_basic_info"=>$artist_basic_info,"artist_preferred_info"=>$artist_preferred_info);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

@@ -149,7 +149,7 @@ app.controller('freelanceHireIndividualRegiController', function ($scope, $http)
                 required: "Please select city",
             },
             prof_info: {
-                required: "Please enter address",
+                required: "Please enter professional information",
             },
         },
     };

@@ -121,6 +121,16 @@ app.filter('wordFirstCase', function () {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
+app.filter('removeOther', function () {
+    return function(input) {
+      // return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+        if(input)
+        {
+            return input.replace('other','').replace(/,\s*$/, "");
+        }
+    // console.log(input);
+    }
+});
 app.filter('slugify', function () {
     return function (input) {
         if (!input)
@@ -2704,4 +2714,705 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
     }
     $scope.get_user_talent_cat_data();
     //Type of Talent / Category End
+
+    //Art Search Status Start
+    $scope.validate_art_imp = function(){
+        var art_status = $("#art_status").val();        
+        if(art_status == 1 || art_status == 2 || art_status == 3)
+        {
+            $(".mm-dropdown").attr("style","border: 1px solid #ddd;");
+            return true;
+        }
+        else
+        {
+            $(".mm-dropdown").attr("style","border: 1px solid #f00000;");
+            return false;
+        }
+    };
+
+    $scope.art_imp_save = function(){
+        var pre_loc = $scope.validate_art_imp();
+        if (pre_loc)
+        {
+            $("#art_imp_save_loader").show();
+            $("#art_imp_save").attr("style","pointer-events:none;display:none;");
+            var art_status = $("#art_status").val();
+            var updatedata = $.param({'art_status':art_status});
+            $http({
+                method: 'POST',
+                url: base_url + 'artist_live/art_imp_save',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    $scope.art_imp_data = result.data.art_imp_data;
+                }
+                $("#art_imp_save").removeAttr("style");
+                $("#art_imp_save_loader").hide();
+                $("#availability").modal('hide');
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
+            });
+            
+        }
+    };
+    
+    $scope.get_user_art_imp_data = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'artist_live/get_user_art_imp_data',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.art_imp_data = result.data.art_imp_data;
+            }
+            $("#art_imp-loader").hide();
+            $("#art_imp-body").show();
+
+        });
+    }
+    $scope.get_user_art_imp_data();
+    //Art Search Status End
+
+    //Art Basic Info Start
+    $scope.art_dob_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#artdobdateerror").hide();
+        $("#artdobdateerror").html('');
+        var kcyear = document.getElementsByName("art_dob_year")[0],
+        kcmonth = document.getElementsByName("art_dob_month")[0],
+        kcday = document.getElementsByName("art_dob_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1900; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        var first_chl_year = "<option value=''>Select Year</option>";
+        $("#art_dob_year").html(first_chl_year+year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            var first_chl_day = "<option value=''>Select Day</option>";
+            $("#art_dob_day").html(first_chl_day+day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.art_dob_error = function()
+    {
+        $("#artdobdateerror").hide();
+        $("#artdobdateerror").html('');
+    };
+    $scope.art_basic_country_change = function() {
+        $("#art_basic_state").attr("disabled","disabled");
+        $("#art_basic_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.art_basic_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#art_basic_state").removeAttr("disabled");
+            $("#art_basic_city").attr("disabled","disabled");
+            $("#art_basic_state_loader").hide();
+            $scope.art_basic_state_list = data.data;
+            $scope.art_basic_city_list = [];
+        });
+    }
+
+    $scope.art_basic_state_change = function() {
+        if($scope.art_basic_state != "" && $scope.art_basic_state != 0 && $scope.art_basic_state != null)
+        {
+            $("#art_basic_city").attr("disabled","disabled");
+            $("#art_basic_city_loader").show();
+            var statedata = $.param({'state_id': $scope.art_basic_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#art_basic_city").removeAttr("disabled");
+                $("#art_basic_city_loader").hide();
+                $scope.art_basic_city_list = data.data;
+            });
+        }
+    }
+
+    $scope.view_more_about = function(){
+        $("#about-detail").removeClass("dtl-box-height");
+        $("#view-more-about").hide();
+    };
+    $scope.get_artist_basic_info = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'artist_live/get_artist_basic_info',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.artist_basic_info = result.data.artist_basic_info;
+                $scope.artist_preferred_info = result.data.artist_preferred_info;
+                
+                setTimeout(function(){
+                    if($("#about-detail").innerHeight() > 155)
+                    {
+                        $("#about-detail").addClass("dtl-box-height");
+                        $("#view-more-about").show();
+                    }
+                    else
+                    {
+                        $("#view-more-about").hide();
+                    }
+
+                    if($("#preffered-detail").innerHeight() > 155)
+                    {
+                        $("#preffered-detail").addClass("dtl-box-height");
+                        $("#view-more-preffered").show();
+                    }
+                    else
+                    {
+                        $("#view-more-preffered").hide();
+                    }
+                },500);
+            }
+            $("#art-info-loader").hide();
+            $("#art-info-body").show();
+            $("#art-preffered-loader").hide();
+            $("#art-preffered-body").show();
+
+        });
+    }
+    $scope.get_artist_basic_info();
+
+    $scope.edit_art_basic_info = function(){
+        $("#art_basic_info_save").attr("style","pointer-events:none");
+        var artist_basic_arr = $scope.artist_basic_info;
+        $("#art_fname").val(artist_basic_arr.art_name);
+        $("#art_lname").val(artist_basic_arr.art_lastname);
+        
+        var cat_arr = artist_basic_arr.art_skill.split(",");        
+        if(cat_arr.indexOf("26") != -1){
+            $("#other_category_div").show();
+            $("#art_other_category").val(artist_basic_arr.other_category_txt);
+        }
+        else{
+            $("#other_category_div").hide();
+            $("#art_other_category").val("");
+        }
+        // Set the value
+        $("#skills").val(cat_arr).change();
+        $("#art_gender").val(artist_basic_arr.art_gender);
+        $("#art_email").val(artist_basic_arr.art_email);
+        $("#art_phnno").val(artist_basic_arr.art_phnno);
+
+        var art_dob_arr = artist_basic_arr.art_dob.split("-");
+        art_dob_day = art_dob_arr[2];
+        art_dob_month = art_dob_arr[1];
+        art_dob_year = art_dob_arr[0];
+        $("#art_dob_month").val(art_dob_month);
+        // $scope.art_dob_month = art_dob_month;
+        $scope.art_dob_date_fnc(art_dob_day,art_dob_month,art_dob_year);
+
+        $scope.art_basic_country = artist_basic_arr.art_country;
+        $("#art_basic_country").val(artist_basic_arr.art_country);
+        // $scope.art_basic_country_change();
+        var counrtydata = $.param({'country_id': $scope.art_basic_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#art_basic_state").removeAttr("disabled");
+            $("#art_basic_city").attr("disabled","disabled");
+            $("#art_basic_state_loader").hide();
+            $scope.art_basic_state_list = data.data;
+            $scope.art_basic_city_list = [];
+            $scope.art_basic_state = artist_basic_arr.art_state;
+
+            $("#art_basic_city").attr("disabled","disabled");
+            $("#art_basic_city_loader").show();
+            var statedata = $.param({'state_id': $scope.art_basic_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#art_basic_city").removeAttr("disabled");
+                $("#art_basic_city_loader").hide();
+                $scope.art_basic_city_list = data.data;
+                $scope.art_basic_city = artist_basic_arr.art_city;
+                $("#art_basic_info_save").removeAttr("style");
+            });        
+        });
+
+        $("#job-basic-info").modal('show');
+    };
+
+    $('#skills').multiSelect();
+    $scope.arts_basic_info_validate = {
+        rules: {            
+            art_fname: {
+                required: true,
+                maxlength: 255
+            },
+            art_lname: {
+                required: true,
+                maxlength: 255
+            },
+            "skills[]": {
+                required: true,                
+            },
+            art_other_category: {
+                required: {
+                    depends: function(element) {
+                        var all_cat_arr = $("#skills").val();    
+                        if(all_cat_arr.indexOf("26") != -1){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    }
+                },
+            },
+            art_gender: {
+                required: true,
+            },
+            art_email: {
+                required: true,
+                email:true,
+                remote: {
+                    url: base_url + "artist/check_email",
+                    type: "post",
+                    data: {
+                      email: function() {
+                        return $( "#art_email" ).val();
+                      }
+                    }
+                },
+            },
+            art_phnno: {
+                required: true,
+            },
+            art_dob_month: {
+                required: true,
+            },
+            art_dob_day: {
+                required: true,
+            },
+            art_dob_year: {
+                required: true,
+            },
+            art_basic_country: {
+                required: true,
+            },
+            art_basic_state: {
+                required: true,
+            },
+            art_basic_city: {
+                required: true,
+            },
+        },
+    };
+    $scope.validate_skills = function(){
+        var all_cat_arr = $("#skills").val();    
+        if(all_cat_arr.length > 0 && all_cat_arr.length < 11){
+            return true;
+        }
+        else
+        {
+            $("#multidropdown").attr("style","border:1px solid #ff0000;");
+            return false;
+        }
+    };
+    $scope.art_basic_info_save = function(){
+        var vali_skill = $scope.validate_skills();
+        if ($scope.art_basic_info_form.validate() && vali_skill) {
+            $("#art_basic_info_save_loader").show();
+            $("#art_basic_info_save").attr("style","pointer-events:none;display:none;");
+
+            var art_fname = $("#art_fname").val();
+            var art_lname = $("#art_lname").val();
+            var art_category = $("#skills").val();
+            var art_other_category = $("#art_other_category").val();
+            var art_gender = $("#art_gender option:selected").val();
+            var art_email = $("#art_email").val();
+            var art_phnno = $("#art_phnno").val();
+            var art_dob_day = $("#art_dob_day option:selected").val();
+            var art_dob_month = $("#art_dob_month option:selected").val();
+            var art_dob_year = $("#art_dob_year option:selected").val();
+            var art_basic_country = $("#art_basic_country option:selected").val();
+            var art_basic_state = $("#art_basic_state option:selected").val();
+            var art_basic_city = $("#art_basic_city option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = art_dob_year + '/' + art_dob_month + '/' + art_dob_day;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#artdobdateerror").html("Birth date always less than to today's date.");
+                $("#artdobdateerror").show();
+
+                $("#art_basic_info_save").removeAttr("style");
+                $("#art_basic_info_save_loader").hide();
+                return false;
+            }
+
+            var updatedata = $.param({
+                'art_fname':art_fname,                
+                'art_lname':art_lname,                
+                'art_category':art_category,                
+                'art_other_category':art_other_category,                
+                'art_gender':art_gender,                
+                'art_email':art_email,                
+                'art_phnno':art_phnno,                
+                'art_dob_day':art_dob_day,                
+                'art_dob_month':art_dob_month,                
+                'art_dob_year':art_dob_year,                
+                'art_basic_country':art_basic_country,                
+                'art_basic_state':art_basic_state,                
+                'art_basic_city':art_basic_city,                
+            });
+            $http({
+                method: 'POST',
+                url: base_url + 'artist_live/art_basic_info_save',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.artist_basic_info = result.data.artist_basic_info;
+                    $scope.artist_preferred_info = result.data.artist_preferred_info;
+                }
+                $("#art_basic_info_save").removeAttr("style");
+                $("#art_basic_info_save_loader").hide();
+                $("#job-basic-info").modal('hide');
+                // var profile_progress = result.data.profile_progress;
+                // var count_profile_value = profile_progress.user_process_value;
+                // var count_profile = profile_progress.user_process;
+                // $scope.progress_status = profile_progress.progress_status;
+                // $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+    //Art Basic Info End
+
+    //Art Preffered Info Start
+    $scope.view_more_preffered = function(){
+        $("#preffered-detail").removeClass("dtl-box-height");
+        $("#view-more-preffered").hide();
+    };
+    var defaults = {
+      'buttonHTML': '<span class="multi-select-button custom-mini-select" id="multidropdown-pc">',
+    };
+    $('#pref_cate').multiSelect(defaults);
+
+    $scope.art_preffered_country_change = function() {
+        $("#art_preffered_state").attr("disabled","disabled");
+        $("#art_preffered_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.art_preffered_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#art_preffered_state").removeAttr("disabled");
+            $("#art_preffered_city").attr("disabled","disabled");
+            $("#art_preffered_state_loader").hide();
+            $scope.art_preffered_state_list = data.data;
+            $scope.art_preffered_city_list = [];
+        });
+    }
+
+    $scope.art_preffered_state_change = function() {
+        if($scope.art_preffered_state != "" && $scope.art_preffered_state != 0 && $scope.art_preffered_state != null)
+        {
+            $("#art_preffered_city").attr("disabled","disabled");
+            $("#art_preffered_city_loader").show();
+            var statedata = $.param({'state_id': $scope.art_preffered_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#art_preffered_city").removeAttr("disabled");
+                $("#art_preffered_city_loader").hide();
+                $scope.art_preffered_city_list = data.data;
+            });
+        }
+    }
+
+    $scope.arts_preferred_info_validate = {
+        rules: {
+            "pref_cate[]": {
+                required: true,                
+            },
+            art_other_pref_cate: {
+                required: {
+                    depends: function(element) {
+                        var all_cat_arr = $("#pref_cate").val();    
+                        if(all_cat_arr.indexOf("26") != -1){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    }
+                },
+            },            
+            art_preffered_country: {
+                required: true,
+            },
+            art_preffered_state: {
+                required: true,
+            },
+            art_preffered_city: {
+                required: true,
+            },
+            preffered_availability: {
+                required: true,
+            },
+        },
+    };
+    $scope.validate_pref_cat = function(){
+        var all_cat_arr = $("#pref_cate").val();    
+        if(all_cat_arr.length > 0 && all_cat_arr.length < 11){
+            return true;
+        }
+        else
+        {
+            $("#multidropdown-pc").attr("style","border:1px solid #ff0000;");
+            return false;
+        }
+    };
+    $scope.validate_pref_skill = function(){        
+        if($scope.preferred_skill_txt == "" || $scope.preferred_skill_txt == undefined)
+        {
+            $("#preferred_skill_txt .tags").attr("style","border:1px solid #ff0000;");            
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+    $scope.preferred_skill_fnc = function(){
+        $("#preferred_skill_txt .tags").attr("style","border:1px solid #cccccc;");
+    };
+    $scope.art_preferred_info_save = function(){
+        var vali_cat = $scope.validate_pref_cat();
+        var vali_skill = $scope.validate_pref_skill();
+        if ($scope.art_preferred_info_form.validate() && vali_cat && vali_skill) {
+            $("#art_preferred_info_save_loader").show();
+            $("#art_preferred_info_save").attr("style","pointer-events:none;display:none;");
+
+            var pref_cate = $("#pref_cate").val();
+            var art_other_pref_cate = $("#art_other_pref_cate").val();
+            var preferred_skill_txt = $scope.preferred_skill_txt;
+            var art_preffered_country = $("#art_preffered_country option:selected").val();
+            var art_preffered_state = $("#art_preffered_state option:selected").val();
+            var art_preffered_city = $("#art_preffered_city option:selected").val();
+            var preffered_availability = $("#preffered_availability option:selected").val();
+
+            var updatedata = $.param({
+                'pref_cate':pref_cate,                
+                'art_other_pref_cate':art_other_pref_cate,                
+                'preferred_skill_txt':preferred_skill_txt,                
+                'art_preffered_country':art_preffered_country,                
+                'art_preffered_state':art_preffered_state,                
+                'art_preffered_city':art_preffered_city,                
+                'preffered_availability':preffered_availability,
+            });
+            $http({
+                method: 'POST',
+                url: base_url + 'artist_live/art_preferred_info_save',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {
+                    $scope.artist_basic_info = result.data.artist_basic_info;
+                    $scope.artist_preferred_info = result.data.artist_preferred_info;
+                }
+                $("#art_preferred_info_save").removeAttr("style");
+                $("#art_preferred_info_save_loader").hide();
+                $("#preferred-work").modal('hide');
+                // var profile_progress = result.data.profile_progress;
+                // var count_profile_value = profile_progress.user_process_value;
+                // var count_profile = profile_progress.user_process;
+                // $scope.progress_status = profile_progress.progress_status;
+                // $scope.set_progress(count_profile_value,count_profile);
+            });
+        }
+    };
+
+    $scope.edit_art_preferred_info = function(){
+        $("#art_preferred_info_save").attr("style","pointer-events:none");
+        var artist_basic_arr = $scope.artist_basic_info;
+        var artist_preferred_arr = $scope.artist_preferred_info;
+        $("#artist_preferred_arr").val(artist_preferred_arr.preffered_availability);
+        
+        var cat_arr = artist_basic_arr.art_skill.split(",");        
+        if(cat_arr.indexOf("26") != -1){
+            $("#other_pref_cate_div").show();
+            $("#art_other_pref_cate").val(artist_basic_arr.other_category_txt);
+        }
+        else{
+            $("#other_pref_cate_div").hide();
+            $("#art_other_pref_cate").val("");
+        }
+        // Set the value
+        $("#pref_cate").val(cat_arr).change();
+
+        if(artist_preferred_arr.preffered_skills != '')
+        {            
+            var edit_preffered_skills = [];
+            var preffered_skills_arr = artist_preferred_arr.preffered_skills.split(',');
+            preffered_skills_arr.forEach(function(element,catArrIndex) {                
+              edit_preffered_skills[catArrIndex] = {pref_skill:element};
+            });
+            $scope.preferred_skill_txt = edit_preffered_skills;
+        }
+
+        $scope.art_preffered_country = artist_preferred_arr.preffered_country;
+        $("#art_preffered_country").val(artist_preferred_arr.preffered_country);
+        // $scope.art_preffered_country_change();
+        var counrtydata = $.param({'country_id': $scope.art_preffered_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#art_preffered_state").removeAttr("disabled");
+            $("#art_preffered_city").attr("disabled","disabled");
+            $("#art_preffered_state_loader").hide();
+            $scope.art_preffered_state_list = data.data;
+            $scope.art_preffered_city_list = [];
+            $scope.art_preffered_state = artist_preferred_arr.preffered_state;
+
+            $("#art_preffered_city").attr("disabled","disabled");
+            $("#art_preffered_city_loader").show();
+            var statedata = $.param({'state_id': $scope.art_preffered_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#art_preffered_city").removeAttr("disabled");
+                $("#art_preffered_city_loader").hide();
+                $scope.art_preffered_city_list = data.data;
+                $scope.art_preffered_city = artist_preferred_arr.preffered_city;
+                $("#art_preferred_info_save").removeAttr("style");
+            });        
+        });
+
+        $("#preferred-work").modal('show');
+    };
+    //Art Preffered Info End
 });
+
+function otherchange(cat_id){
+    var all_cat_arr = $("#skills").val();    
+    if(all_cat_arr.indexOf("26") != -1){
+        $("#other_category_div").show();
+    }
+    else{
+        $("#other_category_div").hide();
+    }
+    $("#multidropdown").removeAttr("style");
+}
+function other_change_pref_cate(){
+    var all_cat_arr = $("#pref_cate").val();
+    if(all_cat_arr.indexOf("26") != -1){
+        $("#other_pref_cate_div").show();
+    }
+    else{
+        $("#other_pref_cate_div").hide();
+    }
+    $("#multidropdown-pc").removeAttr("style");
+}
