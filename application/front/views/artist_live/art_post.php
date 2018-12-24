@@ -129,7 +129,7 @@
                     </div>
                 </div>
 				
-                <div class="custom-user-list">
+                <div class="custom-user-list-cus">
                     <?php 
                         if(count($usercount) != count($followcount) + count($crosscount)){?>
                     <div class="full-box-module_follow">
