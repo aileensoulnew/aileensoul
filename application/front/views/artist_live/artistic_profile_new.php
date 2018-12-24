@@ -863,10 +863,10 @@
 			</section>
 		</div>
 		
-		
-		
+	<?php if($login_art_data[0]['user_id'] == $artisticdata[0]['user_id']): ?>
+	<!---  model Start  -->	
 	<!---  model basic information  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1043,7 +1043,7 @@
     </div>
 	
 	<!--  model tagline  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="tagline" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display: none;" class="modal fade dtl-modal" id="tagline" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1067,7 +1067,7 @@
     </div>
 	
 	<!--  model bio  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="bio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display: none;" class="modal fade dtl-modal" id="bio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1094,7 +1094,7 @@
     </div>
 	
 	<!--  model Type of Talent / Category  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="talent" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display: none;" class="modal fade dtl-modal" id="talent" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1120,7 +1120,7 @@
 	
 	
 	<!---  model Art Portfolio  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="art-portfolio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="art-portfolio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1160,7 +1160,7 @@
 			</div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-portfolio-model" role="dialog" ng-if="from_user_id == to_user_id">
+    <div class="modal fade message-box biderror" id="delete-portfolio-model" role="dialog">
 	    <div class="modal-dialog modal-lm">
 	        <div class="modal-content">
 	            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1185,7 +1185,7 @@
 	</div>
 	
 	<!--  Availability  -->
-	<div style="display: none;" id="availability" class="modal fade dtl-modal in" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" ng-if="from_user_id == to_user_id">
+	<div style="display: none;" id="availability" class="modal fade dtl-modal in" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1245,7 +1245,7 @@
 	
 	
 	<!--  model Preferred Work  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="preferred-work" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display: none;" class="modal fade dtl-modal" id="preferred-work" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1340,7 +1340,7 @@
     </div>
 	
 	<!---  model Educational Info  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="educational-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="educational-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1420,7 +1420,7 @@
                                             <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group">
                                                 <span class="span-select">
-                                                    <select id="edu_s_year" name="edu_s_year" ng-model="edu_s_year" ng-change="edu_start_year();">
+                                                    <select id="edu_s_year" name="edu_s_year"  ng-model="edu_s_year" ng-change="edu_start_year();">
                                                         <option value="">Year</option>
                                                         <?php
                                                         $year = date("Y",NOW());
@@ -1496,7 +1496,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-edu-model" role="dialog" ng-if="from_user_id == to_user_id">
+    <div class="modal fade message-box biderror" id="delete-edu-model" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1521,7 +1521,7 @@
     </div>
 	
 	<!---  model Experience  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" ng-click="reset_exp_form()" class="modal-close" data-dismiss="modal">×</button>
@@ -1565,10 +1565,9 @@
                                             <?php $getFieldList = $this->data_model->getNewFieldList();?>
                                             <select name="exp_field" id="exp_field" ng-model="exp_field" ng-change="other_field_fnc()">
                                                 <option value="">Select Field</option>
-                                            <?php foreach ($getFieldList as $key => $value) { ?>
-                                                <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
-                                            <?php } ?>
-                                            <option value="0">Other</option>
+                                                <?php foreach($art_category as $_art_category){  ?>
+                                                <option value="<?php echo $_art_category['category_id']; ?>"><?php echo ucwords(ucfirst($_art_category['art_category'])); ?></option>
+                                                <?php } ?>
                                         </select>
                                         </span>
                                         </div>
@@ -1710,7 +1709,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-exp-model" role="dialog" ng-if="from_user_id == to_user_id">
+    <div class="modal fade message-box biderror" id="delete-exp-model" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1735,7 +1734,7 @@
     </div>
 	
 	<!---  model Social Profile  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="social-link" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="social-link" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1819,7 +1818,7 @@
 	</div>
 	
 	<!---  model specialities  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="specialities" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="specialities" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1852,7 +1851,7 @@
     </div>
 	
 	<!---  model Software / Instrument/ Skills  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="art-sof" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="art-sof" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1881,7 +1880,7 @@
     </div>
 	
 	<!---  model Achievements & Awards  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="Achiv-awards" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="Achiv-awards" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1971,7 +1970,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-award-model" role="dialog" ng-if="from_user_id == to_user_id">
+    <div class="modal fade message-box biderror" id="delete-award-model" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1996,7 +1995,7 @@
     </div>
 	
 	<!---  model Additional Course  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -2101,7 +2100,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-addicourse-model" role="dialog" ng-if="from_user_id == to_user_id">
+    <div class="modal fade message-box biderror" id="delete-addicourse-model" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -2126,7 +2125,7 @@
     </div>
 		
 	<!---  model language  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="language" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
+	<div style="display:none;" class="modal fade dtl-modal" id="language" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -2206,7 +2205,8 @@
             </div>
         </div>
     </div>
-		
+    <!---  model End  --> 
+    <?php endif; ?>
 	<!-- Bid-modal  -->
 	<div class="modal fade message-box biderror" id="bidmodal" role="dialog">
 		<div class="modal-dialog modal-lm">
@@ -2293,9 +2293,9 @@
 
 		var app = angular.module("artistProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
 	</script>
-	<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-	<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details.js?ver='.time()); ?>"></script>
 	<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details_new.js?ver='.time()); ?>"></script>
+    <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
+    <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details.js?ver='.time()); ?>"></script>
 	<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
 	<script>

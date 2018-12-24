@@ -296,7 +296,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                             <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
                                             <div class="all-job-top">
                                                 <div class="post-img">
-                                                    <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
+                                                    <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}" onError="this.onerror=null;this.src='<?php echo base_url().'/assets/n-images/commen-img.png'; ?>';"></a>
                                                     <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                                                 </div>
                                                 <div class="job-top-detail">

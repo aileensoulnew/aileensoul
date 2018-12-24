@@ -883,8 +883,8 @@ class Artistic_model extends CI_Model {
         {            
             $data = array(
                 'user_id' => $userid,
-                'edu_school_college' => $edu_school_college,
-                'edu_university' => $edu_university,
+                'edu_school_college' => trim($edu_school_college),
+                'edu_university' => trim($edu_university),
                 'edu_other_university' => $edu_other_university,
                 'edu_degree' => $edu_degree,
                 'edu_other_degree' => $edu_other_degree,
@@ -904,8 +904,8 @@ class Artistic_model extends CI_Model {
         else
         {
             $data = array(
-                'edu_school_college' => $edu_school_college,
-                'edu_university' => $edu_university,
+                'edu_school_college' => trim($edu_school_college),
+                'edu_university' => trim($edu_university),
                 'edu_other_university' => $edu_other_university,
                 'edu_degree' => $edu_degree,
                 'edu_other_degree' => $edu_other_degree,
@@ -956,7 +956,7 @@ class Artistic_model extends CI_Model {
         {            
             $data = array(
                 'user_id' => $userid,
-                'addicourse_name' => $addicourse_name,
+                'addicourse_name' => trim($addicourse_name),
                 'addicourse_org' => $addicourse_org,
                 'addicourse_start_date' => $addicourse_start_date,
                 'addicourse_end_date' => $addicourse_end_date,
@@ -972,7 +972,7 @@ class Artistic_model extends CI_Model {
         else
         {
             $data = array(
-                'addicourse_name' => $addicourse_name,
+                'addicourse_name' => trim($addicourse_name),
                 'addicourse_org' => $addicourse_org,
                 'addicourse_start_date' => $addicourse_start_date,
                 'addicourse_end_date' => $addicourse_end_date,
@@ -1016,7 +1016,7 @@ class Artistic_model extends CI_Model {
         {
             $data = array(
                 'user_id' => $userid,
-                'award_title' => $award_title,
+                'award_title' => trim($award_title),
                 'award_org' => $award_org,
                 'award_date' => $award_date,
                 'award_desc' => $award_desc,
@@ -1031,7 +1031,7 @@ class Artistic_model extends CI_Model {
         else
         {
             $data = array(
-                'award_title' => $award_title,
+                'award_title' => trim($award_title),
                 'award_org' => $award_org,
                 'award_date' => $award_date,
                 'award_desc' => $award_desc,
@@ -1074,7 +1074,7 @@ class Artistic_model extends CI_Model {
         {            
             $data = array(
                 'user_id' => $userid,
-                'exp_company_name' => $exp_company_name,
+                'exp_company_name' => trim($exp_company_name),
                 'exp_designation' => $exp_designation,
                 'exp_company_website' => $exp_company_website,
                 'exp_field' => $exp_field,
@@ -1105,7 +1105,7 @@ class Artistic_model extends CI_Model {
         else
         {
             $data = array(
-                'exp_company_name' => $exp_company_name,
+                'exp_company_name' => trim($exp_company_name),
                 'exp_designation' => $exp_designation,
                 'exp_company_website' => $exp_company_website,
                 'exp_field' => $exp_field,
@@ -1170,7 +1170,7 @@ class Artistic_model extends CI_Model {
         {
             $data = array(
                 'user_id' => $userid,
-                'portfolio_title' => $portfolio_title,
+                'portfolio_title' => trim($portfolio_title),
                 'portfolio_desc' => $portfolio_desc,                
                 'portfolio_file' => $portfolio_file,                
                 'status' => '1',
@@ -1183,7 +1183,7 @@ class Artistic_model extends CI_Model {
         else
         {
             $data = array(
-                'portfolio_title' => $portfolio_title,
+                'portfolio_title' => trim($portfolio_title),
                 'portfolio_desc' => $portfolio_desc,                
                 'portfolio_file' => $portfolio_file,
                 'modify_date' => date('Y-m-d H:i:s', time()),
@@ -1322,9 +1322,9 @@ class Artistic_model extends CI_Model {
     public function art_basic_info_save($user_id, $art_fname = "", $art_lname = "", $art_email = "", $art_gender = "", $birth_date = "", $art_phnno = "", $art_basic_country = "", $art_basic_state = "", $art_basic_city = "", $category = "", $art_other_category_id = "")
     {
         $data = array(                
-            'art_name' => $art_fname,
-            'art_lastname' => $art_lname,
-            'art_email' => $art_email,
+            'art_name' => trim($art_fname),
+            'art_lastname' => trim($art_lname),
+            'art_email' => trim($art_email),
             'art_gender' => $art_gender,
             'art_dob' => $birth_date,
             'art_phnno' => $art_phnno,
@@ -1380,7 +1380,7 @@ class Artistic_model extends CI_Model {
     public function art_preferred_info_save($user_id,$category = "",$art_other_category_id = "",$preferred_skill_tags = "",$art_preffered_country = "",$art_preffered_state = "",$art_preffered_city = "",$preffered_availability = "")
     {
         $data = array(
-            'preffered_skills' => $preferred_skill_tags,
+            'preffered_skills' => trim($preferred_skill_tags),
             'preffered_country' => $art_preffered_country,
             'preffered_state' => $art_preffered_state,
             'preffered_city' => $art_preffered_city,

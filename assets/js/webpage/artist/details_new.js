@@ -1408,7 +1408,7 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
 
     $scope.other_field_fnc = function()
     {
-        if($scope.exp_field == 0 && $scope.exp_field != "")
+        if($scope.exp_field == 26 && $scope.exp_field != "")
         {
             $("#exp_other_field_div").show();
         }
@@ -2549,12 +2549,7 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
 
             $("#save_user_speciality").removeAttr("style");
             $("#user_speciality_loader").hide();
-            $("#specialities").modal('hide');
-            var profile_progress = result.data.profile_progress;
-            var count_profile_value = profile_progress.user_process_value;
-            var count_profile = profile_progress.user_process;
-            $scope.progress_status = profile_progress.progress_status;
-            $scope.set_progress(count_profile_value,count_profile);
+            $("#specialities").modal('hide');            
         });
     };
 
@@ -2969,14 +2964,16 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
         $("#art_gender").val(artist_basic_arr.art_gender);
         $("#art_email").val(artist_basic_arr.art_email);
         $("#art_phnno").val(artist_basic_arr.art_phnno);
-
-        var art_dob_arr = artist_basic_arr.art_dob.split("-");
-        art_dob_day = art_dob_arr[2];
-        art_dob_month = art_dob_arr[1];
-        art_dob_year = art_dob_arr[0];
-        $("#art_dob_month").val(art_dob_month);
-        // $scope.art_dob_month = art_dob_month;
-        $scope.art_dob_date_fnc(art_dob_day,art_dob_month,art_dob_year);
+        if(artist_basic_arr.art_dob)
+        {
+            var art_dob_arr = artist_basic_arr.art_dob.split("-");
+            art_dob_day = art_dob_arr[2];
+            art_dob_month = art_dob_arr[1];
+            art_dob_year = art_dob_arr[0];
+            $("#art_dob_month").val(art_dob_month);
+            // $scope.art_dob_month = art_dob_month;
+        }
+            $scope.art_dob_date_fnc(art_dob_day,art_dob_month,art_dob_year);
 
         $scope.art_basic_country = artist_basic_arr.art_country;
         $("#art_basic_country").val(artist_basic_arr.art_country);
@@ -3363,39 +3360,42 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
             $scope.preferred_skill_txt = edit_preffered_skills;
         }
 
-        $scope.art_preffered_country = artist_preferred_arr.preffered_country;
-        $("#art_preffered_country").val(artist_preferred_arr.preffered_country);
-        // $scope.art_preffered_country_change();
-        var counrtydata = $.param({'country_id': $scope.art_preffered_country});
-        $http({
-            method: 'POST',
-            url: base_url + 'userprofile_page/get_state_by_country_id',
-            data: counrtydata,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (data) {
-            $("#art_preffered_state").removeAttr("disabled");
-            $("#art_preffered_city").attr("disabled","disabled");
-            $("#art_preffered_state_loader").hide();
-            $scope.art_preffered_state_list = data.data;
-            $scope.art_preffered_city_list = [];
-            $scope.art_preffered_state = artist_preferred_arr.preffered_state;
-
-            $("#art_preffered_city").attr("disabled","disabled");
-            $("#art_preffered_city_loader").show();
-            var statedata = $.param({'state_id': $scope.art_preffered_state});
+        if(artist_preferred_arr.preffered_country)
+        {
+            $scope.art_preffered_country = artist_preferred_arr.preffered_country;
+            $("#art_preffered_country").val(artist_preferred_arr.preffered_country);
+            // $scope.art_preffered_country_change();
+            var counrtydata = $.param({'country_id': $scope.art_preffered_country});
             $http({
                 method: 'POST',
-                url: base_url + 'userprofile_page/get_city_by_state_id',
-                data: statedata,
+                url: base_url + 'userprofile_page/get_state_by_country_id',
+                data: counrtydata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function (data) {
-                $("#art_preffered_city").removeAttr("disabled");
-                $("#art_preffered_city_loader").hide();
-                $scope.art_preffered_city_list = data.data;
-                $scope.art_preffered_city = artist_preferred_arr.preffered_city;
-                $("#art_preferred_info_save").removeAttr("style");
-            });        
-        });
+                $("#art_preffered_state").removeAttr("disabled");
+                $("#art_preffered_city").attr("disabled","disabled");
+                $("#art_preffered_state_loader").hide();
+                $scope.art_preffered_state_list = data.data;
+                $scope.art_preffered_city_list = [];
+                $scope.art_preffered_state = artist_preferred_arr.preffered_state;
+
+                $("#art_preffered_city").attr("disabled","disabled");
+                $("#art_preffered_city_loader").show();
+                var statedata = $.param({'state_id': $scope.art_preffered_state});
+                $http({
+                    method: 'POST',
+                    url: base_url + 'userprofile_page/get_city_by_state_id',
+                    data: statedata,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function (data) {
+                    $("#art_preffered_city").removeAttr("disabled");
+                    $("#art_preffered_city_loader").hide();
+                    $scope.art_preffered_city_list = data.data;
+                    $scope.art_preffered_city = artist_preferred_arr.preffered_city;
+                    $("#art_preferred_info_save").removeAttr("style");
+                });        
+            });
+        }
 
         $("#preferred-work").modal('show');
     };

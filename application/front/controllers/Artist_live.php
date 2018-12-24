@@ -2682,7 +2682,7 @@ class Artist_live extends MY_Controller {
                 {                        
                     $data = array(
                         'user_id' => $userid,
-                        'user_links_txt' => $v['value'],
+                        'user_links_txt' => trim($v['value']),
                         'user_links_type' => $link_type[$k]['value'],
                         'status' => '1',
                         'created_date' => date('Y-m-d H:i:s', time()),
@@ -2701,7 +2701,7 @@ class Artist_live extends MY_Controller {
                 {                        
                     $data = array(
                         'user_id' => $userid,
-                        'user_links_txt' => $v['value'],
+                        'user_links_txt' => trim($v['value']),
                         'user_links_type' => "Personal",
                         'status' => '1',
                         'created_date' => date('Y-m-d H:i:s', time()),
@@ -2756,7 +2756,7 @@ class Artist_live extends MY_Controller {
                     {                        
                         $data = array(
                             'user_id' => $userid,
-                            'language_txt' => $v['value'],
+                            'language_txt' => trim($v['value']),
                             'proficiency' => $proficiency[$k]['value'],
                             'status' => '1',
                             'created_date' => date('Y-m-d H:i:s', time()),
@@ -2787,7 +2787,7 @@ class Artist_live extends MY_Controller {
     {
         $user_bio = $this->input->post('user_bio');
         $userid = $this->session->userdata('aileenuser');
-        $data = array('art_desc_art' => $user_bio);
+        $data = array('art_desc_art' => trim($user_bio));
         $udpate_data = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
         if($udpate_data)
         {
@@ -2834,7 +2834,7 @@ class Artist_live extends MY_Controller {
         }
         $user_spl_tag_txt = trim($user_spl_tag_txt,",");
 
-        $data = array('art_spl_tags' => $user_spl_tag_txt,'art_spl_desc' => $speciality_desc);        
+        $data = array('art_spl_tags' => $user_spl_tag_txt,'art_spl_desc' => trim($speciality_desc));        
         $udpate_data = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
         if($udpate_data)
         {
@@ -2975,7 +2975,7 @@ class Artist_live extends MY_Controller {
         $art_category = $this->input->post('art_category');        
         if(in_array("26", $art_category))
         {
-            $art_other_category = $this->input->post('art_other_category');            
+            $art_other_category = trim($this->input->post('art_other_category'));
             $contition_array = array('other_category' => $art_other_category, 'status' => '1');
             $exist_other = $this->common->select_data_by_condition('art_other_category', $contition_array, $data = 'other_category,other_category_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
 
@@ -2985,7 +2985,7 @@ class Artist_live extends MY_Controller {
                 } else {
 
                     $data1 = array(
-                        'other_category' => $art_other_category,
+                        'other_category' => trim($art_other_category),
                         'status' => '1',
                         'is_delete' => '0',
                         'user_id' => $user_id,
@@ -3023,7 +3023,7 @@ class Artist_live extends MY_Controller {
         $art_category = $this->input->post('pref_cate');        
         if(in_array("26", $art_category))
         {
-            $art_other_category = $this->input->post('art_other_pref_cate');            
+            $art_other_category = trim($this->input->post('art_other_pref_cate'));
             $contition_array = array('other_category' => $art_other_category, 'status' => '1');
             $exist_other = $this->common->select_data_by_condition('art_other_category', $contition_array, $data = 'other_category,other_category_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
 
