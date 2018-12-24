@@ -3360,7 +3360,7 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
             $scope.preferred_skill_txt = edit_preffered_skills;
         }
 
-        if(artist_preferred_arr.preffered_country)
+        if(artist_preferred_arr.preffered_country != '0')
         {
             $scope.art_preffered_country = artist_preferred_arr.preffered_country;
             $("#art_preffered_country").val(artist_preferred_arr.preffered_country);
@@ -3395,6 +3395,10 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
                     $("#art_preferred_info_save").removeAttr("style");
                 });        
             });
+        }
+        else
+        {
+            $("#art_preferred_info_save").removeAttr("style");
         }
 
         $("#preferred-work").modal('show');
