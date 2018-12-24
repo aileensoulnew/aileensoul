@@ -371,7 +371,7 @@ class User_post_model extends CI_Model {
                     $of_sql = "";
                     foreach (explode(" ", $other_field) as $key => $value) {
                         if($value != ""){                    
-                            $of_sql .= " other_field LIKE '%".$value."%' OR";
+                            $of_sql .= " other_field LIKE '%".addslashes($value)."%' OR";
                         }
                     }
                     $getSameFieldProUser_sql .= "(".trim($of_sql," OR").")";

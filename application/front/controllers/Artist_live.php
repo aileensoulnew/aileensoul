@@ -2216,7 +2216,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2234,7 +2234,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2513,7 +2513,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2551,7 +2551,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2625,7 +2625,7 @@ class Artist_live extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_award_insert = $this->artistic_model->save_portfolio($user_id,$portfolio_title,$portfolio_desc,$fileName,$edit_portfolio_id);
+            $user_portfolio_insert = $this->artistic_model->save_portfolio($user_id,$portfolio_title,$portfolio_desc,$fileName,$edit_portfolio_id);
             $user_portfolio = $this->artistic_model->get_portfolio($user_id);
             $ret_arr = array("success"=>1,"user_portfolio"=>$user_portfolio);
         }
@@ -2633,6 +2633,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2659,6 +2660,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2713,7 +2715,7 @@ class Artist_live extends MY_Controller {
         $user_social_links_data = $this->artistic_model->get_user_social_links($userid);        
         $user_personal_links_data = $this->artistic_model->get_user_personal_links($userid);        
         $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2768,7 +2770,7 @@ class Artist_live extends MY_Controller {
 
         $user_languages = $this->artistic_model->get_user_languages($userid);
         $ret_arr = array("success"=>1,"user_languages"=>$user_languages);
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2796,7 +2798,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);   
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
 
@@ -2843,8 +2845,7 @@ class Artist_live extends MY_Controller {
         else
         {
             $ret_arr = array("success"=>0);
-        }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        }        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2881,8 +2882,7 @@ class Artist_live extends MY_Controller {
         else
         {
             $ret_arr = array("success"=>0);
-        }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        }        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2919,8 +2919,7 @@ class Artist_live extends MY_Controller {
         else
         {
             $ret_arr = array("success"=>0);
-        }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        }        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2946,7 +2945,7 @@ class Artist_live extends MY_Controller {
         $insert_id = $this->common->update_data($data1, 'art_reg_search_tmp', 'user_id', $user_id);
         $art_imp_data = $this->artistic_model->get_user_art_imp_data($user_id);
         $ret_arr = array("success"=>1,"art_imp_data"=>$art_imp_data);
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2957,6 +2956,7 @@ class Artist_live extends MY_Controller {
         $artist_basic_info = $this->artistic_model->get_artist_basic_info($user_id);
         $artist_preferred_info = $this->artistic_model->get_artist_preferred_info($user_id);
         $ret_arr = array("success"=>1,"artist_basic_info"=>$artist_basic_info,"artist_preferred_info"=>$artist_preferred_info);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -3012,7 +3012,7 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -3075,7 +3075,239 @@ class Artist_live extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
+        $ret_arr['profile_progress'] = $this->progressbar_new($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function progressbar_new($user_id)
+    {
+        $contition_array = array('user_id' => $user_id, 'status' => '1', 'is_delete' => '0');
+
+        $art_data = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_user_image, profile_background, art_desc_art, art_name, art_lastname, art_skill, art_gender, art_email, art_phnno, art_dob, art_country, art_state, art_city, art_active_status, preffered_skills, preffered_country, preffered_state, preffered_city, preffered_availability', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+
+        $count = 0;
+        $progress_status = array();
+        $user_image = 0;        
+        if($art_data['art_user_image'] != '')
+        {
+            $user_image = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_image_status'] = $user_image;
+
+        $profile_background = 0;
+        if($art_data['profile_background'] != '')
+        {
+            $profile_background = 1;
+            $count = $count + 3;
+        }
+        $progress_status['profile_background_status'] = $profile_background;
+
+        $user_bio = 0;
+        if($art_data['art_desc_art'] != '')
+        {
+            $user_bio = 1;
+            $count = $count + 1;
+        }
+        $progress_status['user_bio_status'] = $user_bio;
+
+        //Basic Info
+        $fname = 0;
+        if($art_data['art_name'] != '')
+        {
+            $fname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['fname_status'] = $fname;
+
+        $lname = 0;
+        if($art_data['art_lastname'] != '')
+        {
+            $lname = 1;
+            $count = $count + 1;
+        }
+        $progress_status['lname_status'] = $lname;
+
+        $category = 0;
+        if($art_data['art_skill'] != '')
+        {
+            $category = 1;
+            $count = $count + 1;
+        }
+        $progress_status['category_status'] = $category;
+
+        $gender = 0;
+        if($art_data['art_gender'] != '')
+        {
+            $gender = 1;
+            $count = $count + 1;
+        }
+        $progress_status['gender_status'] = $gender;
+
+        $email = 0;
+        if($art_data['art_email'] != '')
+        {
+            $email = 1;
+            $count = $count + 1;
+        }
+        $progress_status['email_status'] = $email;
+
+        $phnno = 0;
+        if($art_data['art_phnno'] != '')
+        {
+            $phnno = 1;
+            $count = $count + 1;
+        }
+        $progress_status['phnno_status'] = $phnno;
+
+        $dob = 0;
+        if($art_data['art_dob'] != '')
+        {
+            $dob = 1;
+            $count = $count + 1;
+        }
+        $progress_status['dob_status'] = $dob;
+
+        $country = 0;
+        if($art_data['art_country'] != '')
+        {
+            $country = 1;
+            $count = $count + 1;
+        }
+        $progress_status['country_status'] = $country;
+
+        $state = 0;
+        if($art_data['art_state'] != '')
+        {
+            $state = 1;
+            $count = $count + 1;
+        }
+        $progress_status['state_status'] = $state;
+
+        $city = 0;
+        if($art_data['art_city'] != '')
+        {
+            $city = 1;
+            $count = $count + 1;
+        }
+        $progress_status['city_status'] = $city;
+        //artist Active Status
+        
+        $active_status = 0;
+        if($art_data['art_active_status'] != '')
+        {
+            $active_status = 1;
+            $count = $count + 1;
+        }
+        $progress_status['active_status_status'] = $active_status;
+
+        //Preferred Detail
+        $preffered_skills = 0;
+        if($art_data['preffered_skills'] != '')
+        {
+            $preffered_skills = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preffered_skills_status'] = $preffered_skills;
+
+        $preffered_country = 0;
+        if($art_data['preffered_country'] != '')
+        {
+            $preffered_country = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preffered_country_status'] = $preffered_country;
+
+        $preffered_state = 0;
+        if($art_data['preffered_state'] != '')
+        {
+            $preffered_state = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preffered_state_status'] = $preffered_state;
+
+        $preffered_city = 0;
+        if($art_data['preffered_city'] != '')
+        {
+            $preffered_city = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preffered_city_status'] = $preffered_city;
+
+        $preffered_availability = 0;
+        if($art_data['preffered_availability'] > -1 && $art_data['preffered_availability'] != '')
+        {
+            $preffered_availability = 1;
+            $count = $count + 1;
+        }
+        $progress_status['preffered_availability_status'] = $preffered_availability;
+
+        $user_education = $this->artistic_model->get_user_education($user_id);
+        $user_education_status = 0;
+        if(isset($user_education) && !empty($user_education))
+        {
+            $user_education_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_education_status'] = $user_education_status;
+        
+        $user_portfolio_status = 0;
+        $user_portfolio = $this->artistic_model->get_portfolio($user_id);
+        if(isset($user_portfolio) && !empty($user_portfolio))
+        {
+            $user_portfolio_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_portfolio_status'] = $user_portfolio_status;
+
+        $user_experience_status = 0;
+        $user_experience = $this->artistic_model->get_user_experience($user_id);  
+        if(isset($user_experience) && !empty($user_experience))
+        {
+            $user_experience_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_experience_status'] = $user_experience_status;
+        
+        $user_languages = $this->artistic_model->get_user_languages($user_id);
+        $user_languages_status = 0;
+        if(isset($user_languages) && !empty($user_languages))
+        {
+            $user_languages_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_languages_status'] = $user_languages_status;
+
+        $user_links = $this->artistic_model->get_user_links($user_id);
+        $user_links_status = 0;
+        if(isset($user_links) && !empty($user_links))
+        {
+            $user_links_status = 1;
+            $count = $count + 3;
+        }
+        $progress_status['user_links_status'] = $user_links_status;
+        // print_r($progress_status);
+        // echo $count;exit();
+        $user_process = ($count * 100) / 38;        
+        $user_process_value = ($user_process / 100);
+
+        if ($user_process == 100) {
+            //if ($job_data['progress_new'] != 1) {
+                $data = array(
+                    'progressbar' => '1',
+                    'modified_date' => date('Y-m-d h:i:s', time())
+                );
+                $updatedata = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
+                $updatedata = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $user_id);
+            //}
+        } else {
+            $data = array(
+                'progressbar' => '0',
+                'modified_date' => date('Y-m-d h:i:s', time())
+            );
+            $updatedata = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
+            $updatedata = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $user_id);
+        }
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
 }

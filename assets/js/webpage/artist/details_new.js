@@ -450,28 +450,18 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
                     result = result.data;
                     if(result.success == 1)
                     {
-                        $scope.edu_nograduate = 0;
-                        $("#other_university").hide(); 
-                        $("#other_edu").hide();
-                        $("#edu_save").removeAttr("style");
-                        $("#edu_loader").hide();
-                        $("#edu_form")[0].reset();
-                        edu_formdata = new FormData();
                         $scope.user_education = result.user_education;
-                        $scope.reset_edu_form();
-                        $("#educational-info").modal('hide');
                     }
-                    else
-                    {
-                        $scope.edu_nograduate = 0;
-                        $("#other_university").hide(); 
-                        $("#other_edu").hide();
-                        $("#edu_save").removeAttr("style");
-                        $("#edu_loader").hide();
-                        $("#edu_form")[0].reset();
-                        $scope.reset_edu_form();
-                        $("#educational-info").modal('hide');
-                    }
+                    $scope.edu_nograduate = 0;
+                    $("#other_university").hide(); 
+                    $("#other_edu").hide();
+                    $("#edu_save").removeAttr("style");
+                    $("#edu_loader").hide();
+                    $("#edu_form")[0].reset();
+                    edu_formdata = new FormData();                        
+                    $scope.reset_edu_form();
+                    $("#educational-info").modal('hide');
+                    
                     var profile_progress = result.profile_progress;
                     var count_profile_value = profile_progress.user_process_value;
                     var count_profile = profile_progress.user_process;
@@ -2014,6 +2004,11 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
                         $("#business_portfolio_form")[0].reset();
                         $("#art-portfolio").modal('hide');
                     }
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -2091,7 +2086,6 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
         $("#art-portfolio").modal("show");
 
     };
-
     $scope.delete_portfolio = function(){
         $("#delete_portfolio").attr("style","pointer-events:none;display:none;");
         $("#delete_portfolio_loader").show();
@@ -2126,6 +2120,12 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
                         $("#portfolio-delete-btn").show();
                         $scope.reset_portfolio();
                     }
+
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -2939,6 +2939,12 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
             $("#art-preffered-loader").hide();
             $("#art-preffered-body").show();
 
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            $scope.set_progress(count_profile_value,count_profile);
+
         });
     }
     $scope.get_artist_basic_info();
@@ -3165,11 +3171,11 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
                 $("#art_basic_info_save").removeAttr("style");
                 $("#art_basic_info_save_loader").hide();
                 $("#job-basic-info").modal('hide');
-                // var profile_progress = result.data.profile_progress;
-                // var count_profile_value = profile_progress.user_process_value;
-                // var count_profile = profile_progress.user_process;
-                // $scope.progress_status = profile_progress.progress_status;
-                // $scope.set_progress(count_profile_value,count_profile);
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             });
         }
     };
@@ -3320,11 +3326,11 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
                 $("#art_preferred_info_save").removeAttr("style");
                 $("#art_preferred_info_save_loader").hide();
                 $("#preferred-work").modal('hide');
-                // var profile_progress = result.data.profile_progress;
-                // var count_profile_value = profile_progress.user_process_value;
-                // var count_profile = profile_progress.user_process;
-                // $scope.progress_status = profile_progress.progress_status;
-                // $scope.set_progress(count_profile_value,count_profile);
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
+                $scope.set_progress(count_profile_value,count_profile);
             });
         }
     };
@@ -3333,7 +3339,7 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
         $("#art_preferred_info_save").attr("style","pointer-events:none");
         var artist_basic_arr = $scope.artist_basic_info;
         var artist_preferred_arr = $scope.artist_preferred_info;
-        $("#artist_preferred_arr").val(artist_preferred_arr.preffered_availability);
+        $("#preffered_availability").val(artist_preferred_arr.preffered_availability);
         
         var cat_arr = artist_basic_arr.art_skill.split(",");        
         if(cat_arr.indexOf("26") != -1){
@@ -3394,6 +3400,32 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
         $("#preferred-work").modal('show');
     };
     //Art Preffered Info End
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#profile-progress").show();
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                 $("#edit-profile-move").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
 });
 
 function otherchange(cat_id){

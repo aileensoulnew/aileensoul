@@ -35,647 +35,660 @@
 								
 							</div>
 					<div class="all-detail-custom">
-					<div class="gallery" id="gallery">
-						
-						<!--  01 Bio  -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Bio</span><a href="#" data-target="#bio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div id="bio-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="bio-body" style="display: none;">
-                                    <div class="dtl-dis">
-                                        <div class="no-info" ng-if="user_bio == ''">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Highlight your details. (Let it be either personal or professional)</span>
-                                        </div>
-                                        <div class="" ng-if="user_bio != ''">
-                                            <h4>About</h4>
-                                            <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
-                                        </div>
-                                    </div>
-                                </div>								
-							</div>
-						</div>
-						
-						<!--  02 Edit profile  -->
-						<div id="edit-custom-move" class="gallery-item edit-profile-move">
-							<div class="abailability-move">
-							</div>
-						</div>
-						
-						<!--  03 Basic information  -->
-						<div class="gallery-item">
-						</div>
-						
-						<!--  04 Basic information  -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" class="pull-right" ng-click="edit_art_basic_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-                                <div id="art-info-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="art-info-body" style="display: none;">
-    								<div id="about-detail" class="dtl-dis">
-    									<ul class="dis-list list-ul-cus">
-    										<li>
-    											<span>Art category</span>
-    											<label>{{artist_basic_info.art_category_txt | removeOther}}{{artist_basic_info.art_category_txt != 'other' && artist_basic_info.art_category_txt != '' ? ',' : ''}}{{artist_basic_info.other_category_txt}}</label>
-    										</li>
-    										<li ng-if="artist_basic_info.art_gender">
-    											<span>Gender</span>
-                                                <label ng-if="artist_basic_info.art_gender =='1'">Male</label>
-                                                <label ng-if="artist_basic_info.art_gender =='2'">Female</label>
-    											<label ng-if="artist_basic_info.art_gender =='3'">Other</label>
-    										</li>
-    										<li ng-if="artist_basic_info.art_dob">
-    											<span>Date of Birth</span>
-    											<label>{{artist_basic_info.art_dob_txt}}</label>
-    										</li>
-    										<li>
-    											<span>Location</span>
-    											<label ng-if="artist_basic_info.country_name || artist_basic_info.state_name || artist_basic_info.city_name">
-                                                    {{artist_basic_info.city_name != '' ? artist_basic_info.city_name : ''}}
-                                                    {{artist_basic_info.city_name != '' && artist_basic_info.state_name != '' ? ',' : ''}}
-                                                    {{artist_basic_info.state_name != '' ? artist_basic_info.state_name : ''}}
-                                                    {{artist_basic_info.state_name != '' && artist_basic_info.country_name != '' ? ',' : ''}}
-                                                    {{artist_basic_info.country_name != '' ? artist_basic_info.country_name : ''}}
-                                                </label>
-    										</li>    										
-    									</ul>
+    					<div class="gallery" id="gallery">
+    						
+    						<!--  01 Bio  -->
+    						<div class="gallery-item">
+    							<div class="dtl-box">
+    								<div class="dtl-title">
+    									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/prof-sum.png?ver=' . time()) ?>"><span>Bio</span>
+                                        <a href="#"  ng-if="from_user_id == to_user_id" data-target="#bio" data-toggle="modal" class="pull-right">
+                                            <img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>">
+                                        </a>
     								</div>
-                                </div>
-								<div id="view-more-about" class="about-more" style="display: none;">
-									<a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
-								
-							</div>
-						</div>
-						
-						<!--  05 Language  -->
-						<div class="gallery-item language-move">
-						</div>
-						
-						<!--  06 Type of talant  -->
-						<div class="gallery-item type-talant-move">
-						</div>
-						
-						<!--  07 Educational Info  -->
-						<div class="gallery-item">
-                            <div class="dtl-box">
-                                <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" ng-click="reset_edu_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
-                                </div>
-                                <div id="edution-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="edution-body" style="display: none;">
-                                    <div class="dtl-dis" ng-if="user_education.length < 1">
-                                        <div class="no-info">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Showcase what degrees you have! From which school or university you have graduated.</span>
+    								<div id="bio-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
                                         </div>
                                     </div>
-                                    <div class="dtl-dis dis-accor" ng-if="user_education.length > 0">
-                                        <div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="user_edu in user_education" ng-if="$index <= view_more_edu">
-                                                <div class="panel-heading" role="tab" id="edu-{{$index}}">
-                                                    <div class="panel-title">
-                                                        <div class="dis-left">
-                                                            <div class="dis-left-img">
-                                                                <span>{{user_edu.edu_school_college | limitTo:1 | uppercase}}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dis-middle">
-                                                            <h4>{{user_edu.edu_school_college}}</h4>
-                                                            <p ng-if="user_edu.edu_degree == '0'">{{user_edu.edu_other_degree}}</p>
-                                                            <p ng-if="user_edu.edu_degree != '0'">{{user_edu.degree_name}}</p>
-                                                        </div>
-                                                        <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_edu($index)" class="pr5" ng-if="live_slug == segment2">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
-                                                            </span>
-                                                            <span role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
-                                                            </span>
-                                                        </div>
-                     
-                                                    </div>
-                                                </div>
-                                                <div id="edu{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu-{{$index}}">
-                                                    <div class="panel-body">
-                                                        <ul class="dis-list list-ul-cus">
-                                                            <li class="select-preview">
-                                                                <span>Duration</span> 
-                                                                <label ng-if="user_edu.start_date_str">{{user_edu.start_date_str}} to</label>
-                                                                <label ng-if="user_edu.end_date_str != null && end_date_str != ''">{{user_edu.end_date_str}}</label> 
-                                                                <label ng-if="user_edu.end_date_str == null || end_date_str == ''">Pursuing</label>
-                                                            </li>
-                                                            <li class="select-preview">
-                                                                <span>Board / University</span>
-                                                                <label ng-if="user_edu.edu_university == '0'">{{user_edu.edu_other_university}}</label>
-                                                                <label ng-if="user_edu.edu_university != '0'">{{user_edu.university_name}}</label>
-                                                            </li>
-                                                            <li class="select-preview">
-                                                                <span>Course / Field of Study / Stream</span>
-                                                                <label ng-if="user_edu.edu_stream == '0'">{{user_edu.edu_other_stream}}</label>
-                                                                <label ng-if="user_edu.edu_stream != '0'">{{user_edu.stream_name}}</label>
-                                                            </li>
-                                                            <li ng-if="user_edu.edu_file != '' && user_edu.edu_file != null">
-                                                                <span>Document</span>
-                                                                <p class="screen-shot" check-file-ext check-file="{{user_edu.edu_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_EDUCATION_UPLOAD_URL)."'"; ?>">
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                    <div id="bio-body" style="display: none;">
+                                        <div class="dtl-dis">
+                                            <div class="no-info" ng-if="user_bio == ''">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">Highlight your details. (Let it be either personal or professional)</span>
+                                                <span ng-if="from_user_id != to_user_id">Highlight your details. (Let it be either personal or professional)</span>
                                             </div>
-                                            <div id="view-more-edu" class="about-more" ng-if="user_education.length > 3">
-                                                <a href="javascript:void(0);" ng-click="edu_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                            <div class="" ng-if="user_bio != ''">
+                                                <h4>About</h4>
+                                                <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
-						<!--  08  Experience  -->
-						<div class="gallery-item">
-                            <div class="dtl-box">
-                                <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png">
-                                    <span>Experience                                        
-                                        <span class="exp-y-m-inner" ng-if="exp_years > '0' || exp_months > '0'">(
-                                            <span ng-if="exp_years > '0'">{{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
-                                            <span ng-if="exp_months > '0'">{{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
-                                             )
-                                        </span>
-                                    </span>
-                                        <a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
-                                </div>
-                                <div id="exp-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="exp-body" style="display: none;">
-                                    <div class="dtl-dis" ng-if="user_experience.length < '1'">
-                                        <div class="no-info">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Add your experiences!</span>
-                                        </div>
-                                    </div>
-                                    <div class="dtl-dis dis-accor" ng-if="user_experience.length > '0'">
-                                        <div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more_exp">
-                                                <div class="panel-heading" role="tab" id="exp-{{$index}}">
-                                                    <div class="panel-title">
-                                                        <div class="dis-left">
-                                                            <div class="dis-left-img">
-                                                                <span>{{user_exp.exp_company_name | limitTo:1 | uppercase}}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dis-middle">
-                                                            <h4>{{user_exp.exp_company_name}}</h4>
-                                                            <p>{{user_exp.designation}}</p>
-                                                        </div>
-                                                        <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_exp($index)" class="pr5" ng-if="live_slug == segment2">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
-                                                            </span>
-                                                            <span role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
-                                                            </span>
-                                                        </div>
-                     
-                                                    </div>
-                                                </div>
-                                                <div id="exp{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exp-{{$index}}">
-                                                    <div class="panel-body">
-                                                        <ul class="dis-list list-ul-cus">
-                                                            <li class="select-preview">
-                                                                <span>Time Period</span> 
-                                                                <label>{{user_exp.start_date_str}} to</label>
-                                                                <label ng-if="user_exp.end_date_str != '' && user_exp.end_date_str != null">{{user_exp.end_date_str}}</label> 
-                                                                <label ng-if="user_exp.end_date_str == '' || user_exp.end_date_str == null">Still Working</label>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Location</span>
-                                                                {{user_exp.city_name}},{{user_exp.state_name}},{{user_exp.country_name}} 
-                                                            </li>
-                                                            <li ng-if="user_exp.exp_company_website != '' && user_exp.exp_company_website != null">
-                                                                <span>Website</span>
-                                                                <a href="{{user_exp.exp_company_website}}" target="_self">{{user_exp.exp_company_website}}</a>
-                                                            </li>
-                                                            <li>
-                                                                <span>Description</span>
-                                                                <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_exp.exp_desc}}" dd-text-collapse-cond="true">{{user_exp.exp_desc}}</label>
-                                                            </li>
-                                                            <li ng-if="user_exp.exp_file != '' && user_exp.exp_file != null">
-                                                                <span>Document</span>
-                                                                <p class="screen-shot" check-file-ext check-file="{{user_exp.exp_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_EXPERIENCE_UPLOAD_URL)."'"; ?>">
-                                                                    <!-- <img src="<?php echo base_url(); ?>assets/n-images/art-img.jpg"> -->
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="view-more-exp" class="about-more" ng-if="user_experience.length > '3'">
-                                                <a href="#" ng-click="exp_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
-						<!--  09 Portfolio  -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>"><span>Art Portfolio</span><a href="#" data-target="#art-portfolio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
-								</div>
-								<div id="portfolio-loader" class="dtl-dis">
-		                            <div class="text-center">
-		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-		                            </div>
-		                        </div>
-		                        <div id="portfolio-body" style="display: none;">
-		                            <div class="dtl-dis" ng-if="user_portfolio.length < '1'">
-		                                <div class="no-info">
-		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-		                                    <span ng-if="from_user_id == to_user_id">Attract more artistic opportunities by attaching your art portfolio.</span>
-		                                    <span ng-if="from_user_id != to_user_id"><?php echo ucwords($artistic_name); ?> hasn't added any portfolio.</span>
-		                                </div>
-		                            </div>
-									<div class="dtl-dis dis-accor">
-										<div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
-											<div class="panel panel-default" ng-repeat="portfolio in user_portfolio" ng-if="$index <= view_more_port">
-												<div class="panel-heading" role="tab" id="p-{{$index}}">
-													<div class="panel-title">
-														<div class="dis-left">
-															<div class="dis-left-img">
-																<span>{{portfolio.portfolio_title | limitTo:1 | uppercase}}</span>
-															</div>
-														</div>
-														<div class="dis-middle">
-															<h4>{{portfolio.portfolio_title}}</h4>
-														</div>
-														<div class="dis-right">
-															<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" class="pr5" ng-click="edit_portfolio($index);">
-																<img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>">
-															</a>
-															<span role="button" data-toggle="collapse" data-parent="#project-accordion" href="#p{{$index}}" aria-expanded="false" aria-controls="p{{$index}}" class="collapsed up-down">
-																<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
-															</span>
-														</div>
-													</div>
-												</div>
-												<div id="p{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="p-{{$index}}" aria-expanded="false" style="height: 0px;">
-													<div class="panel-body">
-														<ul class="dis-list list-ul-cus">				
-															<li>
-																<span>Description</span>
-																<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{portfolio.portfolio_desc}}" dd-text-collapse-cond="true">{{portfolio.portfolio_desc}}</label>
-															</li>
-															<li ng-if="portfolio.portfolio_file != '' && portfolio.portfolio_file != null">
-		                                                        <span>Project File</span>
-		                                                        <p class="screen-shot" check-file-ext check-file="{{portfolio.portfolio_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_PORTFOLIO_UPLOAD_URL)."'"; ?>">
-		                                                        </p>
-		                                                    </li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div id="view-more-pr" class="about-more" ng-if="user_portfolio.length > '3'">
-		                                        <a href="javascript:void(0);" ng-click="port_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
-		                                    </div>
-										</div>
-									</div>
-								</div>								
-							</div>
-						</div>
-						
-						<!--  10 social profile  -->
-						<div class="gallery-item social-link-move">
-						</div>
-						
-						<!--  11 Preferred Work   -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" class="pull-right" ng-click="edit_art_preferred_info();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-                                <div id="art-preffered-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="art-preffered-body" style="display: none;">
-    								<div id="preffered-detail" class="dtl-dis">
-    									<ul class="dis-list list-ul-cus">
-    										<li class="select-preview">
-    											<span>Preferred Category</span>
-                                                <label>{{artist_basic_info.art_category_txt | removeOther}}{{artist_basic_info.art_category_txt != 'other' && artist_basic_info.art_category_txt != '' ? ',' : ''}}{{artist_basic_info.other_category_txt}}</label>
-    										</li>
-    										<li class="fw" ng-if="artist_preferred_info.preffered_skills">
-    											<span>Skills</span>
-    											<ul	class="skill-list">
-    												<li ng-repeat="pref_skill in artist_preferred_info.preffered_skills.split(',')">{{pref_skill}}</li>
-    											</ul>
-    										</li>
-    										<li ng-if="artist_preferred_info.preffered_country_name || artist_preferred_info.preffered_state_name || artist_preferred_info.preffered_city_name">
-    											<span>Preferred Location</span>
-    											<label ng-if="artist_preferred_info.preffered_country_name || artist_preferred_info.preffered_state_name || artist_preferred_info.preffered_city_name">
-                                                    {{artist_preferred_info.preffered_city_name != '' ? artist_preferred_info.preffered_city_name : ''}}
-                                                    {{artist_preferred_info.preffered_city_name != '' && artist_preferred_info.preffered_state_name != '' ? ',' : ''}}
-                                                    {{artist_preferred_info.preffered_state_name != '' ? artist_preferred_info.preffered_state_name : ''}}
-                                                    {{artist_preferred_info.preffered_state_name != '' && artist_preferred_info.preffered_country_name != '' ? ',' : ''}}
-                                                    {{artist_preferred_info.preffered_country_name != '' ? artist_preferred_info.preffered_country_name : ''}}
-                                                </label>
-    										</li>
-    										<li class="select-preview" ng-if="artist_preferred_info.preffered_availability">
-    											<span>Availability</span>
-                                                <label ng-if="artist_preferred_info.preffered_availability == '1'">Full Time</label>
-                                                <label ng-if="artist_preferred_info.preffered_availability == '2'">Part Time</label>
-                                                <label ng-if="artist_preferred_info.preffered_availability == '3'">Contract</label>
-    											<label ng-if="artist_preferred_info.preffered_availability == '4'">Freelance</label>
-    										</li>
-    									</ul>
+                                    </div>								
+    							</div>
+    						</div>
+    						
+    						<!--  02 Edit profile  -->
+    						<div id="edit-custom-move" class="gallery-item edit-profile-move">
+    							<div class="abailability-move">
+    							</div>
+    						</div>
+    						
+    						<!--  03 Basic information  -->
+    						<div class="gallery-item">
+    						</div>
+    						
+    						<!--  04 Basic information  -->
+    						<div class="gallery-item">
+    							<div class="dtl-box">
+    								<div class="dtl-title">
+    									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" class="pull-right" ng-click="edit_art_basic_info();" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
     								</div>
-                                </div>
-								<div id="view-more-preffered" class="about-more" style="display: none;">
-									<a href="#" ng-click="view_more_preffered();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
-								</div>
-							</div>
-						</div>
-						
-						<!--  12 Specialities  -->
-						<div class="gallery-item">
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>"><span>Specialities</span><a href="#" class="pull-right" ng-click="edit_user_specialities();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div id="specialities-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="specialities-body" style="display: none;">
-                                    <div class="dtl-dis" ng-if="!art_speciality_data.art_spl_tags && !art_speciality_data.art_spl_desc">
-                                        <div class="no-info">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>No specialities.</span>
+                                    <div id="art-info-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
                                         </div>
                                     </div>
-									<div class="dtl-dis" ng-if="art_speciality_data.art_spl_tags || art_speciality_data.art_spl_desc">
-										<ul class="dis-list list-ul-cus">
-											<li class="fw" ng-if="art_speciality_data.art_spl_tags != ''">
-												<span>Tags</span>
-												<ul	class="skill-list">
-													<li ng-repeat="speciality in art_speciality_data.art_spl_tags.split(',')">{{speciality}}</li>
-												</ul>
-											</li>
-											<li ng-if="art_speciality_data.art_spl_desc != ''">
-												<span>Description</span>
-												<p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{art_speciality_data.art_spl_desc}}" dd-text-collapse-cond="true">{{art_speciality_data.art_spl_desc}}</p>
-											</li>
-										</ul>
-									</div>
-								</div>								
-							</div>
-						</div>
-						
-						<!--  13 blank div  -->
-						<div class="gallery-item" >
-						</div>
-						
-						<!--  14 software  -->
-						<div class="gallery-item software-move" >
-						
-							<div class="dtl-box">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software / Instrument/ Skills</span><a href="#" class="pull-right" ng-click="edit_soft_inst_skill();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
-								</div>
-								<div id="soft_inst_skill-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    <div id="art-info-body" style="display: none;">
+        								<div id="about-detail" class="dtl-dis">
+        									<ul class="dis-list list-ul-cus">
+        										<li>
+        											<span>Art category</span>
+        											<label class="text-capitalize">{{artist_basic_info.art_category_txt | removeOther}}{{artist_basic_info.art_category_txt != 'other' && artist_basic_info.art_category_txt != '' && artist_basic_info.other_category_txt? ',' : ''}}{{artist_basic_info.other_category_txt}}</label>
+        										</li>
+        										<li ng-if="artist_basic_info.art_gender">
+        											<span>Gender</span>
+                                                    <label ng-if="artist_basic_info.art_gender =='1'">Male</label>
+                                                    <label ng-if="artist_basic_info.art_gender =='2'">Female</label>
+        											<label ng-if="artist_basic_info.art_gender =='3'">Other</label>
+        										</li>
+        										<li ng-if="artist_basic_info.art_dob">
+        											<span>Date of Birth</span>
+        											<label>{{artist_basic_info.art_dob_txt}}</label>
+        										</li>
+        										<li>
+        											<span>Location</span>
+        											<label ng-if="artist_basic_info.country_name || artist_basic_info.state_name || artist_basic_info.city_name">
+                                                        {{artist_basic_info.city_name != '' ? artist_basic_info.city_name : ''}}
+                                                        {{artist_basic_info.city_name != '' && artist_basic_info.state_name != '' ? ',' : ''}}
+                                                        {{artist_basic_info.state_name != '' ? artist_basic_info.state_name : ''}}
+                                                        {{artist_basic_info.state_name != '' && artist_basic_info.country_name != '' ? ',' : ''}}
+                                                        {{artist_basic_info.country_name != '' ? artist_basic_info.country_name : ''}}
+                                                    </label>
+        										</li>    										
+        									</ul>
+        								</div>
                                     </div>
-                                </div>
-                                <div id="soft_inst_skill-body" style="display: none;">
-                                    <div class="dtl-dis" ng-if="!art_soft_inst_skill">
-                                        <div class="no-info">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>No Software / Instrument/ Skills.</span>
+    								<div id="view-more-about" class="about-more" style="display: none;">
+    									<a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+    								</div>
+    								
+    							</div>
+    						</div>
+    						
+    						<!--  05 Language  -->
+    						<div class="gallery-item language-move">
+    						</div>
+    						
+    						<!--  06 Type of talant  -->
+    						<div class="gallery-item type-talant-move">
+    						</div>
+    						
+    						<!--  07 Educational Info  -->
+    						<div class="gallery-item">
+                                <div class="dtl-box">
+                                    <div class="dtl-title">
+                                        <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" ng-click="reset_edu_form();" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    </div>
+                                    <div id="edution-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
                                         </div>
                                     </div>
-									<div class="dtl-dis" ng-if="art_soft_inst_skill">
-										<ul class="dis-list list-ul-cus">
-											<li class="fw">
-												<span>Tags</span>
-												<ul	class="skill-list">
-													<li ng-repeat="sis in art_soft_inst_skill.split(',')">{{sis}}</li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-								</div>								
-							</div>
-					
-						
-						</div>
-						
-						<!--  15 Achievements and Awards  -->
-						<div class="gallery-item">
-                            <div class="dtl-box">
-                                <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
-                                </div>
-                                <div id="awards-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="awards-body" style="display: none;">
-                                    <div class="dtl-dis" ng-if="user_award.length < '1'">
-                                        <div class="no-info">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Showcase the honour you have achieved to profile.</span>
-                                        </div>
-                                    </div>
-                                    <div class="dtl-dis dis-accor" ng-if="user_award.length > '0'">
-                                        <div class="panel-group" id="award-accordion" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="user_awrd in user_award" ng-if="$index <= view_more_award">
-                                                <div class="panel-heading" role="tab" id="award-{{$index}}">
-                                                    <div class="panel-title">
-                                                        <div class="dis-left">
-                                                            <div class="dis-left-img">
-                                                                <span>{{user_awrd.award_title | limitTo:1 | uppercase}}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dis-middle">
-                                                            <h4>{{user_awrd.award_title}}</h4>        
-                                                            <p>{{user_awrd.award_org}}</p>
-                                                        </div>
-                                                        <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_award($index)" class="pr5" ng-if="live_slug == segment2">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
-                                                            </span>
-                                                            <span role="button" data-toggle="collapse" data-parent="#award-accordion" href="#award{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
-                                                            </span>
-                                                        </div>
-                     
-                                                    </div>
-                                                </div>
-                                                <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
-                                                    <div class="panel-body">
-                                                        <ul class="dis-list list-ul-cus">
-                                                            <li class="select-preview">
-                                                                <span>Date</span> 
-                                                                <label>{{user_awrd.award_date_str}}</label>
-                                                            </li>
-                                                            <li>
-                                                                <span>Description</span>
-                                                                <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_awrd.award_desc}}" dd-text-collapse-cond="true">{{user_awrd.award_desc}}</label>
-                                                            </li>
-                                                            <li ng-if="user_awrd.award_file != '' && user_awrd.award_file != null">
-                                                                <span>Document</span>
-                                                                <p class="screen-shot" check-file-ext check-file="{{user_awrd.award_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_AWARD_UPLOAD_URL)."'"; ?>">
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="view-more-award" class="about-more" ng-if="user_award.length > '3'">
-                                                <a href="#" ng-click="award_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                    <div id="edution-body" style="display: none;">
+                                        <div class="dtl-dis" ng-if="user_education.length < 1">
+                                            <div class="no-info">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">Showcase what degrees you have! From which school or university you have graduated.</span>
+                                                <span ng-if="from_user_id != to_user_id">Showcase what degrees you have! From which school or university you have graduated.</span>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
-						<!--  16 Additional Course  -->
-						<div class="gallery-item">
-                            <div class="dtl-box">
-                                <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/add-course.png"><span>Additional Course</span><a href="#" data-target="#additional-course" data-toggle="modal" ng-click="reset_addicourse_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
-                                </div>
-                                <div id="addicourse-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="addicourse-body" style="display: none;">
-                                    <div class="dtl-dis" ng-if="user_addicourse.length < '1'">
-                                        <div class="no-info">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Highlight the other online or offline courses you have pursued.</span>
-                                        </div>
-                                    </div>
-                                    <div class="dtl-dis dis-accor" ng-if="user_addicourse.length > '0'">
-                                        <div class="panel-group" id="addicourse-accordion" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="user_course in user_addicourse" ng-if="$index <= view_more_ac">
-                                                <div class="panel-heading" role="tab" id="addicourse-{{$index}}">
-                                                    <div class="panel-title">
-                                                        <div class="dis-left">
-                                                            <div class="dis-left-img">
-                                                                <span>{{user_course.addicourse_name | limitTo:1 | uppercase}}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dis-middle">
-                                                            <h4>{{user_course.addicourse_name}}</h4>        
-                                                            <p>{{user_course.addicourse_org}}</p>
-                                                        </div>
-                                                        <div class="dis-right">
-                                                            <span role="button" ng-click="edit_user_addicourse($index)" class="pr5" ng-if="live_slug == segment2">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
-                                                            </span>
-                                                            <span role="button" data-toggle="collapse" data-parent="#addicourse-accordion" href="#addicourse{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
-                                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
-                                                            </span>
-                                                        </div>
-                     
-                                                    </div>
-                                                </div>
-                                                <div id="addicourse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="addicourse-{{$index}}">
-                                                    <div class="panel-body">
-                                                        <ul class="dis-list list-ul-cus">
-                                                            <li>
-                                                                <span>Duration</span> 
-                                                                <label>{{user_course.start_date_str}} to</label>
-                                                                <label ng-if="user_course.end_date_str != '' && user_course.end_date_str != null">{{user_course.end_date_str}}</label> 
-                                                                <label ng-if="user_course.end_date_str == '' || user_course.end_date_str == null">Studying</label>
-                                                            </li>
-                                                            <li ng-if="user_course.addicourse_url != ''">
-                                                                <span>Website</span> 
-                                                                <div class="dis-list-link">
-                                                                <a href="{{user_course.addicourse_url}}" target="_self">{{user_course.addicourse_url}}</a>
+                                        <div class="dtl-dis dis-accor" ng-if="user_education.length > 0">
+                                            <div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-default" ng-repeat="user_edu in user_education" ng-if="$index <= view_more_edu">
+                                                    <div class="panel-heading" role="tab" id="edu-{{$index}}">
+                                                        <div class="panel-title">
+                                                            <div class="dis-left">
+                                                                <div class="dis-left-img">
+                                                                    <span>{{user_edu.edu_school_college | limitTo:1 | uppercase}}</span>
                                                                 </div>
-                                                            </li>
-                                                            <li ng-if="user_course.addicourse_file != '' && user_course.addicourse_file != null">
-                                                                <span>Document</span>
-                                                                <p class="screen-shot" check-file-ext check-file="{{user_course.addicourse_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_ADDICOURSE_UPLOAD_URL)."'"; ?>">
-                                                                </p>
-                                                            </li>
-                                                        </ul>
+                                                            </div>
+                                                            <div class="dis-middle">
+                                                                <h4>{{user_edu.edu_school_college}}</h4>
+                                                                <p ng-if="user_edu.edu_degree == '0'">{{user_edu.edu_other_degree}}</p>
+                                                                <p ng-if="user_edu.edu_degree != '0'">{{user_edu.degree_name}}</p>
+                                                            </div>
+                                                            <div class="dis-right">
+                                                                <span role="button" ng-click="edit_user_edu($index)" class="pr5" ng-if="from_user_id == to_user_id">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                                </span>
+                                                                <span role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                                </span>
+                                                            </div>
+                         
+                                                        </div>
+                                                    </div>
+                                                    <div id="edu{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu-{{$index}}">
+                                                        <div class="panel-body">
+                                                            <ul class="dis-list list-ul-cus">
+                                                                <li class="select-preview">
+                                                                    <span>Duration</span> 
+                                                                    <label ng-if="user_edu.start_date_str">{{user_edu.start_date_str}} to</label>
+                                                                    <label ng-if="user_edu.end_date_str != null && end_date_str != ''">{{user_edu.end_date_str}}</label> 
+                                                                    <label ng-if="user_edu.end_date_str == null || end_date_str == ''">Pursuing</label>
+                                                                </li>
+                                                                <li class="select-preview">
+                                                                    <span>Board / University</span>
+                                                                    <label ng-if="user_edu.edu_university == '0'">{{user_edu.edu_other_university}}</label>
+                                                                    <label ng-if="user_edu.edu_university != '0'">{{user_edu.university_name}}</label>
+                                                                </li>
+                                                                <li class="select-preview">
+                                                                    <span>Course / Field of Study / Stream</span>
+                                                                    <label ng-if="user_edu.edu_stream == '0'">{{user_edu.edu_other_stream}}</label>
+                                                                    <label ng-if="user_edu.edu_stream != '0'">{{user_edu.stream_name}}</label>
+                                                                </li>
+                                                                <li ng-if="user_edu.edu_file != '' && user_edu.edu_file != null">
+                                                                    <span>Document</span>
+                                                                    <p class="screen-shot" check-file-ext check-file="{{user_edu.edu_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_EDUCATION_UPLOAD_URL)."'"; ?>">
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div id="view-more-addicourse" class="about-more" ng-if="user_addicourse.length > '3'">
-                                                <a href="#" ng-click="ac_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                <div id="view-more-edu" class="about-more" ng-if="user_education.length > 3">
+                                                    <a href="javascript:void(0);" ng-click="edu_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-					
-					</div>
+    						
+    						<!--  08  Experience  -->
+    						<div class="gallery-item">
+                                <div class="dtl-box">
+                                    <div class="dtl-title">
+                                        <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png">
+                                        <span>Experience                                        
+                                            <span class="exp-y-m-inner" ng-if="exp_years > '0' || exp_months > '0'">(
+                                                <span ng-if="exp_years > '0'">{{exp_years}} year{{exp_years > '1' ? 's' : ''}}</span>
+                                                <span ng-if="exp_months > '0'">{{exp_months}} month{{exp_months > '1' ? 's' : ''}}</span>
+                                                 )
+                                            </span>
+                                        </span>
+                                            <a href="#" ng-if="from_user_id == to_user_id" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    </div>
+                                    <div id="exp-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                        </div>
+                                    </div>
+                                    <div id="exp-body" style="display: none;">
+                                        <div class="dtl-dis" ng-if="user_experience.length < '1'">
+                                            <div class="no-info">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">Add your experiences!</span>
+                                                <span ng-if="from_user_id != to_user_id">Add your experiences!</span>
+                                            </div>
+                                        </div>
+                                        <div class="dtl-dis dis-accor" ng-if="user_experience.length > '0'">
+                                            <div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more_exp">
+                                                    <div class="panel-heading" role="tab" id="exp-{{$index}}">
+                                                        <div class="panel-title">
+                                                            <div class="dis-left">
+                                                                <div class="dis-left-img">
+                                                                    <span>{{user_exp.exp_company_name | limitTo:1 | uppercase}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dis-middle">
+                                                                <h4>{{user_exp.exp_company_name}}</h4>
+                                                                <p>{{user_exp.designation}}</p>
+                                                            </div>
+                                                            <div class="dis-right">
+                                                                <span role="button" ng-click="edit_user_exp($index)" class="pr5" ng-if="from_user_id == to_user_id">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                                </span>
+                                                                <span role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                                </span>
+                                                            </div>
+                         
+                                                        </div>
+                                                    </div>
+                                                    <div id="exp{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exp-{{$index}}">
+                                                        <div class="panel-body">
+                                                            <ul class="dis-list list-ul-cus">
+                                                                <li class="select-preview">
+                                                                    <span>Time Period</span> 
+                                                                    <label>{{user_exp.start_date_str}} to</label>
+                                                                    <label ng-if="user_exp.end_date_str != '' && user_exp.end_date_str != null">{{user_exp.end_date_str}}</label> 
+                                                                    <label ng-if="user_exp.end_date_str == '' || user_exp.end_date_str == null">Still Working</label>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Company Location</span>
+                                                                    {{user_exp.city_name}},{{user_exp.state_name}},{{user_exp.country_name}} 
+                                                                </li>
+                                                                <li ng-if="user_exp.exp_company_website != '' && user_exp.exp_company_website != null">
+                                                                    <span>Website</span>
+                                                                    <a href="{{user_exp.exp_company_website}}" target="_self">{{user_exp.exp_company_website}}</a>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Description</span>
+                                                                    <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_exp.exp_desc}}" dd-text-collapse-cond="true">{{user_exp.exp_desc}}</label>
+                                                                </li>
+                                                                <li ng-if="user_exp.exp_file != '' && user_exp.exp_file != null">
+                                                                    <span>Document</span>
+                                                                    <p class="screen-shot" check-file-ext check-file="{{user_exp.exp_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_EXPERIENCE_UPLOAD_URL)."'"; ?>">
+                                                                        <!-- <img src="<?php echo base_url(); ?>assets/n-images/art-img.jpg"> -->
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="view-more-exp" class="about-more" ng-if="user_experience.length > '3'">
+                                                    <a href="#" ng-click="exp_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    						
+    						<!--  09 Portfolio  -->
+    						<div class="gallery-item">
+    							<div class="dtl-box">
+    								<div class="dtl-title">
+    									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/bus-portfolio.png?ver=' . time()) ?>"><span>Art Portfolio</span><a href="#"  ng-if="from_user_id == to_user_id" data-target="#art-portfolio" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+    								</div>
+    								<div id="portfolio-loader" class="dtl-dis">
+    		                            <div class="text-center">
+    		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+    		                            </div>
+    		                        </div>
+    		                        <div id="portfolio-body" style="display: none;">
+    		                            <div class="dtl-dis" ng-if="user_portfolio.length < '1'">
+    		                                <div class="no-info">
+    		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+    		                                    <span ng-if="from_user_id == to_user_id">Attract more artistic opportunities by attaching your art portfolio.</span>
+    		                                    <span ng-if="from_user_id != to_user_id"><?php echo ucwords($artistic_name); ?> hasn't added any portfolio.</span>
+    		                                </div>
+    		                            </div>
+    									<div class="dtl-dis dis-accor">
+    										<div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
+    											<div class="panel panel-default" ng-repeat="portfolio in user_portfolio" ng-if="$index <= view_more_port">
+    												<div class="panel-heading" role="tab" id="p-{{$index}}">
+    													<div class="panel-title">
+    														<div class="dis-left">
+    															<div class="dis-left-img">
+    																<span>{{portfolio.portfolio_title | limitTo:1 | uppercase}}</span>
+    															</div>
+    														</div>
+    														<div class="dis-middle">
+    															<h4>{{portfolio.portfolio_title}}</h4>
+    														</div>
+    														<div class="dis-right">
+    															<a href="javascript:void(0);" ng-if="from_user_id == to_user_id" class="pr5" ng-click="edit_portfolio($index);">
+    																<img src="<?php echo base_url('assets/n-images/detail/detial-edit.png?ver=' . time()) ?>">
+    															</a>
+    															<span role="button" data-toggle="collapse" data-parent="#project-accordion" href="#p{{$index}}" aria-expanded="false" aria-controls="p{{$index}}" class="collapsed up-down">
+    																<img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>">
+    															</span>
+    														</div>
+    													</div>
+    												</div>
+    												<div id="p{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="p-{{$index}}" aria-expanded="false" style="height: 0px;">
+    													<div class="panel-body">
+    														<ul class="dis-list list-ul-cus">				
+    															<li>
+    																<span>Description</span>
+    																<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{portfolio.portfolio_desc}}" dd-text-collapse-cond="true">{{portfolio.portfolio_desc}}</label>
+    															</li>
+    															<li ng-if="portfolio.portfolio_file != '' && portfolio.portfolio_file != null">
+    		                                                        <span>Project File</span>
+    		                                                        <p class="screen-shot" check-file-ext check-file="{{portfolio.portfolio_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_PORTFOLIO_UPLOAD_URL)."'"; ?>">
+    		                                                        </p>
+    		                                                    </li>
+    														</ul>
+    													</div>
+    												</div>
+    											</div>
+    											<div id="view-more-pr" class="about-more" ng-if="user_portfolio.length > '3'">
+    		                                        <a href="javascript:void(0);" ng-click="port_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+    		                                    </div>
+    										</div>
+    									</div>
+    								</div>								
+    							</div>
+    						</div>
+    						
+    						<!--  10 social profile  -->
+    						<div class="gallery-item social-link-move">
+    						</div>
+    						
+    						<!--  11 Preferred Work   -->
+    						<div class="gallery-item">
+    							<div class="dtl-box">
+    								<div class="dtl-title">
+    									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/work.png?ver=' . time()) ?>"><span>Preferred Work </span><a href="#" class="pull-right" ng-click="edit_art_preferred_info();" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+    								</div>
+                                    <div id="art-preffered-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                        </div>
+                                    </div>
+                                    <div id="art-preffered-body" style="display: none;">
+        								<div id="preffered-detail" class="dtl-dis">
+        									<ul class="dis-list list-ul-cus">
+        										<li class="select-preview">
+        											<span>Preferred Category</span>
+                                                    <label class="text-capitalize">{{artist_basic_info.art_category_txt | removeOther}}{{artist_basic_info.art_category_txt != 'other' && artist_basic_info.art_category_txt != '' && artist_basic_info.other_category_txt? ',' : ''}}{{artist_basic_info.other_category_txt}}</label>
+        										</li>
+        										<li class="fw" ng-if="artist_preferred_info.preffered_skills">
+        											<span>Skills</span>
+        											<ul	class="skill-list">
+        												<li ng-repeat="pref_skill in artist_preferred_info.preffered_skills.split(',')">{{pref_skill}}</li>
+        											</ul>
+        										</li>
+        										<li ng-if="artist_preferred_info.preffered_country_name || artist_preferred_info.preffered_state_name || artist_preferred_info.preffered_city_name">
+        											<span>Preferred Location</span>
+        											<label ng-if="artist_preferred_info.preffered_country_name || artist_preferred_info.preffered_state_name || artist_preferred_info.preffered_city_name">
+                                                        {{artist_preferred_info.preffered_city_name != '' ? artist_preferred_info.preffered_city_name : ''}}
+                                                        {{artist_preferred_info.preffered_city_name != '' && artist_preferred_info.preffered_state_name != '' ? ',' : ''}}
+                                                        {{artist_preferred_info.preffered_state_name != '' ? artist_preferred_info.preffered_state_name : ''}}
+                                                        {{artist_preferred_info.preffered_state_name != '' && artist_preferred_info.preffered_country_name != '' ? ',' : ''}}
+                                                        {{artist_preferred_info.preffered_country_name != '' ? artist_preferred_info.preffered_country_name : ''}}
+                                                    </label>
+        										</li>
+        										<li class="select-preview" ng-if="artist_preferred_info.preffered_availability">
+        											<span>Availability</span>
+                                                    <label ng-if="artist_preferred_info.preffered_availability == '1'">Full Time</label>
+                                                    <label ng-if="artist_preferred_info.preffered_availability == '2'">Part Time</label>
+                                                    <label ng-if="artist_preferred_info.preffered_availability == '3'">Contract</label>
+        											<label ng-if="artist_preferred_info.preffered_availability == '4'">Freelance</label>
+        										</li>
+        									</ul>
+        								</div>
+                                    </div>
+    								<div id="view-more-preffered" class="about-more" style="display: none;">
+    									<a href="#" ng-click="view_more_preffered();">View More <img src="<?php echo base_url('assets/n-images/detail/down-arrow.png?ver=' . time()) ?>"></a>
+    								</div>
+    							</div>
+    						</div>
+    						
+    						<!--  12 Specialities  -->
+    						<div class="gallery-item">
+    							<div class="dtl-box">
+    								<div class="dtl-title">
+    									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/key-member.png?ver=' . time()) ?>"><span>Specialities</span><a href="#" class="pull-right" ng-click="edit_user_specialities();" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+    								</div>
+    								<div id="specialities-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                        </div>
+                                    </div>
+                                    <div id="specialities-body" style="display: none;">
+                                        <div class="dtl-dis" ng-if="!art_speciality_data.art_spl_tags && !art_speciality_data.art_spl_desc">
+                                            <div class="no-info">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">No specialities.</span>
+                                                <span ng-if="from_user_id != to_user_id">No specialities.</span>
+                                            </div>
+                                        </div>
+    									<div class="dtl-dis" ng-if="art_speciality_data.art_spl_tags || art_speciality_data.art_spl_desc">
+    										<ul class="dis-list list-ul-cus">
+    											<li class="fw" ng-if="art_speciality_data.art_spl_tags != ''">
+    												<span>Tags</span>
+    												<ul	class="skill-list">
+    													<li ng-repeat="speciality in art_speciality_data.art_spl_tags.split(',')">{{speciality}}</li>
+    												</ul>
+    											</li>
+    											<li ng-if="art_speciality_data.art_spl_desc != ''">
+    												<span>Description</span>
+    												<p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{art_speciality_data.art_spl_desc}}" dd-text-collapse-cond="true">{{art_speciality_data.art_spl_desc}}</p>
+    											</li>
+    										</ul>
+    									</div>
+    								</div>								
+    							</div>
+    						</div>
+    						
+    						<!--  13 blank div  -->
+    						<div class="gallery-item" >
+    						</div>
+    						
+    						<!--  14 software  -->
+    						<div class="gallery-item software-move" >
+    						
+    							<div class="dtl-box">
+    								<div class="dtl-title">
+    									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/software.png?ver=' . time()) ?>"><span>Software / Instrument/ Skills</span><a href="#" class="pull-right" ng-click="edit_soft_inst_skill();" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+    								</div>
+    								<div id="soft_inst_skill-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                        </div>
+                                    </div>
+                                    <div id="soft_inst_skill-body" style="display: none;">
+                                        <div class="dtl-dis" ng-if="!art_soft_inst_skill">
+                                            <div class="no-info">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">No Software / Instrument/ Skills.</span>
+                                                <span ng-if="from_user_id != to_user_id">No Software / Instrument/ Skills.</span>
+                                            </div>
+                                        </div>
+    									<div class="dtl-dis" ng-if="art_soft_inst_skill">
+    										<ul class="dis-list list-ul-cus">
+    											<li class="fw">
+    												<span>Tags</span>
+    												<ul	class="skill-list">
+    													<li ng-repeat="sis in art_soft_inst_skill.split(',')">{{sis}}</li>
+    												</ul>
+    											</li>
+    										</ul>
+    									</div>
+    								</div>								
+    							</div>
+    						</div>
+    						
+    						<!--  15 Achievements and Awards  -->
+    						<div class="gallery-item">
+                                <div class="dtl-box">
+                                    <div class="dtl-title">
+                                        <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    </div>
+                                    <div id="awards-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                        </div>
+                                    </div>
+                                    <div id="awards-body" style="display: none;">
+                                        <div class="dtl-dis" ng-if="user_award.length < '1'">
+                                            <div class="no-info">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">Showcase the honour you have achieved to profile.</span>
+                                                <span ng-if="from_user_id != to_user_id">Showcase the honour you have achieved to profile.</span>
+                                            </div>
+                                        </div>
+                                        <div class="dtl-dis dis-accor" ng-if="user_award.length > '0'">
+                                            <div class="panel-group" id="award-accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-default" ng-repeat="user_awrd in user_award" ng-if="$index <= view_more_award">
+                                                    <div class="panel-heading" role="tab" id="award-{{$index}}">
+                                                        <div class="panel-title">
+                                                            <div class="dis-left">
+                                                                <div class="dis-left-img">
+                                                                    <span>{{user_awrd.award_title | limitTo:1 | uppercase}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dis-middle">
+                                                                <h4>{{user_awrd.award_title}}</h4>        
+                                                                <p>{{user_awrd.award_org}}</p>
+                                                            </div>
+                                                            <div class="dis-right">
+                                                                <span role="button" ng-click="edit_user_award($index)" class="pr5" ng-if="from_user_id == to_user_id">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                                </span>
+                                                                <span role="button" data-toggle="collapse" data-parent="#award-accordion" href="#award{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                                </span>
+                                                            </div>
+                         
+                                                        </div>
+                                                    </div>
+                                                    <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
+                                                        <div class="panel-body">
+                                                            <ul class="dis-list list-ul-cus">
+                                                                <li class="select-preview">
+                                                                    <span>Date</span> 
+                                                                    <label>{{user_awrd.award_date_str}}</label>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Description</span>
+                                                                    <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_awrd.award_desc}}" dd-text-collapse-cond="true">{{user_awrd.award_desc}}</label>
+                                                                </li>
+                                                                <li ng-if="user_awrd.award_file != '' && user_awrd.award_file != null">
+                                                                    <span>Document</span>
+                                                                    <p class="screen-shot" check-file-ext check-file="{{user_awrd.award_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_AWARD_UPLOAD_URL)."'"; ?>">
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="view-more-award" class="about-more" ng-if="user_award.length > '3'">
+                                                    <a href="#" ng-click="award_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    						
+    						<!--  16 Additional Course  -->
+    						<div class="gallery-item">
+                                <div class="dtl-box">
+                                    <div class="dtl-title">
+                                        <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/add-course.png"><span>Additional Course</span><a href="#" data-target="#additional-course" data-toggle="modal" ng-click="reset_addicourse_form();" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                                    </div>
+                                    <div id="addicourse-loader" class="dtl-dis">
+                                        <div class="text-center">
+                                            <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                        </div>
+                                    </div>
+                                    <div id="addicourse-body" style="display: none;">
+                                        <div class="dtl-dis" ng-if="user_addicourse.length < '1'">
+                                            <div class="no-info">
+                                                <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                                <span ng-if="from_user_id == to_user_id">Highlight the other online or offline courses you have pursued.</span>
+                                                <span ng-if="from_user_id != to_user_id">Highlight the other online or offline courses you have pursued.</span>
+                                            </div>
+                                        </div>
+                                        <div class="dtl-dis dis-accor" ng-if="user_addicourse.length > '0'">
+                                            <div class="panel-group" id="addicourse-accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-default" ng-repeat="user_course in user_addicourse" ng-if="$index <= view_more_ac">
+                                                    <div class="panel-heading" role="tab" id="addicourse-{{$index}}">
+                                                        <div class="panel-title">
+                                                            <div class="dis-left">
+                                                                <div class="dis-left-img">
+                                                                    <span>{{user_course.addicourse_name | limitTo:1 | uppercase}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dis-middle">
+                                                                <h4>{{user_course.addicourse_name}}</h4>        
+                                                                <p>{{user_course.addicourse_org}}</p>
+                                                            </div>
+                                                            <div class="dis-right">
+                                                                <span role="button" ng-click="edit_user_addicourse($index)" class="pr5" ng-if="from_user_id == to_user_id">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                                </span>
+                                                                <span role="button" data-toggle="collapse" data-parent="#addicourse-accordion" href="#addicourse{{$index}}" aria-expanded="true" aria-controls="exp1" class="up-down collapsed">
+                                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                                </span>
+                                                            </div>
+                         
+                                                        </div>
+                                                    </div>
+                                                    <div id="addicourse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="addicourse-{{$index}}">
+                                                        <div class="panel-body">
+                                                            <ul class="dis-list list-ul-cus">
+                                                                <li>
+                                                                    <span>Duration</span> 
+                                                                    <label>{{user_course.start_date_str}} to</label>
+                                                                    <label ng-if="user_course.end_date_str != '' && user_course.end_date_str != null">{{user_course.end_date_str}}</label> 
+                                                                    <label ng-if="user_course.end_date_str == '' || user_course.end_date_str == null">Studying</label>
+                                                                </li>
+                                                                <li ng-if="user_course.addicourse_url != ''">
+                                                                    <span>Website</span> 
+                                                                    <div class="dis-list-link">
+                                                                    <a href="{{user_course.addicourse_url}}" target="_self">{{user_course.addicourse_url}}</a>
+                                                                    </div>
+                                                                </li>
+                                                                <li ng-if="user_course.addicourse_file != '' && user_course.addicourse_file != null">
+                                                                    <span>Document</span>
+                                                                    <p class="screen-shot" check-file-ext check-file="{{user_course.addicourse_file}}" check-file-path="<?php echo "'".addslashes(ART_USER_ADDICOURSE_UPLOAD_URL)."'"; ?>">
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="view-more-addicourse" class="about-more" ng-if="user_addicourse.length > '3'">
+                                                    <a href="#" ng-click="ac_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    					
+    					</div>
 					</div>
 					</div>
 					<div class="right-add">
 					<!-- Availability  -->
 						<div class="rsp-dtl-box">
 							<div class="dtl-box" id="abailability-move">
-							
-								<div class="dtl-dis">
-									<ul class="dis-list cus-status list-ul-cus">
-                                        <li>
-                                            <label class="fw">
-                                                <span ng-if="art_imp_data == '1'">
-                                                    <span class="job-active"></span>Open for work
-                                                </span>
-                                                <span ng-if="art_imp_data == '2'">
-                                                    <span class="job-passive"></span>Open for Collaboration
-                                                </span>
-                                                <span ng-if="art_imp_data == '3'">
-                                                    <span class="job-not"></span>Not now
-                                                </span>
-                                                <span ng-if="art_imp_data != '1' && art_imp_data != '2' && art_imp_data != '3'">
-                                                    <span class="job-status"></span>Artist Availability Status
-                                                </span>
-												<span class="pull-right">
-                                                <a href="#" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit1.png?ver=' . time()) ?>"></a>
-												</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-								</div>
+                                <div id="art_imp-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="art_imp-body" style="display: none;">
+                                    <div class="dtl-dis">
+    									<ul class="dis-list cus-status list-ul-cus">
+                                            <li>
+                                                <label class="fw">
+                                                    <span ng-if="art_imp_data == '1'">
+                                                        <span class="job-active"></span>Open for work
+                                                    </span>
+                                                    <span ng-if="art_imp_data == '2'">
+                                                        <span class="job-passive"></span>Open for Collaboration
+                                                    </span>
+                                                    <span ng-if="art_imp_data == '3'">
+                                                        <span class="job-not"></span>Not now
+                                                    </span>
+                                                    <span ng-if="art_imp_data != '1' && art_imp_data != '2' && art_imp_data != '3'">
+                                                        <span class="job-status"></span>Artist Availability Status
+                                                    </span>
+    												<span class="pull-right">
+                                                    <a href="#" ng-if="from_user_id == to_user_id" data-target="#availability" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/main-edit1.png?ver=' . time()) ?>"></a>
+    												</span>
+                                                </label>
+                                            </li>
+                                        </ul>
+    								</div>
+                                </div>
 							</div>
 						</div>
 							
@@ -685,33 +698,52 @@
 							
 					<!-- edit profile  -->
 					<div class="rsp-dtl-box">
-						<div class="dtl-box" id="edit-profile-move">
+						<div class="dtl-box" id="edit-profile-move" ng-if="from_user_id == to_user_id">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 							</div>
 							<div class="dtl-dis dtl-edit-p">
-								<div class="dtl-edit-top"></div>
-								<div class="profile-status">
-									<ul>
-										<li><span class=""></span>Profile pic</li>
-										<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Cover pic</li>
-										
-										<li><span class=""></span>Experience</li>
-										<li class="pl20"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>About</li>
-										<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>skills</li>
-										
-										<li class="pl20"><span class=""></span>Social</li>
-										<li><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Idol</li>
-										<li class="fw"><span class=""><img src="<?php echo base_url('assets/n-images/detail/c.png?ver=' . time()) ?>"></span>Educational info</li>
-										<li class="fw"><span class=""></span>Profile overview</li>
-									</ul>
-								</div>
-								<div class="dtl-edit-bottom"></div>
-								<div class="p20">
-								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
-								</div>
-								
-							</div>
+                                <div class="dtl-edit-top"></div>
+                                <div class="profile-status">
+                                    <ul>
+                                        <li><span class=""><img ng-if="progress_status.user_image_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.profile_background_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+                                        
+                                        <li><span class=""><img ng-if="progress_status.user_experience_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Experience</li>
+
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.user_languages_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Languages</li>
+                                        
+                                        <li><span class=""><img ng-if="progress_status.user_bio_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Bio</li>
+
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.user_links_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Social</li>
+                                        
+                                        <li><span class=""><img ng-if="progress_status.fname_status == '1' && progress_status.lname_status == '1' && progress_status.category_status == '1' && progress_status.gender_status == '1' && progress_status.email_status == '1' && progress_status.phnno_status == '1' && progress_status.dob_status == '1' && progress_status.country_status == '1' && progress_status.state_status == '1' && progress_status.city_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic info</li>
+
+                                        <li class="fw"><span class=""><img ng-if="progress_status.user_education_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational Info</li>
+
+                                        <li class="fw"><span class=""><img ng-if="progress_status.active_status_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Availability Status</li>
+
+                                        <li class="fw"><span class=""><img ng-if="progress_status.preffered_skills_status == '1' && progress_status.preffered_country_status == '1' && progress_status.preffered_state_status == '1' && progress_status.preffered_city_status == '1' && progress_status.preffered_availability_status == '1' " src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Preferred Work</li>
+                                    </ul>
+                                </div>
+                                <div class="dtl-edit-bottom"></div>
+                                <div class="p20">
+                                    <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+                                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                        <div class="count_main_progress">
+                                            <div class="circles">
+                                                <div class="second circle-1">
+                                                    <div>
+                                                        <strong></strong>
+                                                        <span id="progress-txt"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                
+                            </div>
 						</div>
 					</div>
 					
@@ -768,7 +800,7 @@
 						<div class="rsp-dtl-box " id="language-move">
 							<div class="dtl-box">
                                 <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
+                                    <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/language.png?ver=' . time()) ?>"><span>Language</span><a href="#" data-target="#language" data-toggle="modal" class="pull-right" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
                                 </div>
                                 <div id="language-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -779,7 +811,8 @@
                                     <div class="dtl-dis">
                                         <div class="no-info" ng-if="user_languages.length < '1'">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Add languages that you know. Open door of overseas opportunities.</span>
+                                            <span ng-if="from_user_id == to_user_id">Add languages that you know. Open door of overseas opportunities.</span>
+                                            <span ng-if="from_user_id != to_user_id">Add languages that you know. Open door of overseas opportunities.</span>
                                         </div>
                                         <ul ng-if="user_languages.length > 0" class="known-language">
                                             <li ng-repeat="user_lang in user_languages">
@@ -795,7 +828,7 @@
 						<div class="rsp-dtl-box" id="type-talant-move">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/cat.png?ver=' . time()) ?>"><span>Type of Talent / Category</span><a href="#" class="pull-right" ng-click="edit_talent_cat();"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/cat.png?ver=' . time()) ?>"><span>Type of Talent / Category</span><a href="#" class="pull-right" ng-click="edit_talent_cat();" ng-if="from_user_id == to_user_id"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
 								</div>
 								<div id="talent_cat-loader" class="dtl-dis">
                                     <div class="text-center">
@@ -806,7 +839,8 @@
                                     <div class="dtl-dis" ng-if="!art_talent_cat">
                                         <div class="no-info">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>No Software / Instrument/ Skills.</span>
+                                            <span ng-if="from_user_id == to_user_id">No Software / Instrument/ Skills.</span>
+                                            <span ng-if="from_user_id != to_user_id">No Software / Instrument/ Skills.</span>
                                         </div>
                                     </div>
 									<div class="dtl-dis" ng-if="art_talent_cat">
@@ -831,7 +865,7 @@
 		
 		
 	<!---  model basic information  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1008,7 +1042,7 @@
     </div>
 	
 	<!--  model tagline  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="tagline" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display: none;" class="modal fade dtl-modal" id="tagline" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1032,7 +1066,7 @@
     </div>
 	
 	<!--  model bio  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="bio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display: none;" class="modal fade dtl-modal" id="bio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1059,7 +1093,7 @@
     </div>
 	
 	<!--  model Type of Talent / Category  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="talent" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display: none;" class="modal fade dtl-modal" id="talent" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1085,7 +1119,7 @@
 	
 	
 	<!---  model Art Portfolio  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="art-portfolio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="art-portfolio" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1125,7 +1159,7 @@
 			</div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-portfolio-model" role="dialog">
+    <div class="modal fade message-box biderror" id="delete-portfolio-model" role="dialog" ng-if="from_user_id == to_user_id">
 	    <div class="modal-dialog modal-lm">
 	        <div class="modal-content">
 	            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1150,7 +1184,7 @@
 	</div>
 	
 	<!--  Availability  -->
-	<div style="display: none;" id="availability" class="modal fade dtl-modal in" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+	<div style="display: none;" id="availability" class="modal fade dtl-modal in" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1210,7 +1244,7 @@
 	
 	
 	<!--  model Preferred Work  -->
-	<div style="display: none;" class="modal fade dtl-modal" id="preferred-work" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display: none;" class="modal fade dtl-modal" id="preferred-work" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1305,7 +1339,7 @@
     </div>
 	
 	<!---  model Educational Info  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="educational-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="educational-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1461,7 +1495,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-edu-model" role="dialog">
+    <div class="modal fade message-box biderror" id="delete-edu-model" role="dialog" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1486,7 +1520,7 @@
     </div>
 	
 	<!---  model Experience  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" ng-click="reset_exp_form()" class="modal-close" data-dismiss="modal">×</button>
@@ -1675,7 +1709,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-exp-model" role="dialog">
+    <div class="modal fade message-box biderror" id="delete-exp-model" role="dialog" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1700,7 +1734,7 @@
     </div>
 	
 	<!---  model Social Profile  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="social-link" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="social-link" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1784,7 +1818,7 @@
 	</div>
 	
 	<!---  model specialities  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="specialities" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="specialities" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1817,7 +1851,7 @@
     </div>
 	
 	<!---  model Software / Instrument/ Skills  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="art-sof" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="art-sof" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
 		<div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1846,7 +1880,7 @@
     </div>
 	
 	<!---  model Achievements & Awards  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="Achiv-awards" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="Achiv-awards" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1936,7 +1970,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-award-model" role="dialog">
+    <div class="modal fade message-box biderror" id="delete-award-model" role="dialog" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -1961,7 +1995,7 @@
     </div>
 	
 	<!---  model Additional Course  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -2066,7 +2100,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror" id="delete-addicourse-model" role="dialog">
+    <div class="modal fade message-box biderror" id="delete-addicourse-model" role="dialog" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -2091,7 +2125,7 @@
     </div>
 		
 	<!---  model language  -->
-	<div style="display:none;" class="modal fade dtl-modal" id="language" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div style="display:none;" class="modal fade dtl-modal" id="language" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-if="from_user_id == to_user_id">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -2172,165 +2206,181 @@
         </div>
     </div>
 		
-			<!-- Bid-modal  -->
-			<div class="modal fade message-box biderror" id="bidmodal" role="dialog">
-				<div class="modal-dialog modal-lm">
-					<div class="modal-content">
-						<button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
-						<div class="modal-body">
-							<span class="mes"></span>
-						</div>
-					</div>
+	<!-- Bid-modal  -->
+	<div class="modal fade message-box biderror" id="bidmodal" role="dialog">
+		<div class="modal-dialog modal-lm">
+			<div class="modal-content">
+				<button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+				<div class="modal-body">
+					<span class="mes"></span>
 				</div>
 			</div>
-			<!-- Model Popup Close -->
-			<!-- Bid-modal-2  -->
-			<div class="modal fade message-box" id="bidmodal-2" role="dialog">
-				<div class="modal-dialog modal-lm">
-					<div class="modal-content">
-						<button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
-						<div class="modal-body">
-							<span class="mes">
-								<div id="popup-form">
-									<form id ="userimage" name ="userimage" class ="clearfix" enctype="multipart/form-data" method="post">
-										<div class=" ">
+		</div>
+	</div>
+	<!-- Model Popup Close -->
+	<!-- Bid-modal-2  -->
+	<div class="modal fade message-box" id="bidmodal-2" role="dialog">
+		<div class="modal-dialog modal-lm">
+			<div class="modal-content">
+				<button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+				<div class="modal-body">
+					<span class="mes">
+						<div id="popup-form">
+							<form id ="userimage" name ="userimage" class ="clearfix" enctype="multipart/form-data" method="post">
+								<div class=" ">
 
-											<div class="fw" id="loaderfollow" style="text-align:center; display: none;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
+									<div class="fw" id="loaderfollow" style="text-align:center; display: none;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
 
-											<input type="file" name="profilepic" accept="image/gif, image/jpeg, image/png" id="upload-one">
-										</div>
-										<div class="col-md-7 text-center">
-											<div id="upload-demo-one" style="width:350px; display: none"></div>
-										</div>
-										<input type="submit"  class="upload-result-one" name="profilepicsubmit" id="profilepicsubmit" value="Save">
-									</form>
+									<input type="file" name="profilepic" accept="image/gif, image/jpeg, image/png" id="upload-one">
 								</div>
-							</span>
+								<div class="col-md-7 text-center">
+									<div id="upload-demo-one" style="width:350px; display: none"></div>
+								</div>
+								<input type="submit"  class="upload-result-one" name="profilepicsubmit" id="profilepicsubmit" value="Save">
+							</form>
 						</div>
-					</div>
+					</span>
 				</div>
 			</div>
-			<!-- Model Popup Close -->
+		</div>
+	</div>
+	<!-- Model Popup Close -->
 
-			<?php echo $login_footer ?>
-			<?php echo $footer; ?>
+	<?php echo $login_footer ?>
+	<?php echo $footer; ?>
 
-			<!-- script for skill textbox automatic start (option 2)-->
-			<script  src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
-			<script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js/jquery.multi-select.js?ver=' . time()); ?>"></script>
-			<script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>
-			<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
-			<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
-			<script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
+	<!-- script for skill textbox automatic start (option 2)-->
+	<script  src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
+	<script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.multi-select.js?ver=' . time()); ?>"></script>
+	<script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
+	<script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
+	<script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-		    <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
-		    <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
-		    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-		    <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
-		    <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
-		    <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
-		    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
-			<script>
-				$('#main_loader').hide();
-				$('#main_page_load').show();
-				$('body').removeClass("body-loader");
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+	<script>
+		$('#main_loader').hide();
+		$('#main_page_load').show();
+		$('body').removeClass("body-loader");
 
-				var base_url = '<?php echo base_url(); ?>';   
-				var data= <?php echo json_encode($demo); ?>;
-				var data1 = <?php echo json_encode($de); ?>;
-				var data= <?php echo json_encode($demo); ?>;
-				var data1 = <?php echo json_encode($city_data); ?>;
-				var slug = '<?php echo $artid; ?>';
-				var user_slug = '<?php echo $get_url; ?>';
+		var base_url = '<?php echo base_url(); ?>';   
+		var data= <?php echo json_encode($demo); ?>;
+		var data1 = <?php echo json_encode($de); ?>;
+		var data= <?php echo json_encode($demo); ?>;
+		var data1 = <?php echo json_encode($city_data); ?>;
+		var slug = '<?php echo $artid; ?>';
+		var user_slug = '<?php echo $get_url; ?>';
 
-				var from_user_id = '<?php echo $login_art_data[0]['user_id']; ?>';
-				var to_user_id = '<?php echo $artisticdata[0]['user_id']; ?>';
+		var from_user_id = '<?php echo $login_art_data[0]['user_id']; ?>';
+		var to_user_id = '<?php echo $artisticdata[0]['user_id']; ?>';
 
-				var art_user_portfolio_upload_url = '<?php echo ART_USER_PORTFOLIO_UPLOAD_URL; ?>';
-				var art_user_award_upload_url = '<?php echo ART_USER_AWARD_UPLOAD_URL; ?>';
-				var art_user_addicourse_upload_url = '<?php echo ART_USER_ADDICOURSE_UPLOAD_URL; ?>';
-				var art_user_experience_upload_url = '<?php echo ART_USER_EXPERIENCE_UPLOAD_URL; ?>';
-            	var art_user_education_upload_url = '<?php echo ART_USER_EDUCATION_UPLOAD_URL; ?>';
+		var art_user_portfolio_upload_url = '<?php echo ART_USER_PORTFOLIO_UPLOAD_URL; ?>';
+		var art_user_award_upload_url = '<?php echo ART_USER_AWARD_UPLOAD_URL; ?>';
+		var art_user_addicourse_upload_url = '<?php echo ART_USER_ADDICOURSE_UPLOAD_URL; ?>';
+		var art_user_experience_upload_url = '<?php echo ART_USER_EXPERIENCE_UPLOAD_URL; ?>';
+    	var art_user_education_upload_url = '<?php echo ART_USER_EDUCATION_UPLOAD_URL; ?>';
 
-				var header_all_profile = '<?php echo $header_all_profile; ?>';
+		var header_all_profile = '<?php echo $header_all_profile; ?>';
 
-				var app = angular.module("artistProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
-			</script>
-			<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-			<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details.js?ver='.time()); ?>"></script>
-			<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details_new.js?ver='.time()); ?>"></script>
-			<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-			<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
-			<script>
-				$(document).ready(function () {
-					$('html,body').animate({scrollTop: 300}, 500);
-				});
-				$(document).ready(function () {
-					if (screen.width > 768) {
-						var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
-							containerElem.classList.add('masonry-layout', 'columns-' + columns);
-							var columnsElements = [];
+		var app = angular.module("artistProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
+	</script>
+	<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
+	<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details.js?ver='.time()); ?>"></script>
+	<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/details_new.js?ver='.time()); ?>"></script>
+	<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
+	<script>
+		$(document).ready(function () {
+			$('html,body').animate({scrollTop: 300}, 500);
+		});
+		$(document).ready(function () {
+			if (screen.width > 768) {
+				var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
+					containerElem.classList.add('masonry-layout', 'columns-' + columns);
+					var columnsElements = [];
 
-							for (var i = 1; i <= columns; i++) {
-								var column = document.createElement('div');
-								column.classList.add('masonry-column', 'column-' + i);
-								containerElem.appendChild(column);
-								columnsElements.push(column);
-							}
-
-							for (var m = 0; m < Math.ceil(itemsElems.length / columns); m++) {
-								for (var n = 0; n < columns; n++) {
-									var item = itemsElems[m * columns + n];
-									columnsElements[n].appendChild(item);
-									item.classList.add('masonry-item');
-								}
-							}
-						};
-						masonryLayout(document.getElementById('gallery'),
-						document.querySelectorAll('.gallery-item'), 2);
+					for (var i = 1; i <= columns; i++) {
+						var column = document.createElement('div');
+						column.classList.add('masonry-column', 'column-' + i);
+						containerElem.appendChild(column);
+						columnsElements.push(column);
 					}
-				});		
-	            $(function() {
-	              // Set
-	              var main = $('div.mm-dropdown .textfirst')
-	              var li = $('div.mm-dropdown > ul > li.input-option')
-	              var inputoption = $("div.mm-dropdown .option")
-	              var default_text = 'Select Status';
 
-	              // Animation
-	              main.click(function() {
-	                main.html(default_text);
-	                li.toggle();
-	              });
+					for (var m = 0; m < Math.ceil(itemsElems.length / columns); m++) {
+						for (var n = 0; n < columns; n++) {
+							var item = itemsElems[m * columns + n];
+							columnsElements[n].appendChild(item);
+							item.classList.add('masonry-item');
+						}
+					}
+				};
+				masonryLayout(document.getElementById('gallery'),
+				document.querySelectorAll('.gallery-item'), 2);
+			}
+		});		
+        $(function() {
+          // Set
+          var main = $('div.mm-dropdown .textfirst')
+          var li = $('div.mm-dropdown > ul > li.input-option')
+          var inputoption = $("div.mm-dropdown .option")
+          var default_text = 'Select Status';
 
-	              // Insert Data
-	              li.click(function() {
-	                // hide
-	                li.toggle();
-	                var livalue = $(this).data('value');
-	                var lihtml = $(this).html();
-	                main.html(lihtml);
-	                inputoption.val(livalue);
-	              });
-	            });
-	            $(document).ready(function () {
-	            	if (screen.width <= 1199) {
-	            		$("#edit-profile-move").appendTo($(".edit-profile-move"));
-			            $("#social-link-move").appendTo($(".social-link-move"));
-			            $("#language-move").appendTo($(".language-move"));
-			            $("#type-talant-move").appendTo($(".type-talant-move"));
-			            $("#abailability-move").appendTo($(".abailability-move"));
-			            $(".remove-blank").remove();
-			        }
-			        if (screen.width < 768) {
-			        	$("#edit-custom-move").appendTo($(".edit-custom-move"));
-			        }
-			    });
-			</script>
-			<script type="text/ng-template" id="title-template">
-		        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
-		    </script>
+          // Animation
+          main.click(function() {
+            main.html(default_text);
+            li.toggle();
+          });
+
+          // Insert Data
+          li.click(function() {
+            // hide
+            li.toggle();
+            var livalue = $(this).data('value');
+            var lihtml = $(this).html();
+            main.html(lihtml);
+            inputoption.val(livalue);
+          });
+        });
+        $(document).ready(function () {
+        	if (screen.width <= 1199) {
+        		$("#edit-profile-move").appendTo($(".edit-profile-move"));
+	            $("#social-link-move").appendTo($(".social-link-move"));
+	            $("#language-move").appendTo($(".language-move"));
+	            $("#type-talant-move").appendTo($(".type-talant-move"));
+	            $("#abailability-move").appendTo($(".abailability-move"));
+	            $(".remove-blank").remove();
+	        }
+	        if (screen.width < 768) {
+	        	$("#edit-custom-move").appendTo($(".edit-custom-move"));
+	        }
+	    });
+	</script>
+	<script type="text/ng-template" id="title-template">
+        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dtl-edit-bottom').hover(function () {
+                $('.profile-status').addClass('hover-bottom');
+            }, function () {
+                $('.profile-status').removeClass('hover-bottom');
+            });
+            
+            $('.dtl-edit-top').hover(function () {
+                $('.profile-status').addClass('hover-top');
+            }, function () {
+                $('.profile-status').removeClass('hover-top');
+            });
+
+        });
+    </script>
 	</body>
 </html>

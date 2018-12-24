@@ -419,7 +419,7 @@
 	                            <div id="story-body" style="display: none;">
 	                            	<div class="no-info" ng-if="!story_data">
 										<img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-										<span ng-if="from_user_id == to_user_id">Tell the story of your business name.</span>
+										<span ng-if="from_user_id == to_user_id">Tell the story of your business.</span>
 										<span ng-if="from_user_id != to_user_id"><?php echo ucwords($business_data['company_name']); ?> hasn't added any story.</span>
 									</div>
 									<div class="dtl-dis dtl-box-height" ng-if="story_data">
