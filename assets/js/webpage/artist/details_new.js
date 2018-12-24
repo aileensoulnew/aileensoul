@@ -1089,7 +1089,7 @@ app.controller('artistProfileController', function ($scope, $http, $location, $w
             award_title: {
                 required: true,
                 maxlength: 200,
-                minlength: 3
+                minlength: 1
             },            
             award_org: {
                 required: true,

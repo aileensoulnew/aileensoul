@@ -131,24 +131,27 @@
 				<!--PROFILE PIC CODE START-->
 				<div class="profile-pho">
 					<div class="user-pic padd_img">
-						<?php 
-						// print_r($recdata);exit();
-						$filename = $this->config->item('rec_profile_thumb_upload_path').$recdata['recruiter_user_image'];
-						// $s3 = new S3(awsAccessKey, awsSecretKey);
-						// $this->data['info']     = $info     = $s3->getObjectInfo(bucket, $filename);
-						if ($recdata['recruiter_user_image'] != '') { ?>
-							<img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL . $recdata['recruiter_user_image']; ?>" alt="<?php echo $recdata['recruiter_user_image']; ?>" >
 						<?php
-						} else {
-					    $a    = $recdata['rec_firstname'];
-					    $acr  = substr($a, 0, 1);
-					    $b    = $recdata['rec_lastname'];
-					    $acr1 = substr($b, 0, 1); ?>
-						<div class="post-img-user">
-							<?php echo ucfirst(strtolower($acr)) . ucfirst(strtolower($acr1)); ?>
-						</div>
-					<?php } ?>
-					<?php if ($this->uri->segment(3) == $userid) { ?>
+                        $filename = $this->config->item('rec_profile_thumb_upload_path') . $recdata['recruiter_user_image'];
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                        if ($recdata['recruiter_user_image'] != '' && $info) {
+                            ?>
+                            <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL . $recdata['recruiter_user_image']; ?>" alt="<?php echo $recdata['recruiter_user_image']; ?>" >
+                            <?php
+                        } else {
+                            $a = $recdata['rec_firstname'];
+                            $acr = substr($a, 0, 1);
+
+                            $b = $recdata['rec_lastname'];
+                            $acr1 = substr($b, 0, 1);
+                            ?>
+                            <div class="post-img-user">
+                            <?php echo ucfirst(strtolower($acr)) . ucfirst(strtolower($acr1)); ?>
+
+                            </div>
+                        <?php } ?>
+						<?php if ($this->uri->segment(3) == $userid) { ?>
 						<a class="cusome_upload" title="Update profile pictuure" href="javascript:void(0);" onclick="updateprofilepopup();"><img src="<?php echo base_url(); ?>assets/img/cam.png" alt="cameraimage"> Update Profile Picture</a>
 					<?php } ?>
 					</div>

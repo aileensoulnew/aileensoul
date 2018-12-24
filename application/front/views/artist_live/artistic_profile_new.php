@@ -721,6 +721,8 @@
                                         
                                         <li><span class=""><img ng-if="progress_status.fname_status == '1' && progress_status.lname_status == '1' && progress_status.category_status == '1' && progress_status.gender_status == '1' && progress_status.email_status == '1' && progress_status.phnno_status == '1' && progress_status.dob_status == '1' && progress_status.country_status == '1' && progress_status.state_status == '1' && progress_status.city_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic info</li>
 
+                                        <li class="pl20"><span class=""><img ng-if="progress_status.user_portfolio_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Art Portfolio</li>
+
                                         <li class="fw"><span class=""><img ng-if="progress_status.user_education_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational Info</li>
 
                                         <li class="fw"><span class=""><img ng-if="progress_status.active_status_status == '1'" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Availability Status</li>
