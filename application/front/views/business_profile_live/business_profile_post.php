@@ -135,7 +135,7 @@ $mobile_agent = $this->agent->mobile;
                                 </div>
                             </div>
 							
-                            <div class="custom-user-list" style="display: none;">
+                            <div class="custom-user-list-cus" style="display: none;">
                                 <?php
                                 if ($follow_user_suggest_count > 0) {
                                     ?>
