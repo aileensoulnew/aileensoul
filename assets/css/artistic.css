@@ -4101,11 +4101,12 @@ label{margin-bottom:3px;}
 	width:100%; float:left;
     display: block;
     font-size: 13.33px;
-    padding: 0.6em 1em 0.6em 30px;
+    padding: 5px 0;
     white-space: nowrap;
 	margin:0 !important;
 	color:#1b8ab9;
 }
+.multi-select-menuitem input{width:auto; height:auto;}
 
 .multi-select-menuitem + .multi-select-menuitem {
     padding-top: 0;
@@ -4117,7 +4118,7 @@ label{margin-bottom:3px;}
 
 .multi-select-menuitem input {
     margin:0 10px !important;
-	height:25px !important;
+	/*height:25px !important;*/
 }
 
 .multi-select-button {
