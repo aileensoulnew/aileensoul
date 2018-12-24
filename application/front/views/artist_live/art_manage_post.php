@@ -459,7 +459,18 @@
 			
 			<div class="right-part right-scroll">
 				<?php $this->load->view('right_add_box'); ?>
-				
+                <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
+                    <div class="count_main_progress">
+                        <div class="circles">
+                            <div class="second circle-1">
+                                <div>
+                                    <strong></strong>
+                                    <span id="progress-txt"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</div>
     </div>
 </div>   
@@ -618,6 +629,7 @@ var data1 = <?php echo json_encode($city_data); ?>;
 var complex = <?php echo json_encode($selectdata); ?>;
 var textarea = document.getElementById("textarea");
 var slug = '<?php echo $artid; ?>';
+var art_slug = '<?php echo artist_dashboard. $get_url; ?>';
 var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 
@@ -631,6 +643,7 @@ var header_all_profile = '<?php echo $header_all_profile; ?>';
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard.js?ver='.time()); ?>"></script>
 <?php }*/ ?>
+<script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard.js?ver='.time()); ?>"></script>
  </body>

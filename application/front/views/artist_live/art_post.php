@@ -157,9 +157,18 @@
             </div>
             <div class="right_middle_side_posrt animated fadeInRightBig fixed_right_display" id="hideuserlist" >
 				<?php $this->load->view('right_add_box'); ?>
-				
-                
-               
+                <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
+                    <div class="count_main_progress">
+                        <div class="circles">
+                            <div class="second circle-1">
+                                <div>
+                                    <strong></strong>
+                                    <span id="progress-txt"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Bid-modal  -->
@@ -338,6 +347,7 @@
             var data= <?php echo json_encode($demo); ?>;
             var data1 = <?php echo json_encode($city_data); ?>;
             var complex = <?php echo json_encode($selectdata); ?>;
+            var art_slug = '<?php echo artist_dashboard. $get_url; ?>';
             var textarea = document.getElementById("textarea");
             var no_artistic_post_html = '<?php echo $no_artistic_post_html ?>';
         </script>
@@ -352,6 +362,7 @@
         <?php }else{?>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
         <?php }*/ ?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script>
     </body>
