@@ -3872,21 +3872,22 @@ div .comment{
 .full-box-module_follow .seeall{
     margin-top:-30px
 }
-.custom-user-list{
+.custom-user-list-cus{
     margin-bottom:10px;
     width:100%;
     float:left;
+	display:none;
 }
-.custom-user-list .profile-boxProfileCard_follow{
+.custom-user-list-cus .profile-boxProfileCard_follow{
     height:300px;
     max-height:300px
 }
-.custom-user-list .profile-boxProfileCard_follow ul li.follow_box_ul_li{
+.custom-user-list-cus .profile-boxProfileCard_follow ul li.follow_box_ul_li{
     width:33.33%!important;
     float:left;
     text-align:center
 }
-.custom-user-list .post-design-pro-img_follow{
+.custom-user-list-cus .post-design-pro-img_follow{
     width:180px;
     padding:15px 15px 0;
     height:180px;
@@ -3894,26 +3895,26 @@ div .comment{
     float:none;
     display:block
 }
-.custom-user-list .follow_left_box_main{
+.custom-user-list-cus .follow_left_box_main{
     height:270px
 }
-.custom-user-list .post-design-name_follow{
+.custom-user-list-cus .post-design-name_follow{
     width:100%;
     padding:0 5px;
     text-align:center
 }
-.custom-user-list .profile-boxProfileCard_follow ul{
+.custom-user-list-cus .profile-boxProfileCard_follow ul{
     padding-bottom:0
 }
-.custom-user-list .follow_left_box_main_btn{
+.custom-user-list-cus .follow_left_box_main_btn{
     padding:0!important;
     margin:0;
     float:none
 }
-.custom-user-list .follow_left_box_main_btn button{
+.custom-user-list-cus .follow_left_box_main_btn button{
     margin-top:5px
 }
-.custom-user-list .Follow_close{
+.custom-user-list-cus .Follow_close{
     right:-5px
 }
 .editor-header .fa-music:before,.editor-header .fa-video-camera:before{
@@ -4306,7 +4307,7 @@ background: linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);}
     }
 }
 @media screen and (max-width:991px){
-    .custom-user-list,.tab-block{
+    .custom-user-list-cus, .tab-block{
         display:block
     }
     .mian_middle_post_box{
@@ -5054,7 +5055,7 @@ background: linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);}
     .text_num{
         line-height:28px
     }
-    .custom-user-list .profile-boxProfileCard_follow ul li.follow_box_ul_li{
+    .custom-user-list-cus .profile-boxProfileCard_follow ul li.follow_box_ul_li{
         width:50%!important
     }
     .no-login #paddingtop_fixed{
@@ -5772,7 +5773,7 @@ background: linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);}
         margin-right:10px;
         margin-bottom:0
     }
-    .custom-user-list .profile-boxProfileCard_follow ul li.follow_box_ul_li{
+    .custom-user-list-cus .profile-boxProfileCard_follow ul li.follow_box_ul_li{
         width:100%!important
     }
     .art-all-comment{

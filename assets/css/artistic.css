@@ -4052,17 +4052,17 @@ div .comment {
 .editor-header .form-group .file-input{margin-left:0;}
 /***  custom user list css  ***/
 .full-box-module_follow .seeall{margin-top:-28px;}
-.custom-user-list{margin-bottom:10px; width:100%; float:left;}
-.custom-user-list .profile-boxProfileCard_follow{height:300px; max-height:300px;}
-.custom-user-list .profile-boxProfileCard_follow ul li.follow_box_ul_li{width:33.33% !important; float:left; text-align:center;}
-.custom-user-list .post-design-pro-img_follow{width:180px; padding:15px 15px 0; height:180px; margin:0 auto; float:none; display:block;}
-.custom-user-list .follow_left_box_main{height:270px;}
-.custom-user-list .post-design-name_follow{width:100%; padding:0 5px; text-align:center;}
-.custom-user-list .profile-boxProfileCard_follow ul{padding-bottom:0;}
-.custom-user-list .follow_left_box_main_btn{padding:0 !important; margin:0; float:none;}
-.custom-user-list .follow_left_box_main_btn button{margin-top:5px;}
-.custom-user-list .Follow_close{right:-5px;}
-.custom-user-list .post-design-name_follow ul li a h6{max-width:100%;}
+.custom-user-list-cus{margin-bottom:10px; width:100%; float:left; display:none;}
+.custom-user-list-cus .profile-boxProfileCard_follow{height:300px; max-height:300px;}
+.custom-user-list-cus .profile-boxProfileCard_follow ul li.follow_box_ul_li{width:33.33% !important; float:left; text-align:center;}
+.custom-user-list-cus .post-design-pro-img_follow{width:180px; padding:15px 15px 0; height:180px; margin:0 auto; float:none; display:block;}
+.custom-user-list-cus .follow_left_box_main{height:270px;}
+.custom-user-list-cus .post-design-name_follow{width:100%; padding:0 5px; text-align:center;}
+.custom-user-list-cus .profile-boxProfileCard_follow ul{padding-bottom:0;}
+.custom-user-list-cus .follow_left_box_main_btn{padding:0 !important; margin:0; float:none;}
+.custom-user-list-cus .follow_left_box_main_btn button{margin-top:5px;}
+.custom-user-list-cus .Follow_close{right:-5px;}
+.custom-user-list-cus .post-design-name_follow ul li a h6{max-width:100%;}
 /***  end custom user list css  ***/
 
 /*
@@ -4391,7 +4391,7 @@ label{margin-bottom:3px;}
 }
 
 @media screen and (max-width: 991px) {
-	.custom-user-list{display:block;}
+	.custom-user-list-cus{display:block;}
     #paddingtop_fixed_art.container {
         padding-left: 0;
         padding-right: 0;
@@ -5132,7 +5132,7 @@ label{margin-bottom:3px;}
     /*** end add  ***/
 	.padd_img{padding:0;}
 	.buisness-menu .profile-pho-bui{border-radius:4px;}
-	.custom-user-list .profile-boxProfileCard_follow ul li.follow_box_ul_li{width:50% !important;}
+	.custom-user-list-cus .profile-boxProfileCard_follow ul li.follow_box_ul_li{width:50% !important;}
 	.file-preview{width:520px;}
 	.ctre_date{line-height:1.5;}
     .profile-job-post-location-name .user_lst ul li .bg_following {margin:0px;margin-right: 9px !important;} 
@@ -5752,11 +5752,11 @@ label{margin-bottom:3px;}
     .popup-text span{font-size:16px; padding:5px 0;}
     .popup-text{padding:7px 0px 6px 10px;}
     .post-edit-popup .popup-text textarea{width:70%; line-height:inherit;}
-    .custom-user-list .profile-boxProfileCard_follow ul li.follow_box_ul_li{/*width:100% !important;*/}
-	.custom-user-list .post-design-pro-img_follow{width:145px; height:145px; padding:15px 0 0;}
-	.custom-user-list .Follow_close{right:-6px;}
-	.custom-user-list .follow_left_box_main{height:235px;}
-	.custom-user-list .profile-boxProfileCard_follow{height:260px;}
+    .custom-user-list-cus .profile-boxProfileCard_follow ul li.follow_box_ul_li{/*width:100% !important;*/}
+	.custom-user-list-cus .post-design-pro-img_follow{width:145px; height:145px; padding:15px 0 0;}
+	.custom-user-list-cus .Follow_close{right:-6px;}
+	.custom-user-list-cus .follow_left_box_main{height:235px;}
+	.custom-user-list-cus .profile-boxProfileCard_follow{height:260px;}
 	.file-preview{width:260px;}
 	.user-list .profile-job-post-location-name{padding:10px;}
 	.user-list .profile-job-post-location-name .user_lst ul li .user_btn{padding-top:5px;}
