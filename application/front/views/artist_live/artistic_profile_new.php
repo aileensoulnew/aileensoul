@@ -17,7 +17,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 		<!-- END HEADER -->
-		<?php $this->load->view('adsense'); ?>
+		<?php $this->load->view('adsense');
+        $user_first_name = ucwords($artisticdata[0]['art_name']); ?>
 	</head>
 	<body class="page-container-bg-solid page-boxed botton_footer body-loader">
 		<?php $this->load->view('page_loader'); ?>
@@ -55,8 +56,8 @@
                                         <div class="dtl-dis">
                                             <div class="no-info" ng-if="user_bio == ''">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                <span ng-if="from_user_id == to_user_id">Highlight your details. (Let it be either personal or professional)</span>
-                                                <span ng-if="from_user_id != to_user_id">Highlight your details. (Let it be either personal or professional)</span>
+                                                <span ng-if="from_user_id == to_user_id">Describe briefly about what your interests are, what you have done and what you want to do.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any Bio yet.</span>
                                             </div>
                                             <div class="" ng-if="user_bio != ''">
                                                 <h4>About</h4>
@@ -149,7 +150,7 @@
                                             <div class="no-info">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                                 <span ng-if="from_user_id == to_user_id">Showcase what degrees you have! From which school or university you have graduated.</span>
-                                                <span ng-if="from_user_id != to_user_id">Showcase what degrees you have! From which school or university you have graduated.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any educational details yet.</span>
                                             </div>
                                         </div>
                                         <div class="dtl-dis dis-accor" ng-if="user_education.length > 0">
@@ -238,8 +239,8 @@
                                         <div class="dtl-dis" ng-if="user_experience.length < '1'">
                                             <div class="no-info">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                <span ng-if="from_user_id == to_user_id">Add your experiences!</span>
-                                                <span ng-if="from_user_id != to_user_id">Add your experiences!</span>
+                                                <span ng-if="from_user_id == to_user_id">Add your experiences details whether it's working somewhere or owning a business.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any experience details yet.</span>
                                             </div>
                                         </div>
                                         <div class="dtl-dis dis-accor" ng-if="user_experience.length > '0'">
@@ -322,8 +323,8 @@
     		                            <div class="dtl-dis" ng-if="user_portfolio.length < '1'">
     		                                <div class="no-info">
     		                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-    		                                    <span ng-if="from_user_id == to_user_id">Attract more artistic opportunities by attaching your art portfolio.</span>
-    		                                    <span ng-if="from_user_id != to_user_id"><?php echo ucwords($artistic_name); ?> hasn't added any portfolio.</span>
+    		                                    <span ng-if="from_user_id == to_user_id">Show your talent to the world. Attach your art portfolio.</span>
+    		                                    <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any portfolio yet.</span>
     		                                </div>
     		                            </div>
     									<div class="dtl-dis dis-accor">
@@ -376,7 +377,7 @@
     						
     						<!--  10 social profile  -->
     						<div class="gallery-item social-link-move">
-    						</div>
+                            </div>
     						
     						<!--  11 Preferred Work   -->
     						<div class="gallery-item">
@@ -443,8 +444,8 @@
                                         <div class="dtl-dis" ng-if="!art_speciality_data.art_spl_tags && !art_speciality_data.art_spl_desc">
                                             <div class="no-info">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                <span ng-if="from_user_id == to_user_id">No specialities.</span>
-                                                <span ng-if="from_user_id != to_user_id">No specialities.</span>
+                                                <span ng-if="from_user_id == to_user_id">What is the one thing that separates you from others? Highlight it on your profile.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any specialities yet.</span>
                                             </div>
                                         </div>
     									<div class="dtl-dis" ng-if="art_speciality_data.art_spl_tags || art_speciality_data.art_spl_desc">
@@ -485,8 +486,8 @@
                                         <div class="dtl-dis" ng-if="!art_soft_inst_skill">
                                             <div class="no-info">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                <span ng-if="from_user_id == to_user_id">No Software / Instrument/ Skills.</span>
-                                                <span ng-if="from_user_id != to_user_id">No Software / Instrument/ Skills.</span>
+                                                <span ng-if="from_user_id == to_user_id">At what you are good. Add your expertise to profile.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any skills yet.</span>
                                             </div>
                                         </div>
     									<div class="dtl-dis" ng-if="art_soft_inst_skill">
@@ -518,8 +519,8 @@
                                         <div class="dtl-dis" ng-if="user_award.length < '1'">
                                             <div class="no-info">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                                <span ng-if="from_user_id == to_user_id">Showcase the honour you have achieved to profile.</span>
-                                                <span ng-if="from_user_id != to_user_id">Showcase the honour you have achieved to profile.</span>
+                                                <span ng-if="from_user_id == to_user_id">Add the achievements and awards that you have earned.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any achievements & awards yet.</span>
                                             </div>
                                         </div>
                                         <div class="dtl-dis dis-accor" ng-if="user_award.length > '0'">
@@ -592,7 +593,7 @@
                                             <div class="no-info">
                                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                                 <span ng-if="from_user_id == to_user_id">Highlight the other online or offline courses you have pursued.</span>
-                                                <span ng-if="from_user_id != to_user_id">Highlight the other online or offline courses you have pursued.</span>
+                                                <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any additional course details yet.</span>
                                             </div>
                                         </div>
                                         <div class="dtl-dis dis-accor" ng-if="user_addicourse.length > '0'">
@@ -762,8 +763,8 @@
 			                    <div class="dtl-dis">
 			                        <div class="no-info" ng-if="user_social_links.length < '1' && user_personal_links.length < '1'">
 			                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-			                            <span ng-if="from_user_id == to_user_id">Enter your social profile links. Let people stay connected with you on other platforms too.</span>
-			                            <span ng-if="from_user_id != to_user_id"><?php echo ucwords($artistic_name); ?> hasn't added any social links.</span>
+			                            <span ng-if="from_user_id == to_user_id">Add your other social profile links to get connected with people on other platforms.</span>
+			                            <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any social link yet.</span>
 			                        </div>
 			                        <div class="social-links" ng-if="user_social_links.length > '0'">
 			                            <h4>Social</h4>
@@ -811,8 +812,8 @@
                                     <div class="dtl-dis">
                                         <div class="no-info" ng-if="user_languages.length < '1'">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span ng-if="from_user_id == to_user_id">Add languages that you know. Open door of overseas opportunities.</span>
-                                            <span ng-if="from_user_id != to_user_id">Add languages that you know. Open door of overseas opportunities.</span>
+                                            <span ng-if="from_user_id == to_user_id">How many languages do you know? Add them to your profile.</span>
+                                            <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any languages.   </span>
                                         </div>
                                         <ul ng-if="user_languages.length > 0" class="known-language">
                                             <li ng-repeat="user_lang in user_languages">
@@ -839,8 +840,8 @@
                                     <div class="dtl-dis" ng-if="!art_talent_cat">
                                         <div class="no-info">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span ng-if="from_user_id == to_user_id">No Software / Instrument/ Skills.</span>
-                                            <span ng-if="from_user_id != to_user_id">No Software / Instrument/ Skills.</span>
+                                            <span ng-if="from_user_id == to_user_id">Add the category of your talent.</span>
+                                            <span ng-if="from_user_id != to_user_id"><?php echo $user_first_name; ?> hasn't added any category yet.</span>
                                         </div>
                                     </div>
 									<div class="dtl-dis" ng-if="art_talent_cat">
