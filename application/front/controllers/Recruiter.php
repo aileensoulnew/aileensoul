@@ -5227,85 +5227,91 @@ class Recruiter extends MY_Controller {
 		$recdata = $this->data['recdata'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 		if(isset($recdata) && empty($recdata))
 		{
-			redirect(base_url("404"),"refresh");
-		}
-
-		$join_str[0]['table'] = 'recruiter';
-		$join_str[0]['join_table_id'] = 'recruiter.user_id';
-		$join_str[0]['from_table_id'] = 'rec_post.user_id';
-		$join_str[0]['join_type'] = '';
-
-		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type,rec_post.comp_name,rec_post.comp_logo';
-		$contition_array = array('post_id' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'rec_post.user_id' => $userid);
-		$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-
-		$cache_time = $this->db->get_where('job_title', array(
-			'title_id' => $this->data['postdata'][0]['post_name']
-		))->row()->name;
-
-		if ($cache_time) {
-			$cache_time1 = $cache_time;
-		} else {
-			$cache_time1 = $this->data['postdata'][0]['post_name'];
-		}
-
-		if ($cache_time1 != '') {
-			$text = strtolower($this->common->clean($cache_time1));
-		} else {
-			$text = '';
-		}
-
-
-		$cityname = $this->db->get_where('cities', array('city_id' => $this->data['postdata'][0]['city']))->row()->city_name;
-		$statename = $this->db->get_where('states', array('state_id' => $this->data['postdata'][0]['state']))->row()->state_name;
-		$countryname = $this->db->get_where('countries', array('country_id' => $this->data['postdata'][0]['country']))->row()->country_name;
-		
-		if ($cityname != '') {
-			$m_city = $this->common->clean($cityname);
-			$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
-		}
-		else if($statename != "") {
-			$m_city = $this->common->clean($statename);
-			$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($statename));            
-		}
-		else if($countryname != "") {
-			$m_city = $this->common->clean($countryname);
-			$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($countryname));
-		}
-		if ($this->data['postdata'][0]['post_id'] != '') {
-			$url = $text . $cityname . '-' . $this->data['postdata'][0]['user_id'] . '-' . $this->data['postdata'][0]['post_id'];
-		} else {
-			$url = '';
-		}
-		// echo $url;die;
-		$segment3 = array_splice($segment3, 0, -2);
-		$segment3 = implode(' ', $segment3);
-		$segment3 = ucfirst($segment3);
-
-		$this->data['title'] = $cache_time1.' job in '.$m_city.' for '.$postdata[0]['min_year'].'-'.$postdata[0]['max_year'] .' Year Experience';
-		$this->data['metadesc'] = 'Apply Now to '.$cache_time1.' job vacancy in '.$recdata[0]['re_comp_name'].', '.$m_city.' on Aileensoul. Experience Required: '.$postdata[0]['min_year'].' to '.$postdata[0]['max_year'] .' year.';
-
-		$contition_array = array('post_id !=' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'post_name' => $this->data['postdata'][0]['post_name']);
-		$this->data['recommandedpost'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-
-		// if ($url == $this->uri->segment(3)) {
-		// echo $url." == ".$this->uri->segment_array()[count($this->uri->segment_array())];exit;
-		//if ($url == $this->uri->segment_array()[count($this->uri->segment_array())]) {
-		if(isset($postdata) && !empty($postdata))
-		{			
-			if ($this->session->userdata('aileenuser')) {
-				$this->load->view('job/rec_post', $this->data);
-			} else {
-				$this->load->view('job/rec_post_login', $this->data);
-			}
+			$this->data['title'] = "404".TITLEPOSTFIX;
+            $this->load->view('404', $this->data);
 		}
 		else
-		{
-			$this->load->view('404', $this->data);
+		{			
+			$join_str[0]['table'] = 'recruiter';
+			$join_str[0]['join_table_id'] = 'recruiter.user_id';
+			$join_str[0]['from_table_id'] = 'rec_post.user_id';
+			$join_str[0]['join_type'] = '';
+
+			$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type,rec_post.comp_name,rec_post.comp_logo';
+			$contition_array = array('post_id' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'rec_post.user_id' => $userid);
+			$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+
+			$cache_time = $this->db->get_where('job_title', array(
+				'title_id' => $this->data['postdata'][0]['post_name']
+			))->row()->name;
+
+			if ($cache_time) {
+				$cache_time1 = $cache_time;
+			} else {
+				$cache_time1 = $this->data['postdata'][0]['post_name'];
+			}
+
+			if ($cache_time1 != '') {
+				$text = strtolower($this->common->clean($cache_time1));
+			} else {
+				$text = '';
+			}
+
+
+			$cityname = $this->db->get_where('cities', array('city_id' => $this->data['postdata'][0]['city']))->row()->city_name;
+			$statename = $this->db->get_where('states', array('state_id' => $this->data['postdata'][0]['state']))->row()->state_name;
+			$countryname = $this->db->get_where('countries', array('country_id' => $this->data['postdata'][0]['country']))->row()->country_name;
+			
+			if ($cityname != '') {
+				$m_city = $this->common->clean($cityname);
+				$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
+			}
+			else if($statename != "") {
+				$m_city = $this->common->clean($statename);
+				$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($statename));            
+			}
+			else if($countryname != "") {
+				$m_city = $this->common->clean($countryname);
+				$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($countryname));
+			}
+			if ($this->data['postdata'][0]['post_id'] != '') {
+				$url = $text . $cityname . '-' . $this->data['postdata'][0]['user_id'] . '-' . $this->data['postdata'][0]['post_id'];
+			} else {
+				$url = '';
+			}
+			// echo $url;die;
+			$segment3 = array_splice($segment3, 0, -2);
+			$segment3 = implode(' ', $segment3);
+			$segment3 = ucfirst($segment3);
+
+			$this->data['title'] = $cache_time1.' job in '.$m_city.' for '.$postdata[0]['min_year'].'-'.$postdata[0]['max_year'] .' Year Experience';
+			$this->data['metadesc'] = 'Apply Now to '.$cache_time1.' job vacancy in '.$recdata[0]['re_comp_name'].', '.$m_city.' on Aileensoul. Experience Required: '.$postdata[0]['min_year'].' to '.$postdata[0]['max_year'] .' year.';
+
+			$contition_array = array('post_id !=' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'post_name' => $this->data['postdata'][0]['post_name']);
+			$this->data['recommandedpost'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+
+			// if ($url == $this->uri->segment(3)) {
+			// echo $url." == ".$this->uri->segment_array()[count($this->uri->segment_array())];exit;
+			//if ($url == $this->uri->segment_array()[count($this->uri->segment_array())]) {
+			if(isset($postdata) && !empty($postdata))
+			{			
+				if ($this->session->userdata('aileenuser')) {
+					$this->load->view('job/rec_post', $this->data);
+				} else {
+					$this->load->view('job/rec_post_login', $this->data);
+				}
+			}
+			else
+			{
+				// $this->load->view('404', $this->data);
+				$this->data['title'] = "404".TITLEPOSTFIX;
+	            $this->load->view('404', $this->data);
+			}
+			/*} else {
+				redirect(base_url().$url, refresh);
+			}*/
 		}
-		/*} else {
-			redirect(base_url().$url, refresh);
-		}*/
+
 	}
 
 	//DELETE LOGO START

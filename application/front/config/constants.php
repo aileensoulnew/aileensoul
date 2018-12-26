@@ -75,7 +75,8 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
 
 define('SITEPATH', $_SERVER['DOCUMENT_ROOT'] . '/aileensoulnew/aileensoul/');
-define('TITLEPOSTFIX', ' - Aileensoul');
+// define('TITLEPOSTFIX', ' - Aileensoul');
+define('TITLEPOSTFIX', ' | Aileensoul');
 
 define('NOIMAGE', 'uploads/avatar.png');
 define('NOBUSIMAGE', 'uploads/nobusimage.jpg');

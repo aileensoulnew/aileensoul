@@ -3,7 +3,7 @@
 <html>
     <head>
         <title><?php echo $title; ?></title>
-        <?php echo $head; ?>
+        <?php //echo $head; ?>
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
