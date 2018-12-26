@@ -191,7 +191,8 @@ $route['business/reactivateacc'] = "business_profile/reactivateacc";
 //$route['business-profile/image'] = "business_profile/image";
 $route['business-profile'] = "business_profile_live/business_profile_post";
 $route['business-profile/image-insert'] = "business_profile/image_insert";
-$route['business-profile/details'] = "business_profile_live/business_resume";
+// $route['business-profile/details'] = "business_profile_live/business_resume";
+
 $route['business-profile/bussiness-profile-post-add'] = "business_profile/business_profile_addpost_insert";
 $route['business-profile/bussiness-profile-post-add/manage/(:any)'] = "business_profile/business_profile_addpost_insert/manage/$1";
 
@@ -969,6 +970,13 @@ $route['article-preview/(:any)'] = 'article/article_preview/$1';
 $route['article/(:any)'] = 'article/article_published/$1';
 $route['o/(:any)'] = 'user_post/opprtunity_detail/$1';
 $route['noscript'] = 'Userprofile/noscript';
+
+//Old Url
+$route['business-profile/details'] = "My404Page";
+$route['business-profile/details/(:any)'] = "My404Page";
+$route['recruiter/jobpost'] = "My404Page";
+$route['recruiter/jobpost/(:any)'] = "My404Page";
+
 $route['(:any)'] = 'Userprofile';
 
 

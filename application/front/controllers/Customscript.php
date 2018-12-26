@@ -43,4 +43,20 @@ class Customscript extends CI_Controller {
         }
         echo "Done";
     }
+
+    public function cityslug()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");        
+      
+        $cityData = $this->db->get_where('cities', array())->result();        
+        echo "<pre>";
+        // print_r($cityData);exit();echo "</pre>";
+        foreach ($cityData as $key => $value) {
+            $city_slug = $this->common->set_slug($value->city_name, 'slug1', 'cities');
+            $data = array("slug1"=>$city_slug);
+            $updatdata = $this->common->update_data($data, 'cities', 'city_id', $value->city_id);
+        }
+        echo "Done";
+    }
 }

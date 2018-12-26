@@ -518,50 +518,54 @@ class Artist_live extends MY_Controller {
         $this->data['artisticdata'] = $artisticdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_step,user_id,art_user_image,art_name,art_lastname,designation,slug,art_id,art_skill,art_yourart,art_desc_art,art_email,art_city,art_state,art_country,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if(empty($artisticdata))
         {
-            redirect("404");
+            $this->data['title'] = "404".TITLEPOSTFIX;
+            $this->load->view('404',$this->data);
         }
-        $this->data['artid'] = $this->data['artisticdata'][0]['user_id'];
-        $this->data['get_url'] = $get_url = $this->get_url($this->data['artisticdata'][0]['user_id']);
-        $artistic_name = $this->get_artistic_name($this->data['artid']);
+        else
+        {            
+            $this->data['artid'] = $this->data['artisticdata'][0]['user_id'];
+            $this->data['get_url'] = $get_url = $this->get_url($this->data['artisticdata'][0]['user_id']);
+            $artistic_name = $this->get_artistic_name($this->data['artid']);
 
-        $cityname = $this->db->get_where('cities', array('city_id' => $this->data['artisticdata'][0]['art_city']))->row()->city_name;
-        $statename = $this->db->get_where('states', array('state_id' => $this->data['artisticdata'][0]['art_state']))->row()->state_name;
-        $countryname = $this->db->get_where('countries', array('country_id' => $this->data['artisticdata'][0]['art_country']))->row()->country_name;
-        $category_name = $this->artistic_model->getCategoryNames($this->data['artisticdata'][0]['art_skill']);
-        $art_othercategory = "";
-        if($this->data['artisticdata'][0]['other_skill'] != "")
-        {
-            $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $this->data['artisticdata'][0]['other_skill']))->row()->other_category;
-        }
-        
-        $this->data['title'] = "Artist ".$artistic_name." ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." From ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname;
-        
-        $this->data['metadesc'] = "Artist ".$artistic_name." from ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname." is a ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." ".($this->data['artisticdata'][0]['art_yourart'] != '' ? 'specailist in '.$this->data['artisticdata'][0]['art_yourart'] : '').". Visit Aileensoul to view full ".$artistic_name." portfolio.";        
-
-        if ($userid && count($artistic_deactive) <= 0 && $this->data['artist_isregister']) {
-            if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
-                $this->load->view('artist/notavalible');
-            } else if ($this->data['artisticdata'][0]['art_step'] != '4') {
-                redirect('find-artist');
-            } else {
-                $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
-                if ($get_url == $slugname) {
-                    $this->load->view('artist_live/art_manage_post', $this->data);
-                } else {
-                    redirect('artist/p/'. $get_url .'/dashboard', refresh);
-                }
+            $cityname = $this->db->get_where('cities', array('city_id' => $this->data['artisticdata'][0]['art_city']))->row()->city_name;
+            $statename = $this->db->get_where('states', array('state_id' => $this->data['artisticdata'][0]['art_state']))->row()->state_name;
+            $countryname = $this->db->get_where('countries', array('country_id' => $this->data['artisticdata'][0]['art_country']))->row()->country_name;
+            $category_name = $this->artistic_model->getCategoryNames($this->data['artisticdata'][0]['art_skill']);
+            $art_othercategory = "";
+            if($this->data['artisticdata'][0]['other_skill'] != "")
+            {
+                $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $this->data['artisticdata'][0]['other_skill']))->row()->other_category;
             }
-        } else {
-            if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
-                $this->load->view('artist/notavalible');
-            } else {
-                include ('artistic_include.php');
-                $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-                $this->data['artistic_common_profile'] = $this->load->view('artist_live/artistic_common_profile', $this->data, true);
-                if ($get_url == $slugname) {
-                    $this->load->view('artist_live/art_dashboard_live', $this->data);
+            
+            $this->data['title'] = "Artist ".$artistic_name." ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." From ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname;
+            
+            $this->data['metadesc'] = "Artist ".$artistic_name." from ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname." is a ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." ".($this->data['artisticdata'][0]['art_yourart'] != '' ? 'specailist in '.$this->data['artisticdata'][0]['art_yourart'] : '').". Visit Aileensoul to view full ".$artistic_name." portfolio.";        
+
+            if ($userid && count($artistic_deactive) <= 0 && $this->data['artist_isregister']) {
+                if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
+                    $this->load->view('artist/notavalible');
+                } else if ($this->data['artisticdata'][0]['art_step'] != '4') {
+                    redirect('find-artist');
                 } else {
-                    redirect('artist/p/'. $get_url .'/dashboard', refresh);
+                    $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+                    if ($get_url == $slugname) {
+                        $this->load->view('artist_live/art_manage_post', $this->data);
+                    } else {
+                        redirect('artist/p/'. $get_url, refresh);
+                    }
+                }
+            } else {
+                if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
+                    $this->load->view('artist/notavalible');
+                } else {
+                    include ('artistic_include.php');
+                    $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+                    $this->data['artistic_common_profile'] = $this->load->view('artist_live/artistic_common_profile', $this->data, true);
+                    if ($get_url == $slugname) {
+                        $this->load->view('artist_live/art_dashboard_live', $this->data);
+                    } else {
+                        redirect('artist/p/'. $get_url, refresh);
+                    }
                 }
             }
         }
