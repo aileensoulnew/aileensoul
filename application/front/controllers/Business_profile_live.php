@@ -15,6 +15,7 @@ class Business_profile_live extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('user_post_model');
         $this->load->model('data_model');
+        $this->load->model('job_model');
         $this->load->model('business_model');
         $this->lang->load('message', 'english');
         $this->load->helper('smiley');
@@ -266,6 +267,9 @@ class Business_profile_live extends MY_Controller {
             if ($this->session->userdata('aileenuser') && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
                 $this->load->view('business_profile_live/business_profile_manage_post', $this->data);
             } else {
+                $page = 1;
+                $limit = 20;
+                $this->data['top_city'] = $this->job_model->get_job_city($page,$limit);  
                 include ('business_profile_include.php');
                 $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
                 $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);

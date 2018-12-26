@@ -9,7 +9,7 @@ else{
     $business_user_image_txt = base_url(NOBUSIMAGE);
 }
 $contact_email_txt = $business_data[0]['contact_email'];
-$login_user_id = $this->session->userdata('aileenuser')
+$login_user_id = $this->session->userdata('aileenuser');
 ?>
 <!DOCTYPE html>
 <html>
@@ -197,7 +197,9 @@ $login_user_id = $this->session->userdata('aileenuser')
                                                 ?> 
                                                 <?php
                                                 if ($business_data[0]['city']) {
-                                                    $city_txt = $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
+                                                    $city_data = $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row();
+                                                    $city_txt = $city_data->city_name;
+                                                    $city_slug = $city_data->slug;
                                                     echo $city_txt.",";
                                                 }
                                                 ?> 
@@ -1110,7 +1112,7 @@ $login_user_id = $this->session->userdata('aileenuser')
                     }
                 },
                 <?php
-                if($city_txt != "" && $category_txt != ""): ?>
+                if($city_txt != "" && $category_txt != "" && array_search(trim($city_txt),array_column($top_city, 'city_name')) != ''): ?>
                 {
                     "@type": "ListItem",
                     "position": 3,
@@ -1125,7 +1127,7 @@ $login_user_id = $this->session->userdata('aileenuser')
                     "position": 4,
                     "item":
                     {
-                        "@id": "<?php echo base_url().$category_slug."-business-in-".$this->common->create_slug($city_txt); ?>",
+                        "@id": "<?php echo base_url().$category_slug."-business-in-".$city_slug; ?>",
                         "name": "<?php echo $category_txt." Business in ".$city_txt; ?>"
                     }
                 },
@@ -1165,7 +1167,7 @@ $login_user_id = $this->session->userdata('aileenuser')
                     "position": 4,
                     "item":
                     {
-                        "@id": "<?php echo base_url()."business-in-".$this->common->create_slug($city_txt); ?>",
+                        "@id": "<?php echo base_url()."business-in-".$city_slug; ?>",
                         "name": "<?php echo $city_txt; ?>"
                     }
                 },
