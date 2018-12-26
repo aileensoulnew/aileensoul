@@ -76,10 +76,13 @@ class User_basic_info extends MY_Controller {
                     $cityId = $city['city_id'];
                 } else {
                     $data = array();
+                    $city_slug = $this->common->set_city_slug(trim($_POST['city_name']), 'slug', 'cities');
                     $data['city_name'] = $_POST['city_name'];
                     $data['state_id'] = '0';
                     $data['status'] = '2';
                     $data['group_id'] = '0';
+                    $data['city_image'] =  $city_slug.'.png';
+                    $data['slug'] = $city_slug;
                     $cityId = $this->common->insert_data_getid($data, 'cities');
                 }
             }

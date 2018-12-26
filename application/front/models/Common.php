@@ -787,6 +787,15 @@ class Common extends CI_Model {
         }return $slugname;
     }
 
+     public function set_city_slug($slugname, $filedname, $tablename, $notin_id = array()) {
+        $slugname = $oldslugname = $this->clean($slugname);
+        $i = 1;
+        while ($this->compare_slug($slugname, $filedname, $tablename, $notin_id) > 0) {
+            $slugname = $oldslugname . '-' . $i;
+            $i++;
+        }return $slugname;
+    }
+
     public function compare_slug($slugname, $filedname, $tablename, $notin_id = array()) {
         $this->db->where($filedname, $slugname);
         if (isset($notin_id) && $notin_id != "" && count($notin_id) > 0 && !empty($notin_id)) {

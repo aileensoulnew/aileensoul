@@ -2482,12 +2482,13 @@ class Userprofile_page extends MY_Controller {
             $cityId = $city['city_id'];
         } else {
             $data = array();
+            $city_slug = $this->common->set_city_slug(trim($basic_info_city), 'slug', 'cities');
             $data['city_name'] = $basic_info_city;
             $data['state_id'] = '0';
             $data['status'] = '2';
             $data['group_id'] = '0';
-            $data['slug'] = $this->common->clean($basic_info_city);
-            $data['city_image'] = $this->common->clean($basic_info_city).".png";
+            $data['slug'] = $this->common->clean($city_slug);
+            $data['city_image'] = $this->common->clean($city_slug).".png";
             $cityId = $this->common->insert_data_getid($data, 'cities');
         }        
 
@@ -2566,12 +2567,13 @@ class Userprofile_page extends MY_Controller {
             $cityId = $city['city_id'];
         } else {
             $data = array();
+            $city_slug = $this->common->set_city_slug(trim($stud_info_city), 'slug', 'cities');
             $data['city_name'] = $stud_info_city;
             $data['state_id'] = '0';
             $data['status'] = '2';
             $data['group_id'] = '0';
-            $data['slug'] = $this->common->clean($stud_info_city);
-            $data['city_image'] = $this->common->clean($stud_info_city).".png";
+            $data['slug'] = $this->common->clean($city_slug);
+            $data['city_image'] = $this->common->clean($city_slug).".png";
             $cityId = $this->common->insert_data_getid($data, 'cities');
         }
 

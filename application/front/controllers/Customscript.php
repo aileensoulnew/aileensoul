@@ -53,7 +53,7 @@ class Customscript extends CI_Controller {
         echo "<pre>";
         // print_r($cityData);exit();echo "</pre>";
         foreach ($cityData as $key => $value) {
-            $city_slug = $this->common->set_slug($value->city_name, 'slug1', 'cities');
+            $city_slug = $this->common->clean($value->city_name, 'slug1', 'cities');
             $data = array("slug1"=>$city_slug);
             $updatdata = $this->common->update_data($data, 'cities', 'city_id', $value->city_id);
         }

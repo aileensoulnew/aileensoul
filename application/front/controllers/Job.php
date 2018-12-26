@@ -1382,13 +1382,15 @@ class Job extends MY_Controller {
                     $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
                     if ($citydata) {
                         $city[] = $citydata[0]['city_id'];
-                    } else {
-                        $slug = $this->setcategory_slug($cit, 'slug', 'cities');
+                    } else {                        
+                        $city_slug = $this->common->set_city_slug(trim($cit), 'slug', 'cities');
                         $data = array(
                             'city_name' => $cit,
-                            'city_image' => $slug.".png",
-                            'status' => '1',
-                            'slug' => $slug,
+                            'city_image' => $city_slug.".png",
+                            'state_id' => '0',
+                            'status' => '2',
+                            'group_id' => '0',
+                            'slug' => $city_slug,
                         );                        
                         $city[] = $this->common->insert_data_getid($data, 'cities');
                     }
@@ -3418,12 +3420,14 @@ class Job extends MY_Controller {
                     if ($citydata) {
                         $city[] = $citydata[0]['city_id'];
                     } else {
-                        $slug = $this->setcategory_slug($cit, 'slug', 'cities');
+                        $city_slug = $this->common->set_city_slug(trim($cit), 'slug', 'cities');
                         $data = array(
                             'city_name' => $cit,
-                            'city_image' => $slug.".png",
-                            'status' => '1',
-                            'slug' => $slug,
+                            'city_image' => $city_slug.".png",
+                            'state_id' => '0',
+                            'status' => '2',
+                            'group_id' => '0',
+                            'slug' => $city_slug,
                         );
                         if ($userid) {
                             $city[] = $this->common->insert_data_getid($data, 'cities');
@@ -6454,9 +6458,14 @@ class Job extends MY_Controller {
                 if ($citydata) {
                     $city[] = $citydata[0]['city_id'];
                 } else {
+                    $city_slug = $this->common->set_city_slug(trim($cit), 'slug', 'cities');
                     $data = array(
                         'city_name' => $cit,
-                        'status' => '1',
+                        'city_image' => $city_slug.'.png',
+                        'state_id' => '0',
+                        'status' => '2',
+                        'group_id' => '0',
+                        'slug' => $this->common->clean($city_slug),
                     );
                     if ($userid) {
                         $city[] = $this->common->insert_data_getid($data, 'cities');
@@ -6742,12 +6751,14 @@ class Job extends MY_Controller {
                         if ($citydata) {
                             $city[] = $citydata[0]['city_id'];
                         } else {
-                            $slug = $this->setcategory_slug($cit, 'slug', 'cities');
+                            $city_slug = $this->common->set_city_slug(trim($cit), 'slug', 'cities');
                             $data = array(
                                 'city_name' => $cit,
-                                'city_image' => $slug.".png",
-                                'status' => '1',
-                                'slug' => $slug,
+                                'city_image' => $city_slug.".png",
+                                'state_id' => '0',
+                                'status' => '2',
+                                'group_id' => '0',
+                                'slug' => $city_slug,
                             );
                             if ($userid) {
                                 $city[] = $this->common->insert_data_getid($data, 'cities');
@@ -8314,7 +8325,7 @@ class Job extends MY_Controller {
                 if ($citydata) {
                     $city_id = $citydata[0]['city_id'];
                 } else {
-                    $city_slug = $this->create_slug($value['city']);;
+                    $city_slug = $this->common->set_city_slug(trim($value['city']), 'slug', 'cities');
                     $data = array(
                         'city_name' => $value['city'],
                         'city_image' => $city_slug.'.png',

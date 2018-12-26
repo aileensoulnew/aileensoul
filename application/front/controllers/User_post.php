@@ -893,10 +893,13 @@ class User_post extends MY_Controller {
                         $cityId = $city['city_id'];
                     } else {
                         $data = array();
+                        $city_slug = $this->common->set_city_slug(trim($loc['city_name']), 'slug', 'cities');
                         $data['city_name'] = $loc['city_name'];
                         $data['state_id'] = '0';
                         $data['status'] = '2';
                         $data['group_id'] = '0';
+                        $data['city_image'] =  $city_slug.'.png';
+                        $data['slug'] = $city_slug;
                         $cityId = $this->common->insert_data_getid($data, 'cities');
                     }
                     $city_id .= $cityId . ',';
@@ -1471,10 +1474,13 @@ class User_post extends MY_Controller {
                     $cityId = $city['city_id'];
                 } else {
                     $data = array();
+                    $city_slug = $this->common->set_city_slug(trim($loc['city_name']), 'slug', 'cities');
                     $data['city_name'] = $loc['city_name'];
                     $data['state_id'] = '0';
                     $data['status'] = '2';
                     $data['group_id'] = '0';
+                    $data['city_image'] =  $city_slug.'.png';
+                    $data['slug'] = $city_slug;
                     $cityId = $this->common->insert_data_getid($data, 'cities');
                 }
                 $city_id .= $cityId . ',';

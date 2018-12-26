@@ -12478,7 +12478,7 @@ Your browser does not support the audio tag.
                     if ($citydata) {
                         $city_id = $citydata[0]['city_id'];
                     } else {
-                        $city_slug = $this->create_slug($value['city']);;
+                        $city_slug = $this->common->set_city_slug(trim($value['city']), 'slug', 'cities');
                         $data = array(
                             'city_name' => $value['city'],
                             'city_image' => $city_slug.'.png',

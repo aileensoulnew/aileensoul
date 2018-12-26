@@ -437,9 +437,14 @@ class Profile extends CI_Controller {
                 if ($citydata) {
                     $cityId .= $citydata[0]['city_id'];
                 } else {
-                    $data = array(
+                    $city_slug = $this->common->set_city_slug(trim($city), 'slug', 'cities');
+                    $data = array(                        
                         'city_name' => trim($city),
-                        'status' => '1',
+                        'city_image' => $city_slug.".png",
+                        'state_id' => '0',
+                        'status' => '2',
+                        'group_id' => '0',
+                        'slug' => $city_slug,
                     );
                     if ($userid) {
                         $cityId .= $this->common->insert_data_getid($data, 'cities');
@@ -549,9 +554,14 @@ class Profile extends CI_Controller {
                 if ($citydata) {
                     $cityId = $citydata[0]['city_id'];
                 } else {
-                    $data = array(
-                        'city_name' => trim($studcity),
-                        'status' => '1',
+                    $city_slug = $this->common->set_city_slug(trim($studcity), 'slug', 'cities');
+                    $data = array(                        
+                        'city_name' => $studcity,
+                        'city_image' => $city_slug.".png",
+                        'state_id' => '0',
+                        'status' => '2',
+                        'group_id' => '0',
+                        'slug' => $city_slug,
                     );
                     if ($userid) {
                         $cityId = $this->common->insert_data_getid($data, 'cities');
