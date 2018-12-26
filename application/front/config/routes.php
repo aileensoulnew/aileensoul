@@ -788,6 +788,9 @@ $route['freelancer-new-individual/(:any)'] = "freelancer/freelancer_post_profile
 $route['freelance-employer/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
 $route['freelance-employer-new/(:any)'] = "freelancer_hire_live/freelancer_hire_profile_new/$1";
 
+$route['(:any)-job-vacancy-in-(:any)'] = "recruiter/live_post";
+$route['(:any)-job-vacancy-in-(:any)/(:any)'] = "recruiter/live_post/$1";
+
 $route['(:any)-jobs'] = "job/job_search_new/$1//1";//Pratik Job By Job Title,Job by Category,Job by Skills
 $route['(:any)-jobs/(:any)'] = "job/job_search_new/$1//1";//Pratik Job By Job Title,Job by Category,Job by Skills
 $route['jobs-opening-at-(:any)'] = "job/job_search_new/$1//2";
@@ -867,9 +870,6 @@ $route['recruiter/post/(:any)'] = "recruiter_live/rec_post/$1";
 
 // $route['recruiter/jobpost'] = "recruiter/live_post";
 // $route['recruiter/jobpost/(:any)'] = "recruiter/live_post/$1";
-
-$route['(:any)-job-vacancy-in-(:any)'] = "recruiter/live_post";
-$route['(:any)-job-vacancy-in-(:any)/(:any)'] = "recruiter/live_post/$1";
 
 // $route['recruiter/add-post'] = "recruiter/add_post";
 $route['post-job'] = "recruiter/add_post";
