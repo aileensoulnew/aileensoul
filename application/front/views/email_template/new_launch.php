@@ -23,7 +23,7 @@
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 				<td style="text-align:center; padding-bottom:30px;">
-					<p style="font-size:30px; color:#1b8ab9;"><img style="width:30px;margin-right:10px; vertical-align:middle; margin-top:-5px;" src="https://www.aileensoul.com/assets/img/mail/m-logo.png">
+					<p style="font-size:30px; color:#1b8ab9;"><img style="width:30px;margin-right:10px; vertical-align:middle; margin-top:-5px;" src="<?php echo base_url(); ?>/assets/img/mail/m-logo.png">
 					<span>Aileensoul</span></p>
 				</td>
 			</tr>
@@ -34,7 +34,7 @@
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td>
-								<img style="border-top-left-radius:10px; border-top-right-radius:10px;" src="https://www.aileensoul.com/assets/img/mail/new-launch.jpg">
+								<img style="border-top-left-radius:10px; border-top-right-radius:10px;" src="<?php echo base_url(); ?>/assets/img/mail/new-launch.jpg">
 							</td>
 						</tr>
 					</table>
@@ -45,12 +45,12 @@
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="padding-top:30px;">
-								<p>Hello First Name,</p>
+								<p>Hello <?php echo $first_name; ?>,</p>
 								<p style="padding-top:20px; line-height:1.5;">We are happy to announce that we have enhanced our website with some exciting and useful features to make your life little easier and simple.</p>
 								<p style="padding-top:20px; line-height:1.5;">
 									Till now we have introduced 5 different profile for Job-seekers, Recruiter, Business, Freelance, and Artist.
 								</p>
-								<p style="padding-top:20px; line-height:1.5;">Here's some new feature we have built-in <a href="#" style="color:#1b8ab9; text-decoration:none;">Aileensoul</a>.</p>
+								<p style="padding-top:20px; line-height:1.5;">Here's some new feature we have built-in <a href="<?php echo base_url(); ?>" style="color:#1b8ab9; text-decoration:none;">Aileensoul</a>.</p>
 							</td>
 						</tr>
 						<tr>
@@ -61,7 +61,7 @@
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td style="width:60%; vertical-align:top;">
-														<img style="width:100%;" src="https://www.aileensoul.com/assets/img/mail/new-1.jpg">
+														<img style="width:100%;" src="<?php echo base_url(); ?>/assets/img/mail/new-1.jpg">
 													</td>
 													<td style="width:40%; text-align:right; padding-left:15px;">
 														<p style="font-size:21px; font-weight:bold; font-style:italic; padding-bottom:30px;">Post Opportunity</p>
@@ -81,7 +81,7 @@
 														<p style="line-height:1.5; padding-top:5px;">Now get an answer to your any queries easily from experts or connections.</p>
 													</td>
 													<td style="width:60%; vertical-align:top;">
-														<img style="width:100%;" src="https://www.aileensoul.com/assets/img/mail/new-2.jpg">
+														<img style="width:100%;" src="<?php echo base_url(); ?>/assets/img/mail/new-2.jpg">
 													</td>
 												</tr>
 											</table>
@@ -90,7 +90,7 @@
 									<tr>
 										<td style="padding-top:60px; vertical-align:top;">
 											<p style="font-size:21px; font-weight:bold; padding-bottom:10px; font-style:italic;">Post Article</p>
-											<img style="width:100%;" src="https://www.aileensoul.com/assets/img/mail/new-3.jpg">
+											<img style="width:100%;" src="<?php echo base_url(); ?>/assets/img/mail/new-3.jpg">
 											
 											<p style="line-height:1.5; padding-top:10px; text-align:center;">Easily publish any of your ideas, founding, or research and reach a larger audience.</p>
 										</td>
@@ -98,7 +98,7 @@
 									<tr>
 										<td style="padding-top:60px; vertical-align:top;">
 											<p style="font-size:21px; font-weight:bold; padding-bottom:10px; font-style:italic;">Networking</p>
-											<img style="width:100%;" src="https://www.aileensoul.com/assets/img/mail/new-4.jpg">
+											<img style="width:100%;" src="<?php echo base_url(); ?>/assets/img/mail/new-4.jpg">
 											
 											<p style="line-height:1.5; padding-top:10px; text-align:center;">Search, connect and grow your network by keeping your profile up to date so others can find you easily.</p>
 										</td>
@@ -108,7 +108,7 @@
 						</tr>
 						<tr>
 							<td style="padding-top:30px; text-align:center;">
-								<a href="#" class="btn">Get Started Now</a>
+								<a href="<?php echo base_url(); ?>" class="btn">Get Started Now</a>
 							</td>
 						</tr>
 						<tr>
@@ -119,16 +119,16 @@
 						</tr>
 						<tr>
 							<td style="padding-top:25px; text-align:center; padding-bottom:15px;">
-								<a href="#" style="margin:0 15px;"><img src="https://www.aileensoul.com/assets/img/mail/m-fb.png"></a>
-								<a href="#" style="margin:0 15px;"><img src="https://www.aileensoul.com/assets/img/mail/m-twt.png"></a>
-								<a href="#" style="margin:0 15px;"><img src="https://www.aileensoul.com/assets/img/mail/m-in.png"></a>
+								<a href="https://www.facebook.com/aileensouldotcom?utm_source=email&utm_medium=email&utm_campaign=welcome_fb" style="margin:0 15px;"><img src="<?php echo base_url(); ?>assets/img/mail/m-fb.png"></a>
+								<a href="https://twitter.com/aileen_soul?utm_source=email&utm_medium=email&utm_campaign=welcome_twitter" style="margin:0 15px;"><img src="<?php echo base_url(); ?>assets/img/mail/m-twt.png"></a>
+								<a href="https://www.linkedin.com/company/aileensoul/?utm_source=email&utm_medium=email&utm_campaign=welcome_linkedin" style="margin:0 15px;"><img src="<?php echo base_url(); ?>assets/img/mail/m-in.png"></a>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align:center; padding-bottom:15px; font-size:12px;">
-								<a href="#" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Terms & Conditions</a>
-								<a href="#" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Privacy Policy</a>
-								<a href="#" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Feedback</a>
+								<a href="<?php echo base_url(); ?>terms-and-condition?utm_source=email&utm_medium=email&utm_campaign=welcome_tc" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Terms & Conditions</a>
+								<a href="<?php echo base_url(); ?>privacy-policy?utm_source=email&utm_medium=email&utm_campaign=welcome_privacy" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Privacy Policy</a>
+								<a href="<?php echo base_url(); ?>feedback?utm_source=email&utm_medium=email&utm_campaign=welcomefeedback" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Feedback</a>
 							</td>
 						</tr>
 						<tr>
@@ -138,7 +138,7 @@
 						</tr>
 						<tr>
 							<td style="text-align:center; padding-bottom:15px; font-size:12px;">
-								<p>This email was sent with the intention to give you timely updates. If you don't want to receive any further insiders information, you can <a href="#" style="color:#5c5c5c;"> unsubscribe.</p>
+								<p>This email was sent with the intention to give you timely updates. If you don't want to receive any further insiders information, you can <a href="<?php echo $unsubscribe_link; ?>?utm_source=email&utm_medium=email&utm_campaign=welcome_unsubscribe" style="color:#5c5c5c;">  unsubscribe.</p>
 							</td>
 						</tr>
 						

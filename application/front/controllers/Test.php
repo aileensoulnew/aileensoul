@@ -46,6 +46,29 @@ class Test extends MY_Controller {
         }
         
     }
+    public function newlaunch()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $join_str[0]['table'] = 'user';
+        $join_str[0]['join_table_id'] = 'user.user_id';
+        $join_str[0]['from_table_id'] = 'user_login.user_id';
+        $join_str[0]['join_type'] = '';
+
+        $contition_array = array('user_login.status' => '1','user_login.is_delete' => '0');
+        $userData = $this->common->select_data_by_condition('user_login', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $subject = "Introducing Aileensoul New Version 2.0";
+        foreach ($userData as $key => $value) {
+            $this->data['first_name'] = $value['first_name'];
+            $this->data['unsubscribe_link'] = base_url()."unsubscribe/".md5($value['encrypt_key'])."/".md5($value['user_slug'])."/".md5($value['user_id']);
+            $email_html = $this->load->view('email_template/new_launch',$this->data,TRUE);
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $value['email']);            
+            var_dump($send_email);
+            echo "<br>".$key;
+        }
+    }
 
   
 }
