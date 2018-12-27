@@ -22,7 +22,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     <head>
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
-        <title>Find best career opportunities in Business, Job Search, Freelancing, and Art | Aileensoul</title>
+        <title>Find best career opportunities in Business, Job Search, Freelancing, and Art<?php echo TITLEPOSTFIX; ?></title>
         <meta name="description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Aileensoul has built a collabrative platfrom for each industry. Join now! It's Free.">
         <meta property="og:title" content="Find best career opportunities in Business, Job Search, Freelancing, and Art | Aileensoul" />
         <meta property="og:description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Aileensoul has built a collabrative platfrom for each industry. Join now! It's Free."/>
@@ -135,7 +135,12 @@ header("Pragma: no-cache"); // HTTP/1.0
                         <div class="">
                             <div class="col-md-7 col-sm-6">
                                 <div class="top-middle">
-                                    <div class="text-effect"><p>We provide platform & opportunities to</p><p>every person in the world to make their career.</p></div>
+                                    <div class="text-effect">
+                                        <h1>
+                                        <p>We provide platform & opportunities to</p>
+                                        <p>every person in the world to make their career.</p>
+                                        </h1>
+                                    </div>
                                 </div>
                                 <div class="bottom-middle">
                                     <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -341,7 +346,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <div class="right-main-inner">
                                     <div class="">
                                         <div class="title">
-                                            <h1 class="tlh2">Welcome to Aileensoul</h1>
+                                            <h3 class="tlh2">Welcome to Aileensoul</h3>
                                         </div>
 
                                         <form role="form" name="login_form_main" id="login_form_main" method="post">
