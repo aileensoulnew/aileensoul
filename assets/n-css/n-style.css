@@ -1768,6 +1768,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .all-detail-box{border:1px solid #d2d2d2; border-top:0; width:100%; float:left; min-height:500px;}
 .list-box-custom .nav-tabs > li > a{color:#5c5c5c; font-size:16px;}
 .list-box-custom .nav-tabs>li.active>a, .list-box-custom .nav-tabs>li.active>a:focus, .list-box-custom .nav-tabs>li.active>a:hover {color:#1b8ab9;}
+.list-box-custom .nav-tabs>li.active>a h1{font-size:16px; line-height:1.4;}
 .jobs-listing, .art-bus-cus {width:100%; float:left;}
 .all-jobs-list .jobs-listing h4{font-size:18px; padding-bottom:5px; border-bottom:1px solid #d2d2d2; color:#5c5c5c;}
 .all-jobs-list .jobs-listing h5{font-size:16px; text-transform:capitalize; color:#7b7b7b; font-weight:bold;}
