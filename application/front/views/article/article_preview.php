@@ -10,11 +10,11 @@ if($userid_login == "")
 }
 if($article_data['article_meta_title'] != "")
 {
-	$meta_title = $article_data['article_meta_title'];
+	$meta_title = $article_data['article_meta_title'].TITLEPOSTFIX;
 }
 else
 {
-	$meta_title = ucwords($article_data['article_title'])." by ".ucwords($user_data['first_name']." ".$user_data['last_name'])." | Aileensoul";
+	$meta_title = ucwords($article_data['article_title'])." by ".ucwords($user_data['first_name']." ".$user_data['last_name']).TITLEPOSTFIX;
 } ?>
 <html lang="en">
     <head>
@@ -113,7 +113,7 @@ else
 				<!-- article-box -->
 				<div class="article-preview">
 					<div class="article-title">
-						<h2><?php echo ucwords($article_data['article_title']); ?></h2>
+						<h1><?php echo ucwords($article_data['article_title']); ?></h1>
 					</div>
 					<p class="pb10">
 						<span class="cat-name-cus">
