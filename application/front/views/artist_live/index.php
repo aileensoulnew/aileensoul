@@ -244,7 +244,10 @@
                 <?php echo $login_footer; ?>
             </div>
         </div>
-        <?php //$this->load->view('mobile_side_slide'); ?>
+        <?php if($this->session->userdata('aileenuser') == ""){
+            $this->load->view('mobile_side_slide');
+        }
+        ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
