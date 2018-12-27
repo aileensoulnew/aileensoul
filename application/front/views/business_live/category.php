@@ -64,7 +64,9 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active">
                                             <a href="javascript:void(0);">
-                                                <span class="hidden-xs">Business by </span> Categories
+                                                <h1>
+                                                    <span class="hidden-xs">Business by </span> Categories
+                                                </h1>
                                             </a>
                                         </li>
                                         <li>

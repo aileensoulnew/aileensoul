@@ -256,7 +256,7 @@ class Business_profile_live extends MY_Controller {
         $statename = $this->db->get_where('states', array('state_id' => $business_data[0]['state']))->row()->state_name;
         $countryname = $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
 
-        $this->data['title'] = ucwords($company_name)." ".($cityname != "" ? $cityname."," : "")." ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "")." | ".$industry_name;
+        $this->data['title'] = ucwords($company_name)." ".($cityname != "" ? $cityname."," : "")." ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "")." - ".$industry_name.TITLEPOSTFIX;
         $this->data['metadesc'] = ucwords($company_name)." is ".$industry_name." company based in ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "").". To know more about it's contact details and services, Visit Aileensoul website.";
         if (count($business_data) == 0) {
             // $this->load->view('business_profile/notavalible', $this->data);

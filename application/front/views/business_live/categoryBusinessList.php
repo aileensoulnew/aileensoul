@@ -62,26 +62,26 @@
 							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="page-title">
-                            <h3>Search Result for: 
+                            <h1 class="cat-title">
                                 <?php
                                 if($category_txt != "" && $location_txt != "")
                                 {
-                                    echo $search_txt = $category_txt." Business in ".$location_txt; 
+                                    echo $search_txt = $category_txt." Companies in ".$location_txt; 
                                     $item3_url = base_url()."business";
                                     $item3_txt = "All Business";
                                 }
                                 elseif($location_txt != "")
                                 {
-                                    echo "Business in ".$search_txt = $location_txt;
+                                    echo "Companies in ".$search_txt = $location_txt;
                                     $item3_url = base_url()."business-by-location";
                                     $item3_txt = "Business by Location";
                                 }
                                 elseif ($category_txt != "") {
                                     $search_txt = $category_txt;
-                                    echo $category_txt." Business";
+                                    echo $category_txt." Companies";
                                     $item3_url = base_url()."business-by-categories";
                                     $item3_txt = "Business by Category";
-                                } ?></h3>
+                                } ?></h1>
                         </div>
                         <?php 
                         if(isset($businessList) && !empty($businessList)):

@@ -74,7 +74,7 @@
                                         </li> 
                                         <li class="active">
                                             <a href="javascript:void(0);">
-                                               Businesses
+                                               <h1>Businesses</h1>
                                             </a>
                                         </li>
                                     </ul>

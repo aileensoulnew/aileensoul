@@ -20,7 +20,15 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
 				<div class="search-bnr-text">
-					<h1>Find the business that best suits your requirement</h1>
+					<?php if($this->uri->uri_string() == "business-search"){
+                    ?>   
+                    <h1>Find the business that best suits your requirement</h1>
+                    <?php }
+                    else{
+                    ?>   
+                    <h2 class="bnr-title">Find the business that best suits your requirement</h2>
+                    <?php
+                    } ?>					
 				</div>
 				<div class="search-box">
 					<form onsubmit="return searchSubmit();" method="post" action="javascript:void(0);">

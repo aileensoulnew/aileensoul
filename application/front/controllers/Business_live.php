@@ -57,7 +57,7 @@ class Business_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Grow Business Network and Get Your Business Listed | Aileensoul";
+        $this->data['title'] = "Grow Business Network and Get Your Business Listed".TITLEPOSTFIX;
         $this->data['metadesc'] = "Search for Real Estate, Fashion, Home appliance, and many more businesses at your near by locations from Aileensoul. Also, you can List your business Now. It's Free.";
         $this->data['business_profile_set'] = $this->business_profile_set;
         $limit = 8;
@@ -79,7 +79,7 @@ class Business_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         
-        $this->data['title'] = "Search Top Businesses by Category | Aileensoul";
+        $this->data['title'] = "Search Top Businesses by Category".TITLEPOSTFIX;
         $this->data['metadesc'] = "Get details of various businesses from different field like IT sector, Automobile, Real Estate, Clothing, Beverages, and so on."; 
 
         $this->data['business_profile_set'] = $this->business_profile_set;
@@ -150,12 +150,12 @@ class Business_live extends MY_Controller {
 
         if($sertype == 1)
         {
-            $this->data['title'] = $tmCat." Business in ".$tmLoc."| Aileensoul";
+            $this->data['title'] = $tmCat." Business in ".$tmLoc.TITLEPOSTFIX;
             $this->data['metadesc'] = $tmCat." Business: Find and get the contact and location details of various ".$tmCat." Business at ".$tmLoc." on Aileensoul. Visit to know more.";
         }
         else if($sertype == 2)
         {
-            $this->data['title'] = $tmCat." Business | Aileensoul";
+            $this->data['title'] = $tmCat." Business".TITLEPOSTFIX;
             $this->data['metadesc'] = "Looking for ".$tmCat."? Find and get the contact details of various ".$tmCat." Business at your near by location on Aileensoul. Visit to know more.";
         }        
         
@@ -361,7 +361,7 @@ class Business_live extends MY_Controller {
         $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->data['businessLocation'] = $this->business_model->businessAllLocation($page,$limit)['bus_loc'];
         $this->data['links'] = $this->pagination->create_links();
-        $this->data['title'] = "Search Top Businesses by Location | Aileensoul";
+        $this->data['title'] = "Search Top Businesses by Location".TITLEPOSTFIX;
         $this->data['metadesc'] = "Find and get details of various business and services nearby your location on Aileensoul.com"; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/location', $this->data);
@@ -385,7 +385,7 @@ class Business_live extends MY_Controller {
         $this->data['location_txt'] = $location_txt = $locationdata['city_name'];
 
         //$this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
-        $this->data['title'] = "Businesses in ".$location_txt.": Get Details of Top Business | Aileensoul";
+        $this->data['title'] = "Businesses in ".$location_txt.": Get Details of Top Business".TITLEPOSTFIX;
         $this->data['metadesc'] = "View address and contact information of business established in ".$location_txt.". Register to connect and know more about business."; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->data['business_profile_set'] = $this->business_profile_set;

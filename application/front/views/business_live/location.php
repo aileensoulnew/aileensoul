@@ -69,7 +69,7 @@
                                         </li>
                                         <li class="active">
                                             <a href="javascript:void(0);">
-                                                <span class="hidden-xs">Business by</span> Location
+                                                <h1><span class="hidden-xs">Business by</span> Location</h1>
                                             </a>
                                         </li> 
                                         <li>
