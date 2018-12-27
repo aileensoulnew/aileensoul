@@ -10,18 +10,11 @@
         <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <?php
-        if (IS_JOB_CSS_MINIFY == '0') {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
-        <?php } else { ?>
-
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
-        <?php } ?>
+        
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
+        
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver='.time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
@@ -84,43 +77,7 @@
                     <div class="left-part">
                         <?php echo $fa_leftbar; ?>
 						<?php $this->load->view('right_add_box'); ?>
-						<?php echo $left_footer_list_view; ?>
-                        <!-- <div class="custom_footer_left fw">
-                            <div class="">
-                                <ul>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> About Us 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Contact Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Blogs 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
+						<?php echo $left_footer_list_view; ?>                       
                     </div>
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
 						<div class="tab-add">
@@ -129,7 +86,17 @@
                         <!--<div class="common-form">-->
                         <!--</div>-->
                         <div class="page-title">
-                            <h3>Recommended Projects</h3>
+                            <h1 class="search-title">Remote 
+                            <?php
+                            if(isset($is_skill) && !empty($is_skill))
+                            {
+                                echo $is_skill['skill'];
+                            }
+                            elseif(isset($is_field) && !empty($is_field))
+                            {
+                                echo $is_field['category_name'];
+                            }?> Jobs
+                            </h1>
                         </div>
                         <?php if(isset($searchFA) && empty($searchFA) && $page == 0): ?>
                         <div class="user_no_post_avl ng-scope">
@@ -311,21 +278,12 @@
         <!-- Model Popup Close -->
 
 
-<?php echo $footer; 
-if($userid_login == ""){?>
-    <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-    <?php }
-    if (IS_JOB_JS_MINIFY == '0') {
-        ?>
-        <!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
-        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
-<?php } else { ?>
-
-
-        <!-- <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> -->
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
-
-<?php } ?>
+    <?php echo $footer; 
+    if($userid_login == ""){?>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+    <?php } ?>
+    
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>

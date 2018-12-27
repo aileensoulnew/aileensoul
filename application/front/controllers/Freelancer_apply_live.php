@@ -206,6 +206,7 @@ class Freelancer_apply_live extends MY_Controller {
 
         $this->data['is_skill'] = $fa_skills = $this->freelancer_apply_model->is_fa_skills($keyword);
         $this->data['is_field'] = $fa_fields = $this->freelancer_apply_model->is_fa_field($keyword);
+        // print_r($this->data['is_skill']);exit();
         $search_location_arr = array();
 
         $limit = 8;
@@ -253,7 +254,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
 
-        $this->data['title'] = "Freelance ".str_replace("-"," ",ucwords($search))." Jobs | Aileensoul";
+        $this->data['title'] = "Freelance ".str_replace("-"," ",ucwords($search))." Jobs".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous ".str_replace("-"," ",ucwords($search))." Freelance Jobs on Aileensoul. Earn a little extra income plus enhance your skills. Apply Now!";
 
 
