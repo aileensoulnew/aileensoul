@@ -55,7 +55,7 @@ class Userprofile extends MY_Controller {
         {
             $desg = $this->data['is_userSlugStudentInfo']['Degree'];
         }
-        $this->data['title'] = "About ".ucwords($fullname)." | Aileensoul";
+        $this->data['title'] = "About ".ucwords($fullname).TITLEPOSTFIX;
         $this->data['metadesc'] = "Connect with ".ucwords($fullname).", ".ucwords($desg)." and know more about him only at Aileensoul.com. Join Now!";
 
         $this->data['professionData'] = $this->user_model->getUserProfessionData($userid,"*");        

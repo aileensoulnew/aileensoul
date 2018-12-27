@@ -126,7 +126,7 @@
                 </div>
                 <!--PROFILE PIC CODE END -->
 
-                <h3><?php echo ucfirst($userdata['first_name']) . ' ' . ucfirst($userdata['last_name']); ?></h3>
+                <h1><?php echo ucfirst($userdata['first_name']) . ' ' . ucfirst($userdata['last_name']); ?></h1>
                 <?php if (count($is_userSlugBasicInfo) != 0) { ?>	
                     <p id="hpd"><?php echo $is_userSlugBasicInfo['Designation']; ?></p>
                 <?php } else if (count($is_userSlugStudentInfo) != 0) { ?>
