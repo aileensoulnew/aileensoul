@@ -904,6 +904,8 @@ border-bottom: 0px;}
 
 /***  all job page  ***/ 
 .page-title h3{padding:10px; margin:0 0 10px; text-align:center; border:1px solid #d2d2d2; border-radius:4px;}
+.page-title h1.cat-title{padding:10px; margin:0 0 10px; text-align:center; border:1px solid #d2d2d2; border-radius:4px; font-size: 23px; font-weight: 500; color: #5c5c5c;}
+
 .page-title h1.search-title{padding:10px; margin:0 0 10px; text-align:center; border:1px solid #d2d2d2; border-radius:4px; font-size:24px;}
 
 .all-job-box{margin:0 0 10px; border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left;}
@@ -3567,6 +3569,7 @@ color: #5c5c5c !important;}
 	#filter .left-search-box .accordion-group h3 a{color:#1b8ab9; font-size:16px; line-height:1;}
 	.mob-filter{display:block;}
 	.list-box-custom .nav-tabs > li > a{font-size:15px; padding:5px;}
+	.list-box-custom .nav-tabs > li > a h1{font-size:15px;}
 	.mian_middle_post_box{float:none;}
 	.bus-by-cus .list-box-custom .nav-tabs > li > a{font-size:16px; padding:8px;}
 	
@@ -3926,7 +3929,7 @@ color: #5c5c5c !important;}
 	.pop-content-cus h2{font-size:22px;}
 	.job-top-detail{width:86%;}
 	.job-top-detail h5{max-width:100%;}
-	.list-box-custom .nav-tabs > li > a{padding:8px;}
+	.list-box-custom .nav-tabs > li > a{padding:7px;}
 	.all-detail-box{border-left:0; border-right:0;}
 	.all-detail-box .tab-pane ul li{padding:0;}
 	.all-detail-box .tab-pane ul{padding:0;}
@@ -4615,6 +4618,7 @@ color: #5c5c5c !important;}
 	.por_content ul li .pro-text .count{width: 14px;}
 	.por_content ul li img{margin-right: 3px; float: left; width: 40px; height: 40px;}
 	.list-box-custom .nav-tabs > li > a{font-size:13px;}
+	.list-box-custom .nav-tabs > li > a h1{font-size:13px;}
 	.all-detail-box .tab-pane ul li{font-size:13px;}
 	.custom-user-btn a{width:75px;}
 	.post-img{width:40px; height:40px;}
