@@ -69,7 +69,7 @@ class Recruiter_live extends MY_Controller {
         }
         $this->data['recruiter_related_list'] = $recruiter_related_list = $this->recruiter_model->recruiter_related_blog_list();
         $this->data['search_banner'] = $this->load->view('recruiter_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Hire, Post Job & Search Employees - Recruitment Solution at Aileensoul";
+        $this->data['title'] = "Hire, Post Job & Search Employees - Recruitment Solution at Aileensoul".TITLEPOSTFIX;
         $this->data['metadesc'] = "Finding right candidate seems difficult, right ? Don't worry! Aileensoul offers you a employment platfrom for Job listing, Find and Connecting with right person. Join Now! Post you Job for Free.";
         if($userid != ""){            
             $this->load->view('recruiter_live/index', $this->data);

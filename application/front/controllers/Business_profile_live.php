@@ -11499,7 +11499,7 @@ Your browser does not support the audio tag.
                 redirect(base_url());
             }
         }
-        $this->data['title'] = "Signup - List you Business with Aileensoul";
+        $this->data['title'] = "Signup - List you Business with Aileensoul".TITLEPOSTFIX;
         $this->data['metadesc'] = "Grow your business network by listing your business at Aileensoul";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        

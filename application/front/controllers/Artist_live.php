@@ -2099,7 +2099,7 @@ class Artist_live extends MY_Controller {
                 redirect(base_url());
             }
         }
-        $this->data['title'] = "Signup - Show Your Artwork with Aileensoul";
+        $this->data['title'] = "Signup - Show Your Artwork with Aileensoul".TITLEPOSTFIX;
         $this->data['metadesc'] = "You are just one step away from showcasing your talent to the whole world. Sign up now! And amaze the world with your art. ";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        

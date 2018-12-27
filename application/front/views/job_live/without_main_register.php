@@ -3,7 +3,7 @@
     <head>
         <!-- <title ng-bind="title"></title> -->
         <!-- <meta name="robots" content="noindex, nofollow"> -->
-        <title>Job Search: Find best local jobs and employment at near by location</title>
+        <title>Job Search: Find best local jobs and employment at near by location<?php echo TITLEPOSTFIX; ?></title>
         <meta name="description" content="Find the current job opportunities and options in any industry in your locale that best suits your skill and connect with recruiter. Apply Today! Upload your Resume Now." />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

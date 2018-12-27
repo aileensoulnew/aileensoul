@@ -46,7 +46,7 @@ class Job_live extends MY_Controller {
         // $this->data['job_profile_link'] =  $this->job_profile_link;
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Job Profile | Aileensoul";
+        $this->data['title'] = "Job Profile".TITLEPOSTFIX;
         //$this->load->view('job_live/index', $this->data);
         /*if($this->job_profile_set == 1)
             $this->load->view('job_live/index', $this->data);
@@ -347,7 +347,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Jobs by Location - Find Available Local Jobs in Your City";
+        $this->data['title'] = "Search Full Time Jobs by Location - Find Available Local Jobs in Your City".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous Jobs near by your location on Aileensoul. Choose your preferable city and find the latest jobs. Get your dream job now!"; 
 
         $limit = 15;
@@ -412,7 +412,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Jobs by Skills - Browse IT/Non-IT Jobs";
+        $this->data['title'] = "Search Full Time Jobs by Skills - Browse IT/Non-IT Jobs".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous Jobs by your skills on Aileensoul. Choose preferable IT and Non-IT skills and find the latest jobs. Register and Get your dream job now!"; 
 
         $limit = 15;
@@ -477,7 +477,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Jobs by Designation : Find Jobs by Your Job Title";
+        $this->data['title'] = "Search Full Time Jobs by Designation : Find Jobs by Your Job Title".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous Jobs by your Designation on Aileensoul.com. Register and Grab the Opportunity Now! It's Free platfrom."; 
 
         $limit = 15;
@@ -542,7 +542,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Jobs by Companies | Top Companies Hiring at Aileensoul";
+        $this->data['title'] = "Search Full Time Jobs by Companies | Top Companies Hiring at Aileensoul".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous Jobs by company on Aileensoul. Choose your preferable company and find the latest jobs openings. Join Aileensoul and Get your dream job now!"; 
 
         $limit = 15;
@@ -607,7 +607,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Jobs by Categories - Browse HR, IT, Banking, Marketing Jobs";
+        $this->data['title'] = "Search Full Time Jobs by Categories - Browse HR, IT, Banking, Marketing Jobs".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous Jobs by categories like HR, Digital Marketing, Web Designing, Graphic Designing, Banking, and many more on Aileensoul. Join Aileensoul and Grab the opportunity now!"; 
 
         $limit = 15;
@@ -672,7 +672,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Location-Wise Jobs by Skills or Designation or Field  ";
+        $this->data['title'] = "Search Full Time Location-Wise Jobs by Skills or Designation or Field ".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore numerous top Jobs according to your skills, or designation, or field by Location on Aileensoul.com. Register for Free and Apply on your dream job now!"; 
 
         
