@@ -76,7 +76,7 @@
                         <div class="">
                             <div class="">
                                 <ul class="nav nav-tabs">
-									<li class="active"><a href="javascript:void(0);"><span class="hidden-xs">Freelance Jobs by</span> Fields</a></li>
+									<li class="active"><a href="javascript:void(0);"><h1><span class="hidden-xs">Freelance Jobs by</span> Fields</h1></a></li>
                                     <li><a href="<?php echo base_url(); ?>freelance-jobs-by-categories"><span class="hidden-xs">Freelance Job by</span> Categories</a></li>
                                    
                                 </ul>

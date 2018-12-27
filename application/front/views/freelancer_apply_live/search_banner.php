@@ -79,8 +79,16 @@
 		<div class="bnr-cus-sec">
         <div class="row">
             <div class="col-lg-6 col-md-7">
-                <div class="search-bnr-text">
+                <div class="search-bnr-text">                    
+                    <?php if($this->uri->uri_string() == "freelance-jobs"){
+                    ?>   
                     <h1>Work from Anywhere at Any Time</h1>
+                    <?php }
+                    else{
+                    ?>   
+                    <h2 class="bnr-title">Work from Anywhere at Any Time</h2>
+                    <?php
+                    } ?>
                     <p>Get the work you love</p>
                 </div>
                 <div class="search-box">
