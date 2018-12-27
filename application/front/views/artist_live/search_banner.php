@@ -21,8 +21,16 @@
 		<div class="bnr-cus-sec">
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
-				<div class="search-bnr-text">
-					<h1>Search and Connect with the Best Talented Artist from All over the World</h1>
+				<div class="search-bnr-text">					
+					<?php if($this->uri->uri_string() == "find-artist"){
+                    ?>   
+                    <h1>Search and Connect with the Best Talented Artist from All over the World</h1>
+                    <?php }
+                    else{
+                    ?>   
+                    <h2 class="bnr-title">Search and Connect with the Best Talented Artist from All over the World</h2>
+                    <?php
+                    } ?>
 				</div>
 				<div class="search-box">
 					<form onsubmit="return searchSubmitNew();" method="post" name="artist_search" action="javascript:void(0);">

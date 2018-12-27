@@ -63,7 +63,7 @@
                     </div>
                     <div class="middle-part">
                         <div class="page-title">
-                            <h3>Search Result for: <?php
+                            <h1 class="cat-title"><?php
                                 if($category_txt != "" && $location_txt != "")
                                 {
                                     echo $search_txt = $category_txt." in ".$location_txt;
@@ -80,7 +80,7 @@
                                     echo $search_txt = $category_txt;
                                     $item3_url = base_url()."artist/category";
                                     $item3_txt = "Artist by Category";
-                                } ?></h3>
+                                } ?></h1>
                         </div>
 						<div class="tab-add">
 							<?php $this->load->view('banner_add'); ?>

@@ -63,7 +63,7 @@
                                     <ul class="nav nav-tabs">
                                         <li><a href="<?php echo base_url(); ?>artist/category"><span class="hidden-xs">Artist by</span> Categories</a></li>
                                         <li><a href="<?php echo base_url(); ?>artist/location"><span class="hidden-xs">Artist by</span> Location</a></li>
-                                        <li class="active"><a href="javascript:void(0);">Artist</a></li>
+                                        <li class="active"><a href="javascript:void(0);"><h1>Artist</h1></a></li>
                                     </ul>
                                 </div>
 

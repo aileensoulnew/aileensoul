@@ -108,9 +108,9 @@ if($session_user_id != "")
 				<div class="business-profile-right">
 					<div class="bui-menu-profile">
 						<div class="profile-left">
-							<h4 class="profile-head-text"><a href="javascript:void(0);" title="<?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>" onclick="login_profile();">
+							<h1 class="profile-head-text"><a href="javascript:void(0);" title="<?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>" onclick="login_profile();">
 							 <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?></a>
-						 </h4>
+						 </h1>
 						 <h4 class="profile-head-text_dg">
 							<?php
 							 if ($artisticdata[0]['designation'] == '') {

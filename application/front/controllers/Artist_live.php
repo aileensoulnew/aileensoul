@@ -48,7 +48,7 @@ class Artist_live extends MY_Controller {
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
-        $this->data['title'] = "Search Creative Artist in any Profession | Aileensoul";
+        $this->data['title'] = "Search Creative Artist in any Profession".TITLEPOSTFIX;
         $this->data['metadesc'] = "Find and Connect with great talents from photographers, designers, models, musicians, actor, dancer to writers from all over the world only at Aileensoul. ";
         $limit = 8;
         $this->data['artistCategory'] = $this->artistic_model->artistCategory($limit);
@@ -174,12 +174,12 @@ class Artist_live extends MY_Controller {
             {
                 $tmCat = "Artist";
             }
-            $this->data['title'] = "Find and Connect with ".$tmCat." in ".$tmLoc;
+            $this->data['title'] = "Find and Connect with ".$tmCat." in ".$tmLoc.TITLEPOSTFIX;
             $this->data['metadesc'] = "Looking for great skilful ".$tmCat." in ".$tmLoc."? Connect with them on Aileensoul. Search and explore their portfolio and work details. Join Now to create something artistic!";
         }
         else if($sertype == 2)
         {
-            $this->data['title'] = "Search ".$tmCat." and their work details |Aileensoul";
+            $this->data['title'] = "Search ".$tmCat." and their work details".TITLEPOSTFIX;
             $this->data['metadesc'] = "Looking for great skilful ".$tmCat."? Connect with them on Aileensoul. Search and explore their portfolio and work details. ";
         }
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
@@ -537,7 +537,7 @@ class Artist_live extends MY_Controller {
                 $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $this->data['artisticdata'][0]['other_skill']))->row()->other_category;
             }
             
-            $this->data['title'] = "Artist ".$artistic_name." ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." From ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname;
+            $this->data['title'] = "Artist ".$artistic_name." ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." From ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname.TITLEPOSTFIX;
             
             $this->data['metadesc'] = "Artist ".$artistic_name." from ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname." is a ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." ".($this->data['artisticdata'][0]['art_yourart'] != '' ? 'specailist in '.$this->data['artisticdata'][0]['art_yourart'] : '').". Visit Aileensoul to view full ".$artistic_name." portfolio.";        
 
@@ -1886,7 +1886,7 @@ class Artist_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         
-        $this->data['title'] = "Find Artist by Location and Connect with Them | Aileensoul";
+        $this->data['title'] = "Find Artist by Location and Connect with Them".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore top location-wise various artist like painter, writer, photographer, dancer, model, and so on. Register free to connect with them."; 
 
         $this->data['ismainregister'] = false;
