@@ -238,7 +238,7 @@ class Registration extends CI_Controller {
                         </tr>
                     </table>';
 
-            $subject = "Welcome to aileensoul";
+            $subject = ucwords($fname).", Verify your Aileensoul Account";
 
             $mail = $this->email_model->send_email($subject = $subject, $templ = $msg, $to_email = $toemail);
             //$mail = $this->email_model->do_email($msg, $subject, $toemail, $from);

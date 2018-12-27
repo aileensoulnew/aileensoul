@@ -49,7 +49,7 @@
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="padding-top:30px;">
-								<p>Hi First Name,</p>
+								<p>Hi <?php echo ucwords($first_name); ?>,</p>
 								<p style="padding-top:20px; line-height:1.5;">We get it; you are looking to hire some talented freelancer for work. Right?</p>
 								<p style="padding-top:20px; line-height:1.5;">Here are quick two steps to get started:</p>
 							</td>

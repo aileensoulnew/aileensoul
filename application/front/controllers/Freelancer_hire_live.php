@@ -3320,10 +3320,11 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
                 $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                $this->userdata['first_name'] = $first_name;
                 
                 $email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);                
 
-                $subject = $first_name.", Get the Work Done by Skilled Freelancer";
+                $subject = ucwords($first_name).", Get the Work Done by Skilled Freelancer";
 
                 $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
                 //Send Promotional Mail End
@@ -3417,9 +3418,14 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
 			//Send Promotional Mail Start
 			$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+			
 			$this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+			$this->userdata['first_name'] = $first_name;
+
 			$email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);
-			$subject = $first_name.", Get the Work Done by Skilled Freelancer";
+			$subject = ucwords($first_name).", Get the Work Done by Skilled Freelancer";
+			exit();
+
 			$send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
 			//Send Promotional Mail End
 			$ret_arr = array("success"=>1);
@@ -3492,9 +3498,14 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
 			//Send Promotional Mail Start
 			$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+			
 			$this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+
+			$this->userdata['first_name'] = $comp_name;
+			
 			$email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);
-			$subject = $comp_name.", Get the Work Done by Skilled Freelancer";
+
+			$subject = ucwords($comp_name).", Get the Work Done by Skilled Freelancer";
 			$send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
 			//Send Promotional Mail End
 			$ret_arr = array("success"=>1);
