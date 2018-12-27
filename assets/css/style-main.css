@@ -320,6 +320,7 @@ header h2{
     line-height:1.5;
     margin:0
 }
+.top-middle .text-effect h1{font-size:30px; line-height:1.5;}
 .carousel-fade .carousel-caption h1,.carousel-fade .carousel-caption h3{
     font-family:Lato,sans-serif;
     font-weight:600;
@@ -346,7 +347,7 @@ header h2{
 .modal.login{
     width: 100%;
     border: none;
-    border-radius: none;
+    border-radius: 0px;
 }
 .modal.login .modal-content{
     padding: 0px;
@@ -2681,6 +2682,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .top-middle .text-effect{
         font-size:22px
     }
+	.top-middle .text-effect h1{font-size:22px;}
     .box-profile{
         margin:0 20px 20px
     }
@@ -2832,6 +2834,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .top-middle .text-effect{
         font-size:19px
     }
+	.top-middle .text-effect h1{font-size:19px;}
     .cover .middle-section .container{
         width:750px
     }
@@ -3139,6 +3142,8 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .carousel-fade .carousel-caption h3,.top-middle .text-effect{
         font-size:24px
     }
+	
+	.top-middle .text-effect h1{font-size:24px;}
     .carousel-fade .carousel-caption p{
         font-size:18px
     }

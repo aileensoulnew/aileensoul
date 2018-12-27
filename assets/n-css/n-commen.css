@@ -1132,6 +1132,7 @@ a:focus{outline:none;}
 	header .logo svg{margin-top:0px;}
 	.custom-landscape header .logo svg{margin-top:5px;}
 	.logo-size{font-size:28px;}
+	.detail-job-no-login .logo-size{font-size:28px;}
 	header .logo svg{width:140px;}
 	.sub-header{top:48px;}
 	.sub-menu li.dropdown.open::before{width:14px; height:7px; top:25px;}
@@ -1158,6 +1159,10 @@ a:focus{outline:none;}
 	.mobile-header header h2{padding-right:0; width:8%;}
 	.right-header ul{width:8%;}
 	.right-header ul li{float:right;}
+	.detail-job-no-login header{padding:5px 0;}
+	.old-no-login header {padding:5px 0;}
+	.detail-job-no-login header .logo svg{margin-top:0;}
+	.old-no-login .logo-size{font-size:28px;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}

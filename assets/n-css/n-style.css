@@ -505,9 +505,9 @@ label.cameraButton input[accept*="camera"] {
 .profile-img:hover .upload-profile{display:block; color:#fff;}
 .user-photo-name{text-align:center; padding-bottom: 10px; position:relative;}
 .user-photo-name .profile-img img{width:168px; height:168px; border-radius:100%;}
-.user-photo-name h3{margin:5px 0 0; letter-spacing: 1px;}
-.user-photo-name h3 a{color:#5c5c5c;}
-.user-photo-name h3 a:focus{text-decoration:none;}
+.user-photo-name h1{margin:5px 0 0; letter-spacing: 1px; font-size:24px;}
+.user-photo-name h1 a{color:#5c5c5c;}
+.user-photo-name h1 a:focus{text-decoration:none;}
 .user-photo-name p{color:#6f6f6f; letter-spacing: 1px;}
 .user-btns{padding:0px 0 10px; text-align:center;}
 .user-btns a{width:170px;}
@@ -3697,6 +3697,7 @@ color: #5c5c5c !important;}
 	.no-timeline h2{font-size:35px;}
 	.new-article .right-part{width:100%; float:left; position:relative; margin:0; }
 	.new-article .custom-user-list{padding-right:0;}
+	.new-ld-page .mian_middle_post_box{left:0;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -3723,7 +3724,7 @@ color: #5c5c5c !important;}
 	.user-photo-name .profile-img{width:120px; height:120px; margin-top:-90px;}
 	.upload-profile{width:110px; height:110px; padding:20px 6px; font-size:14px;}
 	.upload-profile img{margin-bottom:2px;}
-	.user-photo-name h3{font-size:18px;}
+	.user-photo-name h1{font-size:18px;}
 	.user-photo-name p{font-size:14px;}
 	.add-banner h1{font-size:20px;}
 	.add-wi-us{position:relative;}
@@ -4278,7 +4279,7 @@ color: #5c5c5c !important;}
 	.main-banner{max-height:190px;}
 	.user-photo-name .profile-img{width:110px; height:110px; margin-top:-80px;}
 	.upload-profile{width:100px; height:100px; font-size:0; padding:15px 15px;}
-	.user-photo-name h3 a{font-size:20px;}
+	.user-photo-name h1 a{font-size:20px;}
 	.user-photo-name p{font-size:16px; word-wrap: break-word;}
 	.post-box .post-text{width:84%; padding-right:0; font-size:12px; letter-spacing:0.5px;}
 	.post-detail{width:80%;}
