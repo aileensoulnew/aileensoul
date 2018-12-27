@@ -9,7 +9,15 @@
             <div class="row">
                 <div class="col-lg-6 col-md-7" >
                     <div class="search-bnr-text">
+                        <?php if($this->uri->uri_string() == "job-search"){
+                        ?>   
                         <h1>Find the Right Job Opportunities</h1>
+                        <?php }
+                        else{
+                        ?>   
+                        <h2 class="bnr-title">Find the Right Job Opportunities</h2>
+                        <?php
+                        } ?>
                         <p>Because Dreams Matter </p>
                     </div>
                     <div class="search-box">

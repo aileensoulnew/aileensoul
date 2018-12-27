@@ -78,7 +78,7 @@
                                     <ul class="nav nav-tabs">
                                         <li><a href="<?php echo base_url(); ?>jobs-by-categories"><span class="hidden-xs">Jobs by</span> Categories</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-skills"><span class="hidden-xs">Jobs by</span> Skills</a></li>
-                                        <li class="active"><a href="javascript:void(0);"><span class="hidden-xs">Jobs by</span> Locations</a></li>
+                                        <li class="active"><a href="javascript:void(0);"><h1><span class="hidden-xs">Jobs by</span> Locations</h1></a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-companies"><span class="hidden-xs">Jobs by</span> Companies</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-designations"><span class="hidden-xs">Jobs by</span> Designations</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs">Jobs</a></li>

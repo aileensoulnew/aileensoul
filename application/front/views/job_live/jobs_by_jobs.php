@@ -81,7 +81,7 @@
                                         <li><a href="<?php echo base_url(); ?>jobs-by-location"><span class="hidden-xs">Jobs by</span> Locations</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-companies"><span class="hidden-xs">Jobs by</span> Companies</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-designations"><span class="hidden-xs">Jobs by</span> Designations</a></li>
-                                        <li class="active"><a href="javascript:void(0);">Jobs</a></li>
+                                        <li class="active"><a href="javascript:void(0);"><h1>Jobs</h1></a></li>
                                     </ul>
                                 </div>
                                 <div class="all-jobs-list">

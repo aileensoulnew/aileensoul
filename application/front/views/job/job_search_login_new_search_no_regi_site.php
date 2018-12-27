@@ -65,7 +65,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                             <div class="page-title">
-                                <h3>
+                                <h1 class="search-title">
 
                                     <?php
                                     if ($keyword == "" && $keyword1 == "") {
@@ -82,7 +82,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                         echo $keyword1;
                                     }*/
                                     ?>
-                                </h3>
+                                </h1>
 
                                 <div class="">
                                     <div class="job-contact-frnd ">
