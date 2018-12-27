@@ -904,6 +904,8 @@ border-bottom: 0px;}
 
 /***  all job page  ***/ 
 .page-title h3{padding:10px; margin:0 0 10px; text-align:center; border:1px solid #d2d2d2; border-radius:4px;}
+.page-title h1.search-title{padding:10px; margin:0 0 10px; text-align:center; border:1px solid #d2d2d2; border-radius:4px;}
+
 .all-job-box{margin:0 0 10px; border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left;}
 .all-job-top{padding:10px 15px; border-bottom:1px solid #d2d2d2; width:100%; float:left;}
 .all-job-top .post-img{width:60px; height:60px; float:left; border:none;}
@@ -1183,7 +1185,8 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-box input.btn1{display:inline-block; width:auto; height:auto;}
 .search-box .search-input input.btn1{width:120px; margin-right:0;}
 .search-bnr-text{padding:50px 0 40px; letter-spacing:1px;}
-.search-bnr-text h1{font-size:26px; color:#5c5c5c; line-height:1.5; letter-spacing:1px; }
+.search-bnr-text h1{font-size:26px; color:#5c5c5c; line-height:1.5; letter-spacing:1px;}
+.search-bnr-text h2.bnr-title{font-size:26px; color:#5c5c5c; line-height:1.5; letter-spacing:1px;}
 .work-timing{padding-left:0;}
 .work-timing li{list-style-type:none; float:left; padding:0 20px;}
 .work-timing li:first-child{padding-left:0;}
