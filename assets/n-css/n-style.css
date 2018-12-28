@@ -3339,7 +3339,7 @@ color: #5c5c5c !important;}
 .reg-form-cus .inner-form .login .title h1{background:inherit; -webkit-text-fill-color:inherit; color:#5c5c5c;}
 .reg-form-cus .inner-form .login .title p{background:inherit; -webkit-text-fill-color:inherit; color:#5c5c5c;}
 .reg-form-cus .inner-form .login form .btn3{border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c;}
-
+.custom-blog-css .blog-scroll-a h2{color:#fff; padding:0;}
 /***  end extra button css  ***/
 
 /***  media query  ***/
