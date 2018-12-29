@@ -246,7 +246,7 @@
                                         </div>
                                         <!-- Edit Post Opportunity End -->
                                         <div id="post-opp-detail-{{post.post_data.id}}">
-                                            <div class="post-title">
+                                            <div class="post-title opp-title-cus">
                                                 <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></h1></p>
                                             </div>
                                             <h5 class="post-title">

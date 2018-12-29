@@ -126,7 +126,7 @@ header('Expires: ' . $date);
                             </div>
                         </div>
                         <div class="row dis-box">
-                            <h2>How to Register With Aileensoul’s Job Profile?</h2>
+                            <h1>How to Register With Aileensoul’s Job Profile?</h1>
                             <div class="col-md-6 col-sm-12 pb20 pull-right cus-job-img">
                                 <img style="width:100%;" src="<?php echo base_url('assets/img/job2.jpg?ver=' . time()); ?>" alt="job-image">
                             </div>

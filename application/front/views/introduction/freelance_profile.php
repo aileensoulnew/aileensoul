@@ -136,7 +136,7 @@ header('Expires: ' . $date);
                             </div>
                         </div>
                         <div class="row dis-box">
-                            <h2>How to Register With Aileensoul’s Freelance Profile?</h2>
+                            <h1>How to Register With Aileensoul’s Freelance Profile?</h1>
                             <div class="col-md-6 col-sm-12 pb20 pull-right">
                                 <img style="width:100%;" src="<?php echo base_url('assets/img/fre2.jpg?ver=' . time()); ?>" alt="freelance-image">
                             </div>
