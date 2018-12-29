@@ -23,12 +23,15 @@ header("Pragma: no-cache"); // HTTP/1.0
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
-        <meta charset="utf-8">
-        <!-- <meta name="robots" content="noindex, nofollow"> -->
+        <meta charset="utf-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <?php
+        if($category_page == 1){ ?>
+            <meta name="robots" content="noindex, follow">
+        <?php
+        }
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
