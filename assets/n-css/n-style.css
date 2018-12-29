@@ -3342,12 +3342,13 @@ color: #5c5c5c !important;}
 .custom-blog-css .blog-scroll-a h2{color:#fff; padding:0;}
 .opp-title-cus{width:100%; float:left; padding-bottom:5px;}
 .opp-title-cus p{float:left; font-size:14px;}
-.opp-title-cus h1{float:left; padding-left:5px; font-size:14px; line-height:1.5;}
+.opp-title-cus h1{float:left; padding-left:5px; font-size:14px; line-height:1.6;}
 .que-title-cus{width:100%; float:left;}
 .que-title-cus b{float:left; font-size:14px;}
 .que-title-cus h1{float:left; font-size:14px; line-height:1.6;}
 .report.add-with-us h1{padding-bottom:0;}
 .report.add-with-us .con-detail{padding-bottom:50px;}
+.modal-content .title h3.tlh2{border-bottom:0px;}
 
 
 /***  media query  ***/
@@ -4605,6 +4606,7 @@ color: #5c5c5c !important;}
 	.no-timeline h2{font-size:22px;}
 	.no-timeline img{margin-right:0; margin-top:-10px;}
 	#add-menu .no-timeline{width:70%;}
+	.blog-page .blog-left-content h2{font-size:18px; line-height:1.5;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

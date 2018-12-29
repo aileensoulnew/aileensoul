@@ -2758,7 +2758,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .form-text .mob-none,.profile-box-1.bus:after,.profile-box-1.rec:after,.tablate-potrat-add{
         display:none
     }
-    .error{
+    .error{ 
         font-size:14px
     }
     .m-h-a{
