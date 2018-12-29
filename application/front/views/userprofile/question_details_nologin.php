@@ -566,43 +566,42 @@
             "@context": "http://schema.org",
             "@type": "QAPage",
             "name": "<?php echo $question_data['question']; ?>",
-            "description": "<?php echo $question_data['description']; ?>"
-        }
-        </script>
-
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Question",
-            "name": "<?php echo $question_data['question']; ?>",
-            "upvoteCount": "<?php echo ($question_data['post_like_count'] != "" ? $question_data['post_like_count'] : 0); ?>",
-            "text": "<?php echo $question_data['description']; ?>",
-            "dateCreated": "<?php echo date('Y-m-d', strtotime($question_data['created_date'])); ?>",
-            "author": {
-                "@type": "Person",
-                "name": "<?php echo ($question_data['is_anonymously'] == 1 ? "Anonymous" :ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name'])) ?>"
-            },
-            "answerCount": "<?php echo $question_data['post_comment_count']; ?>"
-         }
-        </script>
-        <?php
-        foreach ($question_data['post_comment_data'] as $key => $value) { ?>            
-            <script type="application/ld+json">
-            {
+            "mainEntity":{
                 "@context": "http://schema.org",
-                "@type": "Answer",
-                "upvoteCount": "<?php echo ($value['postCommentLikeCount'] != "" ? $value['postCommentLikeCount'] : 0); ?>",
-                "text": "<?php echo $value['comment']; ?>",
-                "dateCreated": "<?php echo date('Y-m-d', strtotime($value['created_date'])); ?>",
+                "@type": "Question",
+                "name": "<?php echo $question_data['question']; ?>",
+                "upvoteCount": "<?php echo ($question_data['post_like_count'] != "" ? $question_data['post_like_count'] : 0); ?>",
+                "text": "<?php echo $question_data['description']; ?>",
+                "dateCreated": "<?php echo date('Y-m-d', strtotime($question_data['created_date'])); ?>",
                 "author": {
                     "@type": "Person",
-                    "name": "<?php echo $value['username']; ?>"
-                }   
-             }
-            </script>
-        <?php
+                    "name": "<?php echo ($question_data['is_anonymously'] == 1 ? "Anonymous" :ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name'])) ?>"
+                },
+                "answerCount": "<?php echo $question_data['post_comment_count']; ?>",
+                "suggestedAnswer":[
+                <?php
+                foreach ($question_data['post_comment_data'] as $key => $value) { ?>
+                    {
+                        "@context": "http://schema.org",
+                        "@type": "Answer",
+                        "upvoteCount": "<?php echo ($value['postCommentLikeCount'] != "" ? $value['postCommentLikeCount'] : 0); ?>",
+                        "text": "<?php echo $value['comment']; ?>",
+                        "dateCreated": "<?php echo date('Y-m-d', strtotime($value['created_date'])); ?>",
+                        "author": {
+                            "@type": "Person",
+                            "name": "<?php echo $value['username']; ?>"
+                        }   
+                    }
+                <?php
+                    if($key < count($question_data['post_comment_data']) - 1)
+                    {
+                        echo ",";
+                    }
+                }
+                ?>
+                ]
+            }
         }
-        ?>
-
+        </script>
     </body>
 </html>
