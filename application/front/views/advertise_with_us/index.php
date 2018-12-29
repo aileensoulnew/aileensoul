@@ -90,9 +90,10 @@ header('Cache-Control: public, max-age=30');
 				
 				<div class="container">
 					<div class="row">
-						<h1 class="text-center">Promote Your Business With Aileensoul
-							<span class="con-detail">mail : <a href="mailto:info@aileensoul.com"><span class="pr15">info@aileensoul.com</span></a><br class="block-479"> call : <a href="tel:9879907399">+91 9879907399</a></span>
-						</h1>
+						<h1 class="text-center">Promote Your Business With Aileensoul</h1>
+                        <div>
+                            <span class="con-detail">mail : <a href="mailto:info@aileensoul.com"><span class="pr15">info@aileensoul.com</span></a><br class="block-479"> call : <a href="tel:9879907399">+91 9879907399</a></span>						
+                        </div>
 						
 					</div>
 				</div>

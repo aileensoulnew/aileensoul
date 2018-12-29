@@ -246,8 +246,10 @@
                                         </div>
                                         <!-- Edit Post Opportunity End -->
                                         <div id="post-opp-detail-{{post.post_data.id}}">
+                                            <div class="post-title">
+                                                <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></h1></p>
+                                            </div>
                                             <h5 class="post-title">
-                                                <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><span ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>

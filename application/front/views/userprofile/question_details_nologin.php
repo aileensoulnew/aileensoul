@@ -183,8 +183,8 @@
                             </div>
                             <div class="post-discription" ng-if="post.post_data.post_for == 'question'">
                                 <div id="ask-que-{{post.post_data.id}}" class="post-des-detail">
-                                    <h5 class="post-title">
-                                        <div ng-if="post.question_data.question"><b>Question:</b><span ng-bind="post.question_data.question" id="ask-post-question-{{post.post_data.id}}"></span></div>                                        
+                                    <div ng-if="post.question_data.question"><b>Question:</b><h1 ng-bind="post.question_data.question" id="ask-post-question-{{post.post_data.id}}"></h1></div>
+                                    <h5 class="post-title">                                        
                                         <div class="post-des-detail" ng-if="post.question_data.description">
                                             <div id="ask-que-desc-{{post.post_data.id}}" ng-class="post.question_data.description.length > 250 ? 'view-more-expand' : ''">
                                                 <b>Description:</b>

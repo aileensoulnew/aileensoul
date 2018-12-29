@@ -17,7 +17,7 @@ class Advertise_with_us extends CI_Controller {
     }
 
     public function index() {
-        $this->data['title'] = "Advertise Your Business | Aileensoul";
+        $this->data['title'] = "Advertise Your Business".TITLEPOSTFIX;
         $this->data['metadesc'] = "Aileensoul provides a platform from business person to career seeker and opportunity to advetise ads to its wide range of auidence.";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
