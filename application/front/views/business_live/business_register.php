@@ -80,6 +80,20 @@
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>            
         </div>
+        <div class="modal fade message-box biderror" id="bus_err" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class='pop_content pop-content-cus'>
+                                <h2>Company already registered on Aileensoul. For more details try the business search filter.</h2>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>

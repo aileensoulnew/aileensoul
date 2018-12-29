@@ -235,63 +235,76 @@ class Business_profile_registration extends MY_Controller {
             $data['errors'] = $errors;
         } else {
             if ($_POST['busreg_step'] == '0' || $_POST['busreg_step'] == '') {
+                
                 $data['company_name'] = $company_name = $_POST['companyname'];
                 $data['country'] = $_POST['country_id'];
                 $data['state'] = $_POST['state_id'];
                 $data['city'] = $_POST['city_id'];
                 $data['pincode'] = $_POST['pincode'];
                 $data['address'] = $_POST['business_address'];
-                $data['user_id'] = $userid;
-                $data['business_slug'] = $business_slug = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
-                $data['created_date'] = date('Y-m-d H:i:s', time());
-                $data['status'] = '1';
-                $data['is_deleted'] = '0';
-                $data['business_step'] = '1';
 
-                $data['contact_person'] = $userdata['first_name'] .' '.$userdata['last_name'];
-                $data['contact_email'] = $userdata['email'];
-
-                $insert_id = $this->common->insert_data_getid($data, 'business_profile');
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
-                    //Openfire Username Generate Start
-                    $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
-                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                    $op_un_ps = "business_".str_replace("-", "_", $business_slug);
-                    $properties = array();
-                    $username = $op_un_ps;
-                    $password = $op_un_ps;
-                    $name = $company_name;
-                    $email = $email_reg;
-                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                    //Openfire Username Generate End
-                }
-
-                if(trim($data['country']) != "")
+                $contition_array = array('user_id !=' => $userid, 'is_deleted' => '0', 'status' => '1', 'company_name'=>trim($company_name), 'country'=>$_POST['country_id'], 'state'=>$_POST['state_id'], 'city'=>$_POST['city_id'], 'address'=>trim($_POST['business_address']));
+                $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $sel_data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                if(isset($business_data) && !empty($business_data))
                 {
-                    $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
-
-                    $data['country_name'] = trim($country_name);
+                    $errors['already_exist'] = 'Company already registered on Aileensoul. For more details try the business search filter.';
+                    $data1['errors'] = $errors;
+                    echo json_encode($data1);exit();
                 }
-
-                if(trim($data['state']) != "")
+                else
                 {
-                    $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+                    $data['user_id'] = $userid;
+                    $data['business_slug'] = $business_slug = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = '1';
+                    $data['is_deleted'] = '0';
+                    $data['business_step'] = '1';
 
-                    $data['state_name'] = trim($state_name);
-                }
+                    $data['contact_person'] = $userdata['first_name'] .' '.$userdata['last_name'];
+                    $data['contact_email'] = $userdata['email'];
 
-                if(trim($data['city']) != "")
-                {
-                    $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+                    $insert_id = $this->common->insert_data_getid($data, 'business_profile');
+                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                        //Openfire Username Generate Start
+                        $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
+                        $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                        $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                        $op_un_ps = "business_".str_replace("-", "_", $business_slug);
+                        $properties = array();
+                        $username = $op_un_ps;
+                        $password = $op_un_ps;
+                        $name = $company_name;
+                        $email = $email_reg;
+                        $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                        //Openfire Username Generate End
+                    }
 
-                    $data['city_name'] = trim($city_name);
-                }
-                $insert_id1 = $this->common->insert_data_getid($data, 'business_profile_search_tmp');
-                if ($insert_id) {
-                    $data['is_success'] = 1;
-                } else {
-                    $data['is_success'] = 0;
+                    if(trim($data['country']) != "")
+                    {
+                        $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
+
+                        $data['country_name'] = trim($country_name);
+                    }
+
+                    if(trim($data['state']) != "")
+                    {
+                        $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+
+                        $data['state_name'] = trim($state_name);
+                    }
+
+                    if(trim($data['city']) != "")
+                    {
+                        $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+                        $data['city_name'] = trim($city_name);
+                    }
+                    $insert_id1 = $this->common->insert_data_getid($data, 'business_profile_search_tmp');
+                    if ($insert_id) {
+                        $data['is_success'] = 1;
+                    } else {
+                        $data['is_success'] = 0;
+                    }
                 }
             } else {
                 $data['company_name'] = $_POST['companyname'];
@@ -301,33 +314,45 @@ class Business_profile_registration extends MY_Controller {
                 $data['pincode'] = $_POST['pincode'];
                 $data['address'] = $_POST['business_address'];
                 // $data['business_slug'] = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
-                $data['modified_date'] = date('Y-m-d H:i:s', time());
-                $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                if(trim($data['country']) != "")
+                $contition_array = array('user_id !=' => $userid, 'is_deleted' => '0', 'status' => '1', 'company_name'=>trim($_POST['companyname']), 'country'=>$_POST['country_id'], 'state'=>$_POST['state_id'], 'city'=>$_POST['city_id'], 'address'=>trim($_POST['business_address']));
+                $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $sel_data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                if(isset($business_data) && !empty($business_data))
                 {
-                    $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
-
-                    $data['country_name'] = trim($country_name);
+                    // print_r($business_data);exit(
+                    $errors['already_exist'] = 'Company already registered on Aileensoul. For more details try the business search filter.';
+                    $data1['errors'] = $errors;
+                    echo json_encode($data1);exit();
                 }
-
-                if(trim($data['state']) != "")
+                else
                 {
-                    $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+                    $data['modified_date'] = date('Y-m-d H:i:s', time());
+                    $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                    if(trim($data['country']) != "")
+                    {
+                        $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
 
-                    $data['state_name'] = trim($state_name);
-                }
+                        $data['country_name'] = trim($country_name);
+                    }
 
-                if(trim($data['city']) != "")
-                {
-                    $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+                    if(trim($data['state']) != "")
+                    {
+                        $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
 
-                    $data['city_name'] = trim($city_name);
-                }
-                $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
-                if ($updatdata) {
-                    $data['is_success'] = 1;
-                } else {
-                    $data['is_success'] = 0;
+                        $data['state_name'] = trim($state_name);
+                    }
+
+                    if(trim($data['city']) != "")
+                    {
+                        $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+                        $data['city_name'] = trim($city_name);
+                    }
+                    $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
+                    if ($updatdata) {
+                        $data['is_success'] = 1;
+                    } else {
+                        $data['is_success'] = 0;
+                    }
                 }
             }
         }
@@ -983,6 +1008,13 @@ class Business_profile_registration extends MY_Controller {
             if (empty($_POST['indtype'])) {
                 $errors['errorOtherCategory'] = 'Please enter other industrial type.';
             }
+        }
+
+        $contition_array = array('user_id !=' => $userid, 'is_deleted' => '0', 'status' => '1', 'company_name'=>trim($_POST['companyname']), 'country'=>$_POST['country'], 'state'=>$_POST['state'], 'city'=>$_POST['city'], 'address'=>trim($_POST['business_address']));
+        $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $sel_data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        if(isset($business_data) && !empty($business_data))
+        {
+            $errors['already_exist'] = 'Company already registered on Aileensoul. For more details try the business search filter.';
         }
 
         if (!empty($errors)) {

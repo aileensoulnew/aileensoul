@@ -760,8 +760,18 @@ app.controller('businessCreateProfileController', function ($scope, $http, $loca
             }).then(function (data) {
                 data = data.data;
                 if (data.errors) {
-                    // Showing errors.
-                    $scope.errorImage = data.errors.image1;
+                    err_arr = data.errors;                              
+                    if(err_arr.already_exist)
+                    {
+                        $("#bus_err").modal("show");
+                        $('#profilereg_ajax_load').hide();
+                        angular.element('#businessinfo #submit').removeClass("form_submit");
+                        angular.element('#businessinfo #submit').css("pointer-events","all");
+                    }
+                    else
+                    {
+                        $scope.errorImage = data.errors.image1;
+                    }
                 } else {
                     angular.element('#businessinfo #submit').css("pointer-events","all");
                     if (data.is_success == '1') {

@@ -175,7 +175,7 @@
                                                                 <label>Postal address:<span style="color:red">*</span></label>
                                                                 <input name="business_address" ng-model="user.business_address" tabindex="6" autofocus type="text" id="business_address" placeholder="Enter address" style="resize: none;" value=""/>
                                                                 <span ng-show="errorPostalAddress" class="error">{{errorPostalAddress}}</span>                                                                        
-                                                            </fieldset>
+                                                            </fieldset>                  
                                                             <input type="hidden" name="busreg_step" ng-model="user.busreg_step" id="busreg_step" tabindex="4"  value="">
                                                             <fieldset class="hs-submit full-width" style="position: relative;">
                                                                 <input type="submit"  id="next" name="next" tabindex="7" value="Next" >
@@ -211,7 +211,7 @@
                                                                 <input name="contactwebsite" ng-model="user.contactwebsite" tabindex="4" autofocus type="url" id="contactwebsite" placeholder="Enter contact website" value=""/>
                                                                 <span class="website_hint" style="font-size: 13px; color: #1b8ab9;">Note : <i>Enter website url with http or https</i></span>                                 
                                                                 <span ng-show="errorContactWebsite" class="error">{{errorContactWebsite}}</span>                      
-                                                            </fieldset>
+                                                            </fieldset>                  
                                                             <input type="hidden" name="busreg_step" ng-model="user.busreg_step" id="busreg_step" tabindex="4"  value="">
                                                             <fieldset class="hs-submit full-width" style="position: relative;">
                                                                 <input type="submit"  id="next" name="next" tabindex="5"  value="Next">
@@ -308,25 +308,32 @@
                     </div>
                 </div>
         </section>
+
+        <div class="modal fade message-box biderror" id="bus_err" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class='pop_content pop-content-cus'>
+                                <h2>Company already registered on Aileensoul. For more details try the business search filter.</h2>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <?php echo $login_footer ?>        
         <?php echo $footer; ?>
         <!-- <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script> -->
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>  
-        <?php
-        if (IS_BUSINESS_JS_MINIFY == '0') {
-            ?>
+        
             
-            <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php } else {
-            ?>
-            
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/angular-validate.min.js?ver=' . time()) ?>"></script>
-        <?php }
-        ?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
@@ -740,12 +747,21 @@
                                             data = data.data;                                            
                                             if (data.errors) {
                                                 // Showing errors.
-                                                $scope.errorCompanyName = data.errors.companyname;
-                                                $scope.errorCountry = data.errors.country;
-                                                $scope.errorState = data.errors.state;
-                                                $scope.errorCity = data.errors.city;
-                                                $scope.errorPincode = data.errors.pincode;
-                                                $scope.errorPostalAddress = data.errors.business_address;
+                                                err_arr = data.errors;                              
+                                                if(err_arr.already_exist)
+                                                {
+                                                    $("#bus_err").modal("show");
+                                                    angular.element('#businessinfo #next').removeClass("form_submit");
+                                                }
+                                                else
+                                                {
+                                                    $scope.errorCompanyName = err_arr.companyname;
+                                                    $scope.errorCountry = err_arr.country;
+                                                    $scope.errorState = err_arr.state;
+                                                    $scope.errorCity = err_arr.city;
+                                                    $scope.errorPincode = err_arr.pincode;
+                                                    $scope.errorPostalAddress = err_arr.business_address;
+                                                }
                                             } else {
                                                 if (data.is_success == '1') {
                                                     angular.element('#businessinfo #next').removeClass("form_submit");
@@ -967,16 +983,8 @@
                         }
                     });
         </script>
-        <?php
-        if (IS_BUSINESS_JS_MINIFY == '0') {
-            ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.js?ver=' . time()); ?>"></script>
-             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php } else {
-            ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/information.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php }
-        ?>        
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+            
     </body>
 </html>
