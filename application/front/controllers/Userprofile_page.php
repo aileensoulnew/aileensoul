@@ -912,12 +912,12 @@ class Userprofile_page extends MY_Controller {
 
     public function question_detail($question_id = '') {
         $userid = $this->session->userdata('aileenuser');
-        if($userid == "")
-        {
+        // if($userid == "")
+        // {
             $this->data['question_data'] = $question_data = $this->userprofile_model->get_question_from_id($question_id);            
             $userid = $question_data['user_id'];
             $title = $question_data['question'];
-        }        
+        //}        
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
