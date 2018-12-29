@@ -3340,7 +3340,15 @@ color: #5c5c5c !important;}
 .reg-form-cus .inner-form .login .title p{background:inherit; -webkit-text-fill-color:inherit; color:#5c5c5c;}
 .reg-form-cus .inner-form .login form .btn3{border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c;}
 .custom-blog-css .blog-scroll-a h2{color:#fff; padding:0;}
-/***  end extra button css  ***/
+.opp-title-cus{width:100%; float:left; padding-bottom:5px;}
+.opp-title-cus p{float:left; font-size:14px;}
+.opp-title-cus h1{float:left; padding-left:5px; font-size:14px; line-height:1.5;}
+.que-title-cus{width:100%; float:left;}
+.que-title-cus b{float:left; font-size:14px;}
+.que-title-cus h1{float:left; font-size:14px; line-height:1.6;}
+.report.add-with-us h1{padding-bottom:0;}
+.report.add-with-us .con-detail{padding-bottom:50px;}
+
 
 /***  media query  ***/
 @media print {

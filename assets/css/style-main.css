@@ -2333,12 +2333,13 @@ header.profile-header .logo a{color:#5c5c5c}
 .profiles-details .top-detail h1{
     padding:0 0 25px
 }
-.profiles-details h2{
+.profiles-details h2, .profiles-details h1 {
     padding:20px 15px 80px;
     text-align:center;
-    position:relative
+    position:relative;
 }
-.profiles-details h2:after{
+.profiles-details h1 {font-size:30px;}
+.profiles-details h2:after, .profiles-details h1:after {
     width:250px;
     height:2px;
     background:#5c5c5c;
@@ -2735,7 +2736,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
         width:100%!important
     }
     .contact-add .p20{padding: 23px 30px;}
-    .profiles-details h2::after{top:95px;}
+    .profiles-details h2::after, .profiles-details h1::after {top:95px;}
 	.test-cus > li > a{padding:5px 10px;}
 	.new-abput-page .img-custom{width:45%;}
 }
@@ -2919,10 +2920,10 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .dis-box{
         padding:0
     }
-    .profiles-details h2{
+    .profiles-details h2, .profiles-details h1::after{
         padding-bottom:20px
     }
-    .profiles-details h2::after{
+    .profiles-details h2::after, .profiles-details h1::after {
         display:none
     }
     .profiles-details p{
@@ -3308,7 +3309,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
         width:100%;
         padding:0
     }
-    .profiles-details h2{
+    .profiles-details h2, .profiles-details h1{
         font-size:25px;
         margin-top:0;
         font-weight:500 !important;
