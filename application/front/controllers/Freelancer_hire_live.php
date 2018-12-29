@@ -57,7 +57,7 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-			$this->data['title'] = "Hire Freelancers and Post Projects | Aileensoul";
+			$this->data['title'] = "Hire Freelancers and Post Projects".TITLEPOSTFIX;
 			$this->data['metadesc'] = "Find freelancer and home based online jobs on Aileensoul. Joining and posting project is completely free. Get freelance job and post your requirement now!";
 			$this->data['free_hire_related_list'] = $this->freelancer_hire_model->free_hire_related_blog_list();
 			if($userid != ""){
@@ -149,7 +149,7 @@ class Freelancer_hire_live extends MY_Controller {
 				$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 				$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 				$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-				$this->data['title'] = "Create Freelance Employer Account | Aileensoul";
+				$this->data['title'] = "Create Freelance Employer Account".TITLEPOSTFIX;
 				$this->load->view('freelancer_hire_live/new_freelance_emp_reg', $this->data);
 			}
 			else
@@ -1188,7 +1188,7 @@ public function freelancer_hire_profile($id = "") {
 		
 	}
 
-	$this->data['title'] = ucfirst($fullname) . " Freelance Recruiter | Aileensoul";
+	$this->data['title'] = ucfirst($fullname) . " Freelance Recruiter".TITLEPOSTFIX;
 
 	$this->data['metadesc'] = "View ".ucfirst($fullname) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
 
@@ -1226,7 +1226,7 @@ public function freelancer_hire_profile_new($id = "") {
 	$statename = $this->db->get_where('states', array('state_id' => $hire_data[0]['state']))->row()->state_name;
 	$countryname = $this->db->get_where('countries', array('country_id' => $hire_data[0]['country']))->row()->country_name;
 
-	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " Freelance Recruiter | Aileensoul";
+	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " Freelance Recruiter".TITLEPOSTFIX;
 
 	$this->data['metadesc'] = "View ".ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_profile_new', $this->data);
@@ -2380,7 +2380,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = 'freelancer_post.post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 	if(empty($postdata))
 	{
-		$this->data['title'] = '404 | Aileensoul';
+		$this->data['title'] = '404'.TITLEPOSTFIX;
 		$this->load->view('404', $this->data);
 	}
 	else
@@ -3183,7 +3183,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-			$this->data['title'] = "Recruiter Profile | Aileensoul";
+			$this->data['title'] = "Recruiter Profile".TITLEPOSTFIX;
 			
 			$this->load->view('freelancer_hire_live/index', $this->data);
 		}
@@ -3209,7 +3209,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
             	redirect(base_url());
         	}
         }
-        $this->data['title'] = "Signup to Hire Freelancers | Aileensoul";
+        $this->data['title'] = "Signup to Hire Freelancers".TITLEPOSTFIX;
         $this->data['metadesc'] = "Built your remote team with Aileensoul. Register today. It's Free.";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
