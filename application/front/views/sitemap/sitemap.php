@@ -23,7 +23,7 @@
 		
 		<?php $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 
-		<link rel="canonical" href="<?php echo $actual_link ?>" />
+		<link rel="canonical" href="<?php echo current_url(); ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">  
 		<meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
@@ -232,6 +232,18 @@
 							<div class="dir-box">
 								<h3>General Information</h3>
 								<div class="row">
+									<?php if(!$this->session->userdata('aileenuser')) {?>
+									<div class="col-md-3 col-sm-6">
+										<ul>
+											<li><a href="<?php echo base_url('login') ?>">Sign in </a></li>
+										</ul>
+									</div>
+									<div class="col-md-3 col-sm-6">
+										<ul>
+											<li><a href="<?php echo base_url('registration') ?>">Sign up</a></li>
+										</ul>
+									</div>
+									<?php }?>
 									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url() ?>">Home </a></li>

@@ -3881,17 +3881,19 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             user_bio = success.data.user_bio;
             skills_data = success.data.skills_data;
             skills_data_edit = success.data.skills_data_edit;
-            $scope.details_data = details_data;
             $scope.user_bio = user_bio;
             $scope.user_skills = skills_data;
             $scope.edit_user_skills = skills_data_edit;
-            $scope.user_dob = $scope.details_data.user_dob;
-
-            dob = $scope.details_data.user_dob.split('-');
-            $scope.dob_month = dob[1];
-            dob_month = dob[1];            
-            dob_day = dob[2];            
-            dob_year = dob[0];
+            if(details_data)
+            {                
+                $scope.details_data = details_data;
+                $scope.user_dob = $scope.details_data.user_dob;
+                dob = $scope.details_data.user_dob.split('-');
+                $scope.dob_month = dob[1];
+                dob_month = dob[1];            
+                dob_day = dob[2];            
+                dob_year = dob[0];
+            }
             //$scope.dob_fnc(dob_day,dob_month,dob_year);
 
             var profile_progress = success.data.profile_progress;
@@ -3902,13 +3904,13 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 $("#edit-profile-move").hide();
             }
-            $scope.set_progress(count_profile_value,count_profile);
             $("#skill-loader").hide();
             $("#skill-body").show();
 
             $("#profile-loader").hide();
             $("#profile-body").show();
 
+            $scope.set_progress(count_profile_value,count_profile);
             load_add();
             load_add_detail();
         });
@@ -3994,8 +3996,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 }
                 $scope.user_fav_sport_txt = edit_fav_sport;
                 
-                $("#about-loader").hide();
-                $("#about-body").show();
                 setTimeout(function(){
                     if($("#about-detail div").innerHeight() > 155)
                     {
@@ -4007,6 +4007,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     }
                 },500);
             }
+            $("#about-loader").hide();
+            $("#about-body").show();
 
         });
     }
@@ -4616,9 +4618,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 $scope.user_research = result.data.user_research;
-                $("#research-loader").hide();
-                $("#research-body").show();
             }
+            $("#research-loader").hide();
+            $("#research-body").show();
 
         });
     };
@@ -5424,9 +5426,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_publication = result.data.user_publication;
                 $scope.user_publication = user_publication;
-                $("#publication-loader").hide();
-                $("#publication-body").show();
             }
+            $("#publication-loader").hide();
+            $("#publication-body").show();
 
         });
     }
@@ -5798,9 +5800,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_patent = result.data.user_patent;
                 $scope.user_patent = user_patent;
-                $("#patent-loader").hide();
-                $("#patent-body").show();
             }
+            $("#patent-loader").hide();
+            $("#patent-body").show();
 
         });
     }
@@ -6150,9 +6152,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_award = result.data.user_award;
                 $scope.user_award = user_award;
-                $("#awards-loader").hide();
-                $("#awards-body").show();
             }
+            $("#awards-loader").hide();
+            $("#awards-body").show();
 
         });
     }
@@ -6493,9 +6495,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_activity = result.data.user_activity;
                 $scope.user_activity = user_activity;
-                $("#activity-loader").hide();
-                $("#activity-body").show();
             }
+            $("#activity-loader").hide();
+            $("#activity-body").show();
 
         });
     }
@@ -6842,9 +6844,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_addicourse = result.data.user_addicourse;
                 $scope.user_addicourse = user_addicourse;
-                $("#addicourse-loader").hide();
-                $("#addicourse-body").show();
             }
+            $("#addicourse-loader").hide();
+            $("#addicourse-body").show();
 
         });
     }
@@ -7382,9 +7384,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.user_experience = user_experience;
                 $scope.exp_years = result.data.exp_years;
                 $scope.exp_months = result.data.exp_months;
-                $("#exp-loader").hide();
-                $("#exp-body").show();
             }
+            $("#exp-loader").hide();
+            $("#exp-body").show();
 
         });
     }
@@ -7877,9 +7879,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_projects = result.data.user_projects;
                 $scope.user_projects = user_projects;
-                $("#project-loader").hide();
-                $("#project-body").show();
             }
+            $("#project-loader").hide();
+            $("#project-body").show();
 
         });
     }
@@ -8381,9 +8383,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_education = result.data.user_education;
                 $scope.user_education = user_education;
-                $("#edution-loader").hide();
-                $("#edution-body").show();
             }
+            $("#edution-loader").hide();
+            $("#edution-body").show();
 
         });
     }
