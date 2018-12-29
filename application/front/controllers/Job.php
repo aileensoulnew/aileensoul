@@ -6172,23 +6172,23 @@ class Job extends MY_Controller {
         $keyloc = ucwords(str_replace('-',' ', $ser_location));
         if($serach_type == 1)
         {
-            $this->data['title'] = $keyser." Jobs Openings | Apply Now on ".$keyser." Jobs";
+            $this->data['title'] = $keyser." Jobs Openings | Apply Now on ".$keyser." Jobs".TITLEPOSTFIX;
             $this->data['metadesc'] = $keyser." Job Vacancy: Explore the latest ".$keyser." jobs on Aileensoul. Apply and get the job in your location. ";
         }
         else if($serach_type == 2)
         {
             $keyser1 = substr($keyser, 0, strrpos( $keyser, ' '));
-            $this->data['title'] = $keyser1." Job Openings: Great Career Opportunities at ".$keyser1;
+            $this->data['title'] = $keyser1." Job Openings: Great Career Opportunities at ".$keyser1.TITLEPOSTFIX;
             $this->data['metadesc'] = "Explore numerous Jobs by ".$keyser1." on Aileensoul. Connect and get the latest information on recent jobs openings by ".$keyser1.". Join Aileensoul and Apply Now!";
         }
         else if($serach_type == 3)
         {
-            $this->data['title'] = "Jobs in ".ucwords($keyser).": Apply on Latest ".date("Y")." Job Openings  ";
+            $this->data['title'] = "Jobs in ".ucwords($keyser).": Apply on Latest ".date("Y")." Job Openings".TITLEPOSTFIX;
             $this->data['metadesc'] = "Either you are a fresher or experienced, we have jobs for everyone. Search and Apply on the latest jobs vacancies in ".ucwords($keyser)." from various industry. ";
         }
         else if($serach_type == 4)
         {
-            $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keyloc." | Aileensoul";
+            $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keyloc.TITLEPOSTFIX;
             $this->data['metadesc'] = ucwords($keyser)." Vacancy in ".$keyloc.": Explore the latest ".ucwords($keyser)." jobs on Aileensoul. Apply and get the job in ".$keyloc." location. ";
         }
         // print_r($_POST);
