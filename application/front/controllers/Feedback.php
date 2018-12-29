@@ -18,7 +18,7 @@ class Feedback extends CI_Controller {
     }
 
     public function index() { 
-        $this->data['title'] = "Feedback | Aileensoul";
+        $this->data['title'] = "Feedback".TITLEPOSTFIX;
         $this->data['metadesc'] = "Send us your valuable feedback. It will not only help us to improve our platform but also in providing great user experience.";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);

@@ -8,16 +8,11 @@
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />       
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
-       <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-common.css?ver='.time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()) ?>">
-         <?php if (IS_OUTSIDE_CSS_MINIFY == '0'){?>
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver='.time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver='.time()) ?>">
-        <?php }else{?>
-         <link rel="stylesheet" href="<?php echo base_url('assets/css_min/common-style.css?ver='.time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()) ?>">
-        <?php }?>
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver='.time()) ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()) ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -103,10 +98,10 @@
                         </div> -->
                     </div>
                 </div>
-                    <div class="container">
+                <div class="container">
                     <div class="pt10">
                         <div class="titlea">
-                            <h1 class="pb20">Our Mission</h1>
+                            <h2 class="pb20">Our Mission</h2>
                         </div>
                         <div class="about-content">
 					
@@ -122,7 +117,7 @@
                  <div class="container">
                     <div class="pt10">
                         <div class="titlea">
-                            <h1 class="pb20">Our Vision</h1>
+                            <h2 class="pb20">Our Vision</h2>
                         </div>
                         <div class="about-content text-center">
 							
@@ -132,10 +127,10 @@
                        
                     </div>
                 </div>
-       <div class="container" >
+                <div class="container" >
                     <div class="pt10">
                         <div class="titlea">
-                            <h1 class="pb20">Our Leadership</h1>
+                            <h2 class="pb20">Our Leadership</h2>
                         </div>
                        <div class="about-content text-center">
 							<div class="all-tem pt10">

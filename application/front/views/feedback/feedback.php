@@ -103,7 +103,7 @@ header('Cache-Control: public, max-age=30');
                         <div class="inner-form">
                             <div class="login">
                                 <div class="title">
-                                    <h1>Send us feedback</h1>
+                                    <h2>Send us feedback</h2>
                                 </div>
                                 <form name="feedback_form" id="feedback_form" method="post">
                                     <div class="row">
