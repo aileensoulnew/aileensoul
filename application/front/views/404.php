@@ -3,12 +3,9 @@
 <html>
     <head>
         <title><?php echo $title; ?></title>
-        <?php //echo $head; ?>
-        <?php
-        $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        ?>
+        <?php //echo $head; ?>        
         <meta name="robots" content="noindex, nofollow">
-        <link rel="canonical" href="<?php echo $actual_link ?>" />
+        
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
