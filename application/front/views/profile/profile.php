@@ -50,8 +50,7 @@ color: #1b8ab9 !important;}
 									<div class="panel-heading">
 											<ul class="nav nav-tabs">
 												<li class="active"><a href="#edit-profile" data-toggle="tab">General Info</a></li>
-												<li><a href="#edit-basic-info" data-toggle="tab">Basic Info</a></li>
-												
+												<!-- <li><a href="#edit-basic-info" data-toggle="tab">Basic Info</a></li> -->
 											</ul>
 									</div>
 									<div class="panel-body">
@@ -200,6 +199,7 @@ color: #1b8ab9 !important;}
 												</div>
 											</div>
 											
+											<?php /* ?>
 											<div class="tab-pane fade" id="edit-basic-info">
 												<?php
 													$is_user = 0;
@@ -300,6 +300,7 @@ color: #1b8ab9 !important;}
 												</div>
 												
 											</div>
+											<?php */ ?>
 											
 										</div>
 									</div>

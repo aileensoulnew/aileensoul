@@ -23,11 +23,10 @@ class Profile extends CI_Controller {
 
     public function index() {
         $userid = $this->session->userdata('aileenuser');
-        $this->data['userdata'] = $this->user_model->getUserData($userid);        
-//      $this->data['userdata'] =  $this->common->select_data_by_id('user', 'user_id', $userid, $data = '*', $join_str = array());
+        $this->data['userdata'] = $this->user_model->getUserData($userid);
         $this->data['professionData'] = $this->user_model->getUserProfessionData($userid,"*");        
         $this->data['studentData'] = $this->user_model->getUserStudentData($userid,"*");
-        $this->data['title'] = 'Setting | Edit Profile - Aileensoul';
+        $this->data['title'] = 'Setting | Edit Profile'.TITLEPOSTFIX;
         $this->data['usry'] = date('Y', strtotime($this->data['userdata']['user_dob']));
         $this->data['usrm'] = date('m', strtotime($this->data['userdata']['user_dob']));
         $this->data['usrd'] = date('d', strtotime($this->data['userdata']['user_dob']));
