@@ -977,7 +977,6 @@ $route['business-profile/details/(:any)'] = "My404Page";
 $route['recruiter/jobpost'] = "My404Page";
 $route['recruiter/jobpost/(:any)'] = "My404Page";
 
-$route['a/(:any)'] = 'Userprofile';
 $route['(:any)'] = 'Userprofile';
 
 
