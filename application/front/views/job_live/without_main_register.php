@@ -34,21 +34,10 @@
 			</div>
             <div class="job-cat-lp" >
                 <div class="container" >
-                    <div class="center-title" ><!--  -->
+                    <div class="center-title" >
                         <h2>Jobs by Category</h2>
                     </div>
-                    <div class="row pt20" ><!--  -->
-                        <!-- <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="jobCategory.length != 0" ng-repeat="jobs in jobCategory" ng-init="jobIndex=$index">
-                            <div class="all-cat-box">
-                                <a ng-href="<?php echo base_url(); ?>{{jobs.industry_slug}}-jobs">
-                                    <div class="cus-cat-middle">
-                                    <img ng-src="<?php echo JOB_INDUSTRY_IMG_PATH;?>{{jobs.industry_image}}">
-                                    <p class="" ng-bind="jobs.industry_name"></p>
-                                    <-- <span ng-bind="jobs.count"></span> ---
-                                    </div>
-                                </a>
-                            </div>
-                        </div> -->
+                    <div class="row pt20" >                        
                         <?php if(isset($jobCategory) && !empty($jobCategory)):
                                 foreach($jobCategory as $_jobCategory): ?>
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
@@ -67,7 +56,7 @@
 					<div class="banner-add">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
-                    <div class="p20 fw" ><!--  -->
+                    <div class="p20 fw" >
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>jobs-by-categories" class="btn-1">View More</a></p>
                     </div>
                 </div>
@@ -76,7 +65,7 @@
             <div class="content-bnr">
                 <div class="bnr-box">
                     
-                    <div class="content-bnt-text" ><!--  -->
+                    <div class="content-bnt-text" >
                         <h2>Still Cant Find the Right Job Don't Worry We Are Here to Help</h2>
                         <p><a href="<?php echo base_url('job-profile/create-account'); ?>" class="btn5">Create Job Profile</a></p>
                     </div>
@@ -85,10 +74,10 @@
 
             <div class="how-it-work">
                 <div class="container">
-                    <div class="center-title" ><!--  -->
+                    <div class="center-title" >
                         <h2>How it Works</h2>
                     </div>
-                    <div class="row" ><!--  -->
+                    <div class="row" >
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url();?>assets/n-images/reg.png">
@@ -127,11 +116,11 @@
 			</div>
             <div class="related-article">
                 <div class="container">
-                        <div class="center-title" ><!--  -->
+                        <div class="center-title" >
                             <h2>Related Articles</h2>
 
                         </div>
-                        <div class="row pt20" ><!--  -->
+                        <div class="row pt20" >
                             <?php if(isset($job_related_list) && !empty($job_related_list)):
                                     foreach($job_related_list as $_job_related_list): ?>
                             <div class="col-md-4 col-sm-4">
@@ -179,10 +168,10 @@
                 </div>
             <div class="container">
                 <div class="browse-jobs">
-                    <div class="center-title" ><!--  -->
+                    <div class="center-title" >
                         <h2>Browse Other Jobs</h2>
                     </div>
-                    <div class="row" ><!--  -->
+                    <div class="row" >
                         <div class="col-md-4 col-sm-4">
                             <div class="browse-box">
                                 <ul>
