@@ -928,7 +928,7 @@ class Userprofile_page extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['question_id'] = $question_id;
-        $this->data['title'] = $title;
+        $this->data['title'] = $title.TITLEPOSTFIX;
         if($this->session->userdata('aileenuser') != "")
         {
             $this->load->view('userprofile/question_details', $this->data);

@@ -1678,7 +1678,7 @@ class User_post extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['post_id'] = $post_id;
-        $this->data['title'] = $opp_data['opptitle']." - Aileensoul";
+        $this->data['title'] = $opp_data['opptitle'].TITLEPOSTFIX;
         $this->data['metadesc'] = ucwords($userdata['first_name'])." posted opportunity for ".$opp_data['opportunity_for']." in ".$opp_data['location'].".";
         if($this->session->userdata('aileenuser') != "")
         {
@@ -1688,7 +1688,7 @@ class User_post extends MY_Controller {
             }
             else
             {
-                $this->data['title'] = "404 | Aileensoul";
+                $this->data['title'] = "404".TITLEPOSTFIX;
                 $this->data['metadesc'] = "404";
                 $this->load->view('404', $this->data);
             }
@@ -1701,7 +1701,7 @@ class User_post extends MY_Controller {
             }
             else
             {
-                $this->data['title'] = "404 | Aileensoul";
+                $this->data['title'] = "404".TITLEPOSTFIX;
                 $this->data['metadesc'] = "404";
                 $this->load->view('404', $this->data);
             }
