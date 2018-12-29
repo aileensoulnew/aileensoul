@@ -6,7 +6,8 @@
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver='.time()); ?>">
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="canonical" href="<?php echo current_url(); ?>" />
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-common.css?ver='.time()) ?>">
