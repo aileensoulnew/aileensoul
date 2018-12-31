@@ -244,7 +244,59 @@
                         </table>
                     </div>
                 </div>
-                <a href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" title="Photos">
+                
+				<div class="left-info-box">
+				<div class="dash-info-box">
+					<h4>Bio</h4>
+					<p>Lorem ipsupm its a dummy text. its has binn use to for the Lorem ipsupm its a dummy text... <a href="#">View More</a></p>
+				</div>
+				<div class="dash-info-box">
+					<h4>Email id</h4>
+					<p>info@lormipsum.com</p>
+				</div>
+				<div class="dash-info-box">
+					<h4>Location </h4>
+					<p>Ahmedabad , Gujarat, India</p>
+				</div>
+				<div class="dash-info-box">
+					<h4>Type of Talent</h4>
+					<ul class="skill-list">
+						<li>HTML</li>
+						<li>CSS</li>
+						<li>dashboard</li>
+					</ul>
+				</div>
+				<div class="dash-info-box">
+					<h4>Specialities</h4>
+					<ul class="skill-list">
+						<li>HTML</li>
+						<li>CSS</li>
+						<li>dashboard</li>
+					</ul>
+					<p class="pt10">Lorem ipsupm its a dummy text. its has binn use to for the Lorem ipsupm its a dummy text... <a href="#">View More</a></p>
+				</div>
+				<div class="dash-info-box">
+					<h4>Availability </h4>
+					<p>Open for work.</p>
+				</div>
+				<div class="dash-info-box">
+					<h4>Latest Experience </h4>
+					<ul>
+						<li>at aileensoul pvt ltd.</li>
+					</ul>
+				</div>
+				<div class="dash-info-box">
+					<h4>Achievements & Awards </h4>
+					<ul>
+						<li>Gujrat gaurav pusrskar (2018)</li>
+						<li>Arjun award (2016)</li>
+						<li>Pdam shree award (2015)</li>
+					</ul>
+				</div>
+				
+			</div>
+				
+				<a class="fw" href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" title="Photos">
                 <div class="full-box-module business_data" id="autorefresh">
                     <div class="profile-boxProfileCard  module buisness_he_module" style="">
                         <div class="head_details">
@@ -256,7 +308,7 @@
                     </div>
                 </div>
                 </a>
-                <a href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" title="Video">
+                <a class="fw" href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" title="Video">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
@@ -271,7 +323,7 @@
                 </div>
                 </a>
              
-                <div class="full-box-module business_data">
+                <div class="full-box-module business_data fw">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
                              <a href="<?php echo site_url('artist/p/' . $get_url . '/audios'); ?>"> 
@@ -286,7 +338,7 @@
                     </div>
                 </div>
              
-                <a href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" title="Pdf">
+                <a class="fw" href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" title="Pdf">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module pdf_box">
                         <table class="business_data_table">
@@ -305,7 +357,10 @@
 				<?php echo $left_footer; ?>
                 
             </div>
-            <!-- popup start -->
+            
+			
+			
+			<!-- popup start -->
             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business"  >
 			<div class="tab-add">
 				<?php $this->load->view('banner_add'); ?>
@@ -471,6 +526,30 @@
                         </div>
                     </div>
                 </div>
+				<div class="right-info-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="n-images/detail/website.png"><span>Website</span>
+								</div>
+								<div class="dtl-dis">
+									<h4>Social</h4>
+									<ul class="social-link-list">
+										<li><a href="#"><img src="n-images/detail/fb.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/in.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/pin.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/insta.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/you.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/git.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/twt.png"></a></li>
+									</ul>
+									<h4 class="pt20 fw">Personal</h4>
+									<ul class="social-link-list">
+										<li><a href="#"><img src="n-images/detail/pr-web.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/pr-web.png"></a></li>
+									</ul>
+								</div>
+							</div>
+				
+				
 			</div>
     </div>
 </div>   
