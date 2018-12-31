@@ -532,7 +532,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 							</div>
 							<div class="right-info-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="n-images/detail/about.png"><span>How Business Name Started?</span>
+									<img class="cus-width" src="n-images/detail/about.png"><span>Story</span>
 								</div>
 								<div class="dtl-dis dtl-box-height">
 									<div class="bus-story">
