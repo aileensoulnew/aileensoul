@@ -529,6 +529,9 @@ border-bottom: 1px solid #d2d2d2;}
 .dash-left-title h3 a:hover{background: #e9ebee; padding: 5px 10px; border-radius: 3px;}
 .left-info-box table td{padding:3px; color:#5c5c5c;}
 .left-info-box table td:first-child{width:30px;}
+.right-info-box .dtl-title{padding:0 0 10px 0;}
+.right-info-box .dtl-dis{padding:0;}
+.right-info-box .review-list li .review-left{width:50px; height:50px;}
 
 .dash-info-box{font-size:15px; color:#7b7b7b; width:100%; float:left; margin-bottom:10px;}
 .dash-info-box h4{border-bottom:1px solid #d2d2d2; padding-bottom:5px; margin-bottom:5px; font-size:16px; color:#5c5c5c; line-height:1.2;}

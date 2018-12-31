@@ -466,6 +466,129 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </div>
                             </div>
                             <?php endif; ?>
+							
+							<div class="right-info-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="n-images/detail/website.png"><span>Website</span>
+								</div>
+								<div class="dtl-dis">
+									<h4>Social</h4>
+									<ul class="social-link-list">
+										<li><a href="#"><img src="n-images/detail/fb.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/in.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/pin.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/insta.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/you.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/git.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/twt.png"></a></li>
+									</ul>
+									<h4 class="pt20 fw">Personal</h4>
+									<ul class="social-link-list">
+										<li><a href="#"><img src="n-images/detail/pr-web.png"></a></li>
+										<li><a href="#"><img src="n-images/detail/pr-web.png"></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="right-info-box">
+								
+								<div class="dtl-title">
+									<img class="cus-width" src="n-images/detail/review.png"><span>Reviews</span>
+								
+								</div>
+								<div class="dtl-dis">
+									<div class="total-rev">
+										<span class="total-rat">4.8</span> <span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
+												</span>
+												<span class="rev-count">59 Reviews</span>
+												
+												
+									</div>
+									<ul class="review-list">
+										<li>
+											<div class="review-left">
+												<img src="n-images/detail/user-pic.jpg">
+											</div>
+											<div class="review-right">
+												<h4>Yatin Belani</h4>
+												<div class="rating-star-cus">
+													<span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
+												</span>
+												</div>
+												<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+									<div class="form-group">
+										
+									</div>
+									
+								</div>
+							
+							</div>
+							<div class="right-info-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="n-images/detail/about.png"><span>How Business Name Started?</span>
+								</div>
+								<div class="dtl-dis dtl-box-height">
+									<div class="bus-story">
+										<img src="n-images/detail/14.jpg">
+									</div>
+									<ul class="dis-list">
+										<li>
+											<span>Description</span>
+											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+											<a class="dis-more" href="#"><b>See More..</b> </a>
+										</li>
+									
+										<li>
+											<span>What differentiate you from your competitiors</span>
+											Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+											<a class="dis-more" href="#"><b>See More..</b> </a>
+										</li>
+								
+									</ul>
+								</div>
+								<div class="about-more">
+									<a href="#">View More <img src="n-images/detail/down-arrow.png"></a>
+								</div>
+								
+							</div>
+							<div class="right-info-box add-menu">
+								<div class="dtl-title">
+									<img class="cus-width" src="n-images/detail/menu.png"><span>Add Menu</span>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list">
+										<li>
+											<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+												<img src="n-images/art-img.jpg">
+											</p>
+										</li>
+										<li>
+											<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+												<img src="n-images/art-img.jpg">
+											</p>
+										</li>
+										<li>
+											<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+												<img src="n-images/art-img.jpg">
+											</p>
+										</li>
+										<li>
+											<p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+												<img src="n-images/art-img.jpg">
+											</p>
+										</li>
+										
+									</ul>
+								</div>
+								
+							</div>
                         </div>
                     </div>
                 </div>
