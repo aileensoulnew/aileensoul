@@ -522,13 +522,22 @@ border-bottom: 1px solid #d2d2d2;}
 
 .main-dashboard .left-part{position:absolute;}
 .main-dashboard .right-part{position:absolute;}
-.left-info-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin-bottom:10px; font-size:14px;}
+.left-info-box, .right-info-box {width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin-bottom:10px; font-size:14px;}
 .dash-left-title h3{margin:0; padding:5px; text-align:center; color:#5c5c5c;}
 .dash-left-title h3 a{color:#5c5c5c; width:120px; display:inline-block; padding:5px 10px; letter-spacing:1px;}
 .dash-left-title h3 a i{float:left;}
 .dash-left-title h3 a:hover{background: #e9ebee; padding: 5px 10px; border-radius: 3px;}
 .left-info-box table td{padding:3px; color:#5c5c5c;}
 .left-info-box table td:first-child{width:30px;}
+
+.dash-info-box{font-size:15px; color:#7b7b7b; width:100%; float:left; margin-bottom:10px;}
+.dash-info-box h4{border-bottom:1px solid #d2d2d2; padding-bottom:5px; margin-bottom:5px; font-size:16px; color:#5c5c5c; line-height:1.2;}
+.dash-info-box ul{padding-left:15px; margin-bottom:0px;}
+.dash-info-box ul li{padding:0px; margin:0; font-size:15px; color:#7b7b7b;}
+.dash-info-box ul.skill-list{padding:0; width:100%; float:left; padding-top:5px;}
+.dash-info-box ul.skill-list li{border: 1px solid #d2d2d2; padding: 3px 15px; border-radius: 20px; margin-right: 5px; margin-bottom: 7px; float: left; font-size: 14px;
+background: #f6f6f6; list-style-type:none;}
+
 
 
 .media-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:5px; margin-bottom:10px;}

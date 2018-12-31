@@ -209,7 +209,43 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </table>
                                 </div>
                             </div>
-                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/photos' ?>">
+							<div class="left-info-box">
+								<div class="dash-left-title">
+									<h3><i class="fa fa-info-circle"></i> Information</h3>
+								</div>
+								<div class="dash-info-box">
+										<h4>Specialties </h4>
+										<ul class="skill-list">
+											<li>HTML</li>
+											<li>CSS</li>
+											<li>Photo shop</li>
+											<li>Saturday</li>
+										</ul>
+									</div>
+									<div class="dash-info-box">
+										<h4>Hours of Operation</h4>
+										<p>On Specified Days</p>
+										<ul>
+											<li>Sunday : 2:30 PM to 1:30 PM</li>
+											<li>Wednesday : 7:00 AM to 7:30 PM</li>
+											<li>Thursday : 3:00 AM to 3:00 PM</li>
+											<li>Saturday : 6:30 PM to 8:00 AM</li>
+										</ul>
+									</div>
+									<div class="dash-info-box">
+										<h4>Mission</h4>
+										<p>Lorem ipsupm its a dummy text. its has binn use to for the Lorem ipsupm its a dummy text... <a href="#">View More</a></p>
+									</div>
+									<div class="dash-info-box">
+										<h4>Tagline</h4>
+										<p>Lorem ipsupm its a dummy text. its has binn use to... <a href="#">View More</a></p>
+									</div>
+									<div class="dash-info-box">
+										<h4>Year Founded</h4>
+										<p>10 june 2018 </p>
+									</div>
+							</div>
+                            <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/photos' ?>">
                                 <div class="full-box-module business_data">
                                     <div class="profile-boxProfileCard  module buisness_he_module" >
                                         <div class="head_details">
@@ -220,7 +256,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </div>
                                 </div>
                             </a>
-                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
+                            <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
                                 <div class="full-box-module business_data">
                                     <div class="profile-boxProfileCard  module">
                                         <table class="business_data_table">
@@ -233,7 +269,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </div>
                                 </div>
                             </a>
-                            <div class="full-box-module business_data">
+                            <div class="full-box-module business_data fw">
                                 <div class="profile-boxProfileCard  module">
                                     <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>"> 
                                         <div class="head_details1">
@@ -246,7 +282,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </table>
                                 </div>
                             </div>
-                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
+                            <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
                                 <div class="full-box-module business_data">
                                     <div class="profile-boxProfileCard  module buisness_he_module" >
                                         <div class="head_details">
