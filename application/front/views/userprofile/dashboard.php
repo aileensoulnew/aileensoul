@@ -5,13 +5,41 @@
             <div class="dash-left-title">
                 <h3><i class="fa fa-info-circle"></i> Information</h3>
             </div>
-            <table width="100%">
+            <div class="dash-info-box">
+                <h4>Bio</h4>
+                <p dd-text-collapse dd-text-collapse-max-length="120" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
+            </div>
+            <div class="dash-info-box">
+                <h4>Date of Birth</h4>
+                <p>{{details_data.DOB}}</p>
+            </div>
+            
+            <div class="dash-info-box" ng-if="user_education.length > 0">
+                <h4>Education</h4>
+                <ul ng-repeat="user_edu in user_education">
+                    <li ng-if="user_edu.end_date_str == '' || user_edu.end_date_str == null">Studying at {{user_edu.edu_school_college}}</li>
+                    <li ng-if="user_edu.end_date_str != '' && user_edu.end_date_str != null">Studided at {{user_edu.edu_school_college}}</li>
+                </ul>
+            </div>
+            <div class="dash-info-box" ng-if="user_experience.length > '0'">
+                <h4>Experience</h4>
+                <ul ng-repeat="user_exp in user_experience">                    
+                    <li>{{user_exp.designation}} at {{user_exp.exp_company_name}}</li>
+                </ul>
+            </div>
+            <div class="dash-info-box" ng-if="user_skills.length > '0'">
+                <h4>Skills</h4>
+                <ul class="skill-list">
+                    <li ng-repeat="skills in user_skills">{{skills.name}}</li>
+                </ul>
+            </div>
+            <!-- <table width="100%">
                 <tr>
-                    <td><img src = "<?php echo base_url('assets/n-images/user.png?ver=' . time()) ?>"></td>
+                    <td><img src = "<?php //echo base_url('assets/n-images/user.png?ver=' . time()) ?>"></td>
                     <td>{{details_data.fullname}}</td>
                 </tr>
                 <tr>
-                    <td><img src = "<?php echo base_url('assets/n-images/designation.png?ver=' . time()) ?>"></td>
+                    <td><img src = "<?php //echo base_url('assets/n-images/designation.png?ver=' . time()) ?>"></td>
                     <td ng-if="details_data.Designation !==undefined">
                         {{details_data.Designation}}
                     </td>
@@ -21,21 +49,21 @@
 
                 </tr>
                 <tr>
-                    <td><img src = "<?php echo base_url('assets/n-images/industry.png?ver=' . time()) ?>"></td>
+                    <td><img src = "<?php //echo base_url('assets/n-images/industry.png?ver=' . time()) ?>"></td>
                     <td>
                         <span ng-if="details_data.Industry !==undefined">{{details_data.Industry}}</span>
                         <span ng-if="details_data.University !==undefined">{{details_data.University}}</span>
                     </td>
                 </tr>
                 <tr>
-                    <td><img src = "<?php echo base_url('assets/n-images/location-lb.png?ver=' . time()) ?>"></td>
+                    <td><img src = "<?php //echo base_url('assets/n-images/location-lb.png?ver=' . time()) ?>"></td>
                     <td>{{details_data.City}}</td>
                 </tr>
                  <tr>
-                    <td><img src = "<?php echo base_url('assets/n-images/dob.png?ver=' . time()) ?>"></td>
+                    <td><img src = "<?php //echo base_url('assets/n-images/dob.png?ver=' . time()) ?>"></td>
                     <td>{{details_data.DOB}}</td>
                 </tr>
-            </table>
+            </table> -->
         </div>
         <div class="media-box latest_photos">
             <div class="dash-left-title" liveslug="{{live_slug}}" userslug="{{user_slug}}">
@@ -856,6 +884,70 @@
                             </a> -->
                         </div>
                     </data-owl-carousel>
+                </div>
+            </div>
+
+            <!-- <div class="dtl-box">
+                <div class="dtl-title">
+                    <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png'); ?>"><span>Website</span>
+                </div>
+                <div class="dtl-dis">
+                    <h4>Social</h4>
+                    <ul class="social-link-list">
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png'); ?>"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png'); ?>"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png'); ?>"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png'); ?>"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png'); ?>"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png'); ?>"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png'); ?>"></a></li>
+                    </ul>
+                    <h4 class="pt20 fw">Personal</h4>
+                    <ul class="social-link-list">
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pr-web'); ?>.png"></a></li>
+                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pr-web'); ?>.png"></a></li>
+                    </ul>
+                </div>
+            </div> -->
+            <div class="dtl-box">                
+                <div id="social-link-loader" class="dtl-dis">
+                    <div class="text-center">
+                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                    </div>
+                </div>
+                <div id="social-link-body" style="display: none;">
+                    <div class="dtl-dis">
+                        <div class="no-info" ng-if="user_social_links.length < '1' && user_personal_links.length < '1'">
+                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                            <span>Enter your social profile links. Let people stay connected with you on other platforms too.</span>
+                        </div>
+                        <div class="social-links" ng-if="user_social_links.length > '0'">
+                            <h4>Social</h4>
+                            <ul class="social-link-list">
+                                <li ng-repeat="social_links in user_social_links">
+                                    <a href="{{social_links.user_links_txt}}" target="_self">
+                                        <img ng-if="social_links.user_links_type == 'Facebook'" src="<?php echo base_url(); ?>assets/n-images/detail/fb.png">
+                                        <img ng-if="social_links.user_links_type == 'Google'" src="<?php echo base_url(); ?>assets/n-images/detail/g-plus.png">
+                                        <img ng-if="social_links.user_links_type == 'LinkedIn'" src="<?php echo base_url(); ?>assets/n-images/detail/in.png">
+                                        <img ng-if="social_links.user_links_type == 'Pinterest'" src="<?php echo base_url(); ?>assets/n-images/detail/pin.png">
+                                        <img ng-if="social_links.user_links_type == 'Instagram'" src="<?php echo base_url(); ?>assets/n-images/detail/insta.png">
+                                        <img ng-if="social_links.user_links_type == 'GitHub'" src="<?php echo base_url(); ?>assets/n-images/detail/git.png">
+                                        <img ng-if="social_links.user_links_type == 'Twitter'" src="<?php echo base_url(); ?>assets/n-images/detail/twt.png">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="social-links" ng-if="user_personal_links.length > '0'">
+                            <h4 class="pt20 fw">Personal</h4>
+                            <ul class="social-link-list">
+                                <li ng-repeat="user_p_links in user_personal_links">
+                                    <a href="{{user_p_links.user_links_txt}}" target="_self">
+                                        <img src="<?php echo base_url(); ?>assets/n-images/detail/pr-web.png">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

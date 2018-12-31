@@ -1941,7 +1941,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#progress_div').hide();
             $('.progress-bar').css("width",0);
             $('.sr-only').text(0+"%");
-            check_no_post_data();
+            // check_no_post_data();
             $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
@@ -1965,7 +1965,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 for (var i in success.data) {
                     $scope.postData.push(success.data[i]);
                 }
-                check_no_post_data();
+                // check_no_post_data();
             } else {
                 // processing = false;
                 // isLoadingData = false;
@@ -2017,7 +2017,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             details_data = success.data.detail_data;
+            details_data.DOB = details_data.DOB.substring(0,details_data.DOB.length - 4)
             $scope.details_data = details_data;            
+            $scope.user_bio = success.data.user_bio;            
+            $scope.user_skills = success.data.skills_data;
+
             $scope.$parent.title = "About "+details_data.fullname+" | Aileensoul";
             if(details_data.Degree != "")
             {
@@ -3801,12 +3805,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         });
     }
 
-    function check_no_post_data() {
+    /*function check_no_post_data() {
         var numberPost = $scope.postData.length;
         if (numberPost == 0) {
             $('.all_user_post').html(no_user_post_html);
         }
-    }
+    }*/
     
     $scope.like_user_list = function (post_id) {
         $http({
@@ -3825,7 +3829,81 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         });
 
     }
-    scopeHold = $scope;    
+    scopeHold = $scope;
+    
+    $scope.get_user_links = function()
+    {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_links',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.user_social_links = result.data.user_social_links_data;
+                $scope.user_personal_links = result.data.user_personal_links_data;                
+            }
+            else
+            {
+                $scope.user_social_links = [];
+                $scope.user_personal_links = [];
+            }
+            $("#social-link-loader").hide();
+            $("#social-link-body").show();
+
+        });
+    };
+    $scope.get_user_links();
+
+    $scope.get_user_experience = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_experience',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_experience = result.data.user_experience;
+                $scope.user_experience = user_experience;
+                $scope.exp_years = result.data.exp_years;
+                $scope.exp_months = result.data.exp_months;
+            }
+        });
+    }
+    $scope.get_user_experience();
+
+    $scope.get_user_education = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_education',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_education = result.data.user_education;
+                $scope.user_education = user_education;
+            }
+            $("#edution-loader").hide();
+            $("#edution-body").show();
+
+        });
+    }
+    $scope.get_user_education();
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
