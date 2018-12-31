@@ -280,8 +280,10 @@
 					<p>Open for work.</p>
 				</div>
 				<div class="dash-info-box">
-					<h4>Latest Experience </h4>
+					<h4>Experience </h4>
 					<ul>
+						<li>at aileensoul pvt ltd.</li>
+						<li>at aileensoul pvt ltd.</li>
 						<li>at aileensoul pvt ltd.</li>
 					</ul>
 				</div>

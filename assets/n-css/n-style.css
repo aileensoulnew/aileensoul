@@ -536,6 +536,10 @@ border-bottom: 1px solid #d2d2d2;}
 .right-info-box .dis-list li span{font-size:16px; font-weight:normal; color:#5c5c5c;}
 .right-info-box .dtl-box-height{height:260px;}
 .right-info-box .dtl-box-height .about-more{padding:0;}
+.right-info-box .dtl-dis.dis-accor .panel-heading{padding:10px 0;}
+.right-info-box .dis-left{width:40px;}
+.right-info-box .dis-left .dis-left-img{width:40px; height:40px;}
+.right-info-box .dis-middle{width:254px;}
 
 
 .dash-info-box{font-size:15px; color:#7b7b7b; width:100%; float:left; margin-bottom:10px;}
