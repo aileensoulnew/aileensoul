@@ -217,15 +217,15 @@ class Business_profile_live extends MY_Controller {
         if($id != ''){
             $id = $this->business_model->removelocationfromslug($id);
         }
-        $business_main_slug = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_slug;
+        $business_main_slug = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_slug;        
         $business_main_profile = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_profile_id;
 
         if ($id != '') {
             $contition_array = array('business_slug' => $id, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
-            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,pincode,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,pincode,industriyal,business_slug,user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         } else {
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
-            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,pincode,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,pincode,industriyal,business_slug,user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }        
         if ($business_main_slug == $id) {
             $this->data['is_eligable_for_post'] = 1;
@@ -249,7 +249,7 @@ class Business_profile_live extends MY_Controller {
         }
 
         $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
-        
+
         $company_name = $this->get_company_name($id);
         $industry_name = $this->db->get_where('industry_type', array('industry_id' => $business_data[0]['industriyal'], 'status' => '1'))->row()->industry_name;
         $cityname = $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
@@ -11905,7 +11905,7 @@ Your browser does not support the audio tag.
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
 
-        $contition_array = array('user_id' => $user_id);
+        $contition_array = array('user_id' => $user_id,'status' => '1');
         $story_data = $this->common->select_data_by_condition('business_user_how_start', $contition_array, $sel_data = 'story_file', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $story_file = (isset($story_data) && !empty($story_data) ? $story_data[0]['story_file'] : '');
