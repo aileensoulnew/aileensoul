@@ -12,29 +12,21 @@ $contact_email_txt = $business_data[0]['contact_email'];
 $login_user_id = $this->session->userdata('aileenuser');
 ?>
 <!DOCTYPE html>
-<html>
+<html ng-app="businessProfileApp" ng-controller="businessProfileController">
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?>  
-        <?php if (IS_BUSINESS_CSS_MINIFY == '0') { ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
-            <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-        <?php } else { ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-            <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/business.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
-        <?php } ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
+        
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
+        <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/developer.css?ver=' . time()); ?>" />
 
         <style type="text/css">
             .two-images, .three-image, .four-image{
@@ -298,6 +290,44 @@ $login_user_id = $this->session->userdata('aileenuser');
                                 </table>
                             </div>
                         </div>
+                        <div class="left-info-box">
+                            <div class="dash-left-title">
+                                <h3><i class="fa fa-info-circle"></i> Information</h3>
+                            </div>
+                                <div class="dash-info-box" ng-if="business_info_data.business_ext_benifit">
+                                    <h4>Specialties </h4>
+                                    <ul class="skill-list">
+                                        <li ng-repeat="benefits in business_info_data.business_ext_benifit.split(',')">{{benefits}}</li>
+                                    </ul>
+                                </div>
+                                <div class="dash-info-box" ng-if="bus_opening_hours">
+                                    <h4>Hours of Operation</h4>
+                                    <p ng-if="bus_opening_hours.opening_hour == '1'">Always open</p>
+                                    <p ng-if="bus_opening_hours.opening_hour == '2'">On Specified Days</p>
+                                    <p ng-if="bus_opening_hours.opening_hour == '3'">Appointment needed</p>
+                                    <ul ng-if="bus_opening_hours.opening_hour == '2'">
+                                        <li ng-if="bus_opening_hours.sun_from_time && bus_opening_hours.sun_from_ap && bus_opening_hours.sun_to_time && bus_opening_hours.sun_to_ap">Sunday : {{bus_opening_hours.sun_from_time}} {{bus_opening_hours.sun_from_ap}} to {{bus_opening_hours.sun_to_time}} {{bus_opening_hours.sun_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.mon_from_time && bus_opening_hours.mon_from_ap && bus_opening_hours.mon_to_time && bus_opening_hours.mon_to_ap">Monday : {{bus_opening_hours.mon_from_time}} {{bus_opening_hours.mon_from_ap}} to {{bus_opening_hours.mon_to_time}} {{bus_opening_hours.mon_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.tue_from_time && bus_opening_hours.tue_from_ap && bus_opening_hours.tue_to_time && bus_opening_hours.tue_to_ap">Tuesday : {{bus_opening_hours.tue_from_time}} {{bus_opening_hours.tue_from_ap}} to {{bus_opening_hours.tue_to_time}} {{bus_opening_hours.tue_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.wed_from_time && bus_opening_hours.wed_from_ap && bus_opening_hours.wed_to_time && bus_opening_hours.wed_to_ap">Wednesday : {{bus_opening_hours.wed_from_time}} {{bus_opening_hours.wed_from_ap}} to {{bus_opening_hours.wed_to_time}} {{bus_opening_hours.wed_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.thu_from_time && bus_opening_hours.thu_from_ap && bus_opening_hours.thu_to_time && bus_opening_hours.thu_to_ap">Thursday : {{bus_opening_hours.thu_from_time}} {{bus_opening_hours.thu_from_ap}} to {{bus_opening_hours.thu_to_time}} {{bus_opening_hours.thu_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.fri_from_time && bus_opening_hours.fri_from_ap && bus_opening_hours.fri_to_time && bus_opening_hours.fri_to_ap">Friday : {{bus_opening_hours.fri_from_time}} {{bus_opening_hours.fri_from_ap}} to {{bus_opening_hours.fri_to_time}} {{bus_opening_hours.fri_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.sat_from_time && bus_opening_hours.sat_from_ap && bus_opening_hours.sat_to_time && bus_opening_hours.sat_to_ap">Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</li>
+                                    </ul>
+                                </div>
+                                <div class="dash-info-box" ng-if="business_info_data.business_mission != ''">
+                                    <h4>Mission</h4>
+                                    <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{business_info_data.business_mission}}" dd-text-collapse-cond="true">{{business_info_data.business_mission}}</p>
+                                </div>
+                                <div class="dash-info-box" ng-if="business_info_data.business_tagline != ''">
+                                    <h4>Tagline</h4>
+                                    <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{business_info_data.business_tagline}}" dd-text-collapse-cond="true">{{business_info_data.business_tagline}}</p>
+                                </div>                                    
+                                <div class="dash-info-box" ng-if="business_info_data.business_year_found">
+                                    <h4>Year Founded</h4>
+                                    <p>{{business_info_data.business_year_found}}</p>
+                                </div>
+                        </div>
                         <a href="javascript:void(0);" onclick="register_profile();">
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard  module buisness_he_module" >
@@ -371,11 +401,304 @@ $login_user_id = $this->session->userdata('aileenuser');
 
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 						<?php $this->load->view('right_add_box'); ?>
+                        <div>
+                            <div class="right-info-box" ng-if="user_social_links.length > '0' || user_personal_links.length > '0'">
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/website.png"><span>Website</span>
+                                </div>
+                                <div class="dtl-dis">
+                                    <div class="social-links" ng-if="user_social_links.length > '0'">
+                                        <h4>Social</h4>
+                                        <ul class="social-link-list">
+                                            <li ng-repeat="social_links in user_social_links">
+                                                <a href="{{social_links.user_links_txt}}" target="_self">
+                                                    <img ng-if="social_links.user_links_type == 'Facebook'" src="<?php echo base_url(); ?>assets/n-images/detail/fb.png">
+                                                    <img ng-if="social_links.user_links_type == 'Google'" src="<?php echo base_url(); ?>assets/n-images/detail/g-plus.png">
+                                                    <img ng-if="social_links.user_links_type == 'LinkedIn'" src="<?php echo base_url(); ?>assets/n-images/detail/in.png">
+                                                    <img ng-if="social_links.user_links_type == 'Pinterest'" src="<?php echo base_url(); ?>assets/n-images/detail/pin.png">
+                                                    <img ng-if="social_links.user_links_type == 'Instagram'" src="<?php echo base_url(); ?>assets/n-images/detail/insta.png">
+                                                    <img ng-if="social_links.user_links_type == 'GitHub'" src="<?php echo base_url(); ?>assets/n-images/detail/git.png">
+                                                    <img ng-if="social_links.user_links_type == 'Twitter'" src="<?php echo base_url(); ?>assets/n-images/detail/twt.png">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="social-links" ng-if="user_personal_links.length > '0'">
+                                        <h4 class="pt20 fw">Personal</h4>
+                                        <ul class="social-link-list">
+                                            <li ng-repeat="user_p_links in user_personal_links">
+                                                <a href="{{user_p_links.user_links_txt}}" target="_self">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/pr-web.png">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-info-box">
+                                
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/review.png"><span>Reviews</span>
+                                </div>
+                                <div class="dtl-dis">
+                                    <div class="no-info" ng-if="review_data.length < '1'">
+                                        <img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+                                        <?php if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
+                                        <span>Be the first to post your review.</span>
+                                        <?php else: ?>
+                                            <span>There are no reviews right now.</span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
+                                        <span class="total-rat">{{avarage_review}}</span>
+                                        <span class="rating-star">
+                                            <input id="avarage_review" type="number" value="{{avarage_review}}">
+                                        </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
+                                    </div>
+                                    <ul class="review-list">
+                                        <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
+                                            <div class="review-left" ng-if="!review_list.user_image">
+                                                <div class="rev-img">
+                                                    <div class="post-img-profile">
+                                                        {{review_list.company_name | limitTo:1}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-left" ng-if="review_list.user_image">
+                                                <img ng-src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
+                                            </div>
+                                            <div class="review-right">
+                                                <h4>{{review_list.company_name | wordFirstCase}}</h4>
+                                                <div class="rating-star-cus">
+                                                    <span class="rating-star">
+                                                        <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
+                                                    </span>
+                                                </div>
+                                                <div class="review-dis" ng-if="review_list.review_desc">
+                                                    {{review_list.review_desc}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="form-group"></div>
+                                </div>                          
+                            </div>
+                            <div class="right-info-box" ng-if="story_data">
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/about.png"><span>Story</span>
+                                </div>
+                                <div class="dtl-dis dtl-box-height">
+                                    <div class="bus-story" ng-if="story_data.story_file" ng-click="open_business_story();">
+                                        <img ng-src="<?php echo BUSINESS_USER_STORY_UPLOAD_URL;?>{{story_data.story_file}}">
+                                    </div>
+                                    <div class="bus-story" ng-if="!story_data.story_file" ng-click="open_business_story();">
+                                        <div class="gradient-bg"></div>
+                                    </div>
+                                    <ul class="dis-list list-ul-cus">
+                                        <li>
+                                            <span>Description</span>
+                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_desc}}" dd-text-collapse-cond="true">{{story_data.story_desc}}</label>
+                                        </li>
+                                    
+                                        <li>
+                                            <span>What differentiate you from your competitiors</span>
+                                            <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_diff}}" dd-text-collapse-cond="true">{{story_data.story_diff}}</label>
+                                        </li>
+                                
+                                    </ul>
+                                </div>
+                                <div class="about-more" ng-if="story_data">
+                                    <a href="javascript:void(0);" ng-click="open_business_story();">View More <img src="<?php echo base_url().'assets/'; ?>n-images/detail/down-arrow.png"></a>
+                                </div>
+                                
+                            </div>
+                            <div class="right-info-box add-menu" ng-if="menu_info_data.length > '0'">
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/menu.png"><span>Menu</span>
+                                </div>
+                                <div class="dtl-dis">
+                                    <ul class="dis-list">
+                                        <li ng-repeat="menu_info in menu_info_data | limitTo:6">
+                                            <p class="screen-shot" data-target="#add-menu" data-toggle="modal">
+                                                <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>                                  
+                            </div>
+                            <div class="right-info-box" ng-if="jobs_data.length > '0'">
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-opning.png?ver=' . time()) ?>"><span>Job Openings </span>
+                                </div>
+                                <div class="dtl-dis dis-accor">
+                                    <div class="panel-group">
+                                        
+                                        <div class="panel panel-default" ng-repeat="job in jobs_data">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    <a href="<?php echo base_url(); ?>{{job.post_name_txt | slugify}}-job-vacancy-in-{{job.slug_city}}-{{job.user_id}}-{{job.post_id}}" target="_self">
+                                                        <div class="dis-left">
+                                                            <div class="dis-left-img img-cus">
+                                                                <img ng-if="!job.comp_logo" src="<?php echo base_url('assets/n-images/detail/job-def.png?ver=' . time()) ?>">
+                                                                <img ng-if="job.comp_logo" ng-src="<?php echo REC_PROFILE_MAIN_UPLOAD_URL; ?>{{job.comp_logo}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="dis-middle">
+                                                            <h4>{{job.post_name_txt}}</h4>
+                                                            <p>{{job.comp_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
 					</div>
 
                 </div>
             </div>
         </section>
+
+        <div style="display:none;" class="modal fade dtl-modal timeline-cus bus-start-cus" id="bus-name-started-display" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
+                    <div class="modal-body-cus"> 
+                        <div class="dtl-title">
+                            <span>How <?php echo ucwords($business_data[0]['company_name']); ?> Started?</span>
+                        </div>                  
+                        <div class="dtl-dis">                       
+                            <div class="bus-story no-img-upload" style="float: left;width: 100%;">
+                                <label class="upload-file">                                 
+                                    <span id="upload-file1" style="display: none;">Change</span>
+                                </label>
+                            </div>                                              
+                            <div class="form-group">
+                                <h4>Description</h4>
+                                <label>{{story_data.story_desc}}</label>
+                            </div>
+                            <div class="form-group">
+                                <h4>Difference between <?php echo ucwords($business_data[0]['company_name']); ?> and competitiors</h4>
+                                <label>{{story_data.story_diff}}</label>
+                            </div>
+                        </div>
+                        <div class="dtl-btn bottom-btn">
+                            <a href="#" class="save" data-dismiss="modal">
+                                <span>Close</span>
+                            </a>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade dtl-modal" id="add-menu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
+                    <div class="modal-body-cus"> 
+                        <div class="dtl-title">
+                            <span class="timeline-tital">Menu</span>
+                        </div>                            
+                        <div class="dtl-dis" ng-if="menu_info_data.length > '0'">
+                            <div class="menu-privew">
+                                <ul>
+                                    <li ng-repeat="menu_info in menu_info_data">
+                                        <p ng-click="openModal();currentSlide($index + 1)">
+                                            <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="dtl-btn bottom-btn">
+                            <a href="#" class="save" data-dismiss="modal">
+                                <span>Close</span>
+                            </a>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalPhotos" class="modal modal2" style="display: none;">
+            <button type="button" class="new-modal-close" data-dismiss="modal" ng-click="closeModal()">×</button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                        <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                    </div>
+                    <div class="mySlides" ng-repeat="menu_info in menu_info_data">
+                        <div class="numbertext"></div>
+                        <div class="slider_img_p">                  
+                            <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL ?>{{menu_info.file_name}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">                       
+                        </div>
+                    </div>          
+                </div>
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+            </div> 
+            <a class="prev" style="left:0px;" ng-click="plusSlides(-1)">&#10094;</a>
+            <a class="next" ng-click="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
+                    <div class="modal-body-cus"> 
+                        <div class="dtl-title">
+                            <span>Reviews</span>
+                        </div>
+                        <form id="business_review" name="business_review" ng-validate="business_review_validate">
+                            <div class="dtl-dis">
+                                <div class="form-group">
+                                    <div class="rev-img">
+                                        <?php if($login_bussiness_data->business_user_image != ''): ?>
+                                        <img src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL.$login_bussiness_data->business_user_image; ?>">
+                                        <?php else: ?>
+                                            <div class="post-img-profile">
+                                                <?php echo strtoupper(substr($login_bussiness_data->company_name, 0,1)); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="total-rev-top">
+                                        <h4><?php echo $login_bussiness_data->company_name; ?></h4>
+                                        <span class="rating-star">
+                                            <input id="review_star" value="5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea type="text" placeholder="Description" id="review_desc" name="review_desc" maxlength="700" ng-model="review_desc"></textarea>
+                                    <span class="pull-right">{{700 - review_desc.length}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="upload-file">
+                                        <span class="fw">Upload Photo</span>
+                                        <input type="file" id="review_file" name="review_file">
+                                        <span id="review_file_error" class="error" style="display: none;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dtl-btn bottom-btn">
+                                <a id="save_review" href="#" ng-click="save_review()" class="save">
+                                    <span>Save</span>
+                                </a>
+                                <div id="review_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade message-box" id="likeusermodal" role="dialog">
             <div class="modal-dialog modal-lm">
@@ -455,350 +778,46 @@ $login_user_id = $this->session->userdata('aileenuser');
             var user_id = '<?php echo $this->session->userdata('aileenuser') ?>';
         </script>
         <script>
-
-             function open_profile() {
+            function open_profile() {
                 register_profile();
-             }
-            function login_profile() { 
-                // $('#register').modal('hide');
-                // $('#login').modal('show');
+            }
+            function login_profile() {                 
                 $('#bidmodal').modal('show');
             }
             function register_profile() {
-                if(ismainregister == false || isbusiness_deactive == true){
-                    // $('#login').modal('hide');
-                    // $('#register').modal('show');
+                if(ismainregister == false || isbusiness_deactive == true){                   
                     $('#bidmodal').modal('show');
                 }else{
                     window.location.href = '<?php echo business_register_step1; ?>'
                 }
             }
-            function forgot_profile() {
-                $('#forgotPassword').modal('show');
-                $('#register').modal('hide');
-                $('#login').modal('hide');
-                $('body').addClass('modal-open-other'); 
-            }
-
-
-            $('.modal-close').click(function(e){ 
-                $('body').removeClass('modal-open-other'); 
-                //$('#login').modal('show');
-            });
         </script>
-        <script type="text/javascript">
-            function login()
-            {
-                document.getElementById('error1').style.display = 'none';
-            }
-            $(document).ready(function () {
-                $("#login_form").validate({
-                    rules: {
-                        email_login: {
-                            required: true,
-                        },
-                        password_login: {
-                            required: true,
-                        }
-                    },
-                    messages:
-                            {
-                                email_login: {
-                                    required: "Please enter email address",
-                                },
-                                password_login: {
-                                    required: "Please enter password",
-                                }
-                            },
-                    submitHandler: submitForm
-                });
-                function submitForm()
-                {
 
-                    var email_login = $("#email_login").val();
-                    var password_login = $("#password_login").val();
-                    var post_data = {
-                        'email_login': email_login,
-                        'password_login': password_login,
-                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url() ?>login/business_check_login',
-                        data: post_data,
-                        dataType: "json",
-                        beforeSend: function ()
-                        {
-                            $("#error").fadeOut();
-                            $("#btn1").html('Login');
-                        },
-                        success: function (response)
-                        {
-                            if (response.data == "ok") {
-                                $("#btn1").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="Loader" /> &nbsp; Login');
-                                if (response.is_bussiness == '1') {
-                                    window.location = "<?php echo base_url() ?>company/" + slug;
-                                } else {
-                                    window.location = "<?php echo base_url() ?>business-search";
-                                }
-                            } else if (response.data == "password") {
-                                $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
-                                document.getElementById("password_login").classList.add('error');
-                                document.getElementById("password_login").classList.add('error');
-                                $("#btn1").html('Login');
-                            } else {
-                                $("#errorlogin").html('<label for="email_login" class="error">Please enter a valid email.</label>');
-                                document.getElementById("email_login").classList.add('error');
-                                document.getElementById("email_login").classList.add('error');
-                                $("#btn1").html('Login');
-                            }
-                        }
-                    });
-                    return false;
-                }
-            });
-        </script>
-        <script>
-            $(document).ready(function () {
-                $.validator.addMethod("lowercase", function (value, element, regexpr) {
-                    return regexpr.test(value);
-                }, "Email Should be in Small Character");
-
-                $("#register_form").validate({
-                    rules: {
-                        first_name: {
-                            required: true,
-                        },
-                        last_name: {
-                            required: true,
-                        },
-                        email_reg: {
-                            required: true,
-                            email: true,
-                            //lowercase: /^[0-9a-z\s\r\n@!#\$\^%&*()+=_\-\[\]\\\';,\.\/\{\}\|\":<>\?]+$/,
-                            remote: {
-                                url: "<?php echo site_url() . 'registration/check_email' ?>",
-                                type: "post",
-                                data: {
-                                    email_reg: function () {
-                                        // alert("hi");
-                                        return $("#email_reg").val();
-                                    },
-                                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
-                                },
-                            },
-                        },
-                        password_reg: {
-                            required: true,
-                        },
-                        selday: {
-                            required: true,
-                        },
-                        selmonth: {
-                            required: true,
-                        },
-                        selyear: {
-                            required: true,
-                        },
-                        selgen: {
-                            required: true,
-                        }
-                    },
-
-                    groups: {
-                        selyear: "selyear selmonth selday"
-                    },
-                    messages:
-                            {
-                                first_name: {
-                                    required: "Please enter first name",
-                                },
-                                last_name: {
-                                    required: "Please enter last name",
-                                },
-                                email_reg: {
-                                    required: "Please enter email address",
-                                    remote: "Email address already exists",
-                                },
-                                password_reg: {
-                                    required: "Please enter password",
-                                },
-
-                                selday: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selmonth: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selyear: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selgen: {
-                                    required: "Please enter your gender",
-                                }
-
-                            },
-                    submitHandler: submitRegisterForm
-                });
-                /* register submit */
-                function submitRegisterForm()
-                {
-                    var first_name = $("#first_name").val();
-                    var last_name = $("#last_name").val();
-                    var email_reg = $("#email_reg").val();
-                    var password_reg = $("#password_reg").val();
-                    var selday = $("#selday").val();
-                    var selmonth = $("#selmonth").val();
-                    var selyear = $("#selyear").val();
-                    var selgen = $("#selgen").val();
-                    var post_data = {
-                        'first_name': first_name,
-                        'last_name': last_name,
-                        'email_reg': email_reg,
-                        'password_reg': password_reg,
-                        'selday': selday,
-                        'selmonth': selmonth,
-                        'selyear': selyear,
-                        'selgen': selgen,
-                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-                    }
-                    var todaydate = new Date();
-                    var dd = todaydate.getDate();
-                    var mm = todaydate.getMonth() + 1; //January is 0!
-                    var yyyy = todaydate.getFullYear();
-
-                    if (dd < 10) {
-                        dd = '0' + dd
-                    }
-
-                    if (mm < 10) {
-                        mm = '0' + mm
-                    }
-
-                    var todaydate = yyyy + '/' + mm + '/' + dd;
-                    var value = selyear + '/' + selmonth + '/' + selday;
-
-
-                    var d1 = Date.parse(todaydate);
-                    var d2 = Date.parse(value);
-                    if (d1 < d2) {
-                        $(".dateerror").html("Date of birth always less than to today's date.");
-                        return false;
-                    } else {
-                        if ((0 == selyear % 4) && (0 != selyear % 100) || (0 == selyear % 400))
-                        {
-                            if (selmonth == 4 || selmonth == 6 || selmonth == 9 || selmonth == 11) {
-                                if (selday == 31) {
-                                    $(".dateerror").html("This month has only 30 days.");
-                                    return false;
-                                }
-                            } else if (selmonth == 2) { //alert("hii");
-                                if (selday == 31 || selday == 30) {
-                                    $(".dateerror").html("This month has only 29 days.");
-                                    return false;
-                                }
-                            }
-                        } else {
-                            if (selmonth == 4 || selmonth == 6 || selmonth == 9 || selmonth == 11) {
-                                if (selday == 31) {
-                                    $(".dateerror").html("This month has only 30 days.");
-                                    return false;
-                                }
-                            } else if (selmonth == 2) {
-                                if (selday == 31 || selday == 30 || selday == 29) {
-                                    $(".dateerror").html("This month has only 28 days.");
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url() ?>registration/reg_insert',
-                        data: post_data,
-                        dataType: 'json',
-                        beforeSend: function ()
-                        {
-                            $("#register_error").fadeOut();
-                            $("#btn1").html('Create an account');
-                        },
-                        success: function (response)
-                        {
-                            if (response.okmsg == "ok") {
-                                $("#btn-register").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="Loader"/> &nbsp; Sign Up ...');
-
-                                window.location = "<?php echo base_url() ?>business-search/";
-                            } else {
-                                $("#register_error").fadeIn(1000, function () {
-                                    $("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
-                                    $("#btn1").html('Create an account');
-                                });
-                            }
-                        }
-                    });
-                    return false;
-                }
-            });
-
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#forgot_password").validate({
-                    rules: {
-                        forgot_email: {
-                            required: true,
-                            email: true,
-                        }
-                    },
-                    messages: {
-                        forgot_email: {
-                            required: "Email Address Is Required.",
-                        }
-                    },
-                     submitHandler: submitforgotForm
-                });
-
-                function submitforgotForm()
-                {
-
-                    var email_login = $("#forgot_email").val();
-
-                    var post_data = {
-                        'forgot_email': email_login,
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: base_url + 'profile/forgot_live',
-                        data: post_data,
-                        dataType: "json",
-                        beforeSend: function ()
-                        {
-                            $("#error").fadeOut();
-                        },
-                        success: function (response)
-                        {
-                            if (response.data == "success") {
-                                //  alert("login");
-                                $("#forgotbuton").html(response.message);
-                                setTimeout(function () {
-                                    $('#forgotPassword').modal('hide');
-                                    $('#login').modal('show');
-                                    $("#forgotbuton").html('');
-                                    document.getElementById("forgot_email").value = "";
-                                }, 5000); // milliseconds
-                                //window.location = base_url + "job/home/live-post";
-                            } else {
-                                $("#forgotbuton").html(response.message);
-                            }
-                        }
-                    });
-                    return false;
-                }            /* validation */
-            });
-        </script>
         
+        <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>">
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+        <script type="text/javascript">
+            var user_slug = '<?php echo $business_data[0]['business_slug']; ?>';
+            var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
+            
+            var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';
+            var to_user_id = '<?php echo $business_data[0]['user_id']; ?>';
+            
+            var app = angular.module("businessProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
+        </script>
+     
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/user_dashboard.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/dashboard_new.js?ver=' . time()); ?>"></script>
         
         <script>
             $(document).on('click', '[data-toggle*=modal]', function () {
@@ -978,5 +997,6 @@ $login_user_id = $this->session->userdata('aileenuser');
         }
         </script>
         <?php endif; ?>
+        <script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
     </body>
 </html>

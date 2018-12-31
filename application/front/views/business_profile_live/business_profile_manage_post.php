@@ -532,8 +532,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <h4>{{review_list.company_name | wordFirstCase}}</h4>
                                                     <div class="rating-star-cus">
                                                         <span class="rating-star">
-                                                        <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
-                                                            </span>
+                                                            <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
+                                                        </span>
                                                     </div>
                                                     <div class="review-dis" ng-if="review_list.review_desc">
                                                         {{review_list.review_desc}}
@@ -594,7 +594,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </div>
                                     <div class="dtl-dis dis-accor">
                                         <div class="panel-group">
-                                            
+
                                             <div class="panel panel-default" ng-repeat="job in jobs_data">
                                                 <div class="panel-heading">
                                                     <div class="panel-title">

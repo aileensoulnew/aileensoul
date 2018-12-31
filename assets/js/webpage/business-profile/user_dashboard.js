@@ -128,7 +128,7 @@ function business_dashboard_post(slug, pagenum) {
         dataType: "html",
         beforeSend: function() {
             if (pagenum == 'undefined') {
-                //  $(".business-all-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+                //  $(".business-all-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
             } else {
                 $('#loader').show();
             }
@@ -179,7 +179,7 @@ function GetBusPhotos() {
         url: base_url + "business_profile/bus_photos",
         data: 'bus_slug=' + slug,
         beforeSend: function() {
-            $(".bus_photos").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+            $(".bus_photos").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
         },
         success: function(data) {
             $('.loader').remove();
@@ -194,7 +194,7 @@ function GetBusVideos() {
         url: base_url + "business_profile/bus_videos",
         data: 'bus_slug=' + slug,
         beforeSend: function() {
-            $(".bus_videos").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+            $(".bus_videos").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
         },
         success: function(data) {
             $('.loader').remove();
@@ -209,7 +209,7 @@ function GetBusAudios() {
         url: base_url + "business_profile/bus_audio",
         data: 'bus_slug=' + slug,
         beforeSend: function() {
-            $(".bus_audios").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+            $(".bus_audios").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
         },
         success: function(data) {
             $('.loader').remove();
@@ -224,7 +224,7 @@ function GetBusPdf() {
         url: base_url + "business_profile/bus_pdf",
         data: 'bus_slug=' + slug,
         beforeSend: function() {
-            $(".bus_pdf").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+            $(".bus_pdf").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
         },
         success: function(data) {
             $('.loader').remove();
@@ -1174,7 +1174,7 @@ function remove_ownpost(abc) {
 
 
 // Get the modal
-var modal = document.getElementById('myModal2');
+/*var modal = document.getElementById('myModal2');
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn1");
 // Get the <span> element that closes the modal
@@ -1816,8 +1816,8 @@ btn.onclick = function() {
 
         // DROP DOWN SCRIPT START 
 
-        /* When the user clicks on the button, 
-         toggle between hiding and showing the dropdown content */
+        //When the user clicks on the button, 
+        //toggle between hiding and showing the dropdown content 
         function myFunction(clicked_id) {
             var dropDownClass = document.getElementById('myDropdown' + clicked_id).className;
             dropDownClass = dropDownClass.split(" ").pop(-1);
@@ -1915,4 +1915,4 @@ btn.onclick = function() {
                 range.select(); //Select the range (make it the visible selection
             }
         }
-    }
+    }*/

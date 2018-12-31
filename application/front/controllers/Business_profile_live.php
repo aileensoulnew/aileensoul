@@ -274,6 +274,7 @@ class Business_profile_live extends MY_Controller {
                 $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
                 $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
                 $this->load->view('business_profile_live/business_dashboard', $this->data);
+                //No login
             }
         }
     }

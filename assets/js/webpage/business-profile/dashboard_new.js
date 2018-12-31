@@ -348,8 +348,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#avarage_review").val($scope.avarage_review);
                     $("#avarage_review").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
                     $(".user-rating").rating({min:0, max:5, step:0.5, size:'sm',readonly:true});
-                    $("#review-loader").hide();
-                    $("#review-body").show();
+                    // $("#review-loader").hide();
+                    // $("#review-body").show();                    
                 },1000);
             }
         });
