@@ -1104,6 +1104,10 @@ class Recruiter extends MY_Controller {
 		$degree = $this->data['degree'] = $this->common->select_data_by_search('degree', $search_condition, $contition_array, $data = '*', $sortby = 'degree_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
 		$postdatas = $this->data['postdata'] = $this->common->select_data_by_id('rec_post', 'post_id', $id, $data = '*', $join_str = array());
+		if(isset($postdatas) && empty($postdatas))
+		{
+			redirect(base_url("recruiter/post"));
+		}
 		//Selected Job titlre fetch
 		$contition_array = array('title_id' => $postdatas[0]['post_name']);
 		$jobtitle = $this->common->select_data_by_condition('job_title', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');

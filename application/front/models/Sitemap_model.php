@@ -708,7 +708,8 @@ class Sitemap_model extends CI_Model {
         $sql = "SELECT fp.*, c.*,fp.user_id as post_user_id 
                 FROM ailee_freelancer_post fp
                 LEFT JOIN ailee_category c on fp.post_field_req = c.category_id 
-                WHERE fp.is_delete = '0' AND fp.status = '1' ORDER BY post_id DESC";
+                LEFT JOIN ailee_freelancer_hire_reg fhr on fhr.user_id = fp.user_id
+                WHERE fp.is_delete = '0' AND fp.status = '1' AND fhr.status = '1' AND fhr.is_delete = '0' ORDER BY post_id DESC";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
