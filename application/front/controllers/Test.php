@@ -12,12 +12,13 @@ class Test extends MY_Controller {
         $this->load->helper('form');
         $this->lang->load('message', 'english');
         $this->load->library('S3');
+        $this->load->library('inbackground');
         $this->load->model('common');
         $this->load->model('email_model');
 
-//        if (!$this->session->userdata('user_id')) {
-//            redirect('login', 'refresh');
-//        }
+       // if (!$this->session->userdata('user_id')) {
+       //     redirect('login', 'refresh');
+       // }
 
         include ('include.php');
         include ('business_include.php');
@@ -68,6 +69,61 @@ class Test extends MY_Controller {
             var_dump($send_email);
             echo "<br>".$key;
         }
+    }
+
+    public function testcount()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        $to = $this->input->post('to');
+        $start = $this->input->post('start');
+
+        $myfile = fopen("test.txt", "w");
+        $txt = "";
+        for($i=$start;$i<=$to;$i++){
+            $txt .= $i."\n";
+        }        
+        fwrite($myfile, $txt);
+        fclose($myfile);        
+    }
+    public function testback()
+    {
+        // $this->testcount();
+        // $url = base_url()."test/testcount";
+        // $param = array("to"=>10,"start"=>1);
+        // $this->inbackground->do_in_background($url, $param);
+        // $url = base_url()."test/testcount";
+        // $param = array("to"=>1000,"start"=>10);
+        // $this->inbackground->do_in_background($url, $param);
+        // echo "done";
+
+        $data1 = array(
+            'fname' => "test",
+            'lname' => "test1",
+            'email' => "test1",
+            'phnno' => "test1",
+            'keyskill' => "test1",
+            'work_job_title' => "test1",
+            'work_job_industry' => "test1",
+            'work_job_city' => "test1",
+            'exp_y' => "test1",
+            'exp_m' => "test1",
+            'experience' => "test1",
+            'created_date' => "test1",
+            'user_id' => "test1",
+            'job_step' => '10',
+            'status' => '1',
+            'is_delete' => '0',
+            'slug' => "test1"
+        );
+        echo count($data1);
+        unset($data1['fname']);
+        print_r($data1);
+        // unset($data1[count($data1)-1]);
+        // print_r($data1);
+        // unset($data1[count($data1)-1]);
+        // print_r($data1);
+
     }
 
   

@@ -4665,18 +4665,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     if(result.success == '1')
                     {
                         $scope.user_research = result.user_research;
-                        $("#user_research_save").removeAttr("style");
-                        $("#user_research_loader").hide();
-                        $("#research_form")[0].reset();
-                        $("#research").modal('hide');
                     }
-                    else
-                    {
-                        $("#user_research_save").removeAttr("style");
-                        $("#user_research_loader").hide();
-                        $("#research_form")[0].reset();
-                        $("#research").modal('hide');
-                    }
+                    research_formdata = new FormData();
+                    $("#user_research_save").removeAttr("style");
+                    $("#user_research_loader").hide();
+                    $("#research_form")[0].reset();
+                    $("#research").modal('hide');
                 }
             });
         }
@@ -5899,6 +5893,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#patent_doc_prev").remove();
         $("#delete_user_patent_modal").remove();
         $("#patent_form")[0].reset();
+        patent_formdata = new FormData();
     };
     $scope.edit_user_patent = function(index){
         $scope.reset_patent_form();        
@@ -6253,6 +6248,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#award_file_prev").remove();
         $("#delete_user_award_modal").remove();
         $("#award_form")[0].reset();
+        award_formdata = new FormData();
     };
     $scope.edit_user_award = function(index){
         $scope.reset_awards_form();
