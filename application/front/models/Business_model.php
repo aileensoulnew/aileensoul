@@ -1172,7 +1172,7 @@ class Business_model extends CI_Model {
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
         $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
-        $this->db->where('LOWER(rp.comp_name)', trim(strtolower($company_name)));
+        $this->db->where('TRIM(LOWER(rp.comp_name))', trim(strtolower($company_name)));
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->order_by('rp.created_date', 'desc');
