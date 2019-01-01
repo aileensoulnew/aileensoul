@@ -4,7 +4,7 @@ $userid = $this->session->userdata('aileenuser');
 $fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastname']);
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="artistDashboardApp" ng-controller="artistDashboardController">
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
@@ -164,73 +164,119 @@ $fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastn
                                     <tr>
                                         <td class="business_data_td1"><i class="fa fa-trophy" aria-hidden="true"></i></td>
                                         <td class="business_data_td2">
+                                            {{artist_basic_info.art_category_txt}}
                                             <?php
-                                   
-                                    $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $artisticdata[0]['other_skill']))->row()->other_category;
+                                            /*$art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $artisticdata[0]['other_skill']))->row()->other_category;
+                                            $category = $artisticdata[0]['art_skill'];
+                                            $category = explode(',' , $category);
+                                            $category_txt = "";
+                                            foreach ($category as $catkey => $catval) {
+                                                $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
+                                                $categorylist[] = ucwords($art_category);
+                                                $category_txt .= ucwords($art_category).",";
+                                            } 
+                                            $listfinal1 = array_diff($categorylist, array('Other'));
+                                            $listFinal = implode(',', $listfinal1);
 
-                                    $category = $artisticdata[0]['art_skill'];
-                                    $category = explode(',' , $category);
-                                    $category_txt = "";
-                                    foreach ($category as $catkey => $catval) {
-                                       $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
-                                       $categorylist[] = ucwords($art_category);
-                                       $category_txt .= ucwords($art_category).",";
-                                     } 
-
-                                    $listfinal1 = array_diff($categorylist, array('Other'));
-                                    $listFinal = implode(',', $listfinal1);
-                                       
-                                    if(!in_array(26, $category)){
-                                     echo $listFinal;
-                                   }else if($artisticdata[0]['art_skill'] && $artisticdata[0]['other_skill']){
-
-                                    $trimdata = $listFinal .','.ucwords($art_othercategory);
-                                    echo trim($trimdata, ',');
-                                   }
-                                   else{
-                                     echo ucwords($art_othercategory);  
-                                  }
-                                    ?>   
-                                </td>
-                                </tr>
-                                 <?php if($artisticdata[0]['art_yourart']){?>
-                                <tr>
-                                <td class="business_data_td1 detaile_map"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></td>
-                                <td class="business_data_td2"><span><?php echo $artisticdata[0]['art_yourart']; ?></span></td>
-                               </tr>
-                               <?php }?>
-
-                                    <?php if($artisticdata[0]['art_desc_art']){?>
-                            <tr>
-                                <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
-                                <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
-                            </tr>
-                            <?php }
-                            if($userid != ""){?>
-                                     <tr>
-                                <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                                <td class="business_data_td2">
-                                    <a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                            <tr>
-                                <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
-                                <td class="business_data_td2"><span>
-                                        <?php
-                                        if ($artisticdata[0]['art_city']) {
-                                            echo $city_txt = $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
-                                            echo",";
-                                        }
-                                        ?> 
-                                        <?php
-                                        if ($artisticdata[0]['art_country']) {
-                                            echo $this->db->select('country_name')->select('country_name')->get_where('countries', array('country_id' => $artisticdata[0]['art_country']))->row()->country_name;
-                                        }
-                                        ?>
-                                    </span></td>
+                                            if(!in_array(26, $category)){
+                                                echo $listFinal;
+                                            }else if($artisticdata[0]['art_skill'] && $artisticdata[0]['other_skill']){
+                                                $trimdata = $listFinal .','.ucwords($art_othercategory);
+                                                echo trim($trimdata, ',');
+                                            }
+                                            else{
+                                                echo ucwords($art_othercategory);  
+                                            }*/
+                                            ?>   
+                                        </td>
                                     </tr>
+                                    <?php /*if($artisticdata[0]['art_yourart']){?>
+                                    <tr>
+                                        <td class="business_data_td1 detaile_map"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></td>
+                                        <td class="business_data_td2"><span><?php echo $artisticdata[0]['art_yourart']; ?></span></td>
+                                    </tr>
+                                    <?php }
+                                    if($artisticdata[0]['art_desc_art']){?>
+                                    <tr>
+                                        <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
+                                        <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
+                                    </tr>
+                                    <?php }
+                                    if($userid != ""){?>
+                                    <tr>
+                                        <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                                        <td class="business_data_td2">
+                                            <a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                    <tr>
+                                        <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
+                                        <td class="business_data_td2">
+                                            <span>
+                                            <?php
+                                            if ($artisticdata[0]['art_city']) {
+                                                echo $city_txt = $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
+                                                echo",";
+                                            }
+                                            ?> 
+                                            <?php
+                                            if ($artisticdata[0]['art_country']) {
+                                                echo $this->db->select('country_name')->select('country_name')->get_where('countries', array('country_id' => $artisticdata[0]['art_country']))->row()->country_name;
+                                            }
+                                            ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php */ ?>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="left-info-box">
+                            <div class="dash-info-box" ng-if="user_bio != ''">
+                                <h4>Bio</h4>
+                                <p dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
+                            </div>                            
+                            <div class="dash-info-box">
+                                <h4>Location </h4>                              
+                                <p ng-if="artist_basic_info.country_name || artist_basic_info.state_name || artist_basic_info.city_name">
+                                    {{artist_basic_info.city_name != '' ? artist_basic_info.city_name : ''}}
+                                    {{artist_basic_info.city_name != '' && artist_basic_info.state_name != '' ? ',' : ''}}
+                                    {{artist_basic_info.state_name != '' ? artist_basic_info.state_name : ''}}
+                                    {{artist_basic_info.state_name != '' && artist_basic_info.country_name != '' ? ',' : ''}}
+                                    {{artist_basic_info.country_name != '' ? artist_basic_info.country_name : ''}}
+                                </p>
+                            </div>
+                            <div class="dash-info-box" ng-if="art_talent_cat">
+                                <h4>Type of Talent</h4>
+                                <ul class="skill-list">
+                                    <li ng-repeat="tal_cat in art_talent_cat.split(',')">{{tal_cat}}</li>
+                                </ul>
+                            </div>
+                            <div class="dash-info-box" ng-if="art_speciality_data.art_spl_tags || art_speciality_data.art_spl_desc">
+                                <h4>Specialities</h4>
+                                <ul class="skill-list" ng-if="art_speciality_data.art_spl_tags != ''">
+                                    <li ng-repeat="speciality in art_speciality_data.art_spl_tags.split(',')">{{speciality}}</li>
+                                </ul>
+                                <p ng-if="art_speciality_data.art_spl_desc != ''" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{art_speciality_data.art_spl_desc}}" dd-text-collapse-cond="true">{{art_speciality_data.art_spl_desc}}</p>
+                            </div>
+                            <div class="dash-info-box" ng-if="art_imp_data  == '1' || art_imp_data  == '2' || art_imp_data  == '3'">
+                                <h4>Availability </h4>
+                                <p ng-if="art_imp_data == '1'">Open for work</p>
+                                <p ng-if="art_imp_data == '2'">Open for Collaboration</p>
+                                <p ng-if="art_imp_data == '3'">Not now</p>
+                            </div>
+                            <div class="dash-info-box" ng-if="user_experience.length > '0'">
+                                <h4>Experience </h4>
+                                <ul>
+                                    <li ng-repeat="user_exp in user_experience">{{user_exp.designation}} at {{user_exp.exp_company_name}}</li>
+                                </ul>
+                            </div>
+                            <div class="dash-info-box" ng-if="user_award.length > '0'">
+                                <h4>Achievements & Awards </h4>
+                                <ul>
+                                    <li ng-repeat="_user_award in user_award">{{_user_award.award_title}} ({{_user_award.award_date | limitTo:4}})</li>
+                                </ul>
                             </div>
                         </div>
                         <!-- user iamges start-->
@@ -385,6 +431,39 @@ $fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastn
                         </div>
 						<div id="hideuserlist" class="right_middle_side_posrt">
 							<?php $this->load->view('right_add_box'); ?>
+                            <div class="right-info-box" ng-if="user_social_links.length > '0' || user_personal_links.length > '0'">
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span>
+                                </div>
+                                <div class="dtl-dis">
+                                    <div class="social-links" ng-if="user_social_links.length > '0'">
+                                        <h4>Social</h4>
+                                        <ul class="social-link-list">
+                                            <li ng-repeat="social_links in user_social_links">
+                                                <a href="{{social_links.user_links_txt}}" target="_self">
+                                                    <img ng-if="social_links.user_links_type == 'Facebook'" src="<?php echo base_url(); ?>assets/n-images/detail/fb.png">
+                                                    <img ng-if="social_links.user_links_type == 'Google'" src="<?php echo base_url(); ?>assets/n-images/detail/g-plus.png">
+                                                    <img ng-if="social_links.user_links_type == 'LinkedIn'" src="<?php echo base_url(); ?>assets/n-images/detail/in.png">
+                                                    <img ng-if="social_links.user_links_type == 'Pinterest'" src="<?php echo base_url(); ?>assets/n-images/detail/pin.png">
+                                                    <img ng-if="social_links.user_links_type == 'Instagram'" src="<?php echo base_url(); ?>assets/n-images/detail/insta.png">
+                                                    <img ng-if="social_links.user_links_type == 'GitHub'" src="<?php echo base_url(); ?>assets/n-images/detail/git.png">
+                                                    <img ng-if="social_links.user_links_type == 'Twitter'" src="<?php echo base_url(); ?>assets/n-images/detail/twt.png">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="social-links" ng-if="user_personal_links.length > '0'">
+                                        <h4 class="pt20">Personal</h4>
+                                        <ul class="social-link-list">
+                                            <li ng-repeat="user_p_links in user_personal_links">
+                                                <a href="{{user_p_links.user_links_txt}}" target="_self">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/pr-web.png">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 					</div>
                 </div>
@@ -411,9 +490,6 @@ $fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastn
 <?php //$this->load->view('mobile_side_slide'); ?>
 <?php echo $footer; ?>
 
- <?php
-  if (IS_ART_JS_MINIFY == '0') { ?>
-
         <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
@@ -426,29 +502,26 @@ $fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastn
         <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
-<?php }else{?>
-
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-        <script type = "text/javascript" src="<?php echo base_url('assets/js_min/jquery.form.3.51.js') ?>"></script> 
-      
-        <script src="<?php echo base_url('assets/dragdrop/js_min/plugins/sortable.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js_min/fileinput.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js_min/locales/fr.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js_min/locales/es.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
-
-<?php }?>
         <!-- POST BOX JAVASCRIPT END --> 
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var slug = '<?php echo $artid; ?>';
             var site_url = '<?php echo $get_url; ?>';
-            var userid = "<?php echo $userid; ?>";
+            var userid = "<?php echo $userid; ?>";            
+            var user_slug = '<?php echo $get_url; ?>';
+            var app = angular.module("artistDashboardApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
         </script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard_new.js?ver='.time()); ?>"></script>
         <!-- script for login  user valoidtaion start -->
         <script>
             function login_profile() {
@@ -498,371 +571,20 @@ $fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastn
 
             }
 
-            $('.modal-close').click(function(e){ 
-    $('body').removeClass('modal-open-other'); 
-    //$('#login').modal('show');
-});
-        </script>
-
-<script type="text/javascript">
-    
-    $( document ).on( 'keydown', function ( e ) {
-    if ( e.keyCode === 27 ) {
-        $('#register').modal('hide');
-        $('#login').modal('hide');
-        $('#forgotPassword').modal('hide');
-    }
-});
-
-</script>
-
-
-        <script type="text/javascript">
-            function login()
-            {
-                document.getElementById('error1').style.display = 'none';
-            }
-            //validation for edit email formate form
-            $(document).ready(function () {
-                /* validation */
-                $("#login_form").validate({
-                    rules: {
-                        email_login: {
-                            required: true,
-                        },
-                        password_login: {
-                            required: true,
-                        }
-                    },
-                    messages:
-                            {
-                                email_login: {
-                                    required: "Please enter email address",
-                                },
-                                password_login: {
-                                    required: "Please enter password",
-                                }
-                            },
-                    submitHandler: submitForm
-                });
-                /* validation */
-                /* login submit */
-                function submitForm()
-                {
-
-                    var email_login = $("#email_login").val();
-                    var password_login = $("#password_login").val();
-                    var post_data = {
-                        'email_login': email_login,
-                        'password_login': password_login,
-                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url() ?>login/artistic_check_login',
-                        data: post_data,
-                        dataType: "json",
-                        beforeSend: function ()
-                        {
-                            $("#error").fadeOut();
-                            $("#btn1").html('Login');
-                        },
-                        success: function (response)
-                        {
-                            if (response.data == "ok") { 
-                                $("#btn1").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="<?php echo "btn-ajax-loader.gif"; ?>"/> &nbsp; Login');
-                                if (response.is_artistic == '1') { 
-                                    window.location = "<?php echo base_url(). $get_url . 'dashboard' ?>" + site_url;
-                                } else { 
-                                    window.location = "<?php echo find_artist; ?>";
-                                }
-                            } else if (response.data == "password") {
-                                $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
-                                document.getElementById("password_login").classList.add('error');
-                                document.getElementById("password_login").classList.add('error');
-                                $("#btn1").html('Login');
-                            } else {
-                                $("#errorlogin").html('<label for="email_login" class="error">Please enter a valid email.</label>');
-                                document.getElementById("email_login").classList.add('error');
-                                document.getElementById("email_login").classList.add('error');
-                                $("#btn1").html('Login');
-                            }
-                        }
-                    });
-                    return false;
-                }
-                /* login submit */
+            $('.modal-close').click(function(e){
+                $('body').removeClass('modal-open-other');
             });
-
-
-
         </script>
-        <script>
-
-            $(document).ready(function () {
-
-                $.validator.addMethod("lowercase", function (value, element, regexpr) {
-                    return regexpr.test(value);
-                }, "Email Should be in Small Character");
-
-                $("#register_form").validate({
-                    rules: {
-                        first_name: {
-                            required: true,
-                        },
-                        last_name: {
-                            required: true,
-                        },
-                        email_reg: {
-                            required: true,
-                            email: true,
-                           // lowercase: /^[0-9a-z\s\r\n@!#\$\^%&*()+=_\-\[\]\\\';,\.\/\{\}\|\":<>\?]+$/,
-                            remote: {
-                                url: "<?php echo site_url() . 'registration/check_email' ?>",
-                                type: "post",
-                                data: {
-                                    email_reg: function () {
-                                      
-                                        return $("#email_reg").val();
-                                    },
-                                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
-                                },
-                            },
-                        },
-                        password_reg: {
-                            required: true,
-                        },
-                        selday: {
-                            required: true,
-                        },
-                        selmonth: {
-                            required: true,
-                        },
-                        selyear: {
-                            required: true,
-                        },
-                        selgen: {
-                            required: true,
-                        }
-                    },
-
-                    groups: {
-                        selyear: "selyear selmonth selday"
-                    },
-                    messages:
-                            {
-                                first_name: {
-                                    required: "Please enter first name",
-                                },
-                                last_name: {
-                                    required: "Please enter last name",
-                                },
-                                email_reg: {
-                                    required: "Please enter email address",
-                                    remote: "Email address already exists",
-                                },
-                                password_reg: {
-                                    required: "Please enter password",
-                                },
-
-                                selday: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selmonth: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selyear: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selgen: {
-                                    required: "Please enter your gender",
-                                }
-
-                            },
-                    submitHandler: submitRegisterForm
-                });
-                /* register submit */
-                function submitRegisterForm()
-                {
-                    var first_name = $("#first_name").val();
-                    var last_name = $("#last_name").val();
-                    var email_reg = $("#email_reg").val();
-                    var password_reg = $("#password_reg").val();
-                    var selday = $("#selday").val();
-                    var selmonth = $("#selmonth").val();
-                    var selyear = $("#selyear").val();
-                    var selgen = $("#selgen").val();
-
-                    var post_data = {
-                        'first_name': first_name,
-                        'last_name': last_name,
-                        'email_reg': email_reg,
-                        'password_reg': password_reg,
-                        'selday': selday,
-                        'selmonth': selmonth,
-                        'selyear': selyear,
-                        'selgen': selgen,
-                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-                    }
-
-
-                    var todaydate = new Date();
-                    var dd = todaydate.getDate();
-                    var mm = todaydate.getMonth() + 1; //January is 0!
-                    var yyyy = todaydate.getFullYear();
-
-                    if (dd < 10) {
-                        dd = '0' + dd
-                    }
-
-                    if (mm < 10) {
-                        mm = '0' + mm
-                    }
-
-                    var todaydate = yyyy + '/' + mm + '/' + dd;
-                    var value = selyear + '/' + selmonth + '/' + selday;
-
-
-                    var d1 = Date.parse(todaydate);
-                    var d2 = Date.parse(value);
-                    if (d1 < d2) {
-                        $(".dateerror").html("Date of birth always less than to today's date.");
-                        return false;
-                    } else {
-                        if ((0 == selyear % 4) && (0 != selyear % 100) || (0 == selyear % 400))
-                        {
-                            if (selmonth == 4 || selmonth == 6 || selmonth == 9 || selmonth == 11) {
-                                if (selday == 31) {
-                                    $(".dateerror").html("This month has only 30 days.");
-                                    return false;
-                                }
-                            } else if (selmonth == 2) { 
-                                if (selday == 31 || selday == 30) {
-                                    $(".dateerror").html("This month has only 29 days.");
-                                    return false;
-                                }
-                            }
-                        } else {
-                            if (selmonth == 4 || selmonth == 6 || selmonth == 9 || selmonth == 11) {
-                                if (selday == 31) {
-                                    $(".dateerror").html("This month has only 30 days.");
-                                    return false;
-                                }
-                            } else if (selmonth == 2) {
-                                if (selday == 31 || selday == 30 || selday == 29) {
-                                    $(".dateerror").html("This month has only 28 days.");
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url() ?>registration/reg_insert',
-                        data: post_data,
-                        dataType: 'json',
-                        beforeSend: function ()
-                        {
-                            $("#register_error").fadeOut();
-                            $("#btn1").html('Create an account');
-                        },
-                        success: function (response)
-                        {
-                            if (response.okmsg == "ok") {
-                                $("#btn-register").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="<?php echo "btn-ajax-loader.gif"; ?>"/> &nbsp; Sign Up ...');
-
-                                window.location = "<?php echo base_url() ?>artist";
-                            } else {
-                                $("#register_error").fadeIn(1000, function () {
-                                    $("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
-                                    $("#btn1").html('Create an account');
-                                });
-                            }
-                        }
-                    });
-                    return false;
-                }
-            });
-
-        </script>
-        <!-- forgot password script end -->
         <script type="text/javascript">
-            $(document).ready(function () { 
-                /* validation */
-                $("#forgot_password").validate({
-                    rules: {
-                        forgot_email: {
-                            required: true,
-                            email: true,
-                        }
-
-                    },
-                    messages: {
-                        forgot_email: {
-                            required: "Email Address Is Required.",
-                        }
-                    },
-                    submitHandler: submitforgotForm
-                });
-
-
-function submitforgotForm()
-{
-
-    var email_login = $("#forgot_email").val();
-
-    var post_data = {
-        'forgot_email': email_login,
-//            csrf_token_name: csrf_hash
-    }
-    $.ajax({
-        type: 'POST',
-        url: base_url + 'profile/forgot_live',
-        data: post_data,
-        dataType: "json",
-        beforeSend: function ()
-        {
-            $("#error").fadeOut();
-//            $("#forgotbuton").html('Your credential has been send in your register email id');
-        },
-        success: function (response)
-        {
-            if (response.data == "success") {
-                //  alert("login");
-                $("#forgotbuton").html(response.message);
-                setTimeout(function () {
+            $( document ).on( 'keydown', function ( e ) {
+                if ( e.keyCode === 27 ) {
+                    $('#register').modal('hide');
+                    $('#login').modal('hide');
                     $('#forgotPassword').modal('hide');
-                    $('#login').modal('show');
-                    $("#forgotbuton").html('');
-                    document.getElementById("forgot_email").value = "";
-                }, 5000); // milliseconds
-                //window.location = base_url + "job/home/live-post";
-            } else {
-                $("#forgotbuton").html(response.message);
-
-            }
-        }
-    });
-    return false;
-}            /* validation */
-
+                }
             });
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-        
-    <?php /*
-    if (IS_ART_JS_MINIFY == '0') { ?>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-    <!-- <script type="text/javascript" defer="defer" src="<?php //echo base_url('assets/js/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
-
-    <?php }else{?> 
-
-    <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-    <!-- <script type="text/javascript" defer="defer" src="<?php //echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
-    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-    <!-- <script type="text/javascript" defer="defer" src="<?php //echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
-    <?php }*/ ?>           
-        
         <script>
             $(document).on('click', '[data-toggle*=modal]', function () {
                 $('[role*=dialog]').each(function () {
@@ -884,14 +606,7 @@ function submitforgotForm()
             });
             var session_userid = "<?php echo $this->session->userdata('aileenuser');?>";
         </script>
-        <?php if($this->session->userdata('aileenuser')){ ?>
-            <script>
-                var header_all_profile = '<?php echo $header_all_profile; ?>';
-            </script>               
-            <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-
-        <?php } ?>
+       
         <?php if($artist_isregister == false){ ?>
             <script src="<?php echo base_url('assets/js_min/jquery.multi-select.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>

@@ -458,8 +458,9 @@
     											</li>
     											<li ng-if="art_speciality_data.art_spl_desc != ''">
     												<span>Description</span>
-    												<p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{art_speciality_data.art_spl_desc}}" dd-text-collapse-cond="true">{{art_speciality_data.art_spl_desc}}</p>
+    												<label dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{art_speciality_data.art_spl_desc}}" dd-text-collapse-cond="true" class="inner-dis">{{art_speciality_data.art_spl_desc}}</label>
     											</li>
+                                                <li></li>
     										</ul>
     									</div>
     								</div>								
@@ -1079,7 +1080,7 @@
 					</div>
 					<div class="dtl-dis">
 						<label>About</label>
-						<textarea type="text" placeholder="Enter Bio" id="user_bio" name="user_bio" ng-model="user_bio"></textarea>
+						<textarea type="text" placeholder="Enter Bio" id="user_bio" name="user_bio" ng-model="user_bio" maxlength="700"></textarea>
 						<span class="pull-right">{{700 - user_bio.length}}</span>
 						
 					</div>					
@@ -1835,7 +1836,7 @@
 						</div>
 						<div class="form-group big-textarea">
 							<label>Description</label>
-							<textarea type="text" placeholder="Description" id="speciality_desc" name="speciality_desc" ng-model="speciality_desc"></textarea>
+							<textarea type="text" placeholder="Description" id="speciality_desc" name="speciality_desc" ng-model="speciality_desc" maxlength="700"></textarea>
 							<span class="pull-right">{{700 - speciality_desc.length}}</span>
 						</div>
 					</div>
