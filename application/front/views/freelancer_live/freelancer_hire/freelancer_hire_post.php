@@ -261,7 +261,27 @@
                             <div id="loader" style="display: none;"><p style="text-align:center;"><img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>"/></p></div>
                         </div>
 						<div class="right-add">
-							<?php $this->load->view('right_add_box'); ?>
+							<?php $this->load->view('right_add_box');
+                            if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) {?>
+                            <div class="right-add-box">
+                                <div class="p20">
+                                    <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
+                                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                        <div class="count_main_progress">
+                                            <div class="circles">
+                                                <div class="second circle-1">
+                                                    <div>
+                                                        <strong></strong>
+                                                        <span id="progress-txt"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+
 						</div>
                     </div>
             </section>
@@ -338,21 +358,14 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var returnpage = '<?php echo $returnpage; ?>';
-            var user_id =<?php echo json_encode($this->uri->segment(3)) ?>;
-        </script>
-        <script>
+            var user_id = <?php echo json_encode($this->uri->segment(3)) ?>;        
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var fh_slug = "<?php echo $free_hire_login_slug; ?>";
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_post.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-        <?php /*if (IS_HIRE_JS_MINIFY == '0') { ?>
-                            <!--<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_post.js?ver=' . time()); ?>"></script>-->
-                <!--<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
-        <?php } else { ?>
-                <!--<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_post.js?ver=' . time()); ?>"></script>-->
-                <!--<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
-        <?php }*/ ?>
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>        
 
     </body>
 </html>
