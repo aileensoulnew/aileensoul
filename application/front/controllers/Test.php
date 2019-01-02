@@ -75,10 +75,10 @@ class Test extends MY_Controller {
     {
         set_time_limit(0);
         ini_set("memory_limit","512M");
-        $to = $this->input->post('to');
-        $start = $this->input->post('start');
+        $to = $this->input->post('to') ? $this->input->post('to') : 10000000;
+        $start = $this->input->post('start') ? $this->input->post('start') : 1;
 
-        $myfile = fopen("test.txt", "w");
+        $myfile = fopen("test".$start.".txt", "w");
         $txt = "";
         for($i=$start;$i<=$to;$i++){
             $txt .= $i."\n";
@@ -89,15 +89,22 @@ class Test extends MY_Controller {
     public function testback()
     {
         // $this->testcount();
-        // $url = base_url()."test/testcount";
-        // $param = array("to"=>10,"start"=>1);
-        // $this->inbackground->do_in_background($url, $param);
-        // $url = base_url()."test/testcount";
-        // $param = array("to"=>1000,"start"=>10);
-        // $this->inbackground->do_in_background($url, $param);
-        // echo "done";
+        $url = base_url()."test/testcount";
+        $param = array("to"=>10,"start"=>1);
+        $this->inbackground->do_in_background($url, $param);
+        $url = base_url()."test/testcount";
+        $param = array("to"=>10000000,"start"=>1);
+        $this->inbackground->do_in_background($url, $param);
+        $url = base_url()."test/testcount";
+        $param = array("to"=>10000000,"start"=>2);
+        $this->inbackground->do_in_background($url, $param);
+        $url = base_url()."test/testcount";
+        $param = array("to"=>10000000,"start"=>3);
+        $this->inbackground->do_in_background($url, $param);
+        echo "done";
+        redirect(base_url());
 
-        $data1 = array(
+        /*$data1 = array(
             'fname' => "test",
             'lname' => "test1",
             'email' => "test1",
@@ -118,7 +125,7 @@ class Test extends MY_Controller {
         );
         echo count($data1);
         unset($data1['fname']);
-        print_r($data1);
+        print_r($data1);*/
         // unset($data1[count($data1)-1]);
         // print_r($data1);
         // unset($data1[count($data1)-1]);

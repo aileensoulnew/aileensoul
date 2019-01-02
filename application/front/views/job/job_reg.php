@@ -198,14 +198,14 @@
 
                     <div class="form-group">
                       <!-- <input type="text" class="form-control" required> -->
-                      <input type="search" tabindex="9" id="job_title" name="job_title" value=""  class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" onkeyup="check_value(this);">
+                      <input type="search" tabindex="9" id="job_title" name="job_title" value="<?php echo ($userdata['title_name'] != '' ? $userdata['title_name'] : $userdata['degree_name']);?>"  class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" onkeyup="check_value(this);">
                       <label class="form-control-placeholder" for="job_title">Job Title</label>
                       <?php echo form_error('job_title'); ?>
                     </div>
 
                     <div class="form-group">
                       <!-- <input type="text" class="form-control" required> -->
-                      <input id="skills2" style="text-transform: capitalize;" name="skills" class="form-control" tabindex="10" size="90">
+                      <input id="skills2" style="text-transform: capitalize;" name="skills" class="form-control" tabindex="10" size="90" value="<?php echo $userdata['skill_data'];?>">
                       <label class="form-control-placeholder" for="skills2">Skills</label>
                       <?php echo form_error('skills'); ?>
                     </div>                    

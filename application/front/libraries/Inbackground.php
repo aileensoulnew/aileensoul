@@ -18,15 +18,15 @@ class Inbackground
         //Use SSL & port 443 for secure servers
         //Use otherwise for localhost and non-secure servers
 
-        if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+        /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
            //For secure server
             $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port']) ? $parts['port'] : 443, $errno, $errstr, 0);
         }
         else
-        {
+        {*/
             //For localhost and un-secure server
             $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 0);
-        }
+        //}
         if(!$fp)
         {
             echo "Some thing Problem";    

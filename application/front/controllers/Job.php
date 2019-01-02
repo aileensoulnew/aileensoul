@@ -22,13 +22,13 @@ class Job extends MY_Controller {
         $this->load->library('inbackground');
 
         //   This function is there only one time users slug created after remove it start
-//         $this->db->select('job_id,fname,lname');
-//         $res = $this->db->get('job_reg')->result();
-//         foreach ($res as $k => $v) {
-//             $data = array('slug' => $this->setcategory_slug($v->fname."-". $v->lname, 'slug', 'job_reg'));
-//             $this->db->where('job_id', $v->job_id);
-//             $this->db->update('job_reg', $data);
-//         }
+        // $this->db->select('job_id,fname,lname');
+        // $res = $this->db->get('job_reg')->result();
+        // foreach ($res as $k => $v) {
+        //     $data = array('slug' => $this->setcategory_slug($v->fname."-". $v->lname, 'slug', 'job_reg'));
+        //     $this->db->where('job_id', $v->job_id);
+        //     $this->db->update('job_reg', $data);
+        // }
         // This function is there only one time users slug created after remove it End
         include ('main_profile_link.php');
         include ('include.php');
@@ -3289,7 +3289,19 @@ class Job extends MY_Controller {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
         //Retrieve Data from main user registartion table start
         $this->data['job'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
-//Retrieve Data from main user registartion table end
+        $user_data = $this->user_model->getLeftboxData($userid);
+        $skills_data = $this->userprofile_model->get_user_skills($userid);        
+        $skill_name = "";
+        if(isset($skills_data) && !empty($skills_data))
+        {
+            foreach ($skills_data as $key => $value) {
+                $skill_name .= $value['name'].",";
+            }
+        }
+        $user_data['skill_data'] = trim($skill_name,",");
+        $this->data['userdata'] = $user_data;
+        // print_r($this->data['userdata']);exit();
+        //Retrieve Data from main user registartion table end
         //skill data fetch
         $contition_array = array('status' => 'publish');
         $jobtitle = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = 'name');
@@ -3440,6 +3452,7 @@ class Job extends MY_Controller {
 
             $city = implode(',', $city);
         }
+
         $first_name = $this->input->post('first_name');
         $last_name = $this->input->post('last_name');
         $email_reg = $this->input->post('email');
@@ -3475,13 +3488,14 @@ class Job extends MY_Controller {
             } else {
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
 
+                $url1 = base_url()."job/generate_job_profile";
+                $param1 = array("user_id"=>$userid);
+                $this->inbackground->do_in_background($url1, $param1);
+
                 $url = base_url()."job/send_mail_job_reg_background";
-                $param = array("email_id"=>$email_reg);
+                $param = array("email_id"=>$email_reg,"user_id"=>$userid);
                 $this->inbackground->do_in_background($url, $param);
 
-                $url1 = base_url()."job/generate_job_profile";
-                $param1 = array();
-                $this->inbackground->do_in_background($url1, $param1);
                 // $this->generate_job_profile();
 
 
@@ -8761,7 +8775,7 @@ class Job extends MY_Controller {
     public function send_mail_job_reg_background()
     {
         $email_reg = $this->input->post('email_id');
-        $userid = $this->session->userdata('aileenuser');
+        $userid = $this->input->post('user_id');//$this->session->userdata('aileenuser');
         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
         $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
@@ -8775,22 +8789,20 @@ class Job extends MY_Controller {
 
     public function generate_job_profile()
     {
-        $user_id = $this->session->userdata('aileenuser');
+        $user_id = $this->input->post('user_id');//$this->session->userdata('aileenuser');
 
-        $myfile = fopen("test1.txt", "w");
-        $txt = "";
-        $i=0;
         $user_experience = $this->userprofile_model->get_user_experience($user_id);
         if(isset($user_experience) && !empty($user_experience))
         {
             foreach ($user_experience as $_user_experience) {
-                $txt .= $i++."\n";
+              
                 if($_user_experience['exp_file'] != '')
                 {
+                    $fileName = $_user_experience['exp_file'];
                     $user_experience_upload_path = $this->config->item('user_experience_upload_path');
-                    $job_user_resume_upload_path = $this->config->item('job_user_resume_upload_path');
+                    $job_user_experience_upload_path = $this->config->item('job_user_experience_upload_path');
                     $file = $user_experience_upload_path.$_user_experience['exp_file'];
-                    $newfile = $job_user_resume_upload_path.$_user_experience['exp_file'];
+                    $newfile = $job_user_experience_upload_path.$_user_experience['exp_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -8798,7 +8810,11 @@ class Job extends MY_Controller {
                         if (IMAGEPATHFROM == 's3bucket') {
                             $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
                         }
-                    }
+                    }                    
+                }
+                else
+                {
+                    $fileName = "";
                 }
                 $exp_company_name = $_user_experience['exp_company_name'];
                 $exp_designation_id = $_user_experience['exp_designation'];
@@ -8811,8 +8827,7 @@ class Job extends MY_Controller {
                 $exp_start_date = $_user_experience['exp_start_date'];
                 $exp_end_date = $_user_experience['exp_end_date'];
                 $exp_isworking = $_user_experience['exp_isworking'];
-                $exp_desc = $_user_experience['exp_desc'];
-                $fileName = $_user_experience['exp_file'];
+                $exp_desc = $_user_experience['exp_desc'];                
                 $this->job_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp = 0);
             }
         }
@@ -8821,7 +8836,7 @@ class Job extends MY_Controller {
         if(isset($user_education) && !empty($user_education))
         {
             foreach ($user_education as $_user_education) {
-                $txt .= $i++."\n";
+              
                 if($_user_education['edu_file'] != '')
                 {
                     $user_education_upload_path = $this->config->item('user_education_upload_path');
@@ -8841,8 +8856,8 @@ class Job extends MY_Controller {
                 $edu_university = $_user_education['edu_university'];
                 $edu_other_university = $_user_education['edu_other_university'];
                 $edu_degree = $_user_education['edu_degree'];
-                $edu_stream = $_user_education['edu_other_degree'];
-                $edu_other_degree = $_user_education['edu_stream'];
+                $edu_other_degree = $_user_education['edu_other_degree'];
+                $edu_stream = $_user_education['edu_stream'];
                 $edu_other_stream = $_user_education['edu_other_stream'];
                 $edu_start_date = $_user_education['edu_start_date'];
                 $edu_end_date = $_user_education['edu_end_date'];
@@ -8852,18 +8867,19 @@ class Job extends MY_Controller {
                 $this->job_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName,$edit_edu = 0);
             }
         }
-
+    
         $user_projects = $this->userprofile_model->get_user_project($user_id);
         if(isset($user_projects) && !empty($user_projects))
         {
             foreach ($user_projects as $_user_projects) {
-                $txt .= $i++."\n";
+              
                 if($_user_projects['project_file'] != "")
                 {
+                    $fileName = $_user_projects['project_file'];
                     $user_project_upload_path = $this->config->item('user_project_upload_path');
                     $job_user_project_upload_path = $this->config->item('job_user_project_upload_path');
-                    $file = $user_project_upload_path.$_user_education['project_file'];
-                    $newfile = $job_user_project_upload_path.$_user_education['project_file'];
+                    $file = $user_project_upload_path.$_user_projects['project_file'];
+                    $newfile = $job_user_project_upload_path.$_user_projects['project_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -8872,6 +8888,10 @@ class Job extends MY_Controller {
                             $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
                         }
                     }
+                }
+                else
+                {
+                    $fileName = "";
                 }
                 $project_title = $_user_projects['project_title'];
                 $project_team = $_user_projects['project_team'];
@@ -8883,8 +8903,7 @@ class Job extends MY_Controller {
                 $project_partner_name = $_user_projects['project_partner_name'];
                 $project_start_date = $_user_projects['project_start_date'];
                 $project_end_date = $_user_projects['project_end_date'];
-                $project_desc = $_user_projects['project_desc'];
-                $fileName = $_user_projects['project_file'];
+                $project_desc = $_user_projects['project_desc'];                
                 $this->job_model->set_user_project($user_id,$project_title,$project_team,$project_role,$project_skill_ids,$project_field,$project_other_field,$project_url,$project_partner_name,$project_start_date,$project_end_date,$project_desc,$fileName,$edit_project = 0);
             }
         }
@@ -8893,13 +8912,14 @@ class Job extends MY_Controller {
         if(isset($user_activity) && !empty($user_activity))
         {
             foreach ($user_activity as $_user_activity) {
-                $txt .= $i++."\n";
+              
                 if($_user_activity['activity_file'] != "")
                 {
+                    $fileName = $_user_activity['activity_file'];
                     $user_activity_upload_path = $this->config->item('user_activity_upload_path');
                     $job_user_activity_upload_path = $this->config->item('job_user_activity_upload_path');
-                    $file = $user_activity_upload_path.$_user_education['activity_file'];
-                    $newfile = $job_user_activity_upload_path.$_user_education['activity_file'];
+                    $file = $user_activity_upload_path.$_user_activity['activity_file'];
+                    $newfile = $job_user_activity_upload_path.$_user_activity['activity_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -8909,12 +8929,16 @@ class Job extends MY_Controller {
                         }
                     }
                 }
+                else
+                {
+                    $fileName = "";
+                }
                 $activity_participate = $_user_activity['activity_participate'];
                 $activity_org = $_user_activity['activity_org'];
                 $award_start_date = $_user_activity['activity_start_date'];
                 $award_end_date = $_user_activity['activity_end_date'];
                 $activity_desc = $_user_activity['activity_desc'];
-                $fileName = $_user_activity['activity_file'];
+                
                 $this->job_model->set_user_activity($user_id,$activity_participate,$activity_org,$award_start_date,$award_end_date,$activity_desc,$fileName,$edit_activity = 0);
             }
         }
@@ -8923,13 +8947,14 @@ class Job extends MY_Controller {
         if(isset($user_publication) && !empty($user_publication))
         {
             foreach ($user_publication as $_user_publication) {
-                $txt .= $i++."\n";
+              
                 if($_user_publication['pub_file'] != "")
                 {
+                    $fileName = $_user_publication['pub_file'];
                     $user_publication_upload_path = $this->config->item('user_publication_upload_path');
                     $job_user_publication_upload_path = $this->config->item('job_user_publication_upload_path');
-                    $file = $user_publication_upload_path.$_user_education['pub_file'];
-                    $newfile = $job_user_publication_upload_path.$_user_education['pub_file'];
+                    $file = $user_publication_upload_path.$_user_publication['pub_file'];
+                    $newfile = $job_user_publication_upload_path.$_user_publication['pub_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -8939,13 +8964,17 @@ class Job extends MY_Controller {
                         }
                     }
                 }
+                else
+                {
+                    $fileName = "";
+                }
                 $pub_title = $_user_publication['pub_title'];
                 $pub_author = $_user_publication['pub_author'];
                 $pub_url = $_user_publication['pub_url'];
                 $pub_publisher = $_user_publication['pub_publisher'];
                 $pub_desc = $_user_publication['pub_desc'];
                 $publication_date = $_user_publication['pub_date'];
-                $fileName = $_user_publication['pub_file'];
+                
                 $this->job_model->set_user_publication($user_id,$pub_title,$pub_author,$pub_url,$pub_publisher,$pub_desc,$publication_date,$fileName,$edit_publication = 0);
             }
         }
@@ -8954,13 +8983,14 @@ class Job extends MY_Controller {
         if(isset($user_research) && !empty($user_research))
         {
             foreach ($user_research as $_user_research) {
-                $txt .= $i++."\n";
+              
                 if($_user_research['research_document'] != "")
                 {
+                    $fileName = $_user_research['research_document'];
                     $user_research_upload_path = $this->config->item('user_research_upload_path');
                     $job_user_research_upload_path = $this->config->item('job_user_research_upload_path');
-                    $file = $user_research_upload_path.$_user_education['research_document'];
-                    $newfile = $job_user_research_upload_path.$_user_education['research_document'];
+                    $file = $user_research_upload_path.$_user_research['research_document'];
+                    $newfile = $job_user_research_upload_path.$_user_research['research_document'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -8970,13 +9000,17 @@ class Job extends MY_Controller {
                         }
                     }
                 }
+                else
+                {
+                    $fileName = "";
+                }
                 $research_title = $_user_research['research_title'];
                 $research_desc = $_user_research['research_desc'];
                 $research_field = $_user_research['research_field'];
                 $research_other_field = $_user_research['research_other_field'];
                 $research_url = $_user_research['research_url'];
                 $research_published_date = $_user_research['research_publish_date'];
-                $fileName = $_user_research['research_document'];
+                
                 $this->job_model->set_user_research($user_id,$research_title,$research_desc,$research_field,$research_other_field,$research_url,$research_published_date,$fileName,$edit_research = 0);
             }
         }
@@ -8985,13 +9019,14 @@ class Job extends MY_Controller {
         if(isset($user_addicourse) && !empty($user_addicourse))
         {
             foreach ($user_addicourse as $_user_addicourse) {
-                $txt .= $i++."\n";
+              
                 if($_user_addicourse['addicourse_file'] != "")
                 {
+                    $fileName = $_user_addicourse['addicourse_file'];
                     $user_addicourse_upload_path = $this->config->item('user_addicourse_upload_path');
                     $job_user_addicourse_upload_path = $this->config->item('job_user_addicourse_upload_path');
-                    $file = $user_addicourse_upload_path.$_user_education['addicourse_file'];
-                    $newfile = $job_user_research_upload_path.$_user_education['addicourse_file'];
+                    $file = $user_addicourse_upload_path.$_user_addicourse['addicourse_file'];
+                    $newfile = $job_user_addicourse_upload_path.$_user_addicourse['addicourse_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -9001,12 +9036,16 @@ class Job extends MY_Controller {
                         }
                     }
                 }
+                else
+                {
+                    $fileName = "";
+                }
                 $addicourse_name = $_user_addicourse['addicourse_name'];
                 $addicourse_org = $_user_addicourse['addicourse_org'];
                 $addicourse_start_date = $_user_addicourse['addicourse_start_date'];
                 $addicourse_end_date = $_user_addicourse['addicourse_end_date'];
                 $addicourse_url = $_user_addicourse['addicourse_url'];
-                $fileName = $_user_addicourse['addicourse_file'];
+                
                 $this->job_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse = 0);
             }
         }
@@ -9015,13 +9054,14 @@ class Job extends MY_Controller {
         if(isset($user_award) && !empty($user_award))
         {
             foreach ($user_award as $_user_award) {
-                $txt .= $i++."\n";
+              
                 if($_user_award['award_file'] != "")
                 {
+                    $fileName = $_user_award['award_file'];
                     $user_award_upload_path = $this->config->item('user_award_upload_path');
                     $job_user_award_upload_path = $this->config->item('job_user_award_upload_path');
-                    $file = $user_award_upload_path.$_user_education['award_file'];
-                    $newfile = $job_user_award_upload_path.$_user_education['award_file'];
+                    $file = $user_award_upload_path.$_user_award['award_file'];
+                    $newfile = $job_user_award_upload_path.$_user_award['award_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -9031,11 +9071,15 @@ class Job extends MY_Controller {
                         }
                     }
                 }
+                else
+                {
+                    $fileName = "";
+                }
                 $award_title = $_user_award['award_title'];
                 $award_org = $_user_award['award_org'];
                 $award_date = $_user_award['award_date'];
                 $award_desc = $_user_award['award_desc'];
-                $fileName = $_user_award['award_file'];                
+                
                 $this->job_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards = 0);
             }
         }
@@ -9044,13 +9088,14 @@ class Job extends MY_Controller {
         if(isset($user_patent) && !empty($user_patent))
         {
             foreach ($user_patent as $_user_patent) {
-                $txt .= $i++."\n";
+              
                 if($_user_patent['patent_file'] != "")
                 {
+                    $fileName = $_user_patent['patent_file'];
                     $user_patent_upload_path = $this->config->item('user_patent_upload_path');
                     $job_user_patent_upload_path = $this->config->item('job_user_patent_upload_path');
-                    $file = $user_patent_upload_path.$_user_education['patent_file'];
-                    $newfile = $job_user_patent_upload_path.$_user_education['patent_file'];
+                    $file = $user_patent_upload_path.$_user_patent['patent_file'];
+                    $newfile = $job_user_patent_upload_path.$_user_patent['patent_file'];
                     if(copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -9060,6 +9105,10 @@ class Job extends MY_Controller {
                         }
                     }
                 }
+                else
+                {
+                    $fileName = "";
+                }
                 $patent_title = $_user_patent['patent_title'];
                 $patent_creator = $_user_patent['patent_creator'];
                 $patent_number = $_user_patent['patent_number'];
@@ -9067,7 +9116,7 @@ class Job extends MY_Controller {
                 $patent_office = $_user_patent['patent_office'];
                 $patent_url = $_user_patent['patent_url'];
                 $patent_desc = $_user_patent['patent_desc'];
-                $fileName = $_user_patent['patent_file'];
+                
                 $this->job_model->set_user_patent($user_id,$patent_title,$patent_creator,$patent_number,$patent_date,$patent_office,$patent_url,$patent_desc,$fileName,$edit_patent = 0);
             }
         }
@@ -9076,7 +9125,7 @@ class Job extends MY_Controller {
         if(isset($user_social_links_data) && !empty($user_social_links_data))
         {
             foreach ($user_social_links_data as $_user_social_links_data) {
-                $txt .= $i++."\n";
+              
                 $data = array(
                     'user_id' => $user_id,
                     'user_links_txt' => $_user_social_links_data['user_links_txt'],
@@ -9093,7 +9142,7 @@ class Job extends MY_Controller {
         if(isset($user_personal_links_data) && !empty($user_personal_links_data))
         {
             foreach ($user_personal_links_data as $_user_personal_links_data) {
-                $txt .= $i++."\n";
+              
                 $data = array(
                     'user_id' => $user_id,
                     'user_links_txt' => $_user_personal_links_data['user_links_txt'],
@@ -9110,7 +9159,7 @@ class Job extends MY_Controller {
         if(isset($user_languages) && !empty($user_languages))
         {
             foreach ($user_languages as $_user_languages) {
-                $txt .= $i++."\n";
+              
                 $data = array(
                     'user_id' => $user_id,
                     'language_txt' => $_user_languages['language_name'],
@@ -9123,23 +9172,21 @@ class Job extends MY_Controller {
             }
         }
         
-        $skill_ids = $this->db->get_where('job_reg', array('user_id' => $user_id))->row()->user_skills;
+       /* $skill_ids = $this->db->get_where('job_reg', array('user_id' => $user_id))->row()->user_skills;
         if(isset($skill_ids) && $skill_ids != '')
         {
-            $txt .= $i++."\n";
+          
             $data = array('user_skills' => $skill_ids,'keyskill' => $skill_ids);        
             $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $user_id);
-        }
+        }*/
 
         $about_user_data = $this->userprofile_model->get_about_user($user_id);//for Hobbies
         if(isset($about_user_data['user_hobbies']) && $about_user_data['user_hobbies'] != '')
         {
-            $txt .= $i++."\n";
+          
             $user_hobby_txt = $about_user_data['user_hobbies'];
             $data = array('user_hobbies' => $user_hobby_txt);
             $udpate_data = $this->common->update_data($data, 'job_reg', 'user_id', $user_id);
-        }
-        fwrite($myfile, $txt);
-        fclose($myfile);
+        }        
     }
 }
