@@ -531,7 +531,20 @@ border-bottom: 1px solid #d2d2d2;}
 .left-info-box table td:first-child{width:30px;}
 .right-info-box .dtl-title{padding:0 0 10px 0;}
 .right-info-box .dtl-dis{padding:0;}
-.right-info-box .review-list li .review-left{width:50px; height:50px;}
+.right-info-box .review-list li .review-left{width:30px; height:30px;}
+.right-info-box .rev-img .post-img-profile{width:30px; height:30px; font-size:14px; padding:9px 0;}
+.right-info-box .review-list li .review-right{width:89%; padding-left:8px;}
+.right-info-box .review-list li .review-right h4{font-size:13px; line-height:1.2; font-weight:bold;}
+.right-info-box .review-list li .review-right .rating-star-cus{padding-top:0;}
+.right-info-box .review-list li .review-right .review-dis{font-size:13px; line-height:1.5;}
+.right-info-box .dtl-dis ul li{padding-bottom:10px;}
+.right-info-box .total-rev{padding-bottom:5px; font-size:18px;}
+.right-info-box .total-rev .total-rat{padding-top:0px;}
+.right-info-box .total-rev span.rev-count{font-size:12px; line-height:1;}
+.right-info-box .rating-star-cus .rating-sm{font-size:14px;}
+.right-info-box .rating-container{line-height:18px;}
+.right-info-box .rating-container .rating-stars{height:18px;}
+.right-info-box .rating-sm{font-size:18px;}
 .right-info-box .dis-list{padding-top:5px;}
 .right-info-box .dis-list li span{font-size:16px; font-weight:normal; color:#5c5c5c;}
 .right-info-box .dtl-box-height{height:260px;}
@@ -551,7 +564,17 @@ border-bottom: 1px solid #d2d2d2;}
 background: #f6f6f6; list-style-type:none;}
 .dash-info-box p{padding-left:20px;}
 .dash-info-box h4 svg{vertical-align: middle; margin-top: -4px;}
-
+.bus-info .dash-info-box{margin-bottom:15px;}
+.bus-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px;}
+.bus-info .dash-info-box p{width:93%; float:left; line-height:1; padding-left:5px;}
+.bus-info .dash-info-box ul{width:93%; float:left; padding-left:5px; padding-top:0;}
+.bus-info .dash-info-box ul.skill-list{margin-top:-5px;}
+.dash-info-box p a{color:#7b7b7b;}
+.dash-info-box p a:hover{color:#1b8ab9;}
+.dash-info-box p span.box-dis{line-height: 1.5; display: inline-block; margin-top: -3px;}
+.dash-info-box p.inner-dis{line-height: 1.5; display: inline-block; margin-top: -3px;}
+.dash-info-box p.dis-mail{word-break: break-all;} 
+.dash-info-box p a span{word-break: break-all;} 
 
 
 .media-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:5px; margin-bottom:10px;}

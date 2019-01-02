@@ -295,7 +295,9 @@ $login_user_id = $this->session->userdata('aileenuser');
                                 <h3><i class="fa fa-info-circle"></i> Information</h3>
                             </div>
                                 <div class="dash-info-box" ng-if="business_info_data.business_ext_benifit">
-                                    <h4>Specialties </h4>
+                                    <h4>
+
+ Specialties </h4>
                                     <ul class="skill-list">
                                         <li ng-repeat="benefits in business_info_data.business_ext_benifit.split(',')">{{benefits}}</li>
                                     </ul>
