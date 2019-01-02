@@ -21,6 +21,7 @@ class Business_profile_registration extends MY_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
+        $this->load->library('inbackground');
 
         $userid = $this->session->userdata('aileenuser');
         include ('business_include.php');
@@ -433,7 +434,10 @@ class Business_profile_registration extends MY_Controller {
             if ($updatdata) {
                 if($_POST['busreg_step'] == '1')
                 {
-                    //Send Promotional Mail Start
+                    $url = base_url()."business_profile_registration/send_promotional_main_in_back";
+                    $param = array("email_id"=>$email,"user_id"=>$userid);
+                    $this->inbackground->do_in_background($url, $param);
+                    /*//Send Promotional Mail Start
                     $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
                     $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data_sel = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -446,7 +450,7 @@ class Business_profile_registration extends MY_Controller {
                     $subject = $userdata[0]['company_name']." is Now Live on Aileensoul Platform ";
 
                     $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-                    //Send Promotional Mail End
+                    //Send Promotional Mail End*/
                 }
                 $data['is_success'] = 1;
             } else {
@@ -533,7 +537,8 @@ class Business_profile_registration extends MY_Controller {
             $data['details'] = $_POST['business_details'];
             $data['modified_date'] = date('Y-m-d H:i:s', time());
             if ($_POST['busreg_step'] == '2') {
-                $data['business_step'] = '3';
+                $data['business_step'] = '4';
+                // $data['business_step'] = '3';
             }
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
             if(trim($data['industriyal']) != "")
@@ -1072,7 +1077,11 @@ class Business_profile_registration extends MY_Controller {
                 //Openfire Username Generate End
             }
 
-            //Send Promotional Mail Start            
+            $url = base_url()."business_profile_registration/send_promotional_main_in_back";
+            $param = array("email_id"=>$email_reg,"user_id"=>$userid);
+            $this->inbackground->do_in_background($url, $param);
+
+            /*//Send Promotional Mail Start            
             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
             $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
@@ -1082,7 +1091,7 @@ class Business_profile_registration extends MY_Controller {
             $subject = $company_name." is Now Live on Aileensoul Platform ";
 
             $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-            //Send Promotional Mail End
+            //Send Promotional Mail End*/
 
             if(trim($data['industriyal']) != "")
             {
@@ -1112,8 +1121,8 @@ class Business_profile_registration extends MY_Controller {
                 $data['city_name'] = trim($city_name);
             }
             $insert_id = $this->common->insert_data_getid($data, 'business_profile_search_tmp');
-
-            $config = array(
+            $data['is_success'] = 1;
+            /*$config = array(
                 'upload_path' => $this->config->item('bus_profile_main_upload_path'),
                 'max_size' => 1024 * 100,
                 'allowed_types' => array('jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg')
@@ -1160,7 +1169,7 @@ class Business_profile_registration extends MY_Controller {
                             $quality = "100%";
                         }
 
-                        /* RESIZE */
+                        // RESIZE 
 
                         $business_profile_detail_main[$i]['image_library'] = 'gd2';
                         $business_profile_detail_main[$i]['source_image'] = $this->config->item('bus_detail_main_upload_path') . $response['result'][$i]['file_name'];
@@ -1170,7 +1179,7 @@ class Business_profile_registration extends MY_Controller {
                         $this->load->library('image_lib', $business_profile_detail_main[$i], $instanse10);
                         $this->$instanse10->watermark();
 
-                        /* RESIZE */
+                        // RESIZE 
 
                         $main_image = $this->config->item('bus_detail_main_upload_path') . $response['result'][$i]['file_name'];
                         $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
@@ -1211,7 +1220,7 @@ class Business_profile_registration extends MY_Controller {
                         $dataimage = $response['result'][$i]['file_name'];
                         //Creating Thumbnail
                         $this->$instanse->resize();
-                        /* CROP */
+                        // CROP 
                         // reconfigure the image lib for cropping
                         $conf_new[$i] = array(
                             'image_library' => 'gd2',
@@ -1240,7 +1249,7 @@ class Business_profile_registration extends MY_Controller {
                         $resize_image = $this->config->item('bus_detail_thumb_upload_path') . $response['result'][$i]['file_name'];
                         $abc = $s3->putObjectFile($resize_image, bucket, $resize_image, S3::ACL_PUBLIC_READ);
 
-                        /* CROP */
+                        // CROP 
 
                         $response['error'][] = $thumberror = $this->$instanse->display_errors();
                         $return['data'][] = $imgdata;
@@ -1301,11 +1310,31 @@ class Business_profile_registration extends MY_Controller {
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;
-            }
+            }*/
 
         }
         echo json_encode($data);
 
+    }
+
+    public function send_promotional_main_in_back()
+    {
+        $userid = $this->input->post('user_id');        
+        $to_email = $this->input->post('to_email');
+        //Send Promotional Mail Start
+        $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
+        $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data_sel = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+        $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+        
+        $email_html = $this->load->view('email_template/business',$this->userdata,TRUE);                
+
+        $subject = $userdata[0]['company_name']." is Now Live on Aileensoul Platform ";
+
+        $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email,$unsubscribe);
+        //Send Promotional Mail End
     }
 
 }

@@ -140,12 +140,12 @@
                                         <span ng-show="errorBusinessDetails" class="error">{{errorBusinessDetails}}</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-12 bus-upload-img">
+                                <!-- <div class="col-sm-12 col-md-12 bus-upload-img">
                                     <div class="form-group">
                                         <span class="pr15">Business images:</span>
                                         <input type="file" tabindex="14" name="business_image" id="business_image" ng-model="user.business_image" multiple>
                                     </div>
-                                </div>
+                                </div> -->
                                 
                                 <div class="col-sm-12 col-md-12">
                                     <div class="form-group">

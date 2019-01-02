@@ -749,9 +749,9 @@ app.controller('businessCreateProfileController', function ($scope, $http, $loca
             $('#profilereg_ajax_load').show();
             $scope.loader_show = true;
             var form_data = new FormData($("#businessinfo")[0]);
-            angular.forEach($('#business_image')[0].files, function (file) {
-                form_data.append('business_image[]', file);
-            });
+            // angular.forEach($('#business_image')[0].files, function (file) {
+            //     form_data.append('business_image[]', file);
+            // });
 
             $http.post(base_url+'business_profile_registration/business_profile_insert',form_data,
             {

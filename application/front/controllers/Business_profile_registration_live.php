@@ -86,7 +86,7 @@ class Business_profile_registration_live extends MY_Controller {
             $this->load->view('business_profile/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
-// GET BUSINESS PROFILE DATA
+            // GET BUSINESS PROFILE DATA
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -122,20 +122,19 @@ class Business_profile_registration_live extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
 
         $this->business_profile_active_check();
-
-// GET BUSINESS PROFILE DATA
+        // GET BUSINESS PROFILE DATA
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
         $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// GET COUNTRY DATA
+        // GET COUNTRY DATA
         $contition_array = array('status' => '1');
         $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id, country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// GET STATE DATA
+        // GET STATE DATA
         $contition_array = array('status' => '1', 'country_id' => $userdata[0]['country']);
         $this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = 'state_id, state_name, country_id', $sortby = 'state_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// GET CITY DATA
+        // GET CITY DATA
         $contition_array = array('status' => '1', 'state_id' => $userdata[0]['state']);
         $this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id, city_name, state_id', $sortby = 'city_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -186,7 +185,6 @@ class Business_profile_registration_live extends MY_Controller {
     }
 
     // BUSINESS PROFILE SLUG START
-
     public function setcategory_slug($slugname, $filedname, $tablename, $notin_id = array()) {
         $slugname = $oldslugname = $this->create_slug($slugname);
         $i = 1;
@@ -211,8 +209,7 @@ class Business_profile_registration_live extends MY_Controller {
         $slug = trim($slug, '-');
         return $slug;
     }
-
-// BUSINESS PROFILE SLUG END
+    // BUSINESS PROFILE SLUG END
 
     public function ng_bus_info_insert() {
 
@@ -325,7 +322,7 @@ class Business_profile_registration_live extends MY_Controller {
                 }
             }
         }
-// response back.
+        // response back.
         echo json_encode($data);
     }
 
@@ -333,7 +330,7 @@ class Business_profile_registration_live extends MY_Controller {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $this->business_profile_active_check();
-// GET BUSINESS PROFILE DATA
+        // GET BUSINESS PROFILE DATA
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
         $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step,contact_person,contact_mobile,contact_email,contact_website', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($userdata) {
@@ -405,7 +402,7 @@ class Business_profile_registration_live extends MY_Controller {
                 $data['is_success'] = 0;
             }
         }
-// response back.
+        // response back.
         echo json_encode($data);
     }
 

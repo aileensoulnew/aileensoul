@@ -158,7 +158,7 @@ class Business_profile_live extends MY_Controller {
         $StudentData = $this->user_model->getUserStudentData($userid,"*");            
         if(empty($ProfessionData) && empty($StudentData))
         {
-            redirect(base_url().'basic-information', 'refresh');
+            redirect(base_url().'registration/basic-information', 'refresh');
         }
         $this->business_profile_active_check();
         $this->is_business_profile_register();
@@ -11388,12 +11388,12 @@ Your browser does not support the audio tag.
         if ($business_check && $isredirect == true) {
 
             if ($business_check[0]['business_step'] == 1) {
-                redirect('business-profile/contact-information', refresh);
+                redirect('business-profile/registration/contact-information', refresh);
             } else if ($business_check[0]['business_step'] == 2) {
-                redirect('business-profile/description', refresh);
-            } else if ($business_check[0]['business_step'] == 3) {
+                redirect('business-profile/registration/description', refresh);
+            }/* else if ($business_check[0]['business_step'] == 3) {
                 redirect('business-profile/image', refresh);
-            }
+            }*/
         } else {
             //redirect('business-profile/registration/business-information-update', refresh);
             if($isredirect == true)

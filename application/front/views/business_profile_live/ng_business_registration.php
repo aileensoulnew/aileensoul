@@ -113,7 +113,7 @@
                                                     </a>
                                                 </li>
                                             <?php } ?>
-                                            <?php if ($business_common_data[0]['business_step'] > '2' && $business_common_data[0]['business_step'] != '') { ?>    
+                                            <?php /*if ($business_common_data[0]['business_step'] > '2' && $business_common_data[0]['business_step'] != '') { ?>    
                                                 <li id="left-form-each-li-4">
                                                     <a href="#" ng-click="submitdescriptionForm();" data-toggle="tab">
                                                         <span class="edit-pro-box"><img src="<?php echo base_url('assets/img/upload-img.png'); ?>" alt="Business Images"></span><span class="edit-form-name">Business Images</span>
@@ -125,7 +125,7 @@
                                                         <span class="edit-pro-box"><img src="<?php echo base_url('assets/img/upload-img.png'); ?>" alt="Business Images"></span><span class="edit-form-name">Business Images</span>
                                                     </a>
                                                 </li>
-                                            <?php } ?> 
+                                            <?php }*/ ?> 
                                         </ul>
                                     </div>
                                     <div class="all-edit-form">
@@ -278,7 +278,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="tab-pane" id="business_image"> 
+                                                <!-- <div class="tab-pane" id="business_image"> 
                                                     <div class="">
                                                         <h3>Business Images</h3>
                                                         <form name="businessimage" ng-submit="submitbusImageForm()" id="businessimage" class="clearfix" ng-validate="imageValidate">
@@ -298,7 +298,7 @@
                                                             </fieldset>
                                                         </form>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -743,45 +743,44 @@
                                     data: $scope.user, //forms user object
                                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 })
-                                        .then(function (data) {
-                                            data = data.data;                                            
-                                            if (data.errors) {
-                                                // Showing errors.
-                                                err_arr = data.errors;                              
-                                                if(err_arr.already_exist)
-                                                {
-                                                    $("#bus_err").modal("show");
-                                                    angular.element('#businessinfo #next').removeClass("form_submit");
-                                                }
-                                                else
-                                                {
-                                                    $scope.errorCompanyName = err_arr.companyname;
-                                                    $scope.errorCountry = err_arr.country;
-                                                    $scope.errorState = err_arr.state;
-                                                    $scope.errorCity = err_arr.city;
-                                                    $scope.errorPincode = err_arr.pincode;
-                                                    $scope.errorPostalAddress = err_arr.business_address;
-                                                }
-                                            } else {
-                                                if (data.is_success == '1') {
-                                                    angular.element('#businessinfo #next').removeClass("form_submit");
-                                                    $scope.loader_show = false;
-                                                    activeContactInformation();
-                                                    $scope.tab_active(2);
-                                                    $("li#left-form-each-li-2 a").attr({
-                                                        href: "#contact_information",
-                                                        'data-toggle': "tab",
-                                                        'ng-click': "getContactInformation(); tab_active(2);"
-                                                    });
-                                                } else {
-                                                    return false;
-                                                }
-                                            }
-                                        });
+                                .then(function (data) {
+                                    data = data.data;                                            
+                                    if (data.errors) {
+                                        // Showing errors.
+                                        err_arr = data.errors;                              
+                                        if(err_arr.already_exist)
+                                        {
+                                            $("#bus_err").modal("show");
+                                            angular.element('#businessinfo #next').removeClass("form_submit");
+                                        }
+                                        else
+                                        {
+                                            $scope.errorCompanyName = err_arr.companyname;
+                                            $scope.errorCountry = err_arr.country;
+                                            $scope.errorState = err_arr.state;
+                                            $scope.errorCity = err_arr.city;
+                                            $scope.errorPincode = err_arr.pincode;
+                                            $scope.errorPostalAddress = err_arr.business_address;
+                                        }
+                                    } else {
+                                        if (data.is_success == '1') {
+                                            angular.element('#businessinfo #next').removeClass("form_submit");
+                                            $scope.loader_show = false;
+                                            activeContactInformation();
+                                            $scope.tab_active(2);
+                                            $("li#left-form-each-li-2 a").attr({
+                                                href: "#contact_information",
+                                                'data-toggle': "tab",
+                                                'ng-click': "getContactInformation(); tab_active(2);"
+                                            });
+                                        } else {
+                                            return false;
+                                        }
+                                    }
+                                });
                             } else {
                                 return false;
                             }
-
                         };
                         $.validator.addMethod("regx2", function (value, element, regexpr) {
                             if (!value)
@@ -833,31 +832,31 @@
                                     data: $scope.user, //forms user object
                                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 })
-                                        .then(function (data) {
-                                            data = data.data;
-                                            if (data.errors) {
-                                                // Showing errors.
-                                                $scope.errorContactName = data.errors.contactname;
-                                                $scope.errorContactMobile = data.errors.contactmobile;
-                                                $scope.errorEmail = data.errors.email;
-                                                $scope.errorCity = data.errors.city;
-                                                $scope.errorContactWebsite = data.errors.contactwebsite;
-                                            } else {
-                                                if (data.is_success == '1') {
-                                                    angular.element('#contactinfo #next').removeClass("form_submit");
-                                                    $scope.loader_show = false;
-                                                    activeDescription();
-                                                    $scope.tab_active(3);
-                                                    $("li#left-form-each-li-3 a").attr({
-                                                        href: "#description",
-                                                        'data-toggle': "tab",
-                                                        'ng-click': "getDescription(); tab_active(3)"
-                                                    });
-                                                } else {
-                                                    return false;
-                                                }
-                                            }
-                                        });
+                                .then(function (data) {
+                                    data = data.data;
+                                    if (data.errors) {
+                                        // Showing errors.
+                                        $scope.errorContactName = data.errors.contactname;
+                                        $scope.errorContactMobile = data.errors.contactmobile;
+                                        $scope.errorEmail = data.errors.email;
+                                        $scope.errorCity = data.errors.city;
+                                        $scope.errorContactWebsite = data.errors.contactwebsite;
+                                    } else {
+                                        if (data.is_success == '1') {
+                                            angular.element('#contactinfo #next').removeClass("form_submit");
+                                            $scope.loader_show = false;
+                                            activeDescription();
+                                            $scope.tab_active(3);
+                                            $("li#left-form-each-li-3 a").attr({
+                                                href: "#description",
+                                                'data-toggle': "tab",
+                                                'ng-click': "getDescription(); tab_active(3)"
+                                            });
+                                        } else {
+                                            return false;
+                                        }
+                                    }
+                                });
                             } else {
                                 return false;
                             }
@@ -898,30 +897,31 @@
                                     data: $scope.user, //forms user object
                                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 })
-                                        .then(function (data) {
-                                            data = data.data;
-                                            if (data.errors) {
-                                                $scope.errorBusinessType = data.errors.business_type;
-                                                $scope.errorCategory = data.errors.industriyal;
-                                                $scope.errorOtherBusinessType = data.errors.bustype;
-                                                $scope.errorOtherCategory = data.errors.indtype;
-                                                $scope.errorBusinessDetails = data.errors.business_details;
-                                            } else {
-                                                if (data.is_success == '1') {
-                                                    angular.element('#businessdis #next').removeClass("form_submit");
-                                                    $scope.loader_show = false;
-                                                    activeImage();
-                                                    $scope.tab_active(4);
-                                                    $("li#left-form-each-li-4 a").attr({
-                                                        href: "#business_image",
-                                                        'data-toggle': "tab",
-                                                        'ng-click': "getImage(); tab_active(4)"
-                                                    });
-                                                } else {
-                                                    return false;
-                                                }
-                                            }
-                                        });
+                                .then(function (data) {
+                                    data = data.data;
+                                    if (data.errors) {
+                                        $scope.errorBusinessType = data.errors.business_type;
+                                        $scope.errorCategory = data.errors.industriyal;
+                                        $scope.errorOtherBusinessType = data.errors.bustype;
+                                        $scope.errorOtherCategory = data.errors.indtype;
+                                        $scope.errorBusinessDetails = data.errors.business_details;
+                                    } else {
+                                        if (data.is_success == '1') {
+                                            angular.element('#businessdis #next').removeClass("form_submit");
+                                            $scope.loader_show = false;
+                                            // activeImage();
+                                            window.location.href = base_url + 'business-profile';
+                                            /*$scope.tab_active(4);
+                                            $("li#left-form-each-li-4 a").attr({
+                                                href: "#business_image",
+                                                'data-toggle': "tab",
+                                                'ng-click': "getImage(); tab_active(4)"
+                                            });*/
+                                        } else {
+                                            return false;
+                                        }
+                                    }
+                                });
                             } else {
                                 return false;
                             }
