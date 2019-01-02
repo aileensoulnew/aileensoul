@@ -460,6 +460,9 @@ $route['artist/insert_commentthreeimg'] = "artist/insert_commentthreeimg";
 $route['artist/edit_comment_insertimg'] = "artist/edit_comment_insertimg"; 
 $route['artist/delete_commentimg'] = "artist/delete_commentimg";
 
+$route['artist/generate_artist_profile'] = "artist/generate_artist_profile";
+$route['artist/send_promotional_main_in_back'] = "artist/send_promotional_main_in_back";
+
 /*$route['artist/category'] = "artist_live/view_more_artist";
 $route['artist/location'] = "artist_live/view_more_artist";
 $route['artist'] = "artist_live/view_more_artist";*/

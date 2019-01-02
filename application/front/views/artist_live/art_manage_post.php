@@ -438,7 +438,9 @@
                     </div>           
         			
         			<div class="right-part right-scroll">
-        				<?php $this->load->view('right_add_box'); ?>
+        				<?php $this->load->view('right_add_box');
+                        if($login_art_data[0]['user_id'] == $artisticdata[0]['user_id']):
+                        ?>
                         <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
                             <div class="count_main_progress">
                                 <div class="circles">
@@ -451,6 +453,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
         				<div class="right-info-box" ng-if="user_social_links.length > '0' || user_personal_links.length > '0'">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span>

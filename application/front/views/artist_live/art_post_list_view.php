@@ -2,7 +2,7 @@
 <input type = "hidden" class = "total_record" value = "<?php echo $total_record; ?>" />
 <input type = "hidden" class = "perpage_record" value = "<?php echo $perpage; ?>" />
 <?php 
-if (count($total_record) > 0) {
+if ($total_record > 0) {
     $feed_counter = 1;
     foreach ($artistic_post as $row) {
     $userid = $this->session->userdata('aileenuser');

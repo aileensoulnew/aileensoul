@@ -734,7 +734,7 @@
                                 <div class="dtl-edit-bottom"></div>
                                 <div class="p20">
                                     <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
-                                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                    <div id="profile-progress" class="edit_profile_progress" style="display: none;" ng-if="from_user_id == to_user_id">
                                         <div class="count_main_progress">
                                             <div class="circles">
                                                 <div class="second circle-1">

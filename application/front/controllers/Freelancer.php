@@ -5370,7 +5370,7 @@ class Freelancer extends MY_Controller {
                     $free_apply_education_upload_path = $this->config->item('free_apply_education_upload_path');
                     $file = $user_education_upload_path.$_user_education['edu_file'];
                     $newfile = $free_apply_education_upload_path.$_user_education['edu_file'];
-                    if(copy($file, $newfile))
+                    if(@copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
@@ -5410,7 +5410,7 @@ class Freelancer extends MY_Controller {
                     $free_apply_project_upload_path = $this->config->item('free_apply_project_upload_path');
                     $file = $user_project_upload_path.$_user_projects['project_file'];
                     $newfile = $free_apply_project_upload_path.$_user_projects['project_file'];
-                    if(copy($file, $newfile))
+                    if(@copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
@@ -5450,7 +5450,7 @@ class Freelancer extends MY_Controller {
                     $free_apply_publication_upload_path = $this->config->item('free_apply_publication_upload_path');
                     $file = $user_publication_upload_path.$_user_publication['pub_file'];
                     $newfile = $free_apply_publication_upload_path.$_user_publication['pub_file'];
-                    if(copy($file, $newfile))
+                    if(@copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
@@ -5486,7 +5486,7 @@ class Freelancer extends MY_Controller {
                     $free_apply_experience_upload_path = $this->config->item('free_apply_experience_upload_path');
                     $file = $user_experience_upload_path.$_user_experience['exp_file'];
                     $newfile = $free_apply_experience_upload_path.$_user_experience['exp_file'];
-                    if(copy($file, $newfile))
+                    if(@copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
@@ -5527,7 +5527,7 @@ class Freelancer extends MY_Controller {
                     $free_apply_addicourse_upload_path = $this->config->item('free_apply_addicourse_upload_path');
                     $file = $user_addicourse_upload_path.$_user_addicourse['addicourse_file'];
                     $newfile = $free_apply_addicourse_upload_path.$_user_addicourse['addicourse_file'];
-                    if(copy($file, $newfile))
+                    if(@copy($file, $newfile))
                     {
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);

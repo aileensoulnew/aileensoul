@@ -12,10 +12,12 @@ class Artist extends MY_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('artistic_model');
+        $this->load->model('userprofile_model');
         $this->data['title'] = "Aileensoul";
         $this->load->helper('smiley');
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->load->library('S3');
+        $this->load->library('inbackground');
 
         // $this->load->library('minify');
         // $this->load->helper('url');
@@ -204,7 +206,19 @@ class Artist extends MY_Controller {
                     //Openfire Username Generate End
                 }
 
-                //Send Promotional Mail Start
+                $url1 = base_url()."artist/generate_artist_profile";
+                $param1 = array("user_id"=>$userid);
+                $this->inbackground->do_in_background($url1, $param1);
+
+                $url = base_url()."artist/send_promotional_main_in_back";
+                $param = array(
+                    "user_id" => $userid,
+                    "first_name" => $first_name,
+                    "to_email" => $email_reg,
+                );
+                $this->inbackground->do_in_background($url, $param);
+
+                /*//Send Promotional Mail Start
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $userid))->row();
 
                 $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
@@ -214,7 +228,7 @@ class Artist extends MY_Controller {
                 $subject = $first_name.", Let’s Get Started  ";
 
                 $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-                //Send Promotional Mail End
+                //Send Promotional Mail End*/
             }
 
             if($data['art_skill'] != "")
@@ -16616,5 +16630,227 @@ class Artist extends MY_Controller {
             $data = array("is_success" => 1);
         }
         echo json_encode($data);
+    }
+    public function send_promotional_main_in_back()
+    {
+        $userid = $this->input->post('user_id');
+        $first_name = $this->input->post('first_name');
+        $to_email = $this->input->post('to_email');
+        //Send Promotional Mail Start
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $userid))->row();
+
+        $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+        
+        $email_html = $this->load->view('email_template/artist',$this->userdata,TRUE);                
+
+        $subject = $first_name.", Let’s Get Started  ";
+
+        $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+        //Send Promotional Mail End
+    }
+
+    public function generate_artist_profile()
+    {
+        $user_id = $this->input->post('user_id');//$this->session->userdata('aileenuser');
+
+        $user_education = $this->userprofile_model->get_user_education($user_id);
+        if(isset($user_education) && !empty($user_education))
+        {
+            foreach ($user_education as $_user_education) {
+              
+                if($_user_education['edu_file'] != '')
+                {
+                    $fileName = $_user_education['edu_file'];
+                    $user_education_upload_path = $this->config->item('user_education_upload_path');
+                    $art_education_upload_path = $this->config->item('art_education_upload_path');
+                    $file = $user_education_upload_path.$_user_education['edu_file'];
+                    $newfile = $art_education_upload_path.$_user_education['edu_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+                $edu_school_college = $_user_education['edu_school_college'];
+                $edu_university = $_user_education['edu_university'];
+                $edu_other_university = $_user_education['edu_other_university'];
+                $edu_degree = $_user_education['edu_degree'];
+                $edu_other_degree = $_user_education['edu_other_degree'];
+                $edu_stream = $_user_education['edu_stream'];
+                $edu_other_stream = $_user_education['edu_other_stream'];
+                $edu_start_date = $_user_education['edu_start_date'];
+                $edu_end_date = $_user_education['edu_end_date'];
+                $edu_nograduate = $_user_education['edu_nograduate'];                
+
+                $this->artistic_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName,$edit_edu = 0);
+            }
+        }
+
+        $user_award = $this->userprofile_model->get_user_award($user_id);
+        if(isset($user_award) && !empty($user_award))
+        {
+            foreach ($user_award as $_user_award) {
+              
+                if($_user_award['award_file'] != "")
+                {
+                    $fileName = $_user_award['award_file'];
+                    $user_award_upload_path = $this->config->item('user_award_upload_path');
+                    $art_user_award_upload_path = $this->config->item('art_user_award_upload_path');
+                    $file = $user_award_upload_path.$_user_award['award_file'];
+                    $newfile = $art_user_award_upload_path.$_user_award['award_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+                $award_title = $_user_award['award_title'];
+                $award_org = $_user_award['award_org'];
+                $award_date = $_user_award['award_date'];
+                $award_desc = $_user_award['award_desc'];
+                
+                $this->artistic_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards = "");
+            }
+        }
+
+        $user_experience = $this->userprofile_model->get_user_experience($user_id);
+        if(isset($user_experience) && !empty($user_experience))
+        {
+            foreach ($user_experience as $_user_experience) {
+              
+                if($_user_experience['exp_file'] != '')
+                {
+                    $fileName = $_user_experience['exp_file'];
+                    $user_experience_upload_path = $this->config->item('user_experience_upload_path');
+                    $art_experience_upload_path = $this->config->item('art_experience_upload_path');
+                    $file = $user_experience_upload_path.$_user_experience['exp_file'];
+                    $newfile = $art_experience_upload_path.$_user_experience['exp_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }                    
+                }
+                else
+                {
+                    $fileName = "";
+                }
+                $exp_company_name = $_user_experience['exp_company_name'];
+                $exp_designation_id = $_user_experience['exp_designation'];
+                $exp_company_website = $_user_experience['exp_company_website'];
+                $exp_field = $_user_experience['exp_field'];
+                $exp_other_field = $_user_experience['exp_other_field'];
+                $exp_country = $_user_experience['exp_country'];
+                $exp_state = $_user_experience['exp_state'];
+                $exp_city = $_user_experience['exp_city'];
+                $exp_start_date = $_user_experience['exp_start_date'];
+                $exp_end_date = $_user_experience['exp_end_date'];
+                $exp_isworking = $_user_experience['exp_isworking'];
+                $exp_desc = $_user_experience['exp_desc'];                
+                $this->artistic_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp = 0);
+            }
+        }
+
+        $user_addicourse = $this->userprofile_model->get_user_addicourse($user_id);
+        if(isset($user_addicourse) && !empty($user_addicourse))
+        {
+            foreach ($user_addicourse as $_user_addicourse) {
+              
+                if($_user_addicourse['addicourse_file'] != "")
+                {
+                    $fileName = $_user_addicourse['addicourse_file'];
+                    $user_addicourse_upload_path = $this->config->item('user_addicourse_upload_path');
+                    $art_addicourse_upload_path = $this->config->item('art_addicourse_upload_path');
+                    $file = $user_addicourse_upload_path.$_user_addicourse['addicourse_file'];
+                    $newfile = $art_addicourse_upload_path.$_user_addicourse['addicourse_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+                $addicourse_name = $_user_addicourse['addicourse_name'];
+                $addicourse_org = $_user_addicourse['addicourse_org'];
+                $addicourse_start_date = $_user_addicourse['addicourse_start_date'];
+                $addicourse_end_date = $_user_addicourse['addicourse_end_date'];
+                $addicourse_url = $_user_addicourse['addicourse_url'];
+                
+                $this->artistic_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse = 0);
+            }
+        }
+
+        $user_social_links_data = $this->userprofile_model->get_user_social_links($user_id);
+        if(isset($user_social_links_data) && !empty($user_social_links_data))
+        {
+            foreach ($user_social_links_data as $_user_social_links_data) {
+              
+                $data = array(
+                    'user_id' => $user_id,
+                    'user_links_txt' => $_user_social_links_data['user_links_txt'],
+                    'user_links_type' => $_user_social_links_data['user_links_type'],
+                    'status' => '1',
+                    'created_date' => date('Y-m-d H:i:s', time()),
+                    'modify_date' => date('Y-m-d H:i:s', time()),
+                );
+                $insert_id = $this->common->insert_data($data, 'art_user_links');
+            }
+        }
+
+        $user_personal_links_data = $this->userprofile_model->get_user_personal_links($user_id);
+        if(isset($user_personal_links_data) && !empty($user_personal_links_data))
+        {
+            foreach ($user_personal_links_data as $_user_personal_links_data) {
+              
+                $data = array(
+                    'user_id' => $user_id,
+                    'user_links_txt' => $_user_personal_links_data['user_links_txt'],
+                    'user_links_type' => "Personal",
+                    'status' => '1',
+                    'created_date' => date('Y-m-d H:i:s', time()),
+                    'modify_date' => date('Y-m-d H:i:s', time()),
+                );
+                $insert_id = $this->common->insert_data($data, 'art_user_links');
+            }
+        }
+
+        $user_languages = $this->userprofile_model->get_user_languages($user_id);
+        if(isset($user_languages) && !empty($user_languages))
+        {
+            foreach ($user_languages as $_user_languages) {
+                $data = array(
+                    'user_id' => $user_id,
+                    'language_txt' => $_user_languages['language_name'],
+                    'proficiency' => $_user_languages['proficiency'],
+                    'status' => '1',
+                    'created_date' => date('Y-m-d H:i:s', time()),
+                    'modify_date' => date('Y-m-d H:i:s', time()),
+                );
+                $insert_id = $this->common->insert_data($data, 'art_user_languages');
+            }
+        }
     }
 }

@@ -352,6 +352,7 @@ class Artist_live extends MY_Controller {
         } else {
             if($userid)
             {
+                $this->data['userdata'] = $this->user_model->getLeftboxData($userid);
                 $this->load->view('artist_live/profile', $this->data);
             }
             else
@@ -522,7 +523,10 @@ class Artist_live extends MY_Controller {
             $this->load->view('404',$this->data);
         }
         else
-        {            
+        {
+            $contition_array = array('user_id' => $userid, 'status' => '1', 'art_step' => '4');
+            $this->data['login_art_data'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
             $this->data['artid'] = $this->data['artisticdata'][0]['user_id'];
             $this->data['get_url'] = $get_url = $this->get_url($this->data['artisticdata'][0]['user_id']);
             $artistic_name = $this->get_artistic_name($this->data['artid']);
