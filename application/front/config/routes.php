@@ -776,6 +776,9 @@ $route['freelancer/save_user_basic'] = "freelancer/save_user_basic";
 
 $route['freelancer/get_freelancer_apply_progress'] = "freelancer/get_freelancer_apply_progress";
 
+$route['freelancer/send_promotional_main_in_back'] = "freelancer/send_promotional_main_in_back";
+$route['freelancer/generate_freelancer_profile'] = "freelancer/generate_freelancer_profile";
+
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 $route['freelancer-new/(:any)'] = "freelancer/freelancer_post_profile_new/$1";
 $route['freelancer-new-individual/(:any)'] = "freelancer/freelancer_post_profile_new_individual/$1";

@@ -115,7 +115,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="current_position" name="current_position" ng-model="current_position" ng-keyup="current_position_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" placeholder="Current Position" ng-init="current_position = '<?php echo ($user_data['title_name'] != '' ? $user_data['title_name'] : ''); ?>'" maxlength="35" tabindex="5">
+                                            <input type="text" class="form-control" value="<?php echo ($user_data['title_name'] != '' ? $user_data['title_name'] : ''); ?>" id="current_position" name="current_position" ng-model="current_position" ng-keyup="current_position_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" placeholder="Current Position" ng-init="current_position = '<?php echo ($user_data['title_name'] != '' ? $user_data['title_name'] : ''); ?>'" maxlength="35" tabindex="5">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
@@ -204,7 +204,7 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="skills" id="skills1" tabindex="9" placeholder="Skills*" maxlength="255"  ng-model="user.skills">
+                                    <input class="form-control" type="text" name="skills" id="skills1" tabindex="9" placeholder="Skills*" maxlength="255" ng-model="user.skills" value="<?php echo ($user_data['skill_data'] != '' ? $user_data['skill_data'] : ''); ?>" ng-init="user.skills='<?php echo ($user_data['skill_data'] != '' ? $user_data['skill_data'] : ''); ?>'">
                                 </div>                      
                                 <div class="row total-exp">
                                     <div class="col-md-12">
