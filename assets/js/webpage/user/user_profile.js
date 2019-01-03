@@ -3299,7 +3299,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         });
             }
         } else {
-
+            var description_check = $('#editPostTexBox-' + post_id).text();
             var description = $('#editPostTexBox-' + post_id).html();
             description = description.replace(/&nbsp;/gi, " ");
             description = description.replace(/<br>$/, '');
@@ -3309,7 +3309,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();
-            if (description == '')
+            if (description_check.trim() == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
