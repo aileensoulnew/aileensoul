@@ -1,7 +1,7 @@
 <!-- 
     Edit Profile:
     Individual : Not Display popup -  Company Information,Company Overview
-    Comapny : Not Display popup - Basic Info, Educational, Experience,Profile Summary)
+    Comapny : Not Display popup - Basic Info, Educational, Experience,Profile Summary,Additional Course)
  -->
 <!DOCTYPE html>
 <html lang="en" ng-app="freelanceApplyProfileApp" ng-controller="freelanceApplyProfileController">
@@ -983,8 +983,8 @@
                                 </div>
 							</div>
 						</div>
-						
-					
+
+                        <?php if($is_indivdual_company == '1'): ?>
 						<!--  12 Additional Caurse  -->
 						<div class="gallery-item">
                             <div class="dtl-box">
@@ -1063,6 +1063,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
 						
 						<!--  13 Publication -->
 						<div class="gallery-item">
@@ -2606,8 +2607,8 @@
                 </div>
             </div>
         </div>
-    	
-    	
+
+        <?php if($is_indivdual_company == '1'): ?>
     	<!---  model Additional Course  -->
         <div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -2737,6 +2738,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     	
     	<!---  model Publication  -->
     	<div style="display:none;" class="modal fade dtl-modal" id="publication" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
