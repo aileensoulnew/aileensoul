@@ -564,17 +564,20 @@ border-bottom: 1px solid #d2d2d2;}
 background: #f6f6f6; list-style-type:none;}
 .dash-info-box p{padding-left:20px;}
 .dash-info-box h4 svg{vertical-align: middle; margin-top: -4px;}
-.bus-info .dash-info-box{margin-bottom:15px;}
-.bus-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px;}
-.bus-info .dash-info-box p{width:93%; float:left; line-height:1; padding-left:5px;}
-.bus-info .dash-info-box ul{width:93%; float:left; padding-left:5px; padding-top:0;}
-.bus-info .dash-info-box ul.skill-list{margin-top:-5px;}
+.bus-info .dash-info-box, .art-info .dash-info-box {margin-bottom:15px;}
+.bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px;}
+.bus-info .dash-info-box p, .art-info .dash-info-box p {width:93%; float:left; line-height:1; padding-left:5px;}
+.bus-info .dash-info-box ul, .art-info .dash-info-box ul {width:93%; float:left; padding-left:5px; padding-top:0; margin-top:-4px;}
+.bus-info .dash-info-box ul.skill-list, .art-info .dash-info-box ul.skill-list{margin-top:-5px;}
 .dash-info-box p a{color:#7b7b7b;}
 .dash-info-box p a:hover{color:#1b8ab9;}
 .dash-info-box p span.box-dis{line-height: 1.5; display: inline-block; margin-top: -3px;}
 .dash-info-box p.inner-dis{line-height: 1.5; display: inline-block; margin-top: -3px;}
 .dash-info-box p.dis-mail{word-break: break-all;} 
 .dash-info-box p a span{word-break: break-all;} 
+.dash-info-box ul.skill-list li.inner-dis{border:0; background:none; padding:0;}
+.av-cus .dash-info-box{margin-bottom:0;}
+.dash-info-box .collapse-text-toggle{font-size:12px;}
 
 
 .media-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:5px; margin-bottom:10px;}
