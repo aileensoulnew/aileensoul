@@ -348,6 +348,7 @@
             var base_url = '<?php echo base_url(); ?>';
             //var user_slug = '<?php echo $this->uri->segment(2); ?>';
             var user_slug = '<?php echo $this->uri->segment(1); ?>';//Pratik
+            var cmt_maxlength = '700';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var item = '<?php echo $this->uri->segment(1); ?>';
             var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';

@@ -220,6 +220,7 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
     }
 
     $scope.post_like = function (post_id) {
+        $('#post-like-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -227,6 +228,7 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             if (success.data.message == 1) {
+                $('#post-like-' + post_id).removeAttr('style');
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
@@ -257,7 +259,69 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
         });
     }
 
+    $scope.cmt_handle_paste = function (e) {        
+        e.preventDefault();
+        e.stopPropagation();
+        var value = e.originalEvent.clipboardData.getData("Text");        
+        value = value.substring(0,cmt_maxlength);        
+        document.execCommand('inserttext', false, value);
+    };
+
+    $scope.check_comment_char_count = function(post_id,e){
+        var comment = $('#commentTaxBox-' + post_id).html();
+        //comment = comment.replace(/^(<br\s*\/?>)+/, '');
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        var no_allow_keycode = [8,17,35,36,37,38,39,40,46];
+
+        // if(e.keyCode != 8 && e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 17 && e.keyCode != 46 && comment.length + 1 > 10)
+        if(no_allow_keycode.indexOf(e.keyCode) == -1 && comment.length + 1 > cmt_maxlength)
+        {
+            e.preventDefault();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.cmt_handle_paste_edit = function (e) {        
+        e.preventDefault();
+        e.stopPropagation();
+        var value = e.originalEvent.clipboardData.getData("Text");        
+        value = value.substring(0,cmt_maxlength);        
+        document.execCommand('inserttext', false, value);
+    };
+
+    $scope.check_comment_char_count_edit = function(cmt_id,e){
+        var comment = $('#editCommentTaxBox-' + cmt_id).text();
+        //comment = comment.replace(/^(<br\s*\/?>)+/, '');
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        var no_allow_keycode = [8,17,35,36,37,38,39,40,46];
+        // if(e.keyCode != 8 && e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 17 && e.keyCode != 46 && comment.length + 1 > 10)
+        if(no_allow_keycode.indexOf(e.keyCode) == -1 && comment.length + 1 > cmt_maxlength)
+        {
+            e.preventDefault();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
     $scope.sendComment = function (post_id, index, post) {
+        $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
+        $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
+        $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
+        $("#cmt-btn-"+post_id).attr("disabled","disabled");
+
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
         //comment = comment.replace(/^(<br\s*\/?>)+/, '');
@@ -273,29 +337,35 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
                 data: 'comment=' + comment + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-                    .then(function (success) {
-                        data = success.data;
-                        if (data.message == '1') {
-                            if (commentClassName == 'last-comment') {
-                                $scope.postData[index].post_comment_data.splice(0, 1);
-                                $scope.postData[index].post_comment_data.push(data.comment_data[0]);
-                                if(data.comment_count > 0)
-                                {
-                                    $('.post-comment-count-' + post_id).show();
-                                }
-                                $('.post-comment-count-' + post_id).html(data.comment_count);
-                                $('.editable_text').html('');
-                            } else {
-                                $scope.postData[index].post_comment_data.push(data.comment_data[0]);
-                                if(data.comment_count > 0)
-                                {
-                                    $('.post-comment-count-' + post_id).show();
-                                }
-                                $('.post-comment-count-' + post_id).html(data.comment_count);
-                                $('.editable_text').html('');
-                            }
+            .then(function (success) {
+                data = success.data;
+                if (data.message == '1') {
+                    if (commentClassName == 'last-comment') {
+                        $scope.postData[index].post_comment_data.splice(0, 1);
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        if(data.comment_count > 0)
+                        {
+                            $('.post-comment-count-' + post_id).show();
                         }
-                    });
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        if(data.comment_count > 0)
+                        {
+                            $('.post-comment-count-' + post_id).show();
+                        }
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    }
+                }
+                setTimeout(function(){
+                    $("#cmt-btn-mob-"+post_id).removeAttr("style");
+                    $("#cmt-btn-mob-"+post_id).removeAttr("disabled");
+                    $("#cmt-btn-"+post_id).removeAttr("style");
+                    $("#cmt-btn-"+post_id).removeAttr("disabled");
+                },1000);
+            });
         } else {
             $scope.isMsgBoxEmpty = true;
         }
@@ -387,25 +457,26 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
     }
 
     $scope.likePostComment = function (comment_id, post_id) {
+        $('#cmt-like-fnc-' + comment_id).attr("style","pointer-events:none;")
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePostComment',
             data: 'comment_id=' + comment_id + '&post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (data.message == '1') {
-                        if (data.is_newLike == 1) {
-                            $('#post-comment-like-' + comment_id).parent('a').addClass('like');
-                            $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
-                        } else if (data.is_oldLike == 1) {
-                            $('#post-comment-like-' + comment_id).parent('a').removeClass('like');
-                            $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
-                        }
-
-                    }
-                });
+        .then(function (success) {
+            data = success.data;
+            if (data.message == '1') {
+                $('#cmt-like-fnc-' + comment_id).removeAttr("style");
+                if (data.is_newLike == 1) {
+                    $('#post-comment-like-' + comment_id).parent('a').addClass('like');
+                    $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
+                } else if (data.is_oldLike == 1) {
+                    $('#post-comment-like-' + comment_id).parent('a').removeClass('like');
+                    $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
+                }
+            }
+        });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
         /*var editContent = $('#comment-dis-inner-' + comment_id).html();
@@ -416,7 +487,9 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
         $(".comment-for-post-"+post_id+" .comment-dis-inner").show();
         $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
         $(".comment-for-post-"+post_id+" li[id^=cancel-comment-li-]").hide();
-        var editContent = $('#comment-dis-inner-' + comment_id).html();
+        // var editContent = $('#comment-dis-inner-' + comment_id).html();
+        var editContent = $scope.postData[parent_index].post_comment_data[index].comment;
+        editContent = editContent.substring(0,cmt_maxlength);
         $('#edit-comment-' + comment_id).show();
         $('#editCommentTaxBox-' + comment_id).html(editContent);
         $('#comment-dis-inner-' + comment_id).hide();
