@@ -523,13 +523,13 @@ border-bottom: 1px solid #d2d2d2;}
 .main-dashboard .left-part{position:absolute;}
 .main-dashboard .right-part{position:absolute;}
 .left-info-box, .right-info-box {width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin-bottom:10px; font-size:14px;}
-.dash-left-title h3{margin:0; padding:5px; text-align:center; color:#5c5c5c;}
+.dash-left-title h3{margin:0; padding:0px 5px 10px; text-align:center; color:#5c5c5c; line-height:1; margin-bottom:10px;}
 .dash-left-title h3 a{color:#5c5c5c; width:120px; display:inline-block; padding:5px 10px; letter-spacing:1px;}
 .dash-left-title h3 a i{float:left;}
 .dash-left-title h3 a:hover{background: #e9ebee; padding: 5px 10px; border-radius: 3px;}
 .left-info-box table td{padding:3px; color:#5c5c5c;}
 .left-info-box table td:first-child{width:30px;}
-.right-info-box .dtl-title{padding:0 0 10px 0;}
+.right-info-box .dtl-title{padding:0 0 5px 0; font-size:18px;}
 .right-info-box .dtl-dis{padding:0;}
 .right-info-box .review-list li .review-left{width:30px; height:30px;}
 .right-info-box .rev-img .post-img-profile{width:30px; height:30px; font-size:14px; padding:9px 0;}
@@ -553,6 +553,7 @@ border-bottom: 1px solid #d2d2d2;}
 .right-info-box .dis-left{width:40px;}
 .right-info-box .dis-left .dis-left-img{width:40px; height:40px;}
 .right-info-box .dis-middle{width:254px;}
+.dtl-dis .bus-story{margin-top:10px;}
 
 
 .dash-info-box{font-size:13px; color:#7b7b7b; width:100%; float:left; margin-bottom:10px;}
@@ -567,7 +568,8 @@ background: #f6f6f6; list-style-type:none;}
 .bus-info .dash-info-box, .art-info .dash-info-box {margin-bottom:15px;}
 .bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px;}
 .bus-info .dash-info-box p, .art-info .dash-info-box p {width:93%; float:left; line-height:1; padding-left:5px;}
-.bus-info .dash-info-box ul, .art-info .dash-info-box ul {width:93%; float:left; padding-left:5px; padding-top:0; margin-top:-4px;}
+.bus-info .dash-info-box ul, .art-info .dash-info-box ul {width:93%; float:left; padding-left:5px; padding-top:0;}
+.art-info .dash-info-box ul{margin-top:-4px;}
 .bus-info .dash-info-box ul.skill-list, .art-info .dash-info-box ul.skill-list{margin-top:-5px;}
 .dash-info-box p a{color:#7b7b7b;}
 .dash-info-box p a:hover{color:#1b8ab9;}
@@ -578,6 +580,9 @@ background: #f6f6f6; list-style-type:none;}
 .dash-info-box ul.skill-list li.inner-dis{border:0; background:none; padding:0;}
 .av-cus .dash-info-box{margin-bottom:0;}
 .dash-info-box .collapse-text-toggle{font-size:12px;}
+.profile-boxProfileCard h5{color:#5c5c5c; font-weight:normal;}
+.profile-boxProfileCard h5 span{vertical-align:top;}
+.right-info-box .dtl-title span{vertical-align:top; padding-top:3px; display:inline-block;}
 
 
 .media-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:5px; margin-bottom:10px;}
@@ -592,6 +597,7 @@ transform: translate(-50%,-50%);
 max-width: inherit;
 height: 100%;}
 .dash-left-title h3{font-size:20px;}
+.dash-left-title h3 span{vertical-align:top; padding-top:4px; display:inline-block;}
 .latest_audio .all-meda a:hover .audio-title, .latest_pdf .all-meda:hover .pdf-title{
     position: absolute;
     width: 100%;
@@ -4217,6 +4223,9 @@ color: #5c5c5c !important;}
 	.no-timeline h2{font-size:25px; padding-top:0;}
 	.article-preview .article-title h1{font-size:20px;}
 	.left-info-box, .right-info-box{border-radius:0; border-left:0; border-right:0;}
+	.dash-left-title h3{font-size:18px; text-align:left; border-bottom:1px solid #d2d2d2; padding:0px 2px 5px;}
+	.dash-left-title h3 svg{width:20px;}
+	.right-info-box .dtl-title svg{width:20px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4585,6 +4594,7 @@ color: #5c5c5c !important;}
 	.dis-middle{width:75%;}
 	.dis-list li span{font-size:13px;}
 	.dtl-dis ul li{font-size:12px; padding-bottom:10px;}
+	.dtl-dis ul li .rating-md{font-size:12px;}
 	.dis-accor .panel-collapse{padding:0 10px;}
 	.dtl-dis{/*padding:10px 10px 30px;*/}
 	.dis-right a.pr5{padding-right:0;}
@@ -4662,6 +4672,7 @@ color: #5c5c5c !important;}
 	.no-timeline img{margin-right:0; margin-top:-10px;}
 	#add-menu .no-timeline{width:70%;}
 	.blog-page .blog-left-content h2{font-size:18px; line-height:1.5;}
+	.bus-info .dash-info-box p{font-size:13px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
