@@ -16571,7 +16571,15 @@ class Artist extends MY_Controller {
                     //Openfire Username Generate End
                 }
 
-                //Send Promotional Mail Start
+                $url = base_url()."artist/send_promotional_main_in_back";
+                $param = array(
+                    "user_id" => $userid,
+                    "first_name" => $firstname,
+                    "to_email" => $email,
+                );
+                $this->inbackground->do_in_background($url, $param);
+
+                /*//Send Promotional Mail Start
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $userid))->row();
 
                 $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
@@ -16581,7 +16589,7 @@ class Artist extends MY_Controller {
                 $subject = $first_name.", Let’s Get Started  ";
 
                 $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-                //Send Promotional Mail End
+                //Send Promotional Mail End*/
 
                 if($reg_data['art_skill'] != "")
                 {

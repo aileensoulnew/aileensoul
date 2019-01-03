@@ -8036,11 +8036,19 @@ Your browser does not support the audio tag.
             $insert_id = $this->common->insert_data_getid($data, 'contact_person');
             if ($insert_id) {
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $to_id))->row()->contact_email;
+                if($this->data['business_login_user_image'] != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$this->data['business_login_user_image'];
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
 
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $this->data['business_login_company_name'] . '</b> send contact request in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
@@ -8611,10 +8619,18 @@ Your browser does not support the audio tag.
             if ($updatdata) {
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $toid))->row()->contact_email;
+                if($this->data['business_login_user_image'] != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$this->data['business_login_user_image'];
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $img . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $this->data['business_login_company_name'] . '</b> is approved your contact request in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>

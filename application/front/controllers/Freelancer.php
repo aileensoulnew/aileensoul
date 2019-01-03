@@ -2971,8 +2971,16 @@ class Freelancer extends MY_Controller {
                         //Openfire Username Generate End
                     }
 
+                    $url = base_url()."freelancer/send_promotional_main_in_back";
+                    $param = array(
+                        "user_id" => $userid,
+                        "first_name" => $first_name,
+                        "to_email" => $email_reg,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
+
                     //Send Promotional Mail Start
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+                    /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
                     $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     $this->userdata['firstname'] = $first_name;
@@ -2981,7 +2989,7 @@ class Freelancer extends MY_Controller {
 
                     $subject = $first_name.", Here’s How to Not Miss Great Opportunities.";
 
-                    $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                    $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);*/
                     //Send Promotional Mail End
                     if(trim($data['freelancer_post_field']) != "")
                     {
@@ -3358,7 +3366,7 @@ class Freelancer extends MY_Controller {
                 }
 
                 //Send Promotional Mail Start
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+                /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
                 $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 $this->userdata['firstname'] = $firstname;
@@ -3367,8 +3375,16 @@ class Freelancer extends MY_Controller {
 
                 $subject = $firstname.", Here’s How to Not Miss Great Opportunities.";
 
-                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);*/
                 //Send Promotional Mail End
+
+                $url = base_url()."freelancer/send_promotional_main_in_back";
+                $param = array(
+                    "user_id" => $userid,
+                    "first_name" => $firstname,
+                    "to_email" => $email,
+                );
+                $this->inbackground->do_in_background($url, $param);
 
                 if(trim($data['freelancer_post_field']) != "")
                 {
@@ -3522,7 +3538,7 @@ class Freelancer extends MY_Controller {
             }
 
             //Send Promotional Mail Start
-            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+            /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
             $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
             $this->userdata['firstname'] = $first_name;
@@ -3531,8 +3547,15 @@ class Freelancer extends MY_Controller {
 
             $subject = $first_name.", Here’s How to Not Miss Great Opportunities.";
 
-            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);*/
             //Send Promotional Mail End
+            $url = base_url()."freelancer/send_promotional_main_in_back";
+            $param = array(
+                "user_id" => $userid,
+                "first_name" => $first_name,
+                "to_email" => $email,
+            );
+            $this->inbackground->do_in_background($url, $param);
 
             if(trim($data['freelancer_post_field']) != "")
             {

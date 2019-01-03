@@ -5973,15 +5973,15 @@ class Job extends MY_Controller {
 
 
         $email_html .= '</td>
-                                                                    <td style="padding:5px;">
-                                                                        <p>Job seeker<b> ' . ucwords($jobdata[0]['fname']) . ' ' . ucwords($jobdata[0]['lname']) . '</b> Applied on your jobpost.
-                                                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                                                    </td>
-                                                                    <td style="'.MAIL_TD_3.'">
-                                                                        <p><a class="btn" href="' . BASEURL . 'job/resume/' . $jobdata[0]['slug'] . '">view</a></p>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>';
+                    <td style="padding:5px;">
+                        <p>Job seeker<b> ' . ucwords($jobdata[0]['fname']) . ' ' . ucwords($jobdata[0]['lname']) . '</b> Applied on your jobpost.
+                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    </td>
+                    <td style="'.MAIL_TD_3.'">
+                        <p><a class="btn" href="' . BASEURL . 'job/resume/' . $jobdata[0]['slug'] . '">view</a></p>
+                    </td>
+                </tr>
+            </table>';
 
         $subject = ucwords($jobdata[0]['fname']) . ' ' . ucwords($jobdata[0]['lname']) . ' Applied on your jobpost - Aileensoul.';
         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $notid))->row();
@@ -6551,14 +6551,17 @@ class Job extends MY_Controller {
 
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
                 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+                /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
                 $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 
                 $email_html = $this->load->view('email_template/job_register',$this->userdata,TRUE);
 
                 $subject = "Find and Get Great Opportunities on Aileensoul";
-                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);*/
+                $url = base_url()."job/send_mail_job_reg_background";
+                $param = array("email_id"=>$email,"user_id"=>$userid);
+                $this->inbackground->do_in_background($url, $param);
 
                 if($job_save != "")
                 {
@@ -6916,14 +6919,17 @@ class Job extends MY_Controller {
                 }
             }
             if ($insert_id) {
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+                /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
                 $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 
                 $email_html = $this->load->view('email_template/job_register',$this->userdata,TRUE);
 
                 $subject = "Find and Get Great Opportunities on Aileensoul";
-                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);*/
+                $url = base_url()."job/send_mail_job_reg_background";
+                $param = array("email_id"=>$email,"user_id"=>$userid);
+                $this->inbackground->do_in_background($url, $param);
                 $data = array("is_success" => 1);
             } else {
                 $data['errors'] = $errors['not_sucess'] = "Please Try again";

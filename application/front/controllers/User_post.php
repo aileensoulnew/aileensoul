@@ -302,11 +302,28 @@ class User_post extends MY_Controller {
                             $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                         }
 
+                        if($login_userdata['user_image'] != "")
+                        {
+                            $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                        }
+                        else
+                        {
+                            if($login_userdata['user_gender']  == 'M')
+                            {
+                                $login_user_img = base_url('assets/img/man-user.jpg');
+                            }
+
+                            if($login_userdata['user_gender']  == 'F')
+                            {
+                                $login_user_img = base_url('assets/img/female-user.jpg');
+                            }
+                        }
+
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td style="'.MAIL_TD_1.'">
-                                                <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                             </td>
                                             <td style="padding:5px;">
                                                 <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> commented on your post.</p>
@@ -466,11 +483,28 @@ class User_post extends MY_Controller {
                             $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                         }
 
+                        if($login_userdata['user_image'] != "")
+                        {
+                            $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                        }
+                        else
+                        {
+                            if($login_userdata['user_gender']  == 'M')
+                            {
+                                $login_user_img = base_url('assets/img/man-user.jpg');
+                            }
+
+                            if($login_userdata['user_gender']  == 'F')
+                            {
+                                $login_user_img = base_url('assets/img/female-user.jpg');
+                            }
+                        }
+
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td style="'.MAIL_TD_1.'">
-                                                <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                             </td>
                                             <td style="padding:5px;">
                                                 <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your comment.</p>
