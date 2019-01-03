@@ -92,10 +92,13 @@
 					$userid = $this->session->userdata('aileenuser');
 					if ($this->uri->segment(3) == $userid) {
 					    $user_id = $userid;
+					    $login_user_id = $user_id;
 					} elseif ($this->uri->segment(3) == "") {
 					    $user_id = $userid;
+					    $login_user_id = $user_id;
 					} else {
 					    $user_id = $this->uri->segment(3);
+					    $login_user_id = $user_id;
 					}
 
 					$contition_array = array('user_id' => $user_id, 'is_delete' => '0', 're_status' => '1');
@@ -797,7 +800,7 @@
 		var header_all_profile = '<?php echo $header_all_profile; ?>';
 		var base_url = '<?php echo base_url(); ?>';
 		var jobdata = <?php echo json_encode($jobtitle); ?>;
-		var user_id = <?php echo $this->uri->segment(3); ?>;
+		var user_id = <?php echo $login_user_id; ?>;
 		var rec_profile_thumb_upload_url = "<?php echo REC_PROFILE_THUMB_UPLOAD_URL; ?>";
 		var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
 		var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';

@@ -67,10 +67,13 @@
                         $userid = $this->session->userdata('aileenuser');
                         if ($this->uri->segment(3) == $userid) {
                             $user_id = $userid;
+                            $login_user_id = $user_id;
                         } elseif ($this->uri->segment(3) == "") {
                             $user_id = $userid;
+                            $login_user_id = $user_id;
                         } else {
                             $user_id = $this->uri->segment(3);
+                            $login_user_id = $user_id;
                         }
 
                         $contition_array = array('user_id' => $user_id, 'is_delete' => '0', 're_status' => '1');
@@ -259,6 +262,24 @@
                 </div>
 				<div class="right-add">
 					<?php $this->load->view('right_add_box'); ?>
+                    <?php if ($postdataone[0]['user_id'] == $userid) { ?>
+                    <div class="right-add-box">
+                        <div class="p20">                            
+                            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                <div class="count_main_progress">
+                                    <div class="circles">
+                                        <div class="second circle-1">
+                                            <div>
+                                                <strong></strong>
+                                                <span id="progress-txt"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
 				</div>
             </div>
 
@@ -356,46 +377,25 @@
     var id = '<?php echo $this->uri->segment(3); ?>';
     var return_page = '<?php echo $_GET['page']; ?>';
     var header_all_profile = '<?php echo $header_all_profile; ?>';
+    var login_user_id = '<?php echo $login_user_id; ?>';
     </script>
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 
-    <!-- FIELD VALIDATION JS END -->    
+    <!-- FIELD VALIDATION JS END --> 
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
     <?php
-    if (IS_REC_JS_MINIFY == '0') { ?>
-        <!-- <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script> -->
-
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-
-
-        <?php
-        if($this->uri->segment(3) != $userid)
-        {?>
-            <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
-        <?php
-        }
-        else
-        { ?>
-            <script src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
-        <?php 
-        } ?>
-
+    if($this->uri->segment(3) != $userid)
+    {?>
+        <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
     <?php
     }
     else
-    {
-    ?>
-        <!-- <script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script> -->
-        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-        <!-- <script src="<?php echo base_url('assets/js_min/webpage/recruiter/rec_post.js'); ?>"></script> -->
-        <?php if($this->uri->segment(3) != $userid){   ?>
-            <script src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
-        <?php }else{ ?>
-            <script src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
-        <?php } ?>
+    { ?>
+        <script src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
     <?php 
-    } ?>    
+    } ?>
     <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
     <script src="<?php echo base_url('assets/js/webpage/recruiter/rec_post.js'); ?>"></script>
     </body>
