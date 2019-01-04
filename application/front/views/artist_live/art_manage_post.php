@@ -455,15 +455,12 @@
             					<span ng-if="art_imp_data == '3'"><span class="job-not"></span>Not now</span>
             				</div>
 						</div>
-						<div class="right-add-box">
-						</div>
-						
         				<?php $this->load->view('right_add_box');
                         if($login_art_data[0]['user_id'] == $artisticdata[0]['user_id']):
-                        ?>
+                        ?>   
                         <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
                             <div class="count_main_progress">
-                                <div class="circles">
+                                <div class="circles">  
                                     <div class="second circle-1">
                                         <div>
                                             <strong></strong>
