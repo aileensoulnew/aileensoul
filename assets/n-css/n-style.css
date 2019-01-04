@@ -529,6 +529,8 @@ border-bottom: 1px solid #d2d2d2;}
 .dash-left-title h3 a:hover{background: #e9ebee; padding: 5px 10px; border-radius: 3px;}
 .left-info-box table td{padding:3px; color:#5c5c5c;}
 .left-info-box table td:first-child{width:30px;}
+.left-info-box.bus-info h3 svg{width:21px;}
+.left-info-box.art-info h3 svg{width:21px;}
 .right-info-box .dtl-title{padding:0 0 5px 0; font-size:18px;}
 .right-info-box .dtl-dis{padding:0;}
 .right-info-box .review-list li .review-left{width:30px; height:30px;}
@@ -538,7 +540,7 @@ border-bottom: 1px solid #d2d2d2;}
 .right-info-box .review-list li .review-right .rating-star-cus{padding-top:0;}
 .right-info-box .review-list li .review-right .review-dis{font-size:13px; line-height:1.5;}
 .right-info-box .dtl-dis ul li{padding-bottom:10px;}
-.right-info-box .total-rev{padding-bottom:5px; font-size:18px;}
+.right-info-box .total-rev{padding-bottom:15px; font-size:18px;}
 .right-info-box .total-rev .total-rat{padding-top:0px;}
 .right-info-box .total-rev span.rev-count{font-size:12px; line-height:1;}
 .right-info-box .rating-star-cus .rating-sm{font-size:14px;}
@@ -554,6 +556,8 @@ border-bottom: 1px solid #d2d2d2;}
 .right-info-box .dis-left .dis-left-img{width:40px; height:40px;}
 .right-info-box .dis-middle{width:254px;}
 .dtl-dis .bus-story{margin-top:10px;}
+.right-info-box .write-review img{width:16px;}
+.right-info-box .write-review .write-review{font-size:13px;}
 
 
 .dash-info-box{font-size:13px; color:#7b7b7b; width:100%; float:left; margin-bottom:10px;}
@@ -2870,7 +2874,7 @@ box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104
 .vertical-m-box .vm-box{float: left; top: 50%; width: 530px; position: absolute;
 max-width: 100%; max-height: 100%; transform: translate(-50%,-50%); left: 50%; margin-top:22px;}
 .one-border textarea{border-width:0 0 1px 0; border-radius:0; height:120px;}
-.dtl-dis .bus-story{height:150px; overflow:hidden; position:relative; margin-bottom:15px;}
+.dtl-dis .bus-story{height:150px; overflow:hidden; position:relative; margin-bottom:15px; cursor:pointer;}
 .dtl-dis .bus-story img{width: auto; height: 100%; left: 50%; position: absolute; top: 50%;
 transform: translate(-50%, -50%); max-width: inherit;}
 .dtl-dis .bus-story.no-img-upload{background:#f6f6f6;}
@@ -4255,7 +4259,7 @@ text-transform:uppercase;}
 	.no-timeline h2{font-size:25px; padding-top:0;}
 	.article-preview .article-title h1{font-size:20px;}
 	.left-info-box, .right-info-box{border-radius:0; border-left:0; border-right:0;}
-	.dash-left-title h3{font-size:18px; text-align:left; border-bottom:1px solid #d2d2d2; padding:0px 2px 5px;}
+	.dash-left-title h3{font-size:18px; text-align:left; border-bottom:1px solid #d2d2d2; padding:0px 2px 5px; margin-bottom:10px;}
 	.dash-left-title h3 svg{width:20px;}
 	.right-info-box .dtl-title svg{width:20px;}
 	.mob-progressbar .progress .skill{line-height:26px;}
