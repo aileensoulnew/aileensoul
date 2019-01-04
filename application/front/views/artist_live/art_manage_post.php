@@ -35,7 +35,7 @@
     <?php $this->load->view('adsense'); ?>
 </head>
 <!-- END HEADER -->
-<body class="page-container-bg-solid page-boxed body-loader">
+<body class="page-container-bg-solid page-boxed body-loader art-dash">
     <?php $this->load->view('page_loader'); ?>
     <div id="main_page_load" style="display: block;">    
         <?php echo $artistic_header2; ?>
@@ -332,11 +332,11 @@
 						<div class="mob-progressbar">
 							<p>Complete your profile to get connected with more people.</p>
 							<p class="mob-edit-pro">
-								<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+								<a href="<?php echo artist_dashboard. $get_url.'/details'; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 							</p>
 							<div class="progress skill-bar ">
-								<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="34.782608695652" aria-valuemin="0" aria-valuemax="100" style="width: 34.7826%;">
-									<span class="skill"><i class="val">35%</i></span>
+								<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+									<span class="skill"><i class="val">0%</i></span>
 								</div>
 							</div>
 						</div>
