@@ -328,7 +328,9 @@
             			<div class="tab-add">
             				<?php $this->load->view('banner_add'); ?>
             			</div> 
-
+                        <?php
+                        if($login_art_data[0]['user_id'] == $artisticdata[0]['user_id']):
+                        ?>
 						<div class="mob-progressbar">
 							<p>Complete your profile to get connected with more people.</p>
 							<p class="mob-edit-pro">
@@ -340,6 +342,9 @@
 								</div>
 							</div>
 						</div>
+                        <?php
+                        endif;
+                        ?>
 						<div id="move-availability" class="">
 						</div>
 						<div id="move-middle" class="">

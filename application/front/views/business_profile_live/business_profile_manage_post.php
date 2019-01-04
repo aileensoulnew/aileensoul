@@ -414,6 +414,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php echo $left_footer; ?>
                             </div>
                             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
+                                <?php if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
 								<div class="mob-progressbar">
 									<p>Complete your profile to get more visibility</p>
 									<p class="mob-edit-pro">
@@ -425,6 +426,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 										</div>
 									</div>
 								</div>
+                                <?php endif; ?>
                                 <div class="right_side_posrt">
                                     <div class="tab-add">
                                         <?php $this->load->view('banner_add'); ?>
