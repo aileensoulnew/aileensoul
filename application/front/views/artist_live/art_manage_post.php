@@ -330,7 +330,7 @@
             			</div> 
 
 						<div class="mob-progressbar">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum elit nulla, id gravida ipsum sagittis eu</p>
+							<p>Complete your profile to get connected with more people.</p>
 							<p class="mob-edit-pro">
 								<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 							</p>
@@ -449,6 +449,8 @@
                                 <span ng-if="art_imp_data == '2'"><span class="job-passive"></span>Open for Collaboration</span>
             					<span ng-if="art_imp_data == '3'"><span class="job-not"></span>Not now</span>
             				</div>
+						</div>
+						<div class="right-add-box">
 						</div>
 						
         				<?php $this->load->view('right_add_box');
@@ -647,14 +649,16 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard_new.js?ver='.time()); ?>"></script>
 	<script>
 			$(document).ready(function () {
-				if (screen.width <= 991) {
-					$(".move-middle").appendTo($("#move-middle"));
+				if (screen.width <= 1279) {
 					$(".move-website").appendTo($("#move-website"));
 					$(".move-availability").appendTo($("#move-availability"));
 					
-					
 				}
-			   
+			});
+			$(document).ready(function () {
+				if (screen.width <= 991) {
+					$(".move-middle").appendTo($("#move-middle"));
+				}
 			});
 		</script>
 </body>

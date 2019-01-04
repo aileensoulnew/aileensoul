@@ -1507,11 +1507,13 @@
             $('[data-toggle="tooltip"]').tooltip();   
         });
 		$(document).ready(function () {
-        	if (screen.width <= 991) {
-        		$(".move-middle").appendTo($("#move-middle"));
+        	if (screen.width <= 1279) {
         		$(".move-middle1").appendTo($("#move-middle1"));
-	            
 	        }
-	       
 	    });
+		$(document).ready(function () {
+			if (screen.width <= 991) {
+				$(".move-middle").appendTo($("#move-middle"));
+			}
+		});
     </script>
