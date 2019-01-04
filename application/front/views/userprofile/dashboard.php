@@ -378,13 +378,13 @@
                 </div>
             </div>
 			<div class="mob-progressbar fw">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum elit nulla, id gravida ipsum sagittis eu</p>
+				<p>Complete your profile to get connected with more people.</p>
 				<p class="mob-edit-pro">
-					<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+					<a ng-href="<?php echo base_url() ?>{{user_slug}}/details" target="_self"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 				</p>
 				<div class="progress skill-bar ">
-					<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="34.782608695652" aria-valuemin="0" aria-valuemax="100" style="width: 34.7826%;">
-						<span class="skill"><i class="val">35%</i></span>
+					<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="" style="">
+						<span class="skill"><i class="val">0%</i></span>
 					</div>
 				</div>
 			</div>
