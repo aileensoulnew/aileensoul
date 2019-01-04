@@ -270,7 +270,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </p>
                                 </div>
 								<?php }?>
-                                <div class="dash-info-box sp-day" ng-if="bus_opening_hours miss-cus">
+                                <div class="dash-info-box sp-day" ng-if="bus_opening_hours">
                                     <h4>
                                         <svg width="18px" height="17px" viewBox="0 0 612 612" >
                                             <g>
@@ -294,7 +294,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         <li ng-if="bus_opening_hours.sat_from_time && bus_opening_hours.sat_from_ap && bus_opening_hours.sat_to_time && bus_opening_hours.sat_to_ap">Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</li>
 									</ul>
 								</div>
-                                <div class="dash-info-box" ng-if="business_info_data.business_mission != ''">
+                                <div class="dash-info-box miss-cus" ng-if="business_info_data.business_mission != ''">
                                     <h4>
                                         <svg  viewBox="0 0 414.295 414.295" width="18px" height="17px" stroke-width="1" stroke="#5c5c5c">
                                             <g>
