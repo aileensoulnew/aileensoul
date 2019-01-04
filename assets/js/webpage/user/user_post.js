@@ -2220,10 +2220,15 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
+            $('#post-like-' + post_id).removeAttr('style');
             if (success.data.message == 1) {                
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
-                    $('#post-like-' + post_id).addClass('like');
+                    // $('#post-like-' + post_id).addClass('like');
+                    
+                    var myEl = angular.element( document.querySelector('#post-like-' + post_id) );
+                    myEl.addClass('like');
+
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
                         $('#post-other-like-' + post_id).html('');
@@ -2247,10 +2252,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
-            }
-            setTimeout(function(){
-                $('#post-like-' + post_id).removeAttr('style');
-            },100);
+            }            
         });
     }
 
@@ -2312,11 +2314,6 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     };
 
     $scope.sendComment = function (post_id, index, post) {
-        $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
-        $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
-        $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
-        $("#cmt-btn-"+post_id).attr("disabled","disabled");
-        
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
         //comment = comment.replace(/^(<br\s*\/?>)+/, '');
@@ -2325,6 +2322,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
         if (comment) {
+            $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
+            $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-"+post_id).attr("disabled","disabled");
+            
             $scope.isMsg = true;
             $http({
                 method: 'POST',

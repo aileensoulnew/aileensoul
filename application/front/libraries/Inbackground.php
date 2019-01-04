@@ -20,12 +20,12 @@ class Inbackground
 
         if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
            //For secure server
-            $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port']) ? $parts['port'] : 443, $errno, $errstr, 0);
+            $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port']) ? $parts['port'] : 443, $errno, $errstr, 30);
         }
         else
         {
             //For localhost and un-secure server
-            $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 0);
+            $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
         }
         if(!$fp)
         {
