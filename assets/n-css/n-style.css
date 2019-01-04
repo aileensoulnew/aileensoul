@@ -4234,7 +4234,7 @@ text-transform:uppercase;}
 	.events-content li h2 a img{width:18px;}
 	.right-cus-imp{width:100%;}
 	.right-cus-imp .dtl-box{width:100%;}
-	.dtl-box{border-radius:0;}
+	
 	.total-rev{font-size:22px;}
 	.rating-sm{font-size:20px;}
 	.total-rev .total-rat{padding-top:0;}
@@ -4705,6 +4705,7 @@ text-transform:uppercase;}
 	#add-menu .no-timeline{width:70%;}
 	.blog-page .blog-left-content h2{font-size:18px; line-height:1.5;}
 	.bus-info .dash-info-box p{font-size:13px;}
+	.dtl-box{border-radius:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
