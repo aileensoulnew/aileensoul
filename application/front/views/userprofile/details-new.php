@@ -38,6 +38,14 @@
 			<div class="edit-profile-mob">
 			</div>
             <div class="gallery" id="gallery">
+				<!-- 02  edit profile  -->
+                <div class="gallery-item edit-profile-move">
+                </div>
+				
+				<!-- 02  advertize  -->
+                <div class="gallery-item advertize-move">
+                </div>
+				
                 <!-- 01 Profile Overview Start-->
                 <div class="gallery-item">
                     <div class="dtl-box">
@@ -65,13 +73,9 @@
                 </div>
                 <!-- Profile Overview End-->
                 
-				<!-- 02  edit profile  -->
-                <div class="gallery-item edit-profile-move">
-                </div>
 				
-				<!-- 03  Blank div  -->
-                <div class="gallery-item about-move">
-                </div>
+				
+				
 				
 				<!-- 04 About User Start -->
                 <div class="gallery-item">
@@ -905,7 +909,7 @@
             </div>
         </div>
         <div class="right-add add-detail">
-            <div class="right-add-box">                
+            <div id="add-move" class="right-add-box">                
                 <div class="dtl-box p10 dtl-adv">                
                 </div>
             </div>

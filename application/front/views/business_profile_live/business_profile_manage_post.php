@@ -592,8 +592,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 						
 						</div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
-							<div class="right-add-box">        
-							</div> 
+							
 							<?php $this->load->view('right_add_box');
                             if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
                             <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
