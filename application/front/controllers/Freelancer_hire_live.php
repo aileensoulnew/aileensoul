@@ -2367,7 +2367,8 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$this->data['postid'] = $postid;	
 
 	$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-	$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,profile_background';
+	// $data = 'username,fullname,designation,freelancer_hire_user_image,user_id,profile_background';
+	$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug,is_indivdual_company,comp_name,company_field,company_other_field';
 	$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
 	$join_str[0]['table'] = 'freelancer_hire_reg';

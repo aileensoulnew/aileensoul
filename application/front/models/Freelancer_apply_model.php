@@ -261,13 +261,15 @@ class Freelancer_apply_model extends CI_Model {
             $sql .= "(".trim($sql_exp, ' OR ').") OR ";
         }
 
-        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,post_rating_type,currency_name as post_currency,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug, IF(fhr.is_indivdual_company = '1',ct.city_name,cct.city_name) as city,IF(fhr.is_indivdual_company = '1',cr.country_name,ccr.country_name) as country";
         $this->db->select($select_data)->from('freelancer_post fp');
         $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
         $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
         $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
         $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
+        $this->db->join('cities cct', 'cct.city_id = fhr.company_city', 'left');
+        $this->db->join('countries ccr', 'ccr.country_id = fhr.company_country', 'left');
 
         if(isset($fa_skills) && !empty($fa_skills)){            
             $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
@@ -292,8 +294,17 @@ class Freelancer_apply_model extends CI_Model {
         //echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-            $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
-            $result_array[$key]['fullname'] = $firstname;
+            /*$firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
+            $result_array[$key]['fullname'] = $firstname;*/
+            $fh_data = $this->db->select('fullname,is_indivdual_company,comp_name')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row();
+            if($fh_data->is_indivdual_company == '1')
+            {
+                $result_array[$key]['fullname'] = $fh_data->fullname;
+            }
+            if($fh_data->is_indivdual_company == '2')
+            {
+                $result_array[$key]['fullname'] = $fh_data->comp_name;
+            }
 
             $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $value['post_field_req']))->row()->category_name;
             $result_array[$key]['industry_name'] = $category_name;

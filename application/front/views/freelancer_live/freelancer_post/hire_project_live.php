@@ -17,7 +17,36 @@
     <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
     
     <body class="page-container-bg-solid page-boxed no-login freeh3 detail-job-no-login body-loader">
-        <?php $this->load->view('page_loader'); ?>
+        <?php $this->load->view('page_loader');
+        if($freelancr_user_data[0]['is_indivdual_company'] == '2')
+        {
+            $fullname = ucwords($freelancr_user_data[0]['comp_name']);
+            if($freelancr_user_data[0]['company_field'] != 0)
+            {
+                $designation = $this->db->get_where('category', array('category_id' => $freelancr_user_data[0]['company_field']))->row()->category_name;
+            }
+            else
+            {
+                $designation = $freelancr_user_data[0]['company_other_field'];
+            }
+            $sub_fullname = substr($fullname, 0, 1);
+            $no_img_name = $sub_fullname;
+        }
+        else
+        {
+            $fname = $freelancr_user_data[0]['fullname'];
+            $lname = $freelancr_user_data[0]['username'];
+            $fullname = ucwords($fname) . ' ' . ucwords($lname);
+            $designation = "";
+            if($freelancr_user_data[0]['current_position'] > 0)
+            {
+                $designation = $this->db->get_where('job_title', array('title_id' => $freelancr_user_data[0]['current_position']))->row()->name;
+            }
+
+            $sub_fname = substr($fname, 0, 1);
+            $sub_lname = substr($lname, 0, 1);
+            $no_img_name = $sub_fname.$sub_lname;
+        } ?>
         <div id="main_page_load" style="display: block;">    
             <header>
                 <div class="container">
@@ -94,12 +123,12 @@
                                                             ?>
 
                                                             <!-- box image start -->
-                                                            <img src="<?php echo FREE_HIRE_BG_THUMB_UPLOAD_URL . $freelancr_user_data[0]['profile_background']; ?>" class="bgImage" alt="<?php echo $freelancr_user_data[0]['fullname'] . ' ' . $freelancr_user_data[0]['username']; ?>">
+                                                            <img src="<?php echo FREE_HIRE_BG_THUMB_UPLOAD_URL . $freelancr_user_data[0]['profile_background']; ?>" class="bgImage" alt="<?php echo $fullname; ?>">
                                                             <!-- box image end -->
                                                             <?php
                                                         } else {
                                                             ?>
-                                                            <img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $freelancr_user_data[0]['fullname'] . ' ' . $freelancr_user_data[0]['username']; ?>" >
+                                                            <img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $fullname; ?>" >
                                                             <?php
                                                         }
                                                         ?>
@@ -109,7 +138,7 @@
                                             <div class="profile-boxProfileCard-content clearfix">
                                                 <div class="left_side_box_img buisness-profile-txext">
 
-                                                    <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="javascript:void(0);" onclick="register_profile();" title="<?php echo $freelancr_user_data[0]['rec_firstname'] . ' ' . $freelancr_user_data[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+                                                    <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="javascript:void(0);" onclick="register_profile();" title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
                                                         <?php
                                                         $fname = $freelancr_user_data[0]['fullname'];
                                                         $lname = $freelancr_user_data[0]['username'];
@@ -121,11 +150,11 @@
                                                                 if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'])) {
                                                                     ?>
                                                                     <div class="post-img-profile">
-                                                                        <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                        <?php echo ucfirst(strtolower($no_img_name)); ?>
                                                                     </div>
                                                                 <?php } else {
                                                                     ?>
-                                                                    <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freelancr_user_data[0]['fullname'] . " " . $freelancr_user_data[0]['username']; ?>" > 
+                                                                    <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $fullname; ?>" > 
                                                                     <?php
                                                                 }
                                                             } else {
@@ -134,11 +163,11 @@
                                                                 $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
                                                                 if ($info) {
                                                                     ?>
-                                                                    <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freelancr_user_data[0]['fullname'] . " " . $freelancr_user_data[0]['username']; ?>" >
+                                                                    <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $fullname; ?>" >
                                                                 <?php } else {
                                                                     ?>
                                                                     <div class="post-img-profile">
-                                                                        <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                        <?php echo ucfirst(strtolower($no_img_name)); ?>
                                                                     </div> 
                                                                     <?php
                                                                 }
@@ -146,7 +175,7 @@
                                                         } else {
                                                             ?>
                                                             <div class="post-img-profile">
-                                                                <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                <?php echo ucfirst(strtolower($no_img_name)); ?>
                                                             </div>
                                                             <?php
                                                         }
@@ -155,15 +184,15 @@
                                                 </div>
                                                 <div class="right_left_box_design ">
                                                     <span class="profile-company-name ">
-                                                        <a href="javascript:void(0);" onclick="register_profile();" title="<?php echo ucfirst(strtolower($freelancr_user_data['fullname'])) . ' ' . ucfirst(strtolower($freelancr_user_data['username'])); ?>">   <?php echo ucfirst(strtolower($freelancr_user_data[0]['fullname'])) . ' ' . ucfirst(strtolower($freelancr_user_data[0]['username'])); ?></a>
+                                                        <a href="javascript:void(0);" onclick="register_profile();" title="<?php echo ucfirst(strtolower($freelancr_user_data['fullname'])) . ' ' . ucfirst(strtolower($freelancr_user_data['username'])); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
                                                     </span>
 
 
                                                     <div class="profile-boxProfile-name">
-                                                        <a href="javascript:void(0);" onclick="register_profile();" title="<?php echo ucfirst(strtolower($freelancr_user_data[0]['designation'])); ?>">
+                                                        <a href="javascript:void(0);" onclick="register_profile();" title="<?php echo ucfirst(strtolower($designation)); ?>">
                                                             <?php
-                                                            if (ucfirst(strtolower($freelancr_user_data[0]['designation']))) {
-                                                                echo ucfirst(strtolower($freelancr_user_data[0]['designation']));
+                                                            if (ucfirst(strtolower($designation))) {
+                                                                echo ucfirst(strtolower($designation));
                                                             } else {
                                                                 echo "Designation";
                                                             }
@@ -431,7 +460,7 @@
                                                                         if (!file_exists($this->config->item('free_post_profile_main_upload_path') . $user['freelancer_post_user_image'])) {
                                                                             ?>
                                                                             <div class="post-img-user">
-                                                                                <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                                <?php echo ucfirst(strtolower($no_img_name)); ?>
                                                                             </div>
                                                                         <?php } ?>
                                                                         <img src="<?php echo FREE_POST_PROFILE_THUMB_UPLOAD_URL . $user['freelancer_post_user_image']; ?>" alt="<?php echo $user['freelancer_post_fullname'] . " " . $user['freelancer_post_username']; ?>" >
@@ -445,7 +474,7 @@
                                                                             <img src="<?php echo FREE_POST_PROFILE_THUMB_UPLOAD_URL . $user['freelancer_post_user_image']; ?>" alt="<?php echo $user['freelancer_post_fullname'] . " " . $user['freelancer_post_username']; ?>" >
                                                                         <?php } else { ?>
                                                                             <div class="post-img-user">
-                                                                                <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                                <?php echo ucfirst(strtolower($no_img_name)); ?>
                                                                             </div>
                                                                             <?php
                                                                         }
@@ -453,7 +482,7 @@
                                                                 } else {
                                                                     ?>
                                                                     <div class="post-img-user">
-                                                                        <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                        <?php echo ucfirst(strtolower($no_img_name)); ?>
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
@@ -466,10 +495,7 @@
                                                                         echo "Designation";
                                                                     }
                                                                     ?></p>
-                                                            </div>
-                                                            <!--                                                        <div class="sort-emp-msg">
-                                                                                                                        <a href="javascript:void(0);" class="">Message</a>
-                                                                                                                    </div>-->
+                                                            </div>                                                            
                                                         </div>
                                                     <?php } ?>
                                                 </div>
