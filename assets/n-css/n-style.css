@@ -3534,6 +3534,9 @@ color: #5c5c5c !important;}
 	.list-box-custom .nav > li > a{padding:10px 7px;}
 	.dis-middle{width:265px;}
 	#add-menu .no-timeline{width: 47%;}
+	.mob-progressbar,.mob-progressbar .progress{display:block;}
+	.right_side_posrt{width:100%;}
+	#profile-progress{display:none !important;}
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}
@@ -3822,7 +3825,7 @@ color: #5c5c5c !important;}
 	.new-article .custom-user-list{padding-right:0;}
 	.new-ld-page .mian_middle_post_box{left:0;}
 	#move-availability{margin-top:10px;}
-	.mob-progressbar,.mob-progressbar .progress{display:block;}
+	
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}

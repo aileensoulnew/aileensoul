@@ -417,8 +417,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             </div>
                             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
 								<div class="mob-progressbar">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum elit nulla, id gravida ipsum sagittis eu</p>
+									<p>Complete your profile to get more visibility</p>
 									<p class="mob-edit-pro">
+										<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 										<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 									</p>
 									<div class="progress skill-bar ">
@@ -593,7 +594,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </div>
 						
 						</div>
-                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
+                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
+							<div class="right-add-box">        
+							</div> 
 							<?php $this->load->view('right_add_box');
                             if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
                             <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
@@ -1093,8 +1096,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <script>
 			$(document).ready(function () {
-				if (screen.width <= 991) {
-					$(".move-middle").appendTo($("#move-middle"));
+				if (screen.width <= 1279) {
+					
 					$(".move-website").appendTo($("#move-website"));
 					$(".move-jobs").appendTo($("#move-jobs"));
 					$(".move-review").appendTo($("#move-review"));
@@ -1102,7 +1105,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 					$(".move-menu").appendTo($("#move-menu"));
 					
 				}
-			   
+			
+			});
+			$(document).ready(function () {
+				if (screen.width <= 991) {
+					$(".move-middle").appendTo($("#move-middle"));
+				}
 			});
 		</script>
     </body>
