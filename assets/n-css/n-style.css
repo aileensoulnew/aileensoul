@@ -3507,6 +3507,7 @@ text-transform:uppercase;}
 	.right_side_posrt{width:100%;}
 	.bus-dash #profile-progress{display:none !important;}
 	.art-dash #profile-progress{display:none !important;}
+	.main-dashboard #profile-progress{display:none !important;}
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}
