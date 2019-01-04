@@ -955,8 +955,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         </div>
                                         <div class="total-rev-top">
                                             <h4><?php echo $login_bussiness_data->company_name; ?></h4>
-                                            <span class="rating-star">
-                                                <input id="review_star" value="5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
+                                            <span id="star-rate" class="rating-star">
+                                                <input id="review_star" value="0.5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
                                             </span>
                                         </div>
                                     </div>
