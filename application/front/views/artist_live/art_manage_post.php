@@ -246,7 +246,7 @@
             					</ul>
             				</div>
 
-            				<div class="dash-info-box" ng-if="art_speciality_data.art_spl_tags || art_speciality_data.art_spl_desc">
+            				<div class="dash-info-box" ng-if="art_speciality_data.art_spl_tags">
             					<h4>
                                     <svg viewBox="0 0 487.222 487.222" width="17px" height="16px">
                                         <g>

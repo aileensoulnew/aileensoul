@@ -1962,7 +1962,8 @@ function set_progress(count_profile_value,count_profile)
         $("#profile-progress").show();
         $("#progress-txt").html("Hurray! Your profile is complete.");
         setTimeout(function(){
-            // $("#edit-profile-move").hide();
+            $("#profile-progress").hide();
+            $(".mob-progressbar").hide();
         },5000);
     }
     else
