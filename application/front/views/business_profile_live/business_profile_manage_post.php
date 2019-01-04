@@ -417,11 +417,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 								<div class="mob-progressbar">
 									<p>Complete your profile to get more visibility</p>
 									<p class="mob-edit-pro">
-										<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
-										<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+										<a href="<?php echo base_url().'company/'.$slugid.'/details'; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 									</p>
 									<div class="progress skill-bar ">
-										<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="34.782608695652" aria-valuemin="0" aria-valuemax="100" style="width: 34.7826%;">
+										<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
 											<span class="skill"><i class="val">35%</i></span>
 										</div>
 									</div>
