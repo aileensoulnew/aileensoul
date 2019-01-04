@@ -566,7 +566,7 @@ background: #f6f6f6; list-style-type:none;}
 .dash-info-box p{padding-left:20px;}
 .dash-info-box h4 svg{vertical-align: middle; margin-top: -4px;}
 .bus-info .dash-info-box, .art-info .dash-info-box {margin-bottom:15px;}
-.bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px;}
+.bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:21px;}
 .bus-info .dash-info-box p, .art-info .dash-info-box p {width:93%; float:left; line-height:1; padding-left:5px;}
 .bus-info .dash-info-box ul, .art-info .dash-info-box ul {width:93%; float:left; padding-left:5px; padding-top:0;}
 .art-info .dash-info-box ul{margin-top:-4px;}
