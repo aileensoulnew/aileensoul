@@ -57,82 +57,8 @@
                     </a>
                 </div>
             </div>
-            <div class="full-box-module business_data mob-detail-custom">
-                <div class="profile-boxProfileCard  module">                       
-                    <table class="business_data_table">
-                        <tr>
-                            <td class="business_data_td1"><i class="fa fa-trophy" aria-hidden="true"></i></td>
-                            <td class="business_data_td2">
-                                <?php
-                               
-                                $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $artisticdata[0]['other_skill']))->row()->other_category;
-
-                                $category = $artisticdata[0]['art_skill'];
-                                $category = explode(',' , $category);
-
-                                foreach ($category as $catkey => $catval) {
-                                   $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
-                                   $categorylist[] = ucwords($art_category);
-                                 } 
-
-                                $listfinal1 = array_diff($categorylist, array('Other'));
-                                $listFinal = implode(',', $listfinal1);
-                                   
-                                if(!in_array(26, $category)){
-                                 echo $listFinal;
-                               }else if($artisticdata[0]['art_skill'] && $artisticdata[0]['other_skill']){
-
-                                $trimdata = $listFinal .','.ucwords($art_othercategory);
-                                echo trim($trimdata, ',');
-                               }
-                               else{
-                                 echo ucwords($art_othercategory);  
-                              }
-                                ?>   
-                            </td>
-                        </tr>
-                        
-                        <?php if($artisticdata[0]['art_yourart']){?>
-                        <tr>
-                            <td class="business_data_td1 detaile_map"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></td>
-                            <td class="business_data_td2"><span><?php echo $artisticdata[0]['art_yourart']; ?></span></td>
-                        </tr>
-                         <?php }?>
-
-                        <?php if($artisticdata[0]['art_desc_art']){?>
-                        <tr>
-                            <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
-                            <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
-                        </tr>
-                        <?php }?>
-                        <tr>
-                            <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                            <td class="business_data_td2">
-								<a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
-							</td>
-                        </tr>
-                        <tr>
-                            <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
-                            <td class="business_data_td2">
-                                <span>
-                                    <?php
-                                    if ($artisticdata[0]['art_city']) {
-                                        echo $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
-                                        echo",";
-                                    }
-                                    ?> 
-                                    <?php
-                                    if ($artisticdata[0]['art_country']) {
-                                        echo $this->db->select('country_name')->select('country_name')->get_where('countries', array('country_id' => $artisticdata[0]['art_country']))->row()->country_name;
-                                    }
-                                    ?>
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
+			
+  
             <div class="user-midd-section">
                 <div class="container art_container padding-360 manage-post-custom">        
                     <div class="profile-box-custom left_side_posrt">
@@ -225,7 +151,7 @@
                         
 						
 						
-        				<div class="left-info-box art-info">
+        				<div class="left-info-box art-info move-middle">
 							<div class="dash-left-title">
 								<h3><i class="fa fa-info-circle"></i> Information</h3>
 							</div>
@@ -401,7 +327,26 @@
                     <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business"  >
             			<div class="tab-add">
             				<?php $this->load->view('banner_add'); ?>
-            			</div>                    
+            			</div> 
+
+						<div class="mob-progressbar">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum elit nulla, id gravida ipsum sagittis eu</p>
+							<p class="mob-edit-pro">
+								<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+							</p>
+							<div class="progress skill-bar ">
+								<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="34.782608695652" aria-valuemin="0" aria-valuemax="100" style="width: 34.7826%;">
+									<span class="skill"><i class="val">35%</i></span>
+								</div>
+							</div>
+						</div>
+						<div id="move-availability" class="">
+						</div>
+						<div id="move-middle" class="">
+						</div>
+						
+						<div id="move-website" class="">
+						</div>
                         <!-- The Modal -->
                         <div id="myModal3" class="modal-post">
                             <!-- Modal content -->
@@ -497,7 +442,7 @@
                     </div>           
         			
         			<div class="right-part right-scroll">
-						<div class="right-info-box art-info av-cus">
+						<div class="right-info-box art-info av-cus move-availability">
 							<div class="dash-info-box" ng-if="art_imp_data  == '1' || art_imp_data  == '2' || art_imp_data  == '3'">
             					<!-- <h4>Availability </h4> -->
                                 <span ng-if="art_imp_data == '1'"><span class="job-active"></span>Open for work</span>
@@ -522,6 +467,7 @@
                             </div>
                         </div>
                         <?php endif; ?>
+						<div class="move-website">
         				<div class="right-info-box" ng-if="user_social_links.length > '0' || user_personal_links.length > '0'">
 							
 							<div class="dtl-dis">
@@ -553,7 +499,8 @@
                                 </div>
 							</div>
 						</div>
-        			</div>
+						</div>
+					</div>
                 </div>
             </div>
         </section>
@@ -698,5 +645,17 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard.js?ver='.time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard_new.js?ver='.time()); ?>"></script>
+	<script>
+			$(document).ready(function () {
+				if (screen.width <= 991) {
+					$(".move-middle").appendTo($("#move-middle"));
+					$(".move-website").appendTo($("#move-website"));
+					$(".move-availability").appendTo($("#move-availability"));
+					
+					
+				}
+			   
+			});
+		</script>
 </body>
 </html>

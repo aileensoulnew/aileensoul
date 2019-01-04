@@ -416,6 +416,17 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php echo $left_footer; ?>
                             </div>
                             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
+								<div class="mob-progressbar">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum elit nulla, id gravida ipsum sagittis eu</p>
+									<p class="mob-edit-pro">
+										<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+									</p>
+									<div class="progress skill-bar ">
+										<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="34.782608695652" aria-valuemin="0" aria-valuemax="100" style="width: 34.7826%;">
+											<span class="skill"><i class="val">35%</i></span>
+										</div>
+									</div>
+								</div>
                                 <div class="right_side_posrt">
                                     <div class="tab-add">
                                         <?php $this->load->view('banner_add'); ?>
