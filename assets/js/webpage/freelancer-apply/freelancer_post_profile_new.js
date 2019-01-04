@@ -3229,11 +3229,19 @@ app.controller('freelanceApplyProfileController', function ($scope, $http,$compi
         },
         messages: {
             review_star: {
-                required: "Please select start",
+                required: "Please select star",
             },
             review_desc: {
                 required: "Please enter rating review description",
             },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "review_star") {
+                error.insertAfter("#star-rate");
+                error.attr("style","display:block !important;")
+            } else {
+                error.insertAfter(element);
+            }
         },
     };
 
