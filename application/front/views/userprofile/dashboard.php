@@ -377,7 +377,13 @@
                     </div>
                 </div>
             </div>
-			<div class="mob-progressbar fw">
+            <?php
+            $all_c_no_login = "";
+            if($user_id == ""){
+                $all_c_no_login = "hide";
+            }
+            ?>
+			<div class="mob-progressbar fw <?php echo $all_c_no_login; ?>" ng-if="live_slug == user_slug">
 				<p>Complete your profile to get connected with more people.</p>
 				<p class="mob-edit-pro">
 					<a ng-href="<?php echo base_url() ?>{{user_slug}}/details" target="_self"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
