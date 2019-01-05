@@ -1801,8 +1801,12 @@ class User_post extends MY_Controller {
         $subject = $this->input->post('subject');
         $email_html = $this->input->post('email_html');
         $to_email = $this->input->post('to_email');
-        $unsubscribe = $this->input->post('unsubscribe');
-        $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe);
+        $email_data = $this->user_model->getUserByEmail($to_email);
+        if($email_data)
+        {
+            $unsubscribe = $this->input->post('unsubscribe');
+            $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe);
+        }
     }
 
 }
