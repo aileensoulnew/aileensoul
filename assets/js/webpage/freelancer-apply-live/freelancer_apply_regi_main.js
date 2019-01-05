@@ -181,10 +181,10 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
         messages:
         {
             first_name: {
-                required: "Please enter first name",
+                required: "Please enter First name and Last name",
             },
             last_name: {
-                required: "Please enter last name",
+                required: "Please enter First name and Last name",
             },
             email_reg: {
                 required: "Please enter email address",
@@ -236,6 +236,7 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
             .then(function (success){
 
                 if (success.data.errors) {
+                    var err_arr = success.data.errors;
                     if(err_arr.errorReg != "")
                     {
                         $("#register_error").fadeIn(1000, function() {
@@ -244,10 +245,10 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
                     }
                     else
                     {
-                        $scope.errorjobTitle = success.data.errors.jobTitle;
-                        $scope.errorcityList = success.data.errors.cityList;
-                        $scope.errorfield = success.data.errors.field;
-                        $scope.errorotherField = success.data.errors.otherField;
+                        $scope.errorjobTitle = err_arr.jobTitle;
+                        $scope.errorcityList = err_arr.cityList;
+                        $scope.errorfield = err_arr.field;
+                        $scope.errorotherField = err_arr.otherField;
                     }
                     $("#main_create_ac").removeAttr("style");
                 } else {

@@ -107,6 +107,7 @@
             var profile_login = '<?php echo $profile_login; ?>';
             var openfirelink = '<?php echo OPENFIRELINK; ?>';
             var openfireserver = '<?php echo OPENFIRESERVER; ?>';
+            var reserve_keyword = '<?php echo strtolower(RESERVE_KEYWORD); ?>';
             var app = angular.module('artistRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){

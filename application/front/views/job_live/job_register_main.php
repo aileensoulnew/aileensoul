@@ -116,7 +116,7 @@
                             </label>
                         </div>
                         <p class="text-center">
-                            <button type="submit" class="btn1" tabindex="12">Create an Account</button>
+                            <button type="submit" class="btn1" id="main_create_ac" tabindex="12">Create an Account</button>
                         </p>
                     </form>
                 </div>
