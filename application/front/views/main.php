@@ -199,6 +199,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                             <div class="col-md-5 col-sm-6 custom-padd">
                                 <div class="login">
                                     <h4>Join Aileensoul - It's Free</h4>
+                                    <div id="register_error" class="row"></div>
                                     <form name="register_form" id="register_form" method="post" autocomplete="off">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6">
@@ -211,6 +212,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                     <input tabindex="2" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
                                                 </div>
                                             </div>
+                                            <div id="err-res-key" class="err-flname"></div>
                                         </div>
 
                                         <div class="form-group">
@@ -412,6 +414,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
                 var openfirelink = '<?php echo OPENFIRELINK; ?>';
                 var openfireserver = '<?php echo OPENFIRESERVER; ?>';
+                var reserve_keyword = '<?php echo strtolower(RESERVE_KEYWORD); ?>';
 				
 				 $(".btn-pr-pl").click(function () {
 					$(".pr-pl-box").remove();

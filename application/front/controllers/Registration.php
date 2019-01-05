@@ -13,6 +13,7 @@ class Registration extends CI_Controller {
         $this->load->model('user_model');
         //AWS access info start
         $this->load->library('S3');
+        $this->load->library('inbackground');
         /*if ($this->session->userdata('aileenuser')) {
             redirect($this->session->userdata('aileenuser_slug')."/profiles", 'refresh');
         }*/
@@ -124,65 +125,111 @@ class Registration extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('registration/registration');
         } else {
-
-            if ($userdata) {
-                
+            if ($userdata) {                
             } else {
-                $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
-                $key = $this->common->generate_encrypt_key(16);
-
-                $user_data = array(
-                    'first_name' => $first_name,
-                    'last_name' => $last_name,
-                    'user_dob' => $dob,
-                    'user_gender' => $this->input->post('selgen'),
-                    'user_agree' => '1',
-                    'created_date' => date('Y-m-d h:i:s', time()),
-                    'verify_date' => date('Y-m-d h:i:s', time()),
-                    'user_verify' => '0',
-                    'user_slider' => '1',
-                    'term_condi' => $term_condi,
-                    'user_slug' => $user_slug,
-                    'is_subscribe' => '1',
-                    'encrypt_key' => $key
-                );
-
-
-                $user_insert = $this->common->insert_data_getid($user_data, 'user');
-                if ($user_insert) {
-                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
-                        //Openfire Username Generate Start
-                        $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                        $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                        $op_un_ps = str_replace("-", "_", $user_slug);
-                        $properties = array();
-                        $username = $op_un_ps;
-                        $password = $op_un_ps;
-                        $name = ucwords($first_name." ".$last_name);
-                        $email = $email_reg;
-                        $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                        //Openfire Username Generate End
-                    }
-
-                    $user_login_data = array(
-                        'email' => strtolower($this->input->post('email_reg')),
-                        'password' => md5($this->input->post('password_reg')),
-                        'is_delete' => '0',
-                        'status' => '1',
-                        'user_id' => $user_insert,
-                    );
-                    $user_login_insert = $this->common->insert_data_getid($user_login_data, 'user_login');
-              
-                    $user_info_data = array(
-                        'user_id' => $user_insert,
-                    );
-                    $user_info_insert = $this->common->insert_data_getid($user_info_data, 'user_info');
-              
-                    
+                $res_keyword_arr = explode(",", strtolower(RESERVE_KEYWORD));
+                if(in_array(strtolower($first_name), $res_keyword_arr) && in_array(strtolower($last_name), $res_keyword_arr))
+                {
+                    $user_insert = "";
                 }
+                else
+                {
+                    if(in_array(strtolower($first_name), $res_keyword_arr))
+                    {
+                        $user_slug = $this->setuser_slug($last_name, 'user_slug', 'user');
+                    }
+                    else if(in_array(strtolower($last_name), $res_keyword_arr))
+                    {
+                        $user_slug = $this->setuser_slug($first_name, 'user_slug', 'user');
+                    }
+                    else
+                    {
+                        $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
+                    }
+                    
+                    $key = $this->common->generate_encrypt_key(16);
+
+                    $user_data = array(
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'user_dob' => $dob,
+                        'user_gender' => $this->input->post('selgen'),
+                        'user_agree' => '1',
+                        'created_date' => date('Y-m-d h:i:s', time()),
+                        'verify_date' => date('Y-m-d h:i:s', time()),
+                        'user_verify' => '0',
+                        'user_slider' => '1',
+                        'term_condi' => $term_condi,
+                        'user_slug' => $user_slug,
+                        'is_subscribe' => '1',
+                        'encrypt_key' => $key
+                    );
+
+                    $user_insert = $this->common->insert_data_getid($user_data, 'user');
+                    if ($user_insert) {
+                        if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                            //Openfire Username Generate Start
+                            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                            $op_un_ps = str_replace("-", "_", $user_slug);
+                            $properties = array();
+                            $username = $op_un_ps;
+                            $password = $op_un_ps;
+                            $name = ucwords($first_name." ".$last_name);
+                            $email = $email_reg;
+                            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                            //Openfire Username Generate End
+                        }
+
+                        $user_login_data = array(
+                            'email' => strtolower($this->input->post('email_reg')),
+                            'password' => md5($this->input->post('password_reg')),
+                            'is_delete' => '0',
+                            'status' => '1',
+                            'user_id' => $user_insert,
+                        );
+                        $user_login_insert = $this->common->insert_data_getid($user_login_data, 'user_login');
+                  
+                        $user_info_data = array(
+                            'user_id' => $user_insert,
+                        );
+                        $user_info_insert = $this->common->insert_data_getid($user_info_data, 'user_info');
+
+                        if ($gender == 'F') {
+                            $login_user_img = base_url('assets/img/female-user.jpg');
+                        } else {
+                            $login_user_img = base_url('assets/img/man-user.jpg');
+                        }                        
+                        $msg = "";
+                        $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>                                
+                                        <td style="padding:5px;">
+                                            <p><b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.</p>
+                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                        </td>
+                                        <td style="'.MAIL_TD_3.'">
+                                            <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_insert . '">Verify</a></p>
+                                        </td>
+                                    </tr>
+                                </table>';
+
+                        $subject = ucwords($first_name).", Verify your Aileensoul Account";
+
+                        $url = base_url()."registration/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$msg,
+                            "to_email"=>$toemail
+                        );
+                        $this->inbackground->do_in_background($url, $param);
+
+                        // $mail = $this->email_model->send_email($subject = $subject, $templ = $msg, $to_email = $toemail);
+                    }
+                }
+
             }
         }
-         $is_userBasicInfo = $this->user_model->is_userBasicInfo($user_insert);
+        $is_userBasicInfo = $this->user_model->is_userBasicInfo($user_insert);
         
         $is_userStudentInfo = $this->user_model->is_userStudentInfo($user_insert);
         //for getting last insrert id
@@ -201,8 +248,9 @@ class Registration extends CI_Controller {
                         "userslug" => $user_slug['user_slug'],
             ));
         } else {
-            $this->session->flashdata('error', 'Sorry!! Your data not inserted');
-            redirect('registration', 'refresh');
+            // $this->session->flashdata('error', 'Sorry!! Your data not inserted');
+            // redirect('registration', 'refresh');
+            echo json_encode(array( "okmsg" => "cancel"));
         }
     }
 
@@ -574,71 +622,122 @@ class Registration extends CI_Controller {
             $dob = trim($_POST['selyear']) . '-' . trim($_POST['selmonth']) . '-' . trim($_POST['selday']);
             $ip = $this->input->ip_address();
             $first_name = trim($_POST['first_name']);
-            $last_name = trim($_POST['last_name']);            
-            $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
-            $key = $this->common->generate_encrypt_key(16);
-            
-            $user_data = array(
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-                'user_dob' => $dob,
-                'user_gender' => trim($_POST['selgen']),
-                'user_agree' => '1',
-                'created_date' => date('Y-m-d h:i:s', time()),
-                'verify_date' => date('Y-m-d h:i:s', time()),
-                'user_verify' => '0',
-                'user_slider' => '1',
-                'term_condi' => $_POST['term_condi'],
-                'user_slug' => $user_slug,
-                'is_subscribe' => '1',
-                'encrypt_key' => $key
-            );
-            $user_insert = $this->common->insert_data_getid($user_data, 'user');
-            if ($user_insert) {
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
-                    //Openfire Username Generate Start
-                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                    $op_un_ps = str_replace("-", "_", $user_slug);
-                    $properties = array();
-                    $username = $op_un_ps;
-                    $password = $op_un_ps;
-                    $name = ucwords($first_name." ".$last_name);
-                    $email = $email_reg;
-                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                    //Openfire Username Generate End
-                }
+            $last_name = trim($_POST['last_name']);
+            $res_keyword_arr = explode(",", strtolower(RESERVE_KEYWORD));
 
-                $user_login_data = array(
-                    'email' => strtolower($email_reg),
-                    'password' => md5(trim($_POST['password_reg'])),
-                    'is_delete' => '0',
-                    'status' => '1',
-                    'user_id' => $user_insert,
-                );
-                $user_login_insert = $this->common->insert_data_getid($user_login_data, 'user_login');
-          
-                $user_info_data = array(
-                    'user_id' => $user_insert,
-                );
-                $user_info_insert = $this->common->insert_data_getid($user_info_data, 'user_info');
+            if(in_array(strtolower($first_name), $res_keyword_arr) && in_array(strtolower($last_name), $res_keyword_arr))
+            {
+                $user_insert = "";
             }
+            else
+            {
+                if(in_array(strtolower($first_name), $res_keyword_arr))
+                {
+                    $user_slug = $this->setuser_slug($last_name, 'user_slug', 'user');
+                }
+                else if(in_array(strtolower($last_name), $res_keyword_arr))
+                {
+                    $user_slug = $this->setuser_slug($first_name, 'user_slug', 'user');
+                }
+                else
+                {
+                    $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
+                }                
+                $key = $this->common->generate_encrypt_key(16);
+                $gender = trim($_POST['selgen']);
+                $user_data = array(
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'user_dob' => $dob,
+                    'user_gender' => $gender,
+                    'user_agree' => '1',
+                    'created_date' => date('Y-m-d h:i:s', time()),
+                    'verify_date' => date('Y-m-d h:i:s', time()),
+                    'user_verify' => '0',
+                    'user_slider' => '1',
+                    'term_condi' => $_POST['term_condi'],
+                    'user_slug' => $user_slug,
+                    'is_subscribe' => '1',
+                    'encrypt_key' => $key
+                );
+                $user_insert = $this->common->insert_data_getid($user_data, 'user');
+                if ($user_insert) {
+                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                        //Openfire Username Generate Start
+                        $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                        $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                        $op_un_ps = str_replace("-", "_", $user_slug);
+                        $properties = array();
+                        $username = $op_un_ps;
+                        $password = $op_un_ps;
+                        $name = ucwords($first_name." ".$last_name);
+                        $email = $email_reg;
+                        $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                        //Openfire Username Generate End
+                    }
 
-            $is_userBasicInfo = $this->user_model->is_userBasicInfo($user_insert);        
-            $is_userStudentInfo = $this->user_model->is_userStudentInfo($user_insert);
-            //for getting last insrert id
-            if ($user_insert) { 
-                $user_slug = $this->user_model->getUserSlugById($user_insert);
-                $this->session->set_userdata('aileenuser', $user_insert);
-                $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
-                $datavl = "ok";
-                $data = array(
-                        "okmsg" => $datavl,
-                        "userid" => $user_insert,
-                        "is_userBasicInfo"=>$is_userBasicInfo,
-                        "is_userStudentInfo"=>$is_userStudentInfo,
-                        "userslug" => $user_slug['user_slug'],
-                        );
+                    $user_login_data = array(
+                        'email' => strtolower($email_reg),
+                        'password' => md5(trim($_POST['password_reg'])),
+                        'is_delete' => '0',
+                        'status' => '1',
+                        'user_id' => $user_insert,
+                    );
+                    $user_login_insert = $this->common->insert_data_getid($user_login_data, 'user_login');
+              
+                    $user_info_data = array(
+                        'user_id' => $user_insert,
+                    );
+                    $user_info_insert = $this->common->insert_data_getid($user_info_data, 'user_info');
+
+                    if ($gender == 'F') {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    } else {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }                        
+                    $msg = "";
+                    $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>                                
+                                    <td style="padding:5px;">
+                                        <p><b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_insert . '">Verify</a></p>
+                                    </td>
+                                </tr>
+                            </table>';
+
+                    $subject = ucwords($first_name).", Verify your Aileensoul Account";
+
+                    $url = base_url()."registration/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$msg,
+                        "to_email"=>$email_reg
+                    );
+                    $this->inbackground->do_in_background($url, $param);
+                
+                    $is_userBasicInfo = $this->user_model->is_userBasicInfo($user_insert);        
+                    $is_userStudentInfo = $this->user_model->is_userStudentInfo($user_insert);
+                    //for getting last insrert id
+                    $user_slug = $this->user_model->getUserSlugById($user_insert);
+                    $this->session->set_userdata('aileenuser', $user_insert);
+                    $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+                    $datavl = "ok";
+                    $data = array(
+                            "okmsg" => $datavl,
+                            "userid" => $user_insert,
+                            "is_userBasicInfo"=>$is_userBasicInfo,
+                            "is_userStudentInfo"=>$is_userStudentInfo,
+                            "userslug" => $user_slug['user_slug'],
+                            );
+                }
+                else
+                {
+                    $errors['errorReg'] = 'Try after sometime!';
+                    $data['errors'] = $errors;
+                }
             }
         }
         echo json_encode($data);
@@ -773,6 +872,15 @@ class Registration extends CI_Controller {
         );       
         $this->common->update_data($data, 'user', 'user_id',$userid);
         echo "1";
+    }
+
+    public function send_email_in_background()
+    {
+        $subject = $this->input->post('subject');
+        $email_html = $this->input->post('email_html');
+        $to_email = $this->input->post('to_email');
+        $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe = "");
+        
     }
 
 }

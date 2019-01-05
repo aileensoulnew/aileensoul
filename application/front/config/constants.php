@@ -745,3 +745,5 @@ define('AMAZON_SES_PASSWORD','Alr+GuRQv6HG2FhnGO1lo06qBe3unZ+NVYvi9ASNhR9p');
 
 define('MAIL_TD_1','padding-left: 5px;padding-top: 5px;padding-bottom: 0px;width:60px');
 define('MAIL_TD_3','padding:5px;text-align:right;');
+
+define('RESERVE_KEYWORD', 'Job,Jobs,Skills,Categories,Locations,Companies,Designations,Jobs Opening,Jobs in,Job Vacancy in,Freelance Employer,Freelance Jobs,Freelance Jobs by,Fields,Business,Business Search,Business By,Business in,Find Artist,Artist in,Guest Contributor,About us,Privacy,Disclaimer,Policy,Contact Us,Report Abuse,Artist,Business,In,Profile,Recruiter,Search,Freelance,Employer,Find');
