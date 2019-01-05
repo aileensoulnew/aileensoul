@@ -174,7 +174,7 @@
                     <?php echo $job_menubar; ?>                       
                 </div>
             </div>
-            <div class="container res-job-print tab-plr0">
+            <div class="container res-job-print mob-plr0">
                 <div class="fw">
                     <div class="job-menu-profile job_edit_menu mob-none">
                         <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
@@ -249,10 +249,28 @@
                     <div class="mob-plr0 pt20">
                         <div class="all-detail-custom">
                             <div class="custom-user-list">
+								<div class="dtl-add-mob">
+									<div class="right-add-box">
+										<div class="dtl-box p10 dtl-adv">                
+										</div> 
+									</div>
+								</div>
 								<div class="edit-profile-mob">
 								</div>
                                 <div class="gallery" id="gallery">
-								
+									
+									<!--  01 Edit Profile -->
+                                    <div class="gallery-item edit-profile-move">
+                                    </div>
+									
+									<!--  02 Blank -->
+                                    <div class="gallery-item tab-add">
+										<div class="right-add-box">
+											<div class="dtl-box p10 dtl-adv">                
+											</div> 
+										</div>
+                                    </div>
+									
 									<!--  00 Professional summary -->
                                     <div class="gallery-item ">
                                         <div class="dtl-box">
@@ -279,16 +297,9 @@
                                         </div>
                                     </div>
 								
-									<!--  01 Edit Profile -->
-                                    <div class="gallery-item edit-profile-move">
-                                    </div>
 									
-									<!--  02 Blank -->
-                                    <div class="gallery-item job-basic-info-move">
-                                    </div>
-								
                                     <!--  03 Basic information  -->
-                                    <div class="gallery-item remove-blank">
+                                    <div class="gallery-item">
                                         <div class="dtl-box" id="job-basic-info-move">
                                             <div class="dtl-title">
                                                 <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>">
