@@ -32,7 +32,7 @@
 					<div class="all-detail-custom">
 					
 						<div class="custom-user-list">
-						<div class="dtl-add-mob">
+						<div class="dtl-add-mob add-box-shadow">
 							<?php $this->load->view('right_add_box'); ?>
 						</div>
 						
@@ -50,7 +50,9 @@
 							
 							<!--  02 advertize  -->
 							<div class="gallery-item tab-add">
-								<?php $this->load->view('right_add_box'); ?>
+								<div class="add-box-shadow">
+									<?php $this->load->view('right_add_box'); ?>
+								</div>
 							</div>
 							
     						<!--  01 Bio  -->
