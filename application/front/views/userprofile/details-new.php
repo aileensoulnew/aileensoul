@@ -887,7 +887,7 @@
             </div>
         </div>
         <div class="right-add add-detail">
-            <div id="add-move" class="right-add-box">                
+            <div class="right-add-box">                
                 <div class="dtl-box p10 dtl-adv">                
                 </div>
             </div>

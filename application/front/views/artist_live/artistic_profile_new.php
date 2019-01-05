@@ -28,16 +28,31 @@
 			<?php echo $artistic_header2; ?>
 			<section class="custom-row">
 				<?php echo $artistic_common; ?>
-				<div class="container mobp0">
+				<div class="container mob-plr0 pt20">
 					<div class="all-detail-custom">
 					
 						<div class="custom-user-list">
+						<div class="dtl-add-mob">
+							<?php $this->load->view('right_add_box'); ?>
+						</div>
+						
 							<div class="edit-custom-move">
 								
 							</div>
 					<div class="all-detail-custom">
     					<div class="gallery" id="gallery">
     						
+							<!--  02 Edit profile  -->
+    						<div id="edit-custom-move" class="gallery-item edit-profile-move">
+    							<div class="abailability-move">
+    							</div>
+    						</div>
+							
+							<!--  02 advertize  -->
+							<div class="gallery-item tab-add">
+								<?php $this->load->view('right_add_box'); ?>
+							</div>
+							
     						<!--  01 Bio  -->
     						<div class="gallery-item">
     							<div class="dtl-box">
@@ -68,15 +83,6 @@
     							</div>
     						</div>
     						
-    						<!--  02 Edit profile  -->
-    						<div id="edit-custom-move" class="gallery-item edit-profile-move">
-    							<div class="abailability-move">
-    							</div>
-    						</div>
-    						
-    						<!--  03 Basic information  -->
-    						<div class="gallery-item">
-    						</div>
     						
     						<!--  04 Basic information  -->
     						<div class="gallery-item">
@@ -694,8 +700,8 @@
 							</div>
 						</div>
 							
-						<div class="dtl-box p10 dtl-adv">
-								<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+						<div class="art-add-box">                
+							<?php $this->load->view('right_add_box'); ?>
 						</div>
 							
 					<!-- edit profile  -->
