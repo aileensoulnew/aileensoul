@@ -273,67 +273,7 @@ app.controller('businessRegiController', function ($scope, $http, $location, $wi
 
             });
         }
-    };    
-    function submitRegisterForm()
-    {
-        var first_name = $("#first_name").val();
-        var last_name = $("#last_name").val();
-        var email_reg = $("#email_reg").val();
-        var password_reg = $("#password_reg").val();
-        var selday = $("#selday").val();
-        var selmonth = $("#selmonth").val();
-        var selyear = $("#selyear").val();
-        var selgen = $("#selgen").val();
-
-        var post_data = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email_reg': email_reg,
-            'password_reg': password_reg,
-            'selday': selday,
-            'selmonth': selmonth,
-            'selyear': selyear,
-            'selgen': selgen,
-            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-        }
-        $.ajax({
-            type: 'POST',
-            url: base_url+'registration/reg_insert',
-            dataType: 'json',
-            data: post_data,
-            beforeSend: function ()
-            {
-                $("#register_error").fadeOut();
-                $("#btn-register").html('Sign Up ...');
-            },
-            success: function (response)
-            {
-                var userid = response.userid;
-                if (response.okmsg == "ok")
-                {
-                    $("#btn-register").html('<img src="'+base_url+'images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
-                    var title = "Business Information"
-                    var url = base_url+"business-profile/basic-info";
-                    
-                    $location.path(url);
-
-                    var obj = {Title: title, Url: url};
-                    history.pushState(obj, obj.Title, obj.Url);
-
-                    $timeout(function() {
-                        var el = document.getElementById('ca');
-                        angular.element(el).triggerHandler('click');
-                    }, 0);
-                } else {
-                    $("#register_error").fadeIn(1000, function () {
-                        $("#register_error").html('<div class="alert alert-danger registration"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
-                        $("#btn-register").html('Sign Up');
-                    });
-                }
-            }
-        });
-        return false;
-    }
+    };
 });
 
 app.controller('businessBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
