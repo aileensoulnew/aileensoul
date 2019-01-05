@@ -8711,6 +8711,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#social-link-move").appendTo($(".social-link-move"));
             $("#idol-move").appendTo($(".idol-move"));
             $("#about-move").appendTo($(".about-move"));
+            $("#add-move").appendTo($(".add-move"));
 			$(".remove-blank").remove();
         }
 	
