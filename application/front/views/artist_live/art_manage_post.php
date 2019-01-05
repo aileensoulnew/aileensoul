@@ -62,96 +62,7 @@
             <div class="user-midd-section">
                 <div class="container art_container padding-360 manage-post-custom">        
                     <div class="profile-box-custom left_side_posrt">
-                        <!--div class="full-box-module business_data">
-                            <div class="profile-boxProfileCard  module">
-                               <div class="head_details1">
-                                    <span>
-                                        <a href="<?php echo base_url('artist/p/' . $this->uri->segment(3) .'/details'); ?>" title="Information">
-                                            <h5>
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                Information
-                                            </h5>
-                                        </a>
-                                    </span>
-                                </div>
-                                <table class="business_data_table">
-                                    <tr>
-                                        <td class="business_data_td1"><i class="fa fa-trophy" aria-hidden="true"></i></td>
-                                        <td class="business_data_td2 123">
-                                            {{artist_basic_info.art_category_txt}}
-                                            <?php
-                                           
-                                            /*$art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $artisticdata[0]['other_skill']))->row()->other_category;
-
-                                            $category = $artisticdata[0]['art_skill'];
-                                            $category = explode(',' , $category);
-
-                                            foreach ($category as $catkey => $catval) {
-                                               $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
-                                               $categorylist[] = ucwords($art_category);
-                                             } 
-
-                                            $listfinal1 = array_diff($categorylist, array('Other'));
-                                            $listFinal = implode(',', $listfinal1);
-                                               
-                                            if(!in_array(26, $category)){
-                                             echo $listFinal;
-                                           }else if($artisticdata[0]['art_skill'] && $artisticdata[0]['other_skill']){
-
-                                            $trimdata = $listFinal .','.ucwords($art_othercategory);
-                                            echo trim($trimdata, ',');
-                                           }
-                                           else{
-                                             echo ucwords($art_othercategory);  
-                                          }*/
-                                            ?>   
-                                        </td>
-                                    </tr>                                    
-                                    <?php /*if($artisticdata[0]['art_yourart']){?>
-                                    <tr>
-                                        <td class="business_data_td1 detaile_map"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></td>
-                                        <td class="business_data_td2"><span><?php echo $artisticdata[0]['art_yourart']; ?></span></td>
-                                    </tr>
-                                     <?php }?>
-
-                                    <?php if($artisticdata[0]['art_desc_art']){?>
-                                    <tr>
-                                        <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
-                                        <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
-                                    </tr>
-                                    <?php }?>
-                                    <tr>
-                                        <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                                        <td class="business_data_td2">
-        									<a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
-        								</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
-                                        <td class="business_data_td2">
-                                            <span>
-                                                <?php
-                                                if ($artisticdata[0]['art_city']) {
-                                                    echo $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
-                                                    echo",";
-                                                }
-                                                ?> 
-                                                <?php
-                                                if ($artisticdata[0]['art_country']) {
-                                                    echo $this->db->select('country_name')->select('country_name')->get_where('countries', array('country_id' => $artisticdata[0]['art_country']))->row()->country_name;
-                                                }
-                                                ?>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <?php */ ?>
-                                </table>
-                            </div>
-                        </div-->
-                        
-						
-						
-        				<div class="left-info-box art-info move-middle">
+                        <div class="left-info-box art-info move-middle">
 							<div class="dash-left-title">
 								<h3><i class="fa fa-info-circle"></i> Information</h3>
 							</div>
@@ -171,7 +82,7 @@
                                 Bio</h4>
                                 <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
                             </div>
-                            <div class="dash-info-box" ng-if="user_bio != ''">
+                            <div class="dash-info-box" ng-if="art_category_txt != ''">
             					<h4>
                                     <svg width="17px" height="18px" viewBox="0 0 400 400"><g id="svgg"><path id="path0" d="M61.704 0.211 C 36.639 2.851,21.936 20.830,17.529 54.227 C 16.272 63.754,16.117 66.948,16.117 83.193 C 16.117 161.458,45.160 256.982,89.011 322.947 C 129.769 384.259,177.916 410.230,225.522 396.583 C 265.036 385.256,303.703 345.261,334.407 283.960 C 339.877 273.039,343.886 264.236,343.499 263.996 C 343.331 263.892,343.747 262.565,344.462 260.917 C 345.586 258.330,355.517 232.150,356.099 230.238 C 356.228 229.816,356.717 228.642,357.186 227.629 C 363.466 214.064,374.493 170.599,378.798 142.441 C 388.707 77.627,384.295 32.929,366.079 13.579 C 350.647 -2.815,329.327 -4.165,280.890 8.184 C 276.585 9.282,270.368 10.864,267.076 11.700 C 246.134 17.018,217.879 20.946,200.307 20.985 C 180.255 21.028,150.604 16.645,126.157 10.023 C 96.952 2.112,75.158 -1.205,61.704 0.211 M78.281 21.339 C 92.080 22.953,102.554 25.027,116.400 28.887 C 149.976 38.247,185.748 43.044,210.130 41.458 C 232.463 40.005,252.636 36.822,273.830 31.409 C 304.818 23.495,316.447 21.171,327.552 20.674 C 350.398 19.651,359.219 30.788,362.604 64.927 C 363.120 70.134,363.121 91.350,362.606 98.695 C 356.973 179.011,331.813 255.588,292.021 313.521 C 263.714 354.733,237.079 374.709,205.526 378.391 C 161.957 383.475,112.499 337.145,77.550 258.508 C 75.943 254.894,74.483 251.846,74.305 251.736 C 73.739 251.386,67.562 236.238,64.100 226.708 C 52.745 195.452,44.495 161.908,40.394 130.315 C 32.357 68.399,37.409 31.705,55.104 23.469 C 61.376 20.549,67.061 20.027,78.281 21.339 M109.900 111.881 C 92.689 114.121,82.398 120.392,78.891 130.775 C 73.028 148.137,92.928 168.238,121.735 174.051 C 157.984 181.366,184.137 167.763,178.182 144.690 C 175.139 132.900,157.039 118.869,139.678 114.840 C 138.074 114.468,135.364 113.829,133.656 113.421 C 126.079 111.610,116.665 111.000,109.900 111.881 M275.211 111.793 C 271.679 112.191,260.536 114.558,256.789 115.706 C 245.083 119.292,234.570 126.150,226.866 135.226 C 217.560 146.189,219.502 161.158,231.264 169.130 C 247.245 179.962,279.707 178.036,301.694 164.952 C 321.242 153.319,327.373 136.765,316.986 123.659 C 310.368 115.309,291.513 109.953,275.211 111.793 M124.482 133.087 C 137.457 134.886,145.321 138.072,153.161 144.705 C 157.804 148.632,158.853 150.456,157.164 151.658 C 152.635 154.883,138.351 156.561,130.468 154.794 C 117.574 151.904,114.035 150.601,107.856 146.468 C 104.567 144.268,99.342 139.425,98.905 138.172 C 97.519 134.197,111.887 131.340,124.482 133.087 M291.486 133.044 C 295.679 133.930,300.543 135.995,300.953 137.063 C 301.691 138.986,294.158 145.663,287.299 149.165 C 281.877 151.933,272.484 154.571,265.197 155.371 C 255.511 156.434,240.780 152.950,241.934 149.869 C 242.893 147.307,250.340 141.303,256.208 138.361 C 265.432 133.737,282.549 131.157,291.486 133.044 M255.557 236.639 C 252.424 238.121,251.082 239.931,249.576 244.708 C 236.404 286.487,164.136 287.158,150.531 245.627 C 147.978 237.832,141.896 234.588,135.533 237.626 C 127.439 241.490,128.252 252.558,137.662 266.585 C 169.824 314.525,255.731 303.718,269.694 249.974 C 271.799 241.873,267.639 235.764,260.015 235.764 C 257.784 235.764,257.138 235.891,255.557 236.639 " stroke="none" fill="#5c5c5c" fill-rule="evenodd"></path><path id="path1" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path2" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path3" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path4" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path></g></svg>
                                 Category</h4>

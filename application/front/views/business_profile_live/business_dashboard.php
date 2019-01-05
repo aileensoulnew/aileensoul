@@ -490,6 +490,9 @@ $login_user_id = $this->session->userdata('aileenuser');
                             echo $this->session->flashdata('error');
                         }
                         ?>
+                        <div class="tab-add">
+                            <?php $this->load->view('banner_add'); ?>
+                        </div>
                         <div id="move-middle" class="">
                         </div>
                         <div id="move-website" class="">
