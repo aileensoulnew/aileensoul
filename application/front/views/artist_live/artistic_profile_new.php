@@ -32,7 +32,7 @@
 					<div class="all-detail-custom">
 					
 						<div class="custom-user-list">
-						<div class="dtl-add-mob add-box-shadow">
+						<div class="dtl-add-mob art-detail-mob-add">
 							<?php $this->load->view('right_add_box'); ?>
 						</div>
 						

@@ -27,13 +27,32 @@
         <section>
            <?php echo $business_common; ?>
             <div class="user-midd-section">
-                <div class="container tab-plr0 pt20">
+                <div class="container mob-plr0 pt20">
                     <div class="all-detail-custom">
                         <div class="custom-user-list">
+							<div class="dtl-add-mob">
+								<div class="right-add-box">
+									<div class="dtl-box p10 dtl-adv">                
+									</div> 
+								</div>
+							</div>
 							<div class="edit-custom-move">
 								
 							</div>
 					<div class="gallery" id="gallery">
+						
+						<!-- 02 Edit profile  -->
+						<div class="gallery-item edit-profile-move" >
+						</div>
+						
+						<!-- 03 blank div  -->
+						<div class="gallery-item tab-add">
+							<div class="right-add-box">
+								<div class="dtl-box p10 dtl-adv">                
+								</div> 
+							</div>
+						</div>
+					
 						<!-- 01 Basic information  -->
 						<div class="gallery-item">
 							<div class="dtl-box">
@@ -125,13 +144,9 @@
 							</div>
 						</div>
 						
-						<!-- 02 Edit profile  -->
-						<div class="gallery-item edit-profile-move" >
-						</div>
 						
-						<!-- 03 blank div  -->
-						<div class="gallery-item" >
-						</div>
+						
+						
 						
 						<!-- 04 Address Information  -->
 						<div class="gallery-item">
@@ -648,12 +663,10 @@
 						</div>
 						
 						<!-- 03 blank div  -->
-						<div class="gallery-item news-move" >
-						</div>
 						
 						<!-- 15 News / Press Release  -->
 						<div class="gallery-item">
-							<div class="dtl-box press-rel" id="news-move">
+							<div class="dtl-box press-rel">
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/news.png?ver=' . time()) ?>">
 									<span>News / Press Release</span>

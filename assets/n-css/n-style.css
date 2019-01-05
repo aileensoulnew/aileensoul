@@ -2760,7 +2760,7 @@ padding: 4px;}
 .edit-user-info{position:absolute; right:25px; top:150px;}
 .edit-user-info a img{width:25px;}
 .dtl-dis ul{padding-left:0; margin-bottom:0;  padding-bottom:5px;}
-.dtl-dis ul li{list-style-type:none; padding-bottom:15px; font-size:14px; padding-left:0; margin-bottom:0;}
+.dtl-dis ul li{list-style-type:none; padding-bottom:15px; font-size:14px; padding-left:0; margin-bottom:0; word-break:break-all;}
 .dtl-dis ul li li{padding-bottom:0;}
 .about-dtl-box{padding:5px 0; float:left;}
 .about-detail > h4{margin-bottom:2px;}
@@ -3440,9 +3440,10 @@ text-transform:uppercase;}
 .add-move .right-add-box, .art-add-box .right-add-box {border-radius: 15px; margin-bottom: 30px; float: left;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); border:0px;}
-.add-box-shadow{-webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+.add-box-shadow, .art-detail-mob-add .right-add-box {-webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); padding:10px; width:100%; float:left; border-radius:15px;}
 .dtl-add-mob{display:none;}
+.art-detail-mob-add .right-add-box{margin-bottom:35px;}
 
 
 /***  media query  ***/
