@@ -1,6 +1,5 @@
 var conn_new = new Strophe.Connection(openfirelink);
 reserve_keyword_arr = reserve_keyword.split(',');
-console.log(reserve_keyword_arr);
 $(document).ready(function() {
     $('.ajax_load').hide();
 
