@@ -3425,7 +3425,6 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
 			$email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);
 			$subject = ucwords($first_name).", Get the Work Done by Skilled Freelancer";
-			exit();
 
 			$send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
 			//Send Promotional Mail End
