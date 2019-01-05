@@ -212,6 +212,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                     <input tabindex="2" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
                                             <div id="err-res-key" class="err-flname"></div>
                                         </div>
 

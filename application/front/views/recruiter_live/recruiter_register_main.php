@@ -29,6 +29,8 @@
                                     <label ng-show="errorLname" class="error">{{errorLname}}</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group">
                             <div id="err-res-key" class="err-flname"></div>
                         </div>
 
