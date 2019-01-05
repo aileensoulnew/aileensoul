@@ -119,6 +119,7 @@
             var userid = "<?php echo $userid?>";
             var openfirelink = '<?php echo OPENFIRELINK; ?>';
             var openfireserver = '<?php echo OPENFIRESERVER; ?>';
+            var reserve_keyword = '<?php echo strtolower(RESERVE_KEYWORD); ?>';
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var app = angular.module('recruiterRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
             

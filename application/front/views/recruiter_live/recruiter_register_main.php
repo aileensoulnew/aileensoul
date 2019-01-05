@@ -15,6 +15,7 @@
                         <p class="text-center">Let’s quickly create an account to get started.</p>
                     </div>
                     <form name="register_form" id="register_form" ng-submit="submitRegiForm()" ng-validate="regiValidate">
+                        <div id="register_error" class="row"></div>
                         <div class="row">
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -28,6 +29,7 @@
                                     <label ng-show="errorLname" class="error">{{errorLname}}</label>
                                 </div>
                             </div>
+                            <div id="err-res-key" class="err-flname"></div>
                         </div>
 
                         <div class="form-group">

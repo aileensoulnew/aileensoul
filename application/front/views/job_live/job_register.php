@@ -104,6 +104,7 @@
             var userid = "<?php echo $userid?>";
             var openfirelink = '<?php echo OPENFIRELINK; ?>';
             var openfireserver = '<?php echo OPENFIRESERVER; ?>';
+            var reserve_keyword = '<?php echo strtolower(RESERVE_KEYWORD); ?>';
             var app = angular.module('jobRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){

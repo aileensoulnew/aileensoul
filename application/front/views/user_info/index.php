@@ -147,6 +147,7 @@
             $scope.submitBasicInfoForm = function () {
             if ($scope.basicinfo.validate()) {
                 angular.element('#basicinfo #submit').addClass("form_submit");
+                angular.element('#basicinfo #submit').attr("style","pointer-events:none;");
                 $('#basic_info_ajax_load').show();
                 $http({
                 method: 'POST',
@@ -167,6 +168,7 @@
                     } else {
                         if (success.data.is_success == '1') {
                             angular.element('#basicinfo #submit').removeClass("form_submit");
+                            angular.element('#basicinfo #submit').removeAttr("style");
                             $('#basic_info_ajax_load').hide();
                             window.location = base_url;
                         } else {
@@ -279,6 +281,7 @@
                 $scope.submitStudentInfoForm = function () {
                     if ($scope.studentinfo.validate()) {
                         angular.element('#studentinfo #submit').addClass("form_submit");
+                        angular.element('#studentinfo #submit').attr("style","pointer-events:none;");
                         $('#student_info_ajax_load').show();
                         $http({
                              method: 'POST',
@@ -298,6 +301,7 @@
                             } else {
                             if (success.data.is_success == '1') {
                                     angular.element('#studentinfo #submit').removeClass("form_submit");
+                                    angular.element('#studentinfo #submit').removeAttr("style");
                                     $('#student_info_ajax_load').hide();
                                     window.location = base_url;
                                 } else {

@@ -60,19 +60,68 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
     $scope.$parent.title = "Create Recruiter Profile | Aileensoul";
     $scope.jobByLocation = {};
     $scope.jobs = {};
+    reserve_keyword_arr = reserve_keyword.split(',');
     $("#selday,#selmonth,#selyear").focusin(function() {
         $('#dobtooltip').show();
     });
     $("#selday,#selmonth,#selyear").focusout(function() {
         $('#dobtooltip').hide();
     });
+    $.validator.addMethod("check_res_keyword_fname", function (value, element, param) {
+        var val = $(param).val();
+        if(val != "")
+        {            
+            if(reserve_keyword_arr.indexOf(value.toLowerCase()) != -1 && reserve_keyword_arr.indexOf(val.toLowerCase()) != -1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }, "First name or Last name contains our reserved keyword.");
+    $.validator.addMethod("check_res_keyword_lname", function (value, element, param) {
+        var val = $(param).val();
+        if(val != "")
+        {            
+            if(reserve_keyword_arr.indexOf(value.toLowerCase()) != -1 && reserve_keyword_arr.indexOf(val.toLowerCase()) != -1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }, "First name or Last name contains our reserved keyword.");
+
+    $.validator.addMethod("notEqualFname", function(value, element, param) {
+        return this.optional(element) || value != $(param).val();
+    }, "First name and Last name has to be different.");
+    $.validator.addMethod("notEqualLname", function(value, element, param) {
+        return this.optional(element) || value != $(param).val();
+    }, "First name and Last name has to be different.");
+
     $scope.regiValidate = {
         rules: {
             first_name: {
                 required: true,
+                check_res_keyword_lname:'#last_name',
+                notEqualLname:'#last_name',
             },
             last_name: {
                 required: true,
+                check_res_keyword_fname:'#first_name',
+                notEqualFname:'#first_name',
             },
             email_reg: {
                 required: true,
@@ -108,7 +157,8 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
             }
         },
         groups: {
-            selyear: "selyear selmonth selday"
+            selyear: "selyear selmonth selday",
+            res_keyword: "first_name last_name",
         },
         messages: {
             first_name: {
@@ -144,7 +194,10 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
         errorPlacement: function (error, element) {
             if (element.attr("type") == "checkbox") {
                 error.insertAfter($("#lbl_term_condi"));
-            } else {
+            }
+            else if(element.attr("name") == "first_name" || element.attr("name") == "last_name"){
+                error.appendTo($("#err-res-key"));
+            }else {
                 error.insertAfter(element);
             }
         },
@@ -162,30 +215,22 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
             }).then(function(success) {
                 $("#register_form #create-account").removeAttr("style");
                 if (success.data.errors) {
-                    $scope.errorjobTitle = success.data.errors.jobTitle;
-                    $scope.errorcityList = success.data.errors.cityList;
-                    $scope.errorfield = success.data.errors.field;
-                    $scope.errorotherField = success.data.errors.otherField;
+                    var err_arr = success.data.errors;
+                    if(err_arr.errorReg != "")
+                    {
+                        $("#register_error").fadeIn(1000, function() {
+                            $("#register_error").html('<div class="error-reg-cus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; Try after sometime!</div>');
+                        });
+                    }
+                    else
+                    {                        
+                        $scope.errorjobTitle = success.data.errors.jobTitle;
+                        $scope.errorcityList = success.data.errors.cityList;
+                        $scope.errorfield = success.data.errors.field;
+                        $scope.errorotherField = success.data.errors.otherField;
+                    }
                 } else {
-                    if (success.data.okmsg == "ok") {
-                        /*var username = success.data.userslug.replace(/-/g, "_");
-                        var callback = function (status) {
-                            if (status === Strophe.Status.REGISTER) {
-                                conn_new.register.fields.username = username;
-                                conn_new.register.fields.password = username;
-                                conn_new.register.fields.name = $scope.user.first_name+" "+$scope.user.last_name;
-                                conn_new.register.fields.email = $scope.user.email_reg;
-                                conn_new.register.submit();
-                            } else if (status === Strophe.Status.REGISTERED) {
-                                console.log("registered!");
-                                conn_new.authenticate();
-                            } else if (status === Strophe.Status.CONNECTED) {
-                                console.log("logged in!");
-                            } else {
-                                // every other status a connection.connect would receive
-                            }
-                        };
-                        conn_new.register.connect(base_url+"recruiter/general-info", callback, 0, 0);*/
+                    if (success.data.okmsg == "ok") {                        
                         $('#basic_info_ajax_load').hide();
                         var title = "Recruiter Information"
                         var url = base_url + "recruiter/general-info";
@@ -206,62 +251,7 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
             }, function(error) {});
         }
     };
-
-    function submitRegisterForm() {
-        var first_name = $("#first_name").val();
-        var last_name = $("#last_name").val();
-        var email_reg = $("#email_reg").val();
-        var password_reg = $("#password_reg").val();
-        var selday = $("#selday").val();
-        var selmonth = $("#selmonth").val();
-        var selyear = $("#selyear").val();
-        var selgen = $("#selgen").val();
-        var post_data = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email_reg': email_reg,
-            'password_reg': password_reg,
-            'selday': selday,
-            'selmonth': selmonth,
-            'selyear': selyear,
-            'selgen': selgen,
-            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-        }
-        $.ajax({
-            type: 'POST',
-            url: base_url + 'registration/reg_insert',
-            dataType: 'json',
-            data: post_data,
-            beforeSend: function() {
-                $("#register_error").fadeOut();
-                $("#btn-register").html('Sign Up ...');
-            },
-            success: function(response) {
-                var userid = response.userid;
-                if (response.okmsg == "ok") {
-                    $("#btn-register").html('<img src="' + base_url + 'images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
-                    var title = "Recruiter Information"
-                    var url = base_url + "recruiter/general-info";
-                    $location.path(url);
-                    var obj = {
-                        Title: title,
-                        Url: url
-                    };
-                    history.pushState(obj, obj.Title, obj.Url);
-                    $timeout(function() {
-                        var el = document.getElementById('ca');
-                        angular.element(el).triggerHandler('click');
-                    }, 0);
-                } else {
-                    $("#register_error").fadeIn(1000, function() {
-                        $("#register_error").html('<div class="alert alert-danger registration"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
-                        $("#btn-register").html('Sign Up');
-                    });
-                }
-            }
-        });
-        return false;
-    }
+    
 });
 app.controller('recruiterBasicInfoController', function($scope, $http, $location, $window, $timeout) {
     $scope.$parent.title = "Recruiter Profile | Aileensoul";
