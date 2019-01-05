@@ -3437,6 +3437,10 @@ text-transform:uppercase;}
 .temp .mob-edit-pro a{pointer-events:none; cursor:default;}
 .temp .mob-edit-pro .fa{display:none;}
 
+.add-move .right-add-box{border-radius: 15px; margin-bottom: 30px; float: left;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); border:0px;}
+.dtl-add-mob{display:none;}
 
 
 /***  media query  ***/
@@ -3514,6 +3518,7 @@ text-transform:uppercase;}
 	.bus-dash #profile-progress{display:none !important;}
 	.art-dash #profile-progress{display:none !important;}
 	.main-dashboard #profile-progress{display:none !important;}
+	.right_middle_side_posrt{width:207px;}
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}
@@ -3570,9 +3575,13 @@ text-transform:uppercase;}
 	.dis-middle{width:325px;}
 	.all-detail-custom .right-add .row{margin-left:-15px; margin-right:-15px;}
 	.dtl-adv{display:none;}
+	.tab-add .right-add-box .dtl-adv{display:block; margin-bottom:0;}
 	.rec-dtl .dtl-adv{display:block;}
 	.right-cus-imp .dtl-box{width:462px;}
 	.dtl-adv.cus-add-block{display:block;}
+	.tab-add .right-add-box{border:0; padding:0; border-radius:20px;}
+	.tab-add .right-add-box .adsbygoogle.adBlock{margin:0 auto;	}
+	.right_middle_side_posrt{display:none;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -4264,6 +4273,12 @@ text-transform:uppercase;}
 	.right-info-box .dtl-title svg{width:20px;}
 	.mob-progressbar .progress .skill{line-height:26px;}
 	.mob-progressbar{width:100%; border-left:0; border-right:0; border-radius:0;}
+	.gallery-item.tab-add{display:none;}
+	.dtl-add-mob{display:block;}
+	.dtl-add-mob .right-add-box{padding:0; margin-bottom:35px; border:0;}
+	.dtl-add-mob .right-add-box .dtl-adv{display:block;}
+	.dtl-add-mob .right-add-box .dtl-box{margin-bottom:0;}
+	.dtl-add-mob .right-add-box .dtl-box .adsbygoogle.adBlock{margin:0 auto;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

@@ -1,6 +1,13 @@
 <div class="container mob-plr0 pt20">
     <div class="all-detail-custom">
         <div class="custom-user-list">
+			
+			<div class="dtl-add-mob">
+				<div class="right-add-box">
+					<div class="dtl-box p10 dtl-adv">                
+					</div> 
+				</div>
+			</div>
 			<div class="edit-profile-mob">
 			</div>
             <div class="gallery" id="gallery">
@@ -9,7 +16,11 @@
                 </div>
 				
 				<!-- 02  advertize  -->
-                <div class="gallery-item add-move">
+                <div class="gallery-item tab-add">
+					<div class="right-add-box">
+						<div class="dtl-box p10 dtl-adv">                
+						</div> 
+					</div>
                 </div>
 				
                 <!-- 01 Profile Overview Start-->
