@@ -269,8 +269,10 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
                                 <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                             </div>
                             <div class="job-top-detail">
-                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
-                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                <h5>
+                                    <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a>
+                                    <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a>
+                                </h5>
                                 <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.re_comp_name"></a></p>
                                 <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify | limitTo:200}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.fullname"></a></p>
                             </div>

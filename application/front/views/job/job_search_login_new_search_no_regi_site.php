@@ -116,6 +116,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                         <a href="<?php echo base_url().substr($url,0,200).'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
                                                             <?php echo($_searchJob['string_post_name'] != $_searchJob['post_name'] ? $_searchJob['string_post_name']:$_searchJob['string_post_name']); ?>
                                                         </a>
+                                                    </h5>
                                                        
                                                     <p>
                                                         <a href="<?php echo base_url().substr($url,0,200).'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
