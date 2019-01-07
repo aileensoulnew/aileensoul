@@ -3517,6 +3517,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
         if (comment) {
+            $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
+            $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-"+post_id).attr("disabled","disabled");
+
             $scope.isMsg = true;
             $http({
                 method: 'POST',
@@ -3524,21 +3529,27 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 data: 'comment=' + comment + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-                    .then(function (success) {
-                        data = success.data;
-                        if (data.message == '1') {
-                            if (commentClassName == 'last-comment') {
-                                $scope.postData[index].post_comment_data.splice(0, 1);
-                                $scope.postData[index].post_comment_data.push(data.comment_data[0]);
-                                $('.post-comment-count-' + post_id).html(data.comment_count);
-                                $('.editable_text').html('');
-                            } else {
-                                $scope.postData[index].post_comment_data.push(data.comment_data[0]);
-                                $('.post-comment-count-' + post_id).html(data.comment_count);
-                                $('.editable_text').html('');
-                            }
-                        }
-                    });
+            .then(function (success) {
+                data = success.data;
+                if (data.message == '1') {
+                    if (commentClassName == 'last-comment') {
+                        $scope.postData[index].post_comment_data.splice(0, 1);
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    }
+                }
+                setTimeout(function(){
+                    $("#cmt-btn-mob-"+post_id).removeAttr("style");
+                    $("#cmt-btn-mob-"+post_id).removeAttr("disabled");
+                    $("#cmt-btn-"+post_id).removeAttr("style");
+                    $("#cmt-btn-"+post_id).removeAttr("disabled");
+                },1000);
+            });
         } else {
             $scope.isMsgBoxEmpty = true;
         }

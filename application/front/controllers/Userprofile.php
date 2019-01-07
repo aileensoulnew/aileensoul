@@ -96,7 +96,7 @@ class Userprofile extends MY_Controller {
         if (count($userdata) > 0) {
             $this->load->view('userprofile/index', $this->data);
         } else {
-            $this->data['title'] = "404 | Aileensoul";
+            $this->data['title'] = "404".TITLEPOSTFIX;
             $this->load->view('404', $this->data);
             // $this->load->view('userprofile/notavalible');
         }

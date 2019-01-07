@@ -333,10 +333,6 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
     };
 
     $scope.sendComment = function (post_id, index, post) {
-        $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
-        $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
-        $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
-        $("#cmt-btn-"+post_id).attr("disabled","disabled");
 
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
@@ -346,6 +342,11 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
         if (comment) {
+            $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
+            $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-"+post_id).attr("disabled","disabled");
+
             $scope.isMsg = true;
             $http({
                 method: 'POST',
@@ -440,8 +441,6 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             setTimeout(function(){
                 $(".del_comment").removeAttr("style");
             },1000);
-
-            // $("#cmt-"+comment_id).hide();
 
             data = success.data;
             if (commentClassName == 'last-comment') {

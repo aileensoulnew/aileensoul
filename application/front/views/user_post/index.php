@@ -61,10 +61,16 @@
             .mejs__button > button {
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
-        </style>
-        <?php $this->load->view('adsense'); ?>
+        </style>        
+        <?php $this->load->view('adsense');
+        $user_id = $this->session->userdata('aileenuser');
+        $userData = $this->user_model->getUserData($user_id);
+        $verfy_cls = "";
+        if($userData['user_verify'] == 0){
+            $verfy_cls = "verify-body";
+        } ?>
     </head>
-    <body class="one-hd body-loader">
+    <body class="one-hd body-loader <?php echo $verfy_cls; ?>">
     <?php $this->load->view('page_loader'); ?>
     <div id="main_page_load" style="display: block;">
     <?php echo $header_profile; ?>        
@@ -1274,8 +1280,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <?php $user_id = $this->session->userdata('aileenuser'); ?>
+        </div>        
         <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
