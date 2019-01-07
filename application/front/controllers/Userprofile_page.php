@@ -2644,4 +2644,56 @@ class Userprofile_page extends MY_Controller {
         }        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_report_spam()
+    {
+        $login_user_id = $this->session->userdata('aileenuser');
+        $reported_post_id = $this->input->post('reported_post_id');        
+        $reported_reason = $this->input->post('reported_reason');
+        if($reported_reason == 0)
+        {
+            $reported_reason_other = $this->input->post('reported_reason_other');
+        }
+        else
+        {
+            $reported_reason_other = "";
+        }
+
+        /*$report_data = $this->db->select('*')->get_where('user_post_report', array('reported_post_id' => $reported_post_id,'reported_user_id' => $login_user_id))->row();
+        if(isset($report_data) && !empty($report_data))
+        {
+            $ret_arr = array("success"=>1);
+        }
+        else
+        {*/
+        if($reported_post_id != "")
+        {
+            $curr_date = date('Y-m-d H:i:s', time());
+
+            $data = array(
+                'reported_post_id'      => $reported_post_id,
+                'reported_user_id'      => $login_user_id,
+                'reported_reason'       => $reported_reason,
+                'reported_reason_other' => $reported_reason_other,
+                'status'                => '1',
+                'created_date'          => $curr_date,
+                'modify_date'           => $curr_date,
+            );
+            $report_id = $this->common->insert_data_getid($data, 'user_post_report');
+            if($report_id)
+            {
+                $ret_arr = array("success"=>1);
+            }
+            else
+            {
+                $ret_arr = array("success"=>0);   
+            }
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        //}
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
 }

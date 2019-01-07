@@ -298,8 +298,8 @@
                                     <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a>
                                     <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
                                 </li>
-    							<li>
-    								<a data-target="#report-span" data-toggle="modal" onclick="void(0)" href="#">Report</a>
+    							<li ng-if="live_slug != post.user_data.user_slug">
+    								<a ng-click="open_report_spam(post.post_data.id)" href="javascript:void(0);">Report</a>
     							</li>
                             </ul>
                         </div>
@@ -850,66 +850,77 @@
     </div>
     </div>
 		<?php //$this->load->view('feedback_fixed'); ?>
-		<div style="display:none;" class="modal fade" id="report-span" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div style="display:none;" class="modal fade" id="report-spam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
                     <div class="report-box">
-						<h3>What’s Wrong with This Post?</h3>
-						<ul>
-							<li>
-								<label class="control control--radio">Not Intersed in This Post
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li>
-								<label class="control control--radio">Spam, or Promotional
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li>
-								<label class="control control--radio">Nudity or Sexually Explicit
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li>
-								<label class="control control--radio">Fake News
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li>
-								<label class="control control--radio">Fake Account
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li>
-								<label class="control control--radio">Scam, Phishing or Malware
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li>
-								<label class="control control--radio">Abusive, Violent or Hate Speech
-									<input name="radio" type="radio">
-									<div class="control__indicator"></div>
-								</label>
-							</li>
-							<li class="other-rsn">
-								<label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other Reasons
-									
-								</label>
-							</li>
-							<li>
-								<button class="btn1">Submit</button>
-							</li>
-							
-						</ul>
-                        
+                        <form name="report_spam_form" id="report_spam_form" ng-validate="report_spam_validate">
+    						<h3>What’s Wrong with This Post?</h3>
+    						<ul>
+    							<li>
+    								<label class="control control--radio">Not Intersed in This Post
+    									<input name="report_spam" type="radio" class="report-cls" value="1">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li>
+    								<label class="control control--radio">Spam, or Promotional
+    									<input name="report_spam" type="radio" class="report-cls" value="2">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li>
+    								<label class="control control--radio">Nudity or Sexually Explicit
+    									<input name="report_spam" type="radio" class="report-cls" value="3">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li>
+    								<label class="control control--radio">Fake News
+    									<input name="report_spam" type="radio" class="report-cls" value="4">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li>
+    								<label class="control control--radio">Fake Account
+    									<input name="report_spam" type="radio" class="report-cls" value="5">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li>
+    								<label class="control control--radio">Scam, Phishing or Malware
+    									<input name="report_spam" type="radio" class="report-cls" value="6">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li>
+    								<label class="control control--radio">Abusive, Violent or Hate Speech
+    									<input name="report_spam" type="radio" class="report-cls" value="7">
+    									<div class="control__indicator"></div>
+    								</label>
+    							</li>
+    							<li class="">
+                                    <label class="control control--radio">Other Reasons
+                                        <input name="report_spam" type="radio" class="report-cls" value="0">
+                                        <div class="control__indicator"></div>
+                                    </label>
+    								<!--other-rsn <label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other Reasons
+    								</label> -->
+    							</li>
+                                <li class="fw report-other-res" id="report_other" style="display: none;">
+                                    <label class="control control--radio">Other Reasons
+                                        <input name="other_report_spam" type="text" id="other_report_spam" style="opacity: 1;z-index: 1;">
+                                    </label>
+                                </li>
+    							<li>
+    								<button id="save_report_spam" class="btn1" type="button" ng-click="save_report_spam();">Submit</button>
+                                    <div id="save_report_spam_loader" class="dtl-popup-loader" style="display: none;">
+                                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                                    </div>
+    							</li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1315,6 +1326,7 @@
         <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js') ?>"></script>
         <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js'); ?>"></script>
         <script src="<?php echo base_url('assets/as-videoplayer/demo.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -1333,7 +1345,7 @@
         var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
         var no_user_post_html = '<?php echo $no_user_post_html; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
-        var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense']);
+        var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
