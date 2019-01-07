@@ -3817,6 +3817,8 @@ text-transform:uppercase;}
 	#move-availability{margin-top:10px;}
 	.rec-dtl .cus-inner-middle{width:55%;}
 	.rec-dtl .right-add{display:block;}
+	.free-hire-dtl .cus-inner-middle{width:55%;}
+	.free-hire-dtl .right-add{display:block;}
 	
 }
 @media screen and (max-width: 767px) {
@@ -4286,6 +4288,10 @@ text-transform:uppercase;}
 	.rec-dtl .cus-inner-middle{width:100%;}
 	.rec-dtl .right-add{display:none;}
 	.container.rec_res{padding-left:15px; padding-right:15px;}
+	.free-hire-dtl .cus-inner-middle{width:100%;}
+	.free-hire-dtl .right-add{display:none;}
+	.container.rec_res{padding-left:15px; padding-right:15px;}
+	.container.free-hire-dtl{padding-left:15px; padding-right:15px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4734,6 +4740,7 @@ text-transform:uppercase;}
 	.bus-info .dash-info-box p{font-size:13px;}
 	.dtl-box{border-radius:0;}
 	.container.rec_res{padding:0 !important;}
+	.container.free-hire-dtl{padding:0 !important;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

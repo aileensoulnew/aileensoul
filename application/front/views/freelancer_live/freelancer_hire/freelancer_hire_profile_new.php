@@ -158,7 +158,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container tablate-container  art-profile">    
+			<div class="container tablate-container  art-profile free-hire-dtl">    
 				<?php if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
 					<div class="upload-img">
 						<label class="cameraButton"><span class="tooltiptext"><?php echo $this->lang->line("upload_cover_photo"); ?></span><i class="fa fa-camera" aria-hidden="true"></i>
@@ -297,7 +297,7 @@
 						</div>
 					</div>
 				</div>
-				<div>          
+				<div class="">          
 					<div class="job-menu-profile mob-none job_edit_menu new-fw-name">
 						<a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
 							<h3> <?php echo ucwords($fullname); ?></h3>
@@ -305,8 +305,13 @@
 					</div>
 							
 					<div class="cus-inner-middle mob-clear mobp0">
-						<div class="tab-add-991">
-							<?php $this->load->view('banner_add'); ?>
+						<div class="dtl-add-mob">
+							<div class="right-add-box">
+								<div class="dtl-box p10 dtl-adv">                
+								</div> 
+							</div>
+						</div>
+						<div class="edit-profile-mob">
 						</div>
 						<div class="common-form">
 							<?php if($is_copm_indu == 1): ?>
@@ -602,13 +607,11 @@
 							</div>
 							
 						</div>
-						<div class="banner-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
+						
 					</div>
 					<div class="right-add add-detail">
 						<?php if($fh_userid == $login_userid): ?>
-						<div class="dtl-box">
+						<div class="dtl-box" id="edit-profile-mob">
 							<div class="dtl-title">
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>">
 								<span>Edit Profile</span>
@@ -1312,6 +1315,12 @@
                 $('.profile-status').removeClass('hover-top');
             });
         });
+		$(document).ready(function () {
+			if (screen.width <= 767) {
+				$("#edit-profile-mob").appendTo($(".edit-profile-mob"));
+			   
+			}
+		});
     </script>	
 </body>
 </html>
