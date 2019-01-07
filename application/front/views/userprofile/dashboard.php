@@ -494,7 +494,7 @@
                                     <span class="post-designation" ng-if="post.user_data.title_name == null && post.user_data.degree_name == null" ng-bind="CURRENT WORK"></span>
                                 </div>
                             </div>
-                            <div class="post-right-dropdown dropdown">
+                            <div class="post-right-dropdown dropdown" ng-if="live_slug">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                 <ul class="dropdown-menu"> 
                                     <?php if($user_id != ""): ?>
@@ -519,7 +519,7 @@
                                             <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name">Show in new tab</a>
                                         </li>
                                     <?php endif; ?>
-                                    <li ng-if="live_slug != post.user_data.user_slug">
+                                    <li ng-if="live_slug && live_slug != post.user_data.user_slug">
                                         <a ng-click="open_report_spam(post.post_data.id)" href="javascript:void(0);">Report</a>
                                     </li>
                                 </ul>
