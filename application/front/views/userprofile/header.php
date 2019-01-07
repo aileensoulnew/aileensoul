@@ -144,7 +144,7 @@
                     <a href="#" ng-click="get_user_detail();" data-target="#user-info-edit" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/detail/main-edit1.png"></a>
                 </div>
             </div>
-            <div class="user-btns {{to_id}}" ng-if="live_slug != segment2" ng-init="from_id=<?php echo $from_id;?>">
+            <div class="user-btns {{to_id}}" ng-if="live_slug != segment2" ng-init="from_id=<?php echo ($from_id ? $from_id : '0');?>">
                 <?php 
                 if($user_id != ""){
                 ?>

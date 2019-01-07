@@ -106,6 +106,11 @@ app.filter('removeLastCharacter', function () {
         //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });
+app.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
 app.controller('EditorController', ['$scope', function ($scope) {
         $scope.handlePaste = function (e) {
             e.preventDefault();

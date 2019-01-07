@@ -16,6 +16,7 @@ class Userprofile extends MY_Controller {
         $this->load->model('data_model');
         $this->load->library('S3');
         $this->load->library('form_validation');
+        $this->load->library('inbackground');
         //  include('userprofile_include.php');
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
         $this->data['no_user_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
@@ -73,7 +74,7 @@ class Userprofile extends MY_Controller {
         } else {
             $this->data['contact_value'] = 'new';
             $this->data['contact_status'] = 0;
-            $this->data['contact_id'] = $is_userContactInfo['id'];
+            $this->data['contact_id'] = ($is_userContactInfo['id'] ? $is_userContactInfo['id'] : "");
             $this->data['from_id'] = $is_userContactInfo['from_id'];
         }
 
@@ -83,7 +84,7 @@ class Userprofile extends MY_Controller {
             $this->data['follow_value'] = $is_userFollowInfo['status'];
         } else {
             $this->data['follow_value'] = 'new';
-            $this->data['follow_id'] = $is_userFollowInfo['id'];
+            $this->data['follow_id'] = ($is_userFollowInfo['id'] ? $is_userFollowInfo['id'] : "");
             $this->data['follow_status'] = 0;
         }
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
@@ -164,7 +165,15 @@ class Userprofile extends MY_Controller {
             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
             {
-                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                $url = base_url()."user_post/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$to_email_id,
+                    "unsubscribe"=>$unsubscribe,
+                );
+                $this->inbackground->do_in_background($url, $param);
             }
             //Send Mail End
         }

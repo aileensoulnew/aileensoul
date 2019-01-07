@@ -498,7 +498,7 @@ class Article extends MY_Controller {
                 $this->data['follow_value'] = $is_userFollowInfo['status'];
             } else {
                 $this->data['follow_value'] = 'new';
-                $this->data['follow_id'] = $is_userFollowInfo['id'];
+                $this->data['follow_id'] = ($is_userFollowInfo['id'] != "" ? $is_userFollowInfo['id'] : "''");
                 $this->data['follow_status'] = 0;
             }
             /*print_r($this->data['article_data']);
