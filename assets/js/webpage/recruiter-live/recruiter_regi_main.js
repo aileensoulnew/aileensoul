@@ -162,10 +162,10 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
         },
         messages: {
             first_name: {
-                required: "Please enter first name",
+                required: "Please enter First name and Last name",
             },
             last_name: {
-                required: "Please enter last name",
+                required: "Please enter First name and Last name",
             },
             email_reg: {
                 required: "Please enter email address",
@@ -224,10 +224,10 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
                     }
                     else
                     {                        
-                        $scope.errorjobTitle = success.data.errors.jobTitle;
-                        $scope.errorcityList = success.data.errors.cityList;
-                        $scope.errorfield = success.data.errors.field;
-                        $scope.errorotherField = success.data.errors.otherField;
+                        $scope.errorjobTitle = err_arr.jobTitle;
+                        $scope.errorcityList = err_arr.cityList;
+                        $scope.errorfield = err_arr.field;
+                        $scope.errorotherField = err_arr.otherField;
                     }
                 } else {
                     if (success.data.okmsg == "ok") {                        

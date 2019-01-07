@@ -225,6 +225,7 @@ app.controller('jobRegiController', function ($scope, $http, $location, $window,
     $scope.submitRegiForm = function () {
         if ($scope.register_form.validate())
         {
+            $("#main_create_ac").attr("style","pointer-events:none");
             $http({
             method: 'POST',
                     url: base_url + 'registration/reg_insert_new',
@@ -248,6 +249,7 @@ app.controller('jobRegiController', function ($scope, $http, $location, $window,
                         $scope.errorfield = err_arr.field;
                         $scope.errorotherField = err_arr.otherField;
                     }
+                    $("#main_create_ac").removeAttr("style");
                 } else {
                     if (success.data.okmsg == "ok") {                        
                         $('#basic_info_ajax_load').hide();
@@ -264,6 +266,7 @@ app.controller('jobRegiController', function ($scope, $http, $location, $window,
                     } else {
                         return false;
                     }
+                    $("#main_create_ac").removeAttr("style");
                 }
                 
             }, function (error){

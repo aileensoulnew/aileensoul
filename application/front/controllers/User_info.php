@@ -14,6 +14,7 @@ class User_info extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('data_model');
         $this->load->library('S3');
+        $this->load->library('inbackground');
     }
     
     public function index() {
@@ -137,14 +138,20 @@ class User_info extends MY_Controller {
                 $email_html = $this->load->view('email_template/welcome_mail',$this->userdata,TRUE);                
 
                 $subject = $fullname.", Welcome to Aileensoul Platform :)";
-                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $to_email_id,$unsubscribe);
+                // $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $to_email_id,$unsubscribe);
+                $url = base_url()."user_info/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$to_email_id                    
+                );
+                $this->inbackground->do_in_background($url, $param);
 
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;
             }
         }
-// response back.
         echo json_encode($data);
     }
 
@@ -187,25 +194,6 @@ class User_info extends MY_Controller {
             $data['errors'] = $errors;
         } else {
 
-            /*if (is_array($_POST['jobTitle']))
-            {
-                $jobTitleId = $_POST['jobTitle']['title_id'];
-            }
-            else
-            {
-                $interested_field = $this->data_model->findJobTitle($_POST['jobTitle']);
-                if ($interested_field['title_id'] != '') {
-                    $jobTitleId = $interested_field['title_id'];
-                } else {
-                    $data = array();
-                    $data['name'] = $_POST['jobTitle'];
-                    $data['created_date'] = date('Y-m-d H:i:s', time());
-                    $data['modify_date'] = date('Y-m-d H:i:s', time());
-                    $data['status'] = 'draft';
-                    $data['slug'] = $this->common->clean($_POST['jobTitle']);
-                    $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
-                }
-            }*/
             if (is_array($_POST['currentStudy'])) {
                 $degreeId = $_POST['currentStudy']['degree_id'];
             } else {
@@ -289,19 +277,34 @@ class User_info extends MY_Controller {
 
                 $subject = $fullname.", Welcome to Aileensoul Platform :)";
 
-                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $to_email_id,$unsubscribe);
+                // $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $to_email_id,$unsubscribe);
+                $url = base_url()."user_info/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$to_email_id                    
+                );
+                $this->inbackground->do_in_background($url, $param);
+
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;
             }
-        }
-// response back.
+        }        
         echo json_encode($data);
     }
 
     public function autocomplete() {
 
         $this->load->view('autoselecteasy', $this->data);
+    }
+
+    public function send_email_in_background()
+    {
+        $subject = $this->input->post('subject');
+        $email_html = $this->input->post('email_html');
+        $to_email = $this->input->post('to_email');
+        $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email);        
     }
 
 }
