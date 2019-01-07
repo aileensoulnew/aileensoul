@@ -2193,6 +2193,8 @@ body.sitemap{background:#f6f6f6; border:0px;}
 .report-box .other-reason-box{padding:20px;}
 .report-box .other-reason-box textarea{border:0px; border-bottom:1px solid #d2d2d2; height:150px; margin-bottom:15px; border-radius:0; padding:0; font-size:15px;}
 .report-box .other-reason-box .btn3{font-size:16px; padding:5px 25px; font-weight:normal;}
+.report-box ul li.report-other-res{padding-top:0; margin-top:-10px; position:relative;}
+.report-box ul li.report-other-res label.error{right:10px; bottom:-7px;}
 /***  end report box  ***/
 /***  report page  ***/
 .report{letter-spacing:1px;}
@@ -2806,7 +2808,8 @@ width: auto; height: 100%;
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
 max-width: inherit;}
-.dis-list li label{font-size:14px;}
+.dis-list li label{font-size:14px; font-size: 14px; font-weight: normal;
+margin-bottom: 0;}
 .dis-list li label em{font-style:normal;}
 .dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
 .dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
@@ -3581,7 +3584,6 @@ text-transform:uppercase;}
 	.tab-add .right-add-box .dtl-adv{display:block; margin-bottom:0;}
 	.rec-dtl .dtl-adv{display:block;}
 	.right-cus-imp .dtl-box{width:462px;}
-	.dtl-adv.cus-add-block{display:block;}
 	.tab-add .right-add-box{border:0; padding:0; border-radius:20px;}
 	.tab-add .right-add-box .adsbygoogle.adBlock{margin:0 auto;	}
 	.right_middle_side_posrt{display:none;}
@@ -4292,6 +4294,7 @@ text-transform:uppercase;}
 	.free-hire-dtl .right-add{display:none;}
 	.container.rec_res{padding-left:15px; padding-right:15px;}
 	.container.free-hire-dtl{padding-left:15px; padding-right:15px;}
+	.container.free-apply-dtl{padding-left:15px; padding-right:15px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4741,6 +4744,7 @@ text-transform:uppercase;}
 	.dtl-box{border-radius:0;}
 	.container.rec_res{padding:0 !important;}
 	.container.free-hire-dtl{padding:0 !important;}
+	.container.free-apply-dtl{padding:0 !important;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

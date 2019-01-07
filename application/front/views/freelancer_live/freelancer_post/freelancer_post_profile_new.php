@@ -321,13 +321,29 @@
              
 				
             </div>
-		<div class="container tab-plr0 pt20">
+		<div class="container tab-plr0 pt20 free-apply-dtl">
 			<div class="all-detail-custom">
 				<div class="custom-user-list">
+					<div class="dtl-add-mob">
+									<div class="right-add-box">
+										<div class="dtl-box p10 dtl-adv">                
+										</div> 
+									</div>
+								</div>
 					<div class="edit-custom-move">
 					</div>
+					
 					<div class="gallery" id="gallery">
-
+						<!--  02 Edit profile -->
+						<div class="gallery-item edit-profile-move">
+						</div>
+						<div class="gallery-item tab-add">
+							<div class="right-add-box">
+								<div class="dtl-box p10 dtl-adv">                
+								</div> 
+							</div>
+						</div>
+						
                         <?php if($is_indivdual_company == '1'): ?>
                         <!-- Basic information  -->
                         <div class="gallery-item">
@@ -621,13 +637,9 @@
 						</div>
                         <?php endif; ?>
 						
-						<!--  02 Edit profile -->
-						<div class="gallery-item edit-profile-move">
-						</div>
 						
-						<!--  03 Blank div -->
-						<div class="gallery-item">
-						</div>
+						
+						
                         <?php if($is_indivdual_company == '2'): ?>
 						<!--  04 Company Information -->
 						<div class="gallery-item">
@@ -711,6 +723,9 @@
 						
 						<!--  05 skill -->
 						<div class="gallery-item skill-move">
+						</div>
+						<!--  05 skill -->
+						<div class="gallery-item language-move">
 						</div>
 						
 						<!--  06 Social link (website) -->
@@ -1152,18 +1167,15 @@
 
                     </div>
 				</div>
-			<div class="right-add add-detail">			
+				<div class="right-add add-detail">			
 					
-				<div class="row">
+				
                     <div class="right-add-box"> 
                         <div class="dtl-box p10 dtl-adv cus-add-block">
                             <!-- <img src="<?php //echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>"> -->
                         </div>
                     </div>
-					<!-- <div class="dtl-box p10 dtl-adv">
-						<img src="<?php //echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
-					</div> -->
-					
+				
 					<!-- edit profile  -->
                     <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
 					<div class="rsp-dtl-box">
@@ -1303,10 +1315,13 @@
                                             </li>
                                         </ul>
                                     </div>
+									
                                 </div>
                             </div>
                         </div>
+                        
 					</div>
+					
 
                     <!--  Languages -->
                     <div class="rsp-dtl-box ">
@@ -3113,6 +3128,7 @@
 				$("#edit-profile-move").appendTo($(".edit-profile-move"));
 				$("#social-link-move").appendTo($(".social-link-move"));
 				$("#skill-move").appendTo($(".skill-move"));
+				$("#language-move").appendTo($(".language-move"));
 				$("#social-link-move").appendTo($(".social-link-move"));
 				$("#menu-move").appendTo($(".menu-move"));
 				$(".remove-blank").remove();
