@@ -2864,8 +2864,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $("#report-spam").modal('show');
     };
 
-    $scope.report_spam_validate = {
-        wrapper:"li",
+    $scope.report_spam_validate = {        
         rules: {           
             report_spam: {
                 required: true,
@@ -2888,7 +2887,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         },
         errorPlacement: function (error, element) {
             if (element.attr("name") == "report_spam") {
-                error.insertAfter($("#report_other"));
+                error.appendTo($("#err_report"));
             } else {
                 error.insertAfter(element);
             }

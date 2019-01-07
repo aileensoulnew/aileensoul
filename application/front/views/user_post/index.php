@@ -909,10 +909,9 @@
     								</label> -->
     							</li>
                                 <li class="fw report-other-res" id="report_other" style="display: none;">
-                                    <label class="control control--radio">Other Reasons
-                                        <input name="other_report_spam" type="text" id="other_report_spam" style="opacity: 1;z-index: 1;">
-                                    </label>
+                                    <input name="other_report_spam" type="text" id="other_report_spam" style="opacity: 1;z-index: 1;">
                                 </li>
+                                <li class="report-err-li" id="err_report"></li>
     							<li>
     								<button id="save_report_spam" class="btn1" type="button" ng-click="save_report_spam();">Submit</button>
                                     <div id="save_report_spam_loader" class="dtl-popup-loader" style="display: none;">
