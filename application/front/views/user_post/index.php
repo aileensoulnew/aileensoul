@@ -877,30 +877,25 @@
     								</label>
     							</li>
     							<li>
-    								<label class="control control--radio">Fake News
+    								<label class="control control--radio">Fake News & Fake Account
     									<input name="report_spam" type="radio" class="report-cls" value="4">
     									<div class="control__indicator"></div>
     								</label>
     							</li>
+    							
     							<li>
-    								<label class="control control--radio">Fake Account
+    								<label class="control control--radio">Scam, Phishing or Malware
     									<input name="report_spam" type="radio" class="report-cls" value="5">
     									<div class="control__indicator"></div>
     								</label>
     							</li>
     							<li>
-    								<label class="control control--radio">Scam, Phishing or Malware
+    								<label class="control control--radio">Abusive, Violent or Hate Speech
     									<input name="report_spam" type="radio" class="report-cls" value="6">
     									<div class="control__indicator"></div>
     								</label>
     							</li>
-    							<li>
-    								<label class="control control--radio">Abusive, Violent or Hate Speech
-    									<input name="report_spam" type="radio" class="report-cls" value="7">
-    									<div class="control__indicator"></div>
-    								</label>
-    							</li>
-    							<li class="">
+    							<li class="fw">
                                     <label class="control control--radio">Other Reasons
                                         <input name="report_spam" type="radio" class="report-cls" value="0">
                                         <div class="control__indicator"></div>

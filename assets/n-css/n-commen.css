@@ -94,8 +94,8 @@ a:hover{text-decoration:none;}
 .fs22{font-size:22px;}
 /***  buttons  ***/
 button{border:none;}
-.modal-close{background: none; color: #7b7b7b; font-size: 24px; position: absolute; top: 3px; right: 5px; z-index: 7; padding:0;}
-.modal-close:hover{color:#5c5c5c;}
+.modal-close, .modal-close1 {background: none; color: #7b7b7b; font-size: 24px; position: absolute; top: 3px; right: 5px; z-index: 7; padding:0;}
+.modal-close:hover, .modal-close1:hover {color:#5c5c5c;}
 .btn1{
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9)); 
 	background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 

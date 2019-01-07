@@ -737,8 +737,7 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
     line-height:normal;
     color:#232323;
     display:block;
-    margin:15px 0;
-    padding:10px 0 0
+    padding:0px 0 10px;
 }
 .modal-open .modal{
     z-index:10002
@@ -2515,19 +2514,7 @@ footer div.pt20{
     .modal-content{
         padding:5px
     }
-    #likeusermodal.message-box span.mes{
-        padding:0 15px
-    }
-    #likeusermodal .modal-close1{
-        padding:4px 6px;
-        float:right;
-        border-radius:100%;
-        margin-right:-15px;
-        margin-top:-21px;
-        font-size:27px;
-        background:#1b8ab9;
-        color:#fff
-    }
+   
 }
 @media screen and (max-width:1299px){
     .fixed_right_display{/*display: none;*/}
@@ -3155,9 +3142,6 @@ footer div.pt20{
         }
         .people-list .search input{
             width:93%
-        }
-        .modal.message-box span.mes{
-            padding:0
         }
         .modal.in .modal-dialog{
             font-size:88%

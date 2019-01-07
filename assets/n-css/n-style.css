@@ -2194,7 +2194,12 @@ body.sitemap{background:#f6f6f6; border:0px;}
 .report-box .other-reason-box textarea{border:0px; border-bottom:1px solid #d2d2d2; height:150px; margin-bottom:15px; border-radius:0; padding:0; font-size:15px;}
 .report-box .other-reason-box .btn3{font-size:16px; padding:5px 25px; font-weight:normal;}
 .report-box ul li.report-other-res{padding-top:0; margin-top:-10px; position:relative;}
-.report-box ul li.report-other-res label.error{right:10px; bottom:-7px;}
+.report-box ul li.report-other-res label.error{right:10px; bottom:-20px;}
+.report-box ul li.fw{width:100%;}
+.report-box ul li.report-other-res{padding:0 10px;}
+.report-box ul li.report-err-li{width:100%; float:left; text-align:center; padding-top:0;}
+.report-box ul li.report-err-li .error{left:0; right:0; padding-left:0 !important; }
+
 /***  end report box  ***/
 /***  report page  ***/
 .report{letter-spacing:1px;}
@@ -2410,7 +2415,7 @@ body, body.no-login {padding-bottom:60px;}
 .common-form .follow_left_box_main_btn button{color:#5c5c5c;}
 .user_lst button{color:#5c5c5c;}
 .search-mob-block #search_pop{border:0;}
-.modal.message-box span.mes{padding:15px 10px !important; width:100%; float:left;}
+.modal.message-box span.mes{/*padding:15px 10px !important;*/ width:100%; float:left;}
 .pop_content .cnclbtn, .pop_content .okbtn{/*display:inline-block;*/ margin-bottom:10px;}
 .home_three_follow_ul li .contact-frnd-post{margin-bottom:0;}
 #basic_info_ajax_load{padding-left:10px;}
@@ -4295,6 +4300,12 @@ text-transform:uppercase;}
 	.container.rec_res{padding-left:15px; padding-right:15px;}
 	.container.free-hire-dtl{padding-left:15px; padding-right:15px;}
 	.container.free-apply-dtl{padding-left:15px; padding-right:15px;}
+	h4.modal-title{font-size:18px;}
+	.modal.message-box span.mes .modal-header{padding:10px;}
+	.profile-head-text a{font-size:18px;}
+	.profile-head-text_dg a{font-size:16px;}
+	.bui-menu-profile h2, h2 a {line-height:1 !important;}
+	.business-profile-right .bui-menu-profile{min-height:75px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4360,6 +4371,7 @@ text-transform:uppercase;}
 	.mobile-header .sub-header .sub-menu.rec-only .dropdown.open .dropdown-menu.account{right:-15px !important;}
 	.mobile-header .sub-header .sub-menu.free-h-only .dropdown.open .dropdown-menu.account{right:-15px !important;}
 	.dis-middle{width:78%;}
+	.message-box .modal-content{width:100%;}
 }
 @media screen and (max-width: 539px) {
 	.fw-539{width:100%; float:left;}
@@ -4745,6 +4757,7 @@ text-transform:uppercase;}
 	.container.rec_res{padding:0 !important;}
 	.container.free-hire-dtl{padding:0 !important;}
 	.container.free-apply-dtl{padding:0 !important;}
+	.business-profile-right .bui-menu-profile{min-height:50px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
