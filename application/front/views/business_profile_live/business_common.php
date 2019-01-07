@@ -157,8 +157,17 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
 
                         </div>
-						<div class="">
-							123
+						<div class="follow-msg">
+							<ul>
+								<li>
+									<img src="<?php echo base_url('assets/n-images/flw.png'); ?>">
+									<span>Follow</span>
+								</li>
+								<li>
+									<img src="<?php echo base_url('assets/n-images/msg.png'); ?>">
+									<span>Message</span>
+								</li>
+							</ul>
 						</div>
                         <?php
                         $userid = $this->session->userdata('aileenuser');
