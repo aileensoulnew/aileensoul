@@ -3965,6 +3965,82 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         });
     }
     $scope.get_user_education();
+
+    $('input:radio[name="report_spam"]').change(function(){
+        if($(this).val() == '0'){
+           $("#report_other").show();
+        }
+        else
+        {
+            $("#report_other").hide();   
+        }
+    });
+    $scope.report_post_id = 0;
+    $scope.open_report_spam = function(post_id){
+        $scope.report_post_id = post_id;
+        $("#report_spam_form")[0].reset();
+        $("#report-spam").modal('show');
+    };
+
+    $scope.report_spam_validate = {        
+        rules: {           
+            report_spam: {
+                required: true,
+            },
+            other_report_spam: {
+                required: {
+                    depends: function(element) {
+                        return $("input[name='report_spam']:checked").val() == 0 ? true : false;
+                    }
+                },
+            },
+        },
+        messages: {
+            report_spam: {
+                required: "Select Report",
+            },
+            other_report_spam: {
+                required: "Enter Other Report",
+            },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "report_spam") {
+                error.appendTo($("#err_report"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    };
+    $scope.save_report_spam = function(){
+        if ($scope.report_spam_form.validate()) {
+
+            $("#save_report_spam").attr("style","pointer-events:none;display:none;");
+            $("#save_report_spam_loader").show();
+
+            var reported_post_id = $scope.report_post_id;            
+            var reported_reason = $("input[name='report_spam']:checked").val();
+            var reported_reason_other = $("#other_report_spam").val();
+            var updatedata = $.param({'reported_post_id':reported_post_id,'reported_reason':reported_reason,'reported_reason_other':reported_reason_other});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_report_spam',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                $("#report_spam_form")[0].reset();                
+                if(success == 1)
+                {
+                    
+                }
+                $("#save_report_spam").removeAttr("style");
+                $("#save_report_spam_loader").hide();
+                $("#report-spam").modal('hide');
+            });
+        }
+    };
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

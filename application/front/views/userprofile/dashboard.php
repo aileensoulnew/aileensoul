@@ -519,6 +519,9 @@
                                             <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name">Show in new tab</a>
                                         </li>
                                     <?php endif; ?>
+                                    <li ng-if="live_slug != post.user_data.user_slug">
+                                        <a ng-click="open_report_spam(post.post_data.id)" href="javascript:void(0);">Report</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1067,6 +1070,80 @@
                 </div>
             </div> -->
             
+        </div>
+    </div>
+    <div style="display:none;" class="modal fade" id="report-spam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="report-box">
+                    <form name="report_spam_form" id="report_spam_form" ng-validate="report_spam_validate">
+                        <h3>What’s Wrong with This Post?</h3>
+                        <ul>
+                            <li>
+                                <label class="control control--radio">Not Intersed in This Post
+                                    <input name="report_spam" type="radio" class="report-cls" value="1">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">Spam, or Promotional
+                                    <input name="report_spam" type="radio" class="report-cls" value="2">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">Nudity or Sexually Explicit
+                                    <input name="report_spam" type="radio" class="report-cls" value="3">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">Fake News
+                                    <input name="report_spam" type="radio" class="report-cls" value="4">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">Fake Account
+                                    <input name="report_spam" type="radio" class="report-cls" value="5">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">Scam, Phishing or Malware
+                                    <input name="report_spam" type="radio" class="report-cls" value="6">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">Abusive, Violent or Hate Speech
+                                    <input name="report_spam" type="radio" class="report-cls" value="7">
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li class="">
+                                <label class="control control--radio">Other Reasons
+                                    <input name="report_spam" type="radio" class="report-cls" value="0">
+                                    <div class="control__indicator"></div>
+                                </label>
+                                <!--other-rsn <label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other Reasons
+                                </label> -->
+                            </li>
+                            <li class="fw report-other-res" id="report_other" style="display: none;">
+                                <input name="other_report_spam" type="text" id="other_report_spam" style="opacity: 1;z-index: 1;">
+                            </li>
+                            <li class="report-err-li" id="err_report"></li>
+                            <li>
+                                <button id="save_report_spam" class="btn1" type="button" ng-click="save_report_spam();">Submit</button>
+                                <div id="save_report_spam_loader" class="dtl-popup-loader" style="display: none;">
+                                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
