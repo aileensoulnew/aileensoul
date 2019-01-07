@@ -1,3 +1,4 @@
+
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 $userid = $this->session->userdata('aileenuser');
@@ -123,6 +124,7 @@ if($userid != "")
                                     ?>
                                 </a></h2>
                         </div>
+						
                         <?php
                         $userid = $this->session->userdata('aileenuser');
                         if ($business_common_data[0]['user_id'] != $userid) {
