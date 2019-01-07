@@ -17,6 +17,7 @@ class Userprofile_page extends MY_Controller {
         $this->load->model('userprofile_model');
         $this->load->model('email_model');
         $this->load->library('upload');
+        $this->load->library('inbackground');
         include ('main_profile_link.php');
     }
 
@@ -433,7 +434,15 @@ class Userprofile_page extends MY_Controller {
             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
             {
-                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                $url = base_url()."user_post/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$to_email_id,
+                    "unsubscribe"=>$unsubscribe,
+                );
+                $this->inbackground->do_in_background($url, $param);
+                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
             }
             //Send Mail End
         }
@@ -513,7 +522,15 @@ class Userprofile_page extends MY_Controller {
             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
             {
-                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                $url = base_url()."user_post/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$to_email_id,
+                    "unsubscribe"=>$unsubscribe,
+                );
+                $this->inbackground->do_in_background($url, $param);
             }
             //Send Mail End
             $response['button'] = '<a class="btn3" ng-click="contact('. $contact_id.', \'cancel\', '.$id.','.$indexCon.')">Request sent</a>';
@@ -614,7 +631,15 @@ class Userprofile_page extends MY_Controller {
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
