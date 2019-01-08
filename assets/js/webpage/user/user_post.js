@@ -2220,8 +2220,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $('#post-like-' + post_id).removeAttr('style');
-            if (success.data.message == 1) {                
+            $('#post-like-' + post_id).removeAttr('style');            
+            clearInterval(myVar);            
+            get_notification_unread_count();
+            myVar = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
+            if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     // $('#post-like-' + post_id).addClass('like');
@@ -2332,10 +2337,15 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
                 data: 'comment=' + comment + '&post_id=' + post_id,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             })
             .then(function (success) {
                 data = success.data;
+                clearInterval(myVar);            
+                get_notification_unread_count();
+                myVar = window.setInterval(function(){
+                  get_notification_unread_count();
+                }, 10000);
                 if (data.message == '1') {
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
@@ -2455,6 +2465,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         })
         .then(function (success) {
             data = success.data;
+            clearInterval(myVar);            
+            get_notification_unread_count();
+            myVar = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (data.message == '1') {                
                 if (data.is_newLike == 1) {
                     // $('#post-comment-like-' + comment_id).parent('a').addClass('like');
@@ -2683,34 +2698,32 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'post_id=' + post_id + '&post_for=' + post_for,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    $scope.is_edit = 1;
-                    if (post_for == "opportunity") {
-                        $scope.opp.description = success.data.opportunity;
-                        $scope.opp.job_title = success.data.opportunity_for;
-                        $scope.opp.location = success.data.location;
-                        $scope.opp.field = success.data.field;
-                        $scope.opp.edit_post_id = post_id;
-                        $("#opportunity-popup").modal('show');
+        .then(function (success) {
+            $scope.is_edit = 1;
+            if (post_for == "opportunity") {
+                $scope.opp.description = success.data.opportunity;
+                $scope.opp.job_title = success.data.opportunity_for;
+                $scope.opp.location = success.data.location;
+                $scope.opp.field = success.data.field;
+                $scope.opp.edit_post_id = post_id;
+                $("#opportunity-popup").modal('show');
 
-                    } else if (post_for == "simple") {
-                        $scope.sim.description = success.data.description;
-                        $scope.sim.edit_post_id = post_id;
+            } else if (post_for == "simple") {
+                $scope.sim.description = success.data.description;
+                $scope.sim.edit_post_id = post_id;
 
-                        $("#post-popup").modal('show');
+                $("#post-popup").modal('show');
 
-                    } else if (post_for == "question") {
-                        $scope.ask.ask_que = success.data.question;
-                        $scope.ask.ask_description = success.data.description;
-                        $scope.ask.related_category = success.data.tag_name;
-                        $scope.ask.ask_field = success.data.field;
-                        $scope.ask.edit_post_id = post_id;
+            } else if (post_for == "question") {
+                $scope.ask.ask_que = success.data.question;
+                $scope.ask.ask_description = success.data.description;
+                $scope.ask.related_category = success.data.tag_name;
+                $scope.ask.ask_field = success.data.field;
+                $scope.ask.edit_post_id = post_id;
 
-                        $("#ask-question").modal('show');
-                    }
-                });
-
-
+                $("#ask-question").modal('show');
+            }
+        });
     }
 
     $scope.sendEditComment = function (comment_id,post_id) {
@@ -2765,12 +2778,12 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
     }
 
-//    function check_no_post_data() {
-//        var numberPost = $scope.postData.length;
-//        if (numberPost == 0) {
-//            $('.all_user_post').html(no_user_post_html);
-//        }
-//    }
+   /*function check_no_post_data() {
+       var numberPost = $scope.postData.length;
+       if (numberPost == 0) {
+           $('.all_user_post').html(no_user_post_html);
+       }
+   }*/
 
     $scope.like_user_list = function (post_id) {
         $http({
@@ -2798,19 +2811,19 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'comment_id=' + comment_id + '&post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (commentClassName == 'last-comment') {
-                        $scope.postData[parent_index].post_comment_data.splice(0, 1);
-                        $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
-                        $('.post-comment-count-' + post_id).html(data.comment_count);
-                        $('.editable_text').html('');
-                    } else {
-                        $scope.postData[parent_index].post_comment_data.splice(index, 1);
-                        $('.post-comment-count-' + post_id).html(data.comment_count);
-                        $('.editable_text').html('');
-                    }
-                });
+        .then(function (success) {
+            data = success.data;
+            if (commentClassName == 'last-comment') {
+                $scope.postData[parent_index].post_comment_data.splice(0, 1);
+                $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            } else {
+                $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            }
+        });
     }
     
     
@@ -2826,27 +2839,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         alert("hiiii");
     };
     
-    function fsIconClick(isFullscreen, ninjaSldr) { //fsIconClick is the default event handler of the fullscreen button
-            if (isFullscreen) {
-                ninjaSldr.parentNode.style.display = "none";
-            }
+    function fsIconClick(isFullscreen, ninjaSldr) {
+        //fsIconClick is the default event handler of the fullscreen button
+        if (isFullscreen) {
+            ninjaSldr.parentNode.style.display = "none";
         }
-
-/*$(document).ready(function () {
-  
-   
-        $(document).scroll(function(e){
-          
-            if (processing)
-                return false;
-
-            if ( $(window).scrollTop() >= ($(document).height() - $(window).height())*0.7 ){
-                processing = true; //sets a processing AJAX request flag
-                pg=parseInt(pg)+5
-                getUserPost(pg)
-            }
-        });
-    });*/
+    }
+    
     // angular.element("input[name='gender']:checked").val();
     $('input:radio[name="report_spam"]').change(function(){
         if($(this).val() == '0'){
@@ -2924,9 +2923,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
     };
 });
-// $(document).on('click','.post-opportunity-modal, .post-ask-question-modal', function(){
-//     $('#post-popup').modal('toggle');
-// });
+
 $(document).click(function(){
     $('.right-header ul.dropdown-menu').hide();
 });

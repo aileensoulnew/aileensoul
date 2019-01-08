@@ -968,10 +968,11 @@ Your browser does not support the audio tag.
     }
 
     public function update_notification() {
-        $userid = $this->session->userdata('aileenuser');
+        /*$userid = $this->session->userdata('aileenuser');
 
         $contition_array = array('not_read' => '2', 'not_to_id' => $userid, 'not_type !=' => '1', 'not_type !=' => '2');
         $result = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        print_r($result);exit();
 
         $data = array(
             'not_read' => '1'
@@ -982,7 +983,17 @@ Your browser does not support the audio tag.
         }
 
         $count = count($updatedata);
-        echo $count;
+        echo $count;*/
+        $userid = $this->session->userdata('aileenuser');
+        $data = array(
+            'not_read' => '1'
+        );
+        $this->db->where('not_read', '2');
+        $this->db->where('not_type !=', '1');
+        $this->db->where('not_type !=', '2');
+        $this->db->where('not_to_id', $userid);        
+        $result_array = $this->db->update('notification', $data);
+        echo $count = $this->notification_model->get_notification_unread_count($userid);exit;
     }
 
 //Notification count select & update for apply,save,like,comment,contact and follow End

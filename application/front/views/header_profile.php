@@ -241,7 +241,7 @@ if($first_segment == "")
                                     <div class="dropdown-title">
                                         Notifications <span id="seenot" class="pull-right">See All</span>
                                     </div>
-                                    <div class="fw" id="not_loader"  style="display:none; text-align:center;position:  absolute;top: 50%;">
+                                    <div class="fw" id="not_loader"  style="display:none; text-align:center;position:  absolute;top: 50%;z-index: 9;">
                                         <img src="<?php echo base_url('assets/images/loader.gif') ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/>
                                     </div>
                                     <div class="content custom-scroll">
@@ -732,11 +732,11 @@ if($first_segment == "")
         });
     });
 
-   function Notificationheader() {
-        // getNotification();
-        // notheader();
-
+    function Notificationheader() {
+        getNotification();
+        notheader();
     }
+
     function getNotification() {
         // first click alert('here'); 
 
@@ -746,6 +746,15 @@ if($first_segment == "")
             //data: {uid: 12341234}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
             success: function (data) {
                 data = JSON.parse(data);
+                if(parseInt(data) > 0)
+                {
+                    $(".noti_count").html(data);
+                }
+                else
+                {
+                    $(".noti_count").hide();
+                    $(".noti_count").html("");
+                }
                 //alert(data);
                 //update some fields with the updated data
                 //you can access the data like 'data["driver"]'
@@ -758,7 +767,7 @@ if($first_segment == "")
     {
         // $("#fad" + clicked_id).fadeOut(6000);
         $("#not_loader").show();
-
+        $('.notification_data_in').hide();
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url() . "notification/not_header" ?>',
@@ -766,7 +775,8 @@ if($first_segment == "")
             data: '',
             success: function (data) {
                 $("#not_loader").hide();
-                $('.' + 'notification_data_in').html(data.notification);
+                $('.notification_data_in').show();
+                $('.notification_data_in').html(data.notification);
                 $('#seenot').html(data.seeall);
                
             }
@@ -787,9 +797,9 @@ if($first_segment == "")
                 $(".noti_count").hide();
                 $(".noti_count").html("");
             }
-            setTimeout(function(){
-                // get_notification_unread_count();
-            }, 5000);
+            /*setTimeout(function(){
+                get_notification_unread_count();
+            }, 5000);*/
         });
         /*.fail(function() {
             setTimeout(function(){
@@ -848,10 +858,10 @@ if($first_segment == "")
         // get_notification_unread_count();
         // unread_message_count();
     }, 1000);
-    
-    /*window.setInterval(function(){
+    get_notification_unread_count();
+    var myVar = window.setInterval(function(){
       get_notification_unread_count();
-    }, 5000);*/
+    }, 10000);
     function sendmail() {
         $("#vert_email").attr("style","pointer-events: none;");
         $("#mailsendmodal .msg").html('Please verify your email address!<br />Check your inbox or spam folder in order to verify yourself.');
