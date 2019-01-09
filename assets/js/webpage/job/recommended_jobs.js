@@ -200,10 +200,12 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
     {
         if(job_profile_set == 0 && login_user_id != "")
         {
-            $("#job_apply").val(postid);
+            /*$("#job_apply").val(postid);
             $("#job_apply_userid").val(userid);
             $("#job_save").val('');
-            $('#job_reg').modal('show');
+            $('#job_reg').modal('show');*/
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'>To Complete This Step, You Have to Register in the Job Profile.<p class='poppup-btns'><a class='btn1' href='"+base_url+"job-profile/signup'>Register</a></p></div>");
+            $('#bidmodal').modal('show');
         }
         else
         {

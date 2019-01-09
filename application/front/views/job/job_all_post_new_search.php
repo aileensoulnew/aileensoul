@@ -289,7 +289,7 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
                             <p ng-bind="(job.post_description | limitTo:175) + '.....'"></p>
 
                         </div>
-                        <div class="all-job-bottom">
+                        <div class="all-job-bottom" ng-if="user_id != job.user_id">
                             <span class="job-post-date"><b>Posted on:</b><span ng-bind="job.created_date"></span></span>
                             <p class="pull-right" ng-if="job.job_applied == 1 && job.job_saved == 0">
                                 <a href="javascript:void(0);" class="btn4  applied">Applied</a>
@@ -302,7 +302,6 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
                                 <a href="javascript:void(0);" class="btn4 savedpost{{job.post_id}}" ng-click="savepopup(job.post_id)">Save</a>
                                 <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
                             </p>
-
                         </div>
                     </div>
                     <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loaderimage"/></div>

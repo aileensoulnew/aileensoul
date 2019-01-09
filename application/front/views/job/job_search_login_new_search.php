@@ -267,6 +267,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     if ($keyword == "" && $keyword1 == "") {
                                         echo 'All Jobs';
                                     } elseif ($keyword != "" && $keyword1 == "") {
+                                        echo $schema_name_item4;
+                                    }
+                                    /*if ($keyword == "" && $keyword1 == "") {
+                                        echo 'All Jobs';
+                                    } elseif ($keyword != "" && $keyword1 == "") {
                                         echo $keyword;
                                         echo " Jobs";
                                     } elseif ($keyword == "" && $keyword1 != "") {
@@ -276,7 +281,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                         echo $keyword;
                                         echo " Jobs in ";
                                         echo $keyword1;
-                                    }
+                                    }*/
                                     ?>
                                 </h3>
 

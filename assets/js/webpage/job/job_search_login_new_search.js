@@ -23,7 +23,7 @@ app.filter('capitalize', function() {
         }).join(" ");
     }
 });
-app.controller('jobSearchController', function($scope, $http, $window) {
+app.controller('jobSearchController', function($scope, $http, $window,$compile) {
     $scope.showLoadmore = true;
     $scope.jobCategory = {};
     $scope.jobCity = {};
@@ -40,6 +40,7 @@ app.controller('jobSearchController', function($scope, $http, $window) {
     $scope.jd_fil = "";
     $scope.per_fil = "";
     $scope.exp_fil = "";
+    $scope.user_id = user_id;
     //$scope.jobcompany = "";
     var fil_limit = 10;
     job_search(1);
@@ -185,24 +186,7 @@ app.controller('jobSearchController', function($scope, $http, $window) {
     }
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER END
     //apply post start
-    $scope.applypopup = function(postid, userid) {
-        if (job_profile_set == 0 && login_user_id != "") {
-            $("#job_apply").val(postid);
-            $("#job_apply_userid").val(userid);
-            $("#job_save").val('');
-            $('#job_reg').modal('show');
-        } else {
-            if (login_user_id == "" || job_deactive == 1) {
-                if (login_user_id == "") $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
-                else if (job_deactive == 1) $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
-                $('#bidmodal').modal('show');
-            } else {
-                $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
-                $('#bidmodal').modal('show');
-            }
-        }
-    };
-    $scope.apply_post = function(abc, xyz) {
+    $scope.apply_post = function(abc, xyz) {        
         var alldata = 'all';
         var user = xyz;
         $.ajax({
@@ -212,21 +196,46 @@ app.controller('jobSearchController', function($scope, $http, $window) {
             datatype: 'json',
             success: function(data) {
                 $('.savedpost' + abc).hide();
-                $('.applypost' + abc).html(data.status);
+                $('.applypost' + abc).html("Applied");
                 $('.applypost' + abc).attr('disabled', 'disabled');
-                $('.applypost' + abc).attr('onclick', 'myFunction()');
+                $('.applypost' + abc).attr('ng-click', 'myFunction()');
                 $('.applypost' + abc).addClass('applied');
             }
         });
     };
+
+    $scope.applypopup = function(postid, userid) {
+        if (job_profile_set == 0 && login_user_id != "") {
+            /*$("#job_apply").val(postid);
+            $("#job_apply_userid").val(userid);
+            $("#job_save").val('');
+            $('#job_reg').modal('show');*/
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'>To Complete This Step, You Have to Register in the Job Profile.<p class='poppup-btns'><a class='btn1' href='"+base_url+"job-profile/signup'>Register</a></p></div>");
+            $('#bidmodal').modal('show');
+        } else {
+            if (login_user_id == "" || job_deactive == 1) {
+                if (login_user_id == "") $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                else if (job_deactive == 1) $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
+                $('#bidmodal').modal('show');
+            } else {
+                var $elm = $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " ng-click='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
+                $compile($elm)($scope);
+                //$('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " ng-click='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
+                $('#bidmodal').modal('show');
+            }
+        }
+    };
+
     //apply post end
     //save post start 
     $scope.savepopup = function(id) {
         if (job_profile_set == 0 && login_user_id != "") {
-            $("#job_apply_userid").val('');
+            /*$("#job_apply_userid").val('');
             $("#job_apply").val('');
             $("#job_save").val(id);
-            $('#job_reg').modal('show');
+            $('#job_reg').modal('show');*/
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'>To Complete This Step, You Have to Register in the Job Profile.<p class='poppup-btns'><a class='btn1' href='"+base_url+"job-profile/signup'>Register</a></p></div>");
+            $('#bidmodal').modal('show');
         } else {
             if (login_user_id == "" || job_deactive == 1) {
                 if (login_user_id == "") $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
