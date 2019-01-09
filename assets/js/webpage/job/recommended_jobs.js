@@ -234,7 +234,12 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
             url: base_url + 'job/job_apply_post',
             data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
             datatype: 'json',
-            success: function (data) {                
+            success: function (data) {
+                clearInterval(int_not_count);            
+                get_notification_unread_count();
+                int_not_count = window.setInterval(function(){
+                  get_notification_unread_count();
+                }, 10000);
                 $('.savedpost' + abc).hide();
                 var $eln = $('.applypost' + abc).html("Applied");
                 $compile($eln)($scope);

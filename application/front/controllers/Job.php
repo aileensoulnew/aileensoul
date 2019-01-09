@@ -2173,8 +2173,6 @@ class Job extends MY_Controller {
         $para = $_POST['allpost'];
         $notid = $_POST['userid'];
 
-
-
         $userid = $this->session->userdata('aileenuser');
 
         $contition_array = array('post_id' => $id, 'user_id' => $userid, 'is_delete' => '0');
@@ -2192,13 +2190,9 @@ class Job extends MY_Controller {
                 'job_save' => '1',
                 'modify_date' => date('Y-m-d h:i:s', time()),
             );
-
-
             $updatedata = $this->common->update_data($data, 'job_apply', 'app_id', $app_id);
 
-
             // insert notification
-
             $data = array(
                 'not_type' => '3',
                 'not_from_id' => $userid,
@@ -2206,29 +2200,27 @@ class Job extends MY_Controller {
                 'not_read' => '2',
                 'not_from' => '2',
                 'not_product_id' => $app_id,
-                'not_active' => '1'
+                'not_active' => '1',
+                'not_created_date' => date('Y-m-d h:i:s', time())
             );
-
             $updatedata = $this->common->insert_data_getid($data, 'notification');
             // end notoification
 
             if ($updatedata) {
-
                 if ($para == 'all') {
                     $applypost = 'Applied';
                 }
             }
             // GET NOTIFICATION COUNT
             $not_count = $this->job_notification_count($notid);
-
             echo json_encode(
-                    array(
-                        "status" => 'Applied',
-                        "notification" => array('notification_count' => $not_count, 'to_id' => $notid),
-            ));
-        } else {
-
-
+                array(
+                    "status" => 'Applied',
+                    "notification" => array('notification_count' => $not_count, 'to_id' => $notid),
+                ));
+        }
+        else
+        {
             $data = array(
                 'post_id' => $id,
                 'user_id' => $userid,
@@ -2239,13 +2231,9 @@ class Job extends MY_Controller {
                 'job_delete' => '0',
                 'job_save' => '1'
             );
-
-
             $insert_id = $this->common->insert_data_getid($data, 'job_apply');
 
-
             // insert notification
-
             $data = array(
                 'not_type' => '3',
                 'not_from_id' => $userid,
@@ -2256,13 +2244,19 @@ class Job extends MY_Controller {
                 'not_active' => '1',
                 'not_created_date' => date('Y-m-d H:i:s')
             );
-
             $updatedata = $this->common->insert_data_getid($data, 'notification');
             // end notoification
 
-
             if ($insert_id) {
-                $this->apply_email($notid);
+                // $this->apply_email($notid);
+
+                $url = base_url()."job/apply_email";
+                $param = array(
+                    "notid"=>$notid,
+                    "userid"=>$userid,
+                );
+                $this->inbackground->do_in_background($url, $param);
+
                 $applypost = 'Applied';
             }
 
@@ -2270,10 +2264,10 @@ class Job extends MY_Controller {
             $not_count = $this->job_notification_count($notid);
 
             echo json_encode(
-                    array(
-                        "status" => 'Applied',
-                        "notification" => array('notification_count' => $not_count, 'to_id' => $notid),
-            ));
+                 array(
+                    "status" => 'Applied',
+                    "notification" => array('notification_count' => $not_count, 'to_id' => $notid),
+                 ));
         }
     }
 
@@ -3247,7 +3241,8 @@ class Job extends MY_Controller {
                     'not_read' => '2',
                     'not_from' => '2',
                     'not_product_id' => $app_id,
-                    'not_active' => '1'
+                    'not_active' => '1',
+                    'not_created_date' => date('Y-m-d H:i:s')
                 );
 
                 $updatedata = $this->common->insert_data_getid($data, 'notification');
@@ -5945,9 +5940,12 @@ class Job extends MY_Controller {
     //add other_industry into database End 
 
 
-    public function apply_email($notid) {
+    public function apply_email() {//$notid
+        $notid = $this->input->post('notid');
+        $jobid = $this->input->post('userid');//Login User Id
 
-        $jobid = $this->session->userdata('aileenuser');
+        // $jobid = $this->session->userdata('aileenuser');
+
         $jobdata = $this->common->select_data_by_id('job_reg', 'user_id', $jobid, $data = 'job_user_image,fname,lname,slug', $join_str = array());
         $recemail = $this->common->select_data_by_id('recruiter', 'user_id', $notid, $data = 're_comp_email', $join_str = array());
 
@@ -5989,6 +5987,14 @@ class Job extends MY_Controller {
         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
         {
             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $recemail[0]['re_comp_email'],$unsubscribe);
+            /*$url = base_url()."user_post/send_email_in_background";
+            $param = array(
+                "subject"=>$subject,
+                "email_html"=>$email_html,
+                "to_email"=>$recemail[0]['re_comp_email'],
+                "unsubscribe"=>$unsubscribe,
+            );
+            $this->inbackground->do_in_background($url, $param);*/
         }
     }
 
@@ -6612,7 +6618,13 @@ class Job extends MY_Controller {
 
 
                     if ($insert_id_apply) {
-                        $this->apply_email($job_apply_userid);                        
+                        // $this->apply_email($job_apply_userid);
+                        $url = base_url()."job/apply_email";
+                        $param = array(
+                            "notid"=>$job_apply_userid,
+                            "userid"=>$userid,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
