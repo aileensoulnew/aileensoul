@@ -26,9 +26,9 @@
                         <h4>
                             <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" ng-bind="(follow.first_name | limitTo:1 | uppercase) + (follow.first_name.substr(1) | lowercase) + ' ' + (follow.last_name | limitTo:1 | uppercase) + (follow.last_name.substr(1) | lowercase)"></a>
                         </h4>
-                        <p ng-if="follow.degree_name != ''">{{follow.title_name}}</p>
-                        <p ng-if="follow.degree_name == ''">{{follow.degree_name}}</p>
-                        <p ng-if="follow.degree_name == null && follow.title_name == null">Current work</p>
+                        <p ng-if="follow.title_name && !follow.degree_name">{{follow.title_name}}</p>
+                        <p ng-if="follow.degree_name && !follow.title_name">{{follow.degree_name}}</p>
+                        <p ng-if="!follow.degree_name && !follow.title_name">Current work</p>
 
                     </div>
                     <div ng-if="follow.user_id != user_id" class="custom-user-btn" id="{{follow.user_id}}">
