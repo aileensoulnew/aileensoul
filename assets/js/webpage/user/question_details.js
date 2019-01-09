@@ -140,7 +140,7 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
     function questionData() {
         $('#main_loader').show();
         $('#loader').show();
-        $http.get(base_url + "userprofile_page/question_data/?question=" + question).then(function (success) {
+        $http.get(base_url + "userprofile_page/question_data/?question="+question+"&user_slug="+user_slug).then(function (success) {
             $('#loader').hide();
             $('#main_loader').hide();
             // $('#main_page_load').show();

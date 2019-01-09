@@ -956,7 +956,7 @@ class Userprofile_page extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         // if($userid == "")
         // {
-            $this->data['question_data'] = $question_data = $this->userprofile_model->get_question_from_id($question_id);            
+            $this->data['question_data'] = $question_data = $this->userprofile_model->get_question_from_id($question_id);
             $userid = $question_data['user_id'];
             $title = $question_data['question'];
         //}        
@@ -982,7 +982,17 @@ class Userprofile_page extends MY_Controller {
     }
 
     public function question_data() {
-        $userid = $this->session->userdata('aileenuser');
+
+        if (!empty($_GET["user_slug"]) && $_GET["user_slug"] != 'undefined')
+        {
+            $user_slug = $_GET["user_slug"];             
+            $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        }
+        else
+        {            
+            $userid = $this->session->userdata('aileenuser');
+        } 
+        // $userid = $this->session->userdata('aileenuser');
 
         $question_id = $_GET['question'];
         $questionData = $this->userprofile_model->questionData($question_id, $userid);

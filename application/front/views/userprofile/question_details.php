@@ -33,8 +33,8 @@
                             <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                                 <div class="post-img" ng-if="post.post_data.post_for == 'question'">
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
-                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M' && post.question_data.is_anonymously == '0'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F' && post.question_data.is_anonymously == '0'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     <span class="no-img-post"  ng-if="post.question_data.is_anonymously == '1'">A</span>
                                 </div>
                                 <div class="post-img" ng-if="post.post_data.post_for != 'question'">
@@ -441,6 +441,7 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var user_slug = '<?php echo $question_data['user_data']['user_slug']; ?>';
             var cmt_maxlength = '700';
             var question = '<?php echo $question_id ?>';
             var title = '<?php echo addslashes($title) ?>';

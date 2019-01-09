@@ -1802,6 +1802,19 @@ class Userprofile_model extends CI_Model {
         $this->db->where('up.is_delete', '0');
         $query = $this->db->get();
         $return_arr = $query->row_array();
+
+        $this->db->select("u.user_id,u.user_slug,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+        $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->where('u.user_id', $return_arr['user_id']);
+        $query = $this->db->get();
+        $user_data = $query->row_array();
+        $return_arr['user_data'] = $user_data;
+        
         $return_arr['post_comment_count'] = $this->postCommentCount($return_arr['id']);
         $return_arr['post_like_count'] = $this->likepost_count($return_arr['id']);
         $post_comment_data = $this->postAllCommentData($return_arr['id']);
