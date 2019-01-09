@@ -146,7 +146,8 @@ class User_model extends CI_Model {
     }
 
     public function getSameFieldProUser($field = '',$other_field = '') {
-        $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_profession up");        
+        // $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_profession up");
+        $this->db->select("user_id")->from("user_profession up");
         if($field == 0)
         {
             if(trim($other_field) != ""){
@@ -169,8 +170,15 @@ class User_model extends CI_Model {
             $this->db->where("up.field =" . $field);
         }
         $query = $this->db->get();
-        $result_array = $query->row_array();
-        return $result_array['group_user'];
+        // $result_array = $query->row_array();
+        $result_array = $query->result_array();
+        // print_r($result_array);exit();
+        $user_ids = "";
+        foreach ($result_array as $key => $value) {
+            $user_ids .= $value['user_id'].",";
+        }
+        // echo exit();
+        return $result_array['group_user'] = trim($user_ids,",");
     }
 
     public function getUserStudentData($user_id = '', $select_data = '') {

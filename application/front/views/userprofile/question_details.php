@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="questionDetailsApp" ng-controller="questionDetailsController">
     <head>
-        <title ng-bind="title"></title>
+        <title><?php echo $title; ?></title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -437,7 +437,7 @@
             var user_slug = '<?php echo $question_data['user_data']['user_slug']; ?>';
             var cmt_maxlength = '700';
             var question = '<?php echo $question_id ?>';
-            var title = '<?php echo addslashes($title) ?>';
+            var title = '<?php //echo addslashes($title) ?>';
             var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
