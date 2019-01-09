@@ -3457,6 +3457,8 @@ text-transform:uppercase;}
 .follow-msg ul li{display:inline-block; list-style-type:none; padding:10px 10px 5px; text-align:center; width:80px;}
 .follow-msg ul li img{width:25px;}
 .follow-msg ul li span{display:block;}
+.op-main-page .right-part{position:inherit; margin-left:350px;}
+.op-main-page .right-part.fixed{position:fixed;}
 
 
 /***  media query  ***/
