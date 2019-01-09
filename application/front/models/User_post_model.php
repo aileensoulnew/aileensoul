@@ -1637,6 +1637,8 @@ class User_post_model extends CI_Model {
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
         $this->db->where('upl.post_id',$post_id);
         $this->db->where('upl.is_like','1');
+        $this->db->where('ul.status','1');
+        $this->db->where('ul.is_delete', '0');
         $this->db->order_by('upl.id', 'DESC');
         $query = $this->db->get();
         $result_array = $query->result_array();
