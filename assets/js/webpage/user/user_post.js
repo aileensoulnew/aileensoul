@@ -2221,9 +2221,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $('#post-like-' + post_id).removeAttr('style');            
-            clearInterval(myVar);            
+            clearInterval(int_not_count);            
             get_notification_unread_count();
-            myVar = window.setInterval(function(){
+            int_not_count = window.setInterval(function(){
               get_notification_unread_count();
             }, 10000);
             if (success.data.message == 1) {
@@ -2341,9 +2341,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             })
             .then(function (success) {
                 data = success.data;
-                clearInterval(myVar);            
+                clearInterval(int_not_count);            
                 get_notification_unread_count();
-                myVar = window.setInterval(function(){
+                int_not_count = window.setInterval(function(){
                   get_notification_unread_count();
                 }, 10000);
                 if (data.message == '1') {
@@ -2465,9 +2465,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         })
         .then(function (success) {
             data = success.data;
-            clearInterval(myVar);            
+            clearInterval(int_not_count);            
             get_notification_unread_count();
-            myVar = window.setInterval(function(){
+            int_not_count = window.setInterval(function(){
               get_notification_unread_count();
             }, 10000);
             if (data.message == '1') {                

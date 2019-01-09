@@ -108,46 +108,7 @@ if($browser == "Firefox")
                                 </a>
                                 <a href="<?php echo MESSAGE_URL.'user'; ?>" title="Messages" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
                                     <span class="noti-box" style="display:none;">1</span>
-                                </a>
-                                <div class="dropdown-menu hide">
-                                    <div class="dropdown-title">
-                                        Messages <a href="#" target="_self" class="pull-right">See All</a>
-                                    </div>
-                                    <div class="content custom-scroll">
-                                        <ul class="dropdown-data msg-dropdown">
-                                            <li class="">
-                                                <a href="#">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">Hello how are you</div>
-                                                            <span class="day-text">1 month ago</span>
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                            <li class="">
-                                                <a href="#">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">Hello how are you</div>
-
-                                                            <span class="day-text">1 month ago</span>
-
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                </a>                                
                             </li>
                             <li id="add-contact" class="dropdown">
                                 <a href="javascript:void(0);" title="Contact Request" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_contact_request()">
@@ -711,8 +672,8 @@ if($browser == "Firefox")
     var is_verify = "<?php echo $userData['user_verify']; ?>";
 
     function Notificationheader() {
-        // getNotification();
-        // notheader();
+        getNotification();
+        notheader();
     }
     function getNotification() {
         // first click alert('here'); 
@@ -722,6 +683,15 @@ if($browser == "Firefox")
             //data: {uid: 12341234}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
             success: function (data) {
                 data = JSON.parse(data);
+                if(parseInt(data) > 0)
+                {
+                    $(".noti_count").html(data);
+                }
+                else
+                {
+                    $(".noti_count").hide();
+                    $(".noti_count").html("");
+                }
                 //alert(data);
                 //update some fields with the updated data
                 //you can access the data like 'data["driver"]'
@@ -732,7 +702,6 @@ if($browser == "Firefox")
 
     function notheader()
     {
-
         // $("#fad" + clicked_id).fadeOut(6000);
         $("#not_loader").show();
         $.ajax({
@@ -761,10 +730,7 @@ if($browser == "Firefox")
             {
                 $(".noti_count").hide();
                 $(".noti_count").html("");
-            }
-            setTimeout(function(){
-                // get_notification_unread_count();
-            }, 5000);
+            }           
         });/*.fail(function() {
             setTimeout(function(){
                 get_notification_unread_count();
@@ -822,9 +788,10 @@ if($browser == "Firefox")
         // get_notification_unread_count();
         // unread_message_count();
     }, 1000);    
-    /*window.setInterval(function(){
+    
+    var int_not_count = window.setInterval(function(){
       get_notification_unread_count();
-    }, 5000);*/
+    }, 10000);
 
     function sendmail() {
         $("#vert_email").attr("style","pointer-events: none;")

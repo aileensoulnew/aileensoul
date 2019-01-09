@@ -859,7 +859,7 @@ if($first_segment == "")
         // unread_message_count();
     }, 1000);
     get_notification_unread_count();
-    var myVar = window.setInterval(function(){
+    var int_not_count = window.setInterval(function(){
       get_notification_unread_count();
     }, 10000);
     function sendmail() {
@@ -894,10 +894,33 @@ if($first_segment == "")
     {
         $('body').addClass("verify-body");
     }*/
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</script>
+<script type="text/javascript">
+    var idleTime = 0;
+    $(document).ready(function () {
+        //Increment the idle time counter every minute.
+        // var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+        var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+        //Zero the idle timer on mouse movement.
+        $(this).mousemove(function (e) {
+            idleTime = 0;
+        });
+        $(this).keypress(function (e) {
+            idleTime = 0;
+        });
+    });
+
+    function timerIncrement() {
+        idleTime = idleTime + 1;        
+        if (idleTime > 4) { // 20 minutes
+            window.location.reload();
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
-        var app = angular.module('headerApp', []);
-</script>     
+    var app = angular.module('headerApp', []);
+</script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/classie.js') ?>"></script>

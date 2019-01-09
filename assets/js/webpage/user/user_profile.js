@@ -3415,6 +3415,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
@@ -3530,6 +3535,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
+                clearInterval(int_not_count);            
+                get_notification_unread_count();
+                int_not_count = window.setInterval(function(){
+                  get_notification_unread_count();
+                }, 10000);
                 data = success.data;
                 if (data.message == '1') {
                     if (commentClassName == 'last-comment') {
@@ -3652,6 +3662,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         })
         .then(function (success) {
             data = success.data;
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (data.message == '1') {
                 if (data.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
@@ -9364,6 +9379,11 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
@@ -9524,13 +9544,18 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 data: 'comment=' + comment + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-                    .then(function (success) {
-                        data = success.data;
-                        if (data.message == '1') {
-                            $('.post-comment-count-' + post_id).html(data.comment_count);
-                            $('.editable_text').html('');
-                        }
-                    });
+            .then(function (success) {
+                clearInterval(int_not_count);            
+                get_notification_unread_count();
+                int_not_count = window.setInterval(function(){
+                  get_notification_unread_count();
+                }, 10000);
+                data = success.data;
+                if (data.message == '1') {
+                    $('.post-comment-count-' + post_id).html(data.comment_count);
+                    $('.editable_text').html('');
+                }
+            });
         } else {
             $scope.isMsgBoxEmpty = true;
         }
