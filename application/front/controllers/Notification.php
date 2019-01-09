@@ -993,6 +993,7 @@ Your browser does not support the audio tag.
         $this->db->where('not_type !=', '2');
         $this->db->where('not_to_id', $userid);        
         $result_array = $this->db->update('notification', $data);
+        usleep(500000);
         echo $count = $this->notification_model->get_notification_unread_count($userid);exit;
     }
 
