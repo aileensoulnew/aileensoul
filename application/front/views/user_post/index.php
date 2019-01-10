@@ -136,6 +136,17 @@
             </div>
         </div>
     </div>
+	<div class="mob-progressbar fw">
+		<p>Complete your profile to get connected with more people.</p>
+		<p class="mob-edit-pro">
+			<a href="https://www.aileensoul.com/company/orgenic-agro-1-Ahmedabad/details"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+		</p>
+		<div class="progress skill-bar ">
+			<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+				<span class="skill"><i class="val">66%</i></span>
+			</div>
+		</div>
+	</div>
 	<div class="all-contact-cus ">
 		<div class="all-contact">
             <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
@@ -774,7 +785,7 @@
 	</div>
 	<div id="sidebar" class="right-custom">
     <div class="">
-		<div class="add-detail">            
+		<div class="add-detail all-user-list">            
             <div id="profile-progress" class="edit_profile_progress" style="display: none;">
                 <div class="count_main_progress">
                     <div class="circles">
