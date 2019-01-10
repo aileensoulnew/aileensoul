@@ -3457,8 +3457,10 @@ text-transform:uppercase;}
 .follow-msg ul li{display:inline-block; list-style-type:none; padding:10px 10px 5px; text-align:center; width:80px;}
 .follow-msg ul li img{width:25px;}
 .follow-msg ul li span{display:block;}
-.op-main-page .right-part{position:inherit; margin-left:350px;}
-.op-main-page .right-part.fixed{position:fixed;}
+.left-custom{width:915px; float:left;}
+.right-custom{width:320px; float:right; margin-left:15px}
+.op-main-page .right-part{position:inherit; margin-left:0px;}
+.op-main-page #sidebar.fixed-cus{position:fixed; right:50%; margin-right:-625px;}
 
 
 /***  media query  ***/

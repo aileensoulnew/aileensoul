@@ -76,6 +76,7 @@
     <?php echo $header_profile; ?>        
     <div class="middle-section custom-mob-pd op-main-page">
     <div class="container">
+	<div class="left-custom">
     <?php echo $n_leftbar; ?>
     <div class="middle-part op-middle">
 	
@@ -103,7 +104,7 @@
 				echo "</div>";
                     } ?>
             	
-            <div class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
+            <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
                 Share opportunities, articles and questions
             </div>
             <!--<span class="post-cam"><i class="fa fa-camera"></i></span>-->
@@ -770,7 +771,9 @@
     </div>
     <!-- Repeated Class Complete -->
     </div>
-    <div class="right-part" id="sidebar">
+	</div>
+	<div id="sidebar" class="right-custom">
+    <div class="">
 		<div class="right-add-box">            
         </div> 
         <div class="right-add-box">            
@@ -854,6 +857,7 @@
             </div>
         </div>
     </div>
+	</div>
     </div>
     </div>
     </div>
@@ -1410,9 +1414,9 @@
             var isWindowLarger = (windowHeight > sidebarHeight);
 
             if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
-                $sidebar.addClass('fixed');
+                $sidebar.addClass('fixed-cus');
             } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
-                $sidebar.removeClass('fixed');
+                $sidebar.removeClass('fixed-cus');
             }
 
             var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
@@ -1422,11 +1426,11 @@
                 if (isWindowLarger) {
                     $sidebar.css('top', 0);
                 } else {
-                    $sidebar.css('top', -heightDelta);
+                    $sidebar.css('top', - );
                 }
             } else if (dragTopUp) {
                 $sidebar.css('top', 0);
-            } else if ($sidebar.hasClass('fixed')) {
+            } else if ($sidebar.hasClass('fixed-cus')) {
                 var currentTop = parseInt($sidebar.css('top'), 10);
                 
                 var minTop = -heightDelta;
