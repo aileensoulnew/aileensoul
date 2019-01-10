@@ -142,8 +142,8 @@
 			<a href="https://www.aileensoul.com/company/orgenic-agro-1-Ahmedabad/details"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 		</p>
 		<div class="progress skill-bar ">
-			<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-				<span class="skill"><i class="val">66%</i></span>
+			<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+				<span class="skill"><i class="val">0%</i></span>
 			</div>
 		</div>
 	</div>

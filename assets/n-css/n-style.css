@@ -3839,7 +3839,7 @@ text-transform:uppercase;}
 	.rec-dtl .right-add{display:block;}
 	.free-hire-dtl .cus-inner-middle{width:55%;}
 	.free-hire-dtl .right-add{display:block;}
-	
+	.left-custom{width:100%;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
