@@ -2027,6 +2027,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                 $('body').removeClass('modal-open');
                 $("#post-popup").modal('hide');
+                $("#post_opportunity_box").attr("style","pointer-events:none;");
 
                 //$('.post_loader').show();
                 $('#progress_div').show();
@@ -2094,6 +2095,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                                 $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
+                            $("#post_opportunity_box").removeAttr("style");
                         });
             }
         } else {
