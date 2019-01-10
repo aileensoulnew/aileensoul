@@ -234,6 +234,19 @@
                 </div>
             
                 <div class="cus-inner-middle mob-clear mobp0">
+                    <?php if ($postdataone[0]['user_id'] == $userid) { ?>
+                        <div class="mob-progressbar fw">
+                            <p>Complete your profile to get connected with more people.</p>
+                            <p class="mob-edit-pro">
+                                <a href="<?php echo base_url('recruiter/profile/'.$login_user_id ); ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                            </p>
+                            <div class="progress skill-bar ">
+                                <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <span class="skill"><i class="val">0%</i></span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
 					<div class="tab-add-991">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
@@ -348,14 +361,10 @@
             <!-- Model Popup Close -->
         <!-- START FOOTER -->
       
-<?php echo $login_footer ?>
-<?php echo $footer; ?>
+        <?php echo $login_footer ?>
+        <?php echo $footer; ?>
         <!-- END FOOTER -->
-
-
         <!-- FIELD VALIDATION JS START -->
-        
-
         <script>
                 var base_url = '<?php echo base_url(); ?>';
                 var data1 = <?php echo json_encode($de); ?>;
@@ -367,8 +376,6 @@
                 var header_all_profile = '<?php echo $header_all_profile; ?>';
                 var login_user_id = '<?php echo $login_user_id; ?>';
         </script>
-
-
         <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
