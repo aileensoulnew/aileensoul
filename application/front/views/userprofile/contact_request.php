@@ -78,6 +78,196 @@
                         </div>
                         <div class="list-box-custom suggestion">
                             <h3>Suggestions</h3>
+							<div class="sugg-list">
+								<ul class="">
+									<li>
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="#">
+													<div class="gradient-bg" style="height: 100%"></div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="#">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="#" class="">
+													<span class="user-name">		Niyorkona  Saikia
+													</span>
+													<span class="user-des">
+														FREELANCE CONTENT WRITER
+													</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div class="user-btns">
+													<a class="btn3">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="#">
+													<div class="gradient-bg" style="height: 100%">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
+													</div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="#">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="#" class="">
+													<span class="user-name">		Niyorkona  Saikia
+													</span>
+													<span class="user-des">
+														FREELANCE CONTENT WRITER
+													</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div class="user-btns">
+													<a class="btn3">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="#">
+													<div class="gradient-bg" style="height: 100%">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
+													</div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="#">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="#" class="">
+													<span class="user-name">		Niyorkona  Saikia
+													</span>
+													<span class="user-des">
+														FREELANCE CONTENT WRITER
+													</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div class="user-btns">
+													<a class="btn3">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="#">
+													<div class="gradient-bg" style="height: 100%">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
+													</div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="#">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="#" class="">
+													<span class="user-name">		Niyorkona  Saikia
+													</span>
+													<span class="user-des">
+														FREELANCE CONTENT WRITER
+													</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div class="user-btns">
+													<a class="btn3">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="#">
+													<div class="gradient-bg" style="height: 100%">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
+													</div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="#">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="#" class="">
+													<span class="user-name">		Niyorkona  Saikia
+													</span>
+													<span class="user-des">
+														FREELANCE CONTENT WRITER
+													</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div class="user-btns">
+													<a class="btn3">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="#">
+													<div class="gradient-bg" style="height: 100%">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
+													</div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="#">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="#" class="">
+													<span class="user-name">		Niyorkona  Saikia
+													</span>
+													<span class="user-des">
+														FREELANCE CONTENT WRITER
+													</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div class="user-btns">
+													<a class="btn3">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>
+									
+								</ul>
+							</div>
+							
                             <div class="all-list">                                
                                 <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                     <div class="no-data-content">

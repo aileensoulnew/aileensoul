@@ -3440,6 +3440,7 @@ text-transform:uppercase;}
     background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%)
 }
+.mob-progressbar p{text-align:center;}
 .mob-progressbar .mob-edit-pro .fa{padding-right:5px;}
 .mob-edit-pro a{color:#5c5c5c;}
 .temp .mob-edit-pro a{pointer-events:none; cursor:default;}
@@ -3461,6 +3462,13 @@ text-transform:uppercase;}
 .right-custom{width:320px; float:right; margin-left:15px}
 .op-main-page .right-part{position:inherit; margin-left:0px;}
 .op-main-page #sidebar.fixed-cus{position:fixed; right:50%; margin-right:-625px;}
+.sugg-list{width:100%; float:left; padding:15px 10px;}
+.sugg-list ul{width:100%; float:left; padding:0;}
+.sugg-list ul li{width:33%; padding:5px; list-style-type:none; display:inline-block;}
+.sugg-list .custom-user-list h3{border-bottom:0;}
+.sugg-list .user-info-text .user-name{font-size:15px; color:#5c5c5c; display:block;}
+.sugg-list .user-info-text .user-des{font-size:14px; color:#8c8c8c; display:block;}
+.sugg-list .author-btn .user-btns a.btn3{font-size: 16px; font-weight: normal; width:150px;}
 
 
 /***  media query  ***/
@@ -4307,10 +4315,10 @@ text-transform:uppercase;}
 	.dtl-add-mob .right-add-box .dtl-box .adsbygoogle.adBlock{margin:0 auto;}
 	.rec-dtl .cus-inner-middle{width:100%;}
 	.rec-dtl .right-add{display:none;}
-	.container.rec_res{padding-left:15px; padding-right:15px;}
+	.container.rec_res{padding-left:0px; padding-right:0px;}
 	.free-hire-dtl .cus-inner-middle{width:100%;}
 	.free-hire-dtl .right-add{display:none;}
-	.container.rec_res{padding-left:15px; padding-right:15px;}
+	.container.rec-dtl{padding-left:15px; padding-right:15px;}
 	.container.free-hire-dtl{padding-left:15px; padding-right:15px;}
 	.container.free-apply-dtl{padding-left:15px; padding-right:15px;}
 	h4.modal-title{font-size:18px;}
@@ -4319,6 +4327,7 @@ text-transform:uppercase;}
 	.profile-head-text_dg a{font-size:16px;}
 	.bui-menu-profile h2, h2 a {line-height:1 !important;}
 	.business-profile-right .bui-menu-profile{min-height:75px;}
+	.mob-progressbar{border-left:0; border-right:0; border-radius:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
