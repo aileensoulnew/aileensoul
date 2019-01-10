@@ -535,13 +535,14 @@ class Recruiter_live extends MY_Controller {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
         $recruiterdata = $this->common->select_data_by_id('recruiter', 'user_id', $userid, $data = 'user_id,designation,rec_firstname,rec_lastname', $join_str = array());
         $this->data['title'] = $this->data['recdata']['rec_firstname'] . ' ' . $this->data['recdata']['rec_lastname'] . ' | Post | Recruiter Profile'.TITLEPOSTFIX;
+        // print_r($recruiterdata);exit();
         
-        $contition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
+        /*$contition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
         $jobdata = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if($jobdata[0]['total'] == 0)
         {
             redirect('recruiter');
-        }
+        }*/
 
         //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
         $contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');

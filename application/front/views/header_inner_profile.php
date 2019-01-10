@@ -787,8 +787,9 @@ if($browser == "Firefox")
     setTimeout(function(){
         // get_notification_unread_count();
         // unread_message_count();
-    }, 1000);    
+    }, 1000);
     
+    get_notification_unread_count();
     var int_not_count = window.setInterval(function(){
       get_notification_unread_count();
     }, 10000);

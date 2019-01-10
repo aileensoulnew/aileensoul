@@ -18,6 +18,7 @@ class Recruiter extends MY_Controller {
 		$this->load->model('logins');
 		$this->lang->load('message', 'english');
 		$this->load->library('S3');
+		$this->load->library('inbackground');
 		include ('main_profile_link.php');
 		include ('rec_include.php');
 		include "openfireapi/vendor/autoload.php";
@@ -1734,7 +1735,7 @@ class Recruiter extends MY_Controller {
 		);
 		$contition_array = array('job_apply.post_id' => $id, 'job_reg.status' => '1', 'job_apply.job_delete' => '0', 'job_reg.job_step' => '10');
 
-		$data = "job_reg.job_id,job_reg.user_id as userid,job_reg.fname,job_reg.lname,job_reg.email,job_reg.work_job_industry,job_reg.work_job_city,job_reg.work_job_title,job_reg.phnno,job_reg.keyskill,job_reg.experience,job_reg.slug,job_add_edu.*,job_reg.job_user_image";
+		$data = "job_reg.job_id,job_reg.user_id as userid,job_reg.fname,job_reg.lname,job_reg.email,job_reg.work_job_industry,job_reg.work_job_city,job_reg.work_job_title,job_reg.phnno,job_reg.keyskill,job_reg.experience,job_reg.slug,job_add_edu.*,job_reg.job_user_image,job_reg.designation";
 		$userdata = $this->data['user_data'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = 'job_id');
 
 		$this->load->view('recruiter/view_apply_list', $this->data);
@@ -4762,7 +4763,6 @@ class Recruiter extends MY_Controller {
 		            $img = '<div class="post-img-div">'.ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)).'</div>';
 				}
 
-
 				$email_html = '';
 				$email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 				<tr>
@@ -4785,7 +4785,15 @@ class Recruiter extends MY_Controller {
 				$unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
 				if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-					$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $jobemail,$unsubscribe);
+					// $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $jobemail,$unsubscribe);
+					$url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$jobemail,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
 				}
 			}
 			// GET NOTIFICATION COUNT
