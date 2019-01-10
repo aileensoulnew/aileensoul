@@ -221,7 +221,17 @@
                         </div>
                         <!--- search end -->
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
-							
+                            <div class="mob-progressbar fw">
+                                <p>Complete your profile to get connected with more people.</p>
+                                <p class="mob-edit-pro">
+                                    <a href="<?php echo base_url('recruiter/profile/' . $recdata['user_id']); ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                </p>
+                                <div class="progress skill-bar ">
+                                    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="skill"><i class="val">0%</i></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="common-form ">
                                 <div class="job-saved-box rec-recmn-post">
                                     <h3>
@@ -242,7 +252,22 @@
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
                             <?php $this->load->view('right_add_box'); ?>
-							 
+                            <div class="right-add-box">
+                                <div class="p20">                            
+                                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                        <div class="count_main_progress">
+                                            <div class="circles">
+                                                <div class="second circle-1">
+                                                    <div>
+                                                        <strong></strong>
+                                                        <span id="progress-txt"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -289,6 +314,7 @@
             var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
             var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
             var totalpost = '<?php echo $login_user_totalpost; ?>';
+            var login_user_id = '<?php echo $recdata['user_id']; ?>';
         </script>
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -300,6 +326,7 @@
         <!-- FIELD VALIDATION JS END -->
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/recommen_candidate.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <?php

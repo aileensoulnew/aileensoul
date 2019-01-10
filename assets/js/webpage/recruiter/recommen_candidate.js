@@ -407,3 +407,45 @@ $(document).on('change', '.filtercheckbox', function() {
         angular.element(self).scope().getfilterrecruiterdata();
     }
 });
+get_recruiter_progress();
+
+function get_recruiter_progress() {
+    $.ajax({
+        type: 'POST',
+        url: base_url + 'recruiter/get_recruiter_progress',
+        data: '',
+        dataType: "JSON",
+        success: function(data) {
+            // data = JSON.parse(data);
+            var profile_progress = data.profile_progress;
+            count_profile_value = profile_progress.user_process_value;
+            count_profile = profile_progress.user_process;
+            set_progress(count_profile_value, count_profile);
+        }
+    });
+}
+
+function set_progress(count_profile_value, count_profile) {
+    if (count_profile == 100) {
+        $("#profile-progress").show();
+        $("#progress-txt").html("Hurray! Your profile is complete.");
+        setTimeout(function() {
+            $("#profile-progress").hide();
+            $(".mob-progressbar").hide();
+        }, 5000);
+    } else {
+        $("#edit-profile-move").show();
+        $("#profile-progress").show();
+        $("#progress-txt").html("<a href='" + base_url + 'recruiter/profile/' + login_user_id + "'>Complete your profile to get connected with more people</a>.");
+    }
+    // if($scope.old_count_profile < 100)
+    {
+        $('.second.circle-1').circleProgress({
+            value: count_profile_value //with decimal point
+        }).on('circle-animation-progress', function(event, progress) {
+            $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+            $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
+            $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+        });
+    }
+}

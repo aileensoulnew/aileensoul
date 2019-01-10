@@ -139,7 +139,7 @@
 	<div class="mob-progressbar fw">
 		<p>Complete your profile to get connected with more people.</p>
 		<p class="mob-edit-pro">
-			<a href="https://www.aileensoul.com/company/orgenic-agro-1-Ahmedabad/details"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+			<a href="<?php echo base_url().$this->session->userdata('aileenuser_slug').'/details' ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 		</p>
 		<div class="progress skill-bar ">
 			<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
