@@ -245,6 +245,18 @@
                 </div>
             
                 <div class="cus-inner-middle mob-clear mobp0">
+                    <div class="mob-progressbar fw">
+                        <p>Complete your profile to get connected with more people.</p>
+                        <p class="mob-edit-pro">
+                            <a href="<?php echo ''; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                        </p>
+                        <div class="progress skill-bar ">
+                            <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                <span class="skill"><i class="val">0%</i></span>
+                            </div>
+                        </div>
+                    </div>
+
 					<div class="tab-add">
 						<?php $this->load->view('banner_add'); ?>
 					</div>

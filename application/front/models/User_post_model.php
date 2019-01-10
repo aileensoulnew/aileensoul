@@ -15,14 +15,19 @@ class User_post_model extends CI_Model {
             $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
             $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
             $this->db->where('u.user_id !=', $user_id);
+            // $this->db->where('u.user_gender', 'F');
             $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
             $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
             $condition = '(us.current_study = (select us.current_study from ailee_user_student where user_id=' . $user_id . ') AND us.city = (select us.city from ailee_user_student where user_id=' . $user_id . '))';
-            $this->db->where($condition);
+            // $this->db->where($condition);
             $this->db->where('ui.user_image != ""');
             $this->db->where('ui.profile_background != ""');
-            $this->db->order_by('us.current_study', 'asc');
-          //  $this->db->order_by('us.city', 'asc');
+            $this->db->where('us.current_study != ""');
+            $this->db->where('ul.status', '1');
+            $this->db->where('ul.is_delete', '0');
+            // $this->db->order_by('us.current_study', 'asc');
+            // $this->db->order_by('us.city', 'asc');
+            $this->db->order_by('u.user_id', 'desc');
 
             $this->db->limit('30');
             $query = $this->db->get();            
@@ -34,19 +39,80 @@ class User_post_model extends CI_Model {
             $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
             $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
             $this->db->where('u.user_id !=', $user_id);
+            $this->db->where('u.user_gender', 'F');
             $this->db->where('ui.user_image != ""');
             $this->db->where('ui.profile_background != ""');
             $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
             $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
             $condition = '(up.designation IN (select up.designation from ailee_user_profession where user_id=' . $user_id . ') OR up.city = (select up.city from ailee_user_profession where user_id=' . $user_id . ') OR up.field = (select up.field from ailee_user_profession where user_id=' . $user_id . '))';
-            $this->db->where($condition);
+            // $this->db->where($condition);
+            $this->db->where('ul.status', '1');
+            $this->db->where('ul.is_delete', '0');
+            $this->db->where('up.designation !=','');
             $this->db->group_by("u.user_id");
-            $this->db->order_by('up.designation', 'asc');
-            $this->db->order_by('up.field', 'asc');
-            $this->db->order_by('up.city', 'asc');
+            // $this->db->order_by('up.designation', 'asc');
+            // $this->db->order_by('up.field', 'asc');
+            // $this->db->order_by('up.city', 'asc');
+            $this->db->order_by('u.user_id', 'desc');
             $this->db->limit('30');
             $query = $this->db->get();
             $result_array = $query->result_array();
+            if(isset($result_array) && empty($result_array))
+            {
+                $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,ui.profile_background,jt.name as title_name")->from("user u");
+                $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+                $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+                $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+                $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+                $this->db->where('u.user_id !=', $user_id);
+                $this->db->where('u.user_gender', 'F');
+                $this->db->where('ui.user_image != ""');                
+                $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
+                $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
+                $condition = '(up.designation IN (select up.designation from ailee_user_profession where user_id=' . $user_id . ') OR up.city = (select up.city from ailee_user_profession where user_id=' . $user_id . ') OR up.field = (select up.field from ailee_user_profession where user_id=' . $user_id . '))';
+                // $this->db->where($condition);
+                $this->db->where('ul.status', '1');
+                $this->db->where('ul.is_delete', '0');
+                $this->db->where('up.designation !=','');
+                $this->db->group_by("u.user_id");
+                // $this->db->order_by('up.designation', 'asc');
+                // $this->db->order_by('up.field', 'asc');
+                // $this->db->order_by('up.city', 'asc');
+                $this->db->order_by('u.user_id', 'desc');
+                $this->db->limit('30');
+                $query = $this->db->get();
+                $in_result_array = $query->result_array();
+                if(isset($in_result_array) && empty($in_result_array))
+                {
+                    $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,ui.profile_background,jt.name as title_name")->from("user u");
+                    $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+                    $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+                    $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+                    $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+                    $this->db->where('u.user_id !=', $user_id);
+                    $this->db->where('ui.profile_background != ""');
+                    $this->db->where('ui.user_image != ""');                
+                    $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
+                    $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
+                    $condition = '(up.designation IN (select up.designation from ailee_user_profession where user_id=' . $user_id . ') OR up.city = (select up.city from ailee_user_profession where user_id=' . $user_id . ') OR up.field = (select up.field from ailee_user_profession where user_id=' . $user_id . '))';
+                    // $this->db->where($condition);
+                    $this->db->where('ul.status', '1');
+                    $this->db->where('ul.is_delete', '0');
+                    $this->db->where('up.designation !=','');
+                    $this->db->group_by("u.user_id");
+                    // $this->db->order_by('up.designation', 'asc');
+                    // $this->db->order_by('up.field', 'asc');
+                    // $this->db->order_by('up.city', 'asc');
+                    $this->db->order_by('u.user_id', 'desc');
+                    $this->db->limit('30');
+                    $query = $this->db->get();
+                    $result_array = $query->result_array();
+                }
+                else
+                {
+                    $result_array = $in_result_array;
+                }
+            }
             //print_r($this->db->last_query());die;
             return $result_array;
         }

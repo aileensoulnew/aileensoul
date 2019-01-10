@@ -526,7 +526,8 @@ function set_progress(count_profile_value, count_profile) {
         $("#profile-progress").show();
         $("#progress-txt").html("Hurray! Your profile is complete.");
         setTimeout(function() {
-            // $("#edit-profile-move").hide();
+            $("#profile-progress").hide();
+            $(".progress-bar-custom").hide();
         }, 5000);
     } else {
         $("#edit-profile-move").show();
@@ -538,6 +539,8 @@ function set_progress(count_profile_value, count_profile) {
         $('.second.circle-1').circleProgress({
             value: count_profile_value //with decimal point
         }).on('circle-animation-progress', function(event, progress) {
+            $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+            $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');            
             $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
         });
     }
