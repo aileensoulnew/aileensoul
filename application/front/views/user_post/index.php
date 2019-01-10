@@ -1426,7 +1426,7 @@
                 if (isWindowLarger) {
                     $sidebar.css('top', 0);
                 } else {
-                    $sidebar.css('top', - );
+                    $sidebar.css('top', -heightDelta );
                 }
             } else if (dragTopUp) {
                 $sidebar.css('top', 0);
@@ -1434,10 +1434,10 @@
                 var currentTop = parseInt($sidebar.css('top'), 10);
                 
                 var minTop = -heightDelta;
-                var scrolledTop = currentTop + scrollDelta;
+                //var scrolledTop = currentTop + scrollDelta;
                 
-                var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
-                var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+                //var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+                //var newTop = (isPageAtBottom) ? minTop : scrolledTop;
                 
                 $sidebar.css('top', newTop);
             }

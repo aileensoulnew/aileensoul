@@ -3539,6 +3539,9 @@ text-transform:uppercase;}
 	.art-dash #profile-progress{display:none !important;}
 	.main-dashboard #profile-progress{display:none !important;}
 	.right_middle_side_posrt{width:207px;}
+	.right-custom{width:207px;}
+	.op-main-page #sidebar.fixed-cus{margin-right:-565px;}
+	.right-custom .all-contact{display:none;}
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}
@@ -3602,6 +3605,7 @@ text-transform:uppercase;}
 	.tab-add .right-add-box .adsbygoogle.adBlock{margin:0 auto;	}
 	.right_middle_side_posrt{display:none;}
 	.right-add .art-add-box{display:none;}
+	.right-custom{display:none;}
 }
 @media screen and (max-width: 1024px) {
 
