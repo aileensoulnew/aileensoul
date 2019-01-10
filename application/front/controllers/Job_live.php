@@ -82,7 +82,7 @@ class Job_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('ji.industry_id')->get_where('job_industry ji', array('industry_slug' => $category_slug))->row_array('ji.industry_id');
         $this->data['category_id'] = $category_id['industry_id'];
-        $this->data['title'] = "Categories - Artist Profile | Aileensoul";
+        $this->data['title'] = "Categories - Artist Profile".TITLEPOSTFIX;
         $this->load->view('job_live/category', $this->data);
     }
     
@@ -101,7 +101,7 @@ class Job_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $skill_id = $this->db->select('s.skill_id')->get_where('skill s', array('skill_slug' => $skill_slug))->row_array('s.skill_id');
         $this->data['skill_id'] = $skill_id['skill_id'];
-        $this->data['title'] = "Skills - Artist Profile | Aileensoul";
+        $this->data['title'] = "Skills - Artist Profile".TITLEPOSTFIX;
         $this->load->view('job_live/skill', $this->data);
     }
     
@@ -119,7 +119,7 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['company_id'] = $company_id;
-        $this->data['title'] = "Companies - Artist Profile | Aileensoul";
+        $this->data['title'] = "Companies - Artist Profile".TITLEPOSTFIX;
         $this->load->view('job_live/company', $this->data);
     }
     
@@ -138,7 +138,7 @@ class Job_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $city_id = $this->db->select('c.city_id')->get_where('cities c', array('slug' => $city_slug))->row_array('c.city_id');
         $this->data['city_id'] = $city_id['city_id'];
-        $this->data['title'] = "Cities - Artist Profile | Aileensoul";
+        $this->data['title'] = "Cities - Artist Profile".TITLEPOSTFIX;
         $this->load->view('job_live/city', $this->data);
     }
 
@@ -154,7 +154,7 @@ class Job_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Opportunities".TITLEPOSTFIX;
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];
@@ -320,7 +320,7 @@ class Job_live extends MY_Controller {
         // $this->data['job_profile_link'] =  $this->job_profile_link;
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Job Profile | Aileensoul";
+        $this->data['title'] = "Job Profile".TITLEPOSTFIX;
 
         $this->load->view('job_live/view_more_jobs', $this->data);
     }
@@ -776,7 +776,7 @@ class Job_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Job Search | Aileensoul";
+        $this->data['title'] = "Job Search".TITLEPOSTFIX;
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         /*$this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];

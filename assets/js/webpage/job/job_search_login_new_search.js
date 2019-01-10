@@ -189,6 +189,7 @@ app.controller('jobSearchController', function($scope, $http, $window,$compile) 
     $scope.apply_post = function(abc, xyz) {        
         var alldata = 'all';
         var user = xyz;
+        $('.applypost' + abc).css('pointer-events', 'none');
         $.ajax({
             type: 'POST',
             url: base_url + 'job/job_apply_post',

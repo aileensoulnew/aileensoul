@@ -130,7 +130,7 @@ function remove_post(abc)
 //Remove Post End
 
 //Apply Post Start
-function applypopup(postid, appid) {
+function applypopup(postid, appid) {    
     $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + appid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
     $('#bidmodal').modal('show');
 }
@@ -140,22 +140,30 @@ function apply_post(abc, xyz)
     var alldata = 'all';
     var user = xyz;
     // var appid = xyz;
+    $('.applypost' + abc).attr("style","pointer-events:none;");
+    
     $.ajax({
         type: 'POST',
         url: base_url +'job/job_apply_post',
         data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
         success: function (data) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             data = JSON.parse(data);
-            $('.applypost' + abc).html(data.status);
+            $('.applypost' + abc).removeAttr("style");
+            $('.applypost' + abc).html("Applied");//(data.status);
             $('.applypost' + abc).attr('disabled', 'disabled');
             $('.applypost' + abc).attr('onclick', 'myFunction()');
             $('.applypost' + abc).addClass('applied');
             $('.savedpost' + abc).remove();
             var numItems = $('.contact-frnd-post .job-contact-frnd .profile-job-post-detail').length;
-            if (numItems == '0') {
+            /*if (numItems == '0') {
                 var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='"+ base_url + "img/job-no.png'/></div><div class='art_no_post_text'>No  Saved Post Available.</div></div>";
                 $('.contact-frnd-post').html(nodataHtml);
-            }
+            }*/
         }
     });
 }

@@ -66,13 +66,13 @@ class Recruiter extends MY_Controller {
 
 		if (count($apply_step) >= 0) {
 			if ($apply_step[0]['re_step'] == 1) {
-				redirect('recruiter/signup');
+				redirect('recruiter');
 			}
 			if ($apply_step[0]['re_step'] == 0) {
-				redirect('recruiter/signup');
+				redirect('recruiter');
 			}
 		} else {
-			redirect('recruiter/signup');
+			redirect('recruiter');
 		}
 	}
 
@@ -85,7 +85,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 		if ($this->data['recdata']) {
@@ -110,7 +110,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -200,7 +200,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -240,7 +240,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 		// FETCH RECRUITER DATA    
@@ -288,7 +288,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -519,7 +519,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -559,7 +559,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 			//FETCH RECRUITER DATA
@@ -584,7 +584,7 @@ class Recruiter extends MY_Controller {
 			$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 			$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 			if ($recruiter_deactive) {
-				redirect('recruiter/');
+				redirect('recruiter');
 			}
 				//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -689,7 +689,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -1039,7 +1039,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -1079,7 +1079,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -1289,7 +1289,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 		$this->form_validation->set_rules('post_name', 'Post Name', 'required');
@@ -1600,7 +1600,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 
 		$join_str1 = array(array(
@@ -1647,7 +1647,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 
 		if ($id == $userid || $id == '') {
@@ -1696,7 +1696,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -1792,7 +1792,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 			//FETCH RECRUITER DATA
@@ -2381,7 +2381,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
@@ -2903,7 +2903,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 		$contition_array = array('user_id' => $userid, 'is_delete' => '0', 're_status' => '1');
@@ -3602,7 +3602,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -4151,7 +4151,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -4258,7 +4258,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -4338,7 +4338,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 		$contition_array = array('from_id' => $userid, 'to_id' => $id, 'save_id' => $save_id);
@@ -4407,7 +4407,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -4671,7 +4671,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 
@@ -4818,7 +4818,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 		$data = array(
@@ -4844,7 +4844,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 		//FETCH RECRUITER DATA
@@ -5376,7 +5376,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 
 		// FETCH COUNTRY DATA    
@@ -5416,7 +5416,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 		//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
@@ -6386,7 +6386,7 @@ class Recruiter extends MY_Controller {
 		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 			
 		$candidatejob1 = $this->recruiter_model->get_recommen_candidate_post('','',$city_id,$title_id,$industry_id,$skill_id,$experience_id,$userid,$page,$perpage);
@@ -6892,7 +6892,7 @@ class Recruiter extends MY_Controller {
 		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
 		if ($recruiter_deactive) {
-			redirect('recruiter/');
+			redirect('recruiter');
 		}
 		//if user deactive profile then redirect to recruiter/index untill active profile End
 		$contition_array = array('user_id' => $userid, 'is_delete' => '0', 're_status' => '1');

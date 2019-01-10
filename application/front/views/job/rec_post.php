@@ -917,7 +917,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     $('#bidmodal').modal('show');
                 }
                 else
-                { 
+                {
                     $('.biderror .mes').html("<div class='pop_content'>Are you sure want to apply this  jobpost?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
                     $('#bidmodal').modal('show');
                 }
@@ -927,24 +927,30 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         function apply_post(abc, xyz) {
             var alldata = 'all';
             var user = xyz;
-
+            $('.applypost' + abc).attr("style","pointer-events:none;");
             $.ajax({
                 type: 'POST',
                 url: base_url + 'job/job_apply_post',
                 data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
                 dataType: 'json',
-                success: function (data) { 
+                success: function (data) {
+                    clearInterval(int_not_count);            
+                    get_notification_unread_count();
+                    int_not_count = window.setInterval(function(){
+                      get_notification_unread_count();
+                    }, 10000);
+                    $('.applypost' + abc).removeAttr("style");
                     $('.savedpost' + abc).hide();
-                    $('.applypost' + abc).html(data.status);
+                    $('.applypost' + abc).html("Applied");//(data.status);
                     $('.applypost' + abc).attr('disabled', 'disabled');
                     $('.applypost' + abc).attr('onclick', 'myFunction()');
                     $('.applypost' + abc).addClass('applied');
 
-                    if (data.notification.notification_count != 0) {
+                    /*if (data.notification.notification_count != 0) {
                         var notification_count = data.notification.notification_count;
                         var to_id = data.notification.to_id;
                         show_header_notification(notification_count, to_id);
-                    }
+                    }*/
 
                 }
             });

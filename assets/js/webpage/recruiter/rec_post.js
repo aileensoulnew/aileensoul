@@ -68,7 +68,7 @@ function rec_post(pagenum) {
 }
 //AJAX DATA LOAD BY LAZZY LOADER END
 function removepopup(id) {
-    $('.biderror .mes').html("<div class='pop_content'>Do you want to remove this post?<div class='model_ok_cancel'><a class='okbtn' id=" + id + " onClick='remove_post(" + id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+    $('.biderror .mes').html("<div class='pop_content'>Do you want to remove this post?<div class='model_ok_cancel'><a class='okbtn' id=" + id + " onclick='remove_post(" + id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
     $('#bidmodal').modal('show').fadeIn();
 }
 
@@ -252,14 +252,21 @@ function save_post(abc) {
 function apply_post(abc, xyz) {
     var alldata = 'all';
     var user = xyz;
+    $('.applypost' + abc).attr("style","pointer-events:none;");
     $.ajax({
         type: 'POST',
         url: base_url + 'job/job_apply_post',
         data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
         dataType: 'json',
         success: function(data) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
+            $('.applypost' + abc).removeAttr("style");
             $('.savedpost' + abc).hide();
-            $('.applypost' + abc).html(data.status);
+            $('.applypost' + abc).html("Applied");//(data.status);
             $('.applypost' + abc).attr('disabled', 'disabled');
             $('.applypost' + abc).attr('onclick', 'myFunction()');
             $('.applypost' + abc).addClass('applied');
@@ -273,8 +280,8 @@ function savepopup(id) {
     $('#bidmodal').modal('show');
 }
 
-function applypopup(postid, userid) {
-    $('.biderror .mes').html("<div class='pop_content'>Are you sure want to apply this post?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+function applypopup(postid, userid) {    
+    $('.biderror .mes').html("<div class='pop_content'>Are you sure want to apply this post?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onclick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
     $('#bidmodal').modal('show');
 }
 //script for profile pic strat    

@@ -19,7 +19,7 @@ app.filter('slugify', function () {
         return slug;
     };
 });
-app.controller('jobSearchController', function ($scope, $http,$window) {
+app.controller('jobSearchController', function ($scope, $http,$window,$compile) {
     $scope.title = title;
     $scope.jobCategory = {};
     $scope.jobCity = {};
@@ -195,8 +195,9 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
                 $('#bidmodal').modal('show');
             }
             else
-            {                
-                $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
+            {
+                var $el = $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " ng-click='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
+                $compile($el)($scope);
                 $('#bidmodal').modal('show');
             }
         }
@@ -205,6 +206,7 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
     $scope.apply_post = function(abc, xyz) {
         var alldata = 'all';
         var user = xyz;
+        $('.applypost' + abc).attr("style","pointer-events:none;");
 
         $.ajax({
             type: 'POST',
@@ -212,17 +214,23 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
             data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
             datatype: 'json',
             success: function (data) {
+                clearInterval(int_not_count);            
+                get_notification_unread_count();
+                int_not_count = window.setInterval(function(){
+                  get_notification_unread_count();
+                }, 10000);
+                $('.applypost' + abc).removeAttr("style");
                 $('.savedpost' + abc).hide();
-                $('.applypost' + abc).html(data.status);
+                $('.applypost' + abc).html("Applied");//(data.status);
                 $('.applypost' + abc).attr('disabled', 'disabled');
                 $('.applypost' + abc).attr('onclick', 'myFunction()');
                 $('.applypost' + abc).addClass('applied');
 
-                if (data.notification.notification_count != 0) {
+                /*if (data.notification.notification_count != 0) {
                     var notification_count = data.notification.notification_count;
                     var to_id = data.notification.to_id;
                     show_header_notification(notification_count, to_id);
-                }
+                }*/
             }
         });
     };
