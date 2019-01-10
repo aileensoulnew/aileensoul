@@ -2924,6 +2924,55 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             });
         }
     };
+
+    $scope.get_user_progress = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_progress',            
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            var profile_progress = success.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            if(count_profile == 100)
+            {
+                $("#edit-profile-move").hide();
+            }
+            $scope.set_progress(count_profile_value,count_profile);
+        });
+    };
+
+    $scope.get_user_progress();
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                $("#edit-profile-move").hide();
+                $("#profile-progress").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("<a href='"+base_url+live_slug+"/details' target='_self'>Complete your profile to get connected with more people.</a>");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+                $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
 });
 
 $(document).click(function(){

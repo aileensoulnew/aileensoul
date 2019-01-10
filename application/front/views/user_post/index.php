@@ -774,8 +774,20 @@
 	</div>
 	<div id="sidebar" class="right-custom">
     <div class="">
-		<div class="right-add-box">            
-        </div> 
+		<div class="add-detail">            
+            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                <div class="count_main_progress">
+                    <div class="circles">
+                        <div class="second circle-1">
+                            <div>
+                                <strong></strong>
+                                <span id="progress-txt"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="right-add-box">            
         </div>        
         <div class="all-contact">
@@ -1332,6 +1344,7 @@
         <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js'); ?>"></script>
         <script src="<?php echo base_url('assets/as-videoplayer/demo.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -1385,68 +1398,68 @@
             });
         </script>
 		<script>
-			$(function() {
+        $(function() {
 
-    var $window = $(window);
-    var lastScrollTop = $window.scrollTop();
-    var wasScrollingDown = true;
+        var $window = $(window);
+        var lastScrollTop = $window.scrollTop();
+        var wasScrollingDown = true;
 
-    var $sidebar = $("#sidebar");
-    if ($sidebar.length > 0) {
+        var $sidebar = $("#sidebar");
+        if ($sidebar.length > 0) {
 
         var initialSidebarTop = $sidebar.position().top;
 
         $window.scroll(function(event) {
 
-            var windowHeight = $window.height();
-            var sidebarHeight = $sidebar.outerHeight();
+        var windowHeight = $window.height();
+        var sidebarHeight = $sidebar.outerHeight();
 
-            var scrollTop = $window.scrollTop();
-            var scrollBottom = scrollTop + windowHeight;
+        var scrollTop = $window.scrollTop();
+        var scrollBottom = scrollTop + windowHeight;
 
-            var sidebarTop = $sidebar.position().top;
-            var sidebarBottom = sidebarTop + sidebarHeight;
+        var sidebarTop = $sidebar.position().top;
+        var sidebarBottom = sidebarTop + sidebarHeight;
 
-            var heightDelta = Math.abs(windowHeight - sidebarHeight);
-            var scrollDelta = lastScrollTop - scrollTop;
+        var heightDelta = Math.abs(windowHeight - sidebarHeight);
+        var scrollDelta = lastScrollTop - scrollTop;
 
-            var isScrollingDown = (scrollTop > lastScrollTop);
-            var isWindowLarger = (windowHeight > sidebarHeight);
+        var isScrollingDown = (scrollTop > lastScrollTop);
+        var isWindowLarger = (windowHeight > sidebarHeight);
 
-            if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
-                $sidebar.addClass('fixed-cus');
-            } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
-                $sidebar.removeClass('fixed-cus');
-            }
+        if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
+            $sidebar.addClass('fixed-cus');
+        } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
+            $sidebar.removeClass('fixed-cus');
+        }
 
-            var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
-            var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
+        var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
+        var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
 
-            if (dragBottomDown) {
-                if (isWindowLarger) {
-                    $sidebar.css('top', 0);
-                } else {
-                    $sidebar.css('top', -heightDelta );
-                }
-            } else if (dragTopUp) {
+        if (dragBottomDown) {
+            if (isWindowLarger) {
                 $sidebar.css('top', 0);
-            } else if ($sidebar.hasClass('fixed-cus')) {
-                var currentTop = parseInt($sidebar.css('top'), 10);
-                
-                var minTop = -heightDelta;
-                //var scrolledTop = currentTop + scrollDelta;
-                
-                //var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
-                //var newTop = (isPageAtBottom) ? minTop : scrolledTop;
-                
-                $sidebar.css('top', newTop);
+            } else {
+                $sidebar.css('top', -heightDelta );
             }
+        } else if (dragTopUp) {
+            $sidebar.css('top', 0);
+        } else if ($sidebar.hasClass('fixed-cus')) {
+            var currentTop = parseInt($sidebar.css('top'), 10);
+            
+            var minTop = -heightDelta;
+            //var scrolledTop = currentTop + scrollDelta;
+            
+            //var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+            //var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+            
+            $sidebar.css('top', newTop);
+        }
 
-            lastScrollTop = scrollTop;
-            wasScrollingDown = isScrollingDown;
+        lastScrollTop = scrollTop;
+        wasScrollingDown = isScrollingDown;
         });
-    }
-});
+        }
+        });
 		</script>
     </body>
 </html>

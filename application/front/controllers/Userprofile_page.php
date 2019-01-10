@@ -2731,4 +2731,12 @@ class Userprofile_page extends MY_Controller {
         //}
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
+
+    public function get_user_progress()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $profile_progress = $this->progressbar($userid);
+        $ret_arr = array("success"=>1,"profile_progress"=>$profile_progress);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }
