@@ -49,16 +49,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         // }, function (error) {});
         $http({
             method: 'POST',
-            url: base_url + 'user_post/getContactAllSuggetion?page='+start,
-            //data: 'from_id=' + from_id + '&action=confirm',
-            // data:'offset='+start,
+            url: base_url + 'user_post/getContactAllSuggetion?page='+start,            
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (success) {
-            $("#suggestionlist").show();
+        }).then(function (success) {            
             $(".sugg_post_load").hide();            
-            /*if(success.data.length <= 0){
-                isscroll = false;
-            }*/            
+            
             if (success.data.con_sugg_data.length >0 ) {            
                 if(start > 1)
                 {
@@ -94,12 +89,10 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
-        }, function (error) {
-            $("#suggestionlist").show();
+        }, function (error) {            
             $(".sugg_post_load").hide();
         }, 
-        function (complete) { 
-            $("#suggestionlist").show();
+        function (complete) {
             $(".sugg_post_load").hide();
         });
     }
@@ -113,7 +106,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             $(".req_post_load").hide();
             $("#contactlist").show();
             pending_contact_request = success.data;
-            $scope.pending_contact_request_data = pending_contact_request;
+            $scope.pending_contact_request_data = pending_contact_request;            
         });
     }
     function contactRequestNotification() {
@@ -160,26 +153,10 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         }).then(function (success) {
             if (success.data.message == 1) {
                 $('#item-' + user_id + ' a.btn3').html('Request Sent');
-//                $('.owl-carousel').trigger('next.owl.carousel');
+                //$('.owl-carousel').trigger('next.owl.carousel');
             }
         });
     }
-
-    /*$(document).ready(function () {
-  
-        $(document).scroll(function(e){
-          
-            if (processing)
-                return false;
-
-            if ( $(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
-                processing = true; //sets a processing AJAX request flag
-                if(isscroll){
-                    getContactSuggetion(offset)
-                }
-            }
-        });
-    });*/
 });
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({
@@ -187,4 +164,3 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
-

@@ -162,8 +162,9 @@ class User_post_model extends CI_Model {
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
 
-            $result_array[$key]['user_image'] = $this->db->select('user_image')->get_where('user_info', array('user_id' => $value['user_id']))->row('user_image');
-            
+            $img_data = $this->db->select('user_image,profile_background')->get_where('user_info', array('user_id' => $value['user_id']))->row();
+            $result_array[$key]['user_image'] = $img_data->user_image;
+            $result_array[$key]['profile_background'] = $img_data->profile_background;            
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
         }

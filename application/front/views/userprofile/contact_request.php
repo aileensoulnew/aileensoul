@@ -15,8 +15,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
-    <?php $this->load->view('adsense'); ?>
-</head>
+    	<?php $this->load->view('adsense'); ?>
+    </head>
     <body class=" body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
@@ -27,18 +27,18 @@
 						<?php $this->load->view('banner_add'); ?>
 					</div>
                     <div class="custom-user-list">
-                        <div class="list-box-custom">
+                        <div class="list-box-custom" ng-if="pending_contact_request_data.length > '0'">
                             <h3 class="mob-border-top-1">Pending Contact Request</h3>
                             <div class="all-list">
                                 <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                 </div>
-                                <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
+                                <!-- <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
                                     <div class="no-data-content">
                                         <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
                                         <p class="pt20">No Pending Contact Request</p>
                                     </div>
-                                </div>
+                                </div> -->
                                 <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length != '0'">
                                     <li ng-repeat="contact in pending_contact_request_data">
                                         <div class="list-box">
@@ -79,238 +79,49 @@
                         <div class="list-box-custom suggestion">
                             <h3>Suggestions</h3>
 							<div class="sugg-list">
-								<ul class="">
-									<li>
-										<div class="arti-profile-box">
-											<div class="user-cover-img">
-												<a href="#">
-													<div class="gradient-bg" style="height: 100%"></div>
-												</a>
-											</div>
-											<div class="user-pr-img">
-												<a href="#">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
-												</a>
-											</div>
-											<div class="user-info-text text-center">
-												<a href="#" class="">
-													<span class="user-name">		Niyorkona  Saikia
-													</span>
-													<span class="user-des">
-														Freelance Content Writer
-													</span>
-												</a>
-											</div>
-											
-											<div class="author-btn">
-												<div class="user-btns">
-													<a class="btn3">Add to Contacts</a>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="arti-profile-box">
-											<div class="user-cover-img">
-												<a href="#">
-													<div class="gradient-bg" style="height: 100%">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
-													</div>
-												</a>
-											</div>
-											<div class="user-pr-img">
-												<a href="#">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
-												</a>
-											</div>
-											<div class="user-info-text text-center">
-												<a href="#" class="">
-													<span class="user-name">		Niyorkona  Saikia
-													</span>
-													<span class="user-des">
-														Freelance Content Writer
-													</span>
-												</a>
-											</div>
-											
-											<div class="author-btn">
-												<div class="user-btns">
-													<a class="btn3">Add to Contacts</a>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="arti-profile-box">
-											<div class="user-cover-img">
-												<a href="#">
-													<div class="gradient-bg" style="height: 100%">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
-													</div>
-												</a>
-											</div>
-											<div class="user-pr-img">
-												<a href="#">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
-												</a>
-											</div>
-											<div class="user-info-text text-center">
-												<a href="#" class="">
-													<span class="user-name">		Niyorkona  Saikia
-													</span>
-													<span class="user-des">
-														Freelance Content Writer
-													</span>
-												</a>
-											</div>
-											
-											<div class="author-btn">
-												<div class="user-btns">
-													<a class="btn3">Add to Contacts</a>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="arti-profile-box">
-											<div class="user-cover-img">
-												<a href="#">
-													<div class="gradient-bg" style="height: 100%">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
-													</div>
-												</a>
-											</div>
-											<div class="user-pr-img">
-												<a href="#">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
-												</a>
-											</div>
-											<div class="user-info-text text-center">
-												<a href="#" class="">
-													<span class="user-name">		Niyorkona  Saikia
-													</span>
-													<span class="user-des">
-														Freelance Content Writer
-													</span>
-												</a>
-											</div>
-											
-											<div class="author-btn">
-												<div class="user-btns">
-													<a class="btn3">Add to Contacts</a>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="arti-profile-box">
-											<div class="user-cover-img">
-												<a href="#">
-													<div class="gradient-bg" style="height: 100%">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
-													</div>
-												</a>
-											</div>
-											<div class="user-pr-img">
-												<a href="#">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
-												</a>
-											</div>
-											<div class="user-info-text text-center">
-												<a href="#" class="">
-													<span class="user-name">		Niyorkona  Saikia
-													</span>
-													<span class="user-des">
-														Freelance Content Writer
-													</span>
-												</a>
-											</div>
-											
-											<div class="author-btn">
-												<div class="user-btns">
-													<a class="btn3">Add to Contacts</a>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="arti-profile-box">
-											<div class="user-cover-img">
-												<a href="#">
-													<div class="gradient-bg" style="height: 100%">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1532620554.png">
-													</div>
-												</a>
-											</div>
-											<div class="user-pr-img">
-												<a href="#">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1529311419.png">
-												</a>
-											</div>
-											<div class="user-info-text text-center">
-												<a href="#" class="">
-													<span class="user-name">		Niyorkona  Saikia
-													</span>
-													<span class="user-des">
-														Freelance Content Writer
-													</span>
-												</a>
-											</div>
-											
-											<div class="author-btn">
-												<div class="user-btns">
-													<a class="btn3">Add to Contacts</a>
-												</div>
-											</div>
-										</div>
-									</li>
-									
-								</ul>
-							</div>
-							
-                            <div class="all-list">                                
-                                <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
+								<div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                     <div class="no-data-content">
                                         <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
                                         <p class="pt20">No Suggestion Contact Request</p>
                                     </div>
                                 </div>
-                                <ul id="suggestionlist" style="display: none;">
-                                    <li ng-repeat="suggest in contactSuggetion">
-                                        <div class="list-box">
-                                            <div class="profile-img">
-                                                <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
-                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">                                                
+								<ul class="">
+									<li ng-repeat="suggest in contactSuggetion">
+										<div class="arti-profile-box">
+											<div class="user-cover-img">
+												<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
+													<img ng-if="suggest.profile_background" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{suggest.profile_background}}">
+													<div ng-if="!suggest.profile_background" class="gradient-bg" style="height: 100%"></div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
+													<img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">                                                
                                                     <img ng-if="!suggest.user_image && suggest.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                </a>
-                                            </div>
-                                            <div class="profile-content">
-                                                <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
-                                                    <div class="main_data_cq">   
-                                                        <span title="{{suggest.fullname| capitalize}}" class="main_compny_name" ng-bind="suggest.fullname | capitalize"></span>
-                                                    </div>
-                                                    <div class="main_data_cq">
-                                                        <span class="dc_cl_m" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
-                                                        <span class="dc_cl_m" title="{{suggest.degree_name}}" ng-if="suggest.degree_name != ''">{{suggest.degree_name}}</span>
-                                                        <span class="dc_cl_m" title="Current Work" ng-if="suggest.title_name == null && suggest.degree_name == null">Current Work</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="fw" id="item-{{suggest.user_id}}">
-                                                <p class="request-btn">
-                                                    <a href="#" class="btn3" ng-click="addToContact(suggest.user_id, suggest);">
-                                                        Add to contact
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
+												</a>
+											</div>
+											<div class="user-info-text text-center">
+												<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
+													<span title="{{suggest.fullname| capitalize}}" class="user-name" ng-bind="suggest.fullname | capitalize"></span>
+													<span class="user-des" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
+													<span class="user-des" title="{{suggest.degree_name}}" ng-if="suggest.degree_name != ''">{{suggest.degree_name}}</span>
+													<span class="user-des" title="Current Work" ng-if="suggest.title_name == null && suggest.degree_name == null">Current Work</span>
+												</a>
+											</div>
+											
+											<div class="author-btn">
+												<div id="item-{{suggest.user_id}}" class="user-btns">
+													<a class="btn3" ng-click="addToContact(suggest.user_id, suggest);">Add to Contacts</a>
+												</div>
+											</div>
+										</div>
+									</li>																		
+								</ul>
+								<div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
                                 </div>
-                            </div>
+							</div>
                         </div>
                     </div>
                     <div class="right-add">

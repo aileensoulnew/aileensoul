@@ -65,7 +65,7 @@ class User_post extends MY_Controller {
         {
             $page = 1;
         }
-        $limit = 40;
+        $limit = 39;//40;
         $userid = $this->session->userdata('aileenuser');
         $user_data = $this->user_post_model->getContactAllSuggetion($userid,$page,$limit);
         echo json_encode($user_data);
