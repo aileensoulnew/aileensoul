@@ -97,7 +97,7 @@
 													<span class="user-name">		Niyorkona  Saikia
 													</span>
 													<span class="user-des">
-														FREELANCE CONTENT WRITER
+														Freelance Content Writer
 													</span>
 												</a>
 											</div>
@@ -128,7 +128,7 @@
 													<span class="user-name">		Niyorkona  Saikia
 													</span>
 													<span class="user-des">
-														FREELANCE CONTENT WRITER
+														Freelance Content Writer
 													</span>
 												</a>
 											</div>
@@ -159,7 +159,7 @@
 													<span class="user-name">		Niyorkona  Saikia
 													</span>
 													<span class="user-des">
-														FREELANCE CONTENT WRITER
+														Freelance Content Writer
 													</span>
 												</a>
 											</div>
@@ -190,7 +190,7 @@
 													<span class="user-name">		Niyorkona  Saikia
 													</span>
 													<span class="user-des">
-														FREELANCE CONTENT WRITER
+														Freelance Content Writer
 													</span>
 												</a>
 											</div>
@@ -221,7 +221,7 @@
 													<span class="user-name">		Niyorkona  Saikia
 													</span>
 													<span class="user-des">
-														FREELANCE CONTENT WRITER
+														Freelance Content Writer
 													</span>
 												</a>
 											</div>
@@ -252,7 +252,7 @@
 													<span class="user-name">		Niyorkona  Saikia
 													</span>
 													<span class="user-des">
-														FREELANCE CONTENT WRITER
+														Freelance Content Writer
 													</span>
 												</a>
 											</div>
