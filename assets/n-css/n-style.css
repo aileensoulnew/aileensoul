@@ -3462,15 +3462,18 @@ text-transform:uppercase;}
 .right-custom{width:320px; float:right; margin-left:15px}
 .op-main-page .right-part{position:inherit; margin-left:0px;}
 .op-main-page #sidebar.fixed-cus{position:fixed; right:50%; margin-right:-625px;}
-.sugg-list{width:100%; float:left; padding:15px 10px;}
+.sugg-list{width:100%; float:left; padding:10px 6px;}
 .sugg-list ul{width:100%; float:left; padding:0; display:inline-block; text-align:center;}
-.sugg-list ul li{width:33%; padding:2px; list-style-type:none; display:inline-block;}
+.sugg-list ul li{width:33%; padding:3px; list-style-type:none; display:inline-block;}
 .sugg-list .custom-user-list h3{border-bottom:0;}
-.sugg-list .user-info-text .user-name{font-size:15px; color:#5c5c5c; display:block;}
+.sugg-list .user-info-text .user-name{font-size:15px; color:#5c5c5c; display:block; font-weight:bold;}
 .sugg-list .user-info-text .user-des{font-size:14px; color:#8c8c8c; display:block;}
 .sugg-list .author-btn .user-btns a.btn3{font-size: 14px; font-weight: normal; width:130px; padding:3px 2px;}
 .sugg-list .arti-profile-box{margin-bottom:0;}
 .sugg-list .arti-profile-box .user-info-text{padding:0px 10px 5px;}
+.sugg-list .arti-profile-box .author-btn{padding:0 10px 10px;}
+.sugg-list .request-btn .btn1{font-size:14px;}
+.sugg-list .request-btn .btn3{font-size:14px;}
 
 
 
@@ -3688,7 +3691,7 @@ text-transform:uppercase;}
 	.update-browser{display:none;}
 	.all-detail-box .tab-pane ul li{width:25%;}
 	.title-div ul{width:90%;}
-	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:5px 0 5px; bottom:0; float:left;}
+	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:0px 0 5px; bottom:0; float:left; box-shadow:none;}
 	.post-popup-box .tooltip-custom{bottom:0;}
 	.tooltip-custom::before{display:none;}
 	.left-tooltip .tooltip-custom:before{display:none;}
