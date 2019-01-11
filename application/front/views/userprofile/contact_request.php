@@ -59,10 +59,10 @@
                                             </div>
                                             <div class="author-btn">
                                             	<p class="request-btn">
-                                                    <a href="javascript:void(0);" class="btn1 pull-left" ng-click="confirmContact(contact.from_id, $index)">
+                                                    <a href="javascript:void(0);" class="btn1" ng-click="confirmContact(contact.from_id, $index)">
                                                         Confirm
                                                     </a>
-                                                    <a href="javascript:void(0);" class="btn3 pull-right" ng-click="rejectContact(contact.from_id, $index)">
+                                                    <a href="javascript:void(0);" class="btn3" ng-click="rejectContact(contact.from_id, $index)">
                                                         Decline
                                                     </a>
                                                 </p>
