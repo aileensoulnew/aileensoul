@@ -15,6 +15,7 @@
              })
              .autocomplete({
                  minLength: 2,
+                 appendTo: $('#jobtitle_result'),
                  source: function( request, response ) { 
                      // delegate back to autocomplete, but extract the last term
                      $.getJSON(base_url + "general/get_jobtitle", { term : extractLast( request.term )},response);
@@ -119,6 +120,7 @@ $(function() {
           })
           .autocomplete({
               minLength: 2,
+              appendTo: $('#skills_result'),
               source: function( request, response ) { 
                   // delegate back to autocomplete, but extract the last term
                   $.getJSON(base_url +"general/get_skill", { term : extractLast( request.term )},response);
