@@ -67,12 +67,13 @@
 
                                                 <?php echo form_error('post_desc'); ?>
                                             </div>
-                                            <div class="form-group" <?php if ($skills) { ?> class="error-msg" <?php } ?>>
+                                            <div class="form-group autocomplete-cus" <?php if ($skills) { ?> class="error-msg" <?php } ?>>
                                                 <label class="control-label">Skills: <span style="color:red">*</span></label>
 
                                                 <input id="skills2" name="skills" tabindex="5" size="90" placeholder="Enter Skills">
 
                                                 <?php echo form_error('skills'); ?>
+                                                <div id="skills_result"></div>
                                             </div>
                                             <div class="form-group" <?php if ($industry) { ?> class="error-msg" <?php } ?> class="two-select-box"> 
                                                 <label>Industry:<span style="color:red">*</span></label>

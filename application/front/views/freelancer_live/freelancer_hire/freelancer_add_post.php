@@ -106,11 +106,12 @@
                                     <label>Other Category</label>
                                     <input id="other_field" name="other_field" tabindex="4" size="90" placeholder="Enter skills" maxlength="255">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group autocomplete-cus">
                                     <label><?php echo $this->lang->line("skill_of_requirement"); ?>:<span style="color:red">*</span></label>
                                     <input id="skills2" name="skills" tabindex="4" size="90" placeholder="Enter skills" maxlength="255">
                                     <span id="fullname-error"></span>
                                     <?php echo form_error('skills'); ?>
+                                    <div id="skills_result"></div>
                                 </div>  
                                 <div class="row">
                                     <label class="col-md-12 fw">Required Experience:<span class="optional">(optional)</span></label>
