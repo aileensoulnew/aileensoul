@@ -98,206 +98,206 @@
 							<div class="full-box-module">   
 								<div class="profile-boxProfileCard  module">
 									<div class="profile-boxProfileCard-cover"> 
-									<?php
-									$hire_user = $this->common->select_data_by_id('freelancer_hire_reg', 'user_id', $this->session->userdata('aileenuser'), $data = 'user_id', $join_str = array());
-									$post_user = $this->common->select_data_by_id('freelancer_post', 'post_id', $postid, $data = 'user_id', $join_str = array());
-									?>
-									<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-										<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  aria-hidden="true" rel="noopener">
-									<?php } else if ($hire_user) { ?>
-										<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="javascript:void(0);" aria-hidden="true" rel="noopener">
-									<?php
-									} else {
-										if (is_numeric($recliveid)) {
-										$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
-										} else {
-										$slug = $recliveid;
-										}
-										?>
-										<?php if ($apply_user) { ?>
-										<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('freelance-employer/' . $slug); ?>"  tabindex="-1" 
-										aria-hidden="true" rel="noopener">
-										<?php } else { ?>
-										<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('freelancer/signup'); ?>"  tabindex="-1" 
-										aria-hidden="true" rel="noopener">
 										<?php
-										}
-									}
-									?>
-										<div class="bg-images no-cover-upload"> 
-										<?php
-										if ($freelancr_user_data[0]['profile_background'] != '') {
+										$hire_user = $this->common->select_data_by_id('freelancer_hire_reg', 'user_id', $this->session->userdata('aileenuser'), $data = 'user_id', $join_str = array());
+										$post_user = $this->common->select_data_by_id('freelancer_post', 'post_id', $postid, $data = 'user_id', $join_str = array());
 										?>
-											<!-- box image start -->
-											<img src="<?php echo FREE_HIRE_BG_THUMB_UPLOAD_URL . $freelancr_user_data[0]['profile_background']; ?>" class="bgImage" alt="<?php echo $fullname; ?>">
-											<!-- box image end -->
-										<?php
-										} else {
-										?>
-											<img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $fullname; ?>" >
-										<?php
-										}
-										?>
-										</div>
-									</a>
-								</div>
-								<div class="profile-boxProfileCard-content clearfix">
-									<div class="left_side_box_img buisness-profile-txext">
 										<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-										<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+											<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  aria-hidden="true" rel="noopener">
 										<?php } else if ($hire_user) { ?>
-										<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="javascript:void(0);"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+											<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="javascript:void(0);" aria-hidden="true" rel="noopener">
 										<?php
 										} else {
 											if (is_numeric($recliveid)) {
 											$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
 											} else {
 											$slug = $recliveid;
-											}		
-											if ($apply_user) { ?>
-												<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/' . $slug); ?>"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+											}
+											?>
+											<?php if ($apply_user) { ?>
+											<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('freelance-employer/' . $slug); ?>"  tabindex="-1" 
+											aria-hidden="true" rel="noopener">
 											<?php } else { ?>
-												<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-hire/registration'); ?>"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
-												<?php
+											<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('freelancer/signup'); ?>"  tabindex="-1" 
+											aria-hidden="true" rel="noopener">
+											<?php
 											}
 										}
-
-										if ($freelancr_user_data[0]['freelancer_hire_user_image']) {
-											if (IMAGEPATHFROM == 'upload') {
-												if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'])) {
-													?>
-													<div class="post-img-profile">
-														<?php echo ucfirst(strtolower($no_img_name)); ?>
-													</div>
-													<?php } else {
-													?>
-													<img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $fullname; ?>" > 
-													<?php
-													}
+										?>
+										<div class="bg-images no-cover-upload"> 
+											<?php
+											if ($freelancr_user_data[0]['profile_background'] != '') {
+											?>
+												<!-- box image start -->
+												<img src="<?php echo FREE_HIRE_BG_THUMB_UPLOAD_URL . $freelancr_user_data[0]['profile_background']; ?>" class="bgImage" alt="<?php echo $fullname; ?>">
+												<!-- box image end -->
+											<?php
 											} else {
-													$filename = $this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'];
-													$s3 = new S3(awsAccessKey, awsSecretKey);
-													$this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-													if ($info) {
-													?>
-													<img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $fullname; ?>" >
-													<?php } else {
-													?>
-													<div class="post-img-profile">
-													<?php echo ucfirst(strtolower($no_img_name)); ?>
-													</div> 
-													<?php
-													}
+											?>
+												<img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $fullname; ?>" >
+											<?php
 											}
-										} else {
-										?>
-											<div class="post-img-profile">
-												<?php echo ucfirst(strtolower($no_img_name)); ?>
-											</div>
-										<?php
-										}
-										?>
+											?>
+										</div>
 										</a>
 									</div>
-									<div class="right_left_box_design ">
-										<span class="profile-company-name ">
+									<div class="profile-boxProfileCard-content clearfix">
+										<div class="left_side_box_img buisness-profile-txext">
 											<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-												<a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
+											<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
 											<?php } else if ($hire_user) { ?>
-												<a title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
+											<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="javascript:void(0);"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
 											<?php
 											} else {
 												if (is_numeric($recliveid)) {
-													$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
+												$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
 												} else {
-													$slug = $recliveid;
-												}
-												?>
-												<?php if ($apply_user) { ?>
-													<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"  title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
-												<?php } else { ?>
-													<a href="<?php echo base_url('freelancer/signup'); ?>"  title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
-												<?php } ?>
-											<?php } ?>
-										</span>
-
-										<div class="profile-boxProfile-name">
-											<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-												<a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  title="<?php echo $designation; ?>">
-											<?php } else if ($hire_user) { ?>
-												<a class="eventnone" title="<?php echo $designation; ?>">
-											<?php
-											}
-											else
-											{
-												if (is_numeric($recliveid)) {
-													$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
-												} else {
-													$slug = $recliveid;
-												}
-												?>
-												<?php if ($apply_user) { ?>
-													<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"  title="<?php echo $designation; ?>">
-													<?php } else { ?>
-														<a href="<?php echo base_url('freelancer/signup'); ?>"  title="<?php echo $designation; ?>">
-													<?php } ?>
-											<?php } ?>
-											<?php
-											if (ucfirst(strtolower($designation))) {
-												echo $designation;
-											} else {
-												echo "Designation";
-											}
-											?></a>
-										</div>
-										<ul class=" left_box_menubar">
-											<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-												<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" ><?php echo $this->lang->line("details"); ?></a></li>
-											<?php } else if ($hire_user) { ?>
-												<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="javascript:void(0);" ><?php echo $this->lang->line("details"); ?></a></li>
-											<?php } else {
-												if (is_numeric($recliveid)) {
-													$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
-												} else {
-													$slug = $recliveid;
-												} ?>
-												<?php if ($apply_user) { ?>
-													<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-employer/' . $slug); ?>" ><?php echo $this->lang->line("details"); ?></a></li>
-												<?php } else { ?>
-													<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelancer/signup'); ?>" ><?php echo $this->lang->line("details"); ?></a></li>
-												<?php } ?>
-											<?php } ?>
-											<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-												<li><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
-											<?php } else if ($hire_user) { ?>
-												<li><a title="Projects" href="javascript:void(0);"><?php echo $this->lang->line("Projects"); ?></a></li>
-											<?php } else {
-												if (is_numeric($recliveid)) {
-													$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
-												} else {
-													$slug = $recliveid;
-												}
+												$slug = $recliveid;
+												}		
 												if ($apply_user) { ?>
-													<li><a title="Projects" href="<?php echo base_url('freelance-employer/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
+													<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/' . $slug); ?>"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
 												<?php } else { ?>
-													<li><a title="Projects" href="<?php echo base_url('freelancer/signup'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
-												<?php } 
+													<a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-hire/registration'); ?>"  title="<?php echo $fullname; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+													<?php
+												}
 											}
-											if ($this->session->userdata('aileenuser') == $recliveid) { ?>
-												<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>">Saved</a></li>
-											<?php } ?>
-										</ul>
+
+											if ($freelancr_user_data[0]['freelancer_hire_user_image']) {
+												if (IMAGEPATHFROM == 'upload') {
+													if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'])) {
+														?>
+														<div class="post-img-profile">
+															<?php echo ucfirst(strtolower($no_img_name)); ?>
+														</div>
+														<?php } else {
+														?>
+														<img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $fullname; ?>" > 
+														<?php
+														}
+												} else {
+														$filename = $this->config->item('free_hire_profile_main_upload_path') . $freelancr_user_data[0]['freelancer_hire_user_image'];
+														$s3 = new S3(awsAccessKey, awsSecretKey);
+														$this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+														if ($info) {
+														?>
+														<img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freelancr_user_data[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $fullname; ?>" >
+														<?php } else {
+														?>
+														<div class="post-img-profile">
+														<?php echo ucfirst(strtolower($no_img_name)); ?>
+														</div> 
+														<?php
+														}
+												}
+											} else {
+											?>
+												<div class="post-img-profile">
+													<?php echo ucfirst(strtolower($no_img_name)); ?>
+												</div>
+											<?php
+											}
+											?>
+											</a>
+										</div>
+										<div class="right_left_box_design ">
+											<span class="profile-company-name ">
+												<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
+													<a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
+												<?php } else if ($hire_user) { ?>
+													<a title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
+												<?php
+												} else {
+													if (is_numeric($recliveid)) {
+														$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
+													} else {
+														$slug = $recliveid;
+													}
+													?>
+													<?php if ($apply_user) { ?>
+														<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"  title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
+													<?php } else { ?>
+														<a href="<?php echo base_url('freelancer/signup'); ?>"  title="<?php echo ucfirst(strtolower($fullname)); ?>">   <?php echo ucfirst(strtolower($fullname)); ?></a>
+													<?php } ?>
+												<?php } ?>
+											</span>
+
+											<div class="profile-boxProfile-name">
+												<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
+													<a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  title="<?php echo $designation; ?>">
+												<?php } else if ($hire_user) { ?>
+													<a class="eventnone" title="<?php echo $designation; ?>">
+												<?php
+												}
+												else
+												{
+													if (is_numeric($recliveid)) {
+														$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
+													} else {
+														$slug = $recliveid;
+													}
+													?>
+													<?php if ($apply_user) { ?>
+														<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"  title="<?php echo $designation; ?>">
+														<?php } else { ?>
+															<a href="<?php echo base_url('freelancer/signup'); ?>"  title="<?php echo $designation; ?>">
+														<?php } ?>
+												<?php } ?>
+												<?php
+												if (ucfirst(strtolower($designation))) {
+													echo $designation;
+												} else {
+													echo "Designation";
+												}
+												?></a>
+											</div>
+											<ul class=" left_box_menubar">
+												<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
+													<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" ><?php echo $this->lang->line("details"); ?></a></li>
+												<?php } else if ($hire_user) { ?>
+													<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="javascript:void(0);" ><?php echo $this->lang->line("details"); ?></a></li>
+												<?php } else {
+													if (is_numeric($recliveid)) {
+														$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
+													} else {
+														$slug = $recliveid;
+													} ?>
+													<?php if ($apply_user) { ?>
+														<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-employer/' . $slug); ?>" ><?php echo $this->lang->line("details"); ?></a></li>
+													<?php } else { ?>
+														<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelancer/signup'); ?>" ><?php echo $this->lang->line("details"); ?></a></li>
+													<?php } ?>
+												<?php } ?>
+												<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
+													<li><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
+												<?php } else if ($hire_user) { ?>
+													<li><a title="Projects" href="javascript:void(0);"><?php echo $this->lang->line("Projects"); ?></a></li>
+												<?php } else {
+													if (is_numeric($recliveid)) {
+														$slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $recliveid))->row()->freelancer_hire_slug;
+													} else {
+														$slug = $recliveid;
+													}
+													if ($apply_user) { ?>
+														<li><a title="Projects" href="<?php echo base_url('freelance-employer/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
+													<?php } else { ?>
+														<li><a title="Projects" href="<?php echo base_url('freelancer/signup'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
+													<?php } 
+												}
+												if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+													<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>">Saved</a></li>
+												<?php } ?>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
+							<?php $this->load->view('right_add_box'); ?>
+							<?php echo $left_footer; ?>
 						</div>
-						<?php $this->load->view('right_add_box'); ?>
-						<?php echo $left_footer; ?>
 					</div>
-				</div>
-				<?php
-				$applyuser = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $this->session->userdata('aileenuser'), $data = 'user_id', $join_str = array());
-				if (count($postdata) > 0) {
+					<?php
+					$applyuser = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $this->session->userdata('aileenuser'), $data = 'user_id', $join_str = array());
+					if (count($postdata) > 0) {
 					foreach ($postdata as $post) {
 						$date1=date_create(date('y-m-d'));
 				        $date2=date_create($post_last_date_txt);
@@ -414,7 +414,7 @@
 													if ($freelancerapply1) { ?>
 														<a class="btn4 applied">Applied</a>
 													<?php } else if ($applyuser) { ?>
-														<a href="javascript:void(0);"  class= "applypost btn4"  onClick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id']; ?>)"> Apply</a>
+														<a href="javascript:void(0);"  class= "applypost btn4"  onclick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id']; ?>)"> Apply</a>
 														<?php
 														$userid = $this->session->userdata('aileenuser');
 														$contition_array = array('user_id' => $userid, 'job_save' => '2', 'post_id ' => $post['post_id'], 'job_delete' => '1');
@@ -422,7 +422,7 @@
 														if ($data) { ?>
 															<a class="btn4 saved savedpost<?php echo $post['post_id']; ?>">Saved</a>
 														<?php } else { ?>
-															<a href="javascript:void(0);" id="<?php echo $post['post_id']; ?>" onClick="savepopup(<?php echo $post['post_id']; ?>)" class="btn4 savedpost<?php echo $post['post_id']; ?>">Save</a>
+															<a href="javascript:void(0);" id="<?php echo $post['post_id']; ?>" onclick="savepopup(<?php echo $post['post_id']; ?>)" class="btn4 savedpost<?php echo $post['post_id']; ?>">Save</a>
 														<?php }
 													} else { ?> 
 														<a href="javascript:void(0);" onclick="signuppopup();" class= "applypost btn4"> Apply</a>
@@ -535,7 +535,7 @@
 													?>
 													<a href="javascript:void(0);" class="btn4 applied">Applied</a>
 													<?php } else if ($applyuser) { ?>
-													<a href="javascript:void(0);"  class= "applypost btn4"  onClick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id']; ?>)"> Apply</a>
+													<a href="javascript:void(0);"  class= "applypost btn4"  onclick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id']; ?>)"> Apply</a>
 													<?php
 													$userid = $this->session->userdata('aileenuser');
 													$contition_array = array('user_id' => $userid, 'job_save' => '2', 'post_id ' => $post['post_id'], 'job_delete' => '1');
@@ -545,7 +545,7 @@
 													?>
 													<a href="javascript:void(0);" class="btn4 saved savedpost<?php echo $post['post_id']; ?>">Saved</a>
 													<?php } else { ?>
-													<a href="javascript:void(0);" id="<?php echo $post['post_id']; ?>" onClick="savepopup(<?php echo $post['post_id']; ?>)" class="btn4 savedpost<?php echo $post['post_id']; ?>">Save</a>
+													<a href="javascript:void(0);" id="<?php echo $post['post_id']; ?>" onclick="savepopup(<?php echo $post['post_id']; ?>)" class="btn4 savedpost<?php echo $post['post_id']; ?>">Save</a>
 													<?php }
 													?>
 
@@ -686,22 +686,26 @@
 						</div>
 						<?php
 					}
-				} else { ?>
-				<div class="inner-right-part cust-border">
-					<div class="art-img-nn">
-						<div class="art_no_post_img">
-							<img alt="No projects" src="<?php echo base_url() . 'assets/img/job-no.png'; ?>">
+					}
+					else
+					{ ?>
+						<div class="inner-right-part cust-border">
+							<div class="art-img-nn">
+								<div class="art_no_post_img">
+									<img alt="No projects" src="<?php echo base_url() . 'assets/img/job-no.png'; ?>">
 
-						</div>
-						<div class="art_no_post_text">
-							No  Post Available.
-						</div>
-					</div>
+								</div>
+								<div class="art_no_post_text">
+									No  Post Available.
+								</div>
+							</div>
+						</div> <?php 
+					} ?>
 				</div>
-				<?php } ?>
+				<!-- MIDDLE SECTION END -->
 			</div>
-			<!-- MIDDLE SECTION END -->
-		</section>
+		</div>
+	</section>
 	<!-- END CONTAINER -->
 
 	<!-- BEGIN FOOTER -->
@@ -747,20 +751,13 @@
 	<?php echo $footer; ?>
 </body>
 
-<!-- END FOOTER -->			
-
 <!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script> -->
 <!-- FIELD VALIDATION JS START -->
 <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-
-<script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script> 
+<script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>
 <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
 <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-
-
-
 <script>
 var base_url = '<?php echo base_url(); ?>';
 var data1 = <?php echo json_encode($de); ?>;
@@ -771,51 +768,29 @@ var id = '<?php echo $this->uri->segment(3); ?>';
 var return_page = '<?php echo $_GET['page']; ?>';
 var header_all_profile = '<?php echo $header_all_profile; ?>';
 
-
 function removepopup(id) {
-
-$('.biderror .mes').html("<div class='pop_content'>Do you want to remove this project?<div class='model_ok_cancel'><a class='okbtn' id=" + id + " onClick='remove_post(" + id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
-$('#bidmodal').modal('show');
+	$('.biderror .mes').html("<div class='pop_content'>Do you want to remove this project?<div class='model_ok_cancel'><a class='okbtn' id=" + id + " onclick='remove_post(" + id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+	$('#bidmodal').modal('show');
 }
-
-//remove post start
 
 function remove_post(abc)
 {
 
-$.ajax({
-type: 'POST',
-url: '<?php echo base_url() . "freelancer/remove_post" ?>',
-data: 'post_id=' + abc,
-success: function (data) {
-$('#' + 'removeapply' + abc).html(data);
-$('#' + 'removeapply' + abc).parent().removeClass();
-
-var numItems = $('.contact-frnd-post .job-contact-frnd').length;
-if (numItems == '0') {
-// var nodataHtml = "<div class='text-center rio'><h4 class='page-heading  product-listing' style='border:0px;margin-bottom: 11px;'>No Project Found.</h4></div>";
-var nodataHtml = '<div class="art-img-nn"><div class="art_no_post_img"><img alt="No Projects" src="../img/free-no1.png"></div><div class="art_no_post_text">No Project Found</div></div>';
-$('.contact-frnd-post').html(nodataHtml);
-
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo base_url() . "freelancer/remove_post" ?>',
+		data: 'post_id=' + abc,
+		success: function (data) {
+			$('#' + 'removeapply' + abc).html(data);
+			$('#' + 'removeapply' + abc).parent().removeClass();
+			var numItems = $('.contact-frnd-post .job-contact-frnd').length;
+			if (numItems == '0') {
+				var nodataHtml = '<div class="art-img-nn"><div class="art_no_post_img"><img alt="No Projects" src="../img/free-no1.png"></div><div class="art_no_post_text">No Project Found</div></div>';
+				$('.contact-frnd-post').html(nodataHtml);
+			}
+		}
+	});
 }
-
-
-}
-});
-
-}
-</script>
-<script>
-// jQuery(document).ready(function($) {
-//     $("li.user-id label").click(function(e){
-//     	$(".dropdown").removeClass("open");
-//      $(this).next('ul.dropdown-menu').toggle();
-//      e.stopPropagation();
-//  });
-//  $(".right-header ul li.dropdown a").click(function(e){                        	
-//      $('.right-header ul.dropdown-menu').hide();
-//  });
-// });
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 </html>    

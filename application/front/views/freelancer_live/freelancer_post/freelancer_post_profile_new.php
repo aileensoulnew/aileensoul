@@ -64,7 +64,7 @@
             if($fa_data['is_indivdual_company'] == '1')
             {
                 $fa_fullname = $fa_data['fullname'].' '.$fa_data['username'];
-                $fa_no_img = strtoupper(substr($fa_data['fullname'], 0,1).' '.substr($fa_data['username'], 0,1));
+                $fa_no_img = strtoupper(substr($fa_data['fullname'], 0,1).substr($fa_data['username'], 0,1));
             }
             else
             {
@@ -80,7 +80,7 @@
             $first_name = ucwords($freelancerpostdata[0]['freelancer_post_fullname']);
             $last_name = ucwords($freelancerpostdata[0]['freelancer_post_username']);
             $fullname = $first_name.' '.$last_name;
-            $name_no_img = strtoupper(substr($first_name, 0,1).' '.substr($last_name, 0,1));
+            $name_no_img = strtoupper(substr($first_name, 0,1).substr($last_name, 0,1));
             $is_indivdual_company = 1;
         }
         else
@@ -362,7 +362,7 @@
                                 <div id="basic-info-body" style="display: none;">
                                     <div id="basic-detail" class="dtl-dis dtl-box-height">
                                         <ul class="dis-list">                                        
-                                            <li ng-if="basic_info.current_position">
+                                            <li ng-if="basic_info.current_position_txt">
                                                 <span>Job Title</span>
                                                 <label>{{basic_info.current_position_txt}}</label>
                                             </li>
@@ -388,8 +388,7 @@
                                                 <label ng-if="basic_info.city_name != ''">{{basic_info.city_name}}{{basic_info.city_name != '' && basic_info.state_name != '' ? ',' : ''}}</label>
                                                 <label ng-if="basic_info.state_name != ''"> {{basic_info.state_name}}{{basic_info.state_name != '' && basic_info.country_name != '' ? ',' : ''}}</label>
                                                 <label ng-if="basic_info.country_name != ''"> {{basic_info.country_name}}</label>
-                                            </li>
-                                            
+                                            </li>                                            
                                         </ul>
                                     </div>                                
                                 </div>

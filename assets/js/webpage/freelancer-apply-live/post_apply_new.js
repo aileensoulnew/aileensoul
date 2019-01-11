@@ -1,5 +1,4 @@
 app.directive('ddTextCollapse', ['$compile', function($compile) {
-
     return {
         restrict: 'A',
         scope: true,
@@ -214,7 +213,6 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
     //apply post start
     $scope.applypopup = function(postid, userid)
     {
-        
         if(login_user_id == "" || fa_profile_set == 0)
         {                
             /*if(login_user_id == ""){
@@ -242,6 +240,11 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
             url:  base_url + "freelancer/apply_insert",
             data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
             success: function (data) {
+                clearInterval(int_not_count);            
+                get_notification_unread_count();
+                int_not_count = window.setInterval(function(){
+                  get_notification_unread_count();
+                }, 10000);
                 $('.savedpost' + abc).hide();                
                 var $eln = $('.applypost' + abc).html("Applied");
                 $compile($eln)($scope);
@@ -254,8 +257,7 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
     //apply post end
 
     //save post start 
-    $scope.savepopup  = function(id) {
-        
+    $scope.savepopup  = function(id) {        
         if(login_user_id == "" || fa_profile_set == 0)
         {
             /*if(login_user_id == ""){
@@ -358,8 +360,7 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
                 });
             }
         );
-    };
-   
+    };   
 });
 
 $(window).on("load", function () {
@@ -368,24 +369,3 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
-
-    // NEW HTML SCRIPT
-
-    AOS.init({
-        easing: 'ease-in-out-sine'
-    });
-
-    setInterval(addItem, 100);
-
-    var itemsCounter = 1;
-    var container = document.getElementById('aos-demo');
-
-    function addItem () {
-        if (itemsCounter > 42) return;
-        var item = document.createElement('div');
-        item.classList.add('aos-item');
-        item.setAttribute('data-aos', 'fade-up');
-        item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-        // container.appendChild(item);
-        itemsCounter++;
-    }

@@ -33,7 +33,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
             $first_name = ucwords($freelancerdata[0]['freelancer_post_fullname']);
             $last_name = ucwords($freelancerdata[0]['freelancer_post_username']);
             $fullname = $first_name.' '.$last_name;
-            $name_no_img = strtoupper(substr($first_name, 0,1).' '.substr($last_name, 0,1));
+            $name_no_img = strtoupper(substr($first_name, 0,1).substr($last_name, 0,1));
         }
         else
         {
@@ -314,7 +314,17 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                             <div class="page-title">
                                 <h3>Recommended Projects</h3>
                             </div>
-
+                            <div class="mob-progressbar fw">
+                                <p>Complete your profile to get connected with more people.</p>
+                                <p class="mob-edit-pro">
+                                    <a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                </p>
+                                <div class="progress skill-bar ">
+                                    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="skill"><i class="val">0%</i></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="job-contact-frnd1">
                                 <div class="user_no_post_avl ng-scope" ng-if="freepostapply.length == 0">
                                     <div class="user-img-nn">
@@ -635,21 +645,9 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
             </div>
         </div>
         <!-- Model Popup Close -->
-        <?php
-        if (IS_APPLY_JS_MINIFY == '0') {
-            ?>
-            <!-- <script async src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
-            <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
-            <?php
-        } else {
-            ?>
-            <!-- <script async src="<?php // echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> -->
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>"></script>
-        <?php } ?>        
-        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
-
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         
+        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>      
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
@@ -658,7 +656,6 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
-
 
         <script type="text/javascript">
             $(".alert").delay(3200).fadeOut(300);
@@ -673,26 +670,10 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
             var app = angular.module('FARecommendedProject', ['ui.bootstrap','angular-google-adsense']);
         </script>
 
-        <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-        <!-- <script async type="text/javascript" src="<?php //echo base_url('assets/js/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script> -->
+        <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>        
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/post_apply_new.js?ver=' . time()); ?>"></script>
-        <?php
-        /*if (IS_APPLY_JS_MINIFY == '0') {
-            ?>
-            <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
-            <?php
-        } else {
-            ?>
-            <script  src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
-        <?php }*/ ?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/post_apply_new.js?ver=' . time()); ?>"></script>        
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     </body>               
 </html>

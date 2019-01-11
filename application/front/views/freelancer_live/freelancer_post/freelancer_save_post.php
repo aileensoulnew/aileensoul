@@ -18,7 +18,7 @@
                 $first_name = ucwords($freelancerpostdata[0]['freelancer_post_fullname']);
                 $last_name = ucwords($freelancerpostdata[0]['freelancer_post_username']);
                 $fullname = $first_name.' '.$last_name;
-                $name_no_img = strtoupper(substr($first_name, 0,1).' '.substr($last_name, 0,1));
+                $name_no_img = strtoupper(substr($first_name, 0,1).substr($last_name, 0,1));
                 $is_indivdual_company = 1;
             }
             else
@@ -26,7 +26,10 @@
                 $fullname = ucwords($freelancerpostdata[0]['comp_name']);
                 $name_no_img = strtoupper(substr($fullname, 0,1));
                 $is_indivdual_company = 2;
-            } ?>
+            }
+            $userid = $this->session->userdata('aileenuser');
+            $login_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
+                                 ?>
             <section class="custom-row">
                 <div class="container" id="paddingtop_fixed">
                     <div class="row" id="row1" style="display:none;">
@@ -104,7 +107,7 @@
                                             <img src="<?php echo FREE_POST_PROFILE_MAIN_UPLOAD_URL . $freepostdata['freelancer_post_user_image']; ?>" alt="<?php echo $fullname; ?>" >
                                         <?php } else { ?>
                                             <div class="post-img-user">
-                                                <?php echo ucfirst(strtolower($name_no_img)); ?>
+                                                <?php echo strtoupper($name_no_img); ?>
                                             </div>
                                             <?php
                                         }
@@ -112,7 +115,7 @@
                                 } else {
                                     ?>
                                     <div class="post-img-user">
-                                        <?php echo ucfirst(strtolower($name_no_img)); ?>
+                                        <?php echo strtoupper($name_no_img); ?>
                                     </div>
                                 <?php } ?>
                                 <a title="Update Profile Picture" href="javascript:void(0);" class="cusome_upload" onclick="updateprofilepopup();"><img alt="Update Profile Picture"  src="<?php echo base_url('assets/img/cam.png'); ?>"> <?php echo $this->lang->line("update_profile_picture"); ?></a>
@@ -125,9 +128,7 @@
                         </div>
                         <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
                             <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr"> 
-                                <?php
-                                $userid = $this->session->userdata('aileenuser');
-                                $login_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
+                                <?php                                
                                 if ($freepostdata['user_id'] == $userid) {
                                     ?>     
                                     <ul class="current-user pro-fw">
@@ -156,6 +157,17 @@
 							<div class="tab-add-991">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
+                            <div class="mob-progressbar fw">
+                                <p>Complete your profile to get connected with more people.</p>
+                                <p class="mob-edit-pro">
+                                    <a href="<?php echo base_url('freelancer/').$login_slug; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                </p>
+                                <div class="progress skill-bar ">
+                                    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="skill"><i class="val">0%</i></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="page-title">
                                 <h3>Saved Projects</h3>
                             </div>
@@ -248,7 +260,6 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>">
         </script>
 
-
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var no_saved = '<?php echo $this->lang->line("no_saved_freelancer"); ?>';
@@ -259,36 +270,27 @@
         </script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_save_post.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
-        <?php
-        /*if (IS_APPLY_JS_MINIFY == '0') {
-            ?>
-            <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_save_post.js?ver=' . time()); ?>"></script>
-            <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
-            <?php
-        } else {
-            ?>
-            <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_save_post.js?ver=' . time()); ?>"></script>
-            <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
-        <?php }*/ ?>
+        
         <script>
             //APPLY FOR PROJECT CODE START
             function apply_post(abc, xyz)
             {
-
                 var alldata = 'all';
                 var user = <?php echo $aileenuser_id; ?>;
                 var appid = xyz;
 
                 $.ajax({
                     type: 'POST',
-                    url: '<?php echo base_url() . "freelancer/apply_insert" ?>',
+                    url: '<?php echo base_url() . "freelancer/apply_insert"; ?>',
                     data: 'post_id=' + abc + '&allpost=' + alldata.value + '&userid=' + user,
                     success: function (data) {
-
-                        $('#' + 'postdata' + appid).html(data.status);
-                        $('#' + 'postdata' + appid).remove();
+                        clearInterval(int_not_count);            
+                        get_notification_unread_count();
+                        int_not_count = window.setInterval(function(){
+                          get_notification_unread_count();
+                        }, 10000);
+                        $('#postdata' + appid).html(data.status);
+                        $('#postdata' + appid).remove();
                         var numItems = $('.job-contact-frnd1 .all-job-box').length;
                         if (numItems == '0') {
                             var nodataHtml = "<div class='text-center rio'><h4 class='page-heading  product-listing' style='border:0px;margin-bottom: 11px;'>No Saved Job Found.</h4></div>";
@@ -305,7 +307,7 @@
                 });
             }
             function applypopup(postid, appid) {
-                $('.biderror .mes').html("<div class='pop_content'>Do you want to apply for this work?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + appid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+                $('.biderror .mes').html("<div class='pop_content'>Do you want to apply for this work?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onclick='apply_post(" + postid + "," + appid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
                 $('#bidmodal').modal('show');
             }
             //APPLY FOR PROJECT CODE END

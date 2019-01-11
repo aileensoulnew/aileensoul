@@ -1173,8 +1173,8 @@ class Freelancer extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1', 'free_post_step' => '7');
         $freelancerdata = $this->data['freelancerdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->data['title'] = 'Get Freelance Work Suggestion | Aileensoul';
-        $this->data['metadesc'] = 'Aileensoul provides you the freelance job recommendation based on your skills and interest. Apply and Get the work. ';
+        $this->data['title'] = 'Get Freelance Work Suggestion'.TITLEPOSTFIX;
+        $this->data['metadesc'] = 'Aileensoul provides you the freelance job recommendation based on your skills and interest. Apply and Get the work.';
         $this->load->view('freelancer_live/freelancer_post/post_apply', $this->data);
     }
 
@@ -1188,7 +1188,7 @@ class Freelancer extends MY_Controller {
             $page = $_GET["page"];
         }
 
-        $limit = 3;
+        $limit = 5;
         $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
         
         $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
@@ -1334,7 +1334,13 @@ class Freelancer extends MY_Controller {
                 if ($updatedata) {
                     if ($para == 'all') {
                         // apply mail start
-                        $this->apply_email($notid,$id);
+                        // $this->apply_email($notid,$id);
+                        $url = base_url()."freelancer/apply_email";
+                        $param = array(
+                            "notid" => $notid,
+                            "post_id" => $id,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
 
                         $applypost = 'Applied';
                     }
@@ -1375,7 +1381,13 @@ class Freelancer extends MY_Controller {
                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                 // end notoification
                 if ($insert_id) {
-                    $this->apply_email($notid,$id);
+                    // $this->apply_email($notid,$id);
+                    $url = base_url()."freelancer/apply_email";
+                    $param = array(
+                        "notid" => $notid,
+                        "post_id" => $id,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                     $applypost = 'Applied';
                 }
                 // GET NOTIFICATION COUNT
@@ -1760,13 +1772,19 @@ class Freelancer extends MY_Controller {
         $limit = $perpage;
         $offset = $start;
 
-        $contition_array = array('freelancer_apply.job_delete' => '1', 'freelancer_apply.user_id' => $userid, 'freelancer_apply.job_save' => '2');
+        $contition_array = array('freelancer_apply.job_delete' => '1', 'freelancer_apply.user_id' => $userid, 'freelancer_apply.job_save' => '2', 'freelancer_post.is_delete' => '0', 'freelancer_post.status' => '1');
         $postdetail = $this->data['postdetail'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = 'freelancer_apply.app_id, freelancer_post.post_id, freelancer_post.user_id, freelancer_post.created_date, freelancer_post.post_name, freelancer_post.post_field_req, freelancer_post.post_est_time, freelancer_post.post_skill, freelancer_post.post_exp_month, freelancer_post.post_exp_year, freelancer_post.post_other_skill, freelancer_post.post_description, freelancer_post.post_rate, freelancer_post.post_last_date, freelancer_post.post_currency, freelancer_post.post_rating_type, freelancer_post.country, freelancer_post.city', $sortby = 'freelancer_apply.modify_date', $orderby = 'desc', $limit, $offset, $join_str, $groupby = '');
         $postdetail1 = $this->data['postdetail'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = 'freelancer_apply.app_id, freelancer_post.post_id, freelancer_post.user_id, freelancer_post.created_date, freelancer_post.post_name, freelancer_post.post_field_req, freelancer_post.post_est_time, freelancer_post.post_skill, freelancer_post.post_exp_month, freelancer_post.post_exp_year, freelancer_post.post_other_skill, freelancer_post.post_description, freelancer_post.post_rate, freelancer_post.post_last_date, freelancer_post.post_currency, freelancer_post.post_rating_type, freelancer_post.country, freelancer_post.city', $sortby = 'freelancer_apply.modify_date', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($postdetail1);
         }
-        $return_html = '';
+        $this->data['total_record'] = count($postdetail1);
+        $this->data['postdetail'] = $postdetail;
+        $this->data['page'] = $page;
+        $this->data['perpage'] = $perpage;
+        $this->load->view('freelancer_live/freelancer_post/freelancer_save_post_view', $this->data);
+
+        /*$return_html = '';
         $return_html .= '<input type="hidden" class="page_number" value="' . $page . '" />';
         $return_html .= '<input type="hidden" class="total_record" value="' . $_GET["total_record"] . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
@@ -1923,7 +1941,7 @@ class Freelancer extends MY_Controller {
             $return_html .= '</div>
                                             </div>';
         }
-        echo $return_html;
+        echo $return_html;*/
     }
 
     //AJAX_FREELANCER_APPLY SAVE POST(PROJECT) END
@@ -2074,9 +2092,16 @@ class Freelancer extends MY_Controller {
         $this->data['category_data'] = $this->common->select_data_by_search('category', $search_condition, $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         // print_r($apply_data);exit;
-        $skills = $this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        if($apply_data[0]['freelancer_post_area'] != '')
+        {
+            $skills = "Skills: ".$this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        }
+        else
+        {
+            $skills = "";
+        }
         $this->data['title'] = "Freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) . " Profile";
-        $this->data['metadesc'] = "Connect with freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) ." on Aileensoul. Field: ".$field.". Skills: ".$skills.". Experience: ".($apply_data[0]['freelancer_post_exp_year']) . " " . ($apply_data[0]['freelancer_post_exp_month']).".";
+        $this->data['metadesc'] = "Connect with freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) ." on Aileensoul. Field: ".$field.".".$skills.". Experience: ".($apply_data[0]['freelancer_post_exp_year']) . " " . ($apply_data[0]['freelancer_post_exp_month']).".";
 
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile_new', $this->data);
     }
@@ -2115,8 +2140,15 @@ class Freelancer extends MY_Controller {
         
 
 
-        // print_r($apply_data);exit;
-        $skills = $this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        // print_r($apply_data);exit;        
+        if($apply_data[0]['freelancer_post_area'] != '')
+        {
+            $skills = "Skills: ".$this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        }
+        else
+        {
+            $skills = "";
+        }
         $this->data['title'] = "Freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) . " Profile";
         $this->data['metadesc'] = "Connect with freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) ." on Aileensoul. Field: ".$field.". Skills: ".$skills.". Experience: ".($apply_data[0]['freelancer_post_exp_year']) . " " . ($apply_data[0]['freelancer_post_exp_month']).".";
 
@@ -2157,8 +2189,15 @@ class Freelancer extends MY_Controller {
         
 
 
-        // print_r($apply_data);exit;
-        $skills = $this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        // print_r($apply_data);exit;        
+        if($apply_data[0]['freelancer_post_area'] != '')
+        {
+            $skills = "Skills: ".$this->freelancer_apply_model->getSkillsNames($apply_data[0]['freelancer_post_area']);
+        }
+        else
+        {
+            $skills = "";
+        }
         $this->data['title'] = "Freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) . " Profile";
         $this->data['metadesc'] = "Connect with freelancer ".ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) ." on Aileensoul. Field: ".$field.". Skills: ".$skills.". Experience: ".($apply_data[0]['freelancer_post_exp_year']) . " " . ($apply_data[0]['freelancer_post_exp_month']).".";
 
@@ -2722,7 +2761,9 @@ class Freelancer extends MY_Controller {
     //FREELANCER_APPLY BOTH OTHER FIELD END
 
     //FREELANCER APPLY AS APPLIED ON POST SEND MAIL START
-    public function apply_email($notid,$post_id) {
+    public function apply_email() {
+        $notid = $this->input->post('notid');
+        $post_id = $this->input->post('post_id');
 
         $userid = $this->session->userdata('aileenuser');
         $applydata = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $userid, $data = 'freelancer_post_fullname,freelancer_post_username,freelancer_post_user_image,freelancer_apply_slug', $join_str = array());
@@ -3076,7 +3117,13 @@ class Freelancer extends MY_Controller {
                                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                                 // end notoification
                                 if ($insert_id) {
-                                    $this->apply_email($notid,$id);
+                                    // $this->apply_email($notid,$id);
+                                    $url = base_url()."freelancer/apply_email";
+                                    $param = array(
+                                        "notid" => $notid,
+                                        "post_id" => $id,
+                                    );
+                                    $this->inbackground->do_in_background($url, $param);
                                     $applypost = 'Applied';
                                 }
                                 // echo $applypost;
@@ -5007,7 +5054,7 @@ class Freelancer extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
-        // $ret_arr['profile_progress'] = $this->progressbar_new($userid);
+        $ret_arr['profile_progress'] = $this->progressbar_new($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 

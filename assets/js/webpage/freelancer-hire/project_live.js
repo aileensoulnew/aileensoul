@@ -32,6 +32,12 @@ function apply_post(abc, xyz) {
         dataType:'json',
         success: function (data) {
             
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
+
             $('.savedpost' + abc).hide();
             $('.applypost').html(data.status);
             $('.applypost').attr('disabled', 'disabled');
@@ -39,10 +45,10 @@ function apply_post(abc, xyz) {
             $('.applypost').addClass('applied');
             
             if (data.notification.notification_count != 0) {
-                            var notification_count = data.notification.notification_count;
-                            var to_id = data.notification.to_id;
-                            show_header_notification(notification_count, to_id);
-                        }
+                var notification_count = data.notification.notification_count;
+                var to_id = data.notification.to_id;
+                show_header_notification(notification_count, to_id);
+            }
         }
     });
 }

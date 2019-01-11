@@ -1,51 +1,4 @@
 
-
-//VALIDATION FOR PROFILE PIC START
-//$(document).ready(function () {
-//    $("#userimage").validate({
-//        rules: {
-//            profilepic: {
-//                required: true,
-//            },
-//        },
-//        messages: {
-//            profilepic: {
-//                required: "Photo Required",
-//            },
-//        },
-//        submitHandler: profile_pic
-//    });
-//});
-//VALIDATION FOR PROFILE PIC END
-//UOPLOAD PROFILE PIC START
-//function profile_pic() {
-//    if (typeof FormData !== 'undefined') {
-//        // var fd = new FormData();
-//        var formData = new FormData($("#userimage")[0]);
-////    fd.append("image", $("#profilepic")[0].files[0]);
-////         files = this.files;
-//        $.ajax({
-//            // url: "<?php echo base_url(); ?>freelancer/user_image_insert",
-//            url: base_url + "freelancer/user_image_add",
-//            type: "POST",
-//            data: formData,
-//            contentType: false,
-//            cache: false,
-//            processData: false,
-//            success: function (data)
-//            {
-//                $('#bidmodal-2').modal('hide');
-//                $(".user-pic").html(data);
-//                document.getElementById('profilepic').value = null;
-//                //document.getElementById('profilepic').value == '';
-//                $('#preview').prop('src', '#');
-//                $('.popup_previred').hide();
-//            },
-//        });
-//        return false;
-//    }
-//}
-//UOPLOAD PROFILE PIC END
 //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
 $(document).ready(function () {
 
@@ -172,30 +125,6 @@ function check() {
         return false;
     }
 }
-//CHECK SEARCH KEYWORD AND LOCATION BLANK END
-
-//function readURL(input) {
-//    if (input.files && input.files[0]) {
-//        var reader = new FileReader();
-//        reader.onload = function (e) {
-//            document.getElementById('preview').style.display = 'block';
-//            $('#preview').attr('src', e.target.result);
-//            $('.popup_previred').show();
-//        }
-//        reader.readAsDataURL(input.files[0]);
-//    }
-//}
-//$("#profilepic").change(function () {
-//    profile = this.files;
-//    if (!profile[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
-//        $('#profilepic').val('');
-//        picpopup();
-//        return false;
-//    } else {
-//        readURL(this);
-//    }
-//});
-//UPLOAD PROFILE PIC CODE END
 
 function picpopup() {
     $('.biderror .mes').html("<div class='pop_content'>Please select only Image type File.(jpeg,jpg,png,gif)");
@@ -271,7 +200,8 @@ function set_progress(count_profile_value,count_profile)
         $("#profile-progress").show();
         $("#progress-txt").html("Hurray! Your profile is complete.");
         setTimeout(function(){
-            // $("#edit-profile-move").hide();
+            $("#profile-progress").hide();
+            $(".mob-progressbar").hide();
         },5000);
     }
     else
@@ -285,6 +215,8 @@ function set_progress(count_profile_value,count_profile)
         $('.second.circle-1').circleProgress({
             value: count_profile_value //with decimal point
         }).on('circle-animation-progress', function(event, progress) {
+            $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+            $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
             $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
         });
     }
