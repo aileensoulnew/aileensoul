@@ -3469,6 +3469,7 @@ text-transform:uppercase;}
 .sugg-list .user-info-text .user-name{font-size:15px; color:#5c5c5c; display:block;}
 .sugg-list .user-info-text .user-des{font-size:14px; color:#8c8c8c; display:block;}
 .sugg-list .author-btn .user-btns a.btn3{font-size: 16px; font-weight: normal; width:150px;}
+.sugg-list .arti-profile-box{margin-bottom:0;}
 
 
 /***  media query  ***/
@@ -4464,6 +4465,7 @@ text-transform:uppercase;}
 	.post-images .two-img{height:150px;}
 	.all-job-top{padding:10px;}
 	.all-job-middle{padding:10px;}
+	.all-job-middle p{width:100%; float:left;}
 	.all-upload .upload_icon{font-size:12px;}
 	/*.post-box-bottom ul li:last-child{padding-left:0; padding-top:5px;}*/
 	.media-pages-tablet ul li a{font-size:11px;}
