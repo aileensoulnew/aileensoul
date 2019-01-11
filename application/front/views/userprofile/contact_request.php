@@ -29,40 +29,36 @@
                     <div class="custom-user-list">
                         <div class="list-box-custom" ng-if="pending_contact_request_data.length > '0'">
                             <h3 class="mob-border-top-1">Pending Contact Request</h3>
-                            <div class="all-list">
+                            <div class="sugg-list">
                                 <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
-                                </div>
-                                <!-- <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
-                                    <div class="no-data-content">
-                                        <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                        <p class="pt20">No Pending Contact Request</p>
-                                    </div>
-                                </div> -->
-                                <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length != '0'">
+                                </div>                                
+                                <ul class="">
                                     <li ng-repeat="contact in pending_contact_request_data">
-                                        <div class="list-box">
-                                            <div class="profile-img">
+                                        <div class="arti-profile-box">
+                                        	<div class="user-cover-img">
+												<a href="<?php echo base_url();?>{{contact.user_slug}}" target="_self">
+													<img ng-if="contact.profile_background" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+													<div ng-if="!contact.profile_background" class="gradient-bg" style="height: 100%"></div>
+												</a>
+											</div>
+											<div class="user-pr-img">
+												<a href="<?php echo base_url();?>{{contact.user_slug}}" target="_self">
+													<img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}" ng-if="contact.user_image">                                                
+                                                    <img ng-if="!contact.user_image && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="!contact.user_image && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+												</a>
+											</div>                                            
+                                            <div class="user-info-text text-center">
                                                 <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
-                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}" alt="{{contact.fullname}}" ng-if="contact.user_image != ''">                                                
-                                                     <img ng-if="contact.user_image == '' && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                    <img ng-if="contact.user_image == '' && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                </a>
+                                                	<span title="{{contact.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="contact.fullname | capitalize"></span>
+													<span class="user-des main_data_cq" title="{{contact.title_name}}" ng-if="contact.title_name != ''">{{contact.title_name}}</span>
+													<span class="user-des main_data_cq" title="{{contact.degree_name}}" ng-if="contact.degree_name != ''">{{contact.degree_name}}</span>
+													<span class="user-des main_data_cq" title="Current Work" ng-if="contact.title_name == null && contact.degree_name == null">Current Work</span>
+												</a>
                                             </div>
-                                            <div class="profile-content">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
-                                                    <div class="main_data_cq">   
-                                                        <span title="{{contact.fullname}}" class="main_compny_name" ng-bind="contact.fullname | capitalize"></span>
-                                                    </div>
-                                                    <div class="main_data_cq">
-                                                        <span class="dc_cl_m" title="{{contact.designation| capitalize}}" ng-if="contact.designation" ng-bind="contact.designation | capitalize"></span>
-                                                        <span class="dc_cl_m" title="{{contact.degree| capitalize}}" ng-if="contact.degree" ng-bind="contact.degree | capitalize"></span>
-                                                        <span class="dc_cl_m" title="Current Work" ng-if="contact.designation == '' && contact.degree == ''">CURRENT WORK</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="fw">
-                                                <p class="request-btn">
+                                            <div class="author-btn">
+                                            	<p class="request-btn">
                                                     <a href="javascript:void(0);" class="btn1 pull-left" ng-click="confirmContact(contact.from_id, $index)">
                                                         Confirm
                                                     </a>
@@ -101,7 +97,7 @@
                                                     <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
 												</a>
 											</div>
-											<div class="user-info-text text-center main_data_cq">
+											<div class="user-info-text text-center">
 												<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
 													<span title="{{suggest.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="suggest.fullname | capitalize"></span>
 													<span class="user-des main_data_cq" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
@@ -116,7 +112,7 @@
 												</div>
 											</div>
 										</div>
-									</li>																		
+									</li>
 								</ul>
 								<div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />

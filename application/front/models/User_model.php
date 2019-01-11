@@ -243,7 +243,7 @@ class User_model extends CI_Model {
     public function contact_request_pending($user_id = '') {
 //        $this->db->select("uc.from_id,uc.to_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname")->from("user_contact uc");
 //        $this->db->join('user u', 'u.user_id = (CASE WHEN uc.from_id=' . $user_id . ' THEN uc.to_id ELSE uc.from_id END)');
-        $this->db->select("uc.from_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname,u.user_gender, u.user_slug,ui.user_image,jt.name as designation,d.degree_name as degree")->from("user_contact uc");
+        $this->db->select("uc.from_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname,u.user_gender, u.user_slug,ui.user_image,ui.profile_background,jt.name as designation,d.degree_name as degree")->from("user_contact uc");
         $this->db->join('user u', 'u.user_id = uc.from_id');
         $this->db->join('user_info ui', 'ui.user_id = uc.from_id');
         $this->db->join('user_profession up', 'up.user_id = uc.from_id', 'left');
