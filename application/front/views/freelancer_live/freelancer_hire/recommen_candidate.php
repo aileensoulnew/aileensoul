@@ -250,6 +250,17 @@
 									<!-- <div class="tab-add">
 										<?php //$this->load->view('banner_add'); ?>
 									</div> -->
+                                    <div class="mob-progressbar fw">
+                                        <p>Complete your profile to get connected with more people.</p>
+                                        <p class="mob-edit-pro">
+                                            <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                        </p>
+                                        <div class="progress skill-bar ">
+                                            <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                                <span class="skill"><i class="val">0%</i></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <h3><?php echo $this->lang->line("recommended_freelancer"); ?></h3>
                                     <div class="contact-frnd-post">
 
@@ -271,10 +282,23 @@
                         <!-- middle div  -->
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 							<?php $this->load->view('right_add_box'); ?>
-                            
-
+                            <div id="profile-progress" class="right-add-box" style="display: none;">
+                                <div class="p20">                                    
+                                    <div class="edit_profile_progress">
+                                        <div class="count_main_progress">
+                                            <div class="circles">
+                                                <div class="second circle-1">
+                                                    <div>
+                                                        <strong></strong>
+                                                        <span id="progress-txt"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -447,24 +471,13 @@
             var otherfiled = '<?php echo $otherfiled; ?>';
             var totalpost = '<?php echo $login_user_totalpost; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var fh_slug = '<?php echo $free_hire_login_slug; ?>';
             var app = angular.module('freelancerHireListApp', ['ui.bootstrap']);
         </script>  
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-
-        <!-- <script>
-             var header_all_profile = '<?php //echo $header_all_profile; ?>';
-        </script>
-        <script src="<?php //echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
- -->
-        <?php //if (IS_HIRE_JS_MINIFY == '0') { ?>
-            
-        <?php //} else { ?>
-            <!-- <script src="<?php //echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script> -->
-            <!--<script async type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>-->
-            <!--<script async type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
-        <?php //} ?>
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
     </body>
 </html>

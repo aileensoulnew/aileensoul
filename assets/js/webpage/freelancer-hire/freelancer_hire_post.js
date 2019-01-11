@@ -241,13 +241,14 @@ function set_progress(count_profile_value,count_profile)
         $("#profile-progress").show();
         $("#progress-txt").html("Hurray! Your profile is complete.");
         setTimeout(function(){
-            // $("#edit-profile-move").hide();
+            $("#profile-progress").hide();
+            $(".mob-progressbar").hide();
         },5000);
     }
     else
     {
         $("#edit-profile-move").show();
-        $("#profile-progress").show();                
+        $("#profile-progress").show();
         $("#progress-txt").html("<a href='"+base_url+'freelance-employer/'+fh_slug+"'>Complete your profile to get connected with more people</a>.");   
     }
     // if($scope.old_count_profile < 100)
@@ -255,6 +256,8 @@ function set_progress(count_profile_value,count_profile)
         $('.second.circle-1').circleProgress({
             value: count_profile_value //with decimal point
         }).on('circle-animation-progress', function(event, progress) {
+            $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+            $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
             $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
         });
     }

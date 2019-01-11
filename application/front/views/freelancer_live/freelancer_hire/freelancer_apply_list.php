@@ -303,14 +303,7 @@
                 </div>
             </div>
         </div>    
-        <!-- Model Popup Close -->
-        <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
-            <!-- <script src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"> -->
-            </script>
-        <?php } else { ?>
-            <!-- <script src="<?php // echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"> -->
-            </script>
-        <?php } ?>
+        <!-- Model Popup Close -->        
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -319,19 +312,9 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
             <script   type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 
-        <?php /*if (IS_HIRE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
-            <script   type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
-            <script   type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-        <?php }*/ ?>
-
-        <script>
+            <script>
             function inviteuserpopup(abc) {
-                $('.biderror .mes').html("<div class='pop_content'>Do you want to select this freelancer for your project?<div class='model_ok_cancel'><a class='okbtn' id=" + abc + " onClick='inviteuser(" + abc + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+                $('.biderror .mes').html("<div class='pop_content'>Do you want to select this freelancer for your project?<div class='model_ok_cancel'><a class='okbtn' id=" + abc + " onclick='inviteuser(" + abc + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
                 $('#bidmodal').modal('show');
             }
             function inviteuser(clicked_id)
@@ -343,6 +326,11 @@
                     data: 'post_id=' + post_id + '&invited_user=' + clicked_id,
                     dataType: 'json',
                     success: function (data) { //alert(data);
+                        clearInterval(int_not_count);            
+                        get_notification_unread_count();
+                        int_not_count = window.setInterval(function(){
+                          get_notification_unread_count();
+                        }, 10000);
                         $('#' + 'invited' + clicked_id).html(data.status).addClass('button invited').removeClass('invite_border').removeAttr("onclick");
                         $('#' + 'invited' + clicked_id).css('cursor', 'default');
                         if (data.notification.notification_count != 0) {

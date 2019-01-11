@@ -245,6 +245,8 @@ function set_progress(count_profile_value,count_profile)
         $('.second.circle-1').circleProgress({
             value: count_profile_value //with decimal point
         }).on('circle-animation-progress', function(event, progress) {
+            $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+            $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
             $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
         });
     }

@@ -192,6 +192,22 @@
                     
                     </div>
                     <div class="cus-inner-middle mob-clear mobp0">
+                        <?php 
+                        if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) {?>
+                        <div class="mob-progressbar fw">
+                            <p>Complete your profile to get connected with more people.</p>
+                            <p class="mob-edit-pro">
+                                <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                            </p>
+                            <div class="progress skill-bar ">
+                                <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <span class="skill"><i class="val">0%</i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php 
+                        } ?>
+
 						<div class="tab-add-991">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
@@ -211,10 +227,10 @@
 					<div class="right-add">
 						<?php $this->load->view('right_add_box');
                         if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) {?>
-                            <div class="right-add-box">
+                            <div id="profile-progress" class="right-add-box" style="display: none;">
                                 <div class="p20">
                                     <!-- <img src="<?php //echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>"> -->
-                                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                                    <div class="edit_profile_progress">
                                         <div class="count_main_progress">
                                             <div class="circles">
                                                 <div class="second circle-1">

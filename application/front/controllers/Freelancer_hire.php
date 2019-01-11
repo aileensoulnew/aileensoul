@@ -17,6 +17,7 @@ class Freelancer_hire extends MY_Controller {
         $this->load->library('S3');
         //AWS access info end
         $this->load->library('upload');
+        $this->load->library('inbackground');
         include ('main_profile_link.php');
         include ('freelancer_hire_include.php');
         include "openfireapi/vendor/autoload.php";
@@ -2831,7 +2832,14 @@ class Freelancer_hire extends MY_Controller {
 
 
             if ($updatedata) {
-                $this->selectemail_user($saveuser_id, $post_id, $word);
+                // $this->selectemail_user($saveuser_id, $post_id, $word);
+                $url = base_url()."freelancer_hire/selectemail_user";
+                $param = array(
+                    "invite_user"=>$saveuser_id,
+                    "postid"=>$post_id,
+                    "word"=>$word,
+                );
+                $this->inbackground->do_in_background($url, $param);
                 $saveuser = 'shortlisted';
                 // GET NOTIFICATION COUNT
                 $not_count = $this->freelancer_notification_count($saveuser_id);
@@ -2870,7 +2878,14 @@ class Freelancer_hire extends MY_Controller {
             $insertnotification = $this->common->insert_data_getid($data, 'notification');
 
             if ($insert_id) {
-                $this->selectemail_user($saveuser_id, $post_id, $word);
+                // $this->selectemail_user($saveuser_id, $post_id, $word);
+                $url = base_url()."freelancer_hire/selectemail_user";
+                $param = array(
+                    "invite_user"=>$saveuser_id,
+                    "postid"=>$post_id,
+                    "word"=>$word,
+                );
+                $this->inbackground->do_in_background($url, $param);
                 $saveuser = 'shortlisted';
                 // GET NOTIFICATION COUNT
                 $not_count = $this->freelancer_notification_count($saveuser_id);
@@ -3102,7 +3117,14 @@ class Freelancer_hire extends MY_Controller {
 
             if ($insert_id) {
                 $word = 'Selected';
-                $this->selectemail_user($invite_user, $postid, $word);
+                $url = base_url()."freelancer_hire/selectemail_user";
+                $param = array(
+                    "invite_user"=>$invite_user,
+                    "postid"=>$postid,
+                    "word"=>$word,
+                );
+                $this->inbackground->do_in_background($url, $param);
+                // $this->selectemail_user($invite_user, $postid, $word);
             }
         } else {
             echo 'error';
@@ -3110,10 +3132,13 @@ class Freelancer_hire extends MY_Controller {
     }
 
 //FREELANCER_HIRE INVITE FREELANCER OF APLLIED END
-    public function selectemail_user($select_user = '', $post_id = '', $word = '') {
-        $invite_user = $select_user;
-        $postid = $post_id;
-        $writting_word = $word;
+    public function selectemail_user() {//$select_user = '', $post_id = '', $word = ''
+        $invite_user = $this->input->post('invite_user');
+        $postid = $this->input->post('postid');
+        $writting_word = $this->input->post('word');
+        // $invite_user = $select_user;
+        // $postid = $post_id;
+        // $writting_word = $word;
 
         $fa_data = $this->freelancer_hire_model->getFreelancerApplyPostDetail($post_id);
         $url = 'freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id;
