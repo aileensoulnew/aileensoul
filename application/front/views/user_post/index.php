@@ -229,6 +229,41 @@
 	</div>
     <!-- Repeated Class Start -->
     <div class="all_user_post">
+		<!--div class="all-post-box">
+			<div class="all-post-top">
+                <div class="post-head">
+					<div class="post-img">                           
+						<a class="post-name" target="_self" href="https://www.aileensoul.com/aileensoul-associate">
+                            <img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528527907.png" class="login-user-pro-pic">
+                        </a>
+                    </div>  
+					<div class="post-detail">
+						<div class="fw">
+                            <a class="post-name" href="https://www.aileensoul.com/aileensoul-associate">Aileensoul Associate</a>
+                        </div>
+						<div class="fw">
+							<span class="post-designation">AS Representative</span>
+						</div>
+					</div>
+					<div class="post-right-dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Right Down" src="https://www.aileensoul.com/assets/n-images/right-down.png"></a>
+                        <ul class="dropdown-menu"> 
+                            <li>
+								<a href="https://www.aileensoul.com/aileensoul-associate/photos/2715" target="_blank" class="ng-scope">Show in new tab</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+				<div class="post-discription"></div>
+				<div class="post-images">
+                    <div class="one-img">
+						<a href="#">
+							<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_post/main/file_1541400317_TaPJv.jpg">
+						</a>
+                    </div>
+                </div>
+			</div>
+		</div -->
 						
         <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Feed</h3>
 			<div class="user-img-nn">
