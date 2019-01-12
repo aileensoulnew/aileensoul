@@ -125,7 +125,7 @@ $userid = $this->session->userdata('aileenuser');
                         </ul>
                     </div>
                     <div class = "dropdown1">
-                        <a onClick = "myFunction('<?php echo $post_business_profile_post_id ?>')" class = "dropbtn_common  dropbtn1 fa fa-ellipsis-v">
+                        <a onclick="open_popup('<?php echo $post_business_profile_post_id ?>')" class = "dropbtn_common  dropbtn1 fa fa-ellipsis-v">
                         </a>
                         <div id = "myDropdown<?php echo $post_business_profile_post_id ?>" class = "dropdown-content1 dropdown2_content">
                             <?php

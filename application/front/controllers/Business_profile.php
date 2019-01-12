@@ -4193,7 +4193,7 @@ Your browser does not support the audio tag.
             );
 
             $updatdata = $this->common->update_data($data, 'business_profile_post_comment', 'business_profile_post_comment_id', $post_id);
-// insert notification
+            // insert notification
             if ($businessprofiledata[0]['user_id'] == $userid) {
                 
             } else {
@@ -4244,17 +4244,17 @@ Your browser does not support the audio tag.
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
+                                        <tr>
                                             <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                                <p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="'.BASEURL.$url.'">view</a></p>
                                             </td>
-					</tr>
-                                    </table>';
+                                        </tr>
+                                        </table>';
                         $subject = $businessUser->company_name . ' Like your comment in Aileensoul.';
 
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
@@ -4262,12 +4262,20 @@ Your browser does not support the audio tag.
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
             }
-// end notification
+            // end notification
             $businessprofiledata1 = $this->data['businessprofiledata1'] = $this->business_model->getBusinessLikeComment($post_id = $_POST["post_id"]);
 
             if ($updatdata) {
@@ -4768,9 +4776,7 @@ Your browser does not support the audio tag.
                 }
 
                 $cmtlikeuser .= '<div class="like_one_other">';
-                $cmtlikeuser .= ' <a href="javascript:void(0);
-                                                    "  onclick="likeuserlist(' . $businessprofiledata1[0]['business_profile_post_id'] . ');
-                                                    ">';
+                $cmtlikeuser .= ' <a href="javascript:void(0);"  onclick="likeuserlist('.$businessprofiledata1[0]['business_profile_post_id'] . ');">';
 
                 $contition_array = array('business_profile_post_id' => $businessprofiledata1[0]['business_profile_post_id'], 'status' => '1', 'is_delete' => '0');
                 $commnetcount = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');

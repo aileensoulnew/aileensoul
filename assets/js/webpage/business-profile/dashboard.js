@@ -1017,7 +1017,7 @@ window.onclick = function (event) {
 
 /* When the user clicks on the button, 
  toggle between hiding and showing the dropdown content */
-function myFunction(clicked_id) {
+/*function myFunction(clicked_id) {
     document.getElementById('myDropdown' + clicked_id).classList.toggle("show");
     $(document).on('keydown', function (e) {
         if (e.keyCode === 27) {
@@ -1027,7 +1027,7 @@ function myFunction(clicked_id) {
         }
 
     });
-}
+}*/
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
@@ -1108,18 +1108,18 @@ function edit_postinsert(abc)
 
 function remove_post(abc)
 {
-//    $.ajax({
-//        type: 'POST',
-//        url: base_url + "business_profile/business_profile_delete",
-//        data: 'save_id=' + abc,
-//        success: function (data) {
-//            $('#' + 'removepostdata' + abc).html(data);
-//            var total_post = $('.post-design-box').length;
-//            if (total_post == 0) {
-//                $('.art_no_post_avl').show();
-//            }
-//        }
-//    });
+   // $.ajax({
+   //     type: 'POST',
+   //     url: base_url + "business_profile/business_profile_delete",
+   //     data: 'save_id=' + abc,
+   //     success: function (data) {
+   //         $('#' + 'removepostdata' + abc).html(data);
+   //         var total_post = $('.post-design-box').length;
+   //         if (total_post == 0) {
+   //             $('.art_no_post_avl').show();
+   //         }
+   //     }
+   // });
 
     $.ajax({
         type: 'POST',
@@ -1360,7 +1360,7 @@ function imgval(event) {
                     setInterval('window.location.reload()', 10000);
                     $(document).on('keydown', function (e) {
                         if (e.keyCode === 27) {
-//$( "#bidmodal" ).hide();
+                            // $( "#bidmodal" ).hide();
                             $('#bidmodal').modal('hide');
                             $('.modal-post').show();
                         }
@@ -1381,7 +1381,7 @@ function imgval(event) {
 
                         $(document).on('keydown', function (e) {
                             if (e.keyCode === 27) {
-//$( "#bidmodal" ).hide();
+                                //$( "#bidmodal" ).hide();
                                 $('#bidmodal').modal('hide');
                                 $('.modal-post').show();
                             }
@@ -1396,7 +1396,7 @@ function imgval(event) {
                     setInterval('window.location.reload()', 10000);
                     $(document).on('keydown', function (e) {
                         if (e.keyCode === 27) {
-//$( "#bidmodal" ).hide();
+                            //$( "#bidmodal" ).hide();
                             $('#bidmodal').modal('hide');
                             $('.modal-post').show();
                         }
@@ -1416,7 +1416,7 @@ function imgval(event) {
                         setInterval('window.location.reload()', 10000);
                         $(document).on('keydown', function (e) {
                             if (e.keyCode === 27) {
-//$( "#bidmodal" ).hide();
+                                //$( "#bidmodal" ).hide();
                                 $('#bidmodal').modal('hide');
                                 $('.modal-post').show();
                             }
@@ -1430,7 +1430,7 @@ function imgval(event) {
                     setInterval('window.location.reload()', 10000);
                     $(document).on('keydown', function (e) {
                         if (e.keyCode === 27) {
-//$( "#bidmodal" ).hide();
+                            //$( "#bidmodal" ).hide();
                             $('#bidmodal').modal('hide');
                             $('.modal-post').show();
                         }
@@ -1445,7 +1445,7 @@ function imgval(event) {
                 setInterval('window.location.reload()', 10000);
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
-//$( "#bidmodal" ).hide();
+                        //$( "#bidmodal" ).hide();
                         $('#bidmodal').modal('hide');
                         $('.modal-post').show();
                     }
@@ -1527,7 +1527,7 @@ function check_lengthedit(abc)
     } else {
         text_num = maxLen - product_name.length;
         $('#text_num_' + abc).val(parseInt(text_num));
-//        document.getElementById("text_num_" + abc).value = text_num;
+       // document.getElementById("text_num_" + abc).value = text_num;
     }
 }
 
@@ -1840,6 +1840,7 @@ $(document).on('keydown', function (e) {
 /* When the user clicks on the button, 
  toggle between hiding and showing the dropdown content */
 function myFunction(clicked_id) {
+    alert(1);
     var dropDownClass = document.getElementById('myDropdown' + clicked_id).className;
     dropDownClass = dropDownClass.split(" ").pop(-1);
     if (dropDownClass != 'show') {
