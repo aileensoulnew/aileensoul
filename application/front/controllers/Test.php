@@ -133,5 +133,34 @@ class Test extends MY_Controller {
 
     }
 
+    public function testmailhp()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        
+        $to_email_id = "harshad.aileensoul@gmail.com";
+        $login_user_img = "https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png";
+        $email_html = '';
+        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="'.MAIL_TD_1.'">
+                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="Harshad Patel">
+                            </td>
+                            <td style="padding:5px;">
+                                <p><b>'.ucwords("Dhaval Shah").'</b> accepted your contact request.</p>
+                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                            </td>
+                            <td style="'.MAIL_TD_3.'">
+                                <p><a class="btn" href="https://www.aileensoul.com/harshad-patel-2">view</a></p>
+                            </td>
+                        </tr>
+                        </table>';
+        $subject = 'Dhaval Shah accepted your contact request in Aileensoul.';
+        $unsubscribe = "https://www.aileensoul.com/harshad-patel-2";
+        $send_email = $this->email_model->send_email_hp($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+        echo "Done";
+        
+    }
+
   
 }

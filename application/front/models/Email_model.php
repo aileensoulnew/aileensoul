@@ -133,9 +133,9 @@ class Email_model extends CI_Model {
         }
     }
 
-    function sendEmail($app_name = '', $app_email = '', $to_email = '', $subject = '', $mail_body = '', $cc = '', $bcc = '') {
-
-//echo "<pre>"; print_r($to_email); die();
+    function sendEmail($app_name = '', $app_email = '', $to_email = '', $subject = '', $mail_body = '', $cc = '', $bcc = '')
+    {
+        //echo "<pre>"; print_r($to_email); die();
         //Loading E-mail Class
         $this->load->library('email');
 
@@ -280,7 +280,7 @@ class Email_model extends CI_Model {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-//echo '<pre>'; print_r($this->email->print_debugger()); die();
+        //echo '<pre>'; print_r($this->email->print_debugger()); die();
         // if ($this->email->send()) {
         if ($mail->send()) {
             //echo "111"; die();
@@ -298,14 +298,14 @@ class Email_model extends CI_Model {
         $this->load->library('email');
         /* THIS CODE IS COMMENTED */
 
-//        $config['protocol'] = "SMTP";
-//        $config['smtp_host'] = "SMTP.gmail.com";
-//        $config['smtp_port'] = "587";
-//        $config['smtp_user'] = "aileensoftsolution@gmail.com";
-//        $config['smtp_pass'] = "xyz123456";
-//        $config['charset'] = "utf-8";
-//        $config['mailtype'] = "html";
-//        $config['newline'] = "\r\n";
+       // $config['protocol'] = "SMTP";
+       // $config['smtp_host'] = "SMTP.gmail.com";
+       // $config['smtp_port'] = "587";
+       // $config['smtp_user'] = "aileensoftsolution@gmail.com";
+       // $config['smtp_pass'] = "xyz123456";
+       // $config['charset'] = "utf-8";
+       // $config['mailtype'] = "html";
+       // $config['newline'] = "\r\n";
 
         /* THIS CODE IS COMMENTED */
 
@@ -398,6 +398,124 @@ class Email_model extends CI_Model {
         $mail->Subject = $subject;
         $mail->isHTML(true);
         // echo $email_html;exit();
+        $mail->Body = $email_html;
+        // Tells PHPMailer to use SMTP authentication
+        $mail->SMTPAuth = true;
+
+        // Enable TLS encryption over port 587
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        // if ($this->email->send()) {
+        if ($mail->send()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function send_email_hp($subject = '', $templ = '', $to_email = '',$unsubscribe = '') {
+        $this->load->library('email');
+
+        $email_html = '';
+        $email_html .= '<!DOCTYPE html><html><head><title>Aileensoul Notification Mail</title>
+            <style>
+            body{font-family:arial;}
+            p{margin:0;}h3{margin:0;}
+            .post-img-div, .post-img-profile{color: #fff;
+            width: 60px;
+            background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
+            background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+            background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+            background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+            background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#3bb0ac", endColorstr="#1b8ab9",GradientType=0 );
+            padding: 21px 0;
+            text-align: center;
+            text-transform: uppercase;
+            line-height: 1;}
+                        .btn{background:#1b8ab9;
+                    font-size:16px;
+                    color:#fff !important;
+                    padding:8px 20px;
+                    text-decoration:none;
+                            border-radius:3px;
+                }
+                .btn:hover{/*opacity:0.8;*/}
+                .description_table img { width:50px !important; height:50px !important;}
+            </style></head>
+            <body>
+            <div style="max-width:600px; margin:0 auto; background:#f4f4f4; padding:30px;">
+                <table width="100%" style="background:#fff" cellpadding="0" cellspacing="0">
+                    <tr><td style="border-bottom:1px solid #ddd;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr><td style="text-align:center"><h2>
+                        <a style="color:#1b8ab9; text-decoration:none; font-size:23px;" href="https://www.aileensoul.com/" target="_blank"><img src="https://www.aileensoul.com/assets/images/favicon.png" style="   vertical-align: middle;" /> <span class="sitename">Aileensoul</span></a>
+                        </h2></td></tr></table>
+                        </td>
+                    </tr>
+                    <tr><td style="padding-bottom: 20px;">
+                        <table width="100%" cellpadding="0" cellspacing="0" class="description_table">
+                        <tr><td style="padding:5px;padding-left: 5px; font-size:15px;">' . $templ . '</td></tr>
+                        </table>
+                        </td></tr>
+                        
+                </table>';
+        if($unsubscribe != "")
+        {
+            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="text-align:center; padding:10px 0;"><a style="color:#505050; padding:5px 15px; text-decoration:none;" href="'.$unsubscribe.'">Unsubscribe</a></td></tr>
+            </table>';
+        }
+        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:center;padding:10px 0;font-size: 12px;">
+                                        Aileensoul Technologies Private Limited<br>
+                                        Titanium City Centre, 100 Feet Road, Satellite, Ahmedabad, India.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table></div></body></html>';
+        $config['protocol'] = 'sendmail';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_user'] = 'notification.aileensoul@gmail.com';
+        $config['smtp_pass'] = 'aileensoul@123';
+        $config['smtp_port'] = '587';
+        $config['smtp_timeout'] = 5;
+        $config['smtp_keepalive'] = ''; 
+        $config['smtp_crypto'] = '';
+        $config['wordwrap'] = '1';
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'UTF-8';
+        $config['newline'] = '\r\n';
+
+        //$this->email->initialize($config);
+        $this->email->from('notification.aileensoul@gmail.com', 'Aileensoul');
+        $this->email->to($to_email);
+        // $this->email->bcc('dm.aileensoul@gmail.com');
+        $this->email->subject($subject);
+        $this->email->message($email_html);
+        $this->email->set_mailtype("html");
+
+        require 'phpmailer/vendor/autoload.php';
+ 
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer\PHPMailer\PHPMailer;
+        $mail->isSMTP();
+        
+        $mail->Username = 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = 'smtp.gmail.com';
+        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        //Set an alternative reply-to address
+        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addBCC('dm.aileensoul@gmail.com');
+        //Set who the message is to be sent to
+        $mail->addAddress($to_email);
+        $mail->Subject = $subject;
+        $mail->isHTML(true);
         $mail->Body = $email_html;
         // Tells PHPMailer to use SMTP authentication
         $mail->SMTPAuth = true;
