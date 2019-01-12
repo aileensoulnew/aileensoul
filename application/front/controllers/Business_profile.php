@@ -21,6 +21,7 @@ class Business_profile extends MY_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
+        $this->load->library('inbackground');
         $userid = $this->session->userdata('aileenuser');
         // $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="profile.html" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="'. base_url("artist/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("business-profile/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("job/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("recruiter/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("freelance/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
          /*code for business profile link start */
@@ -794,26 +795,26 @@ class Business_profile extends MY_Controller {
                         $insert_id1 = $this->common->insert_data_getid($data1, 'post_files');
                         /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
 
-                        // if ($_SERVER['HTTP_HOST'] != "localhost") {
-                        //     if (isset($main_image)) {
-                        //         unlink($main_image);
-                        //     }
-                        //     if (isset($thumb_image)) {
-                        //         unlink($thumb_image);
-                        //     }
-                        //     if (isset($resize_image)) {
-                        //         unlink($resize_image);
-                        //     }
-                        //     if (isset($resize_image1)) {
-                        //         unlink($resize_image1);
-                        //     }
-                        //     if (isset($resize_image2)) {
-                        //         unlink($resize_image2);
-                        //     }
-                        //     if (isset($resize_image4)) {
-                        //         unlink($resize_image4);
-                        //     }
-                        // }
+                        if ($_SERVER['HTTP_HOST'] != "localhost") {
+                            if (isset($main_image)) {
+                                unlink($main_image);
+                            }
+                            if (isset($thumb_image)) {
+                                unlink($thumb_image);
+                            }
+                            if (isset($resize_image)) {
+                                unlink($resize_image);
+                            }
+                            if (isset($resize_image1)) {
+                                unlink($resize_image1);
+                            }
+                            if (isset($resize_image2)) {
+                                unlink($resize_image2);
+                            }
+                            if (isset($resize_image4)) {
+                                unlink($resize_image4);
+                            }
+                        }
                         /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
                     } else {
                         echo $this->upload->display_errors();
@@ -2734,16 +2735,19 @@ Your browser does not support the audio tag.
                     }
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
-                                            </td>
-					</tr>
+                                    <tr>
+                                        <td style="'.MAIL_TD_1.'">
+                                            <img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '">
+                                        </td>
+                                        <td style="padding:5px;">
+                                            <p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
+                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '
+                                            </span>
+                                        </td>
+                                        <td style="'.MAIL_TD_3.'">
+                                            <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                        </td>
+                                    </tr>
                                     </table>';
 
                     $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
@@ -2753,7 +2757,15 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$busdatatoid[0]['contact_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -2804,17 +2816,20 @@ Your browser does not support the audio tag.
                 }
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="'.$img.'" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
-                                            </td>
-					</tr>
-                                    </table>';
+                                <tr>
+                                    <td style="'.MAIL_TD_1.'">
+                                        <img src="'.$img.'" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '">
+                                    </td>
+                                    <td style="padding:5px;">
+                                        <p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '
+                                        </span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
                 $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
@@ -2822,7 +2837,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$busdatatoid[0]['contact_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
 
@@ -4008,7 +4031,7 @@ Your browser does not support the audio tag.
 
             $updatdata = $this->common->update_data($data, 'business_profile_post_comment', 'business_profile_post_comment_id', $post_id);
 
-// insert notification
+            // insert notification
             if ($businessprofiledata[0]['user_id'] == $userid) {
                 
             } else {
@@ -4061,17 +4084,17 @@ Your browser does not support the audio tag.
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
+                                        <tr>
                                             <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                                <p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' .BASEURL.$url. '">view</a></p>
                                             </td>
-					</tr>
-                                    </table>';
+                                        </tr>
+                                        </table>';
                         $subject = $businessUser->company_name . ' Like your comment in Aileensoul.';
 
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
@@ -4079,18 +4102,26 @@ Your browser does not support the audio tag.
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
             }
-// end notification
+            // end notification
 
             $businessprofiledata1 = $this->data['businessprofiledata1'] = $this->business_model->getBusinessLikeComment($post_id = $_POST["post_id"]);
 
             if ($updatdata) {
                 $cmtlike1 = '<a id = "' . $businessprofiledata1[0]['business_profile_post_comment_id'] . '" onClick = "comment_like(this.id)">';
-                $cmtlike1 .= ' <i class = "fa fa-thumbs-up" aria-hidden = "true">';
+                $cmtlike1 .= ' <i class = "fa fa-thumbs-up main_color" aria-hidden = "true">';
                 $cmtlike1 .= '</i>';
                 $cmtlike1 .= '<span> ';
                 if ($businessprofiledata1[0]['business_comment_likes_count'] > 0) {
@@ -4618,7 +4649,7 @@ Your browser does not support the audio tag.
                 'modify_date' => date('Y-m-d H:i:s')
             );
             $updatdata = $this->common->update_data($data, 'business_profile_post', 'business_profile_post_id', $post_id);
-// insert notification
+            // insert notification
             if ($businessprofiledata[0]['user_id'] == $userid || $businessprofiledata[0]['is_delete'] == '1') {
                 
             } else {
@@ -4674,17 +4705,18 @@ Your browser does not support the audio tag.
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' .  $businessLoginUser->company_name . '"></td>
+                                        <tr>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' .  $businessLoginUser->company_name . '">
+                                            </td>
                                             <td style="padding:5px;">
-						<p><b>' .  $businessLoginUser->company_name . '</b> like your post in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                                <p><b>' .  $businessLoginUser->company_name . '</b> like your post in business profile.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL .$url . '">view</a></p>
                                             </td>
-					</tr>
-                                    </table>';
+                                        </tr>
+                                        </table>';
                         $subject = $businessLoginUser->company_name . ' like your post in Aileensoul.';
 
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
@@ -4692,12 +4724,20 @@ Your browser does not support the audio tag.
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
             }
-// end notification
+            // end notification
 
             $contition_array = array('business_profile_post_id' => $_POST["post_id"], 'status' => '1');
             $businessprofiledata1 = $this->data['businessprofiledata1'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -4894,8 +4934,7 @@ Your browser does not support the audio tag.
 
         $insert_id = $this->common->insert_data_getid($data, 'business_profile_post_comment');
 
-// insert notification
-
+        // insert notification
         if ($busdatacomment[0]['user_id'] == $userid || $busdatacomment[0]['is_delete'] == '1') {
             
         } else {
@@ -4933,17 +4972,17 @@ Your browser does not support the audio tag.
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL .$url. '">view</a></p>
-                                            </td>
-					</tr>
-                                    </table>';
+                                <tr>
+                                    <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
+                                    <td style="padding:5px;">
+                                        <p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL .$url. '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
                 $subject = $businessLoginUser->company_name . ' is comment on your post in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatacomment[0]['user_id']))->row();
@@ -4951,11 +4990,19 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
-// end notification
+        // end notification
         $businessprofiledata = $this->data['businessprofiledata'] = $this->business_model->getBusinessPostComment($post_id = $_POST["post_id"], $sortby = 'business_profile_post_comment_id', $orderby = 'DESC', $limit = '1');
 
         $buscmtcnt = $this->business_model->getBusinessPostComment($post_id = $_POST["post_id"], $sortby = 'business_profile_post_comment_id', $orderby = 'DESC', $limit = '');
@@ -5065,8 +5112,7 @@ Your browser does not support the audio tag.
             $cmtinsert .= '<div class="comment-details-menu">';
             $cmtinsert .= '<p>' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($business_profile['created_date']))) . '</p></div></div></div>';
 
-
-// comment aount variable start
+            // comment count variable start
             $idpost = $business_profile['business_profile_post_id'];
             $cmtcount = '<a onClick="commentall(this.id)" id="' . $idpost . '">';
             $cmtcount .= '<i class="fa fa-comment-o" aria-hidden="true">';
@@ -5078,8 +5124,7 @@ Your browser does not support the audio tag.
                 $cntinsert .= '' . count($buscmtcnt) . '';
                 $cntinsert .= '<span> Comment</span>';
             }
-
-// comment count variable end 
+            // comment count variable end 
         }
 
         // GET NOTIFICATION COUNT
@@ -5115,7 +5160,7 @@ Your browser does not support the audio tag.
 
         $insert_id = $this->common->insert_data_getid($data, 'business_profile_post_comment');
 
-// insert notification
+        // insert notification
         if ($busdatacomment[0]['user_id'] == $userid || $busdatacomment[0]['is_delete'] == '1') {
             
         } else {
@@ -5153,17 +5198,17 @@ Your browser does not support the audio tag.
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
-                                            </td>
-					</tr>
-                                    </table>';
+                                <tr>
+                                    <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
+                                    <td style="padding:5px;">
+                                        <p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
                 $subject = $businessLoginUser->company_name . ' is comment on your post in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatacomment[0]['user_id']))->row();
@@ -5171,11 +5216,19 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
-// end notification
+        // end notification
 
         $businessprofiledata = $this->data['businessprofiledata'] = $this->business_model->getBusinessPostComment($post_id = $_POST["post_id"], $sortby = 'business_profile_post_comment_id', $orderby = 'ASC', $limit = '');
 
@@ -5280,13 +5333,13 @@ Your browser does not support the audio tag.
             $cmtinsert .= '<span role="presentation" aria-hidden="true"> · </span>';
             $cmtinsert .= '<div class="comment-details-menu">';
             $cmtinsert .= '<p>' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($business_profile['created_date']))) . '</p></div></div></div>';
-// comment aount variable start
+            // comment count variable start
             $idpost = $business_profile['business_profile_post_id'];
             $cmtcount = '<a onClick="commentall(this.id)" id="' . $idpost . '">';
             $cmtcount .= '<i class="fa fa-comment-o" aria-hidden="true">';
             $cmtcount .= ' ' . count($businessprofiledata) . '';
             $cmtcount .= '</i></a>';
-// comment count variable end 
+            // comment count variable end 
         }
         if (count($businessprofiledata) > 0) {
             $cntinsert .= '' . count($businessprofiledata) . '';
@@ -5306,8 +5359,8 @@ Your browser does not support the audio tag.
         ));
     }
 
-//business_profile comment insert end  
-//business_profile comment edit start
+    //business_profile comment insert end  
+    //business_profile comment edit start
     public function edit_comment_insert() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
@@ -7397,8 +7450,7 @@ Your browser does not support the audio tag.
 
         $post_id = $_POST['bus_post_id'];
 
-// html start
-
+        // html start
         $fourdata = '<div class="hidebottombordertwo insertcommenttwo' . $post_id . '">';
 
         $busienssdata = $this->data['busienssdata'] = $this->business_model->getBusinessPostComment($post_id = $post_id, $sortby = 'business_profile_post_comment_id', $orderby = 'ASC', $limit = '');
@@ -7472,7 +7524,7 @@ Your browser does not support the audio tag.
                     $fourdata .= '<i class="fa fa-thumbs-up fa-1x" aria-hidden="true"></i>';
                 } else {
 
-                    $fourdata .= '<i class="fa fa-thumbs-up" aria-hidden="true"></i>';
+                    $fourdata .= '<i class="fa fa-thumbs-up main_color" aria-hidden="true"></i>';
                 }
                 $fourdata .= '<span>';
 
@@ -9107,7 +9159,7 @@ No Contacts Available.
     }
 
     public function ajax_business_home_post() {
-// return html
+        // return html
         include ('business_include.php');
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $business_login_slug = $this->data['business_login_slug_with_location'];

@@ -435,7 +435,9 @@ $userid = $this->session->userdata('aileenuser');
                         <div class = "hidebottomborder insertcomment<?php echo $post_business_profile_post_id ?>">
                             <?php $businessprofiledata = $this->data['businessprofiledata'] = $this->business_model->getBusinessPostComment($post_id = $post_business_profile_post_id, $sortby = 'business_profile_post_comment_id', $orderby = 'DESC', $limit = '1');
                                 if ($businessprofiledata) {
-                                foreach ($businessprofiledata as $rowdata) { ?>
+                                foreach ($businessprofiledata as $rowdata) {                                
+                                    $likeuser_cmt = $rowdata['business_comment_like_user'];
+                                    $cmt_likeuserarray = explode(',', $likeuser_cmt); ?>
                                     <div class = "all-comment-comment-box">
                                         <div class = "post-design-pro-comment-img">
                                             <a href = "<?php echo base_url().'company/'.$rowdata['business_slug']; ?>">
@@ -487,7 +489,7 @@ $userid = $this->session->userdata('aileenuser');
                                             <div class = "comment-details-menu" id = "likecomment1<?php echo $rowdata['business_profile_post_comment_id']; ?>">
                                                 <a id = "<?php echo $rowdata['business_profile_post_comment_id']; ?>" onClick = "comment_like1(this.id)">
                                                     <?php
-                                                    if (!in_array($userid, $likeuserarray)) { ?>
+                                                    if (!in_array($userid, $cmt_likeuserarray)) { ?>
                                                         <i class = "fa fa-thumbs-up" style = "color: #999;" aria-hidden = "true"></i> <?php
                                                     } else { ?>
                                                         <i class = "fa fa-thumbs-up main_color" aria-hidden = "true"></i><?php
