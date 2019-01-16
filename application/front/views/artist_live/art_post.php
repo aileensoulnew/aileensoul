@@ -3,27 +3,10 @@
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
-        <?php echo $head; ?>
-        <?php
-            /*if (IS_ART_CSS_MINIFY == '0') {
-                ?>
+        <?php echo $head; ?>        
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver='.time()); ?>">
         <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver='.time()); ?>" media="all" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/video.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/artistic.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
-        <?php }else{?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver='.time()); ?>">
-        <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver='.time()); ?>" media="all" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/video.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
-        <?php }*/ ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver='.time()); ?>">
-        <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver='.time()); ?>" media="all" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/video.css?ver='.time()); ?>">
+        <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url('assets/css/video.css?ver='.time()); ?>"> -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/artistic.css?ver='.time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
@@ -128,6 +111,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mob-progressbar fw">
+                    <p>Complete your profile to get connected with more people.</p>
+                    <p class="mob-edit-pro">
+                        <a href="<?php echo artist_dashboard. $get_url."/details"; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                    </p>
+                    <div class="progress skill-bar ">
+                        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="skill"><i class="val">0%</i></span>
+                        </div>
+                    </div>
+                </div>
 				
                 <div class="custom-user-list-cus">
                     <?php 
@@ -145,6 +140,7 @@
                     </div>
                     <?php }?>
                 </div>
+
                 <div class="art-all-post">
                 </div>
                 <div class="nofoundpost"> 
@@ -315,8 +311,7 @@
             </div>
         </div>
         <?php echo $footer; ?>
-        <?php
-            if (IS_ART_JS_MINIFY == '0') { ?>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.form.3.51.js?ver='.time()); ?>"></script>
 
@@ -329,19 +324,7 @@
         <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver='.time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
-        <?php }else{?>
-        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver='.time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js_min/jquery.form.3.51.js?ver='.time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js_min/plugins/sortable.js?ver='.time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js_min/fileinput.js?ver='.time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js_min/locales/fr.js?ver='.time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/locales/es.js?ver='.time()); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver='.time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
-        <?php }?>
+        
         <script type="text/javascript">
             var base_url = '<?php echo base_url(); ?>';   
             var data= <?php echo json_encode($demo); ?>;
@@ -349,19 +332,10 @@
             var complex = <?php echo json_encode($selectdata); ?>;
             var art_slug = '<?php echo artist_dashboard. $get_url; ?>';
             var textarea = document.getElementById("textarea");
-            var no_artistic_post_html = '<?php echo $no_artistic_post_html ?>';
-        </script>
-        <script>
+            var no_artistic_post_html = '<?php echo $no_artistic_post_html ?>';        
             var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
-
-        <?php
-            /*if (IS_ART_JS_MINIFY == '0') { ?>
-        <!-- <script type="text/javascript" src="<?php // echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script> -->
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-        <?php }else{?>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-        <?php }*/ ?>
+        
         <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script>

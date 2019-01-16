@@ -1153,24 +1153,23 @@ class Artist extends MY_Controller {
                 //echo "<pre>"; print_r($data1);
                 $insert_id1 = $this->common->insert_data_getid($data1, 'post_files');
 
-
-                // if ($_SERVER['HTTP_HOST'] != "localhost") {
-                //     if (isset($main_image)) {
-                //         unlink($main_image);
-                //     }
-                //     if (isset($thumb_image)) {
-                //         unlink($thumb_image);
-                //     }
-                //     if (isset($resize_image)) {
-                //         unlink($resize_image);
-                //     }
-                //     if (isset($resize_image1)) {
-                //         unlink($resize_image1);
-                //     }
-                //     if (isset($resize_image2)) {
-                //         unlink($resize_image2);
-                //     }
-                // }
+                if ($_SERVER['HTTP_HOST'] != "localhost") {
+                    if (isset($main_image)) {
+                        unlink($main_image);
+                    }
+                    if (isset($thumb_image)) {
+                        unlink($thumb_image);
+                    }
+                    if (isset($resize_image)) {
+                        unlink($resize_image);
+                    }
+                    if (isset($resize_image1)) {
+                        unlink($resize_image1);
+                    }
+                    if (isset($resize_image2)) {
+                        unlink($resize_image2);
+                    }
+                }
             } else {
                 echo $this->upload->display_errors();
                 exit;
@@ -2234,17 +2233,17 @@ class Artist extends MY_Controller {
                                       <span> Follow </span>
                                     </button></div>';
             } elseif ($status == 1) {
-                $return_html .= '<div id= "unfollowdiv"  class="user_btn" > 
-                                                                                <button class="bg_following" id="unfollow' . $user['art_id'] . '" onClick="unfollowuser(' . $user['art_id'] . ')">
-                                                                                 <span>   Following </span>
-                                                                                </button></div>';
+                $return_html .= '<div id= "unfollowdiv"  class="user_btn" >
+                                    <button class="bg_following" id="unfollow' . $user['art_id'] . '" onClick="unfollowuser(' . $user['art_id'] . ')">
+                                        <span>Following</span>
+                                    </button></div>';
             }
-            $return_html .= '</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>';
+            $return_html .= '   </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>';
         }
         echo $return_html;
     }
@@ -2342,45 +2341,39 @@ class Artist extends MY_Controller {
 
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                                            <td style="'.MAIL_TD_1.'">';
+                                <tr>
+                                    <td style="'.MAIL_TD_1.'">';
+                                    if (IMAGEPATHFROM == 'upload') {
+                                        if ($artdata[0]['art_user_image']) {
+                                            if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'])) {
+                                                $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                            } else {
+                                                $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '" alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
+                                            }
+                                        } else {
+                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                        }
+                                    } else {
+                                        $filename = $this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'];
+                                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                        if ($info) {
+                                            $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '"  alt="" width="50" height="50">';
+                                        } else {
+                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                        }
+                                    }
+                $email_html .= '    </td>
+                                    <td style="padding:0px;">
+                                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
+                                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
 
-                if (IMAGEPATHFROM == 'upload') {
-
-                    if ($artdata[0]['art_user_image']) {
-                        if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'])) {
-
-                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                        } else {
-                            $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '" alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
-                        }
-                    } else {
-                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                    }
-                } else {
-
-                    $filename = $this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'];
-                    $s3 = new S3(awsAccessKey, awsSecretKey);
-                    $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-
-                    if ($info) {
-                        $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '"  alt="" width="50" height="50">';
-                    } else {
-
-                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                    }
-                }
-
-                $email_html .= '</td>
-                                            <td style="padding:0px;">
-                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
-                                            </td>
-                    </tr>
-                                    </table>';
                 $subject = $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . ' Started following you in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $followuserid[0]['user_id']))->row();
@@ -2388,7 +2381,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->user_verify == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$followuserid[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
 
@@ -2417,7 +2418,7 @@ class Artist extends MY_Controller {
                             "count" => $datacount,
                             "status" => 'success',
                             "notification" => array('notification_count' => $not_count, 'to_id' => $to_id),
-                ));
+                        ));
             }
         }
     }
@@ -2585,7 +2586,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$followuserid[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
 
@@ -3166,7 +3175,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$followuserid[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
             // end notoification
@@ -3263,7 +3280,9 @@ class Artist extends MY_Controller {
                             "notification" => array('notification_count' => $not_count, 'to_id' => $to_id),
                 ));
             }
-        } else {
+        }
+        else
+        {
             $data = array(
                 'follow_type' => '1',
                 'follow_from' => $artdata[0]['art_id'],
@@ -3294,45 +3313,43 @@ class Artist extends MY_Controller {
 
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                                            <td  style="'.MAIL_TD_1.'">';
+                                <tr>
+                                    <td  style="'.MAIL_TD_1.'">';
+                                    if (IMAGEPATHFROM == 'upload') {
+                                        if ($artdata[0]['art_user_image']) {
+                                            if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'])) {
+                                                $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                            } else {
+                                                $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '" alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
+                                            }
+                                        }
+                                        else
+                                        {
+                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                        }
+                                    }
+                                    else
+                                    {
+                                        $filename = $this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'];
+                                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                        if ($info) {
+                                            $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '"  alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
+                                        } else {
+                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                        }
+                                    }
+                                    $email_html .= '</td>
+                                    <td style="padding:0px;">
+                                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
+                                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
 
-                if (IMAGEPATHFROM == 'upload') {
-
-                    if ($artdata[0]['art_user_image']) {
-                        if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'])) {
-
-                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                        } else {
-                            $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '" alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
-                        }
-                    } else {
-                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                    }
-                } else {
-
-                    $filename = $this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'];
-                    $s3 = new S3(awsAccessKey, awsSecretKey);
-                    $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-
-                    if ($info) {
-                        $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '"  alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
-                    } else {
-
-                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                    }
-                }
-
-                $email_html .= '</td>
-                                            <td style="padding:0px;">
-                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
-                                            </td>
-                    </tr>
-                                    </table>';
                 $subject = $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . ' Started following you in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $followuserid[0]['user_id']))->row();
@@ -3340,11 +3357,18 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$followuserid[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
             // end notoification
-
 
             $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
             $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -3360,14 +3384,13 @@ class Artist extends MY_Controller {
                 $to_id = $this->db->select('user_id')->get_where('art_reg', array('art_id' => $art_id))->row()->user_id;
                 $not_count = $this->artistic_notification_count($to_id);
 
-
                 echo json_encode(
                         array(
                             "follow" => $follow,
                             "count" => $datacount,
                             "status" => 'success',
                             "notification" => array('notification_count' => $not_count, 'to_id' => $to_id),
-                ));
+                        ));
             }
         }
     }
@@ -4181,7 +4204,15 @@ class Artist extends MY_Controller {
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$artemail[0]['art_email'],
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
@@ -4428,7 +4459,15 @@ class Artist extends MY_Controller {
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$artemail[0]['art_email'],
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
@@ -5268,15 +5307,13 @@ class Artist extends MY_Controller {
         }
 
         if ($return == 0) {
-
+            
             $datavl = "notavl";
-            echo json_encode(
-                    array(
-                        "notavlpost" => $datavl,
-            ));
-        } else {
+            echo json_encode(array("notavlpost" => $datavl));
 
-
+        }
+        else
+        {
             $contition_array = array('art_post_id' => $_POST["post_id"], 'status' => '1');
             $artdata = $this->data['artdata'] = $this->common->select_data_by_condition('art_post', $contition_array, $data = 'art_likes_count,art_like_user,is_delete,user_id,art_post_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -5341,55 +5378,57 @@ class Artist extends MY_Controller {
 
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                                            <td style="'.MAIL_TD_1.'">';
+                                            <tr>
+                                                <td style="'.MAIL_TD_1.'">';
+                                                if (IMAGEPATHFROM == 'upload') {
+                                                    if ($artuserdata[0]['art_user_image']) {
+                                                        if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'])) {
+                                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                                        } else {
+                                                            $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '" alt="' . $artuserdata[0]['art_user_image'] . '" width="50" height="50">';
+                                                        }
+                                                    } else {
+                                                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    $filename = $this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'];
+                                                    $s3 = new S3(awsAccessKey, awsSecretKey);
+                                                    $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                                    if ($info) {
+                                                        $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '"  alt="' . $artuserdata[0]['art_user_image'] . '" width="60" height="60">';
+                                                    } else {
+                                                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                                    }
+                                                }
+                            $email_html .= '    </td>
+                                                <td style="padding:0px;">
+                                                    <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> like your post in artistic profile.</p>
+                                                    <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                                </td>
+                                                <td style="'.MAIL_TD_3.'">
+                                                    <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
+                                                </td>
+                                            </tr>
+                                            </table>';
 
-                            if (IMAGEPATHFROM == 'upload') {
-
-                                if ($artuserdata[0]['art_user_image']) {
-                                    if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'])) {
-
-                                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                                    } else {
-                                        $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '" alt="' . $artuserdata[0]['art_user_image'] . '" width="50" height="50">';
-                                    }
-                                } else {
-                                    $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                                }
-                            } else {
-
-
-                                $filename = $this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'];
-                                $s3 = new S3(awsAccessKey, awsSecretKey);
-                                $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-
-
-                                if ($info) {
-                                    $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '"  alt="' . $artuserdata[0]['art_user_image'] . '" width="60" height="60">';
-                                } else {
-
-                                    $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                                }
-                            }
-
-                            $email_html .= '</td>
-                                            <td style="padding:0px;">
-                        <pstyle="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> like your post in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
-                                            </td>
-                    </tr>
-                                    </table>';
                             $subject = $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . ' like your post in Aileensoul.';
 
-                            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $profile_data[0]['user_id']))->row();
+                            $unsubscribeData = $this->db->select('encrypt_key ,user_slug ,user_id ,is_subscribe ,user_verify')->get_where('user', array('user_id' => $profile_data[0]['user_id']))->row();
 
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$artemail[0]['art_email'],
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
@@ -5573,7 +5612,7 @@ class Artist extends MY_Controller {
                                 "likecount" => $like_count,
                                 "like_user_count" => $like_user_count,
                                 "status" => 'success',
-                                "notification" => array('notification_count' => $not_count, 'to_id' => $to_id),
+                                "notification" => array('notification_count'=>$not_count,'to_id'=>$to_id),
                     ));
                 }
             }
@@ -5718,7 +5757,15 @@ class Artist extends MY_Controller {
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$artemail[0]['art_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -5967,7 +6014,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$artemail[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
@@ -6198,55 +6253,55 @@ class Artist extends MY_Controller {
 
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                                            <td style="'.MAIL_TD_1.'">';
-
-                    if (IMAGEPATHFROM == 'upload') {
-
-                        if ($artuserdata[0]['art_user_image']) {
-                            if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'])) {
-
-                                $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                            } else {
-                                $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '" alt="' . $artuserdata[0]['art_user_image'] . '" width="50" height="50">';
-                            }
-                        } else {
-                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                        }
-                    } else {
-
-
-                        $filename = $this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'];
-                        $s3 = new S3(awsAccessKey, awsSecretKey);
-                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-
-
-                        if ($info) {
-                            $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '"  alt="' . $artuserdata[0]['art_user_image'] . '" width="60" height="60">';
-                        } else {
-
-                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                        }
-                    }
-
-                    $email_html .= '</td>
-                                            <td style="padding:0px;">
-                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
-                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
-                                            </td>
-                    </tr>
+                                    <tr>
+                                        <td style="'.MAIL_TD_1.'">';
+                                        if (IMAGEPATHFROM == 'upload') {
+                                            if ($artuserdata[0]['art_user_image']) {
+                                                if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'])) {
+                                                    $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                                } else {
+                                                    $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '" alt="' . $artuserdata[0]['art_user_image'] . '" width="50" height="50">';
+                                                }
+                                            } else {
+                                                $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                            }
+                                        } else {
+                                            $filename = $this->config->item('art_profile_thumb_upload_path') . $artuserdata[0]['art_user_image'];
+                                            $s3 = new S3(awsAccessKey, awsSecretKey);
+                                            $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                            if ($info) {
+                                                $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artuserdata[0]['art_user_image'] . '"  alt="' . $artuserdata[0]['art_user_image'] . '" width="60" height="60">';
+                                            } else {
+                                                $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                            }
+                                        }
+                    $email_html .= '    </td>
+                                        <td style="padding:0px;">
+                                            <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
+                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                        </td>
+                                        <td style="'.MAIL_TD_3.'">
+                                            <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
+                                        </td>
+                                    </tr>
                                     </table>';
+
                     $subject = $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . ' is comment on your post in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $profile_data[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key, user_slug ,user_id ,is_subscribe ,user_verify')->get_where('user', array('user_id' => $profile_data[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$artemail[0]['art_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -7247,7 +7302,15 @@ class Artist extends MY_Controller {
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$artemail[0]['art_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -7502,7 +7565,15 @@ class Artist extends MY_Controller {
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$artemail[0]['art_email'],
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
@@ -7696,7 +7767,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$artemail[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
@@ -7976,7 +8055,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$artemail[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
@@ -8238,7 +8325,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$artemail[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
@@ -8490,7 +8585,15 @@ class Artist extends MY_Controller {
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$artemail[0]['art_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -8645,7 +8748,15 @@ class Artist extends MY_Controller {
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$artemail[0]['art_email'],
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
@@ -8783,7 +8894,15 @@ class Artist extends MY_Controller {
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$artemail[0]['art_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -8913,7 +9032,15 @@ class Artist extends MY_Controller {
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$artemail[0]['art_email'],
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
@@ -10021,7 +10148,15 @@ class Artist extends MY_Controller {
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$artemail[0]['art_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }

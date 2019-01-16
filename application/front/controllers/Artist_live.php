@@ -18,7 +18,7 @@ class Artist_live extends MY_Controller {
         $this->load->model('artistic_model');
         $this->load->library('S3');
         $this->load->library('upload');
-
+        $this->load->library('inbackground');
 
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
         $this->data['no_user_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
@@ -72,7 +72,7 @@ class Artist_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         
-        $this->data['title'] = "Find Artist by Category and Connect with Them | Aileensoul";
+        $this->data['title'] = "Find Artist by Category and Connect with Them".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore top artist by various categories such as painter, writer, photographer, dancer, model, and so on. Register free to connect with them."; 
         
         $this->data['ismainregister'] = false;
@@ -119,7 +119,7 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Categories - Artist Profile | Aileensoul";
+        $this->data['title'] = "Categories - Artist Profile".TITLEPOSTFIX;
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
@@ -240,7 +240,7 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Artist Search | Aileensoul";
+        $this->data['title'] = "Artist Search".TITLEPOSTFIX;
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
@@ -428,7 +428,7 @@ class Artist_live extends MY_Controller {
         } else {
             $this->data['left_artistic'] = $this->load->view('artist_live/left_artistic', $this->data, true);
             $artistic_name = $this->get_artistic_name($id);
-            $this->data['title'] = 'Artist Profile | Aileensoul';
+            $this->data['title'] = 'Artist Profile'.TITLEPOSTFIX;
             $this->data['metadesc'] = 'Grow your artist network by connecting with other artist that share the same or similar interest at Aileensoul platform.';
             $this->load->view('artist_live/art_post', $this->data);
         }
@@ -1938,7 +1938,7 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Find Top Location-Wise Artist by Category and Connect with Them | Aileensoul";
+        $this->data['title'] = "Find Top Location-Wise Artist by Category and Connect with Them".TITLEPOSTFIX;
         $this->data['metadesc'] = "Explore top 20 categories wise artist near your location. Register free to connect with them."; 
         $this->data['ismainregister'] = false;
         if($userid){
@@ -1982,7 +1982,7 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Opportunities".TITLEPOSTFIX;
         // echo $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
         $locationdata = $this->artistic_model->getidfromslugoflocation($location);
 

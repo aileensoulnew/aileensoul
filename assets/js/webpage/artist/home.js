@@ -194,13 +194,21 @@ function followuser(clicked_id) {
             $('.' + 'fr' + clicked_id).html(data.follow);
             $('#countfollow').html(data.count);
             $('ul.home_three_follow_ul').append(data.third_user);
-            $.when($('.fad' + clicked_id).fadeOut(2000)).done(function() {
+           /* $.when($('.fad' + clicked_id).fadeOut(400)).done(function() {
+                $('.fad' + clicked_id).remove();
+                var numberPost = $('[class^="follow_box_ul_li"]').length;
+                if (numberPost == 0) {
+                    $('.full-box-module_follow').hide();
+                }
+            });*/
+            $('.fad' + clicked_id).fadeOut(400,function(){
                 $('.fad' + clicked_id).remove();
                 var numberPost = $('[class^="follow_box_ul_li"]').length;
                 if (numberPost == 0) {
                     $('.full-box-module_follow').hide();
                 }
             });
+             
             if (data.notification.notification_count != 0) {
                 var notification_count = data.notification.notification_count;
                 var to_id = data.notification.to_id;
@@ -219,7 +227,14 @@ function followclose(clicked_id) { //alert("hii");
         data: 'follow_to=' + clicked_id,
         success: function(data) {
             $('ul.home_three_follow_ul').append(data);
-            $.when($('.fad' + clicked_id).fadeOut(1500)).done(function() {
+            /*$.when($('.fad' + clicked_id).fadeOut(400)).done(function() {
+                $('.fad' + clicked_id).remove();
+                var numberPost = $('[class^="follow_box_ul_li"]').length;
+                if (numberPost == 0) {
+                    $('.full-box-module_follow').hide();
+                }
+            });*/
+            $('.fad' + clicked_id).fadeOut(400,function() {
                 $('.fad' + clicked_id).remove();
                 var numberPost = $('[class^="follow_box_ul_li"]').length;
                 if (numberPost == 0) {
@@ -231,7 +246,7 @@ function followclose(clicked_id) { //alert("hii");
 }
 
 function followusercell(clicked_id) {
-    $("#fadcell" + clicked_id).fadeOut(6000);
+    $("#fadcell" + clicked_id).fadeOut(400);
     $.ajax({
         type: 'POST',
         url: base_url + "artist/follow_home",
@@ -250,7 +265,7 @@ function followusercell(clicked_id) {
 }
 
 function followclosecell(clicked_id) { //alert("hii");
-    $("#fadcell" + clicked_id).fadeOut(3000);
+    $("#fadcell" + clicked_id).fadeOut(400);
 }
 $(document).ready(function() {
     art_home_post();
@@ -1782,7 +1797,8 @@ function set_progress(count_profile_value,count_profile)
         $("#profile-progress").show();
         $("#progress-txt").html("Hurray! Your profile is complete.");
         setTimeout(function(){
-            // $("#edit-profile-move").hide();
+            $("#profile-progress").hide();
+            $(".mob-progressbar").hide();
         },5000);
     }
     else
@@ -1796,6 +1812,8 @@ function set_progress(count_profile_value,count_profile)
         $('.second.circle-1').circleProgress({
             value: count_profile_value //with decimal point
         }).on('circle-animation-progress', function(event, progress) {
+            $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+            $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
             $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
         });
     }
