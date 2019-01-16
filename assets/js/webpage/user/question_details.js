@@ -582,7 +582,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         }).then(function(success) {
             $scope.count_likeUser = success.data.countlike;
             $scope.get_like_user_list = success.data.likeuserlist;
-            $('#likeusermodal').modal('show');
+            if($scope.count_likeUser > 0)
+            {
+                $('#likeusermodal').modal('show');
+            }
         });
     }
     $scope.IsVisible = false;

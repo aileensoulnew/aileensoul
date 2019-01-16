@@ -356,7 +356,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <ul class="pull-right bottom-right">
-                                            <li class="like-count" ng-click="like_user_list(post.post_data.id);"><span id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count" style="{{post.post_like_count > 0 ? '' : 'display: none';}}"></span><span>Like</span></li>
+                                            <li class="like-count" ng-click="no_login_pop(post.post_data.id);"><span id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count" style="{{post.post_like_count > 0 ? '' : 'display: none';}}"></span><span>Like</span></li>
                                             <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Answers</span></li> -->
                                             <li><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><span class="post-comment-count-{{post.post_data.id}}" style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" ng-bind="post.post_comment_count"></span><span>Answers</span></a></li>
                                             <li><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><span class="post-comment-count-{{post.post_data.id}}" style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" ng-bind="post.post_comment_count"></span><span>Answers</span></a></li>
@@ -366,7 +366,7 @@
                             </div>
                             <div class="like-other-box">
                                 <!-- <a href="#" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a> -->
-                                <a href="#" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                <a href="#" ng-click="no_login_pop(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
                             </div>
                         </div>
                         <div class="ans-text" ng-if="post.post_comment_data.length !='0'"><span>Answers</span></div>
@@ -525,6 +525,8 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var user_slug = '<?php echo $question_data['user_data']['user_slug']; ?>';
+            var cmt_maxlength = '700';
             var question = '<?php echo $question_id ?>';
             var title = '<?php echo addslashes($title) ?>';
             var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
