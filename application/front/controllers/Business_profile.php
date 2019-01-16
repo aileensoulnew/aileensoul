@@ -3091,7 +3091,7 @@ Your browser does not support the audio tag.
             redirect('business_profile/');
         }
         //if user deactive profile then redirect to business_profile/index untill active profile End
-
+        
         $not_bus_profile_id = $business_id = $_POST["follow_to"];
 
         $is_listing = $_POST["is_listing"];
@@ -3116,8 +3116,6 @@ Your browser does not support the audio tag.
             $update = $this->common->update_data($data, 'follow', 'follow_id', $follow[0]['follow_id']);
 
             // insert notification
-
-
             $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $busdatatoid[0]['user_id'], 'not_product_id' => $follow[0]['follow_id'], 'not_from' => '6');
             $busnotification = $this->common->select_data_by_condition('notification', $contition_array, $data = 'not_read', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             if ($busnotification[0]['not_read'] == 2) {
@@ -3154,25 +3152,35 @@ Your browser does not support the audio tag.
                     }
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' .$img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
-                                            </td>
-					</tr>
+                                    <tr>
+                                        <td style="'.MAIL_TD_1.'">
+                                            <img src="' .$img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '">
+                                        </td>
+                                        <td style="padding:5px;">
+                                            <p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
+                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                        </td>
+                                        <td style="'.MAIL_TD_3.'">
+                                            <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                        </td>
+                                    </tr>
                                     </table>';
                     $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key, user_slug, user_id, is_subscribe, user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$busdatatoid[0]['contact_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -3228,17 +3236,19 @@ Your browser does not support the audio tag.
 
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' .$loginBusinessUserData->company_name. '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name. '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
-                                            </td>
-					</tr>
-                                    </table>';
+                                <tr>
+                                    <td style="'.MAIL_TD_1.'">
+                                        <img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' .$loginBusinessUserData->company_name. '">
+                                    </td>
+                                    <td style="padding:5px;">
+                                        <p><b>' . $loginBusinessUserData->company_name. '</b> Started following you in business profile.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
                 $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
@@ -3246,7 +3256,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$busdatatoid[0]['contact_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
             // end notification
@@ -3263,9 +3281,10 @@ Your browser does not support the audio tag.
             }
         }
         $profile_slug = $_POST["profile_slug"];
-        if ($profile_slug) {
+        /*if ($profile_slug) {
             $business_id = $this->db->select('business_profile_id')->get_where('business_profile', array('business_slug' => $profile_slug))->row()->business_profile_id;
-        }
+        }*/
+        $business_id = $this->db->select('business_profile_id')->get_where('business_profile', array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1'))->row()->business_profile_id;
 
         // GET NOTIFICATION COUNT
         $to_id = $this->db->select('user_id')->get_where('business_profile', array('business_profile_id' => $not_bus_profile_id))->row()->user_id;
@@ -3285,14 +3304,14 @@ Your browser does not support the audio tag.
     public function unfollow_two() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
-//if user deactive profile then redirect to business_profile/index untill active profile start
+        // if user deactive profile then redirect to business_profile/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
         $business_deactive = $this->data['business_deactive'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
         if ($business_deactive) {
             redirect('business_profile/');
         }
-//if user deactive profile then redirect to business_profile/index untill active profile End
+        //if user deactive profile then redirect to business_profile/index untill active profile End
 
         $business_id = $_POST["follow_to"];
         $is_listing = $_POST["is_listing"];
@@ -3323,9 +3342,10 @@ Your browser does not support the audio tag.
                 $unfollow .= '</div>';
             }
             $profile_slug = $_POST["profile_slug"];
-            if ($profile_slug) {
+            /*if ($profile_slug) {
                 $business_id = $this->db->select('business_profile_id')->get_where('business_profile', array('business_slug' => $profile_slug))->row()->business_profile_id;
-            }
+            }*/
+            $business_id = $this->db->select('business_profile_id')->get_where('business_profile', array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1'))->row()->business_profile_id;
             echo json_encode(
                     array("unfollow_html" => $unfollow,
                         "unfollowing_count" => $this->business_user_following_count($business_id),

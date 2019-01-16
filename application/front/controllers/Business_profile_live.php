@@ -3386,14 +3386,14 @@ Your browser does not support the audio tag.
     public function unfollow_two() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
-//if user deactive profile then redirect to business_profile/index untill active profile start
+        // if user deactive profile then redirect to business_profile/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
         $business_deactive = $this->data['business_deactive'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
         if ($business_deactive) {
             redirect('business_profile/');
         }
-//if user deactive profile then redirect to business_profile/index untill active profile End
+        //if user deactive profile then redirect to business_profile/index untill active profile End
 
         $business_id = $_POST["follow_to"];
         $is_listing = $_POST["is_listing"];
@@ -3494,6 +3494,17 @@ Your browser does not support the audio tag.
 
         $this->business_profile_active_check();
         $this->is_business_profile_register();
+
+        $business_user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $id))->row()->user_id;
+        $userid = $this->session->userdata('aileenuser');
+        if($business_user_id == $userid)
+        {
+            $this->data['my_profile'] = 1;
+        }
+        else
+        {
+            $this->data['my_profile'] = 0;
+        }
 
         $company_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($company_name) . ' | Followers' . ' | Business Profile' . TITLEPOSTFIX;
@@ -3662,6 +3673,16 @@ Your browser does not support the audio tag.
         $this->business_profile_active_check();
         $this->is_business_profile_register();
 
+        $business_user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $id))->row()->user_id;
+        $userid = $this->session->userdata('aileenuser');
+        if($business_user_id == $userid)
+        {
+            $this->data['my_profile'] = 1;
+        }
+        else
+        {
+            $this->data['my_profile'] = 0;
+        }
 
         $company_name = $this->get_company_name($id);
         $this->data['title'] = $company_name . ' | Following' . ' | Business Profile' . TITLEPOSTFIX;
