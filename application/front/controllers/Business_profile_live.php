@@ -23,6 +23,7 @@ class Business_profile_live extends MY_Controller {
         $this->load->library('S3');
         $this->load->library('upload');
         $this->load->library('image_lib');
+        $this->load->library('inbackground');
         //AWS access info end
         $userid = $this->session->userdata('aileenuser');
         // $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="profile.html" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="'. base_url("artist/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("business-profile/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("job/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("recruiter/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("freelance/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
@@ -2523,7 +2524,15 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$busdatatoid[0]['contact_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -2606,7 +2615,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$busdatatoid[0]['contact_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
             $contition_array = array('follow_type' => '2', 'follow_from' => $artdata[0]['business_profile_id'], 'follow_status' => 1);
@@ -2875,7 +2892,15 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$busdatatoid[0]['contact_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -2946,7 +2971,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$busdatatoid[0]['contact_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
 
@@ -3273,7 +3306,15 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$busdatatoid[0]['contact_email'],
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
@@ -3347,7 +3388,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$busdatatoid[0]['contact_email'],
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
             // end notification
@@ -4214,12 +4263,20 @@ Your browser does not support the audio tag.
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
             }
-// end notification
+            // end notification
 
             $businessprofiledata1 = $this->data['businessprofiledata1'] = $this->business_model->getBusinessLikeComment($post_id = $_POST["post_id"]);
 
@@ -4366,12 +4423,20 @@ Your browser does not support the audio tag.
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
             }
-// end notification
+            // end notification
             $businessprofiledata1 = $this->data['businessprofiledata1'] = $this->business_model->getBusinessLikeComment($post_id = $_POST["post_id"]);
 
             if ($updatdata) {
@@ -4826,12 +4891,20 @@ Your browser does not support the audio tag.
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
                         }
                     }
                 }
             }
-// end notification
+            // end notification
 
             $contition_array = array('business_profile_post_id' => $_POST["post_id"], 'status' => '1');
             $businessprofiledata1 = $this->data['businessprofiledata1'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -5085,11 +5158,19 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
-// end notification
+        // end notification
         $businessprofiledata = $this->data['businessprofiledata'] = $this->business_model->getBusinessPostComment($post_id = $_POST["post_id"], $sortby = 'business_profile_post_comment_id', $orderby = 'DESC', $limit = '1');
 
         $buscmtcnt = $this->business_model->getBusinessPostComment($post_id = $_POST["post_id"], $sortby = 'business_profile_post_comment_id', $orderby = 'DESC', $limit = '');
@@ -5297,11 +5378,19 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
-// end notification
+        // end notification
 
         $businessprofiledata = $this->data['businessprofiledata'] = $this->business_model->getBusinessPostComment($post_id = $_POST["post_id"], $sortby = 'business_profile_post_comment_id', $orderby = 'ASC', $limit = '');
 
@@ -5924,11 +6013,19 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$to_email_id,
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
-// end notification
+            // end notification
 
 
             $contition_array = array('post_image_id' => $_POST["post_image_id"], 'is_unlike' => '0');
@@ -6155,12 +6252,20 @@ Your browser does not support the audio tag.
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$to_email_id,
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
                 }
-// end notification
+                // end notification
 
                 $contition_array = array('post_image_id' => $_POST["post_image_id"], 'is_unlike' => '0');
                 $bdata2 = $this->data['bdata2'] = $this->common->select_data_by_condition('bus_post_image_like', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -6309,11 +6414,19 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
-// end notification
+        // end notification
 
 
         $contition_array = array('post_image_id' => $post_image_id, 'is_delete' => '0');
@@ -6537,11 +6650,19 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         }
-// end notification
+        // end notification
 
         $contition_array = array('post_image_id' => $post_image_id, 'is_delete' => '0');
         $businesscomment = $this->common->select_data_by_condition('bus_post_image_comment', $contition_array, $data = '*', $sortby = 'post_image_comment_id', $orderby = 'DESC', $limit = '1', $offset = '', $join_str = array(), $groupby = '');
@@ -6777,11 +6898,19 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$to_email_id,
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
-// end notification
+            // end notification
 
             $contition_array = array('post_image_comment_id' => $_POST["post_image_comment_id"], 'is_unlike' => '0');
             $bdatacm = $this->data['bdatacm'] = $this->common->select_data_by_condition('bus_comment_image_like', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -6911,12 +7040,20 @@ Your browser does not support the audio tag.
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$to_email_id,
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
                 }
-// end notification 
+                // end notification 
 
 
                 $contition_array = array('post_image_comment_id' => $_POST["post_image_comment_id"], 'is_unlike' => '0');
@@ -7027,11 +7164,19 @@ Your browser does not support the audio tag.
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$to_email_id,
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
                     }
                 }
             }
-// end notification
+            // end notification
 
             $contition_array = array('post_image_comment_id' => $_POST["post_image_comment_id"], 'is_unlike' => '0');
             $bdatacm = $this->data['bdatacm'] = $this->common->select_data_by_condition('bus_comment_image_like', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -7158,12 +7303,20 @@ Your browser does not support the audio tag.
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
-                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$to_email_id,
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
                             }
                         }
                     }
                 }
-// end notification
+                // end notification
 
                 $contition_array = array('post_image_comment_id' => $_POST["post_image_comment_id"], 'is_unlike' => '0');
                 $bdata2 = $this->data['bdata2'] = $this->common->select_data_by_condition('bus_comment_image_like', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -8182,7 +8335,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
 
@@ -8736,7 +8897,15 @@ Your browser does not support the audio tag.
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                    $url = base_url()."user_post/send_email_in_background";
+                    $param = array(
+                        "subject"=>$subject,
+                        "email_html"=>$email_html,
+                        "to_email"=>$to_email_id,
+                        "unsubscribe"=>$unsubscribe,
+                    );
+                    $this->inbackground->do_in_background($url, $param);
                 }
             }
         } else {
