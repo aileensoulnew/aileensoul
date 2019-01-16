@@ -460,14 +460,21 @@
                                                 </li>
                                                 <li><b>Company profile</b>
                                                     <span>
-                                                        <?php if ($post['re_comp_profile'] != '') { ?>
+                                                       <?php
+                                                        if($post['comp_profile'] != '')
+                                                        { ?>
+                                                            <pre>
+                                                                <?php echo $this->common->make_links($post['comp_profile']); ?>
+                                                            </pre> <?php
+                                                        }
+                                                        else if ($post['re_comp_profile'] != '') { ?>
                                                             <pre>
                                                                 <?php echo $this->common->make_links($post['re_comp_profile']); ?></pre>
-                                                            <?php
+                                                                <?php
                                                         } else {
-                                                            echo PROFILENA;
+                                                            echo JOBDATANA;
                                                         }
-                                                        ?> 
+                                                        ?>  
                                                     </span>
                                                 </li>
                                             </ul>
@@ -762,12 +769,19 @@
                                                     </li>
                                                     <li><b>Company profile</b>
                                                         <span>
-                                                            <?php if ($post['re_comp_profile'] != '') { ?>
+                                                            <?php
+                                                            if($post['comp_profile'] != '')
+                                                            { ?>
+                                                                <pre>
+                                                                    <?php echo $this->common->make_links($post['comp_profile']); ?>
+                                                                </pre> <?php
+                                                            }
+                                                            else if ($post['re_comp_profile'] != '') { ?>
                                                                 <pre>
                                                                     <?php echo $this->common->make_links($post['re_comp_profile']); ?></pre>
-                                                                <?php
+                                                                    <?php
                                                             } else {
-                                                                echo PROFILENA;
+                                                                echo JOBDATANA;
                                                             }
                                                             ?> 
                                                         </span>

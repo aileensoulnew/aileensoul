@@ -639,7 +639,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 </li>
                                                 <li><b>Company profile</b>
                                                     <span>
-                                                        <?php if ($post['re_comp_profile'] != '') { ?>
+                                                        <?php
+                                                        if($post['comp_profile'] != '')
+                                                        { ?>
+                                                            <pre>
+                                                                <?php echo $this->common->make_links($post['comp_profile']); ?>
+                                                            </pre> <?php
+                                                        }
+                                                        else if ($post['re_comp_profile'] != '') { ?>
                                                             <pre>
                                                                 <?php echo $this->common->make_links($post['re_comp_profile']); ?></pre>
                                                                 <?php
