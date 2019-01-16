@@ -82,7 +82,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .user-profile-box .user-detail-bottom ul li a{font-size:13px; color:#5c5c5c; letter-spacing:1px;}
 .user-profile-box .user-detail-bottom ul li a:hover{color:#1b8ab9;}
 
-.all-profile-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px; margin-left:0;}
+.all-profile-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:right; border-radius:4px; margin-left:0;}
 .all-profile-box .all-pro-head{padding:5px 10px; border-bottom:1px solid #d2d2d2;}
 .all-profile-box .all-pro-head h4{margin:0; letter-spacing:1px; font-size:16px;}
 .all-profile-box .all-pro-head h4 a{color:#5c5c5c;}
@@ -2473,7 +2473,7 @@ label.cameraButton{min-height:43px;}
 .cus_work .control{padding-left:20px; float:left; margin-right:15px;}
 .cus_work .control--radio .control__indicator::after{width:13px; height:13px;}
 .edit_data{margin-top:-4px;}
-.cbp-spmenu{background:#fff !important;}
+.cbp-spmenu{/*background:#fff !important;*/}
 /***  error  ***/
 #artpost .fw fieldset label.error{right:0;}
 
@@ -3428,7 +3428,7 @@ color: #5c5c5c !important;}
 .mob-progressbar .mob-edit-pro{text-align:center;}
 .mob-progressbar .progress{height:25px; margin-top:5px; background:#e5e5e5; margin-bottom:6px;}
 .mob-progressbar p{font-size:13px; font-weight:bold;}
-.mob-progressbar .progress .skill{line-height:25px; padding:0; margin:0 0 0 20px;
+.mob-progressbar .progress .skill{line-height:22px; padding:0; margin:0 0 0 20px;
 text-transform:uppercase;}
 .mob-progressbar .progress .skill .val{font-style:normal; margin:0 20px 0 0;}
 .mob-progressbar .progress-bar{text-align:center; transition-duration:3s;}
@@ -4313,7 +4313,7 @@ text-transform:uppercase;}
 	.dash-left-title h3{font-size:18px; text-align:left; border-bottom:1px solid #d2d2d2; padding:0px 2px 5px; margin-bottom:10px;}
 	.dash-left-title h3 svg{width:20px;}
 	.right-info-box .dtl-title svg{width:20px;}
-	.mob-progressbar .progress .skill{line-height:26px;}
+	.mob-progressbar .progress .skill{}
 	.mob-progressbar{width:100%; border-left:0; border-right:0; border-radius:0;}
 	.gallery-item.tab-add{display:none;}
 	.dtl-add-mob{display:block;}
