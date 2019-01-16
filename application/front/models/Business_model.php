@@ -411,12 +411,11 @@ class Business_model extends CI_Model {
             AND ailee_business_profile_post.status = '1' 
             AND ailee_user_login.is_delete = '0' 
             AND ailee_user_login.status = '1' 
-            AND business_profile_post_id NOT IN ( SELECT business_profile_post_id FROM ailee_business_profile_post WHERE ailee_business_profile_post.is_delete = '0' AND ailee_business_profile_post.status = '1' AND FIND_IN_SET ('".$user_id."', delete_post) != '0')
-            AND (
+            AND (business_profile_post_id NOT IN ( SELECT business_profile_post_id FROM ailee_business_profile_post WHERE ailee_business_profile_post.is_delete = '0' AND ailee_business_profile_post.status = '1' AND FIND_IN_SET ('".$user_id."', delete_post) != '0')
+            OR (
             ailee_business_profile_post.user_id IN (SELECT user_id FROM ailee_follow JOIN ailee_business_profile ON ailee_business_profile.business_profile_id=ailee_follow.follow_to WHERE follow_from = '".$business_profile_id."' AND follow_status = '1' AND follow_type = '2') OR 
             ailee_business_profile_post.user_id IN (SELECT user_id FROM ailee_business_profile WHERE ailee_business_profile.is_deleted = '0' AND ailee_business_profile.status = '1' AND ailee_business_profile.business_step = '4' AND (ailee_business_profile.industriyal = '".$industriyal."' AND ailee_business_profile.industriyal !=0) AND (ailee_business_profile.other_industrial = '".$other_industrial."' AND ailee_business_profile.other_industrial != '') OR (ailee_business_profile.city = '".$city."' AND ailee_business_profile.industriyal = '$industriyal'))
-                )
-            OR (ailee_business_profile_post.posted_user_id = '".$user_id."' AND ailee_business_profile_post.is_delete =0)
+                ))
             ORDER BY business_profile_post_id DESC";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
@@ -439,12 +438,11 @@ class Business_model extends CI_Model {
             AND ailee_business_profile_post.status = '1' 
             AND ailee_user_login.is_delete = '0' 
             AND ailee_user_login.status = '1' 
-            AND business_profile_post_id NOT IN ( SELECT business_profile_post_id FROM ailee_business_profile_post WHERE ailee_business_profile_post.is_delete = '0' AND ailee_business_profile_post.status = '1' AND FIND_IN_SET ('".$user_id."', delete_post) != '0')
-            AND (
+            AND (business_profile_post_id NOT IN ( SELECT business_profile_post_id FROM ailee_business_profile_post WHERE ailee_business_profile_post.is_delete = '0' AND ailee_business_profile_post.status = '1' AND FIND_IN_SET ('".$user_id."', delete_post) != '0')
+            OR (
             ailee_business_profile_post.user_id IN (SELECT user_id FROM ailee_follow JOIN ailee_business_profile ON ailee_business_profile.business_profile_id=ailee_follow.follow_to WHERE follow_from = '".$business_profile_id."' AND follow_status = '1' AND follow_type = '2') OR 
             ailee_business_profile_post.user_id IN (SELECT user_id FROM ailee_business_profile WHERE ailee_business_profile.is_deleted = '0' AND ailee_business_profile.status = '1' AND ailee_business_profile.business_step = '4' AND (ailee_business_profile.industriyal = '".$industriyal."' AND ailee_business_profile.industriyal !=0) AND (ailee_business_profile.other_industrial = '".$other_industrial."' AND ailee_business_profile.other_industrial != '') OR (ailee_business_profile.city = '".$city."' AND ailee_business_profile.industriyal = '$industriyal'))
-                )
-            OR (ailee_business_profile_post.posted_user_id = '".$user_id."' AND ailee_business_profile_post.is_delete =0)
+                ))
             ORDER BY business_profile_post_id DESC";        
         $query = $this->db->query($sql);
         $result_array = $query->row()->total_record;
