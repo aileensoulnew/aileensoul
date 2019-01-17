@@ -1418,4 +1418,32 @@ class Artistic_model extends CI_Model {
         $this->db->update('art_reg_search_tmp', $data);
         return true;
     }
+
+    public function get_artist_follower_count($art_id)
+    {
+        $this->db->select("COUNT(*) as follower_count")->from("follow f");
+        $this->db->join('art_reg a', 'a.art_id = f.follow_from', 'left');
+        $this->db->where('a.status', '1');
+        $this->db->where('a.is_delete', '0');
+        $this->db->where('f.follow_type', '1');
+        $this->db->where('f.follow_to', $art_id);
+        $this->db->where('f.follow_status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['follower_count'];
+    }
+
+    public function get_artist_following_count($art_id)
+    {
+        $this->db->select("COUNT(*) as following_count")->from("follow f");
+        $this->db->join('art_reg a', 'a.art_id = f.follow_to', 'left');
+        $this->db->where('a.status', '1');
+        $this->db->where('a.is_delete', '0');
+        $this->db->where('f.follow_type', '1');
+        $this->db->where('f.follow_from', $art_id);
+        $this->db->where('f.follow_status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['following_count'];
+    }
 }

@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     artistic_following(slug_id);
 
@@ -206,7 +205,7 @@ function unfollowuser_list(clicked_id)
                 $('#countfollow').html(data.unfollow);
 
             } else {
-                $('#' + 'removefollow' + clicked_id).fadeOut(4000);
+                $('#' + 'removefollow' + clicked_id).fadeOut(400);
                 $('#countfollow').html(data.unfollow);
 
             }

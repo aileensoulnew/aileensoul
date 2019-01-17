@@ -130,17 +130,7 @@ var slug_id = '<?php echo $artisticdata[0]['user_id']; ?>';
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/following.js?ver='.time()); ?>"></script>
- <?php
-  /*if (IS_ART_JS_MINIFY == '0') { ?>
-<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/following.js?ver='.time()); ?>"></script>
 
-<?php }else{?>
-
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/following.js?ver='.time()); ?>"></script>
-
-<?php } */?>
 <script>
     // page scroll top 
             $(document).ready(function () {
