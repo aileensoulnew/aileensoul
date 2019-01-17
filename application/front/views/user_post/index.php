@@ -113,17 +113,17 @@
             <ul>
                 <li>
                     <a href="#" data-target="#opportunity-popup" data-toggle="modal">
-                        <img src="<?php echo base_url('assets/n-images/post-op.png') ?>"><span><span class="none-479">Post</span> <span> Opportunity</span></span>
+                        <img src="<?php echo base_url('assets/n-images/post-op.svg') ?>"><span><span class="none-479">Post</span> <span> Opportunity</span></span>
                     </a>
                 </li>
                 <li class="pl15">
                     <a href="<?php echo base_url('new-article'); ?>" target="_self">
-                        <img src="<?php echo base_url('assets/n-images/article.png') ?>"><span><span class="none-479">Post</span> <span> Article</span></span>
+                        <img src="<?php echo base_url('assets/n-images/article.svg') ?>"><span><span class="none-479">Post</span> <span> Article</span></span>
                     </a>
                 </li>
                 <li class="pl15">
                     <a href="#" data-target="#ask-question" data-toggle="modal">
-                        <img src="<?php echo base_url('assets/n-images/ask-qustion.png') ?>"><span>Ask Question</span>
+                        <img src="<?php echo base_url('assets/n-images/ask-question.svg') ?>"><span>Ask Question</span>
                     </a>
                 </li>
             </ul>

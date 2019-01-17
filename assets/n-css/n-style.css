@@ -3476,6 +3476,16 @@ text-transform:uppercase;}
 .sugg-list .request-btn .btn3{font-size:14px;}
 
 #comp_profile{height:150px;}
+.post-box-bottom svg path{ fill: #7b7b7b;}
+.bottom-left .fa-thumbs-up::before{font-size:0; background:url('../n-images/like.svg'); width:19px; height:19px; float:left; background-size:100%;}
+.bottom-left .fa-comment-o::before{font-size:0; background:url('../n-images/comment.svg'); width:19px; height:19px; float:left; background-size:100%;}
+.dash-left-title .fa-info-circle::before{font-size:0; background:url('../n-images/info.svg'); width:20px; height:20px; float:left; background-size:100%; margin-bottom:-3px;}
+.dash-left-title .fa-camera::before{font-size:0; background:url('../n-images/camera.svg'); width:24px; height:24px; float:left; background-size:100%; margin-top:-4px;}
+.dash-left-title .fa-video-camera::before{font-size:0; background:url('../n-images/video.svg'); width:24px; height:24px; float:left; background-size:100%; margin-top:-4px;}
+.dash-left-title .fa-music::before{font-size:0; background:url('../n-images/music.svg'); width:22px; height:22px; float:left; background-size:100%; margin-top:-1px;}
+.dash-left-title .fa-file-pdf-o::before{font-size:0; background:url('../n-images/pdf.svg'); width:25px; height:25px; float:left; background-size:100%; margin-top:-4px;}
+.dash-left-title .fa-file::before{font-size:0; background:url('../n-images/file.svg'); width:25px; height:25px; float:left; background-size:100%; margin-top:-4px;}
+
 
 /***  media query  ***/
 @media print {
