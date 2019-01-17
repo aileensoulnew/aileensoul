@@ -2382,7 +2382,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->user_verify == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -2582,7 +2582,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -3172,7 +3172,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -3355,7 +3355,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -4193,7 +4193,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -4448,7 +4448,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -5409,7 +5409,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -5499,7 +5499,7 @@ class Artist extends MY_Controller {
                                 "likecount" => $like_count,
                                 "like_user_count" => $like_user_count,
                                 "status" => 'success',
-                                "notification" => array('notification_count' => $not_count, 'to_id' => $to_id),
+                                "notification" => array('notification_count'=>$not_count,'to_id'=>$to_id),
                     ));
                 }
             } else {
@@ -5746,7 +5746,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -6003,7 +6003,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -6282,7 +6282,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -7291,7 +7291,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -7554,7 +7554,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -7756,7 +7756,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -8044,7 +8044,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -8314,7 +8314,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -8574,7 +8574,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -8737,7 +8737,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -8883,7 +8883,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -9021,7 +9021,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -10137,7 +10137,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -16982,6 +16982,19 @@ class Artist extends MY_Controller {
                 );
                 $insert_id = $this->common->insert_data($data, 'art_user_languages');
             }
+        }
+    }
+
+    public function send_email_in_background()
+    {
+        $subject = $this->input->post('subject');
+        $email_html = $this->input->post('email_html');
+        $to_email = $this->input->post('to_email');
+        $email_data = $this->user_model->getUserByEmail($to_email);
+        if($email_data)
+        {
+            $unsubscribe = $this->input->post('unsubscribe');
+            $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe);
         }
     }
 }

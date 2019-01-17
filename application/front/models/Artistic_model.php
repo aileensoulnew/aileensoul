@@ -233,10 +233,10 @@ class Artistic_model extends CI_Model {
         $artquery = $this->db->query($artistsql);
         $artdata = $artquery->result_array();*/
         //print_r($artdata);exit;
-        if(count($artdata) > 0){
+        /*if(count($artdata) > 0){
             $artregid = $artdata[0]['art_id'];
             $artskill = $artdata[0]['art_skill'];
-        }
+        }*/
 
         // Start limit
         $start = ($page - 1) * $limit;
@@ -280,6 +280,7 @@ class Artistic_model extends CI_Model {
             FROM ailee_art_post as ap
             JOIN ailee_art_reg as ar ON ar.user_id=ap.user_id 
             WHERE ap.is_delete = '0' 
+            AND ap.user_id != $login_userid 
             AND ap.status = '1' 
             AND ar.status = '1' 
             AND ar.is_delete = '0' 
