@@ -81,6 +81,8 @@ foreach ($followingdata as $followkey) {
   }
   $this->data['countfr'] = $countfr = count($countlfu);
   
+  $this->data['follower_count'] = $this->artistic_model->get_artist_follower_count($artregid);
+  $this->data['following_count'] = $this->artistic_model->get_artist_following_count($artregid);
   
 //$this->data['art_header2_border'] = $this->load->view('artist/art_header2_border', $this->data, true);
 

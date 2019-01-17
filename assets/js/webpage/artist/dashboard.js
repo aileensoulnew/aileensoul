@@ -550,6 +550,11 @@ function post_like(clicked_id) {
         dataType: 'json',
         data: 'post_id=' + clicked_id,
         success: function(data) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (data.notavlpost == 'notavl') {
                 $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                 $('#bidmodal').modal('show');
@@ -582,6 +587,11 @@ function comment_like(clicked_id) {
         data: 'post_id=' + clicked_id,
         dataType: 'json',
         success: function(data) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (data.return_html == 'notavl') {
                 $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                 $('#bidmodal').modal('show');
@@ -605,6 +615,11 @@ function comment_like1(clicked_id) {
         data: 'post_id=' + clicked_id,
         dataType: 'json',
         success: function(data) {
+            clearInterval(int_not_count);            
+            get_notification_unread_count();
+            int_not_count = window.setInterval(function(){
+              get_notification_unread_count();
+            }, 10000);
             if (data.return_html == 'notavl') {
                 $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                 $('#bidmodal').modal('show');
@@ -704,6 +719,11 @@ function insert_comment(clicked_id) {
                 data: 'post_id=' + clicked_id + '&comment=' + post_comment,
                 dataType: "json",
                 success: function(data) {
+                    clearInterval(int_not_count);            
+                    get_notification_unread_count();
+                    int_not_count = window.setInterval(function(){
+                      get_notification_unread_count();
+                    }, 10000);
                     if (data.notavlpost == 'notavl') {
                         $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                         $('#bidmodal').modal('show');
@@ -721,6 +741,11 @@ function insert_comment(clicked_id) {
                 data: 'post_id=' + clicked_id + '&comment=' + post_comment,
                 dataType: "json",
                 success: function(data) {
+                    clearInterval(int_not_count);            
+                    get_notification_unread_count();
+                    int_not_count = window.setInterval(function(){
+                      get_notification_unread_count();
+                    }, 10000);
                     if (data.notavlpost == 'notavl') {
                         $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                         $('#bidmodal').modal('show');
@@ -773,6 +798,11 @@ function entercomment(clicked_id) {
                     data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
                     dataType: "json",
                     success: function(data) {
+                        clearInterval(int_not_count);            
+                        get_notification_unread_count();
+                        int_not_count = window.setInterval(function(){
+                          get_notification_unread_count();
+                        }, 10000);
                         if (data.notavlpost == 'notavl') {
                             $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                             $('#bidmodal').modal('show');
@@ -794,6 +824,11 @@ function entercomment(clicked_id) {
                     data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
                     dataType: "json",
                     success: function(data) {
+                        clearInterval(int_not_count);            
+                        get_notification_unread_count();
+                        int_not_count = window.setInterval(function(){
+                          get_notification_unread_count();
+                        }, 10000);
                         if (data.notavlpost == 'notavl') {
                             $('.biderror .mes').html("<div class='pop_content'>The post that you were deleting on has been removed by its owner and this content is no longer available.</div>");
                             $('#bidmodal').modal('show');

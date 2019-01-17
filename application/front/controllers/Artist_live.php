@@ -421,6 +421,10 @@ class Artist_live extends MY_Controller {
         $this->data['followcount'] = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $contition_array = array('profile' => '1', 'user_from' => $artisticdata[0]['art_id']);
         $this->data['crosscount'] = $this->common->select_data_by_condition('user_ignore', $contition_array, $data = 'id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $this->data['follower_count'] = $this->artistic_model->get_artist_follower_count($artisticdata[0]['art_id']);
+        $this->data['following_count'] = $this->artistic_model->get_artist_following_count($artisticdata[0]['art_id']);        
+
         $this->data['get_url'] = $this->get_url($userid);
 
         if (!$this->data['artisticdata']) {

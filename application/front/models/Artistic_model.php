@@ -233,10 +233,10 @@ class Artistic_model extends CI_Model {
         $artquery = $this->db->query($artistsql);
         $artdata = $artquery->result_array();*/
         //print_r($artdata);exit;
-        if(count($artdata) > 0){
+        /*if(count($artdata) > 0){
             $artregid = $artdata[0]['art_id'];
             $artskill = $artdata[0]['art_skill'];
-        }
+        }*/
 
         // Start limit
         $start = ($page - 1) * $limit;
@@ -280,6 +280,7 @@ class Artistic_model extends CI_Model {
             FROM ailee_art_post as ap
             JOIN ailee_art_reg as ar ON ar.user_id=ap.user_id 
             WHERE ap.is_delete = '0' 
+            AND ap.user_id != $login_userid 
             AND ap.status = '1' 
             AND ar.status = '1' 
             AND ar.is_delete = '0' 
@@ -1417,5 +1418,33 @@ class Artistic_model extends CI_Model {
         $this->db->where('user_id', $user_id);
         $this->db->update('art_reg_search_tmp', $data);
         return true;
+    }
+
+    public function get_artist_follower_count($art_id)
+    {
+        $this->db->select("COUNT(*) as follower_count")->from("follow f");
+        $this->db->join('art_reg a', 'a.art_id = f.follow_from', 'left');
+        $this->db->where('a.status', '1');
+        $this->db->where('a.is_delete', '0');
+        $this->db->where('f.follow_type', '1');
+        $this->db->where('f.follow_to', $art_id);
+        $this->db->where('f.follow_status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['follower_count'];
+    }
+
+    public function get_artist_following_count($art_id)
+    {
+        $this->db->select("COUNT(*) as following_count")->from("follow f");
+        $this->db->join('art_reg a', 'a.art_id = f.follow_to', 'left');
+        $this->db->where('a.status', '1');
+        $this->db->where('a.is_delete', '0');
+        $this->db->where('f.follow_type', '1');
+        $this->db->where('f.follow_from', $art_id);
+        $this->db->where('f.follow_status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['following_count'];
     }
 }

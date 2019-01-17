@@ -2382,7 +2382,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->user_verify == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -2498,14 +2498,15 @@ class Artist extends MY_Controller {
             );
             $update = $this->common->update_data($data, 'follow', 'follow_id', $follow[0]['follow_id']);
 
-            $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
-            $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
+            // $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $followcount = $this->artistic_model->get_artist_following_count($artdata[0]['art_id']);
 
             if ($update) {
                 $follow = '<div id="unfollowdiv">';
                 $follow .= '<button class="bg_following" id="unfollow' . $art_id . '" onClick="unfollowuser(' . $art_id . ')"><span>Following</span></button>';
                 $follow .= '</div>';
-                $datacount = '(' . count($followcount) . ')';
+                $datacount = '(' . $followcount . ')';
                 $is_follow = 1;
             }
         } else {
@@ -2539,46 +2540,40 @@ class Artist extends MY_Controller {
 
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                                            <td style="'.MAIL_TD_1.'">';
+                                <tr>
+                                    <td style="'.MAIL_TD_1.'">';
+                                    if (IMAGEPATHFROM == 'upload') {
+                                        if ($artdata[0]['art_user_image']) {
+                                            if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'])) {
+                                                $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                            } else {
+                                                $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '" alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
+                                            }
+                                        } else {
+                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                        }
+                                    } else {
+                                        $filename = $this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'];
+                                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                        if ($info) {
+                                            $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '"  alt="" width="50" height="50">';
+                                        } else {
+                                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
+                                        }
+                                    }
+                                $email_html .= '
+                                    </td>
+                                    <td style="padding:0px;">
+                                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
+                                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                                    </td>
+                                    <td style="'.MAIL_TD_3.'">
+                                        <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
 
-                if (IMAGEPATHFROM == 'upload') {
-
-                    if ($artdata[0]['art_user_image']) {
-                        if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'])) {
-
-                            $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                        } else {
-                            $email_html .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '" alt="' . $artdata[0]['art_user_image'] . '" width="50" height="50">';
-                        }
-                    } else {
-                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                    }
-                } else {
-
-                    $filename = $this->config->item('art_profile_thumb_upload_path') . $artdata[0]['art_user_image'];
-                    $s3 = new S3(awsAccessKey, awsSecretKey);
-                    $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-
-                    if ($info) {
-                        $email_html .= '<img  src="' . ART_PROFILE_THUMB_UPLOAD_URL . $artdata[0]['art_user_image'] . '"  alt="" width="50" height="50">';
-                    } else {
-
-                        $email_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE" width="50" height="50">';
-                    }
-                }
-
-
-                $email_html .= '</td>
-                                            <td style="padding:0px;">
-                        <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
-                                            </td>
-                    </tr>
-                                    </table>';
                 $subject = $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . ' Started following you in Aileensoul.';
 
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $followuserid[0]['user_id']))->row();
@@ -2587,7 +2582,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -2602,15 +2597,16 @@ class Artist extends MY_Controller {
             // end notoification
 
 
-            $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
-            $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
+            // $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $followcount = $this->artistic_model->get_artist_following_count($artdata[0]['art_id']);
 
             if ($insert) {
 
                 $follow = '<div id="unfollowdiv">';
                 $follow .= '<button class="bg_following" id="unfollow' . $art_id . '" onClick="unfollowuser(' . $art_id . ')"><span>Following</span></button>';
                 $follow .= '</div>';
-                $datacount = '(' . count($followcount) . ')';
+                $datacount = '(' . $followcount . ')';
                 $is_follow = 1;
             }
         }
@@ -3176,7 +3172,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -3258,14 +3254,15 @@ class Artist extends MY_Controller {
 
             // end notoification
 
-            $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
-            $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
+            // $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $followcount = $this->artistic_model->get_artist_following_count($artdata[0]['art_id']);
             if ($update) {
 
                 $follow = '<div class=" user_btn follow_btn_' . $art_id . '" id="unfollowdiv">';
                 $follow .= '<button class="bg_following" id="unfollow' . $art_id . '" onClick="unfollowuser_two(' . $art_id . ')"><span>Following</span></button>';
                 $follow .= '</div>';
-                $datacount = '(' . count($followcount) . ')';
+                $datacount = '(' . $followcount . ')';
 
                 // GET NOTIFICATION COUNT
                 $to_id = $this->db->select('user_id')->get_where('art_reg', array('art_id' => $art_id))->row()->user_id;
@@ -3358,7 +3355,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $followuserid[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -3370,15 +3367,16 @@ class Artist extends MY_Controller {
             }
             // end notoification
 
-            $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
-            $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
+            // $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $followcount = $this->artistic_model->get_artist_following_count($artdata[0]['art_id']);
 
             if ($insert) {
 
                 $follow = '<div class=" user_btn follow_btn_' . $art_id . '" id="unfollowdiv">';
                 $follow .= '<button class="bg_following" id="unfollow' . $art_id . '" onClick="unfollowuser_two(' . $art_id . ')"><span>Following</span></button>';
                 $follow .= '</div>';
-                $datacount = '(' . count($followcount) . ')';
+                $datacount = '(' . $followcount . ')';
 
                 // GET NOTIFICATION COUNT
                 $to_id = $this->db->select('user_id')->get_where('art_reg', array('art_id' => $art_id))->row()->user_id;
@@ -3460,8 +3458,9 @@ class Artist extends MY_Controller {
             );
             $update = $this->common->update_data($data, 'follow', 'follow_id', $follow[0]['follow_id']);
 
-            $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
-            $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $contition_array = array('follow_type' => '1', 'follow_from' => $artdata[0]['art_id'], 'follow_status' => '1');
+            // $followcount = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $followcount = $this->artistic_model->get_artist_following_count($artdata[0]['art_id']);
 
             if ($update) {
                 $unfollow = '<div class=" user_btn follow_btn_' . $art_id . '" id="followdiv">';
@@ -3469,7 +3468,7 @@ class Artist extends MY_Controller {
                               <span>Follow</span> 
                       </button></div>';
 
-                $datacount = '(' . count($followcount) . ')';
+                $datacount = '(' . $followcount . ')';
                 echo json_encode(
                         array(
                             "follow" => $unfollow,
@@ -3507,28 +3506,17 @@ class Artist extends MY_Controller {
             $update = $this->common->update_data($data, 'follow', 'follow_id', $follow[0]['follow_id']);
 
             if ($update) {
-
-                $join_str[0]['table'] = 'art_reg';
-                $join_str[0]['join_table_id'] = 'art_reg.art_id';
-                $join_str[0]['from_table_id'] = 'follow.follow_from';
-                $join_str[0]['join_type'] = '';
-
-
-                $contition_array = array('follow_from' => $artdata[0]['art_id'], 'follow.follow_status' => '1', 'follow_type' => '1', 'art_reg.status' => '1');
-                $followingotherdata = $this->data['followingotherdata'] = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-                $followingdatacount = count($followingotherdata);
-                $unfollow .= '(' . $followingdatacount . ')';
-                if (count($followingotherdata) == 0) {
+                $followingdatacount = $this->artistic_model->get_artist_following_count($artdata[0]['art_id']);
+                $unfollow .= '('.$followingdatacount.')';
+                if ($followingdatacount == 0) {
                     $notfound = '<div class="art-img-nn">
-         <div class="art_no_post_img">
-
-           <img src="' . base_url('assets/img/icon_no_following.png') . '" alt="icon_no_following.png">
-        
-         </div>
-         <div class="art_no_post_text">
-           No Following Available.
-         </div>
-          </div>';
+                                    <div class="art_no_post_img">
+                                        <img src="' . base_url('assets/img/icon_no_following.png') . '" alt="icon_no_following.png">
+                                    </div>
+                                    <div class="art_no_post_text">
+                                        No Following Available.
+                                    </div>
+                                </div>';
                 }
 
                 echo json_encode(
@@ -4205,7 +4193,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -4460,7 +4448,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -5421,7 +5409,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -5511,7 +5499,7 @@ class Artist extends MY_Controller {
                                 "likecount" => $like_count,
                                 "like_user_count" => $like_user_count,
                                 "status" => 'success',
-                                "notification" => array('notification_count' => $not_count, 'to_id' => $to_id),
+                                "notification" => array('notification_count'=>$not_count,'to_id'=>$to_id),
                     ));
                 }
             } else {
@@ -5758,7 +5746,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -6015,7 +6003,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -6294,7 +6282,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -7303,7 +7291,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -7566,7 +7554,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -7768,7 +7756,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -8056,7 +8044,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -8326,7 +8314,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -8586,7 +8574,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -8749,7 +8737,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -8895,7 +8883,7 @@ class Artist extends MY_Controller {
                     if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                     {
                         // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                        $url = base_url()."user_post/send_email_in_background";
+                        $url = base_url()."artist/send_email_in_background";
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$email_html,
@@ -9033,7 +9021,7 @@ class Artist extends MY_Controller {
                             if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                             {
                                 // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                                $url = base_url()."user_post/send_email_in_background";
+                                $url = base_url()."artist/send_email_in_background";
                                 $param = array(
                                     "subject"=>$subject,
                                     "email_html"=>$email_html,
@@ -10149,7 +10137,7 @@ class Artist extends MY_Controller {
                 if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                 {
                     // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $artemail[0]['art_email'],$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
+                    $url = base_url()."artist/send_email_in_background";
                     $param = array(
                         "subject"=>$subject,
                         "email_html"=>$email_html,
@@ -16994,6 +16982,19 @@ class Artist extends MY_Controller {
                 );
                 $insert_id = $this->common->insert_data($data, 'art_user_languages');
             }
+        }
+    }
+
+    public function send_email_in_background()
+    {
+        $subject = $this->input->post('subject');
+        $email_html = $this->input->post('email_html');
+        $to_email = $this->input->post('to_email');
+        $email_data = $this->user_model->getUserByEmail($to_email);
+        if($email_data)
+        {
+            $unsubscribe = $this->input->post('unsubscribe');
+            $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe);
         }
     }
 }
