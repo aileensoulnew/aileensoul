@@ -1,3 +1,4 @@
+
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 ?>
@@ -158,16 +159,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                         </div>
 						<div class="follow-msg">
-							<ul>
-								<li>
-									<img src="<?php echo base_url('assets/n-images/flw.png'); ?>">
-									<span>Follow</span>
-								</li>
-								<li>
-									<img src="<?php echo base_url('assets/n-images/msg.png'); ?>">
-									<span>Message</span>
-								</li>
-							</ul>
+							<div class="btn-move">
+							</div>
 						</div>
                         <?php
                         $userid = $this->session->userdata('aileenuser');
@@ -311,8 +304,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 $userid = $this->session->userdata('aileenuser');
                                 if ($business_common_data[0]['user_id'] != $userid) {
                                     ?>
-                                    <div class="flw_msg_btn fr top_follow">
-                                        <ul>
+                                    <div class="fr top_follow">
+                                        <ul id="btn-move">
                                             <li>
                                                 <div class="<?php echo "fr" . $business_common_data[0]['business_profile_id']; ?>">
                                                     <?php
@@ -325,11 +318,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         if ($status == 0 || $status == " ") {
                                                             ?>
                                                             <div class="msg_flw_btn_1" id= "followdiv">
-                                                                <button id="<?php echo "follow" . $business_common_data[0]['business_profile_id']; ?>" onClick="followuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Follow</button>
+                                                                <button class="btn-n2" id="<?php echo "follow" . $business_common_data[0]['business_profile_id']; ?>" onClick="followuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Follow</button>
                                                             </div>
                                                         <?php } elseif ($status == 1) { ?>
                                                             <div class="msg_flw_btn_1" id= "unfollowdiv">
-                                                                <button class="bg_following"  id="<?php echo "unfollow" . $business_common_data[0]['business_profile_id']; ?>" onClick="unfollowuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Following </button>
+                                                                <button class="bg_following btn-n2"  id="<?php echo "unfollow" . $business_common_data[0]['business_profile_id']; ?>" onClick="unfollowuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Following </button>
                                                             </div>
                                                         <?php } ?>
                                                     </div>         
@@ -339,7 +332,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     // $message_url = base_url('chat/abc/5/5/' . $business_common_data[0]['user_id']);//Old
                                                     $message_url = MESSAGE_URL.'business/business-'.$image[0]['business_slug'];
                                                     ?>
-                                                    <a href="<?php echo $message_url; ?>">Message</a></li>
+                                                    <a href="<?php echo $message_url; ?>" class="btn-n2">Message</a></li>
                                             <?php } ?>
                                         </ul>   
                                     </div>
@@ -433,4 +426,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             });
         }
     </script>
+	<script>
+		$(document).ready(function ()
+		{
+			if (screen.width <= 991)
+			{
+				$("#btn-move").appendTo($(".btn-move"));
+			
+			}
+		
+		});
+	</script>
     <!--PROFILE PIC MODEL END-->

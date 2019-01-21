@@ -306,7 +306,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 $userid = $this->session->userdata('aileenuser');
                                 if ($business_common_data[0]['user_id'] != $userid) {
                                     ?>
-                                    <div class="flw_msg_btn fr top_follow">
+                                    <div class="flw_msg_btn fr top_follow 123">
                                         <ul>
                                             <li>
                                                 <div class="<?php echo "fr" . $business_common_data[0]['business_profile_id']; ?>">
