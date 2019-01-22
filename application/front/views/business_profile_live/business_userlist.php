@@ -75,7 +75,7 @@
 									<div class="tab-add">
 										<?php $this->load->view('banner_add'); ?>
 									</div>
-                                    <div class="common-form">
+                                    <div class="common-form userlist-cus">
                                         <div class="job-saved-box">
                                             <h3>User list</h3>
                                             

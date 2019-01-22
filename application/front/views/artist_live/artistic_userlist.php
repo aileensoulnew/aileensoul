@@ -75,7 +75,7 @@
                                     }
                                     ?>
                                 </div> 
-                                <div class="common-form">
+                                <div class="common-form userlist-cus">
                                     <div class="job-saved-box">
                                         <h3>Userlist</h3>
                                         <div class="contact-frnd-post">

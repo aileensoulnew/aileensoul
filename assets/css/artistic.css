@@ -48,6 +48,7 @@
     padding: 10px 10px 0;
     background-color: white;
     border: 1px solid #d9d9d9;
+	border-top:0;
 }
 .user-midd-section {
     margin: 15px 0 35px;
@@ -1896,31 +1897,7 @@ label.cameraButton:active {
 .flw_msg_btn ul li .fr {
     padding-left: 10px;
 }
-.flw_msg_btn ul li a {
-    letter-spacing: 1px;
-    letter-spacing: 1px;
-    width: 90px;
-    padding: 8px 15px;
-    background: rgb(44, 83, 158);
-    background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    background: -moz-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: -webkit-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: -o-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: -ms-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: linear-gradient(to top, #e9e9e9 5%, #f9f9f9 100%);
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    border: 1px solid #dcdcdc;
-    display: inline-block;
-    cursor: pointer;
-    color: #9C9999;
-    font-size: 13px;
-    margin-top: 3px;
-    -o-box-shadow: inset 0px 0px 50px 0px #ABABAB, 5px 5px 5px 1px #242424;
-    font-weight: bold;
-    text-decoration: none;
-}
+
 .top_follow {
     margin-top: 9px!important;
 }
@@ -1931,72 +1908,7 @@ label.cameraButton:active {
     padding: 0;
     overflow: hidden;
 }
-.flw_msg_btn ul li {
-    margin-right: 10px !important;
-}
-.flw_msg_btn ul li button {
-    margin-bottom: 0px;
-    width: 90px;
-    padding: 8px 0px;
-    background: -moz-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: -webkit-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: -o-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: -ms-linear-gradient(bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background: linear-gradient(to top, #e9e9e9 5%, #f9f9f9 100%);
-    -o-box-shadow: inset 0px 0px 50px 0px #ABABAB, 5px 5px 5px 1px #242424;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    border: 1px solid #dcdcdc;
-    display: inline-block;
-    cursor: pointer;
-    color: #9C9999;
-    font-family: Arial;
-    font-size: 13px;
-    margin-top: 3px;
-    font-weight: bold;
-    text-decoration: none;
-    -webkit-transition: background 1s ease-out;
-    -moz-transition: background 1s ease-out;
-    -o-transition: background 1s ease-out;
-    transition: background 1s ease-out;
-    margin-top: 0;
-}
-.flw_msg_btn ul li button:hover {
-    -webkit-transform: none;
-    transform: none;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
-    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background-color: #e9e9e9;
-    color: #666666;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
-}
-.flw_msg_btn ul li a:hover {
-    -webkit-transform: none;
-    transform: none;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
-    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background-color: #e9e9e9;
-    color: #666666;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
-}
-.business-profile-right .flw_msg_btn ul li a {
-    height: auto;
-}
+
 #contact_per {
     float: left;
     width: 17%;
@@ -2044,17 +1956,6 @@ label.cameraButton:active {
     right: 0;
     top: 45px;
     text-align: center;
-}
-.bg_following {
-    border: none!important;
-    color: #fff!important;
-    background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%) !important;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9)) !;
-    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%) !important;
-    background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%) !important;
-    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%) !important;
-    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%)!important;
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);
 }
 .cance_req_main_box .add-contact div {
     background-color: #1b8ab9;
@@ -3724,9 +3625,7 @@ label.cameraButton input[accept*="camera"] {
     background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
     background-color: #e9e9e9;
 }
-.bg_following:hover {
-    background-color: #156f95 !important;
-}
+
 .likeuser_list {
     background-color: #f2f2f2;
     float: left;
@@ -3985,7 +3884,7 @@ div .comment {
 .profile-boxProfileCard_follow ul{padding-bottom:10px;}
 .post-design-commnet-box button:focus{/*outline:none;*/}
 
-.flw_msg_btn ul li:last-child a{margin-top:0;}
+.flw_msg_btn ul li:last-child a{padding: 9px 25px; height:auto; color:#5c5c5c;}
 .krajee-default[data-template="audio"] .file-preview-audio {/*height:100% !important;*/ border:none; }
 #mainContainer{min-width:108% !important;}
 .attach-file-name{padding-left:15px;}
@@ -4233,6 +4132,55 @@ label{margin-bottom:3px;}
 }
 .common-form fieldset label#othercategory_error{display: block !important;}
 .mob-comment button img{height:23px;}
+#btn-move button{
+    background-color: #fff;
+	border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c; cursor: pointer; font-size: 14px; padding: 8px 25px; text-align: center; display: inline-block; margin: 0 5px; font-weight: bold;
+	width:127px;
+}
+#btn-move .bg_following{
+    background-color: #fff;
+	border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c; cursor: pointer; font-size: 14px; padding: 8px 25px; text-align: center; display: inline-block; margin: 0 5px; font-weight: bold;
+}
+#btn-move .bg_following.btn-n2:hover{
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color: #e9e9e9;
+}
+#btn-move .bg_following:hover{
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color: #e9e9e9;
+}
+#btn-move .btn-n2{width:127px;}
+.userlist-cus .contact-frnd-post{padding:0;}
+.userlist-cus .job-contact-frnd .profile-job-post-detail{border-width:0 0 1px; border-radius:0; margin-bottom:0;}
+.userlist-cus .profile-job-post-location-name .user_btn button{background:#fff;}
+.userlist-cus .profile-job-post-location-name .user_btn button:hover{
+transform: none;
+background: -webkit-linear-gradient(top,rgba(255,255,255,1) 0,rgba(255,255,255,1) 100%);
+background: -moz-linear-gradient(top,#e9e9e9 5%,#f9f9f9 100%);
+background: -webkit-linear-gradient(top,#e9e9e9 5%,#f9f9f9 100%);
+background: -o-linear-gradient(top,#e9e9e9 5%,#f9f9f9 100%);
+background: -ms-linear-gradient(top,#e9e9e9 5%,#f9f9f9 100%);
+background: linear-gradient(to bottom,#e9e9e9 5%,#f9f9f9 100%);
+    background-color: rgba(0, 0, 0, 0);
+color: #5c5c5c;}
+.userlist-cus .profile-job-post-location-name .user_btn button.bg_following{border: none;
+color: #fff;
+background: -moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+background: -o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+background: -ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+background: linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);}
 
 /***  media query  ***/
 @media screen and (max-width: 1280px) {
@@ -4660,6 +4608,7 @@ label{margin-bottom:3px;}
     }
     .other-profile-menu .profile-main-box-buis-menu .flw_msg_btn {
         width: 100%;
+		display:none;
     }
     .other-profile-menu .business-profile-right .flw_msg_btn ul li a {
         margin-top: 0;
@@ -4695,6 +4644,11 @@ label{margin-bottom:3px;}
     .mian_middle_post_box{position:inherit; float:left; margin:0 auto; width:550px; }
     /*** end advertise  ***/
     .more-image{width: 263px;height:198px;}
+	#btn-move{padding-left:0;}
+	#btn-move li{list-style-type:none; display:inline-block; padding-left:0;}
+	#btn-move button{padding:6px 25px;}
+	#btn-move .bg_following{padding:6px 25px;}
+	
 }
 
 @media screen and (max-width: 800px) {
@@ -5142,6 +5096,11 @@ label{margin-bottom:3px;}
 	.manage-post-custom .mian_middle_post_box{margin-left: auto !important;}
 	.more-image{width: 264px;height: 188px;}
 	.inputtype-comment{margin-bottom:8px;}
+	#btn-move .user_btn .bg_following, #btn-move .user_btn button {font-size:12px; padding:3px 20px;}
+	#btn-move .btn-n2{width:100px; font-size:12px; padding:3px 20px;}
+	#btn-move button{width:100px; font-size:12px; padding:3px 10px;}
+	#btn-move .bg_following{font-size:12px; padding:3px 10px;}
+	
 }
 
 @media screen and (max-width: 639px) {
