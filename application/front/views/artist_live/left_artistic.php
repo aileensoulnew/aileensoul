@@ -1,4 +1,7 @@
-<div class="full-box-module">
+<?php
+$this->data['follower_count'] = $follower_count = $this->artistic_model->get_artist_follower_count($artisticdata[0]['art_id']);
+$this->data['following_count'] = $following_count = $this->artistic_model->get_artist_following_count($artisticdata[0]['art_id']);
+?><div class="full-box-module">
 	<div class="profile-boxProfileCard  module">
 		<div class="profile-boxProfileCard-cover">
 			<a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo artist_dashboard. $get_url; ?>" tabindex="-1" aria-hidden="true" rel="noopener" title="<?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">

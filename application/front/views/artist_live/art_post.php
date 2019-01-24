@@ -1,3 +1,12 @@
+<?php
+$contition_array = array('status' => '1', 'art_step' => '4', 'is_delete' => '0');
+$this->data['usercount'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+$contition_array = array('follow_type' => '1', 'follow_from' => $artisticdata[0]['art_id'], 'follow_status' => '1');
+$this->data['followcount'] = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+$contition_array = array('profile' => '1', 'user_from' => $artisticdata[0]['art_id']);
+$this->data['crosscount'] = $this->common->select_data_by_condition('user_ignore', $contition_array, $data = 'id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+?>
 <!DOCTYPE html>
 <html>
     <head>

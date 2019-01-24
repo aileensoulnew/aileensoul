@@ -6,7 +6,7 @@ $this->load->model('user_post_model');
 
 $userid = $this->session->userdata('aileenuser');
 
-$this->data['userdata'] = $this->user_model->getUserData($userid);
+//$this->data['userdata'] = $this->user_model->getUserData($userid);
 // artistics detail
 $this->data['artdata'] = $this->artistic_model->getArtUserData($userid);
 $segment3 = explode('-', $this->uri->segment(3));
