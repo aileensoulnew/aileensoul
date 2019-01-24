@@ -3415,9 +3415,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (success.data.message == 1) {
@@ -3535,9 +3535,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
-                clearInterval(int_not_count);            
+                clearTimeout(int_not_count);            
                 get_notification_unread_count();
-                int_not_count = window.setInterval(function(){
+                int_not_count = setTimeout(function(){
                   get_notification_unread_count();
                 }, 10000);
                 data = success.data;
@@ -3662,9 +3662,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         })
         .then(function (success) {
             data = success.data;
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (data.message == '1') {
@@ -9379,9 +9379,9 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (success.data.message == 1) {
@@ -9545,9 +9545,9 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
-                clearInterval(int_not_count);            
+                clearTimeout(int_not_count);            
                 get_notification_unread_count();
-                int_not_count = window.setInterval(function(){
+                int_not_count = setTimeout(function(){
                   get_notification_unread_count();
                 }, 10000);
                 data = success.data;

@@ -47,9 +47,9 @@ function short_user(e) {
         data: "user_id=" + e + "&post_id=" + t.value,
         dataType: "json",
         success: function(t) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if ($(".saveduser" + e).html(t.status).addClass("saved"), 0 != t.notification.notification_count) {

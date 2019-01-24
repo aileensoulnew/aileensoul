@@ -32,9 +32,9 @@ function apply_post(abc, xyz) {
         dataType:'json',
         success: function (data) {
             
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
 

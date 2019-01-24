@@ -229,9 +229,9 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function(success) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (success.data.message == 1) {
@@ -333,9 +333,9 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 }
             }).then(function(success) {
                 data = success.data;
-                clearInterval(int_not_count);            
+                clearTimeout(int_not_count);            
                 get_notification_unread_count();
-                int_not_count = window.setInterval(function(){
+                int_not_count = setTimeout(function(){
                   get_notification_unread_count();
                 }, 10000);
                 if (data.message == '1') {
@@ -454,9 +454,9 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }
         }).then(function(success) {
             data = success.data;
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (data.message == '1') {

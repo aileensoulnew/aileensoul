@@ -237,9 +237,9 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
             data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
             datatype: 'json',
             success: function (data) {
-                clearInterval(int_not_count);            
+                clearTimeout(int_not_count);            
                 get_notification_unread_count();
-                int_not_count = window.setInterval(function(){
+                int_not_count = setTimeout(function(){
                   get_notification_unread_count();
                 }, 10000);
                 $('.savedpost' + abc).hide();

@@ -550,9 +550,9 @@ function post_like(clicked_id) {
         dataType: 'json',
         data: 'post_id=' + clicked_id,
         success: function(data) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (data.notavlpost == 'notavl') {
@@ -587,9 +587,9 @@ function comment_like(clicked_id) {
         data: 'post_id=' + clicked_id,
         dataType: 'json',
         success: function(data) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (data.return_html == 'notavl') {
@@ -615,9 +615,9 @@ function comment_like1(clicked_id) {
         data: 'post_id=' + clicked_id,
         dataType: 'json',
         success: function(data) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             if (data.return_html == 'notavl') {
@@ -719,9 +719,9 @@ function insert_comment(clicked_id) {
                 data: 'post_id=' + clicked_id + '&comment=' + post_comment,
                 dataType: "json",
                 success: function(data) {
-                    clearInterval(int_not_count);            
+                    clearTimeout(int_not_count);            
                     get_notification_unread_count();
-                    int_not_count = window.setInterval(function(){
+                    int_not_count = setTimeout(function(){
                       get_notification_unread_count();
                     }, 10000);
                     if (data.notavlpost == 'notavl') {
@@ -741,9 +741,9 @@ function insert_comment(clicked_id) {
                 data: 'post_id=' + clicked_id + '&comment=' + post_comment,
                 dataType: "json",
                 success: function(data) {
-                    clearInterval(int_not_count);            
+                    clearTimeout(int_not_count);            
                     get_notification_unread_count();
-                    int_not_count = window.setInterval(function(){
+                    int_not_count = setTimeout(function(){
                       get_notification_unread_count();
                     }, 10000);
                     if (data.notavlpost == 'notavl') {
@@ -798,9 +798,9 @@ function entercomment(clicked_id) {
                     data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
                     dataType: "json",
                     success: function(data) {
-                        clearInterval(int_not_count);            
+                        clearTimeout(int_not_count);            
                         get_notification_unread_count();
-                        int_not_count = window.setInterval(function(){
+                        int_not_count = setTimeout(function(){
                           get_notification_unread_count();
                         }, 10000);
                         if (data.notavlpost == 'notavl') {
@@ -824,9 +824,9 @@ function entercomment(clicked_id) {
                     data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
                     dataType: "json",
                     success: function(data) {
-                        clearInterval(int_not_count);            
+                        clearTimeout(int_not_count);            
                         get_notification_unread_count();
-                        int_not_count = window.setInterval(function(){
+                        int_not_count = setTimeout(function(){
                           get_notification_unread_count();
                         }, 10000);
                         if (data.notavlpost == 'notavl') {

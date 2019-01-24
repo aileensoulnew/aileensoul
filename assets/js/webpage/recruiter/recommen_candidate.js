@@ -385,9 +385,9 @@ function savepopup(abc) {
         url: base_url + 'recruiter/save_search_user',
         data: 'user_id=' + abc + '&save_id=' + saveid.value,
         success: function(data) {
-        	clearInterval(int_not_count);            
+        	clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             $('.' + 'saveduser' + abc).html(data).addClass('saved');

@@ -147,9 +147,9 @@ function apply_post(abc, xyz)
         url: base_url +'job/job_apply_post',
         data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
         success: function (data) {
-            clearInterval(int_not_count);            
+            clearTimeout(int_not_count);            
             get_notification_unread_count();
-            int_not_count = window.setInterval(function(){
+            int_not_count = setTimeout(function(){
               get_notification_unread_count();
             }, 10000);
             data = JSON.parse(data);
