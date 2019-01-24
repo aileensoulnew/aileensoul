@@ -309,8 +309,9 @@
                     dataType: 'json',
                     success: function (data) { //alert(data);
                         clearInterval(int_not_count);            
+                        // clearTimeout(int_not_count);            
                         get_notification_unread_count();
-                        int_not_count = window.setInterval(function(){
+                        int_not_count = setTimeout(function(){
                           get_notification_unread_count();
                         }, 10000);
                         $('#' + 'invited' + clicked_id).html(data.status).addClass('button invited').removeClass('invite_border').removeAttr("onclick");

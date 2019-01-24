@@ -942,8 +942,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 dataType: 'json',
                 success: function (data) {
                     clearInterval(int_not_count);            
+                    // clearTimeout(int_not_count);            
                     get_notification_unread_count();
-                    int_not_count = window.setInterval(function(){
+                    int_not_count = setTimeout(function(){
                       get_notification_unread_count();
                     }, 10000);
                     $('.applypost' + abc).removeAttr("style");

@@ -670,6 +670,7 @@ if($browser == "Firefox")
 <script>
     var userid = "<?php echo $session_user['aileenuser']; ?>";
     var is_verify = "<?php echo $userData['user_verify']; ?>";
+    var int_not_count;
 
     function Notificationheader() {
         getNotification();
@@ -730,12 +731,15 @@ if($browser == "Firefox")
             {
                 $(".noti_count").hide();
                 $(".noti_count").html("");
-            }           
-        });/*.fail(function() {
-            setTimeout(function(){
+            }
+            int_not_count = setTimeout(function(){
                 get_notification_unread_count();
-            }, 5000);
-        });*/
+            }, 10000);
+        }).fail(function() {
+            int_not_count = setTimeout(function(){
+                get_notification_unread_count();
+            }, 15000);
+        });
 
         /*$.ajax({
             type: 'POST',
@@ -787,11 +791,11 @@ if($browser == "Firefox")
     setTimeout(function(){
         // get_notification_unread_count();
         // unread_message_count();
-    }, 1000);
+    }, 10000);
     
     get_notification_unread_count();
-    var int_not_count = window.setInterval(function(){
-      get_notification_unread_count();
+    int_not_count = window.setInterval(function(){
+      // get_notification_unread_count();
     }, 10000);
 
     function sendmail() {

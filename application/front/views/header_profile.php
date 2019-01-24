@@ -711,6 +711,7 @@ if($first_segment == "")
 <script>
     var userid = "<?php echo $session_user['aileenuser']; ?>";
     var is_verify = "<?php echo $userData['user_verify']; ?>";
+    var int_not_count;
 
     $(function () {
         $('a[href="#search"]').on('click', function (event) {
@@ -797,15 +798,14 @@ if($first_segment == "")
                 $(".noti_count").hide();
                 $(".noti_count").html("");
             }
-            /*setTimeout(function(){
+            int_not_count = setTimeout(function(){
                 get_notification_unread_count();
-            }, 5000);*/
+            }, 10000);
+        }).fail(function() {
+            int_not_count = setTimeout(function(){
+                get_notification_unread_count();
+            }, 15000);
         });
-        /*.fail(function() {
-            setTimeout(function(){
-                get_notification_unread_count();
-            }, 5000);
-        });*/
         /*$.ajax({
             type: 'POST',
             url: '<?php //echo base_url() . "notification/get_notification_unread_count" ?>',
@@ -859,8 +859,8 @@ if($first_segment == "")
         // unread_message_count();
     }, 1000);
     get_notification_unread_count();
-    var int_not_count = window.setInterval(function(){
-      get_notification_unread_count();
+    int_not_count = window.setInterval(function(){
+      // get_notification_unread_count();
     }, 10000);
     function sendmail() {
         $("#vert_email").attr("style","pointer-events: none;");

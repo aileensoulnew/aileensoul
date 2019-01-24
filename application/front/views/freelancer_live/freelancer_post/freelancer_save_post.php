@@ -285,8 +285,9 @@
                     data: 'post_id=' + abc + '&allpost=' + alldata.value + '&userid=' + user,
                     success: function (data) {
                         clearInterval(int_not_count);            
+                        // clearTimeout(int_not_count);            
                         get_notification_unread_count();
-                        int_not_count = window.setInterval(function(){
+                        int_not_count = setTimeout(function(){
                           get_notification_unread_count();
                         }, 10000);
                         $('#postdata' + appid).html(data.status);
