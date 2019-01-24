@@ -198,7 +198,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     };
-    $scope.get_artist_basic_info();
+    // $scope.get_artist_basic_info();
 
     $scope.get_user_bio = function(){
         $http({
@@ -219,7 +219,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
             $("#bio-body").show();
         });
     };
-    $scope.get_user_bio();
+    // $scope.get_user_bio();
 
     $scope.get_user_talent_cat_data = function(){
         $http({
@@ -241,7 +241,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     };
-    $scope.get_user_talent_cat_data();
+    // $scope.get_user_talent_cat_data();
 
     $scope.get_user_specialities = function(){
         $http({
@@ -263,7 +263,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     };
-    $scope.get_user_specialities();
+    // $scope.get_user_specialities();
 
     $scope.get_user_art_imp_data = function(){
         $http({
@@ -285,7 +285,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     };
-    $scope.get_user_art_imp_data();
+    // $scope.get_user_art_imp_data();
 
     $scope.get_user_experience = function(){
         $http({
@@ -311,7 +311,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     };
-    $scope.get_user_experience();
+    // $scope.get_user_experience();
 
     $scope.get_user_award = function(){
         $http({
@@ -334,7 +334,7 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     }
-    $scope.get_user_award();
+    // $scope.get_user_award();
 
     $scope.get_user_links = function()
     {
@@ -363,5 +363,15 @@ app.controller('artistDashboardController', function ($scope, $http, $location, 
 
         });
     };
-    $scope.get_user_links();
+
+    setTimeout(function(){
+        $scope.get_user_links();
+        $scope.get_user_award();
+        $scope.get_user_experience();
+        $scope.get_user_art_imp_data();
+        $scope.get_user_specialities();
+        $scope.get_user_talent_cat_data();
+    },5000);
+    $scope.get_user_bio();
+    $scope.get_artist_basic_info();
 });
