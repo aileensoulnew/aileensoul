@@ -1522,13 +1522,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     $scope.sim.post_for = 'simple';
     $scope.ask.post_for = 'question';
     $scope.user_id = user_id;
-    getUserDashboardPost();
-    getUserDashboardImage();
-    getUserDashboardVideo();
-    getUserDashboardArticle();
-    getUserDashboardInformation()
-    getUserDashboardAudio();
-    getUserDashboardPdf();
+    
 
     $scope.removeViewMore = function(mainId,removeViewMore) {    
         $("#"+mainId).removeClass("view-more-expand");
@@ -1919,32 +1913,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 }
             }
         }
-    });
-    function getUserDashboardPost(pagenum) {
-        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            // $('#main_loader').show();
-             if($scope.$parent.pade_reload == true)
-            {
-                $('#main_loader').show();            
-            }
-        }
-            
-        $('#loader').show();
-        $http.get(base_url + "user_post/getUserDashboardPost?page=" + pagenum + "&user_slug=" + user_slug).then(function (success) {
-            $('#loader').hide();
-            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-                $('#main_loader').hide();
-            }
-            // $('#main_page_load').show();
-            $('body').removeClass("body-loader");
-            $scope.postData = success.data;
-            $('#progress_div').hide();
-            $('.progress-bar').css("width",0);
-            $('.sr-only').text(0+"%");
-            // check_no_post_data();
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
-        }, function (error) {});
-    }
+    });    
 
     function getUserDashboardPostLoad(pagenum) {
         if (isLoadingData) {
@@ -2005,7 +1974,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-     function getUserDashboardInformation() {
+    function getUserDashboardInformation() {
         $('#loader').show();
       
         $('footer').hide();
@@ -2091,7 +2060,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-    getFieldList();
+    // getFieldList();
     function getFieldList() {
         $http.get(base_url + "general_data/getFieldList").then(function (success) {
             $scope.fieldList = success.data;
@@ -2862,8 +2831,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     
     
        
-     $scope.lightbox = function (idx) {
-                 //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
+    $scope.lightbox = function (idx) {
+        //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
             var ninjaSldr = document.getElementById("ninja-slider");
             ninjaSldr.parentNode.style.display = "block";
 
@@ -2874,11 +2843,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
   
     };
     
-    function fsIconClick(isFullscreen, ninjaSldr) { //fsIconClick is the default event handler of the fullscreen button
-            if (isFullscreen) {
-                ninjaSldr.parentNode.style.display = "none";
-            }
+    function fsIconClick(isFullscreen, ninjaSldr) { 
+        //fsIconClick is the default event handler of the fullscreen button
+        if (isFullscreen) {
+            ninjaSldr.parentNode.style.display = "none";
         }
+    }
 
 
     // POST SOMETHING UPLOAD START
@@ -3398,7 +3368,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 var index = $scope.contactSuggetion.indexOf(contact);
                 $('.addtobtn-' + user_id).html('Request Sent');
                 $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
-//                $('.owl-carousel').trigger('next.owl.carousel');
+               // $('.owl-carousel').trigger('next.owl.carousel');
             }
         });
     }
@@ -3945,7 +3915,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
         });
     };
-    $scope.get_user_links();
+    
 
     $scope.get_user_experience = function(){
         $http({
@@ -3967,7 +3937,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
         });
     }
-    $scope.get_user_experience();
+    
 
     $scope.get_user_education = function(){
         $http({
@@ -3990,7 +3960,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
         });
     }
-    $scope.get_user_education();
+    
 
     $('input:radio[name="report_spam"]').change(function(){
         if($(this).val() == '0'){
@@ -4067,6 +4037,46 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             });
         }
     };
+
+    function getUserDashboardPost(pagenum) {
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            // $('#main_loader').show();
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
+        }
+            
+        $('#loader').show();
+        $http.get(base_url + "user_post/getUserDashboardPost?page=" + pagenum + "&user_slug=" + user_slug).then(function (success) {
+            $('#loader').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+            $scope.postData = success.data;
+            $('#progress_div').hide();
+            $('.progress-bar').css("width",0);
+            $('.sr-only').text(0+"%");
+            // check_no_post_data();
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            
+            getUserDashboardImage();
+            getUserDashboardVideo();
+            getUserDashboardArticle();
+            getUserDashboardAudio();
+            getUserDashboardPdf();
+            $scope.get_user_links();
+            $scope.get_user_experience();
+            $scope.get_user_education();
+
+        }, function (error) {});
+    }
+
+    getUserDashboardPost();
+    getUserDashboardInformation()
+
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
