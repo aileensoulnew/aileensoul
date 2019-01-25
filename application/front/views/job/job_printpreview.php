@@ -170,6 +170,8 @@
                             }
                             ?>
                         </div>
+						<div class="btn-move">
+						</div>
                     </div>
                     <?php echo $job_menubar; ?>                       
                 </div>

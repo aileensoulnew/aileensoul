@@ -203,7 +203,9 @@
 					<div class="job-menu-profile mob-block">
 						<a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
 							<h3> <?php echo ucwords($fullname); ?></h3>
-						</a>						
+						</a>	
+						<div class="btn-move">
+						</div>
 					</div>
 					
 					<div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
@@ -273,14 +275,14 @@
 											}
 											?>
 											<div class="flw_msg_btn fr">
-												<ul> <li>
+												<ul id="btn-move"> <li>
 													<?php
 													if($this->session->userdata('aileenuser')){
 														if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
 															// $msg_url = base_url('chat/abc/4/3/' . $id);//Old
 															$msg_url = MESSAGE_URL.'fa/fh-'.$freelancerhiredata[0]['freelancer_hire_slug'];
 															?>
-															<a title="Message" href="<?php echo $msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
+															<a title="Message" href="<?php echo $msg_url; ?>" class="btn-n2"><?php echo $this->lang->line("message"); ?></a>
 														<?php } /*else { ?>
 															<a title="Message" href="<?php echo base_url('chat/abc/3/4/' . $id); ?>"><?php echo $this->lang->line("message"); ?></a>
 														<?php }*/
@@ -1322,5 +1324,16 @@
 			}
 		});
     </script>	
+	<script>
+			$(document).ready(function ()
+			{
+				if (screen.width <= 767)
+				{
+					$("#btn-move").appendTo($(".btn-move"));
+				
+				}
+			
+			});
+	</script> 
 </body>
 </html>

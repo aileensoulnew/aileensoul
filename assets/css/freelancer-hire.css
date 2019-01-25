@@ -1607,8 +1607,16 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
 fieldset.work_type_custom input{height: 30px;min-height: 25px;}
 .job-contact-frnd .add-post-button .btn-3{margin: 10px;}
 .job-contact-frnd .rio .add-post-button.add-post-custom{text-align:center; margin:0 0 6px;}
-
-
+#btn-move li a.btn-n2{background: #fff;
+	border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c; cursor: pointer; font-size: 14px; padding: 8px 5px; text-align: center; display: inline-block; margin: 0 5px; font-weight: bold; width:100px;}
+#btn-move li a.btn-n2:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color: #e9e9e9;}
+.art-side-menu .flw_msg_btn{margin-top: 7px !important;}
 
 
 /***  media query  ***/
@@ -2145,6 +2153,10 @@ fieldset.work_type_custom input{height: 30px;min-height: 25px;}
     .sort-emp-detail a{color: #5c5c5c;}
     .no-login .btn-right{text-align: center !important;}	
     .no-login #paddingtop_fixed{padding-top: 132px !important;}
+	.btn-move ul{padding:10px 0 0;}
+	.btn-move ul li{padding:0; display:inline-block;}
+	.flw_msg_btn.fr{display:none;}
+	#btn-move li a.btn-n2{padding:6px 5px;}
 
 }
 @media screen and (max-width: 640px) {
@@ -2413,6 +2425,7 @@ fieldset.work_type_custom input{height: 30px;min-height: 25px;}
 	.sort-emp-msg{width:100%; float:left;}
     .btn4{font-size: 12px;margin-left: 1px;margin-right: 2px;margin-bottom: 5px; }
     .no-login #paddingtop_fixed{padding-top: 105px !important;}
+	#btn-move li a.btn-n2{padding:3px 5px; width:90px; font-size:12px;}
 }
 @media screen and (max-width: 360px) {
     #paddingtop_fixed {

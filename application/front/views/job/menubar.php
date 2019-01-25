@@ -64,7 +64,7 @@ if ($userid != $id) {
                 if ($userid != $id) {
                     ?>
                     <div class="flw_msg_btn fr">
-                        <ul>
+                        <ul id="btn-move">
                             <?php
                             if ($userid) {
                                 $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(2), 'is_delete' => '0', 'status' => '1'))->row()->user_id;
@@ -76,30 +76,30 @@ if ($userid != $id) {
                                     ?> 
 
                                     <li> 
-                                        <a class=" butt_rec  save_saved_btn">Saved</a>
+                                        <a class="butt_rec  save_saved_btn">Saved</a>
                                     </li>
             <?php } else { ?>
                                     <li> 
-                                        <a id="<?php echo 'saveduser' . $id; ?>" onClick="savepopup(<?php echo $id; ?>)" href="javascript:void(0);" class= "save_saved_btn <?php echo 'saveduser' . $id; ?>">
+                                        <a id="<?php echo 'saveduser' . $id; ?>" onClick="savepopup(<?php echo $id; ?>)" href="javascript:void(0);" class= "save_saved_btn btn-n2 <?php echo 'saveduser' . $id; ?>">
                                             Save
                                         </a>
                                     </li>
             <?php }
         } else { ?>
                                 <li> 
-                                    <a onclick="register_profile();">Save</a> 
+                                    <a class="btn-n2" onclick="register_profile();">Save</a> 
                                 </li>
         <?php } ?>
                             <?php if ($userid) {
                                 // $msg_url = base_url('chat/abc/2/1/' . $id);//Old
                                 $msg_url = MESSAGE_URL.'recruiter/job-'.$slugdata[0]['slug']; ?>
                                 <li> 
-                                    <a href="<?php echo $msg_url; ?>">Message</a> 
+                                    <a class="btn-n2" href="<?php echo $msg_url; ?>">Message</a> 
                                 </li>
         <?php } else { ?>
 
                                 <li> 
-                                    <a onclick="register_profile();">Message</a> 
+                                    <a class="btn-n2" onclick="register_profile();">Message</a> 
                                 </li>
                     <?php } ?>
                         </ul>
@@ -110,3 +110,14 @@ if ($userid != $id) {
 
     </div>
 </div>
+<script>
+		$(document).ready(function ()
+		{
+			if (screen.width <= 767)
+			{
+				$("#btn-move").appendTo($(".btn-move"));
+			
+			}
+		
+		});
+	</script> 

@@ -202,6 +202,8 @@
                         <a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
                             <h3><?php echo ucwords($fullname); ?></h3>
                         </a>
+						<div class="btn-move">
+						</div>
                     </div>
                     <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
                         <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr"> 
@@ -252,19 +254,19 @@
                                         if ($this->uri->segment(2) != "") {
                                             ?>
                                             <div class="flw_msg_btn fr">
-                                                <ul>
+                                                <ul id="btn-move">
                                                     <?php
                                                     if ($data[0]['status'] == '1' || $data[0]['status'] == '') {
 
                                                         if ($_GET['post_id']) {
                                                             ?> 
                                                             <li>
-                                                                <a title="shortlist" id="<?php echo $id; ?>" onClick="shortlistpopup(<?php echo $id; ?>)" href="javascript:void(0);" class="<?php echo 'saveduser' . $id ?>"> Shortlist </a> 
+                                                                <a title="shortlist" id="<?php echo $id; ?>" onClick="shortlistpopup(<?php echo $id; ?>)" href="javascript:void(0);" class="<?php echo 'saveduser' . $id ?> btn-n2"> Shortlist </a> 
 
                                                             </li>
                                                         <?php } else { ?>
                                                             <li>
-                                                                <a title="save" id="<?php echo $id; ?>" onClick="savepopup(<?php echo $id; ?>)" href="javascript:void(0);" class="<?php echo 'saveduser' . $id ?>">
+                                                                <a title="save" id="<?php echo $id; ?>" onClick="savepopup(<?php echo $id; ?>)" href="javascript:void(0);" class="<?php echo 'saveduser' . $id ?> btn-n2">
                                                                     <?php echo $this->lang->line("save"); ?>
                                                                 </a> 
 
@@ -273,11 +275,11 @@
                                                     } elseif ($data[0]['status'] == '0') {
                                                         ?>
                                                         <li> 
-                                                            <a title="Saved" class="saved butt_rec <?php echo 'saveduser' . $id; ?> "><?php echo $this->lang->line("saved"); ?></a>
+                                                            <a title="Saved" class="saved butt_rec <?php echo 'saveduser' . $id; ?> btn-n2 "><?php echo $this->lang->line("saved"); ?></a>
                                                         </li> <?php } else {
                                                         ?>
                                                         <li> 
-                                                            <a title="Shortlisted" class="saved butt_rec <?php echo 'saveduser' . $id; ?> ">Shortlisted</a>
+                                                            <a title="Shortlisted" class="saved butt_rec <?php echo 'saveduser' . $id; ?> btn-n2 ">Shortlisted</a>
                                                         </li> 
                                                     <?php }
                                                     ?>
@@ -289,12 +291,12 @@
                                                                 // $msg_url = base_url('chat/abc/3/4/' . $row['user_id']);//Old
                                                                 $msg_url = MESSAGE_URL.'fh/fa-'.$freelancerpostdata['0']['freelancer_apply_slug'];
                                                                 ?>
-                                                                <a title="Message" href="<?php echo $msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
+                                                                <a class="btn-n2" title="Message" href="<?php echo $msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
                                                             <?php } else {
                                                                 // $msg_url = base_url('chat/abc/4/3/' . $id);//Old
                                                                 $msg_url = MESSAGE_URL.'fa/fh-'.$freelancerpostdata['0']['freelancer_apply_slug'];
                                                                 ?>
-                                                                <a title="Message" href="<?php echo $msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
+                                                                <a class="btn-n2" title="Message" href="<?php echo $msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
                                                             <?php
                                                             }
                                                         }
@@ -3150,5 +3152,16 @@
             });
         });
 		</script>
+		<script>
+			$(document).ready(function ()
+			{
+				if (screen.width <= 767)
+				{
+					$("#btn-move").appendTo($(".btn-move"));
+				
+				}
+			
+			});
+		</script> 
     </body>
 </html>

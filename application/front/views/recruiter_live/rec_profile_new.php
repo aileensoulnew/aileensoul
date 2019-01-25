@@ -182,6 +182,8 @@
 							<?php }
 						} ?>
 					</div>
+					<div class="btn-move">
+					</div>
 				</div>
 				<!-- menubar -->
 				<div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
@@ -220,14 +222,14 @@
 							if ($this->uri->segment(3) != "" && $this->uri->segment(3) != $userid)
 							{ ?>
 								<div class="flw_msg_btn fr">
-									<ul>
+									<ul id="btn-move">
 										<li>
 										<?php
 										$returnpage = $_GET['page'];
 										if ($this->uri->segment(3) != $userid) {
 											$msg_url = MESSAGE_URL . 'job/recruiter-' . $recdata['slug'];
 											?>
-											<a href="<?php echo $msg_url; ?>" title="Message">Message</a>
+											<a class="btn-n2" href="<?php echo $msg_url; ?>" title="Message">Message</a>
 										</li>
 									</ul>
 								</div>
@@ -845,5 +847,16 @@
 			}
 		});
     </script>	
+	<script>
+		$(document).ready(function ()
+		{
+			if (screen.width <= 767)
+			{
+				$("#btn-move").appendTo($(".btn-move"));
+			
+			}
+		
+		});
+	</script> 
 </body>
 </html>

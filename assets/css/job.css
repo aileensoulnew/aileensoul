@@ -2286,6 +2286,16 @@ fieldset.main_select_data span:after{
     width: calc(100% - 8px);
     margin-left: 8px;
 }
+.art-side-menu .flw_msg_btn{margin-top:7px !important;}
+#btn-move li a.btn-n2{background: #fff;
+	border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c; cursor: pointer; font-size: 14px; padding: 8px 5px; text-align: center; display: inline-block; margin: 0 5px; font-weight: bold; width:100px;}
+#btn-move li a.btn-n2:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color: #e9e9e9;}
 
 
 
@@ -2962,6 +2972,10 @@ fieldset.main_select_data span:after{
     .no-login .left_side_posrt li{
         margin-bottom:5px!important
     }
+	.flw_msg_btn.fr{display:none;}
+	.btn-move ul{padding:10px 0 0;}
+	.btn-move ul li{padding:0; display:inline-block;}
+	
 }
 @media screen and (max-width:639px){
     .mian_middle_post_box{
@@ -3252,6 +3266,7 @@ fieldset.main_select_data span:after{
         width:100%
     }
     .modal.in .modal-dialog{margin: inherit !important;}
+	#btn-move li a.btn-n2{font-size:12px; padding:3px 5px; width:90px;}
 }
 @media screen and (max-width:360px){
     .art_no_post_text{
