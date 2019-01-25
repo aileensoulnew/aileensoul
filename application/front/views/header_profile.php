@@ -799,11 +799,11 @@ if($first_segment == "")
                 $(".noti_count").html("");
             }
             int_not_count = setTimeout(function(){
-                get_notification_unread_count();
+                // get_notification_unread_count();
             }, 10000);
         }).fail(function() {
             int_not_count = setTimeout(function(){
-                get_notification_unread_count();
+                // get_notification_unread_count();
             }, 15000);
         });
         /*$.ajax({
@@ -896,7 +896,7 @@ if($first_segment == "")
     }*/
 </script>
 <script type="text/javascript">
-    var idleTime = 0;
+    /*var idleTime = 0;
     $(document).ready(function () {
         //Increment the idle time counter every minute.
         // var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
@@ -916,7 +916,7 @@ if($first_segment == "")
         if (idleTime > 4) { // 20 minutes
             window.location.reload();
         }
-    }
+    }*/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
