@@ -30,41 +30,33 @@
 .add-post-button{margin-top: 25px;}
 .add-post-button a{cursor: pointer;}
 .add-post-button .btn:focus{color: white; background: #156f95;}
-.buisness-profile-pic-candidate {border: 1px solid #d9d9d9; margin-left: 17px!important;  width: 50px; margin-top: 5px;
-    height: 50px;  margin-bottom: 6px; display: inline-block;} 
+.buisness-profile-pic-candidate {border: 1px solid #d9d9d9; margin-left: 17px!important;  width: 60px; margin-top: 5px; height: 60px;  margin-bottom: 6px; display: inline-block;} 
 .buisness-profile-pic-candidate img { width: 100%; height: 100%;}
-.designation_rec { float: left; width: 60%; padding-top:5px; line-height: 17px;}
+.designation_rec { float: left; width: 60%; padding-top:7px; line-height: 16px;}
+.profile-job-post-location-name-rec ul li:first-child{line-height:1;}
 .profile-job-post-location-name-rec ul {padding: 0;}
-.profile-job-post-location-name-rec ul li { width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    padding: 0px 3px 0 8px; margin: 0; list-style: none; display: inline-block;}
+.profile-job-post-location-name-rec ul li { width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0px 3px 0 15px; margin: 0; list-style: none; display: inline-block;}
 .profile-job-post-location-name-rec ul li i { padding-right: 5px;}
 .profile-job-post-location-name-rec ul li a { color: #5b5b5b; display: inline-block; font-size: 13px; font-family: 'arial'; font-weight:normal;}
 
-.apply-btn {background: #e8f3f8; padding: 8px 12px;}
+.apply-btn {padding: 8px 12px;}
 .apply-btn a {background: #ffffff; color: #5c5c5c; border-radius: 4px; font-size:15px; padding: 3px 13px; display: inline-block; font-weight: 500; text-transform: capitalize; border: 1px solid #5c5c5c; min-width:72px; text-align:center; margin-left:5px;}
 .apply-btn a:hover {color: #fff; background: #5c5c5c;}
 li.fr a {text-decoration: none !important;}
 .job-contact-frnd .add-post-button{text-align:center !important;}
-.profile-job-profile-button {background-color: #f6f6f6; padding: 4px 0px; border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul {list-style: none; display: block;
-    width: 100%; clear: both; padding: 10px 4px 6px; margin-left: 4px;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li{float:left; width:100%; margin-bottom:5px;}
+.profile-job-profile-button {/*background-color: #f6f6f6;*/ padding: 4px 0px;  border-bottom:1px solid #d2d2d2;}
+.profile-job-profile-button.rec-candidate{border-bottom:0; border-top:1px solid #d2d2d2; padding:0;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul {list-style: none; display: block; width: 100%; clear: both; padding: 10px 0px 6px; margin-left: 3px;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li{float:left; width:100%; margin-bottom:0px;}
 .profile-job-post-detail .profile-job-post-title .profile-job-profile-menu li a { text-decoration: none; font-weight: 600;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu li a:hover {text-decoration-line: underline;
-    color: #1b8ab9;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li b{font-weight:normal;
-    width: 25%; float: left; position:relative; padding-right:7px;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span p {text-align: justify;
-    word-break: break-word; display: flex; margin-bottom: 0px;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span p a {color: #3b5283;
-    text-decoration-line: underline;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li b::after {content: " :";
-     float: left; position:absolute; right:0; top:-1px;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span {word-wrap: break-word; padding-left: 7px;
-    word-break: break-word; float: left; padding-right: 10px; width: 70%;}
-.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li label {
-    font-weight: 600; width: 30%; float: left;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu li a:hover {text-decoration-line: underline; color: #1b8ab9;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li b{
+ width: 20%; float: left; position:relative; padding-right:7px;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span p {text-align: justify; word-break: break-word; display: flex; margin-bottom: 0px;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span p a {color: #3b5283; text-decoration-line: underline;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li b::after {content: " :"; float: left; position:absolute; right:0; top:-1px;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span {word-wrap: break-word; padding-left: 7px; word-break: break-word; float: left; padding-right: 10px; width: 70%;}
+.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li label {font-weight: 600; width: 30%; float: left;}
 .profile-job-details ul li {list-style: none;}
 .job-post-detail {border-radius: 4px; margin-bottom: 15px;}
 .profile-job-details {font-size: 18px; padding-left: 20px;}
@@ -179,13 +171,12 @@ li.fr a {text-decoration: none !important;}
 	word-break:break-word;
 }
 .profile-job-post-location-name-rec .post_name {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     margin-left: 0px;
     max-width: 93%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-    line-height: 24px;
 }
 .profile-job-profile-button ul li a{font-family: 'arial'; font-weight:normal;}
 .dot_free{
@@ -955,7 +946,7 @@ label.cameraButton input[accept*="camera"] {
     position: relative;
 }
 .profile-boxProfile-name a{font-size:14px;}
-.buisness-profile-pic-candidate .post-img-profile{width:50px; height:50px; font-size:20px; padding:16px 0;}
+.buisness-profile-pic-candidate .post-img-profile{width:58px; height:58px; font-size:20px; padding:20px 0;}
 #hideuserlist .fw.text-center{text-align:right;}
 
 
@@ -1083,6 +1074,8 @@ fieldset.fresher_radio label {
     background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
     background-color: #e9e9e9;}
 .art-side-menu .flw_msg_btn{margin-top:7px !important;}
+.candi-status{width:50%; float:left; padding:10px 15px;}
+.candi-status span{font-size:13px; font-weight:bold;}
 /***  media query  ***/
 
 @media screen and (max-width: 1279px){

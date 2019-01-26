@@ -59,11 +59,27 @@ if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 	                                <?php echo ucfirst(strtolower($row['fname'])) . ' ' . ucfirst(strtolower($row['lname'])); ?>
 	                            </a>
 	                        </li>
-	                        <li style="display: block;">
-	                            <a class="post_designation" href="javascript:void(0)" title="<?php echo $row['designation']; ?>">
-	                                <?php echo (trim($row['designation']) != "" ? $row['designation'] : "Current Work"); ?>
-	                            </a>
-	                        </li>
+								<?php
+									if ($row['work_job_title']) {
+										$contition_array = array('title_id' => $row['work_job_title']);
+										$jobtitle = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+										if ($jobtitle != "") {?>
+										<li>
+											<span><?php echo $jobtitle[0]['name']; ?></span>
+										</li>
+										<?php } 
+									}?>
+							<li>
+								<span><?php echo ($row['email'] != "" ? $row['email'] : PROFILENA); ?></span> 
+								<?php 
+	                	if ($row['phnno']) { ?>
+	                	
+	                		/ <span><?php echo $row['phnno']; ?></span>
+	                	
+	                	<?php } ?>
+							</li>	
+	                            
+	                       
 	                    </ul>
 	                </div>
 	            </div>
@@ -73,15 +89,7 @@ if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 	        <div class="profile-job-profile-menu">
 	            <ul class="clearfix">
 	            	<?php
-	            	if ($row['work_job_title']) {
-	            		$contition_array = array('title_id' => $row['work_job_title']);
-						$jobtitle = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-						if ($jobtitle != "") {?>
-	                	<li>
-	                		<b>Job Title</b><span><?php echo $jobtitle[0]['name']; ?></span>
-	                	</li>
-		            	<?php }
-		        	}
+	            	
 		        	if ($row['keyskill']) {
 	            		$detailes = array();
 						$work_skill = explode(',', $row['keyskill']);
@@ -210,6 +218,7 @@ if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 								?>
 		                	</span>
 		                </li>
+						
 		                <?php
 		                $contition_array = array('user_id' => $row['iduser']);
 						$jobGraduation = $this->common->select_data_by_condition('job_graduation', $contition_array, $data = '*', $sortby = 'degree_count', $orderby = 'desc', $limit = '1', $offset = '', $join_str = array(), $groupby = '');					
@@ -251,19 +260,17 @@ if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 	                		<b><?php echo $stream_tag; ?></b><span><?php echo $stream_name; ?></span>
 	                	</li>
 	                	<?php } ?>
-	                	<li>
-	                		<b>E-mail</b><span><?php echo ($row['email'] != "" ? $row['email'] : PROFILENA); ?></span>
-	                	</li>
-	                	<?php 
-	                	if ($row['phnno']) { ?>
-	                	<li>
-	                		<b>Mobile Number</b><span><?php echo $row['phnno']; ?></span>
-	                	</li>
-	                	<?php } ?>
+	                	
+	                	
 	            </ul>
 	        </div>
-	        <div class="profile-job-profile-button clearfix">
-	            <div class="apply-btn fr">
+	        <div class="profile-job-profile-button rec-candidate clearfix">
+	            <div class="candi-status">
+					<span>
+                        <span class="job-active"></span>Currently Looking for Job
+                    </span>
+				</div>
+				<div class="apply-btn fr">
 	            	<?php
 	            	$userid = $this->session->userdata('aileenuser');
 					$contition_array = array('from_id' => $userid, 'to_id' => $row['iduser'], 'save_type' => 1, 'status' => '0');

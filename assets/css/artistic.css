@@ -4657,6 +4657,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 	.user-pic img{border-radius:100%;}
 	.user-pic:hover a{border-radius:100%;}
 	.user-pic:hover a img{border-radius:4px;}
+	.buisness-menu .profile-pho-bui{border-radius:100%;}
 }
 
 @media screen and (max-width: 800px) {
