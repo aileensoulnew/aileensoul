@@ -2157,7 +2157,11 @@ fieldset.work_type_custom input{height: 30px;min-height: 25px;}
 	.btn-move ul li{padding:0; display:inline-block;}
 	.flw_msg_btn.fr{display:none;}
 	#btn-move li a.btn-n2{padding:6px 5px;}
-
+	.profile-pho{border-radius:100%;}
+	.post-img-user{border-radius:100%;}
+	.user-pic img{border-radius:100%;}
+	.user-pic:hover a{border-radius:100%;}
+	.user-pic:hover a img{border-radius:4px;}
 }
 @media screen and (max-width: 640px) {
 	.mian_middle_post_box{width:100%;}

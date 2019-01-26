@@ -4357,7 +4357,7 @@ text-transform:uppercase;}
 	.free-hire-dtl .cus-inner-middle{width:100%;}
 	.free-hire-dtl .right-add{display:none;}
 	.container.rec-dtl{padding-left:15px; padding-right:15px;}
-	.container.free-hire-dtl{padding-left:15px; padding-right:15px;}
+	.container.free-hire-dtl .cus-inner-middle{padding-left:15px; padding-right:15px;}
 	.container.free-apply-dtl{padding-left:15px; padding-right:15px;}
 	h4.modal-title{font-size:18px;}
 	.modal.message-box span.mes .modal-header{padding:10px;}

@@ -2243,6 +2243,11 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
 	.flw_msg_btn.fr{display:none;}
 	ul#btn-move li a.butt_rec{background:#fff !important; color:#5c5c5c !important;}
 	#btn-move li a.btn-n2{padding:6px 5px;}
+	.profile-pho{border-radius:100%;}
+	.post-img-user{border-radius:100%;}
+	.user-pic img{border-radius:100%;}
+	.user-pic:hover a{border-radius:100%;}
+	.user-pic:hover a img{border-radius:4px;}
 }
 @media screen and (max-width: 640px) {
 	.mian_middle_post_box{width:100%;}

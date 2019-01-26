@@ -636,6 +636,7 @@ label.cameraButton:active {
 }
 .bui_art_left_box .profile-boxProfile-name a {
     font-size: 14px;
+
 }
 .bui_art_left_box .follow_left_box_main_btn button {
     width: 82px;
@@ -4650,6 +4651,12 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 	#btn-move .bg_following{padding:6px 5px;}
 	#btn-move button.btn-n2{padding:6px 5px;}
 	#btn-move .btn-n2{padding:6px 5px; width:100px;}
+	.profile-pho{border-radius:100%;}
+	.post-img-user{border-radius:100%;}
+	.user-pic{border-radius:100%;}
+	.user-pic img{border-radius:100%;}
+	.user-pic:hover a{border-radius:100%;}
+	.user-pic:hover a img{border-radius:4px;}
 }
 
 @media screen and (max-width: 800px) {

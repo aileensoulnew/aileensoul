@@ -2975,6 +2975,11 @@ fieldset.main_select_data span:after{
 	.flw_msg_btn.fr{display:none;}
 	.btn-move ul{padding:10px 0 0;}
 	.btn-move ul li{padding:0; display:inline-block;}
+	.profile-pho{border-radius:100%;}
+	.post-img-user{border-radius:100%;}
+	.user-pic img{border-radius:100%;}
+	.user-pic:hover a{border-radius:100%;}
+	.user-pic:hover a img{border-radius:4px;}
 	
 }
 @media screen and (max-width:639px){

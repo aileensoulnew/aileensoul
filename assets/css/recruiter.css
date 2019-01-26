@@ -1565,7 +1565,11 @@ fieldset.fresher_radio label {
 	.btn-move ul{padding:0;}
 	.btn-move ul li{padding:10px 0 0; list-style-type:none;}
 	#btn-move li a.btn-n2{padding:6px 5px;}
-    
+    .profile-pho{border-radius:100%;}
+	.post-img-user{border-radius:100%;}
+	.user-pic img{border-radius:100%;}
+	.user-pic:hover a{border-radius:100%;}
+	.user-pic:hover a img{border-radius:4px;}
 }
 
 @media screen and (max-width: 640px) {
