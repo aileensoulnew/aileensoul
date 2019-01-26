@@ -799,12 +799,12 @@ if($first_segment == "")
                 $(".noti_count").html("");
             }
             int_not_count = setTimeout(function(){
-                // get_notification_unread_count();
-            }, 10000);
+                get_notification_unread_count();
+            }, 20000);
         }).fail(function() {
             int_not_count = setTimeout(function(){
-                // get_notification_unread_count();
-            }, 15000);
+                get_notification_unread_count();
+            }, 25000);
         });
         /*$.ajax({
             type: 'POST',
