@@ -357,10 +357,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="all-job-middle">
                                 <p class="pb5">
                                     <span class="location">
-                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png') ?>">{{job.slug_city}},({{job.country_name}})</span>
+                                        <span><img src="<?php echo base_url('assets/n-images/location.svg') ?>">{{job.slug_city}},({{job.country_name}})</span>
                                     </span>
                                     <span class="exp">
-                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png') ?>">{{job.min_year}} year - {{job.max_year}} year <span ng-if="job.fresher == '1'">(freshers can also apply)</span></span>
+                                        <span><img src="<?php echo base_url('assets/n-images/exp.svg') ?>">{{job.min_year}} year - {{job.max_year}} year <span ng-if="job.fresher == '1'">(freshers can also apply)</span></span>
                                     </span>
                                 </p>
                                 <p ng-bind="(job.post_description | limitTo:175) + '.....'"></p>

@@ -4,11 +4,8 @@
 	<title><?php echo $title; ?></title>
 	<meta name="description" content="<?php echo $metadesc; ?>" />
 	<?php echo $head; ?>
-	<?php if (IS_HIRE_CSS_MINIFY == '0') { ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
-	<?php } else { ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
-	<?php } ?>
+	
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
 	   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
    <?php } ?>

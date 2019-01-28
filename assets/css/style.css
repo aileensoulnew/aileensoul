@@ -772,14 +772,14 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
 }
 .pop_content .cnclbtn,.pop_content .okbtn{
     transition:all .2s;
-    color:#fff;
-    padding:8px 18px;
-    background-color:#1b8ab9!important;
+    color:#5c5c5c;
+    padding:6px 18px;
     margin-top:8px;
     width:100px;
     border-radius:8px;
     font-size:16px;
-    text-decoration:none
+    text-decoration:none;
+	border:1px solid #5c5c5c;
 }
 .pop_content .okbtn{
     margin-right:20px;
@@ -793,7 +793,7 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
     margin-top:40px
 }
 .pop_content .cnclbtn:hover,.pop_content .okbtn:hover{
-    background-color:#156f95!important
+    background-color:#5c5c5c;
 }
 .main_frlancer{
     float:left;

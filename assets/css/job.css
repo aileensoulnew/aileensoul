@@ -29,11 +29,6 @@
 .mob-block{
     display:none
 }
-.applied,.saved{
-    color:#fff!important;
-    background-color:#1b8ab9!important;
-    pointer-events:none;
-}
 .job-menu-profile{
     float:left;
     padding-left:31px;
@@ -1785,11 +1780,6 @@ label.cameraButton input[accept*=camera]{
 .message a.mesg_link:hover{
     color:#fff;
     background:#156f95
-}
-.message button:hover{
-    color:#fff;
-    background-color:#1b8ab9;
-    border:1px solid transparent
 }
 .message1 #univer1{
     border:1px solid #1b8ab9;
