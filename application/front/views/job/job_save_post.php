@@ -6,22 +6,14 @@
         <!-- END HEAD -->
 
         <title><?php echo $title; ?></title>
-<?php
-        if (IS_JOB_CSS_MINIFY == '0') {
-            ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
 
-  <?php }else{?>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
-
-  <?php }?>        
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
     <?php $this->load->view('adsense'); ?>
 </head>
     <!-- END HEAD -->

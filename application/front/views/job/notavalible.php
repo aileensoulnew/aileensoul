@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <?php echo $head; ?>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<?php echo $head; ?>
 
-       <?php
-        if (IS_JOB_CSS_MINIFY == '0') {
-            ?>
-
-	  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
-
-     <?php }else{?>
-
-       <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
-
-     <?php }?>
-   <?php $this->load->view('adsense'); ?>
-</head>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
+		<?php $this->load->view('adsense'); ?>
+	</head>
    <body>
       <?php   if ($this->session->userdata('aileenuser')) { ?>
       <?php echo $header; ?>

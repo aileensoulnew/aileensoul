@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <!-- start head -->
-      <?php  echo $head; ?>
-      <!-- END HEAD -->
+	<head>
+		<!-- start head -->
+		<?php  echo $head; ?>
+		<!-- END HEAD -->
 
-      <title><?php echo $title; ?></title>
+		<title><?php echo $title; ?></title>
 
-    <?php
-        if (IS_REC_CSS_MINIFY == '0') {
-            ?>
-           <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
-		   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
-            <?php
-        } else {
-            ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
-        <?php } ?>
-   <?php $this->load->view('adsense'); ?>
-</head>
-   <!-- END HEAD -->
+    
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
+		<?php $this->load->view('adsense'); ?>
+	</head>
+	<!-- END HEAD -->
   
-   <body class="page-container-bg-solid page-boxed no-login">
+	<body class="page-container-bg-solid page-boxed no-login">
 
-     <header>
+		<header>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-3 left-header text-center fw-479">

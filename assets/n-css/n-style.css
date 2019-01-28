@@ -2577,7 +2577,7 @@ label.cameraButton{min-height:43px;}
 .tab-add-991{display:none; width:100%; float:left;}
 .job-saved-box h3.mb15{margin-bottom:15px;}
 .edit_pr_bar {width: 23% !important; display: inline-block; margin: 0 !important;}
-.page-boxed .edit_profile_progress{width:100%;}
+.page-boxed .edit_profile_progress{width:100%; border:1px solid #d2d2d2;}
 .border1{border:1px solid #d2d2d2; border-radius:4px;}
 .bus-art-cus-left{display:block;}
 .border-bottom0{border-bottom:0 !important;}

@@ -3,21 +3,13 @@
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head; ?> 
-        <?php
-            if (IS_REC_CSS_MINIFY == '0') {
-                ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
+        
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
-        <?php
-            } else {
-                ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
-        <?php } ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
-    <?php $this->load->view('adsense'); ?>
-</head>
+		<?php $this->load->view('adsense'); ?>
+	</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $recruiter_header2; ?>
         <?php if ($recdata['re_step'] == 3) { ?>

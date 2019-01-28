@@ -3,21 +3,9 @@
   
         <title><?php echo $title; ?></title>
         <?php echo $head; ?> 
- 
-            <?php
-        if (IS_REC_CSS_MINIFY == '0') {
-            ?>
-         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
-     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/profiles/common/mobile.css'); ?>" />
-            <?php
-        } else {
-            ?>
-          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
-     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/profiles/common/mobile.css'); ?>" />
-        <?php } ?>
-        
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/profiles/common/mobile.css'); ?>" />
       
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header; ?>
