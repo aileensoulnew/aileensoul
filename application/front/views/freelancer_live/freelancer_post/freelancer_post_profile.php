@@ -4,19 +4,12 @@
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?>
-        <?php
-        if (IS_APPLY_CSS_MINIFY == '0') {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
-            <?php
-        } else {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
-        <?php } ?>
+        
 
         <?php if (!$this->session->userdata('aileenuser')) { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
         <?php } ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <?php $this->load->view('adsense'); ?>

@@ -3509,6 +3509,10 @@ text-transform:uppercase;}
 .all-job-bottom p a.btn4.saved{background:#5c5c5c !important; color:#fff;}
 .all-job-bottom p a.btn4.applied{background:#5c5c5c !important; color:#fff;}
 .job-bottom-btn .btn4.applied{background:#5c5c5c; color:#fff; border:1px solid #5c5c5c;}
+.apply-btn a{border:1px solid #5c5c5c; color:#5c5c5c;}
+.apply-btn a:hover{background:#5c5c5c; color:#fff;}
+.apply-btn a.saved{background:#5c5c5c; color:#fff;}
+.profile-job-post-detail .profile-job-post-title .button.invited{background:#5c5c5c; border:1px solid #5c5c5c;}
 
 
 /***  media query  ***/

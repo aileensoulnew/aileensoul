@@ -243,14 +243,12 @@ li.fr a {
     margin-left: 7px;
     background-color: #ffffff;
     text-transform: capitalize;
-    color: #1b8ab9;
-    border: 1px solid #1b8ab9;
     float: right;
     font-weight: normal;
 }
 .profile-job-post-detail .profile-job-post-title .button:Hover {
     color: #fff;
-    background: #1b8ab9;
+    background: #5c5c5c;
 }
 .last_date {
     padding-left: 15px;

@@ -4,23 +4,13 @@
         <?php echo $head; ?>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <?php
-        if (IS_APPLY_CSS_MINIFY == '0') {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
-            <?php
-        } else {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
-        <?php } ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
 
 
-
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
-    <?php $this->load->view('adsense'); ?>
-</head>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
+		<?php $this->load->view('adsense'); ?>
+	</head>
     <body class="no-login cus-left-project">
         <?php
         $userid = $this->session->userdata('aileenuser');

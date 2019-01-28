@@ -3,11 +3,11 @@
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head; ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-apply.css?ver=' . time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
-    <?php $this->load->view('adsense'); ?>
-</head>
+		<?php $this->load->view('adsense'); ?>
+	</head>
     <body class="page-container-bg-solid page-boxed botton_footer body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
