@@ -964,32 +964,40 @@ class Freelancer_hire extends MY_Controller {
                                         $return_html .= '</h6>
                                     </a>
                                     </li>
-                                    <li style = "display: block;" >';
-                                    $return_html .= '<a href = "JavaScript:Void(0);" title = "' . ucwords($row['designation']) . '">';
+                                    <li><span>';
+                                    if ($row['freelancer_post_field']) {
+                                        $field_name = $this->db->select('category_name')->get_where('category', array('category_id' => $row['freelancer_post_field']))->row()->category_name;
+                                        $return_html .= $field_name;
+                                    } else {
+                                        $return_html .= PROFILENA;
+                                    }
+                                    /*$return_html .= '<a href = "JavaScript:Void(0);" title = "' . ucwords($row['designation']) . '">';
                                     if ($row['designation']) {
                                         $return_html .= $row['designation'];
                                     } else {
                                         $return_html .= $this->lang->line("designation");
+                                    }*/
+                                    $return_html .= '</span></li><li><span>';
+                                    $cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $row['freelancer_post_city']))->row()->city_name;
+                                    $countryname = $this->db->select('country_name')->get_where('countries', array('country_id' => $row['freelancer_post_country']))->row()->country_name;
+                                    if ($cityname || $countryname) {
+                                        if ($cityname) {
+                                            $return_html .= $cityname . ",";
+                                        }
+                                        if ($countryname) {
+                                            $return_html .= $countryname;
+                                        }
                                     }
-                                    $return_html .= '</a></li>
+                                    $return_html .='</span></li>
                                     </ul>
                                     </div>
                                     </div>
                                     </div>
                                     </div> <div class = "profile-job-post-title clearfix">
                                     <div class = "profile-job-profile-menu">
-                                    <ul class = "clearfix">
-                                    <li><b>';
-                            $return_html .= $this->lang->line("field");
-                            $return_html .= '</b><span>';
-                            if ($row['freelancer_post_field']) {
-                                $field_name = $this->db->select('category_name')->get_where('category', array('category_id' => $row['freelancer_post_field']))->row()->category_name;
-                                $return_html .= $field_name;
-                            } else {
-                                $return_html .= PROFILENA;
-                            }
+                                    <ul class = "clearfix">';                            
 
-                            $return_html .= '</li></span><li><b>';
+                            $return_html .= '<li><b>';
                             $return_html .= $this->lang->line("skill");
                             $return_html .= '</b><span>';
                             $aud = $row['freelancer_post_area'];
@@ -1017,23 +1025,38 @@ class Freelancer_hire extends MY_Controller {
                             }
                     
                             $return_html .= '</span>
-                                            </li>';
-                            $cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $row['freelancer_post_city']))->row()->city_name;
-                            $countryname = $this->db->select('country_name')->get_where('countries', array('country_id' => $row['freelancer_post_country']))->row()->country_name;
-                            $return_html .= '<li><b>';
-                            $return_html .= $this->lang->line("location");
-                            $return_html .= '</b><span>';
-                            if ($cityname || $countryname) {
-                                if ($cityname) {
-                                    $return_html .= $cityname . ",";
+                                            </li><li><b>';
+                            $return_html .= $this->lang->line("total_experiance");
+                            $return_html .= '</b>
+                        <span>';
+                            if ($row['freelancer_post_exp_year'] || $row['freelancer_post_exp_month']) {
+                                if ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] == '') {
+                                    $return_html .= "1 year";
+                                } elseif ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] == '0 year') {
+                                    $return_html .= "1 year";
+                                } elseif ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] != '') {
+                                    $year = explode(' ', $row['freelancer_post_exp_year']);
+                                    // echo $year;
+                                    $totalyear = $year[0] + 1;
+                                    $return_html .= $totalyear . $this->lang->line("year");
+                                } elseif ($row['freelancer_post_exp_year'] != '' && $row['freelancer_post_exp_month'] == '') {
+                                    $return_html .= $row['freelancer_post_exp_year'];
+                                } elseif ($row['freelancer_post_exp_year'] != '' && $row['freelancer_post_exp_month'] == '0 month') {
+
+                                    $return_html .= $row['freelancer_post_exp_year'];
+                                } else {
+
+                                    $return_html .= $row['freelancer_post_exp_year'] . ' ' . $row['freelancer_post_exp_month'];
                                 }
-                                if ($countryname) {
-                                    $return_html .= $countryname;
-                                }
+                            } else {
+                                $return_html .= PROFILENA;
                             }
-                            $return_html .= '</span></li>
+                            $return_html .= '</span>
+                        </li>';
+
+                            $return_html .= '
                         <li><b>';
-                            $return_html .= $this->lang->line("skill_description");
+                            $return_html .= 'Description';//$this->lang->line("skill_description");
                             $return_html .= '</b><span><p>';
                             if ($row['freelancer_post_skill_description']) {
                                 $return_html .= $row['freelancer_post_skill_description'];
@@ -1067,39 +1090,11 @@ class Freelancer_hire extends MY_Controller {
                                 $return_html .= PROFILENA;
                             }
 
-                            $return_html .= '</span>
-                        </li>
-                        <li><b>';
-                            $return_html .= $this->lang->line("total_experiance");
-                            $return_html .= '</b>
-                        <span>';
-                            if ($row['freelancer_post_exp_year'] || $row['freelancer_post_exp_month']) {
-                                if ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] == '') {
-                                    $return_html .= "1 year";
-                                } elseif ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] == '0 year') {
-                                    $return_html .= "1 year";
-                                } elseif ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] != '') {
-                                    $year = explode(' ', $row['freelancer_post_exp_year']);
-                                    // echo $year;
-                                    $totalyear = $year[0] + 1;
-                                    $return_html .= $totalyear . $this->lang->line("year");
-                                } elseif ($row['freelancer_post_exp_year'] != '' && $row['freelancer_post_exp_month'] == '') {
-                                    $return_html .= $row['freelancer_post_exp_year'];
-                                } elseif ($row['freelancer_post_exp_year'] != '' && $row['freelancer_post_exp_month'] == '0 month') {
-
-                                    $return_html .= $row['freelancer_post_exp_year'];
-                                } else {
-
-                                    $return_html .= $row['freelancer_post_exp_year'] . ' ' . $row['freelancer_post_exp_month'];
-                                }
-                            } else {
-                                $return_html .= PROFILENA;
-                            }
-                            $return_html .= '</span>
-                        </li>
+                            $return_html .= '</span></li>';
+                            $return_html .= '
                         </ul>
                         </div>
-                        <div class = "profile-job-profile-button clearfix">
+                        <div class = "profile-job-profile-button freecan clearfix">
                         <div class = "apply-btn fr">';
                             $userid = $this->session->userdata('aileenuser');
                             $contition_array = array('from_id' => $userid, 'to_id' => $row['user_id'], 'save_type' => '2');
