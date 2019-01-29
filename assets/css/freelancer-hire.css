@@ -34,7 +34,7 @@
     float: left;
     padding-left: 31px;
     width: 18.5%;
-    margin-top: 0px;
+    margin-top: 0px !important;
 }
 .buisness-profile-pic-candidate {
     border: 1px solid #d9d9d9;
@@ -1623,6 +1623,7 @@ fieldset.work_type_custom input{height: 30px;min-height: 25px;}
         font-size: 13px;
     }
 	.tablate-add{display:block; width:160px; position:fixed; margin-left:960px;}
+	.job-menu-profile{width:100% !important; padding-bottom:10px;}
 }
 @media screen and (max-width: 1199px) {
     #paddingtop_fixed {

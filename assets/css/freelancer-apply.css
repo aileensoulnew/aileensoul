@@ -1680,7 +1680,7 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
     position: absolute!important;
     z-index: 999 !important;
 }
-.job_edit_menu{width:100% !important;}
+.job_edit_menu{/*width:100% !important;*/}
 #btn-move li a.btn-n2{background: #fff;
 	border: 1px solid #5c5c5c; border-radius: 20px; color: #5c5c5c; cursor: pointer; font-size: 14px; padding: 8px 5px; text-align: center; display: inline-block; margin: 0 5px; font-weight: bold; width:100px;}
 .profile-box-art .right-menu-jr .flw_msg_btn ul#btn-move li a.butt_rec:hover, #btn-move li a.btn-n2:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -1705,6 +1705,7 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
         font-size: 13px;
     }
 	.tablate-add{display:block; width:160px; position:fixed; margin-left:960px;}
+	.job-menu-profile{width:100% !important; padding-bottom:10px;}
 }
 @media screen and (max-width: 1199px) {
     #paddingtop_fixed {
@@ -1813,7 +1814,6 @@ p.pull-right a.btn4:last-child {line-height: 22px;}
     }
     .job-menu-profile {
         margin-top: 25px !important;
-        padding-bottom: 0px;
     }
     .right_left_box_design {
         padding: 9px 12px 12px 12px !important;

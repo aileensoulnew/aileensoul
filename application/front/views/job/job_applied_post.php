@@ -208,7 +208,8 @@
                          
                     </div>
                     <div class="right-add">
-                        <?php $this->load->view('right_add_box'); ?>                        
+                        <?php $this->load->view('right_add_box'); ?>
+						<div class="right-add-box">                      
                         <div id="profile-progress" class="edit_profile_progress">
                             <div class="count_main_progress">
                                 <div class="circles">
@@ -221,7 +222,8 @@
                                 </div>
                             </div>
                         </div>                        
-                    </div>
+						</div>
+					</div>
                     <?php
                     /*if ($count_profile == 100) {
                         if ($job_reg[0]['progressbar'] == 0) {

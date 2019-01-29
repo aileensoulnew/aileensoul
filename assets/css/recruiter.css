@@ -1083,6 +1083,7 @@ fieldset.fresher_radio label {
 		margin-left: 10px
     }
 	.tablate-add{display:block; width:160px; position:fixed; margin-left:960px;}
+	.job-menu-profile{width:100% !important; padding-bottom:10px;}
 } 
 
 @media screen and (max-width: 1200px){
@@ -1101,7 +1102,6 @@ fieldset.fresher_radio label {
         height: 75px !important;
     }
 	.experience_year{margin-right:34px;}
-	.job_edit_menu{width: 22.5% !important;}
 	.job_edit_pr{padding-left: 225px;}
 	/***  add  ***/
 	.tablate-add{display:none;}
