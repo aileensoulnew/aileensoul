@@ -3513,6 +3513,8 @@ text-transform:uppercase;}
 .apply-btn a:hover{background:#5c5c5c; color:#fff;}
 .apply-btn a.saved{background:#5c5c5c; color:#fff;}
 .profile-job-post-detail .profile-job-post-title .button.invited{background:#5c5c5c; border:1px solid #5c5c5c;}
+.model_ok_cancel .btn1{background:#fff; border:1px solid #5c5c5c !important;}
+.model_ok_cancel .btn1:hover{background:#5c5c5c;}
 
 
 /***  media query  ***/
@@ -4209,7 +4211,7 @@ text-transform:uppercase;}
 	.profile-main-rec-box-menu{border-left:0; border-right:0; border-bottom:0;}
 	.mob-progressbar{width:90%; margin:0 auto 15px;}
 	.job-saved-box .contact-frnd-post{padding:0;}
-	.job-saved-box .job-contact-frnd .profile-job-post-detail{border:0;}
+	.job-saved-box .job-contact-frnd .profile-job-post-detail{border:0; border-top:1px solid #d2d2d2; border-radius:0;}
 	.profile-job-profile-button{border-radius:0;}
 	.left-form-each{z-index:9;}
 	.gender-custom{/*min-height:78px;*/}

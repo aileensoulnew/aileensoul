@@ -106,7 +106,7 @@
                     } ?>
             	
             <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
-                Share opportunities, articles and questions
+                Share knowledge, opportunities, articles and questions 
             </div>
             <!--<span class="post-cam"><i class="fa fa-camera"></i></span>-->
         </div>
@@ -418,7 +418,7 @@
                             <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
                                 <div class="post-box">        
                                     <div class="post-text">
-                                        <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                        <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
 
                                         <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
                                     </div>                        
@@ -1003,7 +1003,7 @@
                                     } ?>
                                 </div>
                                 <div class="post-text">
-                                    <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share opportunities, articles and questions"></textarea>
+                                    <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
                                 </div>
                                 <div class="all-upload" ng-if="is_edit != 1">
                                     <div class="form-group">

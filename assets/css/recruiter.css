@@ -1074,8 +1074,8 @@ fieldset.fresher_radio label {
     background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
     background-color: #e9e9e9;}
 .art-side-menu .flw_msg_btn{margin-top:7px !important;}
-.candi-status{width:50%; float:left; padding:10px 15px;}
-.candi-status span{font-size:13px; font-weight:bold; display:none;}
+.candi-status{width:50%; float:left; padding:10px 15px; display:none;}
+.candi-status span{font-size:13px; font-weight:bold;}
 /***  media query  ***/
 
 @media screen and (max-width: 1279px){
@@ -1563,6 +1563,7 @@ fieldset.fresher_radio label {
 	.user-pic img{border-radius:100%;}
 	.user-pic:hover a{border-radius:100%;}
 	.user-pic:hover a img{border-radius:4px;}
+	.profile-job-profile-button.rec-candidate{border-bottom:1px solid #d2d2d2;}
 }
 
 @media screen and (max-width: 640px) {
@@ -1836,7 +1837,7 @@ fieldset.fresher_radio label {
     .profile-job-details ul li .lction p {font-size: 12px;}
 	.created_date{font-size: 10px;}
 	.profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li b {
-		width: 42%;
+		width: 33%;
 		font-size: 12px;
     }
     .profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul li span {
