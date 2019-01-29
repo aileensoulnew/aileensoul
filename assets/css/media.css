@@ -270,7 +270,7 @@
             .profile-job-post-location-name-rec .post_designation { font-size: 12px; }
             .buisness-profile-pic-candidate { height: 6%; width: 40px; }
     
-           .profile-job-post-location-name-rec ul li { padding: 3px 3px 0px 8px; line-height: 16px; }
+           .profile-job-post-location-name-rec ul li { /*padding: 3px 3px 0px 8px; line-height: 16px;*/ }
 
       /* recruiter off */
            

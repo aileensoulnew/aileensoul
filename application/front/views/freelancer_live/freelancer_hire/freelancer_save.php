@@ -181,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container mobp0">
+                <div class="container mobp0 pt20">
                     <div class="job-menu-profile mob-none job_edit_menu">
                         <a title="<?php echo ucwords($fullname); ?>" href="javascript:void(0);">
                             <h3><?php echo ucwords($fullname); ?></h3>
