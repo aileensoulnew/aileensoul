@@ -2545,7 +2545,7 @@ class Recruiter extends MY_Controller {
 						<div class="all-job-middle">
 						<p class="pb5">
 						<span class="location">';
-						$rec_post .= '<span><img class="pr5" src="' . base_url('assets/images/location.png') . '" alt="locationimage">';
+						$rec_post .= '<span><img src="' . base_url('assets/images/location.svg') . '" alt="locationimage">';
 						if ($cityname || $countryname) {
 							if ($cityname) {
 								$rec_post .= $cityname . ', ';
@@ -2555,7 +2555,7 @@ class Recruiter extends MY_Controller {
 						$rec_post .= '      </span>
 						</span>';
 						$rec_post .= '<span class="exp">
-						<span><img class="pr5" src="' . base_url('assets/images/exp.png') . '" alt="experienceimage">';
+						<span><img src="' . base_url('assets/images/exp.svg') . '" alt="experienceimage">';
 
 						if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
 							$rec_post .= $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";
@@ -2720,7 +2720,7 @@ class Recruiter extends MY_Controller {
 						<div class="all-job-middle">
 						<p class="pb5">
 						<span class="location">';
-						$rec_post .= '<span><img class="pr5" src="' . base_url('assets/images/location.png') . '" alt="location">';
+						$rec_post .= '<span><img src="' . base_url('assets/images/location.svg') . '" alt="location">';
 						if ($city_name || $countryname) {
 							if ($cityname) {
 								$rec_post .= $city_name . ', ';
@@ -2730,7 +2730,7 @@ class Recruiter extends MY_Controller {
 						$rec_post .= '      </span>
 						</span>';
 						$rec_post .= '<span class="exp">
-						<span><img class="pr5" src="' . base_url('assets/images/exp.png') . '" alt="experience">';
+						<span><img src="' . base_url('assets/images/exp.svg') . '" alt="experience">';
 
 						if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
 							$rec_post .= $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";

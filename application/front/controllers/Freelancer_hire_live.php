@@ -1370,7 +1370,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			<div class="all-job-middle">
 			<p class="pb5">
 			<span class="location">';
-			$return_html .= '<span><img alt="location" class="pr5" src="' . base_url('assets/images/location.png') . '">';
+			$return_html .= '<span><img alt="location" src="' . base_url('assets/images/location.svg') . '">';
 			$country = $this->db->select("IF(is_indivdual_company = '1',city,company_country) as country")->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country;
 			$countryname = $this->db->select('country_name')->get_where('countries', array('country_id' => $country))->row()->country_name;
 			if ($cityname || $countryname) {
@@ -1382,7 +1382,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			$return_html .= '      </span>
 			</span>';
 			$return_html .= '<span class="exp">
-			<span><img alt="skill" class="pr5" src="' . base_url('assets/images/exp.png') . '">';
+			<span><img alt="skill" src="' . base_url('assets/images/exp.svg') . '">';
 
 			$comma = ", ";
 			$k = 0;

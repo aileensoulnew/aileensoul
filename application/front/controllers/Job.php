@@ -4020,7 +4020,7 @@ class Job extends MY_Controller {
             <div class="all-job-middle">
                 <p class="pb5">
                     <span class="location">';
-                $return_html .= '<span><img class="pr5" src="' . base_url('assets/images/location.png') . '">';
+                $return_html .= '<span><img src="' . base_url('assets/images/location.svg') . '">';
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                 if ($cityname || $countryname) {
@@ -4032,7 +4032,7 @@ class Job extends MY_Controller {
                 $return_html .= '      </span>
                     </span>';
                 $return_html .= '<span class="exp">
-                        <span><img class="pr5" src="' . base_url('assets/images/exp.png') . '">';
+                        <span><img src="' . base_url('assets/images/exp.svg') . '">';
 
                 if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
                     $return_html .= $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";
@@ -4245,7 +4245,7 @@ class Job extends MY_Controller {
             <div class="all-job-middle">
                 <p class="pb5">
                     <span class="location">';
-                $return_html .= '<span><img class="pr5" src="' . base_url('assets/images/location.png') . '">';
+                $return_html .= '<span><img src="' . base_url('assets/images/location.svg') . '">';
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                 if ($cityname || $countryname) {
@@ -4257,7 +4257,7 @@ class Job extends MY_Controller {
                 $return_html .= '</span>
                     </span>';
                 $return_html .= '<span class="exp">
-                        <span><img class="pr5" src="' . base_url('assets/images/exp.png') . '">';
+                        <span><img src="' . base_url('assets/images/exp.svg') . '">';
 
                 if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
                     $return_html .= $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";
@@ -4450,7 +4450,7 @@ class Job extends MY_Controller {
             <div class="all-job-middle">
                 <p class="pb5">
                     <span class="location">';
-                $return_html .= '<span><img class="pr5" src="' . base_url('assets/images/location.png') . '">';
+                $return_html .= '<span><img src="' . base_url('assets/images/location.svg') . '">';
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                 if ($cityname || $countryname) {
@@ -4462,7 +4462,7 @@ class Job extends MY_Controller {
                 $return_html .= '</span>
                     </span>';
                 $return_html .= '<span class="exp">
-                        <span><img class="pr5" src="' . base_url('assets/images/exp.png') . '">';
+                        <span><img src="' . base_url('assets/images/exp.svg') . '">';
 
                 if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
                     $return_html .= $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";
@@ -4793,7 +4793,7 @@ class Job extends MY_Controller {
             <div class="all-job-middle">
                 <p class="pb5">
                     <span class="location">';
-                $return_html .= '<span><img class="pr5" src="' . base_url('assets/images/location.png') . '">';
+                $return_html .= '<span><img src="' . base_url('assets/images/location.svg') . '">';
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                 if ($cityname || $countryname) {
@@ -4805,7 +4805,7 @@ class Job extends MY_Controller {
                 $return_html .= '</span>
                     </span>';
                 $return_html .= '<span class="exp">
-                        <span><img class="pr5" src="' . base_url('assets/images/exp.png') . '">';
+                        <span><img src="' . base_url('assets/images/exp.svg') . '">';
 
                 if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
                     $return_html .= $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";
