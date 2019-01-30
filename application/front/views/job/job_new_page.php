@@ -226,10 +226,10 @@
                                     <div class="all-job-middle">
                                         <p class="pb5">
                                             <span class="location">
-                                                <span><img class="pr5" src="<?php echo base_url('assets/images/location.png'); ?>" alt="Ahmedabad,(India)">Ahmedabad,(India)</span>
+                                                <span><img src="<?php echo base_url('assets/images/location.svg'); ?>" alt="Ahmedabad,(India)">Ahmedabad,(India)</span>
                                             </span>
                                             <span class="exp">
-                                                <span><img class="pr5" src="<?php echo base_url('assets/images/exp.png'); ?>" alt="experience">
+                                                <span><img src="<?php echo base_url('assets/images/exp.svg'); ?>" alt="experience">
                                                     <?php
                                                     if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
                                                         echo $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " " . "(Fresher can also apply)";

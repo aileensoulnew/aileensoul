@@ -2248,14 +2248,8 @@ body.sitemap{background:#f6f6f6; border:0px;}
 .cq_post ul li:hover{background:#e9f4f8;}
 .art-cat-custom label.error{top:65px;}
 .day-text2 {font-size: 11px !important;}
-.post-img-div {color: #fff; width: 50px; height: 50px; font-size: 20px; padding: 16px 0; text-align: center; text-transform: uppercase; line-height: 1;
-    background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
-    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-	background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);
+.post-img-div {color: #5c5c5c; width: 50px; height: 50px; font-size: 20px; padding: 16px 0; text-align: center; text-transform: uppercase; line-height: 1;
+background:#fff; border:1px solid #d2d2d2; border-radius:4px;
 }
 .like_cmnt_count li, .like_cmnt_count li .like_count_ext {word-spacing:0;}
 .buisness-menu{box-shadow:none !important;}

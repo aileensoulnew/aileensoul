@@ -133,12 +133,12 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                             <div class="all-job-middle">
                                                 <p class="pb5">
                                                     <span class="location">
-                                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png') ?>">
+                                                        <span><img src="<?php echo base_url('assets/n-images/location.svg') ?>">
                                                             <?php echo $_searchJob['city_name'].',('.$_searchJob['country_name'].')'; ?></span>
                                                     </span>
                                                     <span class="exp">
                                                         <span>
-                                                            <img class="pr5" src="<?php echo base_url('assets/n-images/exp.png') ?>">
+                                                            <img src="<?php echo base_url('assets/n-images/exp.svg') ?>">
                                                                 <?php 
                                                                 echo $_searchJob['min_year'].'year -'.$_searchJob['max_year'].' year';
                                                                 echo ($_searchJob['fresher'] == '1' ? '<span>(freshers can also apply)</span>' : '');

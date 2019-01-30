@@ -588,7 +588,7 @@
                                                         $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                                                         $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                                                         ?>
-                                                        <span><img class="pr5" src="<?php echo base_url('assets/images/location.png'); ?>" title="locationimage">
+                                                        <span><img src="<?php echo base_url('assets/images/location.svg'); ?>" title="locationimage">
                                                             <?php
                                                             if ($cityname || $countryname) {
                                                                 if ($cityname) {
