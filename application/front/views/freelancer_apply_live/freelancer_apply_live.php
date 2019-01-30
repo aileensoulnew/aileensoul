@@ -82,20 +82,20 @@
                                     <span class="location" ng-if="applypost.city || applypost.country">
                                         <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
                                         <span ng-if="applypost.city && applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
+                                            <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
                                         </span>
                                         <!-- IF ONLY CITY AVAILABLE -->
                                         <span ng-if="applypost.city && !applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
+                                            <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>">{{ applypost.city }}
                                         </span>
                                         <!-- IF ONLY COUNTRY AVAILABLE -->
                                         <span ng-if="!applypost.city && applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
+                                            <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>">{{applypost.country}}
                                         </span>
                                     </span>
                                     <span class="exp">
                                         <span>
-                                            <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                            <img src="<?php echo base_url('assets/img/exp.svg?ver=' . time()) ?>">
                                             Skils: <span dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
                                             </span>
                                         </span>
@@ -311,10 +311,10 @@
                         <div class="all-job-middle">
                             <p class="pb5">
                                 <span class="location">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png?ver=' . time()) ?>">{{applypost.city}},({{applypost.country}})</span>
+                                    <span><img src="<?php echo base_url('assets/n-images/location.svg?ver=' . time()) ?>">{{applypost.city}},({{applypost.country}})</span>
                                 </span>
                                 <span class="exp">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png?ver=' . time()) ?>">Skils: {{applypost.post_skill}} etc..</span>
+                                    <span><img src="<?php echo base_url('assets/n-images/exp.svg?ver=' . time()) ?>">Skils: {{applypost.post_skill}} etc..</span>
                                 </span>
                             </p>
                             <p>

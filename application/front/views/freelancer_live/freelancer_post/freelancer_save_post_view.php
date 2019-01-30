@@ -46,7 +46,7 @@ if ($total_record > 0) { ?>
                 <p class="pb5">
                     <span class="location">
                         <span>
-                            <img alt="location" class="pr5" src="<?php echo base_url('assets/images/location.png'); ?>">
+                            <img alt="location" src="<?php echo base_url('assets/images/location.svg'); ?>">
                             <?php
                             if ($cityname || $countryname) {
                                 if ($cityname) {
@@ -59,7 +59,7 @@ if ($total_record > 0) { ?>
                     </span>
                     <span class="exp">
                         <span>
-                            <img alt="skill" class="pr5" src="<?php echo base_url('assets/images/exp.png'); ?>">
+                            <img alt="skill" src="<?php echo base_url('assets/images/exp.svg'); ?>">
                             <?php
                             $comma = ", ";
                             $k = 0;

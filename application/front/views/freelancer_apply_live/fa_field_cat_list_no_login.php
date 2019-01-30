@@ -142,24 +142,24 @@
                                                 <?php if($_searchFA['city'] != "" && $_searchFA['country'] != ""){?>
                                                 <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
                                                 <span>
-                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>"><?php echo $_searchFA['city'].",(".$_searchFA['country'].")"; ?>
+                                                    <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>"><?php echo $_searchFA['city'].",(".$_searchFA['country'].")"; ?>
                                                 </span>
                                                 <?php } elseif($_searchFA['city'] != "" && $_searchFA['country'] == ""){?>
                                                 <!-- IF ONLY CITY AVAILABLE -->
                                                 <span>
-                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>"><?php echo $_searchFA['city']; ?>
+                                                    <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>"><?php echo $_searchFA['city']; ?>
                                                 </span>
                                                 <?php }elseif($_searchFA['city'] == "" && $_searchFA['country'] != ""){?>
                                                 <!-- IF ONLY COUNTRY AVAILABLE -->
                                                 <span>
-                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>"><?php echo $_searchFA['country']; ?>
+                                                    <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>"><?php echo $_searchFA['country']; ?>
                                                 </span>
                                                 <?php }?>
                                             </span>
                                             <?php endif;?>
                                             <span class="exp">
-                                                <span>
-                                                    <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                                <span> 
+                                                    <img src="<?php echo base_url('assets/img/exp.svg?ver=' . time()) ?>">
                                                     <span>
                                                         <?php echo substr($_searchFA['post_skill'], 0,35).(strlen($_searchFA['post_skill']) > 35 ? "..." : ""); ?>
                                                     </span>

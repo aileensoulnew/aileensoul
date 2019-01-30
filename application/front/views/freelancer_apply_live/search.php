@@ -259,10 +259,10 @@
                         <div class="all-job-middle">
                             <p class="pb5">
                                 <span class="location">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png?ver=' . time()) ?>">{{applypost.city}},({{applypost.country}})</span>
+                                    <span><img src="<?php echo base_url('assets/n-images/location.svg?ver=' . time()) ?>">{{applypost.city}},({{applypost.country}})</span>
                                 </span>
                                 <span class="exp">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png?ver=' . time()) ?>">Skils: {{applypost.post_skill}} etc..</span>
+                                    <span><img src="<?php echo base_url('assets/n-images/exp.svg?ver=' . time()) ?>">Skils: {{applypost.post_skill}} etc..</span>
                                 </span>
                             </p>
                             <p>

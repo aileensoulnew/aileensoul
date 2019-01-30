@@ -166,20 +166,20 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 <span class="location" ng-if="applypost.city || applypost.country">
                                     <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
                                     <span ng-if="applypost.city && applypost.country">
-                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
+                                        <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
                                     </span>
                                     <!-- IF ONLY CITY AVAILABLE -->
                                     <span ng-if="applypost.city && !applypost.country">
-                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
+                                        <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>">{{ applypost.city }}
                                     </span>
                                     <!-- IF ONLY COUNTRY AVAILABLE -->
                                     <span ng-if="!applypost.city && applypost.country">
-                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
+                                        <img src="<?php echo base_url('assets/img/location.svg?ver=' . time()) ?>">{{applypost.country}}
                                     </span>
                                 </span>
                                 <span class="exp">
                                     <span>
-                                        <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                        <img src="<?php echo base_url('assets/img/exp.svg?ver=' . time()) ?>">
                                         <span dd-text-collapse dd-text-collapse-max-length="35" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
                                         </span>
                                     </span>
