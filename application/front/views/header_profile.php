@@ -332,7 +332,7 @@ if($first_segment == "")
 									</svg>
 									<span>View Profile</span></a>
 								</li>
-                                <li><a href="<?php echo base_url('edit-profile') ?>" title="Setting">
+                                <li><a href="<?php echo base_url('edit-profile') ?>" title="Setting" target="_self">
 									<svg x="0px" y="0px" width="15px" height="15px" viewBox="0 0 268.765 268.765">
 									<g id="Settings">
 										<g>
