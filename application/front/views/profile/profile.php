@@ -339,13 +339,7 @@ color: #1b8ab9 !important;}
             var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
-        <?php
-        if(IS_OUTSIDE_JS_MINIFY == '0'){
-        ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/profile/profile.js'); ?>"></script>
-        <?php } else{ ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/profile/profile.js'); ?>"></script>
-        <?php } ?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/profile/profile.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 
         <script type="text/javascript">

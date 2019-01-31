@@ -1,11 +1,17 @@
 $(document).ready(function () {
+    $.validator.addMethod("alphanumonly", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\s]+$/i.test(value);
+    }, "Contain only letters.");
+
     $("#basicinfo").validate({
         rules: {
             first_name: {
                 required: true,
+                alphanumonly:true
             },
             last_name: {
                 required: true,
+                alphanumonly:true
             },
             email: {
                 required: true,
