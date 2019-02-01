@@ -31,7 +31,7 @@
 .add-post-button a{cursor: pointer;}
 .add-post-button .btn:focus{color: white; background: #156f95;}
 .buisness-profile-pic-candidate { width: 60px;height: 60px; display: inline-block;} 
-.buisness-profile-pic-candidate img { width: 100%; height: 100%;}
+.buisness-profile-pic-candidate img { width: 100%; height: 100%; border-radius:4px;}
 .designation_rec { float: left; width: 60%; padding-top:2px; line-height: 16px;}
 .profile-job-post-location-name-rec ul li:first-child{line-height:1;}
 .profile-job-post-location-name-rec ul {padding: 0;}
@@ -253,17 +253,11 @@ width: auto;
 -ms-transform: translate(-50%,-50%);
 transform: translate
 }
-.post-img-profile{color: #fff;
+.post-img-profile{color: #5c5c5c;
 width: 60px;
 height: 60px;
-background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
-background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9',GradientType=0 );
-padding: 21px 0;
+background:#fff; border:1px solid #d2d2d2; border-radius:4px;
+padding: 20px 0;
 font-size: 20px;
 text-align: center;
 text-transform: uppercase;
@@ -851,14 +845,8 @@ label.cameraButton input[accept*="camera"] {
 }*/
 .custom-row .user-pic:hover a{width:100%;}
 .post-img-user{
-    color:#fff;
-    background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); /* ff3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9)); /* safari4+,chrome */
-    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); /* opera 11.10+ */
-    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); /* ie10+ */
-    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); /* w3c */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9',GradientType=0 );
+    color:#5c5c5c;
+    background:#fff;
     font-size: 40px;
     padding: 63px 0;
     text-align: center;
@@ -946,7 +934,7 @@ label.cameraButton input[accept*="camera"] {
     position: relative;
 }
 .profile-boxProfile-name a{font-size:14px;}
-.buisness-profile-pic-candidate .post-img-profile{width:60px; height:60px; font-size:20px; padding:20px 0;}
+.buisness-profile-pic-candidate .post-img-profile{width:60px; height:60px; font-size:20px; padding:20px 0; background:#fff; border-radius:4px; border:1px solid #d2d2d2; color:#5c5c5c;}
 #hideuserlist .fw.text-center{text-align:right;}
 
 

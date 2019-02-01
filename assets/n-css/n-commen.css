@@ -1139,6 +1139,7 @@ a:focus{outline:none;}
 	
 	.blog-page header{min-height:40px;}
 	.blog-page .sub-header{top:46px;}
+	.blog-page.old-no-login .sub-header{top:43px;}
 	#pagination.pagination-button{text-align:center;}
 	.pagination-button a{padding-left:10px; padding-right:10px;}
 	.main-login .no_login_footer{position:relative; margin-bottom:0;}
@@ -1163,6 +1164,9 @@ a:focus{outline:none;}
 	.old-no-login header {padding:5px 0;}
 	.detail-job-no-login header .logo svg{margin-top:0;}
 	.old-no-login .logo-size{font-size:28px;}
+	.blog-page.old-no-login .right-header ul{width:auto;}
+	.blog-page.old-no-login .right-header ul li{padding-right:10px;}
+	.blog-scroll-a table tr td{font-size:13px; line-height:1.5;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}

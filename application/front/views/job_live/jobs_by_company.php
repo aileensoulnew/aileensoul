@@ -130,7 +130,7 @@
                                         
                         </div>
                     </div>
-                    <div class="right-add">
+                    <div class="right-add"> 
                       <?php $this->load->view('right_add_box'); ?>
                         
                     </div>

@@ -617,21 +617,17 @@ li.fr a {
     transform: translate
 }
 .post-img-profile {
-    color: #fff;
+    color: #5c5c5c;
     width: 60px;
     height: 60px;
-    background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
-    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);
+    background:#fff;
     font-size: 20px;
-    padding: 21px 0;
+    padding: 20px 0;
     text-align: center;
     text-transform: uppercase;
     line-height: 1;
+	border-radius:4px;
+	border:1px solid #d2d2d2;
 }
 .a-inlineBlock .post-img-profile {
     /*line-height: 2;*/
@@ -1337,26 +1333,8 @@ label.cameraButton input[accept*="camera"] {
 }*/
 .alert.alert-danger {font-size: 16px;}
 .post-img-user {
-    color: #fff;
-    background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    /* ff3.6+ */
-    
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
-    /* safari4+,chrome */
-    
-    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    /* safari5.1+,chrome10+ */
-    
-    background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    /* opera 11.10+ */
-    
-    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    /* ie10+ */
-    
-    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
-    /* w3c */
-    
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);
+    color: #5c5c5c;
+    background:#fff;
     font-size: 40px;
     padding: 63px 0;
     text-align: center;
