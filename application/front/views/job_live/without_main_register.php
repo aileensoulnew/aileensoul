@@ -116,10 +116,9 @@
 			</div>
             <div class="related-article">
                 <div class="container">
-                        <div class="center-title" >
-                            <h2>Related Articles</h2>
-
-                        </div>
+                    <div class="center-title" >
+                        <h2>Related Articles</h2>
+                    </div>
                         <div class="row pt20" >
                             <?php if(isset($job_related_list) && !empty($job_related_list)):
                                     foreach($job_related_list as $_job_related_list): ?>
