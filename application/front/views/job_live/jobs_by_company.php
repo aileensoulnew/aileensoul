@@ -38,7 +38,7 @@
           * html .ui-autocomplete {
             height: 100px;
           }
-          </style>
+        </style>
     <?php $this->load->view('adsense'); ?>
 </head>
 <body class="profile-main-page">
