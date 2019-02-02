@@ -65,7 +65,7 @@ $mobile_agent = $this->agent->mobile;
                                 <?php
                             }
                             ?>
-							<?php $this->load->view('right_add_box'); ?>
+							<?php //$this->load->view('right_add_box'); ?>
                           <?php echo $left_footer; ?>
                         </div>
                         <br>
@@ -168,7 +168,7 @@ $mobile_agent = $this->agent->mobile;
                     </div>
                     
 					<div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-                        <?php $this->load->view('right_add_box'); ?>
+                        <?php //$this->load->view('right_add_box'); ?>
                         <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
                             <div class="count_main_progress">
                                 <div class="circles">
