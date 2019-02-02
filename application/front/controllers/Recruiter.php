@@ -1679,6 +1679,7 @@ class Recruiter extends MY_Controller {
 		);
 
 		$updatedata = $this->common->update_data($data, 'rec_post', 'post_id', $postid);
+		$updatedata = $this->common->update_data($data, 'rec_post_search_tmp', 'post_id', $postid);
 		echo $postid;
 	}
 
