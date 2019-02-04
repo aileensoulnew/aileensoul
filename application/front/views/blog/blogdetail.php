@@ -285,6 +285,9 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						<div class="blog-left-img">
 	    							<img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$blog_data['image']; ?>">
 	    						</div>
+								
+								
+								
 	    						<div class="blog-left-content">
                                     <?php echo $blog_data['description']; ?>
 	    						</div>
@@ -321,7 +324,17 @@ header("Pragma: no-cache"); // HTTP/1.0
     						  		</li>
 	    						</ul>
 	    					</div>
-	    					
+	    					<div class="fw pb20">
+									<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+									<ins class="adsbygoogle"
+										 style="display:block"
+										 data-ad-format="autorelaxed"
+										 data-ad-client="ca-pub-6060111582812113"
+										 data-ad-slot="5800323493"></ins>
+									<script>
+										 (adsbygoogle = window.adsbygoogle || []).push({});
+									</script>
+							</div>
 	    					<div class="also-like fw pt20">
 	    						<div class="center-title">
 	                                <h3>You may also like</h3>
@@ -444,9 +457,18 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <h4>Your email id subscribed successfully.</h4>
                             </div>
                         </form>
-						<div class="pt20 fw">
-						<?php $this->load->view('right_add_box'); ?>
-						</div>
+						 
+						<div class="fw pb20">
+									<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+									<ins class="adsbygoogle"
+										 style="display:block"
+										 data-ad-format="autorelaxed"
+										 data-ad-client="ca-pub-6060111582812113"
+										 data-ad-slot="5800323493"></ins>
+									<script>
+										 (adsbygoogle = window.adsbygoogle || []).push({});
+									</script>
+							</div>
                     </div>
 	    		</div>	    		
 	    	</div>

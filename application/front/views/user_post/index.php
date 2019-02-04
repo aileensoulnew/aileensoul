@@ -228,7 +228,10 @@
             </div>
         </div>
 	</div>
-    <!-- Repeated Class Start -->
+    
+	
+	
+	<!-- Repeated Class Start -->
     <div class="all_user_post">
         
         <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Feed</h3>
