@@ -90,7 +90,16 @@ header("Pragma: no-cache"); // HTTP/1.0
             </style>
     <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-    <?php $this->load->view('adsense'); ?>
+    <?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6060111582812113",
+        enable_page_level_ads: true
+      });
+    </script>
+    <?php }
+    $this->load->view('adsense'); ?>
 </head>
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
         <body class="blog-page blog-d old-no-login">

@@ -159,7 +159,8 @@ class Business_profile_live extends MY_Controller {
         $StudentData = $this->user_model->getUserStudentData($userid,"*");            
         if(empty($ProfessionData) && empty($StudentData))
         {
-            redirect(base_url().'registration/basic-information', 'refresh');
+            // redirect(base_url().'registration/basic-information', 'refresh');
+            redirect(base_url().'business-search', 'refresh');
         }
         $this->business_profile_active_check();
         $this->is_business_profile_register();
