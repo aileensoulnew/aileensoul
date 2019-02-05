@@ -46,9 +46,9 @@
                         <a data-toggle="modal" data-target="#regmodal" class="cusome_upload"  href="#">
                         <?php
                         }
-                        if(file_exists(USER_BG_MAIN_UPLOAD_URL . $userdata['profile_background'])){ ?>
+                        //if(file_exists(USER_BG_MAIN_UPLOAD_URL . $userdata['profile_background'])){ ?>
                             <img src = "<?php echo USER_BG_MAIN_UPLOAD_URL . $userdata['profile_background']; ?>" name="image_src" id="image_src" alt="<?php echo $userdata['profile_background']; ?>"/>
-                        <?php } ?>
+                        <?php //} ?>
                         </a>
                         <?php
                     } else {
@@ -85,12 +85,12 @@
                         $filename = $this->config->item('user_thumb_upload_path') . $userdata['user_image'];
                         $s3 = new S3(awsAccessKey, awsSecretKey);
                         $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                        if(file_exists(USER_MAIN_UPLOAD_URL . $userdata['user_image'])){ ?>
+                        //if(file_exists(USER_MAIN_UPLOAD_URL . $userdata['user_image'])){ ?>
                             <a class="other-user-profile" hrerf="#" data-toggle="modal" data-target="#other-user-profile-img">
                                 <img src="<?php echo USER_MAIN_UPLOAD_URL . $userdata['user_image']; ?>">
                             </a>
                         <?php
-                        }
+                        /*}
                         else
                         { ?>
                             <a class="other-user-profile" hrerf="#">
@@ -101,7 +101,7 @@
                                 <?php endif; ?>
                             </a>
                         <?php   
-                        }
+                        }*/
                     } else {
                         $a = $userdata['first_name'];
                         $acr = substr($a, 0, 1);
