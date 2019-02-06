@@ -181,6 +181,9 @@ $mobile_agent = $this->agent->mobile;
                                 </div>
                             </div>
                         </div>
+						<div class="right-add-box">
+							<img src="<?php echo base_url('assets/n-images/add.jpg?ver=' . time()) . '?ver=' . time() ?>">
+						</div>
                     </div>
                 </div>
             </div>
