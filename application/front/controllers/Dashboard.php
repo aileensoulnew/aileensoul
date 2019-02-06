@@ -93,8 +93,8 @@ class Dashboard extends MY_Controller {
             $this->session->unset_userdata('aileenuser_slug');
             $this->session->unset_userdata('aileenuser_fullname');
             // $this->clear_all_cache();
-            // $this->session->sess_destroy();
-            // clearstatcache();
+            $this->session->sess_destroy();
+            clearstatcache();
             
             redirect(base_url());
             exit();
@@ -102,8 +102,8 @@ class Dashboard extends MY_Controller {
         else
         {
             // $this->clear_all_cache();
-            // $this->session->sess_destroy();
-            // clearstatcache();            
+            $this->session->sess_destroy();
+            clearstatcache();            
             redirect(base_url());
             exit();
         }

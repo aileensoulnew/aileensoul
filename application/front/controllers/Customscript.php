@@ -44,6 +44,37 @@ class Customscript extends CI_Controller {
         echo "Done";
     }
 
+    public function createtoken( $length = 16 )
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        
+        $this->load->library('encryption');
+
+        $cipher = $this->input->get('cipher')
+            ? urldecode( $this->input->get('cipher') )
+            : $length . ' byte key';
+
+        /*echo $key = bin2hex( $this->encryption->create_key( $length ) ).'<br>';
+        echo $key1 = ( $this->encryption->create_key( $length ) ).'<br>';
+
+        echo '// ' . $cipher . '<br /> 
+        $config[\'encryption_key\'] = hex2bin(\'' . $key . '\');<br />';
+
+        for ($i=0; $i < 10; $i++) { 
+            $key = bin2hex( $this->encryption->create_key( $length ) );
+            echo $key .'<----->'. md5($key).'<br />';
+        }*/
+        $userData = $this->db->get_where('user', array())->result();        
+        // print_r($userData);
+        foreach ($userData as $key => $value) {            
+            $key = bin2hex( $this->encryption->create_key( $length ) );
+            $data = array("token"=>$key);
+            $updatdata = $this->common->update_data($data, 'user', 'user_id', $value->user_id);
+        }
+        echo "Done";
+    }
+
     public function cityslug()
     {
         set_time_limit(0);
