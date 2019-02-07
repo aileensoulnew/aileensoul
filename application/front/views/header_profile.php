@@ -92,7 +92,7 @@ if($first_segment == "")
 								</a>
                             </li>
 							<li class="dropdown">
-                                <a href="<?php echo MESSAGE_URL.'user?at='.base64_encode(base64_encode($msg_user_data['token'])).'&ak='.base64_encode(base64_encode($msg_user_data['encrypt_key'])); ?>" title="Messages" class="dropdown-toggle">
+                                <a href="<?php echo MESSAGE_URL.'user'; ?>" title="Messages" class="dropdown-toggle">
 									<svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 30.743 30.744">
                                         <g>
                                         	<path d="M28.585,9.67h-0.842v9.255c0,1.441-0.839,2.744-2.521,2.744H8.743v0.44c0,1.274,1.449,2.56,2.937,2.56h12.599l4.82,2.834

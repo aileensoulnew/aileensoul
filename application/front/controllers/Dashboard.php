@@ -14,6 +14,7 @@ class Dashboard extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('dashboard_model');
         $this->load->library('S3');
+        $this->load->helper('cookie');
         $this->data['title'] = "Grow Business Network | Hiring | Search Jobs | Freelance Work | Artistic | It's Free";
 
         //    include('include.php');
@@ -95,7 +96,10 @@ class Dashboard extends MY_Controller {
             // $this->clear_all_cache();
             $this->session->sess_destroy();
             clearstatcache();
-            
+
+            delete_cookie('ask');
+            delete_cookie('ast');
+
             redirect(base_url());
             exit();
         }
@@ -104,6 +108,10 @@ class Dashboard extends MY_Controller {
             // $this->clear_all_cache();
             $this->session->sess_destroy();
             clearstatcache();            
+            
+            delete_cookie('ask');
+            delete_cookie('ast');
+
             redirect(base_url());
             exit();
         }
