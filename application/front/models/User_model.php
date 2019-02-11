@@ -519,5 +519,21 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
+    public function get_user_from_cookies($user_slug = "",$ast,$ask) {
+        $this->db->select("u.*")->from("user u");        
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        if($user_slug != "")
+        {
+            $this->db->where("u.user_slug",$user_slug);
+        }
+        $this->db->where("u.encrypt_key",$ask);
+        $this->db->where("u.token",$ast);
+        $this->db->where("ul.status","1");
+        $this->db->where("ul.is_delete","0");
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        return $result_array;
+    }
+
 
 }
