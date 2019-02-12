@@ -1433,7 +1433,7 @@ appearance:         none;}
 .search-business .search-detail li .img{float:left; width:30px;} 
 .search-business .search-detail li .detail-content{float:left; width:94%; word-wrap:break-word;} 
 .post-design-commnet-box{z-index: 1; background:#f6f6f6;}
-.report .search-banner{background: rgba(255,255,255,1);
+.report .search-banner, .report .new-ld-page .search-banner {background: rgba(255,255,255,1);
 background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(205,213,217,1) 100%);
 background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(205,213,217,1)));
 background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(205,213,217,1) 100%);

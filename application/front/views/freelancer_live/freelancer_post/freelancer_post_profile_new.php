@@ -1099,7 +1099,7 @@
                                     <div class="dtl-dis" ng-if="user_publication.length < '1'">
                                         <div class="no-info">
                                             <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Are you know by a piece of work? Add that details here.</span>
+                                            <span>Are you known by a piece of work? Add that details here.</span>
                                         </div>
                                     </div>
                                     <div class="dtl-dis dis-accor" ng-if="user_publication.length > '0'">
