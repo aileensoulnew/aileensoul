@@ -2544,7 +2544,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .btn4{border:1px solid #fff; padding:3px 25px; border-radius:20px; color:#fff; margin-right:15px;}
 .btn4:hover{color:#1b8ab9; background:#fff;}
 .tablate-main-login{display:none;}
-.mob-side-menu .cbp-spmenu-right.cbp-spmenu-open{background:#fff; border-left:1px solid #d2d2d2;}
+.mob-side-menu .cbp-spmenu-right.cbp-spmenu-open{/*background:#fff; border-left:1px solid #d2d2d2;*/}
 .mob-side-menu .cbp-spmenu-right.cbp-spmenu-open ul{padding-left:0;}
 .mob-side-menu .all-profile-box ul li a{padding: 5px 10px; display: inline-flex; width: 100%; background:#fff; font-size:14px; color:#5c5c5c; letter-spacing:1px; border-bottom:0;}
 .mob-side-menu .all-profile-box ul li a:hover{color:#1b8ab9;}

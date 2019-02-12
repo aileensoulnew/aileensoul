@@ -215,6 +215,8 @@ padding: 5px;}
 .post-bottom{/*padding:5px 0 0;*/ border-top:1px solid #d2d2d2; width:100%; float:left;}
 .post-bottom ul{padding:0; margin:0;}
 .post-bottom ul li{float:left; list-style-type:none; margin-top:2px;}
+.post-bottom ul li.user-likes{margin-top:5px;}
+.post-bottom ul#like_user_list li{margin-top:0px;}
 .post-bottom ul.bottom-right li{margin:0 10px;}
 .bottom-left li a{cursor: pointer;
 	color: #999;

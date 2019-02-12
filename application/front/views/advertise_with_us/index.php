@@ -119,7 +119,7 @@ header('Cache-Control: public, max-age=30');
                     </div>
                     <div class="fw p20">
                         <div class="add-title">
-                            <h2>How your Advertise display?</h2>
+                            <h2>How your Advertise will be displayed?</h2>
                         </div>
                         <div class="">
                            <img src="<?php echo base_url('assets/n-images/Advertisedisplay.jpg') ?>" alt="Advertise With Us">
