@@ -67,6 +67,7 @@ class Login extends CI_Controller {
         $is_userBasicInfo = $this->user_model->is_userBasicInfo($userinfo['user_id']);
         
         $is_userStudentInfo = $this->user_model->is_userStudentInfo($userinfo['user_id']);
+        $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
         
         $user_slug = '';
         if ($userinfo['user_id'] != '') {
@@ -80,7 +81,6 @@ class Login extends CI_Controller {
                     $this->session->set_userdata('aileenuser_firstname', $userinfo['first_name'] );
                     $this->session->set_userdata('aileenuser_userimage', $userinfo['user_image'] );
                     //Set Cookie for Message
-                    $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
                     set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
                     set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
 
