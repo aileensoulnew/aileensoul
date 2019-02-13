@@ -65,7 +65,7 @@ class Customscript extends CI_Controller {
             $key = bin2hex( $this->encryption->create_key( $length ) );
             echo $key .'<----->'. md5($key).'<br />';
         }*/
-        $userData = $this->db->get_where('user', array('token !=',''))->result();
+        $userData = $this->db->query("SELECT * FROM ailee_user WHERE token IS NULL")->result();        
         foreach ($userData as $key => $value) {            
             $key = bin2hex( $this->encryption->create_key( $length ) );
             $data = array("token"=>$key);
