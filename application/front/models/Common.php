@@ -827,6 +827,19 @@ class Common extends CI_Model {
     //GENERATE ENCRYPT KEY END
 
     //GENERATE ENCRYPT KEY START
+    public function generate_token($length = '16')
+    {
+        $cipher = $length.' byte key';
+        $key = bin2hex( $this->encryption->create_key($length));
+        $query = $this->db->get_where('user', array('token' => $key));
+        if ($query->num_rows() > 0) {
+            $this->generate_encrypt_key(16);
+        }
+        return $key;
+    }
+    //GENERATE ENCRYPT KEY END
+
+    //GENERATE ENCRYPT KEY START
     public function generate_article_unique_key($length = '16')
     {
         $cipher = $length.' byte key';

@@ -19,6 +19,7 @@ class Recruiter extends MY_Controller {
 		$this->lang->load('message', 'english');
 		$this->load->library('S3');
 		$this->load->library('inbackground');
+		$this->load->helper('cookie');
 		include ('main_profile_link.php');
 		include ('rec_include.php');
 		include "openfireapi/vendor/autoload.php";
@@ -6014,6 +6015,12 @@ class Recruiter extends MY_Controller {
 			} else {
 				$this->session->set_userdata('aileenuser', $userinfo[0]['user_id']);
 				$this->session->set_userdata('aileenuser_slug', $userinfo[0]['user_slug']);
+
+				//Set Cookie for Message
+                $msg_user_data = $this->user_model->get_user_for_message($userinfo[0]['user_id']);
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+
 				$is_data = 'ok';
 			}
 		} else if ($email_login == $result['user_email']) {

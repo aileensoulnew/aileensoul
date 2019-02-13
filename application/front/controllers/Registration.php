@@ -14,6 +14,7 @@ class Registration extends CI_Controller {
         //AWS access info start
         $this->load->library('S3');
         $this->load->library('inbackground');
+        $this->load->helper('cookie');
         /*if ($this->session->userdata('aileenuser')) {
             redirect($this->session->userdata('aileenuser_slug')."/profiles", 'refresh');
         }*/
@@ -78,6 +79,12 @@ class Registration extends CI_Controller {
             $this->session->set_userdata('aileenuser', $id);
             $this->session->set_userdata('aileenuser_slug', $user[0]['user_slug']);
             $this->session->set_userdata('aileenuser_firstname', $user[0]['aileenuser_firstname']);
+
+            //Set Cookie for Message
+            $msg_user_data = $this->user_model->get_user_for_message($id);
+            set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
+            set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+
             // redirect($this->session->userdata('aileenuser_slug'));
             $ret_arr = array("success"=>1,"user_slug"=>$user[0]['user_slug']);
         }
@@ -148,6 +155,7 @@ class Registration extends CI_Controller {
                     }
                     
                     $key = $this->common->generate_encrypt_key(16);
+                    $token = $this->common->generate_token(16);
 
                     $user_data = array(
                         'first_name' => $first_name,
@@ -162,7 +170,8 @@ class Registration extends CI_Controller {
                         'term_condi' => $term_condi,
                         'user_slug' => $user_slug,
                         'is_subscribe' => '1',
-                        'encrypt_key' => $key
+                        'encrypt_key' => $key,
+                        'token' => $token,
                     );
 
                     $user_insert = $this->common->insert_data_getid($user_data, 'user');
@@ -237,6 +246,11 @@ class Registration extends CI_Controller {
             $user_slug = $this->user_model->getUserSlugById($user_insert);
             $this->session->set_userdata('aileenuser', $user_insert);
             $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+
+            //Set Cookie for Message
+            $msg_user_data = $this->user_model->get_user_for_message($user_insert);
+            set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
+            set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
 
             $datavl = "ok";
             echo json_encode(
@@ -644,6 +658,7 @@ class Registration extends CI_Controller {
                     $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
                 }                
                 $key = $this->common->generate_encrypt_key(16);
+                $token = $this->common->generate_token(16);
                 $gender = trim($_POST['selgen']);
                 $user_data = array(
                     'first_name' => $first_name,
@@ -658,7 +673,8 @@ class Registration extends CI_Controller {
                     'term_condi' => $_POST['term_condi'],
                     'user_slug' => $user_slug,
                     'is_subscribe' => '1',
-                    'encrypt_key' => $key
+                    'encrypt_key' => $key,
+                    'token' => $token
                 );
                 $user_insert = $this->common->insert_data_getid($user_data, 'user');
                 if ($user_insert) {
@@ -724,6 +740,12 @@ class Registration extends CI_Controller {
                     $user_slug = $this->user_model->getUserSlugById($user_insert);
                     $this->session->set_userdata('aileenuser', $user_insert);
                     $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+
+                    //Set Cookie for Message
+                    $msg_user_data = $this->user_model->get_user_for_message($user_insert);
+                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
+                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+
                     $datavl = "ok";
                     $data = array(
                             "okmsg" => $datavl,
