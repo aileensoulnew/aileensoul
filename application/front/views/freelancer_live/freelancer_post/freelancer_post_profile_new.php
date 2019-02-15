@@ -327,11 +327,11 @@
 			<div class="all-detail-custom">
 				<div class="custom-user-list">
 					<div class="dtl-add-mob">
-									<div class="right-add-box">
-										<div class="dtl-box p10 dtl-adv">                
-										</div> 
-									</div>
-								</div>
+						<div class="right-add-box">
+							<div class="dtl-box p10 dtl-adv">                
+							</div> 
+						</div>
+					</div>
 					<div class="edit-custom-move">
 					</div>
 					
@@ -347,6 +347,36 @@
 						</div>
 						
                         <?php if($is_indivdual_company == '1'): ?>
+						
+						<!-- Profile Summary -->
+                        <div class="gallery-item ">
+                            <div class="dtl-box">
+                                <div class="dtl-title">
+                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/edution.png"><span>Profile Summary</span>
+                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
+                                        <a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
+                                    <?php endif; ?>
+                                </div>
+                                <div id="prof-summary-loader" class="dtl-dis">
+                                    <div class="text-center">
+                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
+                                    </div>
+                                </div>
+                                <div id="prof-summary-body" style="display: none;">
+                                    <div class="dtl-dis">
+                                        <div class="no-info" ng-if="prof_summary == ''">
+                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
+                                            <span>Highlight your details. (Let it be either personal or professional)</span>
+                                        </div>
+                                        <div class="" ng-if="prof_summary != ''">
+                                            <h4>Description</h4>
+                                            <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{prof_summary}}" dd-text-collapse-cond="true">{{prof_summary}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
                         <!-- Basic information  -->
                         <div class="gallery-item">
                             <div class="dtl-box">
@@ -578,35 +608,9 @@
                             </div>
                         </div>
 						
-                        <!-- Profile Summary -->
-                        <div class="gallery-item ">
-                            <div class="dtl-box">
-                                <div class="dtl-title">
-                                    <img class="cus-width" src="<?php echo base_url().'assets/'; ?>n-images/detail/edution.png"><span>Profile Summary</span>
-                                    <?php if($fa_profile == '1' && $fh_profile == '0'): ?>
-                                        <a href="#" data-target="#prof-summary" data-toggle="modal" class="pull-right"><img src="<?php echo base_url().'assets/'; ?>n-images/detail/edit.png"></a>
-                                    <?php endif; ?>
-                                </div>
-                                <div id="prof-summary-loader" class="dtl-dis">
-                                    <div class="text-center">
-                                        <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-                                    </div>
-                                </div>
-                                <div id="prof-summary-body" style="display: none;">
-                                    <div class="dtl-dis">
-                                        <div class="no-info" ng-if="prof_summary == ''">
-                                            <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
-                                            <span>Highlight your details. (Let it be either personal or professional)</span>
-                                        </div>
-                                        <div class="" ng-if="prof_summary != ''">
-                                            <h4>Description</h4>
-                                            <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{prof_summary}}" dd-text-collapse-cond="true">{{prof_summary}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endif; ?>
+                        
+                        
+						<?php endif; ?>
                         <?php if($is_indivdual_company == '2'): ?>
 						<!--  01 Company Overview -->
 						<div class="gallery-item ">
@@ -731,6 +735,9 @@
 						
 						<!--  06 Social link (website) -->
 						<div class="gallery-item social-link-move">
+						</div>
+						<!--  blank div -->
+						<div class="gallery-item">
 						</div>
 
                         <!--  07 Portfolio / project  -->
