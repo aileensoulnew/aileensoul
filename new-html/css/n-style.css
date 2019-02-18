@@ -170,7 +170,7 @@ padding: 5px;}
 .modal-content .post-field .form-group{padding:5px 15px; margin-bottom:0; position:relative;}
 .modal-content .post-field .form-group textarea{border:none; min-height:30px; max-height:80px; font-size:14px; border:1px solid #d2d2d2; padding:5px 15px; margin-bottom:9px;}
 .modal-content .post-field .form-group input{/*border:none; padding:0;*/}
-.post-head{padding:10px 15px; background:#f6f6f6; width:100%; float:left; position:relative; border-top-left-radius:4px; border-top-right-radius:4px;}
+.post-head{padding:10px 15px; width:100%; float:left; position:relative; border-top-left-radius:4px; border-top-right-radius:4px;}
 .post-head .post-img .no-img-post{padding:13px 0; display:inline-block;}
 .post-detail{width:85%; float:left; padding-left:10px;}
 .post-detail .post-name{font-size:14px; color:#5c5c5c; font-weight:600; float:left; padding-right:10px; text-transform: capitalize; max-width:86%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
@@ -1581,8 +1581,7 @@ a .audience-box:hover{background:#f6f6f6; box-shadow:0 0 2px 1px #d2d2d2;}
 .bar{background-color:#1b8ab9; width:0; height:20px; border-radius:3px}
 .percent{position:absolute; display:inline-block; top:3px; left:48%}
 .progress-bar{background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%)!important;}
-.progress {height: 20px; margin-bottom: 20px; overflow: hidden; background-color: #f5f5f5;
-  border-radius: 4px; -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);}
+.progress {height: 20px; margin-bottom: 20px; overflow: hidden; background-color: #f5f5f5; border-radius: 4px; box-shadow:none;}
 .progress-bar {float: left; width: 0; height: 100%; font-size: 12px; line-height: 20px; color: #fff; text-align: center; background-color: #337ab7; -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15); -webkit-transition: width .6s ease; -o-transition: width .6s ease; transition: width .6s ease;}
 .progress-striped .progress-bar,
 .progress-bar-striped {
@@ -3665,6 +3664,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.op-main-page #sidebar.fixed-cus{margin-right:-565px;}
 	.right-custom .all-contact{display:none;}
 	.sugg-list ul li{width:32.9%;}
+	.right-custom .follow-box{}
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}
@@ -3740,6 +3740,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.post-box-bottom ul li:nth-child(2){display:none;}
 	.bus-inner .right-add{display:none;}
 	.tab-mb15{margin-bottom:15px;}
+	.left-part1{display:none;}
 	/***  all profile  ***/
 	.custom-box .custom-width{max-width:735px;}
 	.custom-box .left-box img{width:100%;}
@@ -4454,6 +4455,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.sugg-list .author-btn .user-btns a.btn3{font-size:12px; line-height:1.4; width:115px;}
 	.btn-n2{font-size:12px; padding:3px 20px;}
 	.profile-job-post-title .profile-job-profile-button{border-bottom:1px solid #d2d2d2;}
+	.op-main-page .container{}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

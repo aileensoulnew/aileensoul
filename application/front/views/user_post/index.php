@@ -31,9 +31,8 @@
             .progress{
                 position:relative;
                 width:100%;
-                border:1px solid #ddd;
                 padding:1px;
-                border-radius:3px;
+                border-radius:4px;
                 height:23px
             }
             .bar{
