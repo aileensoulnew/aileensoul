@@ -18,8 +18,8 @@
 */
 
 
-if ($_SERVER['HTTP_HOST'] == "localhost") {
-    $config['base_url'] = 'http://localhost/aileensoulnew/aileensoul/admin';
+if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == 'aileensoul.localhost') {
+    $config['base_url'] = 'http://aileensoul.localhost/admin';
 } else {
   $config['base_url'] = 'https://www.aileensoul.com/admin/';
 }
