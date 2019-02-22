@@ -545,12 +545,13 @@
             </div>
         </header>
 
-        <div class="middle-section op-main-page">
+        <div class="main-section">
 
-            <div class="container">
-			<div class="left-custom">
-                <div id="sidebar1" class="left-part1">
-                    <div class="user-profile-box">
+            <div class="container mobp0">
+			<div class="container-flex">
+                <div id="" class="left-section">
+					<div id="left-fixed" class="fw">
+                    <div class="user-profile-box box-border">
                         <div class="user-cover-img">
                             <img src="img/user-cover.jpg">
                         </div>
@@ -678,11 +679,11 @@
                             </ul>
                         </div>
                     </div>
-
+					</div>
                 </div>
 
-                <div class="middle-part">
-                    <div class="add-post">
+                <div class="middle-section">
+                    <div class="add-post box-border">
                         <div class="post-box" data-target="#post-popup1" data-toggle="modal">
                             <div class="post-img">
                                 <img src="img/user-pic.jpg">
@@ -1353,8 +1354,9 @@
                         </div>
                     </div>
                 </div>
-			</div>
-                <div id="sidebar" class="right-custom">
+			
+                <div class="right-section">
+					<div id="right-fixed" class="fw">
                     <div class="right-add-box">
                         <img src="img/add.jpg">
                     </div>
@@ -1915,8 +1917,9 @@
 					<div class="right-add-box">
                         <img src="img/add.jpg">
                     </div>
-                </div>
-
+					</div>
+				</div>
+			</div>
             </div>
         </div>
 		<!--  poup modal  -->
@@ -2175,7 +2178,7 @@
         var lastScrollTop = $window.scrollTop();
         var wasScrollingDown = true;
 
-        var $sidebar = $("#sidebar");
+        var $sidebar = $("#left-fixed");
         if ($sidebar.length > 0) {
 
         var initialSidebarTop = $sidebar.position().top;
@@ -2239,7 +2242,7 @@
         var lastScrollTop = $window.scrollTop();
         var wasScrollingDown = true;
 
-        var $sidebar = $("#sidebar1");
+        var $sidebar = $("#right-fixed");
         if ($sidebar.length > 0) {
 
         var initialSidebarTop = $sidebar.position().top;

@@ -12,12 +12,14 @@
         <link rel="stylesheet" href="css/n-commen.css">
         <link rel="stylesheet" href="css/n-style.css">
 		<style>
-			.container{display: flex;}
-			.left{float:left; width:320px;}
-			.right{float:right; width:320px;}
-			.middle{margin:0 auto; width:580px;}
+			.main-section{padding:60px 0 50px;}
+			.container-flex{display: flex;}
+			.left-section{float:left; width:320px;}
+			.right-section{float:right; width:320px;}
+			.middle-section{margin:0 auto; width:580px;}
 			.ib{display:inline-table;}
 			.abc1{position:fixed;}
+			.container-flex .middle-section{padding:0;} 
 		</style>
 
     </head>
@@ -553,20 +555,25 @@
             </div>
         </header>
 		
-		<div class="container" style="padding-top:100px;">
-			<div class="left">
-				<div class="abc1">
-					left
+		<div class="main-section">
+			<div class="container">
+				<div class="container-flex">
+					<div class="left-section">
+						<div class="abc1">
+							left
+						</div>
+					</div>
+					<div class="middle-section">
+						middle
+					</div>
+					<div class="right-section">
+						<div class="abc1">
+							right
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="middle ib">
-				middle
-			</div>
-			<div class="right">
-				right
-			</div>
-		
-        </div>
+		</div>
 		<!--  poup modal  -->
 		<script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
