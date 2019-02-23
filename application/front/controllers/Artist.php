@@ -33,7 +33,7 @@ class Artist extends MY_Controller {
         //     $this->db->update('art_reg', $data);
         //  }
         //This function is there only one time users slug created after remove it End
-        include "openfireapi/vendor/autoload.php";
+        // include "openfireapi/vendor/autoload.php";
         include ('main_profile_link.php');
 
         include ('artistic_include.php');
@@ -192,7 +192,7 @@ class Artist extends MY_Controller {
             {
                 $email_reg = $this->input->post('email');
                 $insert_id = $this->common->insert_data_getid($data, 'art_reg');
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -204,7 +204,7 @@ class Artist extends MY_Controller {
                     $email = $email_reg;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                     //Openfire Username Generate End
-                }
+                }*/
 
                 $url1 = base_url()."artist/generate_artist_profile";
                 $param1 = array("user_id"=>$userid);
@@ -16680,7 +16680,7 @@ class Artist extends MY_Controller {
             if ($userid) {
                 $insert_id = $this->common->insert_data_getid($reg_data, 'art_reg');
 
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -16692,7 +16692,7 @@ class Artist extends MY_Controller {
                     $email = $email;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                     //Openfire Username Generate End
-                }
+                }*/
 
                 $url = base_url()."artist/send_promotional_main_in_back";
                 $param = array(

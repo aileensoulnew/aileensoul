@@ -22,7 +22,7 @@ class Freelancer_hire_live extends MY_Controller {
 		//AWS access info end
 		include ('main_profile_link.php');
 		include ('freelancer_hire_include.php');
-		include "openfireapi/vendor/autoload.php";
+		// include "openfireapi/vendor/autoload.php";
 		$this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
 	}
 
@@ -3303,7 +3303,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
             );
             $insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
             if ($insert_id) {
-            	if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+            	/*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
 	            	//Openfire Username Generate Start
 	                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
 	                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -3315,7 +3315,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 	                $email = $email_reg;
 	                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
 	                //Openfire Username Generate End
-	            }
+	            }*/
 
                 //Send Promotional Mail Start
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
@@ -3403,7 +3403,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 		$insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
 		if($insert_id)
 		{
-			if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com")
+			/*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com")
 			{
 				//Openfire Username Generate Start
 				$authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
@@ -3415,7 +3415,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 				$name = ucwords($first_name." ".$last_name);
 				$email = $email_id;
 				$result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-			}
+			}*/
 
 			//Send Promotional Mail Start
 			$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
@@ -3482,7 +3482,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 		$insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
 		if($insert_id)
 		{
-			if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com")
+			/*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com")
 			{
 				//Openfire Username Generate Start
 				$authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
@@ -3494,7 +3494,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 				$name = ucwords($comp_name);
 				$email = $comp_email;
 				$result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-			}
+			}*/
 
 			//Send Promotional Mail Start
 			$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();

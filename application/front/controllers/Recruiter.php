@@ -22,7 +22,7 @@ class Recruiter extends MY_Controller {
 		$this->load->helper('cookie');
 		include ('main_profile_link.php');
 		include ('rec_include.php');
-		include "openfireapi/vendor/autoload.php";
+		// include "openfireapi/vendor/autoload.php";
 
 	}
 
@@ -5519,7 +5519,7 @@ class Recruiter extends MY_Controller {
 
 			$insert_id = $this->common->insert_data_getid($data, 'recruiter');
 
-			if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+			/*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
 				//Openfire Username Generate Start
 	            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
 	            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -5531,7 +5531,7 @@ class Recruiter extends MY_Controller {
 	            $email = $email_reg;
 	            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
 	            //Openfire Username Generate End
-	        }
+	        }*/
             //Send Promotional Mail Start
             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
@@ -6306,7 +6306,7 @@ class Recruiter extends MY_Controller {
 				
 				$insert_id = $this->common->insert_data_getid($data, 'recruiter');            
 				if ($insert_id) {
-					if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+					/*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
 						//Openfire Username Generate Start
 		                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
 		                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -6318,7 +6318,7 @@ class Recruiter extends MY_Controller {
 		                // $email = $email_reg;
 		                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
 		                //Openfire Username Generate End
-		            }
+		            }*/
 	                
 	                //Send Promotional Mail Start
 	                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
