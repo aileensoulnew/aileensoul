@@ -3680,6 +3680,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.right-custom .all-contact{display:none;}
 	.sugg-list ul li{width:32.9%;}
 	.right-custom .follow-box{}
+	.right-section .follow-box{display:none;}
 }
 @media screen and (max-width: 1199px) {
 	.right-section{display:none;}
