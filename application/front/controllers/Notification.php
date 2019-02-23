@@ -6646,4 +6646,43 @@ Your browser does not support the audio tag.
                     "seeall" => $seeall,
         ));
     }
+
+    public function unread_message_count_new()
+    {
+        if(include_once './mongo/vendor/autoload.php')
+        {
+
+            $userid = $this->session->userdata('aileenuser');
+            $user_data = $this->user_model->getUserData($userid);            
+
+            $client = new MongoDB\Client(MONGO_URL.(MONGO_USER != '' ? MONGO_USER.':'.MONGO_PASS.'@' : '').MONGO_SERVER);
+            $collection = $client->testchat->messages;
+            $pipeline = array(
+                array(
+                    '$match' => array(
+                        'to_username' => $user_data['user_slug'],
+                        'msg_status' => 1
+                    )
+                ),
+                array(
+                    '$group' => array(
+                        '_id' => array(
+                            'from_username' => '$from_username'
+                        ),
+                    )
+                )
+            );
+            $result = $collection->aggregate($pipeline)->toArray();
+            echo count($result);exit();
+        }
+        else
+        {
+            echo "0";
+        }
+        /*$userid = $this->session->userdata('aileenuser');
+        $user_data = $this->user_model->getUserData($userid);
+        $user_slug = str_replace("-", "_",$user_data['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;*/
+    }
 }
