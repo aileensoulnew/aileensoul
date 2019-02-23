@@ -20,7 +20,7 @@ class Freelancer_hire extends MY_Controller {
         $this->load->library('inbackground');
         include ('main_profile_link.php');
         include ('freelancer_hire_include.php');
-        include "openfireapi/vendor/autoload.php";
+        // include "openfireapi/vendor/autoload.php";
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
         
          
@@ -210,7 +210,7 @@ class Freelancer_hire extends MY_Controller {
             }
 
             if ($insert_id1) {
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -221,7 +221,7 @@ class Freelancer_hire extends MY_Controller {
                     $name = ucwords($firstname." ".$lastname);
                     $email = $email_reg;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                }
+                }*/
 
                 //Send Promotional Mail Start
                 $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();

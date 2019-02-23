@@ -23,7 +23,7 @@ class Freelancer extends MY_Controller {
         $this->load->library('inbackground');
         include ('main_profile_link.php');
         include ('freelancer_include.php');
-        include "openfireapi/vendor/autoload.php";
+        // include "openfireapi/vendor/autoload.php";
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
     }
 
@@ -2998,7 +2998,7 @@ class Freelancer extends MY_Controller {
                 );
                 $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');                
                 if ($insert_id) {
-                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                    /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                         //Openfire Username Generate Start
                         $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                         $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -3010,7 +3010,7 @@ class Freelancer extends MY_Controller {
                         $email = $email_reg;
                         $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                         //Openfire Username Generate End
-                    }
+                    }*/
 
                     $url = base_url()."freelancer/send_promotional_main_in_back";
                     $param = array(
@@ -3398,7 +3398,7 @@ class Freelancer extends MY_Controller {
             );
             $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
             if ($insert_id) {
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -3410,7 +3410,7 @@ class Freelancer extends MY_Controller {
                     $email = $email;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                     //Openfire Username Generate End
-                }
+                }*/
 
                 //Send Promotional Mail Start
                 /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
@@ -3570,7 +3570,7 @@ class Freelancer extends MY_Controller {
         );
         $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
         if ($insert_id) {
-            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+            /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                 //Openfire Username Generate Start
                 $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                 $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -3582,7 +3582,7 @@ class Freelancer extends MY_Controller {
                 $email = $email;
                 $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                 //Openfire Username Generate End
-            }
+            }*/
 
             //Send Promotional Mail Start
             /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
@@ -3744,7 +3744,7 @@ class Freelancer extends MY_Controller {
         );
         $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
         if ($insert_id) {
-            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+            /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                 //Openfire Username Generate Start
                 $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                 $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -3756,7 +3756,7 @@ class Freelancer extends MY_Controller {
                 $email = $email;
                 $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                 //Openfire Username Generate End
-            }
+            }*/
 
             $url1 = base_url()."freelancer/generate_freelancer_profile";
             $param1 = array("user_id"=>$userid);

@@ -21,7 +21,7 @@ class Registration extends CI_Controller {
         //AWS access info end
         include ('main_profile_link.php');
         include('include.php');
-        include "openfireapi/vendor/autoload.php";
+        // include "openfireapi/vendor/autoload.php";
         $this->load->library('encryption');
 
 
@@ -176,7 +176,7 @@ class Registration extends CI_Controller {
 
                     $user_insert = $this->common->insert_data_getid($user_data, 'user');
                     if ($user_insert) {
-                        if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                        /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                             //Openfire Username Generate Start
                             $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                             $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -188,7 +188,7 @@ class Registration extends CI_Controller {
                             $email = $email_reg;
                             $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                             //Openfire Username Generate End
-                        }
+                        }*/
 
                         $user_login_data = array(
                             'email' => strtolower($this->input->post('email_reg')),
@@ -678,7 +678,7 @@ class Registration extends CI_Controller {
                 );
                 $user_insert = $this->common->insert_data_getid($user_data, 'user');
                 if ($user_insert) {
-                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                    /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                         //Openfire Username Generate Start
                         $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                         $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -690,7 +690,7 @@ class Registration extends CI_Controller {
                         $email = $email_reg;
                         $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                         //Openfire Username Generate End
-                    }
+                    }*/
 
                     $user_login_data = array(
                         'email' => strtolower($email_reg),

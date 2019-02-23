@@ -33,7 +33,7 @@ class Job extends MY_Controller {
         include ('main_profile_link.php');
         include ('include.php');
         include ('job_include.php');
-        include "openfireapi/vendor/autoload.php";
+        // include "openfireapi/vendor/autoload.php";
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
     }
 
@@ -3502,7 +3502,7 @@ class Job extends MY_Controller {
 
                 $subject = "Find and Get Great Opportunities on Aileensoul";
                 $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email_reg,$unsubscribe);*/
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -3514,7 +3514,7 @@ class Job extends MY_Controller {
                     $email = $email_reg;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                     //Openfire Username Generate End
-                }
+                }*/
 
                 if($data1['keyskill'] != "")
                 {
@@ -6541,7 +6541,7 @@ class Job extends MY_Controller {
                 $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
             } else {
 
-                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -6553,7 +6553,7 @@ class Job extends MY_Controller {
                     $email = $email_reg;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                     //Openfire Username Generate End
-                }
+                }*/
 
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
                 
@@ -6866,7 +6866,7 @@ class Job extends MY_Controller {
                     $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
                 } else {
                     $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
-                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                    /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                         //Openfire Username Generate Start
                         $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                         $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
@@ -6878,7 +6878,7 @@ class Job extends MY_Controller {
                         // $email = $email_reg;
                         $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                         //Openfire Username Generate End
-                    }
+                    }*/
                     
                     if($data1['keyskill'] != "")
                     {

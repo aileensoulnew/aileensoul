@@ -51,6 +51,12 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('OP_ADMIN_UN', 'admin');
     define('OP_ADMIN_PW', 'admin@123');
     define('MESSAGE_URL', 'http://chat.aileensoul.localhost/');
+
+    define('MONGO_URL', 'mongodb://');
+    define('MONGO_USER', '');
+    define('MONGO_PASS', '');
+    define('MONGO_SERVER', 'localhost');
+
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
     define('BASEURL', 'http://35.165.1.109:81/');
@@ -71,6 +77,11 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('MESSAGE_URL', 'http://message.aileensoul.com/');
     define('OP_ADMIN_UN', 'admin');
     define('OP_ADMIN_PW', 'admin@123');
+
+    define('MONGO_URL', 'mongodb://');
+    define('MONGO_USER', 'sysadmin');
+    define('MONGO_PASS', 'sysadmin123?');
+    define('MONGO_SERVER', '34.222.73.215');
     error_reporting(0);
 }
 

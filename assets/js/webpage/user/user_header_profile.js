@@ -14,7 +14,7 @@ app.filter('capitalize', function () {
 
     }
 });
-app.controller('headerCtrl', function ($scope, $http) {
+app.controller('headerCtrl', function ($scope, $http,$timeout) {
     contactRequestCount();
     
     function contactRequestCount(){
@@ -73,6 +73,58 @@ app.controller('headerCtrl', function ($scope, $http) {
             $scope.contact_request_data.splice(index, 1);
         });
     }
+
+    var loadTime = 1000, //Load the data every second
+        errorCount = 0, //Counter for the server errors
+        loadPromise; //Pointer to the promise created by the Angular $timout service
+
+    var getData = function() {
+        $http.get(base_url+'notification/unread_message_count_new?now=' + Date.now())
+        .then(function(res) {
+            $scope.not_data = res.data;
+            if(res.data > 0)
+            {
+                $(".msg-count").show();
+                $(".msg-count").text(res.data);
+            }
+            else
+            {
+                $(".msg-count").hide();
+                $(".msg-count").text('');   
+            }
+             // console.log(res.data);
+
+              errorCount = 0;
+              nextLoad();
+        })
+        .catch(function(res) {
+             // $scope.not_data = 'Server error';
+             // console.log('Server error');
+             nextLoad(++errorCount * 2 * loadTime);
+        });
+    };
+
+     var cancelNextLoad = function() {
+         $timeout.cancel(loadPromise);
+     };
+
+    var nextLoad = function(mill) {
+        mill = mill || loadTime;
+
+        //Always make sure the last timeout is cleared before starting a new one
+        cancelNextLoad();
+        $timeout(getData, mill);
+    };
+
+
+    //Start polling the data from the server
+    getData();
+
+
+    //Always clear the timeout when the view is destroyed, otherwise it will   keep polling
+    $scope.$on('$destroy', function() {
+        cancelNextLoad();
+    });
 });
 $(".dropdown-menu").click(function (event) {
     $(this).parent('li').addClass('open');

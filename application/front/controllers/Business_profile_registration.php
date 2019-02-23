@@ -25,7 +25,7 @@ class Business_profile_registration extends MY_Controller {
 
         $userid = $this->session->userdata('aileenuser');
         include ('business_include.php');
-        include "openfireapi/vendor/autoload.php";
+        // include "openfireapi/vendor/autoload.php";
 
         // FIX BUSINESS PROFILE NO POST DATA
 
@@ -265,7 +265,7 @@ class Business_profile_registration extends MY_Controller {
                     $data['contact_email'] = $userdata['email'];
 
                     $insert_id = $this->common->insert_data_getid($data, 'business_profile');
-                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                    /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                         //Openfire Username Generate Start
                         $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
                         $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
@@ -278,7 +278,7 @@ class Business_profile_registration extends MY_Controller {
                         $email = $email_reg;
                         $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                         //Openfire Username Generate End
-                    }
+                    }*/
 
                     if(trim($data['country']) != "")
                     {
@@ -1062,7 +1062,7 @@ class Business_profile_registration extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'business_profile');
 
-            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+            /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                 //Openfire Username Generate Start
                 $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
                 $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
@@ -1075,7 +1075,7 @@ class Business_profile_registration extends MY_Controller {
                 $email = $email_reg;
                 $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                 //Openfire Username Generate End
-            }
+            }*/
 
             $url = base_url()."business_profile_registration/send_promotional_main_in_back";
             $param = array("email_id"=>$email_reg,"user_id"=>$userid);
