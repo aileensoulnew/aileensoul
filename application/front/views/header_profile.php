@@ -792,7 +792,14 @@ if($first_segment == "")
             $(".noti_count").show();
             if(parseInt(data) > 0)
             {
-                $(".noti_count").html(data);
+                if(parseInt(data) > 99)
+                {
+                    $(".noti_count").html('99+');
+                }
+                else
+                {
+                    $(".noti_count").html(data);
+                }
             }
             else
             {

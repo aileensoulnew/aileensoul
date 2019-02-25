@@ -28,7 +28,7 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             {
                 $(".con_req_cnt").show();
             }
-            $scope.contact_request_count = contact_request.total;
+            $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
         });
     }
 
@@ -74,7 +74,7 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
         });
     }
 
-    var loadTime = 1000, //Load the data every second
+    var loadTime = 40000, //Load the data every second
         errorCount = 0, //Counter for the server errors
         loadPromise; //Pointer to the promise created by the Angular $timout service
 
@@ -85,7 +85,14 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             if(res.data > 0)
             {
                 $(".msg-count").show();
-                $(".msg-count").text(res.data);
+                if(res.data > 99)
+                {
+                    $(".msg-count").text('99+');
+                }
+                else
+                {
+                    $(".msg-count").text(res.data);
+                }
             }
             else
             {
