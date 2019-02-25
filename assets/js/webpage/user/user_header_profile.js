@@ -27,6 +27,14 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             if(contact_request.total > 0)
             {
                 $(".con_req_cnt").show();
+                if(contact_request.total > 99)
+                {
+                    $(".con_req_cnt").addClass('not-max');
+                }
+                else
+                {
+                    $(".con_req_cnt").removeClass('not-max');
+                }
             }
             $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
         });
@@ -142,10 +150,12 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             {
                 if(parseInt(event.data) > 99)
                 {
+                    $(".noti_count").addClass('not-max');
                     $(".noti_count").html('99+');
                 }
                 else
                 {
+                    $(".noti_count").removeClass('not-max');
                     $(".noti_count").html(event.data);
                 }
             }

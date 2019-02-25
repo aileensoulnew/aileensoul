@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         
         <link href="<?php echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" />
+    </head>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
@@ -34,7 +35,7 @@
         </style>
 
     <?php $this->load->view('adsense'); ?>
-</head>
+
     <?php $que_cls = "";
     if($this->uri->segment(2) && $this->uri->segment(2) == "questions")
     {
