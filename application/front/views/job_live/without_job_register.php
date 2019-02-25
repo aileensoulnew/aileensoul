@@ -70,7 +70,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Companies</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="company in jobCompany">                                   
                                     <label class="control control--checkbox"><span ng-bind="company.company_name | capitalize"></span>
                                         <input type="checkbox" class="company-filter" ng-model="jobcompany" name="jobcompany[]" ng-value="{{company.rec_id}}" ng-change="applyJobFilter()"/>
@@ -84,7 +84,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Categories</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="category in jobCategory">
                                     <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
                                         <input type="checkbox" class="category-filter" ng-model="categories" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
@@ -98,7 +98,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Cities</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="city in jobCity">
                                     <label class="control control--checkbox"><span ng-bind="city.city_name | capitalize"></span>
                                         <input type="checkbox" class="location-filter" ng-model="location" name="location[]" ng-value="{{city.city_id}}" ng-change="applyJobFilter()"/>
@@ -112,7 +112,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Skills</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="skill in jobSkill">
                                     <label class="control control--checkbox"><span ng-bind="skill.skill | capitalize"></span>
                                         <input type="checkbox" class="skills-filter" ng-model="skills" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>
@@ -126,7 +126,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Designation</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="jd in jobDesignation">
                                     <label class="control control--checkbox"><span ng-bind="jd.job_title | capitalize"></span>
                                         <input type="checkbox" class="jds-filter" ng-model="jds" name="jds[]" ng-value="{{jd.title_id}}" ng-change="applyJobFilter()"/>
@@ -346,7 +346,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Companies</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="company in jobCompany">                                   
                                     <label class="control control--checkbox"><span ng-bind="company.company_name | capitalize"></span>
                                         <input type="checkbox" class="company-filter" ng-model="jobcompany" name="jobcompany[]" ng-value="{{company.rec_id}}" ng-change="applyJobFilter()"/>
@@ -360,7 +360,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Categories</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="category in jobCategory">
                                     <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
                                         <input type="checkbox" class="category-filter" ng-model="categories" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
@@ -374,7 +374,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Cities</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="city in jobCity">
                                     <label class="control control--checkbox"><span ng-bind="city.city_name | capitalize"></span>
                                         <input type="checkbox" class="location-filter" ng-model="location" name="location[]" ng-value="{{city.city_id}}" ng-change="applyJobFilter()"/>
@@ -388,7 +388,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Skills</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="skill in jobSkill">
                                     <label class="control control--checkbox"><span ng-bind="skill.skill | capitalize"></span>
                                         <input type="checkbox" class="skills-filter" ng-model="skills" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>
@@ -402,7 +402,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Designation</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="jd in jobDesignation">
                                     <label class="control control--checkbox"><span ng-bind="jd.job_title | capitalize"></span>
                                         <input type="checkbox" class="jds-filter" ng-model="jds" name="jds[]" ng-value="{{jd.title_id}}" ng-change="applyJobFilter()"/>

@@ -541,9 +541,10 @@ background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%
 .time_ago{font-size:11px;}
 .no-data{padding:50px 0; text-align:center; }
 .no-data .no-data-text{padding-top:20px;}
-.noti-box{width: 15px; height: 18px; background: red; display: inline-block; text-align: center; 
-border-radius: 50%;font-size: 10px;line-height: 1.8;position: absolute; right: 7px; top:-5px; color:#fff;}
+.noti-box{width: 18px; height: 18px; background: red; display: inline-block; text-align: center; 
+border-radius: 50%;font-size: 11px;line-height: 1.7;position: absolute; right: 7px; top:-5px; color:#fff;}
 .mob-btm-icon .noti-box{right:-5px;}
+.noti-box.not-max{width:23px; right:2px;}
 /***  end register header  ***/
 /***  no data content div search page ***/
 .no-data-box, .availabel-data-box{border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left; margin-bottom:10px;}
