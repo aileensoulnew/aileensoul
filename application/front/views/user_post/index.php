@@ -1475,5 +1475,16 @@
         }
         });
 		</script>
+
+        <script>
+        /*if(typeof(EventSource) !== "undefined") {            
+            var source = new EventSource("<?php echo base_url(); ?>cron/get_notification_unread_count_wc");
+            source.onmessage = function(event) {
+                console.log(event.data);
+            };
+        } else {
+            console.log("Sorry, your browser does not support server-sent events...");
+        }*/
+        </script>
     </body>
 </html>

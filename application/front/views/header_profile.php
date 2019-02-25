@@ -807,11 +807,11 @@ if($first_segment == "")
                 $(".noti_count").html("");
             }
             int_not_count = setTimeout(function(){
-                get_notification_unread_count();
+                // get_notification_unread_count();
             }, 20000);
         }).fail(function() {
             int_not_count = setTimeout(function(){
-                get_notification_unread_count();
+                // get_notification_unread_count();
             }, 25000);
         });
         /*$.ajax({
@@ -866,7 +866,7 @@ if($first_segment == "")
         // get_notification_unread_count();
         // unread_message_count();
     }, 1000);
-    get_notification_unread_count();
+    // get_notification_unread_count();
     int_not_count = window.setInterval(function(){
       // get_notification_unread_count();
     }, 10000);

@@ -7,6 +7,8 @@ class Cron extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
+
+        $this->load->model('notification_model');
     }
 
     public function kill_all_query()
@@ -21,6 +23,20 @@ class Cron extends MY_Controller {
             }
             # code...
         }
+    }
+
+    public function get_notification_unread_count_wc()
+    {        
+        header('Content-Type: text/event-stream');
+        header('Cache-Control: no-cache');
+
+        $userid = $this->session->userdata('aileenuser');
+        $count = $this->notification_model->get_notification_unread_count($userid);
+
+        $time = "1";// date('r');
+        $userid = $this->session->userdata('aileenuser');
+        echo "data:{$count}\n\n";
+        flush();
     }
 
 }

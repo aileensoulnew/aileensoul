@@ -119,19 +119,45 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
         mill = mill || loadTime;
 
         //Always make sure the last timeout is cleared before starting a new one
-        cancelNextLoad();
+        // cancelNextLoad();
         $timeout(getData, mill);
     };
 
 
     //Start polling the data from the server
-    getData();
+    // getData();
 
 
     //Always clear the timeout when the view is destroyed, otherwise it will   keep polling
     $scope.$on('$destroy', function() {
-        cancelNextLoad();
+        // cancelNextLoad();
     });
+
+    if(typeof(EventSource) !== "undefined") {            
+        var source = new EventSource(base_url+"cron/get_notification_unread_count_wc");
+        source.onmessage = function(event) {
+            // console.log(event.data);
+            $(".noti_count").show();
+            if(parseInt(event.data) > 0)
+            {
+                if(parseInt(event.data) > 99)
+                {
+                    $(".noti_count").html('99+');
+                }
+                else
+                {
+                    $(".noti_count").html(event.data);
+                }
+            }
+            else
+            {
+                $(".noti_count").hide();
+                $(".noti_count").html("");
+            }
+        };
+    } else {
+        console.log("Sorry, your browser does not support server-sent events...");
+    }
 });
 $(".dropdown-menu").click(function (event) {
     $(this).parent('li').addClass('open');
