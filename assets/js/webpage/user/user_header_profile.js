@@ -15,7 +15,7 @@ app.filter('capitalize', function () {
     }
 });
 app.controller('headerCtrl', function ($scope, $http,$timeout) {
-    contactRequestCount();
+    // contactRequestCount();
     
     function contactRequestCount(){
         $http({
@@ -82,7 +82,7 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
         });
     }
 
-    var loadTime = 40000, //Load the data every second
+    /*var loadTime = 40000, //Load the data every second
         errorCount = 0, //Counter for the server errors
         loadPromise; //Pointer to the promise created by the Angular $timout service
 
@@ -113,14 +113,14 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
               nextLoad();
         })
         .catch(function(res) {
-             // $scope.not_data = 'Server error';
-             // console.log('Server error');
-             nextLoad(++errorCount * 2 * loadTime);
+            // $scope.not_data = 'Server error';
+            // console.log('Server error');
+            // nextLoad(++errorCount * 2 * loadTime);
         });
     };
 
      var cancelNextLoad = function() {
-         $timeout.cancel(loadPromise);
+        // $timeout.cancel(loadPromise);
      };
 
     var nextLoad = function(mill) {
@@ -128,7 +128,7 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
 
         //Always make sure the last timeout is cleared before starting a new one
         // cancelNextLoad();
-        $timeout(getData, mill);
+        // $timeout(getData, mill);
     };
 
 
@@ -139,9 +139,37 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
     //Always clear the timeout when the view is destroyed, otherwise it will   keep polling
     $scope.$on('$destroy', function() {
         // cancelNextLoad();
-    });
+    });*/
 
-    if(typeof(EventSource) !== "undefined") {            
+    if(typeof(EventSource) !== "undefined") {
+        var source = new EventSource(base_url+"cron/unread_message_count_wc");
+        source.onmessage = function(event) {
+            // console.log(event.data);
+            if(parseInt(event.data) > 0)
+            {
+                $(".msg-count").show();
+                if(parseInt(event.data) > 99)
+                {
+                    $(".msg-count").addClass('not-max');
+                    $(".msg-count").html('99+');
+                }
+                else
+                {
+                    $(".msg-count").removeClass('not-max');
+                    $(".msg-count").html(event.data);
+                }
+            }
+            else
+            {
+                $(".msg-count").hide();
+                $(".msg-count").html("");
+            }
+        };
+    } else {
+        console.log("Sorry, your browser does not support server-sent events...");
+    }
+
+    if(typeof(EventSource) !== "undefined") {
         var source = new EventSource(base_url+"cron/get_notification_unread_count_wc");
         source.onmessage = function(event) {
             // console.log(event.data);
@@ -163,6 +191,34 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             {
                 $(".noti_count").hide();
                 $(".noti_count").html("");
+            }
+        };
+    } else {
+        console.log("Sorry, your browser does not support server-sent events...");
+    }
+
+    if(typeof(EventSource) !== "undefined") {
+        var source = new EventSource(base_url+"cron/contact_request_count_wc");
+        source.onmessage = function(event) {
+            // console.log(event.data);
+            if(parseInt(event.data) > 0)
+            {
+                $(".con_req_cnt").show();
+                if(parseInt(event.data) > 99)
+                {
+                    $(".con_req_cnt").addClass('not-max');
+                    $(".con_req_cnt").html('99+');
+                }
+                else
+                {
+                    $(".con_req_cnt").removeClass('not-max');
+                    $(".con_req_cnt").html(event.data);
+                }
+            }
+            else
+            {
+                $(".con_req_cnt").hide();
+                $(".con_req_cnt").html("");
             }
         };
     } else {
