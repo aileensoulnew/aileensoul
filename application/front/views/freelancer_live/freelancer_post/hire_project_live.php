@@ -240,6 +240,22 @@
                                     $date2=date_create($post_last_date_txt);
                                     $diff=date_diff($date1,$date2);
                                     $remail_days = $diff->format("%r%a");
+
+                                    if($post['is_indivdual_company'] == 1)
+                                    {
+
+                                        $firstname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->fullname;
+                                        $lastname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->username;
+                                        $fullname = ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname));
+                                        $city = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
+                                        $country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country;
+                                    }
+                                    else
+                                    {
+                                        $fullname = $post['comp_name'];
+                                        $country = $post['company_country'];
+                                        $city = $post['company_city'];
+                                    }
                                     ?>
                                     <div class="inner-right-part">
 										<div class="tab-add">
@@ -258,15 +274,13 @@
                                                     <h5><a href="javascript:void(0);" onclick="register_profile();"><?php echo $post['post_name']; ?></a></h5>
 
                                                     <?php
-                                                    $firstname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->fullname;
-                                                    $lastname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->username;
+                                                    /*$firstname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->fullname;
+                                                    $lastname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->username;*/
                                                     ?>
                                                     <p>
-                                                        <a href="javascript:void(0);" onclick="register_profile();"><?php echo ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)); ?></a></a></p>
+                                                        <a href="javascript:void(0);" onclick="register_profile();"><?php echo $fullname; ?></a></a></p>
                                                     <p class="loca-exp">
-                                                        <span class="location">
-                                                            <?php $city = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city; ?>
-                                                            <?php $country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country; ?>
+                                                        <span class="location">    
 
                                                             <?php          
                                                             $cityObj = $this->db->get_where('cities', array('city_id' => $city))->row();

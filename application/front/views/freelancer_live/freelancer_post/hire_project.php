@@ -311,15 +311,27 @@
 
 							<div class="all-job-box job-detail">
 								<div class="all-job-top">
-									<div class="job-top-detail">
+									<div class="job-top-detail">										
 										<h5><a><?php echo $post['post_name']; ?></a></h5>
 										<?php
 										$postuser = $this->common->select_data_by_id('freelancer_post', 'post_id', $post['post_id'], $data = 'user_id', $join_str = array());
 										$hireuser = $this->common->select_data_by_id('freelancer_hire_reg', 'user_id', $this->session->userdata('aileenuser'), $data = 'user_id', $join_str = array());
-										?>
-										<?php
-										$firstname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->fullname;
-										$lastname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->username;
+										if($post['is_indivdual_company'] == 1)
+										{
+
+											$firstname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->fullname;
+											$lastname = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->username;
+											$fullname = ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname));
+											$city = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
+											$country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country;
+										}
+										else
+										{
+											$fullname = $post['comp_name'];
+											$country = $post['company_country'];
+											$city = $post['company_city'];
+										}
+										
 										?>
 										<p>
 											<?php
@@ -329,10 +341,10 @@
 												} else {
 													$slug = $post['user_id'];
 												} ?>
-												<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"><?php echo ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)); ?></a>
+												<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"><?php echo $fullname; ?></a>
 											<?php
 											} else if ($hireuser) { ?>
-												<a><?php echo ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)); ?></a>
+												<a><?php echo $fullname; ?></a>
 												<?php
 											} else {
 												if (is_numeric($post['user_id'])) {
@@ -341,16 +353,17 @@
 													$slug = $post['user_id'];
 												}
 												if($applyuser){ ?>
-													<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"><?php echo ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)); ?></a>
+													<a href="<?php echo base_url('freelance-employer/' . $slug); ?>"><?php echo $fullname; ?></a>
 												<?php } else {?> 
-													<a href="<?php echo base_url('freelancer/signup'); ?>"><?php echo ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)); ?></a>
+													<a href="<?php echo base_url('freelancer/signup'); ?>"><?php echo $fullname; ?></a>
 												<?php } 
 											} ?>				
 										</p>
 										<p class="loca-exp">
 											<span class="location">
-												<?php $city = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city; ?>
-												<?php $country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country; ?>
+												<?php 
+												/*$city = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
+												$country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country;*/ ?>
 
 												<?php
 												$cityname = $this->db->get_where('cities', array('city_id' => $city))->row()->city_name;
