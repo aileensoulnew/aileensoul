@@ -396,4 +396,21 @@ class Userprofile extends MY_Controller {
         }
     }
 
+    public function contact_request_node() {        
+        $ast = $this->input->post('ast'); 
+        $ask = $this->input->post('ask'); 
+        
+        $user_data = $this->user_model->get_user_from_cookies('',base64_decode(base64_decode($ast)),base64_decode(base64_decode($ask)));        
+        // print_r($user_data);
+        // exit;
+        if($user_data)
+        {
+            $userid = $user_data['user_id'];
+
+            $contactRequestUpdate = $this->user_model->contact_request_read($userid);
+            $contactRequest = $this->user_model->contact_request($userid);
+            echo json_encode($contactRequest);
+        }
+    }
+
 }
