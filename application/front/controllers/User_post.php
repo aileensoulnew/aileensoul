@@ -602,7 +602,8 @@ class User_post extends MY_Controller {
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
-        $post_data = $this->user_post_model->userPost($userid, $page);
+        // $post_data = $this->user_post_model->userPost($userid, $page);//Old Logic
+        $post_data = $this->user_post_model->user_post_new($userid, $page);
         echo json_encode($post_data);
     }
 
