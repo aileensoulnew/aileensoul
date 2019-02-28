@@ -1,5 +1,5 @@
-<div class="left-part">
-    <div class="user-profile-box">
+<div id="left-fixed" class="fw">
+    <div class="user-profile-box box-border">
         <div class="user-cover-img">
             <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
                 <?php
@@ -74,7 +74,22 @@
             </div>
         </div>
     </div>
-
+	
+	<div class="add-detail all-user-list">            
+            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                <div class="count_main_progress">
+                    <div class="circles">
+                        <div class="second circle-1">
+                            <div>
+                                <strong></strong>
+                                <span id="progress-txt"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
     <div class="all-profile-box hidden">
         <div class="all-pro-head">
             <h4>Profiles<a href="<?php echo base_url($leftbox_data['user_slug'].'/profiles') ?>" title="All Profile" class="pull-right">All</a></h4>
@@ -122,7 +137,14 @@
             </li>
         </ul>
     </div>
-    <?php echo $right_profile_view; ?>
+	<?php echo $right_profile_view; ?>
+	<div class="business-move">
+	</div>
+					
+	<div class="artist-move">
+	</div>
+	
+    
     <?php echo $left_footer; ?>
   
 </div>

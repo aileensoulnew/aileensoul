@@ -74,11 +74,14 @@
     <?php $this->load->view('page_loader'); ?>
     <div id="main_page_load" style="display: block;">
     <?php echo $header_profile; ?>        
-    <div class="middle-section custom-mob-pd op-main-page">
-    <div class="container">
-	<div class="left-custom">
-    <?php echo $n_leftbar; ?>
-    <div class="middle-part op-middle">
+    <div class="main-section op-main-page">
+    <div class="container mobp0">
+	<div class="container-flex">
+	
+		<div class="left-section">
+			<?php echo $n_leftbar; ?>
+		</div>
+    <div class="middle-section op-middle">
 	
     <div class="add-post">
         <div class="post-box">
@@ -449,7 +452,7 @@
                         </div>
                     </div> -->
                     <div class="post-discription" ng-if="post.post_data.post_for == 'article'"></div>
-                    <div class="post-images" ng-if="post.post_data.post_for == 'article'">
+                    <div class="post-images article-post-cus" ng-if="post.post_data.post_for == 'article'">
                         <div class="one-img" ng-class="post.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
                             <a href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_self">
                                 <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image != ''">
@@ -607,7 +610,8 @@
                             <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
                         </div>
                     </div>
-                    <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
+                    
+					<div class="post-images" ng-if="post.post_data.total_post_files == '2'">
                         <div class="two-img" ng-repeat="post_file in post.post_file_data">
                             <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                         </div>
@@ -662,30 +666,47 @@
                     </div>
                     <div class="post-bottom">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-9 col-sm-9 col-xs-8">
                                 <ul class="bottom-left">
-                                    <li>
+                                    <li class="user-likes">
                                         <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
                                         <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
                                     </li>
-                                    <li><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i></a></li>
+                                    <!--li><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i></a></li-->
                                     <li><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i></a></li>
                                 </ul>
+								<ul id="" class="bottom-left like_user_list">
+											<li class="like-img">
+												<a class="ripple" href="#" title="harshad patel">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
+												</a>
+											</li>
+											<li class="like-img">
+												<a class="ripple" href="#" title="harshad patel">
+													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
+												</a>
+											</li>
+											<li class="like-img">
+												<a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+											</li>
+										</ul>
+								
+								
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-3 col-sm-3 col-xs-4">
                                 <ul class="pull-right bottom-right">
-                                    <li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li>
+                                    <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
                                     <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
 
-                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></a></li>
-                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></a></li>
+                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
 
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="like-other-box">
-                        <a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                        
                     </div>
                 </div>
                 <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
@@ -723,16 +744,20 @@
                                         <button class="btn2" ng-click="sendEditComment(comment.comment_id, post.post_data.id)">Save</button>
                                     </div>
                                 </div>
-                                <ul class="comment-action">
-                                    <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
+							</div>
+							<div class="comment-action">
+                                <ul class="pull-left">
+                                    <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
 
-                                    <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
-
-                                    <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex)">Edit</a></li> 
+                                    <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li> 
                                     <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Cancel</a></li> 
-                                    <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)">Delete</a></li>
+                                    
                                     <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
                                 </ul>
+								<ul class="pull-right">
+									<li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
+									<li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+								</ul>
                             </div>
                         </div>
 
@@ -781,27 +806,16 @@
             </div>
         </div>
         <!-- Feed End -->
+		
         <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
     </div>
     <!-- Repeated Class Complete -->
-    </div>
-	</div>
-	<div id="sidebar" class="right-custom">
-    <div class="">
-		<div class="add-detail all-user-list">            
-            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
-                <div class="count_main_progress">
-                    <div class="circles">
-                        <div class="second circle-1">
-                            <div>
-                                <strong></strong>
-                                <span id="progress-txt"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div> 
+	<!-- middle part end  -->
+	
+	<div class="right-section">
+    <div id="right-fixed" class="fw">
+		
         <div class="right-add-box">            
         </div>        
         <div class="all-contact">
@@ -882,11 +896,306 @@
                 </data-owl-carousel>
             </div>
         </div>
-    </div>
+		
+		<div id="business-move" class="follow-box">
+                        
+                        <div class="all-user-list">
+							<h4><a href="#" class="">All Businesses</a></h4>
+                            <div class="owl-carousel owl-theme">
+                                <div class="item last-item">
+                                    <div class="arti-profile-box">
+										<div class="find-more">
+										<img src="https://www.aileensoul.com/assets/n-images/view-all.png">
+										</div>
+										
+										<div class="user-info-text text-center">
+											<h3>
+												<a href="http://localhost/aileensoulnew/aileensoul/harshad-patel">Find More Contacts							</a>
+											</h3>
+											
+										</div>
+										<div class="author-btn">
+											<div class="user-btns">
+												<a class="btn3">View More</a>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+                                
+								<div class="item">
+                                    <div class="arti-profile-box">
+										<div class="user-cover-img">
+											<a href="#">
+												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
+											</a>
+											<div class="cover-bg">
+											</div>
+										</div>
+										<div class="follow-user-detail">
+											<div class="user-pr-img">
+												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
+											</div>
+											<div class="user-info-text text-center">
+												<h3>
+													<a href="#">Harshad Patel							</a>
+												</h3>
+												<p>
+													<a href="#">Creative Designer</a>
+												</p>
+											</div>
+										</div>
+										
+										
+										<div class="author-btn">
+											<div class="row">
+												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
+													<p class="">Ahmedabad</p>
+												</div>
+												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
+													<a class="btn3">Follow</a>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+								<div class="item">
+                                    <div class="arti-profile-box">
+										<div class="user-cover-img">
+											<a href="#">
+												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
+											</a>
+											<div class="cover-bg">
+											</div>
+										</div>
+										<div class="follow-user-detail">
+											<div class="user-pr-img">
+												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
+											</div>
+											<div class="user-info-text text-center">
+												<h3>
+													<a href="#">Harshad Patel							</a>
+												</h3>
+												<p>
+													<a href="#">Creative Designer</a>
+												</p>
+											</div>
+										</div>
+										
+										
+										<div class="author-btn">
+											<div class="row">
+												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
+													<p class="">Ahmedabad</p>
+												</div>
+												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
+													<a class="btn3">Follow</a>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+								<div class="item">
+                                    <div class="arti-profile-box">
+										<div class="user-cover-img">
+											<a href="#">
+												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
+											</a>
+											<div class="cover-bg">
+											</div>
+										</div>
+										<div class="follow-user-detail">
+											<div class="user-pr-img">
+												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
+											</div>
+											<div class="user-info-text text-center">
+												<h3>
+													<a href="#">Harshad Patel							</a>
+												</h3>
+												<p>
+													<a href="#">Creative Designer</a>
+												</p>
+											</div>
+										</div>
+										
+										
+										<div class="author-btn">
+											<div class="row">
+												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
+													<p class="">Ahmedabad</p>
+												</div>
+												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
+													<a class="btn3">Follow</a>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+								
+                            </div>
+
+                        </div>
+                    </div>
+		<div id="artist-move" class="follow-box">
+                        
+                        <div class="all-user-list">
+							<h4><a href="#" class="">All Artists</a></h4>
+                            <div class="owl-carousel owl-theme">
+                                <!--div class="item last-item">
+                                    <div class="arti-profile-box">
+										<div class="find-more">
+										<img src="https://www.aileensoul.com/assets/n-images/view-all.png">
+										</div>
+										
+										<div class="user-info-text text-center">
+											<h3>
+												<a href="http://localhost/aileensoulnew/aileensoul/harshad-patel">Find More Contacts							</a>
+											</h3>
+											
+										</div>
+										<div class="author-btn">
+											<div class="user-btns">
+												<a class="btn3">View More</a>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div-->
+                                
+								<div class="item">
+                                    <div class="arti-profile-box">
+										<div class="user-cover-img">
+											<a href="#">
+												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
+											</a>
+											<div class="cover-bg">
+											</div>
+										</div>
+										<div class="follow-user-detail">
+											<div class="user-pr-img">
+												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
+											</div>
+											<div class="user-info-text text-center">
+												<h3>
+													<a href="#">Harshad Patel							</a>
+												</h3>
+												<p>
+													<a href="#">Designer</a>
+												</p>
+											</div>
+										</div>
+										
+										
+										<div class="author-btn">
+											<div class="row">
+												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
+													<p class="">Ahmedabad</p>
+												</div>
+												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
+													<a class="btn3">Follow</a>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+								<div class="item">
+                                    <div class="arti-profile-box">
+										<div class="user-cover-img">
+											<a href="#">
+												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
+											</a>
+											<div class="cover-bg">
+											</div>
+										</div>
+										<div class="follow-user-detail">
+											<div class="user-pr-img">
+												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
+											</div>
+											<div class="user-info-text text-center">
+												<h3>
+													<a href="#">Harshad Patel							</a>
+												</h3>
+												<p>
+													<a href="#">Designer</a>
+												</p>
+											</div>
+										</div>
+										
+										
+										<div class="author-btn">
+											<div class="row">
+												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
+													<p class="">Ahmedabad</p>
+												</div>
+												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
+													<a class="btn3">Follow</a>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+								<div class="item">
+                                    <div class="arti-profile-box">
+										<div class="user-cover-img">
+											<a href="#">
+												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
+											</a>
+											<div class="cover-bg">
+											</div>
+										</div>
+										<div class="follow-user-detail">
+											<div class="user-pr-img">
+												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
+											</div>
+											<div class="user-info-text text-center">
+												<h3>
+													<a href="#">Harshad Patel							</a>
+												</h3>
+												<p>
+													<a href="#">Designer</a>
+												</p>
+											</div>
+										</div>
+										
+										
+										<div class="author-btn">
+											<div class="row">
+												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
+													<p class="">Ahmedabad</p>
+												</div>
+												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
+													<a class="btn3">Follow</a>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+                                </div>
+								
+                            </div>
+
+                        </div>
+                    </div>
+			<div class="right-add-box">
+                        <img src="img/add.jpg">
+                    </div>
 	</div>
+	</div>
+	<!-- sidebar end  -->
     </div>
+	<!-- container-flex end  -->
     </div>
+	<!-- container end  -->
     </div>
+	<!-- middle-section end  -->
+    </div>
+	<!-- main_page_load end  -->
+	
 		<?php //$this->load->view('feedback_fixed'); ?>
 		<div style="display:none;" class="modal fade" id="report-spam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -1411,6 +1720,50 @@
                 $('[data-toggle="tooltip"]').tooltip();   
             });
         </script>
+		<!--script>
+            jQuery(document).ready(function ($) {
+                var owl = $('.owl-carousel');
+                owl.on('initialize.owl.carousel initialized.owl.carousel ' +
+                        'initialize.owl.carousel initialize.owl.carousel ' +
+                        'resize.owl.carousel resized.owl.carousel ' +
+                        'refresh.owl.carousel refreshed.owl.carousel ' +
+                        'update.owl.carousel updated.owl.carousel ' +
+                        'drag.owl.carousel dragged.owl.carousel ' +
+                        'translate.owl.carousel translated.owl.carousel ' +
+                        'to.owl.carousel changed.owl.carousel',
+                        function (e) {
+                            $('.' + e.type)
+                                    .removeClass('secondary')
+                                    .addClass('success');
+                            window.setTimeout(function () {
+                                $('.' + e.type)
+                                        .removeClass('success')
+                                        .addClass('secondary');
+                            }, 500);
+                        });
+                owl.owlCarousel({
+                    loop: true,
+                    nav: true,
+                    lazyLoad: true,
+                    margin: 0,
+                    video: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 1
+                        },
+                        960: {
+                            items: 1,
+                        },
+                        1200: {
+                            items: 1
+                        }
+                    }
+                });
+            });
+		</script-->
 		<script>
         $(function() {
 
@@ -1418,7 +1771,7 @@
         var lastScrollTop = $window.scrollTop();
         var wasScrollingDown = true;
 
-        var $sidebar = $("#sidebar");
+        var $sidebar = $("#left-fixed");
         if ($sidebar.length > 0) {
 
         var initialSidebarTop = $sidebar.position().top;
@@ -1474,7 +1827,71 @@
         });
         }
         });
-		</script>
+	</script>
+	<script>
+        $(function() {
+
+        var $window = $(window);
+        var lastScrollTop = $window.scrollTop();
+        var wasScrollingDown = true;
+
+        var $sidebar = $("#right-fixed");
+        if ($sidebar.length > 0) {
+
+        var initialSidebarTop = $sidebar.position().top;
+
+        $window.scroll(function(event) {
+
+        var windowHeight = $window.height();
+        var sidebarHeight = $sidebar.outerHeight();
+
+        var scrollTop = $window.scrollTop();
+        var scrollBottom = scrollTop + windowHeight;
+
+        var sidebarTop = $sidebar.position().top;
+        var sidebarBottom = sidebarTop + sidebarHeight;
+
+        var heightDelta = Math.abs(windowHeight - sidebarHeight);
+        var scrollDelta = lastScrollTop - scrollTop;
+
+        var isScrollingDown = (scrollTop > lastScrollTop);
+        var isWindowLarger = (windowHeight > sidebarHeight);
+
+        if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
+            $sidebar.addClass('fixed-cus1');
+        } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
+            $sidebar.removeClass('fixed-cus1');
+        }
+
+        var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
+        var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
+
+        if (dragBottomDown) {
+            if (isWindowLarger) {
+                $sidebar.css('top', 0);
+            } else {
+                $sidebar.css('top', -heightDelta );
+            }
+        } else if (dragTopUp) {
+            $sidebar.css('top', 0);
+        } else if ($sidebar.hasClass('fixed-cus1')) {
+            var currentTop = parseInt($sidebar.css('top'), 10);
+            
+            var minTop = -heightDelta;
+            //var scrolledTop = currentTop + scrollDelta;
+            
+           // var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+           // var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+            
+           // $sidebar.css('top', newTop);
+        }
+
+        lastScrollTop = scrollTop;
+        wasScrollingDown = isScrollingDown;
+        });
+        }
+        });
+	</script>
 
         <script>
         /*if(typeof(EventSource) !== "undefined") {            
@@ -1486,5 +1903,17 @@
             console.log("Sorry, your browser does not support server-sent events...");
         }*/
         </script>
+		<script>
+			$(document).ready(function () {
+				if (screen.width <= 1279) {
+					$("#business-move").appendTo($(".business-move"));
+					$("#artist-move").appendTo($(".artist-move"));
+					
+				}
+				if (screen.width < 768) {
+					$("#edit-profile-move").appendTo($(".edit-custom-move"));
+				}
+			});
+		</script>
     </body>
 </html>

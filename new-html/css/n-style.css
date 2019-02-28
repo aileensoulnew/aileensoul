@@ -193,7 +193,7 @@ padding: 5px;}
 .post-discription h5 p b{font-size:14px; padding-right: 5px;}
 .post-des-detail{font-size:13px; position: relative; width: 100%; float: left;}
 .post-des-detail b{font-size:14px; padding-right: 5px;}
-.post-images{width:100%; float:left;}
+.post-images{width:100%; float:left; padding:0 15px;}
 .post-images .one-img{text-align:center;}
 .post-images .one-img img{max-width:100%;}
 .post-images .two-img{width:calc(50% - 2px); float:left; margin:1px; height:200px; overflow:hidden; position:relative;}
@@ -3585,6 +3585,8 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .follow-box .arti-profile-box .author-btn .user-city p{font-size:14px; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .user-profile-box{padding:6px; }
 /***  new commen css  ***/
+.one-hd.verify-body .main-section{padding-top:100px;}
+.verify-body-inner .main-section{padding-top:115px;}
 .one-hd .main-section{padding:60px 0 50px;}
 .container-flex{display: flex;}
 .left-section{float:left; width:320px;}
@@ -5099,3 +5101,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	  --columns: 1;
 	}
 }
+
+
+.sub-header .sub-menu li:nth-child(2){display:none;}
+.sub-header .sub-menu li:nth-child(3) ul li:nth-child(2){display:block;}
