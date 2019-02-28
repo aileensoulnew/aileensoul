@@ -299,14 +299,10 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .all-contact .all-user-list .owl-nav .owl-next:after{content: ''; position:absolute; right:10px; background: url('../images/right-arrow-contact.png?version=@{cache-version}');
 width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .all-contact h4{border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin:0; letter-spacing:1px; margin-bottom:10px; width:100%; float:left;}
-
 .all-contact .all-user-list .item{text-align:center;}
-
 .all-contact h4{border-bottom:1px solid #d2d2d2;padding:10px; margin:0; letter-spacing:1px; margin-bottom:10px; width:100%; float:left;}
 .all-contact .all-user-list .owl-nav .owl-prev{font-size:0; position:relative; float: left;}
-
 .all-contact .all-user-list .owl-nav .owl-next{float:right; font-size:0; position:relative;}
-
 .all-contact .all-user-list .owl-nav .owl-next:hover:after{opacity: 1;}
 .all-contact .all-user-list .owl-nav .owl-prev:hover:before{opacity: 1;}
 .all-contact .arti-profile-box .author-btn .user-btns a.btn3{padding:5px 2px; margin-bottom:10px;}
@@ -333,12 +329,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
     background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
 	
 }
-.all-post-top .post-head .post-img{
-    color:#fff;
-    font-size:20px;
-    text-align:center;
-    text-transform:uppercase
-}
+.all-post-top .post-head .post-img{color:#fff; font-size:20px; text-align:center; text-transform:uppercase;}
 .all-user-list .item .post-img .post-img-mainuser{padding:56px 0;}
 .custom-user-list .post-img-mainuser{padding:18px 0;}
 .mes{text-align:center;}
@@ -370,74 +361,22 @@ background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     padding: 72px 0;
     border-radius: 100%;
 }
-.cameraButton .fa.fa-camera{
-	width:30px;
-	height:26px;
-	background:url('../img/cam-b.png?version=@{cache-version}') no-repeat;
-	border:none;
-	padding:5px;
-	background-size:100%;
-}
-.cameraButton .fa-camera::before{
-	display:none;
-}
-.upload-camera{
-	position:absolute;
-	right:25px;
-	bottom:25px;
-	background:rgba(255,255,255, 0.4);
-	border-radius:4px;
-    border:1px solid transparent;
-	z-index:9;
-}
-.upload-camera .cameraButton{
-	background:none;
-	padding:8px 10px 3px;
-	border:none;
-        cursor: pointer;
-        border-radius: 4px;
-}
-.upload-camera a {
-    display: inline-block;
-    padding: 5px;
-}
+.cameraButton .fa.fa-camera{width:30px; height:26px; border:none; padding:5px;
+	background:url('../img/cam-b.png?version=@{cache-version}') no-repeat;background-size:100%;}
+.cameraButton .fa-camera::before{display:none;}
+.upload-camera{position:absolute; right:25px; bottom:25px; background:rgba(255,255,255, 0.4); border-radius:4px; border:1px solid transparent; z-index:9;}
+.upload-camera .cameraButton{background:none; padding:8px 10px 3px; border:none; cursor: pointer; border-radius: 4px;}
+.upload-camera a {display: inline-block; padding: 5px;}
 .upload-camera:hover{border:1px solid #d2d2d2;}
 .upload-camera:hover .cameraButton .fa.fa-camera{}
 .upload-camera label{margin:0 !important;}
 .upload-camera .cameraButton .tooltiptext{margin-top:7px;}
-.cameraButton .tooltiptext {
-    visibility: hidden;
-    width: 180px;
-    background:rgba(0,0,0, 0.6);
-    color: #fff;
-    opacity: 1.0;
-    text-align: center;
-    padding: 10px 0px;
-    position: absolute;
-    z-index: 1;
-    font-weight: 500;
-    margin-top: 25px;
-    top: -8px;
-    right: 110%;
-}
-.cameraButton .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent rgba(0,0,0, 0.6);
-}
-.cameraButton:hover .tooltiptext {
-    visibility: hidden;
-}
+.cameraButton .tooltiptext {visibility: hidden; width: 180px; background:rgba(0,0,0, 0.6); color: #fff; opacity: 1.0; text-align: center; padding: 10px 0px; position: absolute; z-index: 1; font-weight: 500; margin-top: 25px; top: -8px; right: 110%;}
+.cameraButton .tooltiptext::after {content: ""; position: absolute; top: 50%; left: 100%; margin-top: -5px; border-width: 5px; border-style: solid;
+border-color: transparent transparent transparent rgba(0,0,0, 0.6);}
+.cameraButton:hover .tooltiptext {visibility: hidden;}
 .cameraButton:hover .tooltiptext_rec{visibility: hidden;}
-label.cameraButton input[accept*="camera"] {
-    display: none;
-}
-
+label.cameraButton input[accept*="camera"] {display: none;}
 .upload-profile{background-color: rgba(0, 0, 0, 0.4); border-radius: 100%; bottom: 1px; color: #fff; display: none; height: 169px; left: 1px; padding: 20px 10px; position: absolute; text-align: center; width: 169px;font-size: 13px; font-weight: bold;}
 .upload-profile a{margin-bottom: 20px; color: #fff; display: inline-block;}
 .upload-profile img {display: block; margin: 0 auto 0px; width:40px !important; height:auto !important; border-radius:0px !important;}
@@ -531,31 +470,10 @@ background: #f6f6f6; list-style-type:none;}
 
 .media-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:5px; margin-bottom:10px;}
 .media-box .media-display .all-meda{width:92px; margin:5px; height:92px; float:left; list-style-type:none; overflow:hidden; cursor: pointer; position: relative; overflow: hidden;}
-.media-box .media-display .all-meda img{position: absolute;
-left: 50%;
-top: 50%;
-width: auto;
--webkit-transform: translate(-50%,-50%);
--ms-transform: translate(-50%,-50%);
-transform: translate(-50%,-50%);
-max-width: inherit;
-height: 100%;}
+.media-box .media-display .all-meda img{position: absolute; left: 50%; top: 50%; width: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); max-width: inherit; height: 100%;}
 .dash-left-title h3{font-size:20px;}
 .dash-left-title h3 span{vertical-align:top; padding-top:4px; display:inline-block;}
-.latest_audio .all-meda a:hover .audio-title, .latest_pdf .all-meda:hover .pdf-title{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.8);
-    z-index: 9;
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 13px;
-    font-weight: normal;
-    line-height: 1.2;
-    color: #5c5c5c;
-    cursor: pointer;
-}
+.latest_audio .all-meda a:hover .audio-title, .latest_pdf .all-meda:hover .pdf-title{position: absolute; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 9; text-align: center; padding: 15px 10px; font-size: 13px; font-weight: normal; line-height: 1.2; color: #5c5c5c; cursor: pointer;}
 /** ripple effects  **
 
 .ripple .fa-thumbs-up {
