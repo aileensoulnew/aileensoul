@@ -669,27 +669,27 @@
                             <div class="col-md-9 col-sm-9 col-xs-8">
                                 <ul class="bottom-left">
                                     <li class="user-likes">
-                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
-                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
+                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
+                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
                                     </li>
                                     <!--li><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i></a></li-->
-                                    <li><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i></a></li>
+                                    <!-- <li><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i></a></li> -->
                                 </ul>
 								<ul id="" class="bottom-left like_user_list">
-											<li class="like-img">
-												<a class="ripple" href="#" title="harshad patel">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
-												</a>
-											</li>
-											<li class="like-img">
-												<a class="ripple" href="#" title="harshad patel">
-													<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
-												</a>
-											</li>
-											<li class="like-img">
-												<a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
-											</li>
-										</ul>
+									<li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
+										<a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
+											<img ng-if="user_like.user_image" ng-src="<?php echo USER_THUMB_UPLOAD_URL; ?>{{user_like.user_image}}">
+                    
+                                            <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            
+                                            <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+
+										</a>
+									</li>									
+									<li class="like-img">
+										<a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+									</li>
+								</ul>
 								
 								
                             </div>
@@ -942,7 +942,7 @@
                                             <p class="">{{contact.city_name}}</p>
                                         </div>
                                         <div class="user-btns col-md-6 col-sm-6 col-xs-6">
-                                            <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="add_to_contact_business(contact.user_id, contact)">Follow</a>
+                                            <a class="btn3 busflwbtn-{{contact.user_id}}" ng-click="add_to_contact_business(user_id, 1, contact.user_id)">Follow</a>
                                         </div>
                                     </div>
                                 </div>

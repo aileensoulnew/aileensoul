@@ -1085,6 +1085,8 @@ class User_post_model extends CI_Model {
             $query = $this->db->get();
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
+            
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
 
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
@@ -2254,6 +2256,22 @@ class User_post_model extends CI_Model {
         $sql .= " ORDER BY bp.business_profile_id DESC LIMIT 30";
         // echo $sql;exit;
         $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_user_like_list($post_id = '') {
+        $this->db->select("upl.user_id,u.first_name,u.last_name,u.user_slug,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,ui.user_image")->from("user_post_like upl");
+        $this->db->join('user u', 'u.user_id = upl.user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = upl.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = upl.user_id', 'left');
+        $this->db->where('upl.post_id',$post_id);
+        $this->db->where('upl.is_like','1');
+        $this->db->where('ul.status','1');
+        $this->db->where('ul.is_delete', '0');
+        $this->db->order_by('upl.id', 'DESC');
+        $this->db->limit(2);
+        $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
     }

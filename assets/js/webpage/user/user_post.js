@@ -229,16 +229,16 @@ app.directive("owlCarousel", function () {
     };
 });
 app.directive('owlCarouselItem', [function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element) {
-                // wait for the last item in the ng-repeat then call init
-                if (scope.$last) {
-                    scope.initCarousel(element.parent());
-                }
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+            // wait for the last item in the ng-repeat then call init
+            if (scope.$last) {
+                scope.initCarousel(element.parent());
             }
-        };
-    }]);
+        }
+    };
+}]);
 /*app.directive('fileInput', function ($parse) {
     return {
         restrict: 'A',
@@ -2214,7 +2214,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
     }
 
-    $scope.post_like = function (post_id) {
+    $scope.post_like = function (post_id,parent_index) {
         $('#post-like-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
@@ -2259,6 +2259,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
+                $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }            
         });
     }
@@ -2981,12 +2982,19 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     };
     $scope.get_business_contact_suggetion();
 
-    $scope.get_artist_contact_suggetion = function() {
-        $http.get(base_url + "user_post/get_artist_contact_suggetion").then(function (success) {
-            $scope.business_suggetion = success.data;
-        }, function (error) {});
+    $scope.add_to_contact_business = function (id, status, to_id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/add_business_follow',
+            data: 'follow_id=' + id + '&status=' + status + '&to_id=' + to_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            // $scope.follow_value = success.data;
+            $('.busflwbtn-' + to_id).html('Following');
+            $('.busflwbtn-' + to_id).attr('style','pointer-events:none;');
+        });
     };
-    $scope.get_artist_contact_suggetion();
 });
 
 $(document).click(function(){

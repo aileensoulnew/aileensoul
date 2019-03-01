@@ -209,7 +209,17 @@ class Userprofile_model extends CI_Model {
 
     public function userFollowStatus($user_id = '', $id = '') {
         $this->db->select("uf.status,uf.id")->from("user_follow as uf");
-        $where = "((follow_from = '" . $user_id . "' AND follow_to = '" . $id . "'))";
+        $where = "follow_from = '" . $user_id . "' AND follow_to = '" . $id . "' AND follow_type = '1'";
+        $this->db->where($where);
+        $this->db->order_by("uf.id", "DESC");
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function userBusinessFollowStatus($user_id = '', $id = '') {
+        $this->db->select("uf.status,uf.id")->from("user_follow as uf");
+        $where = "follow_from = '" . $user_id . "' AND follow_to = '" . $id . "' AND follow_type = '2'";
         $this->db->where($where);
         $this->db->order_by("uf.id", "DESC");
         $query = $this->db->get();

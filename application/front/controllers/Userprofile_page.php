@@ -547,13 +547,17 @@ class Userprofile_page extends MY_Controller {
 
         if (count($follow) != 0) {
             $data = array('status' => $status,'modify_date' => date("Y-m-d h:i:s"));
-            $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            $where = array('id' => $follow['id'], 'follow_type' => '1');
+            $this->db->where($where);
+            $updatdata = $this->db->update('user_follow', $data);
+            // $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             $response = $status;
         } else {
             $data = array(
                 'status' => $status,
                 'follow_from' => $userid,
                 'follow_to' => $id,
+                'follow_type' => '1',
                 'created_date' => date("Y-m-d h:i:s"),
                 'modify_date' => date("Y-m-d h:i:s"),
             );

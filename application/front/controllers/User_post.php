@@ -15,6 +15,7 @@ class User_post extends MY_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('user_post_model');
+        $this->load->model('userprofile_model');
         $this->load->model('data_model');
         $this->load->library('S3');
         $this->load->library('inbackground');
@@ -712,6 +713,7 @@ class User_post extends MY_Controller {
                     } elseif ($return_array['likePost_count'] == 1) {
                         $return_array['post_like_data'] = $postLikeUsername;
                     }
+                    $return_array['user_like_list'] = $this->user_post_model->get_user_like_list($post_id);
                 }
             } else {
                 $data = array();
@@ -737,6 +739,7 @@ class User_post extends MY_Controller {
                     } elseif ($return_array['likePost_count'] == 1) {
                         $return_array['post_like_data'] = $postLikeUsername;
                     }
+                    $return_array['user_like_list'] = $this->user_post_model->get_user_like_list($post_id);
                 }
             }
         } else {
@@ -772,6 +775,7 @@ class User_post extends MY_Controller {
                 $return_array['likePost_count'] = $this->likePost_count($post_id);
                 $return_array['post_like_data'] = '';
             }
+            $return_array['user_like_list'] = $this->user_post_model->get_user_like_list($post_id);
         }
 
         if($return_array['is_newLike'] == 1)
@@ -1824,6 +1828,121 @@ class User_post extends MY_Controller {
         }
 
         echo json_encode($business_data);
+    }
+
+    public function add_business_follow() {
+        $userid = $this->session->userdata('aileenuser');
+        $follow_id = $_POST['follow_id'];
+        $status = $_POST['status'];
+        $id = $_POST['to_id'];
+        $follow = $this->userprofile_model->userBusinessFollowStatus($userid, $id);
+        // print_r($follow);exit();
+
+        if (count($follow) != 0) {
+            $data = array('status' => $status,'modify_date' => date("Y-m-d h:i:s"));
+            // $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            $where = array('id' => $follow['id'], 'follow_type' => '2');
+            $this->db->where($where);
+            $updatdata = $this->db->update('user_follow', $data);
+            $response = $status;
+        } else {
+            $data = array(
+                'status' => $status,
+                'follow_from' => $userid,
+                'follow_to' => $id,
+                'follow_type' => '2',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_follow');
+            $response = $status;
+        }
+
+        if($status == 1)
+        {
+            if($userid != $id)
+            {
+                $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '0');
+                $follownotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                if ($follownotification[0]['not_read'] == 2) {                
+                }
+                elseif($follownotification[0]['not_read'] == 1)
+                {
+                    $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                    $where = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '0');
+                    $this->db->where($where);
+                    $updatdata = $this->db->update('notification', $dataFollow);
+                }
+                else
+                {
+                    $dataFollow = array(
+                        'not_type' => '8',
+                        'not_from_id' => $userid,
+                        'not_to_id' => $id,
+                        'not_read' => '2',                    
+                        'not_from' => '7',
+                        'not_img' => '0',
+                        'not_created_date' => date('Y-m-d H:i:s'),
+                        'not_active' => '1'
+                    );
+                    $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                    if ($insert_id) {
+                        $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $id))->row()->contact_email;
+                        $login_userdata = $this->user_model->getUserData($userid);
+                        if($login_userdata['user_image'] != "")
+                        {
+                            $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                        }
+                        else
+                        {
+                            if($login_userdata['user_gender']  == 'M')
+                            {
+                                $login_user_img = base_url('assets/img/man-user.jpg');
+                            }
+
+                            if($login_userdata['user_gender']  == 'F')
+                            {
+                                $login_user_img = base_url('assets/img/female-user.jpg');
+                            }
+                        }
+
+                        $email_html = '';
+                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="'.MAIL_TD_1.'">
+                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            </td>
+                                            <td style="padding:5px;">
+                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> started following you in business profile.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                            </td>
+                                            <td style="'.MAIL_TD_3.'">
+                                                <p><a class="btn" href="'.BASEURL.$login_userdata['user_slug'].'">view</a></p>
+                                            </td>
+                                        </tr>
+                                        </table>';
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' started following you in Aileensoul.';
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $id))->row();
+                        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                        if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
+                        {
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
+                        }
+                    }
+                }
+            }            
+        }
+        echo $response;
     }
 
 }
