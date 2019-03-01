@@ -1423,7 +1423,7 @@ class User_post extends MY_Controller {
 
                             /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
 
-                            if ($_SERVER['HTTP_HOST'] != "localhost") {
+                            if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                                 if (isset($main_image)) {
                                     unlink($main_image);
                                 }
@@ -1458,8 +1458,10 @@ class User_post extends MY_Controller {
 
             //$post_data = $this->user_post_model->userPost($userid, $start = '0', $limit = '1');
             //  echo count($post_data); '<pre>'; print_r($post_data); die();
-            //echo json_encode($post_data);
-            echo json_encode("1");
+            $postDetailData = $this->user_post_model->postDetail($user_post_id, $userid);
+            echo json_encode($postDetailData[0]);
+            // echo json_encode($post_data);
+            // echo json_encode("1");
         }
     }
 
