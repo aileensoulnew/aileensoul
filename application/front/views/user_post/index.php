@@ -897,293 +897,81 @@
             </div>
         </div>
 		
-		<div id="business-move" class="follow-box">
-                        
-                        <div class="all-user-list">
-							<h4><a href="#" class="">All Businesses</a></h4>
-                            <div class="owl-carousel owl-theme">
-                                <div class="item last-item">
-                                    <div class="arti-profile-box">
-										<div class="find-more">
-										<img src="https://www.aileensoul.com/assets/n-images/view-all.png">
-										</div>
-										
-										<div class="user-info-text text-center">
-											<h3>
-												<a href="http://localhost/aileensoulnew/aileensoul/harshad-patel">Find More Contacts							</a>
-											</h3>
-											
-										</div>
-										<div class="author-btn">
-											<div class="user-btns">
-												<a class="btn3">View More</a>
-											</div>
-										</div>
-									</div>
-                                    
+		<div id="business-move" class="follow-box">                        
+            <div class="all-user-list">
+				<h4><a href="#" class="">All Businesses</a></h4>                
+                <data-owl-carousel class="owl-carousel owl-theme" data-options="">
+                    <div owl-carousel-item="" ng-repeat="contact in business_suggetion" class="item">
+                        <div class="item" id="item-{{contact.user_id}}">
+                            <div class="arti-profile-box">
+                                <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
+                                    <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                        <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                    </a>
+                                    <div class="cover-bg"></div>
                                 </div>
-                                
-								<div class="item">
-                                    <div class="arti-profile-box">
-										<div class="user-cover-img">
-											<a href="#">
-												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
-											</a>
-											<div class="cover-bg">
-											</div>
-										</div>
-										<div class="follow-user-detail">
-											<div class="user-pr-img">
-												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
-											</div>
-											<div class="user-info-text text-center">
-												<h3>
-													<a href="#">Harshad Patel							</a>
-												</h3>
-												<p>
-													<a href="#">Creative Designer</a>
-												</p>
-											</div>
-										</div>
-										
-										
-										<div class="author-btn">
-											<div class="row">
-												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
-													<p class="">Ahmedabad</p>
-												</div>
-												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
-													<a class="btn3">Follow</a>
-												</div>
-											</div>
-										</div>
-									</div>
-                                    
+                                <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
+                                    <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                        <div class="gradient-bg" style="height: 100%"></div>
+                                    </a>
+                                    <div class="cover-bg"></div>
                                 </div>
-								<div class="item">
-                                    <div class="arti-profile-box">
-										<div class="user-cover-img">
-											<a href="#">
-												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
-											</a>
-											<div class="cover-bg">
-											</div>
-										</div>
-										<div class="follow-user-detail">
-											<div class="user-pr-img">
-												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
-											</div>
-											<div class="user-info-text text-center">
-												<h3>
-													<a href="#">Harshad Patel							</a>
-												</h3>
-												<p>
-													<a href="#">Creative Designer</a>
-												</p>
-											</div>
-										</div>
-										
-										
-										<div class="author-btn">
-											<div class="row">
-												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
-													<p class="">Ahmedabad</p>
-												</div>
-												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
-													<a class="btn3">Follow</a>
-												</div>
-											</div>
-										</div>
-									</div>
-                                    
+                                <div class="follow-user-detail">
+                                    <div class="user-pr-img" ng-if="contact.business_user_image">
+                                        <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                            <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{contact.business_user_image}}">
+                                        </a>
+                                    </div>
+                                    <div class="user-pr-img" ng-if="!contact.business_user_image">
+                                        <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                            <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                        </a>
+                                    </div>
+                                    <div class="user-info-text text-center">
+                                        <h3>
+                                            <a href="<?php echo base_url(); ?>{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)"></a>
+                                        </h3>
+                                        <p>
+                                            <a href="<?php echo base_url(); ?>{{contact.business_slug}}">{{contact.industry_name | uppercase}}</a>
+                                        </p>
+                                    </div>
                                 </div>
-								<div class="item">
-                                    <div class="arti-profile-box">
-										<div class="user-cover-img">
-											<a href="#">
-												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
-											</a>
-											<div class="cover-bg">
-											</div>
-										</div>
-										<div class="follow-user-detail">
-											<div class="user-pr-img">
-												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
-											</div>
-											<div class="user-info-text text-center">
-												<h3>
-													<a href="#">Harshad Patel							</a>
-												</h3>
-												<p>
-													<a href="#">Creative Designer</a>
-												</p>
-											</div>
-										</div>
-										
-										
-										<div class="author-btn">
-											<div class="row">
-												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
-													<p class="">Ahmedabad</p>
-												</div>
-												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
-													<a class="btn3">Follow</a>
-												</div>
-											</div>
-										</div>
-									</div>
-                                    
+                                <div class="author-btn">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6 user-city">
+                                            <p class="">{{contact.city_name}}</p>
+                                        </div>
+                                        <div class="user-btns col-md-6 col-sm-6 col-xs-6">
+                                            <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="add_to_contact_business(contact.user_id, contact)">Follow</a>
+                                        </div>
+                                    </div>
                                 </div>
-								
                             </div>
-
                         </div>
                     </div>
-		<div id="artist-move" class="follow-box">
-                        
-                        <div class="all-user-list">
-							<h4><a href="#" class="">All Artists</a></h4>
-                            <div class="owl-carousel owl-theme">
-                                <!--div class="item last-item">
-                                    <div class="arti-profile-box">
-										<div class="find-more">
-										<img src="https://www.aileensoul.com/assets/n-images/view-all.png">
-										</div>
-										
-										<div class="user-info-text text-center">
-											<h3>
-												<a href="http://localhost/aileensoulnew/aileensoul/harshad-patel">Find More Contacts							</a>
-											</h3>
-											
-										</div>
-										<div class="author-btn">
-											<div class="user-btns">
-												<a class="btn3">View More</a>
-											</div>
-										</div>
-									</div>
-                                    
-                                </div-->
-                                
-								<div class="item">
-                                    <div class="arti-profile-box">
-										<div class="user-cover-img">
-											<a href="#">
-												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
-											</a>
-											<div class="cover-bg">
-											</div>
-										</div>
-										<div class="follow-user-detail">
-											<div class="user-pr-img">
-												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
-											</div>
-											<div class="user-info-text text-center">
-												<h3>
-													<a href="#">Harshad Patel							</a>
-												</h3>
-												<p>
-													<a href="#">Designer</a>
-												</p>
-											</div>
-										</div>
-										
-										
-										<div class="author-btn">
-											<div class="row">
-												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
-													<p class="">Ahmedabad</p>
-												</div>
-												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
-													<a class="btn3">Follow</a>
-												</div>
-											</div>
-										</div>
-									</div>
-                                    
-                                </div>
-								<div class="item">
-                                    <div class="arti-profile-box">
-										<div class="user-cover-img">
-											<a href="#">
-												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
-											</a>
-											<div class="cover-bg">
-											</div>
-										</div>
-										<div class="follow-user-detail">
-											<div class="user-pr-img">
-												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
-											</div>
-											<div class="user-info-text text-center">
-												<h3>
-													<a href="#">Harshad Patel							</a>
-												</h3>
-												<p>
-													<a href="#">Designer</a>
-												</p>
-											</div>
-										</div>
-										
-										
-										<div class="author-btn">
-											<div class="row">
-												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
-													<p class="">Ahmedabad</p>
-												</div>
-												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
-													<a class="btn3">Follow</a>
-												</div>
-											</div>
-										</div>
-									</div>
-                                    
-                                </div>
-								<div class="item">
-                                    <div class="arti-profile-box">
-										<div class="user-cover-img">
-											<a href="#">
-												<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_bg/main/1550033106.png">
-											</a>
-											<div class="cover-bg">
-											</div>
-										</div>
-										<div class="follow-user-detail">
-											<div class="user-pr-img">
-												<a href="#"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/main/1550033085.png"></a>
-											</div>
-											<div class="user-info-text text-center">
-												<h3>
-													<a href="#">Harshad Patel							</a>
-												</h3>
-												<p>
-													<a href="#">Designer</a>
-												</p>
-											</div>
-										</div>
-										
-										
-										<div class="author-btn">
-											<div class="row">
-												<div class="col-md-6 col-sm-6 col-xs-6 user-city">
-													<p class="">Ahmedabad</p>
-												</div>
-												<div class="user-btns col-md-6 col-sm-6 col-xs-6">
-													<a class="btn3">Follow</a>
-												</div>
-											</div>
-										</div>
-									</div>
-                                    
-                                </div>
-								
+                    <div owl-carousel-item="" class="item last-item-box">
+                        <div class="arti-profile-box">
+                            <div class="find-more">
+                                <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                            </div>                            
+                            <div class="user-info-text text-center">
+                                <h3>
+                                    <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                    </a>
+                                </h3>                                
                             </div>
-
-                        </div>
+                            <div class="author-btn">
+                                <div class="user-btns">
+                                    <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
-			<div class="right-add-box">
-                        <img src="img/add.jpg">
-                    </div>
+                </data-owl-carousel>
+            </div>
+        </div>
+		<div class="right-add-box">
+        </div>
 	</div>
 	</div>
 	<!-- sidebar end  -->

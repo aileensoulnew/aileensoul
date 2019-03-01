@@ -795,7 +795,7 @@ class Business_profile extends MY_Controller {
                         $insert_id1 = $this->common->insert_data_getid($data1, 'post_files');
                         /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
 
-                        if ($_SERVER['HTTP_HOST'] != "localhost") {
+                        if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                             if (isset($main_image)) {
                                 unlink($main_image);
                             }
@@ -1810,7 +1810,7 @@ Your browser does not support the audio tag.
 
             if ($updatdata) {
 
-                if ($_SERVER['HTTP_HOST'] != "localhost") {
+                if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                     if (isset($main_image)) {
                         unlink($main_image);
                     }
@@ -1930,7 +1930,7 @@ Your browser does not support the audio tag.
 
         if ($update) {
 
-            if ($_SERVER['HTTP_HOST'] != "localhost") {
+            if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                 if (isset($main_image)) {
                     unlink($main_image);
                 }
@@ -3985,7 +3985,7 @@ Your browser does not support the audio tag.
         $update1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
 
         if ($update) {
-            if ($_SERVER['HTTP_HOST'] != "localhost") {
+            if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                 if (isset($main_image)) {
                     unlink($main_image);
                 }

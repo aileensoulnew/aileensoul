@@ -2973,6 +2973,20 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
         $scope.old_count_profile = count_profile;
     };
+
+    $scope.get_business_contact_suggetion = function() {
+        $http.get(base_url + "user_post/get_business_contact_suggetion").then(function (success) {
+            $scope.business_suggetion = success.data;
+        }, function (error) {});
+    };
+    $scope.get_business_contact_suggetion();
+
+    $scope.get_artist_contact_suggetion = function() {
+        $http.get(base_url + "user_post/get_artist_contact_suggetion").then(function (success) {
+            $scope.business_suggetion = success.data;
+        }, function (error) {});
+    };
+    $scope.get_artist_contact_suggetion();
 });
 
 $(document).click(function(){

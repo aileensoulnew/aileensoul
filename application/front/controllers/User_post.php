@@ -1810,4 +1810,20 @@ class User_post extends MY_Controller {
         }
     }
 
+    public function get_business_contact_suggetion() {
+
+        $userid = $this->session->userdata('aileenuser');
+        $login_userdata = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
+        if($login_userdata)
+        {
+            $business_data = $this->user_post_model->get_business_contact_suggetion($userid);            
+        }
+        else
+        {
+            $business_data = array();   
+        }
+
+        echo json_encode($business_data);
+    }
+
 }
