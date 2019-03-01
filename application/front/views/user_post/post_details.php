@@ -22,14 +22,18 @@
     <?php $this->load->view('adsense');
     $login_userid = $this->session->userdata('aileenuser'); ?>
 </head>
-    <body class="profile-db body-loader">
+    <body class="one-hd profile-db body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
             <?php echo $header_profile ?>
-            <div class="middle-section middle-section-banner">
-                <div class="container pt20 mobp0">
-                    <?php echo $n_leftbar ?>
-                    <div class="middle-part question-detail">
+            
+			<div class="main-section op-main-page">
+				<div class="container mobp0">
+                <div class="container-flex">
+					<div class="left-section">
+						<?php echo $n_leftbar ?>
+					</div>
+                    <div class="middle-section question-detail">
                         <div id="main-post-{{post.post_data.id}}" ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">
                                 <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
                                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
@@ -490,11 +494,13 @@
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                     </div>
-                    <div class="right-part">
-                        <?php $this->load->view('right_add_box'); ?>
+                    <div class="right-section">
+						<div id="right-fixed" class="fw">
+							<div class="right-add-box">
+						</div>
                     </div>
 
-
+					</div>
                 </div>
             </div>
         </div>
