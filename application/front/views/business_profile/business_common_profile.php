@@ -262,7 +262,8 @@ if($userid != "")
                                     </li>
                                     <!-- <li <?php /*if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'contacts') {*/ ?> class="active" <?php //} ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php //echo $business_user_contacts_count; ?></span>)</a></li> -->
                                     <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="javascript:void(0);" onclick="open_profile();">Followers <br>  <div id="countfollower">(<?php echo $business_user_follower_count; ?>)</div></a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php echo $business_user_following_count; ?>)</div></a></li>
+
+                                    <!-- <li <?php //if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" <?php //} ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php //echo $business_user_following_count; ?>)</div></a></li> -->
                                 </ul>
                                 <?php
                                 $userid = $this->session->userdata('aileenuser');
@@ -284,15 +285,15 @@ if($userid != "")
                                                             <div class="msg_flw_btn_1" id= "followdiv">
                                                                 <button id="" onClick="open_profile();">Follow</button>
                                                             </div>
-                                                        <?php } elseif ($status == 1) { ?>
+                                                        <?php } /*elseif ($status == 1) { ?>
                                                             <div class="msg_flw_btn_1" id= "unfollowdiv">
                                                                 <button class="bg_following"  id="" onClick="open_profile();">Following </button>
                                                             </div>
-                                                        <?php } ?>
+                                                        <?php }*/ ?>
                                                     </div>         
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0);" onclick="open_profile();" >Message</a></li>
+                                                    <!-- <a href="javascript:void(0);" onclick="open_profile();" >Message</a></li> -->
                                             <?php } ?>
                                         </ul>   
                                     </div>

@@ -315,7 +315,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     $status = $this->db->get_where('follow', array('follow_type' => '2', 'follow_from' => $bup_id[0]['business_profile_id'], 'follow_to' => $business_common_data[0]['business_profile_id']))->row()->follow_status;
                                                     $logslug = $this->db->get_where('business_profile', array('user_id' => $userid))->row()->business_slug;
                                                     if ($logslug != $this->uri->segment(3)) {
-                                                        if ($status == 0 || $status == " ") {
+                                                        /*if ($status == 0 || $status == " ") {
                                                             ?>
                                                             <div class="msg_flw_btn_1" id= "followdiv">
                                                                 <button class="btn-n2" id="<?php echo "follow" . $business_common_data[0]['business_profile_id']; ?>" onClick="followuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Follow</button>
@@ -324,15 +324,16 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             <div class="msg_flw_btn_1" id= "unfollowdiv">
                                                                 <button class="bg_following btn-n2"  id="<?php echo "unfollow" . $business_common_data[0]['business_profile_id']; ?>" onClick="unfollowuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Following </button>
                                                             </div>
-                                                        <?php } ?>
+                                                        <?php }*/ ?>
                                                     </div>         
                                                 </li>
                                                 <li>
                                                     <?php
                                                     // $message_url = base_url('chat/abc/5/5/' . $business_common_data[0]['user_id']);//Old
-                                                    $message_url = MESSAGE_URL.'business/business-'.$image[0]['business_slug'];
+                                                    //$message_url = MESSAGE_URL.'business/business-'.$image[0]['business_slug'];//New
                                                     ?>
-                                                    <a href="<?php echo $message_url; ?>" class="btn-n2">Message</a></li>
+                                                    <!-- <a href="<?php echo $message_url; ?>" class="btn-n2">Message</a> -->
+                                                </li>
                                             <?php } ?>
                                         </ul>   
                                     </div>
