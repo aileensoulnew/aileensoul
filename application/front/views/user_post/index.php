@@ -1445,7 +1445,7 @@
 		
 		<div id="business-move" class="follow-box">                        
             <div class="all-user-list">
-				<h4><a href="#" class="">All Businesses</a></h4>                
+				<h4><a href="<?php echo base_url('company/userlist'); ?>" class="">All Businesses</a></h4>                
                 <data-owl-carousel class="owl-carousel owl-theme" data-options="">
                     <div owl-carousel-item="" ng-repeat="contact in business_suggetion" class="item">
                         <div class="item" id="item-{{contact.user_id}}">

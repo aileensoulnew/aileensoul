@@ -107,13 +107,13 @@ $this->data['business_common_data'][0]['business_slug'] = $business_common_data[
                             <br> <span class="left_box_follower_count">(<?php echo ($business_user_follower_count); ?>)</span>
                         </a>
                     </li>
-                    <li  
-                        <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" 
-                        <?php } ?>>
-                        <a  class="padding_less_right" title="Following" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/following'; ?>">Following 
-                            <br> <span class="left_box_following_count">(<?php echo ($business_user_following_count); ?>) </span>
+                    <!-- <li  
+                        <?php //if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" 
+                        <?php //} ?>>
+                        <a  class="padding_less_right" title="Following" href="<?php //echo base_url('company/' . $business_common_data[0]['business_slug']) . '/following'; ?>">Following 
+                            <br> <span class="left_box_following_count">(<?php //echo ($business_user_following_count); ?>) </span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

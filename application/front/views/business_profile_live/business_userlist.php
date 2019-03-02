@@ -29,7 +29,7 @@
                     <div class="">
                         <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt" >
                             <div class="left_fixed">
-                                <?php echo $business_left ?>
+                                <?php //echo $business_left ?>
                             </div>
                             <div class="left-search-box list-type-bullet">
                                 <div class="">
@@ -77,7 +77,7 @@
 									</div>
                                     <div class="common-form userlist-cus">
                                         <div class="job-saved-box">
-                                            <h3>User list</h3>
+                                            <h3>Business list</h3>
                                             
                                             <div class="contact-frnd-post">
 											<div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
@@ -214,19 +214,12 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var app = angular.module('userListApp', ['ui.bootstrap']);
         </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-        <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/userlist.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/userlist.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>        
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/userlist.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        
     </body>
 </html>

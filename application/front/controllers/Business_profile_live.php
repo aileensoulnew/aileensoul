@@ -2289,8 +2289,8 @@ Your browser does not support the audio tag.
         if($id != ""){
             $id = $this->business_model->removelocationfromslug($id);
         }
-        $compnay_name = $this->get_company_name($id);
-        $this->data['title'] = ucwords($compnay_name) . ' | All User' . ' | Business Profile ' . TITLEPOSTFIX;
+        // $compnay_name = $this->get_company_name($id);
+        $this->data['title'] = 'All Business User ' . TITLEPOSTFIX;
         $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, TRUE);
 
         $this->load->view('business_profile_live/business_userlist', $this->data);

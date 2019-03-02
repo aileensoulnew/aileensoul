@@ -121,16 +121,22 @@ function business_userlist(pagenum, from = "") {
 }
 
 
-function followuser(clicked_id)
+function followuser(id,status,to_id)
 {
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/follow",
+        // url: base_url + "business_profile/follow",
+        url: base_url + "user_post/add_business_follow",
         dataType: 'json',
-        data: 'follow_to=' + clicked_id,
+        data: 'follow_id=' + id + '&status=' + status + '&to_id=' + to_id,
         success: function (data) {
-            $('.' + 'fruser' + clicked_id).html(data.follow);
-            $('#countfollow').html(data.count);
+            // $('.' + 'fruser' + clicked_id).html(data.follow);
+            $('#follow' + to_id).html('Following');
+            $('#follow' + to_id).attr('readonly','readonly');
+            $('#follow' + to_id).attr('disabled','disabled');
+            $('#follow' + to_id).attr('style','pointer-events:none;');
+            $('#follow' + to_id).removeAttr('onClick');
+            // $('#countfollow').html(data.count);
         }
     });
 }
@@ -154,8 +160,6 @@ function unfollowuser(clicked_id)
         }
     });
 }
-
-
 
 
 $(document).on('change','.locationcheckbox,.categorycheckbox',function(){

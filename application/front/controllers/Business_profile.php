@@ -2193,29 +2193,6 @@ Your browser does not support the audio tag.
         $userlist = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc', $limit, $offset,$category_id,$location_id);
         $userlist1 = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc');
 
-        $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
-        $businessdata1 = $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        // followers count
-        $join_str[0]['table'] = 'follow';
-        $join_str[0]['join_table_id'] = 'follow.follow_to';
-        $join_str[0]['from_table_id'] = 'business_profile.business_profile_id';
-        $join_str[0]['join_type'] = '';
-
-        $contition_array = array('follow_to' => $artdata[0]['business_profile_id'], 'follow_status' => '1', 'follow_type' => '1');
-        $followers = count($this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = ''));
-
-        // follow count end
-        // fllowing count
-        $join_str[0]['table'] = 'follow';
-        $join_str[0]['join_table_id'] = 'follow.follow_from';
-        $join_str[0]['from_table_id'] = 'business_profile.business_profile_id';
-        $join_str[0]['join_type'] = '';
-
-        $contition_array = array('follow_from' => $artdata[0]['business_profile_id'], 'follow_status' => '1', 'follow_type' => '1', 'business_profile.business_step' => '4');
-        $following = count($this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = ''));
-
-        //following end
-
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($userlist1);
         }
@@ -2277,7 +2254,11 @@ Your browser does not support the audio tag.
             }
             $return_html .= '</a> </div> </li>
                 <li class="fruser' . $user['business_profile_id'] . ' fr">';
-                $status = $this->db->get_where('follow', array('follow_type' => 2, 'follow_from' => $artdata[0]['business_profile_id'], 'follow_to' => $user['business_profile_id']))->row()->follow_status;
+                $return_html .= '<div id= "followdiv " class="user_btn">
+                <button id="follow' . $user['user_id'] . '" onClick="followuser('.$userid.',1,'.$user['user_id'].')">
+                <span> Follow </span>
+                </button></div>';
+            /*$status = $this->db->get_where('follow', array('follow_type' => 2, 'follow_from' => $artdata[0]['business_profile_id'], 'follow_to' => $user['business_profile_id']))->row()->follow_status;
             if ($status == 0 || $status == " ") {
                 $return_html .= '<div id= "followdiv " class="user_btn">
                 <button id="follow' . $user['business_profile_id'] . '" onClick="followuser(' . $user['business_profile_id'] . ')">
@@ -2288,7 +2269,7 @@ Your browser does not support the audio tag.
                 <button class="bg_following" id="unfollow' . $user['business_profile_id'] . '" onClick="unfollowuser(' . $user['business_profile_id'] . ')">
                 <span>Following</span> 
                 </button></div>';
-            }
+            }*/
             $return_html .= '</li>
                                 </ul>
                             </div>

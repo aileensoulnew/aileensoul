@@ -48,14 +48,14 @@ $mobile_agent = $this->agent->mobile;
                         <div class="left_fixed">
                             <?php echo $business_left; ?>
                             <?php
-                            if ($follow_user_suggest_count > 0) {
+                            /*if ($follow_user_suggest_count > 0) {
                                 ?>
                                 <div class="full-box-module_follow fw">
                                     <div class="common-form">
                                         <h3 class="user_list_head">User List
                                         </h3>
                                         <div class="seeall">
-                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/userlist'; ?>">View all
+                                            <a href="<?php echo base_url('company/userlist'); ?>">View all
                                             </a>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@ $mobile_agent = $this->agent->mobile;
                                     </div>
                                 </div>
                                 <?php
-                            }
+                            }*/
                             ?>
 							<?php //$this->load->view('right_add_box'); ?>
                           <?php echo $left_footer; ?>

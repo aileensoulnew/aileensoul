@@ -300,7 +300,8 @@ class Business_model extends CI_Model {
             AND bp.is_deleted = '0'
             AND bp.status = '1'
             AND ul.status = '1'
-            AND ul.is_delete = '0'";
+            AND ul.is_delete = '0'
+            AND bp.user_id NOT IN (select follow_to from ailee_user_follow where follow_from='" . $user_id . "' AND follow_type = '2' AND status = '1')";
         if($location_id != ""){
             $sql .= " AND ct.city_id IN (". $location_id .")";
         }
