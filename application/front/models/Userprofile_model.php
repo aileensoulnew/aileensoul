@@ -92,6 +92,7 @@ class Userprofile_model extends CI_Model {
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
 //        $this->db->where('u.user_id !=', $user_id);
         $this->db->where('uf.status', '1');
+        $this->db->where('uf.follow_type', '1');
         $this->db->where("ul.status","1");
         $this->db->where("ul.is_delete","0");
         $this->db->where($where);
@@ -137,7 +138,7 @@ class Userprofile_model extends CI_Model {
         if ($start < 0)
             $start = 0;
         $where = "((uf.follow_from = '" . $user_id . "'))";
-        $this->db->select("u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,jt.name as title_name,d.degree_name,u.user_slug")->from("user_follow  uf");
+        $this->db->select("u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,jt.name as title_name,d.degree_name,u.user_slug,uf.follow_type")->from("user_follow  uf");
         $this->db->join('user u', 'u.user_id = uf.follow_to', 'left');
         $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
         $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
@@ -145,7 +146,7 @@ class Userprofile_model extends CI_Model {
         $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
         $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
-//        $this->db->where('u.user_id !=', $user_id);
+       // $this->db->where('u.user_id !=', $user_id);
         $this->db->where('uf.status', '1');        
         $this->db->where("ul.status","1");
         $this->db->where("ul.is_delete","0");
@@ -153,6 +154,7 @@ class Userprofile_model extends CI_Model {
         $this->db->order_by("uf.id", "DESC");
 
         $query = $this->db->get();
+        // echo $this->db->last_query();exit();
         $result_array = $query->result_array();
         $total_record = $this->getFollowingCount($user_id, $select_data = '');
         $page_array['page'] = $page;
@@ -175,6 +177,11 @@ class Userprofile_model extends CI_Model {
                 else
                 {
                     $result_array[$key]["follow_status"] = 0;
+                }
+
+                if($value['follow_type'] == 2)
+                {
+                    $result_array[$key]["business_data"] = $this->get_business_data_from_user_id($value['user_id']);
                 }
             }
         }
@@ -263,6 +270,7 @@ class Userprofile_model extends CI_Model {
         $where = "((uf.follow_to = '" . $user_id . "'))";
         $this->db->select("count(*) as total")->from("user_follow  uf");
         $this->db->where('uf.status', '1');
+        $this->db->where('uf.follow_type', '1');
         $this->db->where($where);
         $this->db->order_by("uf.id", "DESC");
         $query = $this->db->get();
@@ -1854,5 +1862,26 @@ class Userprofile_model extends CI_Model {
         $this->db->order_by('upc.id', 'desc');        
         $query = $this->db->get();
         return $post_comment_data = $query->result_array();
+    }
+
+     public function get_business_data_from_user_id($user_id)
+    {
+        $sql = "SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name
+            FROM ailee_business_profile bp
+            LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city
+            LEFT JOIN ailee_states st ON st.state_id = bp.state
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.user_id = '". $user_id ."'
+            AND bp.business_step = '4'
+            AND bp.is_deleted = '0'
+            AND bp.status = '1'
+            AND ul.status = '1'
+            AND ul.is_delete = '0'";
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
     }
 }

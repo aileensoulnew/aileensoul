@@ -1864,7 +1864,7 @@ class User_post extends MY_Controller {
         {
             if($userid != $id)
             {
-                $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '0');
+                $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '1');
                 $follownotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
                 if ($follownotification[0]['not_read'] == 2) {                
@@ -1872,7 +1872,7 @@ class User_post extends MY_Controller {
                 elseif($follownotification[0]['not_read'] == 1)
                 {
                     $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
-                    $where = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '0');
+                    $where = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '1');
                     $this->db->where($where);
                     $updatdata = $this->db->update('notification', $dataFollow);
                 }
@@ -1884,7 +1884,7 @@ class User_post extends MY_Controller {
                         'not_to_id' => $id,
                         'not_read' => '2',                    
                         'not_from' => '7',
-                        'not_img' => '0',
+                        'not_img' => '1',
                         'not_created_date' => date('Y-m-d H:i:s'),
                         'not_active' => '1'
                     );

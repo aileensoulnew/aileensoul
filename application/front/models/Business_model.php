@@ -693,7 +693,7 @@ class Business_model extends CI_Model {
     // BUSIENSS PROFILE USER FOLLOWER COUNT START
 
     public function business_user_follower_count($business_profile_id = '') {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
+        /*$s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         if ($business_profile_id == '') {
             $business_profile_id = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_profile_id;
@@ -708,9 +708,16 @@ class Business_model extends CI_Model {
 
         $bus_user_f_er_count = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'count(*) as follower_count', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str_following, $groupby = '');
 
-        $follower_count = $bus_user_f_er_count[0]['follower_count'];
-
-        return $follower_count;
+        $follower_count = $bus_user_f_er_count[0]['follower_count'];*/
+        $where = "((uf.follow_to = '" . $business_profile_id . "'))";
+        $this->db->select("count(*) as total")->from("user_follow  uf");
+        $this->db->where('uf.status', '1');
+        $this->db->where('uf.follow_type', '2');
+        $this->db->where($where);
+        $this->db->order_by("uf.id", "DESC");
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['total'];
     }
 
     // BUSIENSS PROFILE USER FOLLOWER COUNT END
@@ -1542,6 +1549,73 @@ class Business_model extends CI_Model {
         $this->db->where('user_id', $user_id);
         $this->db->update('business_profile_search_tmp', $data);
         return true;
+    }
+
+    public function getFollowerCount($user_id = '', $select_data = '') {
+        $where = "((uf.follow_to = '" . $user_id . "'))";
+        $this->db->select("count(*) as total")->from("user_follow  uf");
+        $this->db->where('uf.status', '1');
+        $this->db->where('uf.follow_type', '2');
+        $this->db->where($where);
+        $this->db->order_by("uf.id", "DESC");
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_business_follower_data($user_id = '', $sortby = '', $orderby = '', $limit = '', $offset = '',$login_user_id) {
+
+        $where = "((uf.follow_to = '" . $user_id . "'))";
+
+        $this->db->select("u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,jt.name as title_name,d.degree_name,u.user_slug")->from("user_follow  uf");
+        $this->db->join('user u', 'u.user_id = uf.follow_from', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+        $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->where('uf.status', '1');
+        $this->db->where('uf.follow_type', '2');
+        $this->db->where("ul.status","1");
+        $this->db->where("ul.is_delete","0");
+        $this->db->where($where);
+        $this->db->order_by("uf.id", "DESC");
+
+        $query = $this->db->get();
+        $result_array = $query->result_array();        
+        // echo $this->db->last_query();die;
+        // echo '<pre>'; print_r($result_array); die();        
+        foreach ($result_array as $key => $result) {
+            if($login_user_id != $result['user_id'])
+            {
+                $condition = "((uf.follow_to = '" . $login_user_id . "' AND uf.follow_from = '" . $result['user_id'] . "'))";
+                $this->db->select("uf.id as follow_user_id")->from("user_follow uf");
+                $this->db->where('uf.status', '1');
+                $this->db->where($condition);
+                $querry = $this->db->get();
+                $result_query = $querry->result_array();
+                if(isset($result_query) && !empty($result_query))
+                {                
+                    $result_array[$key]["follow_status"] = 1;
+                }
+                else
+                {
+                    $result_array[$key]["follow_status"] = 0;
+                }                
+            }
+        }        
+        $total_record = $this->getFollowerCount($user_id, $select_data = '');
+        $page_array['page'] = $page;
+        $page_array['total_record'] = $total_record[0]['total'];
+        $page_array['perpage_record'] = $limit;
+
+        $data = array(
+            'followerrecord' => $result_array,
+            'pagedata' => $page_array
+        );
+        return $data;
+        // return $result_array;
     }
 
 }

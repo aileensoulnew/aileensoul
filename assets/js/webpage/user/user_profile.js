@@ -9255,6 +9255,43 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
         });
     }
+
+    $scope.follow_business_user = function (id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/follow_business_user',
+            data: 'to_id=' + id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $("#buss-" + id).html($compile(success.data)($scope));
+        });
+    }
+    
+    $scope.unfollow_business_user = function (id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/unfollowing_business_user',
+            dataType: 'json',
+            data: 'to_id=' + id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            if (success.data.response == 1) {
+                if(live_slug != user_slug)
+                {
+                    $("#buss-" + id).html($compile(success.data.follow_view)($scope));
+                }
+                else
+                {
+                    $('#buss-' + id).closest('.custom-user-box').fadeToggle();
+                    if (success.data.unfollowingcount == '0') {
+                        $("#nofollowng").html("<div class='art-img-nn'><div class='art_no_post_img'><img src='assets/img/icon_notification_big.png' alt='notification image'></div><div class='art_no_post_text'>No Following Contacts Available. </div></div>");
+                    }
+                }
+            }
+        });
+    }
     $scope.goUserprofile = function (path) {
         location.href = base_url + 'profiles/' + path;
     }

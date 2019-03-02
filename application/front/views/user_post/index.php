@@ -1451,34 +1451,34 @@
                         <div class="item" id="item-{{contact.user_id}}">
                             <div class="arti-profile-box">
                                 <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                    <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                    <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
                                         <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                     </a>
                                     <div class="cover-bg"></div>
                                 </div>
                                 <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                    <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                    <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
                                         <div class="gradient-bg" style="height: 100%"></div>
                                     </a>
                                     <div class="cover-bg"></div>
                                 </div>
                                 <div class="follow-user-detail">
                                     <div class="user-pr-img" ng-if="contact.business_user_image">
-                                        <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                        <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
                                             <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{contact.business_user_image}}">
                                         </a>
                                     </div>
                                     <div class="user-pr-img" ng-if="!contact.business_user_image">
-                                        <a href="<?php echo base_url(); ?>{{contact.business_slug}}" >
+                                        <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
                                             <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
                                         </a>
                                     </div>
                                     <div class="user-info-text text-center">
                                         <h3>
-                                            <a href="<?php echo base_url(); ?>{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)"></a>
+                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)"></a>
                                         </h3>
                                         <p>
-                                            <a href="<?php echo base_url(); ?>{{contact.business_slug}}">{{contact.industry_name | uppercase}}</a>
+                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}">{{contact.industry_name | uppercase}}</a>
                                         </p>
                                     </div>
                                 </div>

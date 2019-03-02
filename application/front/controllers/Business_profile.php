@@ -3439,7 +3439,7 @@ Your browser does not support the audio tag.
         }
     }
 
-    public function ajax_followers($id = "") {
+    public function ajax_followers_old($id = "") {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $perpage = 5;
@@ -3588,6 +3588,132 @@ Your browser does not support the audio tag.
         }
 
         echo $return_html;
+    }
+
+    public function ajax_followers($id = "") {
+
+        $s3 = new S3(awsAccessKey, awsSecretKey);
+        $userid = $this->session->userdata('aileenuser');
+        $perpage = 5;
+        $page = 1;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+        $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
+        $artdata = $artisticdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $slugid = $artdata[0]['business_slug'];
+
+        if ($id == $slugid || $id == '') {
+            $contition_array = array('business_profile.user_id' => $userid, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1');
+            $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            
+            $limit = $perpage;
+            $offset = $start;
+
+            $userlist = $this->business_model->get_business_follower_data($businessdata1[0]['user_id'], $sortby = '', $orderby = '', $limit, $offset,$userid);            
+            $total_record = $userlist['pagedata']['total_record'];
+            
+        } else {
+            $contition_array = array('business_profile.business_slug' => $id, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
+            $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');            
+            $limit = $perpage;
+            $offset = $start;
+
+            $userlist = $this->business_model->get_business_follower_data($businessdata1[0]['user_id'], $sortby = '', $orderby = '', $limit, $offset,$userid);            
+            $total_record = $userlist['pagedata']['total_record'];
+        }
+
+        $return_html = '';
+        $return_html .= '<input type="hidden" class="page_number" value="' . $offset . '" />';
+        $return_html .= '<input type="hidden" class="total_record" value="' . $total_record . '" />';
+        $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
+        if ($total_record > 0) {
+            $followerrecord = $userlist['followerrecord'];
+            foreach ($followerrecord as $user) {
+
+                $return_html .= '<div class="job-contact-frnd ">
+                                <div class="profile-job-post-detail clearfix">
+                                <div class="profile-job-post-title-inside clearfix">
+                                <div class="profile-job-post-location-name">
+                                <div class="user_lst">
+                                <ul>
+                                <li class="fl">
+                                <div class="follow-img">';                
+                
+                $followerslug = $user['user_slug'];
+
+                $return_html .= '<a href="' . base_url($followerslug) . '">';
+                if ($user['user_image'] != '') {
+                    $return_html .= '<img src="' . USER_THUMB_UPLOAD_URL . $user['user_image'] . '?ver=' . time() . '" height="50px" width="50px" alt="' . $user['user_image'] . '" >';
+                } else {
+                    if($user['user_gender'] == "M")
+                    {
+                        $return_html .= '<img  src="'.base_url('assets/img/man-user.jpg').'"  alt="NOBUSIMAGE">';
+                    }
+                    else
+                    {
+                        $return_html .= '<img  src="'.base_url('assets/img/female-user.jpg').'"  alt="NOBUSIMAGE">';
+                    }
+                }
+
+                $return_html .= '</a>
+                                </div>
+                                </li>
+                                <li class="folle_text">
+                                <div class="">
+                                <div class="follow-li-text " style="padding: 0;">
+                                <a href="' . base_url($followerslug) . '">' . ucwords(strtolower($user['first_name'].' '.$user['last_name'])) . '</a></div>
+                                <div>';
+                $return_html .= '<a>';
+                if ($user['title_name']) {
+                    $return_html .= $user['title_name'];
+                }
+                else if($user['degree_name']) {
+                    $return_html .= $user['degree_name'];
+                }
+                else{
+                    $return_html .= "Current Work";
+                }
+
+                $return_html .= '</a>
+                </div>
+                </li>
+                <li class="fr" id ="frfollow' . $user['user_id'] . '">';               
+
+                if ($user['follow_status'] == 0) {
+                    /*$return_html .= '<div class="user_btn follow_btn_' . $user['user_id'] . '" id= "followdiv">
+                    <button id="follow' . $user['user_id'] . '" onClick="business_user_follow(' . $user['user_id'] . ')"><span>Follow</span></button>
+                    </div>';*/
+                }
+                else {
+                    /*$return_html .= '<div class="user_btn follow_btn_' . $user['user_id'] . '" id= "unfollowdiv">
+                    <button class="bg_following" id="unfollow' . $user['user_id'] . '" onClick="business_user_unfollow(' . $user['user_id'] . ')"><span>Unfollow</span></button>
+                    </div>';*/
+                }
+                $return_html .= '</li>
+                </ul>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>';
+            }
+        } else {
+            $return_html .= '<div class="art-img-nn" id= "art-blank">
+                                <div class="art_no_post_img">
+                                    <img src="' . base_url('assets/img/icon_no_follower.png?ver=' . time()) . '" alt="icon_no_follower.png">
+                                </div>
+                                <div class="art_no_post_text">
+                                    No Followers Available.
+                                </div>
+                            </div>';
+        }
+        echo $return_html;
+        
     }
 
     public function following($id = "") {

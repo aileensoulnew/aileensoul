@@ -2251,8 +2251,9 @@ class User_post_model extends CI_Model {
             AND bp.is_deleted = '0'
             AND bp.status = '1'
             AND ul.status = '1'
-            AND ul.is_delete = '0'";
-        
+            AND ul.is_delete = '0'
+            AND bp.user_id NOT IN (select follow_to from ailee_user_follow where follow_from='" . $user_id . "' AND follow_type = '2' AND status = '1')";
+
         $sql .= " ORDER BY bp.business_profile_id DESC LIMIT 30";
         // echo $sql;exit;
         $query = $this->db->query($sql);

@@ -363,6 +363,67 @@ class Userprofile_page extends MY_Controller {
         echo json_encode($unfollowingjson);
     }
 
+    public function follow_business_user() {
+        $userid = $this->session->userdata('aileenuser');
+        //$follow_id = $_POST['follow_id'];
+        $id = $_POST['to_id'];
+        $follow = $this->userprofile_model->userBusinessFollowStatus($userid, $id);
+
+        if (count($follow) != 0) {           
+            
+            $data = array('status' => '1','modify_date' => date("Y-m-d h:i:s"));
+            $where = array('id' => $follow['id'], 'follow_type' => '2');
+            $this->db->where($where);
+            $updatdata = $this->db->update('user_follow', $data);
+
+            //   $response = $status;
+            $html = '<a class="btn1 following"  ng-click="unfollow_business_user(' . $id . ')">Following</a>';
+        } else {
+            $data = array(
+                'status' => '1',
+                'follow_from' => $userid,
+                'follow_to' => $id,
+                'follow_type' => '2',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_follow');
+            // $response = $status;
+            $html = '<a class="btn1 following"  ng-click="unfollow_business_user(' . $id . ')">Following</a>';
+        }
+
+
+        echo $html;
+    }
+
+    public function unfollowing_business_user() {
+        $userid = $this->session->userdata('aileenuser');
+        $id = $_POST['to_id'];
+        $follow = $this->userprofile_model->userBusinessFollowStatus($userid, $id);
+        if (count($follow) != 0) {
+            // $data = array('status' => '0');
+            // $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+
+            $data = array('status' => '0','modify_date' => date("Y-m-d h:i:s"));
+            $where = array('id' => $follow['id'], 'follow_type' => '2');
+            $this->db->where($where);
+            $updatdata = $this->db->update('user_follow', $data);
+
+            $response = 1;
+            $html = '<a class="btn3 follow"  ng-click="follow_business_user(' . $id . ')">Follow</a>';
+        } else {
+            $response = 0;
+            $html = '<a class="btn3 following"  ng-click="unfollow_business_user(' . $id . ')">Following</a>';
+        }
+        $followingdata = $this->userprofile_model->getFollowingCount($userid);
+
+        $unfollowingjson['response'] = $response;
+        $unfollowingjson['unfollowingcount'] = $followingdata[0]['total'];
+        $unfollowingjson['follow_view'] = $html;
+
+        echo json_encode($unfollowingjson);
+    }
+
     public function addcontact() {
         $userid = $this->session->userdata('aileenuser');
         $contact_id = $_POST['contact_id'];
