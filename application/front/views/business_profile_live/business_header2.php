@@ -43,7 +43,7 @@ if($browser == "Firefox")
 echo $header_inner_profile ?>
 <div class="web-header">
     
-    <?php if ($business_common_data[0]['business_step'] == 4) { ?>
+    <?php //if ($business_common_data[0]['business_step'] == 4) { ?>
     <div class="sub-header">
         <div class="container">
             <div class="row">
@@ -231,10 +231,10 @@ echo $header_inner_profile ?>
         </div>
 
     </div>
-     <?php } ?>
+     <?php //} ?>
 </div>
 <div class="mobile-header">
-    <?php if ($business_common_data[0]['business_step'] == 4) { ?>
+    <?php //if ($business_common_data[0]['business_step'] == 4) { ?>
     <div class="sub-header bus-only">
 		<div class="container">
 			<div class="row">
@@ -286,7 +286,7 @@ echo $header_inner_profile ?>
 	
 	</div>
 
-    <?php } ?>
+    <?php //} ?>
 	
 </div>
 
