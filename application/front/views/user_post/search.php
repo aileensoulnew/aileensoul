@@ -34,10 +34,13 @@
         <?php echo $header_profile ?>
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
-            <div class="middle-section">
+            <div class="main-section">
                 <div class="container mobp0">
-                    <?php echo $n_leftbar; ?>
-                    <div class="middle-part">
+					<div class="container-flex">
+						<div class="left-section">
+							<?php echo $n_leftbar; ?>
+						</div>
+                    <div class="middle-section-cus">
                         <div class="no-data-box" ng-if="searchProfileData.length == '0' && postData.length == '0'">
                             <h3>Search result of "<?php echo $search_keyword ?>" </h3>
                             <div class="no-data-content">
@@ -635,7 +638,8 @@
                         </div>
 
                     </div>
-                    <div class="right-part">
+					<div class="right-section">
+                    <div id="right-fixed" class="fw">
                         <?php $this->load->view('right_add_box'); ?>
                         <div class="all-contact">
                             <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
@@ -716,6 +720,8 @@
                             </div>
                         </div>
                     </div>
+					</div>
+					</div>
                 </div>
             </div>
         </div>
@@ -927,5 +933,133 @@
             });
            
         </script>
+		<script>
+        $(function() {
+
+        var $window = $(window);
+        var lastScrollTop = $window.scrollTop();
+        var wasScrollingDown = true;
+
+        var $sidebar = $("#left-fixed");
+        if ($sidebar.length > 0) {
+
+        var initialSidebarTop = $sidebar.position().top;
+
+        $window.scroll(function(event) {
+
+        var windowHeight = $window.height();
+        var sidebarHeight = $sidebar.outerHeight();
+
+        var scrollTop = $window.scrollTop();
+        var scrollBottom = scrollTop + windowHeight;
+
+        var sidebarTop = $sidebar.position().top;
+        var sidebarBottom = sidebarTop + sidebarHeight;
+
+        var heightDelta = Math.abs(windowHeight - sidebarHeight);
+        var scrollDelta = lastScrollTop - scrollTop;
+
+        var isScrollingDown = (scrollTop > lastScrollTop);
+        var isWindowLarger = (windowHeight > sidebarHeight);
+
+        if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
+            $sidebar.addClass('fixed-cus');
+        } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
+            $sidebar.removeClass('fixed-cus');
+        }
+
+        var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
+        var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
+
+        if (dragBottomDown) {
+            if (isWindowLarger) {
+                $sidebar.css('top', 0);
+            } else {
+                $sidebar.css('top', -heightDelta );
+            }
+        } else if (dragTopUp) {
+            $sidebar.css('top', 0);
+        } else if ($sidebar.hasClass('fixed-cus')) {
+            var currentTop = parseInt($sidebar.css('top'), 10);
+            
+            var minTop = -heightDelta;
+            //var scrolledTop = currentTop + scrollDelta;
+            
+            //var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+            //var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+            
+            // $sidebar.css('top', newTop);
+        }
+
+        lastScrollTop = scrollTop;
+        wasScrollingDown = isScrollingDown;
+        });
+        }
+        });
+	</script>
+	<script>
+        $(function() {
+
+        var $window = $(window);
+        var lastScrollTop = $window.scrollTop();
+        var wasScrollingDown = true;
+
+        var $sidebar = $("#right-fixed");
+        if ($sidebar.length > 0) {
+
+        var initialSidebarTop = $sidebar.position().top;
+
+        $window.scroll(function(event) {
+
+        var windowHeight = $window.height();
+        var sidebarHeight = $sidebar.outerHeight();
+
+        var scrollTop = $window.scrollTop();
+        var scrollBottom = scrollTop + windowHeight;
+
+        var sidebarTop = $sidebar.position().top;
+        var sidebarBottom = sidebarTop + sidebarHeight;
+
+        var heightDelta = Math.abs(windowHeight - sidebarHeight);
+        var scrollDelta = lastScrollTop - scrollTop;
+
+        var isScrollingDown = (scrollTop > lastScrollTop);
+        var isWindowLarger = (windowHeight > sidebarHeight);
+
+        if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
+            $sidebar.addClass('fixed-cus1');
+        } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
+            $sidebar.removeClass('fixed-cus1');
+        }
+
+        var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
+        var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
+
+        if (dragBottomDown) {
+            if (isWindowLarger) {
+                $sidebar.css('top', 0);
+            } else {
+                $sidebar.css('top', -heightDelta );
+            }
+        } else if (dragTopUp) {
+            $sidebar.css('top', 0);
+        } else if ($sidebar.hasClass('fixed-cus1')) {
+            var currentTop = parseInt($sidebar.css('top'), 10);
+            
+            var minTop = -heightDelta;
+            //var scrolledTop = currentTop + scrollDelta;
+            
+           // var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+           // var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+            
+           // $sidebar.css('top', newTop);
+        }
+
+        lastScrollTop = scrollTop;
+        wasScrollingDown = isScrollingDown;
+        });
+        }
+        });
+	</script>
     </body>
 </html>
