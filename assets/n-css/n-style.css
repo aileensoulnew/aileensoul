@@ -209,7 +209,7 @@ padding: 5px;}
 .post-bottom ul li{float:left; list-style-type:none;}
 .post-bottom ul li.user-likes{margin-top:5px;}
 .post-bottom ul#like_user_list li{margin-top:0px;}
-.post-bottom ul.bottom-right li{/*margin:0 10px;*/}
+.post-bottom ul.bottom-right li{margin:0;}
 .bottom-left li a{cursor: pointer; color: #999; margin-right: 18px !important; padding: 0px !important; font-weight: 400; display: block; position: relative; border-radius: 100%; line-height:1;}
 .bottom-left li a .fa-thumbs-up:hover {background-color: #efefef; border-radius: 50%;}
 .bottom-left li a .fa-comment-o:hover {background-color: #efefef; border-radius: 50%;}
@@ -239,7 +239,7 @@ padding: 5px;}
 .comment-dis{width:92%; float:left; margin-left:10px; background:#f6f6f6; padding:5px 8px; border-radius:10px;}
 .comment-dis .comment-name a{color:#5c5c5c; font-weight:600; font-size:13px; text-transform: capitalize;}
 .comment-dis .comment-name a:hover{color:#1b8ab9; cursor:pointer;}
-.comment-dis .comment-dis-inner{font-size:13px; word-wrap: break-word;}
+.comment-dis .comment-dis-inner{font-size:13px; word-wrap: break-word; width:100%; float:left;}
 .comment-action{padding:0; width:100%; float:left; margin:0;}
 .comment-action ul{margin-bottom:0;}
 .comment-action li{float:left; list-style-type:none; padding:0 10px; position:relative;}

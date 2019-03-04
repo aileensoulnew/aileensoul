@@ -1213,12 +1213,12 @@ label.cameraButton:active{
     width:100%
 }
 .comment-name{
-    width:90%;
+   /* width:90%;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     font-weight:600;
-    margin-left:10px
+    margin-left:10px*/
 }
 .comment-details{
     padding-left:10px;
@@ -1283,8 +1283,8 @@ label.cameraButton:active{
     width:7px
 }
 .like_user_list,.like_user_list ul,.like_user_list ul li,.like_user_listq{
-    width:100%;
-    float:left
+   /* width:100%;
+    float:left */
 }
 .like_user_list ul::-webkit-scrollbar-thumb{
     border-radius:4px;
@@ -4208,6 +4208,8 @@ background: -ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
 background: linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
 filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);}
 
+
+.comment-action ul{padding-left:40px;}
 /***  media query  ***/
 
 @media screen and (max-width:1279px){
