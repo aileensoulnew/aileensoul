@@ -103,6 +103,9 @@ app.controller('searchController', function($scope, $http, $compile) {
     var isProcessingPst = false;
     $("#search").val(keyword);
     $("#mob_search").val(keyword);
+    if(!user_id){
+        window.location = "/";
+    }
     searchData();
     getContactSuggetion();
 

@@ -107,6 +107,11 @@ $this->data['business_common_data'][0]['business_slug'] = $business_common_data[
                             <br> <span class="left_box_follower_count">(<?php echo ($business_user_follower_count); ?>)</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a title="Detail" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/details'; ?>">Details
+                        </a>
+                    </li>
                     <!-- <li  
                         <?php //if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" 
                         <?php //} ?>>
