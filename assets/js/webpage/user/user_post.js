@@ -2233,12 +2233,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $('#post-like-' + post_id).removeAttr('style');            
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+            $('#post-like-' + post_id).removeAttr('style');
+            
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();

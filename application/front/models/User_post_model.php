@@ -1135,6 +1135,7 @@ class User_post_model extends CI_Model {
         $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->where('user_id', $user_id);
         $this->db->where('up.status', 'publish');
+        $this->db->where('up.user_type', '1');
         $this->db->where('up.post_for != ', 'question');
         $this->db->where('up.is_delete', '0');
         if ($getDeleteUserPost) {
@@ -1226,6 +1227,7 @@ class User_post_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;

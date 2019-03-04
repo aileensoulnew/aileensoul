@@ -3373,23 +3373,20 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         });
     }
 
-    $scope.post_like = function (post_id) {
+    $scope.post_like = function (post_id,parent_index) {
         if(user_id == "" || user_id == undefined)
         {
             $("#regmodal").modal("show");
             return false;
         }
+        $('#post-like-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+            $('#post-like-' + post_id).removeAttr('style');
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
@@ -3417,6 +3414,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
+                $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         });
     }
