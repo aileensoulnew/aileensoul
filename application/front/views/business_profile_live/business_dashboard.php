@@ -509,30 +509,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                     <span class="post-designation" ng-if="post.user_data.industry_name" ng-bind="post.user_data.industry_name"></span> 
                                                     <span class="post-designation" ng-if="!post.user_data.industry_name">CURRENT WORK</span>
                                                 </div>
-                                            </div>
-                                            <div class="post-right-dropdown dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
-                                                <ul class="dropdown-menu">
-                                                    
-                                                    <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for == 'article'"><a href="<?php echo base_url();?>edit-article/{{post.article_data.unique_key}}">Edit Post</a></li>
-
-                                                    <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
-                                                    <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
-                                                    <li>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for == 'article'" href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for == 'opportunity'" href="<?php echo base_url(); ?>o/{{post.opportunity_data.oppslug}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/post/{{post.post_data.id}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/photos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/videos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/audios/{{post.post_data.id}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a>
-                                                        <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
-                                                    </li>
-                                                    <li ng-if="live_slug != post.user_data.business_slug">
-                                                        <a ng-click="open_report_spam(post.post_data.id)" href="javascript:void(0);">Report</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                         <div class="post-discription" ng-if="post.post_data.post_for == 'opportunity'">
                                             <!-- Edit Post Opportunity Start -->
@@ -857,8 +834,8 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                 <div class="col-md-9 col-sm-9 col-xs-8">
                                                     <ul class="bottom-left">
                                                         <li class="user-likes">
-                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
-                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
+                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" onclick="open_profile();" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
+                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" onclick="open_profile();" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
                                                         </li>         
                                                     </ul>
                                                     <ul id="" class="bottom-left like_user_list">
@@ -873,7 +850,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                             </a>
                                                         </li>                                   
                                                         <li class="like-img">
-                                                            <a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                                            <a href="javascript:void(0)" onclick="open_profile();" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
                                                         </li>
                                                     </ul>
                                                     
@@ -884,8 +861,8 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                         <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
                                                         <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
 
-                                                        <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-                                                        <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                        <li class="comment-count"><a href="javascript:void(0);" onclick="open_profile();" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                        <li class="comment-count"><a href="javascript:void(0);" onclick="open_profile();" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
 
                                                     </ul>
                                                 </div>
@@ -920,29 +897,29 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                     <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                                         <div class="comment-input">
                                                             <!--<div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" onpaste="OnPaste_StripFormatting(event);"></div>-->
-                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
+                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)"></div>
                                                         </div>
                                                         <div class="mob-comment">
-                                                            <button ng-click="sendEditComment(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                            <button onclick="open_profile();"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                         </div>
                                                         
                                                         <div class="comment-submit hidden-mob">
-                                                            <button class="btn2" ng-click="sendEditComment(comment.comment_id, post.post_data.id)">Save</button>
+                                                            <button class="btn2" onclick="open_profile();">Save</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="comment-action">
                                                     <ul class="pull-left">
-                                                        <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
+                                                        <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" onclick="open_profile();" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
 
-                                                        <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li> 
-                                                        <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Cancel</a></li> 
+                                                        <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" onclick="open_profile();"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li> 
+                                                        <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" onclick="open_profile();">Cancel</a></li> 
                                                         
                                                         <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
                                                     </ul>
                                                     <ul class="pull-right">
-                                                        <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
-                                                        <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+                                                        <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" onclick="open_profile();"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
+                                                        <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" onclick="open_profile();"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -972,13 +949,13 @@ $login_user_id = $this->session->userdata('aileenuser');
 
                                                 </div>
                                                 <div class="comment-input">
-                                                    <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)"></div>
+                                                    <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)"></div>
                                                 </div>
                                                 <div class="mob-comment">
-                                                    <button id="cmt-btn-mob-{{post.post_data.id}}"  ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
+                                                    <button id="cmt-btn-mob-{{post.post_data.id}}"  onclick="open_profile();"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
                                                 </div>
                                                 <div class="comment-submit hidden-mob">
-                                                    <button id="cmt-btn-{{post.post_data.id}}" class="btn2" ng-click="sendComment(post.post_data.id, $index, post)">Comment</button>
+                                                    <button id="cmt-btn-{{post.post_data.id}}" class="btn2" onclick="open_profile();">Comment</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1469,7 +1446,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                     $(this).css('color', '#acacac');
                 }
             });
-            $(document).on('click', 'a,.comment-edit-butn,.ripple like_h_w', function (e) {
+            $(document).on('click', '.comment-edit-butn,.ripple like_h_w', function (e) {
                 if($(e.target).prop("class") != "")
                 {
                     var classNames = $(e.target).prop("class").toString().split(' ').pop();
