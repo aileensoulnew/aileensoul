@@ -396,6 +396,7 @@ function upload_success()
             'article_main_category': article_main_category,
             'article_other_category': article_other_category,
             'edit_art_published': edit_art_published,
+            'user_type': user_type,
         };
         $("#publish").text('Publishing ...');
         $("#publish").attr('style','pointer-events: none;');

@@ -242,6 +242,7 @@ class Article extends MY_Controller {
         $article_title = $this->input->post('article_title');
         $article_content = $this->input->post('article_content');
         $unique_key = $this->input->post('unique_key');
+        $user_type = $this->input->post('user_type');
 
         $article_meta_title = $this->input->post('article_meta_title');
         $article_meta_description = $this->input->post('article_meta_description');
@@ -320,6 +321,7 @@ class Article extends MY_Controller {
             {
                 $data = array(
                     "user_id"                   => $user_id,
+                    "user_type"                 => $user_type,
                     "post_for"                  => "article",
                     "post_id"                   => $id_post_article,
                     "created_date"              => date('Y-m-d h:i:s', time()),
