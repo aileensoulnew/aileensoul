@@ -306,7 +306,7 @@ class Article_model extends CI_Model {
         return $related_article_data;
     }
 
-    public function change_category($user_id,$unique_key,$article_main_category = "",$article_other_category = "")
+    public function change_category($user_id,$unique_key,$article_main_category = "",$article_other_category = "",$user_type = "")
     {
         $add_new_article = 0;
         $this->db->select('*')->from('post_article');
@@ -337,6 +337,7 @@ class Article_model extends CI_Model {
         {
             $data = array(
                 "user_id"                   => $user_id,
+                "user_type"                 => $user_type,
                 "article_main_category"     => $article_main_category,
                 "article_other_category"    => $article_other_category,
                 "unique_key"                => $unique_key,

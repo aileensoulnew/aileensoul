@@ -55,6 +55,7 @@ class Article extends MY_Controller {
         if($userid != "" && $unique_key != "")
         {
             $this->data['articleData'] = $article_data = $this->article_model->getArticleData($userid,$unique_key);
+            // print_r($article_data);exit();
             if(empty($article_data))
             {
                 redirect(base_url(),"refresh");
@@ -81,7 +82,16 @@ class Article extends MY_Controller {
             $this->data['meta_title'] = "Edit Article";
             $this->data['meta_desc'] = "Edit Article";
             $this->data['new_article'] = "0";
-            $this->load->view('article/new_article', $this->data);
+            if($article_data['user_type'] == '2')
+            {
+                $business_data = $this->userprofile_model->get_business_data_from_user_id($userid);
+                $this->data['business_data'] = $business_data;
+                $this->load->view('article/new_business_article', $this->data);
+            }
+            else
+            {
+                $this->load->view('article/new_article', $this->data);
+            }
         }
         else
         {
@@ -107,6 +117,12 @@ class Article extends MY_Controller {
             if($user_post_article['status'] == 'publish')
             {
                 redirect(base_url(),"refresh");   
+            }
+            $this->data['business_data'] = array();
+            if($article_data['user_type'] == '2')
+            {
+                $business_data = $this->userprofile_model->get_business_data_from_user_id($userid);
+                $this->data['business_data'] = $business_data;
             }
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
@@ -504,6 +520,12 @@ class Article extends MY_Controller {
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
             print_r($this->data['user_data']);exit();*/
+            $this->data['business_data'] = array();
+            if($article_data['user_type'] == '2')
+            {
+                $business_data = $this->userprofile_model->get_business_data_from_user_id($article_data['user_id']);
+                $this->data['business_data'] = $business_data;
+            }
             $this->data['meta_title'] = "Article Title";
             $this->data['meta_desc'] = "Article Description";
             if($user_post_article['is_delete'] == '1')
@@ -951,9 +973,19 @@ class Article extends MY_Controller {
         echo json_encode($return_data);
     }
 
-    function change_category()
+    public function change_category()
     {
         $user_id = $this->session->userdata('aileenuser');
+        $user_type = $this->input->post('user_type');
+        if($user_type == '2')
+        {
+            $business_data = $this->userprofile_model->get_business_data_from_user_id($user_id);
+            if(empty($business_data))
+            {
+                echo json_encode(array("success"=>"-1"));
+                exit();
+            }
+        }
         if($user_id != "")
         {
             $unique_key = $this->input->post('unique_key');
@@ -967,12 +999,32 @@ class Article extends MY_Controller {
             {
                 $article_other_category = "";
             }
-            $success = $this->article_model->change_category($user_id,$unique_key,$article_main_category,$article_other_category);
+            $success = $this->article_model->change_category($user_id,$unique_key,$article_main_category,$article_other_category,$user_type);
             echo json_encode($success);
         }
         else
         {
             echo json_encode(array("success"=>"-1"));
+        }
+    }
+
+    public function new_business_article()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $business_data = $this->userprofile_model->get_business_data_from_user_id($userid);
+        if($business_data)
+        {
+            $this->data['business_data'] = $business_data;
+            $this->data['unique_key'] = $this->common->generate_article_unique_key(16);
+            $this->data['meta_title'] = "Add Article";
+            $this->data['meta_desc'] = "Add Article";
+            $this->data['articleData'] = array();
+            $this->data['new_article'] = "1";
+            $this->load->view('article/new_business_article', $this->data);
+        }
+        else
+        {
+            redirect(base_url(),"refresh");
         }
     }
 }

@@ -431,57 +431,102 @@ else
 			</div>
 			<div class="right-part">
 				<div class="arti-profile-box">
-					<div class="user-cover-img">
-						<a href="<?php echo base_url().$user_data['user_slug']; ?>">
-							<?php 
-							if($user_data['profile_background'] != "")
-							{ ?>							    
-								<img src="<?php echo USER_BG_MAIN_UPLOAD_URL.$user_data['profile_background'];?>">
-							<?php
-							}else{ ?>
-								<div class="gradient-bg"></div>
-							<?php
-							} ?>
-						</a>
-					</div>
-					<div class="user-pr-img">
-						<?php
-							if ($user_data['user_image'] != "")
-							{
-							    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
-							}
-							else
-							{
-							    if ($user_data['user_gender'] == "M") {
-							        $pro_img = base_url('assets/img/man-user.jpg');
-							    } elseif ($user_data['user_gender'] == "F") {
-							        $pro_img = base_url('assets/img/female-user.jpg');
-							    } else {
-							        $pro_img = base_url('assets/img/man-user.jpg');
-							    }
-
-							}
-						?>
-						<a href="<?php echo base_url().$user_data['user_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
-					</div>
-					<div class="user-info-text text-center">
-						<h3>
-							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
-							<?php echo ucwords($user_data['first_name']." ".$user_data['last_name']); ?>
-							</a>
-						</h3>
-						<p>
+					<?php if($article_data['user_type'] == '1'): ?>
+						<div class="user-cover-img">
 							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
 								<?php 
-								if($user_data['title_name'] != "")
-									echo $user_data['title_name'];
-								elseif($user_data['degree_name'] != "")
-									echo $user_data['degree_name'];
-								else
-									echo "Current Work"; ?>
+								if($user_data['profile_background'] != "")
+								{ ?>							    
+									<img src="<?php echo USER_BG_MAIN_UPLOAD_URL.$user_data['profile_background'];?>">
+								<?php
+								}else{ ?>
+									<div class="gradient-bg"></div>
+								<?php
+								} ?>
 							</a>
-						</p>
-					</div>
+						</div>
+						<div class="user-pr-img">
+							<?php
+								if ($user_data['user_image'] != "")
+								{
+								    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
+								}
+								else
+								{
+								    if ($user_data['user_gender'] == "M") {
+								        $pro_img = base_url('assets/img/man-user.jpg');
+								    } elseif ($user_data['user_gender'] == "F") {
+								        $pro_img = base_url('assets/img/female-user.jpg');
+								    } else {
+								        $pro_img = base_url('assets/img/man-user.jpg');
+								    }
+
+								}
+							?>
+							<a href="<?php echo base_url().$user_data['user_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
+						</div>
+						<div class="user-info-text text-center">
+							<h3>
+								<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+								<?php echo ucwords($user_data['first_name']." ".$user_data['last_name']); ?>
+								</a>
+							</h3>
+							<p>
+								<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+									<?php 
+									if($user_data['title_name'] != "")
+										echo $user_data['title_name'];
+									elseif($user_data['degree_name'] != "")
+										echo $user_data['degree_name'];
+									else
+										echo "Current Work"; ?>
+								</a>
+							</p>
+						</div>
+					<?php else: ?>
+						<div class="user-cover-img">
+							<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>">
+								<?php 
+								if($business_data['profile_background'] != "")
+								{ ?>							    
+									<img src="<?php echo BUS_BG_MAIN_UPLOAD_URL.$business_data['profile_background'];?>">
+								<?php
+								}else{ ?>
+									<div class="gradient-bg"></div>
+								<?php
+								} ?>
+							</a>
+						</div>
+						<div class="user-pr-img">
+							<?php
+								if ($business_data['business_user_image'] != "")
+								{
+								    $pro_img = BUS_PROFILE_THUMB_UPLOAD_URL . $business_data['business_user_image'];
+								}
+								else
+								{
+									$pro_img = base_url(NOBUSIMAGE);
+								}
+							?>
+							<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
+						</div>
+						<div class="user-info-text text-center">
+							<h3>
+								<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>">
+								<?php echo ucwords($business_data['company_name']); ?>
+								</a>
+							</h3>
+							<p>
+								<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>">
+									<?php 
+									if($business_data['industry_name'] != "")
+										echo $business_data['industry_name'];								
+									else
+										echo "Current Work"; ?>
+								</a>
+							</p>
+						</div>
+					<?php endif; ?>
 				
 					<?php
 					if ($userid_login != "" && $userid_login != $article_data['user_id'])
@@ -489,33 +534,35 @@ else
 						<div class="author-btn">
 							<div class="user-btns">
 								<?php
-								if($contact_value == 'new'){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
-								<?php
-								}
-								elseif($contact_value == 'confirm'){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>,1)">In Contacts</a>
-								<?php
-								}
-								elseif($contact_value == 'pending' && $from_id != $to_id){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>)">Request sent</a>
-								<?php
-								}
-								elseif($contact_value == 'pending' && $from_id == $to_id){ ?>
-									<a id="contact-btn" class="btn3" onclick="confirmContactRequestInnerHeader(<?php echo $to_id; ?>)">Confirm Request</a>
-								<?php
-								}
-								elseif($contact_value == 'cancel' || $contact_value == 'reject'){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
-								<?php
-								}
+								if($article_data['user_type'] == '1'){
+									if($contact_value == 'new'){ ?>
+										<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
+									<?php
+									}
+									elseif($contact_value == 'confirm'){ ?>
+										<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>,1)">In Contacts</a>
+									<?php
+									}
+									elseif($contact_value == 'pending' && $from_id != $to_id){ ?>
+										<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>)">Request sent</a>
+									<?php
+									}
+									elseif($contact_value == 'pending' && $from_id == $to_id){ ?>
+										<a id="contact-btn" class="btn3" onclick="confirmContactRequestInnerHeader(<?php echo $to_id; ?>)">Confirm Request</a>
+									<?php
+									}
+									elseif($contact_value == 'cancel' || $contact_value == 'reject'){ ?>
+										<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
+									<?php
+									}
 
-								if($follow_value == "new" || $follow_value == "0"){ ?>
-									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 1, <?php echo $to_id; ?>)">Follow</a>
-								<?php }
-								elseif($follow_value == "1"){ ?>
-									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 0, <?php echo $to_id; ?>)">Following</a>
-								<?php
+									if($follow_value == "new" || $follow_value == "0"){ ?>
+										<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 1, <?php echo $to_id; ?>)">Follow</a>
+									<?php }
+									elseif($follow_value == "1"){ ?>
+										<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 0, <?php echo $to_id; ?>)">Following</a>
+									<?php
+									}								
 								} ?>
 								<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
 							</div>

@@ -667,6 +667,7 @@ function change_category()
         'unique_key': unique_key,
         'article_main_category': article_main_category,
         'article_other_category': article_other_category,
+        'user_type': user_type,
     };
     $("#okcategory").hide();
     $("#save_post").show();

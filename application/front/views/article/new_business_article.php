@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
 $userid_login = $this->session->userdata('aileenuser');
-$article_featured_upload_path = $this->config->item('article_featured_upload_path');?>
+$article_featured_upload_path = $this->config->item('article_featured_upload_path');
+?>
 <html lang="en">
     <head>
         <title><?php echo $meta_title; ?></title>
@@ -76,11 +77,11 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 			<div class="right-part">
 				<div class="arti-profile-box">
 					<div class="user-cover-img">
-						<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+						<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>">
 							<?php 
-							if($user_data['profile_background'] != "")
+							if($business_data['profile_background'] != "")
 							{ ?>							    
-								<img src="<?php echo USER_BG_MAIN_UPLOAD_URL.$user_data['profile_background'];?>">
+								<img src="<?php echo BUS_BG_MAIN_UPLOAD_URL.$business_data['profile_background'];?>">
 							<?php
 							}else{ ?>
 								<div class="gradient-bg"></div>
@@ -90,37 +91,28 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 					</div>
 					<div class="user-pr-img">
 						<?php
-							if ($user_data['user_image'] != "")
+							if ($business_data['business_user_image'] != "")
 							{
-							    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
+							    $pro_img = BUS_PROFILE_THUMB_UPLOAD_URL . $business_data['business_user_image'];
 							}
 							else
 							{
-							    if ($user_data['user_gender'] == "M") {
-							        $pro_img = base_url('assets/img/man-user.jpg');
-							    } elseif ($user_data['user_gender'] == "F") {
-							        $pro_img = base_url('assets/img/female-user.jpg');
-							    } else {
-							        $pro_img = base_url('assets/img/man-user.jpg');
-							    }
-
+								$pro_img = base_url(NOBUSIMAGE);
 							}
 						?>
-						<a href="<?php echo base_url().$user_data['user_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
+						<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
 					</div>
 					<div class="user-info-text text-center">
 						<h3>
-							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
-							<?php echo ucwords($user_data['first_name']." ".$user_data['last_name']); ?>
+							<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>">
+							<?php echo ucwords($business_data['company_name']); ?>
 							</a>
 						</h3>
 						<p>
-							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+							<a href="<?php echo base_url().'company/'.$business_data['business_slug']; ?>">
 								<?php 
-								if($user_data['title_name'] != "")
-									echo $user_data['title_name'];
-								elseif($user_data['degree_name'] != "")
-									echo $user_data['degree_name'];
+								if($business_data['industry_name'] != "")
+									echo $business_data['industry_name'];								
 								else
 									echo "Current Work"; ?>
 							</a>
@@ -270,7 +262,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	var edit_art_published = "<?php echo $edit_art_published; ?>"
 	var new_article = "<?php echo $new_article; ?>"
 	var article_slug = "";
-	var user_type = "1";
+	var user_type = "2";
 	if(new_article == 1)
 	{
 		$("#article-cetegory").modal('show');
