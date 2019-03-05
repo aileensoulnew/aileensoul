@@ -1015,7 +1015,8 @@ class Userprofile_model extends CI_Model {
         {
             $this->db->where('a.user_id', $user_id);
             $this->db->where('a.status != ', 'delete');   
-        }        
+        }
+        $this->db->where('a.user_type', '1');   
         $this->db->order_by('a.id_post_article', 'desc');
         if ($limit != '') {
             $this->db->limit($limit, $start);

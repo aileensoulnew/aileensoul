@@ -5897,8 +5897,8 @@ Your browser does not support the audio tag.
         $this->load->view('business_profile_live/business_audios', $this->data);
     }
 
-//multiple audio for manage user end   
-//multiple pdf for manage user start
+    //multiple audio for manage user end   
+    //multiple pdf for manage user start
 
 
     public function business_pdf($id) {
@@ -5933,8 +5933,42 @@ Your browser does not support the audio tag.
         $this->load->view('business_profile_live/business_pdf', $this->data);
     }
 
-//multiple pdf for manage user end 
-//multiple images like start
+    public function business_article($id) {
+        $s3 = new S3(awsAccessKey, awsSecretKey);
+        $userid = $this->session->userdata('aileenuser');
+        $this->business_profile_active_check();
+        $this->is_business_profile_register();
+        $id = $this->business_model->removelocationfromslug($id);
+
+        $contition_array = array('user_id' => $userid, 'status' => '1', 'business_step' => '4');
+        $slug_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $slug_id = $slug_data[0]['business_slug'];
+        
+        if ($id == $slug_id || $id == '') {
+
+            $contition_array = array('business_slug' => $slug_id, 'status' => '1');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
+
+            $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+
+            $contition_array = array('business_slug' => $id, 'status' => '1', 'business_step' => '4');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
+            $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+        $this->data['buss_article_data'] = $this->business_model->get_user_business_article($businessdata1[0]['user_id'],$userid);
+        $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
+        $company_name = $this->get_company_name($slug_id);
+        $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | PDF' . ' | Business Profile' . TITLEPOSTFIX;
+        $this->load->view('business_profile_live/business_article', $this->data);
+    }
+
+    //multiple pdf for manage user end 
+    //multiple images like start
     public function mulimg_like() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $post_image = $_POST['post_image_id'];

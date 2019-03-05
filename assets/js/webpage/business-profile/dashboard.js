@@ -212,6 +212,22 @@ function GetBusPdf() {
     });
 }
 
+GetBusArticle();
+function GetBusArticle() {
+    $.ajax({
+        type: 'POST',
+        url: base_url + "business_profile/bus_article",
+        data: 'bus_slug=' + slug,
+        beforeSend: function () {
+            $(".bus_article").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
+        },
+        success: function (data) {
+            $('.loader').remove();
+            $('.bus_article').html(data);
+        }
+    });
+}
+
 
 $('#file-fr').fileinput({
     language: 'fr',

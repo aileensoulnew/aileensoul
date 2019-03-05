@@ -5901,8 +5901,53 @@ Your browser does not support the audio tag.
         $this->load->view('business_profile/business_pdf', $this->data);
     }
 
-//multiple pdf for manage user end 
-//multiple images like start
+    public function business_article($id) {
+        $s3 = new S3(awsAccessKey, awsSecretKey);
+        $userid = $this->session->userdata('aileenuser');
+        $this->business_profile_active_check();
+        $this->is_business_profile_register();
+
+        /*if ($id == $slug_id || $id == '') {
+
+            $contition_array = array('business_slug' => $slug_id, 'status' => '1');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+
+            $contition_array = array('business_slug' => $id, 'status' => '1', 'business_step' => '4');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+
+
+        $buss_article_data = $this->business_model->get_user_business_article($businessdata1[0]['user_id'],$login_userid);*/
+
+        $contition_array = array('user_id' => $userid, 'status' => '1', 'business_step' => '4');
+        $slug_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $slug_id = $slug_data[0]['business_slug'];
+        if ($id == $slug_id || $id == '') {
+
+            $contition_array = array('business_slug' => $slug_id, 'status' => '1');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
+
+            $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+
+            $contition_array = array('business_slug' => $id, 'status' => '1', 'business_step' => '4');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
+            $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+        $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
+        $company_name = $this->get_company_name($slug_id);
+        $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | PDF' . ' | Business Profile' . TITLEPOSTFIX;
+        $this->load->view('business_profile/business_pdf', $this->data);
+    }
+
+    //multiple pdf for manage user end 
+    //multiple images like start
+
     public function mulimg_like() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $post_image = $_POST['post_image_id'];
@@ -10679,6 +10724,53 @@ Your browser does not support the audio tag.
         }
         $fetch_pdf .= '<div class = "dataconpdf"></div>';
         echo $fetch_pdf;
+    }
+
+    public function bus_article() {
+        $s3 = new S3(awsAccessKey, awsSecretKey);
+        $id = $_POST['bus_slug'];
+        $id = $this->business_model->removelocationfromslug($id);
+
+        $userid = $this->session->userdata('aileenuser');
+        $login_userid = $this->session->userdata('aileenuser');
+        $user_name = $this->session->userdata('user_name');
+
+        $contition_array = array('user_id' => $userid, 'status' => '1');
+        $slug_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $slug_id = $slug_data[0]['business_slug'];
+
+        if ($id == $slug_id || $id == '') {
+
+            $contition_array = array('business_slug' => $slug_id, 'status' => '1');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+
+            $contition_array = array('business_slug' => $id, 'status' => '1', 'business_step' => '4');
+            $businessdata1 = $this->data['businessdata1'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+
+
+        $buss_article_data = $this->business_model->get_user_business_article($businessdata1[0]['user_id'],$login_userid,$limit = 6);
+
+        if ($buss_article_data) {
+            $i = 0;
+            $fetch_article = '';
+            foreach ($buss_article_data as $mi) {
+                $fetch_article .= '<div class = "image_profile">';
+                $fetch_article .= '<a href = "' .$mi['article_slug'] . '" target="_blank"><div class = "pdf_img">';
+                if($mi['article_featured_image'])
+                    $fetch_article .= '<img src = "'.base_url().$this->config->item('article_featured_upload_path').$mi['article_featured_image'].'" alt="PDF.jpg">';
+                else
+                    $fetch_article .= '<img src = "' . base_url('assets/img/art-default.jpg') . '?ver=' . time() . '" alt="Article">';
+                $fetch_article .= '</div><div class="article-hover">'.substr($mi['article_title'],0,50).'</div></a>';
+                $fetch_article .= '</div>';
+            }
+        } else {
+            
+        }
+        $fetch_article .= '<div class = "dataconpdf"></div>';
+        echo $fetch_article;
     }
 
     public function ajax_business_dashboard_post($id = '') {

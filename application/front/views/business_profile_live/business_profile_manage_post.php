@@ -339,6 +339,20 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         </div>
                                     </div>
                                 </a>
+
+                                <a class="fw articles-cs" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/article' ?>">
+                                    <div class="full-box-module business_data">
+                                        <div class="profile-boxProfileCard  module buisness_he_module" >
+                                            <div class="head_details">
+                                                <h5>
+                                                    <i class="fa fa-file"></i>
+                                                    <span>Article</span>
+                                                </h5>
+                                            </div>      
+                                            <div class="bus_article"></div>
+                                        </div>
+                                    </div>
+                                </a>
                                 <?php $this->load->view('right_add_box'); ?>
                                 <?php echo $left_footer; ?>
                             </div>

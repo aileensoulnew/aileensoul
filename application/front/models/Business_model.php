@@ -1619,4 +1619,60 @@ class Business_model extends CI_Model {
         // return $result_array;
     }
 
+    public function get_user_business_article($user_id,$login_userid,$limit = "")
+    {
+        $this->db->select("a.id_post_article, a.article_title, a.article_featured_image, a.article_slug, a.unique_key")->from("post_article a");
+        if($login_userid != $user_id)
+        {            
+            $this->db->join('user_post up', 'up.post_id = a.id_post_article', 'left');
+            $this->db->where('up.user_id', $user_id);
+            $this->db->where('up.status', 'publish');
+            $this->db->where('up.post_for', 'article');
+        }
+        else
+        {
+            $this->db->where('a.user_id', $user_id);
+            $this->db->where('a.status != ', 'delete');   
+        }
+        $this->db->where('a.user_type', '2');   
+        $this->db->order_by('a.id_post_article', 'desc');
+        if($limit != ''){
+            $this->db->limit('6');
+        }
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
+        $article_data = $query->result_array();
+        if($login_userid == $user_id)
+        { 
+            foreach ($article_data as $k=>$v)
+            {
+                $check_article = $this->user_post_model->check_article($v['id_post_article']);             
+                if(isset($check_article) && !empty($check_article))
+                {
+                    if($check_article['status'] == "publish")
+                    {
+                        $article_data[$k]['article_slug'] = base_url().'article/'.$v['article_slug'];
+                    }
+                    else
+                    {
+                        $article_data[$k]['article_slug'] = base_url().'article-preview/'.$v['article_slug'];  
+                    }
+                }
+                else
+                {
+                    $article_data[$k]['article_slug'] = base_url().'edit-article/'.$v['unique_key'];
+                }
+            }            
+        }
+        else
+        {
+            foreach ($article_data as $k=>$v)
+            {
+                $article_data[$k]['article_slug'] = base_url().'article/'.$v['article_slug'];
+            }    
+        }
+        $result_array['userDashboardArticle'] = $article_data;
+        return $article_data;
+    }
+
 }
