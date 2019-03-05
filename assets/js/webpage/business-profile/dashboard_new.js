@@ -768,8 +768,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }, function (error) {});
     }
 
-
-    getContactSuggetion();
+    if(user_id != '')
+    {
+        getContactSuggetion();
+    }
     function getContactSuggetion() {
         $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
             $scope.contactSuggetion = success.data;
@@ -2053,14 +2055,14 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     }
 
     getUserPost(pg);
-    var isProcessing = false;
-    function getUserPost(pg,fl_addpost) {
+    var isProcessing = false;    
+    function getUserPost(pg,fl_addpost) {        
      
         $('#loader').show();
         if(pg == "" && fl_addpost == ""){
             $('#main_loader').show();
         }
-        $http.get(base_url + "user_post/getUserBusinessPost?page=" + pg).then(function (success) {
+        $http.get(base_url + "user_post/getUserBusinessPost?page=" + pg+"&user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             if(pg == ""){
                 $('#main_loader').hide();
@@ -2115,7 +2117,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }
         isProcessing = true;
         $('#loader').show();
-        $http.get(base_url + "user_post/getUserBusinessPost?page=" + pg).then(function (success) {
+        $http.get(base_url + "user_post/getUserBusinessPost?page=" + pg+"&user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
            
             if (success.data[0].post_data) {

@@ -5963,7 +5963,7 @@ Your browser does not support the audio tag.
         $this->data['buss_article_data'] = $this->business_model->get_user_business_article($businessdata1[0]['user_id'],$userid);
         $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
         $company_name = $this->get_company_name($slug_id);
-        $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | PDF' . ' | Business Profile' . TITLEPOSTFIX;
+        $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | Article' . ' | Business Profile' . TITLEPOSTFIX;
         $this->load->view('business_profile_live/business_article', $this->data);
     }
 

@@ -2425,9 +2425,13 @@ class User_post_model extends CI_Model {
         if ($getDeleteUserPost) {
             $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
         }
+        
+        $this->db->where('up.user_id', $user_id);
         $this->db->where('up.status', 'publish');
+        $this->db->where('up.post_for != ', 'question');
         $this->db->where('up.is_delete', '0');
         $this->db->where('up.user_type', '2');
+
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array['post_count'];

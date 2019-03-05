@@ -1946,16 +1946,21 @@ class User_post extends MY_Controller {
     }
 
     public function getUserBusinessPost() {
-        $userid = $this->session->userdata('aileenuser');
+        // $userid = $this->session->userdata('aileenuser');
         $page = 1;
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
 
-        $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
+        /*$user_slug = $_GET["user_slug"];
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');*/
+        $user_slug = $_GET["user_slug"];
+
+        $contition_array = array('business_slug' => $user_slug, 'is_deleted' => '0', 'status' => '1');
         $business_profile_count = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if(count($business_profile_count) > 0)
         {
+            $userid = $business_profile_count[0]['user_id'];
             $post_data = $this->user_post_model->business_user_post_new($userid, $page);
         }
         else

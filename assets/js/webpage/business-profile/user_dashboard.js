@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    business_dashboard_post(slug);
+    // business_dashboard_post(slug);
     GetBusPhotos();
     GetBusVideos();
     GetBusAudios();
@@ -22,7 +22,7 @@ $(document).ready(function() {
                 //if ($(".page_number:last").val() <= $(".total_record").val()) {
                 if (parseInt(page) <= parseInt(available_page)) {
                     var pagenum = parseInt($(".page_number:last").val()) + 1;
-                    business_dashboard_post(slug, pagenum);
+                    // business_dashboard_post(slug, pagenum);
                 }
             }
         }
