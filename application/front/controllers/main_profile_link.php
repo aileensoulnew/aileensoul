@@ -58,9 +58,18 @@
         $this->data['freelance_hire_right_profile_link'] = base_url('freelance-employer');
         $this->data['freelance_apply_right_profile_link'] = base_url('freelance-jobs');
 
-        if(!empty($business_profile_count) &&  $business_profile_count[0]['business_step']==4){
-            $this->business_profile_link = base_url("business-profile");
-             $this->business_profile_set = 1;
+        if(!empty($business_profile_count) &&  $business_profile_count[0]['business_step']==4){            
+            
+            $sql = "SELECT *,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
+            LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+            LEFT JOIN ailee_states st on bp.state = st.state_id
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND user_id = '". $userid ."'";
+            $query = $this->db->query($sql);
+            $business_slug = $query->row();
+
+            $this->business_profile_link = base_url('company/').$business_slug->business_slug;// base_url("business-profile");
+            $this->business_profile_set = 1;
         }
         if(!empty($artist_profile_count) &&  count($artist_profile_count)>0){
             $this->artist_profile_link = base_url("artist-profile");

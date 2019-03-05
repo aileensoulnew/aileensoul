@@ -36,7 +36,7 @@
 	// echo $header_profile;
 	echo $freelancer_post_header2;
 	?>
-	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+	<!-- <script src="<?php //echo base_url('assets/js/bootstrap.min.js'); ?>"></script> -->
 	<?php
 	}
 	} elseif ($freelancr_user_data[0]['free_hire_step'] == 3) {

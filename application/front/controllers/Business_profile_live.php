@@ -164,6 +164,17 @@ class Business_profile_live extends MY_Controller {
         }
         $this->business_profile_active_check();
         $this->is_business_profile_register();
+        if(count($this->data['business_common_data']) > 0)
+        {
+            $bus_slug = base_url().'company/'.$this->data['business_common_data'][0]['business_slug'];
+            redirect($bus_slug, 'refresh');
+        }
+        else
+        {
+            redirect(base_url(), 'refresh');   
+        }
+
+        // print_r($this->data['business_common_data']);exit();
 
         // GET USER BUSINESS DATA FROM INCLUDE START
         $business_profile_id = $this->data['business_common_data'][0]['business_profile_id'];
