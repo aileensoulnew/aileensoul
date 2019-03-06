@@ -277,7 +277,7 @@ class Business_profile_live extends MY_Controller {
             $this->data['title'] = "404".TITLEPOSTFIX;
             $this->load->view('404', $this->data);
         } else {
-            if ($this->session->userdata('aileenuser') && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
+            if ($this->session->userdata('aileenuser')){ // && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
                 $this->load->view('business_profile_live/business_profile_manage_post', $this->data);
             } else {
                 $page = 1;
@@ -1996,9 +1996,10 @@ Your browser does not support the audio tag.
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $this->data['slugid'] = $id;
         $userid = $this->session->userdata('aileenuser');
-        if ($userid) {
-            $this->business_profile_active_check();
-            $this->is_business_profile_register();
+        if (!$userid) {
+            redirect(base_url(), refresh);
+            // $this->business_profile_active_check();
+            // $this->is_business_profile_register();
         }
         if (!$this->session->userdata('aileenuser')) {
             include ('business_profile_include.php');
@@ -2333,7 +2334,7 @@ Your browser does not support the audio tag.
 
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
         $businessdata1 = $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// followers count
+        // followers count
         $join_str[0]['table'] = 'follow';
         $join_str[0]['join_table_id'] = 'follow.follow_to';
         $join_str[0]['from_table_id'] = 'business_profile.business_profile_id';
@@ -2342,8 +2343,8 @@ Your browser does not support the audio tag.
         $contition_array = array('follow_to' => $artdata[0]['business_profile_id'], 'follow_status' => '1', 'follow_type' => '1');
         $followers = count($this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = ''));
 
-// follow count end
-// fllowing count
+        // follow count end
+        // fllowing count
         $join_str[0]['table'] = 'follow';
         $join_str[0]['join_table_id'] = 'follow.follow_from';
         $join_str[0]['from_table_id'] = 'business_profile.business_profile_id';
@@ -3553,11 +3554,16 @@ Your browser does not support the audio tag.
         $id = $this->business_model->removelocationfromslug($id);
         $this->data['slug_id'] = $id;
 
-        $this->business_profile_active_check();
-        $this->is_business_profile_register();
+        // $this->business_profile_active_check();
+        // $this->is_business_profile_register();
 
         $business_user_id = $this->db->select('user_id')->get_where('business_profile', array('business_slug' => $id))->row()->user_id;
         $userid = $this->session->userdata('aileenuser');
+        if(!$userid)
+        {
+            redirect(base_url(),'refresh');
+        }
+        
         if($business_user_id == $userid)
         {
             $this->data['my_profile'] = 1;

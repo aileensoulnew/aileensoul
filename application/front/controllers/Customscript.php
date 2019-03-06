@@ -276,4 +276,21 @@ class Customscript extends CI_Controller {
         print_r($businessdataposted);
 
     }
+
+    public function check_city()
+    {
+        // $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41));";
+        $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
+        $city_data1 = $this->db->query($sql)->result();
+        echo count($city_data1);
+        echo "<br>";
+        // print_r($city_data1);
+        echo "<br>";
+
+        $sql = "SELECT * FROM ailee_user_student WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
+        $city_data2 = $this->db->query($sql)->result();
+        echo count($city_data2);
+        echo "<br>";
+        // print_r($city_data2);
+    }
 }

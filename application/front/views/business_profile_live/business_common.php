@@ -310,11 +310,14 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 <div class="<?php echo "fr" . $business_common_data[0]['business_profile_id']; ?>">
                                                     <?php
                                                     $userid = $this->session->userdata('aileenuser');
-                                                    $contition_array = array('user_id' => $userid, 'status' => '1');
-                                                    $bup_id = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-                                                    $status = $this->db->get_where('follow', array('follow_type' => '2', 'follow_from' => $bup_id[0]['business_profile_id'], 'follow_to' => $business_common_data[0]['business_profile_id']))->row()->follow_status;
+                                                    $contition_array = array('follow_from' => $userid, 'follow_to' => $business_common_data[0]['user_id'],'follow_type' => '2');
+
+                                                    $status = $this->db->get_where('user_follow',$contition_array)->row()->status;
+                                                    // echo 'asdasdas'.$status;exit();
+
                                                     $logslug = $this->db->get_where('business_profile', array('user_id' => $userid))->row()->business_slug;
-                                                    if ($logslug != $this->uri->segment(3)) {
+                                                    if ($logslug != $this->uri->segment(2)) {
+                                                    // print_r($logslug);exit();
                                                         /*if ($status == 0 || $status == " ") {
                                                             ?>
                                                             <div class="msg_flw_btn_1" id= "followdiv">
@@ -324,7 +327,18 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             <div class="msg_flw_btn_1" id= "unfollowdiv">
                                                                 <button class="bg_following btn-n2"  id="<?php echo "unfollow" . $business_common_data[0]['business_profile_id']; ?>" onClick="unfollowuser_two(<?php echo $business_common_data[0]['business_profile_id']; ?>)">Following </button>
                                                             </div>
-                                                        <?php }*/ ?>
+                                                        <?php }*/
+                                                        if ($status == 0 || $status == "") { ?>
+                                                            <div class="msg_flw_btn_1" id= "followdiv">
+                                                                <button class="btn-n2" id="follow<?php echo $business_common_data[0]['user_id']; ?>" onclick="add_to_contact_business(<?php echo $userid; ?>,1,<?php echo $business_common_data[0]['user_id']; ?>)">Follow</button>
+                                                            </div>
+                                                        <?php }
+                                                        else{?>
+                                                            <div class="msg_flw_btn_1" id= "followdiv">
+                                                                <button class="btn-n2">Following</button>
+                                                            </div>
+                                                        <?php
+                                                        } ?>
                                                     </div>         
                                                 </li>
                                                 <li>
@@ -423,6 +437,26 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     }else{
                         $('#messageModel').modal('hide');
                     }
+                }
+            });
+        }
+
+        function add_to_contact_business(user_id,status,business_profile_id) {
+            $.ajax({
+                type: 'POST',
+                url: base_url + "user_post/add_business_follow",
+                data: 'follow_id=' + user_id + '&status=' + status + '&to_id=' + business_profile_id,
+                dataType: "json",
+                success: function (data) {
+                    $('#follow'+business_profile_id).html('Following');
+                    $('#follow'+business_profile_id).attr('style','pointer-events:none;');
+                    $('#follow'+business_profile_id).removeAttr('onclick');
+
+                    var str = $("#countfollower").text();
+                    followecnt = str.substr(1,str.length - 2);
+                    followecnt = parseInt(followecnt) + 1;
+                    $("#countfollower").html("("+followecnt+")");
+                    
                 }
             });
         }

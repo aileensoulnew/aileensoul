@@ -472,9 +472,11 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>">
 									<span>Reviews</span>
-									<a ng-if="from_user_id != to_user_id" href="javascript:void(0);" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>">
+									<?php if($login_bussiness_data): ?>
+									<a ng-if="from_user_id != to_user_id" href="javascript:void(0);" data-target="#reviews" data-toggle="modal" class="pull-right write-review">	<img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>">
 										<span>Write a review</span>
 									</a>
+									<?php endif; ?>
 								</div>
 								<div id="review-loader" class="dtl-dis">
 		                                <div class="text-center">
