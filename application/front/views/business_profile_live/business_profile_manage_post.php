@@ -1504,18 +1504,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </div>
                     </div>
                 </div>
-            </div> -->
-            <div class="modal fade message-box" id="post" role="dialog">
-                <div class="modal-dialog modal-lm">
-                    <div class="modal-content">
-                        <button type="button" class="modal-close" id="post"data-dismiss="modal">&times;</button>       
-                        <div class="modal-body">
-                            <span class="mes">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> -->            
 
             <div class="modal fade message-box" id="postedit" role="dialog">
                 <div class="modal-dialog modal-lm">
@@ -1924,6 +1913,29 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 </div>
             </div>
         </div>
+        <div class="modal fade message-box biderror post-error" id="posterrormodal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;
+                    </button>       
+                    <div class="modal-body">
+                        <span class="mes"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade message-box biderror post-error" id="post" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="post"data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <?php echo $footer; ?>
         <script>
@@ -1986,6 +1998,26 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 				}
 			
 			});
+            $(document).ready(function () {
+
+                $(document).on('show.bs.modal', '.modal', function (event) {
+                    var zIndex = 1040 + (20 * $('.modal:visible').length);
+                    $(this).css('z-index', zIndex);
+                    setTimeout(function() {
+                        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                    }, 0);
+                });
+
+                $(document).on('hidden.bs.modal', function (event) {
+                    if($('.modal.in').length > 0)
+                    {
+                        if ($('body').hasClass('modal-open') == false) {
+                            $('body').addClass('modal-open');
+                        };            
+                    }
+                });
+
+            });
 			$(document).ready(function () {
 				if (screen.width <= 991) {
 					$(".move-middle").appendTo($("#move-middle"));

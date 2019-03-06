@@ -1539,13 +1539,13 @@
                             </div>                            
                             <div class="user-info-text text-center">
                                 <h3>
-                                    <a href="<?php echo base_url('contact-request') ?>">Find More Businesses
+                                    <a href="<?php echo base_url('company/userlist'); ?>">Find More Businesses
                                     </a>
                                 </h3>                                
                             </div>
                             <div class="author-btn">
                                 <div class="user-btns">
-                                    <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                    <a class="btn3" href="<?php echo base_url('company/userlist'); ?>">View More</a>
                                 </div>
                             </div>
                         </div>                        
