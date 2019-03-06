@@ -82,8 +82,8 @@ class Registration extends CI_Controller {
 
             //Set Cookie for Message
             $msg_user_data = $this->user_model->get_user_for_message($id);
-            set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-            set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+            set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+            set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
             // redirect($this->session->userdata('aileenuser_slug'));
             $ret_arr = array("success"=>1,"user_slug"=>$user[0]['user_slug']);
@@ -249,8 +249,8 @@ class Registration extends CI_Controller {
 
             //Set Cookie for Message
             $msg_user_data = $this->user_model->get_user_for_message($user_insert);
-            set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-            set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+            set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+            set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
             $datavl = "ok";
             echo json_encode(
@@ -743,8 +743,8 @@ class Registration extends CI_Controller {
 
                     //Set Cookie for Message
                     $msg_user_data = $this->user_model->get_user_for_message($user_insert);
-                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                     $datavl = "ok";
                     $data = array(

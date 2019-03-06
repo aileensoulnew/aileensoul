@@ -81,8 +81,8 @@ class Login extends CI_Controller {
                     $this->session->set_userdata('aileenuser_firstname', $userinfo['first_name'] );
                     $this->session->set_userdata('aileenuser_userimage', $userinfo['user_image'] );
                     //Set Cookie for Message
-                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                     $is_data = 'ok';
                 } else if ($userinfo['password'] != md5($password_login)) {
@@ -125,8 +125,8 @@ class Login extends CI_Controller {
 
                     //Set Cookie for Message
                     $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                     $data = 'ok';
                 }else if ($userinfo['password'] != md5($password_login)) {
@@ -173,8 +173,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                 $data = 'ok';
                 }else if ($userinfo['password'] != md5($password_login)) {
@@ -250,8 +250,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo[0]['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                 $data = 'ok';
             }
@@ -293,8 +293,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo[0]['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                 $is_data = 'ok';
             }
@@ -379,8 +379,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                 $is_data = 'ok';
                 }else if ($userinfo['password'] != md5($password_login)) {
@@ -426,8 +426,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($user[0]['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
 
                 $status = true;
@@ -483,8 +483,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                 $is_data = 'ok';
                 }else if ($userinfo['password'] != md5($password_login)) {
@@ -527,8 +527,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
 
                 $is_data = 'ok';
                 }else if ($userinfo['password'] != md5($password_login)) {
@@ -574,8 +574,8 @@ class Login extends CI_Controller {
 
                 //Set Cookie for Message
                 $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,".aileensoul.localhost","/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,".aileensoul.localhost","/");
+                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
+                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
                 
                 }else if ($userinfo['password'] != md5($password_login)) {
                     $is_data = 'password';
