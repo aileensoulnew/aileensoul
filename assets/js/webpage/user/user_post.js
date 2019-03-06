@@ -921,7 +921,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
 
             setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
-        }, function (error) {});
+        }, function (error) {            
+            getUserPostLoadMore(pg);
+        });
     }
 
     
