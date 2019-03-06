@@ -1080,6 +1080,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </div>
                                 </div>
 
+                                <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Post</h3>
+                                    <div class="user-img-nn">
+                                        <div class="user_no_post_img">
+                                            <img src="<?php echo base_url('assets/img/no-post.png?ver=' . time()); ?>" alt="no post">
+                                        </div>
+                                        <div class="art_no_post_text">No Post Available.</div>
+                                    </div>
+                                </div>
+
                                 <!-- <div class="business-all-post">
                                 </div> -->
                                 <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
