@@ -20,14 +20,17 @@
     <?php $this->load->view('adsense'); 
     $loging_userid = $this->session->userdata('aileenuser'); ?>
 </head>
-    <body class="profile-db body-loader">
+    <body class="profile-db body-loader one-hd">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
         <?php echo $header_profile ?>
-        <div class="middle-section middle-section-banner">
-            <div class="container pt20 mobp0">
-                <?php echo $n_leftbar ?>
-                <div class="middle-part question-detail">
+        <div class="main-section">
+            <div class="container mobp0">
+				<div class="container-flex">
+				<div class="left-section">
+					<?php echo $n_leftbar ?>
+				</div>
+                <div class="middle-section-cus question-detail">
                     <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData">
                         <div class="all-post-top">
                             <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
@@ -353,11 +356,11 @@
 						<?php $this->load->view('banner_add'); ?>
 					</div>
                 </div>
-                <div class="right-part">
+                <div class="right-section">
                    <?php $this->load->view('right_add_box'); ?>
                 </div>
 
-
+				</div>
             </div>
         </div>
         </div>
