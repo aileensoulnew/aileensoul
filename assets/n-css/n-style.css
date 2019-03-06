@@ -170,7 +170,7 @@ padding: 5px;}
 .modal-content .post-field .form-group{padding:5px 15px; margin-bottom:0; position:relative;}
 .modal-content .post-field .form-group textarea{border:none; min-height:30px; max-height:80px; font-size:14px; border:1px solid #d2d2d2; padding:5px 15px; margin-bottom:9px;}
 .modal-content .post-field .form-group input{/*border:none; padding:0;*/}
-.post-head{padding:10px 15px; width:100%; float:left; position:relative; border-top-left-radius:4px; border-top-right-radius:4px;}
+.post-head{padding:10px 15px 0; width:100%; float:left; position:relative; border-top-left-radius:4px; border-top-right-radius:4px;}
 .post-head .post-img .no-img-post{padding:13px 0; display:inline-block;}
 .post-detail{width:85%; float:left; padding-left:10px;}
 .post-detail .post-name{font-size:14px; color:#5c5c5c; font-weight:600; float:left; padding-right:10px; text-transform: capitalize; max-width:86%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
@@ -4346,6 +4346,8 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.middle-section-cus{width:100%;}
 	.read-more-post{bottom:8px;}
 	.mob-pl0{padding-left:0;}
+	.all-post-box .bottom-left.like_user_list li:last-child{width:62%;}
+	.all-post-box .bottom-left.like_user_list li:last-child a{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
