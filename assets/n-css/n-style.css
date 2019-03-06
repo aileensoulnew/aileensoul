@@ -448,7 +448,7 @@ background: #f6f6f6; list-style-type:none;}
 .dash-info-box p{padding-left:20px;}
 .dash-info-box h4 svg{vertical-align: middle; margin-top: -4px;}
 .bus-info .dash-info-box, .art-info .dash-info-box {margin-bottom:15px;}
-.bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px;}
+.bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px; margin-top:0;}
 .bus-info .dash-info-box p, .art-info .dash-info-box p {width:93%; float:left; line-height:1; padding-left:5px; word-wrap: break-word;}
 .bus-info .dash-info-box ul, .art-info .dash-info-box ul {width:93%; float:left; padding-left:5px; padding-top:0;}
 .art-info .dash-info-box ul{margin-top:-4px;}
@@ -2505,7 +2505,7 @@ label.cameraButton{min-height:43px;}
 .arti-profile-box .user-cover-img img{position: absolute; left: 50%; top: 50%; width: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); max-width: inherit; height: 100%;}
 .arti-profile-box .user-pr-img{width:80px; height:80px; margin:-50px auto 0; border:3px solid #fff; position:relative; border-radius:100%;}
 .arti-profile-box .user-pr-img img{border-radius:100%; width:100%;}
-.arti-profile-box .user-info-text{padding:5px 10px 10px;}
+.arti-profile-box .user-info-text{/*padding:5px 10px 10px;*/}
 .arti-profile-box .user-info-text h3{font-size:22px; color:#1b8ab9;}
 .arti-profile-box .user-info-text p{font-size:18px; color:#1b8ab9;}
 .arti-profile-box .find-more{text-align:center;}
@@ -3228,9 +3228,11 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 .item .arti-profile-box .user-info-text h3 a{font-size:16px; color:#5c5c5c; font-weight:bold; letter-spacing:1px;}
 .item .arti-profile-box .user-info-text p a{font-size:14px; color:#7b7b7b;}
 .item .arti-profile-box .author-btn .user-btns a.btn3{width:130px;}
+.follow-box .item .arti-profile-box .author-btn .user-btns a.btn3{width:80px; padding:3px 2px; margin-top:6px;}
 .item .user-btns{padding:0;}
 .arti-profile-box .user-info-text h3{max-width: 100%; white-space: nowrap;
 text-overflow: ellipsis; overflow: hidden;}
+.last-item-box .arti-profile-box .user-info-text h3{text-align:center;}
 .arti-profile-box .user-info-text p{max-width: 100%; white-space: nowrap;
 text-overflow: ellipsis; overflow: hidden;}
 .pl4{padding-left:4px;}
@@ -3429,16 +3431,17 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .follow-box .arti-profile-box .follow-user-detail{position: relative; float:left; width:100%; margin-top:-50px; padding:0 10px;}
 .follow-box .arti-profile-box .follow-user-detail .user-pr-img {width: 60px; height: 60px;  border: 2px solid #fff; border-radius: 100%; margin:0px; float:left;}
 .follow-box .arti-profile-box .user-cover-img{height:90px; border-radius:0;}
-.follow-box .arti-profile-box .user-info-text{float:left; width:79%; text-align:left;}
-.follow-box .arti-profile-box .user-info-text h3{line-height:1;}
+.follow-box .arti-profile-box .user-info-text{float:left; width:100%; text-align:left;}
+.follow-box .arti-profile-box .user-info-text h3{line-height:1; font-size:inherit; padding-top:2px;}
 .follow-box .arti-profile-box .user-info-text p{line-height:1;}
 .follow-box .arti-profile-box .user-cover-img .cover-bg{width:100%; height:100%; position:absolute; top:0; background:rgba(0,0,0,0.5);}
-.follow-box .item .arti-profile-box .user-info-text h3 a{color:#fff; font-size:15px;}
+.follow-box .item .arti-profile-box .user-info-text h3 a{color:#5c5c5c; font-size:14px; font-weight:bold;}
 .follow-box .item .arti-profile-box .user-info-text p a{color:#fff;}
 .follow-box .arti-profile-box .author-btn{padding:0 10px 10px;}
 .follow-box .arti-profile-box .author-btn .user-btns a.btn3{font-size:13px; font-weight:normal; color:#5c5c5c;}
-.follow-box .arti-profile-box .author-btn .user-city {padding-right:0; padding-top:5px;}
-.follow-box .arti-profile-box .author-btn .user-city p{font-size:14px; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.follow-box .arti-profile-box .author-btn .user-city {padding-right:0;}
+.follow-box .arti-profile-box .author-btn .user-city p{font-size:13px; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height:1; padding-top:5px;}
+.follow-box .arti-profile-box .author-btn .user-city p a{color:#5c5c5c;}
 .user-profile-box{padding:6px; }
 /***  new commen css  ***/
 .one-hd.verify-body .main-section{padding-top:100px;}
@@ -3452,7 +3455,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 #left-fixed.fixed-cus{position:fixed; width:320px;}
 #right-fixed.fixed-cus1{position:fixed; width:320px;}
 .box-border{border: 1px solid #d2d2d2; margin-bottom: 10px; width: 100%; float: left; border-radius: 4px;}
-.follow-box .arti-profile-box .find-more img{width:60px;}
+.follow-box .arti-profile-box .find-more img{width:100px;}
 
 .container-flex .middle-section{padding:0;} 
 .one-hd.verify-body .container-flex .middle-section{padding:0;} 
@@ -4339,6 +4342,10 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.btn-n2{font-size:12px; padding:3px 20px;}
 	.profile-job-post-title .profile-job-profile-button{border-bottom:1px solid #d2d2d2;}
 	.op-main-page .container{}
+	.op-main-page .middle-section{width:100%;}
+	.middle-section-cus{width:100%;}
+	.read-more-post{bottom:8px;}
+	.mob-pl0{padding-left:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

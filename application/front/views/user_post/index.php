@@ -1243,7 +1243,7 @@
                     </div>
                     <div class="post-bottom">
                         <div class="row">
-                            <div class="col-md-9 col-sm-9 col-xs-8">
+                            <div class="col-md-9 col-sm-9 col-xs-9 mob-pr0">
                                 <ul class="bottom-left">
                                     <li class="user-likes">
                                         <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
@@ -1270,7 +1270,7 @@
 								
 								
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-4">
+                            <div class="col-md-3 col-sm-3 col-xs-3 mob-pl0">
                                 <ul class="pull-right bottom-right">
                                     <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
                                     <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
@@ -1485,13 +1485,13 @@
                                     <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
                                         <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                     </a>
-                                    <div class="cover-bg"></div>
+                                    
                                 </div>
                                 <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
                                     <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
                                         <div class="gradient-bg" style="height: 100%"></div>
                                     </a>
-                                    <div class="cover-bg"></div>
+                                   
                                 </div>
                                 <div class="follow-user-detail">
                                     <div class="user-pr-img" ng-if="contact.business_user_image">
@@ -1504,21 +1504,27 @@
                                             <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
                                         </a>
                                     </div>
-                                    <div class="user-info-text text-center">
-                                        <h3>
-                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)"></a>
-                                        </h3>
+                                    <div  text-center">
+                                        
                                         <p>
-                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}">{{contact.industry_name | uppercase}}</a>
+                                            
                                         </p>
                                     </div>
                                 </div>
                                 <div class="author-btn">
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6 col-xs-6 user-city">
+										<div class="col-md-12 col-sm-12">
+											<div class="user-info-text">
+											<h3>
+												<a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)"></a>
+											</h3>
+											</div>
+										</div>
+                                        <div class="col-md-8 col-sm-8 col-xs-8 user-city">
+											<p><a href="<?php echo base_url(); ?>company/{{contact.business_slug}}">{{contact.industry_name | uppercase}}</a></p>
                                             <p class="">{{contact.city_name}}</p>
                                         </div>
-                                        <div class="user-btns col-md-6 col-sm-6 col-xs-6">
+                                        <div class="user-btns col-md-4 col-sm-4 col-xs-4">
                                             <a class="btn3 busflwbtn-{{contact.user_id}}" ng-click="add_to_contact_business(user_id, 1, contact.user_id)">Follow</a>
                                         </div>
                                     </div>
@@ -1533,7 +1539,7 @@
                             </div>                            
                             <div class="user-info-text text-center">
                                 <h3>
-                                    <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                    <a href="<?php echo base_url('contact-request') ?>">Find More Businesses
                                     </a>
                                 </h3>                                
                             </div>
