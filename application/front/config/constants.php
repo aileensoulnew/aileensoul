@@ -58,6 +58,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('MONGO_SERVER', 'localhost');
 
     define('COOKIEHOST', '.aileensoul.localhost');
+    define('CROSSDOMAIN', 'http://chat.aileensoul.localhost');
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
     define('BASEURL', 'http://35.165.1.109:81/');
@@ -85,6 +86,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('MONGO_SERVER', '34.222.73.215');
 
     define('COOKIEHOST', '.aileensoul.com');
+    define('CROSSDOMAIN', 'https://message.aileensoul.com:3000');
     error_reporting(0);
 }
 

@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: http://chat.aileensoul.localhost');
+header('Access-Control-Allow-Origin: '.CROSSDOMAIN);
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
