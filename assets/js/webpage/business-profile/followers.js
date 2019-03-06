@@ -15,7 +15,7 @@ if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
                 var mod_page = total_record % perpage_record;
                 if (mod_page > 0) {
                     available_page = available_page + 1;
-                }
+                }                
                 //if ($(".page_number:last").val() <= $(".total_record").val()) {
                 if (parseInt(page) <= parseInt(available_page)) {
                     var pagenum = parseInt($(".page_number:last").val()) + 1;

@@ -1564,7 +1564,10 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
-    public function get_business_follower_data($user_id = '', $sortby = '', $orderby = '', $limit = '', $offset = '',$login_user_id) {
+    public function get_business_follower_data($user_id = '', $sortby = '', $orderby = '', $limit = '', $page = '',$login_user_id) {        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
 
         $where = "((uf.follow_to = '" . $user_id . "'))";
 
@@ -1582,6 +1585,9 @@ class Business_model extends CI_Model {
         $this->db->where("ul.is_delete","0");
         $this->db->where($where);
         $this->db->order_by("uf.id", "DESC");
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
 
         $query = $this->db->get();
         $result_array = $query->result_array();        
