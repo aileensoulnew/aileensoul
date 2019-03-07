@@ -562,9 +562,20 @@ else
 									elseif($follow_value == "1"){ ?>
 										<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 0, <?php echo $to_id; ?>)">Following</a>
 									<?php
-									}								
+									} ?>
+									<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
+								<?php
+								}
+								else{
+									if($follow_value == "new" || $follow_value == 0){?>
+										<a id="follow-btn" class="btn3" onclick="follow_business(<?php echo $follow_id; ?>, 1, <?php echo $to_id; ?>)">Follow</a>
+									<?php
+									}
+									elseif($follow_value == 1){?>
+										<a id="follow-btn" class="btn3">Following</a>
+									<?php
+									}
 								} ?>
-								<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
 							</div>
 						</div>
 						<?php 
@@ -640,6 +651,7 @@ else
 	var base_url = "<?php echo base_url(); ?>"
 	var user_thumb_upload_url = "<?php echo USER_THUMB_UPLOAD_URL; ?>"
 	var like_usr_cnt = "<?php echo $like_usr_cnt; ?>"
+	var user_type = "<?php echo $article_data['user_type']; ?>"
 </script>
 <?php 
 if($article_data['article_featured_image'] != "")

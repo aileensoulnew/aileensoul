@@ -408,11 +408,29 @@ function follow(id, status, to_id) {
                 $("#follow-btn").html("Follow");
             }
         },
-        error: function (jqXHR, status, err) {
-            console.error(err);
+        error: function (jqXHR, status, err) {            
             $("#follow-btn").removeAttr("style");
         },
     });    
+}
+
+function follow_business(id, status, to_id)
+{
+    $("#follow-btn").attr("style","pointer-events:none");
+    $.ajax({
+        url: base_url + 'user_post/add_business_follow',
+        type: "POST",
+        data: {"follow_id": id,"status":status,"to_id":to_id},
+        dataType: 'json',
+        success: function (result) {
+            $("#follow-btn").removeAttr("style");
+            $("#follow-btn").removeAttr("onclick");
+            $("#follow-btn").html("Following");
+        },
+        error: function (jqXHR, status, err) {            
+            $("#follow-btn").removeAttr("style");
+        },
+    });
 }
 $(document).ready(function(){
     

@@ -496,7 +496,7 @@ class Article extends MY_Controller {
             $this->data['related_article_data'] = $this->article_model->get_related_article($userid,$id_post_article);
 
             $is_userContactInfo = $this->userprofile_model->userContactStatus($userid, $article_data['user_id']);
-            $is_userFollowInfo = $this->userprofile_model->userFollowStatus($userid, $article_data['user_id']);
+            
             $this->data['to_id'] = $article_data['user_id'];
             if (count($is_userContactInfo) != 0) {
                 $this->data['contact_status'] = 1;
@@ -510,14 +510,32 @@ class Article extends MY_Controller {
                 $this->data['from_id'] = $is_userContactInfo['from_id'];
             }
 
-            if (count($is_userFollowInfo) != 0) {
-                $this->data['follow_status'] = 1;
-                $this->data['follow_id'] = $is_userFollowInfo['id'];
-                $this->data['follow_value'] = $is_userFollowInfo['status'];
-            } else {
-                $this->data['follow_value'] = 'new';
-                $this->data['follow_id'] = ($is_userFollowInfo['id'] != "" ? $is_userFollowInfo['id'] : "''");
-                $this->data['follow_status'] = 0;
+            if($article_data['id_post_article'] == 1)
+            {
+                $is_userFollowInfo = $this->userprofile_model->userFollowStatus($userid, $article_data['user_id']);
+                if (count($is_userFollowInfo) != 0) {
+                    $this->data['follow_status'] = 1;
+                    $this->data['follow_id'] = $is_userFollowInfo['id'];
+                    $this->data['follow_value'] = $is_userFollowInfo['status'];
+                } else {
+                    $this->data['follow_value'] = 'new';
+                    $this->data['follow_id'] = ($is_userFollowInfo['id'] != "" ? $is_userFollowInfo['id'] : "''");
+                    $this->data['follow_status'] = 0;
+                }
+            }
+            else
+            {
+                $is_userFollowInfo = $this->userprofile_model->userBusinessFollowStatus($userid, $article_data['user_id']);
+                // print_r($is_userFollowInfo);exit();
+                if (count($is_userFollowInfo) != 0) {
+                    $this->data['follow_status'] = 1;
+                    $this->data['follow_id'] = $is_userFollowInfo['id'];
+                    $this->data['follow_value'] = $is_userFollowInfo['status'];
+                } else {
+                    $this->data['follow_value'] = 'new';
+                    $this->data['follow_id'] = $userid;
+                    $this->data['follow_status'] = 0;
+                }
             }
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
