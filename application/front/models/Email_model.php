@@ -282,6 +282,9 @@ class Email_model extends CI_Model {
 
         //echo '<pre>'; print_r($this->email->print_debugger()); die();
         // if ($this->email->send()) {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            return true;
+        }
         if ($mail->send()) {
             //echo "111"; die();
             return true;
@@ -405,7 +408,9 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            return true;
+        }
         // if ($this->email->send()) {
         if ($mail->send()) {
             return TRUE;
@@ -523,6 +528,9 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            return true;
+        }
 
         // if ($this->email->send()) {
         if ($mail->send()) {

@@ -1732,16 +1732,10 @@ class User_post_model extends CI_Model {
                 $this->db->where('u.user_id', $value['user_id']);
                 $query = $this->db->get();
                 $user_data = $query->row_array();
-                $result_array[$key]['user_data'] = $user_data;
+                $searchPostData[$key]['user_data'] = $user_data;
             }
             else
-            {                
-                $this->db->select("count(*) as file_count")->from("user_post_file upf");
-                $this->db->where('upf.post_id', $value['id']);
-                $query = $this->db->get();
-                $total_post_files = $query->row_array('file_count');
-                $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
-
+            {
                 $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
                 $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
                 $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
@@ -1751,7 +1745,7 @@ class User_post_model extends CI_Model {
                 $this->db->where('bp.user_id', $value['user_id']);
                 $query = $this->db->get();
                 $user_data = $query->row_array();
-                $result_array[$key]['user_data'] = $user_data;
+                $searchPostData[$key]['user_data'] = $user_data;
             }
 
             if ($value['post_for'] == 'opportunity') {
@@ -1996,16 +1990,10 @@ class User_post_model extends CI_Model {
                 $this->db->where('u.user_id', $value['user_id']);
                 $query = $this->db->get();
                 $user_data = $query->row_array();
-                $result_array[$key]['user_data'] = $user_data;
+                $searchPostData[$key]['user_data'] = $user_data;
             }
             else
-            {                
-                $this->db->select("count(*) as file_count")->from("user_post_file upf");
-                $this->db->where('upf.post_id', $value['id']);
-                $query = $this->db->get();
-                $total_post_files = $query->row_array('file_count');
-                $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
-
+            {
                 $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
                 $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
                 $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
@@ -2015,7 +2003,7 @@ class User_post_model extends CI_Model {
                 $this->db->where('bp.user_id', $value['user_id']);
                 $query = $this->db->get();
                 $user_data = $query->row_array();
-                $result_array[$key]['user_data'] = $user_data;
+                $searchPostData[$key]['user_data'] = $user_data;
             }
 
             if ($value['post_for'] == 'opportunity') {
@@ -2208,13 +2196,7 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['user_data'] = $user_data;
             }
             else
-            {                
-                $this->db->select("count(*) as file_count")->from("user_post_file upf");
-                $this->db->where('upf.post_id', $value['id']);
-                $query = $this->db->get();
-                $total_post_files = $query->row_array('file_count');
-                $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
-
+            {
                 $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
                 $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
                 $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            

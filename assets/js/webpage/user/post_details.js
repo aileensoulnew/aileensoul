@@ -219,7 +219,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $('.modal-close').click();
         }
     });
-    $scope.post_like = function(post_id) {
+    $scope.post_like = function(post_id,parent_index) {
         $('#post-like-' + post_id).attr('style', 'pointer-events: none;');
         $http({
             method: 'POST',
@@ -229,11 +229,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function(success) {
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
@@ -259,6 +255,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                     }
                 }
             }
+            $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             setTimeout(function() {
                 $('#post-like-' + post_id).removeAttr('style');
             }, 100);
