@@ -1395,10 +1395,7 @@
 		
         <div class="right-add-box">            
         </div> 
-		<div class="box-border text-center">
-			<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=aileensoul-21&marketplace=amazon&region=IN&placement=0008135398&asins=0008135398&linkId=cfc85a9cfa9e1e86c32fcea8edcac9a8&show_border=false&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff">
-    </iframe>
-		</div>
+		
         <div class="all-contact">
             <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4>
             <div class="all-user-list">

@@ -1038,7 +1038,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .like-popup .like-detail h4{display:block; margin:0; width:100%; float:left; padding:2px 0 5px;}
 .like-popup .like-detail p{font-size:14px;}
 .like-popup .modal-body{padding:0;}
-.article-post-cus{}
+.article-preview header{background:none; position:inherit; }
 /***  end article page  ***/
 .gradient-bg{
     /*background:#fff;
@@ -1057,6 +1057,13 @@ header.profile-header .logo a{color:#5c5c5c;}
 
 }
 .left-part .user-profile-box .gradient-bg{background: #ffffff; 
+	background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 100%);
+	background: -webkit-linear-gradient(top, #f6f6f6 0%,#ffffff 100%);
+	background: linear-gradient(to bottom, #f6f6f6 0%,#ffffff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0 ); 
+
+}
+.left-section .user-profile-box .gradient-bg{background: #ffffff; 
 	background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 100%);
 	background: -webkit-linear-gradient(top, #f6f6f6 0%,#ffffff 100%);
 	background: linear-gradient(to bottom, #f6f6f6 0%,#ffffff 100%); 
@@ -3460,7 +3467,9 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .container-flex .middle-section{padding:0;} 
 .one-hd.verify-body .container-flex .middle-section{padding:0;} 
 /***  end new commen css  ***/
-
+.users-list .user-msg-list .users-list-li a{width:auto;}
+.profile-head-text a{color:#5c5c5c;}
+.bui-menu-profile h2 a{color:#7b7b7b;}
 /***  media query  ***/
 @media print {
     .rating-container .clear-rating {display: none;}
