@@ -280,7 +280,7 @@ class Customscript extends CI_Controller {
     public function check_city()
     {
         // $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41));";
-        $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
+        /*$sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
         $city_data1 = $this->db->query($sql)->result();
         echo count($city_data1);
         echo "<br>";
@@ -290,7 +290,52 @@ class Customscript extends CI_Controller {
         $sql = "SELECT * FROM ailee_user_student WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
         $city_data2 = $this->db->query($sql)->result();
         echo count($city_data2);
-        echo "<br>";
+        echo "<br>";*/
         // print_r($city_data2);
+
+        echo "<pre>";
+        $sql = "SELECT user_id FROM ailee_user WHERE user_id NOT IN (SELECT `user_id` FROM ailee_user_profession);";
+        $user_data = $this->db->query($sql)->result();
+        $i = 0;
+        foreach ($user_data as $_user_data) {
+            $sql1 = "SELECT * FROM ailee_job_reg WHERE user_id = $_user_data->user_id AND is_delete = '0' AND status = '1'";
+            $job_data = $this->db->query($sql1)->row();
+            if(isset($job_data))
+            {                
+                $_user_data->job_city_id = ($job_data->city_id);
+            }            
+
+            $sql2 = "SELECT * FROM ailee_recruiter WHERE user_id = $_user_data->user_id AND is_delete = '0' AND re_status = '1'";
+            $rec_data = $this->db->query($sql2)->row();
+            // $_user_data->rec =  ($rec_data);
+            if(isset($rec_data))
+            {                
+                $_user_data->rec_city = ($rec_data->re_comp_city);
+            }
+
+            $sql3 = "SELECT * FROM ailee_freelancer_hire_reg WHERE user_id = $_user_data->user_id AND is_delete = '0' AND status = '1'";
+            $fh_data = $this->db->query($sql3)->row();
+            // $_user_data->fh =  ($fh_data);
+            if(isset($fh_data))
+            {                
+                $_user_data->fh_city = ($fh_data->city);
+            }
+
+            $sql4 = "SELECT * FROM ailee_freelancer_post_reg WHERE user_id = $_user_data->user_id AND is_delete = '0' AND status = '1'";
+            $fa_data = $this->db->query($sql4)->row();
+            // $_user_data->fa = ($fa_data);
+            if(isset($fa_data))
+            {                
+                $_user_data->fa_city = ($fa_data->freelancer_post_city);
+            }
+            print_r($_user_data);            
+
+            if($i == 100)
+            {
+                exit;
+            }
+
+            $i++;
+        }
     }
 }
