@@ -198,7 +198,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         //dots[slideIndex - 1].className += " active";
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
-    $scope.post_like = function(post_id) {
+    $scope.post_like = function(post_id,parent_index) {
         $('#post-like-' + post_id).attr('style', 'pointer-events: none;');
         $http({
             method: 'POST',
@@ -210,11 +210,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         }).then(function(success) {
             if (success.data.message == 1) {
                 $('#post-like-' + post_id).removeAttr('style');
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
@@ -238,6 +234,8 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
+
+                $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         });
     }

@@ -294,7 +294,7 @@ app.controller('searchController', function($scope, $http, $compile) {
         });
     };
 
-    $scope.post_like = function(post_id) {
+    $scope.post_like = function(post_id,parent_index) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -327,6 +327,8 @@ app.controller('searchController', function($scope, $http, $compile) {
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
+
+                $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         });
     };

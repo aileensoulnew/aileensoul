@@ -163,7 +163,7 @@ class Userprofile_model extends CI_Model {
 
         foreach ($result_array as $key => $value) {
             if($login_user_id != $value['user_id'])
-            {      
+            {
                 $condition = "((uf.follow_from = '" . $login_user_id . "' AND uf.follow_to = '" . $value['user_id'] . "'))";
                 $this->db->select("uf.id as follow_user_id")->from("user_follow uf");
                 $this->db->where('uf.status', '1');
@@ -177,12 +177,11 @@ class Userprofile_model extends CI_Model {
                 else
                 {
                     $result_array[$key]["follow_status"] = 0;
-                }
-
-                if($value['follow_type'] == 2)
-                {
-                    $result_array[$key]["business_data"] = $this->get_business_data_from_user_id($value['user_id']);
-                }
+                }                
+            }
+            if($value['follow_type'] == 2)
+            {
+                $result_array[$key]["business_data"] = $this->get_business_data_from_user_id($value['user_id']);
             }
         }
         $data = array(
@@ -349,6 +348,7 @@ class Userprofile_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
@@ -515,7 +515,7 @@ class Userprofile_model extends CI_Model {
         $getDeleteUserPost = $this->deletePostUser($user_id);
 
         $result_array = array();
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         if ($getUserProfessionData && $getSameFieldProUser) {
             $this->db->where('up.user_id IN (' . $getSameFieldProUser . ')');
         } elseif ($getUserStudentData && $getSameFieldStdUser) {
@@ -569,6 +569,7 @@ class Userprofile_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
@@ -659,6 +660,7 @@ class Userprofile_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
@@ -1883,6 +1885,22 @@ class Userprofile_model extends CI_Model {
         // echo $sql;exit;
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function get_user_like_list($post_id = '') {
+        $this->db->select("upl.user_id,u.first_name,u.last_name,u.user_slug,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,ui.user_image")->from("user_post_like upl");
+        $this->db->join('user u', 'u.user_id = upl.user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = upl.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = upl.user_id', 'left');
+        $this->db->where('upl.post_id',$post_id);
+        $this->db->where('upl.is_like','1');
+        $this->db->where('ul.status','1');
+        $this->db->where('ul.is_delete', '0');
+        $this->db->order_by('upl.id', 'DESC');
+        $this->db->limit(2);
+        $query = $this->db->get();
+        $result_array = $query->result_array();
         return $result_array;
     }
 }
