@@ -231,7 +231,8 @@ class User_post_model extends CI_Model {
     }
 
     public function get_location() {
-        $this->db->select("city_name")->from("cities c");
+        $this->db->distinct();
+        $this->db->select("city_name")->from("cities");
         $this->db->where('status', '1');
         $this->db->where('state_id !=', '0');
         $query = $this->db->get();
