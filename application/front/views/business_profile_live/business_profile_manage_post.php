@@ -450,90 +450,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             				</div>
             				<div id="move-menu" class="">
             				</div>
-							
-                            <!-- <div id="myModal3" class="modal-post">
-                                <div class="modal-content-post">
-                                    <span class="close3">&times;</span>
-                                    <div class="post-editor post-edit-popup" id="close">
-                                        <?php echo form_open_multipart(base_url('business-profile/bussiness-profile-post-add/' . 'manage/' . $business_data[0]['user_id']), array('id' => 'artpostform', 'name' => 'artpostform', 'class' => 'clearfix dashboard-upload-image-form', 'onsubmit' => "imgval(event)")); ?>
-                                        <div class="main-text-area col-md-12"  >
-                                            <div class="popup-img-in"> 
-                                                <?php
-                                                if ($business_login_user_image != '') {
-                                                    ?>
-                                                    <?php
-                                                    if (IMAGEPATHFROM == 'upload') {
-                                                        if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $business_login_user_image)) {
-                                                            ?>
-                                                            <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Image">
-                                                        <?php } else {
-                                                            ?>
-                                                            <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="Business Profile">
-                                                            <?php
-                                                        }
-                                                    } else {
-                                                        $filename = $this->config->item('bus_profile_thumb_upload_path') . $business_login_user_image;
-                                                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                                                        if (!$info) {
-                                                            ?>
-                                                            <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Image">
-                                                        <?php } else {
-                                                            ?>
-                                                            <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="Business Profile">
-                                                            <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Image">
-                                                    <?php
-                                                }
-                                                ?>
-                                            </div>
-                                            <div id="myBtn1"  class="editor-content col-md-10 popup-text" >
-                                                <textarea id= "test-upload_product" placeholder="Post Your Product...."  onKeyPress=check_length(this.form); onKeyDown=check_length(this.form); 
-                                                          name=my_text rows=4 cols=30 class="post_product_name" style="position: relative;" tabindex="1"></textarea>
-                                                <div class="fifty_val">                   
-                                                    <input size=1 value=50 name=text_num class="text_num" disabled="disabled"> 
-                                                </div>
-                                                <div class="padding-left camera_in camer_h" ><i class=" fa fa-camera " ></i> </div>
-                                            </div>
-                                        </div>
-                                        <div class="row"></div>
-                                        <div  id="text"  class="editor-content col-md-12 popup-textarea" >
-                                            <textarea id="test-upload_des" name="product_desc" class="description" placeholder="Enter Description" tabindex="2"></textarea>
-                                            <output id="list"></output>
-                                        </div>
-                                        <div class="print_privew_post">
-                                        </div>
-                                        <div class="preview"></div>
-                                        <div id="data-vid" class="large-8 columns">
-                                        </div>
-                                        <h2 id="name-vid"></h2>
-                                        <p id="size-vid"></p>
-                                        <p id="type-vid"></p>
-                                        <div class="popup-social-icon">
-                                            <ul class="editor-header">
-                                                <li>
-                                                    <div class="col-md-12"> <div class="form-group">
-                                                            <input id="file-1" type="file" class="file" name="postattach[]"  multiple class="file" data-overwrite-initial="false" data-min-file-count="2" style="display: none;">
-                                                        </div></div>
-                                                    <label for="file-1">
-                                                        <i class=" fa fa-camera upload_icon"  ><span class="upload_span_icon"> Photo </span> </i>
-                                                        <i class=" fa fa-video-camera upload_icon"> <span class="upload_span_icon">Video </span> </i> 
-                                                        <i class="fa fa-music upload_icon"><span class="upload_span_icon"> Audio</span> </i>
-                                                        <i class=" fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr margin_btm">
-                                            <button type="submit"  value="Submit">Post</button>    
-                                        </div>
-                                        <?php echo form_close(); ?>
-                                    </div>
-                                </div>
-                            </div> -->
+                            
                             <?php
                             if ($this->session->flashdata('error')) {
                                 echo $this->session->flashdata('error');
@@ -566,18 +483,18 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <span class="no-img-post"  ng-if="post.user_data.business_user_image == '' || post.question_data.is_anonymously == '1'">A</span>
                                                 </div>
                                                                 
-                                                <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.business_user_image != ''">
+                                                <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.business_user_image">
                                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
                                                         <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.user_data.business_user_image}}">
                                                     </a>
                                                 </div>
-                                                                
-                                                <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image == ''">
+
+                                                <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && !post.user_data.business_user_image">
                                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
-                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.business_user_image == ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                        <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
                                                     </a>
                                                 </div>
-                                                                
+
                                                 <div class="post-detail">
                                                     <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                                         <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
@@ -1971,6 +1888,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             var user_slug = '<?php echo $business_data[0]['business_slug']; ?>';
             var cmt_maxlength = '700';
             var business_slug = '<?php echo $login_bussiness_data->business_slug; ?>';
+            var company_name = '<?php echo $login_bussiness_data->company_name; ?>';
             var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
             
             var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';

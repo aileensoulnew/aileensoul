@@ -151,6 +151,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     $scope.to_user_id = to_user_id;
     $scope.live_slug = business_slug;
     $scope.user_id = user_id;
+    $scope.company_name = company_name;
     
     $scope.get_business_info = function(){
         $http({
@@ -1616,6 +1617,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
                 formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
                 formFileDataOpp.append('post_for', $scope.opp.post_for);
+                formFileDataOpp.append('company_name', $scope.company_name);
 
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -1625,79 +1627,79 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 var bar = $('.progress-bar');
                 var percent = $('.sr-only');
                 $http.post(base_url + 'user_post/post_opportunity_business', formFileDataOpp,
-                        {
-                            transformRequest: angular.identity,
-                            headers: {'Content-Type': undefined, 'Process-Data': false},
-                            uploadEventHandlers: {
-                                progress: function(e) {
-                                     if (e.lengthComputable) {
-                                        progress = Math.round(e.loaded * 100 / e.total);
+                {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined, 'Process-Data': false},
+                    uploadEventHandlers: {
+                        progress: function(e) {
+                             if (e.lengthComputable) {
+                                progress = Math.round(e.loaded * 100 / e.total);
 
-                                        bar.width((progress - 1) +'%');
-                                        percent.html((progress - 1) +'%');
+                                bar.width((progress - 1) +'%');
+                                percent.html((progress - 1) +'%');
 
-                                        //console.log("progress: " + progress + "%");
-                                        if (e.loaded == e.total) {
-                                            /*setTimeout(function(){
-                                                $('#progress_div').hide();
-                                                progress = 0;
-                                                bar.width(progress+'%');
-                                                percent.html(progress+'%');
-                                            }, 2000);*/
-                                            //console.log("File upload finished!");
-                                            //console.log("Server will perform extra work now...");
-                                        }
-                                    }
+                                //console.log("progress: " + progress + "%");
+                                if (e.loaded == e.total) {
+                                    /*setTimeout(function(){
+                                        $('#progress_div').hide();
+                                        progress = 0;
+                                        bar.width(progress+'%');
+                                        percent.html(progress+'%');
+                                    }, 2000);*/
+                                    //console.log("File upload finished!");
+                                    //console.log("Server will perform extra work now...");
                                 }
                             }
-                        })
-                        .then(function (success) {
+                        }
+                    }
+                })
+                .then(function (success) {
 
-                            if (success) {                                
-                                $('.post_loader').hide();
-                                $scope.opp.description = '';
-                                $scope.opp.opptitle = '';
-                                $scope.opp.job_title = '';
-                                $scope.opp.location = '';
-                                $scope.opp.field = '';
-                                $scope.opp.postfiles = '';
-                                document.getElementById('fileInput').value = '';
-                                $('#job_title .input').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-                                $('#job_title .input').css('width', '100%');
+                    if (success) {                                
+                        $('.post_loader').hide();
+                        $scope.opp.description = '';
+                        $scope.opp.opptitle = '';
+                        $scope.opp.job_title = '';
+                        $scope.opp.location = '';
+                        $scope.opp.field = '';
+                        $scope.opp.postfiles = '';
+                        document.getElementById('fileInput').value = '';
+                        $('#job_title .input').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
+                        $('#job_title .input').css('width', '100%');
 
-                                $('#location .input').attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
-                                $('#location .input').css('width', '100%');
+                        $('#location .input').attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
+                        $('#location .input').css('width', '100%');
 
 
-                                $("#post_opportunity")[0].reset();
+                        $("#post_opportunity")[0].reset();
 
-                                $('.file-preview-thumbnails').html('');
-                                //$scope.postData.splice(0, 0, success.data[0]);
-                                getUserPost(pg,1);
-                                $scope.IsVisible = true;                                
-                                // $scope.recentpost = success.data;
+                        $('.file-preview-thumbnails').html('');
+                        //$scope.postData.splice(0, 0, success.data[0]);
+                        getUserPost(pg,1);
+                        $scope.IsVisible = true;                                
+                        // $scope.recentpost = success.data;
 
-                                bar.width(100+'%');
-                                percent.html(100+'%');
-                                setTimeout(function(){                                    
-                                    progress = 0;
-                                    // bar.width(progress+'%');
-                                    // percent.html(progress+'%');
-                                }, 2000);
+                        bar.width(100+'%');
+                        percent.html(100+'%');
+                        setTimeout(function(){                                    
+                            progress = 0;
+                            // bar.width(progress+'%');
+                            // percent.html(progress+'%');
+                        }, 2000);
 
-                                imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
+                        imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
 
-                                cntImgOpp = 0;
-                                formFileDataOpp = new FormData();
-                                fileCountOpp = 0;
-                                fileNamesArrOpp = [];
-                                formFileExtOpp = [];
-                                $("#selectedFilesOpp").html("");
-                                $("#fileCountOpp").text("");
+                        cntImgOpp = 0;
+                        formFileDataOpp = new FormData();
+                        fileCountOpp = 0;
+                        fileNamesArrOpp = [];
+                        formFileExtOpp = [];
+                        $("#selectedFilesOpp").html("");
+                        $("#fileCountOpp").text("");
 
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
-                            }
-                        });
+                        $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                    }
+                });
             }
 
         } else {

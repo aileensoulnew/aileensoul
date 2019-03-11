@@ -1976,8 +1976,8 @@ class User_post extends MY_Controller {
         echo json_encode($post_data);
     }
 
-    public function post_opportunity_business() {        
-       
+    public function post_opportunity_business() {
+
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
@@ -1992,6 +1992,7 @@ class User_post extends MY_Controller {
         $weblink = (isset($_POST['weblink']) && $_POST['weblink'] != 'undefined' && $_POST['weblink'] != '' ? $_POST['weblink'] : '');
         $is_anonymously = (isset($_POST['is_anonymously']) && $_POST['is_anonymously'] != 'undefined' && $_POST['is_anonymously'] != '' ? '1' : '0');
         $category = (isset($_POST['category']) && $_POST['category'] != "undefined" && $_POST['category'] != "" ? json_decode($_POST['category'], TRUE) : "");
+        $company_name = (isset($_POST['company_name']) && $_POST['company_name'] != "undefined" && $_POST['company_name'] != "" ? $_POST['company_name'] : "");
 
 
         $error = '';
@@ -2119,6 +2120,7 @@ class User_post extends MY_Controller {
                 $insert_data['opportunity'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['field'] = $field;
                 $insert_data['other_field'] = $other_field;
+                $insert_data['company_name'] = $company_name;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');
