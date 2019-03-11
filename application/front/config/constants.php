@@ -429,6 +429,8 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('ART_USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_experience/');
     define('ART_USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/art_user_education/');
 
+    define('ARTICLE_FEATURED_UPLOAD_URL', BUCKETLINK . 'uploads/article_featured/');
+
 } else {
     //USER PHOTO 
     define('USER_WEB_IMAGE_URL', BASEURL . 'admin/../uploads/users/main/');
@@ -691,6 +693,8 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('ART_USER_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/art_user_addicourse/');
     define('ART_USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/art_user_experience/');
     define('ART_USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/art_user_education/');
+
+    define('ARTICLE_FEATURED_UPLOAD_URL', BASEURL . 'uploads/article_featured/');
 
 }
 

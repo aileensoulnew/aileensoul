@@ -379,6 +379,10 @@
                                 <div class="form-group" ng-if="opp.field_edit == '0'">
                                     <input id="otherField_edit{{recentpost.post_data.id}}" name="otherField_edit{{recentpost.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+                                </div>
                                 <input type="hidden" name="post_for" class="form-control" value="">
                                 <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{recentpost.post_data.id}}">
                             </div>
@@ -959,6 +963,10 @@
                                     </div>
                                     <div class="form-group" ng-if="opp.field_edit == '0'">
                                         <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                     </div>
                                     <input type="hidden" name="post_for" class="form-control" value="">
                                     <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
@@ -1830,6 +1838,10 @@
                                 </div>
                                 <div class="form-group" ng-if="opp.field == '0'">
                                     <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                 </div>
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">

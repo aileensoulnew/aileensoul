@@ -282,6 +282,26 @@ class Customscript extends CI_Controller {
         set_time_limit(0);
         ini_set("memory_limit","512M");
         // $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41));";
+        $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
+        $city_data1 = $this->db->query($sql)->result();
+        echo count($city_data1);
+        echo "<br>";
+        // print_r($city_data1);
+        echo "<br>";
+
+        $sql = "SELECT * FROM ailee_user_student WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
+        $city_data2 = $this->db->query($sql)->result();
+        echo count($city_data2);
+        echo "<br>";
+        print_r($city_data2);
+    }
+
+    //add old user to new user from job,rec,freelance hire and freelance apply(Freelance Post) table
+    public function old_user_to_new_user()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        // $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41));";
         /*$sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
         $city_data1 = $this->db->query($sql)->result();
         echo count($city_data1);
@@ -302,6 +322,7 @@ class Customscript extends CI_Controller {
         $k = 0;
         $count = 0; 
         echo count($user_data)."<br>";
+        // print_r($user_data);exit();
         foreach ($user_data as $_user_data) {
             $city = "";
             $job_title = "";
@@ -384,8 +405,9 @@ class Customscript extends CI_Controller {
                 }
                 if($city != "" && $job_title != "" && ($field != "" || $fa_field != ""))
                 {
+                    // echo $city."  --  ".$job_title." -- ".$field."   field    ".$fa_field;
                     $k++;
-                    $_user_data->city = $city;
+                    $_user_data->city = $city;                    
                     $_user_data->job_title = $job_title;
                     if($fa_field == 1 || $fa_field == 0)
                     {
@@ -449,7 +471,8 @@ class Customscript extends CI_Controller {
                         }
                     }
 
-                    if($_user_data->job_title)
+                    
+                    if(isset($_user_data->job_title) && !empty($_user_data->job_title))
                     {
                         if(is_numeric($_user_data->job_title))
                         {
@@ -459,8 +482,8 @@ class Customscript extends CI_Controller {
                         {
                             $s = "LOWER(name) = '".strtolower(trim($_user_data->job_title))."'";
                         }
-                        $sql_jt = "SELECT * FROM ailee_job_title WHERE ".$s;
-                        // echo "<br>";
+                        $sql_jt = "SELECT * FROM ailee_job_title WHERE ".addcslashes($s);
+                        // echo $sql_jt."<br>";
                         $job_title_arr = $this->db->query($sql_jt)->row();
                         if($job_title_arr)
                         {
@@ -481,17 +504,17 @@ class Customscript extends CI_Controller {
                             $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
                             $_user_data->title_id = $jobTitleId;
                         }
-                    }
-                    print_r($_user_data);
-                    $data1 = array(
-                        "user_id" => $_user_data->user_id,
-                        "designation" => $_user_data->title_id,
-                        "field" => $_user_data->field,
-                        "other_field" => ($_user_data->other_field != '' ? $_user_data->other_field : ''),
-                        "city" => $_user_data->city
-                    );
-                    // print_r($data1);
-                    $user_prof_data = $this->common->insert_data_getid($data1, 'user_profession');
+
+                        $data1 = array(
+                            "user_id" => $_user_data->user_id,
+                            "designation" => $_user_data->title_id,
+                            "field" => $_user_data->field,
+                            "other_field" => ($_user_data->other_field != '' ? $_user_data->other_field : ''),
+                            "city" => $_user_data->city
+                        );
+                        // print_r($data1);
+                        $user_prof_data = $this->common->insert_data_getid($data1, 'user_profession');
+                    }                    
                 }
                 
             }

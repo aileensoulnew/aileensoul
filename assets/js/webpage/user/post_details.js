@@ -571,6 +571,9 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $scope.opp.job_title_edit = edit_jobtitle;
             $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
             $("#opptitleedit" + post_id).val($scope.postData[index].opportunity_data.opptitle);
+
+            $scope.opp.company_name_edit = $scope.postData[index].opportunity_data.company_name;
+
             if (city_names.length > 0) {
                 $('#location .input').attr('placeholder', '');
                 $('#location .input').css('width', '200px');
@@ -584,6 +587,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }).prop('selected', true);
             $("#description_edit_" + post_id).focus();
             setTimeout(function() {
+                $("#company_name_edit").val($scope.postData[index].opportunity_data.company_name);    
                 //$('#description_edit_' + post_id).focus();                
                 setCursotToEnd(document.getElementById('description_edit_' + post_id));
             }, 100);
@@ -896,6 +900,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var opptitle = $scope.opp.opptitleedit;
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
+            var company_name_edit = $scope.opp.company_name_edit;
             var fields = $("#field_edit" + post_id).val();
             if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '')) {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
@@ -916,6 +921,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.postData[postIndex].post_data.post_for);
+                form_data.append('company_name', company_name_edit);
                 form_data.append('post_id', post_id);
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -932,6 +938,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
                         $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                         $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
+                        $scope.postData[postIndex].opportunity_data.company_name = success.data.company_name;
                         $("#post_opportunity_edit")[0].reset();
                         $("#edit-opp-post-" + post_id).hide();
                         $('#post-opp-detail-' + post_id).show();

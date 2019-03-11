@@ -919,6 +919,7 @@ class User_post extends MY_Controller {
         $weblink = (isset($_POST['weblink']) && $_POST['weblink'] != 'undefined' && $_POST['weblink'] != '' ? $_POST['weblink'] : '');
         $is_anonymously = (isset($_POST['is_anonymously']) && $_POST['is_anonymously'] != 'undefined' && $_POST['is_anonymously'] != '' ? '1' : '0');
         $category = (isset($_POST['category']) && $_POST['category'] != "undefined" && $_POST['category'] != "" ? json_decode($_POST['category'], TRUE) : "");
+        $company_name = (isset($_POST['company_name']) && $_POST['company_name'] != "undefined" && $_POST['company_name'] != "" ? $_POST['company_name'] : "");
 
 
         $error = '';
@@ -1044,6 +1045,7 @@ class User_post extends MY_Controller {
                 $insert_data['location'] = $city_id;
                 $insert_data['opportunity'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['field'] = $field;
+                $insert_data['company_name'] = $company_name;
                 $insert_data['other_field'] = $other_field;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
@@ -1523,6 +1525,7 @@ class User_post extends MY_Controller {
             $opp_desc = $_POST['description'];
             $opptitle = $_POST['opptitle'];
             $opp_field = $_POST['field'];
+            $company_name = (isset($_POST['company_name']) && $_POST['company_name'] != "undefined" && $_POST['company_name'] != "" ? $_POST['company_name'] : "");
             if($opp_field == 0)
                 $other_field = $_POST['other_field'];
             else
@@ -1580,6 +1583,7 @@ class User_post extends MY_Controller {
             $update_data['opportunity'] = $opp_desc;
             $update_data['field'] = $opp_field;
             $update_data['other_field'] = $other_field;
+            $update_data['company_name'] = $company_name;
             $update_data['modify_date'] = date('Y-m-d H:i:s', time());
             $update_post_data = $this->common->update_data($update_data, 'user_opportunity', 'post_id', $post_id);
         } else if ($post_for == 'question') {
@@ -1636,6 +1640,7 @@ class User_post extends MY_Controller {
                     'opportunity' => $opp_desc,
                     'opptitle' => $opportunity_data['opptitle'],
                     'oppslug' => $opportunity_data['oppslug'],
+                    'company_name' => $opportunity_data['company_name'],
                 );                
             } else if ($post_for == 'simple') {
                 $description = nl2br($this->common->make_links($description));

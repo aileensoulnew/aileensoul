@@ -2406,6 +2406,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
                 formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
                 formFileDataOpp.append('post_for', $scope.opp.post_for);
+                formFileDataOpp.append('company_name', $scope.opp.company_name);
 
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -2534,6 +2535,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.opp.post_for);
+                form_data.append('company_name', $scope.opp.company_name_edit);
                 form_data.append('post_id', post_id);
 
                 $('body').removeClass('modal-open');
@@ -2541,38 +2543,38 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $("#login_ajax_load"+post_id).show();
                 $("#save_"+post_id).attr("style","pointer-events: none;");
                 $http.post(base_url + 'user_post/edit_post_opportunity', form_data,
-                        {
-                            transformRequest: angular.identity,
+                {
+                    transformRequest: angular.identity,
 
-                            headers: {'Content-Type': undefined, 'Process-Data': false}
-                        })
-                        .then(function (success) {
-                            $("#login_ajax_load"+post_id).hide();
-                            $("#save_"+post_id).attr("style","pointer-events: all;");
-                            if (success.data.response == 1) {
-                                $scope.postData[postIndex].opportunity_data.opptitle = success.data.opptitle;
-                                $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
-                                $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
-                                $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
-                                $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
-                                $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
-                                $("#post_opportunity_edit")[0].reset();
+                    headers: {'Content-Type': undefined, 'Process-Data': false}
+                })
+                .then(function (success) {
+                    $("#login_ajax_load"+post_id).hide();
+                    $("#save_"+post_id).attr("style","pointer-events: all;");
+                    if (success.data.response == 1) {
+                        $scope.postData[postIndex].opportunity_data.opptitle = success.data.opptitle;
+                        $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
+                        $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
+                        $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
+                        $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
+                        $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
+                        $scope.postData[postIndex].opportunity_data.company_name = success.data.company_name;
+                        $("#post_opportunity_edit")[0].reset();
 
-                                $("#edit-opp-post-"+post_id).hide();
-                                $('#post-opp-detail-' + post_id).show();   
-                                // $('#opp-post-opportunity-for-' + post_id).html(success.data.opp_opportunity_for);
-                                // $('#opp-post-location-' + post_id).html(success.data.opp_location);
-                                // $('#opp-post-field-' + post_id).html(success.data.opp_field);
-                                // $('#opp-post-opportunity-' + post_id).html(success.data.opportunity);
+                        $("#edit-opp-post-"+post_id).hide();
+                        $('#post-opp-detail-' + post_id).show();   
+                        // $('#opp-post-opportunity-for-' + post_id).html(success.data.opp_opportunity_for);
+                        // $('#opp-post-location-' + post_id).html(success.data.opp_location);
+                        // $('#opp-post-field-' + post_id).html(success.data.opp_field);
+                        // $('#opp-post-opportunity-' + post_id).html(success.data.opportunity);
 
-                                //                                $scope.opp.description = '';
-                                //                                $scope.opp.job_title = '';
-                                //                                $scope.opp.location = '';
-                                //                                $scope.opp.field = '';
-                                //                                $scope.opp.postfiles = '';
-                            }
-
-                        });
+                        // $scope.opp.description = '';
+                        // $scope.opp.job_title = '';
+                        // $scope.opp.location = '';
+                        // $scope.opp.field = '';
+                        // $scope.opp.postfiles = '';
+                    }
+                });
             }
 
         }
@@ -2785,6 +2787,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 form_data.append('weblink', $scope.ask.web_link);
                 form_data.append('post_for', $scope.ask.post_for);
                 form_data.append('is_anonymously', $scope.ask.is_anonymously);
+                form_data.append('company_name', $scope.opp.company_name);
                 form_data.append('post_id', post_id);
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -3687,6 +3690,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }
         else if(post_for == "opportunity")
         {
+            console.log($scope.postData[index]);
             var edit_location = [];
             var edit_jobtitle = [];
             var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
@@ -3710,7 +3714,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             });
             $scope.opp.job_title_edit = edit_jobtitle;
 
-            // $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
+            $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
             $("#opptitleedit"+post_id).val($scope.postData[index].opportunity_data.opptitle);
 
             if(city_names.length > 0)
@@ -3730,8 +3734,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
             $scope.opp.field_edit = field_id;
             $scope.opp.otherField_edit = "";
+
+            $scope.opp.company_name_edit = $scope.postData[index].opportunity_data.company_name;
+
             setTimeout(function(){
                 // $scope.opp.otherField_edit = field;
+                $("#company_name" + post_id).val($scope.postData[index].opportunity_data.company_name);    
                 $("#otherField_edit" + post_id).val(field);    
             },100);
 
@@ -3768,34 +3776,32 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             data: 'post_id=' + post_id + '&post_for=' + post_for,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    $scope.is_edit = 1;
-                    if (post_for == "opportunity") {
-                        $scope.opp.description = success.data.opportunity;
-                        $scope.opp.job_title = success.data.opportunity_for;
-                        $scope.opp.location = success.data.location;
-                        $scope.opp.field = success.data.field;
-                        $scope.opp.edit_post_id = post_id;
-                        $("#opportunity-popup").modal('show');
+        .then(function (success) {
+            $scope.is_edit = 1;
+            if (post_for == "opportunity") {
+                $scope.opp.description = success.data.opportunity;
+                $scope.opp.job_title = success.data.opportunity_for;
+                $scope.opp.location = success.data.location;
+                $scope.opp.field = success.data.field;
+                $scope.opp.edit_post_id = post_id;
+                $("#opportunity-popup").modal('show');
 
-                    } else if (post_for == "simple") {
-                        $scope.sim.description = success.data.description;
-                        $scope.sim.edit_post_id = post_id;
+            } else if (post_for == "simple") {
+                $scope.sim.description = success.data.description;
+                $scope.sim.edit_post_id = post_id;
 
-                        $("#post-popup").modal('show');
+                $("#post-popup").modal('show');
 
-                    } else if (post_for == "question") {
-                        $scope.ask.ask_que = success.data.question;
-                        $scope.ask.ask_description = success.data.description;
-                        $scope.ask.related_category = success.data.tag_name;
-                        $scope.ask.ask_field = success.data.field;
-                        $scope.ask.edit_post_id = post_id;
+            } else if (post_for == "question") {
+                $scope.ask.ask_que = success.data.question;
+                $scope.ask.ask_description = success.data.description;
+                $scope.ask.related_category = success.data.tag_name;
+                $scope.ask.ask_field = success.data.field;
+                $scope.ask.edit_post_id = post_id;
 
-                        $("#ask-question").modal('show');
-                    }
-                });
-
-
+                $("#ask-question").modal('show');
+            }
+        });
     }
 
     $scope.sendEditComment = function (comment_id,post_id) {

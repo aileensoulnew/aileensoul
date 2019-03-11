@@ -317,7 +317,7 @@ class Userprofile_model extends CI_Model {
             $result_array[$key]['user_data'] = $user_data;
 
             if ($value['post_for'] == 'opportunity') {
-                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c");
+                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field, uo.company_name")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c");
                 $this->db->join('industry_type it', 'it.industry_id = uo.field', 'left');
                 $this->db->where('uo.id', $value['post_id']);
                 $this->db->where('FIND_IN_SET(jt.title_id, uo.`opportunity_for`) !=', 0);

@@ -1277,6 +1277,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
                 formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
                 formFileDataOpp.append('post_for', $scope.opp.post_for);
+                formFileDataOpp.append('company_name', $scope.opp.company_name);
 
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -1371,7 +1372,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             description = description.trim();
             var opptitle = $scope.opp.opptitleedit;
             var job_title = $scope.opp.job_title_edit;
-            var location = $scope.opp.location_edit;
+            var location = $scope.opp.location_edit;            
             var fields = $("#field_edit"+post_id).val();
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
 
@@ -1399,6 +1400,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.opp.post_for);
+                form_data.append('company_name', $scope.opp.company_name);
                 form_data.append('post_id', post_id);
 
                 $('body').removeClass('modal-open');
@@ -2572,7 +2574,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             });
             $scope.opp.job_title_edit = edit_jobtitle;
 
-            $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
+            $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;            
             $("#opptitleedit"+post_id).val($scope.postData[index].opportunity_data.opptitle);
 
             if(city_names.length > 0)
@@ -2591,6 +2593,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             $scope.opp.field_edit = field_id;
             $scope.opp.otherField_edit = "";
+            $scope.opp.company_name_edit = $scope.postData[index].opportunity_data.company_name;
             setTimeout(function(){
                 // $scope.opp.otherField_edit = field;
                 $("#otherField_edit" + post_id).val(field);    
@@ -3067,6 +3070,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             $scope.opp.field_edit = field_id;
             $scope.opp.otherField_edit = "";
+
+            $scope.opp.company_name_edit = $scope.recentpost.opportunity_data.company_name;            
             setTimeout(function(){
                 // $scope.opp.otherField_edit = field;
                 $("#otherField_edit" + post_id).val(field);    
@@ -3457,6 +3462,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var opptitle = $scope.opp.opptitleedit;
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
+            var company_name = $scope.opp.company_name_edit;
             var fields = $("#field_edit"+post_id).val();
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
 
@@ -3484,6 +3490,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.opp.post_for);
+                form_data.append('company_name', company_name);
                 form_data.append('post_id', post_id);
 
                 $('body').removeClass('modal-open');
