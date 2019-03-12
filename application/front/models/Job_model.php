@@ -2594,4 +2594,30 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $preferred_job_info = $query->row_array();        
         return $preferred_job_info;
     }
+
+    function get_all_job_list() {
+        $this->db->select('rp.*,jt.name')->from('rec_post rp');
+        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->where('DATEDIFF(rp.post_last_date,NOW()) >= ','0');
+        $query = $this->db->get();
+        $result_data = $query->result_array();
+        echo $this->db->last_query();exit();
+        return $result_data;
+    }
+
+    function convert_freelancer_job_to_feed() {
+        $this->db->select('fp.*,ct.city_name as location')->from('freelancer_post fp');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->where('fp.status', '1');
+        $this->db->where('fp.is_delete', '0');
+        $this->db->where('fhr.city !=', '0');
+        $this->db->where('DATEDIFF(fp.post_last_date,NOW()) >= ','0');
+        $query = $this->db->get();
+        $result_data = $query->result_array();        
+        echo $this->db->last_query();exit();
+        return $result_data;
+    }
 }
