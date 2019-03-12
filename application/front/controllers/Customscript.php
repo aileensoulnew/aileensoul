@@ -539,215 +539,162 @@ class Customscript extends CI_Controller {
     public function old_user_to_new_user_2()
     {
         set_time_limit(0);
-        ini_set("memory_limit","512M");
-        // $sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41));";
-        /*$sql = "SELECT * FROM ailee_user_profession WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
-        $city_data1 = $this->db->query($sql)->result();
-        echo count($city_data1);
-        echo "<br>";
-        // print_r($city_data1);
-        echo "<br>";
-
-        $sql = "SELECT * FROM ailee_user_student WHERE city IN (SELECT `city_id` FROM ailee_cities WHERE `state_id` IN( SELECT `state_id` FROM `ailee_states` WHERE `country_id` IN (SELECT country_id FROM `ailee_countries` WHERE `country_name` = 'India')));";
-        $city_data2 = $this->db->query($sql)->result();
-        echo count($city_data2);
-        echo "<br>";*/
-        // print_r($city_data2);
+        ini_set("memory_limit","512M");        
 
         echo "<pre>";
-        $sql = "SELECT user_id,work_job_title,work_job_industry,work_job_other_industry,work_job_city FROM ailee_job_reg WHERE user_id IN (SELECT user_id FROM ailee_user WHERE user_id NOT IN (SELECT `user_id` FROM ailee_user_profession)) AND is_delete = '0' AND STATUS = '1' AND work_job_title != '' AND (work_job_industry != '' OR work_job_other_industry != '') AND work_job_city != '';";
-        $job_data = $this->db->query($sql)->result();
-        print_r($job_data);
+        $sql = "SELECT user_id,work_job_title,work_job_industry,work_job_other_industry,work_job_city FROM ailee_job_reg WHERE user_id IN (SELECT user_id FROM ailee_user WHERE user_id NOT IN (SELECT `user_id` FROM ailee_user_profession)) AND is_delete = '0' AND status = '1' AND work_job_title != '' AND (work_job_industry != '' OR work_job_other_industry != '') AND work_job_city != '';";
+        $job_data = $this->db->query($sql)->result_array();
+        // print_r($job_data);
 
-        $sql1 = "SELECT user_id,freelancer_post_city,freelancer_post_field,freelancer_post_area FROM ailee_freelancer_post_reg WHERE user_id IN (SELECT user_id FROM ailee_user WHERE user_id NOT IN (SELECT `user_id` FROM ailee_user_profession)) AND is_delete = '0' AND STATUS = '1' AND freelancer_post_city != '' AND freelancer_post_field > 0 AND freelancer_post_area != '';";
-        $fa_data = $this->db->query($sql1)->result();
-        print_r($fa_data);exit();
-        $i = 0;
-        $k = 0;
-        $count = 0; 
-        echo count($user_data)."<br>";
-        // print_r($user_data);exit();
-        foreach ($user_data as $_user_data) {
-            $city = "";
-            $job_title = "";
-            $field = "";
-
-            $sql_1 = "SELECT * FROM ailee_user_student WHERE user_id = $_user_data->user_id";
+        $sql1 = "SELECT user_id,freelancer_post_city,freelancer_post_field,freelancer_post_area FROM ailee_freelancer_post_reg WHERE user_id IN (SELECT user_id FROM ailee_user WHERE user_id NOT IN (SELECT `user_id` FROM ailee_user_profession)) AND is_delete = '0' AND status = '1' AND freelancer_post_city != '' AND freelancer_post_field > 0 AND freelancer_post_area != '';";
+        $fa_data = $this->db->query($sql1)->result_array();
+        // print_r($fa_data);exit();
+        echo count($fa_data);
+        foreach ($fa_data as $_fa_data) {
+            $sql_1 = "SELECT * FROM ailee_user_student WHERE user_id = ".$_fa_data['user_id'];
             $stud_data = $this->db->query($sql_1)->row();
             if(empty($stud_data))
             {
-                $count++;
-                $sql1 = "SELECT * FROM ailee_job_reg WHERE user_id = $_user_data->user_id AND is_delete = '0' AND status = '1'";
-                $job_data = $this->db->query($sql1)->row();
-                if(isset($job_data))
+                $field = "";
+                $other_field = "";                        
+                $index = array_search($_fa_data['user_id'], array_column($job_data, 'user_id'));
+                if($index > -1)
                 {
-                    if($job_data->city_id > 0)
-                    {
-                        $city = $job_data->city_id;
-                    }
-                    if($job_data->designation != "")
-                    {
-                        $job_title = $job_data->designation;
-                    }
-                    if(!$job_title && $job_data->work_job_title != "")
-                    {
-                        $job_title = $job_data->work_job_title;
-                    }
-                    if($job_data->work_job_industry != "")
-                    {
-                        $field = $job_data->work_job_industry;
-                    }
+                    // echo $index."---Index<-----><br>";
                 }
-
-
-                $sql4 = "SELECT * FROM ailee_freelancer_post_reg WHERE user_id = $_user_data->user_id AND is_delete = '0' AND status = '1'";
-                $fa_data = $this->db->query($sql4)->row();
-                // $_user_data->fa = ($fa_data);
-                if(isset($fa_data))
+                else
                 {
-                    if(!$city && $fa_data->freelancer_post_city > 0)
+                    $fa_field = $_fa_data['freelancer_post_field'];
+                    if($fa_field == 1 || $fa_field == 0 || $fa_field == 15)
                     {
-                        $city = $fa_data->freelancer_post_city;
-                    }
-                    if(!$job_title && $fa_data->designation != "")
-                    {
-                        $job_title = $fa_data->designation;
-                    }
-                    if($fa_data->freelancer_post_field > 0)
-                    {
-                        $_user_data->fa_field = $fa_field = $fa_data->freelancer_post_field;
-                    }                
-                }
-                if($city != "" && $job_title != "" && ($field != "" || $fa_field != ""))
-                {
-                    // echo $city."  --  ".$job_title." -- ".$field."   field    ".$fa_field;
-                    $k++;
-                    $_user_data->city = $city;                    
-                    $_user_data->job_title = $job_title;
-                    if($fa_field == 1 || $fa_field == 0)
-                    {
-                        $_user_data->field = 198;
+                        $field = 198;
                     }
                     elseif($fa_field == 3)
                     {
-                        $_user_data->field = 149;
+                        $field = 149;
                     }
                     elseif($fa_field == 4)
                     {
-                        $_user_data->field = 43;
+                        $field = 43;
                     }
                     elseif($fa_field == 5)
                     {
-                        $_user_data->field = 124;
+                        $field = 124;
                     }
                     elseif($fa_field == 6)
                     {
-                        $_user_data->field = 141;
+                        $field = 141;
                     }
                     elseif($fa_field == 7)
                     {
-                        $_user_data->field = 80;
+                        $field = 80;
                     }
                     elseif($fa_field == 8)
                     {
-                        $_user_data->field = 215;
+                        $field = 215;
                     }
                     elseif($fa_field == 9)
                     {
-                        $_user_data->field = 115;
+                        $field = 115;
                     }
                     elseif($fa_field == 10)
                     {
-                        $_user_data->field = 148;
+                        $field = 148;
                     }
                     elseif($fa_field == 11)
                     {
-                        $_user_data->field = 244;
+                        $field = 244;
                     }
                     elseif($fa_field == 12)
                     {
-                        $_user_data->field = 114;
+                        $field = 114;
                     }
                     else
                     {
-                        if($field != "")
-                        {
-                            // $_user_data->field = $field;   
-                            $sql_ji = "SELECT * FROM ailee_job_industry WHERE industry_id = $field";                        
-                            $job_indu_arr = $this->db->query($sql_ji)->row();
-                            $_user_data->field = 0;   
-                            $_user_data->other_field = $job_indu_arr->industry_name;
-                            
-                        }
-                        else
-                        {
-                            $_user_data->field = 0;   
-                            $_user_data->other_field = ucwords(strtolower($_user_data->job_title));
-                        }
+                        $sql_cat = "SELECT * FROM ailee_category WHERE category_id = $fa_field";                        
+                        $cat_arr = $this->db->query($sql_cat)->row();
+                        $field = 0;   
+                        $other_field = $cat_arr->category_name."<br>";
+                        
+                    }
+                    $skills =  explode(",", $_fa_data['freelancer_post_area']);                
+                    $sql_1 = "SELECT skill FROM ailee_skill WHERE skill_id = $skills[0]";
+                    $job_title = $this->db->query($sql_1)->row()->skill;                
+                    
+                    $s = "LOWER(name) = '".strtolower(trim($job_title))."'";
+                    $sql_jt = "SELECT * FROM ailee_job_title WHERE ".($s);
+                    // echo $sql_jt."<br>";exit();
+                    $job_title_arr = $this->db->query($sql_jt)->row();
+                    if($job_title_arr)
+                    {
+                        // print_r($job_title_arr);
+                        $job_title_id = $job_title_arr->title_id;
+                        // exit();
+                    }
+                    else
+                    {
+                        $data = array();
+                        $job_slug = $this->common->clean($job_title);
+                        $data['name'] = $job_title;
+                        $data['created_date'] = date('Y-m-d H:i:s', time());
+                        $data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $data['status'] = 'draft';
+                        $data['job_title_img'] = $job_slug.".png";
+                        $data['slug'] = $job_slug;
+                        $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+                        $job_title_id = $jobTitleId;
                     }
 
-                    
-                    if(isset($_user_data->job_title) && !empty($_user_data->job_title))
-                    {
-                        if(is_numeric($_user_data->job_title))
-                        {
-                            $s = "title_id = $_user_data->job_title";
-                        }
-                        else
-                        {
-                            $s = "LOWER(name) = '".strtolower(trim($_user_data->job_title))."'";
-                        }
-                        $sql_jt = "SELECT * FROM ailee_job_title WHERE ".addcslashes($s);
-                        // echo $sql_jt."<br>";
-                        $job_title_arr = $this->db->query($sql_jt)->row();
-                        if($job_title_arr)
-                        {
-                            // print_r($job_title_arr);
-                            $_user_data->title_id = $job_title_arr->title_id;
-                            // exit();
-                        }
-                        else
-                        {
-                            $data = array();
-                            $job_slug = $this->common->clean($_user_data->job_title);
-                            $data['name'] = $_user_data->job_title;
-                            $data['created_date'] = date('Y-m-d H:i:s', time());
-                            $data['modify_date'] = date('Y-m-d H:i:s', time());
-                            $data['status'] = 'draft';
-                            $data['job_title_img'] = $job_slug.".png";
-                            $data['slug'] = $job_slug;
-                            $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
-                            $_user_data->title_id = $jobTitleId;
-                        }
-
-                        $data1 = array(
-                            "user_id" => $_user_data->user_id,
-                            "designation" => $_user_data->title_id,
-                            "field" => $_user_data->field,
-                            "other_field" => ($_user_data->other_field != '' ? $_user_data->other_field : ''),
-                            "city" => $_user_data->city
-                        );
-                        // print_r($data1);
-                        $user_prof_data = $this->common->insert_data_getid($data1, 'user_profession');
-                    }                    
+                    $data1 = array(
+                        "user_id" => $_fa_data['user_id'],
+                        "designation" => $job_title_id,
+                        "field" => $field,
+                        "other_field" => ($other_field != '' ? $other_field : ''),
+                        "city" => $_fa_data['freelancer_post_city']
+                    );
+                    print_r($data1);
+                    $user_prof_data = $this->common->insert_data_getid($data1, 'user_profession');
                 }
-                
-            }
-
-            /*if($_user_data->user_id == 67)
-            {
-                exit();
-            }*/
-
-
-            /*if($i == 100)
-            {
-                exit;
-            }*/
-
-            $i++;
+            }            
         }
-        echo "<br>".$k;
-        echo "<br>count".$count;
+        echo "Done";
+        exit();        
+    }
+
+    public function old_user_to_new_user_3()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");        
+
+        echo "<pre>";
+        $sql = "SELECT user_id,work_job_title,work_job_industry,work_job_other_industry,work_job_city FROM ailee_job_reg WHERE user_id IN (SELECT user_id FROM ailee_user WHERE user_id NOT IN (SELECT `user_id` FROM ailee_user_profession)) AND is_delete = '0' AND status = '1' AND work_job_title != '' AND (work_job_industry != '' OR work_job_other_industry != '') AND work_job_city != '';";
+        $job_data = $this->db->query($sql)->result_array();
+        // print_r($job_data);exit();
+
+        echo count($job_data);
+        foreach ($job_data as $_job_data) {
+            $sql_1 = "SELECT * FROM ailee_user_student WHERE user_id = ".$_job_data['user_id'];
+            $stud_data = $this->db->query($sql_1)->row();
+            if(empty($stud_data))
+            {
+                $sql_cat = "SELECT * FROM ailee_job_industry WHERE industry_id = ".$_job_data['work_job_industry'];                        
+                $cat_arr = $this->db->query($sql_cat)->row();                
+                $other_field = $cat_arr->industry_name;
+                $field = 0;
+                $city = explode(",", $_job_data['work_job_city']);
+
+                $data1 = array(
+                    "user_id" => $_job_data['user_id'],
+                    "designation" => $_job_data['work_job_title'],
+                    "field" => $field,
+                    "other_field" => ($other_field != '' ? $other_field : ''),
+                    "city" => $city[0]
+                );
+                print_r($data1);
+                $user_prof_data = $this->common->insert_data_getid($data1, 'user_profession');                
+            }            
+        }
+        echo "Done";
+        exit();        
     }
 }
