@@ -917,7 +917,307 @@ class Customscript extends CI_Controller {
                 $new_hobbies = $_hobbies->user_hobbies;
             }
             $_hobbies->new_hobbie = trim($new_hobbies,",");
+            $data = array("user_hobbies"=>$_hobbies->new_hobbie);
+            $updatdata = $this->common->update_data($data, 'user_info', 'user_id', $_hobbies->user_id);
             print_r($_hobbies);
         }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_research()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_research WHERE status = '1'";
+        $job_research = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        echo count($job_research)."<br>";
+        // print_r($job_research);        
+        foreach ($job_research as $_job_research) {
+            // print_r($_hobbies->user_hobbies);
+            $sql1 = "SELECT * FROM ailee_user_research WHERE user_id = '".$_job_research['user_id']."' AND research_title = '".$_job_research['research_title']."'";
+            $usr_research = $this->db->query($sql1)->row();
+            if(isset($usr_research) && !empty($usr_research))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_research['research_document'] != "")
+                {
+                    $fileName = $_job_research['research_document'];
+                    $job_user_research_upload_path = $this->config->item('job_user_research_upload_path');
+                    $user_research_upload_path = $this->config->item('user_research_upload_path');
+                    $file = $job_user_research_upload_path.$_job_research['research_document'];
+                    $newfile = $user_research_upload_path.$_job_research['research_document'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+                $user_id = $_job_research['user_id'];
+                $research_title = $_job_research['research_title'];
+                $research_desc = $_job_research['research_desc'];
+                $research_field = $_job_research['research_field'];
+                $research_other_field = $_job_research['research_other_field'];
+                $research_url = $_job_research['research_url'];
+                $research_publish_date = $_job_research['research_publish_date'];
+                $status = $_job_research['status'];
+                $created_date = $_job_research['created_date'];
+                $modify_date = $_job_research['modify_date'];
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'research_title'            => $research_title,
+                    'research_desc'             => $research_desc,
+                    'research_field'            => $research_field,
+                    'research_other_field'      => $research_other_field,
+                    'research_url'              => $research_url,
+                    'research_publish_date'     => $research_publish_date,
+                    'research_document'         => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_research = $this->common->insert_data_getid($data,'user_research');
+                print_r($_job_research);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_award()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_award WHERE status = '1'";
+        $job_award = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        echo count($job_award)."<br>";
+        foreach ($job_award as $_job_award) {
+            $sql1 = "SELECT * FROM ailee_user_award WHERE user_id = '".$_job_award['user_id']."' AND award_title = '".$_job_award['award_title']."'";
+            $usr_award = $this->db->query($sql1)->row();
+            if(isset($usr_award) && !empty($usr_award))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_award['award_file'] != "")
+                {
+                    $fileName = $_job_award['award_file'];
+                    $job_user_award_upload_path = $this->config->item('job_user_award_upload_path');
+                    $user_award_upload_path = $this->config->item('user_award_upload_path');
+                    $file = $job_user_award_upload_path.$_job_award['award_file'];
+                    $newfile = $user_award_upload_path.$_job_award['award_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_award['user_id'];
+                $award_title = $_job_award['award_title'];
+                $award_org = $_job_award['award_org'];
+                $award_date = $_job_award['award_date'];
+                $award_desc = $_job_award['award_desc'];
+                $status = $_job_award['status'];
+                $created_date = $_job_award['created_date'];
+                $modify_date = $_job_award['modify_date'];
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'award_title'               => $award_title,
+                    'award_org'                 => $award_org,
+                    'award_date'                => $award_date,
+                    'award_desc'                => $award_desc,
+                    'award_file'                => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                // $id_user_award = $this->common->insert_data_getid($data,'user_award');
+                print_r($_job_award);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_patent()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_patent WHERE status = '1'";
+        $job_patent = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        echo count($job_patent)."<br>";
+        foreach ($job_patent as $_job_patent) {
+            $sql1 = "SELECT * FROM ailee_user_patent WHERE user_id = '".$_job_patent['user_id']."' AND patent_title = '".$_job_patent['patent_title']."'";
+            $usr_patent = $this->db->query($sql1)->row();
+            if(isset($usr_patent) && !empty($usr_patent))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_patent['patent_file'] != "")
+                {
+                    $fileName = $_job_patent['patent_file'];
+                    $job_user_patent_upload_path = $this->config->item('job_user_patent_upload_path');
+                    $user_patent_upload_path = $this->config->item('user_patent_upload_path');
+                    $file = $job_user_patent_upload_path.$_job_patent['patent_file'];
+                    $newfile = $user_patent_upload_path.$_job_patent['patent_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_patent['user_id'];
+                $patent_title = $_job_patent['patent_title'];
+                $patent_creator = $_job_patent['patent_creator'];
+                $patent_number = $_job_patent['patent_number'];
+                $patent_date = $_job_patent['patent_date'];
+                $patent_office = $_job_patent['patent_office'];
+                $patent_url = $_job_patent['patent_url'];
+                $patent_desc = $_job_patent['patent_desc'];
+                $status = $_job_patent['status'];
+                $created_date = $_job_patent['created_date'];
+                $modify_date = $_job_patent['modify_date'];
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'patent_title'              => $patent_title,
+                    'patent_creator'            => $patent_creator,
+                    'patent_number'             => $patent_number,
+                    'patent_date'               => $patent_date,
+                    'patent_office'             => $patent_office,
+                    'patent_url'                => $patent_url,
+                    'patent_desc'               => $patent_desc,
+                    'patent_file'               => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                // $id_user_patent = $this->common->insert_data_getid($data,'user_patent');
+                print_r($_job_patent);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_activity()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_extra_activity WHERE status = '1'";
+        $job_activity = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        echo count($job_activity)."<br>";
+        foreach ($job_activity as $_job_activity) {
+            $sql1 = "SELECT * FROM ailee_user_extra_activity WHERE user_id = '".$_job_activity['user_id']."' AND activity_participate = '".$_job_activity['activity_participate']."' AND activity_org = '".$_job_activity['activity_org']."'";
+            $usr_activity = $this->db->query($sql1)->row();
+            if(isset($usr_activity) && !empty($usr_activity))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_activity['activity_file'] != "")
+                {
+                    $fileName = $_job_activity['activity_file'];
+                    $user_activity_upload_path = $this->config->item('user_activity_upload_path');
+                    $job_user_activity_upload_path = $this->config->item('job_user_activity_upload_path');
+                    $file = $job_user_activity_upload_path.$_job_activity['activity_file'];
+                    $newfile = $user_activity_upload_path.$_job_activity['activity_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_activity['user_id'];
+                $activity_participate = $_job_activity['activity_participate'];
+                $activity_org = $_job_activity['activity_org'];
+                $activity_start_date = $_job_activity['activity_start_date'];
+                $activity_end_date = $_job_activity['activity_end_date'];
+                $activity_desc = $_job_activity['activity_desc'];                
+                $status = $_job_activity['status'];
+                $created_date = $_job_activity['created_date'];
+                $modify_date = $_job_activity['modify_date'];
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'activity_participate'      => $activity_participate,
+                    'activity_org'              => $activity_org,
+                    'activity_start_date'       => $activity_start_date,
+                    'activity_end_date'         => $activity_end_date,
+                    'activity_desc'             => $activity_desc,                    
+                    'activity_file'             => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                // $id_user_patent = $this->common->insert_data_getid($data,'user_extra_activity');
+                print_r($_job_activity);
+            }
+        }
+        echo "Done";
     }
 }
