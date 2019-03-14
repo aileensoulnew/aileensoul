@@ -71,8 +71,8 @@ header("Pragma: no-cache"); // HTTP/1.0
         <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
 		<style>
             .pr-pl-box{position: fixed; bottom: 0; background:rgba(255,255,255,1); color:#5c5c5c; padding: 10px; width: 100%; text-align: center; z-index: 9999;}
-            .btn-pr-pl{padding: 1px 10px; background:#1b8ab9; color:#fff; border-radius: 3px; display: inline-block;}
-            .btn-pr-pl:hover{background:#1d7398; color:#fff; text-decoration: none;}
+            .btn-pr-pl{padding: 1px 10px; background:#5c5c5c; color:#fff; border-radius: 3px; display: inline-block;}
+            .btn-pr-pl:hover{background:#7b7b7b; color:#fff; text-decoration: none;}
 			.footer{margin-bottom:35px;}
         </style>
 
@@ -85,20 +85,14 @@ header("Pragma: no-cache"); // HTTP/1.0
         <div class="main-login">
             <header>
                 <div class="container">
-                    <div class="row">
+                    <div class="main-reg-pd">
                         <div class="col-md-2 col-sm-3 col-lg-2 col-xs-6">
                             <?php $this->load->view('main_logo'); ?>
                         </div>
 						<div class="col-lg-10 col-md-10 col-sm-9 col-xs-6 right-cus-new-hdr">
 							<ul class="test-cus">
-								<li><a href="<?php echo $job_right_profile_link; ?>">Job</a></li>
-								<li><a href="<?php echo $recruiter_right_profile_link; ?>">Recruiter</a></li>
-								<li><a href="<?php echo $business_right_profile_link; ?>">Business</a></li>
-								<li><a href="<?php echo $artist_right_profile_link; ?>">Artistic</a></li>
-								<li><a href="<?php echo $freelance_hire_right_profile_link; ?>">Hire Freelancer</a></li>
-								<li><a href="<?php echo $freelance_apply_right_profile_link; ?>">Freelance Jobs</a></li>
 								
-								<li><a class="btn-n" href="#" data-target="#login" data-toggle="modal">Login</a></li>
+								<li><a class="btn-new-2" href="#" data-target="#login" data-toggle="modal">Login</a></li>
 								
 							</ul>
 							<span class="mob-right-bar">
@@ -132,69 +126,16 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <div class="clearfix"></div>
 				<div class="container">
                     <div class="mid-trns">
-                        <div class="">
+                        <div class="main-reg-pd">
                             <div class="col-md-7 col-sm-6">
                                 <div class="top-middle">
                                     <div class="text-effect">
                                         <h1>
-                                        <p>We provide platform & opportunities to</p>
-                                        <p>every person in the world to make their career.</p>
+                                        <p>We provide platform & opportunities to every person in the world to make their career.</p>
                                         </h1>
                                     </div>
                                 </div>
-                                <div class="bottom-middle">
-                                    <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel">
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            <div class="item active">  
-                                                <div class="carousel-caption">
-                                                    <img src="<?php echo base_url('assets/img/job1.png?ver=' . time()); ?>" alt="Job Profile">
-                                                    <div class="carousel-text">
-                                                        <h3>Job Profile</h3>
-                                                        <p>Find best job options and connect with recruiters.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item"> 
-                                                <div class="carousel-caption">
-                                                    <img src="<?php echo base_url('assets/img/rec.png?ver=' . time()); ?>" alt="Recruiter">
-                                                    <div class="carousel-text">
-                                                        <h3>Recruiter Profile</h3>
-                                                        <p>Hire quality employees here.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item"> 
-                                                <div class="carousel-caption">
-                                                    <img src="<?php echo base_url('assets/img/freelancer.png?ver=' . time()); ?>" alt="Freelancer">
-                                                    <div class="carousel-text">
-                                                        <h3>Freelance Profile</h3>
-                                                        <p>Hire freelancers and also find freelance work.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item"> 
-                                                <div class="carousel-caption">
-                                                    <img src="<?php echo base_url('assets/img/business.png?ver=' . time()); ?>" alt="Business">
-                                                    <div class="carousel-text">
-                                                        <h3>Business Profile</h3>
-                                                        <p>Grow your business network.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item"> 
-                                                <div class="carousel-caption">
-                                                    <img src="<?php echo base_url('assets/img/art.png?ver=' . time()); ?>" alt="Artistic">
-                                                    <div class="carousel-text">
-                                                        <h3>Artistic Profile</h3>
-                                                        <p> Show your art & talent to the world.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                           
                             </div>
                             <div class="col-md-5 col-sm-6 custom-padd">
                                 <div class="login">
@@ -212,10 +153,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                     <input tabindex="2" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
                                                 </div>
                                             </div>
+											<div class="col-md-12 col-sm-12">
+												<div id="err-res-key" class="err-flname"></div>
+											</div>
                                         </div>
-                                        <div class="form-group">
-                                            <div id="err-res-key" class="err-flname"></div>
-                                        </div>
+                                     
 
                                         <div class="form-group">
                                             <input tabindex="3" type="email" name="email_reg" id="email_reg" class="form-control input-sm" placeholder="Email Address" autocomplete="new-email">
@@ -285,8 +227,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </div>
-                                        <p>
-                                            <button id="create-acc-new" title="Create an account" tabindex="12" class="btn1">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                        <p class="create-ac-bottom">
+                                            <button id="create-acc-new" title="Create an account" tabindex="12" class="btn-new-2">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                         </p>
                                     </form>
                                 </div>
