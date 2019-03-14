@@ -118,7 +118,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 							<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
 						</div>
 						<div class="btn-right">
-							<button id="login-new" title="Login" tabindex="1"  class="btn1-cus">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+							<button id="login-new" title="Login" tabindex="1"  class="btn-new-2">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 							<a tabindex="1" data-target="#forgotPassword" data-toggle="modal" data-dismiss="modal" class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
 						</div>
 					</form>
