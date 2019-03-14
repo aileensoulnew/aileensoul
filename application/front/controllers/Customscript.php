@@ -10,6 +10,7 @@ class Customscript extends CI_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('business_model');
+        $this->load->model('job_model');
         $this->load->library('S3');
     }
 
@@ -696,5 +697,227 @@ class Customscript extends CI_Controller {
         }
         echo "Done";
         exit();        
+    }
+
+    public function convert_to_feed()
+    {
+        $job_data = $this->job_model->get_all_job_list();
+        echo count($job_data);
+        echo "<pre>";
+        foreach ($job_data as $_job_data) {
+            
+            $user_id = $_job_data['user_id'];
+            $post_for = 'opportunity';
+            $user_type = '1';
+            $created_date = $_job_data['created_date'];
+            $status = 'publish';
+            $is_delete = '0';
+            $data = array(
+                'user_id'       => $user_id,
+                'post_for'      => $post_for,
+                'user_type'     => $user_type,
+                'created_date'  => $created_date,
+                'status'        => $status,
+                'is_delete'     => $is_delete
+            );            
+            $main_post_id = $this->common->insert_data_getid($data,'user_post');//data,table
+            if($main_post_id > 0)
+            {
+                $opptitle = substr($_job_data['name'], 0,150);                
+                $opp_for = $_job_data['post_name'];                
+                $location = $_job_data['city'];                
+                $opportunity = $_job_data['post_description'];
+
+                $sql_ji = "SELECT * FROM ailee_job_industry WHERE industry_id = ".$_job_data['industry_type'];
+                $job_indu_arr = $this->db->query($sql_ji)->row();
+                $field = 0;
+                $other_field = $job_indu_arr->industry_name;
+
+                $opptitle_slug = $this->common->set_slug(substr($opptitle, 0,100), 'oppslug', 'user_opportunity');
+                $company_name = $_job_data['comp_name'];
+
+                $data1 = array(
+                    "post_id"           => $main_post_id,
+                    "opptitle"          => $opptitle,
+                    "opportunity_for"   => $opp_for,
+                    "location"          => $location,
+                    "opportunity"       => $opportunity,
+                    "field"             => $field,
+                    "other_field"       => $other_field,
+                    "oppslug"           => $opptitle_slug,
+                    "company_name"      => $company_name,
+                    "modify_date"       => $created_date,
+                );
+                $opp_post_id = $this->common->insert_data_getid($data1, 'user_opportunity');
+                $data2 = array('post_id' => $opp_post_id);
+                $this->common->update_data($data2,'user_post','id',$main_post_id);
+                print_r($data1);
+                echo "<br><br><br><br>";
+            }
+        }
+    }
+
+    public function convert_freelancer_job_to_feed()
+    {
+        $job_data = $this->job_model->convert_freelancer_job_to_feed();
+        echo count($job_data);
+        echo "<pre>";
+        foreach ($job_data as $_job_data) {
+            
+            $user_id = $_job_data['user_id'];
+            $post_for = 'opportunity';
+            $user_type = '1';
+            $created_date = $_job_data['created_date'];
+            $status = 'publish';
+            $is_delete = '0';
+            $data = array(
+                'user_id'       => $user_id,
+                'post_for'      => $post_for,
+                'user_type'     => $user_type,
+                'created_date'  => $created_date,
+                'status'        => $status,
+                'is_delete'     => $is_delete
+            );
+            // print_r($data);
+            // echo $_job_data['post_name'];
+            echo "<br>";
+            $main_post_id = $this->common->insert_data_getid($data,'user_post');//data,table
+            if($main_post_id > 0)
+            {
+                $opptitle = substr($_job_data['post_name'], 0,150);
+
+                $s = "LOWER(name) = '".(strtolower(trim($_job_data['post_name'])))."'";
+                
+                $sql_jt = "SELECT * FROM ailee_job_title WHERE ".$s;
+                // echo $sql_jt."<br>";
+                $job_title_arr = $this->db->query($sql_jt)->row();
+                // print_r($job_title_arr);
+                if($job_title_arr)
+                {
+                    // print_r($job_title_arr);
+                    $title_id = $job_title_arr->title_id;
+                    // exit();
+                }
+                else
+                {
+                    $data = array();
+                    $job_slug = $this->common->clean($_job_data['post_name']);
+                    $data['name'] = $_job_data['post_name'];
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = 'draft';
+                    $data['job_title_img'] = $job_slug.".png";
+                    $data['slug'] = $job_slug;
+                    // print_r($data);
+                    $title_id = $this->common->insert_data_getid($data, 'job_title');
+                }
+
+
+                $opp_for = $title_id;
+                $location = $_job_data['location'];
+                $opportunity = $_job_data['post_description'];
+                $fa_field = $_job_data['post_field_req'];
+
+                if($fa_field == 1 || $fa_field == 0 || $fa_field == 15)
+                {
+                    $field = 198;
+                }
+                elseif($fa_field == 3)
+                {
+                    $field = 149;
+                }
+                elseif($fa_field == 4)
+                {
+                    $field = 43;
+                }
+                elseif($fa_field == 5)
+                {
+                    $field = 124;
+                }
+                elseif($fa_field == 6)
+                {
+                    $field = 141;
+                }
+                elseif($fa_field == 7)
+                {
+                    $field = 80;
+                }
+                elseif($fa_field == 8)
+                {
+                    $field = 215;
+                }
+                elseif($fa_field == 9)
+                {
+                    $field = 115;
+                }
+                elseif($fa_field == 10)
+                {
+                    $field = 148;
+                }
+                elseif($fa_field == 11)
+                {
+                    $field = 244;
+                }
+                elseif($fa_field == 12)
+                {
+                    $field = 114;
+                }
+
+                $opptitle_slug = $this->common->set_slug(substr($opptitle, 0,100), 'oppslug', 'user_opportunity');
+
+                $company_name = "";
+
+                $data1 = array(
+                    "post_id"           => $main_post_id,
+                    "opptitle"          => $opptitle,
+                    "opportunity_for"   => $opp_for,
+                    "location"          => $location,
+                    "opportunity"       => $opportunity,
+                    "field"             => $field,
+                    "other_field"       => "",
+                    "oppslug"           => $opptitle_slug,
+                    "company_name"      => $company_name,
+                    "modify_date"       => $created_date,
+                );
+                $opp_post_id = $this->common->insert_data_getid($data1, 'user_opportunity');
+                $data2 = array('post_id' => $opp_post_id);
+                $this->common->update_data($data2,'user_post','id',$main_post_id);
+                print_r($data1);
+                echo "<br><br><br><br>";
+            }
+        }
+    }
+
+    public function convert_detail_job_to_user_hobbies()
+    {
+        $sql = "SELECT user_id,user_hobbies FROM ailee_job_reg WHERE user_hobbies != '' AND status = '1' AND is_delete = '0'";
+        $hobbies = $this->db->query($sql)->result();
+        // print_r($hobbies);
+        echo "<pre>";
+        foreach ($hobbies as $_hobbies) {
+            // print_r($_hobbies->user_hobbies);
+            $sql1 = "SELECT user_hobbies FROM ailee_user_info WHERE user_id = ".$_hobbies->user_id;
+            $hobbies1 = $this->db->query($sql1)->row();
+            $_hobbies->user_user_hobbies = $hobbies1->user_hobbies;
+            $job_hobbie = explode(",", $_hobbies->user_hobbies);
+            $user_hobbie = explode(",", $hobbies1->user_hobbies);
+            $new_hobbies = "";
+            if(!empty($user_hobbie))
+            {                
+                foreach ($job_hobbie as $key => $value) {
+                    if(!in_array($value, $user_hobbie))
+                    {
+                        $new_hobbies .= $value.",";
+                    }
+                }
+                $new_hobbies = $hobbies1->user_hobbies.','.$new_hobbies;
+            }
+            else
+            {
+                $new_hobbies = $_hobbies->user_hobbies;
+            }
+            $_hobbies->new_hobbie = trim($new_hobbies,",");
+            print_r($_hobbies);
+        }
     }
 }

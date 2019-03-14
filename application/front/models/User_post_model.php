@@ -1334,11 +1334,11 @@ class User_post_model extends CI_Model {
         $sql = "SELECT main.* FROM (SELECT upf.post_id,upf.filename,'image' as filetype,up.created_date FROM ailee_user_post_file upf 
                 LEFT JOIN ailee_user_post up ON up.id = upf.post_id 
                 LEFT JOIN ailee_user_profile_update upu ON upu.id = up.post_id 
-                WHERE upf.file_type = 'image' AND up.user_id = $user_id AND up.status = 'publish' AND up.is_delete = '0' 
+                WHERE upf.file_type = 'image' AND up.user_id = $user_id AND up.user_type = '1' AND up.status = 'publish' AND up.is_delete = '0' 
                 UNION
                 SELECT up.id,upu.data_value as filename,upu.data_key as filetype,up.created_date FROM ailee_user_profile_update upu 
                 LEFT JOIN ailee_user_post up ON upu.id = up.post_id 
-                WHERE upu.user_id = $user_id AND ( up.post_for = 'profile_update' OR up.post_for = 'cover_update') AND up.status = 'publish' AND up.is_delete = '0'
+                WHERE upu.user_id = $user_id AND up.user_type = '1' AND ( up.post_for = 'profile_update' OR up.post_for = 'cover_update') AND up.status = 'publish' AND up.is_delete = '0'
                 ) as main ";
         if ($getDeleteUserPost) {
             $sql .= "WHERE main.post_id NOT IN ($getDeleteUserPost) ";
@@ -1375,11 +1375,11 @@ class User_post_model extends CI_Model {
         $sql = "SELECT main.* FROM (SELECT upf.post_id,upf.filename,'image' as filetype,up.created_date FROM ailee_user_post_file upf 
                 LEFT JOIN ailee_user_post up ON up.id = upf.post_id 
                 LEFT JOIN ailee_user_profile_update upu ON upu.id = up.post_id 
-                WHERE upf.file_type = 'image' AND up.user_id = $user_id AND up.status = 'publish' AND up.is_delete = '0' 
+                WHERE upf.file_type = 'image' AND up.user_id = $user_id AND up.user_type = '1' AND up.status = 'publish' AND up.is_delete = '0' 
                 UNION
                 SELECT up.id,upu.data_value as filename,upu.data_key as filetype,up.created_date FROM ailee_user_profile_update upu 
                 LEFT JOIN ailee_user_post up ON upu.id = up.post_id 
-                WHERE upu.user_id = $user_id AND ( up.post_for = 'profile_update' OR up.post_for = 'cover_update') AND up.status = 'publish' AND up.is_delete = '0'
+                WHERE upu.user_id = $user_id AND up.user_type = '1' AND ( up.post_for = 'profile_update' OR up.post_for = 'cover_update') AND up.status = 'publish' AND up.is_delete = '0'
                 ) as main ";
         if ($getDeleteUserPost) {
             $sql .= "WHERE main.post_id NOT IN ($getDeleteUserPost) ";
@@ -1407,6 +1407,7 @@ class User_post_model extends CI_Model {
         }
         $this->db->where('up.status', 'publish');
         $this->db->where('up.is_delete', '0');
+        $this->db->where('up.user_type', '1');
         $this->db->order_by('upf.id', 'desc');
         $this->db->limit('6');
         $query = $this->db->get();
@@ -1429,6 +1430,7 @@ class User_post_model extends CI_Model {
         }
         $this->db->where('up.status', 'publish');
         $this->db->where('up.is_delete', '0');
+        $this->db->where('up.user_type', '1');
         $this->db->order_by('upf.id', 'desc');        
         $query = $this->db->get();
         $userDashboardVideoAll = $query->result_array();
@@ -1452,6 +1454,7 @@ class User_post_model extends CI_Model {
         }
         $this->db->where('up.status', 'publish');
         $this->db->where('up.is_delete', '0');
+        $this->db->where('up.user_type', '1');
         $this->db->order_by('upf.id', 'desc');
         $this->db->limit('6');
         $query = $this->db->get();
@@ -1469,6 +1472,7 @@ class User_post_model extends CI_Model {
         $this->db->where('upf.file_type', 'audio');
         $this->db->where('up.status', 'publish');
         $this->db->where('up.is_delete', '0');
+        $this->db->where('up.user_type', '1');
         if($user_id != "")
         {
             $this->db->where('up.user_id', $user_id);
@@ -1492,6 +1496,7 @@ class User_post_model extends CI_Model {
         $this->db->where('upf.file_type', 'pdf');
         $this->db->where('up.status', 'publish');
         $this->db->where('up.is_delete', '0');
+        $this->db->where('up.user_type', '1');
         if($user_id != "")
         {
             $this->db->where('up.user_id', $user_id);

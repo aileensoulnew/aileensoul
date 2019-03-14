@@ -9,6 +9,7 @@ class Artist_userprofile extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        header("Location: /",TRUE,301);
         $this->load->library('form_validation');
         $this->load->library('user_agent');
         $this->load->model('email_model');

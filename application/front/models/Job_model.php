@@ -2603,7 +2603,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $this->db->where('DATEDIFF(rp.post_last_date,NOW()) >= ','0');
         $query = $this->db->get();
         $result_data = $query->result_array();
-        echo $this->db->last_query();exit();
+        // echo $this->db->last_query();exit();
         return $result_data;
     }
 
@@ -2617,7 +2617,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $this->db->where('DATEDIFF(fp.post_last_date,NOW()) >= ','0');
         $query = $this->db->get();
         $result_data = $query->result_array();        
-        echo $this->db->last_query();exit();
+        // echo $this->db->last_query();exit();
         return $result_data;
     }
 }

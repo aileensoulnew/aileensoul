@@ -6,6 +6,7 @@ class Freelancer_hire_live extends MY_Controller {
 
 	public function __construct() {
 		parent::__construct();
+		header("Location: /",TRUE,301);
 		$this->load->library('form_validation');
 		$this->load->model('email_model');
 		$this->load->model('user_model');
