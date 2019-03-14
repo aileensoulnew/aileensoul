@@ -1422,6 +1422,7 @@ $login_user_id = $this->session->userdata('aileenuser');
             
             var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';
             var to_user_id = '<?php echo $business_data[0]['user_id']; ?>';
+            var company_name = '<?php echo $company_name_txt; ?>';
             
             var app = angular.module("businessProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
         </script>
