@@ -20,7 +20,7 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
             <div class="row">
 
                 <div class="fw text-center">
-                    <ul class="footer-ul">
+                    <ul class="footer-ul fw">
                         <?php
                         if (!$this->session->userdata('aileenuser')) {
                             ?>
@@ -28,19 +28,12 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                             <li><a target="_self" title="Create an Account" href="<?php echo base_url('registration'); ?>">Sign Up</a></li>
                             <?php
                         }
-                        ?>
-                        <li><a target="_self" title="Job Profile" href="<?php echo $job_right_profile_link; ?>">Job Profile</a></li>
-                        <li><a target="_self" title="Recruiter Profile" href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a></li>
-						<li><a target="_self" title="Freelance Employer" href="<?php echo $freelance_hire_right_profile_link; ?>">Freelance Employer Profile</a></li>
-                        <li><a target="_self" title="Freelance Jobs" href="<?php echo $freelance_apply_right_profile_link; ?>">Freelancer Profile</a></li>
-						
-                        <!--<li><a title="Freelance Jobs" href="<?php //echo base_url('freelance-jobs'); ?>">Freelance Jobs</a></li> 
-                        <li><a title="Freelance Profile" href="<?php //echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>">Freelance Profile</a></li> -->
+                        ?>                        
                         <li><a target="_self" title="Business Profile" href="<?php echo $business_right_profile_link; ?>">Business Profile</a></li>
-                        <li><a target="_self" title="Artistic Profile" href="<?php echo $artist_right_profile_link; ?>">Artistic Profile</a></li>
+                        
                         <li><a target="_self" title="About Us" href="<?php echo base_url('about-us'); ?>">About</a></li>
 						<li><a target="_self" title="Blog" href="<?php echo base_url('blog'); ?>">Blog</a></li>
-						<li><a target="_self" title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>">FAQ</a></li>
+						<!-- <li><a target="_self" title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>">FAQ</a></li> -->
 						<li><a target="_self" title="Advertise With Us" href="<?php echo base_url('advertise-with-us'); ?>">Advertise With Us</a></li>
 						<li><a target="_self" title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>">Sitemap</a></li>
 						<li><a target="_self" title="Report" tabindex="0" href="<?php echo base_url('report-abuse'); ?>">Report</a></li>

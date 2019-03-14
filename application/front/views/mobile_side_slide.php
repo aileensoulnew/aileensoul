@@ -19,15 +19,10 @@ else
 				<li><a target="_self" title="Login" href="<?php echo base_url('login'); ?>">Login</a></li>
                 <li><a target="_self" title="Create an Account" href="<?php echo base_url('registration'); ?>">Sign Up</a></li>
                 <?php endif; ?>
-                <li><a target="_self" href="<?php echo $job_right_profile_link; ?>">Job Profile</a></li>
-                <li><a target="_self" href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a></li>
-                <li><a target="_self" title="Freelance Employer" href="<?php echo $freelance_hire_right_profile_link; ?>">Freelance Employer Profile</a></li>
-				<li><a target="_self" title="Freelance Hire" href="<?php echo $freelance_apply_right_profile_link; ?>">Freelancer Profile</a></li>
-                <li><a target="_self" href="<?php echo $business_right_profile_link; ?>">Business Profile</a></li>
-                <li><a target="_self" href="<?php echo $artist_right_profile_link; ?>">Artistic Profile</a></li>
+                <li><a target="_self" href="<?php echo $business_right_profile_link; ?>">Business Profile</a></li>                
                 <li><a title="About Us" href="<?php echo base_url('about-us'); ?>">About</a></li>
                 <li><a title="Blog" href="<?php echo base_url('blog'); ?>">Blog</a></li>
-                <li><a title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>">FAQ</a></li>
+                <!-- <li><a title="Faq" tabindex="0" href="<?php //echo base_url('faq'); ?>">FAQ</a></li> -->
                 <li><a title="Advertise With Us" href="<?php echo base_url('advertise-with-us'); ?>">Advertise With Us</a></li>
                 <li><a title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>">Sitemap</a></li>
                 <li><a title="Report" tabindex="0" href="<?php echo base_url('report-abuse'); ?>">Report</a></li>

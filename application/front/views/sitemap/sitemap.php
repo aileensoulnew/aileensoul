@@ -88,14 +88,7 @@
 												</a>
 											</li>
 										</ul>
-									</div>
-									<div class="col-md-3 col-sm-6">
-										<ul>
-											<li>
-												<a href="<?php echo base_url().'sitemap/artist' ?>">Artist</a>
-											</li>
-										</ul>
-									</div>
+									</div>									
 									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
@@ -103,20 +96,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-6">
-										<ul>
-											<li>
-												<a href="<?php echo base_url().'sitemap/jobs' ?>">Jobs</a>
-											</li>
-										</ul>
-									</div>
-									<div class="col-md-3 col-sm-6">
-										<ul>
-											<li>
-												<a href="<?php echo base_url().'sitemap/freelance-jobs' ?>">Freelance Jobs</a>
-											</li>
-										</ul>
-									</div>
+									
 									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
@@ -148,36 +128,8 @@
 								</div>							
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-3 col-sm-6">
-								<div class="site-pr-box">
-									<h3>Job Profile</h3>
-									<ul>
-										<li><a href="<?php echo $sitemap_with_login_job; ?>">Login  </a></li>
-										<li><a href="<?php echo base_url().'job-profile/create-account' ?>">Create Account </a></li>
-										<li><a href="<?php echo base_url().'job-search' ?>">Job Search </a></li>
-										<li><a href="<?php echo base_url().'jobs-by-location' ?>">View Jobs by Location </a></li>
-										<li><a href="<?php echo base_url().'jobs-by-skills' ?>">View Jobs by Skills</a></li>
-										<li><a href="<?php echo base_url().'jobs-by-designations' ?>">View Jobs by Designation </a></li>
-										<li><a href="<?php echo base_url().'jobs-by-companies' ?>">View Jobs by Company </a></li>
-										<li><a href="<?php echo base_url().'jobs-by-categories' ?>">View Jobs by Category</a></li>
-										<li><a href="<?php echo base_url().'jobs' ?>">View Other Jobs </a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="site-pr-box">
-									<h3>
-										<a href="<?php echo base_url().'recruiter' ?>">
-											Recruiter Profile
-										</a>										
-									</h3>
-									<ul>
-										<li><a href="<?php echo $sitemap_with_login_rec; ?>">Login </a></li>
-										<li><a href="<?php echo base_url().'recruiter/create-account' ?>">Create Recruiter Account </a></li>
-										<li><a href="<?php echo base_url().'recruiter/create-account' ?>">Post Job </a></li>
-									</ul>
-								</div>
+						<div class="row">							
+							<div class="col-md-3 col-sm-6">								
 								<div class="site-pr-box">
 									<h3>Business Profile</h3>
 									<ul>
@@ -189,44 +141,7 @@
 										<li><a href="<?php echo base_url().'business' ?>">View Other Business</a></li>
 									</ul>
 								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="site-pr-box">
-									<h3>
-										<a href="<?php echo base_url().'freelance-employer' ?>">
-											Freelance Employer Profile
-										</a>
-									</h3>
-									<ul>
-										<li><a href="<?php echo $sitemap_with_login_free_emp; ?>">Login</a></li>
-										<li><a href="<?php echo base_url().'freelance-employer/create-account' ?>">Create Freelance Employer Account</a></li>
-										<li><a href="<?php echo base_url().'freelance-employer/create-account' ?>">Post Project</a></li>
-									</ul>
-								</div>
-								<div class="site-pr-box">
-									<h3>Freelancer Profile</h3>
-									<ul>
-										<li><a href="<?php echo $sitemap_with_login_free_pro; ?>">Login  </a></li>
-										<li><a href="<?php echo base_url().'freelancer/create-account' ?>">Create Freelance Account</a></li>
-										<li><a href="<?php echo base_url().'freelance-jobs' ?>">Freelance Jobs</a></li>
-										<li><a href="<?php echo base_url().'freelance-jobs-by-fields' ?>">View Freelance Jobs by Fields</a></li>
-										<li><a href="<?php echo base_url().'freelance-jobs-by-categories' ?>">View Freelance Jobs by Categories</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="site-pr-box">
-									<h3>Artistic Profile</h3>
-									<ul>
-										<li><a href="<?php echo $sitemap_with_login_art; ?>">Login</a></li>
-										<li><a href="<?php echo base_url().'artist-profile/create-account' ?>">Create Account</a></li>
-										<li><a href="<?php echo base_url().'find-artist' ?>">Find Artist</a></li>
-										<li><a href="<?php echo base_url().'artist/category' ?>">View Artist by Category</a></li>
-										<li><a href="<?php echo base_url().'artist/location' ?>">View Artist by Location</a></li>
-										<li><a href="<?php echo base_url().'artist' ?>">View Other Artist</a></li>
-									</ul>
-								</div>
-							</div>
+							</div>							
 						</div>
 						<div class="">
 							<div class="dir-box">
@@ -289,11 +204,11 @@
 											<li><a href="<?php echo base_url().'report-abuse' ?>"> Report Spam </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-6">
+									<!-- <div class="col-md-3 col-sm-6">
 										<ul>
-											<li><a href="<?php echo base_url().'faq' ?>"> FAQ </a></li>
+											<li><a href="<?php //echo base_url().'faq' ?>"> FAQ </a></li>
 										</ul>
-									</div>
+									</div> -->
 									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url('guest-contributor'); ?>"> Guest Posting </a></li>

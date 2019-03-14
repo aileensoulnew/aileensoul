@@ -210,25 +210,6 @@ if($browser == "Firefox")
                         }
                         $session_user = $this->session->userdata();
                         ?>
-                            <li class="dropdown business_popup" >
-                                <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()">
-									<svg x="0px" y="0px" viewBox="0 0 56 56" width="22px" height="22px">
-								<g>
-									<path d="M8,40c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S12.411,40,8,40z" fill="#d7ecf5"/>
-									<path d="M28,40c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S32.411,40,28,40z" fill="#d7ecf5"/>
-									<path d="M48,40c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S52.411,40,48,40z" fill="#d7ecf5"/>
-									<path d="M8,20c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S12.411,20,8,20z" fill="#d7ecf5"/>
-									<path d="M28,20c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S32.411,20,28,20z" fill="#d7ecf5"/>
-									<path d="M48,20c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S52.411,20,48,20z" fill="#d7ecf5"/>
-									<path d="M8,0C3.589,0,0,3.589,0,8s3.589,8,8,8s8-3.589,8-8S12.411,0,8,0z" fill="#d7ecf5"/>
-									<path d="M28,0c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S32.411,0,28,0z" fill="#d7ecf5"/>
-									<path d="M48,16c4.411,0,8-3.589,8-8s-3.589-8-8-8s-8,3.589-8,8S43.589,16,48,16z" fill="#d7ecf5"/>
-								</g>
-
-								</svg>
-								</a>
-                                <div class="dropdown-menu"></div>
-                            </li>
                         <li class="dropdown user-id">
                             <a href="javascript:void(0);" title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <?php

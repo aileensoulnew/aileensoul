@@ -66,9 +66,9 @@
                 </div>
                 <div class="user-detail-bottom">
                     <ul>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/profiles') ?>">Profiles</a></li>
                         <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard</a></li>
                         <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/details') ?>">Details</a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contacts</a></li>
                     </ul>
                 </div>
             </div>
@@ -88,56 +88,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-	
-    <div class="all-profile-box hidden">
-        <div class="all-pro-head">
-            <h4>Profiles<a href="<?php echo base_url($leftbox_data['user_slug'].'/profiles') ?>" title="All Profile" class="pull-right">All</a></h4>
-        </div>
-        <ul class="all-pr-list">
-            <li>
-                <a href="<?php echo $this->job_profile_link; ?>" title="Job Profile">
-                    <div class="all-pr-img">
-                        <img ng-src="<?php echo base_url('assets/n-images/i1.jpg?ver='.time()) ?>" alt="Job Profile">
-                    </div>
-                    <span>Job Profile</span>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('recruiter/') ?>" title="Recruiter Profile">
-                    <div class="all-pr-img">
-                        <img ng-src="<?php echo base_url('assets/n-images/i2.jpg?ver='.time()) ?>" alt="Recruiter Profile">
-                    </div>
-                    <span>Recruiter Profile</span>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('freelance-profile') ?>" title="Freelance Profile">
-                    <div class="all-pr-img">
-                        <img ng-src="<?php echo base_url('assets/n-images/i3.jpg?ver='.time()) ?>" alt="Freelance Profile">
-                    </div>
-                    <span>Freelance Profile</span>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('business-search/') ?>" title="Business Profile">
-                    <div class="all-pr-img">
-                        <img ng-src="<?php echo base_url('assets/n-images/i4.jpg?ver='.time()) ?>" alt="Business Profile">
-                    </div>
-                    <span>Business Profile</span>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('find-artist/') ?>" title="Artistic Profile">
-                    <div class="all-pr-img">
-                        <img ng-src="<?php echo base_url('assets/n-images/i5.jpg?ver='.time()) ?>" alt="Artistic Profile">
-                    </div>
-                    <span>Artistic Profile</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-	<?php echo $right_profile_view; ?>
+        </div>	
 	<div class="business-move">
 	</div>
 					

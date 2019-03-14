@@ -189,8 +189,7 @@
             <div class="main-user-option-scroll">
                 <div class="table-responsive content horizontal-images">
                     <table class="table" ng-class="{'other-user': live_slug != segment2}">
-                        <tr>
-                            <td ng-if="live_slug == segment2" ><a href="<?php echo base_url().$userdata['user_slug']; ?>/profiles"  ng-click='makeActive("profiles")' ng-class="{'active': active == 'profiles'}">Profiles</a></td>
+                        <tr>                            
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>" ng-click='makeActive("<?php echo $userdata['user_slug']; ?>")' ng-class="{'active': active == '<?php echo $userdata['user_slug']; ?>' || active == 'dashboard' || active == 'article' || active == 'photos' || active == 'videos' || active == 'audios' || active == 'pdf'}">Dashboard</a></td>
                             <?php 
                             if($user_id != ""){

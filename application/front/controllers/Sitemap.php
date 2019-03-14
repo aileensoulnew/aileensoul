@@ -1823,23 +1823,11 @@ class Sitemap extends CI_Controller {
                 <url>
                 <loc>'.base_url().'members.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'job.xml</loc>
-                <lastmod>'.$lastmod.'</lastmod>
-                </url>
+                </url>                
                 <url>
                 <loc>'.base_url().'business.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'freelancejobs.xml</loc>
-                <lastmod>'.$lastmod.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'artist.xml</loc>
-                <lastmod>'.$lastmod.'</lastmod>
-                </url>
+                </url>                
                 <url>
                 <loc>'.base_url().'opportunity.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
@@ -1847,11 +1835,7 @@ class Sitemap extends CI_Controller {
                 <url>
                 <loc>'.base_url().'questions.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'article.xml</loc>
-                <lastmod>'.$lastmod.'</lastmod>
-                </url>
+                </url>                
                 <url>
                 <loc>'.base_url().'blog.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
@@ -1936,102 +1920,6 @@ class Sitemap extends CI_Controller {
                 <lastmod>'.$lastmod1.'</lastmod>
                 </url>
                 <url>
-                <loc>'.base_url().'faq</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'job-profile/create-account</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'job-search </loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'jobs-by-location</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'jobs-by-skills</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'jobs-by-designations</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'jobs-by-companies</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'jobs-by-categories</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'jobs</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'recruiter/create-account</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'freelance-employer/create-account</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'artist-profile/create-account</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'find-artist</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'artist/category</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'artist/location</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'artist</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
                 <loc>'.base_url().'business-profile/create-account</loc>
                 <priority>0.8</priority>
                 <changefreq>'.$freq1.'</changefreq>
@@ -2060,31 +1948,7 @@ class Sitemap extends CI_Controller {
                 <priority>0.8</priority>
                 <changefreq>'.$freq1.'</changefreq>
                 <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'freelancer/create-account</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'freelance-jobs</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'freelance-jobs-by-fields</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
-                <url>
-                <loc>'.base_url().'freelance-jobs-by-categories</loc>
-                <priority>0.8</priority>
-                <changefreq>'.$freq1.'</changefreq>
-                <lastmod>'.$lastmod1.'</lastmod>
-                </url>
+                </url>                
                 <url>
                 <loc>'.base_url().'sitemap</loc>
                 <priority>0.8</priority>
@@ -2115,12 +1979,12 @@ class Sitemap extends CI_Controller {
         $this->main_sitemap();
         $this->main_other_page_sitemap();
         $this->generate_sitemap_member();
-        $this->job_sitemap();
+        // $this->job_sitemap();
         $this->business_sitemap();
-        $this->freelance_sitemap();
-        $this->artist_sitemap();
+        // $this->freelance_sitemap();
+        // $this->artist_sitemap();
         $this->opportunity_sitemap();
-        $this->article_sitemap();
+        // $this->article_sitemap();
         $this->questions_sitemap();
         $this->generate_sitemap_blog_listing();
         echo "Done";

@@ -739,6 +739,7 @@ app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 });
 app.controller('profilesController', function ($scope, $http, $location) {
+    window.location = base_url;
     $scope.user = {};
     // PROFEETIONAL DATA
     $scope.$parent.title = "Profiles | Aileensoul";    

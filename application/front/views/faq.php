@@ -87,30 +87,7 @@
             <div class="container">
 				<div class="report-middle-box">						
 					<ul class="faq">
-						<li>
-							<a href="<?php echo base_url('how-to-use-job-profile-in-aileensoul'); ?>">
-								How to use Job profile in Aileensoul? 
-								<span class="pull-right">
-									<img src="<?php echo base_url('assets/n-images/more-link.png') ?>">
-								</span>
-							</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url('how-to-use-recruiter-profile-in-aileensoul'); ?>">
-								How to use Recruiter profile in Aileensoul? 
-								<span class="pull-right">
-									<img src="<?php echo base_url('assets/n-images/more-link.png') ?>">
-								</span>
-							</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>">
-								How to use Freelancer profile in Aileensoul?
-								<span class="pull-right">
-									<img src="<?php echo base_url('assets/n-images/more-link.png') ?>">
-								</span>
-							</a>
-						</li>
+						
 						<li>
 							<a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">
 								How to use Business profile in Aileensoul?
@@ -119,14 +96,7 @@
 								</span>
 							</a>
 						</li>
-						<li>
-							<a href="<?php echo base_url('how-to-use-artistic-profile-in-aileensoul'); ?>">
-								How to use Artistic profile in Aileensoul?
-								<span class="pull-right">
-									<img src="<?php echo base_url('assets/n-images/more-link.png') ?>">
-								</span>
-							</a>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
