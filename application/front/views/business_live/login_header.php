@@ -11,7 +11,7 @@
 					<div class="btn-right other-hdr">
 						<?php if (!$this->session->userdata('aileenuser')) { ?>
 						<ul class="nav navbar-nav navbar-right test-cus drop-down">
-							<?php $this->load->view('profile-dropdown'); ?>
+							<?php //$this->load->view('profile-dropdown'); ?>
 							<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
 							<li class="hidden-991"><a href="<?php echo base_url('business-profile/create-account'); ?>" class="btn9">Create Business Account</a></li>
 							<li class="mob-bar-li">

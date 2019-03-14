@@ -60,7 +60,7 @@ header('Expires: ' . $date);
 									<div class="btn-right other-hdr">
 										<?php if (!$this->session->userdata('aileenuser')) { ?>
 											<ul class="nav navbar-nav navbar-right test-cus drop-down">
-												<?php $this->load->view('profile-dropdown'); ?>
+												<?php //$this->load->view('profile-dropdown'); ?>
 												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
 												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
 												<li class="mob-bar-li">

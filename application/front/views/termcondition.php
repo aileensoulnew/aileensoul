@@ -35,19 +35,11 @@ header('Cache-Control: public, max-age=30');
         <link rel="canonical" href="<?php echo $actual_link ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
-        <?php
-        if (IS_OUTSIDE_CSS_MINIFY == '0') {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
-            <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver=' . time()); ?>">
-            <?php
-        } else {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver=' . time()); ?>">
-            <link rel="stylesheet" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/blog.css?ver=' . time()); ?>">
-        <?php } ?>
+        
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver=' . time()); ?>">
+            
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 
@@ -67,7 +59,7 @@ header('Cache-Control: public, max-age=30');
 									<div class="btn-right other-hdr">
 										<?php if (!$this->session->userdata('aileenuser')) { ?>
 											<ul class="nav navbar-nav navbar-right test-cus drop-down">
-												<?php $this->load->view('profile-dropdown'); ?>
+												<?php //$this->load->view('profile-dropdown'); ?>
 												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
 												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
 												<li class="mob-bar-li">

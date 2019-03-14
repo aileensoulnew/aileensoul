@@ -122,7 +122,7 @@ if($category_page == 1)
                                 <div class="btn-right">
                                 <?php if(!$this->session->userdata('aileenuser')) {?>
 									<ul class="nav navbar-nav navbar-right test-cus drop-down">
-										<?php $this->load->view('profile-dropdown'); ?>
+										<?php //$this->load->view('profile-dropdown'); ?>
 										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
 										<li class="hidden-991"><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
 										<li class="mob-bar-li">

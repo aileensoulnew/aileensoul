@@ -63,7 +63,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <div class="btn-right">
                                 <?php if(!$this->session->userdata('aileenuser')) {?>
 									<ul class="nav navbar-nav navbar-right test-cus drop-down">
-										<?php $this->load->view('profile-dropdown'); ?>
+										<?php //$this->load->view('profile-dropdown'); ?>
 										<li class="login-page"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
 										
 										<li class="mob-bar-li">

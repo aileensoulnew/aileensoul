@@ -33,25 +33,19 @@ header('Cache-Control: public, max-age=30');
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
-      <?php
-if(IS_OUTSIDE_CSS_MINIFY == '0'){
-?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver='.time()); ?>">
+      
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver='.time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver='.time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver='.time()); ?>">
-<?php }else{ ?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver='.time()); ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/blog.css?ver='.time()); ?>">
-<?php } ?>
-	<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver='.time()); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()); ?>">
-        
-	<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-    <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>	
-    <?php $this->load->view('adsense'); ?>
-</head>
+
+    	<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+    	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver='.time()); ?>">
+    	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()); ?>">
+            
+    	<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>	
+        <?php $this->load->view('adsense'); ?>
+    </head>
     <body class="report ftr-page">
         <div class="middle-section middle-section-banner new-ld-page">            
             <header>
@@ -65,7 +59,7 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
 									<div class="btn-right other-hdr">
 										<?php if (!$this->session->userdata('aileenuser')) { ?>
 											<ul class="nav navbar-nav navbar-right test-cus drop-down">
-												<?php $this->load->view('profile-dropdown'); ?>
+												<?php //$this->load->view('profile-dropdown'); ?>
 												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
 												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
 												<li class="mob-bar-li">
