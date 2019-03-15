@@ -462,30 +462,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             });
         }
     };
-
-    //Job Opening Start
-    $scope.get_business_job_opening = function(){
-        $http({
-            method: 'POST',
-            url: base_url + 'business_profile_live/get_business_job_opening',
-            data: 'user_slug=' + user_slug,//Pratik
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
-        .then(function (result) {
-            $('body').removeClass("body-loader");
-            success = result.data.success;
-            if(success == 1)
-            {
-                $scope.jobs_data = result.data.jobs_data;
-                $scope.rec_profile = result.data.rec_profile;
-                $("#jobs-loader").hide();
-                $("#jobs-body").show();
-            }
-        });
-    };
-    $scope.get_business_job_opening();
-    //Job Opening End
-
+    
     //Opportunity
 
     $scope.showLoadmore = true;

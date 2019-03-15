@@ -532,58 +532,7 @@
 						
 						
 						<!-- 12 Job Openings  -->
-						<div class="gallery-item">
-							<div class="dtl-box job-opening">
-								<div class="dtl-title">
-									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/job-details.png?ver=' . time()) ?>">
-									<span>Job Openings </span>
-									<a href="<?php echo base_url('recruiter'); ?>" ng-if="from_user_id == to_user_id && rec_profile == '0'" class="pull-right" target="_self"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
-									<a href="<?php echo base_url('post-job'); ?>" ng-if="from_user_id == to_user_id && rec_profile == '1'" class="pull-right" target="_self"><img src="<?php echo base_url('assets/n-images/detail/detail-add.png?ver=' . time()) ?>"></a>
-								</div>
-								<div id="jobs-loader" class="dtl-dis">
-		                            <div class="text-center">
-		                                <img alt="Loader" src="<?php echo base_url(); ?>assets/images/loader.gif">
-		                            </div>
-		                        </div>
-		                        <div id="jobs-body" style="display: none;">
-		                        	<div class="dtl-dis" ng-if="jobs_data.length < '1'">
-		                                <div class="no-info" ng-if="from_user_id == to_user_id && rec_profile == '0'">
-		                                	<a href="<?php echo base_url('recruiter'); ?>" target="_self"><span>Create Recruiter profile</span></a>
-		                                </div>
-		                                <div class="no-info" ng-if="from_user_id == to_user_id && rec_profile == '1'">
-		                                	<span>Post the career opportunities at your company</span>
-		                                	<a href="<?php echo base_url('post-job'); ?>" target="_self"><span>Post Current Opening</span></a>
-		                                </div>
-		                                <div class="no-info" ng-if="from_user_id != to_user_id">
-		                                	<span>There's no job opening right now. Check after some time.</span>
-		                                </div>
-		                            </div>
-									<div class="dtl-dis dis-accor" ng-if="jobs_data.length > '0'">
-										<div class="panel-group">
-											<div class="panel panel-default" ng-repeat="job in jobs_data"><!-- inner div -->
-												<div class="panel-heading">
-													<div class="panel-title">
-														<a href="<?php echo base_url(); ?>{{job.post_name_txt | slugify}}-job-vacancy-in-{{job.slug_city}}-{{job.user_id}}-{{job.post_id}}" target="_self">
-															<div class="dis-left">
-																<div class="dis-left-img img-cus">
-																	<img ng-if="!job.comp_logo" src="<?php echo base_url('assets/n-images/detail/job-def.png?ver=' . time()) ?>">
-																	<img ng-if="job.comp_logo" ng-src="<?php echo REC_PROFILE_MAIN_UPLOAD_URL; ?>{{job.comp_logo}}">
-																</div>
-															</div>
-															<div class="dis-middle">
-																<h4>{{job.post_name_txt}}</h4>
-																<p>{{job.comp_name}}</p>
-															</div>
-														</a>
-										            </div>
-												</div>						
-											</div><!-- inner div -->
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
+						
 						
 						<!-- 13 Achievements and Awards  -->
 						<div class="gallery-item">
