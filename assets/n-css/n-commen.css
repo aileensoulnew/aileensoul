@@ -1129,7 +1129,7 @@ a:focus{outline:none;}
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu{left:0 !important; width:100%; top:31px; padding-top:0;}
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu::before{left:0; right:0; margin: -20px auto 0;}
 	header .logo svg{margin-top:0px;}
-	.custom-landscape header .logo svg{margin-top:5px;}
+	.custom-landscape header .logo svg{margin-top:3px;}
 	.logo-size{font-size:28px;}
 	.detail-job-no-login .logo-size{font-size:28px;}
 	header .logo svg{width:140px;}
@@ -1166,6 +1166,7 @@ a:focus{outline:none;}
 	.blog-page.old-no-login .right-header ul{width:auto;}
 	.blog-page.old-no-login .right-header ul li{padding-right:10px;}
 	.blog-scroll-a table tr td{font-size:13px; line-height:1.5;}
+	.main-login .logo-size{font-size:24px;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}

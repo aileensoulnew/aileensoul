@@ -92,7 +92,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 						<div class="col-lg-10 col-md-10 col-sm-9 col-xs-6 right-cus-new-hdr">
 							<ul class="test-cus">
 								
-								<li><a class="btn-new-2" href="#" data-target="#login" data-toggle="modal">Login</a></li>
+								<li><a class="btn-new-1" href="#" data-target="#login" data-toggle="modal">Login</a></li>
 								
 							</ul>
 							<span class="mob-right-bar">
@@ -118,7 +118,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 							<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
 						</div>
 						<div class="btn-right">
-							<button id="login-new" title="Login" tabindex="1"  class="btn-new-2">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+							<button id="login-new" title="Login" tabindex="1"  class="btn-new-1">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 							<a tabindex="1" data-target="#forgotPassword" data-toggle="modal" data-dismiss="modal" class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
 						</div>
 					</form>
@@ -228,7 +228,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             </label>
                                         </div>
                                         <p class="create-ac-bottom">
-                                            <button id="create-acc-new" title="Create an account" tabindex="12" class="btn-new-2">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                            <button id="create-acc-new" title="Create an account" tabindex="12" class="btn-new-1">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                         </p>
                                     </form>
                                 </div>

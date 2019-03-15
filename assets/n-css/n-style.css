@@ -1097,7 +1097,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 /***  search banner  ***/
 .search-banner{/*background:url("../n-images/search-bnr-job.jpg?version=@{cache-version}"); */padding:60px 0; background-size:100%;}
 .new-ld-page .search-banner{padding:60px 0 0;}
-.report .new-ld-page .search-banner{padding:60px 0;}
+.report .new-ld-page .search-banner{padding:60px 0; box-shadow:none;}
 .new-ld-page header{background:#fff; border-bottom:1px solid #d2d2d2; padding:10px 0;}
 .report .new-ld-page header{background:#f6f7f8; border-bottom:none;}
 .new-ld-page .search-banner header .container{padding:0 15px;}
@@ -3161,7 +3161,7 @@ background: linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);}
 
 /***  end bus timeline  ***/
 /***  new buttons  ***/
-.btn-new-1{border-radius: 20px; background:#fff; border:1px solid #5c5c5c; color: #5c5c5c; padding: 6px 25px; text-align: center; display: inline-block; font-weight: bold; font-family: Arial; margin: 0 5px;}
+.btn-new-1{border-radius: 20px; background:#fff; border:1px solid #5c5c5c; color: #5c5c5c; padding: 7px 40px; text-align: center; display: inline-block; font-weight: bold; font-family: Arial; margin: 0 5px;}
 .btn-new-1:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
     background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
     background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
@@ -3476,7 +3476,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .bui-menu-profile h2 a{color:#7b7b7b;}
 .main-login header{background: url(../n-images/main-bg.jpg); padding:2px 0; border-bottom:0px solid #d2d2d2; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.13);}
 .main-login header .logo svg{fill:#5c5c5c;}
-.create-ac-bottom .btn-new-2{width:100%;}
+.create-ac-bottom .btn-new-1{width:100%;}
 .main-reg-pd{padding-left:25px; padding-right:25px;}
 .footer{background:transparent;}
 .err-flname label.error{left:5px; top:-15px;}
@@ -3991,7 +3991,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	
 	.blog-box .blog-left-img{width:100%;}
 	.blog-left-content{width:100%;}
-	.blog-box{padding:30px 0 10px;}
+	.blog-box{padding:10px 0 10px;}
 	.blog-detail{width:75%;}
 	.also-like-box{margin-bottom:20px;}
 	.comment-text{width:80%;}
@@ -4385,6 +4385,9 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.sitemap .right-header ul{width:auto;}
 	.outer-page .right-header ul{width:auto;}
 	.add-with-us .add-form{width:100%;}
+	.blog-m.blog-page h1{font-size:24px;}
+	.blog-left-content ul, .blog-left-content ol {margin-bottom:0; padding-bottom:0;}
+	.main-login .middle-main .container{padding:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4652,7 +4655,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
     transition: width 0.4s ease-in-out; background-position:top right; position:absolute; right:0; top:-25px; height:25px;}
 	.blog-search input[type=text]:focus { width: 100%; border-bottom: 1px solid #d2d2d2;}
 	.blog-search form fieldset{padding:0;}
-	.custom-user-list{padding-top:10px;}
+	.custom-user-list{}
 	.blog-user-detail .user-img{margin-right:10px;}
 	.user-detail-left{width:72%;}
 	.social-icon{padding-bottom:15px;}
@@ -4842,6 +4845,10 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.sugg-list ul li{width:99%;}
 	.sugg-list .arti-profile-box .user-pr-img{margin:-50px auto 0;}
 	.img-custom .ceo-img{margin-right:20px;}
+	.main-reg-pd .col-md-2{padding-left:0px;}
+	.main-reg-pd .right-cus-new-hdr{padding-right:0;}
+	.top-middle .text-effect h1{font-size:18px;} 
+	.main-reg-pd .login{border-radius:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
@@ -4888,6 +4895,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:52.5%;}
 	.sub-menu.free-h-only li.dropdown.open:nth-child(2)::before{left:53%;}
 	.dis-list li .dis-list-link{width:300px;}
+	
 	
 	
 }

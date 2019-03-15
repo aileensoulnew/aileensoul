@@ -2997,7 +2997,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
          background-size: 150% auto;
     }
     .main-login{
-        background-size:cover
+        /*background-size:cover*/
     }
     .top-middle{
         min-height:auto;
@@ -3342,7 +3342,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.custom-landscape .right-cus-new-hdr .test-cus{padding-top:5px !important;}
 	.test-cus li .btn-n{font-size:12px; padding:3px 20px; margin-top:0;}
 	.right-cus-new-hdr .mob-right-bar{padding-top:3px;}
-	.custom-landscape .right-cus-new-hdr .mob-right-bar{padding-top:9px;}
+	.custom-landscape .right-cus-new-hdr .mob-right-bar{padding-top:7px;}
 	.profile-header .logo img{height:23px !important;}
 	.about-us .right-header ul.test-cus li:nth-last-child(2){padding-left:10px;}
 	.report .right-header ul.test-cus li:nth-last-child(2){padding-left:10px;}
@@ -3507,7 +3507,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.tablate-main-login .header-login input{border-bottom:1px solid #d2d2d2; color:#848484;}
 	.tablate-main-login .header-login input:focus{border-bottom:1px solid #5c5c5c;}
 	.tablate-main-login .btn-right{width:100%; float:left; padding-top:0;}
-	.tablate-main-login .header-login .btn-new-2{width:100%; margin-bottom:10px;}
+	.tablate-main-login .header-login .btn-new-1{width:100%; margin-bottom:10px;}
 	.tablate-main-login .btn-right a{color:#5c5c5c;}
 	.tablate-main-login input::-webkit-input-placeholder {color: #848484;}
 	.tablate-main-login input::-moz-placeholder {color: #848484;}
@@ -3529,6 +3529,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.right-header > ul.test-cus > li:nth-child(3){display:none;}
 	.custom-landscape header{padding:0px 0 5px;}
 	.contact-add{border-radius:0;}
+	.mid-trns .custom-padd{padding-right:0; padding-left:0;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{padding:8px 18px;}
@@ -3538,7 +3539,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .mob-add{margin-bottom:0; border:none;}
     .padding-360{padding-left:1px; padding-right:1px;}
     .contact-frnd-post{padding:10px 8px 0;}
-    .mid-trns .custom-padd{padding-right:0; padding-left:0;}
+    
     .login #register_form span::after{right:16px;}
     .login .form-group select.day,.login .form-group select.month{width:60px;}
     .main_otp_box_middle_submit input[type=password],.main_otp_box_middle_submit input[type=text]{width:100%;}
