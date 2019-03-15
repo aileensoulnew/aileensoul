@@ -752,7 +752,7 @@ option:not(first-child) {
     line-height: 1.2;
 }
 .title h1,.titlea h1{
-    font-size:38px;
+    font-size:32px;
     color:#1b8ab9;
     -webkit-text-fill-color:transparent;
     /*text-transform:capitalize;*/
@@ -2018,23 +2018,11 @@ input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focu
     -webkit-text-fill-color:#5c5c5c!important;
 }
 .modal-body .form-group input:-webkit-autofill,.modal-body .form-group input:-webkit-autofill:active,.modal-body .form-group input:-webkit-autofill:focus,.modal-body .form-group input:-webkit-autofill:hover{background-color:#FFF!important; -webkit-box-shadow:0 0 0 1000px #fff inset!important; -webkit-text-fill-color:#848484!important}
-.contact .inner-form{float:left; margin:0 20px; box-shadow:0 0 10px -1px rgba(217,217,217,1);}
-.contact-add{
-    border:1px solid #c7c7c7;
-    width:545px;
-    float:right;
-    margin:0 20px;
-    border-radius:4px;
-    box-shadow:0 0 10px -1px rgba(217,217,217,1) !important;
+.contact .inner-form{float:left; margin:0 20px;/* box-shadow:0 0 10px -1px rgba(217,217,217,1); border-radius:20px;*/}
+.contact-add{width:545px; float:right; margin:0 20px; border-radius:20px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25) !important;
 }
-.con-address td{
-    padding:15px;
-    vertical-align:middle;
-    color:#848484
-}
-.con-address td a{
-    color:#848484
-}
+.con-address td{padding:15px; vertical-align:middle; color:#848484}
+.con-address td a{ color:#848484}
 .con-address td:first-child{
     width:130px
 }
@@ -2052,12 +2040,12 @@ input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focu
     font-size:18px
 }
 .contact .login .btn1{
-    background:#8ab1c5;
-    border:none!important;
+    background:#fff;
+    border:1px solid #5c5c5c !important; color:#5c5c5c; border-radius:20px; font-weight:bold;
 }
 .contact .login .btn1:hover,.contact .login .btn1:focus{
-    background:#8ab1c5 !important;
-    border:none!important;
+    background:#5c5c5c !important;
+    color:#fff;
 }
 
 .contact .login .btn1:hover{background:#6291a9;}
@@ -2067,7 +2055,7 @@ input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focu
     -webkit-background-clip:inherit;
     -webkit-text-fill-color:inherit;
     letter-spacing:5px;
-	padding:15px 0;
+	padding:10px 0;
 }
 .ftr-copuright{
     font-size:13px
@@ -2538,6 +2526,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .mob-right-bar{display:none;}
 .mob-right-bar .bg-menu{background:none; border:none; padding-right:0;}
 .mob-right-bar svg path{ fill: #5c5c5c;}
+.sitemap .mob-right-bar svg path{ fill: #fff;}
 .test-cus li .btn-n{border:2px solid #fff; background:#fff; color:#1b8ab9; margin-top:-4px; padding:5px 25px; border-radius:20px;}
 .test-cus li .btn-n:hover{background:none; color:#fff;}
 
@@ -2557,7 +2546,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .other-hdr .test-cus.drop-down li.hd-profile a:hover{color:#5c5c5c;}
 .other-hdr .test-cus.drop-down li.hd-profile a:focus{color:#5c5c5c !important;}
 .right-header ul.test-cus li{border-right:0; margin-bottom:0;}
-.right-header ul.test-cus li:nth-last-child(2){padding-right:0;}
+.right-header ul.test-cus li:nth-last-child(2){padding-right:10px;}
 .right-header ul li .all-profile-box li{padding:0;}
 .dropdown.hd-profile .dropdown-menu::before{display:none;}
 .right-header .hd-profile.open .dropdown-menu{margin-top:0;}
@@ -2606,6 +2595,9 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .btn-pr-pl:hover{background:#1d7398; color:#fff; text-decoration: none;}
 .footer{/*margin-bottom:35px;*/}
 .common-form .title h1{margin:0 !important;}
+.middle-section.middle-section-banner{width:100%;}
+.sitemap .middle-section{width:100%;}
+
 
 
 /***  media query  ***/
@@ -3325,7 +3317,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.test-cus{padding-top:0;}
 	.mob-right-bar{padding-top:1px;}
 	.test-cus.drop-down{margin:0;}
-	.about-us .overlaay{padding:11px 0 5px;}
+	.about-us .overlaay{padding:6px 0 8px;}
 	.about-us .btn-right .btn2{margin-top:1px;}
 	.about-us .btn-right .btn3{margin-top:1px;}
 	.test-cus.drop-down .mob-right-bar{padding-top:1px; height:25px; padding-top:3px;}
@@ -3352,6 +3344,12 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.right-cus-new-hdr .mob-right-bar{padding-top:3px;}
 	.custom-landscape .right-cus-new-hdr .mob-right-bar{padding-top:9px;}
 	.profile-header .logo img{height:23px !important;}
+	.about-us .right-header ul.test-cus li:nth-last-child(2){padding-left:10px;}
+	.report .right-header ul.test-cus li:nth-last-child(2){padding-left:10px;}
+	.sitemap .right-header ul.test-cus li:nth-last-child(2){padding-left:10px;}
+	.outer-page .right-header ul.test-cus li:nth-last-child(2){padding-left:10px;}
+	.title h1, .titlea h1{font-size:24px;}
+	.title h2, .titlea h2{font-size:24px;}
 }
 @media screen and (max-width:639px){
     .btns .btn-4{
@@ -3443,6 +3441,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .mian_middle_post_box{width: 100%;}
 	.test-cus.drop-down li{display:none;}
 	.test-cus.drop-down li.mob-bar-li{display:block;}
+	
 }
 @media screen and (max-width:540px){
     .modal.in .modal-dialog{padding: 55px 15px;}
@@ -3488,10 +3487,11 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.new-abput-page .img-custom{width:290px;}
     .cus-chang{margin-bottom: 0px !important;font-size: 17px !important;}
 	.inner-form{padding:0;}
-	.inner-form .login{width:100%; border-left:0; border-right:0; border-radius:0; box-shadow:none;}
+	.inner-form .login{width:100%; border-left:0; border-right:0; border-radius:0; /*box-shadow:none;*/}
 	.title h1{margin:15px 0;}
 	header{padding:3px 0 7px;}
-	.report header{padding:0px 0 7px;}
+	.report header{padding:5px 0;}
+	.report header{min-height:auto;}
 	header .logo a, header h2.logo {line-height:0;}
 	.btn-right .btn2{/*font-size:14px; padding:5px 18px !important;*/}
 	.btn-right .btn4{font-size:14px; padding:5px 18px !important;}
@@ -3528,7 +3528,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.test-cus.drop-down .mob-right-bar{padding-top:9px;}
 	.right-header > ul.test-cus > li:nth-child(3){display:none;}
 	.custom-landscape header{padding:0px 0 5px;}
-	
+	.contact-add{border-radius:0;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{padding:8px 18px;}

@@ -3484,6 +3484,8 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .form-control:focus{box-shadow:none; border-color:#5c5c5c;}
 .form-group .dropdown-menu:before{display:none;}
 .inner-form .title h2{padding:10px 0;}
+.report .report-middle-box .btn1{border:1px solid #5c5c5c !important; background:#fff; color:#5c5c5c; border-radius:20px;}
+.report .report-middle-box .btn1:hover{background:#5c5c5c !important; color:#fff;}
 /***  media query  ***/
 @media print {
     .rating-container .clear-rating {display: none;}
@@ -4376,6 +4378,13 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.all-post-box .bottom-left.like_user_list li:last-child a{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 	.btn-new-2{font-size:13px; padding-top:5px; padding-bottom:5px;}
 	.sitemap .right-header svg path{fill:#fff;}
+	.contact .right-header ul{width:auto;}
+	.feedback-cus .right-header ul{width:auto;}
+	.about-us .right-header ul{width:auto;}
+	.report .right-header ul{width:auto;}
+	.sitemap .right-header ul{width:auto;}
+	.outer-page .right-header ul{width:auto;}
+	.add-with-us .add-form{width:100%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4472,6 +4481,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	
 }
 @media screen and (max-width: 479px) {
+	.p0-479{padding:0;}
 	.mob-pr0{padding-right:0;}
 	.hw-479{width:50%; float:left;}
 	.hidden-479{display:none;}

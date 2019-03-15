@@ -1184,6 +1184,11 @@ a:focus{outline:none;}
 	.mobile-header .search-mob-block{width:82%;}
 	.mobile-header header h2{width:9%;}
 	.right-header ul{width:9%;}
+	.blog-page .logo-size{font-size:24px;}
+	.outer-page .logo-size{font-size:24px;}
+	.old-no-login .logo-size{font-size:24px;}
+	.about-us .logo-size{font-size:24px;}
+	.ftr-page .logo-size{font-size:24px;}
 }
 @media screen and (max-width: 539px) {
     .search-mob-block{width:73%;}

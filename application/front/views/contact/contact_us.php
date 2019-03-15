@@ -92,9 +92,9 @@ header('Expires: ' . $date);
 				</div>
 			</div>
             <section class="middle-main">
-                <div class="container">
+                <div class="container p0-479">
                     <div id="contactsucc"></div>
-                    <div class="form-pd row">
+                    <div class="form-pd fw">
                         <div class="inner-form">
                             <div class="login">
                                 <div class="title">
@@ -134,7 +134,7 @@ header('Expires: ' . $date);
 
 
                         </div>
-                        <div class="mob-p15">
+                        <div class="mob-p15 p0-479">
                             <div class="contact-add">
                                 <div class="title">
                                     <h2>Reach Us</h2>

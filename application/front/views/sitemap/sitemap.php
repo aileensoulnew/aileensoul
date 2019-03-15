@@ -128,18 +128,55 @@
 								</div>							
 							</div>
 						</div>
-						<div class="row">							
-							<div class="col-md-3 col-sm-6">								
+						<div class="">							
+							<div class="">								
 								<div class="site-pr-box">
 									<h3>Business Profile</h3>
-									<ul>
-										<li><a href="<?php echo $sitemap_with_login_bus; ?>">Login</a></li>
-										<li><a href="<?php echo base_url().'business-profile/create-account' ?>">Create Business Account</a></li>
-										<li><a href="<?php echo base_url().'business-search' ?>">Business Search</a></li>
-										<li><a href="<?php echo base_url().'business-by-categories' ?>">View Business by Category</a></li>
-										<li><a href="<?php echo base_url().'business-by-location' ?>">View Business by Location</a></li>
-										<li><a href="<?php echo base_url().'business' ?>">View Other Business</a></li>
-									</ul>
+									<div class="row">
+										<div class="col-md-3 col-sm-6">
+											<ul>
+												<li>
+													<a href="<?php echo $sitemap_with_login_bus; ?>">Login</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<ul>
+												<li>
+													<a href="<?php echo base_url().'business-profile/create-account' ?>">Create Business Account</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<ul>
+												<li>
+													<a href="<?php echo base_url().'business-search' ?>">Business Search</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<ul>
+												<li>
+													<a href="<?php echo base_url().'business-by-categories' ?>">View Business by Category</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<ul>
+												<li>
+													<a href="<?php echo base_url().'business-by-location' ?>">View Business by Location</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<ul>
+												<li>
+													<a href="<?php echo base_url().'business' ?>">View Other Business</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								
 								</div>
 							</div>							
 						</div>
@@ -218,9 +255,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="">
-						<img src="<?php echo base_url('assets/n-images/sitemap.jpg') ?>" style="width:100%;">
-					</div>
+				
 				</div>
 			</div>
 		</div>

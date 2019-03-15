@@ -2108,12 +2108,13 @@ footer div.pt20{
     -webkit-text-fill-color:#5c5c5c
 }
 .feedback-cus .btn1{
-    background:#5c5c5c;
-    color:#fff;
-    border:none!important
+    background:#fff;
+    color:#5c5c5c;
+    border:1px solid #5c5c5c !important;
+	border-radius:20px;
 }
 .feedback-cus .btn1:hover,.feedback-cus .btn1:focus{
-    background: #5c5c5c !important;
+    background: #5c5c5c !important; color:#fff;
 }
 .btn4,.contact .con-address td a:hover{
     color:#1b8ab9
