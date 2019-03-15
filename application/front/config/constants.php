@@ -98,6 +98,7 @@ define('TITLEPOSTFIX', ' | Aileensoul');
 define('NOIMAGE', 'uploads/avatar.png');
 define('NOBUSIMAGE', 'uploads/nobusimage.jpg');
 define('NOBUSIMAGE2', 'uploads/nobusimage2.jpg');
+define('NOBUSIMAGE3', 'assets/n-images/nobusimage-2.jpg');
 define('WHITEIMAGE', 'uploads/white.png');
 define('PROFILENA', '--');
 define('JOBDATANA', 'No Data Available.');
