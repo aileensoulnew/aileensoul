@@ -888,6 +888,7 @@ class Customscript extends CI_Controller {
         }
     }
 
+    //Merge Detail Start
     public function convert_detail_job_to_user_hobbies()
     {
         $sql = "SELECT user_id,user_hobbies FROM ailee_job_reg WHERE user_hobbies != '' AND status = '1' AND is_delete = '0'";
@@ -936,7 +937,7 @@ class Customscript extends CI_Controller {
         // print_r($job_research);        
         foreach ($job_research as $_job_research) {
             // print_r($_hobbies->user_hobbies);
-            $sql1 = "SELECT * FROM ailee_user_research WHERE user_id = '".$_job_research['user_id']."' AND research_title = '".$_job_research['research_title']."'";
+            $sql1 = "SELECT * FROM ailee_user_research WHERE user_id = '".$_job_research['user_id']."' AND LOWER(research_title) = '".strtolower($_job_research['research_title'])."'";
             $usr_research = $this->db->query($sql1)->row();
             if(isset($usr_research) && !empty($usr_research))
             {
@@ -1010,7 +1011,7 @@ class Customscript extends CI_Controller {
         echo "<pre>";
         echo count($job_award)."<br>";
         foreach ($job_award as $_job_award) {
-            $sql1 = "SELECT * FROM ailee_user_award WHERE user_id = '".$_job_award['user_id']."' AND award_title = '".$_job_award['award_title']."'";
+            $sql1 = "SELECT * FROM ailee_user_award WHERE user_id = '".$_job_award['user_id']."' AND LOWER(award_title) = '".strtolower($_job_award['award_title'])."'";
             $usr_award = $this->db->query($sql1)->row();
             if(isset($usr_award) && !empty($usr_award))
             {
@@ -1064,7 +1065,7 @@ class Customscript extends CI_Controller {
                     'modify_date'               => $modify_date,
                 );
                 
-                // $id_user_award = $this->common->insert_data_getid($data,'user_award');
+                $id_user_award = $this->common->insert_data_getid($data,'user_award');
                 print_r($_job_award);
             }
         }
@@ -1081,7 +1082,7 @@ class Customscript extends CI_Controller {
         echo "<pre>";
         echo count($job_patent)."<br>";
         foreach ($job_patent as $_job_patent) {
-            $sql1 = "SELECT * FROM ailee_user_patent WHERE user_id = '".$_job_patent['user_id']."' AND patent_title = '".$_job_patent['patent_title']."'";
+            $sql1 = "SELECT * FROM ailee_user_patent WHERE user_id = '".$_job_patent['user_id']."' AND LOWER(patent_title) = '".strtolower($_job_patent['patent_title'])."'";
             $usr_patent = $this->db->query($sql1)->row();
             if(isset($usr_patent) && !empty($usr_patent))
             {
@@ -1141,7 +1142,7 @@ class Customscript extends CI_Controller {
                     'modify_date'               => $modify_date,
                 );
                 
-                // $id_user_patent = $this->common->insert_data_getid($data,'user_patent');
+                $id_user_patent = $this->common->insert_data_getid($data,'user_patent');
                 print_r($_job_patent);
             }
         }
@@ -1158,7 +1159,7 @@ class Customscript extends CI_Controller {
         echo "<pre>";
         echo count($job_activity)."<br>";
         foreach ($job_activity as $_job_activity) {
-            $sql1 = "SELECT * FROM ailee_user_extra_activity WHERE user_id = '".$_job_activity['user_id']."' AND activity_participate = '".$_job_activity['activity_participate']."' AND activity_org = '".$_job_activity['activity_org']."'";
+            $sql1 = "SELECT * FROM ailee_user_extra_activity WHERE user_id = '".$_job_activity['user_id']."' AND LOWER(activity_participate) = '".strtolower($_job_activity['activity_participate'])."' AND LOWER(activity_org) = '".strtolower($_job_activity['activity_org'])."'";
             $usr_activity = $this->db->query($sql1)->row();
             if(isset($usr_activity) && !empty($usr_activity))
             {
@@ -1214,10 +1215,975 @@ class Customscript extends CI_Controller {
                     'modify_date'               => $modify_date,
                 );
                 
-                // $id_user_patent = $this->common->insert_data_getid($data,'user_extra_activity');
+                $id_user_patent = $this->common->insert_data_getid($data,'user_extra_activity');
                 print_r($_job_activity);
             }
         }
         echo "Done";
     }
+
+    public function convert_detail_to_user_for_skill()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT freelancer_post_area as skills,user_id FROM ailee_freelancer_post_reg WHERE status = '1' AND freelancer_post_area != ''
+                UNION
+                SELECT user_skills as skills,user_id FROM ailee_job_reg WHERE status = '1' AND user_skills != ''";
+        $all_skills = $this->db->query($sql)->result();
+        echo "<pre>";
+        // print_r($all_skills);exit();
+        echo count($all_skills)."<br>";
+        foreach ($all_skills as $_all_skills) {
+            $sql1 = "SELECT user_skills FROM ailee_user_info WHERE user_id = ".$_all_skills->user_id;
+            $skills1 = $this->db->query($sql1)->row();
+            $_all_skills->user_user_skills = $skills1->user_skills;
+            $all_skls = explode(",", $_all_skills->skills);
+            $usr_skill = explode(",", $skills1->user_skills);
+            $new_skills = "";
+            if(!empty($usr_skill))
+            {                
+                foreach ($all_skls as $key => $value) {
+                    if(!in_array($value, $usr_skill))
+                    {
+                        $new_skills .= $value.",";
+                    }
+                }
+                $new_skills = $skills1->user_skills.','.$new_skills;
+            }
+            else
+            {
+                $new_skills = $_all_skills->user_skills;
+            }
+            $_all_skills->new_skills = trim($new_skills,",");
+            $data = array("user_skills"=>$_all_skills->new_skills);
+            $updatdata = $this->common->update_data($data, 'user_info', 'user_id', $_all_skills->user_id);
+            print_r($_all_skills);            
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_to_user_for_link()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT user_links_txt,user_links_type,user_id FROM ailee_freelancer_user_links WHERE status = '1'
+            UNION
+            SELECT user_links_txt,user_links_type,user_id FROM ailee_job_user_links WHERE status = '1'";
+        $all_website = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($all_website);exit();
+        echo count($all_website)."<br>";
+        foreach ($all_website as $_all_website) {
+            $sql1 = "SELECT * FROM ailee_user_links WHERE user_id = '".$_all_website['user_id']."' AND LOWER(user_links_txt) = '".strtolower($_all_website['user_links_txt'])."' AND LOWER(user_links_type) = '".strtolower($_all_website['user_links_type'])."'";
+            $usr_link = $this->db->query($sql1)->row();
+            if(isset($usr_link) && !empty($usr_link))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                $user_id = $_all_website['user_id'];
+                $user_links_txt = $_all_website['user_links_txt'];
+                $user_links_type = $_all_website['user_links_type'];
+                $status = '1';
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'user_links_txt'            => $user_links_txt,
+                    'user_links_type'           => $user_links_type,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_link = $this->common->insert_data_getid($data,'ailee_user_links');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_to_user_for_language()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT language_txt,proficiency,user_id,'1' as lan_type FROM ailee_freelancer_user_languages WHERE status = '1'
+                UNION
+                SELECT language_txt,proficiency,user_id,'2' as lan_type FROM ailee_job_user_languages WHERE status = '1'";
+        $all_language = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($all_language);exit();
+        echo count($all_language)."<br>";
+        foreach ($all_language as $_all_language) {
+            $sql1 = "SELECT * FROM ailee_user_languages WHERE user_id = '".$_all_language['user_id']."' AND LOWER(language_txt) = '".strtolower($_all_language['language_txt'])."' AND LOWER(proficiency) = '".strtolower($_all_language['proficiency'])."'";
+            $usr_activity = $this->db->query($sql1)->row();
+            if(isset($usr_activity) && !empty($usr_activity))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {                
+
+                $user_id = $_all_language['user_id'];
+                $language_txt = $_all_language['language_txt'];
+                $proficiency = $_all_language['proficiency'];
+                $status = '1';
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'language_txt'              => $language_txt,
+                    'proficiency'               => $proficiency,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_language = $this->common->insert_data_getid($data,'ailee_user_languages');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+
+    //Start publication
+    public function convert_detail_free_to_user_publication()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_freelancer_user_publication WHERE status = '1'";
+        $free_publication = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($free_publication);exit();
+        echo count($free_publication)."<br>";
+        foreach ($free_publication as $_free_publication) {
+            $sql1 = "SELECT * FROM ailee_user_publication WHERE user_id = '".$_free_publication['user_id']."' AND LOWER(pub_title) = '".strtolower($_free_publication['pub_title'])."'";
+            $usr_publication = $this->db->query($sql1)->row();
+            if(isset($usr_publication) && !empty($usr_publication))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_free_publication['pub_file'] != "")
+                {
+                    $fileName = $_free_publication['pub_file'];
+                    $user_award_upload_path = $this->config->item('user_publication_upload_path');
+                    $job_user_award_upload_path = $this->config->item('free_apply_publication_upload_path');
+                    $file = $job_user_award_upload_path.$_free_publication['pub_file'];
+                    $newfile = $user_award_upload_path.$_free_publication['pub_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_free_publication['user_id'];
+                $pub_title = $_free_publication['pub_title'];
+                $pub_author = $_free_publication['pub_author'];
+                $pub_url = $_free_publication['pub_url'];
+                $pub_publisher = $_free_publication['pub_publisher'];
+                $pub_desc = $_free_publication['pub_desc'];
+                $pub_date = $_free_publication['pub_date'];
+                $status = $_free_publication['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'pub_title'                 => $pub_title,
+                    'pub_author'                => $pub_author,
+                    'pub_url'                   => $pub_url,
+                    'pub_publisher'             => $pub_publisher,
+                    'pub_desc'                  => $pub_desc,
+                    'pub_date'                  => $pub_date,
+                    'pub_file'                  => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_award = $this->common->insert_data_getid($data,'user_publication');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_publication()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_publication WHERE status = '1'";
+        $job_publication = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($job_publication);exit();
+        echo count($job_publication)."<br>";
+        foreach ($job_publication as $_job_publication) {
+            $sql1 = "SELECT * FROM ailee_user_publication WHERE user_id = '".$_job_publication['user_id']."' AND LOWER(pub_title) = '".strtolower($_job_publication['pub_title'])."'";
+            $usr_publication = $this->db->query($sql1)->row();
+            if(isset($usr_publication) && !empty($usr_publication))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_publication['pub_file'] != "")
+                {
+                    $fileName = $_job_publication['pub_file'];
+                    $user_publication_upload_path = $this->config->item('user_publication_upload_path');
+                    $job_user_publication_upload_path = $this->config->item('job_user_publication_upload_path');
+                    $file = $job_user_publication_upload_path.$_job_publication['pub_file'];
+                    $newfile = $user_publication_upload_path.$_job_publication['pub_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_publication['user_id'];
+                $pub_title = $_job_publication['pub_title'];
+                $pub_author = $_job_publication['pub_author'];
+                $pub_url = $_job_publication['pub_url'];
+                $pub_publisher = $_job_publication['pub_publisher'];
+                $pub_desc = $_job_publication['pub_desc'];
+                $pub_date = $_job_publication['pub_date'];
+                $status = $_job_publication['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'pub_title'                 => $pub_title,
+                    'pub_author'                => $pub_author,
+                    'pub_url'                   => $pub_url,
+                    'pub_publisher'             => $pub_publisher,
+                    'pub_desc'                  => $pub_desc,
+                    'pub_date'                  => $pub_date,
+                    'pub_file'                  => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_award = $this->common->insert_data_getid($data,'user_publication');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+    //End publication
+
+    //Start additional course
+    public function convert_detail_free_to_user_addicourse()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_freelancer_user_addicourse WHERE status = '1'";
+        $free_addicourse = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        print_r($free_addicourse);exit();
+        echo count($free_addicourse)."<br>";
+        foreach ($free_addicourse as $_free_addicourse) {
+            $sql1 = "SELECT * FROM ailee_user_addicourse WHERE user_id = '".$_free_addicourse['user_id']."' AND LOWER(addicourse_name) = '".strtolower($_free_addicourse['addicourse_name'])."'";
+            $usr_addocourse = $this->db->query($sql1)->row();
+            if(isset($usr_addocourse) && !empty($usr_addocourse))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_free_addicourse['addicourse_file'] != "")
+                {
+                    $fileName = $_free_addicourse['addicourse_file'];
+                    $user_addicourse_upload_path = $this->config->item('user_addicourse_upload_path');
+                    $free_apply_addicourse_upload_path = $this->config->item('free_apply_addicourse_upload_path');
+                    $file = $free_apply_addicourse_upload_path.$_free_addicourse['addicourse_file'];
+                    $newfile = $user_addicourse_upload_path.$_free_addicourse['addicourse_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_free_addicourse['user_id'];
+                $addicourse_name = $_free_addicourse['addicourse_name'];
+                $addicourse_org = $_free_addicourse['addicourse_org'];
+                $addicourse_start_date = $_free_addicourse['addicourse_start_date'];
+                $addicourse_end_date = $_free_addicourse['addicourse_end_date'];
+                $addicourse_url = $_free_addicourse['addicourse_url'];                
+                $status = $_free_addicourse['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'addicourse_name'           => $addicourse_name,
+                    'addicourse_org'            => $addicourse_org,
+                    'addicourse_start_date'     => $addicourse_start_date,
+                    'addicourse_end_date'       => $addicourse_end_date,
+                    'addicourse_url'            => $addicourse_url,                    
+                    'addicourse_file'           => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_addicourse = $this->common->insert_data_getid($data,'user_addicourse');
+                print_r($_free_addicourse);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_addicourse()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_addicourse WHERE status = '1'";
+        $job_addicourse = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($job_addicourse);exit();
+        echo count($job_addicourse)."<br>";
+        foreach ($job_addicourse as $_job_addicourse) {
+            $sql1 = "SELECT * FROM ailee_user_addicourse WHERE user_id = '".$_job_addicourse['user_id']."' AND LOWER(addicourse_name) = '".strtolower($_job_addicourse['addicourse_name'])."'";
+            $usr_addocourse = $this->db->query($sql1)->row();
+            if(isset($usr_addocourse) && !empty($usr_addocourse))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_addicourse['addicourse_file'] != "")
+                {
+                    $fileName = $_job_addicourse['addicourse_file'];
+                    $user_addicourse_upload_path = $this->config->item('user_addicourse_upload_path');
+                    $job_user_addicourse_upload_path = $this->config->item('job_user_addicourse_upload_path');
+                    $file = $job_user_addicourse_upload_path.$_job_addicourse['addicourse_file'];
+                    $newfile = $user_addicourse_upload_path.$_job_addicourse['addicourse_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_addicourse['user_id'];
+                $addicourse_name = $_job_addicourse['addicourse_name'];
+                $addicourse_org = $_job_addicourse['addicourse_org'];
+                $addicourse_start_date = $_job_addicourse['addicourse_start_date'];
+                $addicourse_end_date = $_job_addicourse['addicourse_end_date'];
+                $addicourse_url = $_job_addicourse['addicourse_url'];
+                $status = $_job_addicourse['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'addicourse_name'           => $addicourse_name,
+                    'addicourse_org'            => $addicourse_org,
+                    'addicourse_start_date'     => $addicourse_start_date,
+                    'addicourse_end_date'       => $addicourse_end_date,
+                    'addicourse_url'            => $addicourse_url,
+                    'addicourse_file'           => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_addicourse = $this->common->insert_data_getid($data,'user_addicourse');
+                print_r($_job_addicourse);
+            }
+        }
+        echo "Done";
+    }
+    //End additional course
+
+    //Start Project
+    public function convert_detail_free_to_user_project()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_freelancer_user_projects WHERE status = '1'";
+        $free_project = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($free_project);exit();
+        echo count($free_project)."<br>";
+        foreach ($free_project as $_free_project) {
+            $sql1 = "SELECT * FROM ailee_user_projects WHERE user_id = '".$_free_project['user_id']."' AND LOWER(project_title) = '".strtolower($_free_project['project_title'])."'";
+            $usr_project = $this->db->query($sql1)->row();
+            if(isset($usr_project) && !empty($usr_project))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_free_project['project_file'] != "")
+                {
+                    $fileName = $_free_project['project_file'];
+                    $user_project_upload_path = $this->config->item('user_project_upload_path');
+                    $free_apply_project_upload_path = $this->config->item('free_apply_project_upload_path');
+                    $file = $free_apply_project_upload_path.$_free_project['project_file'];
+                    $newfile = $user_project_upload_path.$_free_project['project_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_free_project['user_id'];
+                $project_title = $_free_project['project_title'];
+                $project_team = $_free_project['project_team'];
+                $project_role = $_free_project['project_role'];
+                $project_skills = $_free_project['project_skills'];
+                $project_field = $_free_project['project_field'];                
+                $project_other_field = $_free_project['project_other_field'];                
+                $project_url = $_free_project['project_url'];                
+                $project_partner_name = $_free_project['project_partner_name'];                
+                $project_start_date = $_free_project['project_start_date'];                
+                $project_end_date = $_free_project['project_end_date'];                
+                $project_desc = $_free_project['project_desc'];                
+                $status = $_free_project['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'project_title'             => $project_title,
+                    'project_team'              => $project_team,
+                    'project_role'              => $project_role,
+                    'project_skills'            => $project_skills,
+                    'project_field'             => $project_field,                    
+                    'project_other_field'       => $project_other_field,                    
+                    'project_url'               => $project_url,                    
+                    'project_partner_name'      => $project_partner_name,                    
+                    'project_start_date'        => $project_start_date,                    
+                    'project_end_date'          => $project_end_date,                    
+                    'project_desc'              => $project_desc,
+                    'project_file'              => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_projects = $this->common->insert_data_getid($data,'user_projects');
+                print_r($_free_project);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_project()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_projects WHERE status = '1'";
+        $job_project = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($job_project);exit();
+        echo count($job_project)."<br>";
+        foreach ($job_project as $_job_project) {
+            $sql1 = 'SELECT * FROM ailee_user_projects WHERE user_id = "'.$_job_project['user_id'].'" AND LOWER(project_title) = "'.strtolower($_job_project['project_title']).'"';
+            $usr_project = $this->db->query($sql1)->row();
+            if(isset($usr_project) && !empty($usr_project))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_project['project_file'] != "")
+                {
+                    $fileName = $_job_project['project_file'];
+                    $user_project_upload_path = $this->config->item('user_project_upload_path');
+                    $job_user_project_upload_path = $this->config->item('job_user_project_upload_path');
+                    $file = $job_user_project_upload_path.$_job_project['project_file'];
+                    $newfile = $user_project_upload_path.$_job_project['project_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_project['user_id'];
+                $project_title = $_job_project['project_title'];
+                $project_team = $_job_project['project_team'];
+                $project_role = $_job_project['project_role'];
+                $project_skills = $_job_project['project_skills'];
+                $project_field = $_job_project['project_field'];                
+                $project_other_field = $_job_project['project_other_field'];                
+                $project_url = $_job_project['project_url'];                
+                $project_partner_name = $_job_project['project_partner_name'];                
+                $project_start_date = $_job_project['project_start_date'];                
+                $project_end_date = $_job_project['project_end_date'];                
+                $project_desc = $_job_project['project_desc'];                
+                $status = $_job_project['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'project_title'             => $project_title,
+                    'project_team'              => $project_team,
+                    'project_role'              => $project_role,
+                    'project_skills'            => $project_skills,
+                    'project_field'             => $project_field,                    
+                    'project_other_field'       => $project_other_field,                    
+                    'project_url'               => $project_url,                    
+                    'project_partner_name'      => $project_partner_name,                    
+                    'project_start_date'        => $project_start_date,                    
+                    'project_end_date'          => $project_end_date,                    
+                    'project_desc'              => $project_desc,
+                    'project_file'              => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_projects = $this->common->insert_data_getid($data,'user_projects');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+    //End Project
+
+    //Start Experience
+    public function convert_detail_free_to_user_experience()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_freelancer_user_experience WHERE status = '1'";
+        $free_exp = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($free_exp);exit();
+        echo count($free_exp)."<br>";
+        foreach ($free_exp as $_free_exp) {
+            $sql1 = "SELECT * FROM ailee_user_experience WHERE user_id = '".$_free_exp['user_id']."' AND LOWER(exp_company_name) = '".strtolower($_free_exp['exp_company_name'])."'";
+            $usr_exp = $this->db->query($sql1)->row();
+            if(isset($usr_exp) && !empty($usr_exp))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_free_exp['exp_file'] != "")
+                {
+                    $fileName = $_free_exp['exp_file'];
+                    $user_experience_upload_path = $this->config->item('user_experience_upload_path');
+                    $free_apply_experience_upload_path = $this->config->item('free_apply_experience_upload_path');
+                    $file = $free_apply_experience_upload_path.$_free_exp['exp_file'];
+                    $newfile = $user_experience_upload_path.$_free_exp['exp_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_free_exp['user_id'];
+                $exp_company_name = $_free_exp['exp_company_name'];
+                $exp_designation = $_free_exp['exp_designation'];
+                $exp_company_website = $_free_exp['exp_company_website'];
+                $exp_field = $_free_exp['exp_field'];
+                $exp_other_field = $_free_exp['exp_other_field'];                
+                $exp_country = $_free_exp['exp_country'];                
+                $exp_state = $_free_exp['exp_state'];                
+                $exp_city = $_free_exp['exp_city'];                
+                $exp_start_date = $_free_exp['exp_start_date'];                
+                $exp_end_date = $_free_exp['exp_end_date'];                
+                $exp_isworking = $_free_exp['exp_isworking'];                
+                $exp_desc = $_free_exp['exp_desc'];                
+                $status = $_free_exp['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'exp_company_name'          => $exp_company_name,
+                    'exp_designation'           => $exp_designation,
+                    'exp_company_website'       => $exp_company_website,
+                    'exp_field'                 => $exp_field,
+                    'exp_other_field'           => $exp_other_field,                    
+                    'exp_country'               => $exp_country,                    
+                    'exp_state'                 => $exp_state,                    
+                    'exp_city'                  => $exp_city,                    
+                    'exp_start_date'            => $exp_start_date,                    
+                    'exp_end_date'              => $exp_end_date,                    
+                    'exp_isworking'             => $exp_isworking,
+                    'exp_desc'                  => $exp_desc,
+                    'exp_file'                  => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_exp = $this->common->insert_data_getid($data,'user_experience');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_experience()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_experience WHERE status = '1'";
+        $job_exp = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($job_exp);exit();
+        echo count($job_exp)."<br>";
+        foreach ($job_exp as $_job_exp) {
+            $sql1 = "SELECT * FROM ailee_user_experience WHERE user_id = '".$_job_exp['user_id']."' AND LOWER(exp_company_name) = '".strtolower($_job_exp['exp_company_name'])."'";
+            $usr_exp = $this->db->query($sql1)->row();
+            if(isset($usr_exp) && !empty($usr_exp))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_exp['exp_file'] != "")
+                {
+                    $fileName = $_job_exp['exp_file'];
+                    $user_experience_upload_path = $this->config->item('user_experience_upload_path');
+                    $job_user_experience_upload_path = $this->config->item('job_user_experience_upload_path');
+                    $file = $job_user_experience_upload_path.$_job_exp['exp_file'];
+                    $newfile = $user_experience_upload_path.$_job_exp['exp_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_exp['user_id'];
+                $exp_company_name = $_job_exp['exp_company_name'];
+                $exp_designation = $_job_exp['exp_designation'];
+                $exp_company_website = $_job_exp['exp_company_website'];
+                $exp_field = $_job_exp['exp_field'];
+                $exp_other_field = $_job_exp['exp_other_field'];                
+                $exp_country = $_job_exp['exp_country'];                
+                $exp_state = $_job_exp['exp_state'];                
+                $exp_city = $_job_exp['exp_city'];                
+                $exp_start_date = $_job_exp['exp_start_date'];                
+                $exp_end_date = $_job_exp['exp_end_date'];                
+                $exp_isworking = $_job_exp['exp_isworking'];                
+                $exp_desc = $_job_exp['exp_desc'];                
+                $status = $_job_exp['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'exp_company_name'          => $exp_company_name,
+                    'exp_designation'           => $exp_designation,
+                    'exp_company_website'       => $exp_company_website,
+                    'exp_field'                 => $exp_field,
+                    'exp_other_field'           => $exp_other_field,                    
+                    'exp_country'               => $exp_country,                    
+                    'exp_state'                 => $exp_state,                    
+                    'exp_city'                  => $exp_city,                    
+                    'exp_start_date'            => $exp_start_date,                    
+                    'exp_end_date'              => $exp_end_date,                    
+                    'exp_isworking'             => $exp_isworking,
+                    'exp_desc'                  => $exp_desc,
+                    'exp_file'                  => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_exp = $this->common->insert_data_getid($data,'user_experience');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+    //End Experience
+
+    //Start Education
+    public function convert_detail_free_to_user_education()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_freelancer_user_education WHERE status = '1'";
+        $free_edu = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($free_edu);exit();
+        echo count($free_edu)."<br>";
+        foreach ($free_edu as $_free_edu) {
+            $sql1 = "SELECT * FROM ailee_user_education WHERE user_id = '".$_free_edu['user_id']."' AND LOWER(edu_school_college) = '".strtolower($_free_edu['edu_school_college'])."'";
+            $usr_edu = $this->db->query($sql1)->row();
+            if(isset($usr_edu) && !empty($usr_edu))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_free_edu['edu_file'] != "")
+                {
+                    $fileName = $_free_edu['edu_file'];
+                    $user_education_upload_path = $this->config->item('user_education_upload_path');
+                    $free_apply_education_upload_path = $this->config->item('free_apply_education_upload_path');
+                    $file = $free_apply_education_upload_path.$_free_edu['edu_file'];
+                    $newfile = $user_education_upload_path.$_free_edu['edu_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_free_edu['user_id'];
+                $edu_school_college = $_free_edu['edu_school_college'];
+                $edu_university = $_free_edu['edu_university'];
+                $edu_other_university = $_free_edu['edu_other_university'];
+                $edu_degree = $_free_edu['edu_degree'];
+                $edu_other_degree = $_free_edu['edu_other_degree'];
+                $edu_stream = $_free_edu['edu_stream'];
+                $edu_other_stream = $_free_edu['edu_other_stream'];
+                $edu_start_date = $_free_edu['edu_start_date'];
+                $edu_end_date = $_free_edu['edu_end_date'];
+                $edu_nograduate = $_free_edu['edu_nograduate'];
+                $status = $_free_edu['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'edu_school_college'        => $edu_school_college,
+                    'edu_university'            => $edu_university,
+                    'edu_other_university'      => $edu_other_university,
+                    'edu_degree'                => $edu_degree,
+                    'edu_other_degree'          => $edu_other_degree,                    
+                    'edu_stream'                => $edu_stream,                    
+                    'edu_other_stream'          => $edu_other_stream,                    
+                    'edu_start_date'            => $edu_start_date,                    
+                    'edu_end_date'              => $edu_end_date,                    
+                    'edu_nograduate'            => $edu_nograduate,
+                    'edu_file'                  => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_exp = $this->common->insert_data_getid($data,'user_education');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+
+    public function convert_detail_job_to_user_education()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT * FROM ailee_job_user_education WHERE status = '1'";
+        $job_edu = $this->db->query($sql)->result_array();
+        echo "<pre>";
+        // print_r($job_edu);exit();
+        echo count($job_edu)."<br>";
+        foreach ($job_edu as $_job_edu) {
+            $sql1 = 'SELECT * FROM ailee_user_education WHERE user_id = "'.$_job_edu['user_id'].'" AND LOWER(edu_school_college) = "'.strtolower($_job_edu['edu_school_college']).'"';
+            $usr_edu = $this->db->query($sql1)->row();
+            if(isset($usr_edu) && !empty($usr_edu))
+            {
+                $new = 0;
+            }
+            else
+            {
+                $new = 1;
+            }
+            if($new == 1)
+            {
+                if($_job_edu['edu_file'] != "")
+                {
+                    $fileName = $_job_edu['edu_file'];
+                    $user_education_upload_path = $this->config->item('user_education_upload_path');
+                    $job_user_education_upload_path = $this->config->item('job_user_education_upload_path');
+                    $file = $job_user_education_upload_path.$_job_edu['edu_file'];
+                    $newfile = $user_education_upload_path.$_job_edu['edu_file'];
+                    if(@copy($file, $newfile))
+                    {
+                        $s3 = new S3(awsAccessKey, awsSecretKey);
+                        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($newfile, bucket, $newfile, S3::ACL_PUBLIC_READ);
+                        }
+                    }
+                }
+                else
+                {
+                    $fileName = "";
+                }
+
+                $user_id = $_job_edu['user_id'];
+                $edu_school_college = $_job_edu['edu_school_college'];
+                $edu_university = $_job_edu['edu_university'];
+                $edu_other_university = $_job_edu['edu_other_university'];
+                $edu_degree = $_job_edu['edu_degree'];
+                $edu_other_degree = $_job_edu['edu_other_degree'];
+                $edu_stream = $_job_edu['edu_stream'];
+                $edu_other_stream = $_job_edu['edu_other_stream'];
+                $edu_start_date = $_job_edu['edu_start_date'];
+                $edu_end_date = $_job_edu['edu_end_date'];
+                $edu_nograduate = $_job_edu['edu_nograduate'];
+                $status = $_job_edu['status'];
+                $created_date = date('Y-m-d H:i:s', time());
+                $modify_date = $created_date;
+
+                $data = array(
+                    'user_id'                   => $user_id,
+                    'edu_school_college'        => $edu_school_college,
+                    'edu_university'            => $edu_university,
+                    'edu_other_university'      => $edu_other_university,
+                    'edu_degree'                => $edu_degree,
+                    'edu_other_degree'          => $edu_other_degree,                    
+                    'edu_stream'                => $edu_stream,                    
+                    'edu_other_stream'          => $edu_other_stream,                    
+                    'edu_start_date'            => $edu_start_date,                    
+                    'edu_end_date'              => $edu_end_date,                    
+                    'edu_nograduate'            => $edu_nograduate,
+                    'edu_file'                  => $fileName,
+                    'status'                    => $status,
+                    'created_date'              => $created_date,
+                    'modify_date'               => $modify_date,
+                );
+                
+                $id_user_exp = $this->common->insert_data_getid($data,'user_education');
+                print_r($data);
+            }
+        }
+        echo "Done";
+    }
+    //End Education
+    //Merge Detail End
 }

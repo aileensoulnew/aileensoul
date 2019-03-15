@@ -771,7 +771,7 @@ class Sitemap_model extends CI_Model {
 
     function generate_sitemap_opportunity_listing(){
         
-        $sql = "SELECT uo.post_id, up.user_id, uo.opportunity, it.industry_name as field_txt,uo.field,uo.other_field, uo.opptitle, uo.oppslug FROM ailee_user_opportunity uo LEFT JOIN ailee_industry_type it ON it.industry_id = uo.field LEFT JOIN ailee_user_post up ON up.id = uo.post_id WHERE up.status = 'publish' ORDER BY up.id DESC";
+        $sql = "SELECT uo.post_id, up.user_id, uo.opportunity, it.industry_name as field_txt,uo.field,uo.other_field, uo.opptitle, uo.oppslug FROM ailee_user_opportunity uo LEFT JOIN ailee_industry_type it ON it.industry_id = uo.field LEFT JOIN ailee_user_post up ON up.id = uo.post_id WHERE up.status = 'publish' AND up.is_delete = '0' ORDER BY up.created_date DESC";
 
         $query = $this->db->query($sql);        
         $result_array = $query->result_array();
