@@ -108,7 +108,7 @@
                     } ?>
             	
             <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
-                Share knowledge, opportunities, articles and questions 
+                Express Yourself 
             </div>
             <!--<span class="post-cam"><i class="fa fa-camera"></i></span>-->
         </div>
@@ -848,7 +848,7 @@
                                         
                         <div class="post-img no-profile-pic" ng-if="post.post_data.user_type == '2' && post.post_data.post_for != 'question' && !post.user_data.business_user_image">
                             <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
-                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE3); ?>"> 
                             </a>
                         </div>
                                         
@@ -1510,7 +1510,7 @@
                                     </div>
                                     <div class="user-pr-img" ng-if="!contact.business_user_image">
                                         <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
-                                            <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                            <img ng-src="<?php echo base_url(NOBUSIMAGE3); ?>">
                                         </a>
                                     </div>
                                     <div  text-center">
@@ -1671,7 +1671,7 @@
                     <div class="post-popup-box">
                         <form  id="post_something" name="post_something" ng-submit="post_something_check(event)">
                             <div class="post-box">
-                                <div class="post-img">
+                                <!--div class="post-img">
                                     <?php
                                     if ($leftbox_data['user_image'] != '')
                                     { ?>
@@ -1692,8 +1692,17 @@
                                         <?php
                                         } 
                                     } ?>
+                                </div-->
+                                <div class="form-group">
+									<label>Post title</label>
+                                    <input type="text" placeholder="Etnter Title">
                                 </div>
-                                <div class="post-text">
+								
+								<div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="100">
+                                </div>
+								<div class="form-group">
                                     <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
                                 </div>
                                 <div class="all-upload" ng-if="is_edit != 1">
@@ -1746,50 +1755,9 @@
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
                     <div class="post-popup-box">
                         <form id="post_opportunity" name="post_opportunity" ng-submit="post_opportunity_check(event)">
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <?php
-                                    if ($leftbox_data['user_image'] != '')
-                                    { ?>
-                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
-                                    <?php
-                                    }
-                                    else
-                                    { 
-                                        if($leftbox_data['user_gender'] == "M")
-                                        {?>                                
-                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                        <?php
-                                        }
-                                        if($leftbox_data['user_gender'] == "F")
-                                        {
-                                        ?>
-                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                        <?php
-                                        } 
-                                    } ?>
-                                </div>
-                                <div class="post-text">
-                                    <textarea name="description" ng-model="opp.description" id="description" class="title-text-area" placeholder="Post Opportunity"></textarea>
-                                </div>
-
-                                <div class="all-upload" ng-if="is_edit != 1">
-                                    <div class="form-group">
-                                        <div id="fileCountOpp"></div>
-                                        <div id="selectedFilesOpp" class="file-preview"></div>
-
-                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
-                                    </div>
-                                    <label for="fileInput" ng-click="postFiles()">
-                                        <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
-                                        <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
-                                        <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
-                                    </label>
-                                </div>
-                            </div>
+                            
                             <div class="post-field">
-                                <div class="form-group">
+                                <div class="form-group title-op-op">
                                     <label>Title of Opportunity</label>
                                     <input id="opptitle"  type="text" class="form-control" ng-model="opp.opptitle" placeholder="Enter Title of Opportunity" autocomplete="off" maxlength="100">
                                     <div id="opptitletooltip" class="tooltip-custom" style="display: none;">Enter the specific "title" of this opportunity. Ex: Hiring Software Developer, Contractors Needed for Bridge Construction, Fund Raising Opportunities for Entrepreneur etc.</div>
@@ -1824,7 +1792,7 @@
                                     </script>
                                 </div>
                                 <div class="form-group">
-                                    <label class="pb5">For which field?</label>
+                                    <label class="">For which field?</label>
 									
                                     <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                     <span class="select-field-custom">
@@ -1839,14 +1807,41 @@
                                 <div class="form-group" ng-if="opp.field == '0'">
                                     <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>
+								<div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="100">
+                                </div>
                                 <div class="form-group">
-                                    <label>Company Name</label>
+                                    <label>Company Name (Optional)</label>
                                     <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                 </div>
+								
+								
+								<div class="post-text form-group pt20">
+									
+                                    <textarea name="description" ng-model="opp.description" id="description" class="title-text-area" placeholder="Post Opportunity"></textarea>
+                                </div>
+								
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">
-                            </div>
-                            <div class="text-right fw pt10 pb20 pr15">
+								
+                            
+							<div class="all-upload form-group" ng-if="is_edit != 1">
+                                    <div class="">
+                                        <div id="fileCountOpp"></div>
+                                        <div id="selectedFilesOpp" class="file-preview"></div>
+
+                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
+                                    </div>
+                                    <label for="fileInput" ng-click="postFiles()">
+                                        <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
+                                        <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
+                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                        <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
+                                    </label>
+                                </div>
+							</div>
+                            <div class="text-right fw post-op-btn pb20 pr20">
                                 <button type="submit" class="btn1"  value="Submit">Post</button>    
                             </div>
                             <?php // echo form_close(); ?>
@@ -1943,7 +1938,10 @@
                                     </span>
 									<div id="ask_fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Question.</div>
                                 </div>
-
+								<div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="100">
+                                </div>
                                 <div class="form-group" ng-if="ask.ask_field == '0'">
                                     <input type="text" class="form-control" ng-model="ask.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>

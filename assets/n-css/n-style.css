@@ -165,7 +165,7 @@ padding: 5px;}
 .all-upload .upload_icon:hover{padding: 5px; background: #d9d9d9; border-radius: 5px;}
 .all-post-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px;}
 .all-post-box .all-post-top{padding:0; width:100%; float:left;}
-.post-field{width:100%; float:left; background:#fff;}
+.post-field{width:100%; float:left; padding:10px 5px 0;}
 .modal-content .post-popup-box form{padding:0; width:100%; float:left;}
 .modal-content .post-field .form-group{padding:5px 15px; margin-bottom:0; position:relative;}
 .modal-content .post-field .form-group textarea{border:none; min-height:30px; max-height:80px; font-size:14px; border:1px solid #d2d2d2; padding:5px 15px; margin-bottom:9px;}
@@ -1683,7 +1683,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .all-upload .img_preview .remove_img{position: absolute; bottom: 0; right: 3px; cursor: pointer; background: #fff; padding: 0px 4px; width: auto;}
 .all-upload .img_preview .remove_img i{border-bottom: 0;}
 .all-upload .img_preview .remove_img i:hover{background: none;}
-.all-upload .file-preview{padding: 0;}
+.all-upload .file-preview{padding: 0; margin:0;}
 .all-upload .img_preview .i-ip video{width: 100%; height: 100%;}
 .all-upload .img_preview .i-ip.i-ip-audio{background: url('../images/music-icon.png?version=@{cache-version}'); width: 115px; height: 115px; background-size: 100%;}
 .all-upload .img_preview:hover{box-shadow: 3px 3px 5px 0 #333;}
@@ -2326,7 +2326,7 @@ label.cameraButton{min-height:43px;}
 .ui-autocomplete{z-index:999999 !important;}
 .custom-user-box.no-data-available .art_no_post_img img{width:150px;}
 .custom-user-box.no-data-available .art_no_post_text{font-size:22px;}
-#ask_question .post-field .form-group .select-field-custom{margin-top:5px;}
+#ask_question .post-field .form-group .select-field-custom{}
 .user-list-detail p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .profile-boxProfileCard-content{background: #ffffff; 
 	background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 48%, #ffffff 57%, #f6f6f6 100%);
@@ -3486,6 +3486,21 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .inner-form .title h2{padding:10px 0;}
 .report .report-middle-box .btn1{border:1px solid #5c5c5c !important; background:#fff; color:#5c5c5c; border-radius:20px;}
 .report .report-middle-box .btn1:hover{background:#5c5c5c !important; color:#fff;}
+
+.modal-content .post-field .post-text.form-group textarea{min-height:120px; border:0; padding:0; margin:0;}
+.modal-content .post-field .post-text.form-group textarea:focus{border:0px !important;}
+.modal-content .post-field .post-text.form-group{padding-top:20px;}
+.file-preview{margin-bottom:10px;}
+.post-op-btn{margin-top:-35px;}
+.post-op-btn button{position:relative; z-index:9;}
+.form-group tags-input .host{margin:0;}
+#opportunity-popup .modal-dialog{margin-top:0; margin-bottom:10px;}
+.post-popup-box .title-op-op .tooltip-custom{top:5px; min-height:138px;}
+.post-field input:focus{border:1px solid #1b8ab9;}
+.post-field .tags input:focus{border:0px;}
+.post-popup-box textarea:focus{border:0;}
+#post-popup .post-popup-box .form-group textarea:focus{border:0px !important;}
+
 /***  media query  ***/
 @media print {
     .rating-container .clear-rating {display: none;}
