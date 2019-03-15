@@ -1324,7 +1324,7 @@ class Customscript extends CI_Controller {
         // print_r($all_language);exit();
         echo count($all_language)."<br>";
         foreach ($all_language as $_all_language) {
-            $sql1 = "SELECT * FROM ailee_user_languages WHERE user_id = '".$_all_language['user_id']."' AND LOWER(language_txt) = '".strtolower($_all_language['language_txt'])."' AND LOWER(proficiency) = '".strtolower($_all_language['proficiency'])."'";
+            $sql1 = "SELECT * FROM ailee_user_languages WHERE user_id = '".$_all_language['user_id']."' AND LOWER(language_txt) = '".strtolower($_all_language['language_txt'])."'";
             $usr_activity = $this->db->query($sql1)->row();
             if(isset($usr_activity) && !empty($usr_activity))
             {
@@ -1354,7 +1354,7 @@ class Customscript extends CI_Controller {
                 );
                 
                 $id_user_language = $this->common->insert_data_getid($data,'ailee_user_languages');
-                print_r($data);
+                print_r($_all_language);
             }
         }
         echo "Done";
@@ -1676,7 +1676,7 @@ class Customscript extends CI_Controller {
         // print_r($free_project);exit();
         echo count($free_project)."<br>";
         foreach ($free_project as $_free_project) {
-            $sql1 = "SELECT * FROM ailee_user_projects WHERE user_id = '".$_free_project['user_id']."' AND LOWER(project_title) = '".strtolower($_free_project['project_title'])."'";
+            $sql1 = 'SELECT * FROM ailee_user_projects WHERE user_id = "'.$_free_project['user_id'].'" AND LOWER(project_title) = "'.strtolower($_free_project['project_title']).'"';
             $usr_project = $this->db->query($sql1)->row();
             if(isset($usr_project) && !empty($usr_project))
             {
@@ -1850,7 +1850,7 @@ class Customscript extends CI_Controller {
         // print_r($free_exp);exit();
         echo count($free_exp)."<br>";
         foreach ($free_exp as $_free_exp) {
-            $sql1 = "SELECT * FROM ailee_user_experience WHERE user_id = '".$_free_exp['user_id']."' AND LOWER(exp_company_name) = '".strtolower($_free_exp['exp_company_name'])."'";
+            $sql1 = 'SELECT * FROM ailee_user_experience WHERE user_id = "'.$_free_exp['user_id'].'" AND LOWER(exp_company_name) = "'.strtolower($_free_exp['exp_company_name']).'"';
             $usr_exp = $this->db->query($sql1)->row();
             if(isset($usr_exp) && !empty($usr_exp))
             {
@@ -1938,7 +1938,7 @@ class Customscript extends CI_Controller {
         // print_r($job_exp);exit();
         echo count($job_exp)."<br>";
         foreach ($job_exp as $_job_exp) {
-            $sql1 = "SELECT * FROM ailee_user_experience WHERE user_id = '".$_job_exp['user_id']."' AND LOWER(exp_company_name) = '".strtolower($_job_exp['exp_company_name'])."'";
+            $sql1 = 'SELECT * FROM ailee_user_experience WHERE user_id = "'.$_job_exp['user_id'].'" AND LOWER(exp_company_name) = "'.strtolower($_job_exp['exp_company_name']).'"';
             $usr_exp = $this->db->query($sql1)->row();
             if(isset($usr_exp) && !empty($usr_exp))
             {
