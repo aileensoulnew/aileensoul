@@ -1019,7 +1019,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
             else
             {
-                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
+                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'bmp', 'BMP'];
                 var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
                 var allowesaudio = ['mp3','mpeg'];
                 var allowespdf = ['pdf'];
@@ -1488,7 +1488,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 return false;
             } else {
 
-                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
+                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'bmp', 'BMP'];
                 
                 var imgExtNot = false;
 
@@ -1736,7 +1736,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 return false;
             } else {
 
-                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
+                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'bmp', 'BMP'];
                 var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
                 var allowesaudio = ['mp3','mpeg'];
                 var allowespdf = ['pdf'];
