@@ -270,6 +270,11 @@ if($browser == "Firefox")
 									</svg>
 									<span>View Profile</span></a>
 								</li>
+                                <li>
+                                    <a href="<?php echo $this->business_profile_link; ?>">
+                                        <span>Business Profile</span>
+                                    </a>
+                                </li>
                                 <li><a target="_self" href="<?php echo base_url('edit-profile') ?>" title="Setting">
 									<svg x="0px" y="0px" width="15px" height="15px" viewBox="0 0 268.765 268.765">
 									<g id="Settings">

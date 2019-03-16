@@ -54,7 +54,7 @@ echo $header_inner_profile ?>
                         		$bus_pro_url = base_url('company/' . $business_login_slug_with_location);
                         	}
                         	else{
-                        		$bus_pro_url = base_url("business-profile/registration/business-information");
+                        		$bus_pro_url = base_url("business-search");
                         	} ?>
                             <a href="<?php echo $bus_pro_url;// base_url('business-profile');//$business_right_profile_link; ?>">
 								<div class="sub-menu-icon">
