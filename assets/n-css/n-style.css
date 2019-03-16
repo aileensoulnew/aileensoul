@@ -218,7 +218,7 @@ padding: 5px;}
 .bottom-right li{font-size:13px; color:#999; cursor:pointer;}
 .bottom-right li:hover{color:#1b8ab9;}
 .bottom-right li a{font-size:13px; color:#999;}
-.bottom-right li a:hover{color:#1b8ab9;}
+.bottom-right li a:hover{color:#5c5c5c;}
 .bottom-right li span:last-child{padding-left:5px;}
 .like-other-box{width:100%; float:left; border-top:1px solid #d2d2d2; padding-top:3px; line-height: 1;}
 .like-other-box a{font-size:13px;}
