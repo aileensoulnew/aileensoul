@@ -1423,6 +1423,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
                                 $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                                 $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
+                                $scope.postData[postIndex].opportunity_data.company_name = success.data.company_name;
                                 $("#post_opportunity_edit")[0].reset();
 
                                 $("#edit-opp-post-"+post_id).hide();
@@ -3513,6 +3514,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $scope.recentpost.opportunity_data.location = success.data.opp_location;
                                 $scope.recentpost.opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                                 $scope.recentpost.opportunity_data.opportunity = success.data.opportunity;
+                                $scope.recentpost.opportunity_data.company_name = success.data.company_name;
                                 $("#post_opportunity_edit")[0].reset();
 
                                 $("#edit-opp-post-"+post_id).hide();

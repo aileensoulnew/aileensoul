@@ -591,6 +591,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                     </select>
                                                                 </span>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <label>Company Name</label>
+                                                                <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+                                                            </div>
                                                             <div class="form-group" ng-if="opp.field_edit == '0'">
                                                                 <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                                             </div>
@@ -612,6 +616,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                                         <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                                         <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
                                                     </h5>
                                                     <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
                                                         <div id="opp-post-opportunity-{{post.post_data.id}}" ng-class="post.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
@@ -1619,6 +1624,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <div class="form-group" ng-if="opp.field == '0'">
                                     <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>
+                                <div class="form-group">
+                                    <label>Company Name (Optional)</label>
+                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+                                </div>
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="opportunity" ng-init="opp.post_for='opportunity'">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">
                             </div>
@@ -1859,7 +1868,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             var user_slug = '<?php echo $business_data[0]['business_slug']; ?>';
             var cmt_maxlength = '700';
             var business_slug = '<?php echo $login_bussiness_data->business_slug; ?>';
-            var company_name = '<?php echo $login_bussiness_data->company_name; ?>';
+            // var company_name = '<?php echo $login_bussiness_data->company_name; ?>';
             var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
             
             var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';

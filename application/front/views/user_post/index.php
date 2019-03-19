@@ -401,6 +401,7 @@
                             <p ng-if="recentpost.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="recentpost.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{recentpost.post_data.id}}"></span></p>
                             <p ng-if="recentpost.opportunity_data.location"><b>Location:</b><span ng-bind="recentpost.opportunity_data.location" id="opp-post-location-{{recentpost.post_data.id}}"></span></p>
                             <p ng-if="recentpost.opportunity_data.field"><b>Field:</b><span ng-bind="recentpost.opportunity_data.field" id="opp-post-field-{{recentpost.post_data.id}}"></span></p>
+                            <p ng-if="recentpost.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="recentpost.opportunity_data.company_name" id="opp-recpost-company-{{recentpost.post_data.id}}"></span></p>
                         </h5>
                         <div class="post-des-detail" ng-if="recentpost.opportunity_data.opportunity">
                             <div id="opp-post-opportunity-{{recentpost.post_data.id}}" ng-class="recentpost.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
@@ -986,6 +987,7 @@
                                 <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
                             </h5>
                             <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
                                 <div id="opp-post-opportunity-{{post.post_data.id}}" ng-class="post.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
