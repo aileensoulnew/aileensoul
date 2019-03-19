@@ -748,14 +748,14 @@ class Userprofile_page extends MY_Controller {
         $follow = $this->userprofile_model->userFollowStatus($userid, $id);
 
         if (count($follow) != 0) {
-            $data = array('status' => 0,'modify_date' => date("Y-m-d h:i:s"));
+            $data = array('status' => '0','modify_date' => date("Y-m-d h:i:s"));
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             //   $response = $status;
 
             $html = '<a class="btn3 follow"  ng-click="follow_user(' . $id . ')">Follow</a>';
         } else {
             $data = array(
-                'status' => 0,
+                'status' => '0',
                 'follow_from' => $userid,
                 'follow_to' => $id,
                 'created_date' => date("Y-m-d h:i:s"),
@@ -1648,7 +1648,7 @@ class Userprofile_page extends MY_Controller {
         {
             $user_idol_insert = $this->userprofile_model->delete_user_idol($user_id,$idol_id);
             $user_idol = $this->userprofile_model->get_user_idols($user_id);
-            $profile_progress = $this->progressbar($userid);  
+            $profile_progress = $this->progressbar($user_id);  
             $ret_arr = array("success"=>1,"user_idols"=>$user_idol,"profile_progress"=>$profile_progress);
         }
         else
@@ -2803,5 +2803,23 @@ class Userprofile_page extends MY_Controller {
         $profile_progress = $this->progressbar($userid);
         $ret_arr = array("success"=>1,"profile_progress"=>$profile_progress);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_all_counter()
+    {
+        if (!empty($_GET["user_slug"]) && $_GET["user_slug"] != 'undefined')
+        {
+            $user_slug = $_GET["user_slug"];
+            $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        }
+        else
+        {            
+            $userid = $this->session->userdata('aileenuser');
+        }
+        $all_counter = $this->userprofile_model->get_all_counter($userid);
+        $progress_arr = $this->progressbar($userid);
+        $user_detail_counter = $progress_arr['user_process'];
+        $all_counter['detail_counter'] = round($user_detail_counter);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($all_counter));
     }
 }

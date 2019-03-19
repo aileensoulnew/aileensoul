@@ -326,7 +326,7 @@ app.controller('userProfileController', function ($scope, $http) {
             $scope.fieldList = success.data;
         }, function (error) {});
     }
-    $scope.get_field_list();
+    $scope.get_field_list();   
 
     $scope.get_user_detail = function(){
         $http.get(base_url + "userprofile_page/get_user_data").then(function (success) {            
@@ -617,6 +617,7 @@ app.controller('userProfileController', function ($scope, $http) {
         })
         .then(function (success) {                    
             $scope.contact_value = success.data.trim();
+            $scope.get_all_counter();
         });
     };
 
@@ -629,6 +630,7 @@ app.controller('userProfileController', function ($scope, $http) {
         })
         .then(function (success) {                    
             $scope.contact_value = success.data.trim();
+            $scope.get_all_counter();
         });
     };
 
@@ -649,9 +651,9 @@ app.controller('userProfileController', function ($scope, $http) {
             data: 'follow_id=' + id + '&status=' + status + '&to_id=' + to_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    $scope.follow_value = success.data;
-                });
+        .then(function (success) {
+            $scope.follow_value = success.data;
+        });
     };
 });
 app.config(function ($routeProvider, $locationProvider) {
@@ -742,6 +744,106 @@ app.controller('profilesController', function ($scope, $http, $location) {
     window.location = base_url;
     $scope.user = {};
     // PROFEETIONAL DATA
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     $scope.$parent.title = "Profiles | Aileensoul";    
     getFieldList();
     function getFieldList() {
@@ -773,6 +875,106 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
     $scope.makeActive = function (item,slug) {
         $scope.active = $scope.active == item ? '' : item;
     }
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     // Variables
     $scope.showLoadmore = true;
     $scope.row = 0;
@@ -859,6 +1061,106 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
         $scope.active = $scope.active == item ? '' : item;
     }
     // lazzy loader start
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     // Variables
     $scope.showLoadmore = true;
     $scope.row = 0;
@@ -946,6 +1248,106 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
         $scope.active = $scope.active == item ? '' : item;
     }
     // lazzy loader start
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     // Variables
     $scope.showLoadmore = true;
     $scope.row = 0;
@@ -1041,6 +1443,106 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
     });
 
     // lazzy loader start
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     // Variables
     $scope.showLoadmore = true;
     $scope.row = 0;
@@ -1195,6 +1697,106 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
         }
     });
     // lazzy loader start
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     // Variables
     $scope.showLoadmore = true;
     $scope.row = 0;
@@ -1385,6 +1987,105 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
             $compile($elm)($scope);
     },2000);
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
     
     var isLoadingData = false;
 
@@ -3863,6 +4564,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 getUserDashboardPdf();
                 getUserDashboardImage();
                 getUserDashboardPost();
+                $scope.get_all_counter();
             }
         });
     }
@@ -4095,6 +4797,104 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     }*/
     // PROFEETIONAL DATA
     getFieldList();
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
 
     function load_add_detail()
     {
@@ -4335,6 +5135,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var count_profile = profile_progress.user_process;
                 $scope.progress_status = profile_progress.progress_status;
                 $scope.set_progress(count_profile_value,count_profile);
+                $scope.get_all_counter();
                 $("#user_bio_save").removeAttr("style");
                 $("#user_bio_loader").hide();
                 $("#profile-overview").modal('hide');
@@ -4373,6 +5174,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var count_profile = profile_progress.user_process;
             $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
+
+            $scope.get_all_counter();
             
             $("#user_skills_save").removeAttr("style");
             $("#user_skills_loader").hide();
@@ -4592,6 +5395,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var count_profile = profile_progress.user_process;
                 $scope.progress_status = profile_progress.progress_status;
                 $scope.set_progress(count_profile_value,count_profile);
+                $scope.get_all_counter();
                 $("#save_about_user").removeAttr("style");
                 $("#about_user_loader").hide();
                 $("#detail-about").modal('hide');
@@ -5202,6 +6006,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var count_profile = profile_progress.user_process;
             $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
+            $scope.get_all_counter();
             $("#user_links_save").removeAttr("style");
             $("#user_links_loader").hide();
             $("#social-link").modal('hide');
@@ -5298,6 +6103,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     var count_profile = profile_progress.user_process;
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
+                    $scope.get_all_counter();
                 }
             });
         }
@@ -5408,6 +6214,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         var count_profile = profile_progress.user_process;
                         $scope.progress_status = profile_progress.progress_status;
                         $scope.set_progress(count_profile_value,count_profile);
+                        $scope.get_all_counter();
                     }
                     else
                     {
@@ -7589,6 +8396,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     var count_profile = profile_progress.user_process;
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
+                    $scope.get_all_counter();
                 }
             });
         }
@@ -7791,6 +8599,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         var count_profile = profile_progress.user_process;
                         $scope.progress_status = profile_progress.progress_status;
                         $scope.set_progress(count_profile_value,count_profile);
+                        $scope.get_all_counter();
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();                        
                     }
@@ -8615,6 +9424,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     var count_profile = profile_progress.user_process;
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
+                    $scope.get_all_counter();
                 }
             });
         }
@@ -8771,6 +9581,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         var count_profile = profile_progress.user_process;
                         $scope.progress_status = profile_progress.progress_status;
                         $scope.set_progress(count_profile_value,count_profile);
+                        $scope.get_all_counter();
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();                        
                     }
@@ -8900,6 +9711,105 @@ app.controller('contactsController', function ($scope, $http, $location, $window
         $compile($el)($scope);
     },1000);
 
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
     $scope.contact = function (id, status, to_id,indexCon,confirm = 0) {
         if(confirm == '1')
         {
@@ -8914,9 +9824,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
         })
         .then(function (success) {            
             if(success.data != "")
-            {                
+            {
                 $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
             }
+            $scope.get_all_counter();
         });
     }
 
@@ -8932,6 +9843,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             {                
                 $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
             }
+            $scope.get_all_counter();
         });
     }
 
@@ -9031,7 +9943,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
 app.controller('followersController', function ($scope, $http, $location, $compile, $window) {
 
     //    lazzy loader start
-// Variables
+
     $scope.showLoadmore = true;
     $scope.row = 0;
     $scope.rowperpage = 3;
@@ -9048,6 +9960,105 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
         $compile($el)($scope);
     },1000);
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
 
     // Fetch data
     $scope.getFollowers = function (pagenum) {
@@ -9107,7 +10118,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     });
     // Call function
     $scope.getFollowers();
-//    lazzy loader end
+   // lazzy loader end
 
     $scope.user = {};
     var id = 1;
@@ -9122,6 +10133,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) {
+            $scope.get_all_counter();
             $("#" + id).html($compile(success.data)($scope));
         });
     }
@@ -9132,10 +10144,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             data: 'to_id=' + id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-
-                    $("#" + id).html($compile(success.data)($scope));
-                });
+        .then(function (success) {
+            $scope.get_all_counter();
+            $("#" + id).html($compile(success.data)($scope));
+        });
     }
     $scope.goUserprofile = function (path) {
         location.href = base_url + 'profiles/' + path;
@@ -9160,6 +10172,105 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
         $compile($el)($scope);
     },1000);
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
 
     // Fetch data
     $scope.getFollowing = function (pagenum) {
@@ -9220,7 +10331,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     });
     // Call function
     $scope.getFollowing();
-//    lazzy loader end
+   // lazzy loader end
     $scope.user = {};
     var id = 1;
     
@@ -9245,16 +10356,18 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) {
-            if (success.data.response == 1) {
+            if (success.data.response == 1) {                
                 if(live_slug != user_slug)
                 {
-                     $("#" + id).html($compile(success.data.follow_view)($scope));
+                    $('.following_counter').html('('+success.data.unfollowingcount+')');
                 }
                 else
                 {
                     $('#' + id).closest('.custom-user-box').fadeToggle();
+                    $('.following_counter').html('('+success.data.unfollowingcount+')');
                     if (success.data.unfollowingcount == '0') {
                         $("#nofollowng").html("<div class='art-img-nn'><div class='art_no_post_img'><img src='assets/img/icon_notification_big.png' alt='notification image'></div><div class='art_no_post_text'>No Following Contacts Available. </div></div>");
+                        $(".following_counter").hide();
                     }
                 }
             }
@@ -9290,8 +10403,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 else
                 {
                     $('#buss-' + id).closest('.custom-user-box').fadeToggle();
+                    $('.following_counter').html('('+success.data.unfollowingcount+')');
                     if (success.data.unfollowingcount == '0') {
                         $("#nofollowng").html("<div class='art-img-nn'><div class='art_no_post_img'><img src='assets/img/icon_notification_big.png' alt='notification image'></div><div class='art_no_post_text'>No Following Contacts Available. </div></div>");
+                        $(".following_counter").hide();
                     }
                 }
             }
@@ -9327,6 +10442,105 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             $scope.fieldList = success.data;
         }, function (error) {});
     }
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter > 0)
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html('('+$scope.prettifyNumber(result.dashboard_counter)+')');
+            }
+            else
+            {
+                $('.dashboard_counter').hide();
+                $('.dashboard_counter').html('');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html('('+result.detail_counter+'%)');
+            }
+            else
+            {
+                $('.detail_counter').hide();
+                $('.detail_counter').html('');
+            }
+
+            if(result.contact_counter > 0)
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html('('+$scope.prettifyNumber(result.contact_counter)+')');
+            }
+            else
+            {
+                $('.contact_counter').hide();
+                $('.contact_counter').html('');
+            }
+
+            if(result.follower_counter > 0)
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html('('+$scope.prettifyNumber(result.follower_counter)+')');
+            }
+            else
+            {
+                $('.follower_counter').hide();
+                $('.follower_counter').html('');
+            }
+
+            if(result.following_counter > 0)
+            {
+                $('.following_counter').show();
+                $('.following_counter').html('('+$scope.prettifyNumber(result.following_counter)+')');
+            }
+            else
+            {
+                $('.following_counter').hide();
+                $('.following_counter').html('');
+            }
+
+            if(result.question_counter > 0)
+            {
+                $('.question_counter').show();
+                $('.question_counter').html('('+$scope.prettifyNumber(result.question_counter)+')');
+            }
+            else
+            {
+                $('.question_counter').hide();
+                $('.question_counter').html('');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
 
     //$scope.category = [];
     $scope.loadCategory = function ($query) {
@@ -9727,6 +10941,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 //$scope.questionData.splice(index, 1);
                 $scope.questionData = [];
                 $scope.getQuestions();
+                $scope.get_all_counter();
             }
         });
     }

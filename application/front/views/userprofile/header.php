@@ -196,33 +196,33 @@
                 <div class="table-responsive content horizontal-images">
                     <table class="table" ng-class="{'other-user': live_slug != segment2}">
                         <tr>                            
-                            <td><a href="<?php echo base_url().$userdata['user_slug']; ?>" ng-click='makeActive("<?php echo $userdata['user_slug']; ?>")' ng-class="{'active': active == '<?php echo $userdata['user_slug']; ?>' || active == 'dashboard' || active == 'article' || active == 'photos' || active == 'videos' || active == 'audios' || active == 'pdf'}">Dashboard</a></td>
+                            <td><a href="<?php echo base_url().$userdata['user_slug']; ?>" ng-click='makeActive("<?php echo $userdata['user_slug']; ?>")' ng-class="{'active': active == '<?php echo $userdata['user_slug']; ?>' || active == 'dashboard' || active == 'article' || active == 'photos' || active == 'videos' || active == 'audios' || active == 'pdf'}">Dashboard <span class="dashboard_counter"></span></a></td>
                             <?php 
                             if($user_id != ""){
                             ?>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/details"  ng-click='makeActive("details")' ng-class="{
-                                    'active': active == 'details'}">Details</a></td>
+                                    'active': active == 'details'}">Details <span ng-if="live_slug == segment2" class="detail_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/contacts" ng-click='makeActive("contacts")' ng-class="{
-                                    'active': active == 'contacts'}">Contacts</a></td>
+                                    'active': active == 'contacts'}">Contacts <span class="contact_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/followers"  ng-click='makeActive("followers")' ng-class="{
-                                    'active': active == 'followers'}">followers</a></td>
+                                    'active': active == 'followers'}">followers <span class="follower_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/following"  ng-click='makeActive("following")' ng-class="{
-                                    'active': active == 'following'}">following</a></td>
+                                    'active': active == 'following'}">following <span class="following_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/questions"  ng-click='makeActive("questions")' ng-class="{
-                                    'active': active == 'questions'}">Questions</a></td>
+                                    'active': active == 'questions'}">Questions <span class="question_counter"></span></a></td>
                             <?php 
                             }else{
                             ?>
                             <td><a href="#" data-toggle="modal" data-target="#regmodal" ng-class="{
-                                    'active': active == 'details'}">Details</a></td>
+                                    'active': active == 'details'}">Details <span ng-if="live_slug == segment2" class="detail_counter"></span></a></td>
                             <td><a href="#" data-toggle="modal" data-target="#regmodal" ng-class="{
-                                    'active': active == 'contacts'}">Contacts</a></td>
+                                    'active': active == 'contacts'}">Contacts <span class="contact_counter"></span></a></td>
                             <td><a href="#"  data-toggle="modal" data-target="#regmodal" ng-class="{
-                                    'active': active == 'followers'}">followers</a></td>
+                                    'active': active == 'followers'}">followers <span class="follower_counter"></a></td>
                             <td><a href="#"  data-toggle="modal" data-target="#regmodal" ng-class="{
-                                    'active': active == 'following'}">following</a></td>
+                                    'active': active == 'following'}">following <span class="following_counter"></a></td>
                             <td><a href="#"  data-toggle="modal" data-target="#regmodal" ng-class="{
-                                    'active': active == 'questions'}">Questions</a></td>
+                                    'active': active == 'questions'}">Questions <span class="question_counter"></span></a></td>
                             <?php 
                             }
                             ?>
