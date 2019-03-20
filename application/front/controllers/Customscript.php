@@ -2186,4 +2186,53 @@ class Customscript extends CI_Controller {
     }
     //End Education
     //Merge Detail End
+
+    public function crate_hashtag()
+    {
+        $hashtag = array();
+        $art_sql = "SELECT category_id,REPLACE(art_category,' ','') as art_category FROM ailee_art_category WHERE art_category != 'other';";
+        $art_cat_data = $this->db->query($art_sql)->result();
+        echo "<pre>";
+        // print_r($art_cat_data);
+        foreach ($art_cat_data as $_art_cat_data) {
+            $res = preg_replace("/[^a-zA-Z0-9]/", "", $_art_cat_data->art_category);
+            $_art_cat_data->art_hashtag = strtolower($res);
+            $hashtag[] = strtolower($res);
+            // print_r($_art_cat_data);
+        }
+
+        $jt_sql = "SELECT title_id,name FROM ailee_job_title WHERE status = 'publish';";
+        $job_title_data = $this->db->query($jt_sql)->result();
+        echo "<pre>";
+        // print_r($job_title_data);
+        foreach ($job_title_data as $_job_title_data) {
+            $res = preg_replace("/[^a-zA-Z0-9]/", "", $_job_title_data->name);
+            $_job_title_data->jt_hashtag = strtolower($res);
+            $hashtag[] = strtolower($res);
+            // print_r($_job_title_data);
+        }
+
+        $s_sql = "SELECT skill_id,skill FROM ailee_skill WHERE status = '1' AND ( type='1' OR type='2');";
+        $skill_data = $this->db->query($s_sql)->result();
+        echo "<pre>";
+        // print_r($skill_data);
+        foreach ($skill_data as $_skill_data) {
+            $res = preg_replace("/[^a-zA-Z0-9]/", "", $_skill_data->skill);
+            $_skill_data->jt_hashtag = strtolower($res);
+            $hashtag[] = strtolower($res);
+            // print_r($_skill_data);
+        }
+        // print_r($hashtag);
+        $main_hashtag = array_values(array_unique($hashtag));
+        foreach ($main_hashtag as $key => $value) {
+            $data = array(
+                'hashtag'       => $value,
+                'status'        => '1',
+                'created_date'  => date('Y-m-d H:i:s', time()),
+                'modify_date'   => date('Y-m-d H:i:s', time()),
+            );
+            print_r($data);
+            $hashtag_id = $this->common->insert_data_getid($data, 'hashtag');
+        }
+    }
 }

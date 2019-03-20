@@ -61,6 +61,14 @@
             .mejs__button > button {
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
+            #output span{
+                font-weight: bold;
+            }
+            #output {
+               position: absolute; 
+               z-index: 1;
+            }
+
         </style>        
         <?php $this->load->view('adsense');
         $user_id = $this->session->userdata('aileenuser');
@@ -1702,7 +1710,10 @@
 								
 								<div class="form-group">
                                     <label>Add hashtag (Topic)</label>
-                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="100">
+                                    <!-- <input id="sim_hashtag" type="text" class="form-control" ng-model="opp.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200"> -->
+                                    <div id="output"></div>
+                                    <div contenteditable="true" id="sim_hashtag"></div>
+                                    <div id="sim-hashtag-list"></div>
                                 </div>
 								<div class="form-group">
                                     <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
@@ -2099,6 +2110,10 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js') ?>"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="<?php echo base_url('assets/js/autosize.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.hashtags.js') ?>"></script>
+
         <script>
             $(function () {
                 $('a[href="#search"]').on('click', function (event) {
@@ -2322,6 +2337,89 @@
 					$("#edit-profile-move").appendTo($(".edit-custom-move"));
 				}
 			});
+
+            $(function() {
+                function split( val ) {
+                    return val.split( / \s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+
+                function converter (){
+                    var str = $('#sim_hashtag').text();
+                    str = str.replace(/(<)/gi, '&lt;');
+                    str = str.replace(/(<)/gi, '&lg;');
+                    str = str.replace(/(?:\r\n|\n\r|\r|\n)/g, '<br />');
+                    str = str.replace(/#(.+?)(?=[\s.,:,]|$)/g, '<span>#$1</span>');
+                    str = str.replace(/@(.+?)(?=[\s.,:,]|$)/g, '<span>@$1</span>');
+                    str = str.replace(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g, '<span>$1</span>');
+                    $('#output').html(str);
+                }
+
+                $( "#sim_hashtag" ).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "#sim-hashtag-list",
+                    minLength: 2,
+                    source: function( request, response ) { 
+                        // delegate back to autocomplete, but extract the last term
+                        // console.log(request.term);
+                        var search_key = extractLast( request.term );
+                        if(search_key[0] == "#")
+                        {
+                            search_key = search_key.substr(1);
+                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var text =$("#sim_hashtag").html();
+                        var terms = split( $("#sim_hashtag").html() );
+                        text = text == null || text == undefined ? "" : text;
+                        var checked = (text.indexOf(ui.item.value + ' ') > -1 ? 'checked' : '');
+                        if (checked == 'checked') {
+                            terms.push( ui.item.value );
+                            $("#sim_hashtag").html(terms.split( " " ));
+                            // $("#sim_hashtag").html() = terms.split( " " );
+                        }//if end
+                        else {
+                            // if(terms.length <= 10) {
+                                // remove the current input
+                                terms.pop();
+                                // add the selected item
+                                terms.push( ui.item.value );
+                                // add placeholder to get the comma-and-space at the end
+                                terms.push( "" );
+                                // $("#sim_hashtag").html() = terms.join( " " );
+                                $("#sim_hashtag").html(terms.join( " " ));
+                                converter();
+                                return false;
+                            /*}else{
+                                var last = terms.pop();
+                                $(this).val(this.value.substr(0, this.value.length - last.length - 2)); 
+                                // removes text from input
+                                $(this).effect("highlight", {}, 1000);
+                                $(this).attr("style","border: solid 1px red;");
+                                return false;
+                            }*/
+                        }//else end
+                    }
+                });
+                $('#sim_hashtag').on('input keyup', converter);
+            });
+            //$("#sim_hashtag").hashtags();
 		</script>
     </body>
 </html>

@@ -158,4 +158,24 @@ class General extends MY_Controller {
         $this->load->view('report', $this->data);
     }
 
+    public function get_hashtag($id = "") {
+
+
+        //get search term
+        $searchTerm = $_GET['term'];
+        if (!empty($searchTerm)) {
+
+            $contition_array = array('status' => '1');
+            $search_condition = "(hashtag LIKE '" . trim($searchTerm) . "%')";
+            $hashtaglist = $this->common->select_data_by_search('hashtag', $search_condition, $contition_array, $data = 'id,CONCAT("#",hashtag) as text', $sortby = 'hashtag', $orderby = 'desc', $limit = '10', $offset = '', $join_str5 = '', $groupby = 'hashtag');
+        }
+        foreach ($hashtaglist as $key => $value) {
+            //   $citydata[$key]['id'] = $value['id'];
+            $hashtagdata[$key]['value'] = $value['text'];
+        }
+
+        $cdata = array_values($hashtagdata);
+        echo json_encode($cdata);
+    }
+
 }
