@@ -1822,7 +1822,7 @@ tags-input .tags .input{font-size: 13px; color:#7a7a7a;}
 tags-input .tags .tag-item{font-size: 13px;}
 .view-more-expand{max-height: 70px !important; overflow: hidden; float: left; width: 100%; line-height: 1.7; font-size:13px;}
 span.view-more-expand{line-height: 1.8;}
-.read-more-post{position: absolute; bottom: 0px; background: #fff; padding: 0px 0; right: 15px; color: #5c5c5c; cursor: pointer; font-weight: bold; font-size:13px;}
+.read-more-post{position: absolute; bottom: 0px; background: #fff; padding: 0px 0; right: 0px; color: #5c5c5c; cursor: pointer; font-weight: bold; font-size:13px;}
 .read-more-post:hover{color:#1b8ab9;}
 .post-field label .pull-right img{width: 80%; float: right;}
 #likeusermodal .modal-content h3{color:#1b8ab9; border-bottom: 1px solid #d2d2d2;}
@@ -4387,7 +4387,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.op-main-page .container{}
 	.op-main-page .middle-section{width:100%;}
 	.middle-section-cus{width:100%;}
-	.read-more-post{bottom:8px;}
+	.read-more-post{}
 	.mob-pl0{padding-left:0;}
 	.all-post-box .bottom-left.like_user_list li:last-child{width:62%;}
 	.all-post-box .bottom-left.like_user_list li:last-child a{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
