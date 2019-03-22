@@ -4000,7 +4000,10 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.login-form{width:100%;}
 	.signup-form{width:100%;}
 	.right-reg h3{font-size:20px;}
-	.right-reg.form-height{min-height:540px;}
+	.right-reg.form-height{min-height:580px;}
+	.top-logo svg {width:158px;}
+	.top-logo svg .logo-size{font-size:30px;}
+	.top-logo span{padding-top:5px;}
 }
 @media screen and (max-width: 767px) {
 	.middle-section{width:100%;}
@@ -4523,7 +4526,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.blok-767{display:block;}
 	.main-reg-header .mob-right-bar{float:right; margin-top:15px; margin-right:10px;}
 	.main-reg-header{box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.13);}
-	.main-reg .no_login_footer{display:none;}
+	.main-reg .no_login_footer .ftr-top{display:none;}
 	.right-reg.form-height{margin-top:0;}
 	
 	

@@ -78,164 +78,204 @@ header("Pragma: no-cache"); // HTTP/1.0
 
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="custom-landscape">
+    <body class="custom-landscape main-reg">
 		<div class="pr-pl-box">
             Aileensoul uses cookies to analyze traffic and shows ads to the site. Using this site you agree of its use. Refer <a href="https://www.aileensoul.com/privacy-policy">Privacy Policy</a> to learn more about the use of cookies. <a class="btn-pr-pl" href="javascript:void(0);">Close</a>
         </div>
-        <div class="main-login">
-            <header>
-                <div class="container">
-                    <div class="main-reg-pd">
-                        <div class="col-md-2 col-sm-3 col-lg-2 col-xs-6">
-                            <?php $this->load->view('main_logo'); ?>
-                        </div>
-						<div class="col-lg-10 col-md-10 col-sm-9 col-xs-6 right-cus-new-hdr">
-							<ul class="test-cus">
+		<div>
+			<div class="main-reg-header">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-10">
+							<div class="top-logo">
+								<a href="#">
+									<img src="<?php echo base_url('assets/n-images/logo.png') ?>">
 								
-								<li><a class="btn-new-1" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-								
-							</ul>
+									<span><svg>
+									<text class="logo-size" x="0" y="25">Aileensoul</text>
+									</svg></span>
+								</a>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-2">
 							<span class="mob-right-bar">
 								<?php $this->load->view('mobile_right_bar'); ?>
 							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 border-right">
+						<div class="left-reg">
+							<ul>
+								<li><img src="<?php echo base_url('assets/n-images/mrg-1.png') ?>"><span>Showcase your talent and get opportunities.</span></li>
+								<li><img src="<?php echo base_url('assets/n-images/mrg-2.png') ?>"><span>Ask the question, post opportunities, and articles.</span></li>
+								<li><img src="<?php echo base_url('assets/n-images/mrg-3.png') ?>"><span>Follow your interest and do networking.</span></li>
+								<li><img src="<?php echo base_url('assets/n-images/mrg-4.png') ?>"><span>List your business.</span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="right-reg">
+							<div class="right-reg-content">
+								<p>We provide platform & Opportunities to every person in the world to make their career.</p>
+								
+								<div class="reg-btns">
+									<a href="javascript:void(0);" id="login-btn-id" class="btn-new-1">Login</a>
+										
+									<a href="javascript:void(0);" id="signup-btn-id" class="btn-new-3">Sign up</a>
+								</div>
+							</div>
+							<div id="login-form-id" class="login-form">
+								<h3>Welcome to Aileensoul</h3>
+								<form class="new-form pt20" name="login_form" id="login_form" method="post">
+									<div class="form-group">
+										<input type="email" tabindex="1"  name="email_login" id="email_login" class="form-control input-sm" placeholder="Email Address">
+									</div>
+									<div class="form-group">
+										<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
+									</div>
+									<p class="pt15 fw">
+										<button id="login-new" title="Login" tabindex="1"  class="btn-new-1">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+									</p>
+									<p class="pt15 fw">
+										<a tabindex="1" data-target="#forgotPassword" data-toggle="modal" data-dismiss="modal" class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
+									</p>
+									<p class="pt10 fw">
+                                        Don't have an account? <a id="creat-acc" title="Create an account" href="#">Create an account</a>
+                                    </p>
+									
+								</form>
+							</div>
+							<div id="sign-up" class="signup-form">
+								<h3>Join Aileensoul - It's Free</h3>
+								<div id="register_error" class="row"></div>
+                                <form class="new-form" name="register_form" id="register_form" method="post" autocomplete="off">
+                                    <div class="row">
+										<div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input tabindex="1" type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input tabindex="2" type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
+                                            </div>
+                                        </div>
+										<div class="col-md-12 col-sm-12">
+											<div id="err-res-key" class="err-flname"></div>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<div class="form-group">
+												<input tabindex="3" type="email" name="email_reg" id="email_reg" class="form-control" placeholder="Email Address" autocomplete="new-email">
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<div class="form-group">
+												<input tabindex="4" type="password" name="password_reg" id="password_reg" class="form-control" placeholder="Password" autocomplete="new-password">
+											</div>
+										</div>
+										<div class="col-md-8 col-sm-12 text-left">
+											<div class="form-group dob">
+												<label class="d_o_b"> Date Of Birth :</label>
+												<span>
+													<select tabindex="5" class="day" name="selday" id="selday">
+														<option value="" disabled selected>Day</option>
+															<?php
+															for ($i = 1; $i <= 31; $i++) {
+																?>
+																<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+																<?php
+															}
+															?>
+													</select>
+												</span>
+												<span>
+													<select tabindex="6" class="month" name="selmonth" id="selmonth">
+														<option value="" disabled selected>Month</option>
+														<option value="1">Jan</option>
+														<option value="2">Feb</option>
+														<option value="3">Mar</option>
+														<option value="4">Apr</option>
+														<option value="5">May</option>
+														<option value="6">Jun</option>
+														<option value="7">Jul</option>
+														<option value="8">Aug</option>
+														<option value="9">Sep</option>
+														<option value="10">Oct</option>
+														<option value="11">Nov</option>
+														<option value="12">Dec</option>
+													</select>
+												</span>
+												<span>
+													<select tabindex="7" class="year" name="selyear" id="selyear">
+														<option value="" disabled selected>Year</option>
+															<?php
+															for ($i = date('Y'); $i >= 1900; $i--) {
+																?>
+																<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+																<?php
+															}
+															?>
+													</select>
+												</span>
+											</div>
+											<div class="dateerror"></div>
+										</div>
+										<div class="col-md-4 col-sm-12 text-left">
+											<div class="form-group gender-custom">
+												<label class="d_o_b fw"> Gender :</label>
+												<span>
+													<select tabindex="8" class="gender"  onchange="changeMe(this)" name="selgen" id="selgen">
+														<option value="" disabled selected>Gender</option>
+														<option value="M">Male</option>
+														<option value="F">Female</option>
+													</select>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<div class="form-text term_condi_check text-left fw">
+												<label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
+													<input tabindex="9" type="checkbox" name="term_condi" id="term_condi" value="1" />
+														I have read and agree to use this website as subjected to Aileensoul 
+													<a href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" tabindex="10" target="_blank">Terms & Condition</a> and 
+													<a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy" target="_blank">Privacy Policy</a>.
+													<div class="control__indicator"></div>
+												</label>
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12 pt20 fw">
+											<p class="create-ac-bottom fw">
+												<button id="create-acc-new" title="Create an account" tabindex="12" class="btn-new-1">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+											</p>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<p class="pt15 fw">
+												Already have an account?
+												<a id="login-acc" title="Create an account" href="javascript:void(0);">Login</a>
+											</p>
+										</div>
+									</div>
+											
+                                    
+                                </form>
+							</div>
 							
 						</div>
-						
-                        
-                        
-                    </div>
-					
-                </div>
-            </header>
-			
-            <section class="middle-main">
-                <div class="tablate-main-login">
-					<form class="header-login" name="login_form" id="login_form" method="post">
-						<div class="input">
-							<input type="email" tabindex="1"  name="email_login" id="email_login" class="form-control input-sm" placeholder="Email Address">
-						</div>
-						<div class="input">
-							<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
-						</div>
-						<div class="btn-right">
-							<button id="login-new" title="Login" tabindex="1"  class="btn-new-1">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-							<a tabindex="1" data-target="#forgotPassword" data-toggle="modal" data-dismiss="modal" class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
-						</div>
-					</form>
+					</div>
 				</div>
-                <div class="clearfix"></div>
-				<div class="container">
-                    <div class="mid-trns">
-                        <div class="main-reg-pd">
-                            <div class="col-md-7 col-sm-6">
-                                <div class="top-middle">
-                                    <div class="text-effect">
-                                        <h1>
-                                        <p>We provide platform & opportunities to every person in the world to make their career.</p>
-                                        </h1>
-                                    </div>
-                                </div>
-                           
-                            </div>
-                            <div class="col-md-5 col-sm-6 custom-padd">
-                                <div class="login">
-                                    <h4>Join Aileensoul - It's Free</h4>
-                                    <div id="register_error" class="row"></div>
-                                    <form name="register_form" id="register_form" method="post" autocomplete="off">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input tabindex="1" type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input tabindex="2" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-                                                </div>
-                                            </div>
-											<div class="col-md-12 col-sm-12">
-												<div id="err-res-key" class="err-flname"></div>
-											</div>
-                                        </div>
-                                     
-
-                                        <div class="form-group">
-                                            <input tabindex="3" type="email" name="email_reg" id="email_reg" class="form-control input-sm" placeholder="Email Address" autocomplete="new-email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input tabindex="4" type="password" name="password_reg" id="password_reg" class="form-control input-sm" placeholder="Password" autocomplete="new-password">
-                                        </div>
-                                        <div class="form-group dob">
-                                            <label class="d_o_b"> Date Of Birth :</label>
-                                            <span>
-                                                <select tabindex="5" class="day" name="selday" id="selday">
-                                                    <option value="" disabled selected>Day</option>
-                                                    <?php
-                                                    for ($i = 1; $i <= 31; $i++) {
-                                                        ?>
-                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </span>
-                                            <span>
-                                                <select tabindex="6" class="month" name="selmonth" id="selmonth">
-                                                    <option value="" disabled selected>Month</option>
-                                                    <option value="1">Jan</option>
-                                                    <option value="2">Feb</option>
-                                                    <option value="3">Mar</option>
-                                                    <option value="4">Apr</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">Jun</option>
-                                                    <option value="7">Jul</option>
-                                                    <option value="8">Aug</option>
-                                                    <option value="9">Sep</option>
-                                                    <option value="10">Oct</option>
-                                                    <option value="11">Nov</option>
-                                                    <option value="12">Dec</option>
-                                                </select>
-                                            </span>
-                                            <span>
-                                                <select tabindex="7" class="year" name="selyear" id="selyear">
-                                                    <option value="" disabled selected>Year</option>
-                                                    <?php
-                                                    for ($i = date('Y'); $i >= 1900; $i--) {
-                                                        ?>
-                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </select></span>
-                                        </div>
-                                        <div class="dateerror"></div>
-                                        <div class="form-group gender-custom">
-                                            <span>
-                                                <select tabindex="8" class="gender"  onchange="changeMe(this)" name="selgen" id="selgen">
-                                                    <option value="" disabled selected>Gender</option>
-                                                    <option value="M">Male</option>
-                                                    <option value="F">Female</option>
-                                                </select>
-                                            </span>
-                                        </div>
-                                        <div class="form-text term_condi_check">
-                                            <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
-                                                <input tabindex="9" type="checkbox" name="term_condi" id="term_condi" value="1" />
-                                                I have read and agree to use this website as subjected to Aileensoul 
-                                                <a href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" tabindex="10" target="_blank">Terms & Condition</a> and 
-                                                <a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy" target="_blank">Privacy Policy</a>.
-                                                <div class="control__indicator"></div>
-                                            </label>
-                                        </div>
-                                        <p class="create-ac-bottom">
-                                            <button id="create-acc-new" title="Create an account" tabindex="12" class="btn-new-1">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+			</div>
+		</div>
+        
+            
+			
+         
+                
+                
+				
         
         <!-- model for forgot password start -->
         <div class="modal fade login" id="forgotPassword" role="dialog">
@@ -282,69 +322,9 @@ header("Pragma: no-cache"); // HTTP/1.0
             </div>
         </div>
 
-            </section>
-			<div class="modal fade login" id="login" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content login-frm">
-                        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>     	
-                        <div class="modal-body">
-                            <div class="right-main">
-                                <div class="right-main-inner">
-                                    <div class="">
-                                        <div class="title">
-                                            <h3 class="tlh2">Welcome to Aileensoul</h3>
-                                        </div>
-
-                                        <form role="form" name="login_form_main" id="login_form_main" method="post">
-                                            <div class="form-group">
-                                                <input type="email" value="<?php echo $email; ?>" name="email_login_main" id="email_login_main" autofocus="" class="form-control input-sm" placeholder="Email Address*" autocomplete="off">
-                                                <div id="error2" style="display:block;">
-                                                    <?php
-                                                    if ($this->session->flashdata('erroremail')) {
-                                                        echo $this->session->flashdata('erroremail');
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div id="errorlogin"></div> 
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" name="password_login_main" id="password_login_main" class="form-control input-sm" placeholder="Password*">
-                                                <div id="error1" style="display:block;">
-                                                    <?php
-                                                    if ($this->session->flashdata('errorpass')) {
-                                                        echo $this->session->flashdata('errorpass');
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div id="errorpass"></div> 
-                                            </div>
-
-                                            <p class="pt-20 ">
-                                                <button class="btn1" onclick="" type="submit">Login</button>
-                                            </p>
-
-                                            <p class=" text-center">
-                                                <a title="Forgot Password" href="javascript:void(0)" data-toggle="modal"" data-target="#forgotPassword"  data-dismiss="modal" data-toggle="modal">Forgot Password ?</a>
-                                            </p>
-
-                                            <p class="pt15 text-center">
-                                                Don't have an account? <a title="Create an account" href="<?php echo base_url()."registration"; ?>">Create an account</a>
-                                            </p>
-                                        </form>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-			<?php $this->load->view('mobile_side_slide'); ?>
-            <?php echo $login_footer ?>
-        </div>
+        <?php $this->load->view('mobile_side_slide'); ?>
+        <?php echo $login_footer ?>
+      
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
@@ -391,5 +371,34 @@ header("Pragma: no-cache"); // HTTP/1.0
 				});
 			})(jQuery);
     </script>
+		<script>
+			
+			$(document).ready(function(){
+			  $("#login-btn-id").click(function(){
+				$("#login-form-id").addClass("form-disply");
+				$(".right-reg-content").addClass("form-none");
+				
+			  });
+			  $("#creat-acc").click(function(){
+				$("#sign-up").addClass("form-disply");
+				$(".right-reg").addClass("form-height");
+				
+			  });
+			  $("#login-acc").click(function(){
+				$("#login-form-id").addClass("form-disply");
+				$("#sign-up").removeClass("form-disply");
+				$(".right-reg").removeClass("form-height");
+				
+			  });
+			  
+			  $("#signup-btn-id").click(function(){
+				$("#sign-up").addClass("form-disply");
+				$(".right-reg-content").addClass("form-none");
+				$(".right-reg").addClass("form-height");
+			  });
+		
+			  
+			});
+		</script>
     </body>
 </html>
