@@ -2235,4 +2235,23 @@ class Customscript extends CI_Controller {
             $hashtag_id = $this->common->insert_data_getid($data, 'hashtag');
         }
     }
+
+    public function generate_simple_post_title()
+    {
+        $s_sql = "SELECT * FROM ailee_user_simple_post";
+        $post_data = $this->db->query($s_sql)->result();
+        echo "<pre>";
+        
+        foreach ($post_data as $_post_data) {
+            if($_post_data->sim_title == '')
+            {
+                $data = array(
+                    "sim_title" => "sp ".$_post_data->id,
+                    "simslug" => "sp-".$_post_data->id
+                );
+                $updatdata = $this->common->update_data($data, 'user_simple_post', 'id', $_post_data->id);
+            }
+            print_r($_post_data);
+        }
+    }
 }

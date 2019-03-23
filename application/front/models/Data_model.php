@@ -326,4 +326,13 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function find_hashtag($search_keyword = '') {
+        $this->db->select('id')->from('hashtag');
+        $this->db->where('LOWER(hashtag)', strtolower($search_keyword));
+        $this->db->where('status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
 }

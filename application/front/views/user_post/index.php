@@ -430,8 +430,19 @@
                     <!-- Edit Simple Post Start -->
                     <div id="edit-simple-post-{{recentpost.post_data.id}}" style="display: none;">
                         <form  id="post_something_edit" name="post_something_edit" ng-submit="recent_post_something_check(event,postIndex)" enctype="multipart/form-data">
-                            <div class="post-box">        
-                                <div class="post-text">
+                            <div class="post-box">
+                                <div class="form-group">
+                                    <label>Post title</label>
+                                    <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="sim_hashtag{{recentpost.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="sim_hashtag{{recentpost.post_data.id}}"></div>
+                                </div>
+                                <div class="form-group"><!-- <div class="post-text"> -->
                                     <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{recentpost.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
 
                                     <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{recentpost.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
@@ -1016,8 +1027,19 @@
                         <!-- Edit Simple Post Start -->
                         <div id="edit-simple-post-{{post.post_data.id}}" style="display: none;">
                             <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
-                                <div class="post-box">        
-                                    <div class="post-text">
+                                <div class="post-box">
+                                    <div class="form-group">
+                                        <label>Post title</label>
+                                        <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Add hashtag (Topic)</label>
+                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                        <div class="sim_hashtag{{post.post_data.id}}"></div>
+                                    </div>
+                                    <div class="form-group">
                                         <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
 
                                         <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
@@ -1705,15 +1727,14 @@
                                 </div-->
                                 <div class="form-group">
 									<label>Post title</label>
-                                    <input type="text" placeholder="Etnter Title">
+                                    <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title">
                                 </div>
 								
 								<div class="form-group">
                                     <label>Add hashtag (Topic)</label>
-                                    <!-- <input id="sim_hashtag" type="text" class="form-control" ng-model="opp.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200"> -->
-                                    <div id="output"></div>
-                                    <div contenteditable="true" id="sim_hashtag"></div>
-                                    <div id="sim-hashtag-list"></div>
+                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="sim_hashtag"></div>
                                 </div>
 								<div class="form-group">
                                     <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
@@ -2110,9 +2131,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js') ?>"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="<?php echo base_url('assets/js/autosize.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery.hashtags.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
 
         <script>
             $(function () {
@@ -2143,50 +2162,7 @@
                 $('[data-toggle="tooltip"]').tooltip();   
             });
         </script>
-		<!--script>
-            jQuery(document).ready(function ($) {
-                var owl = $('.owl-carousel');
-                owl.on('initialize.owl.carousel initialized.owl.carousel ' +
-                        'initialize.owl.carousel initialize.owl.carousel ' +
-                        'resize.owl.carousel resized.owl.carousel ' +
-                        'refresh.owl.carousel refreshed.owl.carousel ' +
-                        'update.owl.carousel updated.owl.carousel ' +
-                        'drag.owl.carousel dragged.owl.carousel ' +
-                        'translate.owl.carousel translated.owl.carousel ' +
-                        'to.owl.carousel changed.owl.carousel',
-                        function (e) {
-                            $('.' + e.type)
-                                    .removeClass('secondary')
-                                    .addClass('success');
-                            window.setTimeout(function () {
-                                $('.' + e.type)
-                                        .removeClass('success')
-                                        .addClass('secondary');
-                            }, 500);
-                        });
-                owl.owlCarousel({
-                    loop: true,
-                    nav: true,
-                    lazyLoad: true,
-                    margin: 0,
-                    video: true,
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 1
-                        },
-                        960: {
-                            items: 1,
-                        },
-                        1200: {
-                            items: 1
-                        }
-                    }
-                });
-            });
-		</script-->
+
 		<script>
         $(function() {
 
@@ -2338,7 +2314,7 @@
 				}
 			});
 
-            $(function() {
+            // $(function() {
                 function split( val ) {
                     return val.split( / \s*/ );
                 }
@@ -2346,18 +2322,47 @@
                     return split( term ).pop();
                 }
 
-                function converter (){
-                    var str = $('#sim_hashtag').text();
-                    str = str.replace(/(<)/gi, '&lt;');
-                    str = str.replace(/(<)/gi, '&lg;');
-                    str = str.replace(/(?:\r\n|\n\r|\r|\n)/g, '<br />');
-                    str = str.replace(/#(.+?)(?=[\s.,:,]|$)/g, '<span>#$1</span>');
-                    str = str.replace(/@(.+?)(?=[\s.,:,]|$)/g, '<span>@$1</span>');
-                    str = str.replace(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g, '<span>$1</span>');
-                    $('#output').html(str);
+                function autocomplete_hashtag(id)
+                {
+                    $("#"+id).bind( "keydown", function( event ) {
+                        if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).autocomplete( "instance" ).menu.active ) {
+                            event.preventDefault();
+                        }
+                    })
+                    .autocomplete({
+                        appendTo: "."+id,
+                        minLength: 2,
+                        source: function( request, response ) {                         
+                            var search_key = extractLast( request.term );
+                            if(search_key[0] == "#")
+                            {
+                                search_key = search_key.substr(1);
+                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        },
+                        focus: function() {
+                            // prevent value inserted on focus
+                            return false;
+                        },
+                        select: function( event, ui ) {
+                            var terms = split( this.value );
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push( ui.item.value );
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push( "" );
+                            this.value = terms.join( " " );
+                            return false;
+                        },
+                    });                
                 }
-
-                $( "#sim_hashtag" ).bind( "keydown", function( event ) {
+                /*$( "#sim_hashtag" ).bind( "keydown", function( event ) {
                     if ( event.keyCode === $.ui.keyCode.TAB &&
                         $( this ).autocomplete( "instance" ).menu.active ) {
                         event.preventDefault();
@@ -2366,9 +2371,7 @@
                 .autocomplete({
                     appendTo: "#sim-hashtag-list",
                     minLength: 2,
-                    source: function( request, response ) { 
-                        // delegate back to autocomplete, but extract the last term
-                        // console.log(request.term);
+                    source: function( request, response ) {                         
                         var search_key = extractLast( request.term );
                         if(search_key[0] == "#")
                         {
@@ -2385,40 +2388,18 @@
                         return false;
                     },
                     select: function( event, ui ) {
-                        var text =$("#sim_hashtag").html();
-                        var terms = split( $("#sim_hashtag").html() );
-                        text = text == null || text == undefined ? "" : text;
-                        var checked = (text.indexOf(ui.item.value + ' ') > -1 ? 'checked' : '');
-                        if (checked == 'checked') {
-                            terms.push( ui.item.value );
-                            $("#sim_hashtag").html(terms.split( " " ));
-                            // $("#sim_hashtag").html() = terms.split( " " );
-                        }//if end
-                        else {
-                            // if(terms.length <= 10) {
-                                // remove the current input
-                                terms.pop();
-                                // add the selected item
-                                terms.push( ui.item.value );
-                                // add placeholder to get the comma-and-space at the end
-                                terms.push( "" );
-                                // $("#sim_hashtag").html() = terms.join( " " );
-                                $("#sim_hashtag").html(terms.join( " " ));
-                                converter();
-                                return false;
-                            /*}else{
-                                var last = terms.pop();
-                                $(this).val(this.value.substr(0, this.value.length - last.length - 2)); 
-                                // removes text from input
-                                $(this).effect("highlight", {}, 1000);
-                                $(this).attr("style","border: solid 1px red;");
-                                return false;
-                            }*/
-                        }//else end
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( " " );
+                        return false;
                     }
-                });
-                $('#sim_hashtag').on('input keyup', converter);
-            });
+                });  */              
+            // });
             //$("#sim_hashtag").hashtags();
 		</script>
     </body>

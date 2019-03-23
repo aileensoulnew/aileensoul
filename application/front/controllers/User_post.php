@@ -903,18 +903,30 @@ class User_post extends MY_Controller {
         return $likepost_count;
     }
 
+    function get_hashtag_array($string) {
+        /* Match hashtags */
+        preg_match_all('/#(\w+)/', $string, $matches);
+        /* Add all matches to array */
+        foreach ($matches[1] as $match) {
+            $keywords[] = $match;
+        }
+        return (array) $keywords;
+    }
+
     public function post_opportunity() {        
        
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
         $opptitle = (isset($_POST['opptitle'])  && $_POST['opptitle'] != "undefined" && $_POST['opptitle'] != "" ? $_POST['opptitle'] : "");
+        $sptitle = (isset($_POST['sptitle'])  && $_POST['sptitle'] != "undefined" && $_POST['sptitle'] != "" ? $_POST['sptitle'] : "");
         $field = (isset($_POST['field'])  && $_POST['field'] != "undefined" && $_POST['field'] != "" ? $_POST['field'] : "");
         $job_title = (isset($_POST['job_title']) && $_POST['job_title'] != "undefined" && $_POST['job_title'] != "" ? json_decode($_POST['job_title'], TRUE) : "");
         $location = (isset($_POST['location']) && $_POST['location'] != "undefined" && $_POST['location'] != "" ? json_decode($_POST['location'], TRUE) : "");
         $post_for = $_POST['post_for'];
         $question = (isset($_POST['question']) && $_POST['question'] != "" ? $_POST['question'] : "");
         $description = (isset($_POST['description']) && $_POST['description'] != 'undefined' && $_POST['description'] != '' ? $_POST['description'] : '');
+        $hashtag = (isset($_POST['hashtag']) && $_POST['hashtag'] != 'undefined' && $_POST['hashtag'] != '' ? $_POST['hashtag'] : '');
         $other_field = (isset($_POST['other_field']) && $_POST['other_field'] != 'undefined' && $_POST['other_field'] != "" ? $_POST['other_field'] : "");
         $weblink = (isset($_POST['weblink']) && $_POST['weblink'] != 'undefined' && $_POST['weblink'] != '' ? $_POST['weblink'] : '');
         $is_anonymously = (isset($_POST['is_anonymously']) && $_POST['is_anonymously'] != 'undefined' && $_POST['is_anonymously'] != '' ? '1' : '0');
@@ -985,7 +997,26 @@ class User_post extends MY_Controller {
                     $city_id .= $cityId . ',';
                 }
                 $city_id = trim($city_id, ',');
-            } elseif ($post_for == 'question') {
+            }
+            elseif ($post_for == 'simple') {
+                $hashtag_arr = $this->get_hashtag_array($hashtag);
+                $hashtag_id = "";
+                foreach ($hashtag_arr as $key=>$value) {
+                    $ht_arr = $this->data_model->find_hashtag($value);
+                    if ($ht_arr['id'] != '') {
+                        $ht_id = $ht_arr['id'];
+                    } else {
+                        $data = array();
+                        $data['hashtag'] = $value;
+                        $data['created_date'] = date('Y-m-d H:i:s', time());
+                        $data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $data['status'] = '2';                        
+                        $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                    }
+                    $hashtag_id .= $ht_id . ',';
+                }
+                $hashtag_id = trim($hashtag_id, ',');
+            }elseif ($post_for == 'question') {
                 foreach ($ask_category as $ask) {
                     $asked = $this->data_model->findCategory($ask['name']);
                     if ($asked['id'] != '') {
@@ -1053,7 +1084,12 @@ class User_post extends MY_Controller {
 
             } elseif ($post_for == 'simple') {
                 $insert_data = array();
+                $sptitle = substr($sptitle, 0,100);
+                $sim_title = $this->common->set_slug($sptitle, 'simslug', 'user_simple_post');
                 $insert_data['post_id'] = $user_post_id;
+                $insert_data['simslug'] = $sim_title;
+                $insert_data['sim_title'] = $sptitle;
+                $insert_data['hashtag'] = $hashtag_id;
                 $insert_data['description'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
@@ -1514,9 +1550,36 @@ class User_post extends MY_Controller {
         $post_for = $_POST['post_for'];
 
         if ($post_for == 'simple') {
+
+            $hashtag = $_POST['hashtag'];
+            $sptitle = $_POST['sptitle'];
+            $sptitle = substr($sptitle, 0,100);
+            // $sim_title = $this->common->set_slug($sptitle, 'simslug', 'user_simple_post');
+
             $description = $_POST['description'];
 
+            $hashtag_arr = $this->get_hashtag_array($hashtag);
+            $hashtag_id = "";
+            foreach ($hashtag_arr as $key=>$value) {
+                $ht_arr = $this->data_model->find_hashtag($value);
+                if ($ht_arr['id'] != '') {
+                    $ht_id = $ht_arr['id'];
+                } else {
+                    $data = array();
+                    $data['hashtag'] = $value;
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = '2';                        
+                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                }
+                $hashtag_id .= $ht_id . ',';
+            }
+            $hashtag_id = trim($hashtag_id, ',');
+
             $update_data = array();
+            $update_data['hashtag'] = $hashtag_id;
+            // $update_data['simslug'] = $sim_title;
+            $update_data['sim_title'] = $sptitle;
             $update_data['description'] = $description;
             $update_data['modify_date'] = date('Y-m-d H:i:s', time());
             $update_post_data = $this->common->update_data($update_data, 'user_simple_post', 'post_id', $post_id);

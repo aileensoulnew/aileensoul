@@ -331,8 +331,11 @@ class Userprofile_model extends CI_Model {
                 $opportunity_data = $query->row_array();
                 $result_array[$key]['opportunity_data'] = $opportunity_data;
             } elseif ($value['post_for'] == 'simple') {
-                $this->db->select("usp.description")->from("user_simple_post usp");
+                $this->db->select("usp.description,IF(usp.hashtag IS NULL,'',GROUP_CONCAT(DISTINCT(ht.hashtag))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
                 $this->db->where('usp.id', $value['post_id']);
+                $sql = "IF(usp.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, usp.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('usp.hashtag');
                 $query = $this->db->get();
                 $simple_data = $query->row_array();
                 $result_array[$key]['simple_data'] = $simple_data;

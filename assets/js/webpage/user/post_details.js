@@ -540,6 +540,19 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
         if (post_for == "simple") {
             $("#edit-simple-post-" + post_id).show();
             var editContent = $scope.postData[index].simple_data.description //$('#simple-post-description-' + post_id).attr("ng-bind-html");
+
+            // $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title
+            $("#sim_title").val($scope.postData[index].simple_data.sim_title);
+            
+            var hashtags = "";
+            if($scope.postData[index].simple_data.hashtag != '')
+            {
+                hashtags = $scope.postData[index].simple_data.hashtag;
+                hashtags = '#'+hashtags.replace(/,/ig,' #');
+            }
+            // $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
+            $("#sim_hashtag"+$scope.postData[index].post_data.id).val(hashtags);
+
             $('#editPostTexBox-' + post_id).html(editContent.replace(/(<([^>]+)>)/ig, ""));
             setTimeout(function() {
                 //$('#editPostTexBox-' + post_id).focus();
@@ -842,7 +855,11 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             description = description.replace(/&/g, "%26");
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();
-            if (description_check.trim() == '')
+
+            var sim_title = $('#sim_title').val();
+            var sim_hashtag = $('#sim_hashtag'+post_id).val();//$scope.sim.sim_hashtag_edit;
+
+            if ((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && description_check.trim() == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -858,6 +875,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var form_data = new FormData();
             form_data.append('description', description);
             form_data.append('post_for', $scope.postData[postIndex].post_data.post_for);
+            form_data.append('sptitle', sim_title);
+            form_data.append('hashtag', sim_hashtag);
             form_data.append('post_id', post_id);
             $('body').removeClass('modal-open');
             $("#post-popup").modal('hide');

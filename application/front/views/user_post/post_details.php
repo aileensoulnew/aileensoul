@@ -225,8 +225,20 @@
                                         <!-- Edit Simple Post Start -->
                                         <div id="edit-simple-post-{{post.post_data.id}}" style="display: none;">
                                             <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
-                                                <div class="post-box">        
-                                                    <div class="post-text">
+                                                <div class="post-box">
+                                                    <div class="form-group">
+                                                    <label>Post title</label>
+                                                    <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>Add hashtag (Topic)</label>
+                                                    <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                    <div class="sim_hashtag{{post.post_data.id}}"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <!-- <div class="post-text"> -->
                                                         <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
 
                                                         <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
@@ -670,6 +682,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/post_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
         <script>
             var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
                 showRight = document.getElementById( 'showRight' ),
@@ -700,6 +713,53 @@
                     }
                 });
             });
+            
+            function split( val ) {
+                return val.split( / \s*/ );
+            }
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
+            function autocomplete_hashtag(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 2,
+                    source: function( request, response ) {                         
+                        var search_key = extractLast( request.term );
+                        if(search_key[0] == "#")
+                        {
+                            search_key = search_key.substr(1);
+                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( " " );
+                        return false;
+                    },
+                });                
+            }
         </script>
     </body>
 </html>
