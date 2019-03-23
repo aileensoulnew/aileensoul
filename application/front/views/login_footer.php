@@ -20,7 +20,7 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
             <div class="row">
 
                 <div class="fw text-center">
-                    <ul class="footer-ul fw">
+                    <ul class="footer-ul fw ftr-top">
                         <?php
                         if (!$this->session->userdata('aileenuser')) {
                             ?>
@@ -39,12 +39,13 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
 						<li><a target="_self" title="Report" tabindex="0" href="<?php echo base_url('report-abuse'); ?>">Report</a></li>
 						<li><a target="_self" title="Contact Us" href="<?php echo base_url('contact-us'); ?>">Contact</a></li>
 						<li><a target="_self" title="Send Us Feedback" href="<?php echo base_url('feedback'); ?>">Feedback</a></li>
+						<li><a target="_self" href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" >Terms and Condition</a></li>
+                        <li><a target="_self" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy">Privacy Policy</a></li>
+                        <li><a target="_self" title="Disclaimer Policy" href="<?php echo base_url('disclaimer-policy'); ?>">Disclaimer Policy</a></li>
 					</ul>
 					<ul class="footer-ul pt5 pb10">
 						<li> Aileensoul Ⓒ <?php echo gmdate('Y'); ?> </li>
-                        <li>|<a target="_self" href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" >Terms and Condition</a></li>
-                        <li>|<a target="_self" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy">Privacy Policy</a></li>
-                        <li>|<a target="_self" title="Disclaimer Policy" href="<?php echo base_url('disclaimer-policy'); ?>">Disclaimer Policy</a></li>
+                        
                   
                     </ul>
                 </div>

@@ -677,9 +677,9 @@ footer ul li a{
     font-size:13px;
 }
 #selday:focus,#selgen:focus,#selmonth:focus,#selyear:focus,.form-group textarea:focus,#selgen:focus{
-    border-bottom:1px solid #5c5c5c!important;
+    /*border-bottom:1px solid #5c5c5c!important;
     color:#5c5c5c!important;
-    background: none !important;
+    background: none !important;*/
 }
 .form-group textarea[type=text]:focus+label{
     color:#5c5c5c!important;
@@ -689,8 +689,8 @@ footer ul li a{
     color:#5c5c5c!important;
 }
 .form-group input:focus,.form-group input[type=password]:focus{
-    /*border-bottom:1px solid #1b8ab9!important;
-    color:#1b8ab9!important;*/
+    border-bottom:1px solid #1b8ab9!important;
+    color:#1b8ab9!important;
 }
 .contact #contact_form input.error,.contact #contact_form textarea.error {
     border:0px !important;
@@ -1648,7 +1648,7 @@ section{
     border-radius:5px
 }
 #selgen{
-    color:#848484
+   /* color:#848484*/
 }
 #selgen:focus{
     border:none;
@@ -1852,7 +1852,7 @@ label.error{
 .dob .error{
     position:absolute;
     left:0;
-    bottom:-19px
+    /*bottom:-19px*/
 }
 .gender-custom{
     position:relative
@@ -1860,7 +1860,7 @@ label.error{
 .gender-custom .error{
     position:absolute;
     left:0;
-    bottom:-19px
+    /*bottom:-19px*/
 }
 .about-us header,.cust-disclaimer header,.privacy-cust header,.turmcon-cust header{
     /*position:relative*/
@@ -2473,7 +2473,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 }
 .add-anonymously{display:inline-block; padding:9px 15px 0;}
 
-.term_condi_check{padding-bottom:10px !important; padding-top:10px; width:100%; float:left;}
+.term_condi_check{padding-top:10px; width:100%; float:left;}
 .term_condi_check .control{font-size:12px; color:#5c5c5c; font-weight:normal; padding-left:20px; line-height:1.3;}
 .term_condi_check .control a{font-size:12px; color:#a6a6a6;}
 .term_condi_check .control__indicator{width:12px; height:12px; border-radius:3px; border:1px solid #838282;}
@@ -2965,8 +2965,8 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
         text-align:center
     }
     .header-login label.error{text-align: left;display: block;}
-    .dob .error{bottom: -21px;}
-    .gender-custom .error{bottom: -21px;}
+    .dob .error{/*bottom: -21px;*/}
+    .gender-custom .error{*/bottom: -21px;*/}
     .header-login .btn1{
         margin-left:0
     }

@@ -88,7 +88,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-10">
 							<div class="top-logo">
-								<a href="#">
+								<a href="<?php echo base_url(); ?>">
 									<img src="<?php echo base_url('assets/n-images/logo.png') ?>">
 								
 									<span><svg>
@@ -251,7 +251,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 											<p class="create-ac-bottom fw">
 												<button id="create-acc-new" title="Create an account" tabindex="12" class="btn-new-1">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 											</p>
-										</div>
+										</div> 
 										<div class="col-md-12 col-sm-12">
 											<p class="pt15 fw">
 												Already have an account?
@@ -377,24 +377,27 @@ header("Pragma: no-cache"); // HTTP/1.0
 			  $("#login-btn-id").click(function(){
 				$("#login-form-id").addClass("form-disply");
 				$(".right-reg-content").addClass("form-none");
+				$(".right-reg").addClass("form-height1");
 				
 			  });
 			  $("#creat-acc").click(function(){
 				$("#sign-up").addClass("form-disply");
 				$(".right-reg").addClass("form-height");
+				$(".right-reg").removeClass("form-height1");
 				
 			  });
 			  $("#login-acc").click(function(){
 				$("#login-form-id").addClass("form-disply");
 				$("#sign-up").removeClass("form-disply");
 				$(".right-reg").removeClass("form-height");
-				
+				$(".right-reg").addClass("form-height1");
 			  });
 			  
 			  $("#signup-btn-id").click(function(){
 				$("#sign-up").addClass("form-disply");
 				$(".right-reg-content").addClass("form-none");
 				$(".right-reg").addClass("form-height");
+				$(".right-reg").removeClass("form-height1");
 			  });
 		
 			  
