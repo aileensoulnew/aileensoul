@@ -1724,7 +1724,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var fileInput1 = document.getElementById("fileInput1").value;
             //console.log(fileInput1);
             
-            if((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && (fileCountSim == 0 && (description == '' || description == undefined)))
+            if((sim_title == '' || sim_title == undefined) || (sim_hashtag == '' || sim_hashtag == undefined) || (fileCountSim == 0 && (description == '' || description == undefined)))
             {
                 $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.");
                 $('#posterrormodal').modal('show');
@@ -2563,7 +2563,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
             $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
 
-            var editContent = $scope.postData[index].simple_data.description//$('#simple-post-description-' + post_id).attr("ng-bind-html");
+            var editContent = $scope.postData[index].simple_data.description;//$('#simple-post-description-' + post_id).attr("ng-bind-html");
             $('#editPostTexBox-' + post_id).html(editContent.replace(/(<([^>]+)>)/ig,""));
             setTimeout(function(){
                 //$('#editPostTexBox-' + post_id).focus();

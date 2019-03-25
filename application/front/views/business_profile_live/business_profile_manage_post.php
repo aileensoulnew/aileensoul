@@ -411,7 +411,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         </div>
 
                                         <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
-                                            Share knowledge, opportunities, articles and questions 
+                                            Express Yourself 
                                         </div>
                                         <!--<span class="post-cam"><i class="fa fa-camera"></i></span>-->
                                     </div>
@@ -638,12 +638,22 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 <div id="edit-simple-post-{{post.post_data.id}}" style="display: none;">
                                                     <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
                                                         <div class="post-box">        
-                                                            <div class="post-text">
+                                                            <div class="form-group">
+                                                                <label>Post title</label>
+                                                                <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label>Add hashtag (Topic)</label>
+                                                                <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                                <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                                <div class="sim_hashtag{{post.post_data.id}} autocomplete-cus"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <!-- <div class="post-text"> -->
                                                                 <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
-
-                                                                <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
                                                             </div>                        
-                                                            <div class="post-box-bottom" >                            
+                                                            <div class="post-box-bottom" >
                                                                 <input type="hidden" name="post_for" class="form-control" value="simple">
                                                                 <input type="hidden" id="edit_post_id{{postIndex}}" name="edit_post_id" class="form-control" value="{{post.post_data.id}}">
                                                                 <p class="pull-right">
@@ -1442,9 +1452,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     <div class="post-popup-box">
                         <form  id="post_something" name="post_something" ng-submit="post_something_check(event)">
                             <div class="post-box">
-                                <div class="post-img">
+                                <!-- <div class="post-img"> -->
                                     <?php
-                                    if ($business_login_user_image) {
+                                    /*if ($business_login_user_image) {
                                         if (IMAGEPATHFROM == 'upload') {
                                             if (!file_exists($this->config->item('bus_profile_main_upload_path') . $business_login_user_image)) {
                                                 ?>
@@ -1469,9 +1479,20 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     }
                                     else{ ?>
                                         <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image"><?php 
-                                    } ?>
+                                    }*/ ?>
+                                <!-- </div> -->
+                                <div class="form-group">
+                                    <label>Post title</label>
+                                    <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title">
                                 </div>
-                                <div class="post-text">
+                                
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="sim_hashtag"></div>
+                                </div>
+                                <div class="form-group"><!-- <div class="post-text"> -->
                                     <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
                                 </div>
                                 <div class="all-upload" ng-if="is_edit != 1">
@@ -1883,6 +1904,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
         <script>
 			$(document).ready(function () {
 				if (screen.width <= 1279) {
@@ -1938,6 +1960,54 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     }
                 });
             }
+
+            function split( val ) {
+                    return val.split( / \s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+
+                function autocomplete_hashtag(id)
+                {
+                    $("#"+id).bind( "keydown", function( event ) {
+                        if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).autocomplete( "instance" ).menu.active ) {
+                            event.preventDefault();
+                        }
+                    })
+                    .autocomplete({
+                        appendTo: "."+id,
+                        minLength: 2,
+                        source: function( request, response ) {                         
+                            var search_key = extractLast( request.term );
+                            if(search_key[0] == "#")
+                            {
+                                search_key = search_key.substr(1);
+                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        },
+                        focus: function() {
+                            // prevent value inserted on focus
+                            return false;
+                        },
+                        select: function( event, ui ) {
+                            var terms = split( this.value );
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push( ui.item.value );
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push( "" );
+                            this.value = terms.join( " " );
+                            return false;
+                        },
+                    });                
+                }
 		</script>
     </body>
 </html>
