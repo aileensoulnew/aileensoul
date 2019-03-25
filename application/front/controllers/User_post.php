@@ -2164,6 +2164,24 @@ class User_post extends MY_Controller {
                     $city_id .= $cityId . ',';
                 }
                 $city_id = trim($city_id, ',');
+
+                $hashtag_arr = $this->get_hashtag_array($hashtag);
+                $hashtag_id = "";
+                foreach ($hashtag_arr as $key=>$value) {
+                    $ht_arr = $this->data_model->find_hashtag($value);
+                    if ($ht_arr['id'] != '') {
+                        $ht_id = $ht_arr['id'];
+                    } else {
+                        $data = array();
+                        $data['hashtag'] = $value;
+                        $data['created_date'] = date('Y-m-d H:i:s', time());
+                        $data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $data['status'] = '2';                        
+                        $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                    }
+                    $hashtag_id .= $ht_id . ',';
+                }
+                $hashtag_id = trim($hashtag_id, ',');
             }
             elseif ($post_for == 'simple') {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
@@ -2245,6 +2263,7 @@ class User_post extends MY_Controller {
                 $insert_data['opportunity'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['field'] = $field;
                 $insert_data['other_field'] = $other_field;
+                $insert_data['hashtag'] = $hashtag_id;
                 $insert_data['company_name'] = $company_name;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 

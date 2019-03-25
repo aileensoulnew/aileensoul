@@ -592,6 +592,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                 </span>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Add hashtag (Topic)</label>
+                                                                <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                                <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                                <div class="opp_hashtag{{post.post_data.id}}"></div>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label>Company Name</label>
                                                                 <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                                             </div>
@@ -616,6 +622,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                                         <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                                         <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.opportunity_data.hashtag"><b>Hashtags:</b><span ng-bind="post.opportunity_data.hashtag" id="opp-recentpost-hashtag-{{post.post_data.id}}"></span></p>
                                                         <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
                                                     </h5>
                                                     <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
@@ -1545,10 +1552,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
                     <div class="post-popup-box">
                         <form id="post_opportunity" name="post_opportunity" ng-submit="post_opportunity_check(event)">
-                            <div class="post-box">
-                                <div class="post-img">
+                            <div class="post-box"><!-- <div class="post-box"> -->
+                                <!-- <div class="post-img"> -->
                                     <?php
-                                    if ($business_login_user_image) {
+                                    /*if ($business_login_user_image) {
                                         if (IMAGEPATHFROM == 'upload') {
                                             if (!file_exists($this->config->item('bus_profile_main_upload_path') . $business_login_user_image)) {
                                                 ?>
@@ -1573,29 +1580,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     }
                                     else{ ?>
                                         <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image"><?php 
-                                    } ?>
-                                </div>
-                                <div class="post-text">
-                                    <textarea name="description" ng-model="opp.description" id="description" class="title-text-area" placeholder="Post Opportunity"></textarea>
-                                </div>
-
-                                <div class="all-upload" ng-if="is_edit != 1">
-                                    <div class="form-group">
-                                        <div id="fileCountOpp"></div>
-                                        <div id="selectedFilesOpp" class="file-preview"></div>
-
-                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
-                                    </div>
-                                    <label for="fileInput" ng-click="postFiles()">
-                                        <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
-                                        <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
-                                        <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
-                                    </label>
-                                </div>
+                                    }*/ ?>
+                                <!-- </div> -->
                             </div>
                             <div class="post-field">
-                                <div class="form-group">
+                                <div class="form-group title-op-op">
                                     <label>Title of Opportunity</label>
                                     <input id="opptitle"  type="text" class="form-control" ng-model="opp.opptitle" placeholder="Enter Title of Opportunity" autocomplete="off" maxlength="100">
                                     <div id="opptitletooltip" class="tooltip-custom" style="display: none;">Enter the specific "title" of this opportunity. Ex: Hiring Software Developer, Contractors Needed for Bridge Construction, Fund Raising Opportunities for Entrepreneur etc.</div>
@@ -1646,13 +1635,39 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>
                                 <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>  
+                                    <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="opp_hashtag"></div>
+                                </div>
+                                <div class="form-group">
                                     <label>Company Name (Optional)</label>
                                     <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                 </div>
+
+                                <div class="post-text form-group pt20">
+                                    <textarea name="description" ng-model="opp.description" id="description" class="title-text-area" placeholder="Post Opportunity"></textarea>
+                                </div>
+
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="opportunity" ng-init="opp.post_for='opportunity'">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">
+                                <div class="all-upload form-group" ng-if="is_edit != 1">
+                                    <div class="form-group">
+                                        <div id="fileCountOpp"></div>
+                                        <div id="selectedFilesOpp" class="file-preview"></div>
+
+                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
+                                    </div>
+                                    <label for="fileInput" ng-click="postFiles()">
+                                        <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
+                                        <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
+                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                        <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="text-right fw pt10 pb20 pr15">
+
+                            <div class="text-right fw post-op-btn pb20 pr20">
                                 <button type="submit" class="btn1"  value="Submit">Post</button>    
                             </div>
                             <?php // echo form_close(); ?>
