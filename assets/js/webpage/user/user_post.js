@@ -2137,7 +2137,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             description = description.trim();            
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (sim_hashtag == '' || sim_hashtag == undefined) || description_check.trim() == '')
                 {
                     $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                     $('#post').modal('show');
@@ -2556,7 +2556,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title
             var hashtags = "";
-            if($scope.postData[index].simple_data.hashtag != '')
+            if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
             {
                 hashtags = $scope.postData[index].simple_data.hashtag;
                 hashtags = '#'+hashtags.replace(/,/ig,' #');
@@ -3043,7 +3043,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var editContent = $scope.recentpost.simple_data.description//$('#simple-post-description-' + post_id).attr("ng-bind-html");
             $scope.sim.sim_title_edit = $scope.recentpost.simple_data.sim_title
             var hashtags = "";
-            if($scope.recentpost.simple_data.hashtag != '')
+            if($scope.recentpost.simple_data.hashtag && $scope.recentpost.simple_data.hashtag != undefined)
             {
                 hashtags = $scope.recentpost.simple_data.hashtag;
                 hashtags = '#'+hashtags.replace(/,/ig,' #');
@@ -3434,7 +3434,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (sim_hashtag == '' || sim_hashtag == undefined) || description_check.trim() == '')
                 {
                     $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                     $('#post').modal('show');

@@ -151,3 +151,6 @@
 .dtl-modal .form-group.o-l-e-c label.error {
     display: block !important;
 }
+.ui-helper-hidden-accessible{
+    display: none;
+}

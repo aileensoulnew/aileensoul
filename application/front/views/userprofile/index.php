@@ -25,7 +25,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
-        
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <link href="<?php echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" />
     </head>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>

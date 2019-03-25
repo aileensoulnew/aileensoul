@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense');
@@ -235,7 +236,7 @@
                                                     <label>Add hashtag (Topic)</label>
                                                     <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                                    <div class="sim_hashtag{{post.post_data.id}}"></div>
+                                                    <div class="sim_hashtag{{post.post_data.id}} autocomplete-cus"></div>
                                                 </div>
                                                 <div class="form-group">
                                                     <!-- <div class="post-text"> -->

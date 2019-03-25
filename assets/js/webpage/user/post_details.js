@@ -545,7 +545,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $("#sim_title").val($scope.postData[index].simple_data.sim_title);
             
             var hashtags = "";
-            if($scope.postData[index].simple_data.hashtag != '')
+            if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
             {
                 hashtags = $scope.postData[index].simple_data.hashtag;
                 hashtags = '#'+hashtags.replace(/,/ig,' #');
@@ -859,7 +859,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var sim_title = $('#sim_title').val();
             var sim_hashtag = $('#sim_hashtag'+post_id).val();//$scope.sim.sim_hashtag_edit;
 
-            if ((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && description_check.trim() == '')
+            if ((sim_title == '' || sim_title == undefined) || (sim_hashtag == '' || sim_hashtag == undefined) || description_check.trim() == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');

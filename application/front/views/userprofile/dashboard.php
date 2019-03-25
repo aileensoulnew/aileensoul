@@ -609,14 +609,14 @@
                                 <div class="post-box">
                                     <div class="form-group">
                                         <label>Post title</label>
-                                        <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
+                                        <input type="text" placeholder="Etnter Title" id="sim_title{{post.post_data.id}}" maxlength="100" ng-model="sim.sim_title_edit">
                                     </div>
                                     
                                     <div class="form-group">
                                         <label>Add hashtag (Topic)</label>
                                         <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                        <div class="sim_hashtag{{post.post_data.id}}"></div>
+                                        <div class="sim_hashtag{{post.post_data.id}} autocomplete-cus"></div>
                                     </div>
                                     <div class="form-group">
                                     

@@ -3983,13 +3983,14 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             description = description.replace(/&gt;/gi, ">");
             description = description.replace(/&/g, "%26");
 
-            var sim_title = $scope.sim.sim_title_edit;
-            var sim_hashtag = $scope.sim.sim_hashtag_edit;
-        
+            // var sim_title = $scope.sim.sim_title_edit;
+            // var sim_hashtag = $scope.sim.sim_hashtag_edit;
+            var sim_title = $("#sim_title"+post_id).val();
+            var sim_hashtag = $("#sim_hashtag"+post_id).val();
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();
-            if ((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && description_check.trim() == '')
+            if ((sim_title.trim() == '' || sim_title == undefined) || (sim_hashtag.trim() == '' || sim_hashtag == undefined) || description_check.trim() == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -4390,7 +4391,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var editContent = $scope.postData[index].simple_data.description//$('#simple-post-description-' + post_id).attr("ng-bind-html");
             $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title
             var hashtags = "";
-            if($scope.postData[index].simple_data.hashtag != '')
+            
+            if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
             {
                 hashtags = $scope.postData[index].simple_data.hashtag;
                 hashtags = '#'+hashtags.replace(/,/ig,' #');
