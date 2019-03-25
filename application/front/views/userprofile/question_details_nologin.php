@@ -775,7 +775,7 @@
             var user_slug = '<?php echo $question_data['user_data']['user_slug']; ?>';
             var cmt_maxlength = '700';
             var question = '<?php echo $question_id ?>';
-            var title = '<?php echo addslashes($title) ?>';
+            var title = '<?php //echo addslashes($title) ?>';
             var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
