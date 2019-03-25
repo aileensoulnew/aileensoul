@@ -89,8 +89,8 @@
                                     <label>Add Description<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
                                     <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label>Related Categories<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
+                                <!-- <div class="form-group">
+                                    <label>Related Categories<span class="pull-right"><img ng-src="<?php //echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
                                     <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Related Category" replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
                                         <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                     </tags-input>
@@ -100,6 +100,12 @@
                                     <script type="text/ng-template" id="category-autocomplete-template">
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                     </script>
+                                </div> -->
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="ask_hashtag{{post.post_data.id}}"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>From which field the Question asked?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>

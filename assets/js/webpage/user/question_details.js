@@ -117,6 +117,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
     $scope.ask = {};
     $scope.user_id = user_id;
     $scope.title = title;
+    $scope.live_slug = live_slug;
     questionData();
 
     function questionData() {
@@ -546,6 +547,9 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                 }
             });
             //$("#ask_related_category_edit"+post_id).val(related_category);
+
+            $scope.ask.ask_hashtag_edit = $scope.postData[index].question_data.hashtag;
+
             var ask_field = $scope.postData[index].question_data.field;
             if (ask_field != null) {
                 $('[id=ask_field_' + post_id + '] option').filter(function() {
@@ -612,11 +616,13 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
             ask_que_desc = ask_que_desc.trim();
             var related_category_edit = $scope.ask.related_category_edit;
+            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;
+
             var fields = $("#ask_field_" + post_id).val();
             if (fields == 0) var ask_other = $("#ask_other_" + post_id).val();
             else var ask_other = "";
             var ask_is_anonymously = ($("#ask_is_anonymously" + post_id + ":checked").length > 0 ? 1 : 0);
-            if ((fields == '') || (ask_que == '')) {
+            if (fields == '' || ask_que == '' || ask_hashtag_edit == '') {
                 $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function(e) {
@@ -635,6 +641,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                 form_data.append('other_field', ask_other);
                 form_data.append('category', JSON.stringify(related_category_edit));
                 form_data.append('weblink', ask_web_link);
+                form_data.append('hashtag', $scope.ask.ask_hashtag_edit);
                 form_data.append('post_for', "question");
                 form_data.append('is_anonymously', ask_is_anonymously);
                 form_data.append('post_id', post_id);

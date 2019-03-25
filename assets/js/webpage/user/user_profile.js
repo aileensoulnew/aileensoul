@@ -10751,6 +10751,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
             ask_que_desc = ask_que_desc.trim();
             var related_category_edit = $scope.ask.related_category_edit;
+            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;
             var fields = $("#ask_field_"+post_id).val();  
             if(fields == 0)
                 var ask_other = $("#ask_other_"+post_id).val();
@@ -10759,7 +10760,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
 
             var ask_is_anonymously = ($("#ask_is_anonymously"+post_id+":checked").length > 0 ? 1 : 0);            
             
-            if ((fields == '') || (ask_que == ''))
+            if (fields == '' || ask_que == '' || ask_hashtag_edit == '')
             {
                 $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
                 $('#post').modal('show');
@@ -10782,6 +10783,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 form_data.append('other_field', ask_other);
                 form_data.append('category', JSON.stringify(related_category_edit));
                 form_data.append('weblink', ask_web_link);
+                form_data.append('hashtag', $scope.ask.ask_hashtag_edit);
                 form_data.append('post_for', "question");
                 form_data.append('is_anonymously', ask_is_anonymously);
                 form_data.append('post_id', post_id);
@@ -10872,6 +10874,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             });
             $scope.ask.related_category_edit = related_category;
             //$("#ask_related_category_edit"+post_id).val(related_category);
+
+            $scope.ask.ask_hashtag_edit = $scope.questionData[index].question_data.hashtag;
 
             var ask_field = $scope.questionData[index].question_data.field;
 

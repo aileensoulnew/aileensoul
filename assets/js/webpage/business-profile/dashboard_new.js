@@ -1779,8 +1779,9 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var field = document.getElementById("ask_field").value;
             var description = document.getElementById("ask_que").value;
             var description = description.trim();
+            var ask_hashtag = $scope.ask.ask_hashtag;
             var fileInput = document.getElementById("fileInput2").files;
-            if ((field == '') || (description == ''))
+            if (field == '' || description == '' || ask_hashtag == '')
             {
                 $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
                 $('#post').modal('show');
@@ -1836,6 +1837,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 formFileDataQue.append('other_field', $scope.ask.otherField);
                 formFileDataQue.append('category', JSON.stringify($scope.ask.related_category));
                 formFileDataQue.append('weblink', $scope.ask.web_link);
+                formFileDataQue.append('hashtag', $scope.ask.ask_hashtag);
                 formFileDataQue.append('post_for', $scope.ask.post_for);
                 formFileDataQue.append('is_anonymously', $scope.ask.is_anonymously);
 

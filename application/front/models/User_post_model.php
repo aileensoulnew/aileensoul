@@ -725,12 +725,14 @@ class User_post_model extends CI_Model {
                 $simple_data['description'] = nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
                 //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();                
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
@@ -1122,12 +1124,14 @@ class User_post_model extends CI_Model {
                 $simple_data['description'] = nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
                 //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();                
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
@@ -1269,12 +1273,14 @@ class User_post_model extends CI_Model {
                 $simple_data['description'] = $this->common->make_links(nl2br($simple_data['description']));//nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
                 //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();                
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
@@ -1810,11 +1816,14 @@ class User_post_model extends CI_Model {
                 $simple_data = $query->row_array();
                 $searchPostData[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
+                //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();
                 $question_data = $query->row_array();
                 $searchPostData[$key]['question_data'] = $question_data;
@@ -2073,11 +2082,14 @@ class User_post_model extends CI_Model {
                 $simple_data = $query->row_array();
                 $searchPostData[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
+                //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();
                 $question_data = $query->row_array();
                 $searchPostData[$key]['question_data'] = $question_data;
@@ -2179,12 +2191,14 @@ class User_post_model extends CI_Model {
 
     public function getQuestionDataFromId($post_id)
     {
-        $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+        $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
         $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
         $this->db->where('uaq.post_id', $post_id);
         //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
         $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-        $this->db->group_by('uaq.category');
+        $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+        $this->db->where($sql);
+        $this->db->group_by('uaq.category','uaq.hashtag');
         $query = $this->db->get();                
         $question_data = $query->row_array();
         $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
@@ -2285,12 +2299,14 @@ class User_post_model extends CI_Model {
                 $simple_data['description'] = $this->common->make_links(nl2br($simple_data['description']));//nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
                 //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();                
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
@@ -2504,12 +2520,14 @@ class User_post_model extends CI_Model {
                 $simple_data['description'] = $this->common->make_links(nl2br($simple_data['description']));//nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
-                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
                 //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
                 $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
-                $this->db->group_by('uaq.category');
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
                 $query = $this->db->get();                
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));

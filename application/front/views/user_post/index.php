@@ -534,6 +534,7 @@
                             </div>
                             <p ng-if="recentpost.question_data.link"><b>Link:</b><span id="ask-post-link-{{recentpost.post_data.id}}" ng-bind-html="recentpost.question_data.link | parseUrl"></span></p>
                             <p ng-if="recentpost.question_data.category"><b>Category:</b><span ng-bind="recentpost.question_data.category" id="ask-post-category-{{recentpost.post_data.id}}"></span></p>
+                            <p ng-if="recentpost.question_data.hashtag"><b>Hashtag:</b><span ng-bind="recentpost.question_data.hashtag" id="ask-post-hashtag-{{recentpost.post_data.id}}"></span></p>
                             <p ng-if="recentpost.question_data.field"><b>Field:</b><span ng-bind="recentpost.question_data.field" id="ask-post-field-{{recentpost.post_data.id}}"></span></p>
                         </h5>
                         <div class="post-des-detail" ng-if="recentpost.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="recentpost.opportunity_data.opportunity"></span></div>
@@ -565,10 +566,8 @@
                                     <textarea max-rows="5" id="ask_que_desc_{{recentpost.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
                                     <div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Related Categories</label>
-                                    
-                                    
                                     <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{recentpost.post_data.id}}" on-tag-added="onKeyup()">
                                         <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                     </tags-input>
@@ -579,6 +578,12 @@
                                     <script type="text/ng-template" id="category-autocomplete-template">
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                     </script>
+                                </div> -->
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="ask_hashtag{{recentpost.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="ask_hashtag{{recentpost.post_data.id}}"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>From which field the Question asked?</label>
@@ -1138,6 +1143,7 @@
                                 </div>
                                 <p ng-if="post.question_data.link"><b>Link:</b><span id="ask-post-link-{{post.post_data.id}}" ng-bind-html="post.question_data.link | parseUrl"></span></p>
                                 <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
+                                <p ng-if="post.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.question_data.hashtag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
                             </h5>
                             <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity"></span></div>
@@ -1169,10 +1175,8 @@
                                         <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
     									<div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>Related Categories</label>
-    									
-    									
                                         <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
                                             <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                         </tags-input>
@@ -1183,6 +1187,12 @@
                                         <script type="text/ng-template" id="category-autocomplete-template">
                                             <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                         </script>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label>Add hashtag (Topic)</label>
+                                        <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                        <div class="ask_hashtag{{post.post_data.id}}"></div>
                                     </div>
                                     <div class="form-group">
                                         <label>From which field the Question asked?</label>
@@ -1962,7 +1972,7 @@
                                     <textarea id="ask_desc" rows="1" max-rows="5" ng-model="ask.ask_description" placeholder="Add Description" cols="10" style="resize:none"></textarea>
 									<div id="ask_desctooltip" class="tooltip-custom" style="display: none;">Describe your problem in more details with some examples.</div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Related Categories</label>
 									
                                     <tags-input id="ask_related_category" ng-model="ask.related_category" display-property="name"placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" on-tag-added="onKeyup()">
@@ -1975,6 +1985,12 @@
                                     <script type="text/ng-template" id="category-autocomplete-template">
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                     </script>
+                                </div> -->
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="ask_hashtag" type="text" class="form-control" ng-model="ask.ask_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="ask_hashtag"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>From which field the Question asked?</label>
@@ -1987,11 +2003,7 @@
                                         </select>
                                     </span>
 									<div id="ask_fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Question.</div>
-                                </div>
-								<div class="form-group">
-                                    <label>Add hashtag (Topic)</label>
-                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="100">
-                                </div>
+                                </div>                                
                                 <div class="form-group" ng-if="ask.ask_field == '0'">
                                     <input type="text" class="form-control" ng-model="ask.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>

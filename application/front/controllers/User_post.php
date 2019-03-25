@@ -1051,6 +1051,24 @@ class User_post extends MY_Controller {
                     }
                 }
                 $categoryId = trim($categoryId, ',');
+
+                $hashtag_arr = $this->get_hashtag_array($hashtag);
+                $hashtag_id = "";
+                foreach ($hashtag_arr as $key=>$value) {
+                    $ht_arr = $this->data_model->find_hashtag($value);
+                    if ($ht_arr['id'] != '') {
+                        $ht_id = $ht_arr['id'];
+                    } else {
+                        $data = array();
+                        $data['hashtag'] = $value;
+                        $data['created_date'] = date('Y-m-d H:i:s', time());
+                        $data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $data['status'] = '2';                        
+                        $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                    }
+                    $hashtag_id .= $ht_id . ',';
+                }
+                $hashtag_id = trim($hashtag_id, ',');
             }
             $this->config->item('user_post_main_upload_path');
             $config = array(
@@ -1121,6 +1139,7 @@ class User_post extends MY_Controller {
                 $insert_data['field'] = $ask_field;
                 $insert_data['others_field'] = $other_field;
                 $insert_data['link'] = $ask_weblink;
+                $insert_data['hashtag'] = $hashtag_id;
                 $insert_data['is_anonymously'] = $is_anonymously;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_ask_question');
@@ -1695,6 +1714,7 @@ class User_post extends MY_Controller {
             $ask_field = $_POST['field'];
             $ask_other_field = $_POST['other_field'];
             $ask_web_link = $_POST['weblink'];
+            $hashtag = $_POST['hashtag'];
             $ask_category = json_decode($_POST['category'], TRUE);
             $is_anonymously = $_POST['is_anonymously'];
 
@@ -1714,6 +1734,24 @@ class User_post extends MY_Controller {
                 }
             }
             $categoryId = trim($categoryId, ',');
+            
+            $hashtag_arr = $this->get_hashtag_array($hashtag);
+            $hashtag_id = "";
+            foreach ($hashtag_arr as $key=>$value) {
+                $ht_arr = $this->data_model->find_hashtag($value);
+                if ($ht_arr['id'] != '') {
+                    $ht_id = $ht_arr['id'];
+                } else {
+                    $data = array();
+                    $data['hashtag'] = $value;
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = '2';                        
+                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                }
+                $hashtag_id .= $ht_id . ',';
+            }
+            $hashtag_id = trim($hashtag_id, ',');
 
             $question_category = $this->user_post_model->GetQuestionCategoryName($categoryId);
             $question_field = $this->user_post_model->GetIndustryFieldName($ask_field);
@@ -1721,6 +1759,7 @@ class User_post extends MY_Controller {
             $update_data = array();
             $update_data['question'] = $ask_que;
             $update_data['description'] = $ask_desc;
+            $update_data['hashtag'] = $hashtag_id;
             $update_data['category'] = $categoryId;
             $update_data['field'] = $ask_field;
             $update_data['others_field'] = $ask_other_field;
@@ -2218,6 +2257,24 @@ class User_post extends MY_Controller {
                     }
                 }
                 $categoryId = trim($categoryId, ',');
+
+                $hashtag_arr = $this->get_hashtag_array($hashtag);
+                $hashtag_id = "";
+                foreach ($hashtag_arr as $key=>$value) {
+                    $ht_arr = $this->data_model->find_hashtag($value);
+                    if ($ht_arr['id'] != '') {
+                        $ht_id = $ht_arr['id'];
+                    } else {
+                        $data = array();
+                        $data['hashtag'] = $value;
+                        $data['created_date'] = date('Y-m-d H:i:s', time());
+                        $data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $data['status'] = '2';                        
+                        $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                    }
+                    $hashtag_id .= $ht_id . ',';
+                }
+                $hashtag_id = trim($hashtag_id, ',');
             }
             $this->config->item('user_post_main_upload_path');
             $config = array(
@@ -2276,7 +2333,7 @@ class User_post extends MY_Controller {
                 $insert_data['post_id'] = $user_post_id;
                 $insert_data['simslug'] = $sim_title;
                 $insert_data['sim_title'] = $sptitle;
-                $insert_data['hashtag'] = $hashtag_id;
+                $insert_data['hashtag'] = $hashtag_id;                
                 $insert_data['description'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
@@ -2286,6 +2343,7 @@ class User_post extends MY_Controller {
                 $insert_data['question'] = $ask_question;
                 $insert_data['description'] = $ask_description;
                 $insert_data['category'] = $categoryId;
+                $insert_data['hashtag'] = $hashtag_id;
                 $insert_data['field'] = $ask_field;
                 $insert_data['others_field'] = $other_field;
                 $insert_data['link'] = $ask_weblink;

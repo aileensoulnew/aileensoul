@@ -379,7 +379,8 @@
                                             </div>                                            
                                         </div>
                                         <p ng-if="post.question_data.link"><b>Link:</b><span id="ask-post-link-{{post.post_data.id}}" ng-bind-html="post.question_data.link | parseUrl"></span></p>
-                                        <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
+                                        <!-- <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p> -->
+                                        <p ng-if="post.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.question_data.hashtag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
                                         <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
                                     </h5>
                                     <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity"></span></div>
@@ -776,6 +777,7 @@
             var cmt_maxlength = '700';
             var question = '<?php echo $question_id ?>';
             var title = '<?php //echo addslashes($title) ?>';
+            var live_slug = '<?php //echo $this->session->userdata('aileenuser_slug'); ?>';
             var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

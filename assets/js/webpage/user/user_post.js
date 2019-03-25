@@ -1476,10 +1476,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var field = document.getElementById("ask_field").value;
             var description = document.getElementById("ask_que").value;
             var description = description.trim();
+            var ask_hashtag = $scope.ask.ask_hashtag;
             var fileInput = document.getElementById("fileInput2").files;
-            if ((field == '') || (description == ''))
+            if (field == '' || description == '' || ask_hashtag.trim() == '')
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1533,6 +1534,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 formFileDataQue.append('other_field', $scope.ask.otherField);
                 formFileDataQue.append('category', JSON.stringify($scope.ask.related_category));
                 formFileDataQue.append('weblink', $scope.ask.web_link);
+                formFileDataQue.append('hashtag', $scope.ask.ask_hashtag);
                 formFileDataQue.append('post_for', $scope.ask.post_for);
                 formFileDataQue.append('is_anonymously', $scope.ask.is_anonymously);
 
@@ -3135,6 +3137,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             {
                 $("#ask_web_link_"+post_id).val("");  
             }
+
             var related_category = [];
             var rel_category = $scope.recentpost.question_data.category.split(",");            
             rel_category.forEach(function(element,catArrIndex) {
@@ -3167,6 +3170,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             });
 
             //$("#ask_related_category_edit"+post_id).val(related_category);
+
+            $scope.ask.ask_hashtag_edit = $scope.recentpost.question_data.hashtag;
 
             var ask_field = $scope.recentpost.question_data.field;
 
@@ -3599,6 +3604,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
             ask_que_desc = ask_que_desc.trim();
             var related_category_edit = $scope.ask.related_category_edit;
+            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;
             var edit_fields = $("#ask_field_"+post_id).val();  
             if(edit_fields == 0)
                 var ask_other = $("#ask_other_"+post_id).val();
@@ -3607,9 +3613,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             var ask_is_anonymously = ($("#ask_is_anonymously"+post_id+":checked").length > 0 ? 1 : 0);            
             
-            if ((edit_fields == '') || (ask_que == ''))
+            if (edit_fields == '' || ask_que == '' || ask_hashtag_edit == '')
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask question, hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -3630,6 +3636,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 form_data.append('other_field', ask_other);
                 form_data.append('category', JSON.stringify(related_category_edit));
                 form_data.append('weblink', ask_web_link);
+                form_data.append('hashtag', $scope.ask.ask_hashtag_edit);
                 form_data.append('post_for', "question");
                 form_data.append('is_anonymously', ask_is_anonymously);
                 form_data.append('post_id', post_id);

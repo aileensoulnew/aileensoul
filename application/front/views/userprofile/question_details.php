@@ -117,7 +117,7 @@
                                         
                                         <li ng-if="live_slug == post.user_data.user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for == 'article'"><a href="<?php echo base_url();?>edit-article/{{post.article_data.unique_key}}">Edit Post</a></li>
 
-                                        <li ng-if="live_slug == post.user_data.user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                        <li ng-if="live_slug == post.user_data.user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostQuestion(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
                                         <li ng-if="live_slug == post.user_data.user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                         <li>
                                             <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for == 'article'" href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_blank">Show in new tab</a>
@@ -301,7 +301,10 @@
                                             </div>                                            
                                         </div>
                                         <p ng-if="post.question_data.link"><b>Link:</b><span id="ask-post-link-{{post.post_data.id}}" ng-bind-html="post.question_data.link | parseUrl"></span></p>
-                                        <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
+                                        <!-- <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p> -->
+
+                                        <p ng-if="post.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.question_data.hashtag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
+
                                         <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
                                     </h5>
                                     <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity"></span></div>
@@ -333,10 +336,8 @@
                                                 <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
                                                 <div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label>Related Categories</label>
-                                                
-                                                
                                                 <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
                                                     <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                                 </tags-input>
@@ -347,6 +348,12 @@
                                                 <script type="text/ng-template" id="category-autocomplete-template">
                                                     <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                                 </script>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label>Add hashtag (Topic)</label>
+                                                <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                <div class="ask_hashtag{{post.post_data.id}}"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label>From which field the Question asked?</label>
@@ -682,11 +689,13 @@
             var cmt_maxlength = '700';
             var question = '<?php echo $question_id ?>';
             var title = '<?php //echo addslashes($title) ?>';
+            var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
             var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/question_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
         <script>
 			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 				showRight = document.getElementById( 'showRight' ),
@@ -717,6 +726,54 @@
 					}
 				});
 			});
+
+            function split( val ) {
+                    return val.split( / \s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+
+                function autocomplete_hashtag(id)
+                {
+                    $("#"+id).bind( "keydown", function( event ) {
+                        if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).autocomplete( "instance" ).menu.active ) {
+                            event.preventDefault();
+                        }
+                    })
+                    .autocomplete({
+                        appendTo: "."+id,
+                        minLength: 2,
+                        source: function( request, response ) {                         
+                            var search_key = extractLast( request.term );
+                            if(search_key[0] == "#")
+                            {
+                                search_key = search_key.substr(1);
+                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        },
+                        focus: function() {
+                            // prevent value inserted on focus
+                            return false;
+                        },
+                        select: function( event, ui ) {
+                            var terms = split( this.value );
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push( ui.item.value );
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push( "" );
+                            this.value = terms.join( " " );
+                            return false;
+                        },
+                    });                
+                }
 		</script>
     </body>
 </html>

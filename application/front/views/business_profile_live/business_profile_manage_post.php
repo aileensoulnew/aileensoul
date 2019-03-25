@@ -1745,7 +1745,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <textarea id="ask_desc" rows="1" max-rows="5" ng-model="ask.ask_description" placeholder="Add Description" cols="10" style="resize:none"></textarea>
                                     <div id="ask_desctooltip" class="tooltip-custom" style="display: none;">Describe your problem in more details with some examples.</div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Related Categories</label>
                                     
                                     <tags-input id="ask_related_category" ng-model="ask.related_category" display-property="name"placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" on-tag-added="onKeyup()">
@@ -1758,6 +1758,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <script type="text/ng-template" id="category-autocomplete-template">
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                     </script>
+                                </div> -->
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <input id="ask_hashtag" type="text" class="form-control" ng-model="ask.ask_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="ask_hashtag"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>From which field the Question asked?</label>
