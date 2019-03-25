@@ -184,6 +184,12 @@
                                                         <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                                     </div>
                                                     <div class="form-group">
+                                                        <label>Add hashtag (Topic)</label>
+                                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                        <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                        <div class="opp_hashtag{{post.post_data.id}}"></div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label>Company Name</label>
                                                         <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                                     </div>
@@ -205,6 +211,7 @@
                                                 <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="post.opportunity_data.hashtag"><b>Hashtags:</b><span ng-bind="post.opportunity_data.hashtag" id="opp-post-hashtag-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
                                             </h5>
                                             <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">

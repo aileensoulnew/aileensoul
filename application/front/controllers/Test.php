@@ -139,7 +139,7 @@ class Test extends MY_Controller {
         ini_set("memory_limit","512M");
         
         $to_email_id = "harshad.aileensoul@gmail.com";
-        $login_user_img = "https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png";
+        /*$login_user_img = "https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png";
         $email_html = '';
         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
@@ -157,7 +157,13 @@ class Test extends MY_Controller {
                         </table>';
         $subject = 'Dhaval Shah accepted your contact request in Aileensoul.';
         $unsubscribe = "https://www.aileensoul.com/harshad-patel-2";
-        $send_email = $this->email_model->send_email_hp($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+        $send_email = $this->email_model->send_email_hp($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);*/
+
+        $unsubscribe = "https://www.aileensoul.com/harshad-patel-2";
+        $subject = 'Aileensoul Mail.';
+        $email_html = $this->load->view('email_template/test_mail',$this->userdata,TRUE);
+        $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email_id,$unsubscribe);
+        var_dump($send_email);
         echo "Done";
         
     }

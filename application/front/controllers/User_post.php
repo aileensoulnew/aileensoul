@@ -997,6 +997,24 @@ class User_post extends MY_Controller {
                     $city_id .= $cityId . ',';
                 }
                 $city_id = trim($city_id, ',');
+
+                $hashtag_arr = $this->get_hashtag_array($hashtag);
+                $hashtag_id = "";
+                foreach ($hashtag_arr as $key=>$value) {
+                    $ht_arr = $this->data_model->find_hashtag($value);
+                    if ($ht_arr['id'] != '') {
+                        $ht_id = $ht_arr['id'];
+                    } else {
+                        $data = array();
+                        $data['hashtag'] = $value;
+                        $data['created_date'] = date('Y-m-d H:i:s', time());
+                        $data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $data['status'] = '2';                        
+                        $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                    }
+                    $hashtag_id .= $ht_id . ',';
+                }
+                $hashtag_id = trim($hashtag_id, ',');
             }
             elseif ($post_for == 'simple') {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
@@ -1078,6 +1096,7 @@ class User_post extends MY_Controller {
                 $insert_data['field'] = $field;
                 $insert_data['company_name'] = $company_name;
                 $insert_data['other_field'] = $other_field;
+                $insert_data['hashtag'] = $hashtag_id;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');
@@ -1593,6 +1612,8 @@ class User_post extends MY_Controller {
                 $other_field = $_POST['other_field'];
             else
                 $other_field = "";
+
+            $hashtag = $_POST['hashtag'];
             $job_title = json_decode($_POST['job_title'], TRUE);
             $location = json_decode($_POST['location'], TRUE);
 
@@ -1634,6 +1655,24 @@ class User_post extends MY_Controller {
             }
             $city_id = trim($city_id, ',');
 
+            $hashtag_arr = $this->get_hashtag_array($hashtag);
+            $hashtag_id = "";
+            foreach ($hashtag_arr as $key=>$value) {
+                $ht_arr = $this->data_model->find_hashtag($value);
+                if ($ht_arr['id'] != '') {
+                    $ht_id = $ht_arr['id'];
+                } else {
+                    $data = array();
+                    $data['hashtag'] = $value;
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = '2';                        
+                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                }
+                $hashtag_id .= $ht_id . ',';
+            }
+            $hashtag_id = trim($hashtag_id, ',');
+
             $opportunity_location = $this->user_post_model->GetLocationName($city_id);
             $opportunity_title = $this->user_post_model->GetJobTitleName($job_title_id);
             $opportunity_field = $this->user_post_model->GetIndustryFieldName($opp_field);
@@ -1646,6 +1685,7 @@ class User_post extends MY_Controller {
             $update_data['opportunity'] = $opp_desc;
             $update_data['field'] = $opp_field;
             $update_data['other_field'] = $other_field;
+            $update_data['hashtag'] = $hashtag_id;
             $update_data['company_name'] = $company_name;
             $update_data['modify_date'] = date('Y-m-d H:i:s', time());
             $update_post_data = $this->common->update_data($update_data, 'user_opportunity', 'post_id', $post_id);
@@ -1702,6 +1742,7 @@ class User_post extends MY_Controller {
                     'field_id' => $opp_field,
                     'opportunity' => $opp_desc,
                     'opptitle' => $opportunity_data['opptitle'],
+                    'hashtag' => $opportunity_data['hashtag'],
                     'oppslug' => $opportunity_data['oppslug'],
                     'company_name' => $opportunity_data['company_name'],
                 );                

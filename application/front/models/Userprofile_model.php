@@ -321,17 +321,19 @@ class Userprofile_model extends CI_Model {
             $result_array[$key]['user_data'] = $user_data;
 
             if ($value['post_for'] == 'opportunity') {
-                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field, uo.company_name")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c");
+                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field, uo.opptitle ,uo.oppslug, uo.company_name,IF(uo.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uo.field', 'left');
                 $this->db->where('uo.id', $value['post_id']);
                 $this->db->where('FIND_IN_SET(jt.title_id, uo.`opportunity_for`) !=', 0);
                 $this->db->where('FIND_IN_SET(c.city_id, uo.`location`) !=', 0);
-                $this->db->group_by('uo.opportunity_for', 'uo.location');
+                $sql = "IF(uo.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uo.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uo.opportunity_for', 'uo.location','uo.hashtag');
                 $query = $this->db->get();
                 $opportunity_data = $query->row_array();
                 $result_array[$key]['opportunity_data'] = $opportunity_data;
             } elseif ($value['post_for'] == 'simple') {
-                $this->db->select("usp.description,IF(usp.hashtag IS NULL,'',GROUP_CONCAT(DISTINCT(ht.hashtag))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
+                $this->db->select("usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
                 $this->db->where('usp.id', $value['post_id']);
                 $sql = "IF(usp.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, usp.hashtag) != 0)";
                 $this->db->where($sql);

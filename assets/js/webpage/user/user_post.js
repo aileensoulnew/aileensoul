@@ -1003,8 +1003,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var location = $scope.opp.location;
             var fields = $scope.opp.field;
             var otherField = $scope.opp.otherField;
+            var opp_hashtag = $scope.opp.opp_hashtag;
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "")))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (opp_hashtag == undefined || opp_hashtag == '')))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
                 $('#post').modal('show');
@@ -1277,6 +1278,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
                 formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
                 formFileDataOpp.append('post_for', $scope.opp.post_for);
+                formFileDataOpp.append('hashtag', $scope.opp.opp_hashtag);
                 formFileDataOpp.append('company_name', $scope.opp.company_name);
 
                 $('body').removeClass('modal-open');
@@ -2559,7 +2561,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
             {
                 hashtags = $scope.postData[index].simple_data.hashtag;
-                hashtags = '#'+hashtags.replace(/,/ig,' #');
+                // hashtags = '#'+hashtags.replace(/,/ig,' #');
             }
             $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
 
@@ -2616,6 +2618,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $scope.opp.field_edit = field_id;
             $scope.opp.otherField_edit = "";
             $scope.opp.company_name_edit = $scope.postData[index].opportunity_data.company_name;
+            $scope.opp.opp_hashtag_edit = $scope.postData[index].opportunity_data.hashtag;
             setTimeout(function(){
                 // $scope.opp.otherField_edit = field;
                 $("#otherField_edit" + post_id).val(field);    
@@ -3046,7 +3049,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             if($scope.recentpost.simple_data.hashtag && $scope.recentpost.simple_data.hashtag != undefined)
             {
                 hashtags = $scope.recentpost.simple_data.hashtag;
-                hashtags = '#'+hashtags.replace(/,/ig,' #');
+                // hashtags = '#'+hashtags.replace(/,/ig,' #');
             }
             $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
 
@@ -3103,6 +3106,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $scope.opp.otherField_edit = "";
 
             $scope.opp.company_name_edit = $scope.recentpost.opportunity_data.company_name;            
+            $scope.opp.opp_hashtag_edit = $scope.recentpost.opportunity_data.hashtag;
             setTimeout(function(){
                 // $scope.opp.otherField_edit = field;
                 $("#otherField_edit" + post_id).val(field);    
@@ -3502,8 +3506,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var company_name = $scope.opp.company_name_edit;
             var fields = $("#field_edit"+post_id).val();
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
+            var opp_hashtag = $scope.opp.opp_hashtag_edit;
 
-            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == ""))
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (opp_hashtag == undefined || opp_hashtag == ''))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -3528,6 +3533,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.opp.post_for);
                 form_data.append('company_name', company_name);
+                form_data.append('hashtag', $scope.opp.opp_hashtag_edit);
                 form_data.append('post_id', post_id);
 
                 $('body').removeClass('modal-open');
@@ -3550,6 +3556,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $scope.recentpost.opportunity_data.location = success.data.opp_location;
                                 $scope.recentpost.opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                                 $scope.recentpost.opportunity_data.opportunity = success.data.opportunity;
+                                $scope.recentpost.opportunity_data.hashtag = success.data.hashtag;
                                 $scope.recentpost.opportunity_data.company_name = success.data.company_name;
                                 $("#post_opportunity_edit")[0].reset();
 

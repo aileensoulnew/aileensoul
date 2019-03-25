@@ -548,7 +548,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
             {
                 hashtags = $scope.postData[index].simple_data.hashtag;
-                hashtags = '#'+hashtags.replace(/,/ig,' #');
+                // hashtags = '#'+hashtags.replace(/,/ig,' #');
             }
             // $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
             $("#sim_hashtag"+$scope.postData[index].post_data.id).val(hashtags);
@@ -585,6 +585,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
             $("#opptitleedit" + post_id).val($scope.postData[index].opportunity_data.opptitle);
 
+            $scope.opp.opp_hashtag_edit = $scope.postData[index].opportunity_data.hashtag;
             $scope.opp.company_name_edit = $scope.postData[index].opportunity_data.company_name;
 
             if (city_names.length > 0) {
@@ -921,7 +922,9 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var location = $scope.opp.location_edit;
             var company_name_edit = $scope.opp.company_name_edit;
             var fields = $("#field_edit" + post_id).val();
-            if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '')) {
+            var opp_hashtag = $scope.opp.opp_hashtag_edit;
+
+            if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '') || (opp_hashtag == undefined || opp_hashtag == '')) {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
                 $(document).on('keydown', function(e) {
@@ -941,6 +944,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.postData[postIndex].post_data.post_for);
                 form_data.append('company_name', company_name_edit);
+                form_data.append('hashtag', $scope.opp.opp_hashtag_edit);
                 form_data.append('post_id', post_id);
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -957,6 +961,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
                         $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                         $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
+                        $scope.postData[postIndex].opportunity_data.hashtag = success.data.hashtag;
                         $scope.postData[postIndex].opportunity_data.company_name = success.data.company_name;
                         $("#post_opportunity_edit")[0].reset();
                         $("#edit-opp-post-" + post_id).hide();
