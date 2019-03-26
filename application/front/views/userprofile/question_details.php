@@ -333,8 +333,8 @@
                                         <div class="post-field">
                                             <div class="form-group">
                                                 <label>Add Description</label>
-                                                <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
-                                                <div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
+                                                <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10" class="ask_desc"></textarea>
+                                                <div id="ask_desctooltip" class="tooltip-custom" style="display: none;">Describe your problem in more details with some examples.</div>
                                             </div>
                                             <!-- <div class="form-group">
                                                 <label>Related Categories</label>
@@ -359,13 +359,13 @@
                                                 <label>From which field the Question asked?</label>
                                                 
                                                 <span class="select-field-custom">
-                                                    <select ng-model="ask.ask_field_edit" id="ask_field_{{post.post_data.id}}">
+                                                    <select ng-model="ask.ask_field_edit" id="ask_field_{{post.post_data.id}}" class="ask_field">
                                                         <option value="" selected="selected">Select Related Field</option>
                                                         <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
                                                         <option value="0">Other</option>
                                                     </select>
                                                 </span>
-                                                <div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Question.</div>
+                                                <div id="ask_fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Question.</div>
                                             </div>
 
                                             <div class="form-group"  ng-if="ask.ask_field_edit == '0'">
@@ -681,7 +681,6 @@
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script src="//anglibs.github.io/angular-location-update/angular-location-update.min.js"></script>
-
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';

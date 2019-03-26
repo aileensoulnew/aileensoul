@@ -571,6 +571,21 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             //     //$('#editPostTexBox-' + post_id).focus();
             //     setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
             // },100);
+
+            $(".ask_desc").focusin(function(){                
+                $('#ask_desctooltip').show();
+            });
+            $(".ask_desc").focusout(function(){                
+                $('#ask_desctooltip').hide();
+            });
+
+            $(".ask_field").focusin(function(){
+                $('#ask_fieldtooltip').show();
+            });
+            $(".ask_field").focusout(function(){
+                $('#ask_fieldtooltip').hide();
+            });
+
         }
     }
     $scope.like_user_list = function(post_id) {
