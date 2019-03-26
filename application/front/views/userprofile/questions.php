@@ -135,26 +135,39 @@
                 </div>
                 <div class="post-bottom">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-5">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mob-pr0">
                             <ul class="bottom-left">
-                                <li class="like-count">
-                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '1'" class="like">Like</a>
-                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '0'">Like</a>
+                                <li class="user-likes">
+                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
+                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
                                 </li>
-                                <li class="comment-count"><a href="javascript:void(0)" ng-click="giveAnswer(post.post_data.id)"><span>Give Answer</span></a></li>
+                                
                             </ul>
+							<ul class="bottom-left like_user_list">
+								<li class="like-img">
+									<a class="ripple" href="#" title="harshad patel">
+										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
+									</a>
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="#" title="harshad patel">
+										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
+									</a>
+								</li>
+								<li class="like-img">
+									<a href="#" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+								</li>
+								
+							</ul>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-7">
+                        <div class="col-md-3 col-sm-3 col-xs-4">
                             <ul class="pull-right bottom-right">
-                                <li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li>
-                                <li class="comment-count"><span class="post-comment-count-{{post.post_data.id}}" ng-if="post.post_comment_count > 0" ng-bind="post.post_comment_count"></span><span>Answers</span></li>
+                                <li class="comment-count pt5"><a href="javascript:void(0)" ng-click="giveAnswer(post.post_data.id)"><span class="post-comment-count-{{post.post_data.id}}" ng-if="post.post_comment_count > 0" ng-bind="post.post_comment_count"></span><span>Answers</span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="like-other-box">                    
-                    <a href="#" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
-                </div>
+              
             </div>
             <div class="ans-text" id="ans-text-{{post.post_data.id}}" style="display:none;"><span>Answers</span></div>
             <div class="all-post-bottom" id="all-post-bottom-{{post.post_data.id}}" style="display:none;">

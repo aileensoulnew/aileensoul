@@ -1239,12 +1239,11 @@ header.profile-header .logo a{color:#5c5c5c;}
 .ans-text{width:100%; float:left; padding:0 15px 10px; font-size:18px; letter-spacing:1px;}
 .ans-text span{width:100%; float:left; padding-top:10px; border-top:1px solid #d2d2d2;}
 .question{font-size:22px;}
-.question-page .bottom-left li a{font-size:14px; padding: 3px 10px !important;}
-.question-page .bottom-left li a:hover{background: #efefef; border-radius: 4px;}
+.question-page .bottom-left li a{font-size:14px; padding:}
+.question-page .bottom-left li a:hover{background: #efefef;}
 .question-page .bottom-left li a.like{color:#1b8ab9;}
 .question-page .bottom-left li a.like:hover{background: #e8f3f8; color:#1b8ab9;}
 .question-page .post-bottom ul.bottom-right{padding-top:0;}
-.question-page .post-bottom{padding:5px 0;}
  /** reg form **/
 .reg-form-box{ padding:30px 0 0; border-radius:4px;}
 .reg-form-box .reg-form{border-radius:4px; padding-left:80px;}
