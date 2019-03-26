@@ -2726,4 +2726,136 @@ class User_post extends MY_Controller {
             // echo json_encode("1");
         }
     }
+
+    public function add_post_comment_reply() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_id = $_POST['post_id'];
+        $comment_id = $_POST['comment_id'];
+        $comment = $_POST['comment'];
+        // print_r($_POST);
+        $comment_data = $this->user_post_model->get_post_comment_reply_id($post_id, $comment_id);
+        if($comment_data)
+        {
+            $data = array();
+            $data['user_id'] = $userid;
+            $data['post_id'] = $post_id;
+            $data['reply_comment_id'] = $comment_data['id'];
+            $data['comment'] = $comment;
+            $data['created_date'] = date('Y-m-d H:i:s', time());
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $data['is_delete'] = '0';
+            $postComentId = $this->common->insert_data_getid($data, 'user_post_comment');
+            if($postComentId)
+            {
+                $return_data['message'] = '1';
+                $return_data['comment_reply_data'] = $this->user_post_model->post_comment_reply_data($post_id,$comment_id,$userid);
+
+                $to_id = $comment_data['user_id'];
+
+                if($_SERVER['HTTP_HOST'] != "aileensoul.localhost" && $userid != $to_id)
+                {
+
+                    $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
+
+                    $login_userdata = $this->user_model->getUserData($userid);
+                    $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
+                    // print_r($postDetailData);exit;
+                    if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    }
+                    elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    }
+                    elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                    }
+                    elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+
+                    if($login_userdata['user_image'] != "")
+                    {
+                        $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                    }
+                    else
+                    {
+                        if($login_userdata['user_gender']  == 'M')
+                        {
+                            $login_user_img = base_url('assets/img/man-user.jpg');
+                        }
+
+                        if($login_userdata['user_gender']  == 'F')
+                        {
+                            $login_user_img = base_url('assets/img/female-user.jpg');
+                        }
+                    }
+
+                    $email_html = '';
+                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="'.MAIL_TD_1.'">
+                                            <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                        </td>
+                                        <td style="padding:5px;">
+                                            <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> replied on your comment.</p>
+                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                        </td>
+                                        <td style="'.MAIL_TD_3.'">
+                                            <p><a class="btn" href="'.$url.'">view</a></p>
+                                        </td>
+                                    </tr>
+                                    </table>';
+                    $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' replied on your comment in Aileensoul.';
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
+
+                    $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                    if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
+                    {
+                        $url = base_url()."user_post/send_email_in_background";
+                        $param = array(
+                            "subject"=>$subject,
+                            "email_html"=>$email_html,
+                            "to_email"=>$to_email_id,
+                            "unsubscribe"=>$unsubscribe,
+                        );
+                        $this->inbackground->do_in_background($url, $param);
+                    }
+                }
+            }
+        }
+        else
+        {
+            $return_data['message'] = '0';
+        }
+        echo json_encode($return_data);
+    }
+
+    public function edit_post_comment_reply() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_id = $_POST['post_id'];
+        $comment_id = $_POST['reply_comment_id'];
+        $comment = $_POST['comment'];
+        // print_r($_POST);
+        $data = array();
+        $data['comment'] = $comment;
+        $data['modify_date'] = date('Y-m-d H:i:s', time());
+        $updatedata = $this->common->update_data($data, 'user_post_comment', 'id', $comment_id);
+        $return_array = array();
+        if ($updatedata) {
+            $return_array['message'] = 1;
+        }
+        echo json_encode($return_array);
+    }
 }

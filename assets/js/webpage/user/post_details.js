@@ -839,7 +839,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             textRange.select();
         }
     }
-    $scope.post_something_check = function(event, postIndex = -1) {
+    $scope.post_something_check = function(event, postIndex) {
         //alert(postIndex);return false;
         if (document.getElementById("edit_post_id" + postIndex)) {
             var post_id = document.getElementById("edit_post_id" + postIndex).value;
@@ -903,7 +903,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             //}
         }
     }
-    $scope.post_opportunity_check = function(event, postIndex = -1) {
+    $scope.post_opportunity_check = function(event, postIndex) {
         if (document.getElementById("opp_edit_post_id" + postIndex)) {
             var post_id = document.getElementById("opp_edit_post_id" + postIndex).value;
         } else {

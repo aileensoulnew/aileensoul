@@ -376,6 +376,7 @@ class Userprofile_model extends CI_Model {
             foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
+                $result_array[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['post_id'],$value1['comment_id'],$user_id);
             }
         }
 
@@ -432,18 +433,20 @@ class Userprofile_model extends CI_Model {
         $this->db->where('upc.post_id', $post_id);
         $this->db->where('ul.status', '1');
         $this->db->where('upc.is_delete', '0');
+        $this->db->where('upc.reply_comment_id IS NULL');
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array['comment_count'];
     }
 
     public function postCommentData($post_id = '') {
-        $this->db->select("u.user_slug,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date,u.user_gender")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->select("u.user_slug, upc.user_id as commented_user_id, CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id, upc.comment, upc.created_date, u.user_gender")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
         $this->db->join('user_login ul', 'ul.user_id = upc.user_id', 'left');
         $this->db->join('user_info ui', 'ui.user_id = upc.user_id', 'left');
         $this->db->where('upc.post_id', $post_id);
         $this->db->where('ul.status', '1');
+        $this->db->where('upc.reply_comment_id IS NULL');
         $this->db->where('upc.is_delete', '0');
         $this->db->order_by('upc.id', 'desc');
         $this->db->limit('1');
@@ -623,6 +626,7 @@ class Userprofile_model extends CI_Model {
                 $postCommentData[$key1]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($postCommentData[$key1]['created_date'])));
                 $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
+                $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['post_id'],$value1['comment_id'],$user_id);
             }
 
             $result_array[$key]['post_comment_data'] = $postCommentData;
@@ -718,11 +722,14 @@ class Userprofile_model extends CI_Model {
                 $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            
+            $postCommentData = $this->postCommentData($value['id']);            
             foreach ($postCommentData as $key1 => $value1) {
-                $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
-                $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
+                $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
+                $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
+                $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['id'],$value1['comment_id'],$user_id);
             }
+
+            // $result_array[$key]['post_comment_data'] = $postCommentData;
 
             $result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userQuestionsCount($user_id);//$this->userPostCount($user_id);
@@ -1977,5 +1984,25 @@ class Userprofile_model extends CI_Model {
         $question_counter = $this->userQuestionsCount($user_id);
         $return_arr['question_counter'] = $question_counter;
         return $return_arr;
+    }
+
+    public function post_comment_reply_data($post_id = '',$comment_id = '',$user_id = '') {
+        $this->db->select("u.user_slug,u.user_gender,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = upc.user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = upc.user_id', 'left');
+        $this->db->where('upc.post_id', $post_id);
+        $this->db->where('upc.reply_comment_id',$comment_id);
+        $this->db->where('ul.status', '1');
+        $this->db->where('upc.is_delete', '0');
+        $this->db->order_by('upc.id', 'desc');        
+        $query = $this->db->get();
+        $post_comment_data = $query->result_array();
+        foreach ($post_comment_data as $key => $value) {
+            $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
+            $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
+            $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);
+        }
+        return $post_comment_data;
     }
 }

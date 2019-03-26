@@ -2370,12 +2370,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             })
             .then(function (success) {
-                data = success.data;
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                data = success.data;                
+
                 if (data.message == '1') {
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
@@ -2513,11 +2509,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             },100);
         });
     }
-    $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
-       /* var editContent = $('#comment-dis-inner-' + comment_id).html();
-        $('#edit-comment-' + comment_id).show();
-        $('#editCommentTaxBox-' + comment_id).html(editContent);
-        $('#comment-dis-inner-' + comment_id).hide();*/
+    $scope.editPostComment = function (comment_id, post_id, parent_index, index) {       
         $(".comment-for-post-"+post_id+" .edit-comment").hide();
         $(".comment-for-post-"+post_id+" .comment-dis-inner").show();
         $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
@@ -2533,6 +2525,34 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $('#cancel-comment-li-' + comment_id).show();
         $(".new-comment-"+post_id).hide();
     }
+
+    $scope.edit_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {       
+        $(".comment-for-post-"+post_id+" .edit-reply-comment").hide();
+        $(".comment-for-post-"+post_id+" li[id^=cancel-reply-comment-li-]").hide();
+        $(".comment-for-post-"+post_id+" li[id^=edit-reply-comment--]").show();
+        // $(".comment-for-post-"+post_id+" .comment-reply-dis-inner").show();
+
+        var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+        editContent = editContent.substring(0,cmt_maxlength);
+        $('#edit-reply-comment-' + comment_id).show();
+        $('#edit-comment-reply-textbox-' + comment_id).html(editContent);
+        $('#comment-reply-dis-inner-' + comment_id).hide();
+        $('#edit-reply-comment-li-' + comment_id).hide();
+        $('#cancel-reply-comment-li-' + comment_id).show();
+        $(".new-comment-"+post_id).hide();
+    }
+
+    $scope.cancel_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {
+        $('#edit-reply-comment-' + comment_id).hide();        
+        $('#comment-reply-dis-inner-' + comment_id).show();
+        $('#edit-reply-comment-li-' + comment_id).show();
+        $('#cancel-reply-comment-li-' + comment_id).hide();
+        $(".new-comment-"+post_id).show();
+    }
+
+    $scope.comment_reply = function(comment_id){
+        $("#comment-reply-"+comment_id).show();
+    };
 
     $scope.cancelPostComment = function (comment_id, post_id, parent_index, index) {
         
@@ -2794,6 +2814,72 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $scope.isMsgBoxEmpty = true;
         }
     }
+
+    $scope.sendCommentReply = function (comment_id,post_id,postIndex,commentIndex) {
+        var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
+        var comment = $('#reply-comment-' + comment_id).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        if (comment) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/add_post_comment_reply',
+                data: 'comment=' + comment + '&comment_id=' + comment_id + '&post_id=' + post_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                // console.log(success.data);
+                data = success.data;
+                if (data.message == '1') {                    
+                    if (commentClassName == 'last-comment') {
+                        // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        
+                        $('.editable_text').html('');
+                    }
+                }
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
+    $scope.send_edit_comment_reply = function (reply_comment_id,post_id) {
+        var comment = $('#edit-comment-reply-textbox-' + reply_comment_id).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        if (comment) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/edit_post_comment_reply',
+                data: 'comment=' + comment + '&reply_comment_id=' + reply_comment_id + '&post_id=' + post_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {                
+                data = success.data;
+                if (data.message == '1') {
+                    $('#comment-reply-dis-inner-' + reply_comment_id).show();
+                    $('#comment-reply-dis-inner-' + reply_comment_id).html(comment);
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).html();
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).hide();
+                    $('#edit-comment-li-' + reply_comment_id).show();
+                    $('#cancel-reply-comment-li-' + reply_comment_id).hide();
+                    $('.new-comment-'+post_id).show();
+                }                
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
     $scope.deletePost = function (post_id, index) {
         $scope.p_d_post_id = post_id;
         $scope.p_d_index = index;

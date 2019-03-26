@@ -601,7 +601,7 @@ app.controller('userProfileController', function ($scope, $http) {
         }
     };
 
-    $scope.contact = function (id, status, to_id, confirm = 0) {
+    $scope.contact = function (id, status, to_id, confirm) {
         // alert(status);
         // return false;
         if(confirm == '1')
@@ -9830,7 +9830,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     }
     $scope.get_all_counter();
 
-    $scope.contact = function (id, status, to_id,indexCon,confirm = 0) {
+    $scope.contact = function (id, status, to_id,indexCon,confirm) {
         if(confirm == '1')
         {
             $("#remove-contact-conform-"+indexCon).modal("show");
