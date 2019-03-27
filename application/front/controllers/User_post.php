@@ -1114,7 +1114,7 @@ class User_post extends MY_Controller {
                 $insert_data['field'] = $field;
                 $insert_data['company_name'] = $company_name;
                 $insert_data['other_field'] = $other_field;
-                $insert_data['hashtag'] = $hashtag_id;
+                $insert_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');
@@ -1126,7 +1126,7 @@ class User_post extends MY_Controller {
                 $insert_data['post_id'] = $user_post_id;
                 $insert_data['simslug'] = $sim_title;
                 $insert_data['sim_title'] = $sptitle;
-                $insert_data['hashtag'] = $hashtag_id;
+                $insert_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
                 $insert_data['description'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
@@ -1139,7 +1139,7 @@ class User_post extends MY_Controller {
                 $insert_data['field'] = $ask_field;
                 $insert_data['others_field'] = $other_field;
                 $insert_data['link'] = $ask_weblink;
-                $insert_data['hashtag'] = $hashtag_id;
+                $insert_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
                 $insert_data['is_anonymously'] = $is_anonymously;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_ask_question');
@@ -1615,7 +1615,7 @@ class User_post extends MY_Controller {
             $hashtag_id = trim($hashtag_id, ',');
 
             $update_data = array();
-            $update_data['hashtag'] = $hashtag_id;
+            $update_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
             // $update_data['simslug'] = $sim_title;
             $update_data['sim_title'] = $sptitle;
             $update_data['description'] = $description;
@@ -1704,7 +1704,7 @@ class User_post extends MY_Controller {
             $update_data['opportunity'] = $opp_desc;
             $update_data['field'] = $opp_field;
             $update_data['other_field'] = $other_field;
-            $update_data['hashtag'] = $hashtag_id;
+            $update_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
             $update_data['company_name'] = $company_name;
             $update_data['modify_date'] = date('Y-m-d H:i:s', time());
             $update_post_data = $this->common->update_data($update_data, 'user_opportunity', 'post_id', $post_id);
@@ -1759,7 +1759,7 @@ class User_post extends MY_Controller {
             $update_data = array();
             $update_data['question'] = $ask_que;
             $update_data['description'] = $ask_desc;
-            $update_data['hashtag'] = $hashtag_id;
+            $update_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
             $update_data['category'] = $categoryId;
             $update_data['field'] = $ask_field;
             $update_data['others_field'] = $ask_other_field;
@@ -2320,7 +2320,7 @@ class User_post extends MY_Controller {
                 $insert_data['opportunity'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['field'] = $field;
                 $insert_data['other_field'] = $other_field;
-                $insert_data['hashtag'] = $hashtag_id;
+                $insert_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
                 $insert_data['company_name'] = $company_name;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
@@ -2333,7 +2333,7 @@ class User_post extends MY_Controller {
                 $insert_data['post_id'] = $user_post_id;
                 $insert_data['simslug'] = $sim_title;
                 $insert_data['sim_title'] = $sptitle;
-                $insert_data['hashtag'] = $hashtag_id;                
+                $insert_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);                
                 $insert_data['description'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
@@ -2343,7 +2343,7 @@ class User_post extends MY_Controller {
                 $insert_data['question'] = $ask_question;
                 $insert_data['description'] = $ask_description;
                 $insert_data['category'] = $categoryId;
-                $insert_data['hashtag'] = $hashtag_id;
+                $insert_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
                 $insert_data['field'] = $ask_field;
                 $insert_data['others_field'] = $other_field;
                 $insert_data['link'] = $ask_weblink;
