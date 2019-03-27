@@ -433,6 +433,9 @@
                     </div>
                 </div>
                 <div class="post-discription" ng-if="recentpost.post_data.post_for == 'simple'">
+                    <p ng-if="recentpost.simple_data.sim_title"><b>Title:</b><span ng-bind="recentpost.simple_data.sim_title" id="opp-title-{{recentpost.post_data.id}}"></span></p>
+                    <p ng-if="recentpost.simple_data.hashtag"><b>Hashtags:</b><span ng-bind="recentpost.simple_data.hashtag" id="sim-recentpost-hashtag-{{recentpost.post_data.id}}"></span></p>
+
                     <div ng-init="limit = 250; moreShown = false">
                         <span ng-if="recentpost.simple_data.description != ''" id="simple-post-description-{{recentpost.post_data.id}}" ng-bind-html="recentpost.simple_data.description" ng-class="recentpost.simple_data.description.length > 250 ? 'view-more-expand' : ''">
                         </span>
@@ -1042,6 +1045,9 @@
                         </div>
                     </div>
                     <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
+                        <p ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
+                        <p ng-if="post.simple_data.hashtag"><b>Hashtags:</b> <span ng-bind="post.simple_data.hashtag" id="sim-post-hashtag-{{post.post_data.id}}"></span></p>
+
                         <div ng-init="limit = 250; moreShown = false">
                             <span ng-if="post.simple_data.description != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.simple_data.description" ng-class="post.simple_data.description.length > 250 ? 'view-more-expand' : ''">
                             </span>
