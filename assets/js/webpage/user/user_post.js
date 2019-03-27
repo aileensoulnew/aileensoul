@@ -1004,8 +1004,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var fields = $scope.opp.field;
             var otherField = $scope.opp.otherField;
             var opp_hashtag = $scope.opp.opp_hashtag;
+            var check_hashtag = opp_hashtag.replace(/#/g, "");
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (opp_hashtag == undefined || opp_hashtag.substr(1) == '')))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '')))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
                 $('#post').modal('show');
@@ -1477,8 +1478,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var description = document.getElementById("ask_que").value;
             var description = description.trim();
             var ask_hashtag = $scope.ask.ask_hashtag;
+            var check_hashtag = ask_hashtag.replace(/#/g, "");
             var fileInput = document.getElementById("fileInput2").files;
-            if (field == '' || description == '' || ask_hashtag.substr(1) == '')
+            if (field == '' || description == '' || check_hashtag == '')
             {
                 $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
                 $('#post').modal('show');
@@ -1727,8 +1729,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             //var description = description.trim();
             var fileInput1 = document.getElementById("fileInput1").value;
             //console.log(fileInput1);
+            var check_hashtag = sim_hashtag.replace(/#/g, "");
 
-            if((sim_title == '' || sim_title == undefined) || (sim_hashtag.substr(1) == '' || sim_hashtag == undefined) || (fileCountSim == 0 && (description == '' || description == undefined)))
+            if((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || (fileCountSim == 0 && (description == '' || description == undefined)))
             {
                 $('#posterrormodal .mes').html("<div class='pop_content'>All fields are mandatory. Please add title, hashtags, write or attach (photos, videos, audios, pdf) to post.");
                 $('#posterrormodal').modal('show');
@@ -2136,12 +2139,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             var sim_title = $scope.sim.sim_title_edit;
             var sim_hashtag = $scope.sim.sim_hashtag_edit;
+            var check_hashtag = sim_hashtag.replace(/#/g, "");
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();            
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) || (sim_hashtag.substr(1) == '' || sim_hashtag == undefined) || description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || description_check.trim() == '')
                 {
                     $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                     $('#post').modal('show');
@@ -3526,10 +3530,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             var sim_title = $scope.sim.sim_title_edit;
             var sim_hashtag = $scope.sim.sim_hashtag_edit;
+            var check_hashtag = sim_hashtag.replace(/#/g, "");
 
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) || (sim_hashtag.substr(1) == '' || sim_hashtag == undefined) || description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || description_check.trim() == '')
                 {
                     $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                     $('#post').modal('show');
@@ -3603,8 +3608,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var fields = $("#field_edit"+post_id).val();
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
             var opp_hashtag = $scope.opp.opp_hashtag_edit;
+            var check_hashtag = opp_hashtag.replace(/#/g, "");
 
-            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (opp_hashtag == undefined || opp_hashtag.substr(1) == ''))
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == ''))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -3696,6 +3702,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             ask_que_desc = ask_que_desc.trim();
             var related_category_edit = $scope.ask.related_category_edit;
             var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;
+            var check_hashtag = ask_hashtag_edit.replace(/#/g, "");
             var edit_fields = $("#ask_field_"+post_id).val();  
             if(edit_fields == 0)
                 var ask_other = $("#ask_other_"+post_id).val();
@@ -3704,7 +3711,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             var ask_is_anonymously = ($("#ask_is_anonymously"+post_id+":checked").length > 0 ? 1 : 0);            
             
-            if (edit_fields == '' || ask_que == '' || ask_hashtag_edit.substr(1) == '')
+            if (edit_fields == '' || ask_que == '' || check_hashtag == '')
             {
                 $('#post .mes').html("<div class='pop_content'>Ask question, hashtags and Field is required.");
                 $('#post').modal('show');
