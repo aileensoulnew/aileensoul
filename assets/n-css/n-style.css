@@ -3568,7 +3568,8 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .new-form .err-flname .error{display:none !important;}
 
 /***  end main reg css  ***/
-
+.user-profile-box .user-detail-bottom ul li:nth-child(1){width:39%;}
+.user-profile-box .user-detail-bottom ul li:nth-child(2){width:27%;}
 .users-list .user-msg-list .users-list-li a{width:auto;}
 .profile-head-text a{color:#5c5c5c;}
 .bui-menu-profile h2 a{color:#7b7b7b;}

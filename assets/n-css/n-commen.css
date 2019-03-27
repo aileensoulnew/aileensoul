@@ -451,6 +451,8 @@ ul.account li a:hover svg path{fill:#fff;}
 .right-header .dropdown.user-id .dropdown-menu li a{color:#777;}
 .right-header .dropdown.user-id .dropdown-menu li a span{display:inline-block; padding-left:5px;}
 .right-header .dropdown.user-id .dropdown-menu li a svg{margin-bottom:-2px;}
+.right-header .dropdown.user-id .dropdown-menu li:nth-child(3) a svg{width:16px !important;}
+.right-header .dropdown.user-id .dropdown-menu li:nth-child(3) a svg span{padding-left:4px;}
 
 .user-id .user-id-custom{position:relative; margin-bottom: 0;}
 .user-id .user-id-custom:after{content: '\f0dd'; font-family: FontAwesome;
