@@ -637,8 +637,8 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             if (fields == 0) var ask_other = $("#ask_other_" + post_id).val();
             else var ask_other = "";
             var ask_is_anonymously = ($("#ask_is_anonymously" + post_id + ":checked").length > 0 ? 1 : 0);
-            if (fields == '' || ask_que == '' || ask_hashtag_edit == '') {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+            if (fields == '' || ask_que == '' || ask_hashtag_edit.substr(1) == '') {
+                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function(e) {
                     if (e.keyCode === 27) {

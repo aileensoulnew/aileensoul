@@ -2837,7 +2837,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var otherField_edit = $scope.opp.otherField_edit;
             var opp_hashtag = $scope.opp.opp_hashtag;
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (opp_hashtag == undefined || opp_hashtag == '')))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (opp_hashtag == undefined || opp_hashtag.substr(1) == '')))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
                 $('#post').modal('show');
@@ -3216,7 +3216,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
             var opp_hashtag = $scope.opp.opp_hashtag_edit;
 
-            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (opp_hashtag == undefined || opp_hashtag == ''))
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (opp_hashtag == undefined || opp_hashtag.substr(1) == ''))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -3324,7 +3324,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var fileInput = document.getElementById("fileInput2").files;
             if ((field == '') || (description == ''))
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -3471,7 +3471,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var description = description.trim();
             if ((field == '') || (description == ''))
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -3578,9 +3578,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var sim_hashtag = $scope.sim.sim_hashtag_edit;
             //var description = description.trim();
             var fileInput1 = document.getElementById("fileInput1").value;
-            //console.log(fileInput1);
+            //console.log(fileInput1);            
 
-            if ((sim_title == '' || sim_title == undefined) && (sim_hashtag == '' || sim_hashtag == undefined) && fileCountSim == 0 && description == '')
+            if ((sim_title == '' || sim_title == undefined) && (sim_hashtag.substr(1) == '' || sim_hashtag == undefined) && fileCountSim == 0 && description == '')
             {
                 $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.1");
                 $('#posterrormodal').modal('show');
@@ -3995,7 +3995,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();
-            if ((sim_title.trim() == '' || sim_title == undefined) || (sim_hashtag.trim() == '' || sim_hashtag == undefined) || description_check.trim() == '')
+            if ((sim_title.trim() == '' || sim_title == undefined) || (sim_hashtag.substr(1) == '' || sim_hashtag == undefined) || description_check.trim() == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -10751,9 +10751,9 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
 
             var ask_is_anonymously = ($("#ask_is_anonymously"+post_id+":checked").length > 0 ? 1 : 0);            
             
-            if (fields == '' || ask_que == '' || ask_hashtag_edit == '')
+            if (fields == '' || ask_que == '' || ask_hashtag_edit.substr(1) == '')
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {

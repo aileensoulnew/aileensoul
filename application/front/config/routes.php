@@ -981,6 +981,7 @@ $route['new-business-article'] = 'article/new_business_article';
 
 $route['article/(:any)'] = 'article/article_published/$1';
 $route['o/(:any)'] = 'user_post/opprtunity_detail/$1';
+$route['p/(:any)'] = 'user_post/simple_post_detail/$1';
 $route['noscript'] = 'Userprofile/noscript';
 
 //Old Url

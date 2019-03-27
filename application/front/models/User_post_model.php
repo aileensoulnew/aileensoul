@@ -2651,4 +2651,31 @@ class User_post_model extends CI_Model {
         return $post_comment_data;
     }
 
+    public function get_simepl_post_data_from_id($post_id)
+    {
+        $this->db->select("usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
+        $this->db->where('usp.post_id', $post_id);
+        $sql = "IF(usp.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, usp.hashtag) != 0)";
+        $this->db->where($sql);
+        $this->db->group_by('usp.hashtag');
+        $query = $this->db->get();
+        $simple_data = $query->row_array();
+        $simple_data['description'] = nl2br($this->common->make_links($simple_data['description']));
+        return $simple_data;
+    }
+
+    public function get_simplepost_from_slug($slug)
+    {
+        $this->db->select("usp.post_id,up.user_id,usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
+        $this->db->join('user_post up', 'up.id = usp.post_id', 'left');
+        $this->db->where('usp.simslug', $slug);
+        $sql = "IF(usp.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, usp.hashtag) != 0)";
+        $this->db->where($sql);
+        $this->db->group_by('usp.hashtag');
+        $query = $this->db->get();
+        $simple_data = $query->row_array();
+        $simple_data['description'] = nl2br($this->common->make_links($simple_data['description']));
+        return $simple_data;
+    }
+
 }

@@ -860,7 +860,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var sim_title = $('#sim_title').val();
             var sim_hashtag = $('#sim_hashtag'+post_id).val();//$scope.sim.sim_hashtag_edit;
 
-            if ((sim_title == '' || sim_title == undefined) || (sim_hashtag == '' || sim_hashtag == undefined) || description_check.trim() == '')
+            if ((sim_title == '' || sim_title == undefined) || (sim_hashtag.substr(1) == '' || sim_hashtag == undefined) || description_check.trim() == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -924,7 +924,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var fields = $("#field_edit" + post_id).val();
             var opp_hashtag = $scope.opp.opp_hashtag_edit;
 
-            if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '') || (opp_hashtag == undefined || opp_hashtag == '')) {
+            if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '') || (opp_hashtag == undefined || opp_hashtag.substr(1) == '')) {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
                 $(document).on('keydown', function(e) {

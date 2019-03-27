@@ -1786,10 +1786,13 @@ class User_post extends MY_Controller {
                     'company_name' => $opportunity_data['company_name'],
                 );                
             } else if ($post_for == 'simple') {
-                $description = nl2br($this->common->make_links($description));
+                // $description = nl2br($this->common->make_links($description));
+                $simple_data = $this->user_post_model->get_simepl_post_data_from_id($post_id);
                 $updatedata = array(
                     'response' => 1,
-                    'sim_description' => $description,
+                    'sim_description' => $simple_data['description'],
+                    'hashtag' => $simple_data['hashtag'],
+                    'sim_title' => $simple_data['sim_title'],
                 );
             } else if ($post_for == 'question') {
                 //$ask_desc = nl2br($this->common->make_links($ask_desc));
@@ -2857,5 +2860,54 @@ class User_post extends MY_Controller {
             $return_array['message'] = 1;
         }
         echo json_encode($return_array);
+    }
+
+    public function simple_post_detail($slug = '') {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['simp_data'] = $simp_data = $this->user_post_model->get_simplepost_from_slug($slug);        
+        if($userid == "")
+        {
+            $userid = $simp_data['user_id'];            
+        }
+        $post_id = $simp_data['post_id'];
+        
+        $this->data['userdata'] = $userdata = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['post_id'] = $post_id;
+        $this->data['title'] = $simp_data['sim_title'].TITLEPOSTFIX;
+        $this->data['metadesc'] = '';
+        if($this->session->userdata('aileenuser') != "")
+        {
+            if(isset($simp_data) && !empty($simp_data))
+            {
+                $this->load->view('user_post/post_details', $this->data);
+            }
+            else
+            {
+                $this->data['title'] = "404".TITLEPOSTFIX;
+                $this->data['metadesc'] = "404";
+                $this->load->view('404', $this->data);
+            }
+        }
+        else
+        {
+            if(isset($simp_data) && !empty($simp_data))
+            {
+                $this->load->view('user_post/simplepost_detail', $this->data);
+            }
+            else
+            {
+                $this->data['title'] = "404".TITLEPOSTFIX;
+                $this->data['metadesc'] = "404";
+                $this->load->view('404', $this->data);
+            }
+        }
     }
 }
