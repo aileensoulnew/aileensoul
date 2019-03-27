@@ -1119,7 +1119,7 @@ a:focus{outline:none;}
 	.mobmt15{margin-top:15px;}
 	label{font-size:13px;}
 	.no-login #paddingtop_fixed{padding-top:90px !important;}
-	.right-header .dropdown.user-id .dropdown-menu{right:-6px !important;}
+	.right-header .dropdown.user-id .dropdown-menu{right:-6px !important; top:33px;}
     .common-form h3{border-left:0; border-right:0; border-radius:0; font-size:18px;}
     .contact-frnd-post{border-left:0; border-right:0; border-radius:0;}
 	.container.padding-360{padding:0;}
@@ -1167,6 +1167,7 @@ a:focus{outline:none;}
 	.blog-page.old-no-login .right-header ul li{padding-right:10px;}
 	.blog-scroll-a table tr td{font-size:13px; line-height:1.5;}
 	.main-login .logo-size{font-size:24px;}
+	li.user-id .dropdown-menu::before{right:0px; margin-top:-16px;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}

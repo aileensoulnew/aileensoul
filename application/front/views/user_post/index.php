@@ -2110,7 +2110,7 @@
                                 <div class="add-anonymously">
                                     <label class="control control--checkbox" title="Checked this">Add Anonymously<input type="checkbox" ng-model="ask.is_anonymously" value="1"><div class="control__indicator"></div></label>
                                 </div>
-                                <button type="submit" class="btn1"  value="Submit">Post Your Question</button> 
+                                <button type="submit" class="btn1"  value="Submit">Ask Your Question</button> 
                             </div>
                         </form>
                     </div>

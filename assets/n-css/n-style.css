@@ -147,7 +147,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .post-box .post-cam{position:absolute; right:10px; top:23px;}
 .post-box .post-cam .fa{color:#1b8ab9; font-size:25px}
 .post-box-bottom{margin-top:10px; border-top:1px solid #d2d2d2; padding-top:5px; width:100%; float:left;}
-.post-box-bottom ul{padding:5px 0 0; margin:0; float:left;}
+.post-box-bottom ul{padding:6px 0 0; margin:0; float:left;}
 .post-box-bottom ul li{list-style-type:none; display:inline-block;}
 .post-box-bottom ul li a{color:#7b7b7b; font-size:15px; letter-spacing:1px;}
 .post-box-bottom ul li a img{width:18px;}
@@ -3515,9 +3515,11 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .new-form select:focus::-ms-input-placeholder {color:#1b8ab9;}
 .blok-767{display:none;}
 /***  end new commen css  ***/
+
+
 /***  main reg css  ***/
 .top-logo{padding:35px; text-align:center; width:100%; float:left;}
-.top-logo img{width:50px;}
+.top-logo img{width:50px;} 
 .top-logo span{width:100%; float:left; padding-top:13px;}
 .top-logo svg{width:180px; height:27px; fill:#5c5c5c;}
 .top-logo svg .logo-size{font-size:35px; font-family: 'Swis721 LtEx BT';}
@@ -3592,6 +3594,8 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .post-field .tags input:focus{border:0px;}
 .post-popup-box textarea:focus{border:0;}
 #post-popup .post-popup-box .form-group textarea:focus{border:0px !important;}
+.post-popup-box .btn1{border-radius:20px;}
+.post-popup-box p.pull-right .btn1{position:relative; bottom:-3px;}
 
 /***  media query  ***/
 @media print {
@@ -4535,7 +4539,22 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.footer{margin-bottom:0px !important;}
 	.right-reg.form-height{min-height:650px;}
 	.main-reg-header .mob-right-bar{display:block;}
-	
+	.dropdown-menu.profile-dropdown li:first-child{font-size:14px;}
+	.dropdown-menu.profile-dropdown li a{font-size:14px;}
+	.right-header .dropdown.user-id .dropdown-menu li a svg{width:14px !important;}
+	#post-popup .post-popup-box .post-box .form-group{padding:0 15px;}
+	#post-popup .post-popup-box .post-box .all-upload{padding:0 15px;}
+	.post-op-btn{margin-top:0; padding-right:15px; padding-left:15px;}
+	.post-popup-box .all-upload .upload_icon:first-child{padding-left:0;}
+	.post-popup-box .all-upload .upload_icon:last-child{text-align:right; padding-right:0;}
+	.post-popup-box .all-upload .upload_icon:nth-child(2){text-align:center;}
+	.post-popup-box .all-upload .upload_icon:nth-child(3){text-align:right;}
+	#ask-question .post-popup-box .post-box .all-upload{padding:0 15px;}
+	.post-field{padding:10px 0 0;}
+	.all-upload .add-link{padding-right:30px;}
+	#opportunity-popup .post-popup-box .text-right.fw .btn1{width: 100%; border-radius: 20px; font-weight: bold;}
+	.post-box-bottom p{width:100%; padding:0 15px;}
+	.post-box-bottom p .btn1{width: 100%; border-radius: 20px; font-weight: bold;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4726,7 +4745,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
     .cover-pic{left: -3px; right: auto;}
     .user-photo-name .profile-img{/*padding: 3px;*/}
     .post-popup-box .all-upload .upload_icon .upload_span_icon{padding-left: 2px;}
-    .post-popup-box .all-upload .upload_icon{padding: 10px 5px 10px 15px;}
+    .post-popup-box .all-upload .upload_icon{padding: 10px 5px 10px 0px;}
     .cover-pic .btn{float: left !important; }
 	.post-discription .post-field label{font-size:14px;}
 	.btn1{font-size: 14px; padding: 3px 15px;}
@@ -5016,6 +5035,9 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 	.login-form form{padding:15px 0;}
 	.signup-form form{padding:15px 0;}
 	.signup-form .control__indicator{top:1px;}
+	#ask_question .text-right.fw{padding-left:15px; text-align:left;}
+	#ask_question .text-right.fw .add-anonymously{padding-bottom:10px; padding-left:0;}
+	#ask-question .post-popup-box .text-right.fw .btn1{width: 100%; border-radius: 20px; font-weight: bold;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
