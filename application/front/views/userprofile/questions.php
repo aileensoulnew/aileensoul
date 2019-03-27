@@ -138,13 +138,23 @@
                         <div class="col-md-9 col-sm-9 col-xs-9 mob-pr0">
                             <ul class="bottom-left">
                                 <li class="user-likes">
-                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
-                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
+                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
+                                    <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
                                 </li>
                                 
                             </ul>
 							<ul class="bottom-left like_user_list">
-								<li class="like-img">
+                                <li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
+                                        <img ng-if="user_like.user_image" ng-src="<?php echo USER_THUMB_UPLOAD_URL; ?>{{user_like.user_image}}">
+                
+                                        <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                        
+                                        <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+
+                                    </a>
+                                </li> 
+								<!-- <li class="like-img">
 									<a class="ripple" href="#" title="harshad patel">
 										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
 									</a>
@@ -153,7 +163,7 @@
 									<a class="ripple" href="#" title="harshad patel">
 										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1546847465.png">
 									</a>
-								</li>
+								</li> -->
 								<li class="like-img">
 									<a href="#" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
 								</li>
@@ -169,8 +179,8 @@
                 </div>
               
             </div>
-            <div class="ans-text" id="ans-text-{{post.post_data.id}}" style="display:none;"><span>Answers</span></div>
-            <div class="all-post-bottom" id="all-post-bottom-{{post.post_data.id}}" style="display:none;">
+            <div class="ans-text" id="ans-text-{{post.post_data.id}}"><span>Answers</span></div>
+            <div class="all-post-bottom" id="all-post-bottom-{{post.post_data.id}}">
                 <div class="comment-box">
                     <div class="add-comment">
                         <div class="post-img">

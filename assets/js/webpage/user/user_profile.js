@@ -4219,11 +4219,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                
                 data = success.data;
                 if (data.message == '1') {
                     if (commentClassName == 'last-comment') {
@@ -4346,11 +4342,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         })
         .then(function (success) {
             data = success.data;
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+            
             if (data.message == '1') {
                 if (data.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
@@ -10658,23 +10650,22 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
         location.href = base_url + 'profiles/' + path;
     }
 
-    $scope.post_like = function (post_id) {
+    $scope.post_like = function (post_id,parent_index) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+            
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
-                    $('#post-like-' + post_id).addClass('like');
-                    $('#post-like-' + post_id).html('Liked');
+                    // $('#post-like-' + post_id).addClass('like');
+                    
+                    var myEl = angular.element( document.querySelector('#post-like-' + post_id) );
+                    myEl.addClass('like');
+
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
                         $('#post-other-like-' + post_id).html('');
@@ -10691,7 +10682,6 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                         $('#post-like-count-' + post_id).show();
                     }
                     $('#post-like-' + post_id).removeClass('like');
-                    $('#post-like-' + post_id).html('Like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
                         $('#post-other-like-' + post_id).html('');
@@ -10699,12 +10689,13 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
+                $scope.questionData[parent_index].user_like_list = success.data.user_like_list;
             }
         });
     }
 
     $scope.giveAnswer = function (user_id) {
-        var ans_text_class = document.getElementById('ans-text-' + user_id).className.split(' ').pop();
+        /*var ans_text_class = document.getElementById('ans-text-' + user_id).className.split(' ').pop();
         if (ans_text_class == 'open') {
             $('#ans-text-' + user_id).removeClass('open');
             $('#ans-text-' + user_id).css('display', 'none');
@@ -10713,7 +10704,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             $('#ans-text-' + user_id).addClass('open');
             $('#ans-text-' + user_id).css('display', 'block');
             $('#all-post-bottom-' + user_id).css('display', 'block');
-        }
+        }*/
     }
 
     $scope.IsVisible = false;
@@ -10833,13 +10824,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                
                 data = success.data;
                 if (data.message == '1') {
+                    $scope.questionData[index].post_comment_count = data.comment_count;
                     $('.post-comment-count-' + post_id).html(data.comment_count);
                     $('.editable_text').html('');
                 }

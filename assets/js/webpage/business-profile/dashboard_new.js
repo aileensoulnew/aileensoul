@@ -844,7 +844,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
 
             if ((sim_title == '' || sim_title == undefined) || (sim_hashtag == '' || sim_hashtag == undefined) || (fileCountSim == 0 && (description == '' || description == undefined)))
             {
-                $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.");
+                $('#posterrormodal .mes').html("<div class='pop_content'>All fields are mandatory. Please add title, hashtags, write or attach (photos, videos, audios, pdf) to post.");
                 $('#posterrormodal').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1783,7 +1783,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var fileInput = document.getElementById("fileInput2").files;
             if (field == '' || description == '' || ask_hashtag == '')
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1957,7 +1957,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             
             if ((edit_fields == '') || (ask_que == ''))
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
+                $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
