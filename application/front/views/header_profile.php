@@ -364,9 +364,7 @@ if($first_segment == "")
 									<span>Setting</span></a>
 								</li>
                                 <li><a href="<?php echo base_url('logout') ?>" title="Logout">
-									
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
 <svg x="0px" y="0px" viewBox="0 0 511.996 511.996" width="15px" height="15px">
 <g>
 	<g>
