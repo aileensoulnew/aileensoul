@@ -621,12 +621,12 @@ footer ul li a:hover{color:#1b8ab9; text-decoration:underline;}
 .click-profiles i{font-size:16px; margin-bottom: -5px; vertical-align: middle;}
 .custom_footer_left ul.left-ftr-profiles{position:absolute; bottom:23px; width:150px; background:#fff; padding:5px 10px; border:1px solid #d9d9d9; border-radius:4px; right:0;display:none}
 .custom_footer_left {background: white; border: 1px solid #d2d2d2; padding: 5px; border-radius: 4px; margin-bottom: 10px;}
-.custom_footer_left ul {float: left; padding: 0px; margin: 0px;}
-.custom_footer_left ul li {display: inline-block; padding: 0; margin: 0; float: left; font-size:12px; padding: 0px 2px; position:relative;}
+.custom_footer_left ul {display:inline-block; width:100%; padding: 5px 0 0; margin: 0px;}
+.custom_footer_left ul li {display: inline-block; padding: 0; margin: 0; font-size:12px; padding: 0px; position:relative;}
 .custom_footer_left ul  li .click-nav ul:after{position:absolute; right:3px; bottom:-9px; content:''; width:15px; height:9px; background-size:100%;
 background:url('../n-images/lf-down-arrow.png?version=@{cache-version}'); 
 }
-.custom_footer_left ul li a {line-height:18px; padding: 2px 5px; float: left; color: #8c8c8c;}
+.custom_footer_left ul li a {line-height:18px; padding: 2px 5px; float: left; color: #8c8c8c; line-height:1;}
 .custom_footer_left ul li a:hover{color:#1b8ab9;}
 /***  end custom left footer  ***/
 
