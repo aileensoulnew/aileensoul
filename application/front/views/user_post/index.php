@@ -542,7 +542,7 @@
                             </div>
                             <p ng-if="recentpost.question_data.link"><b>Link:</b><span id="ask-post-link-{{recentpost.post_data.id}}" ng-bind-html="recentpost.question_data.link | parseUrl"></span></p>
                             <p ng-if="recentpost.question_data.category"><b>Category:</b><span ng-bind="recentpost.question_data.category" id="ask-post-category-{{recentpost.post_data.id}}"></span></p>
-                            <p ng-if="recentpost.question_data.hashtag"><b>Hashtag:</b><span ng-bind="recentpost.question_data.hashtag" id="ask-post-hashtag-{{recentpost.post_data.id}}"></span></p>
+                            <p ng-if="recentpost.question_data.hashtag"><b>Hashtag:</b><span ng-bind="recentpost.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{recentpost.post_data.id}}"></span></p>
                             <p ng-if="recentpost.question_data.field"><b>Field:</b><span ng-bind="recentpost.question_data.field" id="ask-post-field-{{recentpost.post_data.id}}"></span></p>
                         </h5>
                         <div class="post-des-detail" ng-if="recentpost.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="recentpost.opportunity_data.opportunity"></span></div>
@@ -1154,7 +1154,7 @@
                                 </div>
                                 <p ng-if="post.question_data.link"><b>Link:</b><span id="ask-post-link-{{post.post_data.id}}" ng-bind-html="post.question_data.link | parseUrl"></span></p>
                                 <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
-                                <p ng-if="post.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.question_data.hashtag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
+                                <p ng-if="post.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
                             </h5>
                             <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity"></span></div>
