@@ -81,8 +81,8 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('OP_ADMIN_PW', 'admin@123');
 
     define('MONGO_URL', 'mongodb://');
-    define('MONGO_USER', 'sysadmin');
-    define('MONGO_PASS', 'sysadmin123?');
+    define('MONGO_USER', 'admin');
+    define('MONGO_PASS', 'sysadmin123??');
     define('MONGO_SERVER', '34.222.73.215');
 
     define('COOKIEHOST', '.aileensoul.com');
