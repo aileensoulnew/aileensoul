@@ -2590,9 +2590,20 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .profile-header .right-header .other-hdr .test-cus .btn9:hover{background:#b52f88; color:#fff;}
 .profile-header .right-header .other-hdr .test-cus .btn9:focus{background:#b52f88 !important; color:#fff !important;}
 .profile-header .other-hdr .mob-bar-li svg path{fill:#b52f88;}
-.pr-pl-box{position: fixed; bottom: 0; background:rgba(255,255,255,1); color:#5c5c5c; padding: 10px; width: 100%; text-align: center; z-index: 9999;}
-.btn-pr-pl{padding: 1px 10px; background:#1b8ab9; color:#fff; border-radius: 3px; display: inline-block;}
-.btn-pr-pl:hover{background:#1d7398; color:#fff; text-decoration: none;}
+.pr-pl-box{position: fixed; bottom: 0; background:rgba(255,255,255,1); color:#5c5c5c; padding: 10px; width: 100%; text-align: center; z-index: 9999; font-size:14px; display:none;}
+.btn-pr-pl{padding: 1px 15px; background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
+    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9',GradientType=0 ); color:#fff; border-radius: 15px; display: inline-block;}
+.btn-pr-pl:hover{background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1b8ab9), color-stop(56%, #3bb0ac), color-stop(100%, #3bb0ac));
+    background: -webkit-linear-gradient(96deg, #3bb0ac 0%, #3bb0ac 44%, #1b8ab9 100%);
+    background: -o-linear-gradient(96deg, #3bb0ac 0%, #3bb0ac 44%, #1b8ab9 100%);
+    background: -ms-linear-gradient(96deg, #3bb0ac 0%, #3bb0ac 44%, #1b8ab9 100%);
+    background: linear-gradient(354deg, #3bb0ac 0%, #1b8ab9 44%, #1b8ab9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b8ab9', endColorstr='#3bb0ac',GradientType=0 ); color:#fff; text-decoration: none;}
+.btn-pr-pl:focus{color:#fff; text-decoration:none;}
 .footer{/*margin-bottom:35px;*/}
 .common-form .title h1{margin:0 !important;}
 .middle-section.middle-section-banner{width:100%;}

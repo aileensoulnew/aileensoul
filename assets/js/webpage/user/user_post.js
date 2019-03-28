@@ -836,6 +836,43 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     $("#ask_field").focusout(function(){
         $('#ask_fieldtooltip').hide();
     });
+	
+	$("#sim_title").focusin(function(){
+        $('#simple-post-title').show();
+    });
+    $("#sim_title").focusout(function(){
+        $('#simple-post-title').hide();
+    });
+	
+	$("#sim_hashtag").focusin(function(){
+        $('#simple-post-hashtag').show();
+    });
+    $("#sim_hashtag").focusout(function(){
+        $('#simple-post-hashtag').hide();
+    });
+	
+	$("#opp_hashtag").focusin(function(){
+        $('#opp-post-hashtag').show();
+    });
+    $("#opp_hashtag").focusout(function(){
+        $('#opp-post-hashtag').hide();
+    });
+	
+	$("#company_name").focusin(function(){
+        $('#op-post-company').show();
+    });
+    $("#company_name").focusout(function(){
+        $('#op-post-company').hide();
+    });
+
+	$("#ask_hashtag").focusin(function(){
+        $('#ask-post-hashtag').show();
+    });
+    $("#ask_hashtag").focusout(function(){
+        $('#ask-post-hashtag').hide();
+    });
+
+	
 
     $scope.showLoadmore = true;
     var pg="";
