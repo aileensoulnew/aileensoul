@@ -584,6 +584,11 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                     <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                                     <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                                     <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                    <p ng-if="post.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                        <span>
+                                                            <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                        </span>
+                                                    </p>
                                                     <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
                                                 </h5>
                                                 <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
@@ -597,7 +602,12 @@ $login_user_id = $this->session->userdata('aileenuser');
                                         </div>
                                         <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
                                             <p ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
-                                            <p ng-if="post.simple_data.hashtag"><b>Hashtags:</b> <span ng-bind="post.simple_data.hashtag" class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}"></span></p>
+                                            <p ng-if="post.simple_data.hashtag" class="hashtag-grd">
+                                                <b>Hashtags:</b>
+                                                <span>
+                                                    <span class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                </span>
+                                            </p>                                            
                                             <div ng-init="limit = 250; moreShown = false">
                                                 <span ng-if="post.simple_data.description != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.simple_data.description" ng-class="post.simple_data.description.length > 250 ? 'view-more-expand' : ''">
                                                 </span>
