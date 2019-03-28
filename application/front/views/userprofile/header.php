@@ -201,7 +201,7 @@
                             if($user_id != ""){
                             ?>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/details"  ng-click='makeActive("details")' ng-class="{
-                                    'active': active == 'details'}">Details <span ng-if="live_slug == segment2" class="detail_counter"></span></a></td>
+                                    'active': active == 'details'}">Details <span class="detail_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/contacts" ng-click='makeActive("contacts")' ng-class="{
                                     'active': active == 'contacts'}">Contacts <span class="contact_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/followers"  ng-click='makeActive("followers")' ng-class="{
@@ -214,7 +214,7 @@
                             }else{
                             ?>
                             <td><a href="#" data-toggle="modal" data-target="#regmodal" ng-class="{
-                                    'active': active == 'details'}">Details <span ng-if="live_slug == segment2" class="detail_counter"></span></a></td>
+                                    'active': active == 'details'}">Details <span class="detail_counter"></span></a></td>
                             <td><a href="#" data-toggle="modal" data-target="#regmodal" ng-class="{
                                     'active': active == 'contacts'}">Contacts <span class="contact_counter"></span></a></td>
                             <td><a href="#"  data-toggle="modal" data-target="#regmodal" ng-class="{

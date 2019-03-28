@@ -781,8 +781,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -792,8 +792,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -803,8 +803,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -814,8 +814,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -825,8 +825,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -836,8 +836,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -912,8 +912,8 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -923,8 +923,8 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -934,8 +934,8 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -945,8 +945,8 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -956,8 +956,8 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -967,8 +967,8 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -1098,8 +1098,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -1109,8 +1109,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -1120,8 +1120,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -1131,8 +1131,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -1142,8 +1142,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -1153,8 +1153,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -1285,8 +1285,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -1296,8 +1296,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -1307,8 +1307,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -1318,8 +1318,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -1329,8 +1329,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -1340,8 +1340,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -1480,8 +1480,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -1491,8 +1491,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -1502,8 +1502,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -1513,8 +1513,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -1524,8 +1524,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -1535,8 +1535,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -1734,8 +1734,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -1745,8 +1745,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -1756,8 +1756,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -1767,8 +1767,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -1778,8 +1778,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -1789,8 +1789,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -2024,8 +2024,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -2035,8 +2035,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -2046,8 +2046,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -2057,8 +2057,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -2068,8 +2068,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -2079,8 +2079,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -4849,8 +4849,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -4860,8 +4860,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -4871,8 +4871,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -4882,8 +4882,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -4893,8 +4893,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -4904,8 +4904,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -9763,8 +9763,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -9774,8 +9774,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -9785,8 +9785,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -9796,8 +9796,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -9807,8 +9807,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -9818,8 +9818,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -10013,8 +10013,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -10024,8 +10024,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -10035,8 +10035,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -10046,8 +10046,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -10057,8 +10057,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -10068,8 +10068,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -10225,8 +10225,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -10236,8 +10236,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -10247,8 +10247,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -10258,8 +10258,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -10269,8 +10269,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -10280,8 +10280,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
@@ -10495,8 +10495,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.dashboard_counter').hide();
-                $('.dashboard_counter').html('');
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
             }
 
             if(result.detail_counter > 0)
@@ -10506,8 +10506,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.detail_counter').hide();
-                $('.detail_counter').html('');
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
             }
 
             if(result.contact_counter > 0)
@@ -10517,8 +10517,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.contact_counter').hide();
-                $('.contact_counter').html('');
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
             }
 
             if(result.follower_counter > 0)
@@ -10528,8 +10528,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.follower_counter').hide();
-                $('.follower_counter').html('');
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
             }
 
             if(result.following_counter > 0)
@@ -10539,8 +10539,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.following_counter').hide();
-                $('.following_counter').html('');
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
             }
 
             if(result.question_counter > 0)
@@ -10550,8 +10550,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
             else
             {
-                $('.question_counter').hide();
-                $('.question_counter').html('');
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
             }
             
         }, function (error) {});
