@@ -156,7 +156,6 @@ label,select{
 label{
     font-weight:400;
     color:#616060;
-    margin-bottom:9px
 }
 select{
     padding:5px 15px;
@@ -413,7 +412,7 @@ ol,ul{
     padding:0 0 0 20px
 }
 ol li,ul li{
-    margin:0 0 10px;
+   /* margin:0 0 10px;*/
     padding:0;
     font-size:13px;
     color:#4c4c4c;
@@ -1922,7 +1921,7 @@ label.cameraButton{
     width:100%;
     display:flex;
     align-items:center;
-    margin:0 auto
+    margin:10px;
 }
 .modal-content{
     width:600px;

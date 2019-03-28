@@ -1999,5 +1999,6 @@ function set_progress(count_profile_value,count_profile)
             $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
         });
     }
+	
 }
 get_business_profile_progress();

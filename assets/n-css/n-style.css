@@ -3613,7 +3613,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 body.main-reg{padding-bottom:60px;}
 .tags.focused input:focus{border:0px !important; }
 #post_something_edit .editable_text{border:0; padding:0;}
-#ask_question .btn1{border-radius:20px;}
+.post-discription .btn1{border-radius:20px;}
 
 /***  media query  ***/
 @media print {

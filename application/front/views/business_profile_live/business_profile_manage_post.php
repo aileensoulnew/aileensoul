@@ -554,7 +554,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         </div>
                                                         <div class="post-field">
                                                             <div class="form-group">
-                                                                <label>Title of Opportunity</label>
+                                                                <label>Title of Opportunity <a href="#" data-toggle="tooltip" data-placement="left" title="Give a relevant title to your post that describes your post in a single sentence." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input id="opptitleedit{{post.post_data.id}}"  type="text" class="form-control" ng-model="opp.opptitleedit" placeholder="Enter Title of Opportunity" ng-required="true" autocomplete="off">
                                                             </div>
                                                             <div id="content" class="form-group">
@@ -595,13 +595,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                 </span>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Add hashtag (Topic)</label>
+                                                                <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                                 <div class="opp_hashtag{{post.post_data.id}}"></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Company Name</label>
+                                                                <label>Company Name <a href="#" data-toggle="tooltip" data-placement="left" title="Enter the company name of opportunity ." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
                                                             </div>
                                                             <div class="form-group" ng-if="opp.field_edit == '0'">
@@ -661,12 +661,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
                                                         <div class="post-box">        
                                                             <div class="form-group">
-                                                                <label>Post title</label>
+                                                                <label class="fw">Post title<a href="#" data-toggle="tooltip" data-placement="left" title="Give a relevant title to your post that describes your post in a single sentence." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
                                                             </div>
                                                             
                                                             <div class="form-group">
-                                                                <label>Add hashtag (Topic)</label>
+                                                                <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                                 <div class="sim_hashtag{{post.post_data.id}} autocomplete-cus"></div>
@@ -1505,14 +1505,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <!-- </div> -->
                                 <div class="form-group">
                                     <label>Post title</label>
-                                    <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title">
+                                    <input type="text" class="form-control" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title" >
+									<div id="simple-post-title" class="tooltip-custom" style="display: none;">Give a relevant title to your post that describes your post in a single sentence.</div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)</label>
                                     <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                    <div class="sim_hashtag"></div>
+                                    <div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                                 </div>
                                 <div class="form-group"><!-- <div class="post-text"> -->
                                     <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
@@ -1654,10 +1655,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="opp_hashtag"></div>
+									<div id="opp-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                                 </div>
                                 <div class="form-group">
                                     <label>Company Name (Optional)</label>
                                     <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+									<div id="op-post-company" class="tooltip-custom" style="display: none;">Enter the company name of opportunity</div>
                                 </div>
 
                                 <div class="post-text form-group pt20">
@@ -1779,6 +1782,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <input id="ask_hashtag" type="text" class="form-control" ng-model="ask.ask_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="ask_hashtag"></div>
+									<div id="ask-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                                 </div>
                                 <div class="form-group">
                                     <label>From which field the Question asked?</label>
@@ -2044,6 +2048,94 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         },
                     });                
                 }
+		</script>
+		<script>
+			$(document).ready(function () {
+				$("#opptitle").focusin(function(){
+					$('#opptitletooltip').show();
+				});
+				$("#opptitle").focusout(function(){
+					$('#opptitletooltip').hide();
+				});
+
+				$("#job_title").focusin(function(){
+					$('#jobtitletooltip').show();
+				});
+				$("#job_title").focusout(function(){
+					$('#jobtitletooltip').hide();
+				});
+
+				$("#location").focusin(function(){
+					$('#locationtooltip').show();
+				});
+				$("#location").focusout(function(){
+					$('#locationtooltip').hide();
+				});
+
+				$("#field").focusin(function(){
+					$('#fieldtooltip').show();
+				});
+				$("#field").focusout(function(){
+					$('#fieldtooltip').hide();
+				});
+
+				$("#ask_desc").focusin(function(){
+					$('#ask_desctooltip').show();
+				});
+				$("#ask_desc").focusout(function(){
+					$('#ask_desctooltip').hide();
+				});
+
+				$("#ask_related_category").focusin(function(){
+					$('#rlcattooltip').show();
+				});
+				$("#ask_related_category").focusout(function(){
+					$('#rlcattooltip').hide();
+				});
+
+				$("#ask_field").focusin(function(){
+					$('#ask_fieldtooltip').show();
+				});
+				$("#ask_field").focusout(function(){
+					$('#ask_fieldtooltip').hide();
+				});
+				
+				$("#sim_title").focusin(function(){
+					$('#simple-post-title').show();
+				});
+				$("#sim_title").focusout(function(){
+					$('#simple-post-title').hide();
+				});
+				
+				$("#sim_hashtag").focusin(function(){
+					$('#simple-post-hashtag').show();
+				});
+				$("#sim_hashtag").focusout(function(){
+					$('#simple-post-hashtag').hide();
+				});
+				
+				$("#opp_hashtag").focusin(function(){
+					$('#opp-post-hashtag').show();
+				});
+				$("#opp_hashtag").focusout(function(){
+					$('#opp-post-hashtag').hide();
+				});
+				
+				$("#company_name").focusin(function(){
+					$('#op-post-company').show();
+				});
+				$("#company_name").focusout(function(){
+					$('#op-post-company').hide();
+				});
+
+				$("#ask_hashtag").focusin(function(){
+					$('#ask-post-hashtag').show();
+				});
+				$("#ask_hashtag").focusout(function(){
+					$('#ask-post-hashtag').hide();
+				});
+				
+			});
 		</script>
     </body>
 </html>
