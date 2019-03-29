@@ -568,7 +568,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                         <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
@@ -639,7 +639,7 @@
                                     
                                     <div class="form-group">
                                         <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                         <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
@@ -1732,56 +1732,4 @@
 				$(".move-middle").appendTo($("#move-middle"));
 			}
 		});
-
-        $(function() {
-
-                // function split( val ) {
-                //     return val.split( / \s*/ );
-                // }
-                /*function extractLast( term ) {
-                    return split( term ).pop();
-                }
-                function autocomplete_hashtag(id)
-                {
-                    alert(id);
-                    $( "#sim_hashtag"+id).bind( "keydown", function( event ) {
-                        if ( event.keyCode === $.ui.keyCode.TAB &&
-                            $( this ).autocomplete( "instance" ).menu.active ) {
-                            event.preventDefault();
-                        }
-                    })
-                    .autocomplete({
-                        appendTo: "#sim-hashtag-list"+id,
-                        minLength: 2,
-                        source: function( request, response ) {                         
-                            var search_key = extractLast( request.term );
-                            if(search_key[0] == "#")
-                            {
-                                search_key = search_key.substr(1);
-                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        },
-                        focus: function() {
-                            // prevent value inserted on focus
-                            return false;
-                        },
-                        select: function( event, ui ) {
-                            var terms = split( this.value );
-                            // remove the current input
-                            terms.pop();
-                            // add the selected item
-                            terms.push( ui.item.value );
-                            // add placeholder to get the comma-and-space at the end
-                            terms.push( "" );
-                            this.value = terms.join( " " );
-                            return false;
-                        },
-                    });                
-                }*/
-
-            });
     </script>

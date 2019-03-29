@@ -631,14 +631,24 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
             ask_que_desc = ask_que_desc.trim();
             var related_category_edit = $scope.ask.related_category_edit;
-            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;
+            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;            
+            var check_hashtag = (ask_hashtag_edit != '' && ask_hashtag_edit != undefined ? ask_hashtag_edit.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(ask_hashtag_edit);
 
             var fields = $("#ask_field_" + post_id).val();
             if (fields == 0) var ask_other = $("#ask_other_" + post_id).val();
             else var ask_other = "";
             var ask_is_anonymously = ($("#ask_is_anonymously" + post_id + ":checked").length > 0 ? 1 : 0);
-            if (fields == '' || ask_que == '' || ask_hashtag_edit.substr(1) == '') {
-                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
+            if (fields == '' || ask_que == '' || check_hashtag == '' || hashtags_arr.length == 0)
+            {
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function(e) {
                     if (e.keyCode === 27) {

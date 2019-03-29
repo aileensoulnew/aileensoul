@@ -174,6 +174,18 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     }
     $scope.get_business_info();
 
+    $scope.getHashTags = function(inputText) {  
+        var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        var matches = [];
+        var match;
+
+        while ((match = regex.exec(inputText))) {
+            matches.push(match[1]);
+        }
+
+        return matches;
+    };
+
     $scope.get_opening_hours = function(){
         $http({
             method: 'POST',
@@ -560,25 +572,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     if($('#fileInput1')[0].files.length - 1 == i)
                     {
                         $('#fileInput1').val("");
-                    }
-
-                    /*var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var $el = $("<div class='img_preview' id='imgPrev_"+cntImgSim+"'><div class='i-ip'><embed width='100%' src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='"+f.name+"'></embed></div><label class='remove_img' name='remove_image' ng-click=\"removeFile('"+cntImgSim+"')\" ><i class='fa fa-trash-o' aria-hidden='true'></i></label></div>").appendTo('#selectedFiles');
-                        //$("#selectedFiles").append(html);
-                        $compile($el)($scope);
-
-                        formFileDataSim.append('myfiles_'+cntImgSim, f);
-
-                        cntImgSim++;
-                        fileCountSim++;                    
-                        $("#fileCountSim").text(fileCountSim);
-                        if($('#fileInput1')[0].files.length - 1 == i)
-                        {
-                            $('#fileInput1').val("");
-                        }
-                    }
-                    reader.readAsDataURL(f);*/
+                    }                    
                 }
             }            
         });
@@ -836,16 +830,25 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         if (post_id == 0) {
             var fileInput = document.getElementById("fileInput1").files;
             var sim_title = $scope.sim.sim_title;
-            var sim_hashtag = $scope.sim.sim_hashtag;
-            var check_hashtag = sim_hashtag.replace(/#/g, "");
+            var sim_hashtag = $scope.sim.sim_hashtag;            
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
+
             var description = $scope.sim.description;//document.getElementById("description").value;
             //var description = description.trim();
             var fileInput1 = document.getElementById("fileInput1").value;
             //console.log(fileInput1);
 
-            if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || (fileCountSim == 0 && (description == '' || description == undefined)))
+            if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || (fileCountSim == 0 && (description == '' || description == undefined)))
             {
-                $('#posterrormodal .mes').html("<div class='pop_content'>All fields are mandatory. Please add title, hashtags, write or attach (photos, videos, audios, pdf) to post.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#posterrormodal .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#posterrormodal .mes').html("<div class='pop_content'>All fields are mandatory. Please add title, hashtags, write or attach (photos, videos, audios, pdf) to post.");
+                }
                 $('#posterrormodal').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1248,16 +1251,24 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             description = description.replace(/&/g, "%26");
 
             var sim_title = $scope.sim.sim_title_edit;
-            var sim_hashtag = $scope.sim.sim_hashtag_edit;
-            var check_hashtag = sim_hashtag.replace(/#/g, "");
+            var sim_hashtag = $scope.sim.sim_hashtag_edit;            
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();            
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || description_check.trim() == '')
                 {
-                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                    {
+                        $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    }
+                    else
+                    {
+                        $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    }
                     $('#post').modal('show');
                     $(document).on('keydown', function (e) {
                         if (e.keyCode === 27) {
@@ -1334,12 +1345,20 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var location = $scope.opp.location;
             var fields = $scope.opp.field;
             var otherField = $scope.opp.otherField;
-            var opp_hashtag = $scope.opp.opp_hashtag;
-            var check_hashtag = opp_hashtag.replace(/#/g, "");
+            var opp_hashtag = $scope.opp.opp_hashtag;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '')))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0)))
             {
-                $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1709,12 +1728,20 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var location = $scope.opp.location_edit;
             var fields = $("#field_edit"+post_id).val();
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
-            var opp_hashtag = $scope.opp.opp_hashtag_edit;
-            var check_hashtag = opp_hashtag.replace(/#/g, "");
+            var opp_hashtag = $scope.opp.opp_hashtag_edit;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
 
-            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == ''))
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0))
             {
-                $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1787,12 +1814,21 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var field = document.getElementById("ask_field").value;
             var description = document.getElementById("ask_que").value;
             var description = description.trim();
-            var ask_hashtag = $scope.ask.ask_hashtag;
-            var check_hashtag = ask_hashtag.replace(/#/g, "");
+            var ask_hashtag = $scope.ask.ask_hashtag;            
+            var check_hashtag = (ask_hashtag != '' && ask_hashtag != undefined ? ask_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(ask_hashtag);
+
             var fileInput = document.getElementById("fileInput2").files;
-            if (field == '' || description == '' || check_hashtag == '')
+            if (field == '' || description == '' || check_hashtag == '' || hashtags_arr.length == 0)
             {
-                $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {

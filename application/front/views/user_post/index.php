@@ -395,7 +395,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Add hashtag (Topic) <a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                    <input id="opp_hashtag{{recentpost.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="opp_hashtag{{recentpost.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="opp_hashtag{{recentpost.post_data.id}} all-hashtags-list"></div>
                                 </div>
@@ -467,7 +467,7 @@
                                 
                                 <div class="form-group">
                                     <label class="fw">Add hashtag (Topic) <a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                    <input id="sim_hashtag{{recentpost.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="sim_hashtag{{recentpost.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="sim_hashtag{{recentpost.post_data.id}} all-hashtags-list"></div>
                                 </div>
@@ -603,7 +603,7 @@
                                 </div> -->
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                    <input id="ask_hashtag{{recentpost.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="ask_hashtag{{recentpost.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="ask_hashtag{{recentpost.post_data.id}} all-hashtags-list"></div>
                                 </div>
@@ -1023,7 +1023,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                         <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
@@ -1093,7 +1093,7 @@
                                     
                                     <div class="form-group">
                                         <label>Add hashtag (Topic) <a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                         <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
@@ -1229,7 +1229,7 @@
                                     </div> -->
                                     <div class="form-group">
                                         <label>Add hashtag (Topic)</label>
-                                        <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                        <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                         <div class="ask_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
@@ -1877,7 +1877,7 @@
 								
 								<div class="form-group">
                                     <label>Add hashtag (Topic)</label>
-                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="sim_hashtag all-hashtags-list"></div>
 									<div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -1989,7 +1989,7 @@
                                 </div>
 								<div class="form-group">
                                     <label>Add hashtag (Topic)</label>  
-                                    <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="opp_hashtag all-hashtags-list"></div>
 									<div id="opp-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -2112,7 +2112,7 @@
                                 </div> -->
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)</label>
-                                    <input id="ask_hashtag" type="text" class="form-control" ng-model="ask.ask_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="ask_hashtag" type="text" class="form-control" ng-model="ask.ask_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="ask_hashtag all-hashtags-list"></div>
 									<div id="ask-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -2475,9 +2475,25 @@
                     return split( term ).pop();
                 }
 
+                function autocomplete_hashtag_keypress(e)
+                {
+                    var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                    if (!re.test(e.key)) {
+                        e.preventDefault();                        
+                        return false;
+                    }
+                }
+
                 function autocomplete_hashtag(id)
                 {
-                    $("#"+id).bind( "keydown", function( event ) {
+                    /*$("#"+id).keypress(function( e ) {
+                        console.log(e);
+                        var re = /^[a-zA-Z0-9#]+$/; // or /^\w+$/ as mentioned
+                        if (!re.test(e.key)) {
+                            return false;
+                        }                        
+                    })*/
+                    $("#"+id).bind( "keydown", function( event ) {                        
                         if ( event.keyCode === $.ui.keyCode.TAB &&
                             $( this ).autocomplete( "instance" ).menu.active ) {
                             event.preventDefault();

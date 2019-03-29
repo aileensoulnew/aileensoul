@@ -124,8 +124,20 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }, 300);
         }, function(error) {});
     }
-    getFieldList();
 
+    $scope.getHashTags = function(inputText) {  
+        var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        var matches = [];
+        var match;
+
+        while ((match = regex.exec(inputText))) {
+            matches.push(match[1]);
+        }
+
+        return matches;
+    };
+
+    getFieldList();
     function getFieldList() {
         $http.get(base_url + "general_data/getFieldList").then(function(success) {
             $scope.fieldList = success.data;
@@ -863,11 +875,19 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
 
             var sim_title = $('#sim_title').val();
             var sim_hashtag = $('#sim_hashtag'+post_id).val();//$scope.sim.sim_hashtag_edit;
-            var check_hashtag = sim_hashtag.replace(/#/g, "");
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
 
-            if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || description_check.trim() == '')
+            if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || description_check.trim() == '')
             {
-                $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -931,11 +951,20 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var location = $scope.opp.location_edit;
             var company_name_edit = $scope.opp.company_name_edit;
             var fields = $("#field_edit" + post_id).val();
-            var opp_hashtag = $scope.opp.opp_hashtag_edit;
-            var check_hashtag = opp_hashtag.replace(/#/g, "");
+            var opp_hashtag = $scope.opp.opp_hashtag_edit;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
 
-            if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '') || (check_hashtag == undefined || check_hashtag == '')) {
-                $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+
+            if ((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '') || (location == undefined || location == '') || (fields == undefined || fields == '') || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0)) {
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function(e) {
                     if (e.keyCode === 27) {

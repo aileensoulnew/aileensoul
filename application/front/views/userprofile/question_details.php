@@ -356,7 +356,7 @@
                                             </div> -->
                                             <div class="form-group">
                                                 <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                 <div class="ask_hashtag{{post.post_data.id}}"></div>
                                             </div>
@@ -748,6 +748,15 @@
                 }
                 function extractLast( term ) {
                     return split( term ).pop();
+                }
+
+                function autocomplete_hashtag_keypress(e)
+                {
+                    var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                    if (!re.test(e.key)) {
+                        e.preventDefault();                        
+                        return false;
+                    }
                 }
 
                 function autocomplete_hashtag(id)

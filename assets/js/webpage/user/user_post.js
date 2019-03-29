@@ -356,6 +356,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         setModalsAndBackdropsOrder();
     });
 
+    $scope.getHashTags = function(inputText) {  
+        var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        var matches = [];
+        var match;
+
+        while ((match = regex.exec(inputText))) {
+            matches.push(match[1]);
+        }
+
+        return matches;
+    };
+
     function setModalsAndBackdropsOrder() {  
         var modalZIndex = 1040;
         $('.modal.in').each(function(index) {
@@ -1040,12 +1052,20 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var location = $scope.opp.location;
             var fields = $scope.opp.field;
             var otherField = $scope.opp.otherField;
-            var opp_hashtag = $scope.opp.opp_hashtag;
-            var check_hashtag = opp_hashtag.replace(/#/g, "");
+            var opp_hashtag = $scope.opp.opp_hashtag;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '')))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0)))
             {
-                $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1514,12 +1534,21 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var field = document.getElementById("ask_field").value;
             var description = document.getElementById("ask_que").value;
             var description = description.trim();
-            var ask_hashtag = $scope.ask.ask_hashtag;
-            var check_hashtag = ask_hashtag.replace(/#/g, "");
+            var ask_hashtag = $scope.ask.ask_hashtag;            
+            var check_hashtag = (ask_hashtag != '' && ask_hashtag != undefined ? ask_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(ask_hashtag);
+
             var fileInput = document.getElementById("fileInput2").files;
-            if (field == '' || description == '' || check_hashtag == '')
+            if (field == '' || description == '' || check_hashtag == '' || hashtags_arr.length == 0)
             {
-                $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>Ask Question, Hashtags and Field is required.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -1721,28 +1750,28 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $("#opportunity-popup").modal('hide');
                 $("#ask-question").modal('hide');
                 $http.post(base_url + 'user_post/edit_post_opportunity', form_data,
-                        {
-                            transformRequest: angular.identity,
+                {
+                    transformRequest: angular.identity,
 
-                            headers: {'Content-Type': undefined, 'Process-Data': false}
-                        })
-                        .then(function (success) {
-                            if (success) {
-                                $("#edit-ask-que-"+post_id).hide();
-                                $("#ask-que-"+post_id).show();
-                                $("#main-post-"+post_id+ " .post-images").show();                                
-                                $scope.postData[postIndex].question_data = success.data.question_data;
-                                //$scope.getQuestions();
-                                /*if (success.data.response == 1) {
-                                    $('#ask-post-question-' + post_id).html(success.data.ask_question);
-                                    $('#ask-post-description-' + post_id).html(success.data.ask_description);
-                                    //   $('#ask-post-link-' + post_id).html(success.data.opp_field);
-                                    $('#ask-post-category-' + post_id).html(success.data.ask_category);
-                                    $('#ask-post-field-' + post_id).html(success.data.ask_field);
-                                }*/
-                                
-                            }
-                        });
+                    headers: {'Content-Type': undefined, 'Process-Data': false}
+                })
+                .then(function (success) {
+                    if (success) {
+                        $("#edit-ask-que-"+post_id).hide();
+                        $("#ask-que-"+post_id).show();
+                        $("#main-post-"+post_id+ " .post-images").show();                                
+                        $scope.postData[postIndex].question_data = success.data.question_data;
+                        //$scope.getQuestions();
+                        /*if (success.data.response == 1) {
+                            $('#ask-post-question-' + post_id).html(success.data.ask_question);
+                            $('#ask-post-description-' + post_id).html(success.data.ask_description);
+                            //   $('#ask-post-link-' + post_id).html(success.data.opp_field);
+                            $('#ask-post-category-' + post_id).html(success.data.ask_category);
+                            $('#ask-post-field-' + post_id).html(success.data.ask_field);
+                        }*/
+                        
+                    }
+                });
             }
         }
     }
@@ -1766,12 +1795,21 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             //var description = description.trim();
             var fileInput1 = document.getElementById("fileInput1").value;
             //console.log(fileInput1);
-            var check_hashtag = sim_hashtag.replace(/#/g, "");
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
 
-            if((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || (fileCountSim == 0 && (description == '' || description == undefined)))
+            if((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || (fileCountSim == 0 && (description == '' || description == undefined)))
             {
-                $('#posterrormodal .mes').html("<div class='pop_content'>All fields are mandatory. Please add title, hashtags, write or attach (photos, videos, audios, pdf) to post.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#posterrormodal .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#posterrormodal .mes').html("<div class='pop_content'>All fields are mandatory. Please add title, hashtags, write or attach (photos, videos, audios, pdf) to post.");
+                }
                 $('#posterrormodal').modal('show');
+
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
                         $('#posterrormodal').modal('hide');
@@ -2175,16 +2213,23 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             description = description.replace(/&/g, "%26");            
 
             var sim_title = $scope.sim.sim_title_edit;
-            var sim_hashtag = $scope.sim.sim_hashtag_edit;
-            var check_hashtag = sim_hashtag.replace(/#/g, "");
+            var sim_hashtag = $scope.sim.sim_hashtag_edit;            
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
 
-            //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();            
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || description_check.trim() == '')
                 {
-                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                    {
+                        $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    }
+                    else
+                    {
+                        $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    }
                     $('#post').modal('show');
                     $(document).on('keydown', function (e) {
                         if (e.keyCode === 27) {
@@ -3570,14 +3615,22 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             description = description.trim();
 
             var sim_title = $scope.sim.sim_title_edit;
-            var sim_hashtag = $scope.sim.sim_hashtag_edit;
-            var check_hashtag = sim_hashtag.replace(/#/g, "");
+            var sim_hashtag = $scope.sim.sim_hashtag_edit;            
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
 
             if($scope.sim.post_for == "simple")
             {
-                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined) || description_check.trim() == '')
+                if ((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || description_check.trim() == '')
                 {
-                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                    {
+                        $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    }
+                    else
+                    {
+                        $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    }
                     $('#post').modal('show');
                     $(document).on('keydown', function (e) {
                         if (e.keyCode === 27) {
@@ -3650,12 +3703,20 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var company_name = $scope.opp.company_name_edit;
             var fields = $("#field_edit"+post_id).val();
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
-            var opp_hashtag = $scope.opp.opp_hashtag_edit;
-            var check_hashtag = opp_hashtag.replace(/#/g, "");
+            var opp_hashtag = $scope.opp.opp_hashtag_edit;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
 
-            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == ''))
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0))
             {
-                $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
@@ -3744,8 +3805,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
             ask_que_desc = ask_que_desc.trim();
             var related_category_edit = $scope.ask.related_category_edit;
-            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;
-            var check_hashtag = ask_hashtag_edit.replace(/#/g, "");
+            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;            
+            var check_hashtag = (ask_hashtag_edit != '' && ask_hashtag_edit != undefined ? ask_hashtag_edit.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(ask_hashtag_edit);
+
             var edit_fields = $("#ask_field_"+post_id).val();  
             if(edit_fields == 0)
                 var ask_other = $("#ask_other_"+post_id).val();
@@ -3754,9 +3817,16 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
             var ask_is_anonymously = ($("#ask_is_anonymously"+post_id+":checked").length > 0 ? 1 : 0);            
             
-            if (edit_fields == '' || ask_que == '' || check_hashtag == '')
+            if (edit_fields == '' || ask_que == '' || check_hashtag == '' || hashtags_arr.length == 0)
             {
-                $('#post .mes').html("<div class='pop_content'>Ask question, hashtags and Field is required.");
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>Ask question, hashtags and Field is required.");
+                }
                 $('#post').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {

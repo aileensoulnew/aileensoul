@@ -443,6 +443,16 @@
                 function extractLast( term ) {
                     return split( term ).pop();
                 }
+                
+                function autocomplete_hashtag_keypress(e)
+                {
+                    var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                    if (!re.test(e.key)) {
+                        e.preventDefault();                        
+                        return false;
+                    }
+                }
+
                 function autocomplete_hashtag(id)
                 {
                     $("#"+id).bind( "keydown", function( event ) {

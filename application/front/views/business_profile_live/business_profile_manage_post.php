@@ -591,7 +591,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                                <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                                <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                                 <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                             </div>
@@ -662,7 +662,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             
                                                             <div class="form-group">
                                                                 <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                                <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                                <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                                 <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                             </div>
@@ -1506,7 +1506,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)</label>
-                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="sim_hashtag all-hashtags-list"></div>
                                     <div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -1613,7 +1613,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </div>
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)</label>  
-                                    <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                    <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="opp_hashtag all-hashtags-list"></div>
 									<div id="opp-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -1631,6 +1631,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="opportunity" ng-init="opp.post_for='opportunity'">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">
                                 <div class="all-upload form-group" ng-if="is_edit != 1">
+                                    <div class="form-group">
+                                        <div id="fileCountOpp"></div>
+                                        <div id="selectedFilesOpp" class="file-preview"></div>
+
+                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
+                                    </div>
                                     <label for="fileInput" ng-click="postFiles()">
                                         <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
                                         <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
@@ -1837,52 +1843,61 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             }
 
             function split( val ) {
-                    return val.split( / \s*/ );
-                }
-                function extractLast( term ) {
-                    return split( term ).pop();
-                }
+                return val.split( / \s*/ );
+            }
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
 
-                function autocomplete_hashtag(id)
-                {
-                    $("#"+id).bind( "keydown", function( event ) {
-                        if ( event.keyCode === $.ui.keyCode.TAB &&
-                            $( this ).autocomplete( "instance" ).menu.active ) {
-                            event.preventDefault();
-                        }
-                    })
-                    .autocomplete({
-                        appendTo: "."+id,
-                        minLength: 2,
-                        source: function( request, response ) {                         
-                            var search_key = extractLast( request.term );
-                            if(search_key[0] == "#")
-                            {
-                                search_key = search_key.substr(1);
-                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        },
-                        focus: function() {
-                            // prevent value inserted on focus
-                            return false;
-                        },
-                        select: function( event, ui ) {
-                            var terms = split( this.value );
-                            // remove the current input
-                            terms.pop();
-                            // add the selected item
-                            terms.push( ui.item.value );
-                            // add placeholder to get the comma-and-space at the end
-                            terms.push( "" );
-                            this.value = terms.join( " " );
-                            return false;
-                        },
-                    });                
+            function autocomplete_hashtag_keypress(e)
+            {
+                var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                if (!re.test(e.key)) {
+                    e.preventDefault();                        
+                    return false;
                 }
+            }
+
+            function autocomplete_hashtag(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 2,
+                    source: function( request, response ) {                         
+                        var search_key = extractLast( request.term );
+                        if(search_key[0] == "#")
+                        {
+                            search_key = search_key.substr(1);
+                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( " " );
+                        return false;
+                    },
+                });                
+            }
 		</script>
 		<script>
 			$(document).ready(function () {

@@ -185,7 +185,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Add hashtag (Topic)</label>
-                                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                         <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                     </div>
@@ -256,7 +256,7 @@
                                                     
                                                     <div class="form-group">
                                                         <label>Add hashtag (Topic)</label>
-                                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
+                                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
                                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                         <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                     </div>
@@ -743,6 +743,16 @@
             function extractLast( term ) {
                 return split( term ).pop();
             }
+
+            function autocomplete_hashtag_keypress(e)
+            {
+                var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                if (!re.test(e.key)) {
+                    e.preventDefault();                        
+                    return false;
+                }
+            }
+
             function autocomplete_hashtag(id)
             {
                 $("#"+id).bind( "keydown", function( event ) {
