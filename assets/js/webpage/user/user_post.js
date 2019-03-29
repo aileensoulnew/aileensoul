@@ -2817,6 +2817,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             // },100);
             
         }
+
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
 
     $scope.cancelPostEditNew = function (post_id, post_for, index) {
@@ -3369,6 +3371,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 },100)
             }            
         }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
 
     $scope.deleteRecentPost = function (post_id, index) {
