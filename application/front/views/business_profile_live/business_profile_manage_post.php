@@ -1559,37 +1559,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
                     <div class="post-popup-box">
                         <form id="post_opportunity" name="post_opportunity" ng-submit="post_opportunity_check(event)">
-                            <div class="post-box"><!-- <div class="post-box"> -->
-                                <!-- <div class="post-img"> -->
-                                    <?php
-                                    /*if ($business_login_user_image) {
-                                        if (IMAGEPATHFROM == 'upload') {
-                                            if (!file_exists($this->config->item('bus_profile_main_upload_path') . $business_login_user_image)) {
-                                                ?>
-                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
-                                            <?php } else {
-                                                ?>
-                                                <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="Business Login User">
-                                                <?php
-                                            }
-                                        } else {
-                                            $filename = $this->config->item('bus_profile_thumb_upload_path') . $business_login_user_image;
-                                            $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                                            if (!$info) {
-                                                ?>
-                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
-                                            <?php } else {
-                                                ?>
-                                                <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>">
-                                                <?php
-                                            }
-                                        }
-                                    }
-                                    else{ ?>
-                                        <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image"><?php 
-                                    }*/ ?>
-                                <!-- </div> -->
-                            </div>
+                           
                             <div class="post-field">
                                 <div class="form-group title-op-op">
                                     <label>Title of Opportunity</label>
@@ -1626,7 +1596,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </script>
                                 </div>
                                 <div class="form-group">
-                                    <label class="pb5">For which field?</label>
+                                    <label>For which field?</label>
                                     
                                     <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                     <span class="select-field-custom">
@@ -1661,12 +1631,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="opportunity" ng-init="opp.post_for='opportunity'">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">
                                 <div class="all-upload form-group" ng-if="is_edit != 1">
-                                    <div class="form-group">
-                                        <div id="fileCountOpp"></div>
-                                        <div id="selectedFilesOpp" class="file-preview"></div>
-
-                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
-                                    </div>
                                     <label for="fileInput" ng-click="postFiles()">
                                         <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
                                         <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
