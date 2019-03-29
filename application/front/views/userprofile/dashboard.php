@@ -570,7 +570,7 @@
                                         <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                         <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                        <div class="opp_hashtag{{post.post_data.id}}"></div>
+                                        <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
                                     <div class="form-group">
                                         <label>Company Name<a href="#" data-toggle="tooltip" data-placement="left" title=" Enter the company name of opportunity" class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
@@ -612,8 +612,11 @@
                         </div>
                     </div>
                     <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
-                        <p ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
-                        <p ng-if="post.simple_data.hashtag" class="hashtag-grd">
+                        <p id="simple-post-title-{{post.post_data.id}}" ng-if="post.simple_data.sim_title">
+                            <b>Title:</b> 
+                            <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span>
+                        </p>
+                        <p id="simple-post-hashtag-{{post.post_data.id}}" ng-if="post.simple_data.hashtag" class="hashtag-grd">
                             <b>Hashtags:</b>
                             <span>
                                 <span class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.simple_data.hashtag.split(' ')">{{hashtag}}</span>
@@ -638,7 +641,7 @@
                                         <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                         <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                        <div class="sim_hashtag{{post.post_data.id}} autocomplete-cus"></div>
+                                        <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                     </div>
                                     <div class="form-group">
                                     

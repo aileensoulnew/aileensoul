@@ -4031,10 +4031,14 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         $("#post_something_edit")[0].reset();
                         if (success.data.response == 1) {
                             $scope.postData[postIndex].simple_data.description = success.data.sim_description;
+                            $scope.postData[postIndex].simple_data.sim_title = success.data.sim_title;
+                            $scope.postData[postIndex].simple_data.hashtag = success.data.hashtag;
                             //$('#simple-post-description-' + post_id).html(success.data.sim_description);
                             //$('#simple-post-description-' + post_id).attr("dd-text-collapse-text",success.data.sim_description);
                             $('#edit-simple-post-' + post_id).hide();
                             $('#simple-post-description-' + post_id).show();
+                            $('#simple-post-title-' + post_id).show();
+                            $('#simple-post-hashtag-' + post_id).show();
                             
                         }
                     }
@@ -4391,6 +4395,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $("#edit-simple-post-"+post_id).show();
             var editContent = $scope.postData[index].simple_data.description//$('#simple-post-description-' + post_id).attr("ng-bind-html");
             $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title
+            $('#sim_title'+post_id).val($scope.postData[index].simple_data.sim_title);
             var hashtags = "";
             
             if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
@@ -4399,12 +4404,16 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 // hashtags = '#'+hashtags.replace(/,/ig,' #');
             }
             $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
+            $('#sim_hashtag'+post_id).val(hashtags);
+            
             $('#editPostTexBox-' + post_id).html(editContent.replace(/(<([^>]+)>)/ig,""));
             setTimeout(function(){
                 //$('#editPostTexBox-' + post_id).focus();
                 setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
             },100);            
-            $('#simple-post-description-' + post_id).hide();            
+            $('#simple-post-description-' + post_id).hide();
+            $('#simple-post-title-' + post_id).hide();
+            $('#simple-post-hashtag-' + post_id).hide();
         }
         else if(post_for == "opportunity")
         {
@@ -4477,6 +4486,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         {
             $("#edit-simple-post-"+post_id).hide();
             $('#simple-post-description-' + post_id).show();
+            $('#simple-post-title-' + post_id).show();
+            $('#simple-post-hashtag-' + post_id).show();
         }
         else if(post_for == "opportunity")
         {

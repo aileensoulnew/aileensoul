@@ -426,12 +426,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 <a href="<?php echo base_url('new-business-article'); ?>" target="_self">
                                                     <img src="<?php echo base_url('assets/n-images/article.svg') ?>"><span><span class="none-479">Post</span> <span> Article</span></span>
                                                 </a>
-                                            </li>
-                                            <li class="pl15">
-                                                <a href="#" data-target="#ask-question" data-toggle="modal">
-                                                    <img src="<?php echo base_url('assets/n-images/ask-question.svg') ?>"><span>Ask Question</span>
-                                                </a>
-                                            </li>
+                                            </li>                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -598,7 +593,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                 <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                                                <div class="opp_hashtag{{post.post_data.id}}"></div>
+                                                                <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Company Name <a href="#" data-toggle="tooltip" data-placement="left" title="Enter the company name of opportunity ." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
@@ -643,8 +638,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 </div>
                                             </div>
                                             <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
-                                                <p ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
-                                                <p ng-if="post.simple_data.hashtag" class="hashtag-grd">
+                                                <p id="simple-post-title-{{post.post_data.id}}" ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
+                                                <p id="simple-post-hashtag-{{post.post_data.id}}" ng-if="post.simple_data.hashtag" class="hashtag-grd">
                                                     <b>Hashtags:</b>
                                                     <span>
                                                         <span class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.simple_data.hashtag.split(' ')">{{hashtag}}</span>
@@ -662,14 +657,14 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <div class="post-box">        
                                                             <div class="form-group">
                                                                 <label class="fw">Post title<a href="#" data-toggle="tooltip" data-placement="left" title="Give a relevant title to your post that describes your post in a single sentence." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                                <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
+                                                                <input type="text" placeholder="Etnter Title" id="sim_title{{post.post_data.id}}" maxlength="100" ng-model="sim.sim_title_edit">
                                                             </div>
                                                             
                                                             <div class="form-group">
                                                                 <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
                                                                 <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                                                <div class="sim_hashtag{{post.post_data.id}} autocomplete-cus"></div>
+                                                                <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                             </div>
                                                             <div class="form-group">
                                                             <!-- <div class="post-text"> -->
@@ -1513,6 +1508,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <label>Add hashtag (Topic)</label>
                                     <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="sim_hashtag all-hashtags-list"></div>
                                     <div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                                 </div>
                                 <div class="form-group"><!-- <div class="post-text"> -->
@@ -1543,12 +1539,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                             <a href="<?php echo base_url('new-business-article'); ?>" target="_self">
                                                 <img src="<?php echo base_url('assets/n-images/article.png') ?>"><span><span class="none-479">Post</span> <span>Article</span></span>
                                             </a>
-                                        </li>
-                                        <li class="pl15">
-                                            <a href="#" class="post-ask-question-modal"  data-target="#ask-question" data-toggle="modal">
-                                                <img src="<?php echo base_url('assets/n-images/ask-qustion.png') ?>"><span>Ask Question</span>
-                                            </a>
-                                        </li>
+                                        </li>                                        
                                     </ul>
                                     <input type="hidden" name="post_for" ng-model="sim.post_for" class="form-control" value="simple" ng-init="sim.post_for='simple'">
                                     <input type="hidden" ng-if="is_edit == 1" id="edit_post_id" name="edit_post_id" ng-model="sim.edit_post_id" class="form-control" value="{{sim.edit_post_id}}">
@@ -1654,7 +1645,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <label>Add hashtag (Topic)</label>  
                                     <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                    <div class="opp_hashtag"></div>
+                                    <div class="opp_hashtag all-hashtags-list"></div>
 									<div id="opp-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                                 </div>
                                 <div class="form-group">
@@ -1693,127 +1684,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="display:none;" class="modal fade" id="ask-question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form id="ask_question" name="ask_question" ng-submit="ask_question_check(event)">
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <?php
-                                    if ($business_login_user_image) {
-                                        if (IMAGEPATHFROM == 'upload') {
-                                            if (!file_exists($this->config->item('bus_profile_main_upload_path') . $business_login_user_image)) {
-                                                ?>
-                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
-                                            <?php } else {
-                                                ?>
-                                                <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="Business Login User">
-                                                <?php
-                                            }
-                                        } else {
-                                            $filename = $this->config->item('bus_profile_thumb_upload_path') . $business_login_user_image;
-                                            $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                                            if (!$info) {
-                                                ?>
-                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
-                                            <?php } else {
-                                                ?>
-                                                <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>">
-                                                <?php
-                                            }
-                                        }
-                                    }
-                                    else{ ?>
-                                        <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image"><?php 
-                                    } ?>
-                                </div>
-                                <div class="post-text">
-                                    <!--<textarea class="title-text-area" ng-keyup="questionList()" ng-model="ask.ask_que" id="ask_que" placeholder="Ask Question" typeahead="item as item.question for item in queSearchResult | filter:$viewValue" autocomplete="off"></textarea>-->
-                                    <textarea class="title-text-area" ng-keyup="questionList()" ng-model="ask.ask_que" id="ask_que" placeholder="Ask Your Question (What you want to ask today?)"></textarea>
-                                    <ul class="questionSuggetion custom-scroll">
-                                        <li ng-repeat="que in queSearchResult">
-                                            <a ng-href="<?php echo base_url('questions/') ?>{{que.id}}/{{que.question| slugify}}" ng-bind="que.question"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="all-upload" ng-if="is_edit != 1">
-                                    <div class="form-group">
-                                        <div id="fileCountQue"></div>
-                                        <div id="selectedFilesQue" class="file-preview"></div>
-                                        <input file-input="files" ng-file-model="ask.postfiles" type="file" id="fileInput2" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
-                                    </div>
-                                    <label for="fileInput2" ng-click="postFiles()">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Add Screenshot </span></i>
-                                    </label>
-                                    <div class="add-link" ng-click="ShowHide()">
-                                        <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
-                                    </div>
-                                    <div class="form-group"  ng-show = "IsVisible">
-                                        <input type="url" ng-model="ask.web_link" class="" placeholder="Add Your Web Link">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-field">
-                                <div class="form-group">
-                                    <label>Add Description</label>
-                                    
-                                    <textarea id="ask_desc" rows="1" max-rows="5" ng-model="ask.ask_description" placeholder="Add Description" cols="10" style="resize:none"></textarea>
-                                    <div id="ask_desctooltip" class="tooltip-custom" style="display: none;">Describe your problem in more details with some examples.</div>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label>Related Categories</label>
-                                    
-                                    <tags-input id="ask_related_category" ng-model="ask.related_category" display-property="name"placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" on-tag-added="onKeyup()">
-                                        <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
-                                    </tags-input>
-                                    <div id="rlcattooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
-                                    <script type="text/ng-template" id="category-template">
-                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
-                                    </script>
-                                    <script type="text/ng-template" id="category-autocomplete-template">
-                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
-                                    </script>
-                                </div> -->
-                                <div class="form-group">
-                                    <label>Add hashtag (Topic)</label>
-                                    <input id="ask_hashtag" type="text" class="form-control" ng-model="ask.ask_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);">
-                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                    <div class="ask_hashtag"></div>
-									<div id="ask-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
-                                </div>
-                                <div class="form-group">
-                                    <label>From which field the Question asked?</label>
-                                    
-                                    <span class="select-field-custom">
-                                        <select ng-model="ask.ask_field" id="ask_field">
-                                            <option value="" selected="selected">Select Related Field</option>
-                                            <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
-                                            <option value="0">Other</option>
-                                        </select>
-                                    </span>
-                                    <div id="ask_fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Question.</div>
-                                </div>
-
-                                <div class="form-group" ng-if="ask.ask_field == '0'">
-                                    <input type="text" class="form-control" ng-model="ask.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
-                                </div>
-                                <input type="hidden" name="post_for" ng-model="ask.post_for" class="form-control" value="question" ng-init="ask.post_for='question'">
-                                <input type="hidden" ng-if="is_edit == 1" id="ask_edit_post_id" name="ask_edit_post_id" ng-model="ask.edit_post_id" class="form-control" value="{{ask.edit_post_id}}">
-                            </div>
-                            <div class="text-right fw pt10 pb20 pr15">
-                                <div class="add-anonymously">
-                                    <label class="control control--checkbox" title="Checked this">Add Anonymously<input type="checkbox" ng-model="ask.is_anonymously" value="1"><div class="control__indicator"></div></label>
-                                </div>
-                                <button type="submit" class="btn1"  value="Submit">Post Your Question</button> 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>        
 
         <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm">

@@ -1301,10 +1301,14 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $("#post_something_edit")[0].reset();
                         if (success.data.response == 1) {
                             $scope.postData[postIndex].simple_data.description = success.data.sim_description;
+                            $scope.postData[postIndex].simple_data.sim_title = success.data.sim_title;
+                            $scope.postData[postIndex].simple_data.hashtag = success.data.hashtag;
                             //$('#simple-post-description-' + post_id).html(success.data.sim_description);
                             //$('#simple-post-description-' + post_id).attr("dd-text-collapse-text",success.data.sim_description);
                             $('#edit-simple-post-' + post_id).hide();
                             $('#simple-post-description-' + post_id).show();
+                            $('#simple-post-title-' + post_id).show();
+                            $('#simple-post-hashtag-' + post_id).show();
                             $("#main-post-"+post_id+ " .post-images").show();
                         }
                     }
@@ -2440,6 +2444,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     $scope.EditPostNew = function (post_id, post_for, index) {
 
         $("span[id^=simple-post-description-]").show();
+        $('span[id^=simple-post-title-]').show();
+        $('span[id^=simple-post-hashtag-]').show();
         $("div[id^=edit-simple-post-]").hide();
         $("div[id^=post-opp-detail-]").show();
         $("div[id^=edit-opp-post-]").hide();
@@ -2450,14 +2456,16 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         if(post_for == "simple")
         {
             $("#edit-simple-post-"+post_id).show();
-            $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title
+            $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title;
+            $('#sim_title'+post_id).val($scope.postData[index].simple_data.sim_title);
             var hashtags = "";
             if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
             {
                 hashtags = $scope.postData[index].simple_data.hashtag;
-                hashtags = '#'+hashtags.replace(/,/ig,' #');
+                // hashtags = '#'+hashtags.replace(/,/ig,' #');
             }
             $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
+            $('#sim_hashtag'+post_id).val(hashtags);
 
             var editContent = $scope.postData[index].simple_data.description;//$('#simple-post-description-' + post_id).attr("ng-bind-html");
             $('#editPostTexBox-' + post_id).html(editContent.replace(/(<([^>]+)>)/ig,""));
@@ -2465,7 +2473,9 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 //$('#editPostTexBox-' + post_id).focus();
                 setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
             },100);            
-            $('#simple-post-description-' + post_id).hide();            
+            $('#simple-post-description-' + post_id).hide();
+            $('#simple-post-title-' + post_id).hide();
+            $('#simple-post-hashtag-' + post_id).hide();
         }
         else if(post_for == "opportunity")
         {
@@ -2610,6 +2620,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         {
             $("#edit-simple-post-"+post_id).hide();
             $('#simple-post-description-' + post_id).show();
+            $('#simple-post-title-' + post_id).show();
+            $('#simple-post-hashtag-' + post_id).show();
         }
         else if(post_for == "opportunity")
         {

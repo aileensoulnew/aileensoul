@@ -530,6 +530,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
     }
     $scope.EditPostNew = function(post_id, post_for, index) {
         $("span[id^=simple-post-description-]").show();
+        $("span[id^=simple-post-title-]").show();
+        $("span[id^=simple-post-hashtag-]").show();
         $("div[id^=edit-simple-post-]").hide();
         $("div[id^=post-opp-detail-]").show();
         $("div[id^=edit-opp-post-]").hide();
@@ -558,6 +560,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 //$('#editPostTexBox-' + post_id).focus();
                 setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
             }, 100);
+            $('#simple-post-title-' + post_id).hide();
+            $('#simple-post-hashtag-' + post_id).hide();
             $('#simple-post-description-' + post_id).hide();
         } else if (post_for == "opportunity") {
             var edit_location = [];
@@ -893,9 +897,13 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                     $("#post_something_edit")[0].reset();
                     if (success.data.response == 1) {
                         $scope.postData[postIndex].simple_data.description = success.data.sim_description;
+                        $scope.postData[postIndex].simple_data.sim_title = success.data.sim_title;
+                        $scope.postData[postIndex].simple_data.hashtag = success.data.hashtag;
                         //$('#simple-post-description-' + post_id).html(success.data.sim_description);
                         //$('#simple-post-description-' + post_id).attr("dd-text-collapse-text",success.data.sim_description);
                         $('#edit-simple-post-' + post_id).hide();
+                        $('#simple-post-title-' + post_id).show();
+                        $('#simple-post-hashtag-' + post_id).show();
                         $('#simple-post-description-' + post_id).show();
                         $("#main-post-" + post_id + " .post-images").show();
                     }
