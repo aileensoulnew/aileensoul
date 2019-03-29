@@ -65,58 +65,6 @@
                     </p>
                     <h2 class="text-center pt20 pb10">May be the following options can help you reach your destination.</h2>
                 </div>
-                <div class="error-bottom">
-                    <ul class="row">
-                        <li class="error-main-box">
-                            <a href="<?php echo $job_right_profile_link; ?>">
-                                <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-job.png?ver=' . time()) ?>">
-                                    <p>Looking for Great Job Opportunities? Create Free Job Profile Account</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="error-main-box">
-                            <a href="<?php echo $recruiter_right_profile_link; ?>">
-                                <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-rec.png?ver=' . time()) ?>">
-                                    <p>Looking for Hiring Quality Employees? Create Free Recruiter Profile Account</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="error-main-box">
-                            <a href="<?php echo $freelance_hire_right_profile_link; ?>">
-                                <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-free-apply.png?ver=' . time()) ?>g">
-                                    <p>Looking for Remote Team? Create Free Freelance Employer Profile Account</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="error-main-box">
-                            <a href="<?php echo $freelance_apply_right_profile_link; ?>">
-                                <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-free.png?ver=' . time()) ?>g">
-                                    <p>Looking for Freelance Work? Create Free Freelancer Profile Account</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="error-main-box">
-                            <a href="<?php echo $business_right_profile_link; ?>">
-                                <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-bus.png?ver=' . time()) ?>">
-                                    <p>Looking for Growing Business Network? Create Free Business Profile Account</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="error-main-box">
-                            <a href="<?php echo $artist_right_profile_link; ?>">
-                                <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-art.png?ver=' . time()) ?>">
-                                    <p>Looking for Platform to Show Artistic Side? Create Free Artistic Profile Account</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
                 <div class="error-btn">
                     <div class="col-md-6 col-sm-6 text-right">
                         <a class="btn3" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><img class="pr20" src="<?php echo base_url('assets/n-images/e-arrow.png?ver=' . time()) ?>"><span>Back to Previous page</span></a>
