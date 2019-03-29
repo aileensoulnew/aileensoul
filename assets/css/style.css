@@ -3024,18 +3024,7 @@ footer div.pt20{
             z-index:9;
             font-size:12px
         }
-        ::-webkit-input-placeholder{
-            font-size:13px
-        }
-        ::-moz-placeholder{
-            font-size:13px
-        }
-        :-ms-input-placeholder{
-            font-size:13px
-        }
-        :-moz-placeholder{
-            font-size:13px
-        }
+       
         #row2 img{
             height:200px
         }
@@ -3140,9 +3129,6 @@ footer div.pt20{
         }
         .people-list .search input{
             width:93%
-        }
-        .modal.in .modal-dialog{
-            font-size:88%
         }
         .modal.in .modal-dialog .mes .pop_content{
             font-size:18px

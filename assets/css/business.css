@@ -4384,9 +4384,6 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
     .job-menu-profile{
         padding-bottom:10px
     }
-    input,select,textarea{
-        font-size:12px!important
-    }
     .cover-pic{
         position:absolute!important;
         top:inherit;
