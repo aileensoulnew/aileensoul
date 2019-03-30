@@ -2008,7 +2008,7 @@
                             
                                 <div id="content" class="form-group">
 									<label>FOR WHOM THIS OPPORTUNITY ?<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <textarea rows="1" max-rows="5" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, PHP Developer, HR, BDE, CA, Doctor, Freelancer.." cols="10" style="resize:none"></textarea>
+                                    <textarea id="your-name" rows="1" max-rows="5" cols="10" style="resize:none"></textarea>
 
                                 </div>
                                 <div class="form-group">
@@ -2308,6 +2308,15 @@
 			}
 			if (screen.width < 768) {
 				$("#edit-profile-move").appendTo($(".edit-custom-move"));
+			}
+		});
+		$(document).ready(function() {
+		  $("#your-name").attr("placeholder", "Your Name");  
+		});
+		$(document).ready(function () {
+			if (screen.width <= 479) {
+				$("#your-name").attr("placeholder", "Mobile Your Name");
+				
 			}
 		});
 	</script>

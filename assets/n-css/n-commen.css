@@ -1215,9 +1215,9 @@ a:focus{outline:none;}
 	.hidden-479{display:none;}
 	.no-login-right{text-align:center;}
 	.search-mob-block{width:65%;}
-	.modal-content .post-field label{font-size:12px;}	
-    #upload-demo .cr-boundary{height: 200px !important;}
-    #upload-demo .cr-viewport{height: 200px !important;}
+	.modal-content .post-field label{font-size:13px;}	
+  #upload-demo .cr-boundary{height: 200px !important;}
+  #upload-demo .cr-viewport{height: 200px !important;}
 	.none-sub-menu{display:none;}
 	.sub-header .dropdown.open .dropdown-menu.account > li{width:100%;}
 	.mobile-header .search-mob-block{width:68%;}
