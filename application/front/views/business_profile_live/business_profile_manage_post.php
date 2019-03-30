@@ -591,7 +591,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                                <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                                                <textarea id="opp_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                                 <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                             </div>
@@ -662,7 +662,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             
                                                             <div class="form-group">
                                                                 <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                                <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                                                <textarea id="sim_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                                 <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                             </div>
@@ -1506,7 +1506,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)</label>
-                                    <input id="sim_hashtag" type="text" class="form-control" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                    <textarea id="sim_hashtag" type="text" class="hashtag-textarea" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="sim_hashtag all-hashtags-list"></div>
                                     <div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -1613,7 +1613,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </div>
                                 <div class="form-group">
                                     <label>Add hashtag (Topic)</label>  
-                                    <input id="opp_hashtag" type="text" class="form-control" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                    <textarea id="opp_hashtag" type="text" class="hashtag-textarea" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                     <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                     <div class="opp_hashtag all-hashtags-list"></div>
 									<div id="opp-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
@@ -1786,6 +1786,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>
 			$(document).ready(function () {
 				if (screen.width <= 1279) {
@@ -1986,6 +1987,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 				});
 				
 			});
+            autosize(document.getElementsByClassName('hashtag-textarea'));
 		</script>
     </body>
 </html>

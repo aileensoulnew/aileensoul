@@ -185,7 +185,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Add hashtag (Topic)</label>
-                                                        <input id="opp_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                                        <textarea id="opp_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                         <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                     </div>
@@ -256,7 +256,7 @@
                                                     
                                                     <div class="form-group">
                                                         <label>Add hashtag (Topic)</label>
-                                                        <input id="sim_hashtag{{post.post_data.id}}" type="text" class="form-control sim_hashtag" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                                        <textarea id="sim_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                                         <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                         <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
                                                     </div>
@@ -706,6 +706,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/post_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>
             var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
                 showRight = document.getElementById( 'showRight' ),
@@ -793,6 +794,7 @@
                     },
                 });                
             }
+            autosize(document.getElementsByClassName('hashtag-textarea'));
         </script>
     </body>
 </html>

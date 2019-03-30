@@ -356,7 +356,7 @@
                                             </div> -->
                                             <div class="form-group">
                                                 <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                <input id="ask_hashtag{{post.post_data.id}}" type="text" class="form-control" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);">
+                                                <textarea id="ask_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
                                                 <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
                                                 <div class="ask_hashtag{{post.post_data.id}}"></div>
                                             </div>
@@ -712,6 +712,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/question_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>
 			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 				showRight = document.getElementById( 'showRight' ),
@@ -799,6 +800,7 @@
                         },
                     });                
                 }
+                autosize(document.getElementsByClassName('hashtag-textarea'));
 		</script>
     </body>
 </html>

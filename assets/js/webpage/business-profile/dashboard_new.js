@@ -2649,6 +2649,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             // },100);
             
         }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
 
     $scope.cancelPostEditNew = function (post_id, post_for, index) {

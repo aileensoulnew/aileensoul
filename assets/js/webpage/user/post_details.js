@@ -685,6 +685,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             //     setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
             // },100);
         }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
     $scope.like_user_list = function(post_id) {
         $http({

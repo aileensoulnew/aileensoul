@@ -4522,6 +4522,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#post-opp-detail-' + post_id).hide();   
 
         }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
 
     $scope.cancelPostEditNew = function (post_id, post_for, index) {
@@ -10972,7 +10973,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             //     setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
             // },100);
             $('#ask-que-' + post_id).hide();            
-        }        
+        }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
 
     $scope.EditPost = function (post_id, post_for, index) {

@@ -587,6 +587,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             });
 
         }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
     }
     $scope.like_user_list = function(post_id) {
         $http({

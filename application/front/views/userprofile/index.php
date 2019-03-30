@@ -395,6 +395,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>
     		/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
     			showRight = document.getElementById( 'showRight' ),
