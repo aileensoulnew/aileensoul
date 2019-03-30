@@ -20,7 +20,8 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense'); 
-    $loging_userid = $this->session->userdata('aileenuser'); ?>
+    $loging_userid = $this->session->userdata('aileenuser');
+    $all_counter = $this->common->get_all_counter($leftbox_data['user_id']); ?>
 </head>
     <body class="profile-db body-loader">
         <?php $this->load->view('page_loader'); ?>
@@ -122,9 +123,9 @@
                                 </div>
                                 <div class="user-detail-bottom">
                                     <ul>
-                                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/profiles') ?>">Profiles</a></li>
-                                        <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard</a></li>
-                                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/details') ?>">Details</a></li>
+                                        <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard <span class="dashboard_counter"><?php echo($all_counter['dashboard_counter'] > 0 ? $all_counter['dashboard_counter'] : 0); ?></span></a></li>
+                                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contact <span class="contact_counter"><?php echo($all_counter['contact_counter'] > 0 ? $all_counter['contact_counter'] : 0); ?></span></a></li>
+                                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Follower <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
                                     </ul>
                                 </div>
                             </div>

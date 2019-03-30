@@ -2816,7 +2816,7 @@ class Userprofile_page extends MY_Controller {
         {            
             $userid = $this->session->userdata('aileenuser');
         }
-        $all_counter = $this->userprofile_model->get_all_counter($userid);
+        $all_counter = $this->common->get_all_counter($userid);
         $progress_arr = $this->progressbar($userid);
         $user_detail_counter = $progress_arr['user_process'];
         $all_counter['detail_counter'] = round($user_detail_counter);

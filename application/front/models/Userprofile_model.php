@@ -1966,26 +1966,6 @@ class Userprofile_model extends CI_Model {
         return $result_array['post_count'];
     }
 
-    public function get_all_counter($user_id = "")
-    {
-        $return_arr = array();
-        $post_counter = $this->get_post_count($user_id);
-        $return_arr['dashboard_counter'] = $post_counter;
-
-        $contact_counter = $this->getContactCount($user_id);
-        $return_arr['contact_counter'] = $contact_counter[0]['total'];
-        
-        $following_counter = $this->getFollowingCount($user_id);
-        $return_arr['following_counter'] = $following_counter[0]['total'];
-
-        $follower_counter = $this->getFollowerCount($user_id);
-        $return_arr['follower_counter'] = $follower_counter[0]['total'];
-
-        $question_counter = $this->userQuestionsCount($user_id);
-        $return_arr['question_counter'] = $question_counter;
-        return $return_arr;
-    }
-
     public function post_comment_reply_data($post_id = '',$comment_id = '',$user_id = '') {
         $this->db->select("u.user_slug,u.user_gender,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->join('user u', 'u.user_id = upc.user_id', 'left');

@@ -1,3 +1,7 @@
+<?php
+$url = $this->uri->segment_array();
+$all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
+?>
 <div id="left-fixed" class="fw">
     <div class="user-profile-box box-border">
         <div class="user-cover-img">
@@ -66,29 +70,31 @@
                 </div>
                 <div class="user-detail-bottom">
                     <ul>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard</a></li>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/details') ?>">Details</a></li>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contacts</a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard <span class="dashboard_counter"><?php echo($all_counter['dashboard_counter'] > 0 ? $all_counter['dashboard_counter'] : 0); ?></span></a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contacts <span class="contact_counter"><?php echo($all_counter['contact_counter'] > 0 ? $all_counter['contact_counter'] : 0); ?></span></a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Follower <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-	
+    <?php
+    if(isset($url) && empty($url)): ?>
 	<div class="add-detail all-user-list">            
-            <div id="profile-progress" class="edit_profile_progress" style="display: none;">
-                <div class="count_main_progress">
-                    <div class="circles">
-                        <div class="second circle-1">
-                            <div>
-                                <strong></strong>
-                                <span id="progress-txt"></span>
-                            </div>
+        <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+            <div class="count_main_progress">
+                <div class="circles">
+                    <div class="second circle-1">
+                        <div>
+                            <strong></strong>
+                            <span id="progress-txt"></span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>	
+        </div>
+    </div>	
+    <?php endif; ?>
 	<div class="business-move">
 	</div>
 					

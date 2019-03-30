@@ -774,10 +774,10 @@ app.controller('profilesController', function ($scope, $http, $location) {
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -796,10 +796,10 @@ app.controller('profilesController', function ($scope, $http, $location) {
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -807,10 +807,10 @@ app.controller('profilesController', function ($scope, $http, $location) {
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -818,10 +818,10 @@ app.controller('profilesController', function ($scope, $http, $location) {
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -829,10 +829,10 @@ app.controller('profilesController', function ($scope, $http, $location) {
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -905,10 +905,10 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -927,10 +927,10 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -938,10 +938,10 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -949,10 +949,10 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -960,10 +960,10 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -1091,10 +1091,10 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -1113,10 +1113,10 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -1124,10 +1124,10 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -1135,10 +1135,10 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -1146,10 +1146,10 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -1278,10 +1278,10 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -1300,10 +1300,10 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -1311,10 +1311,10 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -1322,10 +1322,10 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -1333,10 +1333,10 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -1473,10 +1473,10 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -1495,10 +1495,10 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -1506,10 +1506,10 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -1517,10 +1517,10 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -1528,10 +1528,10 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -1727,10 +1727,10 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -1749,10 +1749,10 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -1760,10 +1760,10 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -1771,10 +1771,10 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -1782,10 +1782,10 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -2029,10 +2029,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -2051,10 +2051,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -2062,10 +2062,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -2073,10 +2073,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -2084,10 +2084,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -4897,10 +4897,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -4919,10 +4919,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -4930,10 +4930,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -4941,10 +4941,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -4952,10 +4952,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -9811,10 +9811,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -9833,10 +9833,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -9844,10 +9844,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -9855,10 +9855,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -9866,10 +9866,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -10061,10 +10061,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -10083,10 +10083,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -10094,10 +10094,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -10105,10 +10105,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -10116,10 +10116,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -10273,10 +10273,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -10295,10 +10295,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -10306,10 +10306,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -10317,10 +10317,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -10328,10 +10328,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {
@@ -10554,10 +10554,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     $scope.get_all_counter = function() {
         $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
             var result = success.data;
-            if(result.dashboard_counter > 0)
+            if(result.dashboard_counter != '')
             {
                 $('.dashboard_counter').show();
-                $('.dashboard_counter').html($scope.prettifyNumber(result.dashboard_counter));
+                $('.dashboard_counter').html(result.dashboard_counter);
             }
             else
             {
@@ -10576,10 +10576,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $('.detail_counter').html('0%');
             }
 
-            if(result.contact_counter > 0)
+            if(result.contact_counter != '')
             {
                 $('.contact_counter').show();
-                $('.contact_counter').html($scope.prettifyNumber(result.contact_counter));
+                $('.contact_counter').html(result.contact_counter);
             }
             else
             {
@@ -10587,10 +10587,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $('.contact_counter').html('0');
             }
 
-            if(result.follower_counter > 0)
+            if(result.follower_counter != '')
             {
                 $('.follower_counter').show();
-                $('.follower_counter').html($scope.prettifyNumber(result.follower_counter));
+                $('.follower_counter').html(result.follower_counter);
             }
             else
             {
@@ -10598,10 +10598,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $('.follower_counter').html('0');
             }
 
-            if(result.following_counter > 0)
+            if(result.following_counter != '')
             {
                 $('.following_counter').show();
-                $('.following_counter').html($scope.prettifyNumber(result.following_counter));
+                $('.following_counter').html(result.following_counter);
             }
             else
             {
@@ -10609,10 +10609,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $('.following_counter').html('0');
             }
 
-            if(result.question_counter > 0)
+            if(result.question_counter != '')
             {
                 $('.question_counter').show();
-                $('.question_counter').html($scope.prettifyNumber(result.question_counter));
+                $('.question_counter').html(result.question_counter);
             }
             else
             {

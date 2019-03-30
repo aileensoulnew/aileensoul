@@ -852,4 +852,108 @@ class Common extends CI_Model {
     }
     //GENERATE ENCRYPT KEY END
 
+    public function get_post_count($user_id = "")
+    {
+        $this->db->select("COUNT(up.id) as post_count")->from("user_post up");
+        $this->db->where('up.user_id',$user_id);
+        $getDeleteUserPost = "SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id";
+        $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');        
+        $this->db->where('up.status', 'publish');
+        $sql = "(up.post_for = 'opportunity' OR up.post_for = 'article' OR up.post_for = 'simple')";
+        $this->db->where($sql);        
+        $this->db->where('up.user_type', '1');
+        $this->db->where('up.is_delete', '0');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['post_count'];
+    }
+
+    public function getContactCount($user_id = '', $select_data = '') {
+
+        $where = "((from_id = '" . $user_id . "' OR to_id = '" . $user_id . "'))";
+
+        $this->db->select("count(*) as total")->from("user_contact  uc");
+        $this->db->where('uc.status', 'confirm');
+        $this->db->where($where);
+        $this->db->order_by("uc.id", "DESC");
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function getFollowingCount($user_id = '', $select_data = '') {
+        $where = "(uf.follow_from = '" . $user_id . "')";
+        $this->db->select("count(*) as total")->from("user_follow  uf");
+        $this->db->join('user_login ul', 'ul.user_id = uf.follow_to', 'left');
+        $this->db->where('uf.status', '1');
+        $this->db->where($where);
+        $this->db->where('ul.status', '1');
+        $this->db->where('ul.is_delete', '0');
+        $this->db->order_by("uf.id", "DESC");
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function getFollowerCount($user_id = '', $select_data = '') {
+        $where = "((uf.follow_to = '" . $user_id . "'))";
+        $this->db->select("count(*) as total")->from("user_follow  uf");
+        $this->db->where('uf.status', '1');
+        $this->db->where('uf.follow_type', '1');
+        $this->db->where($where);
+        $this->db->order_by("uf.id", "DESC");
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function userQuestionsCount($user_id = '')
+    {
+
+        $this->db->select("COUNT(up.id) as post_count")->from("user_post up");
+        $getDeleteUserPost = "SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id";// $this->deletePostUser($user_id);
+        $this->db->where('up.id NOT IN ('.$getDeleteUserPost.')');        
+        $this->db->where('up.user_id', $user_id);
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.post_for', 'question');
+        $this->db->where('up.is_delete', '0');
+        $query = $this->db->get();        
+        $result_array = $query->row_array();        
+        return $result_array['post_count'];
+    }
+
+    public function change_number_long_format_to_short($n)
+    {
+        // first strip any formatting;        
+        $n = (0+str_replace(",","",$n));        
+        // is this a number?
+        if(!is_numeric($n)) return 0;        
+        // now filter it;
+        if($n>1000000000000) return round(($n/1000000000000),1).' T';
+        else if($n>1000000000) return round(($n/1000000000),1).' B';
+        else if($n>1000000) return round(($n/1000000),1).' M';
+        else if($n>1000) return round(($n/1000),1).' k';        
+        return number_format($n);
+    }
+
+    public function get_all_counter($user_id = "")
+    {
+        $return_arr = array();
+        $post_counter = $this->get_post_count($user_id);
+        $return_arr['dashboard_counter'] = $this->change_number_long_format_to_short((int)$post_counter);
+
+        $contact_counter = $this->getContactCount($user_id);
+        $return_arr['contact_counter'] = $this->change_number_long_format_to_short($contact_counter[0]['total']);
+        
+        $following_counter = $this->getFollowingCount($user_id);
+        $return_arr['following_counter'] = $this->change_number_long_format_to_short($following_counter[0]['total']);
+
+        $follower_counter = $this->getFollowerCount($user_id);
+        $return_arr['follower_counter'] = $this->change_number_long_format_to_short($follower_counter[0]['total']);
+
+        $question_counter = $this->userQuestionsCount($user_id);
+        $return_arr['question_counter'] = $this->change_number_long_format_to_short($question_counter);
+        return $return_arr;
+    }
+
 }
