@@ -626,7 +626,7 @@ class Userprofile_model extends CI_Model {
                 $postCommentData[$key1]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($postCommentData[$key1]['created_date'])));
                 $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-                $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['post_id'],$value1['comment_id'],$user_id);
+                $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['id'],$value1['comment_id'],$user_id);
             }
 
             $result_array[$key]['post_comment_data'] = $postCommentData;
@@ -1975,7 +1975,7 @@ class Userprofile_model extends CI_Model {
         $this->db->where('upc.reply_comment_id',$comment_id);
         $this->db->where('ul.status', '1');
         $this->db->where('upc.is_delete', '0');
-        $this->db->order_by('upc.id', 'desc');        
+        $this->db->order_by('upc.id', 'asc');        
         $query = $this->db->get();
         $post_comment_data = $query->result_array();
         foreach ($post_comment_data as $key => $value) {

@@ -2254,7 +2254,7 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];            
 
             if($value['user_type'] == '1')
-            {                
+            {
                 $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
                 $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
                 $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
@@ -2329,6 +2329,15 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $cover_update = $query->row_array();
                 $result_array[$key]['cover_update'] = $cover_update;
+            }
+            elseif ($value['post_for'] == 'article') {
+                $this->db->select("article_slug,user_id")->from("post_article");                
+                $this->db->where('id_post_article', $value['post_id']);
+                $this->db->where('status', 'publish');                
+                $query = $this->db->get();                
+                $article_data = $query->row_array();                
+                $result_array[$key]['article_data'] = $article_data;
+
             }
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
@@ -2678,4 +2687,140 @@ class User_post_model extends CI_Model {
         return $simple_data;
     }
 
+    public function get_post_detail_from_comment_id($comment_id = '', $user_id = '') {
+
+        $result_array = array();
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->join('user_post_comment upc', 'upc.post_id = up.id', 'left');
+        $this->db->where('upc.id', $comment_id);
+        $this->db->where('up.status', 'publish');        
+        $this->db->where('up.is_delete', '0');
+        $this->db->where('up.id NOT IN (SELECT post_id FROM ailee_user_post_delete WHERE user_id = "'.$user_id.'")');
+        
+        $this->db->order_by('up.id', 'desc');
+        
+        $query = $this->db->get();
+        $user_post = $query->result_array();
+
+        foreach ($user_post as $key => $value) {
+            $user_post[$key]['time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($user_post[$key]['created_date'])));
+            $result_array[$key]['post_data'] = $user_post[$key];
+
+            $this->db->select("count(*) as file_count")->from("user_post_file upf");
+            $this->db->where('upf.post_id', $value['id']);
+            $query = $this->db->get();
+            $total_post_files = $query->row_array('file_count');
+            $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];            
+
+            if($value['user_type'] == '1')
+            {
+                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+                $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+                $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+                $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+                $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+                $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+                $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+                $this->db->where('u.user_id', $value['user_id']);
+                $query = $this->db->get();
+                $user_data = $query->row_array();
+                $result_array[$key]['user_data'] = $user_data;
+            }
+            else
+            {
+                $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
+                $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
+                $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
+                $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
+                $this->db->join('states st', 'st.state_id = bp.state', 'left');
+                $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
+                $this->db->where('bp.user_id', $value['user_id']);
+                $query = $this->db->get();
+                $user_data = $query->row_array();
+                $result_array[$key]['user_data'] = $user_data;
+            }
+
+            if ($value['post_for'] == 'opportunity') {
+                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field, uo.other_field, uo.opptitle ,uo.oppslug, uo.company_name,IF(uo.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c, ailee_hashtag ht");
+                $this->db->join('industry_type it', 'it.industry_id = uo.field', 'left');
+                $this->db->where('uo.id', $value['post_id']);
+                $this->db->where('FIND_IN_SET(jt.title_id, uo.`opportunity_for`) !=', 0);
+                $this->db->where('FIND_IN_SET(c.city_id, uo.`location`) !=', 0);
+                $sql = "IF(uo.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uo.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uo.opportunity_for', 'uo.location','uo.hashtag');
+                $query = $this->db->get();
+                $opportunity_data = $query->row_array();
+                $opportunity_data['opportunity'] = nl2br($this->common->make_links($opportunity_data['opportunity']));
+                $result_array[$key]['opportunity_data'] = $opportunity_data;
+            } elseif ($value['post_for'] == 'simple') {
+                $this->db->select("usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
+                $this->db->where('usp.id', $value['post_id']);
+                $sql = "IF(usp.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, usp.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('usp.hashtag');
+                $query = $this->db->get();
+                $simple_data = $query->row_array();
+                $simple_data['description'] = $this->common->make_links(nl2br($simple_data['description']));//nl2br($this->common->make_links($simple_data['description']));
+                $result_array[$key]['simple_data'] = $simple_data;
+            } elseif ($value['post_for'] == 'question') {
+                $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
+                $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
+                $this->db->where('uaq.id', $value['post_id']);
+                //$this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
+                $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) != 0 , '1')");
+                $sql = "IF(uaq.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, uaq.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('uaq.category','uaq.hashtag');
+                $query = $this->db->get();                
+                $question_data = $query->row_array();
+                $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
+                $result_array[$key]['question_data'] = $question_data;
+            } elseif ($value['post_for'] == 'profile_update') {
+                $this->db->select("upu.*")->from("user_profile_update upu");
+                $this->db->where('upu.id', $value['post_id']);
+                $query = $this->db->get();
+                $profile_update = $query->row_array();
+                $result_array[$key]['profile_update'] = $profile_update;
+            } elseif ($value['post_for'] == 'cover_update') {
+                $this->db->select("upu.*")->from("user_profile_update upu");
+                $this->db->where('upu.id', $value['post_id']);
+                $query = $this->db->get();
+                $cover_update = $query->row_array();
+                $result_array[$key]['cover_update'] = $cover_update;
+            }
+            $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
+            $this->db->where('upf.post_id', $value['id']);
+            $query = $this->db->get();
+            $post_file_data = $query->result_array();
+            $result_array[$key]['post_file_data'] = $post_file_data;
+
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
+            $post_like_data = $this->postLikeData($value['id']);
+            $post_like_count = $this->likepost_count($value['id']);
+            $result_array[$key]['post_like_count'] = $post_like_count;
+            $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            if($user_id == $post_like_data['user_id'])
+            {
+                $postLikeUsername = "You";
+            }
+            else
+            {
+                $postLikeUsername = $post_like_data['username'];
+            }
+            if ($post_like_count > 1) {
+                $result_array[$key]['post_like_data'] = $postLikeUsername . ' and ' . ($post_like_count - 1) . ' other';
+            } elseif ($post_like_count == 1) {
+                $result_array[$key]['post_like_data'] = $postLikeUsername;
+            }
+            $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
+            $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
+
+            foreach ($postCommentData as $key1 => $value1) {
+                $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
+                $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
+            }
+        }
+        return $result_array;
+    }
 }

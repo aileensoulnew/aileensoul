@@ -1,3 +1,44 @@
+app.directive('ddTextCollapse', ['$compile', function($compile) {
+    return {
+        restrict: 'A',
+        scope: true,
+        link: function(scope, element, attrs) {
+            // start collapsed
+            scope.collapsed = false;
+            // create the function to toggle the collapse
+            scope.toggle = function() {
+                scope.collapsed = !scope.collapsed;
+            };
+            // wait for changes on the text
+            attrs.$observe('ddTextCollapseText', function(text) {
+                // get the length from the attributes
+                var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
+                if (text.length > maxLength) {
+                    // split the text in two parts, the first always showing
+                    var firstPart = String(text).substring(0, maxLength);
+                    var secondPart = String(text).substring(maxLength, text.length);
+                    // create some new html elements to hold the separate info
+                    var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
+                    var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
+                    var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
+                    var lineBreak = $compile('<br ng-if="collapsed">')(scope);
+                    var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "" : "View more"}}</span>')(scope); //{{collapsed ? "View less" : "View more"}}
+                    // remove the current contents of the element
+                    // and add the new ones we created
+                    element.empty();
+                    element.append(firstSpan);
+                    element.append(secondSpan);
+                    element.append(moreIndicatorSpan);
+                    element.append(lineBreak);
+                    element.append(toggleButton);
+                } else {
+                    element.empty();
+                    element.append(text);
+                }
+            });
+        }
+    };
+}]);
 app.directive("owlCarousel", function() {
     return {
         restrict: 'E',
@@ -527,6 +568,51 @@ app.controller('searchController', function($scope, $http, $compile) {
         $(".new-comment-" + post_id).hide();
     };
 
+    $scope.edit_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {       
+        $(".comment-for-post-"+post_id+" .edit-reply-comment").hide();
+        $(".comment-for-post-"+post_id+" li[id^=cancel-reply-comment-li-]").hide();
+        $(".comment-for-post-"+post_id+" li[id^=edit-reply-comment--]").show();
+        // $(".comment-for-post-"+post_id+" .comment-reply-dis-inner").show();
+
+        var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+        editContent = editContent.substring(0,cmt_maxlength);
+        $('#edit-reply-comment-' + comment_id).show();
+        $('#edit-comment-reply-textbox-' + comment_id).html(editContent);
+        $('#comment-reply-dis-inner-' + comment_id).hide();
+        $('#edit-reply-comment-li-' + comment_id).hide();
+        $('#cancel-reply-comment-li-' + comment_id).show();
+        $(".new-comment-"+post_id).hide();
+    }
+
+    $scope.cancel_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {
+        $('#edit-reply-comment-' + comment_id).hide();        
+        $('#comment-reply-dis-inner-' + comment_id).show();
+        $('#edit-reply-comment-li-' + comment_id).show();
+        $('#cancel-reply-comment-li-' + comment_id).hide();
+        $(".new-comment-"+post_id).show();
+    }
+
+    $scope.comment_reply = function(post_index,comment_id,login_user_id,comment_user_id,cmt_reply_obj){
+        $scope.comment_reply_data = cmt_reply_obj;
+        if(login_user_id == 0 && comment_user_id == 0)
+        {
+            $("#reply-comment-"+post_index+"-"+comment_id).html('');            
+        }
+        else
+        {
+            if(login_user_id == comment_user_id)
+            {
+                $("#reply-comment-"+post_index+"-"+comment_id).html('');                
+            }
+            else
+            {
+                var content = '<a class="mention-'+post_index+'-'+comment_id+'" href="'+base_url+cmt_reply_obj.user_slug+'" data-mention="'+window.btoa(cmt_reply_obj.user_slug)+'">'+cmt_reply_obj.username+'</a>&nbsp;';                
+                $("#reply-comment-"+post_index+"-"+comment_id).html(content);
+            }
+        }
+        $("#comment-reply-"+post_index+"-"+comment_id).show();   
+    };
+
     $scope.cancelPostComment = function(comment_id, post_id, parent_index, index) {
         $('#edit-comment-' + comment_id).hide();
         $('#comment-dis-inner-' + comment_id).show();
@@ -599,6 +685,84 @@ app.controller('searchController', function($scope, $http, $compile) {
             $scope.isMsgBoxEmpty = true;
         }
     };
+
+    $scope.sendCommentReply = function (comment_id,post_id,postIndex,commentIndex) {
+        var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
+        var comment = $('#reply-comment-'+postIndex+'-'+commentIndex).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        
+        var mention = 0;
+        var mention_id = 0;
+
+        if($("a.mention-"+postIndex+"-"+commentIndex).data('mention') != undefined && $("a.mention-"+postIndex+"-"+commentIndex).data('mention') != '')
+        {
+            var cmt_mention = window.atob($("a.mention-"+postIndex+"-"+commentIndex).data('mention'));            
+            if(cmt_mention == $scope.comment_reply_data.user_slug){
+                mention = 1;
+                mention_id = $scope.comment_reply_data.commented_user_id;
+            }
+        }
+        // data: {comment:comment,comment_id:comment_id,post_id:post_id,mention:mention,mention_id:$scope.comment_reply_data.commented_user_id},
+        if (comment) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/add_post_comment_reply',
+                data: 'comment=' + comment + '&comment_id=' + comment_id + '&post_id=' + post_id + '&mention=' + mention + '&mention_id=' + mention_id+'&comment_reply_id='+$scope.comment_reply_data.comment_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                // console.log(success.data);
+                data = success.data;
+                if (data.message == '1') {                    
+                    if (commentClassName == 'last-comment') {
+                        // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        
+                        $('.editable_text').html('');
+                    }
+                }
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
+    $scope.send_edit_comment_reply = function (reply_comment_id,post_id) {
+        var comment = $('#edit-comment-reply-textbox-' + reply_comment_id).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        if (comment) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/edit_post_comment_reply',
+                data: 'comment=' + comment + '&reply_comment_id=' + reply_comment_id + '&post_id=' + post_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {                
+                data = success.data;
+                if (data.message == '1') {
+                    $('#comment-reply-dis-inner-' + reply_comment_id).show();
+                    $('#comment-reply-dis-inner-' + reply_comment_id).html(comment);
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).html();
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).hide();
+                    $('#edit-comment-li-' + reply_comment_id).show();
+                    $('#cancel-reply-comment-li-' + reply_comment_id).hide();
+                    $('.new-comment-'+post_id).show();
+                }                
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
 
     $scope.deletePost = function(post_id, index) {
         $scope.p_d_post_id = post_id;

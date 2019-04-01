@@ -1927,37 +1927,26 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -2003,37 +1992,26 @@ Your browser does not support the audio tag.
                 $post_id = $comment_data['post_id'];
                 $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -2072,42 +2050,31 @@ Your browser does not support the audio tag.
                 $notification .= '</span></div></div> </div></a> </li>';
             }
 
-            if ($total['not_from'] == '7' && $total['not_type'] == '6') {
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '2') {
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {                    
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
-                }                
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
                 
@@ -2141,6 +2108,134 @@ Your browser does not support the audio tag.
                 }
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '3') {
+
+                $postDetailData = $this->user_post_model->get_post_detail_from_comment_id($total['not_product_id'], $userid);
+                // print_r($postDetailData);exit();
+                
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
+                {                    
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> replied to your comment.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '4') {
+
+                $postDetailData = $this->user_post_model->get_post_detail_from_comment_id($total['not_product_id'], $userid);
+                // print_r($postDetailData);exit();
+                
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
+                {                    
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> mentioned you in comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div> </div></a> </li>';
@@ -5150,37 +5245,26 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -5226,37 +5310,26 @@ Your browser does not support the audio tag.
                 $post_id = $comment_data['post_id'];
                 $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -5295,42 +5368,31 @@ Your browser does not support the audio tag.
                 $notification .= '</span></div></div> </div></a> </li>';
             }
 
-            if ($total['not_from'] == '7' && $total['not_type'] == '6') {
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '2') {
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
-                }                
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
                 
@@ -5364,6 +5426,134 @@ Your browser does not support the audio tag.
                 }
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '3') {
+
+                $postDetailData = $this->user_post_model->get_post_detail_from_comment_id($total['not_product_id'], $userid);
+                // print_r($postDetailData);exit();
+                
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
+                {                    
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> replied to your comment.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '4') {
+
+                $postDetailData = $this->user_post_model->get_post_detail_from_comment_id($total['not_product_id'], $userid);
+                // print_r($postDetailData);exit();
+                
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
+                {                    
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> mentioned you in comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div> </div></a> </li>';
@@ -6466,37 +6656,26 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -6542,37 +6721,26 @@ Your browser does not support the audio tag.
                 $post_id = $comment_data['post_id'];
                 $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
                 }
                 else
                 {
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -6611,42 +6779,31 @@ Your browser does not support the audio tag.
                 $notification .= '</span></div></div> </div></a> </li>';
             }
 
-            if ($total['not_from'] == '7' && $total['not_type'] == '6') {
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '2') {
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
-                }
-                else
-                {                    
-                    if($postDetailData[0]['post_data']['post_for'] != "question")
-                    {
-                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
-                    }
-                    else
-                    {                        
-                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
-                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
-                    }
-                }                
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
                 
@@ -6680,6 +6837,134 @@ Your browser does not support the audio tag.
                 }
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '3') {
+
+                $postDetailData = $this->user_post_model->get_post_detail_from_comment_id($total['not_product_id'], $userid);
+                // print_r($postDetailData);exit();
+                
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
+                {                    
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> replied to your comment.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '4') {
+
+                $postDetailData = $this->user_post_model->get_post_detail_from_comment_id($total['not_product_id'], $userid);
+                // print_r($postDetailData);exit();
+                
+                if($postDetailData[0]['post_data']['post_for'] == "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."p/".$postDetailData[0]['simple_data']['simslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "opportunity" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "question")
+                {
+                    $url = base_url()."o/".$postDetailData[0]['opportunity_data']['oppslug'];
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "question" && $postDetailData[0]['post_data']['post_for'] != "simple" && $postDetailData[0]['post_data']['post_for'] != "opportunity")
+                {
+                    $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                    $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == "article" )
+                {
+                    $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                else
+                {                    
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> mentioned you in comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div> </div></a> </li>';
@@ -6798,11 +7083,6 @@ Your browser does not support the audio tag.
         else
         {
             echo "0";
-        }
-        /*$userid = $this->session->userdata('aileenuser');
-        $user_data = $this->user_model->getUserData($userid);
-        $user_slug = str_replace("-", "_",$user_data['user_slug'])."@".OPENFIRESERVER;
-        $unread = $this->notification_model->get_unread_message_count($user_slug);
-        echo json_encode($unread);exit;*/
+        }        
     }
 }

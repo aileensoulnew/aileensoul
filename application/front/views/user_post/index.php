@@ -1426,7 +1426,7 @@
 							</div>
 							<div class="comment-action">
                                 <ul class="pull-left">
-                                    <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{comment.comment_id}}" ng-click="comment_reply(comment.comment_id)">Reply</a></li>
+                                    <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{comment.comment_id}}" ng-click="comment_reply(postIndex,commentIndex,0,0,comment)">Reply</a></li>
 
                                     <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
 
@@ -1440,36 +1440,6 @@
 									<li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
 									<li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
 								</ul>
-                            </div>
-
-                            <div id="comment-reply-{{comment.comment_id}}" class="comment-reply" style="display: none;">
-                                <div class="post-img">
-                                    <div ng-if="comment.user_image != ''">
-                                        <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
-                                            <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
-                                        </a>
-                                    </div>
-                                    <div class="post-img" ng-if="comment.user_image == ''">
-                                        <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
-                                            <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="comment-dis">
-                                    <div class="edit-comment">
-                                        <div class="comment-input">             
-                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendCommentReply({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
-                                        </div>
-                                        <div class="mob-comment">
-                                            <button ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
-                                        </div>
-                                        
-                                        <div class="comment-submit hidden-mob">
-                                            <button class="btn2" ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)">Send</button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="post-comment reply-comment" nf-if="comment.comment_reply_data.length > 0" ng-repeat="commentreply in comment.comment_reply_data" ng-init="commentReplyIndex=$index">
@@ -1505,7 +1475,8 @@
                                     </div>
                                 </div>
                                 <div class="comment-action">
-                                    <ul class="pull-left">                  
+                                    <ul class="pull-left">
+                                        <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{commentreply.comment_id}}" ng-click="comment_reply(postIndex,commentIndex,user_id,commentreply.commented_user_id,commentreply)">Reply</a></li>
 
                                         <li ng-if="commentreply.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="likePostComment(commentreply.comment_id, post.post_data.id)" class="like"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
 
@@ -1521,6 +1492,46 @@
                                     </ul>
                                 </div>
                                 
+                            </div>
+
+                            <div id="comment-reply-{{postIndex}}-{{commentIndex}}" class="comment-reply" style="display: none;">
+                                <div class="post-img">
+                                    <?php 
+                                    if ($leftbox_data['user_image'] != '')
+                                    { ?> 
+                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                    <?php
+                                    }
+                                    else
+                                    { 
+                                        if($leftbox_data['user_gender'] == "M")
+                                        {?>                                
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                        <?php
+                                        }
+                                        if($leftbox_data['user_gender'] == "F")
+                                        {
+                                        ?>
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                        <?php
+                                        }                                
+                                    } ?>
+
+                                </div>
+                                <div class="comment-dis">
+                                    <div class="edit-comment">
+                                        <div class="comment-input">             
+                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendCommentReply({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{postIndex}}-{{commentIndex}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
+                                        </div>
+                                        <div class="mob-comment">
+                                            <button ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                        </div>
+                                        
+                                        <div class="comment-submit hidden-mob">
+                                            <button class="btn2" ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

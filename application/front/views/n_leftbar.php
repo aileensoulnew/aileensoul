@@ -72,7 +72,7 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
                     <ul>
                         <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard <span class="dashboard_counter"><?php echo($all_counter['dashboard_counter'] > 0 ? $all_counter['dashboard_counter'] : 0); ?></span></a></li>
                         <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contacts <span class="contact_counter"><?php echo($all_counter['contact_counter'] > 0 ? $all_counter['contact_counter'] : 0); ?></span></a></li>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Follower <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Followers <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
                     </ul>
                 </div>
             </div>

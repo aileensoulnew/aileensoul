@@ -2636,8 +2636,25 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $(".new-comment-"+post_id).show();
     }
 
-    $scope.comment_reply = function(comment_id){
-        $("#comment-reply-"+comment_id).show();
+    $scope.comment_reply = function(post_index,comment_id,login_user_id,comment_user_id,cmt_reply_obj){
+        $scope.comment_reply_data = cmt_reply_obj;
+        if(login_user_id == 0 && comment_user_id == 0)
+        {
+            $("#reply-comment-"+post_index+"-"+comment_id).html('');            
+        }
+        else
+        {
+            if(login_user_id == comment_user_id)
+            {
+                $("#reply-comment-"+post_index+"-"+comment_id).html('');                
+            }
+            else
+            {
+                var content = '<a class="mention-'+post_index+'-'+comment_id+'" href="'+base_url+cmt_reply_obj.user_slug+'" data-mention="'+window.btoa(cmt_reply_obj.user_slug)+'">'+cmt_reply_obj.username+'</a>&nbsp;';                
+                $("#reply-comment-"+post_index+"-"+comment_id).html(content);
+            }
+        }
+        $("#comment-reply-"+post_index+"-"+comment_id).show();   
     };
 
     $scope.cancelPostComment = function (comment_id, post_id, parent_index, index) {
@@ -2905,16 +2922,29 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
     $scope.sendCommentReply = function (comment_id,post_id,postIndex,commentIndex) {
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
-        var comment = $('#reply-comment-' + comment_id).html();
+        var comment = $('#reply-comment-'+postIndex+'-'+commentIndex).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
+        
+        var mention = 0;
+        var mention_id = 0;
+
+        if($("a.mention-"+postIndex+"-"+commentIndex).data('mention') != undefined && $("a.mention-"+postIndex+"-"+commentIndex).data('mention') != '')
+        {
+            var cmt_mention = window.atob($("a.mention-"+postIndex+"-"+commentIndex).data('mention'));            
+            if(cmt_mention == $scope.comment_reply_data.user_slug){
+                mention = 1;
+                mention_id = $scope.comment_reply_data.commented_user_id;
+            }
+        }
+        // data: {comment:comment,comment_id:comment_id,post_id:post_id,mention:mention,mention_id:$scope.comment_reply_data.commented_user_id},
         if (comment) {
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/add_post_comment_reply',
-                data: 'comment=' + comment + '&comment_id=' + comment_id + '&post_id=' + post_id,
+                data: 'comment=' + comment + '&comment_id=' + comment_id + '&post_id=' + post_id + '&mention=' + mention + '&mention_id=' + mention_id+'&comment_reply_id='+$scope.comment_reply_data.comment_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
