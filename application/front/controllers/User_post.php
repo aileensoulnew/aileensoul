@@ -243,6 +243,7 @@ class User_post extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $post_id = $_POST['post_id'];
         $comment = $_POST['comment'];
+        $mention_data = $_POST['mention_data'];
 
         $data = array();
         $data['user_id'] = $userid;

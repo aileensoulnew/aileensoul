@@ -413,4 +413,18 @@ class Userprofile extends MY_Controller {
         }
     }
 
+    public function get_user_list()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $searchTerm = $_GET['term'];
+        if (!empty($searchTerm)) {
+            $user_list = $this->user_model->get_user_list($searchTerm,$userid);
+        }
+        else
+        {
+            $user_list = array();
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($user_list));
+    }
+
 }

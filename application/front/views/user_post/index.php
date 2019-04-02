@@ -1561,7 +1561,8 @@
 
                             </div>
                             <div class="comment-input">
-                                <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)"></div>
+                                <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment(post.post_data.id,$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
+                                <div class="commentTaxBox-{{post.post_data.id}} all-hashtags-list"></div>
                             </div>
                             <div class="mob-comment">
                                 <button id="cmt-btn-mob-{{post.post_data.id}}"  ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
@@ -2567,6 +2568,83 @@
                             return false;
                         },
                     });                
+                }
+
+                function split_m( val ) {
+                    return val.split( /,\s*/ );
+                }
+                function extractLast_m( term ) {
+                    return split_m( term ).pop();
+                }
+
+                function autocomplete_mention(id)
+                {
+                    $("#"+id).bind( "keydown", function( event ) {
+                        if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).autocomplete( "instance" ).menu.active ) {
+                            event.preventDefault();
+                        }
+                    })
+                    .autocomplete({
+                        appendTo: "."+id,
+                        minLength: 2,
+                        create: function () {
+                            $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                            return $('<li>')
+                                .append('<a>' + item.fullname + '</a>')
+                                .appendTo(ul);
+                            };
+                        },
+                        source: function( request, response ) {
+                            var search_key = extractLast_m( request.term );
+                            if(search_key[0] == "@")
+                            {
+                                search_key = search_key.substr(1);
+                                $.getJSON(base_url +"userprofile/get_user_list", { term : search_key},response);
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        },
+                        focus: function() {
+                            // prevent value inserted on focus
+                            return false;
+                        },
+                        select: function( event, ui ) {
+                            // console.log(this.id);
+                            // var terms = split( this.value );
+                            var terms = split_m( $("#"+this.id).text() );
+                            var user_data = {
+                                fullname:ui.item.fullname,
+                                user_slug:ui.item.user_slug,
+                            };
+
+                            var mention_attr = $("#"+this.id).attr('mention-data');
+                            var mention_arr = [];
+                            if(mention_attr != undefined)
+                            {
+                                mention_arr.push(JSON.parse(mention_attr));
+                                mention_arr.push(user_data);
+                            }
+                            else
+                            {
+                                mention_arr = user_data;
+                            }
+                            
+                            $("#"+this.id).attr('mention-data',JSON.stringify(mention_arr));
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push( ui.item.fullname );
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push("");
+                            // this.value = terms.join( " " );
+                            $("#"+this.id).html('<a>'+terms.join(",</a><a>")+'</a>&nbsp;');
+                            placeCaretAtEnd($("#"+this.id)[0]);
+                            return false;
+                        },
+                    });
                 }
                 /*$( "#sim_hashtag" ).bind( "keydown", function( event ) {
                     if ( event.keyCode === $.ui.keyCode.TAB &&

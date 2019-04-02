@@ -22,6 +22,8 @@ class Introduction extends CI_Controller {
     }
 
     public function job_profile() {
+        header("Location: /",TRUE,301);
+
         $this->data['title'] = 'Job Profile - How It Works'.TITLEPOSTFIX;
         $this->data['metadesc'] = 'All about the Aileensoul Job Profile Working!';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
@@ -32,6 +34,8 @@ class Introduction extends CI_Controller {
     }
 
     public function recruiter_profile() {
+        header("Location: /",TRUE,301);
+
         $this->data['title'] = 'Recruiter Profile - How It Works'.TITLEPOSTFIX;
         $this->data['metadesc'] = 'All about the Aileensoul Recruiter Profile Working!';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
@@ -42,8 +46,10 @@ class Introduction extends CI_Controller {
     }
 
     public function freelance_profile() {
-         $this->data['title'] = 'Freelance Profile - How It Works'.TITLEPOSTFIX;
-         $this->data['metadesc'] = 'All about the Aileensoul Freelance Profile Working!';
+        header("Location: /",TRUE,301);
+
+        $this->data['title'] = 'Freelance Profile - How It Works'.TITLEPOSTFIX;
+        $this->data['metadesc'] = 'All about the Aileensoul Freelance Profile Working!';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $profile = $this->check_profile();
@@ -52,8 +58,10 @@ class Introduction extends CI_Controller {
     }
 
     public function business_profile() {
-         $this->data['title'] = 'Business Profile - How It Works'.TITLEPOSTFIX;
-         $this->data['metadesc'] = 'All about the Aileensoul Business Profile Working!';
+        header("Location: /",TRUE,301);
+
+        $this->data['title'] = 'Business Profile - How It Works'.TITLEPOSTFIX;
+        $this->data['metadesc'] = 'All about the Aileensoul Business Profile Working!';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $profile = $this->check_profile();
@@ -62,8 +70,10 @@ class Introduction extends CI_Controller {
     }
 
     public function artistic_profile() {
-         $this->data['title'] = 'Artistic Profile - How It Works'.TITLEPOSTFIX;
-         $this->data['metadesc'] = 'All about the Aileensoul Artistic Profile Working!';
+        header("Location: /",TRUE,301);
+
+        $this->data['title'] = 'Artistic Profile - How It Works'.TITLEPOSTFIX;
+        $this->data['metadesc'] = 'All about the Aileensoul Artistic Profile Working!';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $profile = $this->check_profile();

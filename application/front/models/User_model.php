@@ -535,5 +535,19 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
+    public function get_user_list($term = '',$userid) {
+        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image")->from("user u");
+        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        
+        $sql_ser = "(LOWER(u.first_name) Like '".strtolower($term)."%' OR LOWER(u.last_name) Like '".strtolower($term)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '".strtolower($term)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '".strtolower($term)."%')";
 
+        $this->db->where($sql_ser);
+        $this->db->where("ul.status","1");
+        $this->db->where("ul.is_delete","0");
+        $this->db->where("u.user_id != ",$userid);
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return $result_array;
+    }    
 }

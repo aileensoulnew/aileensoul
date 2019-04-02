@@ -2434,7 +2434,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
     };
 
-    $scope.sendComment = function (post_id, index, post) {
+    $scope.sendComment = function (post_id, index, post) {        
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
         //comment = comment.replace(/^(<br\s*\/?>)+/, '');
@@ -2442,6 +2442,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         comment = comment.replace(/<br>$/, '');
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
+        var mention_data = $("#commentTaxBox-"+post_id).attr('mention-data');
         if (comment) {
             $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
             $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
@@ -2452,7 +2453,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: 'comment=' + comment + '&post_id=' + post_id + '&mention_data=' + mention_data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             })
             .then(function (success) {

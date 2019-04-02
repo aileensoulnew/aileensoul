@@ -50,7 +50,7 @@ class Cron extends MY_Controller {
             $userid = $this->session->userdata('aileenuser');
             $user_data = $this->user_model->getUserData($userid);            
 
-            $client = new MongoDB\Client(MONGO_URL.(MONGO_USER != '' ? MONGO_USER.':'.MONGO_PASS.'@' : '').MONGO_SERVER);
+            $client = new MongoDB\Client(MONGO_URL.(MONGO_USER != '' ? MONGO_USER.':'.MONGO_PASS.'@' : '').MONGO_SERVER.'/'.MONGO_DB);
             $collection = $client->testchat->messages;
             $pipeline = array(
                 array(

@@ -56,6 +56,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('MONGO_USER', '');
     define('MONGO_PASS', '');
     define('MONGO_SERVER', 'localhost');
+    define('MONGO_DB', 'testchat');
 
     define('COOKIEHOST', '.aileensoul.localhost');
     define('CROSSDOMAIN', 'http://chat.aileensoul.localhost');
@@ -84,6 +85,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('MONGO_USER', 'admin');
     define('MONGO_PASS', 'sysadmin123??');
     define('MONGO_SERVER', '34.222.73.215');
+    define('MONGO_DB', 'aileenchat');
 
     define('COOKIEHOST', '.aileensoul.com');
     define('CROSSDOMAIN', 'https://message.aileensoul.com:3000');
