@@ -1407,7 +1407,7 @@
                             <div class="comment-dis">
                                 <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
                                 <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
-                                    <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true">{{comment.comment}}</p>
+                                    <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true"></p>
                                 </div>
 
                                 <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
@@ -2624,12 +2624,12 @@
                             var mention_arr = [];
                             if(mention_attr != undefined)
                             {
-                                mention_arr.push(JSON.parse(mention_attr));
+                                mention_arr = JSON.parse(mention_attr);
                                 mention_arr.push(user_data);
                             }
                             else
                             {
-                                mention_arr = user_data;
+                                mention_arr.push(user_data);
                             }
                             
                             $("#"+this.id).attr('mention-data',JSON.stringify(mention_arr));
@@ -2640,7 +2640,14 @@
                             // add placeholder to get the comma-and-space at the end
                             terms.push("");
                             // this.value = terms.join( " " );
-                            $("#"+this.id).html('<a>'+terms.join(",</a><a>")+'</a>&nbsp;');
+                            var content = '';
+                            $.each(mention_arr, function( index, value ) {
+                              // console.log( index + ": " );
+                              // console.log(value);
+                              content += '<a href="'+base_url+value.user_slug+'" mention="'+window.btoa(value.user_slug)+'">'+value.fullname+',</a>&nbsp;';
+                            });
+                            // $("#"+this.id).html('<a class="mention">'+terms.join(',</a><a class="mention">')+'</a>&nbsp;');
+                            $("#"+this.id).html(content);
                             placeCaretAtEnd($("#"+this.id)[0]);
                             return false;
                         },

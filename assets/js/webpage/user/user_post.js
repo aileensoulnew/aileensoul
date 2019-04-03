@@ -2442,7 +2442,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         comment = comment.replace(/<br>$/, '');
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
-        var mention_data = $("#commentTaxBox-"+post_id).attr('mention-data');
+        // var mention_data = $("#commentTaxBox-"+post_id).attr('mention-data');
         if (comment) {
             $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
             $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
@@ -2453,7 +2453,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id + '&mention_data=' + mention_data,
+                data: 'comment=' + comment + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             })
             .then(function (success) {
@@ -2480,6 +2480,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     }
                 }
                 setTimeout(function(){
+                    $("#commentTaxBox-"+post_id).attr('mention-data','');
                     $("#cmt-btn-mob-"+post_id).removeAttr("style");
                     $("#cmt-btn-mob-"+post_id).removeAttr("disabled");
                     $("#cmt-btn-"+post_id).removeAttr("style");
