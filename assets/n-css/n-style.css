@@ -234,7 +234,7 @@ padding: 5px;}
 .like-other-box{width:100%; float:left; border-top:1px solid #d2d2d2; padding-top:3px; line-height: 1;}
 .like-other-box a{font-size:13px;}
 .comment-box .post-img{width:30px; height:30px;}
-.add-comment .comment-input{width:426px; padding:0 15px; float:left;}
+.add-comment .comment-input{width:426px; padding:0 15px; float:left; position: relative;}
 .edit-comment .comment-input{width:415px; padding:0 15px 0 0; float:left;}
 .question-page .add-comment .comment-input{width:85%;}
 .questions .custom-user-list h3{border-bottom:0;}
@@ -3628,6 +3628,16 @@ tags-input .tags{padding: 0;}
 .form-group label{margin-bottom: 0;}
 .modal-content .post-field .all-upload .form-group{padding: 0;}
 .reply-comment{padding-left: 40px; padding-top: 10px;}
+.comment-input .all-hashtags-list ul.ui-menu li.ui-menu-item{padding-left: 0 !important;}
+.all-hashtags-list .ui-menu .ui-menu-item .ui-menu-item-wrapper{width:100%; float: left; border-bottom: 1px solid #d2d2d2; padding: 5px !important;}
+.comment-input .all-hashtags-list ul.ui-menu{width: 87% !important; left: 28px !important;}
+.comment-input .all-hashtags-list ul.ui-widget{position: absolute !important; top:26px !important; }
+.all-hashtags-list .post-img{width: 50px; height: 50px; margin-right: 10px;}
+.all-hashtags-list a .dropdown-user-detail b{color:#5c5c5c;}
+.all-hashtags-list a .dropdown-user-detail .msg-discription span{color:#5c5c5c;}
+
+
+
 
 /***  media query  ***/
 @media print {
