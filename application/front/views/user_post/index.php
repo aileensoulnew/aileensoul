@@ -2623,7 +2623,7 @@
                                     content += '<div class="dropdown-user-detail">';
                                     content += '<b>'+item.fullname+'</b>';
                                     content += '<div class="msg-discription">';
-                                    content += '<span class="time_ago"></span>';
+                                    content += '<span class="time_ago">Job Title</span>';
                                     content += '</div>';
                                     content += '</div>';                                    
                                     content += '</a>';
