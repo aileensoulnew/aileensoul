@@ -957,8 +957,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                                             <div class="comment-input">
                                                                 <!--<div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" onpaste="OnPaste_StripFormatting(event);"></div>-->
-                                                                <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
+                                                                <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
                                                             </div>
+                                                            <div class="editCommentTaxBox-{{comment.comment_id}} all-hashtags-list"></div>
                                                             <div class="mob-comment">
                                                                 <button ng-click="sendEditComment(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                             </div>
@@ -1008,8 +1009,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                             <div class="edit-reply-comment" id="edit-reply-comment-{{commentreply.comment_id}}" style="display:none;">
                                                                 <div class="comment-input">                 
-                                                                    <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="send_edit_comment_reply({{commentreply.comment_id}}, post.post_data.id)" id="edit-comment-reply-textbox-{{commentreply.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(commentreply.comment_id,$event)"></div>
+                                                                    <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="send_edit_comment_reply({{commentreply.comment_id}}, post.post_data.id)" id="edit-comment-reply-textbox-{{commentreply.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(commentreply.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
                                                                 </div>
+                                                                <div class="edit-comment-reply-textbox-{{commentreply.comment_id}} all-hashtags-list"></div>
                                                                 <div class="mob-comment">
                                                                     <button ng-click="send_edit_comment_reply(commentreply.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                                 </div>                                        
@@ -1065,8 +1067,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <div class="comment-dis">
                                                             <div class="edit-comment">
                                                                 <div class="comment-input">             
-                                                                    <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendCommentReply({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{postIndex}}-{{commentIndex}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
+                                                                    <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendCommentReply({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{postIndex}}-{{commentIndex}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
                                                                 </div>
+                                                                <div class="reply-comment-{{postIndex}}-{{commentIndex}} all-hashtags-list"></div>
                                                                 <div class="mob-comment">
                                                                     <button ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                                 </div>
@@ -1105,8 +1108,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                     </div>
                                                     <div class="comment-input">
-                                                        <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)"></div>
+                                                        <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
                                                     </div>
+                                                    <div class="commentTaxBox-{{post.post_data.id}} all-hashtags-list"></div>
                                                     <div class="mob-comment">
                                                         <button id="cmt-btn-mob-{{post.post_data.id}}"  ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
                                                     </div>
@@ -2083,6 +2087,114 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 				});
 				
 			});
+
+            function placeCaretAtEnd(el) {
+                el.focus();
+                if (typeof window.getSelection != "undefined"
+                        && typeof document.createRange != "undefined") {
+                    var range = document.createRange();
+                    range.selectNodeContents(el);
+                    range.collapse(false);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else if (typeof document.body.createTextRange != "undefined") {
+                    var textRange = document.body.createTextRange();
+                    textRange.moveToElementText(el);
+                    textRange.collapse(false);
+                    textRange.select();
+                }
+            }
+
+            function split_m( val ) {
+                // return val.split( /,\s*/ );
+                return val.split( /@/ );
+            }
+            function extractLast_m( term ) {
+                return split_m( term ).pop();
+            }
+
+            var startTyping = "Start Typing";
+
+            function autocomplete_mention(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 0,
+                    create: function (event,ui) {                            
+                        $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
+                            if(item.fullname != undefined)
+                            {
+                                var content = '<a href="javascript:void(0);" contenteditable="false">';
+                                var img_content = "";
+
+                                if(item.user_image)
+                                {
+                                    var img_url = "<?php echo USER_THUMB_UPLOAD_URL;?>"+item.user_image;
+                                    img_content = '<img src="'+img_url+'" alt="'+item.first_name+'" onError="this.onerror=null;this.src='+(item.user_gender == "M" ? '\''+base_url+'assets/img/man-user.jpg\'' : '\''+base_url+'assets/img/female-user.jpg\'')+'">';
+                                }
+                                else
+                                {
+                                    if(item.user_gender == "M")
+                                    {
+                                        img_content = '<img src="'+base_url+'assets/img/man-user.jpg'+'">';
+                                    }
+                                    else if(item.user_gender == "F")
+                                    {                                            
+                                        img_content = '<img src="'+base_url+'assets/img/female-user.jpg'+'">';   
+                                    }
+                                }
+                                content += '<div class="post-img">'+img_content+'</div>';
+                                content += '<div class="dropdown-user-detail">';
+                                content += '<b>'+item.fullname+'</b>';
+                                content += '<div class="msg-discription">';
+                                content += '<span class="time_ago"></span>';
+                                content += '</div>';
+                                content += '</div>';                                    
+                                content += '</a>';
+
+                                return $('<li>').append(content)
+                                    .appendTo(ul);
+                            }
+                        };
+                    },
+                    source: function( request, response ) {                            
+                        var term = request.term,
+                            results = [];
+                        if (term.indexOf("@") >= 0) {
+                            term = extractLast_m(request.term);
+                            if (term.length > 0) {
+                                results = $.getJSON(base_url +"userprofile/get_user_list", { term : term},response);
+                                response(results);
+                            } else {
+                                results = [startTyping];
+                            }
+                        }                            
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        if (ui.item.fullname !== startTyping) {
+                            var value = $("#"+this.id).html();
+                            var terms = split_m(value);
+                            terms.pop();
+                            var content = '<a contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
+                            terms.push(content);
+                            $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
+                            placeCaretAtEnd($("#"+this.id)[0]);
+                        }
+                        return false;
+                    },
+                });
+            }
             autosize(document.getElementsByClassName('hashtag-textarea'));
 		</script>
     </body>

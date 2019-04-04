@@ -322,6 +322,7 @@ class User_post_model extends CI_Model {
         $query = $this->db->get();
         $post_comment_data = $query->result_array();
         foreach ($post_comment_data as $key => $value) {
+            $post_comment_data[$key]['comment'] = nl2br($this->common->make_links($post_comment_data[$key]['comment']));
             $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
             $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
             $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);
@@ -343,6 +344,7 @@ class User_post_model extends CI_Model {
         $query = $this->db->get();
         $post_comment_data = $query->result_array();
         foreach ($post_comment_data as $key => $value) {
+            $post_comment_data[$key]['comment'] = nl2br($this->common->make_links($post_comment_data[$key]['comment']));
             $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
             $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
             $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);
@@ -2653,6 +2655,7 @@ class User_post_model extends CI_Model {
         $query = $this->db->get();
         $post_comment_data = $query->result_array();
         foreach ($post_comment_data as $key => $value) {
+            $post_comment_data[$key]['comment'] = nl2br($this->common->make_links($post_comment_data[$key]['comment']));
             $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
             $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
             $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);

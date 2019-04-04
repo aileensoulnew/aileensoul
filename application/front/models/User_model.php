@@ -536,9 +536,14 @@ class User_model extends CI_Model {
     }
 
     public function get_user_list($term = '',$userid) {
-        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image")->from("user u");
+        $this->db->distinct();
+        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image,jt.name as title_name, d.degree_name, u.user_gender")->from("user u");
         $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
         $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+        $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
         
         $sql_ser = "(LOWER(u.first_name) Like '".strtolower($term)."%' OR LOWER(u.last_name) Like '".strtolower($term)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '".strtolower($term)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '".strtolower($term)."%')";
 
@@ -546,7 +551,9 @@ class User_model extends CI_Model {
         $this->db->where("ul.status","1");
         $this->db->where("ul.is_delete","0");
         $this->db->where("u.user_id != ",$userid);
-        $query = $this->db->get();        
+        $this->db->limit(50);
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
         $result_array = $query->result_array();
         return $result_array;
     }    

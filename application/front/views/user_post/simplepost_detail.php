@@ -602,7 +602,7 @@
                                             <div class="comment-dis">
                                                 <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
                                                 <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
-                                                    <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true">{{comment.comment}}</p>
+                                                    <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true"></p>
                                                 </div>
 
                                                 <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
@@ -654,7 +654,7 @@
                                                 <div class="comment-dis">
                                                     <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username"></a></div>
                                                     <div class="comment-dis-inner" id="comment-reply-dis-inner-{{commentreply.comment_id}}">
-                                                        <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{commentreply.comment}}" dd-text-collapse-cond="true">{{commentreply.comment}}</p>
+                                                        <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{commentreply.comment}}" dd-text-collapse-cond="true"></p>
                                                     </div>
 
                                                     <div class="edit-reply-comment" id="edit-reply-comment-{{commentreply.comment_id}}" style="display:none;">

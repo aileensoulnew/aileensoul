@@ -68,8 +68,8 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
                 var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
                 var condition = scope.$eval(attrs.ddTextCollapseCond);
                 
-
-                if (text.length > maxLength) {
+                var all_html = $.parseHTML(text);
+                if ($(all_html).text().length > maxLength) {
                     // split the text in two parts, the first always showing
 
                     if(/^\<a.*\>.*\<\/a\>/i.test(text))
@@ -80,12 +80,12 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
                     }
                     else
                     {
-                        var firstPart = String(text).substring(0, maxLength);                    
+                        var firstPart = String($(all_html).text()).substring(0, maxLength);                    
                         var secondPart = String(text).substring(maxLength, text.length);                    
 
                         // create some new html elements to hold the separate info
-                        var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
-                        var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
+                        var firstSpan = $compile('<span ng-if="!collapsed">' + firstPart + '</span>')(scope);
+                        var secondSpan = $compile('<span ng-if="collapsed">' + text + '</span>')(scope);
                         var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
                         var lineBreak = $compile('<br ng-if="collapsed">')(scope);
                         if(condition == true)

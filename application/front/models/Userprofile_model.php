@@ -374,7 +374,11 @@ class Userprofile_model extends CI_Model {
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id']);
 
             foreach ($postCommentData as $key1 => $value1) {
+                
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
+                
+                $result_array[$key]['post_comment_data'][$key1]['comment'] = nl2br($this->common->make_links($result_array[$key]['post_comment_data'][$key1]['comment']));
+
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
                 $result_array[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['post_id'],$value1['comment_id'],$user_id);
             }
@@ -623,6 +627,8 @@ class Userprofile_model extends CI_Model {
             $postCommentData = $this->postCommentData($value['id']);
 
             foreach ($postCommentData as $key1 => $value1) {
+                $postCommentData[$key1]['comment'] = nl2br($this->common->make_links($postCommentData[$key1]['comment']));
+
                 $postCommentData[$key1]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($postCommentData[$key1]['created_date'])));
                 $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
@@ -724,6 +730,8 @@ class Userprofile_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $postCommentData = $this->postCommentData($value['id']);            
             foreach ($postCommentData as $key1 => $value1) {
+                $postCommentData[$key1]['comment'] = nl2br($this->common->make_links($postCommentData[$key1]['comment']));
+
                 $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
                 $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['id'],$value1['comment_id'],$user_id);
@@ -1979,6 +1987,7 @@ class Userprofile_model extends CI_Model {
         $query = $this->db->get();
         $post_comment_data = $query->result_array();
         foreach ($post_comment_data as $key => $value) {
+            $post_comment_data[$key]['comment'] = nl2br($this->common->make_links($post_comment_data[$key]['comment']));
             $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
             $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
             $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);

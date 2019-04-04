@@ -25,14 +25,15 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
             // wait for changes on the text
             attrs.$observe('ddTextCollapseText', function(text) {
                 // get the length from the attributes
+                var all_html = $.parseHTML(text);
                 var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
-                if (text.length > maxLength) {
+                if ($(all_html).text().length > maxLength) {                    
                     // split the text in two parts, the first always showing
-                    var firstPart = String(text).substring(0, maxLength);
+                    var firstPart = String($(all_html).text()).substring(0, maxLength);
                     var secondPart = String(text).substring(maxLength, text.length);
                     // create some new html elements to hold the separate info
-                    var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
-                    var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
+                    var firstSpan = $compile('<span ng-if="!collapsed">' + firstPart + '</span>')(scope);
+                    var secondSpan = $compile('<span ng-if="collapsed">' + text + '</span>')(scope);
                     var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
                     var lineBreak = $compile('<br ng-if="collapsed">')(scope);
                     var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "" : "View more"}}</span>')(scope); //{{collapsed ? "View less" : "View more"}}

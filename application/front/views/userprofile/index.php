@@ -494,6 +494,114 @@
                         },
                     });                
                 }
+
+                function placeCaretAtEnd(el) {
+                    el.focus();
+                    if (typeof window.getSelection != "undefined"
+                            && typeof document.createRange != "undefined") {
+                        var range = document.createRange();
+                        range.selectNodeContents(el);
+                        range.collapse(false);
+                        var sel = window.getSelection();
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                    } else if (typeof document.body.createTextRange != "undefined") {
+                        var textRange = document.body.createTextRange();
+                        textRange.moveToElementText(el);
+                        textRange.collapse(false);
+                        textRange.select();
+                    }
+                }
+
+                function split_m( val ) {
+                    // return val.split( /,\s*/ );
+                    return val.split( /@/ );
+                }
+                function extractLast_m( term ) {
+                    return split_m( term ).pop();
+                }
+
+                var startTyping = "Start Typing";
+
+                function autocomplete_mention(id)
+                {
+                    $("#"+id).bind( "keydown", function( event ) {
+                        if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).autocomplete( "instance" ).menu.active ) {
+                            event.preventDefault();
+                        }
+                    })
+                    .autocomplete({
+                        appendTo: "."+id,
+                        minLength: 0,
+                        create: function (event,ui) {                            
+                            $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
+                                if(item.fullname != undefined)
+                                {
+                                    var content = '<a href="javascript:void(0);" contenteditable="false">';
+                                    var img_content = "";
+
+                                    if(item.user_image)
+                                    {
+                                        var img_url = "<?php echo USER_THUMB_UPLOAD_URL;?>"+item.user_image;
+                                        img_content = '<img src="'+img_url+'" alt="'+item.first_name+'" onError="this.onerror=null;this.src='+(item.user_gender == "M" ? '\''+base_url+'assets/img/man-user.jpg\'' : '\''+base_url+'assets/img/female-user.jpg\'')+'">';
+                                    }
+                                    else
+                                    {
+                                        if(item.user_gender == "M")
+                                        {
+                                            img_content = '<img src="'+base_url+'assets/img/man-user.jpg'+'">';
+                                        }
+                                        else if(item.user_gender == "F")
+                                        {                                            
+                                            img_content = '<img src="'+base_url+'assets/img/female-user.jpg'+'">';   
+                                        }
+                                    }
+                                    content += '<div class="post-img">'+img_content+'</div>';
+                                    content += '<div class="dropdown-user-detail">';
+                                    content += '<b>'+item.fullname+'</b>';
+                                    content += '<div class="msg-discription">';
+                                    content += '<span class="time_ago"></span>';
+                                    content += '</div>';
+                                    content += '</div>';                                    
+                                    content += '</a>';
+
+                                    return $('<li>').append(content)
+                                        .appendTo(ul);
+                                }
+                            };
+                        },
+                        source: function( request, response ) {                            
+                            var term = request.term,
+                                results = [];
+                            if (term.indexOf("@") >= 0) {
+                                term = extractLast_m(request.term);
+                                if (term.length > 0) {
+                                    results = $.getJSON(base_url +"userprofile/get_user_list", { term : term},response);
+                                    response(results);
+                                } else {
+                                    results = [startTyping];
+                                }
+                            }                            
+                        },
+                        focus: function() {
+                            // prevent value inserted on focus
+                            return false;
+                        },
+                        select: function( event, ui ) {
+                            if (ui.item.fullname !== startTyping) {
+                                var value = $("#"+this.id).html();
+                                var terms = split_m(value);
+                                terms.pop();
+                                var content = '<a contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
+                                terms.push(content);
+                                $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
+                                placeCaretAtEnd($("#"+this.id)[0]);
+                            }
+                            return false;
+                        },
+                    });
+                }
         </script>
         <script src="<?php echo base_url('assets/js/masonry.pkgd.min.js?ver=' . time()); ?>"></script>
 
