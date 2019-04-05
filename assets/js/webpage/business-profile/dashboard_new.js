@@ -2472,6 +2472,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $(".comment-for-post-"+post_id+" li[id^=cancel-reply-comment-li-]").hide();
         $(".comment-for-post-"+post_id+" li[id^=edit-reply-comment--]").show();
         // $(".comment-for-post-"+post_id+" .comment-reply-dis-inner").show();
+        $('#edit-comment-li-' + comment_id).hide();
+        $('#timeago-reply-comment-li-' + comment_id).hide();
 
         var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
         editContent = editContent.substring(0,cmt_maxlength);
@@ -2484,6 +2486,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     }
 
     $scope.cancel_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {
+        $('#edit-comment-li-' + comment_id).show();
+        $('#timeago-reply-comment-li-' + comment_id).show();
         $('#edit-reply-comment-' + comment_id).hide();        
         $('#comment-reply-dis-inner-' + comment_id).show();
         $('#edit-reply-comment-li-' + comment_id).show();
