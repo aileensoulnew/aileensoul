@@ -2470,8 +2470,9 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     $scope.edit_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {       
         $(".comment-for-post-"+post_id+" .edit-reply-comment").hide();
         $(".comment-for-post-"+post_id+" li[id^=cancel-reply-comment-li-]").hide();
-        $(".comment-for-post-"+post_id+" li[id^=edit-reply-comment--]").show();
-        // $(".comment-for-post-"+post_id+" .comment-reply-dis-inner").show();
+        $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" li[id^=timeago-reply-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" div[id^=comment-reply-dis-inner-]").show();
         $('#edit-comment-li-' + comment_id).hide();
         $('#timeago-reply-comment-li-' + comment_id).hide();
 
