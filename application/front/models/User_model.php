@@ -551,7 +551,7 @@ class User_model extends CI_Model {
         $this->db->where("ul.status","1");
         $this->db->where("ul.is_delete","0");
         $this->db->where("u.user_id != ",$userid);
-        $this->db->limit(50);
+        $this->db->limit(5);
         $query = $this->db->get();
         // echo $this->db->last_query();exit();
         $result_array = $query->result_array();
