@@ -2154,7 +2154,18 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 content += '<div class="dropdown-user-detail">';
                                 content += '<b>'+item.fullname+'</b>';
                                 content += '<div class="msg-discription">';
-                                content += '<span class="time_ago"></span>';
+                                if(item.title_name)
+                                {
+                                    content += '<span class="time_ago">'+item.title_name+'</span>';
+                                }
+                                else if(item.degree_name)
+                                {
+                                    content += '<span class="time_ago">'+item.degree_name+'</span>';
+                                }
+                                else
+                                {
+                                    content += '<span class="time_ago">Current Work</span>';
+                                }
                                 content += '</div>';
                                 content += '</div>';                                    
                                 content += '</a>';
