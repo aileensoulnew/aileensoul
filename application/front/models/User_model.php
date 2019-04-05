@@ -556,5 +556,28 @@ class User_model extends CI_Model {
         // echo $this->db->last_query();exit();
         $result_array = $query->result_array();
         return $result_array;
-    }    
+    }
+
+    public function set_new_signup($userid,$flag = 0)
+    {
+        $sql = "SELECT user_id FROM ailee_user WHERE user_id = $userid AND new_signup = 1";
+        if($flag == 1)
+        {
+            $sql .= " AND created_date <= NOW() - INTERVAL 1 DAY";
+        }
+        $query = $this->db->query($sql);
+        $result_data = $query->row_array();
+        // print_r($result_data);exit();
+        if(isset($result_data) && !empty($result_data))
+        {
+            $data = array('new_signup'=>0);            
+            $this->db->where('user_id', $userid);
+            $result_array = $this->db->update('user', $data);
+            return true;
+        }
+        else
+        {
+            return true;   
+        }
+    }
 }

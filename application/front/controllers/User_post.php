@@ -475,14 +475,9 @@ class User_post extends MY_Controller {
                                                         <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                                     </td>
                                                     <td style="padding:5px;">';
-                                if($mention == 0)
-                                {
-                                    $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> replied on your comment.</p>';
-                                }
-                                elseif($mention == 1)
-                                {
-                                    $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mention you in replied of comment.</p>';   
-                                }
+                                
+                                $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.</p>';   
+                                
                                 $email_html .= '<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
                                         </td>
                                         <td style="'.MAIL_TD_3.'">
@@ -491,7 +486,7 @@ class User_post extends MY_Controller {
                                     </tr>
                                     </table>';
 
-                                $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' mention you in replied of comment in Aileensoul.';
+                                $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' mentioned you in a comment in Aileensoul.';
                                 $unsubscribe = base_url()."unsubscribe/".md5($userdata['encrypt_key'])."/".md5($userdata['user_slug'])."/".md5($userdata['user_id']);
 
                                 if($userdata['is_subscribe'] == 1)
@@ -3036,7 +3031,7 @@ class User_post extends MY_Controller {
                             }
                             elseif($mention == 1)
                             {
-                                $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mention you in replied of comment.</p>';   
+                                $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.</p>';   
                             }
                             $email_html .= '<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
                                     </td>
@@ -3051,7 +3046,7 @@ class User_post extends MY_Controller {
                             }
                             elseif($mention == 1)
                             {
-                                $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' mention you in replied of comment in Aileensoul.';
+                                $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' mentioned you in a comment in Aileensoul.';
                             }
 
                             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
@@ -3252,7 +3247,7 @@ class User_post extends MY_Controller {
                                     }
                                     elseif($mention == 1)
                                     {
-                                        $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mention you in replied of comment.</p>';   
+                                        $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.</p>';   
                                     }
                                     $email_html .= '<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
                                             </td>
@@ -3262,7 +3257,7 @@ class User_post extends MY_Controller {
                                         </tr>
                                         </table>';
 
-                                    $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' mention you in replied of comment in Aileensoul.';
+                                    $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' mentioned you in a comment in Aileensoul.';
                                     $unsubscribe = base_url()."unsubscribe/".md5($userdata['encrypt_key'])."/".md5($userdata['user_slug'])."/".md5($userdata['user_id']);
 
                                     if($userdata['is_subscribe'] == 1)

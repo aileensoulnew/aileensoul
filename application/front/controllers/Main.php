@@ -89,8 +89,10 @@ class Main extends CI_Controller {
 
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
+
+        $this->user_model->set_new_signup($userid,1);
         
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);        
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);

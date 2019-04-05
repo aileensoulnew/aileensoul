@@ -55,13 +55,14 @@ class Dashboard extends MY_Controller {
         $this->load->view('dashboard/cover', $this->data);
     }
 
-    public function logout() {
-
-       
+    public function logout() {       
 
         //PROGRESSBAR JOB START
         $userid = $this->session->userdata('aileenuser');
-        $this->progressbar();
+
+        $this->user_model->set_new_signup($userid);
+
+        /*$this->progressbar();
 
         if ($this->data['count_profile'] == 100) {
             $data = array(
@@ -77,7 +78,7 @@ class Dashboard extends MY_Controller {
             );
 
             $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
-        }       
+        } */
 
         //PROGRESSBAR JOB END
         if ($this->session->userdata('searchkeyword')) {
