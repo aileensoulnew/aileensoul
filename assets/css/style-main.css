@@ -440,7 +440,6 @@ header h2{
     line-height: normal;
     color: #232323;
     display: block;
-    margin: 15px 0;
 }
 .modal-open .modal {
     z-index: 10002;
@@ -479,28 +478,22 @@ header h2{
     width: 100%;
     float: left;
     padding-top: 25px;
-    padding-bottom: 20px;
 }
 .pop_content .okbtn {
     margin-right: 20px;
     transition: all 200ms;
     font-size: 16px;
     text-decoration: none;
-    color: #fff;
-    padding: 8px 18px;
-    background-color: #1b8ab9!important;
+    padding: 7px 18px;
     left: 170px;
     margin-top: 8px;
     width: 100px;
-    border-radius: 8px;
 }
 .pop_content .cnclbtn {
     transition: all 200ms;
     font-size: 16px;
     text-decoration: none;
-    color: #fff;
-    padding: 8px 18px;
-    background-color: #1b8ab9!important;
+    padding: 7px 18px;
     right: 170px;
     margin-top: 8px;
     width: 100px;
@@ -510,13 +503,6 @@ header h2{
     text-align: center;
     margin-top: 40px;
 }
-.pop_content .cnclbtn:hover {
-    background-color: #156f95 !important;
-}
-.pop_content .okbtn:hover {
-    background-color: #156f95 !important;
-}
-
 /**---------- end model ---------------**/
 
 .cus-chang{font-size: 27px!important;font-weight: normal;margin-bottom: 20px;color: #1b8ab9 !important;font-family: "Arial" !important;}
@@ -645,7 +631,6 @@ header h2{
 .login .btn1{
     width:100%
 }
-.modal-open .btn1{padding: 5px 20px;font-size: 16px !important;}
 .fancybox-slide>*{
     font-size:24px;
     padding:45px!important;

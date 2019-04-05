@@ -410,7 +410,7 @@
 			
 			<div class="tab-add">
 
-				<?php //$this->load->view('infeed_add'); ?>
+				<?php $this->load->view('infeed_add'); ?>
 			</div>
 			<div id="move-middle">
 			</div>
@@ -1125,13 +1125,11 @@
             <div ng-if="(postIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                 <div class="tab-add">
                     <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
-                    <?php //$this->load->view('infeed_add'); ?>
+                    
                 </div>
             </div>
         </div>
-				<div class="tab-add">
-						<?php //$this->load->view('banner_add'); ?>
-					</div>
+				
             </div>
             <!-- Repeated Class Complete -->
             <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>

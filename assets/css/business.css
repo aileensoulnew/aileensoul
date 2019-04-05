@@ -4210,6 +4210,8 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 
 
 .comment-action ul{padding-left:40px;}
+.editable_text{padding: 4px 15px 3px !important;}
+
 /***  media query  ***/
 
 @media screen and (max-width:1279px){
@@ -4492,7 +4494,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
         float:none;
 		width:100%;
     }
-	.business-profile-right .profile-main-box-buis-menu ul.current-user li{width:25%;}
+	.business-profile-right .profile-main-box-buis-menu ul.current-user li{width:33.33%;}
 	.business-profile-right .profile-main-box-buis-menu ul.current-user li:last-child{padding-right:0;}
     .profile-main-box-buis-menu li a{
         height:48px;
@@ -4600,7 +4602,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
         bottom:77px
     }
     .other-profile-menu .bpro-fw li{
-        width:25%
+        width:33.33%
     }
     .profile-main-box-buis-menu .flw_msg_btn{
         margin:6px auto 0!important;
@@ -4648,6 +4650,8 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
     }
 	#contact_per{margin-top:25px;}
 	#btn-move .btn-n2{padding:6px 5px;}
+    .bui-menu-profile .follow-msg{padding-bottom: 20px;}
+
 	
 }
 @media screen and (max-width:800px){
@@ -4719,7 +4723,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
     .mob-comment button{
         background:0 0;
         color:#1b8ab9;
-        padding:0 0 7px;
+        padding:0 10px;
         font-size:22px;
         margin-right:0
     }
@@ -5118,6 +5122,15 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 	#btn-move .user_btn .bg_following, #btn-move .user_btn button {font-size:12px; padding:6px 5px;}
 	#btn-move .btn-n2{width:100px;}
 	#btn-move .user_btn button{width:100px;}
+    .right_side_posrt .left-info-box{padding: 0;}
+    .right_side_posrt .dash-left-title h3{padding: 10px 10px 5px;}
+    .right_side_posrt .left-info-box .dash-info-box{padding: 0 10px;}
+    .right_side_posrt .right-info-box{padding: 0;}
+    .right_side_posrt .right-info-box .dtl-title{padding: 10px 10px 5px;}
+    .right_side_posrt .right-info-box .dtl-dis{padding: 10px;}
+    .right-info-box .dtl-dis ul{padding-bottom: 0;}
+    .right-info-box .dtl-dis ul li:last-child{padding-bottom: 0;}
+    .add-comment .mob-comment{bottom: 4px !important;}
 }
 @media screen and (max-width:639px){
     .modal.in .modal-dialog .mes .pop_content{
