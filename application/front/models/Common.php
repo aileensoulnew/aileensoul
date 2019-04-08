@@ -864,7 +864,7 @@ class Common extends CI_Model {
         $this->db->where('up.user_type', '1');
         $this->db->where('up.is_delete', '0');
         $query = $this->db->get();
-        //$result_array = $query->row_array();
+        $result_array = $query->row_array();
         return $result_array['post_count'];
     }
 
