@@ -55,25 +55,27 @@
                 </header>
             </div>
             <div class="container">
-                <div class="error-top-box">
-                    <h1>
-                        <span>Oh no!</span>
-                        <span>Seems something is broken.</span>
-                    </h1>
-                    <p class="text-center pb20">
-                        <img src="<?php echo base_url('assets/n-images/404.jpg?ver=' . time()) ?>">
-                    </p>
-                    <h2 class="text-center pt20 pb10">May be the following options can help you reach your destination.</h2>
-                </div>
-                <div class="error-btn">
-                    <div class="col-md-6 col-sm-6 text-right">
-                        <a class="btn3" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><img class="pr20" src="<?php echo base_url('assets/n-images/e-arrow.png?ver=' . time()) ?>"><span>Back to Previous page</span></a>
+                    <div class="error-left">
+                        <img src="<?php echo base_url('assets/n-images/panda.jpg') ?>">
                     </div>
-                    <div class="col-md-6 col-sm-6 text-left">
-                        <a class="btn3" href="<?php echo base_url(); ?>"><img class="pr20" src="<?php echo base_url('assets/n-images/e-home.png?ver=' . time()) ?>"><span>Back to Home page</span></a>
+                    <div class="error-right">
+                        <div class="error-top-box">
+                            <h1>
+                                <span>Oh no!</span>
+                                <span>Seems something is broken.</span>
+                            </h1>
+                            <p class="text-center pt20">
+                                <img src="<?php echo base_url('assets/n-images/error-img.png?ver=' . time()) ?>">
+                            </p>
+                            
+                        </div>
+                        <div class="error-btn text-center">
+                            <a class="btn-new-1" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><img class="pr15" src="<?php echo base_url('assets/n-images/error-back.png?ver=' . time()) ?>"><span>Back</span></a>
+                          
+                            <a class="btn-new-1" href="<?php echo base_url(); ?>"><img class="pr15" src="<?php echo base_url('assets/n-images/error-home.png?ver=' . time()) ?>"><span>Home</span></a>
+                        
+                        </div>
                     </div>
-                </div>
-                
             </div>
         </div>
         <div class="pt20">
