@@ -939,6 +939,10 @@ class User_post_model extends CI_Model {
             if($getUserProfessionData)
             {
                 $sql = "SELECT COUNT(*) as total FROM(
+                        SELECT oppcon1.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_opportunity uo JOIN ailee_user_post up  ON up.post_id = uo.id WHERE upr.`user_id` = $user_id AND (IF(upr.field = 0, CONCAT(LOWER(uo.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(uo.other_field) LIKE '%'),'%'),upr.field = uo.field)) AND FIND_IN_SET(upr.city , uo.location) != 0 AND up.status = 'publish' AND FIND_IN_SET(upr.designation , uo.opportunity_for) != 0 AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity') as oppcon1
+                        
+                        UNION
+
                         SELECT main1.* FROM(
                             SELECT innter.* FROM(
                                 SELECT con1.* FROM (SELECT up.* FROM ailee_user_profession upr 
@@ -1479,15 +1483,18 @@ class User_post_model extends CI_Model {
             if($getUserProfessionData)
             {
                 $sql = "SELECT main.* FROM(
+                    SELECT oppcon1.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_opportunity uo JOIN ailee_user_post up  ON up.post_id = uo.id WHERE upr.`user_id` = $user_id AND (IF(upr.field = 0, CONCAT(LOWER(uo.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(uo.other_field) LIKE '%'),'%'),upr.field = uo.field)) AND FIND_IN_SET(upr.city , uo.location) != 0 AND up.status = 'publish' AND FIND_IN_SET(upr.designation , uo.opportunity_for) != 0 AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) as oppcon1
+
+                    UNION
+
                     SELECT main1.* FROM(
                         SELECT innter.* FROM(
                             SELECT con1.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                            LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                            JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                            WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) as con1
-
+                                LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
+                                JOIN ailee_user_post up  ON up.user_id = c1.user_id
+                                WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) as con1
                             UNION
-
+                            
                             SELECT con2.* FROM (SELECT up.* FROM ailee_user_profession upr 
                             LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`city` = upr.`city` 
                             JOIN ailee_user_post up  ON up.user_id = c1.user_id
