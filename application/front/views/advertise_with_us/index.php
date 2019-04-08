@@ -115,27 +115,6 @@ header('Cache-Control: public, max-age=30');
                            <img src="<?php echo base_url('assets/n-images/Advertisedisplay.jpg') ?>" alt="Advertise With Us">
                         </div>
                     </div>
-
-					<div class="banner-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
-			
-                    <div class="fw p20">
-                        <div class="add-title">
-                            <h2>Our Audience.</h2>
-                        </div>
-                        <div class="row">                            
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-								<a href="<?php echo $business_right_profile_link; ?>">
-									<div class="audience-box">
-										<img src="<?php echo base_url('assets/n-images/Business.jpg') ?>" alt="Advertise With Us">
-										<h3>Business Profile</h3>
-										<p>The business profile in Aileensoul consists businesses from various fields such as IT sector, Medical, Clothing or any domain you name. Advertising in this profile will yield a great exposure in several industries which will help you in enlarging your business.</p>
-									</div>
-								</a>
-                            </div>                            
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="container mobp0">
@@ -174,7 +153,7 @@ header('Cache-Control: public, max-age=30');
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12 text-right">
-                                    <input type="submit" class="btn1" id="submit" name="submit" value="Submit">
+                                    <input type="submit" class="btn-new-1" id="submit" name="submit" value="Submit">
                                 </div>
 
                             </div>

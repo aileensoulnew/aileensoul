@@ -4211,6 +4211,9 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 
 .comment-action ul{padding-left:40px;}
 .editable_text{padding: 4px 15px 3px !important;}
+.right_side_posrt .add-post{padding-bottom: 10px;}
+.bus-post-btn{padding-top: 4px;}
+
 
 /***  media query  ***/
 
@@ -5130,7 +5133,9 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
     .right_side_posrt .right-info-box .dtl-dis{padding: 10px;}
     .right-info-box .dtl-dis ul{padding-bottom: 0;}
     .right-info-box .dtl-dis ul li:last-child{padding-bottom: 0;}
-    .add-comment .mob-comment{bottom: 4px !important;}
+    .add-comment .mob-comment{bottom: 3px !important;}
+    .post-box-bottom p.bus-post-btn .btn1{width: auto;}
+    .post-box-bottom p.bus-post-btn{width: auto; padding-top: 5px; padding-right: 0;}
 }
 @media screen and (max-width:639px){
     .modal.in .modal-dialog .mes .pop_content{

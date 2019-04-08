@@ -411,7 +411,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         </div>
 
                                         <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
-                                            Express Yourself 
+                                            Share knowledge, opportunities & articles
                                         </div>
                                         <!--<span class="post-cam"><i class="fa fa-camera"></i></span>-->
                                     </div>
@@ -428,6 +428,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 </a>
                                             </li>                                            
                                         </ul>
+                                        <p class="pull-right bus-post-btn">
+                                            <button type="submit" class="btn1">Post</button>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -668,7 +671,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             </div>
                                                             <div class="form-group">
                                                             <!-- <div class="post-text"> -->
-                                                                <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                                                <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities & articles" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
                                                             </div>                        
                                                             <div class="post-box-bottom" >
                                                                 <input type="hidden" name="post_for" class="form-control" value="simple">
@@ -1612,7 +1615,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                                 </div>
                                 <div class="form-group"><!-- <div class="post-text"> -->
-                                    <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities, articles and questions"></textarea>
+                                    <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities & articles"></textarea>
                                 </div>
                                 <div class="all-upload" ng-if="is_edit != 1">
                                     <div class="form-group">

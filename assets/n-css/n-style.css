@@ -456,7 +456,7 @@ background: #f6f6f6; list-style-type:none;}
 .dash-info-box h4 svg{vertical-align: middle; margin-top: -4px;}
 .bus-info .dash-info-box, .art-info .dash-info-box {margin-bottom:15px;}
 .bus-info .dash-info-box h4, .art-info .dash-info-box h4{width:20px; float:left; font-size:0; line-height:17px; margin-top:0;}
-.bus-info .dash-info-box p, .art-info .dash-info-box p {width:93%; float:left; line-height:1; padding-left:5px; word-wrap: break-word;}
+.bus-info .dash-info-box p, .art-info .dash-info-box p {width:92%; float:left; line-height:1; padding-left:5px; word-wrap: break-word;}
 .bus-info .dash-info-box ul, .art-info .dash-info-box ul {width:93%; float:left; padding-left:5px; padding-top:0;}
 .art-info .dash-info-box ul{margin-top:-4px;}
 .bus-info .dash-info-box ul.skill-list, .art-info .dash-info-box ul.skill-list{margin-top:-5px;}
@@ -1410,10 +1410,10 @@ transform: translate(-50%,-50%);
 .add-banner img{width:100%;}
 .add-banner{position:relative;}
 .add-banner h1{position:absolute; text-align:center; width:100%; color:#fff; bottom:45%; font-size:50px;}
-.add-with-us .add-form{width:50%; margin:50px auto 0; border:1px solid #d2d2d2; border-radius:4px;
-	-webkit-box-shadow:0 0 10px -1px rgba(217,217,217,1);
-    -moz-box-shadow:0 0 10px -1px rgba(217,217,217,1);
-    box-shadow:0 0 10px -1px rgba(217,217,217,1)
+.add-with-us .add-form{width:50%; margin:50px auto 0; border-radius:20px;
+	-webkit-box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);
+    -moz-box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);
+    box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);
 }
 .add-with-us .add-form .add-form-title{padding:10px 0; text-align:center; border-bottom:1px solid #d2d2d2;}
 .add-with-us .add-form form{padding:20px 20px 5px;}
@@ -1424,6 +1424,7 @@ transform: translate(-50%,-50%);
 .add-with-us .add-form form textarea{border-width:0px 0px 1px 0px; padding:5px 10px; border-radius:0;}
 .add-with-us .add-form form input.btn1{border-radius:4px;}
 .add-with-us .add-form form label.error{bottom:-5px;}
+.add-with-us .add-form form input.btn-new-1{border-width: 1px; border-radius: 20px; padding: 7px 10px; height: auto; font-weight: normal;}
 .more-support{font-size:20px; letter-spacing:3px; padding:20px 0;}
 .more-support a{color:#5c5c5c; font-weight:bold;}
 .more-support a:hover{color:#1b8ab9; text-decoration:underline;}
@@ -1444,6 +1445,7 @@ a .audience-box:hover{background:#f6f6f6; box-shadow:0 0 2px 1px #d2d2d2;}
 .audience-box p{text-align: justify; padding-top: 5px; color:#7b7b7b;}
 .add-content{width:80%; margin: 0 auto;}
 .add-content img{width:100%;}
+.add-content .add-title h2{color:#5c5c5c;}
 
 /***  end add with us  ***/
 
@@ -1791,7 +1793,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 #posterrormodal .modal-dialog.modal-lm{height: 100%; position: relative; padding: 0; margin: 0;}
 #posterrormodal .modal-dialog.modal-lm .modal-content{left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%);}
 .post-error{background: rgba(0,0,0,0.8);}
-.mob-comment button{background: none;}
+.mob-comment button{background: none; padding-bottom: 0; padding-top: 0;}
 .mob-comment{display: none;}
 #fileCountQue{display: none;}
 .collapse-text-toggle {font-size: 13px; color: #7b7b7b; cursor: pointer; font-weight: bold;}
@@ -4206,7 +4208,7 @@ tags-input .tags{padding: 0;}
 	.comment-box .add-comment .post-img{display:none;}
 	.comment-box .add-comment .comment-input{width:100%;}
 	.mob-comment{bottom: 0px; display: block; position: absolute; right: 10px; width:auto;}
-	.edit-comment .mob-comment{right:5px; bottom:5px;}
+	.edit-comment .mob-comment{right:5px; bottom:3px;}
 	.mob-comment .btn2{background:none; font-size:0;}
 	.comment-box .add-comment .comment-input{padding:0;}
 	.mob-comment .btn2 img{display:block;}
@@ -4461,7 +4463,7 @@ tags-input .tags{padding: 0;}
 	.custom-box{padding:20px 0;}
 	.availabel-data-box h3{margin-bottom:10px;}
 	.edit-pr-custom .common-form fieldset .control--radio .control__indicator:after{width:11px; height:11px;}
-	.comment-input .editable_text{/*padding:6.5px 45px 6.5px 15px;*/}
+	.comment-input .editable_text{/*padding:6.5px 45px 6.5px 15px;*/ padding-right: 40px !important;}
 	#contactlist, #suggestionlist {width:100%;}
 	.all-list ul li{width:50%;}
 	.all-list ul li .list-box{width:100%;}
@@ -5136,7 +5138,7 @@ tags-input .tags{padding: 0;}
 	.post-popup-box textarea.hashtag-textarea{min-height: 30px;}
 	.post-comment.reply-comment .comment-dis{width: 84%;}
 	.comment-action li{padding: 0 5px;}
-	.comment-action li a{font-size: 12px;}
+	.comment-action li a{font-size: 11px;}
 	.all-post-box .comment-action .pull-right a img{width: 15px;}
 	.all-post-box .all-post-bottom{padding: 5px 15px 8px;}
 	.post-comment{margin-bottom: 8px;}
