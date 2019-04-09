@@ -2516,6 +2516,11 @@ label.cameraButton{min-height:43px;}
 .load-more-btn button{background:none; color:#1b8ab9; font-size:18px;}
 .load-more-btn button:focus{outline:none;}
 .job_reg_main{box-shadow:none;}
+.owl-carousel1 .owl-item:nth-child(odd) .arti-profile-box{border-right: 1px solid #d2d2d2;}
+.owl-carousel1 .arti-profile-box .user-cover-img{border-radius: 0;}
+.all-contact-cus  .all-user-list{border-top-left-radius:0; border-top-right-radius:0;}
+.all-contact-cus .all-contact h4{border-bottom: 0; margin-bottom: 0; border-bottom-left-radius:0; border-bottom-right-radius:0;}
+
 /***  end extra  ***/
 /***  optimization css  ***/
 .left-part.left-scroll{position:absolute;}
