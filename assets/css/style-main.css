@@ -658,7 +658,6 @@ footer ul li{
 }
 footer ul li a{
     color:#7b7b7b;
-    padding:5px;
     font-size:13px;
 }
 #selday:focus,#selgen:focus,#selmonth:focus,#selyear:focus,.form-group textarea:focus,#selgen:focus{

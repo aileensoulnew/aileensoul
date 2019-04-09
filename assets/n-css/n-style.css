@@ -2518,8 +2518,9 @@ label.cameraButton{min-height:43px;}
 .job_reg_main{box-shadow:none;}
 .owl-carousel1 .owl-item:nth-child(odd) .arti-profile-box{border-right: 1px solid #d2d2d2;}
 .owl-carousel1 .arti-profile-box .user-cover-img{border-radius: 0;}
-.all-contact-cus  .all-user-list{border-top-left-radius:0; border-top-right-radius:0;}
+.all-contact-cus .all-user-list{border-top-left-radius:0; border-top-right-radius:0;}
 .all-contact-cus .all-contact h4{border-bottom: 0; margin-bottom: 0; border-bottom-left-radius:0; border-bottom-right-radius:0;}
+.all-contact-cus .last-item-box .arti-profile-box .user-info-text h3{margin-bottom: 12px;}
 
 /***  end extra  ***/
 /***  optimization css  ***/
@@ -3513,6 +3514,8 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .follow-box .arti-profile-box .author-btn .user-city p{font-size:13px; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height:1.1; padding-top:5px;}
 .follow-box .arti-profile-box .author-btn .user-city p a{color:#5c5c5c;}
 .user-profile-box{padding:6px; }
+.post-bottom ul.bottom-right .post-save{padding-right:10px;}
+.post-bottom ul.bottom-right .post-save img{width:16px; margin-top:-6px;}
 
 
 /***  new commen css  ***/
