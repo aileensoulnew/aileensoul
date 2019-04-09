@@ -739,7 +739,36 @@ class User_post extends MY_Controller {
         }
         // $post_data = $this->user_post_model->userPost($userid, $page);//Old Logic
         $post_data = $this->user_post_model->user_post_new($userid, $page);
-        echo json_encode($post_data);
+        if($page == 2 || $page == 4 || $page == 6 || $page == 8 || $page == 10)
+        {
+            if($page == 2)
+            {
+                $page = 1;   
+            }
+            elseif($page == 4)
+            {
+                $page = 2;
+            }
+            elseif($page == 6)
+            {
+                $page = 3;
+            }
+            elseif($page == 8)
+            {
+                $page = 4;
+            }
+            elseif($page == 10)
+            {
+                $page = 5;
+            }
+            $contact_data = $this->user_post_model->get_contact_sugetion_in_post($userid, $page);
+            echo json_encode(array('all_post_data'=>$post_data,'contact_suggetion_'.$page=>$contact_data));
+        }
+        else
+        {
+            echo json_encode(array('all_post_data'=>$post_data));   
+        }
+        // echo json_encode($post_data);
     }
 
     public function getUserDashboardPost() {

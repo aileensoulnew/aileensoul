@@ -156,89 +156,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="all-contact-cus ">
-		<div class="all-contact">
-            <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
-            <div class="all-user-list">
-                <data-owl-carousel class="owl-carousel owl-carousel1" data-options="">
-                    <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
-                        <div class="item" id="item-{{contact.user_id}}">
-                            <div class="arti-profile-box">
-                                <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
-                                    </a>
-                                </div>
-                                <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                        <div class="gradient-bg" style="height: 100%"></div>
-                                    </a>
-                                </div>
-                                <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                        <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
-                                    </a>
-                                </div>
-                                <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                        <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                        <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                    </a>
-                                </div>
-                                <div class="user-info-text text-center">
-                                    <h3>
-                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
-                                    </h3>
-                                    <p>
-                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
-                                    </p>
-                                </div>
-                                <div class="author-btn">
-                                    <div class="user-btns">
-                                        <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div owl-carousel-item="" class="item last-item-box">
-                        <div class="arti-profile-box">
-                            <div class="find-more">
-                                <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
-                            </div>                            
-                            <div class="user-info-text text-center">
-                                <h3>
-                                    <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
-                                    </a>
-                                </h3>                                
-                            </div>
-                            <div class="author-btn">
-                                <div class="user-btns">
-                                    <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <a href="<?php //echo base_url('contact-request') ?>">
-                            <div class="item" id="last-item">
-                                <div class="post-img" ng-if="contact.user_image != ''">
-                                    <img ng-src="<?php //echo base_url('assets/n-images/view-all.png') ?>">
-                                </div>
-                                <div class="user-list-detail">
-                                    <p class="contact-name">Find More Contacts</p>
-                                </div>
-                                <button class="follow-btn">View More</button> 
-                            </div>
-                        </a> -->
-                    </div>
-                </data-owl-carousel>
-            </div>
-        </div>
-	</div>
-    
-	
-	
+
 	<!-- Repeated Class Start -->
     <div class="all_user_post">
         
@@ -1585,6 +1503,361 @@
                     <?php //$this->load->view('infeed_add'); ?>
                 </div>
             </div>
+            <div ng-if="(postIndex + 1) / 10 === 1 && contact_suggetion_1">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsTestimonials}}">
+                                <div owl-carousel-item="" ng-repeat="contact in contact_suggetion_1" class="item">
+                                    <div class="item" id="item-{{contact.user_id}}">
+                                        <div class="arti-profile-box">
+                                            <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <div class="gradient-bg" style="height: 100%"></div>
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
+                                            </div>
+                                            <div class="user-info-text text-center">
+                                                <h3>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                </h3>
+                                                <p>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                </p>
+                                            </div>
+                                            <div class="author-btn">
+                                                <div class="user-btns">
+                                                    <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="arti-profile-box">
+                                        <div class="find-more">
+                                            <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                        </div>                            
+                                        <div class="user-info-text text-center">
+                                            <h3>
+                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                </a>
+                                            </h3>                                
+                                        </div>
+                                        <div class="author-btn">
+                                            <div class="user-btns">
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 20 === 1 && contact_suggetion_2">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsTestimonials}}">                                
+                                <div owl-carousel-item="" ng-repeat="contact in contact_suggetion_2" class="item">
+                                    <div class="item" id="item-{{contact.user_id}}">
+                                        <div class="arti-profile-box">
+                                            <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <div class="gradient-bg" style="height: 100%"></div>
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
+                                            </div>
+                                            <div class="user-info-text text-center">
+                                                <h3>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                </h3>
+                                                <p>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                </p>
+                                            </div>
+                                            <div class="author-btn">
+                                                <div class="user-btns">
+                                                    <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="arti-profile-box">
+                                        <div class="find-more">
+                                            <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                        </div>                            
+                                        <div class="user-info-text text-center">
+                                            <h3>
+                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                </a>
+                                            </h3>                                
+                                        </div>
+                                        <div class="author-btn">
+                                            <div class="user-btns">
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 30 === 1 && contact_suggetion_3">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsTestimonials}}">                                
+                                <div owl-carousel-item="" ng-repeat="contact in contact_suggetion_3" class="item">
+                                    <div class="item" id="item-{{contact.user_id}}">
+                                        <div class="arti-profile-box">
+                                            <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <div class="gradient-bg" style="height: 100%"></div>
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
+                                            </div>
+                                            <div class="user-info-text text-center">
+                                                <h3>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                </h3>
+                                                <p>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                </p>
+                                            </div>
+                                            <div class="author-btn">
+                                                <div class="user-btns">
+                                                    <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="arti-profile-box">
+                                        <div class="find-more">
+                                            <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                        </div>                            
+                                        <div class="user-info-text text-center">
+                                            <h3>
+                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                </a>
+                                            </h3>                                
+                                        </div>
+                                        <div class="author-btn">
+                                            <div class="user-btns">
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 40 === 1 && contact_suggetion_4">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsTestimonials}}">                                
+                                <div owl-carousel-item="" ng-repeat="contact in contact_suggetion_4" class="item">
+                                    <div class="item" id="item-{{contact.user_id}}">
+                                        <div class="arti-profile-box">
+                                            <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <div class="gradient-bg" style="height: 100%"></div>
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
+                                            </div>
+                                            <div class="user-info-text text-center">
+                                                <h3>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                </h3>
+                                                <p>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                </p>
+                                            </div>
+                                            <div class="author-btn">
+                                                <div class="user-btns">
+                                                    <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="arti-profile-box">
+                                        <div class="find-more">
+                                            <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                        </div>                            
+                                        <div class="user-info-text text-center">
+                                            <h3>
+                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                </a>
+                                            </h3>                                
+                                        </div>
+                                        <div class="author-btn">
+                                            <div class="user-btns">
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 50 === 1 && contact_suggetion_5">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsTestimonials}}">                                
+                                <div owl-carousel-item="" ng-repeat="contact in contact_suggetion_5" class="item">
+                                    <div class="item" id="item-{{contact.user_id}}">
+                                        <div class="arti-profile-box">
+                                            <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <div class="gradient-bg" style="height: 100%"></div>
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image != ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                                </a>
+                                            </div>
+                                            <div class="user-pr-img" ng-if="contact.user_image == ''">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                    <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
+                                            </div>
+                                            <div class="user-info-text text-center">
+                                                <h3>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                </h3>
+                                                <p>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                </p>
+                                            </div>
+                                            <div class="author-btn">
+                                                <div class="user-btns">
+                                                    <a class="btn3 addtobtn-{{contact.user_id}}" ng-click="addToContact(contact.user_id, contact)">Add to Contacts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="arti-profile-box">
+                                        <div class="find-more">
+                                            <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                        </div>                            
+                                        <div class="user-info-text text-center">
+                                            <h3>
+                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                </a>
+                                            </h3>                                
+                                        </div>
+                                        <div class="author-btn">
+                                            <div class="user-btns">
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Feed End -->
 		
@@ -2296,6 +2569,8 @@
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var cmt_maxlength = '700';
         var title = '<?php echo $title; ?>';
+        var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+        var user_main_upload_url = '<?php echo USER_MAIN_UPLOAD_URL; ?>';
         var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
         var no_user_post_html = '<?php echo $no_user_post_html; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';

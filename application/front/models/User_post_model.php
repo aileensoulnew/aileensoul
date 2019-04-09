@@ -3662,4 +3662,118 @@ class User_post_model extends CI_Model {
         }
         return $result_array;
     }
+
+    public function get_contact_sugetion_in_post($user_id,$page)
+    {
+        $limit = '20';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city');
+        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');
+        if($getUserProfessionData)
+        {
+            $sql = "SELECT main.* FROM(SELECT u.user_slug, u.user_id, u.first_name, u.last_name, u.user_gender, ui.user_image, ui.profile_background, jt.name as title_name from ailee_user_profession up 
+                LEFT JOIN ailee_user_profession up1 ON up1.designation = up.designation 
+                LEFT JOIN ailee_user u ON u.user_id = up1.user_id 
+                LEFT JOIN ailee_user_info ui ON ui.user_id = up1.user_id 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = up1.user_id 
+                LEFT JOIN ailee_job_title jt ON jt.title_id = up1.designation
+                WHERE up.user_id = $user_id 
+                AND u.user_id != $user_id
+                AND ul.status = '1'
+                AND ul.is_delete = '0'
+                AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id=$user_id)
+                AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id=$user_id)                
+
+                UNION
+
+                SELECT u.user_slug, u.user_id, u.first_name, u.last_name, u.user_gender, ui.user_image, ui.profile_background, jt.name as title_name from ailee_user_profession up 
+                LEFT JOIN ailee_user_profession up1 ON up1.city = up.city 
+                LEFT JOIN ailee_user u ON u.user_id = up1.user_id 
+                LEFT JOIN ailee_user_info ui ON ui.user_id = up1.user_id 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = up1.user_id 
+                LEFT JOIN ailee_job_title jt ON jt.title_id = up1.designation
+                WHERE up.user_id = $user_id 
+                AND u.user_id != $user_id
+                AND ul.status = '1'
+                AND ul.is_delete = '0'
+                AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id=$user_id)
+                AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id=$user_id)                
+
+                UNION
+
+                SELECT u.user_slug, u.user_id, u.first_name, u.last_name, u.user_gender, ui.user_image, ui.profile_background, jt.name as title_name from ailee_user_profession up 
+                LEFT JOIN ailee_user_profession up1 ON up1.field = up.field 
+                LEFT JOIN ailee_user u ON u.user_id = up1.user_id 
+                LEFT JOIN ailee_user_info ui ON ui.user_id = up1.user_id 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = up1.user_id 
+                LEFT JOIN ailee_job_title jt ON jt.title_id = up1.designation
+                WHERE up.user_id = $user_id 
+                AND u.user_id != $user_id
+                AND ul.status = '1'
+                AND ul.is_delete = '0'
+                AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id=$user_id)
+                AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id=$user_id)
+                AND (IF(up1.field = 0, CONCAT(LOWER(up.other_field) LIKE '%',REPLACE(up1.other_field,' ','%' OR LOWER(up.other_field) LIKE '%'),'%'),1=1))
+                
+            ) as main where main.user_id != $user_id";
+        }
+
+        if($getUserStudentData)
+        {
+            $sql = "SELECT main.* FROM(SELECT u.user_slug, u.user_id, u.first_name, u.last_name, u.user_gender, ui.user_image, ui.profile_background, d.degree_name as title_name from ailee_user_student up 
+                LEFT JOIN ailee_user_student us1 ON us1.current_study = up.current_study 
+                LEFT JOIN ailee_user u ON u.user_id = us1.user_id 
+                LEFT JOIN ailee_user_info ui ON ui.user_id = us1.user_id 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = us1.user_id 
+                LEFT JOIN ailee_degree d ON d.degree_id = us1.current_study
+                WHERE up.user_id = $user_id 
+                AND u.user_id != $user_id
+                AND ul.status = '1'
+                AND ul.is_delete = '0'
+                AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id=$user_id)
+                AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id=$user_id)
+
+                UNION
+
+                SELECT u.user_slug, u.user_id, u.first_name, u.last_name, u.user_gender, ui.user_image, ui.profile_background, d.degree_name as title_name from ailee_user_student up 
+                LEFT JOIN ailee_user_student us1 ON us1.city = up.city 
+                LEFT JOIN ailee_user u ON u.user_id = us1.user_id 
+                LEFT JOIN ailee_user_info ui ON ui.user_id = us1.user_id 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = us1.user_id 
+                LEFT JOIN ailee_degree d ON d.degree_id = us1.current_study
+                WHERE up.user_id = $user_id 
+                AND u.user_id != $user_id
+                AND ul.status = '1'
+                AND ul.is_delete = '0'
+                AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id=$user_id)
+                AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id=$user_id)                
+
+                UNION
+
+                SELECT u.user_slug, u.user_id, u.first_name, u.last_name, u.user_gender, ui.user_image, ui.profile_background, d.degree_name as title_name from ailee_user_student up 
+                LEFT JOIN ailee_user_student us1 ON us1.interested_fields = up.interested_fields 
+                LEFT JOIN ailee_user u ON u.user_id = us1.user_id 
+                LEFT JOIN ailee_user_info ui ON ui.user_id = us1.user_id 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = us1.user_id 
+                LEFT JOIN ailee_degree d ON d.degree_id = us1.current_study
+                WHERE up.user_id = $user_id 
+                AND u.user_id != $user_id
+                AND ul.status = '1'
+                AND ul.is_delete = '0'
+                AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id=$user_id)
+                AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id=$user_id)
+                AND (IF(us1.interested_fields = 0, CONCAT(LOWER(up.other_interested_fields) LIKE '%',REPLACE(us1.other_interested_fields,' ','%' OR LOWER(up.other_interested_fields) LIKE '%'),'%'),1=1))
+            ) as main where main.user_id != $user_id";
+        }
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        // echo $sql;exit();
+        
+        $query = $this->db->query($sql);
+        $user_contact = $query->result_array();
+        return $user_contact;
+    }
 }

@@ -229,7 +229,7 @@ app.directive("owlCarousel", function () {
         }
     };
 });
-app.directive("owlCarousel", function () {
+/*app.directive("owlCarousel", function () {
      $('.owl-carousel1').owlCarousel({
         loop: false,
         nav: true,
@@ -251,7 +251,7 @@ app.directive("owlCarousel", function () {
                         }
                     }
                 });
-});
+});*/
 app.directive('owlCarouselItem', [function () {
     return {
         restrict: 'A',
@@ -908,16 +908,96 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $('#ask-post-hashtag').hide();
     });
 
-	
+    $scope.set_owl_carousel = function(contact_suggetion,inx){
+        var content = '<data-owl-carousel class="owl-carousel owl-carousel1" data-options="loop: false,nav: true,lazyLoad: true,margin: 0,video: true,responsive: {0: {items: 2},480: {items: 2},768: {items: 2,},1280: {items: 2}}">';
+        contact_suggetion.forEach(function(element,contactInx) {
+            content += '<div owl-carousel-item=""  class="item">';
+            content += '<div class="item" id="item-'+element.user_id+'">';
+            content += '<div class="arti-profile-box">';
+                content += '<div class="user-cover-img">';
+                    content += '<a href="'+base_url+element.user_slug+'" >';                    
+                    if(element.profile_background)
+                    {
+                        content += '<img src="'+user_bg_main_upload_url+element.profile_background+'">';
+                    }
+                    else
+                    {
+                        content += '<div class="gradient-bg" style="height: 100%"></div>';
+                    }
+                    content += '</a>';
+                content += '</div>';
+                
+                content += '<div class="user-pr-img">';
+                    content += '<a href="'+base_url+element.user_slug+'" >';
+                        if(element.user_image)
+                        {
+                            content += '<img src="'+user_main_upload_url+element.user_image+'">';
+                        }
+                        else
+                        {
+                            if(element.user_gender == 'M')
+                            {
+                                content += '<img src="'+base_url+'assets/img/man-user.jpg">';
+                            }
+                            else
+                            {
+                                content += '<img src="'+base_url+'assets/img/female-user.jpg">';
+                            }
+                        }
+                    content += '</a>';
+                content += '</div>';
+
+                content += '<div class="user-info-text text-center">';
+                    content += '<h3>';
+                        content += '<a href="'+base_url+element.user_slug+'" >';
+                            content += element.first_name+' '+element.last_name;
+                        content += '</a>';
+                    content += '</h3>';
+                    content += '<p>';
+                        content += '<a href="'+base_url+element.user_slug+'" >';
+                        if(element.title_name){
+                            content += element.title_name;
+                        }
+                        else if(element.degree_name){
+                            content += element.degree_name;
+                        }
+                        else{
+                            content += "CURRENT WORK";
+                        }                            
+                        content += '</a>';
+                    content += '</p>';
+                content += '</div>';
+
+                content += '<div class="author-btn">';
+                    content += '<div class="user-btns">';
+                    content += '<a class="btn3 addtobtn-'+element.user_id+'" ng-click="addToContact('+element.user_id+',\'\' )">Add to Contacts';
+                    content += '</a>';
+                    content += '</div>';
+                content += '</div>';
+
+            content += '</div>';
+            content += '</div>';
+            content += '</div>';
+        });
+        content += "</data-owl-carousel>";
+        setTimeout(function(){
+            alert(inx);
+            console.log(content);
+            var $elm = $(".corousel"+inx).html(content);
+            $compile($elm)($scope);
+        },1000);
+    };
 
     $scope.showLoadmore = true;
     var pg="";
+    $scope.page = 0;
     var fl_addpost="";
     var processing = false;
+    $scope.contact_suggetion = [];
     getUserPost(pg);
     var isProcessing = false;
     function getUserPost(pg,fl_addpost) {
-     
+
         $('#loader').show();
         if(pg == "" && fl_addpost == ""){
             $('#main_loader').show();
@@ -929,12 +1009,15 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
-            if (success.data) {
+            if (success.data.all_post_data) {
                 isLoadingData = false;
                 $('#progress_div').hide();
                 $('.progress-bar').css("width",0);
                 $('.sr-only').text(0+"%");
-                $scope.postData = success.data; 
+                $scope.postData = success.data.all_post_data; 
+                // $scope.contact_suggetion.push(success.data.contact_suggetion);
+                // $scope.contact_suggetion = success.data.contact_suggetion;
+                // $scope.set_owl_carousel(success.data.contact_suggetion,$scope.page);
             } else {
                 isLoadingData = true;
             }
@@ -980,13 +1063,61 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $http.get(base_url + "user_post/getUserPost?page=" + pg).then(function (success) {
             $('#loader').hide();
            
-            if (success.data[0].post_data) {
+            if (success.data.all_post_data[0].post_data) {
                 isProcessing = false;
                 //$scope.postData = success.data; 
-                for (var i in success.data) {
-                    $scope.postData.push(success.data[i]);
+                for (var i in success.data.all_post_data) {
+                    $scope.postData.push(success.data.all_post_data[i]);
                 }
                 $scope.showLoadmore = true;
+                $scope.page = $scope.page + 1;
+                // $scope.set_owl_carousel(success.data.contact_suggetion,$scope.page);
+                // console.log($scope.page);
+                if(success.data.contact_suggetion_1)
+                {
+                    $scope.contact_suggetion_1 = success.data.contact_suggetion_1;
+                }
+                if(success.data.contact_suggetion_2)
+                {
+                    $scope.contact_suggetion_2 = success.data.contact_suggetion_2;
+                }
+                if(success.data.contact_suggetion_3)
+                {
+                    $scope.contact_suggetion_3 = success.data.contact_suggetion_3;
+                }
+                if(success.data.contact_suggetion_4)
+                {
+                    $scope.contact_suggetion_4 = success.data.contact_suggetion_4;
+                }
+                if(success.data.contact_suggetion_5)
+                {
+                    $scope.contact_suggetion_5 = success.data.contact_suggetion_5;
+                }
+                /*$scope.contact_suggetion.push(success.data.contact_suggetion);
+                /*$scope.contact_suggetion.push(success.data.contact_suggetion);
+                console.log($scope.contact_suggetion);
+                var defaultOptions = {
+                    loop: false,
+                    nav: true,
+                    lazyLoad: true,
+                    margin: 0,
+                    video: true,
+                    responsive: {
+                        0: {
+                            items: 2
+                        },
+                        480: {
+                            items: 2
+                        },
+                        768: {
+                            items: 2,
+                        },
+                        1280: {
+                            items: 2
+                        }
+                    }
+                };
+                $('.owl-carousel1').owlCarousel(defaultOptions);*/
             } else {
                 // processing = false;
                 // isLoadingData = false;                
@@ -3935,6 +4066,29 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
         }
     }
+
+    $scope.owlOptionsTestimonials = {
+            slideBy:2,
+            loop: false,
+            nav: true,
+            lazyLoad: true,
+            margin: 0,
+            video: true,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                480: {
+                    items: 2
+                },
+                768: {
+                    items: 2,
+                },
+                1280: {
+                    items: 2
+                }
+            }
+        };  
 });
 
 $(document).click(function(){
