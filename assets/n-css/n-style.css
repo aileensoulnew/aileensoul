@@ -2499,7 +2499,7 @@ label.cameraButton{min-height:43px;}
 .job-contact-frnd .profile-job-post-detail{width:100%; float:left;}
 .add-post-button{margin-top:0;}
 .follow-img{margin-left:0;}
-.all-contact-cus{display:none;}
+.all-contact-cus{/*display:none;*/}
 .common-form .notification-box .notification-database:hover{background:none;}
 .notification-box .notification_data li a{width:100%;}
 .notification-box .notification_data li a .notification-database{width:100%;}

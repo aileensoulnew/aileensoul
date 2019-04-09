@@ -160,7 +160,7 @@
 		<div class="all-contact">
             <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4> 
             <div class="all-user-list">
-                <data-owl-carousel class="owl-carousel" data-options="">
+                <data-owl-carousel class="owl-carousel owl-carousel1" data-options="">
                     <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
                         <div class="item" id="item-{{contact.user_id}}">
                             <div class="arti-profile-box">

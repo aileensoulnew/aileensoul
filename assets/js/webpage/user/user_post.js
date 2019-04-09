@@ -229,6 +229,29 @@ app.directive("owlCarousel", function () {
         }
     };
 });
+app.directive("owlCarousel", function () {
+     $('.owl-carousel1').owlCarousel({
+        loop: false,
+        nav: true,
+        lazyLoad: true,
+        margin: 0,
+        video: true,
+        responsive: {
+            0: {
+                items: 1
+                        },
+                        480: {
+                            items: 2
+                        },
+                        768: {
+                            items: 3,
+                        },
+                        1280: {
+                            items: 2
+                        }
+                    }
+                });
+});
 app.directive('owlCarouselItem', [function () {
     return {
         restrict: 'A',
