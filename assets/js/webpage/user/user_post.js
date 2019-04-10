@@ -4068,15 +4068,17 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
     $scope.owlOptionsTestimonials = {
-            slideBy:2,
-            loop: false,
-            nav: true,
-            lazyLoad: true,
-            margin: 0,
-            video: true,
-            responsive: {
+            'slideBy':2,
+            'touchDrag':false,
+            'mouseDrag':false,
+            'loop': false,
+            'nav': true,
+            'lazyLoad': true,
+            'margin': 0,
+            'video': true,
+            'responsive': {
                 0: {
-                    items: 2
+                    items: 1
                 },
                 480: {
                     items: 2
@@ -4088,7 +4090,27 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     items: 2
                 }
             }
-        };  
+        };
+
+    $scope.save_post = function(post_id,index,postData){
+        $('#save-post-' + post_id).attr('style','pointer-events: none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.postData[index].is_user_saved_post = result.status;                
+            }
+            else
+            {
+                $scope.postData[index].is_user_saved_post = result.status;
+            }
+        });
+    };
 });
 
 $(document).click(function(){

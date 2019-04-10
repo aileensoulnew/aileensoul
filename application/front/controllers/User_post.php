@@ -3379,4 +3379,35 @@ class User_post extends MY_Controller {
             }
         }
     }
+
+    public function save_user_post() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_id = $this->input->post('post_id');
+
+        $save_post_data = $this->db->select('*')->get_where('user_post_save', array('user_id' => $userid,'save_post_id'=>$post_id))->row();
+
+        $data = array();
+        if (isset($save_post_data) && !empty($save_post_data)) {
+            $data['status'] = '1';
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $updatedata = $this->common->update_data($data, 'user_post_save', 'id_user_post_save', $save_post_data->id_user_post_save);
+        } else {
+            $data['user_id'] = $userid;
+            $data['save_post_id'] = $post_id;
+            $data['status'] = '1';
+            $data['created_date'] = date('Y-m-d H:i:s', time());
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $save_post_id = $this->common->insert_data_getid($data, 'user_post_save');
+        }
+
+        $return_array = array();
+        if ($updatedata || $save_post_id) {
+            $return_array['status'] = 1;
+        }
+        else
+        {
+            $return_array['status'] = 0;
+        }
+        echo json_encode($return_array);
+    }
 }

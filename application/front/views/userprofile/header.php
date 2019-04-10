@@ -210,6 +210,9 @@
                                     'active': active == 'following'}">following <span class="following_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/questions"  ng-click='makeActive("questions")' ng-class="{
                                     'active': active == 'questions'}">Questions <span class="question_counter"></span></a></td>
+
+                            <td ng-if="live_slug == segment2"><a href="<?php echo base_url().$userdata['user_slug']; ?>/savedpost"  ng-click='makeActive("savedpost")' ng-class="{
+                                    'active': active == 'savedpost'}">Saved Post <span class="question_counter"></span></a></td>
                             <?php 
                             }else{
                             ?>
