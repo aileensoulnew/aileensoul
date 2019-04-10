@@ -5074,6 +5074,25 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     getUserDashboardPost();
     getUserDashboardInformation()
 
+    $scope.save_post = function(post_id,index,postData){
+        $('#save-post-' + post_id).attr('style','pointer-events: none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.postData[index].is_user_saved_post = result.status;                
+            }
+            else
+            {
+                $scope.postData[index].is_user_saved_post = result.status;
+            }
+        });
+    };
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

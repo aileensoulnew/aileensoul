@@ -1076,7 +1076,7 @@ class User_post extends MY_Controller {
         return (array) $keywords;
     }
 
-    public function post_opportunity() {        
+    public function post_opportunity() {
        
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
@@ -3401,6 +3401,8 @@ class User_post extends MY_Controller {
         }
 
         $return_array = array();
+        $savedpost_counter = $this->common->userSavedPostCount($userid);
+        $return_array['savedpost_counter'] = $this->common->change_number_long_format_to_short($savedpost_counter);
         if ($updatedata || $save_post_id) {
             $return_array['status'] = 1;
         }

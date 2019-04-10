@@ -4111,6 +4111,26 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
         });
     };
+
+    $scope.save_recent_post = function(post_id,postData){
+        $('.save-recentpost-' + post_id).attr('style','pointer-events: none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.recentpost.is_user_saved_post = result.status;                
+            }
+            else
+            {
+                $scope.recentpost.is_user_saved_post = result.status;
+            }
+        });
+    };
 });
 
 $(document).click(function(){

@@ -796,6 +796,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if($user_id == $post_like_data['user_id'])
             {
                 $postLikeUsername = "You";
@@ -2180,7 +2181,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($userid_login, $value['id']);
-            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($userid_login, $value['id']);
             if($userid_login == $post_like_data['user_id'])
             {
                 $postLikeUsername = "You";
@@ -2853,6 +2854,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $searchPostData[$key]['post_like_count'] = $post_like_count;
             $searchPostData[$key]['is_userlikePost'] = $this->is_userlikePost($userid, $value['id']);
+            $searchPostData[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if ($post_like_count > 1) {
                 $searchPostData[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
@@ -3119,6 +3121,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $searchPostData[$key]['post_like_count'] = $post_like_count;
             $searchPostData[$key]['is_userlikePost'] = $this->is_userlikePost($userid, $value['id']);
+            $searchPostData[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if ($post_like_count > 1) {
                 $searchPostData[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
@@ -3358,6 +3361,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if($user_id == $post_like_data['user_id'])
             {
                 $postLikeUsername = "You";
@@ -3588,6 +3592,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($userid_login, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($userid_login, $value['id']);
             if($userid_login == $post_like_data['user_id'])
             {
                 $postLikeUsername = "You";
@@ -3809,6 +3814,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if($user_id == $post_like_data['user_id'])
             {
                 $postLikeUsername = "You";

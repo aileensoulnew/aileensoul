@@ -365,6 +365,7 @@ class Userprofile_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if ($post_like_count > 1) {
                 $result_array[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
@@ -429,6 +430,24 @@ class Userprofile_model extends CI_Model {
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array['like_count'];
+    }
+
+    public function is_user_saved_post($user_id = '', $post_id = '') {
+        $this->db->select("*")->from("user_post_save");
+        $this->db->where('save_post_id', $post_id);
+        $this->db->where('user_id', $user_id);
+        $this->db->where('status', '1');        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        if($result_array)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
 
     public function postCommentCount($post_id = '') {
@@ -618,6 +637,7 @@ class Userprofile_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if ($post_like_count > 1) {
                 $result_array[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
@@ -714,6 +734,7 @@ class Userprofile_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
             if($userid_login == $post_like_data['user_id'])
             {
                 $postLikeUsername = "You";

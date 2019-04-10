@@ -580,7 +580,7 @@
                                     <div class="col-md-3 col-sm-3 col-xs-4">
                                         <ul class="pull-right bottom-right">       
 
-                                            <li class="post-save" ng-if="post.post_data.user_id != user_id">
+                                            <li class="post-save">
                                                 <a ng-if="post.is_user_saved_post == '1'" id="unsave-post-{{post.post_data.id}}" href="javascript:void(0);" ng-click="unsave_post(post.post_data.id, $index, post)" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.png'); ?>"></a>
                                             </li>
 
