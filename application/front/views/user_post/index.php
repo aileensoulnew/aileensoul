@@ -1553,7 +1553,12 @@
                                 </div>                                
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
-                                        <div class="find-more">
+                                        <div class="user-cover-img">
+                                            <a href="<?php echo base_url('contact-request') ?>">
+                                                <div class="gradient-bg" style="height: 100%"></div>
+                                            </a>
+                                        </div>
+                                        <div class="find-more user-pr-img">
                                             <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                         </div>                            
                                         <div class="user-info-text text-center">
@@ -1624,7 +1629,12 @@
                                 </div>                                
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
-                                        <div class="find-more">
+                                        <div class="user-cover-img">
+                                            <a href="<?php echo base_url('contact-request') ?>">
+                                                <div class="gradient-bg" style="height: 100%"></div>
+                                            </a>
+                                        </div>
+                                        <div class="find-more user-pr-img">
                                             <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                         </div>                            
                                         <div class="user-info-text text-center">
@@ -1695,7 +1705,12 @@
                                 </div>                                
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
-                                        <div class="find-more">
+                                        <div class="user-cover-img">
+                                            <a href="<?php echo base_url('contact-request') ?>">
+                                                <div class="gradient-bg" style="height: 100%"></div>
+                                            </a>
+                                        </div>
+                                        <div class="find-more user-pr-img">
                                             <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                         </div>                            
                                         <div class="user-info-text text-center">
@@ -1766,7 +1781,12 @@
                                 </div>                                
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
-                                        <div class="find-more">
+                                        <div class="user-cover-img">
+                                            <a href="<?php echo base_url('contact-request') ?>">
+                                                <div class="gradient-bg" style="height: 100%"></div>
+                                            </a>
+                                        </div>
+                                        <div class="find-more user-pr-img">
                                             <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                         </div>                            
                                         <div class="user-info-text text-center">
@@ -1837,7 +1857,12 @@
                                 </div>
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
-                                        <div class="find-more">
+                                        <div class="user-cover-img">
+                                            <a href="<?php echo base_url('contact-request') ?>">
+                                                <div class="gradient-bg" style="height: 100%"></div>
+                                            </a>
+                                        </div>
+                                        <div class="find-more user-pr-img">
                                             <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                         </div>                            
                                         <div class="user-info-text text-center">
