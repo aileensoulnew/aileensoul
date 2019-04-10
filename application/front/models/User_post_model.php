@@ -1018,7 +1018,7 @@ class User_post_model extends CI_Model {
                         UNION
 
                         SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS main6
-                ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
             }
 
             if($getUserStudentData)
@@ -1069,7 +1069,7 @@ class User_post_model extends CI_Model {
                     UNION
 
                     SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS main6
-                ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
             }
         }
         if($new_signup == 0)
@@ -1233,7 +1233,7 @@ class User_post_model extends CI_Model {
                         ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 5 DAY
                     ) as inner2
 
-                ) as main";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
             }
 
             if($getUserStudentData)
@@ -1343,7 +1343,7 @@ class User_post_model extends CI_Model {
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS main26
                         ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 5 DAY ORDER BY RAND() 
                     ) as inner2
-                ) as main";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
             }
         }
 
@@ -1562,7 +1562,7 @@ class User_post_model extends CI_Model {
                     UNION
 
                     SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main6
-                ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
             }
 
             if($getUserStudentData)
@@ -1613,7 +1613,7 @@ class User_post_model extends CI_Model {
                     UNION
 
                     SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main6
-                ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND ul.status = '1' AND ul.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
             }
         }
         if($new_signup == 0)
@@ -1776,7 +1776,7 @@ class User_post_model extends CI_Model {
 
                         ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 5 DAY ORDER BY RAND() LIMIT $total_record
                     ) as inner2
-                ) as main";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
             }
 
             if($getUserStudentData)
@@ -1884,7 +1884,7 @@ class User_post_model extends CI_Model {
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main26
                         ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 5 DAY ORDER BY RAND() 
                     ) as inner2
-                ) as main";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
             }
         }
         //End New Feed After 09-04-2019
