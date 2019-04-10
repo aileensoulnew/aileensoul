@@ -3410,4 +3410,40 @@ class User_post extends MY_Controller {
         }
         echo json_encode($return_array);
     }
+
+    public function getUserSavedPost() {
+        $page = 1;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        $user_slug = $_GET["user_slug"];
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        $post_data = $this->user_post_model->getUserSavedPost($userid, $page);
+        echo json_encode($post_data);
+    }
+
+    public function unsave_user_post() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_id = $this->input->post('post_id');
+
+        $save_post_data = $this->db->select('*')->get_where('user_post_save', array('user_id' => $userid,'save_post_id'=>$post_id))->row();
+
+        $data = array();
+        if (isset($save_post_data) && !empty($save_post_data)) {
+            $data['status'] = '0';
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $updatedata = $this->common->update_data($data, 'user_post_save', 'id_user_post_save', $save_post_data->id_user_post_save);
+        }
+        $return_array = array();
+        $savedpost_counter = $this->common->userSavedPostCount($userid);
+        $return_array['savedpost_counter'] = $this->common->change_number_long_format_to_short($savedpost_counter);
+        if ($updatedata) {
+            $return_array['status'] = 1;
+        }
+        else
+        {
+            $return_array['status'] = 0;
+        }
+        echo json_encode($return_array);
+    }
 }

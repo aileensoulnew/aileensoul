@@ -690,6 +690,10 @@ app.config(function ($routeProvider, $locationProvider) {
                 templateUrl: base_url + "userprofile_page/questions",
                 controller: 'questionsController'
             })
+            .when("/savedpost/:name*", {
+                templateUrl: base_url + "userprofile_page/savedpost",
+                controller: 'savedpostController'
+            })
             .when(":name*\/details", {
                 templateUrl: base_url + "userprofile_page/details",
                 controller: 'detailsController'
@@ -709,6 +713,10 @@ app.config(function ($routeProvider, $locationProvider) {
             .when(":name*\/questions", {
                 templateUrl: base_url + "userprofile_page/questions",
                 controller: 'questionsController'
+            })
+            .when(":name*\/savedpost", {
+                templateUrl: base_url + "userprofile_page/savedpost",
+                controller: 'savedpostController'
             })
             .when(":name*\/profiles", {
                 templateUrl: base_url + "userprofile_page/profile",
@@ -838,6 +846,17 @@ app.controller('profilesController', function ($scope, $http, $location) {
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -970,6 +989,17 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
             }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
             
         }, function (error) {});
     }
@@ -985,9 +1015,9 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
     $scope.getDashboardArticle = function (pagenum) {
         $('.load_more_post').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-             if($scope.$parent.pade_reload == true)
+            if($scope.$parent.pade_reload == true)
             {
-                $('#main_loader').show();            
+                $('#main_loader').show();
             }
             //$('#main_loader').show();
         }
@@ -1155,6 +1185,17 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -1342,6 +1383,17 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -1537,6 +1589,17 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -1791,6 +1854,17 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -2093,6 +2167,17 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -5095,6 +5180,17 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -10010,6 +10106,17 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
             }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
             
         }, function (error) {});
     }
@@ -10260,6 +10367,17 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
             }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
             
         }, function (error) {});
     }
@@ -10471,6 +10589,17 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -10752,6 +10881,17 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             {
                 //$('.question_counter').hide();
                 $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
             }
             
         }, function (error) {});
@@ -11172,8 +11312,2874 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             }
         });
     }
-
 });
+
+app.controller('savedpostController', function ($scope, $http, $location, $compile, $window) {
+    var isLoadingData = false;    
+    $scope.showLoadmore = true;
+    $scope.row = 0;
+    $scope.rowperpage = 5;
+    $scope.buttonText = "Load More";
+    $scope.savedpost = {};
+    $scope.user_id = user_id;
+    $scope.$parent.title = "Saved Post | Aileensoul";
+
+    $scope.opp = {};
+    $scope.sim = {};
+    $scope.ask = {};
+    $scope.postData = {};
+    $scope.opp.post_for = 'opportunity';
+    $scope.sim.post_for = 'simple';
+    $scope.ask.post_for = 'question';
+    
+    $scope.get_all_counter = function() {
+        if($scope.$parent.pade_reload == true)
+        {
+            $('#main_loader').show();
+        }
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            $('#main_loader').hide();
+            if(result.dashboard_counter != '')
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html(result.dashboard_counter);
+            }
+            else
+            {
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html(result.detail_counter+'%');
+            }
+            else
+            {
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
+            }
+
+            if(result.contact_counter != '')
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html(result.contact_counter);
+            }
+            else
+            {
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
+            }
+
+            if(result.follower_counter != '')
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html(result.follower_counter);
+            }
+            else
+            {
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
+            }
+
+            if(result.following_counter != '')
+            {
+                $('.following_counter').show();
+                $('.following_counter').html(result.following_counter);
+            }
+            else
+            {
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
+            }
+
+            if(result.question_counter != '')
+            {
+                $('.question_counter').show();
+                $('.question_counter').html(result.question_counter);
+            }
+            else
+            {
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
+            
+        }, function (error) {});
+    }
+    $scope.get_all_counter();
+
+    $("#job_title").focusin(function(){
+        $('#jobtitletooltip').show();
+    });
+    $("#job_title").focusout(function(){
+        $('#jobtitletooltip').hide();
+    });
+
+    $("#location").focusin(function(){
+        $('#locationtooltip').show();
+    });
+    $("#location").focusout(function(){
+        $('#locationtooltip').hide();
+    });
+    $("#field").focusin(function(){
+        $('#fieldtooltip').show();
+    });
+    $("#field").focusout(function(){
+        $('#fieldtooltip').hide();
+    });
+
+    $("#ask_desc").focusin(function(){
+        $('#ask_desctooltip').show();
+    });
+    $("#ask_desc").focusout(function(){
+        $('#ask_desctooltip').hide();
+    });
+
+    $("#ask_related_category").focusin(function(){
+        $('#rlcattooltip').show();
+    });
+    $("#ask_related_category").focusout(function(){
+        $('#rlcattooltip').hide();
+    });
+
+    $("#ask_field").focusin(function(){
+        $('#ask_fieldtooltip').show();
+    });
+    $("#ask_field").focusout(function(){
+        $('#ask_fieldtooltip').hide();
+    });
+    
+    setTimeout(function(){
+        var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+            $compile($elm)($scope);
+    },2000);
+
+    $scope.getHashTags = function(inputText) {  
+        var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        var matches = [];
+        var match;
+
+        while ((match = regex.exec(inputText))) {
+            matches.push(match[1]);
+        }
+
+        return matches;
+    };
+
+
+    $(document).on('hidden.bs.modal', function (event) {
+        if($('.modal.in').length > 0)
+        {
+            if ($('body').hasClass('modal-open') == false) {
+                $('body').addClass('modal-open');
+            };            
+        }
+    });
+
+    $(document).on('show.bs.modal', '.modal', function(event) {
+        $(this).appendTo($('body'));
+    }).on('shown.bs.modal', '.modal.in', function(event) {
+        setModalsAndBackdropsOrder();
+    }).on('hidden.bs.modal', '.modal', function(event) {
+        setModalsAndBackdropsOrder();
+    });
+
+    function setModalsAndBackdropsOrder() {  
+      var modalZIndex = 1040;
+      $('.modal.in').each(function(index) {
+            var $modal = $(this);
+            modalZIndex++;
+            $modal.css('zIndex', modalZIndex);
+            $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
+        });
+      $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
+    }
+
+    $(document).on('keydown', function (e) {
+        if (e.keyCode === 27) {
+            $('.modal-close').click();            
+        }
+    });
+
+    $(document).on('keydown','#job_title .input',function () {
+        if($('#job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+
+    $(document).on('focusin','#job_title .input',function () {
+        if($('#job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '10px');
+        }
+    });
+    $(document).on('focusout','#job_title .input',function () {
+        if($('#job_title ul li').length > 0)
+        {             
+            $(this).attr('placeholder', '');
+            $(this).css('width', '10px');
+        }
+        if($('#job_title ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
+            $(this).css('width', '100%');
+        }         
+    });
+
+    $(document).on('keydown','#location .input',function () {
+        if($('#location ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#location .input',function () {
+        if($('#location ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '10px');
+        }
+    });
+    $(document).on('focusout','#location .input',function () {
+        if($('#location ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '10px');
+        }
+        if($('#location ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
+            $(this).css('width', '100%');
+        }         
+    });
+
+
+    $(document).on('keydown','#ask_related_category .input',function () {
+        if($('#ask_related_category ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#ask_related_category .input',function () {
+        if($('#ask_related_category ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '10px');
+        }
+    });
+    $(document).on('focusout','#ask_related_category .input',function () {
+        if($('#ask_related_category ul li').length > 0)
+        {             
+            $(this).attr('placeholder', '');
+            $(this).css('width', '10px');
+        }
+        if($('#ask_related_category ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Related Category');
+            $(this).css('width', '100%');
+        }         
+    });
+
+        $scope.removeViewMore = function(mainId,removeViewMore) {    
+        $("#"+mainId).removeClass("view-more-expand");
+        $("#"+removeViewMore).remove();
+    };
+
+    $scope.dashboardPhotosAfterDPUpload = function() {    
+        getUserDashboardImage()
+    };    
+    
+    var cntImgSim = 0;
+    var formFileDataSim = new FormData();
+    var formFileExtSim = [];
+    var fileCountSim = 0;
+    var fileNamesArrSim = [];
+
+    var cntImgOpp = 0;
+    var formFileDataOpp = new FormData();
+    var formFileExtOpp = [];
+    var fileCountOpp = 0;
+    var fileNamesArrOpp = [];
+
+    var cntImgQue = 0;
+    var formFileDataQue = new FormData();
+    var formFileExtQue = [];
+    var fileCountQue = 0;
+    var fileNamesArrQue = [];
+
+    $(document).on('change','#fileInput2', function(e){        
+        $.each($('#fileInput2')[0].files, function(i, f) {
+            if(fileNamesArrQue.indexOf(f.name) < 0)
+            {
+
+                if(f.type.match("image.*")) {
+                
+                formFileExtQue.push(f.type.split('/')[1]);
+                fileNamesArrQue.push(f.name);
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var $el = $("<div class='img_preview' id='imgPrevQue_"+cntImgQue+"'><div class='i-ip'><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='"+f.name+"'></div><label class='remove_img' name='remove_image' ng-click=\"removeFileQue('"+cntImgQue+"')\" ><i class='fa fa-trash-o' aria-hidden='true'></i></label></div>").appendTo('#selectedFilesQue');
+                        //$("#selectedFiles").append(html);
+                        $compile($el)($scope);
+
+                        formFileDataQue.append('myfiles_'+cntImgQue, f);
+
+                        cntImgQue++;
+                        fileCountQue++;                    
+                        $("#fileCountQue").text(fileCountQue);
+                        if($('#fileInput2')[0].files.length - 1 == i)
+                        {
+                            $('#fileInput2').val("");
+                        }
+                    }
+                    reader.readAsDataURL(f); 
+                }               
+            }            
+        });
+    });
+
+    $scope.removeFileQue = function(rmId) {
+        fileCountQue--;
+        $("#fileCountQue").text(fileCountQue);
+        if(fileCountQue <= 0)
+        {
+            $("#fileInput2").val("");
+        }        
+        var ext = formFileDataQue.get("myfiles_"+rmId).type.split('/')[1];
+        var fileExtIndex = formFileExtQue.indexOf(ext.toString());
+        formFileExtQue.splice(fileExtIndex, 1);
+        
+        var fileNameIndex = fileNamesArrQue.indexOf(formFileDataQue.get("myfiles_"+rmId).name);
+        fileNamesArrQue.splice(fileNameIndex, 1);
+        $("#imgPrevQue_"+rmId).remove();
+        formFileDataQue.delete("myfiles_"+rmId);
+    };
+
+    $(document).on('change','#fileInput1', function(e){
+        $.each($('#fileInput1')[0].files, function(i, f) {
+            
+            if(fileNamesArrSim.indexOf(f.name) < 0)
+            {
+                formFileExtSim.push(f.type.split('/')[1]);
+                fileNamesArrSim.push(f.name);
+
+                if(f.type.match("image.*")) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var $el = $("<div class='img_preview' id='imgPrev_"+cntImgSim+"'><div class='i-ip'><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='"+f.name+"'></div><label class='remove_img' name='remove_image' ng-click=\"removeFile('"+cntImgSim+"')\" ><i class='fa fa-trash-o' aria-hidden='true'></i></label></div>").appendTo('#selectedFiles');
+                        //$("#selectedFiles").append(html);
+                        $compile($el)($scope);
+
+                        formFileDataSim.append('myfiles_'+cntImgSim, f);
+
+                        cntImgSim++;
+                        fileCountSim++;                    
+                        $("#fileCountSim").text(fileCountSim);
+                        if($('#fileInput1')[0].files.length - 1 == i)
+                        {
+                            $('#fileInput1').val("");
+                        }
+                    }
+                    reader.readAsDataURL(f); 
+                }
+                else if(f.type.match("video.*")) {
+                    src = URL.createObjectURL(f);
+                    var $el = $('<div class="img_preview" id="imgPrev_'+cntImgSim+'"><div class="i-ip"><video width="400"><source src="'+src+'" id="video_here">Your browser does not support HTML5 video.</video></div><label class="remove_img" name="remove_image" ng-click=\'removeFile("'+cntImgSim+'")\'><i class="fa fa-trash-o" aria-hidden="true"></i></label></div>').appendTo('#selectedFiles');
+                    //$("#selectedFiles").append(html);
+                    $compile($el)($scope);
+                    formFileDataSim.append('myfiles_'+cntImgSim, f);
+                    //fileNamesArrSim.push(f.name);
+                    cntImgSim++;
+                    fileCountSim++;
+                    $("#fileCountSim").text(fileCountSim);
+                    if($('#fileInput1')[0].files.length - 1 == i)
+                    {
+                        $('#fileInput1').val("");
+                    }
+                }
+
+                else if(f.type.match("audio.*")) {
+                    src = URL.createObjectURL(f);
+                    var $el =  $('<div class="img_preview" id="imgPrev_'+cntImgSim+'"><div class="i-ip i-ip-audio"><audio><source src="'+src+'" type="audio/ogg"><source src="'+src+'" type="audio/mpeg">Your browser does not support the audio element.</audio></div><label class="remove_img" name="remove_image" ng-click=\'removeFile("'+cntImgSim+'")\'><i class="fa fa-trash-o" aria-hidden="true"></i></label></div>').appendTo('#selectedFiles');
+                    //$("#selectedFiles").append(html);
+                    $compile($el)($scope);
+                    formFileDataSim.append('myfiles_'+cntImgSim, f);
+                    cntImgSim++;
+                    fileCountSim++;
+                    $("#fileCountSim").text(fileCountSim);
+                    if($('#fileInput1')[0].files.length - 1 == i)
+                    {
+                        $('#fileInput1').val("");
+                    }
+                }
+
+                else if(f.type == "application/pdf") {              
+                    var $el =  $('<div class="img_preview" id="imgPrev_'+cntImgSim+'"><div class="i-ip"><img ng-src="'+base_url+'assets/images/PDF.jpg" class="selFile"></div><label class="remove_img" name="remove_image" ng-click=\'removeFile("'+cntImgSim+'")\'><i class="fa fa-trash-o" aria-hidden="true"></i></label></div>').appendTo('#selectedFiles');
+                    //$("#selectedFiles").append(html);
+                    $compile($el)($scope);
+                    formFileDataSim.append('myfiles_'+cntImgSim, f);
+                    cntImgSim++;
+                    fileCountSim++;
+                    $("#fileCountSim").text(fileCountSim);
+                    if($('#fileInput1')[0].files.length - 1 == i)
+                    {
+                        $('#fileInput1').val("");
+                    }
+
+                    /*var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var $el = $("<div class='img_preview' id='imgPrev_"+cntImgSim+"'><div class='i-ip'><embed width='100%' src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='"+f.name+"'></embed></div><label class='remove_img' name='remove_image' ng-click=\"removeFile('"+cntImgSim+"')\" ><i class='fa fa-trash-o' aria-hidden='true'></i></label></div>").appendTo('#selectedFiles');
+                        //$("#selectedFiles").append(html);
+                        $compile($el)($scope);
+
+                        formFileDataSim.append('myfiles_'+cntImgSim, f);
+
+                        cntImgSim++;
+                        fileCountSim++;                    
+                        $("#fileCountSim").text(fileCountSim);
+                        if($('#fileInput1')[0].files.length - 1 == i)
+                        {
+                            $('#fileInput1').val("");
+                        }
+                    }
+                    reader.readAsDataURL(f);*/
+                }
+            }            
+        });
+    });
+
+    $scope.removeFile = function(rmId) {        
+        fileCountSim--;
+        $("#fileCountSim").text(fileCountSim);
+        if(fileCountSim <= 0)
+        {
+            $("#fileInput1").val("");
+        }        
+        var ext = formFileDataSim.get("myfiles_"+rmId).type.split('/')[1];
+        var fileExtIndex = formFileExtSim.indexOf(ext.toString());
+        formFileExtSim.splice(fileExtIndex, 1);
+        
+        var fileNameIndex = fileNamesArrSim.indexOf(formFileDataSim.get("myfiles_"+rmId).name);
+        fileNamesArrSim.splice(fileNameIndex, 1);
+        //console.log(fileNamesArrSim);
+        $("#imgPrev_"+rmId).remove();
+        formFileDataSim.delete("myfiles_"+rmId);
+
+    };
+
+    $(document).on('change','#fileInput', function(e){
+        $.each($('#fileInput')[0].files, function(i, f) {
+            
+            if(fileNamesArrOpp.indexOf(f.name) < 0)
+            {
+                formFileExtOpp.push(f.type.split('/')[1]);
+                fileNamesArrOpp.push(f.name);
+
+                if(f.type.match("image.*")) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var $el = $("<div class='img_preview' id='imgPrevOpp_"+cntImgOpp+"'><div class='i-ip'><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='"+f.name+"'></div><label class='remove_img' name='remove_image' ng-click=\"removeFileOpp('"+cntImgOpp+"')\" ><i class='fa fa-trash-o' aria-hidden='true'></i></label></div>").appendTo('#selectedFilesOpp');                        
+                        $compile($el)($scope);
+
+                        formFileDataOpp.append('myfiles_'+cntImgOpp, f);
+
+                        cntImgOpp++;
+                        fileCountOpp++;                    
+                        $("#fileCountOpp").text(fileCountOpp);
+                        if($('#fileInput')[0].files.length - 1 == i)
+                        {
+                            $('#fileInput').val("");
+                        }
+                    }
+                    reader.readAsDataURL(f); 
+                }
+                else if(f.type.match("video.*")) {
+                    src = URL.createObjectURL(f);
+                    var $el = $('<div class="img_preview" id="imgPrevOpp_'+cntImgOpp+'"><div class="i-ip"><video width="400"><source src="'+src+'" id="video_here">Your browser does not support HTML5 video.</video></div><label class="remove_img" name="remove_image" ng-click=\'removeFileOpp("'+cntImgOpp+'")\'><i class="fa fa-trash-o" aria-hidden="true"></i></label></div>').appendTo('#selectedFilesOpp');                    
+                    $compile($el)($scope);
+                    formFileDataOpp.append('myfiles_'+cntImgOpp, f);                    
+                    cntImgOpp++;
+                    fileCountOpp++;
+                    $("#fileCountOpp").text(fileCountOpp);
+                    if($('#fileInput')[0].files.length - 1 == i)
+                    {
+                        $('#fileInput').val("");
+                    }
+                }
+
+                else if(f.type.match("audio.*")) {
+                    src = URL.createObjectURL(f);
+                    var $el =  $('<div class="img_preview" id="imgPrevOpp_'+cntImgOpp+'"><div class="i-ip i-ip-audio"><audio><source src="'+src+'" type="audio/ogg"><source src="'+src+'" type="audio/mpeg">Your browser does not support the audio element.</audio></div><label class="remove_img" name="remove_image" ng-click=\'removeFileOpp("'+cntImgOpp+'")\'><i class="fa fa-trash-o" aria-hidden="true"></i></label></div>').appendTo('#selectedFilesOpp');                    
+                    $compile($el)($scope);
+                    formFileDataOpp.append('myfiles_'+cntImgOpp, f);
+                    cntImgOpp++;
+                    fileCountOpp++;
+                    $("#fileCountOpp").text(fileCountOpp);
+                    if($('#fileInput')[0].files.length - 1 == i)
+                    {
+                        $('#fileInput').val("");
+                    }
+                }
+
+                else if(f.type == "application/pdf") {              
+                    var $el =  $('<div class="img_preview" id="imgPrevOpp_'+cntImgOpp+'"><div class="i-ip"><img ng-src="'+base_url+'assets/images/PDF.jpg" class="selFile"></div><label class="remove_img" name="remove_image" ng-click=\'removeFileOpp("'+cntImgOpp+'")\'><i class="fa fa-trash-o" aria-hidden="true"></i></label></div>').appendTo('#selectedFilesOpp');                    
+                    $compile($el)($scope);
+                    formFileDataOpp.append('myfiles_'+cntImgOpp, f);
+                    cntImgOpp++;
+                    fileCountOpp++;
+                    $("#fileCountOpp").text(fileCountOpp);
+                    if($('#fileInput')[0].files.length - 1 == i)
+                    {
+                        $('#fileInput').val("");
+                    }
+                }
+            }            
+        });
+    });
+
+    $scope.removeFileOpp = function(rmId) {
+        fileCountOpp--;
+        $("#fileCountOpp").text(fileCountOpp);
+        if(fileCountOpp <= 0)
+        {
+            $("#fileInput").val("");
+        }        
+        var ext = formFileDataOpp.get("myfiles_"+rmId).type.split('/')[1];
+        var fileExtIndex = formFileExtOpp.indexOf(ext.toString());
+        formFileExtOpp.splice(fileExtIndex, 1);
+        
+        var fileNameIndex = fileNamesArrOpp.indexOf(formFileDataOpp.get("myfiles_"+rmId).name);
+        fileNamesArrOpp.splice(fileNameIndex, 1);
+        $("#imgPrevOpp_"+rmId).remove();
+        formFileDataOpp.delete("myfiles_"+rmId);
+    };
+
+    $scope.openModal = function() {
+        document.getElementById('myModal1').style.display = "block";
+        $("body").addClass("modal-open");
+    };    
+    $scope.closeModal = function() {    
+        document.getElementById('myModal1').style.display = "none";
+        $("body").removeClass("modal-open");
+    };    
+    //var slideIndex = 1;
+    //showSlides(slideIndex);
+    $scope.plusSlides = function(n) {    
+        showSlides(slideIndex += n);
+    };   
+    $scope.currentSlide = function(n) {    
+        showSlides(slideIndex = n);
+    };    
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        //var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        /*for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }*/
+        slides[slideIndex - 1].style.display = "block";
+        //dots[slideIndex - 1].className += " active";
+        //captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+    $scope.openModal2 = function(myModal2Id) {
+        /*if(user_id != "")
+        {            
+            document.getElementById(myModal2Id).style.display = "block";
+            $("body").addClass("modal-open");
+        }
+        else
+        {
+            $("#regmodal").modal("show");
+        }*/
+        document.getElementById(myModal2Id).style.display = "block";
+        $("body").addClass("modal-open");
+    };
+    $scope.closeModal2 = function(myModal2Id) {    
+        document.getElementById(myModal2Id).style.display = "none";
+        $("body").removeClass("modal-open");
+    };
+    $scope.plusSlides2 = function(n,myModal2Id) {    
+        showSlides2(slideIndex += n,myModal2Id);
+    };
+    $scope.currentSlide2 = function(n,myModal2Id) {    
+        showSlides2(slideIndex = n,myModal2Id);
+    };
+    function showSlides2(n,myModal2Id) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides2"+myModal2Id);
+        //var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        var elem = $("#element_load_"+slideIndex);
+        $("#myModal"+myModal2Id+" #all_image_loader").hide();
+
+        if (!elem.prop('complete')) {
+            $("#myModal"+myModal2Id+" #all_image_loader").show();
+            elem.on('load', function() {
+                $("#myModal"+myModal2Id+" #all_image_loader").hide();
+                // console.log("Loaded!");
+                // console.log(this.complete);
+            });
+        } 
+        /*for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }*/
+        slides[slideIndex - 1].style.display = "block";
+        //dots[slideIndex - 1].className += " active";
+        //captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+    $(window).on('scroll', function () {
+        if ($(window).scrollTop() == $(document).height() - $(window).height())
+        {
+            var page = $(".page_number:last").val();
+            var total_record = $(".total_record").val();
+            var perpage_record = $(".perpage_record").val();
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($(".page_number:last").val()) + 1;
+                    getUserSavedPostLoad(pagenum);
+                }
+            }
+        }
+    });    
+
+    function getUserSavedPostLoad(pagenum) {
+        if (isLoadingData) {
+          
+            /*
+             *This won't go past this condition while
+             *isProcessing is true.
+             *You could even display a message.
+             **/
+            return;
+        }
+        isLoadingData = true;
+        $('#loader').show();
+        $http.get(base_url + "user_post/getUserSavedPost?page=" + pagenum + "&user_slug=" + user_slug).then(function (success) {
+            $('#loader').hide();
+            if (success.data.length > 0) {
+                isLoadingData = false;
+                for (var i in success.data) {
+                    $scope.postData.push(success.data[i]);
+                }
+                // check_no_post_data();
+            } else {
+                // processing = false;
+                // isLoadingData = false;
+                isLoadingData = true;
+                $scope.showLoadmore = false;
+            }
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        }, function (error) {});
+    }
+
+    // getFieldList();
+    function getFieldList() {
+        $http.get(base_url + "general_data/getFieldList").then(function (success) {
+            $scope.fieldList = success.data;
+        }, function (error) {});
+    }
+    if(user_id != "")
+    {
+        getContactSuggetion();
+        function getContactSuggetion() {
+            $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
+                $scope.contactSuggetion = success.data;
+                //console.log($scope.contactSuggetion);
+            }, function (error) {});
+        }
+    }
+
+    $scope.job_title = [];
+    $scope.loadJobTitle = function ($query) {
+        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+            var job_title = response.data;
+            return job_title.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+    $scope.location = [];
+    $scope.loadLocation = function ($query) {
+        return $http.get(base_url + 'user_post/get_location', {cache: true}).then(function (response) {
+            var location_data = response.data;
+            return location_data.filter(function (location) {
+                return location.city_name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.category = [];
+    $scope.loadCategory = function ($query) {
+        return $http.get(base_url + 'user_post/get_category', {cache: true}).then(function (response) {
+            var category_data = response.data;
+            return category_data.filter(function (category) {
+                return category.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+
+    $scope.postFiles = function () {
+        var a = document.getElementById('description').value;
+        var b = document.getElementById('job_title').value;
+        var c = document.getElementById('location').value;
+        var d = document.getElementById('field').value;        
+        //document.getElementById("post_opportunity").reset();
+        document.getElementById('description').value = a;
+        document.getElementById('job_title').value = b;
+        document.getElementById('location').value = c;
+        document.getElementById('field').value = d;
+    }
+
+    $scope.post_opportunity_check = function (event,postIndex) {
+
+        if (document.getElementById("opp_edit_post_id"+postIndex)) {
+            var post_id = document.getElementById("opp_edit_post_id"+postIndex).value;
+        } else {
+            var post_id = 0;
+        }        
+        if (post_id == 0) {
+            var fileInput = document.getElementById("fileInput").files;
+            var description = $scope.opp.description;//document.getElementById("description").value;            
+            var job_title = $scope.opp.job_title;
+            var location = $scope.opp.location;
+            var fields = $scope.opp.field;
+            var otherField_edit = $scope.opp.otherField_edit;
+            var opp_hashtag = $scope.opp.opp_hashtag;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
+            
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0)))
+            {
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
+                }
+                $('#post').modal('show');
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        $('#posterrormodal').modal('hide');
+                        $('.modal-post').show();
+                    }
+                });
+                //event.preventDefault();
+                return false;
+            }
+            else
+            {
+                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
+                var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
+                var allowesaudio = ['mp3','mpeg'];
+                var allowespdf = ['pdf'];
+                var imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
+
+                if(fileCountOpp > 0 && fileCountOpp < 11)
+                {
+                    $.each(formFileExtOpp, function( index, value ) {
+                        //console.log( index + ": " + value );
+                        if($.inArray(value, allowedExtensions) > -1)
+                        {
+                            imgExt = true;
+                        }
+                        if($.inArray(value, allowesvideo) > -1)
+                        {
+                            videoExt = true;
+                        }
+                        if($.inArray(value, allowesaudio) > -1)
+                        {
+                            audioExt = true;
+                        }
+                        if($.inArray(value, allowespdf) > -1)
+                        {
+                            pdfExt = true;
+                        }
+                    });
+
+                    if(imgExt == true && (videoExt == true || audioExt == true || pdfExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                    }
+                    if(videoExt == true && (imgExt == true || audioExt == true || pdfExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either video or photo or  audio or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;                        
+                    }
+                    if(audioExt == true && (imgExt == true || videoExt == true || pdfExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either audio or photo or video or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;                        
+                    }
+                    else
+                    {
+                        if(audioExt == true && (description == '' || description == undefined))
+                        {
+                            $('.biderror .mes').html("<div class='pop_content'>Please Enter Audio Title.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false; 
+                        }
+
+                    }
+                    if(pdfExt == true && (imgExt == true || videoExt == true || audioExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either pdf or photo or video or audio. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;                        
+                    }
+                    else
+                    {
+                        if(pdfExt == true && (description == '' || description == undefined))
+                        {
+                            $('.biderror .mes').html("<div class='pop_content'>Please Enter PDF Title.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false; 
+                        }
+                    }
+                }
+                else
+                {
+                    if((description == '' || description == undefined) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields.trim() == undefined || fields.trim() == '')))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to Post Opportunity.");
+                        $('#posterrormodal').modal('show');
+                        //$("#post_opportunity")[0].reset();
+                        //setInterval('window.location.reload()', 10000);
+                        $(document).on('keydown', function (e) {
+                            if (e.keyCode === 27) {
+                                $('#posterrormodal').modal('hide');
+                                $('.modal-post').show();
+                            }
+                        });
+                        //event.preventDefault();
+                        return false;
+                    }
+                }
+
+                for (var i = 0; i < fileCountOpp; i++)
+                {
+                    var vname = fileNamesArrOpp[i];
+                    var vfirstname = fileNamesArrOpp[i];
+                    var ext = vfirstname.split('.').pop();
+                    var ext1 = vname.split('.').pop();
+                    var foundPresent = $.inArray(ext, allowedExtensions) > -1;
+                    var foundPresentvideo = $.inArray(ext, allowesvideo) > -1;
+                    var foundPresentaudio = $.inArray(ext, allowesaudio) > -1;
+                    var foundPresentpdf = $.inArray(ext, allowespdf) > -1;
+
+                    if (foundPresent == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowedExtensions) > -1;
+                        if (foundPresent1 == true && fileCountOpp >= 11) {                        
+                            $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 photos at a time.");
+                            $('#posterrormodal').modal('show');
+                            //setInterval('window.location.reload()', 10000);
+                            //$("#post_opportunity")[0].reset();
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentvideo == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowesvideo) > -1;
+                        if (foundPresent1 == true && fileCountOpp == 1) {
+                        } else {
+                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single video.");
+                            $('#posterrormodal').modal('show');
+                            // setInterval('window.location.reload()', 10000);
+                            //$("#post_opportunity")[0].reset();
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentaudio == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowesaudio) > -1;
+                        if (foundPresent1 == true && fileCountOpp == 1) {
+                        } else {
+                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single audio.");
+                            $('#posterrormodal').modal('show');
+                            //setInterval('window.location.reload()', 10000);
+                            //$("#post_opportunity")[0].reset();
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentpdf == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowespdf) > -1;
+                        if (foundPresent1 == true && fileCountOpp == 1) {
+                        } else {                            
+                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single PDF.");                            
+                            $('#posterrormodal').modal('show');
+                            //setInterval('window.location.reload()', 10000);
+                            //$("#post_opportunity")[0].reset();
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentvideo == false) {
+
+                        $('.biderror .mes').html("<div class='pop_content'>This File Format is not supported Please Try to Upload MP4 or WebM files..");
+                        $('#posterrormodal').modal('show');
+                        //setInterval('window.location.reload()', 10000);
+                        //$("#post_opportunity")[0].reset();
+                        $(document).on('keydown', function (e) {
+                            if (e.keyCode === 27) {
+                                $('#posterrormodal').modal('hide');
+                                $('.modal-post').show();
+
+                            }
+                        });
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+
+                /*var form_data = new FormData();
+                $.each($("#fileInput")[0].files, function(i, file) {
+                    form_data.append('postfiles[]', file);
+                });*/
+
+                formFileDataOpp.append('description', $scope.opp.description);
+                formFileDataOpp.append('field', $scope.opp.field);
+                formFileDataOpp.append('other_field', otherField_edit);
+                formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
+                formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
+                formFileDataOpp.append('post_for', $scope.opp.post_for);
+                formFileDataOpp.append('hashtag', $scope.opp.opp_hashtag);
+                formFileDataOpp.append('company_name', $scope.opp.company_name);
+
+                $('body').removeClass('modal-open');
+                $("#opportunity-popup").modal('hide');
+
+                //$('.post_loader').show();
+                $('#progress_div').show();
+                var bar = $('.progress-bar');
+                var percent = $('.sr-only');
+                $http.post(base_url + 'user_post/post_opportunity', formFileDataOpp,
+                        {
+                            transformRequest: angular.identity,
+                            headers: {'Content-Type': undefined, 'Process-Data': false},
+                            uploadEventHandlers: {
+                                progress: function(e) {
+                                     if (e.lengthComputable) {
+                                        progress = Math.round(e.loaded * 100 / e.total);
+
+                                        bar.width((progress - 1) +'%');
+                                        percent.html((progress - 1) +'%');
+
+                                        //console.log("progress: " + progress + "%");
+                                        if (e.loaded == e.total) {
+                                            /*setTimeout(function(){
+                                                $('#progress_div').hide();
+                                                progress = 0;
+                                                bar.width(progress+'%');
+                                                percent.html(progress+'%');
+                                            }, 2000);*/
+                                            //console.log("File upload finished!");
+                                            //console.log("Server will perform extra work now...");
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .then(function (success) {
+
+                            if (success) {
+                                $("#post_opportunity")[0].reset();
+                                $('.post_loader').hide();
+                                $scope.opp.description = ' ';
+                                $scope.opp.job_title = '';
+                                $scope.opp.location = '';
+                                $scope.opp.field = '';
+                                $scope.opp.postfiles = '';
+                                document.getElementById('fileInput').value = '';
+
+                                $('.file-preview-thumbnails').html('');
+                                //$scope.postData.splice(0, 0, success.data[0]);
+                                getUserDashboardPost();
+                                if (foundPresent == true)
+                                {
+                                    getUserDashboardImage();
+                                }
+                                if (foundPresentvideo == true)
+                                {
+                                    getUserDashboardVideo();
+                                }
+                                if (foundPresentaudio == true)
+                                {
+                                    getUserDashboardAudio();
+                                }
+                                if (foundPresentpdf == true)
+                                {
+                                    getUserDashboardPdf();
+                                }
+
+                                bar.width(100+'%');
+                                percent.html(100+'%');
+                                setTimeout(function(){                                    
+                                    progress = 0;
+                                    // bar.width(progress+'%');
+                                    // percent.html(progress+'%');
+                                }, 2000);
+
+                                imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
+
+                                cntImgOpp = 0;
+                                formFileDataOpp = new FormData();
+                                fileCountOpp = 0;
+                                fileNamesArrOpp = [];
+                                formFileExtOpp = [];
+                                $("#selectedFilesOpp").html("");
+                                $("#fileCountOpp").text("");
+
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                            }
+                        });
+            }
+
+        } else {
+            //var description = $("#description_edit_"+post_id).val();//$scope.opp.description;//document.getElementById("description").value;
+            var description = $('#description_edit_' + post_id).html();
+            description = description.replace(/&nbsp;/gi, " ");
+            description = description.replace(/<br>$/, '');
+            description = description.replace(/&gt;/gi, ">");
+            description = description.replace(/&/g, "%26");            
+            description = description.trim();
+            var opptitle = $scope.opp.opptitleedit;
+            var job_title = $scope.opp.job_title_edit;
+            var location = $scope.opp.location_edit;
+            var fields = $("#field_edit"+post_id).val();            
+            var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
+            var opp_hashtag = $scope.opp.opp_hashtag_edit;            
+            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(opp_hashtag);
+
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0))
+            {
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                }
+                $('#post').modal('show');
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        $('#posterrormodal').modal('hide');
+                        $('.modal-post').show();
+                    }
+                });
+                //event.preventDefault();
+                return false;
+            } else {
+
+
+                var form_data = new FormData();
+
+                form_data.append('description', description);
+                form_data.append('opptitle', opptitle);
+                form_data.append('field', fields);
+                form_data.append('other_field', otherField_edit);
+                form_data.append('job_title', JSON.stringify(job_title));
+                form_data.append('location', JSON.stringify(location));
+                form_data.append('post_for', $scope.opp.post_for);
+                form_data.append('company_name', $scope.opp.company_name_edit);
+                form_data.append('hashtag', $scope.opp.opp_hashtag_edit);
+                form_data.append('post_id', post_id);
+
+                $('body').removeClass('modal-open');
+                $("#opportunity-popup").modal('hide');
+                $("#login_ajax_load"+post_id).show();
+                $("#save_"+post_id).attr("style","pointer-events: none;");
+                $http.post(base_url + 'user_post/edit_post_opportunity', form_data,
+                {
+                    transformRequest: angular.identity,
+
+                    headers: {'Content-Type': undefined, 'Process-Data': false}
+                })
+                .then(function (success) {
+                    $("#login_ajax_load"+post_id).hide();
+                    $("#save_"+post_id).attr("style","pointer-events: all;");
+                    if (success.data.response == 1) {
+                        $scope.postData[postIndex].opportunity_data.opptitle = success.data.opptitle;
+                        $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
+                        $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
+                        $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
+                        $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
+                        $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
+                        $scope.postData[postIndex].opportunity_data.hashtag = success.data.hashtag;
+                        $scope.postData[postIndex].opportunity_data.company_name = success.data.company_name;
+                        $("#post_opportunity_edit")[0].reset();
+
+                        $("#edit-opp-post-"+post_id).hide();
+                        $('#post-opp-detail-' + post_id).show();   
+                        // $('#opp-post-opportunity-for-' + post_id).html(success.data.opp_opportunity_for);
+                        // $('#opp-post-location-' + post_id).html(success.data.opp_location);
+                        // $('#opp-post-field-' + post_id).html(success.data.opp_field);
+                        // $('#opp-post-opportunity-' + post_id).html(success.data.opportunity);
+
+                        // $scope.opp.description = '';
+                        // $scope.opp.job_title = '';
+                        // $scope.opp.location = '';
+                        // $scope.opp.field = '';
+                        // $scope.opp.postfiles = '';
+                    }
+                });
+            }
+
+        }
+    }
+    $scope.IsVisible = false;
+    $scope.ShowHide = function () {
+        //If DIV is visible it will be hidden and vice versa.
+        $scope.IsVisible = $scope.IsVisible ? false : true;
+    }
+
+
+    $scope.questionList = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchQuestionList',
+            data: 'q=' + $scope.ask.ask_que,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.queSearchResult = data;
+            if ($scope.queSearchResult.length > 0) {
+                $('.questionSuggetion').addClass('question-available');
+            } else {
+                $('.questionSuggetion').removeClass('question-available');
+            }
+        });
+    }
+    $scope.ask_question_check = function (event) {
+
+        if (document.getElementById("ask_edit_post_id")) {
+            var post_id = document.getElementById("ask_edit_post_id").value;
+        } else {
+            var post_id = 0;
+        }
+        if (post_id == 0) {
+            var field = document.getElementById("ask_field").value;
+            var description = document.getElementById("ask_que").value;
+            var description = description.trim();
+            var fileInput = document.getElementById("fileInput2").files;
+            if ((field == '') || (description == ''))
+            {
+                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
+                $('#post').modal('show');
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        $('#posterrormodal').modal('hide');
+                        $('.modal-post').show();
+                    }
+                });
+                //event.preventDefault();
+                return false;
+            } else {
+
+                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
+                
+                var imgExtNot = false;
+
+                if(fileCountQue > 0)
+                {
+                    $.each(formFileExtQue, function( index, value ) {
+                        //console.log( index + ": " + value );
+                        if($.inArray(value, allowedExtensions) == -1)
+                        {
+                            imgExtNot = true;
+                        }                        
+                    });
+
+                    if(imgExtNot == true || fileCountQue > 10)
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload photo. You cannot upload more than 10 photos at a time.");
+                            $('#posterrormodal').modal('show');
+                            //$("#post_opportunity")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                    }                    
+                }
+
+                /*var form_data = new FormData();
+                angular.forEach($scope.files, function (file) {
+                    form_data.append('postfiles[]', file);
+                });*/
+                //form_data.append('postfiles',$scope.ask.postfiles);
+                formFileDataQue.append('question', $scope.ask.ask_que);
+                formFileDataQue.append('description', $scope.ask.ask_description);
+                formFileDataQue.append('field', $scope.ask.ask_field);
+                formFileDataQue.append('other_field', $scope.ask.otherField);
+                formFileDataQue.append('category', JSON.stringify($scope.ask.related_category));
+                formFileDataQue.append('weblink', $scope.ask.web_link);
+                formFileDataQue.append('post_for', $scope.ask.post_for);
+                formFileDataQue.append('is_anonymously', $scope.ask.is_anonymously);
+
+                $('body').removeClass('modal-open');
+                $("#opportunity-popup").modal('hide');
+                $("#ask-question").modal('hide');
+                //$('.post_loader').show();
+                // $.each($("#fileInput2")[0].files, function(i, file) {
+                //     form_data.append('postfiles[]', file);
+                // });
+                $('#progress_div').show();
+                var bar = $('.progress-bar');
+                var percent = $('.sr-only');
+
+                $http.post(base_url + 'user_post/post_opportunity', formFileDataQue,
+                        {
+                            transformRequest: angular.identity,
+                            headers: {'Content-Type': undefined, 'Process-Data': false},
+                            uploadEventHandlers: {
+                                progress: function(e) {
+                                     if (e.lengthComputable) {
+                                        progress = Math.round(e.loaded * 100 / e.total);
+
+                                        bar.width((progress - 1) +'%');
+                                        percent.html((progress - 1) +'%');
+
+                                        //console.log("progress: " + progress + "%");
+                                        if (e.loaded == e.total) {
+                                            /*setTimeout(function(){
+                                                $('#progress_div').hide();
+                                                progress = 0;
+                                                bar.width(progress+'%');
+                                                percent.html(progress+'%');
+                                            }, 2000);*/
+                                            //console.log("File upload finished!");
+                                            //console.log("Server will perform extra work now...");
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .then(function (success) {
+                            if (success) {
+                                window.location = base_url+user_slug+"/questions";
+                                $('.post_loader').hide();
+                                $scope.opp.description = '';
+                                $scope.opp.job_title = '';
+                                $scope.opp.location = '';
+                                $scope.opp.field = '';
+                                $scope.opp.postfiles = '';
+                                document.getElementById('fileInput2').value = '';
+                                $('.file-preview-thumbnails').html('');
+                                $scope.ask.postfiles = '';
+                                $scope.ask.ask_que = '';
+                                $scope.ask.ask_description = '';
+                                $scope.ask.ask_field = '';
+                                $scope.ask.otherField = '';
+                                $scope.ask.related_category = '';
+                                $scope.ask.web_link = '';
+                                $scope.ask.post_for = 'question';
+                                $scope.ask.is_anonymously = '';
+
+                                //$scope.postData.splice(0, 0, success.data[0]);
+                                getUserDashboardPost();
+                                getUserDashboardImage();
+
+                                bar.width(100+'%');
+                                percent.html(100+'%');
+                                setTimeout(function(){                                    
+                                    progress = 0;
+                                    // bar.width(progress+'%');
+                                    // percent.html(progress+'%');
+                                }, 2000);
+                                imgExt = false;
+                                cntImgQue = 0;
+                                formFileDataQue = new FormData();
+                                fileCountQue = 0;
+                                fileNamesArrQue = [];
+                                formFileExtQue = [];
+                                $("#selectedFilesQue").html("");
+                                $("#fileCountQue").text("");
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                            }
+                        });
+            }
+
+        } else {
+
+            var field = document.getElementById("ask_field").value;
+            var description = document.getElementById("ask_que").value;
+            var description = description.trim();
+            if ((field == '') || (description == ''))
+            {
+                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
+                $('#post').modal('show');
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        $('#posterrormodal').modal('hide');
+                        $('.modal-post').show();
+                    }
+                });
+                event.preventDefault();
+                return false;
+            } else {
+
+
+                var form_data = new FormData();
+
+                form_data.append('question', $scope.ask.ask_que);
+                form_data.append('description', $scope.ask.ask_description);
+                form_data.append('field', $scope.ask.ask_field);
+                form_data.append('other_field', $scope.ask.otherField);
+                form_data.append('category', JSON.stringify($scope.ask.related_category));
+                form_data.append('weblink', $scope.ask.web_link);
+                form_data.append('post_for', $scope.ask.post_for);
+                form_data.append('is_anonymously', $scope.ask.is_anonymously);
+                form_data.append('company_name', $scope.opp.company_name);
+                form_data.append('post_id', post_id);
+                $('body').removeClass('modal-open');
+                $("#opportunity-popup").modal('hide');
+                $("#ask-question").modal('hide');
+                $http.post(base_url + 'user_post/edit_post_opportunity', form_data,
+                        {
+                            transformRequest: angular.identity,
+
+                            headers: {'Content-Type': undefined, 'Process-Data': false}
+                        })
+                        .then(function (success) {
+                            if (success) {
+                                if (success.data.response == 1) {
+                                    $('#ask-post-question-' + post_id).html(success.data.ask_question);
+                                    $('#ask-post-description-' + post_id).html(success.data.ask_description);
+                                    //   $('#ask-post-link-' + post_id).html(success.data.opp_field);
+                                    $('#ask-post-category-' + post_id).html(success.data.ask_category);
+                                    $('#ask-post-field-' + post_id).html(success.data.ask_field);
+                                }
+                                $scope.opp.description = '';
+                                $scope.opp.job_title = '';
+                                $scope.opp.location = '';
+                                $scope.opp.field = '';
+                                $scope.opp.postfiles = '';
+                                document.getElementById('fileInput').value = '';
+
+                                $scope.ask.postfiles = '';
+                                $scope.ask.ask_que = '';
+                                $scope.ask.ask_description = '';
+                                $scope.ask.ask_field = '';
+                                $scope.ask.otherField = '';
+                                $scope.ask.related_category = '';
+                                $scope.ask.web_link = '';
+                                $scope.ask.post_for = '';
+                                $scope.ask.is_anonymously = '';
+
+                                $scope.postData.splice(0, 0, success.data[0]);
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                            }
+                        });
+            }
+        }
+    }
+    
+    
+       
+    $scope.lightbox = function (idx) {
+        //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
+            var ninjaSldr = document.getElementById("ninja-slider");
+            ninjaSldr.parentNode.style.display = "block";
+
+            nslider.init(idx);
+
+            var fsBtn = document.getElementById("fsBtn");
+            fsBtn.click();
+  
+    };
+    
+    function fsIconClick(isFullscreen, ninjaSldr) { 
+        //fsIconClick is the default event handler of the fullscreen button
+        if (isFullscreen) {
+            ninjaSldr.parentNode.style.display = "none";
+        }
+    }
+
+
+    // POST SOMETHING UPLOAD START
+
+    $scope.post_something_check = function (event,postIndex) {        
+        //alert(postIndex);return false;
+        if (document.getElementById("edit_post_id"+postIndex)) {
+            var post_id = document.getElementById("edit_post_id"+postIndex).value;
+        } else {
+            var post_id = 0;
+        }        
+        if (post_id == 0) {
+            var fileInput = document.getElementById("fileInput1").files;
+
+            var description = $scope.sim.description;//document.getElementById("description").value;
+            var sim_title = $scope.sim.sim_title_edit;
+            var sim_hashtag = $scope.sim.sim_hashtag_edit;            
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
+            //var description = description.trim();
+            var fileInput1 = document.getElementById("fileInput1").value;
+            //console.log(fileInput1);            
+
+            if ((sim_title == '' || sim_title == undefined) && (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) && fileCountSim == 0 && description == '')
+            {
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#posterrormodal .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.1");
+                }
+                $('#posterrormodal').modal('show');
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        $('#posterrormodal').modal('hide');
+                        $('.modal-post').show();
+                    }
+                });
+                // $("#post_something")[0].reset();
+                //event.preventDefault();
+                return false;
+            } else {
+
+                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
+                var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
+                var allowesaudio = ['mp3','mpeg'];
+                var allowespdf = ['pdf'];
+                var imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
+
+                if(fileCountSim > 0 && fileCountSim < 11)
+                {
+                    $.each(formFileExtSim, function( index, value ) {
+                        //console.log( index + ": " + value );
+                        if($.inArray(value, allowedExtensions) > -1)
+                        {
+                            imgExt = true;
+                        }
+                        if($.inArray(value, allowesvideo) > -1)
+                        {
+                            videoExt = true;
+                        }
+                        if($.inArray(value, allowesaudio) > -1)
+                        {
+                            audioExt = true;
+                        }
+                        if($.inArray(value, allowespdf) > -1)
+                        {
+                            pdfExt = true;
+                        }
+                    });
+
+                    if(imgExt == true && (videoExt == true || audioExt == true || pdfExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                    }
+                    if(videoExt == true && (imgExt == true || audioExt == true || pdfExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either video or photo or  audio or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;                        
+                    }
+                    if(audioExt == true && (imgExt == true || videoExt == true || pdfExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either audio or photo or video or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;                        
+                    }
+                    else
+                    {
+                        if(audioExt == true && (description == '' || description == undefined || description == ' '))
+                        {
+                            $('.biderror .mes').html("<div class='pop_content'>Please Enter Audio Title.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false; 
+                        }
+
+                    }
+                    if(pdfExt == true && (imgExt == true || videoExt == true || audioExt == true))
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either pdf or photo or video or audio. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;                        
+                    }
+                    else
+                    {
+                        if(pdfExt == true && (description == '' || description == undefined || description == ' '))
+                        {
+                            $('.biderror .mes').html("<div class='pop_content'>Please Enter PDF Title.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false; 
+                        }
+                    }
+                }
+                else
+                {
+                    if(description == '' || description == undefined || description == ' ')
+                    {
+                        $('.biderror .mes').html("<div class='pop_content'>You cannot upload more than 10 files at a time.");
+                        $('#posterrormodal').modal('show');
+                        $("#post_something")[0].reset();
+                        //setInterval('window.location.reload()', 10000);
+                        $(document).on('keydown', function (e) {
+                            if (e.keyCode === 27) {
+                                $('#posterrormodal').modal('hide');
+                                $('.modal-post').show();
+                            }
+                        });
+                        //event.preventDefault();
+                        return false;
+                    }
+                }
+
+                for (var i = 0; i < fileCountSim; i++)
+                {
+                    var vname = fileNamesArrSim[i];
+                    var vfirstname = fileNamesArrSim[i];
+                    var ext = vfirstname.split('.').pop();
+                    var ext1 = vname.split('.').pop();                    
+                    var foundPresent = $.inArray(ext, allowedExtensions) > -1;
+                    var foundPresentvideo = $.inArray(ext, allowesvideo) > -1;
+                    var foundPresentaudio = $.inArray(ext, allowesaudio) > -1;
+                    var foundPresentpdf = $.inArray(ext, allowespdf) > -1;
+
+                    if (foundPresent == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowedExtensions) > -1;
+                        if (foundPresent1 == true && fileCountSim >= 11) {                        
+                            $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 files at a time.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    }
+                    else if (foundPresentvideo == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowesvideo) > -1;
+                        if (foundPresent1 == true && fileCountSim == 1) {
+                        } else {
+                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single video.");
+                            $('#posterrormodal').modal('show');
+                            //setInterval('window.location.reload()', 10000);
+                            $("#post_something")[0].reset();
+
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentaudio == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowesaudio) > -1;
+                        if (foundPresent1 == true && fileCountSim == 1) {
+
+                            /*if (product_name == '') {
+                             $('.biderror .mes').html("<div class='pop_content'>You have to add audio title.");
+                             $('#posterrormodal').modal('show');
+                             //setInterval('window.location.reload()', 10000);
+                             
+                             $(document).on('keydown', function (e) {
+                             if (e.keyCode === 27) {
+                             //$( "#bidmodal" ).hide();
+                             $('#posterrormodal').modal('hide');
+                             $('.modal-post').show();
+                             }
+                             });
+                             event.preventDefault();
+                             return false;
+                             } */
+
+                        } else {
+                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single audio.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentpdf == true)
+                    {
+                        var foundPresent1 = $.inArray(ext1, allowespdf) > -1;
+                        if (foundPresent1 == true && fileCountSim == 1) {
+
+                            /*if (product_name == '') {
+                             $('.biderror .mes').html("<div class='pop_content'>You have to add pdf title.");
+                             $('#posterrormodal').modal('show');
+                             setInterval('window.location.reload()', 10000);
+                             
+                             $(document).on('keydown', function (e) {
+                             if (e.keyCode === 27) {
+                             $('#posterrormodal').modal('hide');
+                             $('.modal-post').show();
+                             }
+                             });
+                             event.preventDefault();
+                             return false;
+                             } */
+                        } else {
+                            /*if (fileInput.length > 10) {
+                                $('.biderror .mes').html("<div class='pop_content'>You can not upload more than 10 files at a time.");
+                            } else {
+                            }*/
+                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single PDF.");
+                            $('#posterrormodal').modal('show');
+                            $("#post_something")[0].reset();
+                            //setInterval('window.location.reload()', 10000);
+
+                            $(document).on('keydown', function (e) {
+                                if (e.keyCode === 27) {
+                                    $('#posterrormodal').modal('hide');
+                                    $('.modal-post').show();
+
+                                }
+                            });
+                            //event.preventDefault();
+                            return false;
+                        }
+                    } else if (foundPresentvideo == false) {
+
+                        $('.biderror .mes').html("<div class='pop_content'>This File Format is not supported Please Try to Upload MP4 or WebM files..");
+                        $('#posterrormodal').modal('show');
+                        $("#post_something")[0].reset();
+                        //setInterval('window.location.reload()', 10000);
+
+                        $(document).on('keydown', function (e) {
+                            if (e.keyCode === 27) {
+                                $('#posterrormodal').modal('hide');
+                                $('.modal-post').show();
+
+                            }
+                        });
+                        //event.preventDefault();
+                        return false;
+                    }
+                }
+
+                /*var form_data = new FormData();
+                $.each($("#fileInput1")[0].files, function(i, file) {
+                    form_data.append('postfiles[]', file);
+                });*/               
+
+                formFileDataSim.append('description', description);//$scope.sim.description);
+                formFileDataSim.append('sptitle', sim_title);//$scope.sim.sim_title);
+                formFileDataSim.append('hashtag', sim_hashtag);//$scope.sim.sim_hashtag);
+                formFileDataSim.append('post_for', $scope.sim.post_for);
+                //data.append('data', data);
+
+                $('body').removeClass('modal-open');
+                $("#post-popup").modal('hide');
+
+                //$('.post_loader').show();
+                $('#progress_div').show();
+                var bar = $('.progress-bar');
+                var percent = $('.sr-only');
+                $http.post(base_url + 'user_post/post_opportunity', formFileDataSim,
+                        {
+                            transformRequest: angular.identity,
+                            headers: {'Content-Type': undefined, 'Process-Data': false},
+                            uploadEventHandlers: {
+                                progress: function(e) {
+                                     if (e.lengthComputable) {
+
+                                        //document.getElementById("progress_div").style.display = "block";                                        
+                                        
+                                        progress = Math.round(e.loaded * 100 / e.total);
+
+                                        bar.width((progress - 1) +'%');
+                                        percent.html((progress - 1) +'%');
+
+                                        //console.log("progress: " + progress + "%");
+                                        if (e.loaded == e.total) {
+                                            /*setTimeout(function(){
+                                                $('#progress_div').hide();
+                                                progress = 0;
+                                                bar.width(progress+'%');
+                                                percent.html(progress+'%');
+                                            }, 2000);*/
+                                            //console.log("File upload finished!");
+                                            //console.log("Server will perform extra work now...");
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .then(function (success) {
+                            if (success) {
+                                $("#post_something")[0].reset();
+                                //$('.post_loader').hide();
+                                $scope.sim.description = '';
+                                $scope.sim.postfiles = '';
+                                document.getElementById('fileInput1').value = '';
+                                $('.file-preview-thumbnails').html('');
+                                //$scope.postData.splice(0, 0, success.data[0]);                                
+                                if (foundPresent == true)
+                                {
+                                    getUserDashboardImage();
+                                }
+                                if (foundPresentvideo == true)
+                                {
+                                    getUserDashboardVideo();
+                                }
+                                if (foundPresentaudio == true)
+                                {
+                                    getUserDashboardAudio();
+                                }
+                                if (foundPresentpdf == true)
+                                {
+                                    getUserDashboardPdf();
+                                }
+                                getUserDashboardPost();
+
+                                bar.width(100+'%');
+                                percent.html(100+'%');
+                                setTimeout(function(){
+                                    //$('#progress_div').hide();
+                                    progress = 0;
+                                    // bar.width(progress+'%');
+                                    // percent.html(progress+'%');
+                                }, 2000);
+
+                                imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
+
+                                cntImgSim = 0;
+                                formFileDataSim = new FormData();
+                                fileCountSim = 0;
+                                fileNamesArrSim = [];
+                                formFileExtSim = [];
+                                $("#selectedFiles").html("");
+                                $("#fileCountSim").text("");
+
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                            }
+                        });
+            }
+        } else {
+            var description_check = $('#editPostTexBox-' + post_id).text();
+            var description = $('#editPostTexBox-' + post_id).html();
+            description = description.replace(/&nbsp;/gi, " ");
+            description = description.replace(/<br>$/, '');
+            description = description.replace(/&gt;/gi, ">");
+            description = description.replace(/&/g, "%26");
+
+            // var sim_title = $scope.sim.sim_title_edit;
+            // var sim_hashtag = $scope.sim.sim_hashtag_edit;
+            var sim_title = $("#sim_title"+post_id).val();
+            var sim_hashtag = $("#sim_hashtag"+post_id).val();            
+            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
+            var hashtags_arr = $scope.getHashTags(sim_hashtag);
+            //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
+            description = description.trim();
+            if ((sim_title.trim() == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || description_check.trim() == '')
+            {
+                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                {
+                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                }
+                else
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                }
+                $('#post').modal('show');
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        $('#posterrormodal').modal('hide');
+                        $('.modal-post').show();
+                    }
+                });
+                //event.preventDefault();
+                return false;
+            }/* else {*/
+                var form_data = new FormData();
+                form_data.append('description', description);
+                form_data.append('post_for', $scope.sim.post_for);
+                form_data.append('sptitle', sim_title);
+                form_data.append('hashtag', sim_hashtag);
+                form_data.append('post_id', post_id);
+
+                $('body').removeClass('modal-open');
+                $("#post-popup").modal('hide');
+                $http.post(base_url + 'user_post/edit_post_opportunity', form_data,
+                {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined, 'Process-Data': false}
+                })
+                .then(function (success) {
+                    if (success) {
+                        $("#post_something_edit")[0].reset();
+                        if (success.data.response == 1) {
+                            $scope.postData[postIndex].simple_data.description = success.data.sim_description;
+                            $scope.postData[postIndex].simple_data.sim_title = success.data.sim_title;
+                            $scope.postData[postIndex].simple_data.hashtag = success.data.hashtag;
+                            //$('#simple-post-description-' + post_id).html(success.data.sim_description);
+                            //$('#simple-post-description-' + post_id).attr("dd-text-collapse-text",success.data.sim_description);
+                            $('#edit-simple-post-' + post_id).hide();
+                            $('#simple-post-description-' + post_id).show();
+                            $('#simple-post-title-' + post_id).show();
+                            $('#simple-post-hashtag-' + post_id).show();
+                            
+                        }
+                    }
+                });
+            //}
+
+        }
+    }
+
+    $scope.loadMediaElement = function ()
+    {
+        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+        for (i = 0; i < total; i++) {
+            new MediaElementPlayer(mediaElements[i], {
+                stretching: stretching,
+                pluginPath: '../js/build/',
+                success: function (media) {
+                    var renderer = document.getElementById(media.id + '-rendername');
+
+                    media.addEventListener('loadedmetadata', function () {
+                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                        if (src !== null && src !== undefined) {
+                            renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                            renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                            renderer.querySelector('.error').innerHTML = '';
+                        }
+                    });
+
+                    media.addEventListener('error', function (e) {
+                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                    });
+                }
+            });
+        }
+    };
+    $scope.addToContact = function (user_id, contact) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/addToContact',
+            data: 'user_id=' + user_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.message == 1) {
+                var index = $scope.contactSuggetion.indexOf(contact);
+                $('.addtobtn-' + user_id).html('Request Sent');
+                $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
+               // $('.owl-carousel').trigger('next.owl.carousel');
+            }
+        });
+    }
+
+    $scope.post_like = function (post_id,parent_index) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        $('#post-like-' + post_id).attr('style','pointer-events: none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/likePost',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $('#post-like-' + post_id).removeAttr('style');
+            if (success.data.message == 1) {
+                if (success.data.is_newLike == 1) {
+                    $('#post-like-count-' + post_id).show();
+                    $('#post-like-' + post_id).addClass('like');
+                    $('#post-like-count-' + post_id).html(success.data.likePost_count);
+                    if (success.data.likePost_count == '0') {
+                        $('#post-other-like-' + post_id).html('');
+                    } else {
+                        $('#post-other-like-' + post_id).html(success.data.post_like_data);
+                    }
+                } else if (success.data.is_oldLike == 1) {
+                    if(success.data.likePost_count < 1)
+                    {                        
+                        $('#post-like-count-' + post_id).hide();
+                    }
+                    else
+                    {
+                        $('#post-like-count-' + post_id).show();
+                    }
+                    $('#post-like-' + post_id).removeClass('like');
+                    $('#post-like-count-' + post_id).html(success.data.likePost_count);
+                    if (success.data.likePost_count == '0') {
+                        $('#post-other-like-' + post_id).html('');
+                    } else {
+                        $('#post-other-like-' + post_id).html(success.data.post_like_data);
+                    }
+                }
+                $scope.postData[parent_index].user_like_list = success.data.user_like_list;
+            }
+        });
+    }
+
+    $scope.cmt_handle_paste = function (e) {        
+        e.preventDefault();
+        e.stopPropagation();
+        var value = e.originalEvent.clipboardData.getData("Text");        
+        value = value.substring(0,cmt_maxlength);        
+        document.execCommand('inserttext', false, value);
+    };
+
+    $scope.check_comment_char_count = function(post_id,e){
+        var comment = $('#commentTaxBox-' + post_id).html();
+        //comment = comment.replace(/^(<br\s*\/?>)+/, '');
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        var no_allow_keycode = [8,17,35,36,37,38,39,40,46];
+
+        // if(e.keyCode != 8 && e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 17 && e.keyCode != 46 && comment.length + 1 > 10)
+        if(no_allow_keycode.indexOf(e.keyCode) == -1 && comment.length + 1 > cmt_maxlength)
+        {
+            e.preventDefault();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.cmt_handle_paste_edit = function (e) {        
+        e.preventDefault();
+        e.stopPropagation();
+        var value = e.originalEvent.clipboardData.getData("Text");        
+        value = value.substring(0,cmt_maxlength);        
+        document.execCommand('inserttext', false, value);
+    };
+
+    $scope.check_comment_char_count_edit = function(cmt_id,e){
+        var comment = $('#editCommentTaxBox-' + cmt_id).text();
+        //comment = comment.replace(/^(<br\s*\/?>)+/, '');
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        var no_allow_keycode = [8,17,35,36,37,38,39,40,46];
+        // if(e.keyCode != 8 && e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 17 && e.keyCode != 46 && comment.length + 1 > 10)
+        if(no_allow_keycode.indexOf(e.keyCode) == -1 && comment.length + 1 > cmt_maxlength)
+        {
+            e.preventDefault();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.sendComment = function (post_id, index, post) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
+        var comment = $('#commentTaxBox-' + post_id).html();
+        //comment = comment.replace(/^(<br\s*\/?>)+/, '');
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        if (comment) {
+            $("#cmt-btn-mob-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-mob-"+post_id).attr("disabled","disabled");
+            $("#cmt-btn-"+post_id).attr("style","pointer-events: none;");
+            $("#cmt-btn-"+post_id).attr("disabled","disabled");
+
+            $scope.isMsg = true;
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/postCommentInsert',
+                data: 'comment=' + comment + '&post_id=' + post_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                
+                data = success.data;
+                if (data.message == '1') {
+                    if (commentClassName == 'last-comment') {
+                        $scope.postData[index].post_comment_data.splice(0, 1);
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    }
+                }
+                setTimeout(function(){
+                    $("#cmt-btn-mob-"+post_id).removeAttr("style");
+                    $("#cmt-btn-mob-"+post_id).removeAttr("disabled");
+                    $("#cmt-btn-"+post_id).removeAttr("style");
+                    $("#cmt-btn-"+post_id).removeAttr("disabled");
+                },1000);
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
+    $scope.viewAllComment = function (post_id, index, post) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/viewAllComment',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.postData[index].post_comment_data = data.all_comment_data;
+            $scope.postData[index].post_comment_count = data.post_comment_count;
+        });
+    }
+
+    $scope.viewLastComment = function (post_id, index, post) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/viewLastComment',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.postData[index].post_comment_data = data.comment_data;
+            $scope.postData[index].post_comment_count = data.post_comment_count;
+        });
+    }
+    $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
+        $scope.c_d_comment_id = comment_id;
+        $scope.c_d_post_id = post_id;
+        $scope.c_d_parent_index = parent_index;
+        $scope.c_d_index = index;
+        $scope.c_d_post = post;
+        $('#delete_model').modal('show');
+    }
+
+    $scope.deleteComment = function (comment_id, post_id, parent_index, index, post) {
+        // console.log("comment_id",comment_id);
+        // console.log("post_id",post_id);
+        // console.log("parent_index",parent_index);
+        // console.log("index",index);
+        // console.log("post",post);
+        var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
+        //console.log("commentClassName",commentClassName);
+        //return false;
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/deletePostComment',
+            data: 'comment_id=' + comment_id + '&post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            if (commentClassName == 'last-comment') {
+                $scope.postData[parent_index].post_comment_data.splice(0, 1);
+                $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            } else {
+                $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            }
+            if(data.comment_count <= 0)
+            {
+                setTimeout(function(){
+                    $(".comment-for-post-"+post_id+" .post-comment").remove();
+                },100);
+                $(".new-comment-"+post_id).show();                
+            }
+        });
+    }
+
+    $scope.likePostComment = function (comment_id, post_id) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/likePostComment',
+            data: 'comment_id=' + comment_id + '&post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            
+            if (data.message == '1') {
+                if (data.is_newLike == 1) {
+                    $('#post-comment-like-' + comment_id).parent('a').addClass('like');
+                    $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
+                } else if (data.is_oldLike == 1) {
+                    $('#post-comment-like-' + comment_id).parent('a').removeClass('like');
+                    $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
+                }
+
+            }
+        });
+    }
+    $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
+        $(".comment-for-post-"+post_id+" .edit-comment").hide();
+        $(".comment-for-post-"+post_id+" .comment-dis-inner").show();
+        $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" li[id^=cancel-comment-li-]").hide();
+        // var editContent = $('#comment-dis-inner-' + comment_id).html();
+        var editContent = $scope.postData[parent_index].post_comment_data[index].comment;
+        $('#edit-comment-' + comment_id).show();
+        editContent = editContent.substring(0,cmt_maxlength);
+        $('#editCommentTaxBox-' + comment_id).html(editContent);
+        $('#comment-dis-inner-' + comment_id).hide();
+        $('#edit-comment-li-' + comment_id).hide();
+        $('#cancel-comment-li-' + comment_id).show();
+        $(".new-comment-"+post_id).hide();
+    }
+
+    $scope.edit_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {       
+        $(".comment-for-post-"+post_id+" .edit-reply-comment").hide();
+        $(".comment-for-post-"+post_id+" li[id^=cancel-reply-comment-li-]").hide();
+        $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" li[id^=timeago-reply-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" div[id^=comment-reply-dis-inner-]").show();
+        $('#edit-comment-li-' + comment_id).hide();
+        $('#timeago-reply-comment-li-' + comment_id).hide();
+
+        var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+        editContent = editContent.substring(0,cmt_maxlength);
+        $('#edit-reply-comment-' + comment_id).show();
+        $('#edit-comment-reply-textbox-' + comment_id).html(editContent);
+        $('#comment-reply-dis-inner-' + comment_id).hide();
+        $('#edit-reply-comment-li-' + comment_id).hide();
+        $('#cancel-reply-comment-li-' + comment_id).show();
+        $(".new-comment-"+post_id).hide();
+    }
+
+    $scope.cancel_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {
+        $('#edit-comment-li-' + comment_id).show();
+        $('#timeago-reply-comment-li-' + comment_id).show();
+        $('#edit-reply-comment-' + comment_id).hide();        
+        $('#comment-reply-dis-inner-' + comment_id).show();
+        $('#edit-reply-comment-li-' + comment_id).show();
+        $('#cancel-reply-comment-li-' + comment_id).hide();
+        $(".new-comment-"+post_id).show();
+    }
+
+    $scope.comment_reply = function(post_index,comment_id,login_user_id,comment_user_id,cmt_reply_obj){
+        $scope.comment_reply_data = cmt_reply_obj;
+        if(login_user_id == 0 && comment_user_id == 0)
+        {
+            $("#reply-comment-"+post_index+"-"+comment_id).html('');            
+        }
+        else
+        {
+            if(login_user_id == comment_user_id)
+            {
+                $("#reply-comment-"+post_index+"-"+comment_id).html('');                
+            }
+            else
+            {
+                var content = '<a class="mention-'+post_index+'-'+comment_id+'" href="'+base_url+cmt_reply_obj.user_slug+'" data-mention="'+window.btoa(cmt_reply_obj.user_slug)+'">'+cmt_reply_obj.username+'</a>&nbsp;';                
+                $("#reply-comment-"+post_index+"-"+comment_id).html(content);
+            }
+        }
+        $("#comment-reply-"+post_index+"-"+comment_id).show();   
+    };
+
+    $scope.cancelPostComment = function (comment_id, post_id, parent_index, index) {
+        
+        $('#edit-comment-' + comment_id).hide();
+        
+        $('#comment-dis-inner-' + comment_id).show();
+        $('#edit-comment-li-' + comment_id).show();
+        $('#cancel-comment-li-' + comment_id).hide();
+        $(".new-comment-"+post_id).show();
+    }
+
+    $scope.EditPostNew = function (post_id, post_for, index) {
+        if(post_for == "simple")
+        {
+            $("#edit-simple-post-"+post_id).show();
+            var editContent = $scope.postData[index].simple_data.description//$('#simple-post-description-' + post_id).attr("ng-bind-html");
+            $scope.sim.sim_title_edit = $scope.postData[index].simple_data.sim_title
+            $('#sim_title'+post_id).val($scope.postData[index].simple_data.sim_title);
+            var hashtags = "";
+            
+            if($scope.postData[index].simple_data.hashtag && $scope.postData[index].simple_data.hashtag != undefined)
+            {
+                hashtags = $scope.postData[index].simple_data.hashtag;
+                // hashtags = '#'+hashtags.replace(/,/ig,' #');
+            }
+            $scope.sim.sim_hashtag_edit = hashtags;//$scope.postData[index].simple_data.hashtag
+            $('#sim_hashtag'+post_id).val(hashtags);
+            
+            $('#editPostTexBox-' + post_id).html(editContent.replace(/(<([^>]+)>)/ig,""));
+            setTimeout(function(){
+                //$('#editPostTexBox-' + post_id).focus();
+                setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
+            },100);            
+            $('#simple-post-description-' + post_id).hide();
+            $('#simple-post-title-' + post_id).hide();
+            $('#simple-post-hashtag-' + post_id).hide();
+        }
+        else if(post_for == "opportunity")
+        {
+            var edit_location = [];
+            var edit_jobtitle = [];
+            var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
+            var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
+            var city_names = $('#opp-post-location-' + post_id).html().split(",");
+            //var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html()
+            var field = $scope.postData[index].opportunity_data.field;
+            var field_id = $scope.postData[index].opportunity_data.field_id;
+            if(opportunity != "" && opportunity != undefined)
+            {
+                //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));
+                $("#description_edit_" + post_id).html(opportunity.replace(/(<([^>]+)>)/ig,""));
+            }
+            city_names.forEach(function(element,cityArrIndex) {
+              edit_location[cityArrIndex] = {"city_name":element};
+            });
+            $scope.opp.location_edit = edit_location;
+
+            job_title.forEach(function(element,jobArrIndex) {
+              edit_jobtitle[jobArrIndex] = {"name":element};
+            });
+            $scope.opp.job_title_edit = edit_jobtitle;
+
+            $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
+            $("#opptitleedit"+post_id).val($scope.postData[index].opportunity_data.opptitle);
+
+            if(city_names.length > 0)
+            {
+                $('#location .input').attr('placeholder', '');
+                $('#location .input').css('width', '200px');
+            }
+            if(job_title.length > 0)
+            {
+                $('#job_title .input').attr('placeholder', '');
+                $('#job_title .input').css('width', '200px');
+            }
+
+            $('[id=field_edit'+post_id+'] option').filter(function() { 
+                return (field_id != 0 ? $(this).text() == field : 'Other'); //To select Blue
+            }).prop('selected', true);
+
+            $scope.opp.field_edit = field_id;
+            $scope.opp.otherField_edit = "";
+
+            $scope.opp.company_name_edit = $scope.postData[index].opportunity_data.company_name;
+            $scope.opp.opp_hashtag_edit = $scope.postData[index].opportunity_data.hashtag;
+
+            setTimeout(function(){
+                // $scope.opp.otherField_edit = field;
+                $("#company_name" + post_id).val($scope.postData[index].opportunity_data.company_name);    
+                $("#otherField_edit" + post_id).val(field);    
+            },100);
+
+            $("#description_edit_" + post_id).focus();
+            setTimeout(function(){
+                //$('#description_edit_' + post_id).focus();                
+                setCursotToEnd(document.getElementById('description_edit_' + post_id));
+            },100);
+            $("#edit-opp-post-"+post_id).show();
+            $('#post-opp-detail-' + post_id).hide();   
+
+        }
+        autosize(document.getElementsByClassName('hashtag-textarea'));
+    }
+
+    $scope.cancelPostEditNew = function (post_id, post_for, index) {
+        if(post_for == "simple")
+        {
+            $("#edit-simple-post-"+post_id).hide();
+            $('#simple-post-description-' + post_id).show();
+            $('#simple-post-title-' + post_id).show();
+            $('#simple-post-hashtag-' + post_id).show();
+        }
+        else if(post_for == "opportunity")
+        {
+            $("#edit-opp-post-"+post_id).hide();
+            $('#post-opp-detail-' + post_id).show();
+        }
+    }
+
+    $scope.EditPost = function (post_id, post_for, index) {
+        $scope.is_edit = 1;
+
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/getPostData',
+            data: 'post_id=' + post_id + '&post_for=' + post_for,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $scope.is_edit = 1;
+            if (post_for == "opportunity") {
+                $scope.opp.description = success.data.opportunity;
+                $scope.opp.job_title = success.data.opportunity_for;
+                $scope.opp.location = success.data.location;
+                $scope.opp.field = success.data.field;
+                $scope.opp.edit_post_id = post_id;
+                $("#opportunity-popup").modal('show');
+
+            } else if (post_for == "simple") {
+                $scope.sim.description = success.data.description;
+                $scope.sim.edit_post_id = post_id;
+
+                $("#post-popup").modal('show');
+
+            } else if (post_for == "question") {
+                $scope.ask.ask_que = success.data.question;
+                $scope.ask.ask_description = success.data.description;
+                $scope.ask.related_category = success.data.tag_name;
+                $scope.ask.ask_field = success.data.field;
+                $scope.ask.edit_post_id = post_id;
+
+                $("#ask-question").modal('show');
+            }
+        });
+    }
+
+    $scope.sendEditComment = function (comment_id,post_id) {
+        var comment = $('#editCommentTaxBox-' + comment_id).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        if (comment) {
+            $scope.isMsg = true;
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/postCommentUpdate',
+                data: 'comment=' + comment + '&comment_id=' + comment_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                data = success.data;
+                if (data.message == '1') {
+                    $('#comment-dis-inner-' + comment_id).show();
+                    $('#comment-dis-inner-' + comment_id).html(comment);
+                    $('#edit-comment-' + comment_id).html();
+                    $('#edit-comment-' + comment_id).hide();
+                    $('#edit-comment-li-' + comment_id).show();
+                    $('#cancel-comment-li-' + comment_id).hide();
+                    $('.new-comment-'+post_id).show();
+                }
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
+    $scope.sendCommentReply = function (comment_id,post_id,postIndex,commentIndex) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
+        var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
+        var comment = $('#reply-comment-'+postIndex+'-'+commentIndex).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        
+        var mention = 0;
+        var mention_id = 0;
+
+        if($("a.mention-"+postIndex+"-"+commentIndex).data('mention') != undefined && $("a.mention-"+postIndex+"-"+commentIndex).data('mention') != '')
+        {
+            var cmt_mention = window.atob($("a.mention-"+postIndex+"-"+commentIndex).data('mention'));            
+            if(cmt_mention == $scope.comment_reply_data.user_slug){
+                mention = 1;
+                mention_id = $scope.comment_reply_data.commented_user_id;
+            }
+        }
+        // data: {comment:comment,comment_id:comment_id,post_id:post_id,mention:mention,mention_id:$scope.comment_reply_data.commented_user_id},
+        if (comment) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/add_post_comment_reply',
+                data: 'comment=' + comment + '&comment_id=' + comment_id + '&post_id=' + post_id + '&mention=' + mention + '&mention_id=' + mention_id+'&comment_reply_id='+$scope.comment_reply_data.comment_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                // console.log(success.data);
+                data = success.data;
+                if (data.message == '1') {                    
+                    if (commentClassName == 'last-comment') {
+                        // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        
+                        $('.editable_text').html('');
+                    }
+                }
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
+    $scope.send_edit_comment_reply = function (reply_comment_id,post_id) {
+        var comment = $('#edit-comment-reply-textbox-' + reply_comment_id).html();
+        comment = comment.replace(/&nbsp;/gi, " ");
+        comment = comment.replace(/<br>$/, '');
+        comment = comment.replace(/&gt;/gi, ">");
+        comment = comment.replace(/&/g, "%26");
+        if (comment) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/edit_post_comment_reply',
+                data: 'comment=' + comment + '&reply_comment_id=' + reply_comment_id + '&post_id=' + post_id,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {                
+                data = success.data;
+                if (data.message == '1') {
+                    $('#comment-reply-dis-inner-' + reply_comment_id).show();
+                    $('#comment-reply-dis-inner-' + reply_comment_id).html(comment);
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).html();
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).hide();
+                    $('#edit-comment-li-' + reply_comment_id).show();
+                    $('#cancel-reply-comment-li-' + reply_comment_id).hide();
+                    $('.new-comment-'+post_id).show();
+                }                
+            });
+        } else {
+            $scope.isMsgBoxEmpty = true;
+        }
+    }
+
+    $scope.deletePost = function (post_id, index) {
+        if(user_id != "")
+        {            
+            $scope.p_d_post_id = post_id;
+            $scope.p_d_index = index;
+            $('#delete_post_model').modal('show');
+        }
+        else
+        {
+            $('#regmodal').modal('show');   
+        }
+    }
+    $scope.deletedPost = function (post_id, index) {
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/deletePost',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            if (data.message == '1') {
+                //$scope.postData.splice(index, 1);
+                getUserDashboardVideo();
+                getUserDashboardAudio();            
+                getUserDashboardPdf();
+                getUserDashboardImage();
+                getUserDashboardPost();
+                $scope.get_all_counter();
+            }
+        });
+    }
+
+    /*function check_no_post_data() {
+        var numberPost = $scope.postData.length;
+        if (numberPost == 0) {
+            $('.all_user_post').html(no_user_post_html);
+        }
+    }*/
+    
+    $scope.like_user_list = function (post_id) {
+        $http({
+            method: 'POST',
+            url: base_url + "user_post/likeuserlist",
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $scope.count_likeUser = success.data.countlike;
+            $scope.get_like_user_list = success.data.likeuserlist;
+            if(success.data.countlike > 0)
+            {                
+                $('#likeusermodal').modal('show');
+            }
+        });
+
+    }
+    scopeHold = $scope;
+
+    $('input:radio[name="report_spam"]').change(function(){
+        if($(this).val() == '0'){
+           $("#report_other").show();
+        }
+        else
+        {
+            $("#report_other").hide();   
+        }
+    });
+    $scope.report_post_id = 0;
+    $scope.open_report_spam = function(post_id){
+        $scope.report_post_id = post_id;
+        $("#report_spam_form")[0].reset();
+        $("#report-spam").modal('show');
+    };
+
+    $scope.report_spam_validate = {        
+        rules: {           
+            report_spam: {
+                required: true,
+            },
+            other_report_spam: {
+                required: {
+                    depends: function(element) {
+                        return $("input[name='report_spam']:checked").val() == 0 ? true : false;
+                    }
+                },
+            },
+        },
+        messages: {
+            report_spam: {
+                required: "Select Report",
+            },
+            other_report_spam: {
+                required: "Enter Other Report",
+            },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "report_spam") {
+                error.appendTo($("#err_report"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    };
+    $scope.save_report_spam = function(){
+        if ($scope.report_spam_form.validate()) {
+
+            $("#save_report_spam").attr("style","pointer-events:none;display:none;");
+            $("#save_report_spam_loader").show();
+
+            var reported_post_id = $scope.report_post_id;            
+            var reported_reason = $("input[name='report_spam']:checked").val();
+            var reported_reason_other = $("#other_report_spam").val();
+            var updatedata = $.param({'reported_post_id':reported_post_id,'reported_reason':reported_reason,'reported_reason_other':reported_reason_other});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_report_spam',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                $("#report_spam_form")[0].reset();                
+                if(success == 1)
+                {
+                    
+                }
+                $("#save_report_spam").removeAttr("style");
+                $("#save_report_spam_loader").hide();
+                $("#report-spam").modal('hide');
+            });
+        }
+    };
+
+    function getUserSavedPost(pagenum) {
+        /*if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            // $('#main_loader').show();
+            if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
+        }*/
+            
+        $('#loader').show();
+        $http.get(base_url + "user_post/getUserSavedPost?page=" + pagenum + "&user_slug=" + user_slug).then(function (success) {
+            $('#loader').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+            $scope.postData = success.data;
+            $('#progress_div').hide();
+            $('.progress-bar').css("width",0);
+            $('.sr-only').text(0+"%");
+            // check_no_post_data();
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        }, function (error) {});
+    }
+
+    getUserSavedPost();
+
+    $scope.unsave_post = function(post_id,index,postData){
+        $('#unsave-post-' + post_id).attr('style','pointer-events: none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/unsave_user_post',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.postData[index].is_user_saved_post = 0;                
+            }
+            else
+            {
+                $scope.postData[index].is_user_saved_post = result.status;
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
+        });
+    };
+});
+
 function remove_contacts(index) {
     $.ajax({
         url: base_url + "userprofile_page/removeContacts",
@@ -11334,7 +14340,8 @@ function readURL(input) {
     reader.readAsDataURL(input.files[0]);
   }
 }
- $uploadCrop = $('#upload-demo').croppie({
+
+$uploadCrop = $('#upload-demo').croppie({
     enableExif: true,
     viewport: {
         width: 1250,
@@ -11426,6 +14433,7 @@ $(document).on('change','#upload', function(){
             }
         });
 });
+
 $(document).on('click','.post-opportunity-modal, .post-ask-question-modal', function(){
     $('#post-popup').modal('toggle');
 });

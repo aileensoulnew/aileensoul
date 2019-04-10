@@ -951,6 +951,7 @@ $route['(:any)/videos'] = 'Userprofile';
 $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
+$route['(:any)/savedpost'] = 'Userprofile';
 
 //Article
 $route['article/likePost'] = 'article/likePost';

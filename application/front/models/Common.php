@@ -922,6 +922,19 @@ class Common extends CI_Model {
         return $result_array['post_count'];
     }
 
+    public function userSavedPostCount($user_id = '')
+    {
+
+        $this->db->select("COUNT(ups.save_post_id) as saved_post_count")->from("user_post_save ups");
+        $getDeleteUserPost = "SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id";// $this->deletePostUser($user_id);
+        $this->db->where('ups.save_post_id NOT IN ('.$getDeleteUserPost.')');        
+        $this->db->where('ups.user_id', $user_id);
+        $this->db->where('ups.status', '1');        
+        $query = $this->db->get();        
+        $result_array = $query->row_array();        
+        return $result_array['saved_post_count'];
+    }
+
     public function change_number_long_format_to_short($n)
     {
         // first strip any formatting;        
@@ -953,6 +966,10 @@ class Common extends CI_Model {
 
         $question_counter = $this->userQuestionsCount($user_id);
         $return_arr['question_counter'] = $this->change_number_long_format_to_short($question_counter);
+
+        $savedpost_counter = $this->userSavedPostCount($user_id);
+        $return_arr['savedpost_counter'] = $this->change_number_long_format_to_short($savedpost_counter);
+        
         return $return_arr;
     }
 

@@ -56,6 +56,13 @@ class Userprofile_page extends MY_Controller {
         $this->load->view('userprofile/questions', $this->data);
     }
 
+    public function savedpost() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('userprofile/savedpost', $this->data);
+    }
+
     public function contact_request() {
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
