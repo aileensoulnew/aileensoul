@@ -40,8 +40,13 @@
     if($this->uri->segment(2) && $this->uri->segment(2) == "questions")
     {
         $que_cls = "questions";
-    } ?>
-    <body class="main-db <?php echo $que_cls; ?> body-loader">
+    }
+    $cls_no_login = "";
+    if(!$user_id){
+        $cls_no_login = " old-no-login";
+    }
+    ?>
+    <body class="main-db <?php echo $que_cls.$cls_no_login; ?> body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
         <?php if(!$user_id): ?>

@@ -522,6 +522,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
                                                         <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                                         <li>
+                                                            <a ng-if="post.is_user_saved_post == '0'" href="javascript:void(0);" ng-click="save_post(post.post_data.id, $index, post)">Save Post</a>
+                                                            <a ng-if="post.is_user_saved_post == '1'" href="javascript:void(0);">Saved Post</a>
+
                                                             <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for == 'article'" href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_blank">Show in new tab</a>
                                                             <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for == 'opportunity'" href="<?php echo base_url(); ?>o/{{post.opportunity_data.oppslug}}" target="_blank">Show in new tab</a>
 
@@ -923,6 +926,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <ul class="pull-right bottom-right">
                                                             <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
                                                             <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
+                                                            <li class="post-save">
+                                                                <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" ng-click="save_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.png'); ?>"></a>
+
+                                                                <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.png'); ?>"></a>
+                                                            </li>
 
                                                             <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
                                                             <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
@@ -1834,6 +1842,93 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     <div class="modal-body">
                         <span class="mes">
                         </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:none;" class="modal fade" id="report-spam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="report-box">
+                        <form name="report_spam_form" id="report_spam_form" ng-validate="report_spam_validate">
+                            <h3>What’s Wrong with This Post?</h3>
+                            <ul>
+                                <li>
+                                    <label class="control control--radio">Not Intersed in This Post
+                                        <input name="report_spam" type="radio" class="report-cls" value="1">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Spam, or Promotional
+                                        <input name="report_spam" type="radio" class="report-cls" value="2">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Nudity or Sexually Explicit
+                                        <input name="report_spam" type="radio" class="report-cls" value="3">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Fake News & Fake Account
+                                        <input name="report_spam" type="radio" class="report-cls" value="4">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                
+                                <li>
+                                    <label class="control control--radio">Scam, Phishing or Malware
+                                        <input name="report_spam" type="radio" class="report-cls" value="5">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Abusive, Violent or Hate Speech
+                                        <input name="report_spam" type="radio" class="report-cls" value="6">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li class="fw">
+                                    <label class="control control--radio">Other Reasons
+                                        <input name="report_spam" type="radio" class="report-cls" value="0">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <!--other-rsn <label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other Reasons
+                                    </label> -->
+                                </li>
+                                <li class="fw report-other-res" id="report_other" style="display: none;">
+                                    <input name="other_report_spam" type="text" id="other_report_spam" style="opacity: 1;z-index: 1;">
+                                </li>
+                                <li class="report-err-li" id="err_report"></li>
+                                <li>
+                                    <button id="save_report_spam" class="btn1" type="button" ng-click="save_report_spam();">Submit</button>
+                                    <div id="save_report_spam_loader" class="dtl-popup-loader" style="display: none;">
+                                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade" id="other-reason" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="report-box">
+                        
+                        <div class="other-reason-box">
+                            <textarea placeholder="Enter your reason for reporting"></textarea>
+                            <p class="text-center">
+                                <button class="btn3">Back</button> <button class="btn1">Submit</button>
+                            </p>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

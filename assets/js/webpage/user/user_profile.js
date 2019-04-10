@@ -5075,6 +5075,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     getUserDashboardInformation()
 
     $scope.save_post = function(post_id,index,postData){
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         $('#save-post-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
