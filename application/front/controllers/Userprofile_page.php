@@ -117,7 +117,7 @@ class Userprofile_page extends MY_Controller {
         $user_education = $this->userprofile_model->get_user_education($user_id);
         $user_links = $this->userprofile_model->get_user_links($user_id);
         $user_idol = $this->userprofile_model->get_user_idols($user_id);
-        $count = 0;
+        $count = 5;
         $progress_status = array();
         $user_image = 0;
         if($user_data['user_image'] != '')
@@ -219,7 +219,7 @@ class Userprofile_page extends MY_Controller {
         $progress_status['user_links_status'] = $user_links_status;
         $progress_status['user_idol_status'] = $user_idol_status;
 
-        $user_process = ($count * 100) / 28;        
+        $user_process = ($count * 100) / 33;        
         $user_process_value = ($user_process / 100);
 
         if ($user_process == 100) {

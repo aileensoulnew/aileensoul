@@ -909,7 +909,8 @@
 							<li><span class=""><img ng-if="progress_status.user_skills == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li>
 							
 							<li class="pl20"><span class=""><img ng-if="progress_status.user_links_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Social</li>
-							<li><span class=""><img ng-if="progress_status.user_idol_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
+                            <li><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Basic Info</li>
+							<li class="pl20"><span class=""><img ng-if="progress_status.user_idol_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
 							<li class="fw"><span class=""><img ng-if="progress_status.user_education_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
 							<li class="fw"><span class=""><img ng-if="progress_status.user_bio == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile overview</li>
 						</ul>
