@@ -76,33 +76,35 @@ class User_info extends MY_Controller {
         if (!empty($errors)) {
             $data['errors'] = $errors;
         } else {
-            if (is_array($_POST['jobTitle'])) {
-                $jobTitleId = $_POST['jobTitle']['title_id'];
+            $job_title = $_POST['jobTitle'];
+            if (is_array($job_title)) {
+                $jobTitleId = $job_title['title_id'];
             } else {
-                $designation = $this->data_model->findJobTitle($_POST['jobTitle']);
+                $designation = $this->data_model->findJobTitle($job_title);
                 if ($designation['title_id'] != '') {
                     $jobTitleId = $designation['title_id'];
                 } else {
                     $data = array();
-                    $data['name'] = $_POST['jobTitle'];
+                    $data['name'] = substr($job_title, 0,200);
                     $data['created_date'] = date('Y-m-d H:i:s', time());
                     $data['modify_date'] = date('Y-m-d H:i:s', time());
                     $data['status'] = 'draft';
-                    $data['slug'] = $this->common->clean($_POST['jobTitle']);
+                    $data['slug'] = $this->common->clean(substr($job_title, 0,200));
                     $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
                 }
             }
-
-            if (is_array($_POST['cityList'])) {
-                $cityId = $_POST['cityList']['city_id'];
+            $city_arr = $_POST['cityList'];
+            if (is_array($city_arr)) {
+                $cityId = $city_arr['city_id'];
             } else {
-                $city = $this->data_model->findCityList($_POST['cityList']);
+                $city_arr = substr($city_arr, 0,200);
+                $city = $this->data_model->findCityList($city_arr);
                 if ($city['city_id'] != '') {
                     $cityId = $city['city_id'];
                 } else {
                     $data = array();
-                    $city_slug = $this->common->set_city_slug(trim($_POST['cityList']), 'slug', 'cities');
-                    $data['city_name'] = $_POST['cityList'];
+                    $city_slug = $this->common->set_city_slug(trim($city_arr), 'slug', 'cities');
+                    $data['city_name'] = $city_arr;
                     $data['state_id'] = '0';
                     $data['status'] = '2';
                     $data['group_id'] = '0';
@@ -114,7 +116,7 @@ class User_info extends MY_Controller {
 
             $otherField = "";
             if ($_POST['field'] == '0') {
-                $otherField = $_POST['otherField'];
+                $otherField = substr($_POST['otherField'], 0,300);
             }
 
             $data = array();
@@ -193,16 +195,16 @@ class User_info extends MY_Controller {
         if (!empty($errors)) {
             $data['errors'] = $errors;
         } else {
-
-            if (is_array($_POST['currentStudy'])) {
-                $degreeId = $_POST['currentStudy']['degree_id'];
+            $current_study = $_POST['currentStudy'];
+            if (is_array($current_study)) {
+                $degreeId = $current_study['degree_id'];
             } else {
-                $degree = $this->data_model->findDegreeList($_POST['currentStudy']);
+                $degree = $this->data_model->findDegreeList($current_study);
                 if ($degree['degree_id'] != '') {
                     $degreeId = $degree['degree_id'];
                 } else {
                     $data = array();
-                    $data['degree_name'] = $_POST['currentStudy'];
+                    $data['degree_name'] = substr($current_study, 0,200);
                     $data['created_date'] = date('Y-m-d H:i:s', time());
                     $data['modify_date'] = date('Y-m-d H:i:s', time());
                     $data['status'] = '2';
@@ -212,17 +214,18 @@ class User_info extends MY_Controller {
                     $degreeId = $this->common->insert_data_getid($data, 'degree');
                 }
             }
-
-            if (is_array($_POST['cityList'])) {
-                $cityId = $_POST['cityList']['city_id'];
+            $city_arr = $_POST['cityList'];
+            if (is_array($city_arr)) {
+                $cityId = $city_arr['city_id'];
             } else {
-                $city = $this->data_model->findCityList($_POST['cityList']);
+                $city_arr = substr($city_arr, 0,300);
+                $city = $this->data_model->findCityList($city_arr);
                 if ($city['city_id'] != '') {
                     $cityId = $city['city_id'];
                 } else {
                     $data = array();
-                    $city_slug = $this->common->set_city_slug(trim($_POST['cityList']), 'slug', 'cities');
-                    $data['city_name'] = $_POST['cityList'];
+                    $city_slug = $this->common->set_city_slug(trim($city_arr), 'slug', 'cities');
+                    $data['city_name'] = $city_arr;
                     $data['state_id'] = '0';
                     $data['status'] = '2';
                     $data['group_id'] = '0';
@@ -231,16 +234,17 @@ class User_info extends MY_Controller {
                     $cityId = $this->common->insert_data_getid($data, 'cities');
                 }
             }
-            
-            if (is_array($_POST['universityName'])) {
-                $universityId = $_POST['universityName']['university_id'];
+            $university_list = $_POST['universityName'];
+            if (is_array($university_list)) {
+                $universityId = $university_list['university_id'];
             } else {
-                $university = $this->data_model->findUniversityList($_POST['universityName']);
+                $university_list = substr($university_list, 0,300);
+                $university = $this->data_model->findUniversityList($university_list);
                 if ($university['university_id'] != '') {
                     $universityId = $university['university_id'];
                 } else {
                     $data = array();
-                    $data['university_name'] = $_POST['universityName'];
+                    $data['university_name'] = $university_list;
                     $data['created_date'] = date('Y-m-d H:i:s',time());
                     $data['status'] = '2';
                     $data['is_delete'] = '0';
@@ -252,7 +256,7 @@ class User_info extends MY_Controller {
             $field = $_POST['field'];
             $otherField = "";
             if ($_POST['field'] == '0') {
-                $otherField = $_POST['otherField'];
+                $otherField = substr($_POST['otherField'], 0,300);
             }
             
             $data = array();

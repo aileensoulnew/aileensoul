@@ -69,124 +69,122 @@
             
             var app = angular.module("basicInfoApp", ['ngRoute', 'ui.bootstrap', 'ngValidate']);
             app.config(function ($routeProvider, $locationProvider) {
-            $routeProvider
-                    .when("/basic-information", {
+                $routeProvider
+                .when("/basic-information", {
                     templateUrl: base_url + "user_info_page/basic_profile",
-                            controller: 'basicInfoController'
-                    })
-                    .when("/educational-information", {
+                    controller: 'basicInfoController'
+                })
+                .when("/educational-information", {
                     templateUrl: base_url + "user_info_page/educational_profile",
-                            controller: 'studentInfoController'
-                    });
-//                    .otherwise({
-//                    redirectTo: '/profiles/'
-//                    });
-            $locationProvider.html5Mode(true);
+                    controller: 'studentInfoController'
+                });
+                $locationProvider.html5Mode(true);
             });
-            app.controller('basicInfoController', function ($scope, $http, $location) {                
-            $scope.user = {};
-            $('#basic_info_ajax_load').hide();
-            // PROFEETIONAL DATA
-            getFieldList();
-            function getFieldList() {
-            $http.get(base_url + "general_data/getFieldList").then(function (success) {
-            $scope.fieldList = success.data;
-            }, function (error) {});
-            }
+            app.controller('basicInfoController', function ($scope, $http, $location) {
+                $scope.user = {};
+                $('#basic_info_ajax_load').hide();
 
-            $scope.jobTitle = function () {
-            $http({
-            method: 'POST',
-                    url: base_url + 'general_data/searchJobTitleStart',
-                    data: 'q=' + $scope.user.jobTitle,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
+                // PROFEETIONAL DATA
+                getFieldList();
+                function getFieldList() {
+                    $http.get(base_url + "general_data/getFieldList").then(function (success) {
+                        $scope.fieldList = success.data;
+                    }, function (error) {});
+                }
+
+                $scope.jobTitle = function () {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'general_data/searchJobTitleStart',
+                        data: 'q=' + $scope.user.jobTitle,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
                     .then(function (success) {
-                    data = success.data;
-                    $scope.titleSearchResult = data;
+                        data = success.data;
+                        $scope.titleSearchResult = data;
                     });
-            }
+                };
 
-            $scope.cityList = function () {
-            $http({
-            method: 'POST',
+                $scope.cityList = function () {
+                    $http({
+                    method: 'POST',
                     url: base_url + 'general_data/searchCityList',
                     data: 'q=' + $scope.user.cityList,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
+                    })
                     .then(function (success) {
-                    data = success.data;
-                    $scope.citySearchResult = data;
+                        data = success.data;
+                        $scope.citySearchResult = data;
                     });
-            }
+                };
 
-            $scope.basicInfoValidate = {
-                rules: {
-                    jobTitle: {
-                        required: true,
-                    },
-                    city: {
-                        required: true,
-                    },
-                    field: {
-                        required: true,
-                    }
-                },
-                messages: {
-                    jobTitle: {
-                        required: "Job title is required.",
-                    },
-                    city: {
-                        required: "City is required.",
-                    },
-                    field: {
-                        required: "Field id is required.",
-                    }
-                }
-            };
-            $scope.submitBasicInfoForm = function () {
-            if ($scope.basicinfo.validate()) {
-                angular.element('#basicinfo #submit').addClass("form_submit");
-                angular.element('#basicinfo #submit').attr("style","pointer-events:none;");
-                $('#basic_info_ajax_load').show();
-                $http({
-                method: 'POST',
-                        url: base_url + 'user_info/ng_basic_info_insert',
-                        data: $scope.user,
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                })
-                .then(function (success){
-                    if (success.data.errors) {
-                        $scope.errorjobTitle = success.data.errors.jobTitle;
-                        $scope.errorcityList = success.data.errors.cityList;
-                        $scope.errorfield = success.data.errors.field;
-                        $scope.errorotherField = success.data.errors.otherField;
-                        if(success.data.errors.acc_exist == 1)
-                        {
-                            window.location = base_url;
+                $scope.basicInfoValidate = {
+                    rules: {
+                        jobTitle: {
+                            required: true,
+                        },
+                        city: {
+                            required: true,
+                        },
+                        field: {
+                            required: true,
                         }
-                    } else {
-                        if (success.data.is_success == '1') {
-                            angular.element('#basicinfo #submit').removeClass("form_submit");
-                            angular.element('#basicinfo #submit').removeAttr("style");
-                            $('#basic_info_ajax_load').hide();
-                            window.location = base_url;
+                    },
+                    messages: {
+                        jobTitle: {
+                            required: "Job title is required.",
+                        },
+                        city: {
+                            required: "City is required.",
+                        },
+                        field: {
+                            required: "Field id is required.",
+                        }
+                    }
+                };
+                $scope.submitBasicInfoForm = function () {
+                if ($scope.basicinfo.validate()) {
+                    angular.element('#basicinfo #submit').addClass("form_submit");
+                    angular.element('#basicinfo #submit').attr("style","pointer-events:none;");
+                    $('#basic_info_ajax_load').show();
+                    $http({
+                    method: 'POST',
+                            url: base_url + 'user_info/ng_basic_info_insert',
+                            data: $scope.user,
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
+                    .then(function (success){
+                        if (success.data.errors) {
+                            $scope.errorjobTitle = success.data.errors.jobTitle;
+                            $scope.errorcityList = success.data.errors.cityList;
+                            $scope.errorfield = success.data.errors.field;
+                            $scope.errorotherField = success.data.errors.otherField;
+                            if(success.data.errors.acc_exist == 1)
+                            {
+                                window.location = base_url;
+                            }
                         } else {
-                            return false;
+                            if (success.data.is_success == '1') {
+                                angular.element('#basicinfo #submit').removeClass("form_submit");
+                                angular.element('#basicinfo #submit').removeAttr("style");
+                                $('#basic_info_ajax_load').hide();
+                                window.location = base_url;
+                            } else {
+                                return false;
+                            }
                         }
-                    }
-                }, function (error){
+                    }, function (error){
 
-                });
-            }
-            else {
-                return false;
-            }
-
-            };
-                $scope.goMainLink = function(path){
-                    location.href = path;
+                    });
                 }
+                else {
+                    return false;
+                }
+
+                };
+                    $scope.goMainLink = function(path){
+                        location.href = path;
+                    }
             });
 
             app.controller('studentInfoController', function ($scope, $http) {

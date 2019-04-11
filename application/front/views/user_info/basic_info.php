@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                     <label for="text">What's your current position?<font color="red">*</font></label>
-                    <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Enter job title / Designation" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+                    <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Enter job title / Designation" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="200">
                     <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
 					<div id="jttooltip" class="tooltip-custom" style="display: none;">
                         Enter “seeking opportunity” if you are a fresher else enter your current job title. Ex:Seeking Opportunity / CEO / Entrepreneur / Founder / Singer / Photographer / Developer / HR / BDE / CA / Doctor..
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="text">What’s your current location?<font color="red">*</font></label>
-                    <input type="text" name="city" id="city" class="form-control" ng-keyup="cityList()" ng-model="user.cityList" placeholder="Enter city name" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                    <input type="text" name="city" id="city" class="form-control" ng-keyup="cityList()" ng-model="user.cityList" placeholder="Enter city name" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off" maxlength="200">
                     <label ng-show="errorcityList" class="error">{{errorcityList}}</label>
                 </div>
                 <div class="form-group cus_field">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group" ng-if="user.field == '0'">
                     <label for="text">Other Field</label>
-                    <input type="text" class="form-control" ng-model="user.otherField" placeholder="Enter other field" ng-required="true">
+                    <input type="text" class="form-control" ng-model="user.otherField" placeholder="Enter other field" ng-required="true" maxlength="300">
                     <label ng-show="errorotherField" class="error">{{errorotherField}}</label>
                 </div>
                 <p class="text-center submit-btn">

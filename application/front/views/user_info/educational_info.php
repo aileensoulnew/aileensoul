@@ -5,7 +5,7 @@
             <form name="studentinfo" id="studentinfo" ng-submit="submitStudentInfoForm()" ng-validate="studentInfoValidate">
                 <div class="form-group">
                     <label for="text">What are you studying right now?<font color="red">*</font></label>
-                    <input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." ng-keyup="currentStudy()" ng-model="user.currentStudy" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off">
+                    <input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." ng-keyup="currentStudy()" ng-model="user.currentStudy" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off" maxlength="200">
                     <label ng-show="errorcurrentStudy" class="error">{{errorcurrentStudy}}</label>
 					<div id="cstooltip" class="tooltip-custom" style="display: none;">
                         Enter the current qualification that you are pursuing like 10 th , 12 th , B.E, BCA, Medical, MBA
@@ -13,12 +13,12 @@
                 </div>
                 <div class="form-group">
                     <label for="text">Where are you from?<font color="red">*</font></label>
-                    <input type="text" name="city" id="city" class="form-control" ng-keyup="cityList()" ng-model="user.cityList" placeholder="Enter city name" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                    <input type="text" name="city" id="city" class="form-control" ng-keyup="cityList()" ng-model="user.cityList" placeholder="Enter city name" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off" maxlength="300">
                     <label ng-show="errorcityList" class="error">{{errorcityList}}</label>
                 </div>
                 <div class="form-group">
                     <label for="text">University / College / School <font color="red">*</font></label>
-                    <input type="text" name="university" id="university" class="form-control" placeholder="Enter University / College / school " ng-model="user.universityName" ng-keyup="universityList()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
+                    <input type="text" name="university" id="university" class="form-control" placeholder="Enter University / College / school " ng-model="user.universityName" ng-keyup="universityList()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off" maxlength="300">
                     <label ng-show="erroruniversityName" class="error">{{erroruniversityName}}</label>
                 </div>
                 <!-- <div class="form-group">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group" ng-if="user.field == '0'">
                     <label for="text">Other Field</label>
-                    <input type="text" class="form-control" ng-model="user.otherField" placeholder="Enter other field" ng-required="true">
+                    <input type="text" class="form-control" ng-model="user.otherField" placeholder="Enter other field" ng-required="true" maxlength="300">
                     <label ng-show="errorotherField" class="error">{{errorotherField}}</label>
                 </div>
                 <p class="text-center submit-btn">

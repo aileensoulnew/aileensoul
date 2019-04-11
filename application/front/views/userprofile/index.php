@@ -238,11 +238,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>What's your current position?</label>
-                                        <input type="text" placeholder="Enter Job Title / Designation" id="basic_job_title" name="basic_job_title" ng-model="basic_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+                                        <input type="text" placeholder="Enter Job Title / Designation" id="basic_job_title" name="basic_job_title" ng-model="basic_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="200">
                                     </div>
                                     <div class="form-group">
                                         <label>What’s your current location?</label>
-                                        <input type="text" placeholder="Enter City Name" id="basic_info_city" name="basic_info_city" ng-model="basic_info_city" ng-keyup="basic_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                                        <input type="text" placeholder="Enter City Name" id="basic_info_city" name="basic_info_city" ng-model="basic_info_city" ng-keyup="basic_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off" maxlength="200">
                                     </div>
                                     <div class="form-group">
                                         <label>What is your field? </label>
@@ -256,7 +256,7 @@
                                     </div>
                                     <div id="basic_info_other_field_div" class="form-group" style="display: none;">
                                         <label>Enter other field</label>
-                                        <input type="text" placeholder="Enter Other Field" id="basic_info_other_field" name="basic_info_other_field" ng-model="basic_info_other_field" ma>
+                                        <input type="text" placeholder="Enter Other Field" id="basic_info_other_field" name="basic_info_other_field" ng-model="basic_info_other_field" maxlength="300">
                                     </div>
                                     
                                 </div>
@@ -275,15 +275,15 @@
                                 <div class="dtl-dis">
                                     <div class="form-group">
                                         <label>What are you studying right now?</label>
-                                        <input type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="stud_info_study" name="stud_info_study" ng-model="stud_info_study" ng-keyup="stud_info_study_list()" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off">
+                                        <input type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="stud_info_study" name="stud_info_study" ng-model="stud_info_study" ng-keyup="stud_info_study_list()" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off" maxlength="200">
                                     </div>
                                     <div class="form-group">
                                         <label>Where are you from?</label>
-                                        <input type="text" placeholder="Enter City Name" id="stud_info_city" name="stud_info_city" ng-model="stud_info_city" ng-keyup="stud_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                                        <input type="text" placeholder="Enter City Name" id="stud_info_city" name="stud_info_city" ng-model="stud_info_city" ng-keyup="stud_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off" maxlength="300">
                                     </div>
                                     <div class="form-group">
                                         <label>University / College / School</label>
-                                        <input type="text" placeholder="Enter University / College / school " id="stud_info_university" name="stud_info_university" ng-model="stud_info_university" ng-keyup="stud_info_university_list()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
+                                        <input type="text" placeholder="Enter University / College / school " id="stud_info_university" name="stud_info_university" ng-model="stud_info_university" ng-keyup="stud_info_university_list()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off" maxlength="300">
                                     </div>
                                     
                                     <div class="form-group">
@@ -298,7 +298,7 @@
                                     </div>
                                     <div id="stud_info_other_field_div" class="form-group" style="display: none;">
                                         <label>Enter other field</label>
-                                        <input type="text" placeholder="Enter Other Field" id="stud_info_other_field" name="stud_info_other_field" ng-model="stud_info_other_field" ma>
+                                        <input type="text" placeholder="Enter Other Field" id="stud_info_other_field" name="stud_info_other_field" ng-model="stud_info_other_field" maxlength="300">
                                     </div>
                                     
                                 </div>

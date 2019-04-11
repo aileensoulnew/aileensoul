@@ -2576,8 +2576,8 @@ class Userprofile_page extends MY_Controller {
     public function save_user_basicinfo()
     {
         // print_r($this->input->post());exit();
-        $basic_job_title = $this->input->post('basic_job_title');
-        $basic_info_city = $this->input->post('basic_info_city');
+        $basic_job_title = substr($this->input->post('basic_job_title'),0,200);
+        $basic_info_city = substr($this->input->post('basic_info_city'),0,200);
         $basic_info_field = $this->input->post('basic_info_field');
         if($basic_info_field == 0)
         {
@@ -2627,7 +2627,7 @@ class Userprofile_page extends MY_Controller {
         $data_up = array(
             'designation' => $jobTitleId,
             'field' => $basic_info_field,
-            'other_field' => $basic_info_other_field,
+            'other_field' => substr($basic_info_other_field, 0,300),
             'city' => $cityId,
         );
 
@@ -2656,9 +2656,9 @@ class Userprofile_page extends MY_Controller {
     public function save_user_studinfo()
     {
         // print_r($this->input->post());exit();
-        $stud_info_study = $this->input->post('stud_info_study');
-        $stud_info_city = $this->input->post('stud_info_city');
-        $stud_info_university = $this->input->post('stud_info_university');
+        $stud_info_study = substr($this->input->post('stud_info_study'),0,200);
+        $stud_info_city = substr($this->input->post('stud_info_city'),0,300);
+        $stud_info_university = substr($this->input->post('stud_info_university'),0,300);
         $stud_info_field = $this->input->post('stud_info_field');
         if($stud_info_field == 0)
         {
@@ -2727,7 +2727,7 @@ class Userprofile_page extends MY_Controller {
             'city' => $cityId,
             'university_name' => $universityId,
             'interested_fields' => $stud_info_field,
-            'other_interested_fields' => $stud_info_other_field,
+            'other_interested_fields' => substr($stud_info_other_field,0,300),
         );
 
         if(isset($studentData) && !empty($studentData))
