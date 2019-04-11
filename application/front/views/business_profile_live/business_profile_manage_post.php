@@ -429,7 +429,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                             </li>                                            
                                         </ul>
                                         <p class="pull-right bus-post-btn">
-                                            <button type="submit" class="btn1">Post</button>
+                                            <button class="btn1" data-target="#post-popup" data-toggle="modal">Post</button>
                                         </p>
                                     </div>
                                 </div>
