@@ -14194,9 +14194,14 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             {
                 $('.savedpost_counter').show();
                 $('.savedpost_counter').html(result.savedpost_counter);
+                if(result.savedpost_counter == '0')
+                {
+                    $scope.postData = [];
+                }
             }
             else
             {
+                $scope.postData = [];
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
