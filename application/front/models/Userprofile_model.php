@@ -354,6 +354,18 @@ class Userprofile_model extends CI_Model {
                 $question_data = $query->row_array();
                 $result_array[$key]['question_data'] = $question_data;
             }
+            elseif ($value['post_for'] == 'article') {
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
+                $this->db->where('pa.id_post_article', $value['post_id']);
+                $this->db->where('pa.status', 'publish');
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
+                $query = $this->db->get();                
+                $article_data = $query->row_array();                
+                $result_array[$key]['article_data'] = $article_data;
+
+            }
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();

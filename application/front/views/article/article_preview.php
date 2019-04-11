@@ -133,6 +133,18 @@ else
 						<span><a href="<?php echo base_url()."edit-article/".$article_data['unique_key']; ?>">Edit Article</a></span>
 						<?php } ?>
 					</p>
+
+					<?php
+					if($article_data['hashtag'] != ''): ?>
+					<p class="pb10">
+						<span>
+							<?php
+							foreach (explode(" ", $article_data['hashtag']) as $key => $value) {
+								echo '<span class="post-hash-tag">'.$value.'</span>';
+							} ?>
+						</span>
+					</p>
+				<?php endif; ?>
 					
 					<!--div class="article-author">
 						<div class="post-img">

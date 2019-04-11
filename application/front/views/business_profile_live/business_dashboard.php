@@ -636,7 +636,13 @@ $login_user_id = $this->session->userdata('aileenuser');
                                             <!-- Edit Simple Post End -->
                                         </div>
                                         
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'article'"></div>
+                                        <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
+                                            <p ng-if="post.article_data.hashtag" class="hashtag-grd">
+                                                <span>
+                                                    <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                </span>
+                                            </p>
+                                        </div>
                                         <div class="post-images article-post-cus" ng-if="post.post_data.post_for == 'article'">
                                             <div class="one-img" ng-class="post.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
                                                 <a href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_self">

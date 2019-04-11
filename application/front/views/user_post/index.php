@@ -416,7 +416,13 @@
                         <a id="remove-view-more{{recentpost.post_data.id}}" ng-if="recentpost.article_data.article_desc.length > 100" href="<?php //echo base_url(); ?>article/{{recentpost.article_data.article_slug}}">.... Read More</a>
                     </div>
                 </div> -->
-                <div class="post-discription" ng-if="recentpost.post_data.post_for == 'article'"></div>
+                <div class="post-discription" ng-if="recentpost.post_data.post_for == 'article'">
+                    <p ng-if="recentpost.article_data.hashtag" class="hashtag-grd">
+                        <span>
+                            <span class="post-hash-tag" id="opp-post-hashtag-{{recentpost.article_data.id}}" ng-repeat="hashtag in recentpost.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                        </span>
+                    </p>
+                </div>
                 <div class="post-images article-post-cus" ng-if="recentpost.post_data.post_for == 'article'">
                     <div class="one-img" ng-class="recentpost.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
                         <a href="<?php echo base_url(); ?>article/{{recentpost.article_data.article_slug}}" target="_self">
@@ -1056,7 +1062,13 @@
                             <a id="remove-view-more{{post.post_data.id}}" ng-if="post.article_data.article_desc.length > 100" href="<?php //echo base_url(); ?>article/{{post.article_data.article_slug}}">.... Read More</a>
                         </div>
                     </div> -->
-                    <div class="post-discription" ng-if="post.post_data.post_for == 'article'"></div>
+                    <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
+                        <p ng-if="post.article_data.hashtag" class="hashtag-grd">
+                            <span>
+                                <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                            </span>
+                        </p>
+                    </div>
                     <div class="post-images article-post-cus" ng-if="post.post_data.post_for == 'article'">
                         <div class="one-img" ng-class="post.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
                             <a href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_self">

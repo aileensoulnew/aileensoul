@@ -963,6 +963,7 @@ $route['article/upload_featured_img'] = 'article/upload_featured_img';
 $route['article/upload_image'] = 'article/upload_image';
 $route['article/change_category'] = 'article/change_category';
 $route['article/remove_featured_img'] = 'article/remove_featured_img';
+$route['article/save_article_hashtag'] = 'article/save_article_hashtag';
 
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";

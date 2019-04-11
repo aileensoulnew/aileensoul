@@ -355,7 +355,15 @@ function upload_success()
     $("#title_txt").focusin(function(){
         $("#title_txt").removeClass("error");
         $("#err_title").hide();
-    });    
+    });
+
+    $("#article_hashtag").focusin(function(){
+        $("#article_hashtag").removeClass("error");        
+        $('#article-post-hashtag').show();
+    });
+    $("#article_hashtag").focusout(function(){
+        $('#article-post-hashtag').hide();
+    });
     /*$("#title_txt").focusout(function(){
         $('#dobtooltip').hide();
     });*/
@@ -364,7 +372,8 @@ function upload_success()
     {
         var title = $("#title_txt").val();      
         var descr_vali =  tinyMCE.get('article_editor').getContent({format: 'text'});
-        var descr =  tinyMCE.get('article_editor').getContent({format: 'raw'});     
+        var descr =  tinyMCE.get('article_editor').getContent({format: 'raw'});
+        var article_hashtag = $("#article_hashtag").val();    
         var error = 0;
         if(title.trim() == '')
         {
@@ -377,6 +386,12 @@ function upload_success()
             $(".mce-statusbar").addClass("error");
             // $("#article_editor").prev().addClass("error");
             // $("#err_desc").show();
+            error = 1;  
+        }
+        if(article_hashtag.trim() == '')
+        {
+            $("#article_hashtag").addClass("error");
+            $("#article-hashtag").modal("show");
             error = 1;  
         }
         if(error == 1)
@@ -396,6 +411,7 @@ function upload_success()
             'article_main_category': article_main_category,
             'article_other_category': article_other_category,
             'edit_art_published': edit_art_published,
+            'article_hashtag': article_hashtag,
             'user_type': user_type,
         };
         $("#publish").text('Publishing ...');
@@ -562,9 +578,9 @@ $('.cancel-result').on('click', function (ev) {
     $("#featured_img_remove").hide();
 });
 //Featured Image Crop and Upload End
-$("#okbtn").click(function(){   
+function change_url(){
     window.location = base_url + "article-preview/" + article_slug;
-});
+};
 function other_field_fnc(id)
 {
     if(id.value == 0)
@@ -689,11 +705,11 @@ function change_category()
                     Url: url
                 };
                 history.pushState(obj, obj.Title, obj.Url);
-                $("#cat_load_img").hide();
-                $('#article-cetegory').modal('hide');
             }
+            $("#cat_load_img").hide();
             $("#okcategory").show();
             $("#save_post").hide();
+            $('#article-cetegory').modal('hide');
         }
     });
 }
@@ -732,3 +748,133 @@ $(document).ready(function(){
         }
     }
 });
+
+function split( val ) {
+    return val.split( / \s*/ );
+}
+function extractLast( term ) {
+    return split( term ).pop();
+}
+
+function autocomplete_hashtag_keypress(e)
+{
+    var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+    if (!re.test(e.key)) {
+        e.preventDefault();                        
+        return false;
+    }
+}
+
+function placeCaretAtEnd(el) {
+    el.focus();
+    if (typeof window.getSelection != "undefined"
+            && typeof document.createRange != "undefined") {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    } else if (typeof document.body.createTextRange != "undefined") {
+        var textRange = document.body.createTextRange();
+        textRange.moveToElementText(el);
+        textRange.collapse(false);
+        textRange.select();
+    }
+}
+
+function autocomplete_hashtag(id)
+{
+    /*$("#"+id).keypress(function( e ) {
+        console.log(e);
+        var re = /^[a-zA-Z0-9#]+$/; // or /^\w+$/ as mentioned
+        if (!re.test(e.key)) {
+            return false;
+        }                        
+    })*/
+    $("#"+id).bind( "keydown", function( event ) {                        
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        appendTo: "."+id,
+        minLength: 2,
+        source: function( request, response ) {                         
+            var search_key = extractLast( request.term );
+            if(search_key[0] == "#")
+            {
+                search_key = search_key.substr(1);
+                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+            }
+            else
+            {
+                return false;
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            // console.log(this.id);
+            var terms = split( this.value );
+            // var terms = split( $("#"+this.id).text() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            terms.push( "" );
+            this.value = terms.join( " " );
+            // $("#"+this.id).text(terms.join(" "));
+            // placeCaretAtEnd($("#"+this.id)[0]);
+            return false;
+        },
+    });                
+}
+
+function save_article_hashtag()
+{
+    var article_hashtag = $("#article_hashtag").val();
+    if(article_hashtag.trim() == '')
+    {
+        return false;
+    }
+    var post_data = {
+        'unique_key': unique_key,
+        'article_hashtag': article_hashtag,        
+        'user_type': user_type,
+    };
+    $("#okcategory").hide();
+    $("#save_post").show();
+    $("#save_post").text("Saving...");
+    $("#cat_load_img").show();
+    $.ajax({
+        url: base_url + "article/save_article_hashtag",
+        type: "POST",
+        data: post_data,
+        dataType: 'json',
+        success: function (result) {            
+            if(result.add_new_article == 1)
+            {
+                var title = "Edit Article"
+                var url = base_url +"edit-article/"+unique_key;
+                var obj = {
+                    Title: title,
+                    Url: url
+                };
+                history.pushState(obj, obj.Title, obj.Url);
+            }
+            if(result.success == 1)
+            {
+                $("#article-hashtag-txt").html(result.hashtag_txt);
+            }
+            $("#cat_load_img").hide();
+            $("#okcategory").show();
+            $("#save_post").hide();
+            $('#article-hashtag').modal('hide');
+        }
+    });
+}

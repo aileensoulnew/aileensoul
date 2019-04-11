@@ -124,6 +124,20 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 						<a href="" data-target="#article-cetegory" data-toggle="modal" class="pull-left"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"> </a>
 						<span id="cat-selected" class="cat-field-cus">Select Category</span>
 					</p>
+					<p>
+						<a href="#" data-target="#article-hashtag" data-toggle="modal" class="pull-left">
+							<img src="<?php echo base_url(); ?>assets/n-images/edit.png">
+						</a>
+						<span id="article-hashtag-txt" class="cat-field-cus">
+							<?php 
+							if($articleData['hashtag'] != ''){
+								echo $articleData['hashtag'];
+							}
+							else{
+								echo "Article Hashtags";
+							} ?>
+						</span>
+					</p>
 					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title and Description</p>
 					
 					
@@ -183,7 +197,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	                	<div class="msg"></div>
 		                <div class="pop_content">
 		                	<div class="model_ok_cancel">
-		                		<a class="btn1" id="okbtn" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>		                		
+		                		<a class="btn1" id="okbtn" onclick="change_url();" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>		                		
 		                	</div>
 		                </div>
 		            </span>
@@ -192,58 +206,84 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	    </div>
 	</div>
 	<div class="modal fade message-box biderror" id="article-cetegory" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-lm">
-                <div class="modal-content">                    
-                    <div class="modal-body">
-                        <div class="article-popup">
-							<?php $getFieldList = $this->data_model->getNewFieldList();?>
-							<fieldset class="fw">
-								<b>Select Category For Your Article</b>
-								<span class="span-select">
-								<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
-									<?php foreach ($getFieldList as $key => $value) { ?>
-										<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
-									<?php } ?>
-									<option value="0" <?php echo $articleData['article_main_category'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
-								</select>
-								</span>
-							</fieldset>
-							<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
-								
-								<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
-								<span id="fullname-error"></span>
-								<?php echo form_error('other_field'); ?>
-							</fieldset>							
-							<div class="mes">
-								<div class="model_ok_cancel">
-			                		<a class="btn1" id="okcategory" href="javascript:void(0);" title="OK">OK</a>
-			                		<img id="cat_load_img" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE" style="display: none;">
-			                	</div>
-							</div>
+        <div class="modal-dialog modal-lm">
+            <div class="modal-content">                    
+                <div class="modal-body">
+                    <div class="article-popup">
+						<?php $getFieldList = $this->data_model->getNewFieldList();?>
+						<fieldset class="fw">
+							<b>Select Category For Your Article</b>
+							<span class="span-select">
+							<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
+								<?php foreach ($getFieldList as $key => $value) { ?>
+									<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>><?php echo $value['industry_name']; ?></option>
+								<?php } ?>
+								<option value="0" <?php echo $articleData['article_main_category'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
+							</select>
+							</span>
+						</fieldset>
+						<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
+							
+							<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
+							<span id="fullname-error"></span>
+							<?php echo form_error('other_field'); ?>
+						</fieldset>							
+						<div class="mes">
+							<div class="model_ok_cancel">
+		                		<a class="btn1" id="okcategory" href="javascript:void(0);" title="OK">OK</a>
+		                		<img id="cat_load_img" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE" style="display: none;">
+		                	</div>
 						</div>
-                    </div>
+					</div>
                 </div>
             </div>
         </div>
-		<div class="modal fade message-box biderror" id="meta-detail" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-lm">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;
-                    </button>       
-                    <div class="modal-body">
-						<div class="article-popup">
-	                        <input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
-							<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
-							<div class="mes">
-								<div class="model_ok_cancel">
-			                		<a class="btn1" id="okmeta" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
-			                	</div>
-							</div>
+    </div>
+	<div class="modal fade message-box biderror" id="meta-detail" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lm">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">&times;
+                </button>       
+                <div class="modal-body">
+					<div class="article-popup">
+                        <input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
+						<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
+						<div class="mes">
+							<div class="model_ok_cancel">
+		                		<a class="btn1" id="okmeta" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+		                	</div>
 						</div>
-                    </div>
+					</div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade message-box biderror" id="article-hashtag" role="dialog" tabindex="-1">
+    	<div class="modal-dialog modal-lm">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">&times;
+                </button>       
+                <div class="modal-body">
+					<div class="article-popup">
+                        
+                        <div class="form-group">
+                            <label>Add hashtag (Topic)</label>                            
+                            <textarea id="article_hashtag" type="text" class="hashtag-textarea"  placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);" style="min-height: auto;"><?php if($articleData['hashtag'] != ''){ echo trim($articleData['hashtag']);}?></textarea>
+                            <div class="article_hashtag all-hashtags-list"></div>
+							<div id="article-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
+                        </div>
+
+						<div class="mes">
+							<div class="model_ok_cancel">
+		                		<a class="btn1" id="okhashtag" onclick="save_article_hashtag()" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+		                	</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<!-- Model Popup End -->
 </body>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
@@ -253,6 +293,8 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> 
+<script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
 <script type="text/javascript">
 	var user_id = '<?php echo $this->session->userdata('aileenuser');?>';
 	var header_all_profile = '<?php echo $header_all_profile; ?>';
@@ -267,29 +309,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	{
 		$("#article-cetegory").modal('show');
 	}
-</script>
-<script>
-    /*ClassicEditor
-        .create( document.querySelector( '#editor' ), {
-			image: {
-				// You need to configure the image toolbar too, so it uses the new style buttons.
-				toolbar: [ 'imageTextAlternative', '|', 'imageStyleAlignLeft', 'imageStyleFull', 'imageStyleAlignRight' ],
-
-				styles: [
-					// This option is equal to a situation where no style is applied.
-					'imageStyleFull',
-
-					// This represents an image aligned to left.
-					'imageStyleAlignLeft',
-
-					// This represents an image aligned to right.
-					'imageStyleAlignRight'
-				]
-			}
-		} )
-        .catch( error => {
-            console.error( error );
-        } );*/
+	autosize(document.getElementsByClassName('hashtag-textarea'));
 </script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  

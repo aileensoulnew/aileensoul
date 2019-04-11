@@ -49,6 +49,16 @@ class Article extends MY_Controller {
         }
     }
 
+    public function get_hashtag_array($string) {
+        /* Match hashtags */
+        preg_match_all('/#(\w+)/', $string, $matches);
+        /* Add all matches to array */
+        foreach ($matches[1] as $match) {
+            $keywords[] = $match;
+        }
+        return (array) $keywords;
+    }
+
     public function edit_article($unique_key)
     {
         $userid = $this->session->userdata('aileenuser');
@@ -248,6 +258,7 @@ class Article extends MY_Controller {
         $article_meta_description = $this->input->post('article_meta_description');
         $article_main_category = $this->input->post('article_main_category');
         $edit_art_published = $this->input->post('edit_art_published');
+        $article_hashtag = $this->input->post('article_hashtag');
         if($article_main_category == 0)
         {                
             $article_other_category = $this->input->post('article_other_category');
@@ -263,7 +274,26 @@ class Article extends MY_Controller {
             $id_post_article = $article_data['id_post_article'];            
             $article_slug = $article_data['article_slug'];            
             $article_mediaData = $this->article_model->getArticleMediaData($id_post_article);
-            $user_post_article = $this->article_model->getUserPostArticle($id_post_article);            
+            $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            
+            $hashtag_arr = $this->get_hashtag_array($article_hashtag);
+            $hashtag_id = "";            
+            foreach ($hashtag_arr as $key=>$value) {
+                $ht_arr = $this->data_model->find_hashtag($value);                
+                if ($ht_arr['id'] != '') {
+                    $ht_id = $ht_arr['id'];
+                } else {
+                    $data = array();
+                    $data['hashtag'] = $value;
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = '2';                        
+                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                }
+                $hashtag_id .= $ht_id . ',';
+            }
+            $hashtag_id = trim($hashtag_id, ',');            
+
             $doc = new DOMDocument();
             $doc->loadHTML($article_content);
             $xpath = new DOMXPath($doc);
@@ -313,8 +343,9 @@ class Article extends MY_Controller {
                     $email_html .= '<b>Email-Address</b> : '.$article_email;
                     $email_html .= '</td></tr>';
                     $email_html .= '</tr></table>';
-
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
+                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
+                    }
                 }
             }
             else
@@ -341,6 +372,7 @@ class Article extends MY_Controller {
                     "article_meta_description"  => $article_meta_description,
                     "article_main_category"     => $article_main_category,
                     "article_other_category"    => $article_other_category,
+                    "hashtag"                   => $hashtag_id,
                     "status"                    => 'publish',                    
                     "modify_date"               => date('Y-m-d h:i:s', time()),                    
                 );
@@ -374,8 +406,9 @@ class Article extends MY_Controller {
                     $email_html .= '<b>Email-Address</b> : '.$article_email;
                     $email_html .= '</td></tr>';
                     $email_html .= '</tr></table>';
-
-                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
+                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
+                    }
                 }
             }
             else
@@ -756,7 +789,9 @@ class Article extends MY_Controller {
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            }
                         }
                     }
                 }
@@ -982,7 +1017,9 @@ class Article extends MY_Controller {
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            }
                         }
                     }
                 }
@@ -1045,6 +1082,54 @@ class Article extends MY_Controller {
         else
         {
             redirect(base_url(),"refresh");
+        }
+    }
+
+    public function save_article_hashtag()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $user_type = $this->input->post('user_type');
+        if($user_type == '2')
+        {
+            $business_data = $this->userprofile_model->get_business_data_from_user_id($user_id);
+            if(empty($business_data))
+            {
+                echo json_encode(array("success"=>"-1"));
+                exit();
+            }
+        }
+        if($user_id != "")
+        {
+            $unique_key = $this->input->post('unique_key');
+            $article_hashtag = $this->input->post('article_hashtag');
+            $hashtag_arr = $this->get_hashtag_array($article_hashtag);
+            $hashtag_id = "";
+            $hashtag_txt = "";
+            foreach ($hashtag_arr as $key=>$value) {
+                $ht_arr = $this->data_model->find_hashtag($value);
+                $hashtag_txt .= "#".$value." "; 
+                if ($ht_arr['id'] != '') {
+                    $ht_id = $ht_arr['id'];
+                } else {
+                    $data = array();
+                    $data['hashtag'] = $value;
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = '2';                        
+                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
+                }
+                $hashtag_id .= $ht_id . ',';
+            }
+            $hashtag_id = trim($hashtag_id, ',');
+            $hashtag_txt = trim($hashtag_txt);
+            
+            $success = $this->article_model->save_article_hashtag($user_id,$unique_key,$hashtag_id,$user_type);
+            $success['hashtag_txt'] = $hashtag_txt;
+            echo json_encode($success);
+        }
+        else
+        {
+            echo json_encode(array("success"=>"-1"));
         }
     }
 }

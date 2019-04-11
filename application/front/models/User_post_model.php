@@ -765,9 +765,12 @@ class User_post_model extends CI_Model {
 
             }
             elseif ($value['post_for'] == 'article') {
-                $this->db->select("*")->from("post_article");                
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
                 $this->db->where('id_post_article', $value['post_id']);
-                $this->db->where('status', 'publish');                
+                $this->db->where('status', 'publish');
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
@@ -2001,9 +2004,12 @@ class User_post_model extends CI_Model {
 
             }
             elseif ($value['post_for'] == 'article') {
-                $this->db->select("*")->from("post_article");                
-                $this->db->where('id_post_article', $value['post_id']);
-                $this->db->where('status', 'publish');                
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
+                $this->db->where('pa.id_post_article', $value['post_id']);
+                $this->db->where('pa.status', 'publish');
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
@@ -2162,9 +2168,12 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['cover_update'] = $cover_update;
             }
             elseif ($value['post_for'] == 'article') {
-                $this->db->select("*")->from("post_article");                
-                $this->db->where('id_post_article', $value['post_id']);
-                $this->db->where('status', 'publish');                
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
+                $this->db->where('pa.id_post_article', $value['post_id']);
+                $this->db->where('pa.status', 'publish');                
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
@@ -2345,9 +2354,12 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['cover_update'] = $cover_update;
             }
             elseif ($value['post_for'] == 'article') {
-                $this->db->select("*")->from("post_article");                
-                $this->db->where('id_post_article', $value['post_id']);
-                $this->db->where('status', 'publish');                
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
+                $this->db->where('pa.id_post_article', $value['post_id']);
+                $this->db->where('pa.status', 'publish');
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
@@ -3606,9 +3618,12 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['cover_update'] = $cover_update;
             }
             elseif ($value['post_for'] == 'article') {
-                $this->db->select("*")->from("post_article");                
-                $this->db->where('id_post_article', $value['post_id']);
-                $this->db->where('status', 'publish');                
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
+                $this->db->where('pa.id_post_article', $value['post_id']);
+                $this->db->where('pa.status', 'publish');
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
