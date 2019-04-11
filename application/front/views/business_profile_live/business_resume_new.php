@@ -19,7 +19,7 @@
         <?php
 	        echo $header; 
 	        echo $business_header2;
-	        $from_user_id = $login_bussiness_data->user_id;
+	        $from_user_id = $login_user_data['user_id'];
 	        $to_user_id = $business_data['user_id'];
 
 	        $time_array = array("1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30","5:00","5:30","6:00","6:30","7:00","7:30","8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30");
@@ -472,7 +472,7 @@
 								<div class="dtl-title">
 									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/review.png?ver=' . time()) ?>">
 									<span>Reviews</span>
-									<?php if($login_bussiness_data): ?>
+									<?php if($from_user_id != $to_user_id): ?>
 									<a ng-if="from_user_id != to_user_id" href="javascript:void(0);" data-target="#reviews" data-toggle="modal" class="pull-right write-review">	<img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>">
 										<span>Write a review</span>
 									</a>
@@ -500,19 +500,14 @@
 												</span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
 											</div>
 											<ul class="review-list">
-												<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
-													<div class="review-left" ng-if="!review_list.user_image">
-														<div class="rev-img">
-															<div class="post-img-profile">
-																{{review_list.company_name | limitTo:1}}
-															</div>
-														</div>
-													</div>
-													<div class="review-left" ng-if="review_list.user_image">
-														<img ng-src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
+												<li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">	
+													<div class="review-left">
+														<img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{review_list.user_image}}" ng-if="review_list.user_image != ''">
+	                                                    <img ng-if="review_list.user_image == '' && review_list.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+	                                                    <img ng-if="review_list.user_image == '' && review_list.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
 													</div>
 													<div class="review-right">
-														<h4>{{review_list.company_name | wordFirstCase}}</h4>
+														<h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
 														<div class="rating-star-cus">
 															<span class="rating-star">
 															<input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating" class="rating">
@@ -2171,16 +2166,24 @@
 						<div class="dtl-dis">
 							<div class="form-group">
 								<div class="rev-img">
-									<?php if($login_bussiness_data->business_user_image != ''): ?>
-									<img src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL.$login_bussiness_data->business_user_image; ?>">
-									<?php else: ?>
-										<div class="post-img-profile">
-											<?php echo strtoupper(substr($login_bussiness_data->company_name, 0,1)); ?>
-										</div>
-									<?php endif; ?>
+									<?php
+                                    if($login_user_data['user_image'] != ''):
+                                        $user_img = USER_THUMB_UPLOAD_URL . $login_user_data['user_image'];
+                                    else:
+                                        if($login_user_data['user_gender']  == 'M')
+                                        {
+                                            $user_img = base_url('assets/img/man-user.jpg');
+                                        }
+
+                                        if($login_user_data['user_gender']  == 'F')
+                                        {
+                                            $user_img = base_url('assets/img/female-user.jpg');
+                                        }
+                                    endif; ?>
+                                    <img src="<?php echo $user_img; ?>">
 								</div>
 								<div class="total-rev-top">
-									<h4><?php echo $login_bussiness_data->company_name; ?></h4>
+									<h4><?php echo ucwords($login_user_data['first_name'].' '.$login_user_data['last_name']); ?></h4>
 									<span id="star-rate" class="rating-star">
 										<input id="review_star" value="0.5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
 									</span>
@@ -2695,7 +2698,7 @@
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         var user_slug = "<?php echo $business_data['business_slug']; ?>"
 
-        var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';
+        var from_user_id = '<?php echo $login_user_data['user_id']; ?>';
 		var to_user_id = '<?php echo $business_data['user_id']; ?>';
 
         var business_user_award_upload_url = '<?php echo BUSINESS_USER_AWARD_UPLOAD_URL; ?>';

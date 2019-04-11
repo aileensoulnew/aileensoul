@@ -1048,10 +1048,15 @@ class Business_model extends CI_Model {
 
     public function get_save_review($to_user_id)
     {
-        $this->db->select("bp.company_name,bp.business_user_image as user_image,br.*")->from('business_review br');
-        $this->db->join('business_profile bp', 'bp.user_id = br.from_user_id', 'left');
+        // $this->db->select("bp.company_name,bp.business_user_image as user_image,br.*")->from('business_review br');
+        $this->db->select("u.user_id,u.first_name, u.last_name, u.user_slug, u.user_gender, ui.user_image,br.*")->from('business_review br');
+        $this->db->join('user u', 'u.user_id = br.from_user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
         $this->db->where('br.to_user_id', $to_user_id);
         $this->db->where('br.status', '1');
+        $this->db->where("ul.status","1");
+        $this->db->where("ul.is_delete","0");
         $this->db->order_by('br.created_date', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();
@@ -1060,10 +1065,13 @@ class Business_model extends CI_Model {
 
     public function get_review_avarage($to_user_id)
     {
-        $this->db->select("review_star,count(from_user_id) as rating_count")->from('business_review');        
-        $this->db->where('to_user_id', $to_user_id);
-        $this->db->where('status', '1');
-        $this->db->group_by('review_star');
+        $this->db->select("br.review_star,count(br.from_user_id) as rating_count")->from('business_review br');
+        $this->db->join('user_login ul', 'ul.user_id = br.from_user_id', 'left');
+        $this->db->where('br.to_user_id', $to_user_id);
+        $this->db->where('br.status', '1');
+        $this->db->where("ul.status","1");
+        $this->db->where("ul.is_delete","0");
+        $this->db->group_by('br.review_star');
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
@@ -1072,9 +1080,14 @@ class Business_model extends CI_Model {
     public function get_review_count($to_user_id)
     {
         $this->db->select("COUNT(*) total_review")->from('business_review br');
-        $this->db->join('business_profile bp', 'bp.user_id = br.from_user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = br.from_user_id', 'left');
         $this->db->where('br.to_user_id', $to_user_id);
         $this->db->where('br.status', '1');
+        $this->db->where("ul.status","1");
+        $this->db->where("ul.is_delete","0");
+        /*$this->db->join('business_profile bp', 'bp.user_id = br.from_user_id', 'left');
+        $this->db->where('br.to_user_id', $to_user_id);
+        $this->db->where('br.status', '1');*/
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array;

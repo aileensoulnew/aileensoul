@@ -1187,7 +1187,7 @@ function remove_ownpost(abc)
 // remove save post end 
 
 
-// Get the modal
+/*// Get the modal
 var modal = document.getElementById('myModal2');
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn1");
@@ -1208,9 +1208,9 @@ window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
+}*/
 
-// Get the modal
+/*// Get the modal
 var modal = document.getElementById('myModal3');
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn1");
@@ -1232,9 +1232,9 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
-
+*/
 // save post start 
-
+/*
 function save_post(abc)
 {
     $.ajax({
@@ -1246,7 +1246,7 @@ function save_post(abc)
         }
     });
 }
-
+*/
 
 // save post end 
 

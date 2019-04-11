@@ -357,7 +357,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php echo $left_footer; ?>
                             </div>
                             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
-                                <?php if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
+                                <?php if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
 								<div class="mob-progressbar">
 									<p>Complete your profile to get more visibility</p>
 									<p class="mob-edit-pro">
@@ -517,10 +517,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                                     <ul class="dropdown-menu">
                                                         
-                                                        <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for == 'article'"><a href="<?php echo base_url();?>edit-article/{{post.article_data.unique_key}}">Edit Post</a></li>
+                                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for == 'article'"><a href="<?php echo base_url();?>edit-article/{{post.article_data.unique_key}}">Edit Post</a></li>
 
-                                                        <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
-                                                        <li ng-if="live_slug == post.user_data.business_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
+                                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                                         <li>
                                                             <a ng-if="post.is_user_saved_post == '0'" href="javascript:void(0);" ng-click="save_post(post.post_data.id, $index, post)">Save Post</a>
                                                             <a ng-if="post.is_user_saved_post == '1'" href="javascript:void(0);">Saved Post</a>
@@ -537,7 +537,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a> -->
                                                             <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
                                                         </li>
-                                                        <li ng-if="live_slug != post.user_data.business_slug">
+                                                        <li ng-if="user_id != post.user_data.user_id">
                                                             <a ng-click="open_report_spam(post.post_data.id)" href="javascript:void(0);">Report</a>
                                                         </li>
                                                     </ul>
@@ -1159,7 +1159,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
 							
 							<?php $this->load->view('right_add_box');
-                            if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
+                            if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
                             <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
                                 <div class="count_main_progress">
                                     <div class="circles">
@@ -1255,7 +1255,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         </svg>
 
                                         <span>Reviews</span>
-                                        <?php if($login_bussiness_data): ?>
+                                        <?php if($login_user_data['user_id'] != $business_data[0]['user_id']): ?>
                                         <a ng-if="from_user_id != to_user_id" href="javascript:void(0);" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>">
                                             <span>Write a review</span>
                                         </a>
@@ -1264,10 +1264,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
     								<div class="dtl-dis">
                                         <div class="no-info" ng-if="review_data.length < '1'">
                                             <img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-                                            <?php if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
-                                            <span>Be the first to post your review.</span>
-                                            <?php else: ?>
+                                            <?php if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
                                                 <span>There are no reviews right now.</span>
+                                            <?php else: ?>
+                                                <span>Be the first to post your review.</span>
                                             <?php endif; ?>
                                         </div>
                                         <div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
@@ -1277,19 +1277,14 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                             </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
                                         </div>
                                         <ul class="review-list">
-                                            <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
-                                                <div class="review-left" ng-if="!review_list.user_image">
-                                                    <div class="rev-img">
-                                                        <div class="post-img-profile">
-                                                            {{review_list.company_name | limitTo:1}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="review-left" ng-if="review_list.user_image">
-                                                    <img ng-src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
+                                            <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">                    
+                                                <div class="review-left">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{review_list.user_image}}" ng-if="review_list.user_image != ''">
+                                                    <img ng-if="review_list.user_image == '' && review_list.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="review_list.user_image == '' && review_list.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </div>
                                                 <div class="review-right">
-                                                    <h4>{{review_list.company_name | wordFirstCase}}</h4>
+                                                    <h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
                                                     <div class="rating-star-cus">
                                                         <span class="rating-star">
                                                             <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
@@ -1481,16 +1476,24 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <div class="dtl-dis">
                                     <div class="form-group">
                                         <div class="rev-img">
-                                            <?php if($login_bussiness_data->business_user_image != ''): ?>
-                                            <img src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL.$login_bussiness_data->business_user_image; ?>">
-                                            <?php else: ?>
-                                                <div class="post-img-profile">
-                                                    <?php echo strtoupper(substr($login_bussiness_data->company_name, 0,1)); ?>
-                                                </div>
-                                            <?php endif; ?>
+                                            <?php
+                                                if($login_user_data['user_image'] != ''):
+                                                    $user_img = USER_THUMB_UPLOAD_URL . $login_user_data['user_image'];
+                                                else:
+                                                    if($login_user_data['user_gender']  == 'M')
+                                                    {
+                                                        $user_img = base_url('assets/img/man-user.jpg');
+                                                    }
+
+                                                    if($login_user_data['user_gender']  == 'F')
+                                                    {
+                                                        $user_img = base_url('assets/img/female-user.jpg');
+                                                    }
+                                                endif; ?>
+                                                <img src="<?php echo $user_img; ?>">
                                         </div>
                                         <div class="total-rev-top">
-                                            <h4><?php echo $login_bussiness_data->company_name; ?></h4>
+                                            <h4><?php echo ucwords($login_user_data['first_name'].' '.$login_user_data['last_name']); ?></h4>
                                             <span id="star-rate" class="rating-star">
                                                 <input id="review_star" value="0.5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
                                             </span>
@@ -1967,11 +1970,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var user_slug = '<?php echo $business_data[0]['business_slug']; ?>';
             var cmt_maxlength = '700';
-            var business_slug = '<?php echo $login_bussiness_data->business_slug; ?>';
-            // var company_name = '<?php echo $login_bussiness_data->company_name; ?>';
+            var business_slug = '<?php echo '';//$login_user_data->business_slug; ?>';
+            // var company_name = '<?php echo $login_user_data->company_name; ?>';
             var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
             
-            var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';
+            var from_user_id = '<?php echo $login_user_data['user_id']; ?>';
             var to_user_id = '<?php echo $business_data[0]['user_id']; ?>';
             
             var app = angular.module("businessProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);

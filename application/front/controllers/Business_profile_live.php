@@ -221,11 +221,14 @@ class Business_profile_live extends MY_Controller {
             redirect('business-profile');
         }
         $user_name = $this->session->userdata('user_name');
-
+        $login_user_data = array();
         if ($userid) {
+            $login_user_data = $this->user_model->getLeftboxData($userid);//$this->business_model->get_bussiness_from_user_id($userid);
             // $this->business_profile_active_check(false);
             // $this->is_business_profile_register(false);
+        // print_r($login_user_data);exit();
         }
+        $this->data['login_user_data'] = $login_user_data;
         // Remove city or state from slug
         if($id != ''){
             $id = $this->business_model->removelocationfromslug($id);
@@ -260,8 +263,6 @@ class Business_profile_live extends MY_Controller {
                 $this->data['is_eligable_for_post'] = 1;
             }
         }
-
-        $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
 
         $company_name = $this->get_company_name($id);
         $industry_name = $this->db->get_where('industry_type', array('industry_id' => $business_data[0]['industriyal'], 'status' => '1'))->row()->industry_name;
@@ -2061,7 +2062,8 @@ Your browser does not support the audio tag.
         }
         $this->data['company_name'] = $company_name = $this->get_company_name($id);
 
-        $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
+        // $this->data['login_bussiness_data'] = $this->business_model->get_bussiness_from_user_id($userid);
+        $this->data['login_user_data'] = $this->user_model->getLeftboxData($userid);
 
         $contition_array = array('status' => '1');
         $this->data['business_types'] = $businesstypedata = $this->common->select_data_by_condition('business_type', $contition_array, $data = '*', $sortby = 'business_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');

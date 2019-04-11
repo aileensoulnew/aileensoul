@@ -1087,11 +1087,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                                 <div class="dtl-dis">
                                     <div class="no-info" ng-if="review_data.length < '1'">
                                         <img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-                                        <?php if($login_bussiness_data->user_id == $business_data[0]['user_id']): ?>
-                                        <span>Be the first to post your review.</span>
-                                        <?php else: ?>
                                             <span>There are no reviews right now.</span>
-                                        <?php endif; ?>
                                     </div>
                                     <div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
                                         <span class="total-rat">{{avarage_review}}</span>
@@ -1100,19 +1096,14 @@ $login_user_id = $this->session->userdata('aileenuser');
                                         </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
                                     </div>
                                     <ul class="review-list">
-                                        <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">
-                                            <div class="review-left" ng-if="!review_list.user_image">
-                                                <div class="rev-img">
-                                                    <div class="post-img-profile">
-                                                        {{review_list.company_name | limitTo:1}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="review-left" ng-if="review_list.user_image">
-                                                <img ng-src="<?php echo BUS_PROFILE_MAIN_UPLOAD_URL; ?>{{review_list.user_image}}">
+                                        <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">               
+                                            <div class="review-left">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{review_list.user_image}}" ng-if="review_list.user_image != ''">
+                                                <img ng-if="review_list.user_image == '' && review_list.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-if="review_list.user_image == '' && review_list.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                             </div>
                                             <div class="review-right">
-                                                <h4>{{review_list.company_name | wordFirstCase}}</h4>
+                                                <h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
                                                 <div class="rating-star-cus">
                                                     <span class="rating-star">
                                                         <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
