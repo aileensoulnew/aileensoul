@@ -945,7 +945,7 @@ svg path{fill: #5c5c5c;}
 .logo-size{font-size:28px; font-family: 'Swis721 LtEx BT';}
 header h2.logo{line-height:0; height:31px;}
 header .logo a{/*line-height:0;*/}
-header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
+header .logo svg{height:26px; width:158px; margin-top:5px; fill:#fff;}
 .new-ld-page header .logo svg{height:26px; width:165px; margin-top:2px; fill:#fff;}
 .error-page .new-ld-page header .logo svg{margin-top:3px;}
 .old-no-login.error-page .new-ld-page header .logo svg{margin-top:7px;}
