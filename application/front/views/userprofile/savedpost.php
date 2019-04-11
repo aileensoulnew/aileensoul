@@ -1,6 +1,13 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="container pt15 main-dashboard">
     <div class="left-part">
+		<div class="box-border p5">
+            <div class="save-left-box">
+                <span>Saved Items</span>
+                <img src="<?php echo base_url('assets/n-images/post-it.png') ?>">
+                <p>Checkout your saved post.</p>
+            </div>
+        </div>
         <?php echo $left_footer_list_view; ?>
     </div>
 
