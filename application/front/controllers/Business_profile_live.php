@@ -1851,12 +1851,12 @@ Your browser does not support the audio tag.
             if ($updatdata) {
 
                 if ($_SERVER['HTTP_HOST'] != "localhost") {
-                    if (isset($main_image)) {
+                    /*if (isset($main_image)) {
                         unlink($main_image);
                     }
                     if (isset($thumb_image)) {
                         unlink($thumb_image);
-                    }
+                    }*/
                 }
                 if ($this->input->post('hitext') == 1) {
                     redirect('business-profile/business-profile-save-post', refresh);
@@ -1970,12 +1970,12 @@ Your browser does not support the audio tag.
         if ($update) {
 
             if ($_SERVER['HTTP_HOST'] != "localhost") {
-                if (isset($main_image)) {
+                /*if (isset($main_image)) {
                     unlink($main_image);
                 }
                 if (isset($thumb_image)) {
                     unlink($thumb_image);
-                }
+                }*/
             }
 
             $contition_array = array('user_id' => $userid, 'status' => '1', 'is_deleted' => '0');
@@ -4132,12 +4132,12 @@ Your browser does not support the audio tag.
 
         if ($update) {
             if ($_SERVER['HTTP_HOST'] != "localhost") {
-                if (isset($main_image)) {
+                /*if (isset($main_image)) {
                     unlink($main_image);
                 }
                 if (isset($thumb_image)) {
                     unlink($thumb_image);
-                }
+                }*/
             }
         }
 

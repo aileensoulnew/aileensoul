@@ -1660,7 +1660,7 @@ class User_post extends MY_Controller {
 
                             /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
 
-                            if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
+                            /*if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                                 if (isset($main_image)) {
                                     unlink($main_image);
                                 }
@@ -1679,7 +1679,7 @@ class User_post extends MY_Controller {
                                 if (isset($resize_image4)) {
                                     unlink($resize_image4);
                                 }
-                            }
+                            }*/
                             /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
                         } else {
                             echo $this->upload->display_errors();
@@ -2851,7 +2851,7 @@ class User_post extends MY_Controller {
 
                             /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
 
-                            if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
+                            /*if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
                                 if (isset($main_image)) {
                                     unlink($main_image);
                                 }
@@ -2870,7 +2870,7 @@ class User_post extends MY_Controller {
                                 if (isset($resize_image4)) {
                                     unlink($resize_image4);
                                 }
-                            }
+                            }*/
                             /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
                         } else {
                             echo $this->upload->display_errors();
