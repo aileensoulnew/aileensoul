@@ -1264,6 +1264,7 @@ class User_post extends MY_Controller {
 
             $user_post_id = $this->common->insert_data_getid($insert_data, 'user_post');
 
+            $update_post_data = array();
             if ($post_for == 'opportunity') {
                 $insert_data = array();
                 $opptitle = substr($opptitle, 0,100);
@@ -1282,6 +1283,18 @@ class User_post extends MY_Controller {
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');
 
+                $inser_point = array(
+                    "user_id"       =>  $userid,
+                    "post_id"       =>  $user_post_id,
+                    "points"        =>  50,
+                    "status"        =>  '0',
+                    "created_date"  =>  date('Y-m-d H:i:s', time()),
+                    "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                );
+                $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+                
+                $update_post_data['is_monitize'] = '1';
+
             } elseif ($post_for == 'simple') {
                 $insert_data = array();
                 $sptitle = substr($sptitle, 0,100);
@@ -1293,6 +1306,9 @@ class User_post extends MY_Controller {
                 $insert_data['description'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
+
+                $update_post_data['is_monitize'] = '1';
+
             } elseif ($post_for == 'question') {
                 $insert_data = array();
                 $insert_data['post_id'] = $user_post_id;
@@ -1306,10 +1322,23 @@ class User_post extends MY_Controller {
                 $insert_data['is_anonymously'] = $is_anonymously;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_ask_question');
+
+                $update_post_data['is_monitize'] = '1';
+
+                $inser_point = array(
+                    "user_id"       =>  $userid,
+                    "post_id"       =>  $user_post_id,
+                    "points"        =>  5,
+                    "status"        =>  '0',
+                    "created_date"  =>  date('Y-m-d H:i:s', time()),
+                    "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                );
+                $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+
             }
-            $update_data = array();
-            $update_data['post_id'] = $inserted_id;
-            $update_post = $this->common->update_data($update_data, 'user_post', 'id', $user_post_id);
+            
+            $update_post_data['post_id'] = $inserted_id;
+            $update_post = $this->common->update_data($update_post_data, 'user_post', 'id', $user_post_id);
 
             $s3 = new S3(awsAccessKey, awsSecretKey);
             $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
@@ -1318,6 +1347,7 @@ class User_post extends MY_Controller {
             if ($count >= 0) {
                 $i = 0;
                 //for ($i = 0; $i < $count; $i++) {
+                $file_type = "";
                 foreach($_FILES as $k=>$v) {
 
                     // $_FILES['postfiles']['name'] = $files['postfiles']['name'][$i];
@@ -1690,6 +1720,31 @@ class User_post extends MY_Controller {
                         exit;
                     }
                 $i++;
+                }
+
+                // echo $file_type;exit();
+
+                if ($post_for == 'simple' && $file_type == 'image') {
+                    $inser_point = array(
+                        "user_id"       =>  $userid,
+                        "post_id"       =>  $user_post_id,
+                        "points"        =>  5,
+                        "status"        =>  '0',
+                        "created_date"  =>  date('Y-m-d H:i:s', time()),
+                        "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                    );
+                    $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+                }
+                else if ($post_for == 'simple' && $file_type == 'video') {
+                    $inser_point = array(
+                        "user_id"       =>  $userid,
+                        "post_id"       =>  $user_post_id,
+                        "points"        =>  30,
+                        "status"        =>  '0',
+                        "created_date"  =>  date('Y-m-d H:i:s', time()),
+                        "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                    );
+                    $this->common->insert_data_getid($inser_point, 'user_point_mapper');
                 }
             }
 
