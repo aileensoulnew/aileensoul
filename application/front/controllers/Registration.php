@@ -126,6 +126,7 @@ class Registration extends CI_Controller {
         $last_name = $this->input->post('last_name');
         $email_reg = $this->input->post('email_reg');
         $term_condi = $this->input->post('term_condi');
+        $gender = $this->input->post('selgen');
        
         $userdata = $this->user_model->getUserByEmail($email_reg);
 
@@ -189,7 +190,7 @@ class Registration extends CI_Controller {
                             $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                             //Openfire Username Generate End
                         }*/
-
+                        
                         $user_login_data = array(
                             'email' => strtolower($this->input->post('email_reg')),
                             'password' => md5($this->input->post('password_reg')),
@@ -228,7 +229,7 @@ class Registration extends CI_Controller {
                         $param = array(
                             "subject"=>$subject,
                             "email_html"=>$msg,
-                            "to_email"=>$toemail
+                            "to_email"=>$email_reg
                         );
                         $this->inbackground->do_in_background($url, $param);
 

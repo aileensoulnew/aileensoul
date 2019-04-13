@@ -403,7 +403,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 $("#btn-register").html('<img src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
 
                                 //window.location = "<?php echo base_url() ?>profiles/<?php //echo $this->session->userdata('aileenuser_slug'); ?>";
-                                sendmail(userid);
+                                // sendmail(userid);
                                 /*var username = response.userslug.replace(/-/g, "_")
                                 var callback = function (status) {
                                     if (status === Strophe.Status.REGISTER) {
