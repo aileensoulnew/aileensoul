@@ -36,13 +36,13 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-if($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1'){
+if($_SERVER['HTTP_HOST'] == 'aileensoul.localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1'){
 	$db_host 	 = 'localhost';
 	$db_user 	 = 'root';
 	$db_password = '';
 	$db_name 	 = 'laceberry';
         
-    define('SITEURL','http://localhost/aileensoulnew/aileensoul/');
+    define('SITEURL','http://aileensoul.localhost/');
 	define('SITEPATH',$_SERVER['DOCUMENT_ROOT'].'/aileensoul/');
 	define('SITEMAPPATH',$_SERVER['DOCUMENT_ROOT'].'/laceberry/');
 	define('NEWSITEURL','http://localhost/laceberry/');

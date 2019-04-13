@@ -19,6 +19,13 @@
                 </a>
             </li>
             <!-- End Dashboard -->
+            <!--Start Monetizationt-->
+            <li <?php if ($this->uri->segment(1) == 'monetize' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
+                <a href="<?php echo base_url('monetize/postlist/'); ?>">
+                    <i class="fa fa-money margin-r-5"></i> <span>Monetization</span>
+                </a>                
+            </li>
+            <!--End Monetizationt-->
             <!--Start Article Management-->
             <li <?php if ($this->uri->segment(1) == 'article' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
