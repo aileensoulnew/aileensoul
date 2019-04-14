@@ -94,8 +94,8 @@ $this->data['admin_image'] = $user_data[0]['admin_image'];
    
   
 
-  		$this->data['header'] = $this->load->view('header', $this->data);
-        $this->data['leftmenu'] = $this->load->view('leftmenu', $this->data);
+  		$this->data['header'] = $this->load->view('header', $this->data,true);
+        $this->data['leftmenu'] = $this->load->view('leftmenu', $this->data,true);
         $this->data['footer'] = $this->load->view('footer', $this->data,true);
 
 

@@ -15,8 +15,7 @@ class Monetize extends CI_Controller {
             redirect('login', 'refresh');
         }
 
-        $this->load->model('email_model');
-        $this->load->model('monetize_model');
+        $this->load->model('email_model');        
 
         // Get Site Information
         $this->data['title'] = 'Monetization | Aileensoul';
