@@ -973,4 +973,41 @@ class Common extends CI_Model {
         return $return_arr;
     }
 
+    public function get_monetize()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        // $monetize_data = $this->db->select('*')->get_where('user_point_mapper', array('user_id' => $user_id,'status' => '1'))->row();
+        $this->db->select("upm.*")->from("user_point_mapper upm");
+        $this->db->join('user_post up', 'up.id = upm.post_id', 'left');
+        $this->db->where('upm.user_id', $user_id);
+        $this->db->where('upm.status', '1');
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');        
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        $total_points = 0;
+        $total_earn = 0;
+        if(isset($result_array) && !empty($result_array))
+        {
+            foreach ($result_array as $_result_array) {
+                $total_points = $total_points + $_result_array['points'];
+            }
+            $total_earn = $total_points / 100;
+        }
+        $return_arr = array(
+            'total_points'  =>  $total_points,
+            'total_earn'  =>  $total_earn,
+        );
+        return $return_arr;
+    }
+
+    public function is_user_monetize() {
+        $user_id = $this->session->userdata('aileenuser');
+
+        $this->db->select("COUNT(*) as total")->from("user_monitize um");
+        $this->db->where("um.user_id", $user_id);
+        $query = $this->db->get();
+        $result_array = $query->row('total');
+        return $result_array;
+    }
 }

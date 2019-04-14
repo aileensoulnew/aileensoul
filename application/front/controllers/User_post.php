@@ -270,6 +270,21 @@ class User_post extends MY_Controller {
         $postComentId = $this->common->insert_data_getid($data, 'user_post_comment');
         $return_data = array();
         if ($postComentId) {
+            
+            $post_data = $this->db->select('*')->get_where('user_post', array('id' => $post_id))->row();
+            if($post_data->post_for == 'question')
+            {
+                $inser_point = array(
+                    "user_id"       =>  $userid,
+                    "post_id"       =>  $post_id,
+                    "points"        =>  5,
+                    "status"        =>  '0',
+                    "created_date"  =>  date('Y-m-d H:i:s', time()),
+                    "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                );
+                $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+            }
+
             $return_data['message'] = '1';
             $return_data['comment_data'] = $this->user_post_model->postCommentData($post_id,$userid);
             $return_data['comment_data'][0]['is_userlikePostComment'] = '0';
@@ -1080,6 +1095,7 @@ class User_post extends MY_Controller {
        
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
+        $is_user_monetize = $this->common->is_user_monetize();
 
         $opptitle = (isset($_POST['opptitle'])  && $_POST['opptitle'] != "undefined" && $_POST['opptitle'] != "" ? $_POST['opptitle'] : "");
         $sptitle = (isset($_POST['sptitle'])  && $_POST['sptitle'] != "undefined" && $_POST['sptitle'] != "" ? $_POST['sptitle'] : "");
@@ -1282,18 +1298,20 @@ class User_post extends MY_Controller {
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');
+                if($is_user_monetize > 0)
+                {
 
-                $inser_point = array(
-                    "user_id"       =>  $userid,
-                    "post_id"       =>  $user_post_id,
-                    "points"        =>  50,
-                    "status"        =>  '0',
-                    "created_date"  =>  date('Y-m-d H:i:s', time()),
-                    "modify_date"   =>  date('Y-m-d H:i:s', time()),
-                );
-                $this->common->insert_data_getid($inser_point, 'user_point_mapper');
-                
-                $update_post_data['is_monitize'] = '1';
+                    $inser_point = array(
+                        "user_id"       =>  $userid,
+                        "post_id"       =>  $user_post_id,
+                        "points"        =>  50,
+                        "status"        =>  '0',
+                        "created_date"  =>  date('Y-m-d H:i:s', time()),
+                        "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                    );
+                    $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+                    $update_post_data['is_monitize'] = '1';
+                }                
 
             } elseif ($post_for == 'simple') {
                 $insert_data = array();
@@ -1307,7 +1325,9 @@ class User_post extends MY_Controller {
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
 
-                $update_post_data['is_monitize'] = '1';
+                if($is_user_monetize > 0){
+                    $update_post_data['is_monitize'] = '1';
+                }
 
             } elseif ($post_for == 'question') {
                 $insert_data = array();
@@ -1322,18 +1342,20 @@ class User_post extends MY_Controller {
                 $insert_data['is_anonymously'] = $is_anonymously;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_ask_question');
+                if($is_user_monetize > 0){
 
-                $update_post_data['is_monitize'] = '1';
+                    $update_post_data['is_monitize'] = '1';
 
-                $inser_point = array(
-                    "user_id"       =>  $userid,
-                    "post_id"       =>  $user_post_id,
-                    "points"        =>  5,
-                    "status"        =>  '0',
-                    "created_date"  =>  date('Y-m-d H:i:s', time()),
-                    "modify_date"   =>  date('Y-m-d H:i:s', time()),
-                );
-                $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+                    $inser_point = array(
+                        "user_id"       =>  $userid,
+                        "post_id"       =>  $user_post_id,
+                        "points"        =>  5,
+                        "status"        =>  '0',
+                        "created_date"  =>  date('Y-m-d H:i:s', time()),
+                        "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                    );
+                    $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+                }
 
             }
             
@@ -1724,7 +1746,7 @@ class User_post extends MY_Controller {
 
                 // echo $file_type;exit();
 
-                if ($post_for == 'simple' && $file_type == 'image') {
+                if ($is_user_monetize > 0 && $post_for == 'simple' && $file_type == 'image') {
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
@@ -1735,7 +1757,7 @@ class User_post extends MY_Controller {
                     );
                     $this->common->insert_data_getid($inser_point, 'user_point_mapper');
                 }
-                else if ($post_for == 'simple' && $file_type == 'video') {
+                else if ($is_user_monetize > 0 && $post_for == 'simple' && $file_type == 'video') {
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,

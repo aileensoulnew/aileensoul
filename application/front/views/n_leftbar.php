@@ -93,8 +93,29 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
                 </div>
             </div>
         </div>
-    </div>	
-    <?php endif; ?>
+    </div>
+    <?php
+    $is_user_monetize = $this->common->is_user_monetize();    
+    if($is_user_monetize > 0)
+    {
+        $monetize_data = $this->common->get_monetize();    
+        if($monetize_data['total_points'] > 0 && $monetize_data['total_earn'] > 0)
+        {
+        ?>
+            <div class="left-info-box monetize">
+                <div class="dash-left-title">
+                    <h3><i class="fa fa-money"></i> Points</h3>
+                </div>
+                <div class="dash-info-box">
+                    <span><?php echo $monetize_data['total_points']; ?> Point<?php echo $monetize_data['total_points'] > 1 ? 's' : ''; ?></span>
+                </div>
+                <div class="dash-info-box">
+                    <span><?php echo "$ ".$monetize_data['total_earn']; ?></span>
+                </div>
+            </div>
+        <?php }
+    }
+    endif; ?>
 	<div class="business-move">
 	</div>
 					

@@ -83,11 +83,37 @@ class Article extends CI_Controller {
 
     
     public function publish() {
+
         $id = $_POST['id'];
-        $data = array(
-            'status' => 'publish'
-        );
-        $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+
+        $cond1 = array('post_id' => $id,'post_for' => 'article');
+        $post_data = $this->common->select_data_by_condition('user_post', $cond1, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
+
+        $cond2 = array('user_id' => $post_data['user_id'],'status' => '1');
+        $monetine_data = $this->common->select_data_by_condition('user_monitize', $cond2, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
+        $data = array();
+        if(isset($monetine_data) && !empty($monetine_data))
+        {
+            $data['is_monitize'] = '1';
+        }
+
+        $data['status'] = 'publish';
+        $this->db->where('post_id', $id);
+        $this->db->where('post_for', 'article');
+        $update = $this->db->update('user_post', $data);
+        if(isset($monetine_data) && !empty($monetine_data))
+        {
+            $inser_point = array(
+                "user_id"       =>  $post_data['user_id'],
+                "post_id"       =>  $post_data['id'],
+                "points"        =>  30,
+                "status"        =>  '0',
+                "created_date"  =>  date('Y-m-d H:i:s', time()),
+                "modify_date"   =>  date('Y-m-d H:i:s', time()),
+            );
+            $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+        }
+        // $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
         
         $sql = "UPDATE ailee_post_article SET article_desc_old = article_desc WHERE id_post_article = '".$id."'";
         $query = $this->db->query($sql); 
@@ -138,7 +164,9 @@ class Article extends CI_Controller {
         $email_user .= '<br></td></tr>';        
         $email_user .= '</table>';
         $subject = "Approve Article";
-        $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
+        if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
+            $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
+        }
         die();
     }
 

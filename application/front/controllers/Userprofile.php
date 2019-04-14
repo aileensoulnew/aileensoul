@@ -427,4 +427,63 @@ class Userprofile extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($user_list));
     }
 
+    public function monetize()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
+
+        $this->data['is_user_monetize'] = $this->common->is_user_monetize($userid);
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);        
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
+        
+        
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Monetize | Aileensoul";
+        $this->load->view('user_post/monetize', $this->data);
+    }
+
+    public function save_monetize()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $return_arr = array();
+        if($userid != '')
+        {
+            $is_user_monetize = $this->common->is_user_monetize();
+            if($is_user_monetize > 0)
+            {
+                $data = array();
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = '1';
+                $user_monitize_id = $this->common->update_data($data, 'user_monitize', 'user_id', $userid);
+            }
+            else
+            {
+                $data = array();
+                $data['user_id'] = $userid;                
+                $data['created_date'] = date('Y-m-d H:i:s', time());
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = '1';
+                $user_monitize_id = $this->common->insert_data_getid($data, 'user_monitize');
+            }
+            if($user_monitize_id > 0)
+            {
+                $return_arr['success'] = '1';
+            }
+            else
+            {
+                $return_arr['success'] = '0';
+            }
+        }
+        else
+        {
+            $return_arr['success'] = '0';
+        }
+            return $this->output->set_content_type('application/json')->set_output(json_encode($return_arr));
+    }
+
 }
