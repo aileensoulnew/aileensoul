@@ -3621,7 +3621,9 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .monetize-term-cond .control__indicator{width: 22px; height: 22px;}
 .monetize-term-cond .btn-new-3{font-weight: normal; font-size: 18px;}
 .monetize-term-cond .control--checkbox .control__indicator:after{width: 9px; height: 15px; left: 5px; top:0px;}
-.monetize-popup .modal-content{width: 720px;}
+#ans-point .modal-content{width: 750px;}
+#ans-point .mo-popup img{width: 100%;}
+#ans-point .modal-close{color: #fff; top: 0;}
 .mo-popup h2{padding: 15px; border-bottom: 1px solid #d2d2d2; font-size: 22px;}
 
 /***  end monetize css  ***/
@@ -3662,7 +3664,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .post-popup-box p.pull-right .btn1{position:relative; bottom:-3px;}
 .post-hash-tag{font-weight:bold; background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); -webkit-text-fill-color: transparent; -webkit-background-clip: text; display:inline-block; margin:0 3px;}
 .all-hashtags-list ul{border: 1px solid #d2d2d2;}
-.all-hashtags-list ul.ui-menu li.ui-menu-item{list-style-type:none; padding-left: 10px !important; cursor:pointer;}
+.all-hashtags-list ul.ui-menu li.ui-menu-item{list-style-type:none; cursor:pointer;}
 #ask-question .post-popup-box .post-box{padding:15px 15px 0 15px;}
 .post-discription a{background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); -webkit-text-fill-color: transparent; -webkit-background-clip: text; font-weight:bold;}
 .question-page .post-discription .question a{font-weight:normal;}
@@ -3684,7 +3686,7 @@ tags-input .tags{padding: 0;}
 .modal-content .post-field .all-upload .form-group{padding: 0;}
 .reply-comment{padding-left: 40px; padding-top: 10px;}
 .comment-input .all-hashtags-list ul.ui-menu li.ui-menu-item{padding-left: 0 !important;}
-.all-hashtags-list .ui-menu .ui-menu-item .ui-menu-item-wrapper{width:100%; float: left; border-bottom: 1px solid #d2d2d2; padding: 5px !important;}
+.all-hashtags-list .ui-menu .ui-menu-item .ui-menu-item-wrapper{width:100%; float: left; border-bottom: 1px solid #d2d2d2; padding: 5px 15px !important;}
 .comment-input .all-hashtags-list ul.ui-menu{width: 87% !important; left: 28px !important;}
 .comment-input .all-hashtags-list ul.ui-widget{position: absolute !important; top:26px !important; border-radius:5px; }
 .all-hashtags-list .post-img{width: 40px; height: 40px; margin-right: 10px; border:1px solid #d2d2d2;}
@@ -4137,6 +4139,7 @@ tags-input .tags{padding: 0;}
   .error-left{width: 260px;}
   .error-right{width: 460px;}
   .error-top-box{padding: 25px 0 10px;}
+  .big-left{width: 100%;}
   
 }
 @media screen and (max-width: 767px) {
@@ -5397,7 +5400,6 @@ tags-input .tags{padding: 0;}
     --columns: 1;
   }
 }
-
 
 
 .sub-header .sub-menu li:nth-child(3) ul li:nth-child(2){display:block;}
