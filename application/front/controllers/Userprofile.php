@@ -459,7 +459,7 @@ class Userprofile extends MY_Controller {
                 $data = array();
                 $data['modify_date'] = date('Y-m-d H:i:s', time());
                 $data['status'] = '1';
-                $user_monitize_id = $this->common->update_data($data, 'user_monitize', 'user_id', $userid);
+                $user_monetize_id = $this->common->update_data($data, 'user_monetize', 'user_id', $userid);
             }
             else
             {
@@ -468,9 +468,9 @@ class Userprofile extends MY_Controller {
                 $data['created_date'] = date('Y-m-d H:i:s', time());
                 $data['modify_date'] = date('Y-m-d H:i:s', time());
                 $data['status'] = '1';
-                $user_monitize_id = $this->common->insert_data_getid($data, 'user_monitize');
+                $user_monetize_id = $this->common->insert_data_getid($data, 'user_monetize');
             }
-            if($user_monitize_id > 0)
+            if($user_monetize_id > 0)
             {
                 $return_arr['success'] = '1';
             }

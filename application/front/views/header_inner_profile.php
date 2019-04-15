@@ -284,6 +284,12 @@ if($browser == "Firefox")
                                         <span>Business Profile</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('monetize-aileensoul-account') ?>" title="Monetization" target="_self">
+                                        <i class="fa fa-money"></i>
+                                        <span>Monetization</span>
+                                    </a>
+                                </li>
                                 <li><a target="_self" href="<?php echo base_url('edit-profile') ?>" title="Setting">
 									<svg x="0px" y="0px" viewBox="0 0 478.703 478.703" width="15px" height="15px">
 <g>
@@ -468,6 +474,12 @@ if($browser == "Firefox")
 </svg>
 
                                         <span>Business Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('monetize-aileensoul-account') ?>" title="Monetization" target="_self">
+                                        <i class="fa fa-money"></i>
+                                        <span>Monetization</span>
                                     </a>
                                 </li>
                                     <li><a target="_self" href="<?php echo base_url('edit-profile') ?>" title="Setting">

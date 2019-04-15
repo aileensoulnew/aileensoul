@@ -359,6 +359,11 @@ class Article extends MY_Controller {
                     "status"                    => "draft",
                     "is_delete"                 => '0',
                 );
+                $is_user_monetize = $this->common->is_user_monetize();
+                if($is_user_monetize > 0)
+                {
+                    $data['is_monetize'] = '1';
+                }
                 $post_id = $this->common->insert_data_getid($data,'user_post');
                 $new_post = 1;
             }

@@ -42,6 +42,7 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
 						<li><a target="_self" href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" >Terms and Condition</a></li>
                         <li><a target="_self" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy">Privacy Policy</a></li>
                         <li><a target="_self" title="Disclaimer Policy" href="<?php echo base_url('disclaimer-policy'); ?>">Disclaimer Policy</a></li>
+                        <li><a target="_self" title="Monetization" href="<?php echo base_url('monetize-aileensoul-account'); ?>">Monetization</a></li>
 					</ul>
 					<ul class="footer-ul pt5 pb10">
 						<li> Aileensoul Ⓒ <?php echo gmdate('Y'); ?> </li>

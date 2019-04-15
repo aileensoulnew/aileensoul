@@ -1318,7 +1318,7 @@ class User_post extends MY_Controller {
                         "modify_date"   =>  date('Y-m-d H:i:s', time()),
                     );
                     $this->common->insert_data_getid($inser_point, 'user_point_mapper');
-                    $update_post_data['is_monitize'] = '1';
+                    $update_post_data['is_monetize'] = '1';
                 }                
 
             } elseif ($post_for == 'simple') {
@@ -1334,7 +1334,7 @@ class User_post extends MY_Controller {
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
 
                 if($is_user_monetize > 0){
-                    $update_post_data['is_monitize'] = '1';
+                    $update_post_data['is_monetize'] = '1';
                 }
 
             } elseif ($post_for == 'question') {
@@ -1352,7 +1352,7 @@ class User_post extends MY_Controller {
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_ask_question');
                 if($is_user_monetize > 0){
 
-                    $update_post_data['is_monitize'] = '1';
+                    $update_post_data['is_monetize'] = '1';
 
                     $inser_point = array(
                         "user_id"       =>  $userid,

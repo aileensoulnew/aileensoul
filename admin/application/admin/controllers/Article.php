@@ -90,13 +90,9 @@ class Article extends CI_Controller {
         $post_data = $this->common->select_data_by_condition('user_post', $cond1, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
 
         $cond2 = array('user_id' => $post_data['user_id'],'status' => '1');
-        $monetine_data = $this->common->select_data_by_condition('user_monitize', $cond2, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
+        $monetine_data = $this->common->select_data_by_condition('user_monetize', $cond2, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
         $data = array();
-        if(isset($monetine_data) && !empty($monetine_data))
-        {
-            $data['is_monitize'] = '1';
-        }
-
+        
         $data['status'] = 'publish';
         $this->db->where('post_id', $id);
         $this->db->where('post_for', 'article');

@@ -14,6 +14,7 @@
             <li><a href="<?php echo base_url('privacy-policy'); ?>" target="_self">Privacy Policy</a></li>
 			<li><a title="Report" href="<?php echo base_url('report-abuse'); ?>" target="_self">Report </a></li>
             <li><a title="Disclaimer Policy" href="<?php echo base_url('disclaimer-policy'); ?>" target="_self">Disclaimer Policy</a></li>
+            <li><a title="Monetization" href="<?php echo base_url('monetize-aileensoul-account'); ?>" target="_self">Monetization</a></li>
         </ul>
 
     </div>

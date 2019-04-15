@@ -1004,7 +1004,7 @@ class Common extends CI_Model {
     public function is_user_monetize() {
         $user_id = $this->session->userdata('aileenuser');
 
-        $this->db->select("COUNT(*) as total")->from("user_monitize um");
+        $this->db->select("COUNT(*) as total")->from("user_monetize um");
         $this->db->where("um.user_id", $user_id);
         $query = $this->db->get();
         $result_array = $query->row('total');
