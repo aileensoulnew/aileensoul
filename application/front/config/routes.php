@@ -993,7 +993,7 @@ $route['recruiter/jobpost'] = "My404Page";
 $route['recruiter/jobpost/(:any)'] = "My404Page";
 
 //Monetize
-$route['monetize'] = "Userprofile/monetize";
+$route['monetize-aileensoul-account'] = "Userprofile/monetize";
 
 $route['(:any)'] = 'Userprofile';
 

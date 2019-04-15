@@ -272,12 +272,18 @@ class User_post extends MY_Controller {
         if ($postComentId) {
             
             $post_data = $this->db->select('*')->get_where('user_post', array('id' => $post_id))->row();
-            if($post_data->post_for == 'question')
+            $comment_count_data = $this->db->select('*')->get_where('user_post_comment', array('post_id' => $post_id,'user_id' => $userid,'is_delete' => '0'))->result();
+
+            $is_user_monetize = $this->common->is_user_monetize();            
+
+            if($is_user_monetize > 0 && count($comment_count_data) == 0 && $post_data->post_for == 'question')
             {
                 $inser_point = array(
                     "user_id"       =>  $userid,
                     "post_id"       =>  $post_id,
                     "points"        =>  5,
+                    "points_for"    =>  4,
+                    "description"   =>  $comment,
                     "status"        =>  '0',
                     "created_date"  =>  date('Y-m-d H:i:s', time()),
                     "modify_date"   =>  date('Y-m-d H:i:s', time()),
@@ -1305,6 +1311,8 @@ class User_post extends MY_Controller {
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
                         "points"        =>  50,
+                        "points_for"    =>  1,
+                        "description"   =>  $description,
                         "status"        =>  '0',
                         "created_date"  =>  date('Y-m-d H:i:s', time()),
                         "modify_date"   =>  date('Y-m-d H:i:s', time()),
@@ -1350,6 +1358,8 @@ class User_post extends MY_Controller {
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
                         "points"        =>  5,
+                        "points_for"    =>  5,
+                        "description"   =>  $ask_description,
                         "status"        =>  '0',
                         "created_date"  =>  date('Y-m-d H:i:s', time()),
                         "modify_date"   =>  date('Y-m-d H:i:s', time()),
@@ -1751,6 +1761,8 @@ class User_post extends MY_Controller {
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
                         "points"        =>  5,
+                        "points_for"    =>  6,
+                        "description"   =>  '',
                         "status"        =>  '0',
                         "created_date"  =>  date('Y-m-d H:i:s', time()),
                         "modify_date"   =>  date('Y-m-d H:i:s', time()),
@@ -1762,6 +1774,8 @@ class User_post extends MY_Controller {
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
                         "points"        =>  30,
+                        "points_for"    =>  2,
+                        "description"   =>  '',
                         "status"        =>  '0',
                         "created_date"  =>  date('Y-m-d H:i:s', time()),
                         "modify_date"   =>  date('Y-m-d H:i:s', time()),

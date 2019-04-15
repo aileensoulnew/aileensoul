@@ -11355,6 +11355,8 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
     $scope.opp.post_for = 'opportunity';
     $scope.sim.post_for = 'simple';
     $scope.ask.post_for = 'question';
+
+    $('footer').hide();
     
     $scope.get_all_counter = function() {
         if($scope.$parent.pade_reload == true)

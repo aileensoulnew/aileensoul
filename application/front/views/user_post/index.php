@@ -1928,6 +1928,11 @@
         <div class="right-add-box">            
         </div> 
 		
+        <div class="box-border">
+            <a href="<?php echo base_url('monetize-aileensoul-account'); ?>">
+                <img src="<?php echo base_url('assets/n-images/earn-with-ai.jpg') ?>">
+            </a>
+        </div>
         <div class="all-contact">
             <h4><a href="<?php echo base_url('contact-request') ?>" target="_self">All Contacts</a></h4>
             <div class="all-user-list">

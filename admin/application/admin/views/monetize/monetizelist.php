@@ -86,9 +86,12 @@ echo $leftmenu;
                            <th style="width: 15%;"><i class="fa fa-fw fa-pencil-square"></i> 
                               <a href="javascript:void(0);">Title</a>
                            </th>
-                           <th  style="width: 25%;"><i class="fa fa-fw fa-pencil-square"></i> 
-                              <a href="javascript:void(0);">Post type</a>
-                           </th>                           
+                           <th><i class="fa fa-fw fa-pencil-square"></i> 
+                              <a href="javascript:void(0);">Post for</a>
+                           </th>
+                           <th><i class="fa fa-fw fa-pencil-square"></i> 
+                              <a href="javascript:void(0);">Description</a>
+                           </th>
                            <th><i class="fa fa-fw fa-pencil"></i> 
                               <a href="javascript:void(0);">Created Date</a>
                            </th>
@@ -99,13 +102,28 @@ echo $leftmenu;
                         <?php
                         if (count($points_list) != 0){
                            $i = $offset + 1; 
-                           foreach ($points_list as $_points_list) {?>
+                           foreach ($points_list as $_points_list) {                            
+                            ?>
                               <tr id="delete<?php echo $_points_list['id_user_point_mapper'];?>">
                                  <td><?php echo $i++; ?></td>
                                  <td><?php echo ucwords($_points_list['first_name'].' '.$_points_list['last_name']); ?></td>
                                  <td><?php echo $_points_list['email']; ?></td>
                                  <td><a href="<?php echo SITEURL.$_points_list['slug']; ?>"><?php echo $_points_list['title']; ?></a></td>
-                                 <td><?php echo $_points_list['post_for']; ?></td>
+                                 <td><?php 
+                                        if($_points_list['points_for'] == '1')
+                                          echo "Post opportunity";
+                                        elseif($_points_list['points_for'] == '2')
+                                          echo "Post video";
+                                        elseif($_points_list['points_for'] == '3')
+                                          echo "Post article";
+                                        elseif($_points_list['points_for'] == '4')
+                                          echo "Give answer";
+                                        elseif($_points_list['points_for'] == '5')
+                                          echo "Ask question";
+                                        elseif($_points_list['points_for'] == '6')
+                                          echo "Post Image";
+                                       ?></td>
+                                 <td><?php echo substr($_points_list['description'], 0,200); ?></td>
                                  
                                  <td><?php echo $_points_list['created_date']; ?></td>
                                  <td>

@@ -67,7 +67,7 @@ class Monetize extends CI_Controller {
 
         $condition_array = array('user_post.status' => 'publish','user_post.is_delete' => '0');
 
-        $select_data = "user_point_mapper.id_user_point_mapper, user_point_mapper.points, user_point_mapper.user_id, ,user_point_mapper.created_date, user_point_mapper.status as point_status, user_post.post_for, user_post.id, user_post.post_id ,user_post.status as user_post_status ,user_post.is_delete as user_post_isdeleted , user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
+        $select_data = "user_point_mapper.id_user_point_mapper, user_point_mapper.points, user_point_mapper.user_id, user_point_mapper.created_date, user_point_mapper.status as point_status, user_point_mapper.points_for, user_point_mapper.description, user_post.post_for, user_post.id, user_post.post_id ,user_post.status as user_post_status ,user_post.is_delete as user_post_isdeleted , user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
 
         $points_list = $this->common->select_data_by_condition('user_point_mapper', $condition_array, $data = $select_data, $short_by = 'id_user_point_mapper', $order_by = 'desc', $limit, $offset, $join_str);
         

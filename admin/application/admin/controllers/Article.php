@@ -107,6 +107,8 @@ class Article extends CI_Controller {
                 "user_id"       =>  $post_data['user_id'],
                 "post_id"       =>  $post_data['id'],
                 "points"        =>  30,
+                "points_for"    =>  3,
+                "description"   =>  '',
                 "status"        =>  '0',
                 "created_date"  =>  date('Y-m-d H:i:s', time()),
                 "modify_date"   =>  date('Y-m-d H:i:s', time()),

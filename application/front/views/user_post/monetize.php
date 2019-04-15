@@ -64,22 +64,22 @@
                                 <h2>Points dsitribution </h2>
                                 <ul class="monetize-point">
                                     <li><b>50 points</b>  -  Post opportunity
-                                        <p>Opportunity should be for anyone. (example job seekers , freelancers , doctors , ceos, enterprenuers, plumber , artist, photographer , cook , etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> View demo</a></p> 
+                                        <p>Opportunity should be for anyone. (example job seekers , freelancers , doctors , ceos, enterprenuers, plumber , artist, photographer , cook , etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> Learn more.</a></p> 
                                     </li>
                                     <li><b>30 points</b>  -  Post video 
-                                        <p>All types of videos acceptable but you can monetize only helpful and not plagarized.... <a href="">View demo.</a></p>
+                                        <p>All types of videos acceptable but you can monetize only helpful and not plagarized.... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
                                     </li>
                                     <li><b>30 ponts</b>  -  Post article
-                                        <p>All types of article acceptable but you can monetize only useful content.... <a href="">View demo.</a></p>
+                                        <p>All types of article acceptable but you can monetize only useful content.... <a data-toggle="modal" href="#" data-target="#article-point">Learn more.</a></p>
                                     </li>
                                     <li><b>20 points</b>  -  Give answer
-                                        <p>Answers should be helpful for users.... <a href="">View demo.</a></p>
+                                        <p>Answers should be helpful for users.... <a data-toggle="modal" href="#" data-target="#ans-point">View demo.</a></p>
                                     </li>
-                                    <li><b>5 points</b>  -  Ask question
-                                        <p>All types of question is acceptable but it should not have spamming.... <a href="">View demo.</a></p>
+                                    <li><b>5 points</b>  -  Asq question
+                                        <p>All types of question is acceptable but it should not have spamming.... <a data-toggle="modal" href="#" data-target="#qus-point">Learn more.</a></p>
                                     </li>
                                     <li><b>5 points</b>  -  post photo
-                                        <p>All types of photos acceptable. (with no spamming and no copyright issues).... <a href="">View demo.</a></p>
+                                        <p>All types of photos acceptable. (with no spamming and no copyright issues).... <a data-toggle="modal" href="#" data-target="#photo-point">Learn more.</a></p>
                                     </li>
                                 </ul>
                                 <p class="pt20">All content should be creative, helpful and orginial.</p>
