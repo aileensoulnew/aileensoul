@@ -3607,7 +3607,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 /***  monetize css  ***/
 .monetize-box{box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border-radius: 20px;}
 .monetize-box h1{border-bottom: 1px solid #d2d2d2; font-size: 26px; padding: 20px; line-height: 1; color: #5c5c5c;}
-.monetize-box .monetize-detail{padding: 20px;}
+.monetize-box .monetize-detail{padding:0 20px 20px;}
 .monetize-detail .monetize-detail-sec{margin: 20px 0; padding-bottom: 30px; border-bottom: 1px solid #d2d2d2;}
 .monetize-detail .monetize-detail-sec.last-sec{border-bottom: 0; margin-bottom: 0;}
 .monetize-detail .monetize-detail-sec h2{font-size: 20px; color: #5c5c5c; padding-bottom: 10px;}
@@ -3627,7 +3627,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 #ans-point .modal-close{color: #fff; top: 0;}
 .mo-popup h2{padding: 15px; border-bottom: 1px solid #d2d2d2; font-size: 22px;}
 .t-n-c{font-size: 12px; padding-top: 30px;}
-.monetize-term-cond label.error{position: relative; padding-left: 19px !important;}
+.monetize-term-cond label.error{position: relative; padding-left: 19px !important; width: 100%;}
 .last-sec p{font-size: 14px;}
 
 /***  end monetize css  ***/
@@ -4703,7 +4703,7 @@ tags-input .tags{padding: 0;}
   .error-right{width: 100%;}
   .error-left img{height: 200px; width: auto;}
   .error-btn .btn-new-1{padding: 10px 32px;}
-
+  .monetize-box{box-shadow: none;}
 
 }
 @media screen and (max-width: 639px) {
@@ -5236,6 +5236,10 @@ tags-input .tags{padding: 0;}
   .all-post-box .bottom-left.like_user_list .like-img:last-child a{padding: 10px 0px 8px 5px !important;}
   .all-post-box .bottom-left.like_user_list li:first-child{margin-left: 5px;}
   .post-detail .post-name{max-width: 72%;}
+  .monetize-box h1{font-size: 20px; padding: 10px;}
+  .monetize-detail .monetize-detail-sec h2{font-size: 18px;}
+  .monetize-box .monetize-detail{padding: 0 10px 10px;}
+  .monetize-term-cond .btn-new-3{font-size: 16px;}
 
 }
 @media screen and (max-width: 359px) {
