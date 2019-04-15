@@ -42,12 +42,12 @@
                                 <h2>How you will monetize your account ?</h2>
                                 <ul>
                                     <li>To monetize your account you have to put creative and unique content, points will be rewarded for it.</li>
-                                    <li>We will pay 10 dollars for 1000 Points. Once you have reached 1000 Points we will review your account and put advertisement in your content and you can earn money through clicks and views. The revenue will be split 50:50.</li>
+                                    <li>We will pay 10 dollars for 1000 Points. Once you have reached 1000 Points we will review your account and if you are eligible the we will put advertisement in your content and you can earn money through clicks and views. The revenue will be split 50:50.</li>
                                     <li>You will continue to receive 10 dollars for every 1000 Points.</li>
                                 </ul>
                             </div>
                             <div class="monetize-detail-sec">
-                                <h2>Eligebilty to Monetize</h2>
+                                <h2>Eligibility to Monetize</h2>
                                 <ul>
                                     <li>You have to attain 1000 Points.</li>
                                     <li>All the content should be creative, helpful and orginial. (Plagiarized content will not receive any point)</li>
@@ -56,51 +56,53 @@
                             <div class="monetize-detail-sec">
                                 <h2>Payment</h2>
                                 <ul>
-                                    <li>You have to share bank details with us and  you will get advertisement payment on 1 to 10 date after you reach minimum earning of 100 dollar</li>
-                                    <li>You will get payment of points within 15 days after you reach every 1000 point.</li>
+                                    <li>Share bank details with us.</li>
+                                    <li>you will get payment of advertisement on 1 to 10 date of next month after you reach the minimum earning of 100 dollars.</li>
+                                    <li>you will get payment of points within 15 days after you reach every 1000 point.</li>
                                 </ul>
                             </div>
-                            <div class="monetize-detail-sec">
-                                <h2>Points dsitribution </h2>
+                            <div class="monetize-detail-sec last-sec">
+                                <h2>Points distribution </h2>
                                 <ul class="monetize-point">
                                     <li><b>50 points</b>  -  Post opportunity
-                                        <p>Opportunity should be for anyone. (example job seekers , freelancers , doctors , ceos, enterprenuers, plumber , artist, photographer , cook , etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> Learn more.</a></p> 
+                                        <p>opportunity should be for anyone. (example job seekers , freelancers , doctors , ceos, enterprenuers, plumber , artist, photographer , cook , etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> Learn more.</a></p> 
                                     </li>
                                     <li><b>30 points</b>  -  Post video 
-                                        <p>All types of videos acceptable but you can monetize only helpful and not plagarized.... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
+                                        <p>All types of videos acceptable. ( Example : Informative Videos , Learning Videos , Entertainment Videos..).... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
                                     </li>
                                     <li><b>30 ponts</b>  -  Post article
-                                        <p>All types of article acceptable but you can monetize only useful content.... <a data-toggle="modal" href="#" data-target="#article-point">Learn more.</a></p>
+                                        <p>All types of article acceptable. ( Example : Informative Articles , Learning Articles..).... <a data-toggle="modal" href="#" data-target="#article-point">Learn more.</a></p>
                                     </li>
                                     <li><b>20 points</b>  -  Give answer
-                                        <p>Answers should be helpful for users.... <a data-toggle="modal" href="#" data-target="#ans-point">View demo.</a></p>
+                                        <p>Answers should be helpful for users.... <a data-toggle="modal" href="#" data-target="#ans-point">Learn more.</a></p>
                                     </li>
                                     <li><b>5 points</b>  -  Asq question
-                                        <p>All types of question is acceptable but it should not have spamming.... <a data-toggle="modal" href="#" data-target="#qus-point">Learn more.</a></p>
+                                        <p>All types of question is acceptable.... <a data-toggle="modal" href="#" data-target="#qus-point">Learn more.</a></p>
                                     </li>
                                     <li><b>5 points</b>  -  post photo
-                                        <p>All types of photos acceptable. (with no spamming and no copyright issues).... <a data-toggle="modal" href="#" data-target="#photo-point">Learn more.</a></p>
+                                        <p>all types of photos acceptable. ( Example : Informative Photos , Learning Photos , Not selfie..).... <a data-toggle="modal" href="#" data-target="#photo-point">Learn more.</a></p>
                                     </li>
                                 </ul>
-                                <p class="pt20">All content should be creative, helpful and orginial.</p>
+                                <p class="pt20">All content should be creative, helpful and orginial. There should be no copyright issues in your content. If there will be we will permanently delete your account anytime.</p>
+                                <p class="t-n-c">(<span class="error">*</span>We will keep reviewing the content and if it is found inappropriate or not in accordance with our terms than Aileensoul will hold the right to deduct points or not reward any points for the same.)</p>
                             </div>
                             <?php                             
                             if($is_user_monetize == 0){ ?>
                             <form id="monetize_user" name="monetize_user" action="javascript:void(0);" method="POST">
                                 <div class="monetize-term-cond">
                                     <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
-                                        <input type="checkbox" name="term_condi" id="term_condi" value="1">Agree to above  are our terms and codition
+                                        <input type="checkbox" name="term_condi" id="term_condi" value="1">Above all are our terms and codition. Agree to our terms and condition to monetize your account.
                                         <div class="control__indicator"></div>
                                     </label>
                                     <p class="pt20">
                                         <?php
                                         if(isset($userdata) && !empty($userdata)){
                                         ?>
-                                            <button type="submit" onclick="new_monetize();" class="btn-new-3">Start moentize your account</button>
+                                            <button type="submit" onclick="new_monetize();" class="btn-new-3">Start Monetize Account</button>
                                         <?php
                                         }
                                         else{ ?>
-                                            <a href="<?php echo base_url('registration') ?>" class="btn-new-3">Start moentize your account</a>
+                                            <a href="<?php echo base_url('registration') ?>" class="btn-new-3">Start Monetize Account</a>
                                         <?php
                                         } ?>
                                     </p>
@@ -116,6 +118,79 @@
             </div>    	
         </div>    	
     </div>
+    <!--  poup modal  -->
+        <div style="display:none;" class="modal fade monetize-popup" id="opp-point" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="mo-popup">
+                        <div class="">
+                            <img src="<?php echo base_url('assets/n-images/op-point.png') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade monetize-popup" id="video-point" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="mo-popup">
+                        <div class="">
+                            <img src="<?php echo base_url('assets/n-images/video-point.png') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade monetize-popup" id="article-point" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="mo-popup">
+                        <div class="">
+                            <img src="<?php echo base_url('assets/n-images/article-point.png') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade monetize-popup" id="ans-point" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="mo-popup">
+                        <div class="">
+                            <img src="<?php echo base_url('assets/n-images/ans-point.png') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade monetize-popup" id="qus-point" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="mo-popup">
+                        <div class="">
+                            <img src="<?php echo base_url('assets/n-images/qus-point.png') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade monetize-popup" id="photo-point" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="mo-popup">
+                        <div class="">
+                            <img src="<?php echo base_url('assets/n-images/photo-point.png') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/owl.carousel.min.js') ?>"></script>
