@@ -36,13 +36,13 @@
             <div class="container">            	
                 <div class="big-left">
                     <div class="monetize-box">
-                        <h1>Monetize your Aileensoul Account</h1>
+                        <h1>Monetize Aileensoul Account</h1>
                         <div class="monetize-detail">
                             <div class="monetize-detail-sec">
-                                <h2>How you will monetize your account ?</h2>
+                                <h2>How to monetize your account?</h2>
                                 <ul>
                                     <li>To monetize your account you have to put creative and unique content, points will be rewarded for it.</li>
-                                    <li>We will pay 10 dollars for 1000 Points. Once you have reached 1000 Points we will review your account and if you are eligible the we will put advertisement in your content and you can earn money through clicks and views. The revenue will be split 50:50.</li>
+                                    <li>We will pay 10 dollars for 1000 Points. Once you have reached 1000 Points we will review your account and if you are eligible then we will put an advertisement in your content and you can earn money through clicks and views. The revenue will be split 50:50.</li>
                                     <li>You will continue to receive 10 dollars for every 1000 Points.</li>
                                 </ul>
                             </div>
@@ -50,7 +50,7 @@
                                 <h2>Eligibility to Monetize</h2>
                                 <ul>
                                     <li>You have to attain 1000 Points.</li>
-                                    <li>All the content should be creative, helpful and orginial. (Plagiarized content will not receive any point)</li>
+                                    <li>All the content should be creative, helpful and original. (Plagiarized content will not receive any point)</li>
                                 </ul>
                             </div>
                             <div class="monetize-detail-sec">
@@ -65,25 +65,25 @@
                                 <h2>Points distribution </h2>
                                 <ul class="monetize-point">
                                     <li><b>50 points</b>  -  Post opportunity
-                                        <p>opportunity should be for anyone. (example job seekers , freelancers , doctors , ceos, enterprenuers, plumber , artist, photographer , cook , etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> Learn more.</a></p> 
+                                        <p>Opportunity should be for anyone. (example job seekers, freelancers, doctors, CEOs, entrepreneurs, plumbers, artists, photographers, cooks, etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> Learn more.</a></p> 
                                     </li>
                                     <li><b>30 points</b>  -  Post video 
-                                        <p>All types of videos acceptable. ( Example : Informative Videos , Learning Videos , Entertainment Videos..).... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
+                                        <p>All types of videos acceptable. ( Example: Informative Videos, Learning Videos, Entertainment Videos..).... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
                                     </li>
                                     <li><b>30 ponts</b>  -  Post article
-                                        <p>All types of article acceptable. ( Example : Informative Articles , Learning Articles..).... <a data-toggle="modal" href="#" data-target="#article-point">Learn more.</a></p>
+                                        <p>All types of article acceptable. ( Example: Informative Articles, Learning Articles..).... <a data-toggle="modal" href="#" data-target="#article-point">Learn more.</a></p>
                                     </li>
                                     <li><b>20 points</b>  -  Give answer
                                         <p>Answers should be helpful for users.... <a data-toggle="modal" href="#" data-target="#ans-point">Learn more.</a></p>
                                     </li>
-                                    <li><b>5 points</b>  -  Asq question
-                                        <p>All types of question is acceptable.... <a data-toggle="modal" href="#" data-target="#qus-point">Learn more.</a></p>
+                                    <li><b>5 points</b>  -  Ask question
+                                        <p>All types of questions are acceptable.... <a data-toggle="modal" href="#" data-target="#qus-point">Learn more.</a></p>
                                     </li>
-                                    <li><b>5 points</b>  -  post photo
-                                        <p>all types of photos acceptable. ( Example : Informative Photos , Learning Photos , Not selfie..).... <a data-toggle="modal" href="#" data-target="#photo-point">Learn more.</a></p>
+                                    <li><b>5 points</b>  -  Post photo
+                                        <p>All types of photos acceptable. ( Example: Informative Photos, Learning Photos, Not selfie...).... <a data-toggle="modal" href="#" data-target="#photo-point">Learn more.</a></p>
                                     </li>
                                 </ul>
-                                <p class="pt20">All content should be creative, helpful and orginial. There should be no copyright issues in your content. If there will be we will permanently delete your account anytime.</p>
+                                <p class="pt20">All content should be creative, helpful and original. There should be no copyright issues in your content. If there will be we will permanently delete your account anytime.</p>
                                 <p class="t-n-c">(<span class="error">*</span>We will keep reviewing the content and if it is found inappropriate or not in accordance with our terms than Aileensoul will hold the right to deduct points or not reward any points for the same.)</p>
                             </div>
                             <?php                             
@@ -91,7 +91,7 @@
                             <form id="monetize_user" name="monetize_user" action="javascript:void(0);" method="POST">
                                 <div class="monetize-term-cond">
                                     <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
-                                        <input type="checkbox" name="term_condi" id="term_condi" value="1">Above all are our terms and codition. Agree to our terms and condition to monetize your account.
+                                        <input type="checkbox" name="term_condi" id="term_condi" value="1">Above all are our terms and conditions. Agree to our terms and condition to monetize your account.
                                         <div class="control__indicator"></div>
                                     </label>
                                     <p class="pt20">
@@ -191,6 +191,34 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade message-box" id="monetize_success" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class="pop_content">Your account is now on monetization mode.
+                            </div>
+                            <a class="btn1" href="<?php echo base_url(); ?>">OK</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade message-box" id="monetize_fail" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class="pop_content">Please try again later.
+                            </div>
+                            <a class="btn1" href="<?php echo base_url(); ?>">OK</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/owl.carousel.min.js') ?>"></script>
@@ -220,7 +248,7 @@
             },
             messages:{
                 term_condi: {
-                    required: "Please read and accept terms and codition",
+                    required: "Please read and accept terms and conditions",
                 }
             },
             errorPlacement: function (error, element) {
@@ -237,8 +265,16 @@
                     type: "POST",             
                     data: {term_condi:term_condi},
                     dataType: 'json',                    
-                    success: function(data) {
-                        console.log(data);
+                    success: function(data) {                        
+                        if(data.success == '1')
+                        {
+                            $("#monetize_user").remove();
+                            $("#monetize_success").modal("show");
+                        }
+                        else
+                        {
+                            $("#monetize_fail").modal("show");
+                        }
                     }
                 });
                 return false;
