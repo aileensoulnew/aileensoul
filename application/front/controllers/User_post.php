@@ -3539,4 +3539,10 @@ class User_post extends MY_Controller {
         }
         echo json_encode($return_array);
     }
+
+    public function get_user_monetize()
+    {
+        $monetize_data = $this->common->get_monetize();
+        return $this->output->set_content_type('application/json')->set_output(json_encode($monetize_data));
+    }
 }

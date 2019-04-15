@@ -952,6 +952,7 @@ $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
 $route['(:any)/savedpost'] = 'Userprofile';
+$route['(:any)/monetization-analytics'] = 'Userprofile';
 
 //Article
 $route['article/likePost'] = 'article/likePost';

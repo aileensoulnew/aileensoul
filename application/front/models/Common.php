@@ -969,6 +969,9 @@ class Common extends CI_Model {
 
         $savedpost_counter = $this->userSavedPostCount($user_id);
         $return_arr['savedpost_counter'] = $this->change_number_long_format_to_short($savedpost_counter);
+
+        $monetize_data = $this->get_monetize();
+        $return_arr['monetize_earn'] = '$ '.$monetize_data['total_earn'];
         
         return $return_arr;
     }

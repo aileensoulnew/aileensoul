@@ -292,18 +292,17 @@ app.directive("editableText", function () {
     };
 });
 app.controller('EditorController', ['$scope', function ($scope) {
-        $scope.handlePaste = function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var value = e.originalEvent.clipboardData.getData("Text");
-            document.execCommand('inserttext', false, value);
-        };
-    }]);
-
+    $scope.handlePaste = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var value = e.originalEvent.clipboardData.getData("Text");
+        document.execCommand('inserttext', false, value);
+    };
+}]);
 
 app.controller('userProfileController', function ($scope, $http) {
     var url = window.location.href;
-    $scope.active = url.substring(url.lastIndexOf("/") + 1)
+    $scope.active = url.substring(url.lastIndexOf("/") + 1);
     //$scope.active = $scope.active == item ? '' : item;
     $scope.pade_reload = true;
     $scope.makeActive = function (item) {        
@@ -658,41 +657,9 @@ app.controller('userProfileController', function ($scope, $http) {
 });
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
-            .when("/profiles/:name*", {
-                templateUrl: base_url + "userprofile_page/profile",
-                controller: 'profilesController'
-            })
-            .when("/dashboard/:name*", {
-                templateUrl: base_url + "userprofile_page/dashboard",
-                controller: 'dashboardController'
-            })
-            .when("/dashboard/photos/:name*", {
-                templateUrl: base_url + "userprofile_page/photos",
-                controller: 'dashboardPhotosController'
-            })
-            .when("/details/:name*", {
-                templateUrl: base_url + "userprofile_page/details",
-                controller: 'detailsController'
-            })
-            .when("/contacts/:name*", {
-                templateUrl: base_url + "userprofile_page/contacts",
-                controller: 'contactsController'
-            })
-            .when("/followers/:name*", {
-                templateUrl: base_url + "userprofile_page/followers",
-                controller: 'followersController'
-            })
-            .when("/following/:name*", {
-                templateUrl: base_url + "userprofile_page/following",
-                controller: 'followingController'
-            })
-            .when("/questions/:name*", {
-                templateUrl: base_url + "userprofile_page/questions",
-                controller: 'questionsController'
-            })
-            .when("/savedpost/:name*", {
-                templateUrl: base_url + "userprofile_page/savedpost",
-                controller: 'savedpostController'
+            .when(":name*\/monetization-analytics", {
+                templateUrl: base_url + "userprofile_page/monetization_analytics",
+                controller: 'monetizationController'
             })
             .when(":name*\/details", {
                 templateUrl: base_url + "userprofile_page/details",
@@ -858,6 +825,17 @@ app.controller('profilesController', function ($scope, $http, $location) {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }
             
         }, function (error) {});
     }
@@ -999,6 +977,17 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -1197,6 +1186,17 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }
             
         }, function (error) {});
     }
@@ -1394,6 +1394,17 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -1600,6 +1611,17 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -1865,6 +1887,17 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -2178,6 +2211,17 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -5215,6 +5259,17 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -10141,6 +10196,17 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }
             
         }, function (error) {});
     }
@@ -10402,6 +10468,17 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }
             
         }, function (error) {});
     }
@@ -10624,6 +10701,17 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -10916,6 +11004,17 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             {
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
             }
             
         }, function (error) {});
@@ -11339,6 +11438,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
 });
 
 app.controller('savedpostController', function ($scope, $http, $location, $compile, $window) {
+
     var isLoadingData = false;    
     $scope.showLoadmore = true;
     $scope.row = 0;
@@ -11442,10 +11542,20 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }
             
         }, function (error) {});
-    }
-    $scope.get_all_counter();
+    }    
 
     $("#job_title").focusin(function(){
         $('#jobtitletooltip').show();
@@ -14086,7 +14196,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
         $("#report-spam").modal('show');
     };
 
-    $scope.report_spam_validate = {        
+    $scope.report_spam_validate = {
         rules: {           
             report_spam: {
                 required: true,
@@ -14171,8 +14281,15 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
-
-    getUserSavedPost();
+    if($scope.$parent.live_slug != $scope.$parent.segment2)
+    {
+        window.location = base_url+$scope.$parent.segment2;
+    }
+    else
+    {
+        $scope.get_all_counter();
+        getUserSavedPost();
+    }
 
     $scope.unsave_post = function(post_id,index,postData){
         $('#unsave-post-' + post_id).attr('style','pointer-events: none;');
@@ -14209,6 +14326,142 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             }
         });
     };
+});
+app.controller('monetizationController', function ($scope,$http,$location,$compile,$window){
+    // $('#main_loader').hide();
+    $('footer').hide();
+    // alert($scope.$parent.segment2);
+
+    $scope.get_all_counter = function() {
+        if($scope.$parent.pade_reload == true)
+        {
+            $('#main_loader').show();
+        }
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            $('#main_loader').hide();
+            $('body').removeClass("body-loader");
+            if(result.dashboard_counter != '')
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html(result.dashboard_counter);
+            }
+            else
+            {
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html(result.detail_counter+'%');
+            }
+            else
+            {
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
+            }
+
+            if(result.contact_counter != '')
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html(result.contact_counter);
+            }
+            else
+            {
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
+            }
+
+            if(result.follower_counter != '')
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html(result.follower_counter);
+            }
+            else
+            {
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
+            }
+
+            if(result.following_counter != '')
+            {
+                $('.following_counter').show();
+                $('.following_counter').html(result.following_counter);
+            }
+            else
+            {
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
+            }
+
+            if(result.question_counter != '')
+            {
+                $('.question_counter').show();
+                $('.question_counter').html(result.question_counter);
+            }
+            else
+            {
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }
+            
+        }, function (error) {});
+    }    
+
+    $scope.get_user_monetize = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/get_user_monetize',
+            data: '',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;            
+            if(result)
+            {
+                $scope.total_earn = result.total_earn;
+                $scope.total_points = result.total_points;
+            }
+            else
+            {
+                $scope.total_earn = '0';
+                $scope.total_points = '0';
+            }
+        });
+    };
+    if($scope.$parent.live_slug != $scope.$parent.segment2)
+    {
+        window.location = base_url+$scope.$parent.segment2;
+    }
+    else
+    {
+        $scope.get_all_counter();
+        $scope.get_user_monetize();
+    }
+
 });
 
 function remove_contacts(index) {

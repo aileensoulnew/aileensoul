@@ -40,6 +40,10 @@ class Userprofile extends MY_Controller {
         if ($seg_slug == $slug) {
             $userslug = $slug;
         } else {
+            if($this->uri->segment(2) == 'savedpost' || $this->uri->segment(2) == 'monetization-analytics')
+            {
+                redirect(base_url().$seg_slug);
+            }
             $userslug = $seg_slug;
         }
         $userdata = $this->data['userdata'] = $this->user_model->getUserDataByslug($userslug, $datat = "u.user_id,u.first_name,u.last_name,u.user_dob,u.user_gender,u.user_agree,u.created_date,u.verify_date,u.user_verify,u.user_slider,u.user_slug,ui.user_image,ui.modify_date,ui.edit_ip,ui.profile_background,ui.profile_background_main,ul.email,ul.password,ul.is_delete,ul.status,ul.password_code");

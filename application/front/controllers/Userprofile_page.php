@@ -25,6 +25,11 @@ class Userprofile_page extends MY_Controller {
         $this->load->view('userprofile/profiles', $this->data);
     }
 
+    public function monetization_analytics() {
+
+        $this->load->view('userprofile/monetization-analytics', $this->data);
+    }
+
     public function dashboard() {
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
