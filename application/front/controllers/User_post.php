@@ -3545,4 +3545,53 @@ class User_post extends MY_Controller {
         $monetize_data = $this->common->get_monetize();
         return $this->output->set_content_type('application/json')->set_output(json_encode($monetize_data));
     }
+
+    public function save_user_post_share()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $main_id = $this->input->post('post_id');
+        $description = $this->input->post('description');
+        
+        $return_array = array();
+
+        $insert_data = array();
+        $insert_data['user_id'] = $userid;
+        $insert_data['post_for'] = 'share';
+        $insert_data['post_id'] = '';
+        $insert_data['created_date'] = date('Y-m-d H:i:s', time());
+        $insert_data['status'] = 'draft';
+        $insert_data['is_delete'] = '0';
+
+        $id_user_post = $this->common->insert_data_getid($insert_data, 'user_post');
+        if($id_user_post > 0)
+        {            
+            $insert_data = array();
+            $sharedpostslug = 'shared-post';
+            $shared_post_slug = $this->common->set_slug($sharedpostslug, 'shared_post_slug', 'user_post_share');
+            $insert_data['post_id'] = $id_user_post;        
+            $insert_data['shared_post_id'] = $main_id;        
+            $insert_data['description'] = $description == undefined ? "" : trim($description);
+            $insert_data['shared_post_slug'] = $shared_post_slug;
+            $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
+
+            $id_user_post_share = $this->common->insert_data_getid($insert_data, 'user_post_share');
+            if($id_user_post_share > 0)
+            {
+                $data = array();                
+                $data['status'] = 'publish';                
+                $data['post_id'] = $id_user_post_share;                
+                $this->common->update_data($data, 'user_post', 'id', $id_user_post);
+                $return_array['status'] = 1;
+            }
+            else
+            {
+                $return_array['status'] = 0;
+            }
+        }
+        else
+        {
+            $return_array['status'] = 0;
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
 }
