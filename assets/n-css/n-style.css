@@ -579,7 +579,7 @@ background: #f6f6f6; list-style-type:none;}
 .custom-select{width:100%; float:left;}
 .table-responsive.content{height:50px !important; z-index:1;}
 .table-responsive.content{overflow:hidden;}
-.table-responsive.content td{text-align:center; border-right:1px solid #d2d2d2; padding:0; line-height:1; width:14.285714%;}
+.table-responsive.content td{text-align:center; border-right:1px solid #d2d2d2; padding:0; line-height:1; width:12.5%;}
 .table-responsive.content td:last-child{border-right:0px;}
 .table-responsive.content td a{display: block; padding: 5px;color: #a5a5a5; line-height:20px; text-transform: capitalize; font-size:13px; font-weight:bold;}
 .table-responsive.content td a.active{background: #1b8ab9; color: #fff;}
@@ -3629,6 +3629,13 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .t-n-c{font-size: 12px; padding-top: 30px;}
 .monetize-term-cond label.error{position: relative; padding-left: 19px !important; width: 100%;}
 .last-sec p{font-size: 14px;}
+.point-table{}
+.point-table .earn-point{width: 50%; text-align: center; float: left;}
+.earn-point span{display: block; padding: 5px;}
+.monetize .fa-money:before{font-size: 0; background: url('../n-images/point-analytic.png');     background-size: 100%; display: block; content: ''; width: 20px; height: 20px;}
+.monetize .dash-left-title span{padding-top: 1px;}
+.monetize-detail h3{text-align: center; border-bottom: 1px solid #d2d2d2; padding: 10px 15px;}
+.monetize-detail .point-table{padding: 75px;}
 
 /***  end monetize css  ***/
 .error{color: #ff0000;}
@@ -4704,6 +4711,7 @@ tags-input .tags{padding: 0;}
   .error-left img{height: 200px; width: auto;}
   .error-btn .btn-new-1{padding: 10px 32px;}
   .monetize-box{box-shadow: none;}
+  .monetize-detail h3{font-size: 18px;}
 
 }
 @media screen and (max-width: 639px) {
@@ -5240,6 +5248,7 @@ tags-input .tags{padding: 0;}
   .monetize-detail .monetize-detail-sec h2{font-size: 18px;}
   .monetize-box .monetize-detail{padding: 0 10px 10px;}
   .monetize-term-cond .btn-new-3{font-size: 16px;}
+  .btn-new-1{font-size: 14px; line-height: 1;}
 
 }
 @media screen and (max-width: 359px) {

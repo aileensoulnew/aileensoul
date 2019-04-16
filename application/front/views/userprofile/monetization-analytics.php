@@ -4,7 +4,7 @@
 		<div class="box-border p5">
             <div class="save-left-box">
                 <span>Monetization Analytics</span>
-                <img src="<?php echo base_url('assets/n-images/post-it.png') ?>">                
+                <img src="<?php echo base_url('assets/n-images/point-analytic.png') ?>">                
             </div>
         </div>
         <?php echo $left_footer_list_view; ?>
@@ -15,14 +15,17 @@
 			<div class="tab-add">
 				<?php $this->load->view('infeed_add'); ?>
 			</div>
-            <div class="box-border">
-                <div>
-                    <span>{{total_points}}</span>
-                    <span>Points</span>
-                </div>
-                <div>
-                    <span>$</span>
-                    <span>{{total_earn}}</span>
+            <div class="monetize-detail box-border">
+                <h3>Analytics</h3>
+                <div class="point-table p15 fw">
+                    <div class="earn-point">
+                        <span>Points</span>
+                        <span>{{total_points}}</span>
+                    </div>
+                    <div class="earn-point">
+                        <span>Total Earning</span>
+                        <span>$ {{total_earn}}</span>
+                    </div>
                 </div>
             </div>
 			
