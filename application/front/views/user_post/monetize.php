@@ -197,9 +197,9 @@
                     <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
                     <div class="modal-body">
                         <span class="mes">
-                            <div class="pop_content">Your account is now on monetization mode.
+                            <div class="pop_content pb20">Your account is now on monetization mode.
                             </div>
-                            <a class="btn1" href="<?php echo base_url(); ?>">OK</a>
+                            <a class="btn-new-1" href="<?php echo base_url(); ?>">OK</a>
                         </span>
                     </div>
                 </div>
