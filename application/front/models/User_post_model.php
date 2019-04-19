@@ -1986,6 +1986,15 @@ class User_post_model extends CI_Model {
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
 
+            }
+            elseif($value['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $value['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $result_array[$key]['share_data'] = $share_data;
             } /*elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
@@ -2052,7 +2061,7 @@ class User_post_model extends CI_Model {
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
         $result_array = array();
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->where('user_id', $user_id);
         $this->db->where('up.status', 'publish');
         $this->db->where('up.user_type', '1');
@@ -3511,7 +3520,7 @@ class User_post_model extends CI_Model {
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
         $result_array = array();
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->where('user_id', $user_id);
         $this->db->where('up.status', 'publish');
         $this->db->where('up.post_for != ', 'question');
@@ -3584,7 +3593,17 @@ class User_post_model extends CI_Model {
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
-            } elseif ($value['post_for'] == 'profile_update') {
+            }
+            elseif($value['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $value['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $result_array[$key]['share_data'] = $share_data;
+            }
+            elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
                 $query = $this->db->get();
@@ -4082,9 +4101,12 @@ class User_post_model extends CI_Model {
                 $result_array['cover_update'] = $cover_update;
             }
             elseif ($user_post['post_for'] == 'article') {
-                $this->db->select("article_slug,user_id")->from("post_article");                
-                $this->db->where('id_post_article', $user_post['post_id']);
-                $this->db->where('status', 'publish');                
+                $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
+                $this->db->where('pa.id_post_article', $user_post['post_id']);
+                $this->db->where('pa.status', 'publish');
+                $sql = "IF(pa.hashtag != '', FIND_IN_SET(ht.id, pa.hashtag) != '0' , 1=1)";
+                $this->db->where($sql);
+                $this->db->group_by('pa.hashtag');
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array['article_data'] = $article_data;

@@ -2240,25 +2240,25 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     });
 
     $(document)  
-      .on('show.bs.modal', '.modal', function(event) {
+    .on('show.bs.modal', '.modal', function(event) {
         $(this).appendTo($('body'));
-      })
-      .on('shown.bs.modal', '.modal.in', function(event) {
+    })
+    .on('shown.bs.modal', '.modal.in', function(event) {
         setModalsAndBackdropsOrder();
-      })
-      .on('hidden.bs.modal', '.modal', function(event) {
+    })
+    .on('hidden.bs.modal', '.modal', function(event) {
         setModalsAndBackdropsOrder();
-      });
-
-    function setModalsAndBackdropsOrder() {  
-      var modalZIndex = 1040;
-      $('.modal.in').each(function(index) {
-        var $modal = $(this);
-        modalZIndex++;
-        $modal.css('zIndex', modalZIndex);
-        $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
     });
-      $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
+
+    function setModalsAndBackdropsOrder() {        
+        var modalZIndex = 1040;
+        $('.modal.in').each(function(index) {
+            var $modal = $(this);
+            modalZIndex++;
+            $modal.css('zIndex', modalZIndex);
+            $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
+        });
+        $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
     }
 
     $(document).on('keydown', function (e) {
@@ -2696,6 +2696,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     $scope.closeModal2 = function(myModal2Id) {    
         document.getElementById(myModal2Id).style.display = "none";
         $("body").removeClass("modal-open");
+    };
+    $scope.closeModalShare = function(myModal2Id) {    
+        document.getElementById(myModal2Id).style.display = "none";
+        $("body").removeClass("modal-open");
+        $("#"+myModal2Id).modal('hidden');
     };
     $scope.plusSlides2 = function(n,myModal2Id) {    
         showSlides2(slideIndex += n,myModal2Id);
@@ -4701,6 +4706,15 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#post-opp-detail-' + post_id).hide();   
 
         }
+        else if(post_for == "share")
+        {
+            $("#share-post-"+post_id).show();
+            $("#share-post-desc-"+post_id).hide();
+            $("#share-post-detail-"+post_id).hide();
+            setTimeout(function(){
+                $('#share_post_text_'+post_id).val($scope.postData[index].share_data.description);
+            },500);
+        }
         autosize(document.getElementsByClassName('hashtag-textarea'));
     }
 
@@ -4717,7 +4731,76 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $("#edit-opp-post-"+post_id).hide();
             $('#post-opp-detail-' + post_id).show();
         }
+        else if(post_for == "share")
+        {
+            $("#share-post-"+post_id).hide();
+            $("#share-post-desc-"+post_id).show();
+            $("#share-post-detail-"+post_id).show();            
+        }
     }
+
+    $scope.share_post_data = [];
+
+    $scope.edit_share_post_fnc = function(post_id,postIndex){
+        $('#share-btn-'+post_id).attr('style','pointer-events: none;');
+        $('#share-btn-'+post_id).attr('disabled','disabled');
+        var description = $("#share_post_text_"+post_id).val();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/edit_save_user_post_share',
+            data: 'post_id=' + post_id+'&description='+description,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.postData[postIndex].share_data = result.share_data;
+            }
+            else
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Please Try Again.");
+                $('#posterrormodal').modal('show');
+            }
+            $("#share-post-"+post_id).hide();
+            $("#share-post-desc-"+post_id).show();
+            $("#share-post-detail-"+post_id).show(); 
+            $('#share-btn-'+post_id).removeAttr('disabled');
+            $('#share-btn-'+post_id).attr('style','pointer-events: all;');
+        });
+    };
+
+    $scope.share_post = function(post_id,index,postData){
+        $scope.share_post_data = $scope.postData[index];        
+        $("#post-share").modal("show");
+        setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true});},300);
+    };
+
+    $scope.share_post_fnc = function(){        
+        $('.post-popup-box').attr('style','pointer-events: none;');
+        var description = $("#share_post_text").val();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post_share',
+            data: 'post_id=' + $scope.share_post_data.post_data.id+'&description='+description,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;            
+            setTimeout(function(){
+                $('#post-share').modal('hide');
+            },100);
+            if(result.status == '1')
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
+                $('#posterrormodal').modal('show');
+            }
+            else
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Please Try Again.");
+                $('#posterrormodal').modal('show');
+            }
+            $('.post-popup-box').attr('style','pointer-events: all;');
+        });
+    };
 
     $scope.EditPost = function (post_id, post_for, index) {
         $scope.is_edit = 1;

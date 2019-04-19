@@ -227,6 +227,7 @@ class Business_profile_live extends MY_Controller {
             // $this->business_profile_active_check(false);
             // $this->is_business_profile_register(false);
         // print_r($login_user_data);exit();
+            $businessLoginUser = $this->data['business_login_data'] = $this->business_model->get_bussiness_from_user_id($userid);
         }
         $this->data['login_user_data'] = $login_user_data;
         // Remove city or state from slug

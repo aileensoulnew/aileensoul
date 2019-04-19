@@ -3058,6 +3058,39 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             });
         }
     };
+
+    $scope.share_post = function(post_id,index,postData){
+        $scope.share_post_data = $scope.postData[index];        
+        $("#post-share").modal("show");
+        setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true});},300);
+    };
+
+    $scope.share_post_fnc = function(){        
+        $('.post-popup-box').attr('style','pointer-events: none;');
+        var description = $("#share_post_text").val();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_business_post_share',
+            data: 'post_id=' + $scope.share_post_data.post_data.id+'&description='+description,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;            
+            setTimeout(function(){
+                $('#post-share').modal('hide');
+            },100);
+            if(result.status == '1')
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
+                $('#posterrormodal').modal('show');
+            }
+            else
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Please Try Again.");
+                $('#posterrormodal').modal('show');
+            }
+            $('.post-popup-box').attr('style','pointer-events: all;');
+        });
+    };
 });
 function setCursotToEnd(el)
 {

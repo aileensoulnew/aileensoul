@@ -797,7 +797,8 @@ class Business_model extends CI_Model {
 
     function get_bussiness_from_user_id($user_id)
     {
-        $sql = "SELECT *,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
+        $sql = "SELECT *,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug,it.industry_name FROM ailee_business_profile bp
+            LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
             LEFT JOIN ailee_cities ct on bp.city = ct.city_id
             LEFT JOIN ailee_states st on bp.state = st.state_id
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 

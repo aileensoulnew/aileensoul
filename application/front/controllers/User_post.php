@@ -3594,4 +3594,82 @@ class User_post extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
+
+    public function save_user_business_post_share()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $main_id = $this->input->post('post_id');
+        $description = $this->input->post('description');
+        
+        $return_array = array();
+
+        $insert_data = array();
+        $insert_data['user_id'] = $userid;
+        $insert_data['post_for'] = 'share';
+        $insert_data['post_id'] = '';
+        $insert_data['user_type'] = '2';
+        $insert_data['created_date'] = date('Y-m-d H:i:s', time());
+        $insert_data['status'] = 'draft';
+        $insert_data['is_delete'] = '0';
+
+        $id_user_post = $this->common->insert_data_getid($insert_data, 'user_post');
+        if($id_user_post > 0)
+        {            
+            $insert_data = array();
+            $sharedpostslug = 'shared-post';
+            $shared_post_slug = $this->common->set_slug($sharedpostslug, 'shared_post_slug', 'user_post_share');
+            $insert_data['post_id'] = $id_user_post;        
+            $insert_data['shared_post_id'] = $main_id;        
+            $insert_data['description'] = $description == undefined ? "" : trim($description);
+            $insert_data['shared_post_slug'] = $shared_post_slug;
+            $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
+
+            $id_user_post_share = $this->common->insert_data_getid($insert_data, 'user_post_share');
+            if($id_user_post_share > 0)
+            {
+                $data = array();                
+                $data['status'] = 'publish';                
+                $data['post_id'] = $id_user_post_share;                
+                $this->common->update_data($data, 'user_post', 'id', $id_user_post);
+                $return_array['status'] = 1;
+            }
+            else
+            {
+                $return_array['status'] = 0;
+            }
+        }
+        else
+        {
+            $return_array['status'] = 0;
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function edit_save_user_post_share()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $main_id = $this->input->post('post_id');
+        $description = $this->input->post('description');
+        $return_array = array();
+
+        $data_share = array(
+            'description' => $description == undefined ? "" : trim($description),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $where = array('post_id' =>$main_id);
+        $this->db->where($where);
+        $updatdata = $this->db->update('user_post_share', $data_share);
+        
+        $return_array['status'] = 1;
+
+        $this->db->select("*")->from("user_post_share");
+        $this->db->where('post_id', $main_id);                
+        $query = $this->db->get();
+        $share_data = $query->row_array();
+        $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+        $share_data['data'] = $this->user_post_model->get_post_from_id($share_data['shared_post_id']);
+        $return_array['share_data'] = $share_data;
+        
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
 }
