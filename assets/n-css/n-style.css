@@ -3635,7 +3635,15 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .monetize .fa-money:before{font-size: 0; background: url('../n-images/point-analytic.png');     background-size: 100%; display: block; content: ''; width: 20px; height: 20px;}
 .monetize .dash-left-title span{padding-top: 1px;}
 .monetize-detail h3{text-align: center; border-bottom: 1px solid #d2d2d2; padding: 10px 15px;}
-.monetize-detail .point-table{padding: 75px;}
+.analytic-detail .analytic-left-tab{width: 320px; float: left; margin-right: 15px; box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border-radius: 20px; padding: 15px;}
+.analytic-detail .tab-content{width: 580px; float: left; box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border-radius: 20px;}
+.analytic-detail .tab-content .tab-pane h3{text-align: center; padding:10px 15px; border-bottom: 1px solid #d2d2d2;}
+.analytic-detail .tab-content .point-table{padding: 75px;}
+.analytic-detail .tab-content .ana-tab-box{padding: 15px; width: 100%; float: left;}
+.ana-tab-box .progress{margin-bottom: 0;}
+.analytic-left-tab .nav > li > a{padding: 5px; color: #5c5c5c; margin-bottom: 2px;}
+.analytic-left-tab .nav > li > a:hover{border-radius: 5px;}
+.analytic-left-tab .nav > li.active > a{background: #eee; border-radius: 5px;}
 
 /***  end monetize css  ***/
 .error{color: #ff0000;}
