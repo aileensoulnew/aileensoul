@@ -1852,6 +1852,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -1861,21 +1862,25 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . base_url($user_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">Started following you.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -1892,6 +1897,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -1904,18 +1910,25 @@ Your browser does not support the audio tag.
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
                 // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">Started following you in business profile.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -1955,6 +1968,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -1964,21 +1978,25 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -2019,6 +2037,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -2028,21 +2047,25 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image  . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -2082,6 +2105,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -2091,21 +2115,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -2146,6 +2173,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -2155,21 +2183,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> replied to your comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -2210,6 +2241,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -2219,23 +2251,73 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> mentioned you in comment.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '5') {
+
+                $postDetailData = $this->user_post_model->get_sharepost_from_shareid($total['not_product_id']);
+                
+                $share_post_url = base_url()."shp/".$postDetailData['shared_post_slug'];
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $share_post_url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
+                }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">shared your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div> </div></a> </li>';
@@ -5170,6 +5252,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5179,21 +5262,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . base_url($user_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">Started following you.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -5210,6 +5296,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5219,21 +5306,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . base_url($user_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">Started following you in business profile.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -5273,6 +5363,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5282,21 +5373,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -5337,6 +5431,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5346,21 +5441,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image  . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -5400,6 +5498,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5409,21 +5508,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -5464,6 +5566,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5473,21 +5576,24 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> replied to your comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
@@ -5528,6 +5634,7 @@ Your browser does not support the audio tag.
                 $first_name = $user_data['first_name'];
                 $last_name = $user_data['last_name'];
                 $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -5537,23 +5644,73 @@ Your browser does not support the audio tag.
                 $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
-                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
-                // $s3 = new S3(awsAccessKey, awsSecretKey);
-                // $filepath = $s3->getObjectInfo(bucket, $filename);
-                if ($user_image != "") {
-                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
-                } else {                    
-                    $a = $first_name;
-                    $b = $last_name;
-                    $acr = substr($a, 0, 1);
-                    $bcr = substr($b, 0, 1);
-
-                    $notification .= '<div class="post-img-div">';
-                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
-                    $notification .= '</div>';
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
                 }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
                 $notification .= '</div><div class="notification-data-inside">';
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> mentioned you in comment.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '5') {
+
+                $postDetailData = $this->user_post_model->get_sharepost_from_shareid($total['not_product_id']);
+                
+                $share_post_url = base_url()."shp/".$postDetailData['shared_post_slug'];
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $share_post_url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
+                }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">shared your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div> </div></a> </li>';

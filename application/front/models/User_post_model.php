@@ -4199,4 +4199,17 @@ class User_post_model extends CI_Model {
         $shared_data['description'] = nl2br($this->common->make_links($shared_data['description']));
         return $shared_data;
     }
+
+    public function get_sharepost_from_shareid($id_user_post_share)
+    {
+        $this->db->select("ups.post_id,up.user_id,ups.description, ups.shared_post_slug")->from("user_post_share ups");
+        $this->db->join('user_post up', 'up.id = ups.post_id', 'left');
+        $this->db->where('ups.id_user_post_share', $id_user_post_share);
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');
+        $query = $this->db->get();        
+        $shared_data = $query->row_array();
+        $shared_data['description'] = nl2br($this->common->make_links($shared_data['description']));
+        return $shared_data;
+    }
 }
