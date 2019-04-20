@@ -783,6 +783,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             var result = success.data;            
             setTimeout(function(){
                 $('#post-share').modal('hide');
+                $("#share_post_text").val('');
             },100);
             if(result.status == '1')
             {

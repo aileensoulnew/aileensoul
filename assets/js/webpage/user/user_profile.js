@@ -4810,6 +4810,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var result = success.data;            
             setTimeout(function(){
                 $('#post-share').modal('hide');
+                $("#share_post_text").val('');
             },100);
             if(result.status == '1')
             {
@@ -14063,8 +14064,45 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $('#post-opp-detail-' + post_id).hide();   
 
         }
+        else if(post_for == "share")
+        {
+            $("#share-post-"+post_id).show();
+            $("#share-post-desc-"+post_id).hide();
+            $("#share-post-detail-"+post_id).hide();
+            setTimeout(function(){
+                $('#share_post_text_'+post_id).val($scope.postData[index].share_data.description);
+            },500);
+        }
         autosize(document.getElementsByClassName('hashtag-textarea'));
     }
+
+    $scope.edit_share_post_fnc = function(post_id,postIndex){
+        $('#share-btn-'+post_id).attr('style','pointer-events: none;');
+        $('#share-btn-'+post_id).attr('disabled','disabled');
+        var description = $("#share_post_text_"+post_id).val();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/edit_save_user_post_share',
+            data: 'post_id=' + post_id+'&description='+description,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.postData[postIndex].share_data = result.share_data;
+            }
+            else
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Please Try Again.");
+                $('#posterrormodal').modal('show');
+            }
+            $("#share-post-"+post_id).hide();
+            $("#share-post-desc-"+post_id).show();
+            $("#share-post-detail-"+post_id).show(); 
+            $('#share-btn-'+post_id).removeAttr('disabled');
+            $('#share-btn-'+post_id).attr('style','pointer-events: all;');
+        });
+    };
 
     $scope.cancelPostEditNew = function (post_id, post_for, index) {
         if(post_for == "simple")
@@ -14469,6 +14507,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             var result = success.data;            
             setTimeout(function(){
                 $('#post-share').modal('hide');
+                $("#share_post_text").val('');
             },100);
             if(result.status == '1')
             {

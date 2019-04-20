@@ -2884,7 +2884,15 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $question_data = $query->row_array();
                 $searchPostData[$key]['question_data'] = $question_data;
-            }
+            } elseif($value['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $value['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $searchPostData[$key]['share_data'] = $share_data;
+            } 
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();
@@ -2896,7 +2904,7 @@ class User_post_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $searchPostData[$key]['post_like_count'] = $post_like_count;
             $searchPostData[$key]['is_userlikePost'] = $this->is_userlikePost($userid, $value['id']);
-            $searchPostData[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
+            $searchPostData[$key]['is_user_saved_post'] = $this->is_user_saved_post($userid, $value['id']);
             if ($post_like_count > 1) {
                 $searchPostData[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
@@ -3151,7 +3159,15 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $question_data = $query->row_array();
                 $searchPostData[$key]['question_data'] = $question_data;
-            }
+            } elseif($value['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $value['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $searchPostData[$key]['share_data'] = $share_data;
+            } 
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();

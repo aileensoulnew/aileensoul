@@ -3089,6 +3089,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var result = success.data;            
             setTimeout(function(){
                 $('#post-share').modal('hide');
+                $("#share_post_text").val('');
             },100);
             if(result.status == '1')
             {

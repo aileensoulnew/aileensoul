@@ -932,6 +932,75 @@ app.controller('searchController', function($scope, $http, $compile) {
         //dots[slideIndex - 1].className += " active";
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
+
+    $scope.save_post = function(post_id,index,postData){
+        $('#save-post-' + post_id).attr('style','pointer-events: none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post',
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;
+            if(result.status == '1')
+            {
+                $scope.postData[index].is_user_saved_post = result.status;                
+            }
+            else
+            {
+                $scope.postData[index].is_user_saved_post = result.status;
+            }
+        });
+    };
+
+    $scope.share_post_data = [];
+
+    $scope.share_post = function(post_id,index,postData){
+        $scope.share_post_data = $scope.postData[index];        
+        $("#post-share").modal("show");
+        setTimeout(function(){
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            autosize(document.getElementsByClassName('hashtag-textarea'));
+        },300);
+    };
+
+    $scope.share_post_fnc = function(){        
+        $('.post-popup-box').attr('style','pointer-events: none;');
+        var description = $("#share_post_text").val();
+        var post_id = 0;
+        if($scope.share_post_data.post_data.post_for == 'share')
+        {
+            post_id = $scope.share_post_data.share_data.data.post_data.id;
+        }
+        else
+        {
+            post_id = $scope.share_post_data.post_data.id;
+        }
+
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post_share',
+            data: 'post_id='+post_id+'&description='+description,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;            
+            setTimeout(function(){
+                $('#post-share').modal('hide');
+                $("#share_post_text").val('');
+            },100);
+            if(result.status == '1')
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
+                $('#posterrormodal').modal('show');
+            }
+            else
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Please Try Again.");
+                $('#posterrormodal').modal('show');
+            }
+            $('.post-popup-box').attr('style','pointer-events: all;');
+        });
+    };
 });
 $(window).on("load", function() {
     $(".custom-scroll").mCustomScrollbar({
