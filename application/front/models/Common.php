@@ -859,7 +859,7 @@ class Common extends CI_Model {
         $getDeleteUserPost = "SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id";
         $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');        
         $this->db->where('up.status', 'publish');
-        $sql = "(up.post_for = 'opportunity' OR up.post_for = 'article' OR up.post_for = 'simple')";
+        $sql = "(up.post_for = 'opportunity' OR up.post_for = 'article' OR up.post_for = 'simple' OR up.post_for = 'share')";
         $this->db->where($sql);        
         $this->db->where('up.user_type', '1');
         $this->db->where('up.is_delete', '0');
