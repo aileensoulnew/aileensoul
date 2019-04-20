@@ -1351,7 +1351,7 @@
                                         <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" ng-if="post.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
                                     </div>
                                     <div ng-if="post.share_data.data.post_data.post_for == 'profile_update' || post.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{post.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
-                                        <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModalShare('myModalCoverPicShare'+post.share_data.data.post_data.id)">×</button>
+                                        <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModalCoverPicShare'+post.share_data.data.post_data.id)">×</button>
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
@@ -1447,7 +1447,7 @@
                                         </div>
                                     </div>
                                     <div id="myModalShare{{post.share_data.data.post_data.id}}" class="modal modal2" tabindex="-1" role="dialog" style="display: none;">
-                                        <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+post.share_data.data.post_data.id)">×</button>
+                                        <button type="button" class="modal-close" ng-click="closeModal2('myModalShare'+post.share_data.data.post_data.id)">×</button>
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />

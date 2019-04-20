@@ -12098,7 +12098,12 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
     $scope.closeModal = function() {    
         document.getElementById('myModal1').style.display = "none";
         $("body").removeClass("modal-open");
-    };    
+    };
+    $scope.closeModalShare = function(myModal2Id) {    
+        document.getElementById(myModal2Id).style.display = "none";
+        $("body").removeClass("modal-open");
+        $("#"+myModal2Id).modal('hidden');
+    };
     //var slideIndex = 1;
     //showSlides(slideIndex);
     $scope.plusSlides = function(n) {    

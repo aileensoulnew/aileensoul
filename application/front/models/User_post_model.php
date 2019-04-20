@@ -2329,6 +2329,14 @@ class User_post_model extends CI_Model {
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
+            } elseif($value['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $value['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $result_array[$key]['share_data'] = $share_data;
             } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
@@ -3362,6 +3370,14 @@ class User_post_model extends CI_Model {
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
+            } elseif($value['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $value['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $result_array[$key]['share_data'] = $share_data;
             } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
@@ -4119,5 +4135,18 @@ class User_post_model extends CI_Model {
             $result_array['post_file_data'] = $post_file_data;
         // }      
         return $result_array;
+    }
+
+    public function get_sharepost_from_slug($slug)
+    {
+        $this->db->select("ups.post_id,up.user_id,ups.description, ups.shared_post_slug")->from("user_post_share ups");
+        $this->db->join('user_post up', 'up.id = ups.post_id', 'left');
+        $this->db->where('ups.shared_post_slug', $slug);
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');
+        $query = $this->db->get();        
+        $shared_data = $query->row_array();
+        $shared_data['description'] = nl2br($this->common->make_links($shared_data['description']));
+        return $shared_data;
     }
 }

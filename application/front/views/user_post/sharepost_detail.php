@@ -6,35 +6,137 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="canonical" href="<?php echo current_url(); ?>" />
+
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>"> 
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
-         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
-         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense');
-    $login_userid = $this->session->userdata('aileenuser'); ?>
+    $login_userid = $this->session->userdata('aileenuser');
+    $all_counter = $this->common->get_all_counter($leftbox_data['user_id']); ?>
 </head>
-    <body class="one-hd profile-db body-loader">
+    <body class="profile-db body-loader old-no-login">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: block;">
-            <?php echo $header_profile ?>
-            
-			<div class="main-section op-main-page">
-				<div class="container mobp0">
-                <div class="container-flex">
-					<div class="left-section">
-						<?php echo $n_leftbar ?>
-					</div>
-                    <div class="middle-section question-detail">
+        <div id="main_page_load" style="display: block;">            
+            <header>
+                <div class="container">
+                    <div class="row">
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+                                <?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+                                <div class="btn-right">
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+                                    <ul class="nav navbar-nav navbar-right test-cus drop-down">
+                                        <?php //$this->load->view('profile-dropdown'); ?>
+                                        <li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+                                        <li class="hidden-991"><a href="<?php echo base_url(); ?>registration" class="btn3">Create Account</a></li>
+                                        <li class="mob-bar-li">
+                                            <span class="mob-right-bar">
+                                                <?php $this->load->view('mobile_right_bar'); ?>
+                                            </span>
+                                        </li>
+                                    
+                                    </ul>
+                                <?php }?>
+                                </div>
+                            </div>
+                        </div>
+                   
+                </div>
+            </header>       
+            <div class="middle-section middle-section-banner">
+                <div class="container pt20 mobp0">
+                    <div class="left-part">
+                        <div class="user-profile-box">
+                            <div class="user-cover-img">
+                                <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
+                                    <?php
+                                    if($leftbox_data['profile_background'] != '')
+                                    { ?>
+                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL.$leftbox_data['profile_background'] ?>" alt="<?php echo $leftbox_data['first_name'] ?>" class="bgImage">
+                                    <?php
+                                    }
+                                    else
+                                    {?>
+                                        <div class="gradient-bg" style="height: 100%"></div>
+                                    <?php
+                                    }?>
+                                </a>    
+                            </div>
+                            <div class="user-detail">
+                                <div class="user-img">
+                                    <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
+                                    <?php
+                                    if ($leftbox_data['user_image'] != '')
+                                    { ?> 
+                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                        if($leftbox_data['user_gender'] == "M")
+                                        {?>
+                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                        <?php
+                                        }
+                                        if($leftbox_data['user_gender'] == "F")
+                                        {
+                                        ?>
+                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                        <?php
+                                        }
+                                    } ?>
+                                    </a>
+                                </div>
+                                <div class="user-detail-right">
+                                    <div class="user-detail-top">
+                                        <h4>
+                                            <a href="<?php echo base_url($leftbox_data['user_slug']) ?>" title="<?php echo ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name']) ?>">
+                                                <?php echo ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name']) ?></a>
+                                        </h4>
+                                        <p>
+                                            <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
+                                                <?php
+                                                if($leftbox_data['title_name'] == "")
+                                                {
+                                                    echo $leftbox_data['degree_name'];
+                                                }
+                                                else if($leftbox_data['title_name'] != "")
+                                                {
+                                                    echo $leftbox_data['title_name'];
+                                                }
+                                                else
+                                                {
+                                                    echo "Self Employee";
+                                                } ?>
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="user-detail-bottom">
+                                        <ul>
+                                            <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard <span class="dashboard_counter"><?php echo($all_counter['dashboard_counter'] > 0 ? $all_counter['dashboard_counter'] : 0); ?></span></a></li>
+                                            <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contact <span class="contact_counter"><?php echo($all_counter['contact_counter'] > 0 ? $all_counter['contact_counter'] : 0); ?></span></a></li>
+                                            <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Followers <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="middle-part question-detail">
                         <div id="main-post-{{post.post_data.id}}" ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">
                                 <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
                                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
@@ -51,13 +153,13 @@
                                                             
                                             <span class="no-img-post"  ng-if="post.user_data.user_image == '' || post.question_data.is_anonymously == '1'">A</span>
                                         </div>
-                                                        
+
                                         <div class="post-img" ng-if="post.post_data.user_type == '1' && post.post_data.post_for != 'question' && post.user_data.user_image != ''">
                                             <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
                                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
                                             </a>
                                         </div>
-                                                        
+
                                         <div class="post-img no-profile-pic" ng-if="post.post_data.user_type == '1' && post.post_data.post_for != 'question' && post.user_data.user_image == ''">
                                             <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
                                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
@@ -120,15 +222,11 @@
                                             </div>
 
                                         </div>
-                                        <div class="post-right-dropdown dropdown" ng-if="post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'">
+                                        <div class="post-right-dropdown dropdown" ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                             <ul class="dropdown-menu">
-                                                <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
-                                                <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
-                                                <li>
-                                                    <a ng-if="post.is_user_saved_post == '0'" href="javascript:void(0);" class="save-post-{{post.post_data.id}}" ng-click="save_post(post.post_data.id, $index, post)">Save Post</a>
-                                                    <a ng-if="post.is_user_saved_post == '1'" href="javascript:void(0);">Saved Post</a>
-                                                </li>                                            
+                                                <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="no_login_pop(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                                <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="no_login_pop(post.post_data.id, $index)">Delete Post</a></li>                       
                                             </ul>
                                         </div>
                                     </div>
@@ -143,13 +241,8 @@
                                                     </div>                        
                                                 </div>
                                                 <div class="post-field">
-                                                    <div class="form-group">
-                                                        <label>Title of Opportunity</label>
-                                                        <input id="opptitleedit{{post.post_data.id}}"  type="text" class="form-control" ng-model="opp.opptitleedit" placeholder="Enter Title of Opportunity" ng-required="true" autocomplete="off">
-                                                    </div>
                                                     <div id="content" class="form-group">
-                                                        <label>For whom this opportunity?<a href="#" data-toggle="tooltip" data-placement="left" title="Type the designation which best matches for given opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                        
+                                                        <label>For whom this opportunity?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></span></label>
                                                         <tags-input id="job_title" ng-model="opp.job_title_edit" display-property="name" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer...." replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
                                                             <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                                                         </tags-input>
@@ -162,7 +255,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label>For which location?<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select the location for the opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                        <label>For which location?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
                                                         <tags-input id="location" ng-model="opp.location_edit" display-property="city_name" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
                                                             <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
                                                         </tags-input>
@@ -174,44 +267,34 @@
                                                         </script>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="pb5">For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                        <label>For which field?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
                                                         <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                                         <span class="select-field-custom">
-                                                            <select name="field" ng-model="opp.field_edit" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
-                                                                <option value="" selected="selected">Select Related Fields</option>
+                                                            <select name="field" ng-model="opp.field" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
+                                                                <option value="" selected="selected">Select your field</option>
                                                                 <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
                                                                 <option value="0">Other</option>
                                                             </select>
                                                         </span>
                                                     </div>
-                                                    <div class="form-group" ng-if="opp.field_edit == '0'">
-                                                        <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Add hashtag (Topic)</label>
-                                                        <textarea id="opp_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
-                                                        <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                                        <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Company Name</label>
-                                                        <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+                                                    <div class="form-group" ng-if="field == '0'">
+                                                        <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                                     </div>
                                                     <input type="hidden" name="post_for" class="form-control" value="">
                                                     <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
                                                 </div>
                                                 <div class="text-right fw pb10">
-                                                    <button type="submit" class="btn1" id="save_{{post.post_data.id}}" value="Submit">
-                                                        <span class="ajax_load" id="login_ajax_load{{post.post_data.id}}" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span>
-                                                    Save</button>                                    
+                                                    <button type="submit" class="btn1"  value="Submit">Save</button>                                    
                                                 </div>
                                                 <?php // echo form_close(); ?>
                                             </form>
                                         </div>
                                         <!-- Edit Post Opportunity End -->
                                         <div id="post-opp-detail-{{post.post_data.id}}">
+                                            <div class="post-title opp-title-cus">
+                                                <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></h1></p>
+                                            </div>
                                             <h5 class="post-title">
-                                                <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><span ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                                 <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
@@ -233,40 +316,26 @@
                                         </div>
                                     </div>
                                     <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
-                                        <p id="simple-post-title-{{post.post_data.id}}" ng-if="post.simple_data.sim_title">
-                                            <b>Title:</b> 
-                                            <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span>
-                                        </p>
-                                        <p id="simple-post-hashtag-{{post.post_data.id}}" ng-if="post.simple_data.hashtag" class="hashtag-grd">
+                                        <p ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
+                                        <p ng-if="post.simple_data.hashtag" class="hashtag-grd">
                                             <b>Hashtags:</b>
                                             <span>
                                                 <span class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.simple_data.hashtag.split(' ')">{{hashtag}}</span>
                                             </span>
-                                        </p>                                        
+                                        </p>
                                         <div ng-init="limit = 250; moreShown = false">
                                             <span ng-if="post.simple_data.description != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.simple_data.description" ng-class="post.simple_data.description.length > 250 ? 'view-more-expand' : ''">
                                             </span>
-                                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>                            
+                                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
+                                            
                                         </div>
 
                                         <!-- Edit Simple Post Start -->
                                         <div id="edit-simple-post-{{post.post_data.id}}" style="display: none;">
                                             <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
-                                                <div class="post-box">
-                                                    <div class="form-group">
-                                                        <label>Post title</label>
-                                                        <input type="text" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title_edit">
-                                                    </div>
-                                                    
-                                                    <div class="form-group">
-                                                        <label>Add hashtag (Topic)</label>
-                                                        <textarea id="sim_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
-                                                        <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                                        <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                    <!-- <div class="post-text"> -->
-                                                        <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                                <div class="post-box">        
+                                                    <div class="post-text">
+                                                        <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Write something here..." id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
 
                                                         <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
                                                     </div>                        
@@ -282,7 +351,6 @@
                                         </div>
                                         <!-- Edit Simple Post End -->
                                     </div>
-
                                     <div class="post-discription" ng-if="post.post_data.post_for == 'profile_update'">
                                         <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
                                     </div>
@@ -763,8 +831,8 @@
                                             <div class="col-md-9 col-sm-9 col-xs-9 mob-pr0">
                                                 <ul class="bottom-left">
                                                     <li class="user-likes">
-                                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
-                                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
+                                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
+                                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
                                                     </li>
                                                     <!--li><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i></a></li-->
                                                     <!-- <li><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i></a></li> -->
@@ -781,7 +849,7 @@
                                                         </a>
                                                     </li>                                   
                                                     <li class="like-img">
-                                                        <a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                                        <a href="javascript:void(0)" ng-click="no_login_pop(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
                                                     </li>
                                                 </ul>
                                                 
@@ -793,19 +861,20 @@
                                                     <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
 
                                                     <li class="post-save">
-                                                        <a ng-if="post.is_user_saved_post == '0'" class="save-post-{{post.post_data.id}}" ng-click="save_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.png'); ?>"></a>
+                                                        <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.png'); ?>"></a>
 
-                                                        <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.png'); ?>"></a>
+                                                        <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id, $index, post)" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.png'); ?>"></a>
                                                     </li>
 
-                                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-                                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="no_login_pop(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="no_login_pop(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
 
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="like-other-box">                                        
+                                    <div class="like-other-box">
+                                        
                                     </div>
                                 </div>
                                 <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
@@ -833,33 +902,32 @@
                                                 <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                                     <div class="comment-input">
                                                         <!--<div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" onpaste="OnPaste_StripFormatting(event);"></div>-->
-                                                        <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
-                                                        <div class="editCommentTaxBox-{{comment.comment_id}} all-hashtags-list"></div>
+                                                        <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="no_login_pop({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
                                                     </div>
                                                     <div class="mob-comment">
-                                                        <button ng-click="sendEditComment(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                        <button ng-click="no_login_pop(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                     </div>
                                                     
                                                     <div class="comment-submit hidden-mob">
-                                                        <button class="btn2" ng-click="sendEditComment(comment.comment_id, post.post_data.id)">Save</button>
+                                                        <button class="btn2" ng-click="no_login_pop(comment.comment_id, post.post_data.id)">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="comment-action">
                                                 <ul class="pull-left">
-                                                    <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{comment.comment_id}}" ng-click="comment_reply(postIndex,commentIndex,0,0,comment)">Reply</a></li>
+                                                    <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{comment.comment_id}}" ng-click="no_login_pop(postIndex,commentIndex,0,0,comment)">Reply</a></li>
 
-                                                    <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
+                                                    <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="no_login_pop(comment.comment_id, post.post_data.id)" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
 
-                                                    <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
+                                                    <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="no_login_pop(comment.comment_id, post.post_data.id)"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
 
-                                                    <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, commentIndex)">Cancel</a></li> 
+                                                    <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="no_login_pop(comment.comment_id, post.post_data.id, $parent.$index, commentIndex)">Cancel</a></li> 
                                                     
                                                     <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
                                                 </ul>
                                                 <ul class="pull-right">
-                                                    <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
-                                                    <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+                                                    <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="no_login_pop(comment.comment_id, post.post_data.id, postIndex, commentIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
+                                                    <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="no_login_pop(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
                                                 </ul>
                                             </div>
 
@@ -885,32 +953,31 @@
 
                                                     <div class="edit-reply-comment" id="edit-reply-comment-{{commentreply.comment_id}}" style="display:none;">
                                                         <div class="comment-input">                 
-                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="send_edit_comment_reply({{commentreply.comment_id}}, post.post_data.id)" id="edit-comment-reply-textbox-{{commentreply.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(commentreply.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
-                                                            <div class="edit-comment-reply-textbox-{{commentreply.comment_id}} all-hashtags-list"></div>
+                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="no_login_pop({{commentreply.comment_id}}, post.post_data.id)" id="edit-comment-reply-textbox-{{commentreply.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(commentreply.comment_id,$event)"></div>
                                                         </div>
                                                         <div class="mob-comment">
-                                                            <button ng-click="send_edit_comment_reply(commentreply.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                            <button ng-click="no_login_pop(commentreply.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                         </div>                                        
                                                         <div class="comment-submit hidden-mob">
-                                                            <button class="btn2" ng-click="send_edit_comment_reply(commentreply.comment_id, post.post_data.id)">Save</button>
+                                                            <button class="btn2" ng-click="no_login_pop(commentreply.comment_id, post.post_data.id)">Save</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="comment-action">
                                                     <ul class="pull-left">
-                                                        <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{commentreply.comment_id}}" ng-click="comment_reply(postIndex,commentIndex,user_id,commentreply.commented_user_id,commentreply)">Reply</a></li>
+                                                        <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{commentreply.comment_id}}" ng-click="no_login_pop(postIndex,commentIndex,user_id,commentreply.commented_user_id,commentreply)">Reply</a></li>
 
-                                                        <li ng-if="commentreply.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="likePostComment(commentreply.comment_id, post.post_data.id)" class="like"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
+                                                        <li ng-if="commentreply.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="no_login_pop(commentreply.comment_id, post.post_data.id)" class="like"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
 
-                                                        <li ng-if="commentreply.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="likePostComment(commentreply.comment_id, post.post_data.id)"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
+                                                        <li ng-if="commentreply.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="no_login_pop(commentreply.comment_id, post.post_data.id)"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
 
-                                                        <li id="cancel-reply-comment-li-{{commentreply.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancel_post_comment_reply(commentreply.comment_id, post.post_data.id, postIndex, commentIndex,commentReplyIndex)">Cancel</a></li> 
+                                                        <li id="cancel-reply-comment-li-{{commentreply.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="no_login_pop(commentreply.comment_id, post.post_data.id, postIndex, commentIndex,commentReplyIndex)">Cancel</a></li> 
                                                         
-                                                        <li id="timeago-reply-comment-li-{{commentreply.comment_id}}"><a href="javascript:void(0);" ng-bind="commentreply.comment_time_string"></a></li>
+                                                        <li><a href="javascript:void(0);" ng-bind="commentreply.comment_time_string"></a></li>
                                                     </ul>
                                                     <ul class="pull-right">
-                                                        <li ng-if="commentreply.commented_user_id == user_id" id="edit-comment-li-{{commentreply.comment_id}}"><a href="javascript:void(0);" ng-click="edit_post_comment_reply(commentreply.comment_id, post.post_data.id, postIndex, commentIndex,commentReplyIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
-                                                        <li ng-if="post.post_data.user_id == user_id || commentreply.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(commentreply.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+                                                        <li ng-if="commentreply.commented_user_id == user_id" id="edit-comment-li-{{commentreply.comment_id}}"><a href="javascript:void(0);" ng-click="no_login_pop(commentreply.comment_id, post.post_data.id, postIndex, commentIndex,commentReplyIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
+                                                        <li ng-if="post.post_data.user_id == user_id || commentreply.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="no_login_pop(commentreply.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
                                                     </ul>
                                                 </div>
                                                 
@@ -943,15 +1010,14 @@
                                                 <div class="comment-dis">
                                                     <div class="edit-comment">
                                                         <div class="comment-input">             
-                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendCommentReply({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{postIndex}}-{{commentIndex}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
-                                                            <div class="reply-comment-{{postIndex}}-{{commentIndex}} all-hashtags-list"></div>
+                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="no_login_pop({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{postIndex}}-{{commentIndex}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)"></div>
                                                         </div>
                                                         <div class="mob-comment">
-                                                            <button ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                            <button ng-click="no_login_pop(comment.comment_id, post.post_data.id,postIndex, commentIndex)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
                                                         </div>
                                                         
                                                         <div class="comment-submit hidden-mob">
-                                                            <button class="btn2" ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)">Send</button>
+                                                            <button class="btn2" ng-click="no_login_pop(comment.comment_id, post.post_data.id,postIndex, commentIndex)">Send</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -984,39 +1050,41 @@
 
                                             </div>
                                             <div class="comment-input">
-                                                <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
-                                                <div class="commentTaxBox-{{post.post_data.id}} all-hashtags-list"></div>
+                                                <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="no_login_pop({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)"></div>
                                             </div>
                                             <div class="mob-comment">
-                                                <button id="cmt-btn-mob-{{post.post_data.id}}"  ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
+                                                <button id="cmt-btn-mob-{{post.post_data.id}}"  ng-click="no_login_pop(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
                                             </div>
                                             <div class="comment-submit hidden-mob">
-                                                <button id="cmt-btn-{{post.post_data.id}}" class="btn2" ng-click="sendComment(post.post_data.id, $index, post)">Comment</button>
+                                                <button id="cmt-btn-{{post.post_data.id}}" class="btn2" ng-click="no_login_pop(post.post_data.id, $index, post)">Comment</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+								
 								
                             </div>
 							<div class="tab-add">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                     </div>
-                    <div class="right-section">
-						<div id="right-fixed" class="fw">
-							<?php $this->load->view('right_add_box'); ?>
-                        </div>
+                    <div class="right-part">
+                        <?php $this->load->view('right_add_box'); ?>
                     </div>
                 </div>
             </div>
         </div>
+        <?php        
+        echo $login_footer;
+        echo $footer;        
+        ?>
         <div class="modal fade message-box" id="delete_model" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
                     <div class="modal-body">
                         <span class="mes">
-                            <div class="pop_content">Do you want to delete this comment?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="deleteComment(c_d_comment_id, c_d_post_id, c_d_parent_index, c_d_index, c_d_post)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                            <div class="pop_content">Do you want to delete this comment?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="no_login_pop(c_d_comment_id, c_d_post_id, c_d_parent_index, c_d_index, c_d_post)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
                         </span>
                     </div>
                 </div>
@@ -1028,7 +1096,7 @@
                     <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
                     <div class="modal-body">
                         <span class="mes">
-                            <div class="pop_content">Do you want to delete this post?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="deletedPost(p_d_post_id, p_d_index)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                            <div class="pop_content">Do you want to delete this post?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="no_login_pop(p_d_post_id, p_d_index)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
                         </span>
                     </div>
                 </div>
@@ -1065,18 +1133,19 @@
                     </div>
                 </div>
             </div>
-        </div>    
-        <div class="modal fade message-box post-error" id="post" role="dialog" tabindex="-1">
+        </div>
+        <!-- Bid-modal  -->
+        <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
                     <div class="modal-body">
                         <span class="mes"></span>
                     </div>
                 </div>
             </div>
         </div>
-    
+        <!-- Model Popup Close -->
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
@@ -1095,16 +1164,14 @@
         <script>
         var base_url = '<?php echo base_url(); ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-        var post_id = '<?php echo $post_id ?>';
         var cmt_maxlength = '700';
+        var post_id = '<?php echo $post_id ?>';
         var app = angular.module("postDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/post_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
-        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>
             var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
                 showRight = document.getElementById( 'showRight' ),
@@ -1135,183 +1202,46 @@
                     }
                 });
             });
-            
-            function split( val ) {
-                return val.split( / \s*/ );
-            }
-            function extractLast( term ) {
-                return split( term ).pop();
-            }
-
-            function autocomplete_hashtag_keypress(e)
-            {
-                var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
-                if (!re.test(e.key)) {
-                    e.preventDefault();                        
-                    return false;
-                }
-            }
-
-            function autocomplete_hashtag(id)
-            {
-                $("#"+id).bind( "keydown", function( event ) {
-                    if ( event.keyCode === $.ui.keyCode.TAB &&
-                        $( this ).autocomplete( "instance" ).menu.active ) {
-                        event.preventDefault();
-                    }
-                })
-                .autocomplete({
-                    appendTo: "."+id,
-                    minLength: 2,
-                    source: function( request, response ) {                         
-                        var search_key = extractLast( request.term );
-                        if(search_key[0] == "#")
-                        {
-                            search_key = search_key.substr(1);
-                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    },
-                    focus: function() {
-                        // prevent value inserted on focus
-                        return false;
-                    },
-                    select: function( event, ui ) {
-                        var terms = split( this.value );
-                        // remove the current input
-                        terms.pop();
-                        // add the selected item
-                        terms.push( ui.item.value );
-                        // add placeholder to get the comma-and-space at the end
-                        terms.push( "" );
-                        this.value = terms.join( " " );
-                        return false;
-                    },
-                });                
-            }
-
-            function placeCaretAtEnd(el) {
-                el.focus();
-                if (typeof window.getSelection != "undefined"
-                        && typeof document.createRange != "undefined") {
-                    var range = document.createRange();
-                    range.selectNodeContents(el);
-                    range.collapse(false);
-                    var sel = window.getSelection();
-                    sel.removeAllRanges();
-                    sel.addRange(range);
-                } else if (typeof document.body.createTextRange != "undefined") {
-                    var textRange = document.body.createTextRange();
-                    textRange.moveToElementText(el);
-                    textRange.collapse(false);
-                    textRange.select();
-                }
-            }
-
-            function split_m( val ) {
-                // return val.split( /,\s*/ );
-                return val.split( /@/ );
-            }
-            function extractLast_m( term ) {
-                return split_m( term ).pop();
-            }
-
-            var startTyping = "Start Typing";
-
-            function autocomplete_mention(id)
-            {
-                $("#"+id).bind( "keydown", function( event ) {
-                    if ( event.keyCode === $.ui.keyCode.TAB &&
-                        $( this ).autocomplete( "instance" ).menu.active ) {
-                        event.preventDefault();
-                    }
-                })
-                .autocomplete({
-                    appendTo: "."+id,
-                    minLength: 0,
-                    create: function (event,ui) {                            
-                        $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
-                            if(item.fullname != undefined)
-                            {
-                                var content = '<a href="javascript:void(0);" contenteditable="false">';
-                                var img_content = "";
-
-                                if(item.user_image)
-                                {
-                                    var img_url = "<?php echo USER_THUMB_UPLOAD_URL;?>"+item.user_image;
-                                    img_content = '<img src="'+img_url+'" alt="'+item.first_name+'" onError="this.onerror=null;this.src='+(item.user_gender == "M" ? '\''+base_url+'assets/img/man-user.jpg\'' : '\''+base_url+'assets/img/female-user.jpg\'')+'">';
-                                }
-                                else
-                                {
-                                    if(item.user_gender == "M")
-                                    {
-                                        img_content = '<img src="'+base_url+'assets/img/man-user.jpg'+'">';
-                                    }
-                                    else if(item.user_gender == "F")
-                                    {                                            
-                                        img_content = '<img src="'+base_url+'assets/img/female-user.jpg'+'">';   
-                                    }
-                                }
-                                content += '<div class="post-img">'+img_content+'</div>';
-                                content += '<div class="dropdown-user-detail">';
-                                content += '<b>'+item.fullname+'</b>';
-                                content += '<div class="msg-discription">';
-                                if(item.title_name)
-                                {
-                                    content += '<span class="time_ago">'+item.title_name+'</span>';
-                                }
-                                else if(item.degree_name)
-                                {
-                                    content += '<span class="time_ago">'+item.degree_name+'</span>';
-                                }
-                                else
-                                {
-                                    content += '<span class="time_ago">Current Work</span>';
-                                }
-                                content += '</div>';
-                                content += '</div>';                                    
-                                content += '</a>';
-
-                                return $('<li>').append(content)
-                                    .appendTo(ul);
-                            }
-                        };
-                    },
-                    source: function( request, response ) {                            
-                        var term = request.term,
-                            results = [];
-                        if (term.indexOf("@") >= 0) {
-                            term = extractLast_m(request.term);
-                            if (term.length > 0) {
-                                results = $.getJSON(base_url +"userprofile/get_user_list", { term : term},response);
-                                response(results);
-                            } else {
-                                results = [startTyping];
-                            }
-                        }                            
-                    },
-                    focus: function() {
-                        // prevent value inserted on focus
-                        return false;
-                    },
-                    select: function( event, ui ) {
-                        if (ui.item.fullname !== startTyping) {
-                            var value = $("#"+this.id).html();
-                            var terms = split_m(value);
-                            terms.pop();
-                            var content = '<a contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
-                            terms.push(content);
-                            $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
-                            placeCaretAtEnd($("#"+this.id)[0]);
-                        }
-                        return false;
-                    },
-                });
-            }
-            autosize(document.getElementsByClassName('hashtag-textarea'));
         </script>
+        <?php /* ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "JobPosting",
+            "title": "<?php echo $opp_data['opptitle']; ?>",
+            "description": "Description: <?php echo htmlentities($opp_data['opportunity']); ?>",
+            "industry": "<?php echo ($opp_data['field'] != "" ? ucwords($opp_data['field']) : ($opp_data['other_field'] != "" ? $opp_data['other_field'] : "Other")); ?>",
+            "datePosted": "<?php echo date('Y-m-d', strtotime($opp_data['created_date'])); ?>",
+            "jobLocation": [
+            <?php
+                $location_arr = explode(",",$opp_data['location']);
+                foreach ($location_arr as $key => $value)
+                {
+                    if($value != "")
+                    { ?>
+                        {
+                            "@type": "Place",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "<?php echo $value; ?>"
+                            }
+                        }
+                    <?php
+                        if(count($location_arr) - 1 != $key)
+                        {
+                            echo ",";
+                        }
+                    }
+                }
+            ?>                
+            ],
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": "<?php echo ucwords($userdata['first_name']." ".$userdata['last_name']); ?>"  
+            }
+        }
+        </script>
+        <?php */ ?>
+
     </body>
 </html>
