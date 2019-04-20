@@ -4182,7 +4182,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     };
 
     $scope.share_post = function(post_id,index,postData){
-        $scope.share_post_data = $scope.postData[index];        
+        $scope.share_post_data = $scope.postData[index];
+        $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
             $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
@@ -4190,7 +4191,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         },300);
     };
 
-    $scope.share_post_fnc = function(){        
+    $scope.share_post_fnc = function(post_index){        
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
         var post_id = 0;
@@ -4218,6 +4219,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             {
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
+                $scope.postData[post_index].post_share_count = result.post_share_count;
             }
             else
             {

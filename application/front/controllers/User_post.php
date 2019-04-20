@@ -3582,6 +3582,7 @@ class User_post extends MY_Controller {
                 $data['post_id'] = $id_user_post_share;                
                 $this->common->update_data($data, 'user_post', 'id', $id_user_post);
                 $return_array['status'] = 1;
+                $return_array['post_share_count'] = $this->user_post_model->postShareCount($main_id);
             }
             else
             {

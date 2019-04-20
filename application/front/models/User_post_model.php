@@ -326,6 +326,19 @@ class User_post_model extends CI_Model {
         return $result_array['comment_count'];
     }
 
+    public function postShareCount($post_id = '') {
+        $this->db->select("COUNT(ups.id_user_post_share) as share_count")->from("user_post_share ups");
+        $this->db->join('user_post up', 'up.id = ups.post_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = up.user_id', 'left');
+        $this->db->where('ups.shared_post_id', $post_id);
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');
+        $this->db->where('ul.status', '1');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['share_count'];
+    }
+
     public function postCommentData($post_id = '',$user_id = '') {
         $this->db->select("u.user_slug,u.user_gender,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
@@ -2015,6 +2028,8 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_file_data'] = $post_file_data;
             
             $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
+
+            $result_array[$key]['post_share_count'] = $this->postShareCount($value['id']);
 
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
