@@ -4184,16 +4184,29 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.share_post = function(post_id,index,postData){
         $scope.share_post_data = $scope.postData[index];        
         $("#post-share").modal("show");
-        setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true});},300);
+        setTimeout(function(){
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            autosize(document.getElementsByClassName('hashtag-textarea'));
+        },300);
     };
 
     $scope.share_post_fnc = function(){        
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
+        var post_id = 0;
+        if($scope.share_post_data.post_data.post_for == 'share')
+        {
+            post_id = $scope.share_post_data.share_data.data.post_data.id;
+        }
+        else
+        {
+            post_id = $scope.share_post_data.post_data.id;
+        }
+
         $http({
             method: 'POST',
             url: base_url + 'user_post/save_user_post_share',
-            data: 'post_id=' + $scope.share_post_data.post_data.id+'&description='+description,
+            data: 'post_id='+post_id+'&description='+description,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             var result = success.data;            

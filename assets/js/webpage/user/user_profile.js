@@ -2699,7 +2699,17 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     };
     $scope.closeModalShare = function(myModal2Id) {    
         document.getElementById(myModal2Id).style.display = "none";
-        $("body").removeClass("modal-open");
+        // $("body").removeClass("modal-open");
+        if($('.modal.in').length > 0)
+        {
+            if ($('body').hasClass('modal-open') == false) {
+                $('body').addClass('modal-open');
+            };            
+        }
+        else
+        {
+            $("body").removeClass("modal-open");
+        }
         $("#"+myModal2Id).modal('hidden');
     };
     $scope.plusSlides2 = function(n,myModal2Id) {    
@@ -4772,16 +4782,29 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     $scope.share_post = function(post_id,index,postData){
         $scope.share_post_data = $scope.postData[index];        
         $("#post-share").modal("show");
-        setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true});},300);
+        setTimeout(function(){
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            autosize(document.getElementsByClassName('hashtag-textarea'));
+        },300);
     };
 
     $scope.share_post_fnc = function(){        
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
+        var post_id = 0;
+        if($scope.share_post_data.post_data.post_for == 'share')
+        {
+            post_id = $scope.share_post_data.share_data.data.post_data.id;
+        }
+        else
+        {
+            post_id = $scope.share_post_data.post_data.id;
+        }
+
         $http({
             method: 'POST',
             url: base_url + 'user_post/save_user_post_share',
-            data: 'post_id=' + $scope.share_post_data.post_data.id+'&description='+description,
+            data: 'post_id=' + post_id +'&description='+description,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             var result = success.data;            
@@ -14412,6 +14435,52 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+        });
+    };
+
+    $scope.share_post = function(post_id,index,postData){
+        $scope.share_post_data = $scope.postData[index];        
+        $("#post-share").modal("show");
+        setTimeout(function(){
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            autosize(document.getElementsByClassName('hashtag-textarea'));
+        },300);
+    };
+
+    $scope.share_post_fnc = function(){        
+        $('.post-popup-box').attr('style','pointer-events: none;');
+        var description = $("#share_post_text").val();
+        var post_id = 0;
+        if($scope.share_post_data.post_data.post_for == 'share')
+        {
+            post_id = $scope.share_post_data.share_data.data.post_data.id;
+        }
+        else
+        {
+            post_id = $scope.share_post_data.post_data.id;
+        }
+
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/save_user_post_share',
+            data: 'post_id='+post_id+'&description='+description,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            var result = success.data;            
+            setTimeout(function(){
+                $('#post-share').modal('hide');
+            },100);
+            if(result.status == '1')
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
+                $('#posterrormodal').modal('show');
+            }
+            else
+            {
+                $('.biderror .mes').html("<div class='pop_content'>Please Try Again.");
+                $('#posterrormodal').modal('show');
+            }
+            $('.post-popup-box').attr('style','pointer-events: all;');
         });
     };
 });

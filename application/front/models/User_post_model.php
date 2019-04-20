@@ -2169,7 +2169,7 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['share_data'] = $share_data;
             }
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
-            $this->db->where('upf.post_id', $value['id_user_post_share']);
+            $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
