@@ -4781,6 +4781,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
     $scope.share_post = function(post_id,index,postData){
         $scope.share_post_data = $scope.postData[index];        
+        $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
             $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
@@ -4788,7 +4789,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         },300);
     };
 
-    $scope.share_post_fnc = function(){        
+    $scope.share_post_fnc = function(post_index){        
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
         var post_id = 0;
@@ -4816,6 +4817,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             {
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
+                $scope.postData[post_index].post_share_count = result.post_share_count;
             }
             else
             {
@@ -14478,6 +14480,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
 
     $scope.share_post = function(post_id,index,postData){
         $scope.share_post_data = $scope.postData[index];        
+        $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
             $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
@@ -14485,7 +14488,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
         },300);
     };
 
-    $scope.share_post_fnc = function(){        
+    $scope.share_post_fnc = function(post_index){        
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
         var post_id = 0;
@@ -14513,6 +14516,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             {
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
+                $scope.postData[post_index].post_share_count = result.post_share_count;
             }
             else
             {

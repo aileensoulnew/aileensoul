@@ -596,7 +596,7 @@
                                                             <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
 
                                                             <li class="post-save">
-                                                                <a id="share-post-{{post.post_data.id}}" ng-click="share_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                                                                <a id="share-post-{{post.post_data.id}}" ng-click="share_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i><span ng-if="post.post_share_count > 0">{{post.post_share_count}}</span></a>
                                                             </li>
 
                                                             <li class="post-save">
@@ -1633,7 +1633,7 @@
                             </div>
                             <div class="post-box-bottom" >
                                 <p class="pull-right">
-                                    <button ng-click="share_post_fnc();" class="btn1">Post</button>
+                                    <button ng-click="share_post_fnc(post_index);" class="btn1">Post</button>
                                 </p>
                             </div>
                         </div>
