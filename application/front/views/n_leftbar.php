@@ -103,19 +103,21 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
         {
         ?>
             <div class="left-info-box monetize">
-                <div class="dash-left-title">
-                    <h3><i class="fa fa-money"></i> <span>Analytics</span></h3>
-                </div>
-                <div class="point-table">
-                    <div class="earn-point">
-                        <span>Point</span>
-                        <span><?php echo $monetize_data['total_points']; ?><?php echo $monetize_data['total_points'] > 1 ? '' : ''; ?></span>
+                <a href="<?php echo base_url().$leftbox_data['user_slug'].'/monetization-analytics'; ?>">
+                    <div class="dash-left-title">
+                        <h3><i class="fa fa-money"></i> <span>Analytics</span></h3>
                     </div>
-                    <div class="earn-point">
-                        <span>Earning</span>
-                        <span><?php echo "$ ".$monetize_data['total_earn']; ?></span>
+                    <div class="point-table">
+                        <div class="earn-point">
+                            <span>Point</span>
+                            <span><?php echo $monetize_data['total_points']; ?><?php echo $monetize_data['total_points'] > 1 ? '' : ''; ?></span>
+                        </div>
+                        <div class="earn-point">
+                            <span>Earning</span>
+                            <span><?php echo "$ ".$monetize_data['total_earn']; ?></span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         <?php }
     }
