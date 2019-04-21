@@ -1106,7 +1106,7 @@ class Business_model extends CI_Model {
             'created_date' => date('Y-m-d H:i:s', time()),
             'modify_date' => date('Y-m-d H:i:s', time()),
         );
-        $insert_id = $this->common->insert_data($data, 'business_review');
+        $insert_id = $this->common->insert_data_getid($data, 'business_review');
         return $insert_id;
     }
 
@@ -1467,7 +1467,7 @@ class Business_model extends CI_Model {
 
     public function get_address_info($user_id)
     {
-        $this->db->select("bp.country, bp.state, bp.city, bp.pincode, bp.address, ct.city_name, st.state_name, cr.country_name, bp.business_no_location, bp.business_office_location")->from('business_profile bp');
+        $this->db->select("bp.country, bp.state, bp.city, bp.other_city, bp.pincode, bp.address, ct.city_name, st.state_name, cr.country_name, bp.business_no_location, bp.business_office_location")->from('business_profile bp');
         $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
         $this->db->join('states st', 'st.state_id = bp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
@@ -1481,12 +1481,35 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
-    public function save_address_info($user_id,$address_country = "",$address_state = "",$address_city = "",$address_address = "",$address_pincode = "",$address_no_location = "",$address_office_location = "")    
+    public function save_address_info($user_id,$address_country = "",$address_state = "",$address_city = "",$address_other_city = "",$address_address = "",$address_pincode = "",$address_no_location = "",$address_office_location = "")    
     {
+        $sql = "SELECT * FROM ailee_cities WHERE state_id = '".$address_state."' AND LOWER(city_name) = '". trim(strtolower($address_other_city)) ."'";
+
+        $query = $this->db->query($sql);
+        $city_data = $query->row_array();
+        if(isset($city_data) && !empty($city_data))
+        {
+            $other_city_name = $city_data['city_name'];
+        }
+        else
+        {
+            $city_slug = $this->common->set_city_slug(trim($address_other_city), 'slug', 'cities');
+            $data_city = array();
+            $data_city['city_name'] = $address_other_city;
+            $data_city['state_id'] = $address_state;
+            $data_city['status'] = '2';
+            $data_city['group_id'] = '0';
+            $data_city['city_image'] =  $city_slug.'.png';
+            $data_city['slug'] = $city_slug;
+            $cityId = $this->common->insert_data_getid($data_city, 'cities');
+
+        }
+
         $data = array(                
             'country' => $address_country,
             'state' => $address_state,
             'city' => $address_city,
+            'other_city' => $address_other_city,
             'pincode' => $address_pincode,
             'address' => $address_address,
             'business_no_location' => $address_no_location,

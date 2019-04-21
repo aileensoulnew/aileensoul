@@ -3028,7 +3028,11 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#address_city_loader").hide();
                     $scope.address_city_list = data.data;
                     $scope.address_city = $scope.address_info_data.city;
-                    $("#address_city").val($scope.address_info_data.city);
+                    $("#address_city").val($scope.address_info_data.city);                    
+                    $scope.address_other_city = $scope.address_info_data.other_city;
+                    setTimeout(function(){
+                        $("#address_other_city").val($scope.address_info_data.other_city);
+                    },100);
                     $("#save_address_info").removeAttr("style");
                 });        
             });
@@ -3052,6 +3056,13 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             },
             address_city: {
                 required: true,
+            },
+            address_other_city: {
+                required: {
+                    depends: function(element) {
+                        return $("#address_city option:selected").val() == 0 ? true : false;
+                    }
+                },
             },
             address_address: {
                 required: true,
@@ -3084,6 +3095,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var address_country = $("#address_country option:selected").val();
             var address_state = $("#address_state option:selected").val();
             var address_city = $("#address_city option:selected").val();
+            var address_other_city = $("#address_other_city").val();
             var address_address = $("#address_address").val();
             var address_pincode = $("#address_pincode").val();
             var address_no_location = $("#address_no_location option:selected").val();
@@ -3093,6 +3105,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 'address_country':address_country,
                 'address_state':address_state,
                 'address_city':address_city,
+                'address_other_city':address_other_city,
                 'address_address':address_address,
                 'address_pincode':address_pincode,
                 'address_no_location':address_no_location,
@@ -3546,4 +3559,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }
         $scope.old_count_profile = count_profile;
     };
+    /*$scope.check_other_city = function(){
+        console.log($scope.address_city);
+    };*/
 });

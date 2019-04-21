@@ -167,6 +167,7 @@
 												<label>
 													{{address_info_data.address != '' ? address_info_data.address : ''}},
 													<em ng-if="address_info_data.country_name || address_info_data.state_name || address_info_data.city_name">
+														{{address_info_data.city == '0' ? address_info_data.other_city : ''}}
 														{{address_info_data.city_name != '' ? address_info_data.city_name : ''}}
 														{{address_info_data.city_name != '' && address_info_data.state_name != '' ? ',' : ''}}
 														{{address_info_data.state_name != '' ? address_info_data.state_name : ''}}
@@ -1291,13 +1292,22 @@
 									<div class="form-group">
 										<label>City</label>
 										<span class="span-select">
-											<select id="address_city" name="address_city" ng-model="address_city" disabled = "disabled">
+											<select id="address_city" name="address_city" ng-model="address_city" disabled = "disabled" >
 	                                            <option value="">City</option>
 	                                            <option data-ng-repeat='city_item in address_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+	                                            <option value='0'>Other</option>
 	                                        </select>
 	                                        <img id="address_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
 										</span>
 									</div>
+								</div>
+							</div>
+							<div class="row" ng-if="address_city == 0">
+								<div class="col-md-4 col-sm-4 col-xs-4"></div>
+								<div class="col-md-4 col-sm-4 col-xs-4"></div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<label>Other City</label>
+									<input type="text" placeholder="Other City" id="address_other_city" name="address_other_city" ng-model="address_other_city" maxlength="200">
 								</div>
 							</div>
 							<div class="form-group">

@@ -1840,6 +1840,68 @@ Your browser does not support the audio tag.
                 $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '7' && $total['not_type'] == '12') {
+                 
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_to_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name.'/details') . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
+                }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> gives a review to your business profile.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';                
+            }
             //Business Notification End
 
             //Opportunity Notification Start
@@ -5239,6 +5301,68 @@ Your browser does not support the audio tag.
                 $notification .= '</span></div> </div>';
                 $notification .= '</div></a>';
                 $notification .= '</li>';                
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '7' && $total['not_type'] == '12') {
+                 
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_to_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+                $user_gender = $user_data['user_gender'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name.'/details') . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                if($user_image != "")
+                {
+                    $login_user_img = USER_THUMB_UPLOAD_URL . $user_image;
+                }
+                else
+                {
+                    if($user_gender  == 'M')
+                    {
+                        $login_user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($user_gender  == 'F')
+                    {
+                        $login_user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
+                
+                $notification .= '<img src="' . $login_user_img . '" alt="'.$user_image.'">';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y"> gives a review to your business profile.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';                
             }
             //Business Notification End
 

@@ -162,7 +162,8 @@
                                                                 <label> City<span class="optional">(optional)</span>:</label>
                                                                 <select name="city" ng-model="user.city_id" id="city" tabindex="4">
                                                                     <option value="">Select City</option>
-                                                                    <option data-ng-repeat='cityItem in cityList' value='{{cityItem.city_id}}'>{{cityItem.city_name}}</option>             
+                                                                    <option data-ng-repeat='cityItem in cityList' value='{{cityItem.city_id}}'>{{cityItem.city_name}}</option>
+                                                                    <option ng-if="stateList.length > 0" value='0'>Other</option>
                                                                 </select>
                                                                 <span ng-show="errorCity" class="error">{{errorCity}}</span>
                                                             </fieldset>
@@ -171,11 +172,15 @@
                                                                 <input name="pincode" ng-model="user.pincode" tabindex="5"   type="text" id="pincode" placeholder="Enter pincode" value="">
                                                                 <span ng-show="errorPincode" class="error">{{errorPincode}}</span>
                                                             </fieldset>
+                                                            <fieldset class="full-width" ng-if="user.city_id == '0'">
+                                                                <label>Other City:<span style="color:red">*</span></label>
+                                                                <input name="other_city" ng-model="user.other_city" tabindex="6" autofocus type="text" id="other_city" placeholder="Enter other city" style="resize: none;" value=""/>
+                                                            </fieldset>
                                                             <fieldset class="full-width ">
                                                                 <label>Postal address:<span style="color:red">*</span></label>
                                                                 <input name="business_address" ng-model="user.business_address" tabindex="6" autofocus type="text" id="business_address" placeholder="Enter address" style="resize: none;" value=""/>
-                                                                <span ng-show="errorPostalAddress" class="error">{{errorPostalAddress}}</span>                                                                        
-                                                            </fieldset>                  
+                                                                <span ng-show="errorPostalAddress" class="error">{{errorPostalAddress}}</span>
+                                                            </fieldset>
                                                             <input type="hidden" name="busreg_step" ng-model="user.busreg_step" id="busreg_step" tabindex="4"  value="">
                                                             <fieldset class="hs-submit full-width" style="position: relative;">
                                                                 <input type="submit"  id="next" name="next" tabindex="7" value="Next" >
@@ -713,6 +718,13 @@
                                 state: {
                                     required: true,
                                 },
+                                other_city: {
+                                    required: {
+                                        depends: function(element) {
+                                            return $("#city option:selected").val() == 0 ? true : false;
+                                        }
+                                    },
+                                },
                                 business_address: {
                                     required: true,
                                     regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
@@ -727,6 +739,9 @@
                                 },
                                 state: {
                                     required: state_validation,
+                                },
+                                other_city: {
+                                    required: 'Other city is required.',
                                 },
                                 business_address: {
                                     required: address_validation,

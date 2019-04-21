@@ -659,6 +659,13 @@ app.controller('businessCreateProfileController', function ($scope, $http, $loca
             state: {
                 required: true,
             },
+            other_city: {
+                required: {
+                    depends: function(element) {
+                        return $("#city option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
             business_address: {
                 required: true,
                 regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
@@ -701,6 +708,9 @@ app.controller('businessCreateProfileController', function ($scope, $http, $loca
             },
             state: {
                 required: 'State is required.',
+            },
+            other_city: {
+                required: 'Other city is required.',
             },
             business_address: {
                 required: 'Business address is required.',

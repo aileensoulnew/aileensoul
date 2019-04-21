@@ -11758,7 +11758,7 @@ Your browser does not support the audio tag.
             }
             else
             {
-                redirect(base_url());
+                // redirect(base_url());
             }
         }
         $this->data['title'] = "Signup - List you Business with Aileensoul".TITLEPOSTFIX;
@@ -12136,6 +12136,95 @@ Your browser does not support the audio tag.
         if($from_user_id != '' && $to_user_id != '')
         {
             $user_project_insert = $this->business_model->set_save_review($from_user_id,$to_user_id,$review_star,$review_desc,$fileName);
+            if($user_project_insert > 0)
+            {
+                if($from_user_id != $to_user_id)
+                {                    
+                    $contition_array = array('not_type' => '12', 'not_from_id' => $from_user_id, 'not_product_id' => $user_project_insert, 'not_to_id' => $to_user_id, 'not_from' => '6', 'not_img' => '7');
+                    $reviewnotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                    if ($reviewnotification[0]['not_read'] == 2) {                
+                    }
+                    elseif($reviewnotification[0]['not_read'] == 1)
+                    {
+                        $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                        $where = array('not_type' => '12', 'not_from_id' => $from_user_id, 'not_to_id' => $to_user_id, 'not_product_id' => $user_project_insert, 'not_from' => '6', 'not_img' => '7');
+                        $this->db->where($where);
+                        $updatdata = $this->db->update('notification', $dataFollow);
+                    }
+                    else
+                    {
+                        $dataFollow = array(
+                            'not_type' => '12',
+                            'not_from_id' => $from_user_id,
+                            'not_to_id' => $to_user_id,
+                            'not_product_id' => $user_project_insert,                    
+                            'not_read' => '2',                    
+                            'not_from' => '6',
+                            'not_img' => '7',
+                            'not_created_date' => date('Y-m-d H:i:s'),
+                            'not_active' => '1'
+                        );
+                        $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                        if ($insert_id) {
+                            // $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $to_user_id))->row()->contact_email;
+                            $business_r_data = $this->business_model->get_bussiness_from_user_id($to_user_id);
+                            $to_email_id = $business_r_data->contact_email;
+                            $business_slug = $business_r_data->business_slug;
+
+                            $login_userdata = $this->user_model->getUserData($from_user_id);
+                            if($login_userdata['user_image'] != "")
+                            {
+                                $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                            }
+                            else
+                            {
+                                if($login_userdata['user_gender']  == 'M')
+                                {
+                                    $login_user_img = base_url('assets/img/man-user.jpg');
+                                }
+
+                                if($login_userdata['user_gender']  == 'F')
+                                {
+                                    $login_user_img = base_url('assets/img/female-user.jpg');
+                                }
+                            }
+
+                            $email_html = '';
+                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="'.MAIL_TD_1.'">
+                                                    <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </td>
+                                                <td style="padding:5px;">
+                                                    <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> gives a review to your business profile.</p>
+                                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                </td>
+                                                <td style="'.MAIL_TD_3.'">
+                                                    <p><a class="btn" href="'.BASEURL.'company/'.$business_slug.'">view</a></p>
+                                                </td>
+                                            </tr>
+                                            </table>';
+                            $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' gives a review to your business profile in Aileensoul.';
+                            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $id))->row();
+                            $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                            if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
+                            {
+                                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                                $url = base_url()."user_post/send_email_in_background";
+                                $param = array(
+                                    "subject"=>$subject,
+                                    "email_html"=>$email_html,
+                                    "to_email"=>$to_email_id,
+                                    "unsubscribe"=>$unsubscribe,
+                                );
+                                $this->inbackground->do_in_background($url, $param);
+                            }
+                        }
+                    }
+                }
+            }
             $review_data = $this->business_model->get_save_review($to_user_id);
             
             $review_count = $this->business_model->get_review_count($to_user_id);
@@ -12639,6 +12728,7 @@ Your browser does not support the audio tag.
         $address_country = $this->input->post('address_country');
         $address_state = $this->input->post('address_state');
         $address_city = $this->input->post('address_city');
+        $address_other_city = $this->input->post('address_other_city');
         $address_address = $this->input->post('address_address');
         $address_pincode = $this->input->post('address_pincode');
         $address_no_location = $this->input->post('address_no_location');
@@ -12647,7 +12737,7 @@ Your browser does not support the audio tag.
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $address_insert = $this->business_model->save_address_info($user_id,$address_country,$address_state,$address_city,$address_address,$address_pincode,$address_no_location,$address_office_location);
+            $address_insert = $this->business_model->save_address_info($user_id,$address_country,$address_state,$address_city,$address_other_city,$address_address,$address_pincode,$address_no_location,$address_office_location);
             $address_info_data = $this->business_model->get_address_info($user_id);
             $ret_arr = array("success"=>1,"address_info_data"=>$address_info_data);
         }

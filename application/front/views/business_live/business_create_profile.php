@@ -52,6 +52,7 @@
                                             <select name="city" id="city" tabindex="4" ng-model="user.city">
                                                 <option disabled="" value="" selected="selected">Select City</option>
                                                 <option data-ng-repeat='cityItem in cityList' value='{{cityItem.city_id}}'>{{cityItem.city_name}}</option>
+                                                <option ng-if="stateList.length > 0" value='0'>Other</option>
                                             </select>
                                         </span>                                        
                                     </div>
@@ -59,7 +60,17 @@
                                 
                                 <div class="col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="pincode" id="pincode" tabindex="5" placeholder="Enter Pincode" ng-model="user.pincode">                                        
+                                        <input class="form-control" type="text" name="pincode" id="pincode" tabindex="5" placeholder="Enter Pincode" ng-model="user.pincode">               
+                                    </div>
+                                </div>
+                                <div ng-if="user.city == '0'">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                             <input class="form-control" type="text" name="other_city" id="other_city" tabindex="5" placeholder="Enter other city" ng-model="user.other_city">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-md-6">     
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-12">

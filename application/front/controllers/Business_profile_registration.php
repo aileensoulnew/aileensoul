@@ -239,8 +239,33 @@ class Business_profile_registration extends MY_Controller {
                 
                 $data['company_name'] = $company_name = $_POST['companyname'];
                 $data['country'] = $_POST['country_id'];
-                $data['state'] = $_POST['state_id'];
+                $data['state'] = $state_id = $_POST['state_id'];
                 $data['city'] = $_POST['city_id'];
+                $other_city = trim($_POST['other_city']);
+
+                $sql = "SELECT * FROM ailee_cities WHERE state_id = '".$state_id."' AND LOWER(city_name) = '". trim(strtolower($other_city)) ."'";
+
+                $query = $this->db->query($sql);
+                $city_data = $query->row_array();
+                if(isset($city_data) && !empty($city_data))
+                {
+                    $other_city = $city_data['city_name'];
+                }
+                else
+                {
+                    $city_slug = $this->common->set_city_slug(trim($other_city), 'slug', 'cities');
+                    $data_city = array();
+                    $data_city['city_name'] = $other_city;
+                    $data_city['state_id'] = $state_id;
+                    $data_city['status'] = '2';
+                    $data_city['group_id'] = '0';
+                    $data_city['city_image'] =  $city_slug.'.png';
+                    $data_city['slug'] = $city_slug;
+                    $cityId = $this->common->insert_data_getid($data_city, 'cities');
+                }
+
+                $data['other_city'] = $other_city;
+
                 $data['pincode'] = $_POST['pincode'];
                 $data['address'] = $_POST['business_address'];
 
@@ -1028,8 +1053,32 @@ class Business_profile_registration extends MY_Controller {
 
             $data['company_name'] = $company_name = trim($_POST['companyname']);
             $data['country'] = trim($_POST['country']);
-            $data['state'] = trim($_POST['state']);
-            $data['city'] = trim($_POST['city']);
+            $data['state'] = $state_id = trim($_POST['state']);
+            $data['city'] = $city_id = trim($_POST['city']);
+            $other_city = trim($_POST['other_city']);
+
+            $sql = "SELECT * FROM ailee_cities WHERE state_id = '".$state_id."' AND LOWER(city_name) = '". trim(strtolower($other_city)) ."'";
+
+            $query = $this->db->query($sql);
+            $city_data = $query->row_array();
+            if(isset($city_data) && !empty($city_data))
+            {
+                $other_city = $city_data['city_name'];
+            }
+            else
+            {
+                $city_slug = $this->common->set_city_slug(trim($other_city), 'slug', 'cities');
+                $data_city = array();
+                $data_city['city_name'] = $other_city;
+                $data_city['state_id'] = $state_id;
+                $data_city['status'] = '2';
+                $data_city['group_id'] = '0';
+                $data_city['city_image'] =  $city_slug.'.png';
+                $data_city['slug'] = $city_slug;
+                $cityId = $this->common->insert_data_getid($data_city, 'cities');
+            }
+
+            $data['other_city'] = $other_city;
             $data['pincode'] = trim($_POST['pincode']);
             $data['address'] = trim($_POST['business_address']);
             
