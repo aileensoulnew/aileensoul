@@ -146,7 +146,20 @@
                                     <li>
                                         <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/location.png') ?>"></span>
                                         <p class="detail-content">
-                                            <span><?php echo $_businessList['city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");?>
+                                            <span><?php 
+                                            if($_businessList['city'] != '')
+                                            {
+                                                echo $_businessList['city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");
+                                            }
+                                            elseif ($_businessList['city'] == '' && $_businessList['other_city']) {
+                                                echo $_businessList['other_city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");
+                                            }
+                                            else
+                                            {
+                                                echo $_businessList['country'];
+                                            }
+                                            
+                                            ?>
                                             </span>
                                         </p>
                                     </li>

@@ -138,7 +138,18 @@
                         <div class="all-job-middle">
                             <ul class="search-detail">
                                 <li ng-if="business.contact_website"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/website.png') ?>"></span> <p class="detail-content"><a ng-href="{{business.contact_website}}" target="_self" ng-bind="business.contact_website"></a></p></li>
-                                <li><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/location.png') ?>"></span> <p class="detail-content"><span ng-bind="business.city"></span><span ng-if="business.city">,(</span><span ng-bind="business.country">India</span><span ng-if="business.city">)</span></p></li>
+                                
+                                <li>
+                                    <span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/location.png') ?>"></span>
+                                    <p class="detail-content">
+                                        <span ng-if="business.city" ng-bind="business.city"></span>
+                                        <span ng-if="business.other_city" ng-bind="business.other_city"></span>
+                                        <span ng-if="business.city || business.other_city != ''">,(</span>
+                                        <span ng-bind="business.country"></span>
+                                        <span ng-if="business.city || business.other_city != ''">)</span>
+                                    </p>
+                                </li>
+
                                 <li ng-if="business.details"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{business.details | limitTo:110}}...<a href="<?php echo BASEURL ?>company/{{business.business_slug}}"> Read more</a></p></li>
                             </ul>
                         </div>

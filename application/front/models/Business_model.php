@@ -203,7 +203,7 @@ class Business_model extends CI_Model {
         }
 
 
-        $tot_sql = $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, bp.industry_name, bp.city_name AS city, bp.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', bp.city_name),IF(bp.state_name != '',CONCAT(bp.business_slug, '-', bp.state_name),CONCAT(bp.business_slug, '-', bp.country_name))) AS business_slug 
+        $tot_sql = $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, bp.industry_name, bp.city_name AS city, bp.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', bp.city_name),IF(bp.state_name != '',CONCAT(bp.business_slug, '-', bp.state_name),CONCAT(bp.business_slug, '-', bp.country_name))) AS business_slug ,bp.other_city
             FROM ailee_business_profile_search_tmp bp                 
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
             . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
@@ -599,9 +599,7 @@ class Business_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
-            ct.city_name as city, 
-            cr.country_name as country 
+        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country ,bp.other_city
             FROM ailee_business_profile bp 
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
