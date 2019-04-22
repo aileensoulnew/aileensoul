@@ -14644,12 +14644,26 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
             {
                 $scope.total_earn = result.total_earn;
                 $scope.total_points = result.total_points;
+                var earn_points_process_value = parseFloat($scope.total_points) / 10;
+                var earn_process_value = parseFloat($scope.total_earn);            
             }
             else
             {
                 $scope.total_earn = '0';
                 $scope.total_points = '0';
+                var earn_points_process_value = 0;
+                var earn_process_value = 0;
             }
+
+            $('.progress').circleProgress({
+                // value: 0.1 //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $('.progress-bar-custom').width(Math.round(earn_points_process_value * progress)+'%');
+                if(earn_process_value >= 1)
+                {
+                    $('.progress-bar-custom span .val').html('$'+(earn_process_value * progress));
+                }
+            })
         });
     };
     if($scope.$parent.live_slug != $scope.$parent.segment2)
@@ -14661,6 +14675,28 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
         $scope.get_all_counter();
         $scope.get_user_monetize();
     }
+
+    $scope.tab = 1;
+
+    $scope.setTab = function(newTab){
+      $scope.tab = newTab;
+    };
+
+    $scope.isSet = function(tabNum){
+      return $scope.tab === tabNum;
+    };
+
+    $scope.check_payment_detail = function(){
+        if($scope.total_earn < 10)
+        {
+            // $('.biderror .mes').html("<div class='pop_content'>You must reach $10 to add payment detail.</div>");
+            // $('#posterrormodal').modal('show');
+        }
+        else
+        {
+            $scope.payment_detail = 1;
+        }
+    };
 
 });
 
