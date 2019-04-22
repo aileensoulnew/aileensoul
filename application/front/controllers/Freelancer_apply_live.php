@@ -11,6 +11,7 @@ class Freelancer_apply_live extends MY_Controller {
 
         parent::__construct();
         header("Location: /",TRUE,301);
+        echo "";exit();
         $this->load->library('form_validation');
         $this->load->library('user_agent');
         $this->load->model('email_model');
@@ -30,7 +31,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['freelancer_post_header2'] = $this->load->view('freelancer_live/freelancer_post/freelancer_post_header2_new', $this->data, true);
     }
 
-    public function index() {
+    public function index() {        
         if($this->freelance_apply_profile_set == 1)
         {
             redirect(base_url()."recommended-freelance-work");

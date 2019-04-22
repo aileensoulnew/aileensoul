@@ -14,6 +14,7 @@ class Job_live extends MY_Controller {
         // header("HTTP/1.1 301 Moved Permanently");
         // header("Location: /");
         header("Location: /",TRUE,301);
+        echo "";exit();
         
         $this->load->library('form_validation');
         $this->load->library('user_agent');
