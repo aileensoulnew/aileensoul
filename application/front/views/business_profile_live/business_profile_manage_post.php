@@ -141,6 +141,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         if ($business_data[0]['city']) {
                                             echo $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
                                             echo",";
+                                        }elseif ($business_data[0]['other_city'] != '') {
+                                            echo $business_data[0]['other_city'].",";
                                         }                                        
                                         if ($business_data[0]['country']) {
                                             echo $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
