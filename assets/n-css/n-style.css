@@ -3743,11 +3743,14 @@ tags-input .tags{padding: 0;}
 .js-project-lightbox-link img{width:100%;}
 #post-share textarea.hashtag-textarea{border: 0;}
 #post-share .all-post-box{border:0; border-top: 1px solid #d2d2d2; border-radius: 0;}
+#post-share .all-post-box .all-post-box{border-top: 0px;}
 #post-share .post-popup-box p.pull-right .btn1{bottom: 0;}
 #post-share .post-box-bottom{padding: 10px 15px;}
 #post-share .post-discription{margin-bottom: 0;}
 #post-share .all-post-box{border-bottom: 0;}
 .view-post span{font-size: 12px; padding-top: 5px; display: inline-block; color: #7b7b7b;}
+.share-post{width: 100%; float: left;}
+.share-post-head textarea.hashtag-textarea {min-height: 25px; padding-bottom: 0; height: 25px;}
 
 /***  media query  ***/
 @media print {
@@ -4212,8 +4215,8 @@ tags-input .tags{padding: 0;}
   .add-banner{overflow:hidden;}
   .more-support{font-size:16px;}
   
-  .mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content, #register .modal-content, #job_reg .modal-content {width:100%; height:100%; border:0px; border-radius:0px !important;}
-  .mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog, #job_reg .modal-dialog {padding:0; margin:0; height:100% !important;}
+  .mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content, #register .modal-content, #job_reg .modal-content, #post-share .modal-content {width:100%; height:100%; border:0px; border-radius:0px !important;}
+  .mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog, #job_reg .modal-dialog, #post-share .modal-dialog {padding:0; margin:0; height:100% !important;}
   #report-span .modal-dialog{height:auto !important; padding-top:0 !important;}
   #report-span .modal-content{padding-top:10px;}
   #report-span{z-index:999999 !important; background:#fff;}
@@ -4735,6 +4738,11 @@ tags-input .tags{padding: 0;}
   .error-btn .btn-new-1{padding: 10px 32px;}
   .monetize-box{box-shadow: none;}
   .monetize-detail h3{font-size: 18px;}
+  #post-share .share-post p.pull-right button.btn1{width: auto; float: right;}
+  #post-share .post-box-bottom{margin-top: 0;}
+  #post-share .modal-content{width: 100%;}
+  .post-popup-box .share-post .post-box-bottom{border-top: 1px solid #d2d2d2;}
+  .share-post{background: #fff;}
 
 }
 @media screen and (max-width: 639px) {
@@ -5274,7 +5282,11 @@ tags-input .tags{padding: 0;}
   .all-post-box .bottom-left li{padding-right: 15px;}
   .all-post-box .bottom-left li a span{font-size: 11px;}
   .bottom-left .fa::before{width: 18px !important; height: 18px !important;}
-
+  .post-head{padding: 10px 10px 0;}
+  .share-post .post-discription{padding: 10px 10px 0;}
+  #post-share .post-box-bottom{padding: 10px;}
+  #post-share .share-post p.pull-right button.btn1{margin-right: 0;}
+  #post-share .post-images{padding: 0 10px 5px;}
 
 }
 @media screen and (max-width: 359px) {

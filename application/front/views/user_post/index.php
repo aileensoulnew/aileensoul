@@ -2530,7 +2530,7 @@
                                     </div>
                                 </div>
                                 <div class="post-text">
-                                    <textarea id="share_post_text" class="hashtag-textarea" placeholder="Say something about post." autocomplete="off" maxlength="500"></textarea>
+                                    <textarea id="share_post_text" class="hashtag-textarea" placeholder="Write someting." autocomplete="off" maxlength="500"></textarea>
                                 </div>
                             </div>
                             <div id="main-post-{{share_post_data.post_data.id}}" ng-if="share_post_data" class="all-post-box">
