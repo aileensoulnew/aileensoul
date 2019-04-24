@@ -281,7 +281,7 @@ class User_post extends MY_Controller {
                 $inser_point = array(
                     "user_id"       =>  $userid,
                     "post_id"       =>  $post_id,
-                    "points"        =>  5,
+                    "points"        =>  20,
                     "points_for"    =>  4,
                     "description"   =>  $comment,
                     "status"        =>  '0',
@@ -3542,7 +3542,10 @@ class User_post extends MY_Controller {
 
     public function get_user_monetize()
     {
+        $userid = $this->session->userdata('aileenuser');
         $monetize_data = $this->common->get_monetize();
+        $monetize_data['payment_history'] = $this->user_post_model->get_user_payment_history($userid);
+        $monetize_data['user_bank_detail'] = $this->user_post_model->get_user_bank_detail($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($monetize_data));
     }
 
@@ -3811,6 +3814,54 @@ class User_post extends MY_Controller {
                 $this->data['metadesc'] = "404";
                 $this->load->view('404', $this->data);
             }
+        }
+    }
+
+    public function save_user_bank_detail()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $bank_name = $this->input->post('bank_name');
+        $bank_ac_holder_name = $this->input->post('bank_ac_holder_name');
+        $bank_ac_number = $this->input->post('bank_ac_number');
+        $bank_ifsc = $this->input->post('bank_ifsc');
+        $bank_swift = $this->input->post('bank_swift');
+        $country_code = $this->input->post('country_code');
+        $contact_number = $this->input->post('contact_number');
+
+        $bank_data = $this->db->select('*')->get_where('user_bank_detail', array('user_id' => $userid))->row();
+
+        $data = array();
+        if (isset($bank_data) && !empty($bank_data)) {            
+            $data['bank_name'] = $bank_name;
+            $data['bank_ac_holder_name'] = $bank_ac_holder_name;
+            $data['bank_ac_number'] = $bank_ac_number;
+            $data['bank_ifsc'] = $bank_ifsc;
+            $data['bank_swift'] = $bank_swift;
+            $data['country_code'] = $country_code;
+            $data['contact_number'] = $contact_number;
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $bank_id = $this->common->update_data($data, 'user_bank_detail', 'id_user_bank_detail', $bank_data->id_user_bank_detail);
+        } else {
+            $data['user_id'] = $userid;
+            $data['bank_name'] = $bank_name;
+            $data['bank_ac_holder_name'] = $bank_ac_holder_name;
+            $data['bank_ac_number'] = $bank_ac_number;
+            $data['bank_ifsc'] = $bank_ifsc;
+            $data['bank_swift'] = $bank_swift;
+            $data['country_code'] = $country_code;
+            $data['contact_number'] = $contact_number;
+            $data['status'] = '1';
+            $data['created_date'] = date('Y-m-d H:i:s', time());
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $bank_id = $this->common->insert_data_getid($data, 'user_bank_detail');
+        }
+        if($bank_id)
+        {
+            return $this->output->set_content_type('application/json')->set_output(json_encode(array("status"=>1)));
+        }
+        else
+        {
+            return $this->output->set_content_type('application/json')->set_output(json_encode(array("status"=>0)));
         }
     }
 }

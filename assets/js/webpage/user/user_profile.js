@@ -14643,16 +14643,28 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
             if(result)
             {
                 $scope.total_earn = result.total_earn;
-                $scope.total_points = result.total_points;
+                $scope.total_points = result.total_points;                
                 var earn_points_process_value = parseFloat($scope.total_points) / 10;
                 var earn_process_value = parseFloat($scope.total_earn);            
             }
             else
             {
                 $scope.total_earn = '0';
-                $scope.total_points = '0';
+                $scope.total_points = '0';                
                 var earn_points_process_value = 0;
                 var earn_process_value = 0;
+            }
+            $scope.payment_history = result.payment_history;
+            $scope.user_bank_detail = result.user_bank_detail;
+            if($scope.user_bank_detail)
+            {                
+                $scope.bank_name = $scope.user_bank_detail.bank_name;
+                $scope.bank_ac_holder_name = $scope.user_bank_detail.bank_ac_holder_name;
+                $scope.bank_ac_number = $scope.user_bank_detail.bank_ac_number;
+                $scope.bank_ifsc = $scope.user_bank_detail.bank_ifsc;
+                $scope.bank_swift = $scope.user_bank_detail.bank_swift;
+                $scope.country_code = $scope.user_bank_detail.country_code;
+                $scope.contact_number = $scope.user_bank_detail.contact_number;
             }
 
             $('.progress').circleProgress({
@@ -14695,6 +14707,101 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
         else
         {
             $scope.payment_detail = 1;
+        }
+    };
+
+    $scope.bank_info_validate = {
+        // errorElement: 'span',
+        rules: {
+            bank_name: {
+                required: true,
+                maxlength: 200,
+            },
+            bank_ac_holder_name: {
+                required: true,
+                maxlength: 200,
+            },
+            bank_ac_number: {
+                required: true,
+                maxlength: 200,
+            },
+            bank_ac_re_number: {
+                required: true,
+                maxlength: 200,
+                equalTo: "#bank_ac_number"
+            },
+            bank_ifsc: {
+                required: true,
+                maxlength: 50,
+            },
+            bank_swift: {
+                required: true,
+                maxlength: 50,
+            },
+            country_code: {
+                required: true,
+                maxlength: 4,
+            },
+            contact_number: {
+                required: true,
+                maxlength: 50,
+            }
+        },
+        messages: {
+            bank_name: {
+                required: "Bank name is required.",
+            },
+            bank_ac_holder_name: {
+                required: "Bank account holder name is required.",
+            },
+            bank_ac_number: {
+                required: "Bank account number is required.",
+            },
+            bank_ac_re_number: {
+                required: "Bank account number is required.",
+            },
+            bank_ifsc: {
+                required: "Bank IFSC code is required.",
+            },
+            bank_swift: {
+                required: "Bank swift bic is required.",
+            },
+            country_code: {
+                required: "Country code is required.",
+            },
+            contact_number: {
+                required: "Contact number is required.",
+            }
+        }
+    };
+    $scope.submit_bank_info = function () {
+        if ($scope.bank_detail.validate())
+        {
+            angular.element('#bank_detail #submit').addClass("form_submit");
+            $('#bank_info_ajax_load').show();
+            var updatedata = $.param({'bank_name':$scope.bank_name,'bank_ac_holder_name':$scope.bank_ac_holder_name,'bank_ac_number':$scope.bank_ac_number,'bank_ifsc':$scope.bank_ifsc,'bank_swift':$scope.bank_swift,'country_code':$scope.country_code,'contact_number':$scope.contact_number});
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/save_user_bank_detail',
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success){
+                $('#bank_info_ajax_load').hide();                
+                if (success.data.status == 1) {
+                    $("#success-bankinfo").show();
+                    $("#success-bankinfo").html("Bank detail changes successfully.")
+                    $("#success-bankinfo").fadeOut(5000);
+                } else {
+                    
+                }
+            }, function (error){
+
+            });
+        }
+        else
+        {
+            return false;
         }
     };
 

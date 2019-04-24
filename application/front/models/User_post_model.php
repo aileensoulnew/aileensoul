@@ -4212,4 +4212,25 @@ class User_post_model extends CI_Model {
         $shared_data['description'] = nl2br($this->common->make_links($shared_data['description']));
         return $shared_data;
     }
+
+    public function get_user_payment_history($userid)
+    {
+        $this->db->select("*,DATE_FORMAT(modify_date, '%d %M, %Y') as modify_date_str ,DATE_FORMAT(payment_date, '%d %M, %Y') as payment_date_str")->from("user_payment_mapper");        
+        $this->db->where('user_id', $userid);        
+        $this->db->where('earn_amount >= 10');        
+        $this->db->order_by('created_date', 'desc');        
+        $query = $this->db->get();        
+        $payment_data = $query->result_array();        
+        return $payment_data;
+    }
+
+    public function get_user_bank_detail($userid)
+    {
+        $this->db->select("*")->from("user_bank_detail");
+        $this->db->where('user_id', $userid);
+        $this->db->where('status','1');
+        $query = $this->db->get();
+        $bank_data = $query->row_array();
+        return $bank_data;
+    }
 }

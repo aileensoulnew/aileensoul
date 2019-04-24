@@ -113,6 +113,33 @@ class Monetize extends CI_Controller {
 
     public function approve_point() {
         $id_user_point_mapper = $_POST['id'];
+
+        $point_data = $this->db->select('*')->get_where('user_point_mapper', array('id_user_point_mapper' => $id_user_point_mapper))->row();
+        // print_r($point_data);
+        
+        $payment_data = $this->db->select('*')->get_where('user_payment_mapper', array('user_id' => $point_data->user_id,'earn_amount <' => '10'))->row();
+        
+        if(isset($payment_data) && !empty($payment_data))
+        {
+            $modify_date =  date('Y-m-d H:i:s', time());
+            $earn_amount = $point_data->points / 100;
+            $update_sql = "UPDATE ailee_user_payment_mapper SET earn_points = earn_points + '".$point_data->points."', earn_amount = earn_amount + '".$earn_amount."', modify_date = '".$modify_date."' WHERE id_user_payment_mapper =  '".$payment_data->id_user_payment_mapper."'";            
+            // echo $update_sql;exit();
+            $update = $this->db->query($update_sql);
+        }
+        else
+        {
+            $data = array(
+                'user_id' => $point_data->user_id,
+                'earn_points' => $point_data->points,
+                'earn_amount' => $point_data->points/100,
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+                'status' => 'unpaid',
+            );
+            $this->common->insert_data_getid($data, 'user_payment_mapper');            
+        }
+        // print_r($payment_data);exit();
         $data = array(
             'status' => '1'
         );
