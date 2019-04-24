@@ -21,9 +21,14 @@
             <!-- End Dashboard -->
             <!--Start Monetizationt-->
             <li <?php if ($this->uri->segment(1) == 'monetize' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="<?php echo base_url('monetize/postlist/'); ?>">
+                <a href="#">
                     <i class="fa fa-money margin-r-5"></i> <span>Monetization</span>
-                </a>                
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('monetize/postlist'); ?>"><i class="fa fa-money"></i>List ALL Monetization</a></li>
+                    <li><a href="<?php echo base_url('monetize/paymentprocess'); ?>"><i class="fa fa-money"></i>Payment Process</a></li>
+                </ul>
             </li>
             <!--End Monetizationt-->
             <!--Start Article Management-->

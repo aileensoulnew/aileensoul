@@ -32,7 +32,7 @@ class Monetize extends CI_Controller {
         // echo $this->profile->thumb();
     }
 
-    public function postlist() {        
+    public function postlist() {
 
         $limit = $this->paging['per_page'];
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
@@ -158,6 +158,150 @@ class Monetize extends CI_Controller {
         
         echo 'Rejected';
         exit();
+    }
+
+    public function paymentprocess(){
+
+        $limit = $this->paging['per_page'];
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+            $sortby = $this->uri->segment(3);
+            $orderby = $this->uri->segment(4);
+        } else {
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+            $sortby = 'id';
+            $orderby = 'desc';
+        }
+  
+        $this->data['offset'] = $offset;
+        $this->paging['base_url'] = site_url("monetize/paymentprocess");
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $this->paging['uri_segment'] = 5;
+        } else {
+            $this->paging['uri_segment'] = 3;
+        }
+
+        $join_str[1]['table'] = "user";
+        $join_str[1]['join_table_id'] = "user.user_id";
+        $join_str[1]['from_table_id'] = "user_payment_mapper.user_id";
+
+        $join_str[2]['table'] = "user_login";
+        $join_str[2]['join_table_id'] = "user_login.user_id";
+        $join_str[2]['from_table_id'] = "user_payment_mapper.user_id";
+
+        $condition_array = array('user_payment_mapper.earn_points >=' => '1000','user_payment_mapper.earn_amount >=' => '10');
+
+        $select_data = "user_payment_mapper.id_user_payment_mapper, user_payment_mapper.earn_points, user_payment_mapper.user_id, user_payment_mapper.earn_amount, user_payment_mapper.created_date, user_payment_mapper.modify_date, user_payment_mapper.status, user_payment_mapper.payment_date, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
+
+        $payment_list = $this->common->select_data_by_condition('user_payment_mapper', $condition_array, $data = $select_data, $short_by = 'id_user_payment_mapper', $order_by = 'desc', $limit, $offset, $join_str);
+       
+        $this->data['payment_list'] = $payment_list;
+        // print_r($payment_list);exit();
+
+        $total_rows = $this->common->select_data_by_condition('user_payment_mapper', $condition_array, $data = $select_data, $short_by = 'id_user_payment_mapper', $order_by = 'desc', $limit = "", $offset = "", $join_str);
+        $this->paging['total_rows'] = count($total_rows);
+        $this->data['total_rows'] = $this->paging['total_rows'];
+        $this->data['limit'] = $limit;
+        $this->pagination->initialize($this->paging);
+        $this->data['search_keyword'] = '';
+        
+        $this->load->view('monetize/paymentlist', $this->data);
+    }
+
+    public function monetizedetail($id){        
+        $join_str[1]['table'] = "user";
+        $join_str[1]['join_table_id'] = "user.user_id";
+        $join_str[1]['from_table_id'] = "user_payment_mapper.user_id";
+
+        $join_str[2]['table'] = "user_login";
+        $join_str[2]['join_table_id'] = "user_login.user_id";
+        $join_str[2]['from_table_id'] = "user_payment_mapper.user_id";
+
+        $condition_array = array('user_payment_mapper.id_user_payment_mapper' => $id);
+
+        $select_data = "user_payment_mapper.id_user_payment_mapper, user_payment_mapper.earn_points, user_payment_mapper.user_id, user_payment_mapper.earn_amount, user_payment_mapper.created_date, user_payment_mapper.modify_date, user_payment_mapper.status, user_payment_mapper.payment_date, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
+
+        $payment_list = $this->common->select_data_by_condition('user_payment_mapper', $condition_array, $data = $select_data, $short_by = 'id_user_payment_mapper', $order_by = 'desc', $limit, $offset, $join_str)[0];
+       
+        $this->data['payment_detail'] = $payment_list;
+
+        $condition_array1 = array('user_id' => $payment_list['user_id']);
+        $bank_detail = $this->common->select_data_by_condition('user_bank_detail', $condition_array1, "*", $short_by, $order_by = '', $limit, $offset, $join_str='')[0];
+       
+        $this->data['bank_detail'] = $bank_detail;
+        // print_r($bank_detail);
+        // print_r($payment_list);exit();
+
+        $this->load->view('monetize/paymentdetail', $this->data);
+    }
+
+    public function payamount() {
+
+        $id = $_POST['id'];
+
+        $cond1 = array('id_user_payment_mapper' => $id);
+        $payment_data = $this->common->select_data_by_condition('user_payment_mapper', $cond1, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
+        if($payment_data)
+        {            
+            $data = array();
+            $data['status'] = 'paid';
+            $data['payment_date'] = date('Y-m-d H:i:s');
+            $this->db->where('id_user_payment_mapper', $id);            
+            $update = $this->db->update('user_payment_mapper', $data);
+
+            echo 'Payment Complete';
+        }
+        
+        $join_str[1]['table'] = "user";
+        $join_str[1]['join_table_id'] = "user.user_id";
+        $join_str[1]['from_table_id'] = "user_payment_mapper.user_id";
+
+        $join_str[2]['table'] = "user_login";
+        $join_str[2]['join_table_id'] = "user_login.user_id";
+        $join_str[2]['from_table_id'] = "user_payment_mapper.user_id";
+
+        $condition_array = array('user_payment_mapper.id_user_payment_mapper >=' => $id);
+
+        $select_data = "user_payment_mapper.id_user_payment_mapper, user_payment_mapper.earn_points, user_payment_mapper.user_id, user_payment_mapper.earn_amount, user_payment_mapper.created_date, user_payment_mapper.modify_date, user_payment_mapper.status, user_payment_mapper.payment_date, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
+
+        $payment_data = $this->common->select_data_by_condition('user_payment_mapper', $condition_array, $data = $select_data, $short_by = 'id_user_payment_mapper', $order_by = 'desc', $limit, $offset, $join_str)[0];
+
+        $fullname = ucwords($payment_data['first_name']." ".$payment_data['last_name']);
+        $touser = $payment_data['email'];
+        $user_slug = $payment_data['user_slug'];
+
+
+        $email_user = '';
+        $email_user .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
+        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;">Your payment has released by the Aileensoul.</p><br></td></tr>';
+        $email_user .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+        $email_user .= '<a href="'.SITEURL.$user_slug.'/monetization-analytics">Click here to view payment.</a>';
+        $email_user .= '<br></td></tr>';        
+        $email_user .= '</table>';
+        $subject = "Payment Released";
+        if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
+            $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
+        }
+        die();
+    }
+
+    public function rejectamount() {
+
+        $id = $_POST['id'];
+
+        $cond1 = array('id_user_payment_mapper' => $id);
+        $payment_data = $this->common->select_data_by_condition('user_payment_mapper', $cond1, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, $join_str)[0];
+        if($payment_data)
+        {            
+            $data = array();
+            $data['status'] = 'reject';
+            $data['payment_date'] = date('Y-m-d H:i:s');
+            $this->db->where('id_user_payment_mapper', $id);            
+            $update = $this->db->update('user_payment_mapper', $data);
+
+            echo 'Payment Complete';
+        }
+        die();
     }
 }
 ?>

@@ -55,7 +55,7 @@
                                     <td>${{history.earn_amount}}</td>
                                     <td>{{history.status}}</td>
                                     <td>{{history.modify_date_str}}</td>
-                                    <td>{{status == 'paid' ? history.payment_date : '-'}}</td>
+                                    <td>{{history.status != 'unpaid' ? history.payment_date_str : '--'}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -110,24 +110,24 @@
     </div>
 </div>
     
-    <div class="modal fade message-box biderror post-error" id="posterrormodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lm">
-            <div class="modal-content">
-                <button type="button" class="posterror-modal-close modal-close" data-dismiss="modal">&times;
-                </button>       
-                <div class="modal-body">
-                    <span class="mes"></span>
-                </div>
+<div class="modal fade message-box biderror post-error" id="posterrormodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="posterror-modal-close modal-close" data-dismiss="modal">&times;
+            </button>       
+            <div class="modal-body">
+                <span class="mes"></span>
             </div>
         </div>
     </div>
-    <div class="modal fade message-box post-error" id="post" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lm">
-            <div class="modal-content">
-                <button type="button" class="modal-close" id="post" data-dismiss="modal">&times;</button>       
-                <div class="modal-body">
-                    <span class="mes"></span>
-                </div>
+</div>
+<div class="modal fade message-box post-error" id="post" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" id="post" data-dismiss="modal">&times;</button>       
+            <div class="modal-body">
+                <span class="mes"></span>
             </div>
         </div>
     </div>
+</div>
