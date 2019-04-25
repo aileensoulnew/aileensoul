@@ -12,52 +12,9 @@
         }
         /*Code for business profile link end*/
 
-        /*code for Artis profile link start */
-            $contition_array = array('user_id' => $userid);
-            $artist_profile_count = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        /*Code for artist profile link ends*/ 
-
-        /*code for Job profile link start */
-            $contition_array = array('user_id' => $userid);
-            $job_profile_count = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        $contition_array_job = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
-        $job_deactive = $this->common->select_data_by_condition('job_reg', $contition_array_job, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
-
-        $job_deactive = $job_deactive[0]['total'];
-        /*Code for Job profile link ends*/
-        /*code for recruiter profile link start */
-        $contition_array = array('user_id' => $userid);
-        $recruiter_profile_count = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        /*Code for recuiter profile link ends*/
-
-        /*code for freelance hire link start */
-        $contition_array = array('user_id' => $userid,'is_delete' => '0', 'status' => '1');
-        $freelancer_hire_profile_count = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
-        /*Code for freelance hire profile link ends*/
-
-        /*code for freelace apply link start */
-        $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
-        $freelancer_apply_profile_count = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        /*Code for freelance aply link ends*/
-
-        $this->business_profile_link = base_url("business-search");
-        $this->artist_profile_link = base_url("find-artist");
-        $this->job_profile_link = base_url("job-search");
-        $this->recruiter_profile_link = base_url("recruiter");
-        $this->freelance_hire_profile_link = base_url("freelance-profile");
-        $this->freelance_apply_profile_link = base_url("freelance-profile");
+        $this->business_profile_link = base_url("business-search");        
         $this->business_profile_set = 0;
-        $this->artist_profile_set = 0;
-        $this->job_profile_set = 0;
-        $this->recruiter_profile_set = 0;
-        $this->freelance_hire_profile_set = 0;
-        $this->freelance_apply_profile_set = 0;
-
-        $this->data['freelance_hire_right_profile_link'] = base_url('freelance-employer');
-        $this->data['freelance_apply_right_profile_link'] = base_url('freelance-jobs');
-
+        
         if(!empty($business_profile_count) &&  $business_profile_count[0]['business_step']==4){            
             
             $sql = "SELECT *,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
@@ -71,34 +28,10 @@
             $this->business_profile_link = base_url('company/').$business_slug->business_slug;// base_url("business-profile");
             $this->business_profile_set = 1;
         }
-        if(!empty($artist_profile_count) &&  count($artist_profile_count)>0){
-            $this->artist_profile_link = base_url("artist-profile");
-            $this->artist_profile_set = 1;
-        }
-        if(!empty($job_profile_count) &&  count($job_profile_count)>0 && $job_deactive == 0){
-            $this->job_profile_link = base_url("recommended-jobs");
-            $this->job_profile_set = 1;
-        }
-        if(!empty($recruiter_profile_count) &&  count($recruiter_profile_count)>0){
-            $this->recruiter_profile_link = base_url("recommended-candidates");
-            $this->recruiter_profile_set = 1;
-        }
-        if(!empty($freelancer_hire_profile_count) &&  count($freelancer_hire_profile_count)>0){
-            $this->freelance_hire_profile_link = base_url("hire-freelancer");
-            $this->data['freelance_hire_right_profile_link'] = $this->freelance_hire_profile_link;
-            $this->freelance_hire_profile_set = 1;
-        }
-        if(!empty($freelancer_apply_profile_count) &&  count($freelancer_apply_profile_count)>0){
-            $this->freelance_apply_profile_link = base_url("recommended-freelance-work");
-            $this->data['freelance_apply_right_profile_link'] = $this->freelance_apply_profile_link;
-            $this->freelance_apply_profile_set = 1;
-        }
+       
 
-        $this->data['job_right_profile_link'] = $this->job_profile_link;
-        $this->data['recruiter_right_profile_link'] = $this->recruiter_profile_link;
-        $this->data['freelance_right_profile_link'] = base_url('freelance-profile');
         $this->data['business_right_profile_link'] = $this->business_profile_link;
-        $this->data['artist_right_profile_link'] = $this->artist_profile_link;
+        
          $login_user_totalpost = 0;
         if($this->session->userdata('aileenuser')){
             $login_data_sql = "SELECT user_slug FROM ailee_user where user_id = " . $this->session->userdata('aileenuser');

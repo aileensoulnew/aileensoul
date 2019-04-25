@@ -1,33 +1,23 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
-$company_name_txt = $business_data[0]['company_name'];
-$business_slug_txt = base_url().'company/'.$business_common_data[0]['business_slug'];
-if ($business_common_data[0]['business_user_image'] != '') {
-    $business_user_image_txt = BUS_PROFILE_THUMB_UPLOAD_URL . $business_common_data[0]['business_user_image'];
-}
-else{
-    $business_user_image_txt = base_url(NOBUSIMAGE);
-}
-$contact_email_txt = $business_data[0]['contact_email'];
-$login_user_id = $this->session->userdata('aileenuser');
 ?>
 <!DOCTYPE html>
 <html ng-app="businessProfileApp" ng-controller="businessProfileController">
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
-        <?php echo $head; ?>  
-        
+        <?php echo $head; ?>
+       
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
         <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css') ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/developer.css?ver=' . time()); ?>" />
-
+        
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
@@ -42,119 +32,41 @@ $login_user_id = $this->session->userdata('aileenuser');
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
         </style>
-        
-        <style type="text/css">
-            .two-images, .three-image, .four-image{
-                height: auto !important;
-            }
-        </style>
-        
-    <?php $this->load->view('adsense');
-    $cls = "";
-    if($login_user_id == "")
-    {
-        $cls = "no-login old-no-login";
-    } ?>
+    <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push body-loader bus-dash <?php echo $cls; ?>">
+    <body class="page-container-bg-solid page-boxed pushmenu-push body-loader bus-dash">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
-        <?php if($ismainregister == false){ ?>
-            <header>
-                <div class="container">
-					<div class="row">
-                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
-								<?php $this->load->view('main_logo'); ?>
-                            </div>
-                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
-                                <div class="btn-right">
-                                <?php if(!$this->session->userdata('aileenuser')) {?>
-									<ul class="nav navbar-nav navbar-right test-cus drop-down">
-										<?php $this->load->view('profile-dropdown'); ?>
-										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
-										<li class="hidden-991"><a href="<?php echo base_url('business-profile/create-account'); ?>" class="btn3">Create Business Account</a></li>
-										<li class="mob-bar-li">
-											<span class="mob-right-bar">
-												<?php $this->load->view('mobile_right_bar'); ?>
-											</span>
-										</li>
-									
-									</ul>
-                                <?php }?>
-                                </div>
-                            </div>
-                        </div>
-                    
+            <?php echo $header; ?>
+            <?php echo $business_header2; ?>
+            <section>
+                <?php echo $business_common; ?>
+                <div class="text-center tab-block">
+                    <div class="container mob-inner-page">
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/photos') ?>">
+                            Photo
+                        </a>
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
+                            Video
+                        </a>
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
+                            Audio
+                        </a>
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
+                            PDf
+                        </a>
+                    </div>
                 </div>
-            </header>
-        <?php } else {
-                    echo $business_header2; 
-                } 
-        ?>
-        <section>
-			<?php if($ismainregister == false){ ?>
-				<div class="no-login-padding">
-					<div class="ld-sub-header detail-sub-header">
-						<div class="container">
-							<div class="web-ld-sub">
-                            <ul class="">
-                                <li><a href="<?php echo base_url('business-search'); ?>">Business Profile</a></li>
-                                <li><a href="<?php echo base_url('business-by-categories'); ?>">Business by Categories</a></li>
-                                <li><a href="<?php echo base_url('business-by-location'); ?>">Business by Locations</a></li>
-                                <li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">How Business Profile Works</a></li>
-                                <li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
-                            </ul>
-                        </div>
-                        <div class="mob-ld-sub">
-                            <ul class="">
-                                <li class="tab-first-li">
-                                    <a href="#">Businesses</a>
-                                    <ul>
-                                        <li><a href="<?php echo base_url('business-search'); ?>">Business Profile</a></li>
-                                        <li><a href="<?php echo base_url('business-by-categories'); ?>">Business by Categories</a></li>
-                                        <li><a href="<?php echo base_url('business-by-location'); ?>">Business by Locations</a></li>
-                                        <li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">How Business Profile Works</a></li>
-                                        <li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
-                                    </ul>
-                                    
-                                </li>
-                                <li><a href="<?php echo base_url('login'); ?>">Login</a></li>
-                                <li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Business Profile</span><span class="visible-479">Sign Up</span></a></li>
-                            </ul>
-                        </div>
-						</div>
-					</div>
-				</div>
-			<?php } ?>
-            <?php echo $business_common_profile; ?>
-            <div class="text-center tab-block">
-                <div class="mob-inner-page">
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Photo
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Video
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Audio
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        PDf
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Article
-                    </a>
-                </div>
-            </div>
-			
-            <div class="user-midd-section">
-                <div class="container art_container padding-360 manage-post-custom">
-
-                    <div class="profile-box-custom left_side_posrt">
-                        
-                        <div class="left-info-box bus-info move-middle">
-                            <div class="dash-left-title">
-                                <h3><svg id="Capa_1" x="0px" y="0px" viewBox="0 0 65 65" width="25px" height="25">
+				
+				
+				
+                <div class="user-midd-section">
+                    <div class="container art_container padding-360 manage-post-custom">
+                        <div class="profile-box-custom left_side_posrt">                            
+							
+							<div class="left-info-box bus-info move-middle">
+								<div class="dash-left-title">
+									<h3><svg id="Capa_1" x="0px" y="0px" viewBox="0 0 65 65" width="25px" height="25">
                                     <g>
                                         <g>
                                             <path d="M32.5,0C14.58,0,0,14.579,0,32.5S14.58,65,32.5,65S65,50.421,65,32.5S50.42,0,32.5,0z M32.5,61C16.785,61,4,48.215,4,32.5    S16.785,4,32.5,4S61,16.785,61,32.5S48.215,61,32.5,61z" fill="#5c5c5c"></path>
@@ -163,265 +75,274 @@ $login_user_id = $this->session->userdata('aileenuser');
                                         </g>
                                     </g>
                                 </svg> <span>Information</span></h3>
-                            </div>
-                            <div class="dash-info-box cnct-person">
-                                <h4>
-                                    <svg viewBox="0 0 60 60" width="17px" height="17px" stroke-width="1" stroke="#5c5c5c">
-                                        <path d="M48.014,42.889l-9.553-4.776C37.56,37.662,37,36.756,37,35.748v-3.381c0.229-0.28,0.47-0.599,0.719-0.951  c1.239-1.75,2.232-3.698,2.954-5.799C42.084,24.97,43,23.575,43,22v-4c0-0.963-0.36-1.896-1-2.625v-5.319  c0.056-0.55,0.276-3.824-2.092-6.525C37.854,1.188,34.521,0,30,0s-7.854,1.188-9.908,3.53C17.724,6.231,17.944,9.506,18,10.056  v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309  c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C8.801,44.424,7,47.458,7,50.762V54c0,4.746,15.045,6,23,6s23-1.254,23-6v-3.043  C53,47.519,51.089,44.427,48.014,42.889z M51,54c0,1.357-7.412,4-21,4S9,55.357,9,54v-3.238c0-2.571,1.402-4.934,3.659-6.164  l8.921-4.866C23.073,38.917,24,37.354,24,35.655v-4.019l-0.233-0.278c-0.024-0.029-2.475-2.994-3.41-7.065l-0.091-0.396l-0.341-0.22  C19.346,23.303,19,22.676,19,22v-4c0-0.561,0.238-1.084,0.67-1.475L20,16.228V10l-0.009-0.131c-0.003-0.027-0.343-2.799,1.605-5.021  C23.253,2.958,26.081,2,30,2c3.905,0,6.727,0.951,8.386,2.828c1.947,2.201,1.625,5.017,1.623,5.041L40,16.228l0.33,0.298  C40.762,16.916,41,17.439,41,18v4c0,0.873-0.572,1.637-1.422,1.899l-0.498,0.153l-0.16,0.495c-0.669,2.081-1.622,4.003-2.834,5.713  c-0.297,0.421-0.586,0.794-0.837,1.079L35,31.623v4.125c0,1.77,0.983,3.361,2.566,4.153l9.553,4.776  C49.513,45.874,51,48.28,51,50.957V54z" fill="#5c5c5c"/>
-                                    </svg>
-                                Contact Person</h4>
-                                <p><?php echo ucfirst(strtolower($business_data[0]['contact_person'])); ?></p>
-                            </div>
-                            <?php if ($business_data[0]['contact_mobile'] != '0') { ?>
-                            <div class="dash-info-box cnct-no">
-                                <h4>
-                                    <svg viewBox="0 0 376.076 376.076" width="17px" height="17px" stroke-width="1" stroke="#5c5c5c">
-                                        <g>
+								</div>
+								<div class="dash-info-box cnct-person">
+									<h4>
+                                        <svg viewBox="0 0 60 60" width="17px" height="17px" stroke-width="1" stroke="#5c5c5c">
+                                            <path d="M48.014,42.889l-9.553-4.776C37.56,37.662,37,36.756,37,35.748v-3.381c0.229-0.28,0.47-0.599,0.719-0.951  c1.239-1.75,2.232-3.698,2.954-5.799C42.084,24.97,43,23.575,43,22v-4c0-0.963-0.36-1.896-1-2.625v-5.319  c0.056-0.55,0.276-3.824-2.092-6.525C37.854,1.188,34.521,0,30,0s-7.854,1.188-9.908,3.53C17.724,6.231,17.944,9.506,18,10.056  v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309  c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C8.801,44.424,7,47.458,7,50.762V54c0,4.746,15.045,6,23,6s23-1.254,23-6v-3.043  C53,47.519,51.089,44.427,48.014,42.889z M51,54c0,1.357-7.412,4-21,4S9,55.357,9,54v-3.238c0-2.571,1.402-4.934,3.659-6.164  l8.921-4.866C23.073,38.917,24,37.354,24,35.655v-4.019l-0.233-0.278c-0.024-0.029-2.475-2.994-3.41-7.065l-0.091-0.396l-0.341-0.22  C19.346,23.303,19,22.676,19,22v-4c0-0.561,0.238-1.084,0.67-1.475L20,16.228V10l-0.009-0.131c-0.003-0.027-0.343-2.799,1.605-5.021  C23.253,2.958,26.081,2,30,2c3.905,0,6.727,0.951,8.386,2.828c1.947,2.201,1.625,5.017,1.623,5.041L40,16.228l0.33,0.298  C40.762,16.916,41,17.439,41,18v4c0,0.873-0.572,1.637-1.422,1.899l-0.498,0.153l-0.16,0.495c-0.669,2.081-1.622,4.003-2.834,5.713  c-0.297,0.421-0.586,0.794-0.837,1.079L35,31.623v4.125c0,1.77,0.983,3.361,2.566,4.153l9.553,4.776  C49.513,45.874,51,48.28,51,50.957V54z" fill="#5c5c5c"/>
+                                        </svg>
+									Contact Person</h4>
+                                    <p><?php echo ucfirst(strtolower($business_data[0]['contact_person'])); ?></p>
+                                </div>
+								<?php if ($business_data[0]['contact_mobile'] != '0') { ?>
+								<div class="dash-info-box cnct-no">
+                                    <h4>
+                                        <svg viewBox="0 0 376.076 376.076" width="17px" height="17px" stroke-width="1" stroke="#5c5c5c">
                                             <g>
-                                                <path d="M266.611,0.076h-158.32c-13.946-0.758-27.602,4.179-37.84,13.68c-9.859,10.682-14.918,24.933-14,39.44v269.76    c0,39.12,27.44,53.12,53.12,53.12h157.04c39.12,0,53.12-27.44,53.12-53.12V53.116C319.731,13.996,292.291,0.076,266.611,0.076z     M307.651,322.956c0.08,12.32-4,41.12-41.04,41.12h-157.04c-12.32,0-41.12-4-41.12-41.12v-32h239.2V322.956z M307.651,279.116    h-239.2V69.836h239.2V279.116z M307.731,57.916H68.451v-4.72c-0.827-11.287,2.954-22.428,10.48-30.88    c8.172-7.329,18.971-11.025,29.92-10.24h157.76c12.32,0,41.12,4,41.12,41.12V57.916z" fill="#5c5c5c"/>
+                                                <g>
+                                                    <path d="M266.611,0.076h-158.32c-13.946-0.758-27.602,4.179-37.84,13.68c-9.859,10.682-14.918,24.933-14,39.44v269.76    c0,39.12,27.44,53.12,53.12,53.12h157.04c39.12,0,53.12-27.44,53.12-53.12V53.116C319.731,13.996,292.291,0.076,266.611,0.076z     M307.651,322.956c0.08,12.32-4,41.12-41.04,41.12h-157.04c-12.32,0-41.12-4-41.12-41.12v-32h239.2V322.956z M307.651,279.116    h-239.2V69.836h239.2V279.116z M307.731,57.916H68.451v-4.72c-0.827-11.287,2.954-22.428,10.48-30.88    c8.172-7.329,18.971-11.025,29.92-10.24h157.76c12.32,0,41.12,4,41.12,41.12V57.916z" fill="#5c5c5c"/>
+                                                </g>
                                             </g>
-                                        </g>
-                                        <g>
                                             <g>
-                                                <path d="M207.011,29.356h-37.6c-3.314,0-6,2.686-6,6c0,3.314,2.686,6,6,6h37.6c3.314,0,6-2.686,6-6    C213.011,32.042,210.325,29.356,207.011,29.356z" fill="#5c5c5c"/>
+                                                <g>
+                                                    <path d="M207.011,29.356h-37.6c-3.314,0-6,2.686-6,6c0,3.314,2.686,6,6,6h37.6c3.314,0,6-2.686,6-6    C213.011,32.042,210.325,29.356,207.011,29.356z" fill="#5c5c5c"/>
+                                                </g>
                                             </g>
-                                        </g>
-                                        <g>
                                             <g>
-                                                <path d="M188.051,302.316c-14.536,0.044-26.284,11.864-26.24,26.4s11.864,26.284,26.4,26.24    c14.474-0.044,26.196-11.766,26.24-26.24C214.451,314.136,202.631,302.316,188.051,302.316z M188.051,342.956    C188.051,342.956,188.051,342.956,188.051,342.956l0,0.08c-7.909-0.044-14.284-6.491-14.24-14.4    c0.044-7.909,6.491-14.284,14.4-14.24c7.877,0.044,14.24,6.442,14.24,14.32C202.407,336.625,195.96,343,188.051,342.956z" fill="#5c5c5c"/>
+                                                <g>
+                                                    <path d="M188.051,302.316c-14.536,0.044-26.284,11.864-26.24,26.4s11.864,26.284,26.4,26.24    c14.474-0.044,26.196-11.766,26.24-26.24C214.451,314.136,202.631,302.316,188.051,302.316z M188.051,342.956    C188.051,342.956,188.051,342.956,188.051,342.956l0,0.08c-7.909-0.044-14.284-6.491-14.24-14.4    c0.044-7.909,6.491-14.284,14.4-14.24c7.877,0.044,14.24,6.442,14.24,14.32C202.407,336.625,195.96,343,188.051,342.956z" fill="#5c5c5c"/>
+                                                </g>
                                             </g>
-                                        </g>
-                                    </svg>
-                                Contact No</h4>
-                                <p>
-                                    <span><?php echo $business_data[0]['contact_mobile']; ?> </span>
-                                </p>
-                            </div>
-                            <?php }?>
-                            <div class="dash-info-box add-cus">
-                                <h4>
-                                    <svg viewBox="0 0 54.757 54.757" width="17px" height="16x" stroke-width="1" stroke="#5c5c5c">
-                                        <g>
-                                            <path d="M27.557,12c-3.859,0-7,3.141-7,7s3.141,7,7,7s7-3.141,7-7S31.416,12,27.557,12z M27.557,24c-2.757,0-5-2.243-5-5   s2.243-5,5-5s5,2.243,5,5S30.314,24,27.557,24z" fill="#5c5c5c"/>
-                                            <path d="M40.94,5.617C37.318,1.995,32.502,0,27.38,0c-5.123,0-9.938,1.995-13.56,5.617c-6.703,6.702-7.536,19.312-1.804,26.952   L27.38,54.757L42.721,32.6C48.476,24.929,47.643,12.319,40.94,5.617z M41.099,31.431L27.38,51.243L13.639,31.4   C8.44,24.468,9.185,13.08,15.235,7.031C18.479,3.787,22.792,2,27.38,2s8.901,1.787,12.146,5.031   C45.576,13.08,46.321,24.468,41.099,31.431z" fill="#5c5c5c"/>
-                                        </g>
-                                    </svg>
-                                Address</h4>
-                                <p>
-                                    <span class="box-dis">
-                                    <?php
-                                    if ($business_data[0]['address']) {
-                                        echo $business_data[0]['address'];
-                                        echo ",";
-                                    }
-                                    if ($business_data[0]['city']) {
-                                        echo $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
-                                        echo",";
-                                    }                                        
-                                    if ($business_data[0]['country']) {
-                                        echo $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
-                                    }
+                                        </svg>
+                                    Contact No</h4>
+                                    <p>
+                                        <span><?php echo $business_data[0]['contact_mobile']; ?> </span>
+                                    </p>
+                                </div>
+								<?php }?>
+								
+								<div class="dash-info-box email-id">
+                                    <h4>
+                                        <svg viewBox="0 0 31.012 31.012" width="18px" height="17px" stroke-width="0.5" stroke="#5c5c5c">
+                                            <g>
+                                                <path d="M28.512,26.529H2.5c-1.378,0-2.5-1.121-2.5-2.5V6.982c0-1.379,1.122-2.5,2.5-2.5h26.012c1.378,0,2.5,1.121,2.5,2.5v17.047   C31.012,25.408,29.89,26.529,28.512,26.529z M2.5,5.482c-0.827,0-1.5,0.673-1.5,1.5v17.047c0,0.827,0.673,1.5,1.5,1.5h26.012   c0.827,0,1.5-0.673,1.5-1.5V6.982c0-0.827-0.673-1.5-1.5-1.5H2.5z" fill="#5c5c5c"/>
+                                                <path d="M15.506,18.018c-0.665,0-1.33-0.221-1.836-0.662L0.891,6.219c-0.208-0.182-0.23-0.497-0.048-0.705   c0.182-0.21,0.498-0.23,0.706-0.049l12.778,11.137c0.64,0.557,1.72,0.556,2.358,0L29.46,5.466c0.207-0.183,0.522-0.162,0.706,0.049   c0.182,0.208,0.16,0.523-0.048,0.705L17.342,17.355C16.836,17.797,16.171,18.018,15.506,18.018z" fill="#5c5c5c"/>
+                                            </g>
+                                        </svg>
+                                    Email id</h4>
+                                    <p class="dis-mail"><span class="box-dis"><?php echo $business_data[0]['contact_email']; ?></span></p>
+                                </div>
+                                <div class="dash-info-box add-cus">
+                                    <h4>
+                                        <svg viewBox="0 0 54.757 54.757" width="17px" height="16x" stroke-width="1" stroke="#5c5c5c">
+                                            <g>
+                                                <path d="M27.557,12c-3.859,0-7,3.141-7,7s3.141,7,7,7s7-3.141,7-7S31.416,12,27.557,12z M27.557,24c-2.757,0-5-2.243-5-5   s2.243-5,5-5s5,2.243,5,5S30.314,24,27.557,24z" fill="#5c5c5c"/>
+                                                <path d="M40.94,5.617C37.318,1.995,32.502,0,27.38,0c-5.123,0-9.938,1.995-13.56,5.617c-6.703,6.702-7.536,19.312-1.804,26.952   L27.38,54.757L42.721,32.6C48.476,24.929,47.643,12.319,40.94,5.617z M41.099,31.431L27.38,51.243L13.639,31.4   C8.44,24.468,9.185,13.08,15.235,7.031C18.479,3.787,22.792,2,27.38,2s8.901,1.787,12.146,5.031   C45.576,13.08,46.321,24.468,41.099,31.431z" fill="#5c5c5c"/>
+                                            </g>
+                                        </svg>
+                                    Address</h4>
+                                    <p>
+                                        <span class="box-dis">
+                                        <?php
+                                        if ($business_data[0]['address']) {
+                                            echo $business_data[0]['address'];
+                                            echo ",";
+                                        }
+                                        if ($business_data[0]['city']) {
+                                            echo $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
+                                            echo",";
+                                        }elseif ($business_data[0]['other_city'] != '') {
+                                            echo $business_data[0]['other_city'].",";
+                                        }                                        
+                                        if ($business_data[0]['country']) {
+                                            echo $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
+                                        }
+                                        ?>
+                                        </span>
+                                    </p>
+                                </div>
+								<?php
+                                if ($business_data[0]['contact_website']) {
                                     ?>
-                                    </span>
-                                </p>
-                            </div>
-                            <?php
-                            if ($business_data[0]['contact_website']) {
-                                ?>
-                            <div class="dash-info-box web-cus">
-                                <h4>
-                                    <svg viewBox="0 0 482.8 482.8" width="17px" height="16px" stroke-width="1" stroke="#5c5c5c">
-                                        <g>
+                                <div class="dash-info-box web-cus">
+                                    <h4>
+                                        <svg viewBox="0 0 482.8 482.8" width="17px" height="16px" stroke-width="1" stroke="#5c5c5c">
                                             <g>
-                                                <path d="M255.2,209.3c-5.3,5.3-5.3,13.8,0,19.1c21.9,21.9,21.9,57.5,0,79.4l-115,115c-21.9,21.9-57.5,21.9-79.4,0l-17.3-17.3    c-21.9-21.9-21.9-57.5,0-79.4l115-115c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-115,115C8.7,322.7,0,343.6,0,365.8    c0,22.2,8.6,43.1,24.4,58.8l17.3,17.3c16.2,16.2,37.5,24.3,58.8,24.3s42.6-8.1,58.8-24.3l115-115c32.4-32.4,32.4-85.2,0-117.6    C269.1,204,260.5,204,255.2,209.3z" fill="#5c5c5c"/>
-                                                <path d="M458.5,58.2l-17.3-17.3c-32.4-32.4-85.2-32.4-117.6,0l-115,115c-32.4,32.4-32.4,85.2,0,117.6c5.3,5.3,13.8,5.3,19.1,0    s5.3-13.8,0-19.1c-21.9-21.9-21.9-57.5,0-79.4l115-115c21.9-21.9,57.5-21.9,79.4,0l17.3,17.3c21.9,21.9,21.9,57.5,0,79.4l-115,115    c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4l115-115c15.7-15.7,24.4-36.6,24.4-58.8    C482.8,94.8,474.2,73.9,458.5,58.2z" fill="#5c5c5c"/>
+                                                <g>
+                                                    <path d="M255.2,209.3c-5.3,5.3-5.3,13.8,0,19.1c21.9,21.9,21.9,57.5,0,79.4l-115,115c-21.9,21.9-57.5,21.9-79.4,0l-17.3-17.3    c-21.9-21.9-21.9-57.5,0-79.4l115-115c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-115,115C8.7,322.7,0,343.6,0,365.8    c0,22.2,8.6,43.1,24.4,58.8l17.3,17.3c16.2,16.2,37.5,24.3,58.8,24.3s42.6-8.1,58.8-24.3l115-115c32.4-32.4,32.4-85.2,0-117.6    C269.1,204,260.5,204,255.2,209.3z" fill="#5c5c5c"/>
+                                                    <path d="M458.5,58.2l-17.3-17.3c-32.4-32.4-85.2-32.4-117.6,0l-115,115c-32.4,32.4-32.4,85.2,0,117.6c5.3,5.3,13.8,5.3,19.1,0    s5.3-13.8,0-19.1c-21.9-21.9-21.9-57.5,0-79.4l115-115c21.9-21.9,57.5-21.9,79.4,0l17.3,17.3c21.9,21.9,21.9,57.5,0,79.4l-115,115    c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4l115-115c15.7-15.7,24.4-36.6,24.4-58.8    C482.8,94.8,474.2,73.9,458.5,58.2z" fill="#5c5c5c"/>
+                                                </g>
                                             </g>
-                                        </g>
-                                    </svg>
-                                Website</h4>
-                                <p>
-                                    <a target="_blank" href="<?php echo $business_data[0]['contact_website']; ?>"> <span class="box-dis"><?php echo $business_data[0]['contact_website']; ?></span></a>
-                                </p>
-                            </div>
-                            <?php } ?>
+                                        </svg>
+                                    Website</h4>
+                                    <p>
+                                        <a target="_blank" href="<?php echo $business_data[0]['contact_website']; ?>"> <span class="box-dis"><?php echo $business_data[0]['contact_website']; ?></span></a>
+                                    </p>
+                                </div>
+                                <?php } ?>
 
-                            <?php if($business_data[0]['details']){?>
-                            <div class="dash-info-box dis-cus">
-                                <h4>
-                                    <svg viewBox="0 0 490 490" width="17px" height="16px" stroke-width="1" stroke="#5c5c5c">
-                                        <g>
-                                            <g>
-                                                <path d="M393.872,454.517c-2.304,0-4.583-0.804-6.412-2.354l-99.315-84.194H68.115C30.556,367.968,0,337.242,0,299.474V103.977    c0-37.768,30.556-68.494,68.115-68.494h353.77c37.559,0,68.115,30.727,68.115,68.494v195.497    c0,37.768-30.556,68.494-68.115,68.494h-18.071v76.549c0,3.891-2.243,7.428-5.752,9.067    C396.723,454.21,395.293,454.517,393.872,454.517z M68.115,55.483c-26.592,0-48.226,21.754-48.226,48.494v195.497    c0,26.739,21.634,48.494,48.226,48.494h223.662c2.346,0,4.616,0.834,6.411,2.354l85.737,72.685v-65.039c0-5.523,4.453-10,9.945-10    h28.015c26.592,0,48.226-21.755,48.226-48.494V103.977c0-26.74-21.634-48.494-48.226-48.494H68.115z" fill="#5c5c5c"/>
-                                            </g>
+                                <?php if($business_data[0]['details']){?>
+								<div class="dash-info-box dis-cus">
+                                    <h4>
+                                        <svg viewBox="0 0 490 490" width="17px" height="16px" stroke-width="1" stroke="#5c5c5c">
                                             <g>
                                                 <g>
-                                                    <path d="M405.168,147.469H84.832c-5.492,0-9.944-4.478-9.944-10c0-5.523,4.452-10,9.944-10h320.335c5.492,0,9.944,4.477,9.944,10     C415.111,142.991,410.66,147.469,405.168,147.469z" fill="#5c5c5c"/>
+                                                    <path d="M393.872,454.517c-2.304,0-4.583-0.804-6.412-2.354l-99.315-84.194H68.115C30.556,367.968,0,337.242,0,299.474V103.977    c0-37.768,30.556-68.494,68.115-68.494h353.77c37.559,0,68.115,30.727,68.115,68.494v195.497    c0,37.768-30.556,68.494-68.115,68.494h-18.071v76.549c0,3.891-2.243,7.428-5.752,9.067    C396.723,454.21,395.293,454.517,393.872,454.517z M68.115,55.483c-26.592,0-48.226,21.754-48.226,48.494v195.497    c0,26.739,21.634,48.494,48.226,48.494h223.662c2.346,0,4.616,0.834,6.411,2.354l85.737,72.685v-65.039c0-5.523,4.453-10,9.945-10    h28.015c26.592,0,48.226-21.755,48.226-48.494V103.977c0-26.74-21.634-48.494-48.226-48.494H68.115z" fill="#5c5c5c"/>
                                                 </g>
                                                 <g>
-                                                    <path d="M405.168,211.503H84.832c-5.492,0-9.944-4.478-9.944-10c0-5.523,4.452-10,9.944-10h320.335c5.492,0,9.944,4.477,9.944,10     C415.111,207.025,410.66,211.503,405.168,211.503z" fill="#5c5c5c"/>
-                                                </g>
-                                                <g>
-                                                    <path d="M405.168,275.538H84.832c-5.492,0-9.944-4.478-9.944-10c0-5.523,4.452-10,9.944-10h320.335c5.492,0,9.944,4.476,9.944,10     C415.111,271.06,410.66,275.538,405.168,275.538z" fill="#5c5c5c"/>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                Discription</h4>
-                                <?php
-                                $bus_detail = nl2br($this->common->make_links($business_data[0]['details']));
-                                $bus_detail = preg_replace('[^(<br( \/)?>)*|(<br( \/)?>)*$]', '', $bus_detail);
-                                ?>                                    
-                                <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="<?php echo $bus_detail; ?>" dd-text-collapse-cond="true"><?php echo $bus_detail; ?>
-                                </p>
-                            </div>
-                            <?php }?>
-                            <div class="dash-info-box sp-day" ng-if="bus_opening_hours">
-                                <h4>
-                                    <svg width="18px" height="18px" viewBox="0 0 612 612" >
-                                        <g>
-                                            <g>
-                                                <path d="M587.572,186.881c-32.266-75.225-87.096-129.934-162.949-162.285C386.711,8.427,346.992,0.168,305.497,0.168    c-41.488,0-80.914,8.181-118.784,24.428C111.488,56.861,56.415,111.535,24.092,186.881C7.895,224.629,0,264.176,0,305.664    c0,41.496,7.895,81.371,24.092,119.127c32.323,75.346,87.403,130.348,162.621,162.621c37.877,16.247,77.295,24.42,118.784,24.42    c41.489,0,81.214-8.259,119.12-24.42c75.853-32.352,130.683-87.403,162.956-162.621C603.819,386.914,612,347.16,612,305.664    C612,264.176,603.826,224.757,587.572,186.881z M538.724,440.853c-24.021,41.195-56.929,73.876-98.375,98.039    c-41.195,24.021-86.332,36.135-134.845,36.135c-36.47,0-71.27-7.024-104.4-21.415c-33.129-14.384-61.733-33.294-85.661-57.215    c-23.928-23.928-42.973-52.811-57.214-85.997c-14.199-33.065-21.08-68.258-21.08-104.735c0-48.52,11.921-93.428,35.807-134.509    c23.971-41.231,56.886-73.947,98.039-98.04c41.146-24.092,85.99-36.142,134.502-36.142c48.52,0,93.649,12.121,134.845,36.142    c41.446,24.164,74.283,56.879,98.375,98.039c24.092,41.153,36.135,85.99,36.135,134.509    C574.852,354.185,562.888,399.399,538.724,440.853z" fill="#5c5c5c"/>
-                                                <path d="M324.906,302.988V129.659c0-10.372-9.037-18.738-19.41-18.738c-9.701,0-18.403,8.366-18.403,18.738v176.005    c0,0.336,0.671,1.678,0.671,2.678c-0.671,6.024,1.007,11.043,5.019,15.062l100.053,100.046c6.695,6.695,19.073,6.695,25.763,0    c7.694-7.695,7.188-18.86,0-26.099L324.906,302.988z" fill="#5c5c5c"/>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                Hours of Operation</h4>
-                                <p ng-if="bus_opening_hours.opening_hour == '1'">Always open</p>
-                                <p ng-if="bus_opening_hours.opening_hour == '2'">On Specified Days</p>
-                                <p ng-if="bus_opening_hours.opening_hour == '3'">Appointment needed</p>
-                                <ul class="speci-day-ulspeci-day-ul" ng-if="bus_opening_hours.opening_hour == '2'">
-                                    <li ng-if="bus_opening_hours.sun_from_time && bus_opening_hours.sun_from_ap && bus_opening_hours.sun_to_time && bus_opening_hours.sun_to_ap">Sunday : {{bus_opening_hours.sun_from_time}} {{bus_opening_hours.sun_from_ap}} to {{bus_opening_hours.sun_to_time}} {{bus_opening_hours.sun_to_ap}}</li>
-                                    <li ng-if="bus_opening_hours.mon_from_time && bus_opening_hours.mon_from_ap && bus_opening_hours.mon_to_time && bus_opening_hours.mon_to_ap">Monday : {{bus_opening_hours.mon_from_time}} {{bus_opening_hours.mon_from_ap}} to {{bus_opening_hours.mon_to_time}} {{bus_opening_hours.mon_to_ap}}</li>
-                                    <li ng-if="bus_opening_hours.tue_from_time && bus_opening_hours.tue_from_ap && bus_opening_hours.tue_to_time && bus_opening_hours.tue_to_ap">Tuesday : {{bus_opening_hours.tue_from_time}} {{bus_opening_hours.tue_from_ap}} to {{bus_opening_hours.tue_to_time}} {{bus_opening_hours.tue_to_ap}}</li>
-                                    <li ng-if="bus_opening_hours.wed_from_time && bus_opening_hours.wed_from_ap && bus_opening_hours.wed_to_time && bus_opening_hours.wed_to_ap">Wednesday : {{bus_opening_hours.wed_from_time}} {{bus_opening_hours.wed_from_ap}} to {{bus_opening_hours.wed_to_time}} {{bus_opening_hours.wed_to_ap}}</li>
-                                    <li ng-if="bus_opening_hours.thu_from_time && bus_opening_hours.thu_from_ap && bus_opening_hours.thu_to_time && bus_opening_hours.thu_to_ap">Thursday : {{bus_opening_hours.thu_from_time}} {{bus_opening_hours.thu_from_ap}} to {{bus_opening_hours.thu_to_time}} {{bus_opening_hours.thu_to_ap}}</li>
-                                    <li ng-if="bus_opening_hours.fri_from_time && bus_opening_hours.fri_from_ap && bus_opening_hours.fri_to_time && bus_opening_hours.fri_to_ap">Friday : {{bus_opening_hours.fri_from_time}} {{bus_opening_hours.fri_from_ap}} to {{bus_opening_hours.fri_to_time}} {{bus_opening_hours.fri_to_ap}}</li>
-                                    <li ng-if="bus_opening_hours.sat_from_time && bus_opening_hours.sat_from_ap && bus_opening_hours.sat_to_time && bus_opening_hours.sat_to_ap">Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</li>
-                                </ul>
-                            </div>
-                            <div class="dash-info-box miss-cus" ng-if="business_info_data.business_mission != ''">
-                                <h4>
-                                    <svg  viewBox="0 0 414.295 414.295" width="18px" height="17px" stroke-width="1" stroke="#5c5c5c">
-                                        <g>
-                                            <g>
-                                                <path d="M342.804,129.011l69.12-69.12c3.139-3.109,3.164-8.174,0.055-11.314c-1.437-1.451-3.374-2.298-5.415-2.366l0.24,0.48    l-37.6-1.28l-1.28-37.6c-0.149-4.416-3.849-7.875-8.265-7.726c-2.041,0.069-3.979,0.915-5.415,2.366l-69.04,68.72    c-1.558,1.568-2.398,3.711-2.32,5.92v8C200.799,28.544,88.417,49.247,31.87,131.331S-3.975,325.798,78.11,382.345    c82.084,56.547,194.467,35.844,251.014-46.24c42.471-61.651,42.471-143.122,0-204.774h8    C339.25,131.343,341.294,130.508,342.804,129.011z M345.204,233.811c0.12,90.928-73.495,164.737-164.423,164.857    c-90.928,0.12-164.737-73.495-164.857-164.423c-0.12-90.928,73.495-164.737,164.423-164.857    c37.649-0.05,74.177,12.806,103.497,36.423l0.4,13.36l-32,32c-45.521-39.897-114.766-35.337-154.663,10.184    c-39.897,45.521-35.337,114.766,10.184,154.663c45.521,39.897,114.766,35.337,154.663-10.184    c35.846-40.9,36.279-101.899,1.016-143.303l32-32l13.2,0.48C332.172,160.12,345.068,196.383,345.204,233.811z M175.444,239.171    c3.12,3.102,8.16,3.102,11.28,0l16-16c1.559,3.218,2.379,6.744,2.4,10.32c0,13.255-10.745,24-24,24s-24-10.745-24-24    s10.745-24,24-24c3.576,0.021,7.102,0.841,10.32,2.4l-16,16C172.342,231.011,172.342,236.051,175.444,239.171z M203.124,200.131    c-18.422-12.192-43.24-7.142-55.432,11.28c-12.192,18.422-7.142,43.24,11.28,55.432c18.422,12.192,43.24,7.142,55.432-11.28    c8.858-13.385,8.858-30.768,0-44.152l37.92-37.92c33.243,39.472,28.192,98.419-11.28,131.662    c-39.472,33.243-98.419,28.192-131.662-11.28c-33.243-39.472-28.192-98.419,11.28-131.662c34.782-29.292,85.6-29.292,120.382,0    L203.124,200.131z M300.404,114.211l-1.12-34.08l53.6-53.6l0.88,26.64c0,4.418,3.582,8,8,8l26.64,0.88l-53.92,53.28    L300.404,114.211z" fill="#5c5c5c"/>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                Mission</h4>
-                                <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{business_info_data.business_mission}}" dd-text-collapse-cond="true">
-                                    {{business_info_data.business_mission}}
-                                </p>
-                            </div>
-                            <div class="dash-info-box tag-cus" ng-if="business_info_data.business_tagline != ''">
-                                <h4>
-                                    <svg width="18px" height="16px" viewBox="0 0 400 400"  ><g id="svgg">
-                                        <path id="path0" d="M171.200 0.400 C 171.200 0.647,169.133 0.800,165.800 0.800 C 160.667 0.800,160.400 0.840,160.400 1.600 C 160.400 2.347,160.133 2.400,156.400 2.400 C 152.667 2.400,152.400 2.453,152.400 3.200 C 152.400 3.933,152.133 4.000,149.200 4.000 C 146.267 4.000,146.000 4.067,146.000 4.800 C 146.000 5.529,145.733 5.600,143.000 5.600 C 140.267 5.600,140.000 5.671,140.000 6.400 C 140.000 7.133,139.733 7.200,136.800 7.200 C 133.867 7.200,133.600 7.267,133.600 8.000 C 133.600 8.703,133.333 8.800,131.400 8.800 C 129.467 8.800,129.200 8.897,129.200 9.600 C 129.200 10.311,128.933 10.400,126.800 10.400 C 124.667 10.400,124.400 10.489,124.400 11.200 C 124.400 11.911,124.133 12.000,122.000 12.000 C 120.133 12.000,119.600 12.133,119.600 12.600 C 119.600 13.022,119.174 13.200,118.163 13.200 C 117.062 13.200,116.676 13.387,116.516 14.000 C 116.339 14.675,115.970 14.800,114.153 14.800 C 112.267 14.800,112.000 14.899,112.000 15.600 C 112.000 16.267,111.733 16.400,110.400 16.400 C 109.067 16.400,108.800 16.533,108.800 17.200 C 108.800 17.867,108.533 18.000,107.200 18.000 C 105.867 18.000,105.600 18.133,105.600 18.800 C 105.600 19.467,105.333 19.600,104.000 19.600 C 102.667 19.600,102.400 19.733,102.400 20.400 C 102.400 21.067,102.133 21.200,100.800 21.200 C 99.467 21.200,99.200 21.333,99.200 22.000 C 99.200 22.667,98.933 22.800,97.600 22.800 C 96.267 22.800,96.000 22.933,96.000 23.600 C 96.000 24.248,95.733 24.400,94.600 24.400 C 93.467 24.400,93.200 24.552,93.200 25.200 C 93.200 25.867,92.933 26.000,91.600 26.000 C 90.267 26.000,90.000 26.133,90.000 26.800 C 90.000 27.467,89.733 27.600,88.400 27.600 C 87.067 27.600,86.800 27.733,86.800 28.400 C 86.800 28.933,86.533 29.200,86.000 29.200 C 85.556 29.200,85.200 29.467,85.200 29.800 C 85.200 30.222,84.774 30.400,83.763 30.400 C 82.662 30.400,82.276 30.587,82.116 31.200 C 82.001 31.640,81.641 32.000,81.316 32.000 C 80.991 32.000,80.631 32.360,80.516 32.800 C 80.359 33.401,79.970 33.600,78.953 33.600 C 77.867 33.600,77.600 33.758,77.600 34.400 C 77.600 34.933,77.333 35.200,76.800 35.200 C 76.267 35.200,76.000 35.467,76.000 36.000 C 76.000 36.667,75.733 36.800,74.400 36.800 C 73.067 36.800,72.800 36.933,72.800 37.600 C 72.800 38.133,72.533 38.400,72.000 38.400 C 71.467 38.400,71.200 38.667,71.200 39.200 C 71.200 39.733,70.933 40.000,70.400 40.000 C 69.867 40.000,69.600 40.267,69.600 40.800 C 69.600 41.467,69.333 41.600,68.000 41.600 C 66.667 41.600,66.400 41.733,66.400 42.400 C 66.400 42.933,66.133 43.200,65.600 43.200 C 65.067 43.200,64.800 43.467,64.800 44.000 C 64.800 44.533,64.533 44.800,64.000 44.800 C 63.556 44.800,63.200 45.067,63.200 45.400 C 63.200 45.730,62.930 46.000,62.600 46.000 C 62.267 46.000,62.000 46.356,62.000 46.800 C 62.000 47.467,61.733 47.600,60.400 47.600 C 59.067 47.600,58.800 47.733,58.800 48.400 C 58.800 48.933,58.533 49.200,58.000 49.200 C 57.467 49.200,57.200 49.467,57.200 50.000 C 57.200 50.533,56.933 50.800,56.400 50.800 C 55.867 50.800,55.600 51.067,55.600 51.600 C 55.600 52.133,55.333 52.400,54.800 52.400 C 54.267 52.400,54.000 52.667,54.000 53.200 C 54.000 53.733,53.733 54.000,53.200 54.000 C 52.667 54.000,52.400 54.267,52.400 54.800 C 52.400 55.333,52.133 55.600,51.600 55.600 C 51.067 55.600,50.800 55.867,50.800 56.400 C 50.800 56.933,50.533 57.200,50.000 57.200 C 49.467 57.200,49.200 57.467,49.200 58.000 C 49.200 58.533,48.933 58.800,48.400 58.800 C 47.867 58.800,47.600 59.067,47.600 59.600 C 47.600 60.133,47.333 60.400,46.800 60.400 C 46.267 60.400,46.000 60.667,46.000 61.200 C 46.000 61.644,45.733 62.000,45.400 62.000 C 45.070 62.000,44.800 62.270,44.800 62.600 C 44.800 62.933,44.444 63.200,44.000 63.200 C 43.467 63.200,43.200 63.467,43.200 64.000 C 43.200 64.533,42.933 64.800,42.400 64.800 C 41.867 64.800,41.600 65.067,41.600 65.600 C 41.600 66.133,41.333 66.400,40.800 66.400 C 40.133 66.400,40.000 66.667,40.000 68.000 C 40.000 69.333,39.867 69.600,39.200 69.600 C 38.667 69.600,38.400 69.867,38.400 70.400 C 38.400 70.933,38.133 71.200,37.600 71.200 C 37.067 71.200,36.800 71.467,36.800 72.000 C 36.800 72.533,36.533 72.800,36.000 72.800 C 35.467 72.800,35.200 73.067,35.200 73.600 C 35.200 74.133,34.933 74.400,34.400 74.400 C 33.733 74.400,33.600 74.667,33.600 76.000 C 33.600 77.333,33.467 77.600,32.800 77.600 C 32.267 77.600,32.000 77.867,32.000 78.400 C 32.000 78.933,31.733 79.200,31.200 79.200 C 30.756 79.200,30.400 79.467,30.400 79.800 C 30.400 80.130,30.130 80.400,29.800 80.400 C 29.367 80.400,29.200 80.844,29.200 82.000 C 29.200 83.333,29.067 83.600,28.400 83.600 C 27.867 83.600,27.600 83.867,27.600 84.400 C 27.600 84.933,27.333 85.200,26.800 85.200 C 26.133 85.200,26.000 85.467,26.000 86.800 C 26.000 88.133,25.867 88.400,25.200 88.400 C 24.667 88.400,24.400 88.667,24.400 89.200 C 24.400 89.733,24.133 90.000,23.600 90.000 C 22.933 90.000,22.800 90.267,22.800 91.600 C 22.800 92.933,22.667 93.200,22.000 93.200 C 21.352 93.200,21.200 93.467,21.200 94.600 C 21.200 95.733,21.048 96.000,20.400 96.000 C 19.883 96.000,19.600 96.267,19.600 96.753 C 19.600 97.170,19.243 97.600,18.800 97.716 C 18.194 97.875,18.000 98.262,18.000 99.316 C 18.000 100.370,17.806 100.757,17.200 100.916 C 16.587 101.076,16.400 101.462,16.400 102.563 C 16.400 103.733,16.252 104.000,15.600 104.000 C 14.933 104.000,14.800 104.267,14.800 105.600 C 14.800 106.933,14.667 107.200,14.000 107.200 C 13.289 107.200,13.200 107.467,13.200 109.600 C 13.200 111.467,13.067 112.000,12.600 112.000 C 12.181 112.000,12.000 112.422,12.000 113.400 C 12.000 114.533,11.848 114.800,11.200 114.800 C 10.489 114.800,10.400 115.067,10.400 117.200 C 10.400 119.333,10.311 119.600,9.600 119.600 C 8.933 119.600,8.800 119.867,8.800 121.200 C 8.800 122.533,8.667 122.800,8.000 122.800 C 7.267 122.800,7.200 123.067,7.200 126.000 C 7.200 128.933,7.133 129.200,6.400 129.200 C 5.697 129.200,5.600 129.467,5.600 131.400 C 5.600 133.333,5.503 133.600,4.800 133.600 C 4.067 133.600,4.000 133.867,4.000 136.800 C 4.000 139.733,3.933 140.000,3.200 140.000 C 2.456 140.000,2.400 140.267,2.400 143.800 C 2.400 147.333,2.344 147.600,1.600 147.600 C 0.838 147.600,0.800 147.867,0.800 153.200 C 0.800 156.667,0.648 158.800,0.400 158.800 C 0.139 158.800,0.000 165.000,0.000 176.600 C 0.000 188.200,0.139 194.400,0.400 194.400 C 0.648 194.400,0.800 196.533,0.800 200.000 C 0.800 205.333,0.838 205.600,1.600 205.600 C 2.344 205.600,2.400 205.867,2.400 209.400 C 2.400 212.933,2.456 213.200,3.200 213.200 C 3.933 213.200,4.000 213.467,4.000 216.400 C 4.000 219.333,4.067 219.600,4.800 219.600 C 5.529 219.600,5.600 219.867,5.600 222.600 C 5.600 225.333,5.671 225.600,6.400 225.600 C 7.111 225.600,7.200 225.867,7.200 228.000 C 7.200 230.133,7.289 230.400,8.000 230.400 C 8.667 230.400,8.800 230.667,8.800 232.000 C 8.800 233.333,8.933 233.600,9.600 233.600 C 10.311 233.600,10.400 233.867,10.400 236.000 C 10.400 238.133,10.489 238.400,11.200 238.400 C 11.867 238.400,12.000 238.667,12.000 240.000 C 12.000 241.156,12.167 241.600,12.600 241.600 C 13.061 241.600,13.200 242.111,13.200 243.800 C 13.200 245.733,13.297 246.000,14.000 246.000 C 14.667 246.000,14.800 246.267,14.800 247.600 C 14.800 248.933,14.933 249.200,15.600 249.200 C 16.252 249.200,16.400 249.467,16.400 250.637 C 16.400 251.738,16.587 252.124,17.200 252.284 C 17.806 252.443,18.000 252.830,18.000 253.884 C 18.000 254.938,18.194 255.325,18.800 255.484 C 19.243 255.600,19.600 256.030,19.600 256.447 C 19.600 256.933,19.883 257.200,20.400 257.200 C 21.048 257.200,21.200 257.467,21.200 258.600 C 21.200 259.733,21.352 260.000,22.000 260.000 C 22.667 260.000,22.800 260.267,22.800 261.600 C 22.800 262.933,22.933 263.200,23.600 263.200 C 24.133 263.200,24.400 263.467,24.400 264.000 C 24.400 264.533,24.667 264.800,25.200 264.800 C 25.867 264.800,26.000 265.067,26.000 266.400 C 26.000 267.733,26.133 268.000,26.800 268.000 C 27.333 268.000,27.600 268.267,27.600 268.800 C 27.600 269.333,27.867 269.600,28.400 269.600 C 29.067 269.600,29.200 269.867,29.200 271.200 C 29.200 272.296,29.374 272.800,29.753 272.800 C 30.058 272.800,30.401 273.160,30.516 273.600 C 30.631 274.040,31.012 274.400,31.363 274.400 C 31.824 274.400,32.000 274.786,32.000 275.800 C 32.000 276.933,32.152 277.200,32.800 277.200 C 33.333 277.200,33.600 277.467,33.600 278.000 C 33.600 278.533,33.867 278.800,34.400 278.800 C 34.933 278.800,35.200 279.067,35.200 279.600 C 35.200 280.133,35.467 280.400,36.000 280.400 C 36.533 280.400,36.800 280.667,36.800 281.200 C 36.800 281.733,37.067 282.000,37.600 282.000 C 38.267 282.000,38.400 282.267,38.400 283.600 C 38.400 284.933,38.533 285.200,39.200 285.200 C 39.733 285.200,40.000 285.467,40.000 286.000 C 40.000 286.533,40.267 286.800,40.800 286.800 C 41.333 286.800,41.600 287.067,41.600 287.600 C 41.600 288.133,41.867 288.400,42.400 288.400 C 42.933 288.400,43.200 288.667,43.200 289.200 C 43.200 289.733,43.467 290.000,44.000 290.000 C 44.533 290.000,44.800 290.267,44.800 290.800 C 44.800 291.244,45.067 291.600,45.400 291.600 C 45.730 291.600,46.000 291.870,46.000 292.200 C 46.000 292.533,46.356 292.800,46.800 292.800 C 47.333 292.800,47.600 293.067,47.600 293.600 C 47.600 294.133,47.867 294.400,48.400 294.400 C 48.933 294.400,49.200 294.667,49.200 295.200 C 49.200 295.733,49.467 296.000,50.000 296.000 C 50.533 296.000,50.800 296.267,50.800 296.800 C 50.800 297.333,51.067 297.600,51.600 297.600 C 52.133 297.600,52.400 297.867,52.400 298.400 C 52.400 298.933,52.667 299.200,53.200 299.200 C 53.733 299.200,54.000 299.467,54.000 300.000 C 54.000 300.533,54.267 300.800,54.800 300.800 C 55.333 300.800,55.600 301.067,55.600 301.600 C 55.600 302.133,55.867 302.400,56.400 302.400 C 56.933 302.400,57.200 302.667,57.200 303.200 C 57.200 303.733,57.467 304.000,58.000 304.000 C 58.533 304.000,58.800 304.267,58.800 304.800 C 58.800 305.333,59.067 305.600,59.600 305.600 C 60.133 305.600,60.400 305.867,60.400 306.400 C 60.400 307.048,60.667 307.200,61.800 307.200 C 62.778 307.200,63.200 307.381,63.200 307.800 C 63.200 308.133,63.556 308.400,64.000 308.400 C 64.533 308.400,64.800 308.667,64.800 309.200 C 64.800 309.733,65.067 310.000,65.600 310.000 C 66.133 310.000,66.400 310.267,66.400 310.800 C 66.400 311.333,66.667 311.600,67.200 311.600 C 67.733 311.600,68.000 311.867,68.000 312.400 C 68.000 313.067,68.267 313.200,69.600 313.200 C 70.933 313.200,71.200 313.333,71.200 314.000 C 71.200 314.533,71.467 314.800,72.000 314.800 C 72.533 314.800,72.800 315.067,72.800 315.600 C 72.800 316.267,73.067 316.400,74.400 316.400 C 75.733 316.400,76.000 316.533,76.000 317.200 C 76.000 317.733,76.267 318.000,76.800 318.000 C 77.333 318.000,77.600 318.267,77.600 318.800 C 77.600 319.333,77.867 319.600,78.400 319.600 C 78.933 319.600,79.200 319.867,79.200 320.400 C 79.200 321.042,79.467 321.200,80.553 321.200 C 81.570 321.200,81.959 321.399,82.116 322.000 C 82.276 322.613,82.662 322.800,83.763 322.800 C 84.933 322.800,85.200 322.948,85.200 323.600 C 85.200 324.133,85.467 324.400,86.000 324.400 C 86.444 324.400,86.800 324.667,86.800 325.000 C 86.800 325.433,87.244 325.600,88.400 325.600 C 89.733 325.600,90.000 325.733,90.000 326.400 C 90.000 327.067,90.267 327.200,91.600 327.200 C 92.933 327.200,93.200 327.333,93.200 328.000 C 93.200 328.533,93.467 328.800,94.000 328.800 C 94.533 328.800,94.800 329.067,94.800 329.600 C 94.800 330.248,95.067 330.400,96.200 330.400 C 97.333 330.400,97.600 330.552,97.600 331.200 C 97.600 331.867,97.867 332.000,99.200 332.000 C 100.533 332.000,100.800 332.133,100.800 332.800 C 100.800 333.467,101.067 333.600,102.400 333.600 C 103.733 333.600,104.000 333.733,104.000 334.400 C 104.000 335.111,104.267 335.200,106.400 335.200 C 108.533 335.200,108.800 335.289,108.800 336.000 C 108.800 336.667,109.067 336.800,110.400 336.800 C 111.733 336.800,112.000 336.933,112.000 337.600 C 112.000 338.242,112.267 338.400,113.353 338.400 C 114.370 338.400,114.759 338.599,114.916 339.200 C 115.094 339.880,115.462 340.000,117.363 340.000 C 119.333 340.000,119.600 340.095,119.600 340.800 C 119.600 341.511,119.867 341.600,122.000 341.600 C 123.867 341.600,124.400 341.733,124.400 342.200 C 124.400 342.633,124.844 342.800,126.000 342.800 C 127.333 342.800,127.600 342.933,127.600 343.600 C 127.600 344.329,127.867 344.400,130.600 344.400 C 133.333 344.400,133.600 344.471,133.600 345.200 C 133.600 345.911,133.867 346.000,136.000 346.000 C 138.133 346.000,138.400 346.089,138.400 346.800 C 138.400 347.533,138.667 347.600,141.600 347.600 C 144.533 347.600,144.800 347.667,144.800 348.400 C 144.800 349.129,145.067 349.200,147.800 349.200 C 150.533 349.200,150.800 349.271,150.800 350.000 C 150.800 350.747,151.067 350.800,154.800 350.800 C 158.533 350.800,158.800 350.853,158.800 351.600 C 158.800 352.360,159.067 352.400,164.200 352.400 C 169.333 352.400,169.600 352.440,169.600 353.200 C 169.600 353.975,169.867 354.000,178.153 354.000 C 186.370 354.000,186.715 354.031,186.916 354.800 C 187.119 355.578,187.462 355.600,199.363 355.600 C 211.333 355.600,211.600 355.583,211.600 354.800 C 211.600 354.025,211.867 354.000,220.200 354.000 C 228.533 354.000,228.800 353.975,228.800 353.200 C 228.800 352.453,229.067 352.400,232.800 352.400 C 236.533 352.400,236.800 352.453,236.800 353.200 C 236.800 353.867,237.067 354.000,238.400 354.000 C 239.733 354.000,240.000 354.133,240.000 354.800 C 240.000 355.333,240.267 355.600,240.800 355.600 C 241.333 355.600,241.600 355.867,241.600 356.400 C 241.600 356.933,241.867 357.200,242.400 357.200 C 242.844 357.200,243.200 357.467,243.200 357.800 C 243.200 358.219,243.622 358.400,244.600 358.400 C 245.733 358.400,246.000 358.552,246.000 359.200 C 246.000 359.733,246.267 360.000,246.800 360.000 C 247.333 360.000,247.600 360.267,247.600 360.800 C 247.600 361.467,247.867 361.600,249.200 361.600 C 250.533 361.600,250.800 361.733,250.800 362.400 C 250.800 362.933,251.067 363.200,251.600 363.200 C 252.133 363.200,252.400 363.467,252.400 364.000 C 252.400 364.667,252.667 364.800,254.000 364.800 C 255.333 364.800,255.600 364.933,255.600 365.600 C 255.600 366.267,255.867 366.400,257.200 366.400 C 258.533 366.400,258.800 366.533,258.800 367.200 C 258.800 367.733,259.067 368.000,259.600 368.000 C 260.133 368.000,260.400 368.267,260.400 368.800 C 260.400 369.442,260.667 369.600,261.753 369.600 C 262.770 369.600,263.159 369.799,263.316 370.400 C 263.475 371.006,263.862 371.200,264.916 371.200 C 265.970 371.200,266.357 371.394,266.516 372.000 C 266.676 372.613,267.062 372.800,268.163 372.800 C 269.333 372.800,269.600 372.948,269.600 373.600 C 269.600 374.133,269.867 374.400,270.400 374.400 C 270.844 374.400,271.200 374.667,271.200 375.000 C 271.200 375.433,271.644 375.600,272.800 375.600 C 274.133 375.600,274.400 375.733,274.400 376.400 C 274.400 377.067,274.667 377.200,276.000 377.200 C 277.333 377.200,277.600 377.333,277.600 378.000 C 277.600 378.648,277.867 378.800,279.000 378.800 C 280.133 378.800,280.400 378.952,280.400 379.600 C 280.400 380.267,280.667 380.400,282.000 380.400 C 283.333 380.400,283.600 380.533,283.600 381.200 C 283.600 381.911,283.867 382.000,286.000 382.000 C 288.133 382.000,288.400 382.089,288.400 382.800 C 288.400 383.467,288.667 383.600,290.000 383.600 C 291.333 383.600,291.600 383.733,291.600 384.400 C 291.600 385.067,291.867 385.200,293.200 385.200 C 294.533 385.200,294.800 385.333,294.800 386.000 C 294.800 386.701,295.067 386.800,296.953 386.800 C 298.770 386.800,299.139 386.925,299.316 387.600 C 299.475 388.206,299.862 388.400,300.916 388.400 C 301.970 388.400,302.357 388.594,302.516 389.200 C 302.694 389.880,303.062 390.000,304.963 390.000 C 306.933 390.000,307.200 390.095,307.200 390.800 C 307.200 391.511,307.467 391.600,309.600 391.600 C 311.467 391.600,312.000 391.733,312.000 392.200 C 312.000 392.661,312.511 392.800,314.200 392.800 C 316.133 392.800,316.400 392.897,316.400 393.600 C 316.400 394.333,316.667 394.400,319.600 394.400 C 322.533 394.400,322.800 394.467,322.800 395.200 C 322.800 395.933,323.067 396.000,326.000 396.000 C 328.933 396.000,329.200 396.067,329.200 396.800 C 329.200 397.544,329.467 397.600,333.000 397.600 C 336.533 397.600,336.800 397.656,336.800 398.400 C 336.800 399.154,337.067 399.200,341.400 399.200 C 344.200 399.200,346.000 399.357,346.000 399.600 C 346.000 399.861,353.067 400.000,366.400 400.000 C 379.733 400.000,386.800 399.861,386.800 399.600 C 386.800 399.361,388.333 399.200,390.600 399.200 C 394.133 399.200,394.400 399.144,394.400 398.400 C 394.400 397.733,394.667 397.600,396.000 397.600 C 397.333 397.600,397.600 397.467,397.600 396.800 C 397.600 396.178,397.867 396.000,398.800 396.000 L 400.000 396.000 400.000 389.000 C 400.000 384.600,399.851 382.000,399.600 382.000 C 399.380 382.000,399.200 381.640,399.200 381.200 C 399.200 380.667,398.933 380.400,398.400 380.400 C 397.956 380.400,397.600 380.133,397.600 379.800 C 397.600 379.367,397.156 379.200,396.000 379.200 C 394.667 379.200,394.400 379.067,394.400 378.400 C 394.400 377.867,394.133 377.600,393.600 377.600 C 393.067 377.600,392.800 377.333,392.800 376.800 C 392.800 376.356,392.533 376.000,392.200 376.000 C 391.867 376.000,391.600 375.644,391.600 375.200 C 391.600 374.667,391.333 374.400,390.800 374.400 C 390.267 374.400,390.000 374.133,390.000 373.600 C 390.000 372.933,389.733 372.800,388.400 372.800 C 387.067 372.800,386.800 372.667,386.800 372.000 C 386.800 371.467,386.533 371.200,386.000 371.200 C 385.467 371.200,385.200 370.933,385.200 370.400 C 385.200 369.867,384.933 369.600,384.400 369.600 C 383.867 369.600,383.600 369.333,383.600 368.800 C 383.600 368.133,383.333 368.000,382.000 368.000 C 380.667 368.000,380.400 367.867,380.400 367.200 C 380.400 366.667,380.133 366.400,379.600 366.400 C 379.067 366.400,378.800 366.133,378.800 365.600 C 378.800 365.067,378.533 364.800,378.000 364.800 C 377.467 364.800,377.200 364.533,377.200 364.000 C 377.200 363.467,376.933 363.200,376.400 363.200 C 375.956 363.200,375.600 362.933,375.600 362.600 C 375.600 362.270,375.330 362.000,375.000 362.000 C 374.667 362.000,374.400 361.644,374.400 361.200 C 374.400 360.667,374.133 360.400,373.600 360.400 C 373.067 360.400,372.800 360.133,372.800 359.600 C 372.800 359.067,372.533 358.800,372.000 358.800 C 371.467 358.800,371.200 358.533,371.200 358.000 C 371.200 357.467,370.933 357.200,370.400 357.200 C 369.867 357.200,369.600 356.933,369.600 356.400 C 369.600 355.867,369.333 355.600,368.800 355.600 C 368.267 355.600,368.000 355.333,368.000 354.800 C 368.000 354.267,367.733 354.000,367.200 354.000 C 366.667 354.000,366.400 353.733,366.400 353.200 C 366.400 352.667,366.133 352.400,365.600 352.400 C 365.067 352.400,364.800 352.133,364.800 351.600 C 364.800 351.067,364.533 350.800,364.000 350.800 C 363.467 350.800,363.200 350.533,363.200 350.000 C 363.200 349.467,362.933 349.200,362.400 349.200 C 361.867 349.200,361.600 348.933,361.600 348.400 C 361.600 347.867,361.333 347.600,360.800 347.600 C 360.267 347.600,360.000 347.333,360.000 346.800 C 360.000 346.267,359.733 346.000,359.200 346.000 C 358.552 346.000,358.400 345.733,358.400 344.600 C 358.400 343.622,358.219 343.200,357.800 343.200 C 357.467 343.200,357.200 342.844,357.200 342.400 C 357.200 341.867,356.933 341.600,356.400 341.600 C 355.733 341.600,355.600 341.333,355.600 340.000 C 355.600 338.667,355.467 338.400,354.800 338.400 C 354.267 338.400,354.000 338.133,354.000 337.600 C 354.000 337.067,353.733 336.800,353.200 336.800 C 352.533 336.800,352.400 336.533,352.400 335.200 C 352.400 333.867,352.267 333.600,351.600 333.600 C 350.948 333.600,350.800 333.333,350.800 332.163 C 350.800 331.062,350.613 330.676,350.000 330.516 C 349.399 330.359,349.200 329.970,349.200 328.953 C 349.200 327.867,349.042 327.600,348.400 327.600 C 347.689 327.600,347.600 327.333,347.600 325.200 C 347.600 323.067,347.511 322.800,346.800 322.800 C 346.089 322.800,346.000 322.533,346.000 320.400 C 346.000 318.267,345.911 318.000,345.200 318.000 C 344.489 318.000,344.400 317.733,344.400 315.600 C 344.400 313.467,344.311 313.200,343.600 313.200 C 342.834 313.200,342.800 312.933,342.800 307.000 C 342.800 301.067,342.834 300.800,343.600 300.800 C 344.133 300.800,344.400 300.533,344.400 300.000 C 344.400 299.467,344.667 299.200,345.200 299.200 C 345.733 299.200,346.000 298.933,346.000 298.400 C 346.000 297.867,346.267 297.600,346.800 297.600 C 347.333 297.600,347.600 297.333,347.600 296.800 C 347.600 296.267,347.867 296.000,348.400 296.000 C 348.933 296.000,349.200 295.733,349.200 295.200 C 349.200 294.667,349.467 294.400,350.000 294.400 C 350.533 294.400,350.800 294.133,350.800 293.600 C 350.800 293.067,351.067 292.800,351.600 292.800 C 352.040 292.800,352.400 292.551,352.400 292.247 C 352.400 291.942,352.760 291.599,353.200 291.484 C 353.640 291.369,354.000 290.988,354.000 290.637 C 354.000 290.287,354.287 290.000,354.637 290.000 C 354.988 290.000,355.369 289.640,355.484 289.200 C 355.599 288.760,355.959 288.400,356.284 288.400 C 356.609 288.400,356.969 288.040,357.084 287.600 C 357.199 287.160,357.542 286.800,357.847 286.800 C 358.226 286.800,358.400 286.296,358.400 285.200 C 358.400 283.867,358.533 283.600,359.200 283.600 C 359.733 283.600,360.000 283.333,360.000 282.800 C 360.000 282.267,360.267 282.000,360.800 282.000 C 361.333 282.000,361.600 281.733,361.600 281.200 C 361.600 280.667,361.867 280.400,362.400 280.400 C 362.933 280.400,363.200 280.133,363.200 279.600 C 363.200 279.067,363.467 278.800,364.000 278.800 C 364.667 278.800,364.800 278.533,364.800 277.200 C 364.800 275.867,364.933 275.600,365.600 275.600 C 366.044 275.600,366.400 275.333,366.400 275.000 C 366.400 274.670,366.687 274.400,367.037 274.400 C 367.388 274.400,367.765 274.057,367.874 273.637 C 367.984 273.217,368.417 272.784,368.837 272.674 C 369.409 272.525,369.600 272.115,369.600 271.037 C 369.600 269.867,369.748 269.600,370.400 269.600 C 370.917 269.600,371.200 269.333,371.200 268.847 C 371.200 268.430,371.557 268.000,372.000 267.884 C 372.613 267.724,372.800 267.338,372.800 266.237 C 372.800 265.067,372.948 264.800,373.600 264.800 C 374.133 264.800,374.400 264.533,374.400 264.000 C 374.400 263.556,374.667 263.200,375.000 263.200 C 375.433 263.200,375.600 262.756,375.600 261.600 C 375.600 260.267,375.733 260.000,376.400 260.000 C 377.048 260.000,377.200 259.733,377.200 258.600 C 377.200 257.467,377.352 257.200,378.000 257.200 C 378.667 257.200,378.800 256.933,378.800 255.600 C 378.800 254.267,378.933 254.000,379.600 254.000 C 380.267 254.000,380.400 253.733,380.400 252.400 C 380.400 251.067,380.533 250.800,381.200 250.800 C 381.867 250.800,382.000 250.533,382.000 249.200 C 382.000 247.867,382.133 247.600,382.800 247.600 C 383.467 247.600,383.600 247.333,383.600 246.000 C 383.600 244.667,383.733 244.400,384.400 244.400 C 385.048 244.400,385.200 244.133,385.200 243.000 C 385.200 241.867,385.352 241.600,386.000 241.600 C 386.663 241.600,386.800 241.333,386.800 240.047 C 386.800 238.830,386.973 238.448,387.600 238.284 C 388.280 238.106,388.400 237.738,388.400 235.837 C 388.400 233.867,388.495 233.600,389.200 233.600 C 389.911 233.600,390.000 233.333,390.000 231.200 C 390.000 229.067,390.089 228.800,390.800 228.800 C 391.503 228.800,391.600 228.533,391.600 226.600 C 391.600 224.911,391.739 224.400,392.200 224.400 C 392.667 224.400,392.800 223.867,392.800 222.000 C 392.800 219.867,392.889 219.600,393.600 219.600 C 394.333 219.600,394.400 219.333,394.400 216.400 C 394.400 213.467,394.467 213.200,395.200 213.200 C 395.944 213.200,396.000 212.933,396.000 209.400 C 396.000 205.867,396.056 205.600,396.800 205.600 C 397.567 205.600,397.600 205.333,397.600 199.200 C 397.600 193.067,397.633 192.800,398.400 192.800 C 399.187 192.800,399.200 192.533,399.200 176.600 C 399.200 160.667,399.187 160.400,398.400 160.400 C 397.638 160.400,397.600 160.133,397.600 154.800 C 397.600 149.467,397.562 149.200,396.800 149.200 C 396.056 149.200,396.000 148.933,396.000 145.400 C 396.000 141.867,395.944 141.600,395.200 141.600 C 394.453 141.600,394.400 141.333,394.400 137.600 C 394.400 133.867,394.347 133.600,393.600 133.600 C 392.897 133.600,392.800 133.333,392.800 131.400 C 392.800 129.711,392.661 129.200,392.200 129.200 C 391.733 129.200,391.600 128.667,391.600 126.800 C 391.600 124.667,391.511 124.400,390.800 124.400 C 390.095 124.400,390.000 124.133,390.000 122.163 C 390.000 120.262,389.880 119.894,389.200 119.716 C 388.523 119.539,388.400 119.170,388.400 117.316 C 388.400 115.462,388.277 115.093,387.600 114.916 C 386.999 114.759,386.800 114.370,386.800 113.353 C 386.800 112.267,386.642 112.000,386.000 112.000 C 385.333 112.000,385.200 111.733,385.200 110.400 C 385.200 109.067,385.067 108.800,384.400 108.800 C 383.733 108.800,383.600 108.533,383.600 107.200 C 383.600 105.867,383.467 105.600,382.800 105.600 C 382.133 105.600,382.000 105.333,382.000 104.000 C 382.000 102.667,381.867 102.400,381.200 102.400 C 380.533 102.400,380.400 102.133,380.400 100.800 C 380.400 99.467,380.267 99.200,379.600 99.200 C 378.933 99.200,378.800 98.933,378.800 97.600 C 378.800 96.267,378.667 96.000,378.000 96.000 C 377.352 96.000,377.200 95.733,377.200 94.600 C 377.200 93.467,377.048 93.200,376.400 93.200 C 375.867 93.200,375.600 92.933,375.600 92.400 C 375.600 91.956,375.333 91.600,375.000 91.600 C 374.567 91.600,374.400 91.156,374.400 90.000 C 374.400 88.667,374.267 88.400,373.600 88.400 C 372.948 88.400,372.800 88.133,372.800 86.963 C 372.800 85.862,372.613 85.476,372.000 85.316 C 371.557 85.200,371.200 84.770,371.200 84.353 C 371.200 83.867,370.917 83.600,370.400 83.600 C 369.867 83.600,369.600 83.333,369.600 82.800 C 369.600 82.267,369.333 82.000,368.800 82.000 C 368.152 82.000,368.000 81.733,368.000 80.600 C 368.000 79.467,367.848 79.200,367.200 79.200 C 366.667 79.200,366.400 78.933,366.400 78.400 C 366.400 77.867,366.133 77.600,365.600 77.600 C 364.933 77.600,364.800 77.333,364.800 76.000 C 364.800 74.667,364.667 74.400,364.000 74.400 C 363.467 74.400,363.200 74.133,363.200 73.600 C 363.200 73.067,362.933 72.800,362.400 72.800 C 361.867 72.800,361.600 72.533,361.600 72.000 C 361.600 71.467,361.333 71.200,360.800 71.200 C 360.267 71.200,360.000 70.933,360.000 70.400 C 360.000 69.867,359.733 69.600,359.200 69.600 C 358.667 69.600,358.400 69.333,358.400 68.800 C 358.400 68.356,358.133 68.000,357.800 68.000 C 357.378 68.000,357.200 67.574,357.200 66.563 C 357.200 65.485,357.009 65.075,356.437 64.926 C 356.017 64.816,355.584 64.383,355.474 63.963 C 355.365 63.543,354.988 63.200,354.637 63.200 C 354.287 63.200,354.000 62.930,354.000 62.600 C 354.000 62.267,353.644 62.000,353.200 62.000 C 352.667 62.000,352.400 61.733,352.400 61.200 C 352.400 60.667,352.133 60.400,351.600 60.400 C 351.067 60.400,350.800 60.133,350.800 59.600 C 350.800 59.067,350.533 58.800,350.000 58.800 C 349.467 58.800,349.200 58.533,349.200 58.000 C 349.200 57.467,348.933 57.200,348.400 57.200 C 347.867 57.200,347.600 56.933,347.600 56.400 C 347.600 55.867,347.333 55.600,346.800 55.600 C 346.267 55.600,346.000 55.333,346.000 54.800 C 346.000 54.267,345.733 54.000,345.200 54.000 C 344.667 54.000,344.400 53.733,344.400 53.200 C 344.400 52.667,344.133 52.400,343.600 52.400 C 343.067 52.400,342.800 52.133,342.800 51.600 C 342.800 51.160,342.551 50.800,342.247 50.800 C 341.942 50.800,341.599 50.440,341.484 50.000 C 341.325 49.394,340.938 49.200,339.884 49.200 C 338.830 49.200,338.443 49.006,338.284 48.400 C 338.169 47.960,337.788 47.600,337.437 47.600 C 337.067 47.600,336.800 47.265,336.800 46.800 C 336.800 46.267,336.533 46.000,336.000 46.000 C 335.556 46.000,335.200 45.733,335.200 45.400 C 335.200 45.067,334.844 44.800,334.400 44.800 C 333.867 44.800,333.600 44.533,333.600 44.000 C 333.600 43.467,333.333 43.200,332.800 43.200 C 332.267 43.200,332.000 42.933,332.000 42.400 C 332.000 41.733,331.733 41.600,330.400 41.600 C 329.067 41.600,328.800 41.467,328.800 40.800 C 328.800 40.267,328.533 40.000,328.000 40.000 C 327.467 40.000,327.200 39.733,327.200 39.200 C 327.200 38.667,326.933 38.400,326.400 38.400 C 325.867 38.400,325.600 38.133,325.600 37.600 C 325.600 36.952,325.333 36.800,324.200 36.800 C 323.067 36.800,322.800 36.648,322.800 36.000 C 322.800 35.483,322.533 35.200,322.047 35.200 C 321.630 35.200,321.200 34.843,321.084 34.400 C 320.924 33.787,320.538 33.600,319.437 33.600 C 318.267 33.600,318.000 33.452,318.000 32.800 C 318.000 32.267,317.733 32.000,317.200 32.000 C 316.667 32.000,316.400 31.733,316.400 31.200 C 316.400 30.533,316.133 30.400,314.800 30.400 C 313.644 30.400,313.200 30.233,313.200 29.800 C 313.200 29.367,312.756 29.200,311.600 29.200 C 310.267 29.200,310.000 29.067,310.000 28.400 C 310.000 27.867,309.733 27.600,309.200 27.600 C 308.667 27.600,308.400 27.333,308.400 26.800 C 308.400 26.152,308.133 26.000,307.000 26.000 C 305.867 26.000,305.600 25.848,305.600 25.200 C 305.600 24.533,305.333 24.400,304.000 24.400 C 302.667 24.400,302.400 24.267,302.400 23.600 C 302.400 22.933,302.133 22.800,300.800 22.800 C 299.467 22.800,299.200 22.667,299.200 22.000 C 299.200 21.333,298.933 21.200,297.600 21.200 C 296.267 21.200,296.000 21.067,296.000 20.400 C 296.000 19.733,295.733 19.600,294.400 19.600 C 293.067 19.600,292.800 19.467,292.800 18.800 C 292.800 18.158,292.533 18.000,291.447 18.000 C 290.430 18.000,290.041 17.801,289.884 17.200 C 289.725 16.594,289.338 16.400,288.284 16.400 C 287.230 16.400,286.843 16.206,286.684 15.600 C 286.506 14.920,286.138 14.800,284.237 14.800 C 282.267 14.800,282.000 14.705,282.000 14.000 C 282.000 13.333,281.733 13.200,280.400 13.200 C 279.244 13.200,278.800 13.033,278.800 12.600 C 278.800 12.139,278.289 12.000,276.600 12.000 C 274.667 12.000,274.400 11.903,274.400 11.200 C 274.400 10.489,274.133 10.400,272.000 10.400 C 269.867 10.400,269.600 10.311,269.600 9.600 C 269.600 8.889,269.333 8.800,267.200 8.800 C 265.067 8.800,264.800 8.711,264.800 8.000 C 264.800 7.267,264.533 7.200,261.600 7.200 C 258.667 7.200,258.400 7.133,258.400 6.400 C 258.400 5.671,258.133 5.600,255.400 5.600 C 252.667 5.600,252.400 5.529,252.400 4.800 C 252.400 4.067,252.133 4.000,249.200 4.000 C 246.267 4.000,246.000 3.933,246.000 3.200 C 246.000 2.457,245.733 2.400,242.247 2.400 C 238.830 2.400,238.475 2.328,238.284 1.600 C 238.086 0.843,237.738 0.800,231.837 0.800 C 227.946 0.800,225.600 0.650,225.600 0.400 C 225.600 0.137,216.267 0.000,198.400 0.000 C 180.533 0.000,171.200 0.137,171.200 0.400 M219.600 18.800 C 219.600 19.560,219.867 19.600,224.953 19.600 C 229.970 19.600,230.320 19.650,230.516 20.400 C 230.710 21.142,231.062 21.200,235.363 21.200 C 239.733 21.200,240.000 21.246,240.000 22.000 C 240.000 22.728,240.267 22.800,242.953 22.800 C 245.570 22.800,245.931 22.891,246.116 23.600 C 246.302 24.311,246.662 24.400,249.363 24.400 C 251.796 24.400,252.400 24.519,252.400 25.000 C 252.400 25.483,253.022 25.600,255.600 25.600 C 258.533 25.600,258.800 25.667,258.800 26.400 C 258.800 27.103,259.067 27.200,261.000 27.200 C 262.933 27.200,263.200 27.297,263.200 28.000 C 263.200 28.711,263.467 28.800,265.600 28.800 C 267.733 28.800,268.000 28.889,268.000 29.600 C 268.000 30.267,268.267 30.400,269.600 30.400 C 270.933 30.400,271.200 30.533,271.200 31.200 C 271.200 31.911,271.467 32.000,273.600 32.000 C 275.733 32.000,276.000 32.089,276.000 32.800 C 276.000 33.467,276.267 33.600,277.600 33.600 C 278.933 33.600,279.200 33.733,279.200 34.400 C 279.200 35.042,279.467 35.200,280.553 35.200 C 281.570 35.200,281.959 35.399,282.116 36.000 C 282.275 36.606,282.662 36.800,283.716 36.800 C 284.770 36.800,285.157 36.994,285.316 37.600 C 285.476 38.213,285.862 38.400,286.963 38.400 C 288.133 38.400,288.400 38.548,288.400 39.200 C 288.400 39.867,288.667 40.000,290.000 40.000 C 291.333 40.000,291.600 40.133,291.600 40.800 C 291.600 41.467,291.867 41.600,293.200 41.600 C 294.356 41.600,294.800 41.767,294.800 42.200 C 294.800 42.619,295.222 42.800,296.200 42.800 C 297.333 42.800,297.600 42.952,297.600 43.600 C 297.600 44.267,297.867 44.400,299.200 44.400 C 300.533 44.400,300.800 44.533,300.800 45.200 C 300.800 45.733,301.067 46.000,301.600 46.000 C 302.133 46.000,302.400 46.267,302.400 46.800 C 302.400 47.467,302.667 47.600,304.000 47.600 C 305.333 47.600,305.600 47.733,305.600 48.400 C 305.600 48.933,305.867 49.200,306.400 49.200 C 306.933 49.200,307.200 49.467,307.200 50.000 C 307.200 50.667,307.467 50.800,308.800 50.800 C 310.133 50.800,310.400 50.933,310.400 51.600 C 310.400 52.133,310.667 52.400,311.200 52.400 C 311.733 52.400,312.000 52.667,312.000 53.200 C 312.000 53.848,312.267 54.000,313.400 54.000 C 314.414 54.000,314.800 54.176,314.800 54.637 C 314.800 54.988,315.160 55.369,315.600 55.484 C 316.040 55.599,316.400 55.959,316.400 56.284 C 316.400 56.609,316.760 56.969,317.200 57.084 C 317.640 57.199,318.000 57.542,318.000 57.847 C 318.000 58.226,318.504 58.400,319.600 58.400 C 320.933 58.400,321.200 58.533,321.200 59.200 C 321.200 59.733,321.467 60.000,322.000 60.000 C 322.533 60.000,322.800 60.267,322.800 60.800 C 322.800 61.333,323.067 61.600,323.600 61.600 C 324.133 61.600,324.400 61.867,324.400 62.400 C 324.400 62.933,324.667 63.200,325.200 63.200 C 325.733 63.200,326.000 63.467,326.000 64.000 C 326.000 64.533,326.267 64.800,326.800 64.800 C 327.333 64.800,327.600 65.067,327.600 65.600 C 327.600 66.133,327.867 66.400,328.400 66.400 C 328.933 66.400,329.200 66.667,329.200 67.200 C 329.200 67.640,329.449 68.000,329.753 68.000 C 330.058 68.000,330.401 68.360,330.516 68.800 C 330.631 69.240,330.991 69.600,331.316 69.600 C 331.641 69.600,332.001 69.960,332.116 70.400 C 332.231 70.840,332.591 71.200,332.916 71.200 C 333.241 71.200,333.601 71.560,333.716 72.000 C 333.831 72.440,334.191 72.800,334.516 72.800 C 334.841 72.800,335.201 73.160,335.316 73.600 C 335.431 74.040,335.812 74.400,336.163 74.400 C 336.513 74.400,336.800 74.670,336.800 75.000 C 336.800 75.333,337.156 75.600,337.600 75.600 C 338.133 75.600,338.400 75.867,338.400 76.400 C 338.400 76.933,338.667 77.200,339.200 77.200 C 339.733 77.200,340.000 77.467,340.000 78.000 C 340.000 78.533,340.267 78.800,340.800 78.800 C 341.333 78.800,341.600 79.067,341.600 79.600 C 341.600 80.133,341.867 80.400,342.400 80.400 C 342.933 80.400,343.200 80.667,343.200 81.200 C 343.200 81.733,343.467 82.000,344.000 82.000 C 344.533 82.000,344.800 82.267,344.800 82.800 C 344.800 83.244,345.067 83.600,345.400 83.600 C 345.733 83.600,346.000 83.956,346.000 84.400 C 346.000 84.933,346.267 85.200,346.800 85.200 C 347.452 85.200,347.600 85.467,347.600 86.637 C 347.600 87.715,347.791 88.125,348.363 88.274 C 348.783 88.384,349.216 88.817,349.326 89.237 C 349.435 89.657,349.812 90.000,350.163 90.000 C 350.533 90.000,350.800 90.335,350.800 90.800 C 350.800 91.333,351.067 91.600,351.600 91.600 C 352.248 91.600,352.400 91.867,352.400 93.000 C 352.400 94.133,352.552 94.400,353.200 94.400 C 353.733 94.400,354.000 94.667,354.000 95.200 C 354.000 95.733,354.267 96.000,354.800 96.000 C 355.467 96.000,355.600 96.267,355.600 97.600 C 355.600 98.933,355.733 99.200,356.400 99.200 C 356.933 99.200,357.200 99.467,357.200 100.000 C 357.200 100.533,357.467 100.800,358.000 100.800 C 358.667 100.800,358.800 101.067,358.800 102.400 C 358.800 103.733,358.933 104.000,359.600 104.000 C 360.267 104.000,360.400 104.267,360.400 105.600 C 360.400 106.933,360.533 107.200,361.200 107.200 C 361.848 107.200,362.000 107.467,362.000 108.600 C 362.000 109.578,362.181 110.000,362.600 110.000 C 362.933 110.000,363.200 110.356,363.200 110.800 C 363.200 111.333,363.467 111.600,364.000 111.600 C 364.667 111.600,364.800 111.867,364.800 113.200 C 364.800 114.533,364.933 114.800,365.600 114.800 C 366.305 114.800,366.400 115.067,366.400 117.037 C 366.400 118.938,366.520 119.306,367.200 119.484 C 367.806 119.643,368.000 120.030,368.000 121.084 C 368.000 122.138,368.194 122.525,368.800 122.684 C 369.401 122.841,369.600 123.230,369.600 124.247 C 369.600 125.333,369.758 125.600,370.400 125.600 C 371.111 125.600,371.200 125.867,371.200 128.000 C 371.200 130.133,371.289 130.400,372.000 130.400 C 372.711 130.400,372.800 130.667,372.800 132.800 C 372.800 134.933,372.889 135.200,373.600 135.200 C 374.333 135.200,374.400 135.467,374.400 138.400 C 374.400 141.333,374.467 141.600,375.200 141.600 C 375.903 141.600,376.000 141.867,376.000 143.800 C 376.000 145.733,376.097 146.000,376.800 146.000 C 377.556 146.000,377.600 146.267,377.600 150.800 C 377.600 155.333,377.644 155.600,378.400 155.600 C 379.166 155.600,379.200 155.867,379.200 161.800 C 379.200 167.044,379.292 168.000,379.800 168.000 C 380.315 168.000,380.400 169.222,380.400 176.600 C 380.400 183.978,380.315 185.200,379.800 185.200 C 379.292 185.200,379.200 186.156,379.200 191.400 C 379.200 197.333,379.166 197.600,378.400 197.600 C 377.644 197.600,377.600 197.867,377.600 202.400 C 377.600 206.933,377.556 207.200,376.800 207.200 C 376.071 207.200,376.000 207.467,376.000 210.200 C 376.000 212.933,375.929 213.200,375.200 213.200 C 374.489 213.200,374.400 213.467,374.400 215.600 C 374.400 217.733,374.311 218.000,373.600 218.000 C 372.889 218.000,372.800 218.267,372.800 220.400 C 372.800 222.533,372.711 222.800,372.000 222.800 C 371.289 222.800,371.200 223.067,371.200 225.200 C 371.200 227.333,371.111 227.600,370.400 227.600 C 369.758 227.600,369.600 227.867,369.600 228.953 C 369.600 229.970,369.401 230.359,368.800 230.516 C 368.194 230.675,368.000 231.062,368.000 232.116 C 368.000 233.170,367.806 233.557,367.200 233.716 C 366.520 233.894,366.400 234.262,366.400 236.163 C 366.400 238.133,366.305 238.400,365.600 238.400 C 364.933 238.400,364.800 238.667,364.800 240.000 C 364.800 241.333,364.667 241.600,364.000 241.600 C 363.333 241.600,363.200 241.867,363.200 243.200 C 363.200 244.356,363.033 244.800,362.600 244.800 C 362.270 244.800,362.000 245.070,362.000 245.400 C 362.000 245.733,361.644 246.000,361.200 246.000 C 360.533 246.000,360.400 246.267,360.400 247.600 C 360.400 248.933,360.267 249.200,359.600 249.200 C 358.933 249.200,358.800 249.467,358.800 250.800 C 358.800 252.133,358.667 252.400,358.000 252.400 C 357.467 252.400,357.200 252.667,357.200 253.200 C 357.200 253.733,356.933 254.000,356.400 254.000 C 355.733 254.000,355.600 254.267,355.600 255.600 C 355.600 256.933,355.467 257.200,354.800 257.200 C 354.267 257.200,354.000 257.467,354.000 258.000 C 354.000 258.533,353.733 258.800,353.200 258.800 C 352.533 258.800,352.400 259.067,352.400 260.400 C 352.400 261.733,352.267 262.000,351.600 262.000 C 351.156 262.000,350.800 262.267,350.800 262.600 C 350.800 262.930,350.513 263.200,350.163 263.200 C 349.812 263.200,349.435 263.543,349.326 263.963 C 349.216 264.383,348.783 264.816,348.363 264.926 C 347.791 265.075,347.600 265.485,347.600 266.563 C 347.600 267.733,347.452 268.000,346.800 268.000 C 346.267 268.000,346.000 268.267,346.000 268.800 C 346.000 269.244,345.733 269.600,345.400 269.600 C 345.067 269.600,344.800 269.956,344.800 270.400 C 344.800 270.933,344.533 271.200,344.000 271.200 C 343.467 271.200,343.200 271.467,343.200 272.000 C 343.200 272.533,342.933 272.800,342.400 272.800 C 341.867 272.800,341.600 273.067,341.600 273.600 C 341.600 274.133,341.333 274.400,340.800 274.400 C 340.267 274.400,340.000 274.667,340.000 275.200 C 340.000 275.733,339.733 276.000,339.200 276.000 C 338.533 276.000,338.400 276.267,338.400 277.600 C 338.400 278.933,338.267 279.200,337.600 279.200 C 337.156 279.200,336.800 279.467,336.800 279.800 C 336.800 280.133,336.444 280.400,336.000 280.400 C 335.467 280.400,335.200 280.667,335.200 281.200 C 335.200 281.733,334.933 282.000,334.400 282.000 C 333.867 282.000,333.600 282.267,333.600 282.800 C 333.600 283.333,333.333 283.600,332.800 283.600 C 332.267 283.600,332.000 283.867,332.000 284.400 C 332.000 285.048,331.733 285.200,330.600 285.200 C 329.467 285.200,329.200 285.352,329.200 286.000 C 329.200 286.533,328.933 286.800,328.400 286.800 C 327.867 286.800,327.600 287.067,327.600 287.600 C 327.600 288.133,327.333 288.400,326.800 288.400 C 326.267 288.400,326.000 288.667,326.000 289.200 C 326.000 289.733,325.733 290.000,325.200 290.000 C 324.533 290.000,324.400 290.267,324.400 291.600 C 324.400 292.933,324.267 293.200,323.600 293.200 C 322.825 293.200,322.800 293.467,322.800 301.600 C 322.800 309.733,322.825 310.000,323.600 310.000 C 324.356 310.000,324.400 310.267,324.400 314.800 C 324.400 319.333,324.444 319.600,325.200 319.600 C 325.929 319.600,326.000 319.867,326.000 322.600 C 326.000 325.333,326.071 325.600,326.800 325.600 C 327.511 325.600,327.600 325.867,327.600 328.000 C 327.600 330.133,327.689 330.400,328.400 330.400 C 329.067 330.400,329.200 330.667,329.200 332.000 C 329.200 333.156,329.367 333.600,329.800 333.600 C 330.262 333.600,330.400 334.115,330.400 335.837 C 330.400 337.738,330.520 338.106,331.200 338.284 C 331.806 338.443,332.000 338.830,332.000 339.884 C 332.000 340.938,332.194 341.325,332.800 341.484 C 333.401 341.641,333.600 342.030,333.600 343.047 C 333.600 344.133,333.758 344.400,334.400 344.400 C 335.067 344.400,335.200 344.667,335.200 346.000 C 335.200 347.333,335.333 347.600,336.000 347.600 C 336.533 347.600,336.800 347.867,336.800 348.400 C 336.800 348.933,337.067 349.200,337.600 349.200 C 338.267 349.200,338.400 349.467,338.400 350.800 C 338.400 352.133,338.533 352.400,339.200 352.400 C 339.733 352.400,340.000 352.667,340.000 353.200 C 340.000 353.733,340.267 354.000,340.800 354.000 C 341.467 354.000,341.600 354.267,341.600 355.600 C 341.600 356.933,341.733 357.200,342.400 357.200 C 342.844 357.200,343.200 357.467,343.200 357.800 C 343.200 358.133,343.556 358.400,344.000 358.400 C 344.533 358.400,344.800 358.667,344.800 359.200 C 344.800 359.644,345.067 360.000,345.400 360.000 C 345.733 360.000,346.000 360.356,346.000 360.800 C 346.000 361.333,346.267 361.600,346.800 361.600 C 347.467 361.600,347.600 361.867,347.600 363.200 C 347.600 364.533,347.733 364.800,348.400 364.800 C 348.933 364.800,349.200 365.067,349.200 365.600 C 349.200 366.133,349.467 366.400,350.000 366.400 C 350.533 366.400,350.800 366.667,350.800 367.200 C 350.800 367.733,351.067 368.000,351.600 368.000 C 352.133 368.000,352.400 368.267,352.400 368.800 C 352.400 369.333,352.667 369.600,353.200 369.600 C 353.733 369.600,354.000 369.867,354.000 370.400 C 354.000 370.933,354.267 371.200,354.800 371.200 C 355.333 371.200,355.600 371.467,355.600 372.000 C 355.600 372.533,355.867 372.800,356.400 372.800 C 356.933 372.800,357.200 373.067,357.200 373.600 C 357.200 374.133,357.467 374.400,358.000 374.400 C 358.444 374.400,358.800 374.667,358.800 375.000 C 358.800 375.333,359.156 375.600,359.600 375.600 C 360.133 375.600,360.400 375.867,360.400 376.400 C 360.400 376.933,360.667 377.200,361.200 377.200 C 361.733 377.200,362.000 377.467,362.000 378.000 C 362.000 378.648,362.267 378.800,363.400 378.800 C 364.533 378.800,364.800 378.952,364.800 379.600 C 364.800 380.133,365.067 380.400,365.600 380.400 C 366.133 380.400,366.400 380.667,366.400 381.200 C 366.400 382.448,352.610 382.448,352.284 381.200 C 352.090 380.458,351.738 380.400,347.437 380.400 C 343.582 380.400,342.800 380.299,342.800 379.800 C 342.800 379.309,342.111 379.200,339.000 379.200 C 335.467 379.200,335.200 379.144,335.200 378.400 C 335.200 377.667,334.933 377.600,332.000 377.600 C 329.067 377.600,328.800 377.533,328.800 376.800 C 328.800 376.097,328.533 376.000,326.600 376.000 C 324.667 376.000,324.400 375.903,324.400 375.200 C 324.400 374.489,324.133 374.400,322.000 374.400 C 319.867 374.400,319.600 374.311,319.600 373.600 C 319.600 372.889,319.333 372.800,317.200 372.800 C 315.067 372.800,314.800 372.711,314.800 372.000 C 314.800 371.289,314.533 371.200,312.400 371.200 C 310.267 371.200,310.000 371.111,310.000 370.400 C 310.000 369.697,309.733 369.600,307.800 369.600 C 305.867 369.600,305.600 369.503,305.600 368.800 C 305.600 368.137,305.333 368.000,304.047 368.000 C 302.830 368.000,302.448 367.827,302.284 367.200 C 302.124 366.587,301.738 366.400,300.637 366.400 C 299.467 366.400,299.200 366.252,299.200 365.600 C 299.200 364.889,298.933 364.800,296.800 364.800 C 294.667 364.800,294.400 364.711,294.400 364.000 C 294.400 363.352,294.133 363.200,293.000 363.200 C 292.022 363.200,291.600 363.019,291.600 362.600 C 291.600 362.167,291.156 362.000,290.000 362.000 C 288.667 362.000,288.400 361.867,288.400 361.200 C 288.400 360.533,288.133 360.400,286.800 360.400 C 285.467 360.400,285.200 360.267,285.200 359.600 C 285.200 358.933,284.933 358.800,283.600 358.800 C 282.267 358.800,282.000 358.667,282.000 358.000 C 282.000 357.333,281.733 357.200,280.400 357.200 C 279.067 357.200,278.800 357.067,278.800 356.400 C 278.800 355.733,278.533 355.600,277.200 355.600 C 275.867 355.600,275.600 355.467,275.600 354.800 C 275.600 354.360,275.351 354.000,275.047 354.000 C 274.742 354.000,274.399 353.640,274.284 353.200 C 274.125 352.594,273.738 352.400,272.684 352.400 C 271.630 352.400,271.243 352.206,271.084 351.600 C 270.924 350.987,270.538 350.800,269.437 350.800 C 268.267 350.800,268.000 350.652,268.000 350.000 C 268.000 349.467,267.733 349.200,267.200 349.200 C 266.667 349.200,266.400 348.933,266.400 348.400 C 266.400 347.733,266.133 347.600,264.800 347.600 C 263.467 347.600,263.200 347.467,263.200 346.800 C 263.200 346.267,262.933 346.000,262.400 346.000 C 261.956 346.000,261.600 345.733,261.600 345.400 C 261.600 344.967,261.156 344.800,260.000 344.800 C 258.667 344.800,258.400 344.667,258.400 344.000 C 258.400 343.556,258.133 343.200,257.800 343.200 C 257.467 343.200,257.200 342.844,257.200 342.400 C 257.200 341.733,256.933 341.600,255.600 341.600 C 254.267 341.600,254.000 341.467,254.000 340.800 C 254.000 340.267,253.733 340.000,253.200 340.000 C 252.667 340.000,252.400 339.733,252.400 339.200 C 252.400 338.667,252.133 338.400,251.600 338.400 C 251.067 338.400,250.800 338.133,250.800 337.600 C 250.800 336.933,250.533 336.800,249.200 336.800 C 247.867 336.800,247.600 336.667,247.600 336.000 C 247.600 335.467,247.333 335.200,246.800 335.200 C 246.267 335.200,246.000 334.933,246.000 334.400 C 246.000 333.867,245.733 333.600,245.200 333.600 C 244.667 333.600,244.400 333.333,244.400 332.800 C 244.400 331.555,232.441 331.555,232.116 332.800 C 231.920 333.550,231.570 333.600,226.553 333.600 C 221.467 333.600,221.200 333.640,221.200 334.400 C 221.200 335.191,220.933 335.200,198.400 335.200 C 175.867 335.200,175.600 335.191,175.600 334.400 C 175.600 333.640,175.333 333.600,170.200 333.600 C 165.067 333.600,164.800 333.560,164.800 332.800 C 164.800 332.057,164.533 332.000,161.047 332.000 C 157.630 332.000,157.275 331.928,157.084 331.200 C 156.898 330.489,156.538 330.400,153.837 330.400 C 151.404 330.400,150.800 330.281,150.800 329.800 C 150.800 329.317,150.178 329.200,147.600 329.200 C 144.667 329.200,144.400 329.133,144.400 328.400 C 144.400 327.697,144.133 327.600,142.200 327.600 C 140.267 327.600,140.000 327.503,140.000 326.800 C 140.000 326.089,139.733 326.000,137.600 326.000 C 135.467 326.000,135.200 325.911,135.200 325.200 C 135.200 324.489,134.933 324.400,132.800 324.400 C 130.667 324.400,130.400 324.311,130.400 323.600 C 130.400 322.889,130.133 322.800,128.000 322.800 C 125.867 322.800,125.600 322.711,125.600 322.000 C 125.600 321.358,125.333 321.200,124.247 321.200 C 123.230 321.200,122.841 321.001,122.684 320.400 C 122.506 319.720,122.138 319.600,120.237 319.600 C 118.267 319.600,118.000 319.505,118.000 318.800 C 118.000 318.133,117.733 318.000,116.400 318.000 C 115.067 318.000,114.800 317.867,114.800 317.200 C 114.800 316.533,114.533 316.400,113.200 316.400 C 111.867 316.400,111.600 316.267,111.600 315.600 C 111.600 314.933,111.333 314.800,110.000 314.800 C 108.667 314.800,108.400 314.667,108.400 314.000 C 108.400 313.352,108.133 313.200,107.000 313.200 C 106.022 313.200,105.600 313.019,105.600 312.600 C 105.600 312.167,105.156 312.000,104.000 312.000 C 102.667 312.000,102.400 311.867,102.400 311.200 C 102.400 310.667,102.133 310.400,101.600 310.400 C 101.067 310.400,100.800 310.133,100.800 309.600 C 100.800 308.933,100.533 308.800,99.200 308.800 C 97.867 308.800,97.600 308.667,97.600 308.000 C 97.600 307.333,97.333 307.200,96.000 307.200 C 94.667 307.200,94.400 307.067,94.400 306.400 C 94.400 305.867,94.133 305.600,93.600 305.600 C 93.067 305.600,92.800 305.333,92.800 304.800 C 92.800 304.152,92.533 304.000,91.400 304.000 C 90.267 304.000,90.000 303.848,90.000 303.200 C 90.000 302.683,89.733 302.400,89.247 302.400 C 88.830 302.400,88.400 302.043,88.284 301.600 C 88.124 300.987,87.738 300.800,86.637 300.800 C 85.467 300.800,85.200 300.652,85.200 300.000 C 85.200 299.467,84.933 299.200,84.400 299.200 C 83.867 299.200,83.600 298.933,83.600 298.400 C 83.600 297.867,83.333 297.600,82.800 297.600 C 82.267 297.600,82.000 297.333,82.000 296.800 C 82.000 296.133,81.733 296.000,80.400 296.000 C 79.244 296.000,78.800 295.833,78.800 295.400 C 78.800 295.067,78.444 294.800,78.000 294.800 C 77.467 294.800,77.200 294.533,77.200 294.000 C 77.200 293.467,76.933 293.200,76.400 293.200 C 75.867 293.200,75.600 292.933,75.600 292.400 C 75.600 291.956,75.333 291.600,75.000 291.600 C 74.667 291.600,74.400 291.244,74.400 290.800 C 74.400 290.267,74.133 290.000,73.600 290.000 C 73.067 290.000,72.800 289.733,72.800 289.200 C 72.800 288.533,72.533 288.400,71.200 288.400 C 69.867 288.400,69.600 288.267,69.600 287.600 C 69.600 287.067,69.333 286.800,68.800 286.800 C 68.267 286.800,68.000 286.533,68.000 286.000 C 68.000 285.467,67.733 285.200,67.200 285.200 C 66.667 285.200,66.400 284.933,66.400 284.400 C 66.400 283.867,66.133 283.600,65.600 283.600 C 65.067 283.600,64.800 283.333,64.800 282.800 C 64.800 282.267,64.533 282.000,64.000 282.000 C 63.467 282.000,63.200 281.733,63.200 281.200 C 63.200 280.667,62.933 280.400,62.400 280.400 C 61.956 280.400,61.600 280.133,61.600 279.800 C 61.600 279.467,61.244 279.200,60.800 279.200 C 60.267 279.200,60.000 278.933,60.000 278.400 C 60.000 277.867,59.733 277.600,59.200 277.600 C 58.667 277.600,58.400 277.333,58.400 276.800 C 58.400 276.356,58.133 276.000,57.800 276.000 C 57.367 276.000,57.200 275.556,57.200 274.400 C 57.200 273.067,57.067 272.800,56.400 272.800 C 55.867 272.800,55.600 272.533,55.600 272.000 C 55.600 271.467,55.333 271.200,54.800 271.200 C 54.267 271.200,54.000 270.933,54.000 270.400 C 54.000 269.867,53.733 269.600,53.200 269.600 C 52.667 269.600,52.400 269.333,52.400 268.800 C 52.400 268.267,52.133 268.000,51.600 268.000 C 51.067 268.000,50.800 267.733,50.800 267.200 C 50.800 266.667,50.533 266.400,50.000 266.400 C 49.333 266.400,49.200 266.133,49.200 264.800 C 49.200 263.467,49.067 263.200,48.400 263.200 C 47.956 263.200,47.600 262.933,47.600 262.600 C 47.600 262.267,47.244 262.000,46.800 262.000 C 46.267 262.000,46.000 261.733,46.000 261.200 C 46.000 260.667,45.733 260.400,45.200 260.400 C 44.533 260.400,44.400 260.133,44.400 258.800 C 44.400 257.467,44.267 257.200,43.600 257.200 C 43.067 257.200,42.800 256.933,42.800 256.400 C 42.800 255.956,42.533 255.600,42.200 255.600 C 41.778 255.600,41.600 255.174,41.600 254.163 C 41.600 253.062,41.413 252.676,40.800 252.516 C 40.194 252.357,40.000 251.970,40.000 250.916 C 40.000 249.884,39.803 249.474,39.237 249.326 C 38.817 249.216,38.384 248.783,38.274 248.363 C 38.165 247.943,37.788 247.600,37.437 247.600 C 36.976 247.600,36.800 247.214,36.800 246.200 C 36.800 245.067,36.648 244.800,36.000 244.800 C 35.333 244.800,35.200 244.533,35.200 243.200 C 35.200 241.867,35.067 241.600,34.400 241.600 C 33.733 241.600,33.600 241.333,33.600 240.000 C 33.600 238.667,33.467 238.400,32.800 238.400 C 32.133 238.400,32.000 238.133,32.000 236.800 C 32.000 235.467,31.867 235.200,31.200 235.200 C 30.533 235.200,30.400 234.933,30.400 233.600 C 30.400 232.267,30.267 232.000,29.600 232.000 C 28.897 232.000,28.800 231.733,28.800 229.800 C 28.800 227.867,28.703 227.600,28.000 227.600 C 27.333 227.600,27.200 227.333,27.200 226.000 C 27.200 224.667,27.067 224.400,26.400 224.400 C 25.667 224.400,25.600 224.133,25.600 221.200 C 25.600 218.622,25.483 218.000,25.000 218.000 C 24.538 218.000,24.400 217.485,24.400 215.763 C 24.400 213.862,24.280 213.494,23.600 213.316 C 22.891 213.131,22.800 212.770,22.800 210.153 C 22.800 207.467,22.728 207.200,22.000 207.200 C 21.256 207.200,21.200 206.933,21.200 203.363 C 21.200 199.862,21.130 199.507,20.400 199.316 C 19.644 199.118,19.600 198.770,19.600 192.953 C 19.600 187.067,19.565 186.800,18.800 186.800 C 18.021 186.800,18.000 186.533,18.000 176.600 C 18.000 166.667,18.021 166.400,18.800 166.400 C 19.565 166.400,19.600 166.133,19.600 160.247 C 19.600 154.430,19.644 154.082,20.400 153.884 C 21.130 153.693,21.200 153.338,21.200 149.837 C 21.200 146.267,21.256 146.000,22.000 146.000 C 22.728 146.000,22.800 145.733,22.800 143.047 C 22.800 140.430,22.891 140.069,23.600 139.884 C 24.280 139.706,24.400 139.338,24.400 137.437 C 24.400 135.715,24.538 135.200,25.000 135.200 C 25.467 135.200,25.600 134.667,25.600 132.800 C 25.600 130.667,25.689 130.400,26.400 130.400 C 27.111 130.400,27.200 130.133,27.200 128.000 C 27.200 125.867,27.289 125.600,28.000 125.600 C 28.648 125.600,28.800 125.333,28.800 124.200 C 28.800 123.067,28.952 122.800,29.600 122.800 C 30.311 122.800,30.400 122.533,30.400 120.400 C 30.400 118.267,30.489 118.000,31.200 118.000 C 31.867 118.000,32.000 117.733,32.000 116.400 C 32.000 115.067,32.133 114.800,32.800 114.800 C 33.467 114.800,33.600 114.533,33.600 113.200 C 33.600 111.867,33.733 111.600,34.400 111.600 C 35.067 111.600,35.200 111.333,35.200 110.000 C 35.200 108.667,35.333 108.400,36.000 108.400 C 36.642 108.400,36.800 108.133,36.800 107.047 C 36.800 106.030,36.999 105.641,37.600 105.484 C 38.040 105.369,38.400 105.009,38.400 104.684 C 38.400 104.359,38.760 103.999,39.200 103.884 C 39.813 103.724,40.000 103.338,40.000 102.237 C 40.000 101.067,40.148 100.800,40.800 100.800 C 41.333 100.800,41.600 100.533,41.600 100.000 C 41.600 99.556,41.867 99.200,42.200 99.200 C 42.633 99.200,42.800 98.756,42.800 97.600 C 42.800 96.267,42.933 96.000,43.600 96.000 C 44.133 96.000,44.400 95.733,44.400 95.200 C 44.400 94.667,44.667 94.400,45.200 94.400 C 45.848 94.400,46.000 94.133,46.000 93.000 C 46.000 91.867,46.152 91.600,46.800 91.600 C 47.333 91.600,47.600 91.333,47.600 90.800 C 47.600 90.267,47.867 90.000,48.400 90.000 C 48.917 90.000,49.200 89.733,49.200 89.247 C 49.200 88.830,49.557 88.400,50.000 88.284 C 50.613 88.124,50.800 87.738,50.800 86.637 C 50.800 85.467,50.948 85.200,51.600 85.200 C 52.133 85.200,52.400 84.933,52.400 84.400 C 52.400 83.867,52.667 83.600,53.200 83.600 C 53.733 83.600,54.000 83.333,54.000 82.800 C 54.000 82.267,54.267 82.000,54.800 82.000 C 55.333 82.000,55.600 81.733,55.600 81.200 C 55.600 80.667,55.867 80.400,56.400 80.400 C 56.933 80.400,57.200 80.133,57.200 79.600 C 57.200 79.156,57.467 78.800,57.800 78.800 C 58.233 78.800,58.400 78.356,58.400 77.200 C 58.400 75.867,58.533 75.600,59.200 75.600 C 59.644 75.600,60.000 75.333,60.000 75.000 C 60.000 74.667,60.356 74.400,60.800 74.400 C 61.333 74.400,61.600 74.133,61.600 73.600 C 61.600 73.067,61.867 72.800,62.400 72.800 C 62.933 72.800,63.200 72.533,63.200 72.000 C 63.200 71.467,63.467 71.200,64.000 71.200 C 64.533 71.200,64.800 70.933,64.800 70.400 C 64.800 69.867,65.067 69.600,65.600 69.600 C 66.133 69.600,66.400 69.333,66.400 68.800 C 66.400 68.133,66.667 68.000,68.000 68.000 C 69.333 68.000,69.600 67.867,69.600 67.200 C 69.600 66.667,69.867 66.400,70.400 66.400 C 70.933 66.400,71.200 66.133,71.200 65.600 C 71.200 65.067,71.467 64.800,72.000 64.800 C 72.533 64.800,72.800 64.533,72.800 64.000 C 72.800 63.467,73.067 63.200,73.600 63.200 C 74.133 63.200,74.400 62.933,74.400 62.400 C 74.400 61.956,74.667 61.600,75.000 61.600 C 75.333 61.600,75.600 61.244,75.600 60.800 C 75.600 60.267,75.867 60.000,76.400 60.000 C 76.933 60.000,77.200 59.733,77.200 59.200 C 77.200 58.533,77.467 58.400,78.800 58.400 C 79.956 58.400,80.400 58.233,80.400 57.800 C 80.400 57.467,80.756 57.200,81.200 57.200 C 81.733 57.200,82.000 56.933,82.000 56.400 C 82.000 55.867,82.267 55.600,82.800 55.600 C 83.333 55.600,83.600 55.333,83.600 54.800 C 83.600 54.133,83.867 54.000,85.200 54.000 C 86.533 54.000,86.800 53.867,86.800 53.200 C 86.800 52.667,87.067 52.400,87.600 52.400 C 88.133 52.400,88.400 52.133,88.400 51.600 C 88.400 50.948,88.667 50.800,89.837 50.800 C 90.938 50.800,91.324 50.613,91.484 50.000 C 91.599 49.560,91.942 49.200,92.247 49.200 C 92.551 49.200,92.800 48.840,92.800 48.400 C 92.800 47.733,93.067 47.600,94.400 47.600 C 95.733 47.600,96.000 47.467,96.000 46.800 C 96.000 46.267,96.267 46.000,96.800 46.000 C 97.333 46.000,97.600 45.733,97.600 45.200 C 97.600 44.533,97.867 44.400,99.200 44.400 C 100.533 44.400,100.800 44.267,100.800 43.600 C 100.800 42.933,101.067 42.800,102.400 42.800 C 103.556 42.800,104.000 42.633,104.000 42.200 C 104.000 41.778,104.426 41.600,105.437 41.600 C 106.538 41.600,106.924 41.413,107.084 40.800 C 107.241 40.199,107.630 40.000,108.647 40.000 C 109.733 40.000,110.000 39.842,110.000 39.200 C 110.000 38.533,110.267 38.400,111.600 38.400 C 112.933 38.400,113.200 38.267,113.200 37.600 C 113.200 36.933,113.467 36.800,114.800 36.800 C 116.133 36.800,116.400 36.667,116.400 36.000 C 116.400 35.333,116.667 35.200,118.000 35.200 C 119.333 35.200,119.600 35.067,119.600 34.400 C 119.600 33.733,119.867 33.600,121.200 33.600 C 122.533 33.600,122.800 33.467,122.800 32.800 C 122.800 32.097,123.067 32.000,125.000 32.000 C 126.933 32.000,127.200 31.903,127.200 31.200 C 127.200 30.533,127.467 30.400,128.800 30.400 C 130.133 30.400,130.400 30.267,130.400 29.600 C 130.400 28.889,130.667 28.800,132.800 28.800 C 134.933 28.800,135.200 28.711,135.200 28.000 C 135.200 27.289,135.467 27.200,137.600 27.200 C 139.733 27.200,140.000 27.111,140.000 26.400 C 140.000 25.671,140.267 25.600,143.000 25.600 C 145.400 25.600,146.000 25.480,146.000 25.000 C 146.000 24.519,146.604 24.400,149.037 24.400 C 151.738 24.400,152.098 24.311,152.284 23.600 C 152.469 22.891,152.830 22.800,155.447 22.800 C 158.133 22.800,158.400 22.728,158.400 22.000 C 158.400 21.253,158.667 21.200,162.400 21.200 C 166.133 21.200,166.400 21.147,166.400 20.400 C 166.400 19.634,166.667 19.600,172.600 19.600 C 178.533 19.600,178.800 19.566,178.800 18.800 C 178.800 18.010,179.067 18.000,199.200 18.000 C 219.333 18.000,219.600 18.010,219.600 18.800 M124.400 156.237 C 124.400 189.338,124.408 189.677,125.200 189.884 C 125.956 190.082,126.000 190.430,126.000 196.247 C 126.000 202.133,126.035 202.400,126.800 202.400 C 127.544 202.400,127.600 202.667,127.600 206.200 C 127.600 209.733,127.656 210.000,128.400 210.000 C 129.133 210.000,129.200 210.267,129.200 213.200 C 129.200 215.778,129.317 216.400,129.800 216.400 C 130.222 216.400,130.400 216.826,130.400 217.837 C 130.400 218.938,130.587 219.324,131.200 219.484 C 131.877 219.661,132.000 220.030,132.000 221.884 C 132.000 223.738,132.123 224.107,132.800 224.284 C 133.401 224.441,133.600 224.830,133.600 225.847 C 133.600 226.933,133.758 227.200,134.400 227.200 C 134.933 227.200,135.200 227.467,135.200 228.000 C 135.200 228.533,135.467 228.800,136.000 228.800 C 136.667 228.800,136.800 229.067,136.800 230.400 C 136.800 231.733,136.933 232.000,137.600 232.000 C 138.267 232.000,138.400 232.267,138.400 233.600 C 138.400 234.933,138.533 235.200,139.200 235.200 C 139.733 235.200,140.000 235.467,140.000 236.000 C 140.000 236.533,140.267 236.800,140.800 236.800 C 141.452 236.800,141.600 237.067,141.600 238.237 C 141.600 239.315,141.791 239.725,142.363 239.874 C 142.783 239.984,143.216 240.417,143.326 240.837 C 143.435 241.257,143.812 241.600,144.163 241.600 C 144.513 241.600,144.800 241.870,144.800 242.200 C 144.800 242.530,145.070 242.800,145.400 242.800 C 145.733 242.800,146.000 243.156,146.000 243.600 C 146.000 244.133,146.267 244.400,146.800 244.400 C 147.333 244.400,147.600 244.667,147.600 245.200 C 147.600 245.717,147.867 246.000,148.353 246.000 C 148.770 246.000,149.200 246.357,149.316 246.800 C 149.431 247.240,149.812 247.600,150.163 247.600 C 150.533 247.600,150.800 247.935,150.800 248.400 C 150.800 248.917,151.067 249.200,151.553 249.200 C 151.970 249.200,152.400 249.557,152.516 250.000 C 152.676 250.613,153.062 250.800,154.163 250.800 C 155.333 250.800,155.600 250.948,155.600 251.600 C 155.600 252.133,155.867 252.400,156.400 252.400 C 156.933 252.400,157.200 252.667,157.200 253.200 C 157.200 253.867,157.467 254.000,158.800 254.000 C 160.133 254.000,160.400 254.133,160.400 254.800 C 160.400 255.317,160.667 255.600,161.153 255.600 C 161.570 255.600,162.000 255.957,162.116 256.400 C 162.291 257.068,162.662 257.200,164.363 257.200 C 165.907 257.200,166.400 257.345,166.400 257.800 C 166.400 258.233,166.844 258.400,168.000 258.400 C 169.333 258.400,169.600 258.533,169.600 259.200 C 169.600 259.944,169.867 260.000,173.400 260.000 L 177.200 260.000 177.200 246.800 L 177.200 233.600 175.847 233.600 C 174.830 233.600,174.441 233.401,174.284 232.800 C 174.125 232.194,173.738 232.000,172.684 232.000 C 171.630 232.000,171.243 231.806,171.084 231.200 C 170.969 230.760,170.588 230.400,170.237 230.400 C 169.887 230.400,169.600 230.130,169.600 229.800 C 169.600 229.467,169.244 229.200,168.800 229.200 C 168.267 229.200,168.000 228.933,168.000 228.400 C 168.000 227.867,167.733 227.600,167.200 227.600 C 166.667 227.600,166.400 227.333,166.400 226.800 C 166.400 226.267,166.133 226.000,165.600 226.000 C 165.067 226.000,164.800 225.733,164.800 225.200 C 164.800 224.667,164.533 224.400,164.000 224.400 C 163.467 224.400,163.200 224.133,163.200 223.600 C 163.200 223.067,162.933 222.800,162.400 222.800 C 161.733 222.800,161.600 222.533,161.600 221.200 C 161.600 219.867,161.467 219.600,160.800 219.600 C 160.267 219.600,160.000 219.333,160.000 218.800 C 160.000 218.267,159.733 218.000,159.200 218.000 C 158.533 218.000,158.400 217.733,158.400 216.400 C 158.400 215.244,158.233 214.800,157.800 214.800 C 157.345 214.800,157.200 214.307,157.200 212.763 C 157.200 211.062,157.068 210.691,156.400 210.516 C 155.773 210.352,155.600 209.970,155.600 208.753 C 155.600 207.467,155.463 207.200,154.800 207.200 C 154.070 207.200,154.000 206.933,154.000 204.163 C 154.000 201.462,153.911 201.102,153.200 200.916 C 152.459 200.722,152.400 200.370,152.400 196.153 C 152.400 191.867,152.353 191.600,151.600 191.600 C 150.867 191.600,150.800 191.333,150.800 188.406 L 150.800 185.212 162.500 185.106 L 174.200 185.000 174.302 153.900 L 174.405 122.800 149.402 122.800 L 124.400 122.800 124.400 156.237 M210.400 157.800 C 210.400 192.533,210.406 192.800,211.200 192.800 C 211.962 192.800,212.000 193.067,212.000 198.400 C 212.000 203.111,212.095 204.000,212.600 204.000 C 213.089 204.000,213.200 204.671,213.200 207.637 C 213.200 210.938,213.274 211.294,214.000 211.484 C 214.677 211.661,214.800 212.030,214.800 213.884 C 214.800 215.738,214.923 216.107,215.600 216.284 C 216.277 216.461,216.400 216.830,216.400 218.684 C 216.400 220.538,216.523 220.907,217.200 221.084 C 217.806 221.243,218.000 221.630,218.000 222.684 C 218.000 223.738,218.194 224.125,218.800 224.284 C 219.401 224.441,219.600 224.830,219.600 225.847 C 219.600 226.933,219.758 227.200,220.400 227.200 C 221.067 227.200,221.200 227.467,221.200 228.800 C 221.200 230.133,221.333 230.400,222.000 230.400 C 222.533 230.400,222.800 230.667,222.800 231.200 C 222.800 231.733,223.067 232.000,223.600 232.000 C 224.267 232.000,224.400 232.267,224.400 233.600 C 224.400 234.933,224.533 235.200,225.200 235.200 C 225.733 235.200,226.000 235.467,226.000 236.000 C 226.000 236.533,226.267 236.800,226.800 236.800 C 227.452 236.800,227.600 237.067,227.600 238.237 C 227.600 239.338,227.787 239.724,228.400 239.884 C 228.843 240.000,229.200 240.430,229.200 240.847 C 229.200 241.261,229.470 241.600,229.800 241.600 C 230.130 241.600,230.400 241.870,230.400 242.200 C 230.400 242.533,230.756 242.800,231.200 242.800 C 231.733 242.800,232.000 243.067,232.000 243.600 C 232.000 244.133,232.267 244.400,232.800 244.400 C 233.333 244.400,233.600 244.667,233.600 245.200 C 233.600 245.733,233.867 246.000,234.400 246.000 C 234.933 246.000,235.200 246.267,235.200 246.800 C 235.200 247.333,235.467 247.600,236.000 247.600 C 236.533 247.600,236.800 247.867,236.800 248.400 C 236.800 248.933,237.067 249.200,237.600 249.200 C 238.133 249.200,238.400 249.467,238.400 250.000 C 238.400 250.533,238.667 250.800,239.200 250.800 C 239.733 250.800,240.000 251.067,240.000 251.600 C 240.000 252.267,240.267 252.400,241.600 252.400 C 242.933 252.400,243.200 252.533,243.200 253.200 C 243.200 253.717,243.467 254.000,243.953 254.000 C 244.370 254.000,244.800 254.357,244.916 254.800 C 245.066 255.374,245.462 255.600,246.316 255.600 C 247.170 255.600,247.566 255.826,247.716 256.400 C 247.876 257.013,248.262 257.200,249.363 257.200 C 250.374 257.200,250.800 257.378,250.800 257.800 C 250.800 258.267,251.333 258.400,253.200 258.400 C 255.333 258.400,255.600 258.489,255.600 259.200 C 255.600 259.944,255.867 260.000,259.400 260.000 L 263.200 260.000 263.200 246.800 L 263.200 233.600 261.600 233.600 C 260.267 233.600,260.000 233.467,260.000 232.800 C 260.000 232.158,259.733 232.000,258.647 232.000 C 257.630 232.000,257.241 231.801,257.084 231.200 C 256.969 230.760,256.588 230.400,256.237 230.400 C 255.887 230.400,255.600 230.130,255.600 229.800 C 255.600 229.467,255.244 229.200,254.800 229.200 C 254.267 229.200,254.000 228.933,254.000 228.400 C 254.000 227.867,253.733 227.600,253.200 227.600 C 252.667 227.600,252.400 227.333,252.400 226.800 C 252.400 226.267,252.133 226.000,251.600 226.000 C 251.067 226.000,250.800 225.733,250.800 225.200 C 250.800 224.667,250.533 224.400,250.000 224.400 C 249.467 224.400,249.200 224.133,249.200 223.600 C 249.200 223.067,248.933 222.800,248.400 222.800 C 247.867 222.800,247.600 222.533,247.600 222.000 C 247.600 221.467,247.333 221.200,246.800 221.200 C 246.133 221.200,246.000 220.933,246.000 219.600 C 246.000 218.267,245.867 218.000,245.200 218.000 C 244.533 218.000,244.400 217.733,244.400 216.400 C 244.400 215.067,244.267 214.800,243.600 214.800 C 242.952 214.800,242.800 214.533,242.800 213.400 C 242.800 212.422,242.619 212.000,242.200 212.000 C 241.733 212.000,241.600 211.467,241.600 209.600 C 241.600 207.467,241.511 207.200,240.800 207.200 C 240.095 207.200,240.000 206.933,240.000 204.963 C 240.000 203.062,239.880 202.694,239.200 202.516 C 238.472 202.325,238.400 201.970,238.400 198.553 C 238.400 195.067,238.343 194.800,237.600 194.800 C 236.844 194.800,236.800 194.533,236.800 190.000 L 236.800 185.200 248.400 185.200 L 260.000 185.200 260.000 154.000 L 260.000 122.800 235.200 122.800 L 210.400 122.800 210.400 157.800 " stroke="none" fill="#5c5c5c" fill-rule="evenodd"></path><path id="path1" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path2" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path3" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path4" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path></g></svg>
-                                    Tagline</h4> 
-                                    <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{business_info_data.business_tagline}}" dd-text-collapse-cond="true"><span class="box-dis">{{business_info_data.business_tagline}}</span></p>
-                            </div>                                    
-                            <div class="dash-info-box year-found" ng-if="business_info_data.business_year_found">
-                                <h4> 
-                                    <svg viewBox="0 0 60 60" width="17px" height="17px" stroke-width="0.5" stroke="#5c5c5c"> 
-                                    <path d="M51.371,3.146c-0.459-0.185-11.359-4.452-19.84,0.045C24.811,6.758,13.015,4.082,10,3.308V1c0-0.553-0.447-1-1-1  S8,0.447,8,1v3c0,0.014,0.007,0.026,0.008,0.04C8.008,4.052,8,4.062,8,4.074V33v1.074V59c0,0.553,0.447,1,1,1s1-0.447,1-1V35.375  c2.273,0.567,7.227,1.632,12.368,1.632c3.557,0,7.2-0.511,10.101-2.049c7.652-4.061,18.056,0.004,18.16,0.045  c0.309,0.124,0.657,0.086,0.932-0.102C51.835,34.716,52,34.406,52,34.074v-30C52,3.665,51.751,3.298,51.371,3.146z M50,32.665  c-3.26-1.038-11.646-3.096-18.469,0.525C24.812,36.756,13.02,34.082,10,33.308V33V5.375c3.853,0.961,15.381,3.343,22.469-0.417  C39.035,1.475,47.627,3.973,50,4.777V32.665z" fill="#5c5c5c"/>
-                                    </svg>
-                                Year Founded</h4>
-                                <p>{{business_info_data.business_year_found}}</p>
-                            </div>
-                            <div class="dash-info-box spc-cus" ng-if="business_info_data.business_ext_benifit">
-                                <h4>
-                                    <svg viewBox="0 0 487.222 487.222" width="17px" height="16px">
-                                        <g>
-                                            <path d="M486.554,186.811c-1.6-4.9-5.8-8.4-10.9-9.2l-152-21.6l-68.4-137.5c-2.3-4.6-7-7.5-12.1-7.5l0,0c-5.1,0-9.8,2.9-12.1,7.6   l-67.5,137.9l-152,22.6c-5.1,0.8-9.3,4.3-10.9,9.2s-0.2,10.3,3.5,13.8l110.3,106.9l-25.5,151.4c-0.9,5.1,1.2,10.2,5.4,13.2   c2.3,1.7,5.1,2.6,7.9,2.6c2.2,0,4.3-0.5,6.3-1.6l135.7-71.9l136.1,71.1c2,1,4.1,1.5,6.2,1.5l0,0c7.4,0,13.5-6.1,13.5-13.5   c0-1.1-0.1-2.1-0.4-3.1l-26.3-150.5l109.6-107.5C486.854,197.111,488.154,191.711,486.554,186.811z M349.554,293.911   c-3.2,3.1-4.6,7.6-3.8,12l22.9,131.3l-118.2-61.7c-3.9-2.1-8.6-2-12.6,0l-117.8,62.4l22.1-131.5c0.7-4.4-0.7-8.8-3.9-11.9   l-95.6-92.8l131.9-19.6c4.4-0.7,8.2-3.4,10.1-7.4l58.6-119.7l59.4,119.4c2,4,5.8,6.7,10.2,7.4l132,18.8L349.554,293.911z" fill="#5c5c5c"/>
-                                        </g>
-                                    </svg>
-                                Specialties </h4>
-                                <ul class="skill-list">
-                                    <li ng-repeat="benefits in business_info_data.business_ext_benifit.split(',')">{{benefits}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <a class="fw" href="javascript:void(0);" onclick="register_profile();">
-                            <div class="full-box-module business_data">
-                                <div class="profile-boxProfileCard  module buisness_he_module" >
-                                    <div class="head_details">
-                                        <h5>
-                                            <svg viewBox="0 0 333.668 333.668" width="25px" height="24px">
-                                                <g>
-                                                    <path d="M295.101,298.649H38.561C17.295,298.649,0,281.354,0,260.088V103.703c0-21.266,17.295-38.561,38.561-38.561h52.347   l4.582-15.457c1.87-8.458,9.602-14.666,18.696-14.666h105.297c8.837,0,16.658,6.176,18.728,14.743l0.122,0.527l4.177,14.852h52.597   c21.266,0,38.561,17.295,38.561,38.561v156.384C333.662,281.354,316.361,298.649,295.101,298.649z M38.561,77.996   c-14.178,0-25.707,11.53-25.707,25.707v156.384c0,14.178,11.53,25.707,25.707,25.707h256.54c14.178,0,25.707-11.53,25.707-25.707   V103.703c0-14.178-11.53-25.707-25.707-25.707h-62.327l-7.037-25.097c-0.649-2.918-3.278-5.032-6.26-5.032H114.179   c-3.027,0-5.598,2.069-6.26,5.039l-7.429,25.09H38.561z M166.841,259.798c-44.981,0-81.576-36.588-81.576-81.563   c0-44.981,36.594-81.569,81.576-81.569c44.969,0,81.557,36.594,81.557,81.569C248.397,223.204,211.809,259.798,166.841,259.798z    M166.841,109.513c-37.893,0-68.722,30.823-68.722,68.716s30.83,68.709,68.722,68.709c37.886,0,68.703-30.823,68.703-68.709   C235.543,140.336,204.72,109.513,166.841,109.513z M286.804,101.852c-6.555,0-11.858,5.315-11.858,11.858   c0,6.549,5.302,11.857,11.858,11.857c6.549,0,11.851-5.309,11.851-11.857C298.649,107.167,293.346,101.852,286.804,101.852z" fill="#5c5c5c"/>
-                                                </g>
-                                            </svg>
-                                            <span>Photos</span>
-                                        </h5>
-                                    </div>
-                                    <div class="bus_photos">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="fw" href="javascript:void(0);" onclick="register_profile();">
-                            <div class="full-box-module business_data">
-                                <div class="profile-boxProfileCard  module">
-                                    <table class="business_data_table">
-                                        <div class="head_details">
-                                            <h5>
-                                                <svg viewBox="0 0 58 58" width="26px" height="25px">
                                                     <g>
-                                                        <path d="M36.537,28.156l-11-7c-0.308-0.195-0.698-0.208-1.019-0.033C24.199,21.299,24,21.635,24,22v14   c0,0.365,0.199,0.701,0.519,0.877C24.669,36.959,24.834,37,25,37c0.187,0,0.374-0.053,0.537-0.156l11-7   C36.825,29.66,37,29.342,37,29S36.825,28.34,36.537,28.156z M26,34.179V23.821L34.137,29L26,34.179z" fill="#5c5c5c"/>
-                                                        <path d="M57,6H47H11H1C0.448,6,0,6.447,0,7v11v11v11v11c0,0.553,0.448,1,1,1h10h36h10c0.552,0,1-0.447,1-1V40V29V18V7   C58,6.447,57.552,6,57,6z M10,28H2v-9h8V28z M2,30h8v9H2V30z M12,40V29V18V8h34v10v11v11v10H12V40z M56,28h-8v-9h8V28z M48,30h8v9   h-8V30z M56,8v9h-8V8H56z M2,8h8v9H2V8z M2,50v-9h8v9H2z M56,50h-8v-9h8V50z" fill="#5c5c5c"/>
+                                                        <path d="M405.168,147.469H84.832c-5.492,0-9.944-4.478-9.944-10c0-5.523,4.452-10,9.944-10h320.335c5.492,0,9.944,4.477,9.944,10     C415.111,142.991,410.66,147.469,405.168,147.469z" fill="#5c5c5c"/>
                                                     </g>
-                                                </svg>
-                                                <span>Video</span>
-                                            </h5>
-                                        </div>
-                                        <div class="bus_videos">
-                                        </div>
-                                    </table>
+                                                    <g>
+                                                        <path d="M405.168,211.503H84.832c-5.492,0-9.944-4.478-9.944-10c0-5.523,4.452-10,9.944-10h320.335c5.492,0,9.944,4.477,9.944,10     C415.111,207.025,410.66,211.503,405.168,211.503z" fill="#5c5c5c"/>
+                                                    </g>
+                                                    <g>
+                                                        <path d="M405.168,275.538H84.832c-5.492,0-9.944-4.478-9.944-10c0-5.523,4.452-10,9.944-10h320.335c5.492,0,9.944,4.476,9.944,10     C415.111,271.06,410.66,275.538,405.168,275.538z" fill="#5c5c5c"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    Discription</h4>
+                                    <?php
+                                    $bus_detail = nl2br($this->common->make_links($business_data[0]['details']));
+                                    $bus_detail = preg_replace('[^(<br( \/)?>)*|(<br( \/)?>)*$]', '', $bus_detail);
+                                    ?>                                    
+                                    <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="<?php echo $bus_detail; ?>" dd-text-collapse-cond="true"><?php echo $bus_detail; ?>
+                                    </p>
                                 </div>
-                            </div>
-                        </a>
-                        <div class="full-box-module business_data fw">
-                            <div class="profile-boxProfileCard  module buisness_he_module">
-                                <a href="javascript:void(0);" onclick="register_profile();"> 
-                                    <div class="head_details1">
-                                        <h5>
-                                            <svg viewBox="0 0 55 55" width="25px" height="25px">
-                                                <path d="M52.66,0.249c-0.216-0.189-0.501-0.275-0.789-0.241l-31,4.011C20.373,4.084,20,4.507,20,5.01v6.017v4.212v25.384  C18.174,38.428,15.273,37,12,37c-5.514,0-10,4.037-10,9s4.486,9,10,9s10-4.037,10-9c0-0.232-0.019-0.46-0.039-0.687  C21.974,45.248,22,45.189,22,45.121V16.118l29-3.753v18.257C49.174,28.428,46.273,27,43,27c-5.514,0-10,4.037-10,9s4.486,9,10,9  c5.464,0,9.913-3.966,9.993-8.867c0-0.013,0.007-0.024,0.007-0.037V11.227V7.016V1C53,0.712,52.876,0.438,52.66,0.249z M12,53  c-4.411,0-8-3.141-8-7s3.589-7,8-7s8,3.141,8,7S16.411,53,12,53z M43,43c-4.411,0-8-3.141-8-7s3.589-7,8-7s8,3.141,8,7  S47.411,43,43,43z M22,14.101v-3.074V5.889l29-3.752v4.879v3.332L22,14.101z" fill="#5c5c5c"/>
+								<?php }?>
+                                <div class="dash-info-box sp-day" ng-if="bus_opening_hours">
+                                    <h4>
+                                        <svg width="18px" height="18px" viewBox="0 0 612 612" >
+                                            <g>
+                                                <g>
+                                                    <path d="M587.572,186.881c-32.266-75.225-87.096-129.934-162.949-162.285C386.711,8.427,346.992,0.168,305.497,0.168    c-41.488,0-80.914,8.181-118.784,24.428C111.488,56.861,56.415,111.535,24.092,186.881C7.895,224.629,0,264.176,0,305.664    c0,41.496,7.895,81.371,24.092,119.127c32.323,75.346,87.403,130.348,162.621,162.621c37.877,16.247,77.295,24.42,118.784,24.42    c41.489,0,81.214-8.259,119.12-24.42c75.853-32.352,130.683-87.403,162.956-162.621C603.819,386.914,612,347.16,612,305.664    C612,264.176,603.826,224.757,587.572,186.881z M538.724,440.853c-24.021,41.195-56.929,73.876-98.375,98.039    c-41.195,24.021-86.332,36.135-134.845,36.135c-36.47,0-71.27-7.024-104.4-21.415c-33.129-14.384-61.733-33.294-85.661-57.215    c-23.928-23.928-42.973-52.811-57.214-85.997c-14.199-33.065-21.08-68.258-21.08-104.735c0-48.52,11.921-93.428,35.807-134.509    c23.971-41.231,56.886-73.947,98.039-98.04c41.146-24.092,85.99-36.142,134.502-36.142c48.52,0,93.649,12.121,134.845,36.142    c41.446,24.164,74.283,56.879,98.375,98.039c24.092,41.153,36.135,85.99,36.135,134.509    C574.852,354.185,562.888,399.399,538.724,440.853z" fill="#5c5c5c"/>
+                                                    <path d="M324.906,302.988V129.659c0-10.372-9.037-18.738-19.41-18.738c-9.701,0-18.403,8.366-18.403,18.738v176.005    c0,0.336,0.671,1.678,0.671,2.678c-0.671,6.024,1.007,11.043,5.019,15.062l100.053,100.046c6.695,6.695,19.073,6.695,25.763,0    c7.694-7.695,7.188-18.86,0-26.099L324.906,302.988z" fill="#5c5c5c"/>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    Hours of Operation</h4>
+                                    <p ng-if="bus_opening_hours.opening_hour == '1'">Always open</p>
+                                    <p ng-if="bus_opening_hours.opening_hour == '2'">On Specified Days</p>
+                                    <p ng-if="bus_opening_hours.opening_hour == '3'">Appointment needed</p>
+                                    <ul class="speci-day-ulspeci-day-ul" ng-if="bus_opening_hours.opening_hour == '2'">
+                                        <li ng-if="bus_opening_hours.sun_from_time && bus_opening_hours.sun_from_ap && bus_opening_hours.sun_to_time && bus_opening_hours.sun_to_ap">Sunday : {{bus_opening_hours.sun_from_time}} {{bus_opening_hours.sun_from_ap}} to {{bus_opening_hours.sun_to_time}} {{bus_opening_hours.sun_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.mon_from_time && bus_opening_hours.mon_from_ap && bus_opening_hours.mon_to_time && bus_opening_hours.mon_to_ap">Monday : {{bus_opening_hours.mon_from_time}} {{bus_opening_hours.mon_from_ap}} to {{bus_opening_hours.mon_to_time}} {{bus_opening_hours.mon_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.tue_from_time && bus_opening_hours.tue_from_ap && bus_opening_hours.tue_to_time && bus_opening_hours.tue_to_ap">Tuesday : {{bus_opening_hours.tue_from_time}} {{bus_opening_hours.tue_from_ap}} to {{bus_opening_hours.tue_to_time}} {{bus_opening_hours.tue_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.wed_from_time && bus_opening_hours.wed_from_ap && bus_opening_hours.wed_to_time && bus_opening_hours.wed_to_ap">Wednesday : {{bus_opening_hours.wed_from_time}} {{bus_opening_hours.wed_from_ap}} to {{bus_opening_hours.wed_to_time}} {{bus_opening_hours.wed_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.thu_from_time && bus_opening_hours.thu_from_ap && bus_opening_hours.thu_to_time && bus_opening_hours.thu_to_ap">Thursday : {{bus_opening_hours.thu_from_time}} {{bus_opening_hours.thu_from_ap}} to {{bus_opening_hours.thu_to_time}} {{bus_opening_hours.thu_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.fri_from_time && bus_opening_hours.fri_from_ap && bus_opening_hours.fri_to_time && bus_opening_hours.fri_to_ap">Friday : {{bus_opening_hours.fri_from_time}} {{bus_opening_hours.fri_from_ap}} to {{bus_opening_hours.fri_to_time}} {{bus_opening_hours.fri_to_ap}}</li>
+                                        <li ng-if="bus_opening_hours.sat_from_time && bus_opening_hours.sat_from_ap && bus_opening_hours.sat_to_time && bus_opening_hours.sat_to_ap">Saturday : {{bus_opening_hours.sat_from_time}} {{bus_opening_hours.sat_from_ap}} to {{bus_opening_hours.sat_to_time}} {{bus_opening_hours.sat_to_ap}}</li>
+									</ul>
+								</div>
+                                <div class="dash-info-box miss-cus" ng-if="business_info_data.business_mission != ''">
+                                    <h4>
+                                        <svg  viewBox="0 0 414.295 414.295" width="18px" height="17px" stroke-width="1" stroke="#5c5c5c">
+                                            <g>
+                                                <g>
+                                                    <path d="M342.804,129.011l69.12-69.12c3.139-3.109,3.164-8.174,0.055-11.314c-1.437-1.451-3.374-2.298-5.415-2.366l0.24,0.48    l-37.6-1.28l-1.28-37.6c-0.149-4.416-3.849-7.875-8.265-7.726c-2.041,0.069-3.979,0.915-5.415,2.366l-69.04,68.72    c-1.558,1.568-2.398,3.711-2.32,5.92v8C200.799,28.544,88.417,49.247,31.87,131.331S-3.975,325.798,78.11,382.345    c82.084,56.547,194.467,35.844,251.014-46.24c42.471-61.651,42.471-143.122,0-204.774h8    C339.25,131.343,341.294,130.508,342.804,129.011z M345.204,233.811c0.12,90.928-73.495,164.737-164.423,164.857    c-90.928,0.12-164.737-73.495-164.857-164.423c-0.12-90.928,73.495-164.737,164.423-164.857    c37.649-0.05,74.177,12.806,103.497,36.423l0.4,13.36l-32,32c-45.521-39.897-114.766-35.337-154.663,10.184    c-39.897,45.521-35.337,114.766,10.184,154.663c45.521,39.897,114.766,35.337,154.663-10.184    c35.846-40.9,36.279-101.899,1.016-143.303l32-32l13.2,0.48C332.172,160.12,345.068,196.383,345.204,233.811z M175.444,239.171    c3.12,3.102,8.16,3.102,11.28,0l16-16c1.559,3.218,2.379,6.744,2.4,10.32c0,13.255-10.745,24-24,24s-24-10.745-24-24    s10.745-24,24-24c3.576,0.021,7.102,0.841,10.32,2.4l-16,16C172.342,231.011,172.342,236.051,175.444,239.171z M203.124,200.131    c-18.422-12.192-43.24-7.142-55.432,11.28c-12.192,18.422-7.142,43.24,11.28,55.432c18.422,12.192,43.24,7.142,55.432-11.28    c8.858-13.385,8.858-30.768,0-44.152l37.92-37.92c33.243,39.472,28.192,98.419-11.28,131.662    c-39.472,33.243-98.419,28.192-131.662-11.28c-33.243-39.472-28.192-98.419,11.28-131.662c34.782-29.292,85.6-29.292,120.382,0    L203.124,200.131z M300.404,114.211l-1.12-34.08l53.6-53.6l0.88,26.64c0,4.418,3.582,8,8,8l26.64,0.88l-53.92,53.28    L300.404,114.211z" fill="#5c5c5c"/>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    Mission</h4>
+                                    <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{business_info_data.business_mission}}" dd-text-collapse-cond="true">
+                                        {{business_info_data.business_mission}}
+                                    </p>
+                                </div>
+                                <div class="dash-info-box tag-cus" ng-if="business_info_data.business_tagline != ''">
+                                    <h4>
+                                        <svg width="18px" height="16px" viewBox="0 0 400 400"  ><g id="svgg">
+                                            <path id="path0" d="M171.200 0.400 C 171.200 0.647,169.133 0.800,165.800 0.800 C 160.667 0.800,160.400 0.840,160.400 1.600 C 160.400 2.347,160.133 2.400,156.400 2.400 C 152.667 2.400,152.400 2.453,152.400 3.200 C 152.400 3.933,152.133 4.000,149.200 4.000 C 146.267 4.000,146.000 4.067,146.000 4.800 C 146.000 5.529,145.733 5.600,143.000 5.600 C 140.267 5.600,140.000 5.671,140.000 6.400 C 140.000 7.133,139.733 7.200,136.800 7.200 C 133.867 7.200,133.600 7.267,133.600 8.000 C 133.600 8.703,133.333 8.800,131.400 8.800 C 129.467 8.800,129.200 8.897,129.200 9.600 C 129.200 10.311,128.933 10.400,126.800 10.400 C 124.667 10.400,124.400 10.489,124.400 11.200 C 124.400 11.911,124.133 12.000,122.000 12.000 C 120.133 12.000,119.600 12.133,119.600 12.600 C 119.600 13.022,119.174 13.200,118.163 13.200 C 117.062 13.200,116.676 13.387,116.516 14.000 C 116.339 14.675,115.970 14.800,114.153 14.800 C 112.267 14.800,112.000 14.899,112.000 15.600 C 112.000 16.267,111.733 16.400,110.400 16.400 C 109.067 16.400,108.800 16.533,108.800 17.200 C 108.800 17.867,108.533 18.000,107.200 18.000 C 105.867 18.000,105.600 18.133,105.600 18.800 C 105.600 19.467,105.333 19.600,104.000 19.600 C 102.667 19.600,102.400 19.733,102.400 20.400 C 102.400 21.067,102.133 21.200,100.800 21.200 C 99.467 21.200,99.200 21.333,99.200 22.000 C 99.200 22.667,98.933 22.800,97.600 22.800 C 96.267 22.800,96.000 22.933,96.000 23.600 C 96.000 24.248,95.733 24.400,94.600 24.400 C 93.467 24.400,93.200 24.552,93.200 25.200 C 93.200 25.867,92.933 26.000,91.600 26.000 C 90.267 26.000,90.000 26.133,90.000 26.800 C 90.000 27.467,89.733 27.600,88.400 27.600 C 87.067 27.600,86.800 27.733,86.800 28.400 C 86.800 28.933,86.533 29.200,86.000 29.200 C 85.556 29.200,85.200 29.467,85.200 29.800 C 85.200 30.222,84.774 30.400,83.763 30.400 C 82.662 30.400,82.276 30.587,82.116 31.200 C 82.001 31.640,81.641 32.000,81.316 32.000 C 80.991 32.000,80.631 32.360,80.516 32.800 C 80.359 33.401,79.970 33.600,78.953 33.600 C 77.867 33.600,77.600 33.758,77.600 34.400 C 77.600 34.933,77.333 35.200,76.800 35.200 C 76.267 35.200,76.000 35.467,76.000 36.000 C 76.000 36.667,75.733 36.800,74.400 36.800 C 73.067 36.800,72.800 36.933,72.800 37.600 C 72.800 38.133,72.533 38.400,72.000 38.400 C 71.467 38.400,71.200 38.667,71.200 39.200 C 71.200 39.733,70.933 40.000,70.400 40.000 C 69.867 40.000,69.600 40.267,69.600 40.800 C 69.600 41.467,69.333 41.600,68.000 41.600 C 66.667 41.600,66.400 41.733,66.400 42.400 C 66.400 42.933,66.133 43.200,65.600 43.200 C 65.067 43.200,64.800 43.467,64.800 44.000 C 64.800 44.533,64.533 44.800,64.000 44.800 C 63.556 44.800,63.200 45.067,63.200 45.400 C 63.200 45.730,62.930 46.000,62.600 46.000 C 62.267 46.000,62.000 46.356,62.000 46.800 C 62.000 47.467,61.733 47.600,60.400 47.600 C 59.067 47.600,58.800 47.733,58.800 48.400 C 58.800 48.933,58.533 49.200,58.000 49.200 C 57.467 49.200,57.200 49.467,57.200 50.000 C 57.200 50.533,56.933 50.800,56.400 50.800 C 55.867 50.800,55.600 51.067,55.600 51.600 C 55.600 52.133,55.333 52.400,54.800 52.400 C 54.267 52.400,54.000 52.667,54.000 53.200 C 54.000 53.733,53.733 54.000,53.200 54.000 C 52.667 54.000,52.400 54.267,52.400 54.800 C 52.400 55.333,52.133 55.600,51.600 55.600 C 51.067 55.600,50.800 55.867,50.800 56.400 C 50.800 56.933,50.533 57.200,50.000 57.200 C 49.467 57.200,49.200 57.467,49.200 58.000 C 49.200 58.533,48.933 58.800,48.400 58.800 C 47.867 58.800,47.600 59.067,47.600 59.600 C 47.600 60.133,47.333 60.400,46.800 60.400 C 46.267 60.400,46.000 60.667,46.000 61.200 C 46.000 61.644,45.733 62.000,45.400 62.000 C 45.070 62.000,44.800 62.270,44.800 62.600 C 44.800 62.933,44.444 63.200,44.000 63.200 C 43.467 63.200,43.200 63.467,43.200 64.000 C 43.200 64.533,42.933 64.800,42.400 64.800 C 41.867 64.800,41.600 65.067,41.600 65.600 C 41.600 66.133,41.333 66.400,40.800 66.400 C 40.133 66.400,40.000 66.667,40.000 68.000 C 40.000 69.333,39.867 69.600,39.200 69.600 C 38.667 69.600,38.400 69.867,38.400 70.400 C 38.400 70.933,38.133 71.200,37.600 71.200 C 37.067 71.200,36.800 71.467,36.800 72.000 C 36.800 72.533,36.533 72.800,36.000 72.800 C 35.467 72.800,35.200 73.067,35.200 73.600 C 35.200 74.133,34.933 74.400,34.400 74.400 C 33.733 74.400,33.600 74.667,33.600 76.000 C 33.600 77.333,33.467 77.600,32.800 77.600 C 32.267 77.600,32.000 77.867,32.000 78.400 C 32.000 78.933,31.733 79.200,31.200 79.200 C 30.756 79.200,30.400 79.467,30.400 79.800 C 30.400 80.130,30.130 80.400,29.800 80.400 C 29.367 80.400,29.200 80.844,29.200 82.000 C 29.200 83.333,29.067 83.600,28.400 83.600 C 27.867 83.600,27.600 83.867,27.600 84.400 C 27.600 84.933,27.333 85.200,26.800 85.200 C 26.133 85.200,26.000 85.467,26.000 86.800 C 26.000 88.133,25.867 88.400,25.200 88.400 C 24.667 88.400,24.400 88.667,24.400 89.200 C 24.400 89.733,24.133 90.000,23.600 90.000 C 22.933 90.000,22.800 90.267,22.800 91.600 C 22.800 92.933,22.667 93.200,22.000 93.200 C 21.352 93.200,21.200 93.467,21.200 94.600 C 21.200 95.733,21.048 96.000,20.400 96.000 C 19.883 96.000,19.600 96.267,19.600 96.753 C 19.600 97.170,19.243 97.600,18.800 97.716 C 18.194 97.875,18.000 98.262,18.000 99.316 C 18.000 100.370,17.806 100.757,17.200 100.916 C 16.587 101.076,16.400 101.462,16.400 102.563 C 16.400 103.733,16.252 104.000,15.600 104.000 C 14.933 104.000,14.800 104.267,14.800 105.600 C 14.800 106.933,14.667 107.200,14.000 107.200 C 13.289 107.200,13.200 107.467,13.200 109.600 C 13.200 111.467,13.067 112.000,12.600 112.000 C 12.181 112.000,12.000 112.422,12.000 113.400 C 12.000 114.533,11.848 114.800,11.200 114.800 C 10.489 114.800,10.400 115.067,10.400 117.200 C 10.400 119.333,10.311 119.600,9.600 119.600 C 8.933 119.600,8.800 119.867,8.800 121.200 C 8.800 122.533,8.667 122.800,8.000 122.800 C 7.267 122.800,7.200 123.067,7.200 126.000 C 7.200 128.933,7.133 129.200,6.400 129.200 C 5.697 129.200,5.600 129.467,5.600 131.400 C 5.600 133.333,5.503 133.600,4.800 133.600 C 4.067 133.600,4.000 133.867,4.000 136.800 C 4.000 139.733,3.933 140.000,3.200 140.000 C 2.456 140.000,2.400 140.267,2.400 143.800 C 2.400 147.333,2.344 147.600,1.600 147.600 C 0.838 147.600,0.800 147.867,0.800 153.200 C 0.800 156.667,0.648 158.800,0.400 158.800 C 0.139 158.800,0.000 165.000,0.000 176.600 C 0.000 188.200,0.139 194.400,0.400 194.400 C 0.648 194.400,0.800 196.533,0.800 200.000 C 0.800 205.333,0.838 205.600,1.600 205.600 C 2.344 205.600,2.400 205.867,2.400 209.400 C 2.400 212.933,2.456 213.200,3.200 213.200 C 3.933 213.200,4.000 213.467,4.000 216.400 C 4.000 219.333,4.067 219.600,4.800 219.600 C 5.529 219.600,5.600 219.867,5.600 222.600 C 5.600 225.333,5.671 225.600,6.400 225.600 C 7.111 225.600,7.200 225.867,7.200 228.000 C 7.200 230.133,7.289 230.400,8.000 230.400 C 8.667 230.400,8.800 230.667,8.800 232.000 C 8.800 233.333,8.933 233.600,9.600 233.600 C 10.311 233.600,10.400 233.867,10.400 236.000 C 10.400 238.133,10.489 238.400,11.200 238.400 C 11.867 238.400,12.000 238.667,12.000 240.000 C 12.000 241.156,12.167 241.600,12.600 241.600 C 13.061 241.600,13.200 242.111,13.200 243.800 C 13.200 245.733,13.297 246.000,14.000 246.000 C 14.667 246.000,14.800 246.267,14.800 247.600 C 14.800 248.933,14.933 249.200,15.600 249.200 C 16.252 249.200,16.400 249.467,16.400 250.637 C 16.400 251.738,16.587 252.124,17.200 252.284 C 17.806 252.443,18.000 252.830,18.000 253.884 C 18.000 254.938,18.194 255.325,18.800 255.484 C 19.243 255.600,19.600 256.030,19.600 256.447 C 19.600 256.933,19.883 257.200,20.400 257.200 C 21.048 257.200,21.200 257.467,21.200 258.600 C 21.200 259.733,21.352 260.000,22.000 260.000 C 22.667 260.000,22.800 260.267,22.800 261.600 C 22.800 262.933,22.933 263.200,23.600 263.200 C 24.133 263.200,24.400 263.467,24.400 264.000 C 24.400 264.533,24.667 264.800,25.200 264.800 C 25.867 264.800,26.000 265.067,26.000 266.400 C 26.000 267.733,26.133 268.000,26.800 268.000 C 27.333 268.000,27.600 268.267,27.600 268.800 C 27.600 269.333,27.867 269.600,28.400 269.600 C 29.067 269.600,29.200 269.867,29.200 271.200 C 29.200 272.296,29.374 272.800,29.753 272.800 C 30.058 272.800,30.401 273.160,30.516 273.600 C 30.631 274.040,31.012 274.400,31.363 274.400 C 31.824 274.400,32.000 274.786,32.000 275.800 C 32.000 276.933,32.152 277.200,32.800 277.200 C 33.333 277.200,33.600 277.467,33.600 278.000 C 33.600 278.533,33.867 278.800,34.400 278.800 C 34.933 278.800,35.200 279.067,35.200 279.600 C 35.200 280.133,35.467 280.400,36.000 280.400 C 36.533 280.400,36.800 280.667,36.800 281.200 C 36.800 281.733,37.067 282.000,37.600 282.000 C 38.267 282.000,38.400 282.267,38.400 283.600 C 38.400 284.933,38.533 285.200,39.200 285.200 C 39.733 285.200,40.000 285.467,40.000 286.000 C 40.000 286.533,40.267 286.800,40.800 286.800 C 41.333 286.800,41.600 287.067,41.600 287.600 C 41.600 288.133,41.867 288.400,42.400 288.400 C 42.933 288.400,43.200 288.667,43.200 289.200 C 43.200 289.733,43.467 290.000,44.000 290.000 C 44.533 290.000,44.800 290.267,44.800 290.800 C 44.800 291.244,45.067 291.600,45.400 291.600 C 45.730 291.600,46.000 291.870,46.000 292.200 C 46.000 292.533,46.356 292.800,46.800 292.800 C 47.333 292.800,47.600 293.067,47.600 293.600 C 47.600 294.133,47.867 294.400,48.400 294.400 C 48.933 294.400,49.200 294.667,49.200 295.200 C 49.200 295.733,49.467 296.000,50.000 296.000 C 50.533 296.000,50.800 296.267,50.800 296.800 C 50.800 297.333,51.067 297.600,51.600 297.600 C 52.133 297.600,52.400 297.867,52.400 298.400 C 52.400 298.933,52.667 299.200,53.200 299.200 C 53.733 299.200,54.000 299.467,54.000 300.000 C 54.000 300.533,54.267 300.800,54.800 300.800 C 55.333 300.800,55.600 301.067,55.600 301.600 C 55.600 302.133,55.867 302.400,56.400 302.400 C 56.933 302.400,57.200 302.667,57.200 303.200 C 57.200 303.733,57.467 304.000,58.000 304.000 C 58.533 304.000,58.800 304.267,58.800 304.800 C 58.800 305.333,59.067 305.600,59.600 305.600 C 60.133 305.600,60.400 305.867,60.400 306.400 C 60.400 307.048,60.667 307.200,61.800 307.200 C 62.778 307.200,63.200 307.381,63.200 307.800 C 63.200 308.133,63.556 308.400,64.000 308.400 C 64.533 308.400,64.800 308.667,64.800 309.200 C 64.800 309.733,65.067 310.000,65.600 310.000 C 66.133 310.000,66.400 310.267,66.400 310.800 C 66.400 311.333,66.667 311.600,67.200 311.600 C 67.733 311.600,68.000 311.867,68.000 312.400 C 68.000 313.067,68.267 313.200,69.600 313.200 C 70.933 313.200,71.200 313.333,71.200 314.000 C 71.200 314.533,71.467 314.800,72.000 314.800 C 72.533 314.800,72.800 315.067,72.800 315.600 C 72.800 316.267,73.067 316.400,74.400 316.400 C 75.733 316.400,76.000 316.533,76.000 317.200 C 76.000 317.733,76.267 318.000,76.800 318.000 C 77.333 318.000,77.600 318.267,77.600 318.800 C 77.600 319.333,77.867 319.600,78.400 319.600 C 78.933 319.600,79.200 319.867,79.200 320.400 C 79.200 321.042,79.467 321.200,80.553 321.200 C 81.570 321.200,81.959 321.399,82.116 322.000 C 82.276 322.613,82.662 322.800,83.763 322.800 C 84.933 322.800,85.200 322.948,85.200 323.600 C 85.200 324.133,85.467 324.400,86.000 324.400 C 86.444 324.400,86.800 324.667,86.800 325.000 C 86.800 325.433,87.244 325.600,88.400 325.600 C 89.733 325.600,90.000 325.733,90.000 326.400 C 90.000 327.067,90.267 327.200,91.600 327.200 C 92.933 327.200,93.200 327.333,93.200 328.000 C 93.200 328.533,93.467 328.800,94.000 328.800 C 94.533 328.800,94.800 329.067,94.800 329.600 C 94.800 330.248,95.067 330.400,96.200 330.400 C 97.333 330.400,97.600 330.552,97.600 331.200 C 97.600 331.867,97.867 332.000,99.200 332.000 C 100.533 332.000,100.800 332.133,100.800 332.800 C 100.800 333.467,101.067 333.600,102.400 333.600 C 103.733 333.600,104.000 333.733,104.000 334.400 C 104.000 335.111,104.267 335.200,106.400 335.200 C 108.533 335.200,108.800 335.289,108.800 336.000 C 108.800 336.667,109.067 336.800,110.400 336.800 C 111.733 336.800,112.000 336.933,112.000 337.600 C 112.000 338.242,112.267 338.400,113.353 338.400 C 114.370 338.400,114.759 338.599,114.916 339.200 C 115.094 339.880,115.462 340.000,117.363 340.000 C 119.333 340.000,119.600 340.095,119.600 340.800 C 119.600 341.511,119.867 341.600,122.000 341.600 C 123.867 341.600,124.400 341.733,124.400 342.200 C 124.400 342.633,124.844 342.800,126.000 342.800 C 127.333 342.800,127.600 342.933,127.600 343.600 C 127.600 344.329,127.867 344.400,130.600 344.400 C 133.333 344.400,133.600 344.471,133.600 345.200 C 133.600 345.911,133.867 346.000,136.000 346.000 C 138.133 346.000,138.400 346.089,138.400 346.800 C 138.400 347.533,138.667 347.600,141.600 347.600 C 144.533 347.600,144.800 347.667,144.800 348.400 C 144.800 349.129,145.067 349.200,147.800 349.200 C 150.533 349.200,150.800 349.271,150.800 350.000 C 150.800 350.747,151.067 350.800,154.800 350.800 C 158.533 350.800,158.800 350.853,158.800 351.600 C 158.800 352.360,159.067 352.400,164.200 352.400 C 169.333 352.400,169.600 352.440,169.600 353.200 C 169.600 353.975,169.867 354.000,178.153 354.000 C 186.370 354.000,186.715 354.031,186.916 354.800 C 187.119 355.578,187.462 355.600,199.363 355.600 C 211.333 355.600,211.600 355.583,211.600 354.800 C 211.600 354.025,211.867 354.000,220.200 354.000 C 228.533 354.000,228.800 353.975,228.800 353.200 C 228.800 352.453,229.067 352.400,232.800 352.400 C 236.533 352.400,236.800 352.453,236.800 353.200 C 236.800 353.867,237.067 354.000,238.400 354.000 C 239.733 354.000,240.000 354.133,240.000 354.800 C 240.000 355.333,240.267 355.600,240.800 355.600 C 241.333 355.600,241.600 355.867,241.600 356.400 C 241.600 356.933,241.867 357.200,242.400 357.200 C 242.844 357.200,243.200 357.467,243.200 357.800 C 243.200 358.219,243.622 358.400,244.600 358.400 C 245.733 358.400,246.000 358.552,246.000 359.200 C 246.000 359.733,246.267 360.000,246.800 360.000 C 247.333 360.000,247.600 360.267,247.600 360.800 C 247.600 361.467,247.867 361.600,249.200 361.600 C 250.533 361.600,250.800 361.733,250.800 362.400 C 250.800 362.933,251.067 363.200,251.600 363.200 C 252.133 363.200,252.400 363.467,252.400 364.000 C 252.400 364.667,252.667 364.800,254.000 364.800 C 255.333 364.800,255.600 364.933,255.600 365.600 C 255.600 366.267,255.867 366.400,257.200 366.400 C 258.533 366.400,258.800 366.533,258.800 367.200 C 258.800 367.733,259.067 368.000,259.600 368.000 C 260.133 368.000,260.400 368.267,260.400 368.800 C 260.400 369.442,260.667 369.600,261.753 369.600 C 262.770 369.600,263.159 369.799,263.316 370.400 C 263.475 371.006,263.862 371.200,264.916 371.200 C 265.970 371.200,266.357 371.394,266.516 372.000 C 266.676 372.613,267.062 372.800,268.163 372.800 C 269.333 372.800,269.600 372.948,269.600 373.600 C 269.600 374.133,269.867 374.400,270.400 374.400 C 270.844 374.400,271.200 374.667,271.200 375.000 C 271.200 375.433,271.644 375.600,272.800 375.600 C 274.133 375.600,274.400 375.733,274.400 376.400 C 274.400 377.067,274.667 377.200,276.000 377.200 C 277.333 377.200,277.600 377.333,277.600 378.000 C 277.600 378.648,277.867 378.800,279.000 378.800 C 280.133 378.800,280.400 378.952,280.400 379.600 C 280.400 380.267,280.667 380.400,282.000 380.400 C 283.333 380.400,283.600 380.533,283.600 381.200 C 283.600 381.911,283.867 382.000,286.000 382.000 C 288.133 382.000,288.400 382.089,288.400 382.800 C 288.400 383.467,288.667 383.600,290.000 383.600 C 291.333 383.600,291.600 383.733,291.600 384.400 C 291.600 385.067,291.867 385.200,293.200 385.200 C 294.533 385.200,294.800 385.333,294.800 386.000 C 294.800 386.701,295.067 386.800,296.953 386.800 C 298.770 386.800,299.139 386.925,299.316 387.600 C 299.475 388.206,299.862 388.400,300.916 388.400 C 301.970 388.400,302.357 388.594,302.516 389.200 C 302.694 389.880,303.062 390.000,304.963 390.000 C 306.933 390.000,307.200 390.095,307.200 390.800 C 307.200 391.511,307.467 391.600,309.600 391.600 C 311.467 391.600,312.000 391.733,312.000 392.200 C 312.000 392.661,312.511 392.800,314.200 392.800 C 316.133 392.800,316.400 392.897,316.400 393.600 C 316.400 394.333,316.667 394.400,319.600 394.400 C 322.533 394.400,322.800 394.467,322.800 395.200 C 322.800 395.933,323.067 396.000,326.000 396.000 C 328.933 396.000,329.200 396.067,329.200 396.800 C 329.200 397.544,329.467 397.600,333.000 397.600 C 336.533 397.600,336.800 397.656,336.800 398.400 C 336.800 399.154,337.067 399.200,341.400 399.200 C 344.200 399.200,346.000 399.357,346.000 399.600 C 346.000 399.861,353.067 400.000,366.400 400.000 C 379.733 400.000,386.800 399.861,386.800 399.600 C 386.800 399.361,388.333 399.200,390.600 399.200 C 394.133 399.200,394.400 399.144,394.400 398.400 C 394.400 397.733,394.667 397.600,396.000 397.600 C 397.333 397.600,397.600 397.467,397.600 396.800 C 397.600 396.178,397.867 396.000,398.800 396.000 L 400.000 396.000 400.000 389.000 C 400.000 384.600,399.851 382.000,399.600 382.000 C 399.380 382.000,399.200 381.640,399.200 381.200 C 399.200 380.667,398.933 380.400,398.400 380.400 C 397.956 380.400,397.600 380.133,397.600 379.800 C 397.600 379.367,397.156 379.200,396.000 379.200 C 394.667 379.200,394.400 379.067,394.400 378.400 C 394.400 377.867,394.133 377.600,393.600 377.600 C 393.067 377.600,392.800 377.333,392.800 376.800 C 392.800 376.356,392.533 376.000,392.200 376.000 C 391.867 376.000,391.600 375.644,391.600 375.200 C 391.600 374.667,391.333 374.400,390.800 374.400 C 390.267 374.400,390.000 374.133,390.000 373.600 C 390.000 372.933,389.733 372.800,388.400 372.800 C 387.067 372.800,386.800 372.667,386.800 372.000 C 386.800 371.467,386.533 371.200,386.000 371.200 C 385.467 371.200,385.200 370.933,385.200 370.400 C 385.200 369.867,384.933 369.600,384.400 369.600 C 383.867 369.600,383.600 369.333,383.600 368.800 C 383.600 368.133,383.333 368.000,382.000 368.000 C 380.667 368.000,380.400 367.867,380.400 367.200 C 380.400 366.667,380.133 366.400,379.600 366.400 C 379.067 366.400,378.800 366.133,378.800 365.600 C 378.800 365.067,378.533 364.800,378.000 364.800 C 377.467 364.800,377.200 364.533,377.200 364.000 C 377.200 363.467,376.933 363.200,376.400 363.200 C 375.956 363.200,375.600 362.933,375.600 362.600 C 375.600 362.270,375.330 362.000,375.000 362.000 C 374.667 362.000,374.400 361.644,374.400 361.200 C 374.400 360.667,374.133 360.400,373.600 360.400 C 373.067 360.400,372.800 360.133,372.800 359.600 C 372.800 359.067,372.533 358.800,372.000 358.800 C 371.467 358.800,371.200 358.533,371.200 358.000 C 371.200 357.467,370.933 357.200,370.400 357.200 C 369.867 357.200,369.600 356.933,369.600 356.400 C 369.600 355.867,369.333 355.600,368.800 355.600 C 368.267 355.600,368.000 355.333,368.000 354.800 C 368.000 354.267,367.733 354.000,367.200 354.000 C 366.667 354.000,366.400 353.733,366.400 353.200 C 366.400 352.667,366.133 352.400,365.600 352.400 C 365.067 352.400,364.800 352.133,364.800 351.600 C 364.800 351.067,364.533 350.800,364.000 350.800 C 363.467 350.800,363.200 350.533,363.200 350.000 C 363.200 349.467,362.933 349.200,362.400 349.200 C 361.867 349.200,361.600 348.933,361.600 348.400 C 361.600 347.867,361.333 347.600,360.800 347.600 C 360.267 347.600,360.000 347.333,360.000 346.800 C 360.000 346.267,359.733 346.000,359.200 346.000 C 358.552 346.000,358.400 345.733,358.400 344.600 C 358.400 343.622,358.219 343.200,357.800 343.200 C 357.467 343.200,357.200 342.844,357.200 342.400 C 357.200 341.867,356.933 341.600,356.400 341.600 C 355.733 341.600,355.600 341.333,355.600 340.000 C 355.600 338.667,355.467 338.400,354.800 338.400 C 354.267 338.400,354.000 338.133,354.000 337.600 C 354.000 337.067,353.733 336.800,353.200 336.800 C 352.533 336.800,352.400 336.533,352.400 335.200 C 352.400 333.867,352.267 333.600,351.600 333.600 C 350.948 333.600,350.800 333.333,350.800 332.163 C 350.800 331.062,350.613 330.676,350.000 330.516 C 349.399 330.359,349.200 329.970,349.200 328.953 C 349.200 327.867,349.042 327.600,348.400 327.600 C 347.689 327.600,347.600 327.333,347.600 325.200 C 347.600 323.067,347.511 322.800,346.800 322.800 C 346.089 322.800,346.000 322.533,346.000 320.400 C 346.000 318.267,345.911 318.000,345.200 318.000 C 344.489 318.000,344.400 317.733,344.400 315.600 C 344.400 313.467,344.311 313.200,343.600 313.200 C 342.834 313.200,342.800 312.933,342.800 307.000 C 342.800 301.067,342.834 300.800,343.600 300.800 C 344.133 300.800,344.400 300.533,344.400 300.000 C 344.400 299.467,344.667 299.200,345.200 299.200 C 345.733 299.200,346.000 298.933,346.000 298.400 C 346.000 297.867,346.267 297.600,346.800 297.600 C 347.333 297.600,347.600 297.333,347.600 296.800 C 347.600 296.267,347.867 296.000,348.400 296.000 C 348.933 296.000,349.200 295.733,349.200 295.200 C 349.200 294.667,349.467 294.400,350.000 294.400 C 350.533 294.400,350.800 294.133,350.800 293.600 C 350.800 293.067,351.067 292.800,351.600 292.800 C 352.040 292.800,352.400 292.551,352.400 292.247 C 352.400 291.942,352.760 291.599,353.200 291.484 C 353.640 291.369,354.000 290.988,354.000 290.637 C 354.000 290.287,354.287 290.000,354.637 290.000 C 354.988 290.000,355.369 289.640,355.484 289.200 C 355.599 288.760,355.959 288.400,356.284 288.400 C 356.609 288.400,356.969 288.040,357.084 287.600 C 357.199 287.160,357.542 286.800,357.847 286.800 C 358.226 286.800,358.400 286.296,358.400 285.200 C 358.400 283.867,358.533 283.600,359.200 283.600 C 359.733 283.600,360.000 283.333,360.000 282.800 C 360.000 282.267,360.267 282.000,360.800 282.000 C 361.333 282.000,361.600 281.733,361.600 281.200 C 361.600 280.667,361.867 280.400,362.400 280.400 C 362.933 280.400,363.200 280.133,363.200 279.600 C 363.200 279.067,363.467 278.800,364.000 278.800 C 364.667 278.800,364.800 278.533,364.800 277.200 C 364.800 275.867,364.933 275.600,365.600 275.600 C 366.044 275.600,366.400 275.333,366.400 275.000 C 366.400 274.670,366.687 274.400,367.037 274.400 C 367.388 274.400,367.765 274.057,367.874 273.637 C 367.984 273.217,368.417 272.784,368.837 272.674 C 369.409 272.525,369.600 272.115,369.600 271.037 C 369.600 269.867,369.748 269.600,370.400 269.600 C 370.917 269.600,371.200 269.333,371.200 268.847 C 371.200 268.430,371.557 268.000,372.000 267.884 C 372.613 267.724,372.800 267.338,372.800 266.237 C 372.800 265.067,372.948 264.800,373.600 264.800 C 374.133 264.800,374.400 264.533,374.400 264.000 C 374.400 263.556,374.667 263.200,375.000 263.200 C 375.433 263.200,375.600 262.756,375.600 261.600 C 375.600 260.267,375.733 260.000,376.400 260.000 C 377.048 260.000,377.200 259.733,377.200 258.600 C 377.200 257.467,377.352 257.200,378.000 257.200 C 378.667 257.200,378.800 256.933,378.800 255.600 C 378.800 254.267,378.933 254.000,379.600 254.000 C 380.267 254.000,380.400 253.733,380.400 252.400 C 380.400 251.067,380.533 250.800,381.200 250.800 C 381.867 250.800,382.000 250.533,382.000 249.200 C 382.000 247.867,382.133 247.600,382.800 247.600 C 383.467 247.600,383.600 247.333,383.600 246.000 C 383.600 244.667,383.733 244.400,384.400 244.400 C 385.048 244.400,385.200 244.133,385.200 243.000 C 385.200 241.867,385.352 241.600,386.000 241.600 C 386.663 241.600,386.800 241.333,386.800 240.047 C 386.800 238.830,386.973 238.448,387.600 238.284 C 388.280 238.106,388.400 237.738,388.400 235.837 C 388.400 233.867,388.495 233.600,389.200 233.600 C 389.911 233.600,390.000 233.333,390.000 231.200 C 390.000 229.067,390.089 228.800,390.800 228.800 C 391.503 228.800,391.600 228.533,391.600 226.600 C 391.600 224.911,391.739 224.400,392.200 224.400 C 392.667 224.400,392.800 223.867,392.800 222.000 C 392.800 219.867,392.889 219.600,393.600 219.600 C 394.333 219.600,394.400 219.333,394.400 216.400 C 394.400 213.467,394.467 213.200,395.200 213.200 C 395.944 213.200,396.000 212.933,396.000 209.400 C 396.000 205.867,396.056 205.600,396.800 205.600 C 397.567 205.600,397.600 205.333,397.600 199.200 C 397.600 193.067,397.633 192.800,398.400 192.800 C 399.187 192.800,399.200 192.533,399.200 176.600 C 399.200 160.667,399.187 160.400,398.400 160.400 C 397.638 160.400,397.600 160.133,397.600 154.800 C 397.600 149.467,397.562 149.200,396.800 149.200 C 396.056 149.200,396.000 148.933,396.000 145.400 C 396.000 141.867,395.944 141.600,395.200 141.600 C 394.453 141.600,394.400 141.333,394.400 137.600 C 394.400 133.867,394.347 133.600,393.600 133.600 C 392.897 133.600,392.800 133.333,392.800 131.400 C 392.800 129.711,392.661 129.200,392.200 129.200 C 391.733 129.200,391.600 128.667,391.600 126.800 C 391.600 124.667,391.511 124.400,390.800 124.400 C 390.095 124.400,390.000 124.133,390.000 122.163 C 390.000 120.262,389.880 119.894,389.200 119.716 C 388.523 119.539,388.400 119.170,388.400 117.316 C 388.400 115.462,388.277 115.093,387.600 114.916 C 386.999 114.759,386.800 114.370,386.800 113.353 C 386.800 112.267,386.642 112.000,386.000 112.000 C 385.333 112.000,385.200 111.733,385.200 110.400 C 385.200 109.067,385.067 108.800,384.400 108.800 C 383.733 108.800,383.600 108.533,383.600 107.200 C 383.600 105.867,383.467 105.600,382.800 105.600 C 382.133 105.600,382.000 105.333,382.000 104.000 C 382.000 102.667,381.867 102.400,381.200 102.400 C 380.533 102.400,380.400 102.133,380.400 100.800 C 380.400 99.467,380.267 99.200,379.600 99.200 C 378.933 99.200,378.800 98.933,378.800 97.600 C 378.800 96.267,378.667 96.000,378.000 96.000 C 377.352 96.000,377.200 95.733,377.200 94.600 C 377.200 93.467,377.048 93.200,376.400 93.200 C 375.867 93.200,375.600 92.933,375.600 92.400 C 375.600 91.956,375.333 91.600,375.000 91.600 C 374.567 91.600,374.400 91.156,374.400 90.000 C 374.400 88.667,374.267 88.400,373.600 88.400 C 372.948 88.400,372.800 88.133,372.800 86.963 C 372.800 85.862,372.613 85.476,372.000 85.316 C 371.557 85.200,371.200 84.770,371.200 84.353 C 371.200 83.867,370.917 83.600,370.400 83.600 C 369.867 83.600,369.600 83.333,369.600 82.800 C 369.600 82.267,369.333 82.000,368.800 82.000 C 368.152 82.000,368.000 81.733,368.000 80.600 C 368.000 79.467,367.848 79.200,367.200 79.200 C 366.667 79.200,366.400 78.933,366.400 78.400 C 366.400 77.867,366.133 77.600,365.600 77.600 C 364.933 77.600,364.800 77.333,364.800 76.000 C 364.800 74.667,364.667 74.400,364.000 74.400 C 363.467 74.400,363.200 74.133,363.200 73.600 C 363.200 73.067,362.933 72.800,362.400 72.800 C 361.867 72.800,361.600 72.533,361.600 72.000 C 361.600 71.467,361.333 71.200,360.800 71.200 C 360.267 71.200,360.000 70.933,360.000 70.400 C 360.000 69.867,359.733 69.600,359.200 69.600 C 358.667 69.600,358.400 69.333,358.400 68.800 C 358.400 68.356,358.133 68.000,357.800 68.000 C 357.378 68.000,357.200 67.574,357.200 66.563 C 357.200 65.485,357.009 65.075,356.437 64.926 C 356.017 64.816,355.584 64.383,355.474 63.963 C 355.365 63.543,354.988 63.200,354.637 63.200 C 354.287 63.200,354.000 62.930,354.000 62.600 C 354.000 62.267,353.644 62.000,353.200 62.000 C 352.667 62.000,352.400 61.733,352.400 61.200 C 352.400 60.667,352.133 60.400,351.600 60.400 C 351.067 60.400,350.800 60.133,350.800 59.600 C 350.800 59.067,350.533 58.800,350.000 58.800 C 349.467 58.800,349.200 58.533,349.200 58.000 C 349.200 57.467,348.933 57.200,348.400 57.200 C 347.867 57.200,347.600 56.933,347.600 56.400 C 347.600 55.867,347.333 55.600,346.800 55.600 C 346.267 55.600,346.000 55.333,346.000 54.800 C 346.000 54.267,345.733 54.000,345.200 54.000 C 344.667 54.000,344.400 53.733,344.400 53.200 C 344.400 52.667,344.133 52.400,343.600 52.400 C 343.067 52.400,342.800 52.133,342.800 51.600 C 342.800 51.160,342.551 50.800,342.247 50.800 C 341.942 50.800,341.599 50.440,341.484 50.000 C 341.325 49.394,340.938 49.200,339.884 49.200 C 338.830 49.200,338.443 49.006,338.284 48.400 C 338.169 47.960,337.788 47.600,337.437 47.600 C 337.067 47.600,336.800 47.265,336.800 46.800 C 336.800 46.267,336.533 46.000,336.000 46.000 C 335.556 46.000,335.200 45.733,335.200 45.400 C 335.200 45.067,334.844 44.800,334.400 44.800 C 333.867 44.800,333.600 44.533,333.600 44.000 C 333.600 43.467,333.333 43.200,332.800 43.200 C 332.267 43.200,332.000 42.933,332.000 42.400 C 332.000 41.733,331.733 41.600,330.400 41.600 C 329.067 41.600,328.800 41.467,328.800 40.800 C 328.800 40.267,328.533 40.000,328.000 40.000 C 327.467 40.000,327.200 39.733,327.200 39.200 C 327.200 38.667,326.933 38.400,326.400 38.400 C 325.867 38.400,325.600 38.133,325.600 37.600 C 325.600 36.952,325.333 36.800,324.200 36.800 C 323.067 36.800,322.800 36.648,322.800 36.000 C 322.800 35.483,322.533 35.200,322.047 35.200 C 321.630 35.200,321.200 34.843,321.084 34.400 C 320.924 33.787,320.538 33.600,319.437 33.600 C 318.267 33.600,318.000 33.452,318.000 32.800 C 318.000 32.267,317.733 32.000,317.200 32.000 C 316.667 32.000,316.400 31.733,316.400 31.200 C 316.400 30.533,316.133 30.400,314.800 30.400 C 313.644 30.400,313.200 30.233,313.200 29.800 C 313.200 29.367,312.756 29.200,311.600 29.200 C 310.267 29.200,310.000 29.067,310.000 28.400 C 310.000 27.867,309.733 27.600,309.200 27.600 C 308.667 27.600,308.400 27.333,308.400 26.800 C 308.400 26.152,308.133 26.000,307.000 26.000 C 305.867 26.000,305.600 25.848,305.600 25.200 C 305.600 24.533,305.333 24.400,304.000 24.400 C 302.667 24.400,302.400 24.267,302.400 23.600 C 302.400 22.933,302.133 22.800,300.800 22.800 C 299.467 22.800,299.200 22.667,299.200 22.000 C 299.200 21.333,298.933 21.200,297.600 21.200 C 296.267 21.200,296.000 21.067,296.000 20.400 C 296.000 19.733,295.733 19.600,294.400 19.600 C 293.067 19.600,292.800 19.467,292.800 18.800 C 292.800 18.158,292.533 18.000,291.447 18.000 C 290.430 18.000,290.041 17.801,289.884 17.200 C 289.725 16.594,289.338 16.400,288.284 16.400 C 287.230 16.400,286.843 16.206,286.684 15.600 C 286.506 14.920,286.138 14.800,284.237 14.800 C 282.267 14.800,282.000 14.705,282.000 14.000 C 282.000 13.333,281.733 13.200,280.400 13.200 C 279.244 13.200,278.800 13.033,278.800 12.600 C 278.800 12.139,278.289 12.000,276.600 12.000 C 274.667 12.000,274.400 11.903,274.400 11.200 C 274.400 10.489,274.133 10.400,272.000 10.400 C 269.867 10.400,269.600 10.311,269.600 9.600 C 269.600 8.889,269.333 8.800,267.200 8.800 C 265.067 8.800,264.800 8.711,264.800 8.000 C 264.800 7.267,264.533 7.200,261.600 7.200 C 258.667 7.200,258.400 7.133,258.400 6.400 C 258.400 5.671,258.133 5.600,255.400 5.600 C 252.667 5.600,252.400 5.529,252.400 4.800 C 252.400 4.067,252.133 4.000,249.200 4.000 C 246.267 4.000,246.000 3.933,246.000 3.200 C 246.000 2.457,245.733 2.400,242.247 2.400 C 238.830 2.400,238.475 2.328,238.284 1.600 C 238.086 0.843,237.738 0.800,231.837 0.800 C 227.946 0.800,225.600 0.650,225.600 0.400 C 225.600 0.137,216.267 0.000,198.400 0.000 C 180.533 0.000,171.200 0.137,171.200 0.400 M219.600 18.800 C 219.600 19.560,219.867 19.600,224.953 19.600 C 229.970 19.600,230.320 19.650,230.516 20.400 C 230.710 21.142,231.062 21.200,235.363 21.200 C 239.733 21.200,240.000 21.246,240.000 22.000 C 240.000 22.728,240.267 22.800,242.953 22.800 C 245.570 22.800,245.931 22.891,246.116 23.600 C 246.302 24.311,246.662 24.400,249.363 24.400 C 251.796 24.400,252.400 24.519,252.400 25.000 C 252.400 25.483,253.022 25.600,255.600 25.600 C 258.533 25.600,258.800 25.667,258.800 26.400 C 258.800 27.103,259.067 27.200,261.000 27.200 C 262.933 27.200,263.200 27.297,263.200 28.000 C 263.200 28.711,263.467 28.800,265.600 28.800 C 267.733 28.800,268.000 28.889,268.000 29.600 C 268.000 30.267,268.267 30.400,269.600 30.400 C 270.933 30.400,271.200 30.533,271.200 31.200 C 271.200 31.911,271.467 32.000,273.600 32.000 C 275.733 32.000,276.000 32.089,276.000 32.800 C 276.000 33.467,276.267 33.600,277.600 33.600 C 278.933 33.600,279.200 33.733,279.200 34.400 C 279.200 35.042,279.467 35.200,280.553 35.200 C 281.570 35.200,281.959 35.399,282.116 36.000 C 282.275 36.606,282.662 36.800,283.716 36.800 C 284.770 36.800,285.157 36.994,285.316 37.600 C 285.476 38.213,285.862 38.400,286.963 38.400 C 288.133 38.400,288.400 38.548,288.400 39.200 C 288.400 39.867,288.667 40.000,290.000 40.000 C 291.333 40.000,291.600 40.133,291.600 40.800 C 291.600 41.467,291.867 41.600,293.200 41.600 C 294.356 41.600,294.800 41.767,294.800 42.200 C 294.800 42.619,295.222 42.800,296.200 42.800 C 297.333 42.800,297.600 42.952,297.600 43.600 C 297.600 44.267,297.867 44.400,299.200 44.400 C 300.533 44.400,300.800 44.533,300.800 45.200 C 300.800 45.733,301.067 46.000,301.600 46.000 C 302.133 46.000,302.400 46.267,302.400 46.800 C 302.400 47.467,302.667 47.600,304.000 47.600 C 305.333 47.600,305.600 47.733,305.600 48.400 C 305.600 48.933,305.867 49.200,306.400 49.200 C 306.933 49.200,307.200 49.467,307.200 50.000 C 307.200 50.667,307.467 50.800,308.800 50.800 C 310.133 50.800,310.400 50.933,310.400 51.600 C 310.400 52.133,310.667 52.400,311.200 52.400 C 311.733 52.400,312.000 52.667,312.000 53.200 C 312.000 53.848,312.267 54.000,313.400 54.000 C 314.414 54.000,314.800 54.176,314.800 54.637 C 314.800 54.988,315.160 55.369,315.600 55.484 C 316.040 55.599,316.400 55.959,316.400 56.284 C 316.400 56.609,316.760 56.969,317.200 57.084 C 317.640 57.199,318.000 57.542,318.000 57.847 C 318.000 58.226,318.504 58.400,319.600 58.400 C 320.933 58.400,321.200 58.533,321.200 59.200 C 321.200 59.733,321.467 60.000,322.000 60.000 C 322.533 60.000,322.800 60.267,322.800 60.800 C 322.800 61.333,323.067 61.600,323.600 61.600 C 324.133 61.600,324.400 61.867,324.400 62.400 C 324.400 62.933,324.667 63.200,325.200 63.200 C 325.733 63.200,326.000 63.467,326.000 64.000 C 326.000 64.533,326.267 64.800,326.800 64.800 C 327.333 64.800,327.600 65.067,327.600 65.600 C 327.600 66.133,327.867 66.400,328.400 66.400 C 328.933 66.400,329.200 66.667,329.200 67.200 C 329.200 67.640,329.449 68.000,329.753 68.000 C 330.058 68.000,330.401 68.360,330.516 68.800 C 330.631 69.240,330.991 69.600,331.316 69.600 C 331.641 69.600,332.001 69.960,332.116 70.400 C 332.231 70.840,332.591 71.200,332.916 71.200 C 333.241 71.200,333.601 71.560,333.716 72.000 C 333.831 72.440,334.191 72.800,334.516 72.800 C 334.841 72.800,335.201 73.160,335.316 73.600 C 335.431 74.040,335.812 74.400,336.163 74.400 C 336.513 74.400,336.800 74.670,336.800 75.000 C 336.800 75.333,337.156 75.600,337.600 75.600 C 338.133 75.600,338.400 75.867,338.400 76.400 C 338.400 76.933,338.667 77.200,339.200 77.200 C 339.733 77.200,340.000 77.467,340.000 78.000 C 340.000 78.533,340.267 78.800,340.800 78.800 C 341.333 78.800,341.600 79.067,341.600 79.600 C 341.600 80.133,341.867 80.400,342.400 80.400 C 342.933 80.400,343.200 80.667,343.200 81.200 C 343.200 81.733,343.467 82.000,344.000 82.000 C 344.533 82.000,344.800 82.267,344.800 82.800 C 344.800 83.244,345.067 83.600,345.400 83.600 C 345.733 83.600,346.000 83.956,346.000 84.400 C 346.000 84.933,346.267 85.200,346.800 85.200 C 347.452 85.200,347.600 85.467,347.600 86.637 C 347.600 87.715,347.791 88.125,348.363 88.274 C 348.783 88.384,349.216 88.817,349.326 89.237 C 349.435 89.657,349.812 90.000,350.163 90.000 C 350.533 90.000,350.800 90.335,350.800 90.800 C 350.800 91.333,351.067 91.600,351.600 91.600 C 352.248 91.600,352.400 91.867,352.400 93.000 C 352.400 94.133,352.552 94.400,353.200 94.400 C 353.733 94.400,354.000 94.667,354.000 95.200 C 354.000 95.733,354.267 96.000,354.800 96.000 C 355.467 96.000,355.600 96.267,355.600 97.600 C 355.600 98.933,355.733 99.200,356.400 99.200 C 356.933 99.200,357.200 99.467,357.200 100.000 C 357.200 100.533,357.467 100.800,358.000 100.800 C 358.667 100.800,358.800 101.067,358.800 102.400 C 358.800 103.733,358.933 104.000,359.600 104.000 C 360.267 104.000,360.400 104.267,360.400 105.600 C 360.400 106.933,360.533 107.200,361.200 107.200 C 361.848 107.200,362.000 107.467,362.000 108.600 C 362.000 109.578,362.181 110.000,362.600 110.000 C 362.933 110.000,363.200 110.356,363.200 110.800 C 363.200 111.333,363.467 111.600,364.000 111.600 C 364.667 111.600,364.800 111.867,364.800 113.200 C 364.800 114.533,364.933 114.800,365.600 114.800 C 366.305 114.800,366.400 115.067,366.400 117.037 C 366.400 118.938,366.520 119.306,367.200 119.484 C 367.806 119.643,368.000 120.030,368.000 121.084 C 368.000 122.138,368.194 122.525,368.800 122.684 C 369.401 122.841,369.600 123.230,369.600 124.247 C 369.600 125.333,369.758 125.600,370.400 125.600 C 371.111 125.600,371.200 125.867,371.200 128.000 C 371.200 130.133,371.289 130.400,372.000 130.400 C 372.711 130.400,372.800 130.667,372.800 132.800 C 372.800 134.933,372.889 135.200,373.600 135.200 C 374.333 135.200,374.400 135.467,374.400 138.400 C 374.400 141.333,374.467 141.600,375.200 141.600 C 375.903 141.600,376.000 141.867,376.000 143.800 C 376.000 145.733,376.097 146.000,376.800 146.000 C 377.556 146.000,377.600 146.267,377.600 150.800 C 377.600 155.333,377.644 155.600,378.400 155.600 C 379.166 155.600,379.200 155.867,379.200 161.800 C 379.200 167.044,379.292 168.000,379.800 168.000 C 380.315 168.000,380.400 169.222,380.400 176.600 C 380.400 183.978,380.315 185.200,379.800 185.200 C 379.292 185.200,379.200 186.156,379.200 191.400 C 379.200 197.333,379.166 197.600,378.400 197.600 C 377.644 197.600,377.600 197.867,377.600 202.400 C 377.600 206.933,377.556 207.200,376.800 207.200 C 376.071 207.200,376.000 207.467,376.000 210.200 C 376.000 212.933,375.929 213.200,375.200 213.200 C 374.489 213.200,374.400 213.467,374.400 215.600 C 374.400 217.733,374.311 218.000,373.600 218.000 C 372.889 218.000,372.800 218.267,372.800 220.400 C 372.800 222.533,372.711 222.800,372.000 222.800 C 371.289 222.800,371.200 223.067,371.200 225.200 C 371.200 227.333,371.111 227.600,370.400 227.600 C 369.758 227.600,369.600 227.867,369.600 228.953 C 369.600 229.970,369.401 230.359,368.800 230.516 C 368.194 230.675,368.000 231.062,368.000 232.116 C 368.000 233.170,367.806 233.557,367.200 233.716 C 366.520 233.894,366.400 234.262,366.400 236.163 C 366.400 238.133,366.305 238.400,365.600 238.400 C 364.933 238.400,364.800 238.667,364.800 240.000 C 364.800 241.333,364.667 241.600,364.000 241.600 C 363.333 241.600,363.200 241.867,363.200 243.200 C 363.200 244.356,363.033 244.800,362.600 244.800 C 362.270 244.800,362.000 245.070,362.000 245.400 C 362.000 245.733,361.644 246.000,361.200 246.000 C 360.533 246.000,360.400 246.267,360.400 247.600 C 360.400 248.933,360.267 249.200,359.600 249.200 C 358.933 249.200,358.800 249.467,358.800 250.800 C 358.800 252.133,358.667 252.400,358.000 252.400 C 357.467 252.400,357.200 252.667,357.200 253.200 C 357.200 253.733,356.933 254.000,356.400 254.000 C 355.733 254.000,355.600 254.267,355.600 255.600 C 355.600 256.933,355.467 257.200,354.800 257.200 C 354.267 257.200,354.000 257.467,354.000 258.000 C 354.000 258.533,353.733 258.800,353.200 258.800 C 352.533 258.800,352.400 259.067,352.400 260.400 C 352.400 261.733,352.267 262.000,351.600 262.000 C 351.156 262.000,350.800 262.267,350.800 262.600 C 350.800 262.930,350.513 263.200,350.163 263.200 C 349.812 263.200,349.435 263.543,349.326 263.963 C 349.216 264.383,348.783 264.816,348.363 264.926 C 347.791 265.075,347.600 265.485,347.600 266.563 C 347.600 267.733,347.452 268.000,346.800 268.000 C 346.267 268.000,346.000 268.267,346.000 268.800 C 346.000 269.244,345.733 269.600,345.400 269.600 C 345.067 269.600,344.800 269.956,344.800 270.400 C 344.800 270.933,344.533 271.200,344.000 271.200 C 343.467 271.200,343.200 271.467,343.200 272.000 C 343.200 272.533,342.933 272.800,342.400 272.800 C 341.867 272.800,341.600 273.067,341.600 273.600 C 341.600 274.133,341.333 274.400,340.800 274.400 C 340.267 274.400,340.000 274.667,340.000 275.200 C 340.000 275.733,339.733 276.000,339.200 276.000 C 338.533 276.000,338.400 276.267,338.400 277.600 C 338.400 278.933,338.267 279.200,337.600 279.200 C 337.156 279.200,336.800 279.467,336.800 279.800 C 336.800 280.133,336.444 280.400,336.000 280.400 C 335.467 280.400,335.200 280.667,335.200 281.200 C 335.200 281.733,334.933 282.000,334.400 282.000 C 333.867 282.000,333.600 282.267,333.600 282.800 C 333.600 283.333,333.333 283.600,332.800 283.600 C 332.267 283.600,332.000 283.867,332.000 284.400 C 332.000 285.048,331.733 285.200,330.600 285.200 C 329.467 285.200,329.200 285.352,329.200 286.000 C 329.200 286.533,328.933 286.800,328.400 286.800 C 327.867 286.800,327.600 287.067,327.600 287.600 C 327.600 288.133,327.333 288.400,326.800 288.400 C 326.267 288.400,326.000 288.667,326.000 289.200 C 326.000 289.733,325.733 290.000,325.200 290.000 C 324.533 290.000,324.400 290.267,324.400 291.600 C 324.400 292.933,324.267 293.200,323.600 293.200 C 322.825 293.200,322.800 293.467,322.800 301.600 C 322.800 309.733,322.825 310.000,323.600 310.000 C 324.356 310.000,324.400 310.267,324.400 314.800 C 324.400 319.333,324.444 319.600,325.200 319.600 C 325.929 319.600,326.000 319.867,326.000 322.600 C 326.000 325.333,326.071 325.600,326.800 325.600 C 327.511 325.600,327.600 325.867,327.600 328.000 C 327.600 330.133,327.689 330.400,328.400 330.400 C 329.067 330.400,329.200 330.667,329.200 332.000 C 329.200 333.156,329.367 333.600,329.800 333.600 C 330.262 333.600,330.400 334.115,330.400 335.837 C 330.400 337.738,330.520 338.106,331.200 338.284 C 331.806 338.443,332.000 338.830,332.000 339.884 C 332.000 340.938,332.194 341.325,332.800 341.484 C 333.401 341.641,333.600 342.030,333.600 343.047 C 333.600 344.133,333.758 344.400,334.400 344.400 C 335.067 344.400,335.200 344.667,335.200 346.000 C 335.200 347.333,335.333 347.600,336.000 347.600 C 336.533 347.600,336.800 347.867,336.800 348.400 C 336.800 348.933,337.067 349.200,337.600 349.200 C 338.267 349.200,338.400 349.467,338.400 350.800 C 338.400 352.133,338.533 352.400,339.200 352.400 C 339.733 352.400,340.000 352.667,340.000 353.200 C 340.000 353.733,340.267 354.000,340.800 354.000 C 341.467 354.000,341.600 354.267,341.600 355.600 C 341.600 356.933,341.733 357.200,342.400 357.200 C 342.844 357.200,343.200 357.467,343.200 357.800 C 343.200 358.133,343.556 358.400,344.000 358.400 C 344.533 358.400,344.800 358.667,344.800 359.200 C 344.800 359.644,345.067 360.000,345.400 360.000 C 345.733 360.000,346.000 360.356,346.000 360.800 C 346.000 361.333,346.267 361.600,346.800 361.600 C 347.467 361.600,347.600 361.867,347.600 363.200 C 347.600 364.533,347.733 364.800,348.400 364.800 C 348.933 364.800,349.200 365.067,349.200 365.600 C 349.200 366.133,349.467 366.400,350.000 366.400 C 350.533 366.400,350.800 366.667,350.800 367.200 C 350.800 367.733,351.067 368.000,351.600 368.000 C 352.133 368.000,352.400 368.267,352.400 368.800 C 352.400 369.333,352.667 369.600,353.200 369.600 C 353.733 369.600,354.000 369.867,354.000 370.400 C 354.000 370.933,354.267 371.200,354.800 371.200 C 355.333 371.200,355.600 371.467,355.600 372.000 C 355.600 372.533,355.867 372.800,356.400 372.800 C 356.933 372.800,357.200 373.067,357.200 373.600 C 357.200 374.133,357.467 374.400,358.000 374.400 C 358.444 374.400,358.800 374.667,358.800 375.000 C 358.800 375.333,359.156 375.600,359.600 375.600 C 360.133 375.600,360.400 375.867,360.400 376.400 C 360.400 376.933,360.667 377.200,361.200 377.200 C 361.733 377.200,362.000 377.467,362.000 378.000 C 362.000 378.648,362.267 378.800,363.400 378.800 C 364.533 378.800,364.800 378.952,364.800 379.600 C 364.800 380.133,365.067 380.400,365.600 380.400 C 366.133 380.400,366.400 380.667,366.400 381.200 C 366.400 382.448,352.610 382.448,352.284 381.200 C 352.090 380.458,351.738 380.400,347.437 380.400 C 343.582 380.400,342.800 380.299,342.800 379.800 C 342.800 379.309,342.111 379.200,339.000 379.200 C 335.467 379.200,335.200 379.144,335.200 378.400 C 335.200 377.667,334.933 377.600,332.000 377.600 C 329.067 377.600,328.800 377.533,328.800 376.800 C 328.800 376.097,328.533 376.000,326.600 376.000 C 324.667 376.000,324.400 375.903,324.400 375.200 C 324.400 374.489,324.133 374.400,322.000 374.400 C 319.867 374.400,319.600 374.311,319.600 373.600 C 319.600 372.889,319.333 372.800,317.200 372.800 C 315.067 372.800,314.800 372.711,314.800 372.000 C 314.800 371.289,314.533 371.200,312.400 371.200 C 310.267 371.200,310.000 371.111,310.000 370.400 C 310.000 369.697,309.733 369.600,307.800 369.600 C 305.867 369.600,305.600 369.503,305.600 368.800 C 305.600 368.137,305.333 368.000,304.047 368.000 C 302.830 368.000,302.448 367.827,302.284 367.200 C 302.124 366.587,301.738 366.400,300.637 366.400 C 299.467 366.400,299.200 366.252,299.200 365.600 C 299.200 364.889,298.933 364.800,296.800 364.800 C 294.667 364.800,294.400 364.711,294.400 364.000 C 294.400 363.352,294.133 363.200,293.000 363.200 C 292.022 363.200,291.600 363.019,291.600 362.600 C 291.600 362.167,291.156 362.000,290.000 362.000 C 288.667 362.000,288.400 361.867,288.400 361.200 C 288.400 360.533,288.133 360.400,286.800 360.400 C 285.467 360.400,285.200 360.267,285.200 359.600 C 285.200 358.933,284.933 358.800,283.600 358.800 C 282.267 358.800,282.000 358.667,282.000 358.000 C 282.000 357.333,281.733 357.200,280.400 357.200 C 279.067 357.200,278.800 357.067,278.800 356.400 C 278.800 355.733,278.533 355.600,277.200 355.600 C 275.867 355.600,275.600 355.467,275.600 354.800 C 275.600 354.360,275.351 354.000,275.047 354.000 C 274.742 354.000,274.399 353.640,274.284 353.200 C 274.125 352.594,273.738 352.400,272.684 352.400 C 271.630 352.400,271.243 352.206,271.084 351.600 C 270.924 350.987,270.538 350.800,269.437 350.800 C 268.267 350.800,268.000 350.652,268.000 350.000 C 268.000 349.467,267.733 349.200,267.200 349.200 C 266.667 349.200,266.400 348.933,266.400 348.400 C 266.400 347.733,266.133 347.600,264.800 347.600 C 263.467 347.600,263.200 347.467,263.200 346.800 C 263.200 346.267,262.933 346.000,262.400 346.000 C 261.956 346.000,261.600 345.733,261.600 345.400 C 261.600 344.967,261.156 344.800,260.000 344.800 C 258.667 344.800,258.400 344.667,258.400 344.000 C 258.400 343.556,258.133 343.200,257.800 343.200 C 257.467 343.200,257.200 342.844,257.200 342.400 C 257.200 341.733,256.933 341.600,255.600 341.600 C 254.267 341.600,254.000 341.467,254.000 340.800 C 254.000 340.267,253.733 340.000,253.200 340.000 C 252.667 340.000,252.400 339.733,252.400 339.200 C 252.400 338.667,252.133 338.400,251.600 338.400 C 251.067 338.400,250.800 338.133,250.800 337.600 C 250.800 336.933,250.533 336.800,249.200 336.800 C 247.867 336.800,247.600 336.667,247.600 336.000 C 247.600 335.467,247.333 335.200,246.800 335.200 C 246.267 335.200,246.000 334.933,246.000 334.400 C 246.000 333.867,245.733 333.600,245.200 333.600 C 244.667 333.600,244.400 333.333,244.400 332.800 C 244.400 331.555,232.441 331.555,232.116 332.800 C 231.920 333.550,231.570 333.600,226.553 333.600 C 221.467 333.600,221.200 333.640,221.200 334.400 C 221.200 335.191,220.933 335.200,198.400 335.200 C 175.867 335.200,175.600 335.191,175.600 334.400 C 175.600 333.640,175.333 333.600,170.200 333.600 C 165.067 333.600,164.800 333.560,164.800 332.800 C 164.800 332.057,164.533 332.000,161.047 332.000 C 157.630 332.000,157.275 331.928,157.084 331.200 C 156.898 330.489,156.538 330.400,153.837 330.400 C 151.404 330.400,150.800 330.281,150.800 329.800 C 150.800 329.317,150.178 329.200,147.600 329.200 C 144.667 329.200,144.400 329.133,144.400 328.400 C 144.400 327.697,144.133 327.600,142.200 327.600 C 140.267 327.600,140.000 327.503,140.000 326.800 C 140.000 326.089,139.733 326.000,137.600 326.000 C 135.467 326.000,135.200 325.911,135.200 325.200 C 135.200 324.489,134.933 324.400,132.800 324.400 C 130.667 324.400,130.400 324.311,130.400 323.600 C 130.400 322.889,130.133 322.800,128.000 322.800 C 125.867 322.800,125.600 322.711,125.600 322.000 C 125.600 321.358,125.333 321.200,124.247 321.200 C 123.230 321.200,122.841 321.001,122.684 320.400 C 122.506 319.720,122.138 319.600,120.237 319.600 C 118.267 319.600,118.000 319.505,118.000 318.800 C 118.000 318.133,117.733 318.000,116.400 318.000 C 115.067 318.000,114.800 317.867,114.800 317.200 C 114.800 316.533,114.533 316.400,113.200 316.400 C 111.867 316.400,111.600 316.267,111.600 315.600 C 111.600 314.933,111.333 314.800,110.000 314.800 C 108.667 314.800,108.400 314.667,108.400 314.000 C 108.400 313.352,108.133 313.200,107.000 313.200 C 106.022 313.200,105.600 313.019,105.600 312.600 C 105.600 312.167,105.156 312.000,104.000 312.000 C 102.667 312.000,102.400 311.867,102.400 311.200 C 102.400 310.667,102.133 310.400,101.600 310.400 C 101.067 310.400,100.800 310.133,100.800 309.600 C 100.800 308.933,100.533 308.800,99.200 308.800 C 97.867 308.800,97.600 308.667,97.600 308.000 C 97.600 307.333,97.333 307.200,96.000 307.200 C 94.667 307.200,94.400 307.067,94.400 306.400 C 94.400 305.867,94.133 305.600,93.600 305.600 C 93.067 305.600,92.800 305.333,92.800 304.800 C 92.800 304.152,92.533 304.000,91.400 304.000 C 90.267 304.000,90.000 303.848,90.000 303.200 C 90.000 302.683,89.733 302.400,89.247 302.400 C 88.830 302.400,88.400 302.043,88.284 301.600 C 88.124 300.987,87.738 300.800,86.637 300.800 C 85.467 300.800,85.200 300.652,85.200 300.000 C 85.200 299.467,84.933 299.200,84.400 299.200 C 83.867 299.200,83.600 298.933,83.600 298.400 C 83.600 297.867,83.333 297.600,82.800 297.600 C 82.267 297.600,82.000 297.333,82.000 296.800 C 82.000 296.133,81.733 296.000,80.400 296.000 C 79.244 296.000,78.800 295.833,78.800 295.400 C 78.800 295.067,78.444 294.800,78.000 294.800 C 77.467 294.800,77.200 294.533,77.200 294.000 C 77.200 293.467,76.933 293.200,76.400 293.200 C 75.867 293.200,75.600 292.933,75.600 292.400 C 75.600 291.956,75.333 291.600,75.000 291.600 C 74.667 291.600,74.400 291.244,74.400 290.800 C 74.400 290.267,74.133 290.000,73.600 290.000 C 73.067 290.000,72.800 289.733,72.800 289.200 C 72.800 288.533,72.533 288.400,71.200 288.400 C 69.867 288.400,69.600 288.267,69.600 287.600 C 69.600 287.067,69.333 286.800,68.800 286.800 C 68.267 286.800,68.000 286.533,68.000 286.000 C 68.000 285.467,67.733 285.200,67.200 285.200 C 66.667 285.200,66.400 284.933,66.400 284.400 C 66.400 283.867,66.133 283.600,65.600 283.600 C 65.067 283.600,64.800 283.333,64.800 282.800 C 64.800 282.267,64.533 282.000,64.000 282.000 C 63.467 282.000,63.200 281.733,63.200 281.200 C 63.200 280.667,62.933 280.400,62.400 280.400 C 61.956 280.400,61.600 280.133,61.600 279.800 C 61.600 279.467,61.244 279.200,60.800 279.200 C 60.267 279.200,60.000 278.933,60.000 278.400 C 60.000 277.867,59.733 277.600,59.200 277.600 C 58.667 277.600,58.400 277.333,58.400 276.800 C 58.400 276.356,58.133 276.000,57.800 276.000 C 57.367 276.000,57.200 275.556,57.200 274.400 C 57.200 273.067,57.067 272.800,56.400 272.800 C 55.867 272.800,55.600 272.533,55.600 272.000 C 55.600 271.467,55.333 271.200,54.800 271.200 C 54.267 271.200,54.000 270.933,54.000 270.400 C 54.000 269.867,53.733 269.600,53.200 269.600 C 52.667 269.600,52.400 269.333,52.400 268.800 C 52.400 268.267,52.133 268.000,51.600 268.000 C 51.067 268.000,50.800 267.733,50.800 267.200 C 50.800 266.667,50.533 266.400,50.000 266.400 C 49.333 266.400,49.200 266.133,49.200 264.800 C 49.200 263.467,49.067 263.200,48.400 263.200 C 47.956 263.200,47.600 262.933,47.600 262.600 C 47.600 262.267,47.244 262.000,46.800 262.000 C 46.267 262.000,46.000 261.733,46.000 261.200 C 46.000 260.667,45.733 260.400,45.200 260.400 C 44.533 260.400,44.400 260.133,44.400 258.800 C 44.400 257.467,44.267 257.200,43.600 257.200 C 43.067 257.200,42.800 256.933,42.800 256.400 C 42.800 255.956,42.533 255.600,42.200 255.600 C 41.778 255.600,41.600 255.174,41.600 254.163 C 41.600 253.062,41.413 252.676,40.800 252.516 C 40.194 252.357,40.000 251.970,40.000 250.916 C 40.000 249.884,39.803 249.474,39.237 249.326 C 38.817 249.216,38.384 248.783,38.274 248.363 C 38.165 247.943,37.788 247.600,37.437 247.600 C 36.976 247.600,36.800 247.214,36.800 246.200 C 36.800 245.067,36.648 244.800,36.000 244.800 C 35.333 244.800,35.200 244.533,35.200 243.200 C 35.200 241.867,35.067 241.600,34.400 241.600 C 33.733 241.600,33.600 241.333,33.600 240.000 C 33.600 238.667,33.467 238.400,32.800 238.400 C 32.133 238.400,32.000 238.133,32.000 236.800 C 32.000 235.467,31.867 235.200,31.200 235.200 C 30.533 235.200,30.400 234.933,30.400 233.600 C 30.400 232.267,30.267 232.000,29.600 232.000 C 28.897 232.000,28.800 231.733,28.800 229.800 C 28.800 227.867,28.703 227.600,28.000 227.600 C 27.333 227.600,27.200 227.333,27.200 226.000 C 27.200 224.667,27.067 224.400,26.400 224.400 C 25.667 224.400,25.600 224.133,25.600 221.200 C 25.600 218.622,25.483 218.000,25.000 218.000 C 24.538 218.000,24.400 217.485,24.400 215.763 C 24.400 213.862,24.280 213.494,23.600 213.316 C 22.891 213.131,22.800 212.770,22.800 210.153 C 22.800 207.467,22.728 207.200,22.000 207.200 C 21.256 207.200,21.200 206.933,21.200 203.363 C 21.200 199.862,21.130 199.507,20.400 199.316 C 19.644 199.118,19.600 198.770,19.600 192.953 C 19.600 187.067,19.565 186.800,18.800 186.800 C 18.021 186.800,18.000 186.533,18.000 176.600 C 18.000 166.667,18.021 166.400,18.800 166.400 C 19.565 166.400,19.600 166.133,19.600 160.247 C 19.600 154.430,19.644 154.082,20.400 153.884 C 21.130 153.693,21.200 153.338,21.200 149.837 C 21.200 146.267,21.256 146.000,22.000 146.000 C 22.728 146.000,22.800 145.733,22.800 143.047 C 22.800 140.430,22.891 140.069,23.600 139.884 C 24.280 139.706,24.400 139.338,24.400 137.437 C 24.400 135.715,24.538 135.200,25.000 135.200 C 25.467 135.200,25.600 134.667,25.600 132.800 C 25.600 130.667,25.689 130.400,26.400 130.400 C 27.111 130.400,27.200 130.133,27.200 128.000 C 27.200 125.867,27.289 125.600,28.000 125.600 C 28.648 125.600,28.800 125.333,28.800 124.200 C 28.800 123.067,28.952 122.800,29.600 122.800 C 30.311 122.800,30.400 122.533,30.400 120.400 C 30.400 118.267,30.489 118.000,31.200 118.000 C 31.867 118.000,32.000 117.733,32.000 116.400 C 32.000 115.067,32.133 114.800,32.800 114.800 C 33.467 114.800,33.600 114.533,33.600 113.200 C 33.600 111.867,33.733 111.600,34.400 111.600 C 35.067 111.600,35.200 111.333,35.200 110.000 C 35.200 108.667,35.333 108.400,36.000 108.400 C 36.642 108.400,36.800 108.133,36.800 107.047 C 36.800 106.030,36.999 105.641,37.600 105.484 C 38.040 105.369,38.400 105.009,38.400 104.684 C 38.400 104.359,38.760 103.999,39.200 103.884 C 39.813 103.724,40.000 103.338,40.000 102.237 C 40.000 101.067,40.148 100.800,40.800 100.800 C 41.333 100.800,41.600 100.533,41.600 100.000 C 41.600 99.556,41.867 99.200,42.200 99.200 C 42.633 99.200,42.800 98.756,42.800 97.600 C 42.800 96.267,42.933 96.000,43.600 96.000 C 44.133 96.000,44.400 95.733,44.400 95.200 C 44.400 94.667,44.667 94.400,45.200 94.400 C 45.848 94.400,46.000 94.133,46.000 93.000 C 46.000 91.867,46.152 91.600,46.800 91.600 C 47.333 91.600,47.600 91.333,47.600 90.800 C 47.600 90.267,47.867 90.000,48.400 90.000 C 48.917 90.000,49.200 89.733,49.200 89.247 C 49.200 88.830,49.557 88.400,50.000 88.284 C 50.613 88.124,50.800 87.738,50.800 86.637 C 50.800 85.467,50.948 85.200,51.600 85.200 C 52.133 85.200,52.400 84.933,52.400 84.400 C 52.400 83.867,52.667 83.600,53.200 83.600 C 53.733 83.600,54.000 83.333,54.000 82.800 C 54.000 82.267,54.267 82.000,54.800 82.000 C 55.333 82.000,55.600 81.733,55.600 81.200 C 55.600 80.667,55.867 80.400,56.400 80.400 C 56.933 80.400,57.200 80.133,57.200 79.600 C 57.200 79.156,57.467 78.800,57.800 78.800 C 58.233 78.800,58.400 78.356,58.400 77.200 C 58.400 75.867,58.533 75.600,59.200 75.600 C 59.644 75.600,60.000 75.333,60.000 75.000 C 60.000 74.667,60.356 74.400,60.800 74.400 C 61.333 74.400,61.600 74.133,61.600 73.600 C 61.600 73.067,61.867 72.800,62.400 72.800 C 62.933 72.800,63.200 72.533,63.200 72.000 C 63.200 71.467,63.467 71.200,64.000 71.200 C 64.533 71.200,64.800 70.933,64.800 70.400 C 64.800 69.867,65.067 69.600,65.600 69.600 C 66.133 69.600,66.400 69.333,66.400 68.800 C 66.400 68.133,66.667 68.000,68.000 68.000 C 69.333 68.000,69.600 67.867,69.600 67.200 C 69.600 66.667,69.867 66.400,70.400 66.400 C 70.933 66.400,71.200 66.133,71.200 65.600 C 71.200 65.067,71.467 64.800,72.000 64.800 C 72.533 64.800,72.800 64.533,72.800 64.000 C 72.800 63.467,73.067 63.200,73.600 63.200 C 74.133 63.200,74.400 62.933,74.400 62.400 C 74.400 61.956,74.667 61.600,75.000 61.600 C 75.333 61.600,75.600 61.244,75.600 60.800 C 75.600 60.267,75.867 60.000,76.400 60.000 C 76.933 60.000,77.200 59.733,77.200 59.200 C 77.200 58.533,77.467 58.400,78.800 58.400 C 79.956 58.400,80.400 58.233,80.400 57.800 C 80.400 57.467,80.756 57.200,81.200 57.200 C 81.733 57.200,82.000 56.933,82.000 56.400 C 82.000 55.867,82.267 55.600,82.800 55.600 C 83.333 55.600,83.600 55.333,83.600 54.800 C 83.600 54.133,83.867 54.000,85.200 54.000 C 86.533 54.000,86.800 53.867,86.800 53.200 C 86.800 52.667,87.067 52.400,87.600 52.400 C 88.133 52.400,88.400 52.133,88.400 51.600 C 88.400 50.948,88.667 50.800,89.837 50.800 C 90.938 50.800,91.324 50.613,91.484 50.000 C 91.599 49.560,91.942 49.200,92.247 49.200 C 92.551 49.200,92.800 48.840,92.800 48.400 C 92.800 47.733,93.067 47.600,94.400 47.600 C 95.733 47.600,96.000 47.467,96.000 46.800 C 96.000 46.267,96.267 46.000,96.800 46.000 C 97.333 46.000,97.600 45.733,97.600 45.200 C 97.600 44.533,97.867 44.400,99.200 44.400 C 100.533 44.400,100.800 44.267,100.800 43.600 C 100.800 42.933,101.067 42.800,102.400 42.800 C 103.556 42.800,104.000 42.633,104.000 42.200 C 104.000 41.778,104.426 41.600,105.437 41.600 C 106.538 41.600,106.924 41.413,107.084 40.800 C 107.241 40.199,107.630 40.000,108.647 40.000 C 109.733 40.000,110.000 39.842,110.000 39.200 C 110.000 38.533,110.267 38.400,111.600 38.400 C 112.933 38.400,113.200 38.267,113.200 37.600 C 113.200 36.933,113.467 36.800,114.800 36.800 C 116.133 36.800,116.400 36.667,116.400 36.000 C 116.400 35.333,116.667 35.200,118.000 35.200 C 119.333 35.200,119.600 35.067,119.600 34.400 C 119.600 33.733,119.867 33.600,121.200 33.600 C 122.533 33.600,122.800 33.467,122.800 32.800 C 122.800 32.097,123.067 32.000,125.000 32.000 C 126.933 32.000,127.200 31.903,127.200 31.200 C 127.200 30.533,127.467 30.400,128.800 30.400 C 130.133 30.400,130.400 30.267,130.400 29.600 C 130.400 28.889,130.667 28.800,132.800 28.800 C 134.933 28.800,135.200 28.711,135.200 28.000 C 135.200 27.289,135.467 27.200,137.600 27.200 C 139.733 27.200,140.000 27.111,140.000 26.400 C 140.000 25.671,140.267 25.600,143.000 25.600 C 145.400 25.600,146.000 25.480,146.000 25.000 C 146.000 24.519,146.604 24.400,149.037 24.400 C 151.738 24.400,152.098 24.311,152.284 23.600 C 152.469 22.891,152.830 22.800,155.447 22.800 C 158.133 22.800,158.400 22.728,158.400 22.000 C 158.400 21.253,158.667 21.200,162.400 21.200 C 166.133 21.200,166.400 21.147,166.400 20.400 C 166.400 19.634,166.667 19.600,172.600 19.600 C 178.533 19.600,178.800 19.566,178.800 18.800 C 178.800 18.010,179.067 18.000,199.200 18.000 C 219.333 18.000,219.600 18.010,219.600 18.800 M124.400 156.237 C 124.400 189.338,124.408 189.677,125.200 189.884 C 125.956 190.082,126.000 190.430,126.000 196.247 C 126.000 202.133,126.035 202.400,126.800 202.400 C 127.544 202.400,127.600 202.667,127.600 206.200 C 127.600 209.733,127.656 210.000,128.400 210.000 C 129.133 210.000,129.200 210.267,129.200 213.200 C 129.200 215.778,129.317 216.400,129.800 216.400 C 130.222 216.400,130.400 216.826,130.400 217.837 C 130.400 218.938,130.587 219.324,131.200 219.484 C 131.877 219.661,132.000 220.030,132.000 221.884 C 132.000 223.738,132.123 224.107,132.800 224.284 C 133.401 224.441,133.600 224.830,133.600 225.847 C 133.600 226.933,133.758 227.200,134.400 227.200 C 134.933 227.200,135.200 227.467,135.200 228.000 C 135.200 228.533,135.467 228.800,136.000 228.800 C 136.667 228.800,136.800 229.067,136.800 230.400 C 136.800 231.733,136.933 232.000,137.600 232.000 C 138.267 232.000,138.400 232.267,138.400 233.600 C 138.400 234.933,138.533 235.200,139.200 235.200 C 139.733 235.200,140.000 235.467,140.000 236.000 C 140.000 236.533,140.267 236.800,140.800 236.800 C 141.452 236.800,141.600 237.067,141.600 238.237 C 141.600 239.315,141.791 239.725,142.363 239.874 C 142.783 239.984,143.216 240.417,143.326 240.837 C 143.435 241.257,143.812 241.600,144.163 241.600 C 144.513 241.600,144.800 241.870,144.800 242.200 C 144.800 242.530,145.070 242.800,145.400 242.800 C 145.733 242.800,146.000 243.156,146.000 243.600 C 146.000 244.133,146.267 244.400,146.800 244.400 C 147.333 244.400,147.600 244.667,147.600 245.200 C 147.600 245.717,147.867 246.000,148.353 246.000 C 148.770 246.000,149.200 246.357,149.316 246.800 C 149.431 247.240,149.812 247.600,150.163 247.600 C 150.533 247.600,150.800 247.935,150.800 248.400 C 150.800 248.917,151.067 249.200,151.553 249.200 C 151.970 249.200,152.400 249.557,152.516 250.000 C 152.676 250.613,153.062 250.800,154.163 250.800 C 155.333 250.800,155.600 250.948,155.600 251.600 C 155.600 252.133,155.867 252.400,156.400 252.400 C 156.933 252.400,157.200 252.667,157.200 253.200 C 157.200 253.867,157.467 254.000,158.800 254.000 C 160.133 254.000,160.400 254.133,160.400 254.800 C 160.400 255.317,160.667 255.600,161.153 255.600 C 161.570 255.600,162.000 255.957,162.116 256.400 C 162.291 257.068,162.662 257.200,164.363 257.200 C 165.907 257.200,166.400 257.345,166.400 257.800 C 166.400 258.233,166.844 258.400,168.000 258.400 C 169.333 258.400,169.600 258.533,169.600 259.200 C 169.600 259.944,169.867 260.000,173.400 260.000 L 177.200 260.000 177.200 246.800 L 177.200 233.600 175.847 233.600 C 174.830 233.600,174.441 233.401,174.284 232.800 C 174.125 232.194,173.738 232.000,172.684 232.000 C 171.630 232.000,171.243 231.806,171.084 231.200 C 170.969 230.760,170.588 230.400,170.237 230.400 C 169.887 230.400,169.600 230.130,169.600 229.800 C 169.600 229.467,169.244 229.200,168.800 229.200 C 168.267 229.200,168.000 228.933,168.000 228.400 C 168.000 227.867,167.733 227.600,167.200 227.600 C 166.667 227.600,166.400 227.333,166.400 226.800 C 166.400 226.267,166.133 226.000,165.600 226.000 C 165.067 226.000,164.800 225.733,164.800 225.200 C 164.800 224.667,164.533 224.400,164.000 224.400 C 163.467 224.400,163.200 224.133,163.200 223.600 C 163.200 223.067,162.933 222.800,162.400 222.800 C 161.733 222.800,161.600 222.533,161.600 221.200 C 161.600 219.867,161.467 219.600,160.800 219.600 C 160.267 219.600,160.000 219.333,160.000 218.800 C 160.000 218.267,159.733 218.000,159.200 218.000 C 158.533 218.000,158.400 217.733,158.400 216.400 C 158.400 215.244,158.233 214.800,157.800 214.800 C 157.345 214.800,157.200 214.307,157.200 212.763 C 157.200 211.062,157.068 210.691,156.400 210.516 C 155.773 210.352,155.600 209.970,155.600 208.753 C 155.600 207.467,155.463 207.200,154.800 207.200 C 154.070 207.200,154.000 206.933,154.000 204.163 C 154.000 201.462,153.911 201.102,153.200 200.916 C 152.459 200.722,152.400 200.370,152.400 196.153 C 152.400 191.867,152.353 191.600,151.600 191.600 C 150.867 191.600,150.800 191.333,150.800 188.406 L 150.800 185.212 162.500 185.106 L 174.200 185.000 174.302 153.900 L 174.405 122.800 149.402 122.800 L 124.400 122.800 124.400 156.237 M210.400 157.800 C 210.400 192.533,210.406 192.800,211.200 192.800 C 211.962 192.800,212.000 193.067,212.000 198.400 C 212.000 203.111,212.095 204.000,212.600 204.000 C 213.089 204.000,213.200 204.671,213.200 207.637 C 213.200 210.938,213.274 211.294,214.000 211.484 C 214.677 211.661,214.800 212.030,214.800 213.884 C 214.800 215.738,214.923 216.107,215.600 216.284 C 216.277 216.461,216.400 216.830,216.400 218.684 C 216.400 220.538,216.523 220.907,217.200 221.084 C 217.806 221.243,218.000 221.630,218.000 222.684 C 218.000 223.738,218.194 224.125,218.800 224.284 C 219.401 224.441,219.600 224.830,219.600 225.847 C 219.600 226.933,219.758 227.200,220.400 227.200 C 221.067 227.200,221.200 227.467,221.200 228.800 C 221.200 230.133,221.333 230.400,222.000 230.400 C 222.533 230.400,222.800 230.667,222.800 231.200 C 222.800 231.733,223.067 232.000,223.600 232.000 C 224.267 232.000,224.400 232.267,224.400 233.600 C 224.400 234.933,224.533 235.200,225.200 235.200 C 225.733 235.200,226.000 235.467,226.000 236.000 C 226.000 236.533,226.267 236.800,226.800 236.800 C 227.452 236.800,227.600 237.067,227.600 238.237 C 227.600 239.338,227.787 239.724,228.400 239.884 C 228.843 240.000,229.200 240.430,229.200 240.847 C 229.200 241.261,229.470 241.600,229.800 241.600 C 230.130 241.600,230.400 241.870,230.400 242.200 C 230.400 242.533,230.756 242.800,231.200 242.800 C 231.733 242.800,232.000 243.067,232.000 243.600 C 232.000 244.133,232.267 244.400,232.800 244.400 C 233.333 244.400,233.600 244.667,233.600 245.200 C 233.600 245.733,233.867 246.000,234.400 246.000 C 234.933 246.000,235.200 246.267,235.200 246.800 C 235.200 247.333,235.467 247.600,236.000 247.600 C 236.533 247.600,236.800 247.867,236.800 248.400 C 236.800 248.933,237.067 249.200,237.600 249.200 C 238.133 249.200,238.400 249.467,238.400 250.000 C 238.400 250.533,238.667 250.800,239.200 250.800 C 239.733 250.800,240.000 251.067,240.000 251.600 C 240.000 252.267,240.267 252.400,241.600 252.400 C 242.933 252.400,243.200 252.533,243.200 253.200 C 243.200 253.717,243.467 254.000,243.953 254.000 C 244.370 254.000,244.800 254.357,244.916 254.800 C 245.066 255.374,245.462 255.600,246.316 255.600 C 247.170 255.600,247.566 255.826,247.716 256.400 C 247.876 257.013,248.262 257.200,249.363 257.200 C 250.374 257.200,250.800 257.378,250.800 257.800 C 250.800 258.267,251.333 258.400,253.200 258.400 C 255.333 258.400,255.600 258.489,255.600 259.200 C 255.600 259.944,255.867 260.000,259.400 260.000 L 263.200 260.000 263.200 246.800 L 263.200 233.600 261.600 233.600 C 260.267 233.600,260.000 233.467,260.000 232.800 C 260.000 232.158,259.733 232.000,258.647 232.000 C 257.630 232.000,257.241 231.801,257.084 231.200 C 256.969 230.760,256.588 230.400,256.237 230.400 C 255.887 230.400,255.600 230.130,255.600 229.800 C 255.600 229.467,255.244 229.200,254.800 229.200 C 254.267 229.200,254.000 228.933,254.000 228.400 C 254.000 227.867,253.733 227.600,253.200 227.600 C 252.667 227.600,252.400 227.333,252.400 226.800 C 252.400 226.267,252.133 226.000,251.600 226.000 C 251.067 226.000,250.800 225.733,250.800 225.200 C 250.800 224.667,250.533 224.400,250.000 224.400 C 249.467 224.400,249.200 224.133,249.200 223.600 C 249.200 223.067,248.933 222.800,248.400 222.800 C 247.867 222.800,247.600 222.533,247.600 222.000 C 247.600 221.467,247.333 221.200,246.800 221.200 C 246.133 221.200,246.000 220.933,246.000 219.600 C 246.000 218.267,245.867 218.000,245.200 218.000 C 244.533 218.000,244.400 217.733,244.400 216.400 C 244.400 215.067,244.267 214.800,243.600 214.800 C 242.952 214.800,242.800 214.533,242.800 213.400 C 242.800 212.422,242.619 212.000,242.200 212.000 C 241.733 212.000,241.600 211.467,241.600 209.600 C 241.600 207.467,241.511 207.200,240.800 207.200 C 240.095 207.200,240.000 206.933,240.000 204.963 C 240.000 203.062,239.880 202.694,239.200 202.516 C 238.472 202.325,238.400 201.970,238.400 198.553 C 238.400 195.067,238.343 194.800,237.600 194.800 C 236.844 194.800,236.800 194.533,236.800 190.000 L 236.800 185.200 248.400 185.200 L 260.000 185.200 260.000 154.000 L 260.000 122.800 235.200 122.800 L 210.400 122.800 210.400 157.800 " stroke="none" fill="#5c5c5c" fill-rule="evenodd"></path><path id="path1" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path2" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path3" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path><path id="path4" d="" stroke="none" fill="#605c5c" fill-rule="evenodd"></path></g></svg>
+                                        Tagline</h4> 
+                                        <p class="inner-dis" dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{business_info_data.business_tagline}}" dd-text-collapse-cond="true"><span class="box-dis">{{business_info_data.business_tagline}}</span></p>
+								</div>                                    
+									<div class="dash-info-box year-found" ng-if="business_info_data.business_year_found">
+										<h4> 
+                                            <svg viewBox="0 0 60 60" width="17px" height="17px" stroke-width="0.5" stroke="#5c5c5c"> 
+                                            <path d="M51.371,3.146c-0.459-0.185-11.359-4.452-19.84,0.045C24.811,6.758,13.015,4.082,10,3.308V1c0-0.553-0.447-1-1-1  S8,0.447,8,1v3c0,0.014,0.007,0.026,0.008,0.04C8.008,4.052,8,4.062,8,4.074V33v1.074V59c0,0.553,0.447,1,1,1s1-0.447,1-1V35.375  c2.273,0.567,7.227,1.632,12.368,1.632c3.557,0,7.2-0.511,10.101-2.049c7.652-4.061,18.056,0.004,18.16,0.045  c0.309,0.124,0.657,0.086,0.932-0.102C51.835,34.716,52,34.406,52,34.074v-30C52,3.665,51.751,3.298,51.371,3.146z M50,32.665  c-3.26-1.038-11.646-3.096-18.469,0.525C24.812,36.756,13.02,34.082,10,33.308V33V5.375c3.853,0.961,15.381,3.343,22.469-0.417  C39.035,1.475,47.627,3.973,50,4.777V32.665z" fill="#5c5c5c"/>
                                             </svg>
-                                            <span>Audio</span>
-                                        </h5>
+                                        Year Founded</h4>
+                                        <p>{{business_info_data.business_year_found}}</p>
+                                    </div>
+                                    <div class="dash-info-box spc-cus" ng-if="business_info_data.business_ext_benifit">
+                                        <h4>
+                                            <svg viewBox="0 0 487.222 487.222" width="17px" height="16px">
+                                                <g>
+                                                    <path d="M486.554,186.811c-1.6-4.9-5.8-8.4-10.9-9.2l-152-21.6l-68.4-137.5c-2.3-4.6-7-7.5-12.1-7.5l0,0c-5.1,0-9.8,2.9-12.1,7.6   l-67.5,137.9l-152,22.6c-5.1,0.8-9.3,4.3-10.9,9.2s-0.2,10.3,3.5,13.8l110.3,106.9l-25.5,151.4c-0.9,5.1,1.2,10.2,5.4,13.2   c2.3,1.7,5.1,2.6,7.9,2.6c2.2,0,4.3-0.5,6.3-1.6l135.7-71.9l136.1,71.1c2,1,4.1,1.5,6.2,1.5l0,0c7.4,0,13.5-6.1,13.5-13.5   c0-1.1-0.1-2.1-0.4-3.1l-26.3-150.5l109.6-107.5C486.854,197.111,488.154,191.711,486.554,186.811z M349.554,293.911   c-3.2,3.1-4.6,7.6-3.8,12l22.9,131.3l-118.2-61.7c-3.9-2.1-8.6-2-12.6,0l-117.8,62.4l22.1-131.5c0.7-4.4-0.7-8.8-3.9-11.9   l-95.6-92.8l131.9-19.6c4.4-0.7,8.2-3.4,10.1-7.4l58.6-119.7l59.4,119.4c2,4,5.8,6.7,10.2,7.4l132,18.8L349.554,293.911z" fill="#5c5c5c"/>
+                                                </g>
+                                            </svg>
+                                        Specialties </h4>
+                                        <ul class="skill-list">
+											<li ng-repeat="benefits in business_info_data.business_ext_benifit.split(',')">{{benefits}}</li>
+										</ul>
+									</div>
+                                </div>
+                                <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/photos' ?>">
+                                    <div class="full-box-module business_data">
+                                        <div class="profile-boxProfileCard  module buisness_he_module" >
+                                            <div class="head_details">
+                                                <h5>
+                                            <svg viewBox="0 0 333.668 333.668" width="25px" height="24px">
+                                            <g>
+                                            	<path d="M295.101,298.649H38.561C17.295,298.649,0,281.354,0,260.088V103.703c0-21.266,17.295-38.561,38.561-38.561h52.347   l4.582-15.457c1.87-8.458,9.602-14.666,18.696-14.666h105.297c8.837,0,16.658,6.176,18.728,14.743l0.122,0.527l4.177,14.852h52.597   c21.266,0,38.561,17.295,38.561,38.561v156.384C333.662,281.354,316.361,298.649,295.101,298.649z M38.561,77.996   c-14.178,0-25.707,11.53-25.707,25.707v156.384c0,14.178,11.53,25.707,25.707,25.707h256.54c14.178,0,25.707-11.53,25.707-25.707   V103.703c0-14.178-11.53-25.707-25.707-25.707h-62.327l-7.037-25.097c-0.649-2.918-3.278-5.032-6.26-5.032H114.179   c-3.027,0-5.598,2.069-6.26,5.039l-7.429,25.09H38.561z M166.841,259.798c-44.981,0-81.576-36.588-81.576-81.563   c0-44.981,36.594-81.569,81.576-81.569c44.969,0,81.557,36.594,81.557,81.569C248.397,223.204,211.809,259.798,166.841,259.798z    M166.841,109.513c-37.893,0-68.722,30.823-68.722,68.716s30.83,68.709,68.722,68.709c37.886,0,68.703-30.823,68.703-68.709   C235.543,140.336,204.72,109.513,166.841,109.513z M286.804,101.852c-6.555,0-11.858,5.315-11.858,11.858   c0,6.549,5.302,11.857,11.858,11.857c6.549,0,11.851-5.309,11.851-11.857C298.649,107.167,293.346,101.852,286.804,101.852z" fill="#5c5c5c"/>
+                                            </g>
+
+                                            </svg> <span>Photos</span></h5>
+                                            </div>
+                                            <div class="bus_photos">
+                                            </div>
+                                        </div>
                                     </div>
                                 </a>
-                                <table class="business_data_table">
-                                    <div class="bus_audios">
-                                    </div>
-                                </table>
-                            </div>
-                        </div>
-                        <a class="fw" href="javascript:void(0);" onclick="register_profile();">
-                            <div class="full-box-module business_data">
-                                <div class="profile-boxProfileCard  module buisness_he_module" >
-                                    <div class="head_details">
-                                        <h5>
-                                            <svg viewBox="0 0 512 512" width="25px" height="25px">
+                                <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
+                                    <div class="full-box-module business_data">
+                                        <div class="profile-boxProfileCard  module">
+                                            <table class="business_data_table">
+                                                <div class="head_details">
+                                                    <h5>
+                                                <svg viewBox="0 0 58 58" width="26px" height="25px">
                                                 <g>
-                                                    <g>
-                                                        <g>
-                                                            <path d="M444.875,109.792L338.208,3.125c-2-2-4.708-3.125-7.542-3.125h-224C83.135,0,64,19.135,64,42.667v426.667     C64,492.865,83.135,512,106.667,512h298.667C428.865,512,448,492.865,448,469.333v-352     C448,114.5,446.875,111.792,444.875,109.792z M341.333,36.417l70.25,70.25h-48.917c-11.76,0-21.333-9.573-21.333-21.333V36.417z      M426.667,469.333c0,11.76-9.573,21.333-21.333,21.333H106.667c-11.76,0-21.333-9.573-21.333-21.333V42.667     c0-11.76,9.573-21.333,21.333-21.333H320v64C320,108.865,339.135,128,362.667,128h64V469.333z" fill="#5c5c5c"/>
-                                                            <path d="M310.385,313.135c-9.875-7.771-19.26-15.76-25.51-22.01c-8.125-8.125-15.365-16-21.656-23.5     c9.813-30.323,14.115-45.958,14.115-54.292c0-35.406-12.792-42.667-32-42.667c-14.594,0-32,7.583-32,43.688     c0,15.917,8.719,35.24,26,57.698c-4.229,12.906-9.198,27.792-14.781,44.573c-2.688,8.052-5.604,15.51-8.688,22.406     c-2.51,1.115-4.948,2.25-7.302,3.427c-8.479,4.24-16.531,8.052-24,11.594C150.5,370.177,128,380.844,128,401.906     c0,15.292,16.615,24.76,32,24.76c19.833,0,49.781-26.49,71.656-71.115c22.708-8.958,50.938-15.594,73.219-19.75     c17.854,13.729,37.573,26.865,47.125,26.865c26.448,0,32-15.292,32-28.115c0-25.219-28.813-25.219-42.667-25.219     C337.031,309.333,325.49,310.604,310.385,313.135z M160,405.333c-6.094,0-10.219-2.875-10.667-3.427     c0-7.563,22.552-18.25,44.365-28.583c1.385-0.656,2.792-1.313,4.219-1.99C181.896,394.563,166.052,405.333,160,405.333z      M234.667,214.354c0-22.354,6.938-22.354,10.667-22.354c7.542,0,10.667,0,10.667,21.333c0,4.5-3,15.75-8.49,33.313     C239.135,233.75,234.667,222.698,234.667,214.354z M242.844,329c0.667-1.854,1.313-3.729,1.938-5.625     c3.958-11.875,7.521-22.542,10.698-32.146c4.427,4.875,9.198,9.865,14.313,14.979c2,2,6.958,6.5,13.563,12.135     C270.208,321.208,256.219,324.76,242.844,329z M362.667,334.552c0,4.792,0,6.781-9.896,6.844     c-2.906-0.625-9.625-4.583-17.917-10.229c3.01-0.333,5.229-0.5,6.479-0.5C357.094,330.667,361.563,332.208,362.667,334.552z" fill="#5c5c5c"/>
-                                                        </g>
-                                                    </g>
+                                                	<path d="M36.537,28.156l-11-7c-0.308-0.195-0.698-0.208-1.019-0.033C24.199,21.299,24,21.635,24,22v14   c0,0.365,0.199,0.701,0.519,0.877C24.669,36.959,24.834,37,25,37c0.187,0,0.374-0.053,0.537-0.156l11-7   C36.825,29.66,37,29.342,37,29S36.825,28.34,36.537,28.156z M26,34.179V23.821L34.137,29L26,34.179z" fill="#5c5c5c"/>
+                                                	<path d="M57,6H47H11H1C0.448,6,0,6.447,0,7v11v11v11v11c0,0.553,0.448,1,1,1h10h36h10c0.552,0,1-0.447,1-1V40V29V18V7   C58,6.447,57.552,6,57,6z M10,28H2v-9h8V28z M2,30h8v9H2V30z M12,40V29V18V8h34v10v11v11v10H12V40z M56,28h-8v-9h8V28z M48,30h8v9   h-8V30z M56,8v9h-8V8H56z M2,8h8v9H2V8z M2,50v-9h8v9H2z M56,50h-8v-9h8V50z" fill="#5c5c5c"/>
                                                 </g>
-                                            </svg>
-                                            <span>PDF</span>
-                                        </h5>
-                                    </div>
-                                    <div class="bus_pdf"></div>
-                                </div>
-                            </div>
-                        </a>
 
-                        <a class="fw articles-cs" href="javascript:void(0);" onclick="register_profile();">
+                                                </svg> <span>Video</span></h5>
+                                                </div>
+                                                <div class="bus_videos">
+                                                </div>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="full-box-module business_data fw">
+                                    <div class="profile-boxProfileCard  module">
+                                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>"> 
+                                            <div class="head_details1">
+                                                <h5>
+                                            <svg viewBox="0 0 55 55" width="25px" height="25px">
+                                            <path d="M52.66,0.249c-0.216-0.189-0.501-0.275-0.789-0.241l-31,4.011C20.373,4.084,20,4.507,20,5.01v6.017v4.212v25.384  C18.174,38.428,15.273,37,12,37c-5.514,0-10,4.037-10,9s4.486,9,10,9s10-4.037,10-9c0-0.232-0.019-0.46-0.039-0.687  C21.974,45.248,22,45.189,22,45.121V16.118l29-3.753v18.257C49.174,28.428,46.273,27,43,27c-5.514,0-10,4.037-10,9s4.486,9,10,9  c5.464,0,9.913-3.966,9.993-8.867c0-0.013,0.007-0.024,0.007-0.037V11.227V7.016V1C53,0.712,52.876,0.438,52.66,0.249z M12,53  c-4.411,0-8-3.141-8-7s3.589-7,8-7s8,3.141,8,7S16.411,53,12,53z M43,43c-4.411,0-8-3.141-8-7s3.589-7,8-7s8,3.141,8,7  S47.411,43,43,43z M22,14.101v-3.074V5.889l29-3.752v4.879v3.332L22,14.101z" fill="#5c5c5c"/>
+
+                                            </svg> <span>Audio</span></h5>
+                                            </div>
+                                        </a>
+                                        <table class="business_data_table">
+                                            <div class="bus_audios"> 
+                                            </div>
+                                        </table>
+                                    </div>
+                                </div>
+                                <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
+                                    <div class="full-box-module business_data">
+                                        <div class="profile-boxProfileCard  module buisness_he_module" >
+                                            <div class="head_details">
+                                                <h5>
+                                    <svg viewBox="0 0 512 512" width="25px" height="25px">
+                                    <g>
+                                    	<g>
+                                    		<g>
+                                    			<path d="M444.875,109.792L338.208,3.125c-2-2-4.708-3.125-7.542-3.125h-224C83.135,0,64,19.135,64,42.667v426.667     C64,492.865,83.135,512,106.667,512h298.667C428.865,512,448,492.865,448,469.333v-352     C448,114.5,446.875,111.792,444.875,109.792z M341.333,36.417l70.25,70.25h-48.917c-11.76,0-21.333-9.573-21.333-21.333V36.417z      M426.667,469.333c0,11.76-9.573,21.333-21.333,21.333H106.667c-11.76,0-21.333-9.573-21.333-21.333V42.667     c0-11.76,9.573-21.333,21.333-21.333H320v64C320,108.865,339.135,128,362.667,128h64V469.333z" fill="#5c5c5c"/>
+                                    			<path d="M310.385,313.135c-9.875-7.771-19.26-15.76-25.51-22.01c-8.125-8.125-15.365-16-21.656-23.5     c9.813-30.323,14.115-45.958,14.115-54.292c0-35.406-12.792-42.667-32-42.667c-14.594,0-32,7.583-32,43.688     c0,15.917,8.719,35.24,26,57.698c-4.229,12.906-9.198,27.792-14.781,44.573c-2.688,8.052-5.604,15.51-8.688,22.406     c-2.51,1.115-4.948,2.25-7.302,3.427c-8.479,4.24-16.531,8.052-24,11.594C150.5,370.177,128,380.844,128,401.906     c0,15.292,16.615,24.76,32,24.76c19.833,0,49.781-26.49,71.656-71.115c22.708-8.958,50.938-15.594,73.219-19.75     c17.854,13.729,37.573,26.865,47.125,26.865c26.448,0,32-15.292,32-28.115c0-25.219-28.813-25.219-42.667-25.219     C337.031,309.333,325.49,310.604,310.385,313.135z M160,405.333c-6.094,0-10.219-2.875-10.667-3.427     c0-7.563,22.552-18.25,44.365-28.583c1.385-0.656,2.792-1.313,4.219-1.99C181.896,394.563,166.052,405.333,160,405.333z      M234.667,214.354c0-22.354,6.938-22.354,10.667-22.354c7.542,0,10.667,0,10.667,21.333c0,4.5-3,15.75-8.49,33.313     C239.135,233.75,234.667,222.698,234.667,214.354z M242.844,329c0.667-1.854,1.313-3.729,1.938-5.625     c3.958-11.875,7.521-22.542,10.698-32.146c4.427,4.875,9.198,9.865,14.313,14.979c2,2,6.958,6.5,13.563,12.135     C270.208,321.208,256.219,324.76,242.844,329z M362.667,334.552c0,4.792,0,6.781-9.896,6.844     c-2.906-0.625-9.625-4.583-17.917-10.229c3.01-0.333,5.229-0.5,6.479-0.5C357.094,330.667,361.563,332.208,362.667,334.552z" fill="#5c5c5c"/>
+                                    		</g>
+                                    	</g>
+                                    </g>
+                                    </svg> <span>PDF</span></h5>
+                                            </div>      
+                                            <div class="bus_pdf"></div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a class="fw articles-cs" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/article' ?>">
                                     <div class="full-box-module business_data">
                                         <div class="profile-boxProfileCard  module buisness_he_module" >
                                             <div class="head_details">
@@ -434,605 +355,1143 @@ $login_user_id = $this->session->userdata('aileenuser');
                                         </div>
                                     </div>
                                 </a>
-						<?php $this->load->view('right_add_box'); ?>
-                        <?php echo $left_footer; ?>
-                    </div>
-                    <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
-                        <?php
-                        if ($this->session->flashdata('error')) {
-                            echo $this->session->flashdata('error');
-                        }
-                        ?>
-                        <div class="tab-add">
-                            <?php $this->load->view('banner_add'); ?>
-                        </div>
-                        <div id="move-middle" class="">
-                        </div>
-                        <div id="move-website" class="">
-                        </div>
-                        <div id="move-jobs" class="">
-                        </div>
-                        <div id="move-review" class="">
-                        </div>
-                        <div id="move-bus-started" class="">
-                        </div>
-                        <div id="move-menu" class="">
-                        </div>
-                        <div class="fw">
+                                <?php $this->load->view('right_add_box'); ?>
+                                <?php echo $left_footer; ?>
+                            </div>
+                            <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
+                                <?php if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
+								<div class="mob-progressbar">
+									<p>Complete your profile to get more visibility</p>
+									<p class="mob-edit-pro">
+										<a href="<?php echo base_url().'company/'.$slugid.'/details'; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+									</p>
+									<div class="progress skill-bar ">
+										<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+											<span class="skill"><i class="val">35%</i></span>
+										</div>
+									</div>
+								</div>
+                                <?php endif; ?>
+                                <div class="right_side_posrt">
+                                    <div class="tab-add">
+                                        <?php $this->load->view('banner_add'); ?>
+                                    </div>
+                            <?php
+                            if ($is_eligable_for_post == 1) { ?>
 
-                            <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
-                                <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
-                                    <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
-                                    <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
-                                    <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
-                                    <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
-                                    
-                                    <div class="all-post-top">
-                                        <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
-                                            <div class="post-img" ng-if="post.post_data.post_for == 'question'">
-                                                <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'">
-                                                    <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image != '' && post.question_data.is_anonymously == '0'">
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.business_user_image == ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
-                                                </a>
-                                                                
-                                                <span class="no-img-post"  ng-if="post.user_data.business_user_image == '' || post.question_data.is_anonymously == '1'">A</span>
-                                            </div>
-                                                            
-                                            <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.business_user_image">
-                                                <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
-                                                    <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.user_data.business_user_image}}">
-                                                </a>
-                                            </div>
-                                                            
-                                            <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && !post.user_data.business_user_image">
-                                                <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!post.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
-                                                </a>
-                                            </div>
-                                                            
-                                            <div class="post-detail">
-                                                <div class="fw" ng-if="post.post_data.post_for == 'question'">
-                                                    <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
-                                                    <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time">{{post.post_data.time_string}}</span>
-                                                </div>
-                                                                
-                                                <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name"></a><span class="post-time">{{post.post_data.time_string}}</span>
-                                                </div>
-                                                                
-                                                <div class="fw" ng-if="post.post_data.post_for == 'question'">
-                                                    <span class="post-designation" ng-if="post.user_data.industry_name != null && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.industry_name"></span> 
-                                                    <span class="post-designation" ng-if="!post.user_data.industry_name && post.question_data.is_anonymously == '0'">CURRENT WORK</span>
-                                                </div>
-                                                <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                                    <span class="post-designation" ng-if="post.user_data.industry_name" ng-bind="post.user_data.industry_name"></span> 
-                                                    <span class="post-designation" ng-if="!post.user_data.industry_name">CURRENT WORK</span>
-                                                </div>
-                                            </div>                                            
+                                <div class="add-post">
+                                    <div class="post-box">
+
+                                        <div class="post-img">
+                                            <?php
+                                            if ($business_login_user_image) {
+                                                if (IMAGEPATHFROM == 'upload') {
+                                                    if (!file_exists($this->config->item('bus_profile_main_upload_path') . $business_login_user_image)) {
+                                                        ?>
+                                                        <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
+                                                    <?php } else {
+                                                        ?>
+                                                        <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="Business Login User">
+                                                        <?php
+                                                    }
+                                                } else {
+                                                    $filename = $this->config->item('bus_profile_thumb_upload_path') . $business_login_user_image;
+                                                    $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                                    if (!$info) {
+                                                        ?>
+                                                        <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
+                                                    <?php } else {
+                                                        ?>
+                                                        <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>">
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                            else{ ?>
+                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
+                                            <?php } ?>
                                         </div>
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'opportunity'">
-                                            <!-- Edit Post Opportunity Start -->
-                                            <div id="edit-opp-post-{{post.post_data.id}}" style="display: none;">
-                                                <form id="post_opportunity_edit" name="post_opportunity_edit" ng-submit="post_opportunity_check(event,postIndex)">
-                                                    <div class="post-box">                        
-                                                        <div class="post-text">
-                                                            <!-- <textarea name="description" id="description_edit_{{post.post_data.id}}" class="title-text-area" placeholder="Post Opportunity"></textarea> -->
-                                                            <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Post Opportunity..." id="description_edit_{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
-                                                        </div>                        
-                                                    </div>
-                                                    <div class="post-field">
-                                                        <div class="form-group">
-                                                            <label>Title of Opportunity</label>
-                                                            <input id="opptitleedit{{post.post_data.id}}"  type="text" class="form-control" ng-model="opp.opptitleedit" placeholder="Enter Title of Opportunity" ng-required="true" autocomplete="off">
-                                                        </div>
-                                                        <div id="content" class="form-group">
-                                                            <label>For whom this opportunity?<a href="#" data-toggle="tooltip" data-placement="left" title="Type the designation which best matches for given opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                                            
-                                                            <tags-input id="job_title" ng-model="opp.job_title_edit" display-property="name" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer...." replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
-                                                                <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
-                                                            </tags-input>
-                                                            <script type="text/ng-template" id="title-template">
-                                                                <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
-                                                            </script>
-                                                            <script type="text/ng-template" id="title-autocomplete-template">
-                                                                <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
-                                                            </script>
-                                                        </div>
 
-                                                        <div class="form-group">
-                                                            <label>For which location?<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select the location for the opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
-                                                            <tags-input id="location" ng-model="opp.location_edit" display-property="city_name" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
-                                                                <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
-                                                            </tags-input>
-                                                            <script type="text/ng-template" id="location-template">
-                                                                <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
-                                                            </script>
-                                                            <script type="text/ng-template" id="location-autocomplete-template">
-                                                                <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
-                                                            </script>
+                                        <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
+                                            Share knowledge, opportunities & articles
+                                        </div>
+                                        <!--<span class="post-cam"><i class="fa fa-camera"></i></span>-->
+                                    </div>
+                                    <div class="post-box-bottom">
+                                        <ul>
+                                            <li>
+                                                <a href="#" data-target="#opportunity-popup" data-toggle="modal">
+                                                    <img src="<?php echo base_url('assets/n-images/post-op.svg') ?>"><span><span class="none-479">Post</span> <span> Opportunity</span></span>
+                                                </a>
+                                            </li>
+                                            <li class="pl15">
+                                                <a href="<?php echo base_url('new-business-article'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/article.svg') ?>"><span><span class="none-479">Post</span> <span> Article</span></span>
+                                                </a>
+                                            </li>                                            
+                                        </ul>
+                                        <p class="pull-right bus-post-btn">
+                                            <button class="btn1" data-target="#post-popup" data-toggle="modal">Post</button>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            <?php } ?>
+							<div id="move-middle" class="">
+            				</div>
+            				<div id="move-website" class="">
+            				</div>
+            				<div id="move-jobs" class="">
+            				</div>
+            				<div id="move-review" class="">
+            				</div>
+            				<div id="move-bus-started" class="">
+            				</div>
+            				<div id="move-menu" class="">
+            				</div>
+                            
+                            <?php
+                            if ($this->session->flashdata('error')) {
+                                echo $this->session->flashdata('error');
+                            }
+                            ?>
+                            <div class="fw">
+                                <div class="bs-example">
+                                    <div class="progress progress-striped" id="progress_div">
+                                        <div class="progress-bar" style="width: 0%;">
+                                            <span class="sr-only">0%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
+                                    <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
+                                        <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
+                                        <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
+                                        <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
+                                        <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
+                                        
+                                        <div class="all-post-top">
+                                            <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
+                                                <div class="post-img" ng-if="post.post_data.post_for == 'question'">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'">
+                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image != '' && post.question_data.is_anonymously == '0'">
+                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.business_user_image == ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                    </a>
+                                                                    
+                                                    <span class="no-img-post"  ng-if="post.user_data.business_user_image == '' || post.question_data.is_anonymously == '1'">A</span>
+                                                </div>
+                                                                
+                                                <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.business_user_image">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
+                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.user_data.business_user_image}}">
+                                                    </a>
+                                                </div>
+
+                                                <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && !post.user_data.business_user_image">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
+                                                        <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                                    </a>
+                                                </div>
+
+                                                <div class="post-detail">
+                                                    <div class="fw" ng-if="post.post_data.post_for == 'question'">
+                                                        <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
+                                                        <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
+                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                                    </div>
+                                                                    
+                                                    <div class="fw" ng-if="post.post_data.post_for != 'question'">
+                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                                    </div>
+                                                                    
+                                                    <div class="fw" ng-if="post.post_data.post_for == 'question'">
+                                                        <span class="post-designation" ng-if="post.user_data.industry_name != null && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.industry_name"></span> 
+                                                        <span class="post-designation" ng-if="!post.user_data.industry_name && post.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                    </div>
+                                                    <div class="fw" ng-if="post.post_data.post_for != 'question'">
+                                                        <span class="post-designation" ng-if="post.user_data.industry_name" ng-bind="post.user_data.industry_name"></span> 
+                                                        <span class="post-designation" ng-if="!post.user_data.industry_name">CURRENT WORK</span>
+                                                    </div>
+                                                </div>
+                                                <div class="post-right-dropdown dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
+                                                    <ul class="dropdown-menu">
+                                                        
+                                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for == 'article'"><a href="<?php echo base_url();?>edit-article/{{post.article_data.unique_key}}">Edit Post</a></li>
+
+                                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update' && post.post_data.post_for != 'article'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
+                                                        <li>
+                                                            <a ng-if="post.is_user_saved_post == '0'" href="javascript:void(0);" ng-click="save_post(post.post_data.id, $index, post)">Save Post</a>
+                                                            <a ng-if="post.is_user_saved_post == '1'" href="javascript:void(0);">Saved Post</a>
+
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for == 'article'" href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_blank">Show in new tab</a>
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for == 'opportunity'" href="<?php echo base_url(); ?>o/{{post.opportunity_data.oppslug}}" target="_blank">Show in new tab</a>
+
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.post_for == 'simple'" href="<?php echo base_url(); ?>p/{{post.simple_data.simslug}}" target="_blank">Show in new tab</a>
+
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.post_for != 'simple' && post.post_data.post_for == 'share'" href="<?php echo base_url(); ?>shared-post/{{post.share_data.shared_post_slug}}" target="_blank">Show in new tab</a>
+                                                            
+                                                            <!-- <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/post/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/photos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/videos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/audios/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                                            <a ng-if="post.post_data.post_for != 'question' && post.post_data.post_for != 'article' && post.post_data.post_for != 'opportunity' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.business_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a> -->
+                                                            <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
+                                                        </li>
+                                                        <li ng-if="user_id != post.user_data.user_id">
+                                                            <a ng-click="open_report_spam(post.post_data.id)" href="javascript:void(0);">Report</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'opportunity'">
+                                                <!-- Edit Post Opportunity Start -->
+                                                <div id="edit-opp-post-{{post.post_data.id}}" style="display: none;">
+                                                    <form id="post_opportunity_edit" name="post_opportunity_edit" ng-submit="post_opportunity_check(event,postIndex)">
+                                                        <div class="post-box">                        
+                                                            <div class="post-text">
+                                                                <!-- <textarea name="description" id="description_edit_{{post.post_data.id}}" class="title-text-area" placeholder="Post Opportunity"></textarea> -->
+                                                                <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Post Opportunity..." id="description_edit_{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                                            </div>                        
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label class="pb5">For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
-                                                            <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
-                                                            <span class="select-field-custom">
-                                                                <select name="field" ng-model="opp.field_edit" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
-                                                                    <option value="" selected="selected">Select Related Fields</option>
-                                                                    <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
-                                                                    <option value="0">Other</option>
-                                                                </select>
+                                                        <div class="post-field">
+                                                            <div class="form-group">
+                                                                <label>Title of Opportunity <a href="#" data-toggle="tooltip" data-placement="left" title="Give a relevant title to your post that describes your post in a single sentence." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+                                                                <input id="opptitleedit{{post.post_data.id}}"  type="text" class="form-control" ng-model="opp.opptitleedit" placeholder="Enter Title of Opportunity" ng-required="true" autocomplete="off">
+                                                            </div>
+                                                            <div id="content" class="form-group">
+                                                                <label>For whom this opportunity?<a href="#" data-toggle="tooltip" data-placement="left" title="Type the designation which best matches for given opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+                                                                
+                                                                <tags-input id="job_title" ng-model="opp.job_title_edit" display-property="name" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer...." replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
+                                                                    <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                                                </tags-input>
+                                                                <script type="text/ng-template" id="title-template">
+                                                                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                                                </script>
+                                                                <script type="text/ng-template" id="title-autocomplete-template">
+                                                                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                                                </script>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>For which location?<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select the location for the opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                                <tags-input id="location" ng-model="opp.location_edit" display-property="city_name" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
+                                                                    <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
+                                                                </tags-input>
+                                                                <script type="text/ng-template" id="location-template">
+                                                                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                                                </script>
+                                                                <script type="text/ng-template" id="location-autocomplete-template">
+                                                                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="pb5">For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                                <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
+                                                                <span class="select-field-custom">
+                                                                    <select name="field" ng-model="opp.field_edit" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
+                                                                        <option value="" selected="selected">Select Related Fields</option>
+                                                                        <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                                                                        <option value="0">Other</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+                                                                <textarea id="opp_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="opp.opp_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
+                                                                <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                                <div class="opp_hashtag{{post.post_data.id}} all-hashtags-list"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Company Name <a href="#" data-toggle="tooltip" data-placement="left" title="Enter the company name of opportunity ." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+                                                                <input id="company_name_edit"  type="text" class="form-control" ng-model="opp.company_name_edit" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+                                                            </div>
+                                                            <div class="form-group" ng-if="opp.field_edit == '0'">
+                                                                <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                                            </div>
+                                                            <input type="hidden" name="post_for" class="form-control" value="">
+                                                            <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
+                                                        </div>
+                                                        <div class="text-right fw pb10">
+                                                            <button type="submit" class="btn1" id="save_{{post.post_data.id}}" value="Submit">
+                                                                <span class="ajax_load" id="login_ajax_load{{post.post_data.id}}" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span>
+                                                            Save</button>                                    
+                                                        </div>
+                                                        <?php // echo form_close(); ?>
+                                                    </form>
+                                                </div>
+                                                <!-- Edit Post Opportunity End -->
+                                                <div id="post-opp-detail-{{post.post_data.id}}">
+                                                    <h5 class="post-title">
+                                                        <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><span ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="!post.opportunity_data.field || post.opportunity_data.field == 0"><b>Field:</b><span ng-bind="post.opportunity_data.other_field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                            <span>
+                                                                <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
                                                             </span>
+                                                        </p>
+                                                        <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
+                                                    </h5>
+                                                    <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
+                                                        <div id="opp-post-opportunity-{{post.post_data.id}}" ng-class="post.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                            <b>Opportunity:</b>
+                                                            <span ng-bind-html="post.opportunity_data.opportunity"></span>
+                                                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
                                                         </div>
-                                                        <div class="form-group" ng-if="opp.field_edit == '0'">
-                                                            <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
-                                                        </div>
-                                                        <input type="hidden" name="post_for" class="form-control" value="">
-                                                        <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
-                                                    </div>
-                                                    <div class="text-right fw pb10">
-                                                        <button type="submit" class="btn1" id="save_{{post.post_data.id}}" value="Submit">
-                                                            <span class="ajax_load" id="login_ajax_load{{post.post_data.id}}" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span>
-                                                        Save</button>                                    
-                                                    </div>
-                                                    <?php // echo form_close(); ?>
-                                                </form>
-                                            </div>
-                                            <!-- Edit Post Opportunity End -->
-                                            <div id="post-opp-detail-{{post.post_data.id}}">
-                                                <h5 class="post-title">
-                                                    <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><span ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></span></p>
-                                                    <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
-                                                    <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
-                                                    <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
-                                                    <p ng-if="post.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
-                                                        <span>
-                                                            <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
-                                                        </span>
-                                                    </p>
-                                                    <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
-                                                </h5>
-                                                <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
-                                                    <div id="opp-post-opportunity-{{post.post_data.id}}" ng-class="post.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
-                                                        <b>Opportunity:</b>
-                                                        <span ng-bind-html="post.opportunity_data.opportunity"></span>
-                                                        <a id="remove-view-more{{post.post_data.id}}" ng-if="post.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
-                                            <p ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
-                                            <p ng-if="post.simple_data.hashtag" class="hashtag-grd">
-                                                <b>Hashtags:</b>
-                                                <span>
-                                                    <span class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.simple_data.hashtag.split(' ')">{{hashtag}}</span>
-                                                </span>
-                                            </p>                                            
-                                            <div ng-init="limit = 250; moreShown = false">
-                                                <span ng-if="post.simple_data.description != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.simple_data.description" ng-class="post.simple_data.description.length > 250 ? 'view-more-expand' : ''">
-                                                </span>
-                                                <a id="remove-view-more{{post.post_data.id}}" ng-if="post.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>                            
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
+                                                <p id="simple-post-title-{{post.post_data.id}}" ng-if="post.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.simple_data.sim_title" id="opp-title-{{post.post_data.id}}"></span></p>
+                                                <p id="simple-post-hashtag-{{post.post_data.id}}" ng-if="post.simple_data.hashtag" class="hashtag-grd">
+                                                    <b>Hashtags:</b>
+                                                    <span>
+                                                        <span class="post-hash-tag" id="sim-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                    </span>
+                                                </p>                                            
+                                                <div ng-init="limit = 250; moreShown = false">
+                                                    <span ng-if="post.simple_data.description != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.simple_data.description" ng-class="post.simple_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                    </span>
+                                                    <a id="remove-view-more{{post.post_data.id}}" ng-if="post.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>                            
+                                                </div>
+
+                                                <!-- Edit Simple Post Start -->
+                                                <div id="edit-simple-post-{{post.post_data.id}}" style="display: none;">
+                                                    <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
+                                                        <div class="post-box">        
+                                                            <div class="form-group">
+                                                                <label class="fw">Post title<a href="#" data-toggle="tooltip" data-placement="left" title="Give a relevant title to your post that describes your post in a single sentence." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+                                                                <input type="text" placeholder="Etnter Title" id="sim_title{{post.post_data.id}}" maxlength="100" ng-model="sim.sim_title_edit">
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label class="fw">Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+                                                                <textarea id="sim_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="sim.sim_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
+                                                                <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                                                <div class="sim_hashtag{{post.post_data.id}} all-hashtags-list"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <!-- <div class="post-text"> -->
+                                                                <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities & articles" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                                            </div>                        
+                                                            <div class="post-box-bottom" >
+                                                                <input type="hidden" name="post_for" class="form-control" value="simple">
+                                                                <input type="hidden" id="edit_post_id{{postIndex}}" name="edit_post_id" class="form-control" value="{{post.post_data.id}}">
+                                                                <p class="pull-right">
+                                                                    <button type="submit" class="btn1" value="Submit">Save</button>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- Edit Simple Post End -->
                                             </div>
+                                            
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
+                                                <p ng-if="post.article_data.hashtag" class="hashtag-grd">
+                                                    <span>
+                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="post-images article-post-cus" ng-if="post.post_data.post_for == 'article'">
+                                                <div class="one-img" ng-class="post.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
+                                                    <a href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_self">
+                                                        <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image != ''">
 
-                                            <!-- Edit Simple Post Start -->
-                                            <div id="edit-simple-post-{{post.post_data.id}}" style="display: none;">
-                                                <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
-                                                    <div class="post-box">        
+                                                        <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image == ''">
+                                                        <div class="article-post-text">
+                                                            <h3>{{post.article_data.article_title}}</h3>
+                                                            <p>{{post.user_data.company_name}}'s Article on Aileensoul</p>
+                                                        </div>
+                                                    </a>                            
+                                                </div>
+                                            </div>
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'profile_update'">
+                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
+                                            </div>
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'cover_update'">
+                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" ng-if="post.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
+                                            </div>
+                                            <div ng-if="post.post_data.post_for == 'profile_update' || post.post_data.post_for == 'cover_update'" id="myModalCoverPic{{post.post_data.id}}" class="modal modal2" style="display: none;">
+                                                <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModalCoverPic'+post.post_data.id)">×</button>
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                                                            <img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
+                                                        </div>
+                                                        <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                        <div class="mySlides mySlides2{{post.post_data.id}}">
+                                                            <div class="numbertext"></div>
+                                                            <div class="slider_img_p" ng-if="post.post_data.post_for == 'cover_update'">
+                                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" alt="Cover Image" id="cover{{post.post_data.id}}">
+                                                            </div>
+                                                            <div class="slider_img_p" ng-if="post.post_data.post_for == 'profile_update'">
+                                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" alt="Profile Image" id="cover{{post.post_data.id}}">
+                                                            </div>
+                                                        </div>                                
+                                                    </div>
+                                                    <div class="caption-container">
+                                                        <p id="caption"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'question'">
+                                                <div id="ask-que-{{post.post_data.id}}" class="post-des-detail">
+                                                    <h5 class="post-title">
+                                                        <div ng-if="post.question_data.question"><b>Question:</b><span ng-bind="post.question_data.question" id="ask-post-question-{{post.post_data.id}}"></span></div>                                        
+                                                        <div class="post-des-detail" ng-if="post.question_data.description">
+                                                            <div id="ask-que-desc-{{post.post_data.id}}" ng-class="post.question_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                                <b>Description:</b>
+                                                                <span ng-bind-html="post.question_data.description"></span>
+                                                                <a id="remove-view-more{{post.post_data.id}}" ng-if="post.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
+                                                            </div>                                            
+                                                        </div>
+                                                        <p ng-if="post.question_data.link"><b>Link:</b><span id="ask-post-link-{{post.post_data.id}}" ng-bind-html="post.question_data.link | parseUrl"></span></p>
+                                                        <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
+                                                        <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
+                                                    </h5>
+                                                    <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity"></span></div>
+                                                </div>
+                                                <!-- Edit Question Start -->
+                                                <div id="edit-ask-que-{{post.post_data.id}}" style="display: none;">
+                                                    <form id="ask_question" class="edit-question-form" name="ask_question" ng-submit="ask_question_check(event,$index)">
+                                                        <div class="post-box">                        
+                                                            <div class="post-text">                            
+                                                                <textarea class="title-text-area" ng-model="ask.ask_que" ng-keyup="questionList()" id="ask_que_{{post.post_data.id}}" placeholder="Ask Your Question (What you want to ask today?)"></textarea>
+                                                                <ul class="questionSuggetion custom-scroll">
+                                                                    <li ng-repeat="que in queSearchResult">
+                                                                        <a ng-href="<?php echo base_url('questions/') ?>{{que.id}}/{{que.question| slugify}}" target="_self" ng-bind="que.question"></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="all-upload">                                    
+                                                                <div class="add-link" ng-click="ShowHide()">
+                                                                    <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
+                                                                </div>
+                                                                <div class="form-group"  ng-show = "IsVisible">
+                                                                    <input type="url" id="ask_web_link_{{post.post_data.id}}" class="" placeholder="Add Your Web Link">
+                                                                </div>
+                                                            </div>                        
+                                                        </div>
+                                                        <div class="post-field">
+                                                            <div class="form-group">
+                                                                <label>Add Description</label>
+                                                                <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
+                                                                <div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Related Categories</label>
+                                                                
+                                                                
+                                                                <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
+                                                                    <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
+                                                                </tags-input>
+                                                                <div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
+                                                                <script type="text/ng-template" id="category-template">
+                                                                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                                                </script>
+                                                                <script type="text/ng-template" id="category-autocomplete-template">
+                                                                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>From which field the Question asked?</label>
+                                                                
+                                                                <span class="select-field-custom">
+                                                                    <select ng-model="ask.ask_field_edit" id="ask_field_{{post.post_data.id}}">
+                                                                        <option value="" selected="selected">Select Related Field</option>
+                                                                        <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                                                                        <option value="0">Other</option>
+                                                                    </select>
+                                                                </span>
+                                                                <div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Question.</div>
+                                                            </div>
+
+                                                            <div class="form-group"  ng-if="ask.ask_field_edit == '0'">
+                                                                <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control other-field" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
+                                                            </div>
+                                                            <input type="hidden" name="post_for" ng-model="ask.post_for" class="form-control" value="question">
+                                                            <input type="hidden" id="ask_edit_post_id_{{$index}}" name="ask_edit_post_id" class="form-control" value="{{post.post_data.id}}">
+                                                        </div>
+                                                        <div class="text-right fw pt10 pb20">
+                                                            <div class="add-anonymously">
+                                                                <label class="control control--checkbox" title="Checked this">Add Anonymously<input type="checkbox" value="1" id="ask_is_anonymously{{post.post_data.id}}" ng-checked="post.question_data.is_anonymously == 1"><div class="control__indicator"></div></label>
+                                                            </div>
+                                                            <button type="submit" class="btn1" value="Submit">Save</button> 
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- Edit Question End -->
+                                            </div>
+                                            <div class="post-discription" ng-if="post.post_data.post_for == 'share'">
+                                                <p id="share-post-desc-{{post.post_data.id}}" ng-if="post.share_data.description" class="ng-scope">
+                                                    <span ng-bind="post.share_data.description" id="share-desc-{{post.post_data.id}}"></span>
+                                                </p>
+                                                <div id="share-post-{{post.post_data.id}}" style="display: none;">
+                                                    <div class="post-box">
                                                         <div class="post-text">
-                                                            <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share knowledge, opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
-
-                                                            <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
-                                                        </div>                        
-                                                        <div class="post-box-bottom" >                            
-                                                            <input type="hidden" name="post_for" class="form-control" value="simple">
-                                                            <input type="hidden" id="edit_post_id{{postIndex}}" name="edit_post_id" class="form-control" value="{{post.post_data.id}}">
+                                                            <textarea id="share_post_text_{{post.post_data.id}}" class="hashtag-textarea" placeholder="Say something about post." autocomplete="off" maxlength="500"></textarea>
+                                                        </div>
+                                                        <div class="post-box-bottom" >
                                                             <p class="pull-right">
-                                                                <button type="submit" class="btn1" value="Submit">Save</button>
+                                                                <button id="share-btn-{{post.post_data.id}}" ng-click="edit_share_post_fnc(post.post_data.id,$index);" class="btn1">Save</button>
                                                             </p>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
-                                            <!-- Edit Simple Post End -->
-                                        </div>
-                                        
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
-                                            <p ng-if="post.article_data.hashtag" class="hashtag-grd">
-                                                <span>
-                                                    <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.article_data.hashtag.split(' ')">{{hashtag}}</span>
-                                                </span>
-                                            </p>
-                                        </div>
-                                        <div class="post-images article-post-cus" ng-if="post.post_data.post_for == 'article'">
-                                            <div class="one-img" ng-class="post.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
-                                                <a href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_self">
-                                                    <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image != ''">
+                                                </div>
 
-                                                    <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image == ''">
-                                                    <div class="article-post-text">
-                                                        <h3>{{post.article_data.article_title}}</h3>
-                                                        <p>{{post.user_data.company_name}}'s Article on Aileensoul</p>
-                                                    </div>
-                                                </a>                            
-                                            </div>
-                                        </div>
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'profile_update'">
-                                            <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
-                                        </div>
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'cover_update'">
-                                            <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" ng-if="post.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
-                                        </div>
-                                        <div ng-if="post.post_data.post_for == 'profile_update' || post.post_data.post_for == 'cover_update'" id="myModalCoverPic{{post.post_data.id}}" class="modal modal2" style="display: none;">
-                                            <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModalCoverPic'+post.post_data.id)">×</button>
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                                        <img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
-                                                    </div>
-                                                    <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                                                    <div class="mySlides mySlides2{{post.post_data.id}}">
-                                                        <div class="numbertext"></div>
-                                                        <div class="slider_img_p" ng-if="post.post_data.post_for == 'cover_update'">
-                                                            <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" alt="Cover Image" id="cover{{post.post_data.id}}">
-                                                        </div>
-                                                        <div class="slider_img_p" ng-if="post.post_data.post_for == 'profile_update'">
-                                                            <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" alt="Profile Image" id="cover{{post.post_data.id}}">
-                                                        </div>
-                                                    </div>                                
-                                                </div>
-                                                <div class="caption-container">
-                                                    <p id="caption"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-discription" ng-if="post.post_data.post_for == 'question'">
-                                            <div id="ask-que-{{post.post_data.id}}" class="post-des-detail">
-                                                <h5 class="post-title">
-                                                    <div ng-if="post.question_data.question"><b>Question:</b><span ng-bind="post.question_data.question" id="ask-post-question-{{post.post_data.id}}"></span></div>                                        
-                                                    <div class="post-des-detail" ng-if="post.question_data.description">
-                                                        <div id="ask-que-desc-{{post.post_data.id}}" ng-class="post.question_data.description.length > 250 ? 'view-more-expand' : ''">
-                                                            <b>Description:</b>
-                                                            <span ng-bind-html="post.question_data.description"></span>
-                                                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
-                                                        </div>                                            
-                                                    </div>
-                                                    <p ng-if="post.question_data.link"><b>Link:</b><span id="ask-post-link-{{post.post_data.id}}" ng-bind-html="post.question_data.link | parseUrl"></span></p>
-                                                    <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
-                                                    <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
-                                                </h5>
-                                                <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity"></span></div>
-                                            </div>
-                                            <!-- Edit Question Start -->
-                                            <div id="edit-ask-que-{{post.post_data.id}}" style="display: none;">
-                                                <form id="ask_question" class="edit-question-form" name="ask_question" ng-submit="ask_question_check(event,$index)">
-                                                    <div class="post-box">                        
-                                                        <div class="post-text">                            
-                                                            <textarea class="title-text-area" ng-model="ask.ask_que" ng-keyup="questionList()" id="ask_que_{{post.post_data.id}}" placeholder="Ask Your Question (What you want to ask today?)"></textarea>
-                                                            <ul class="questionSuggetion custom-scroll">
-                                                                <li ng-repeat="que in queSearchResult">
-                                                                    <a ng-href="<?php echo base_url('questions/') ?>{{que.id}}/{{que.question| slugify}}" target="_self" ng-bind="que.question"></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="all-upload">                                    
-                                                            <div class="add-link" ng-click="ShowHide()">
-                                                                <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
+                                                <div id="share-post-detail-{{post.post_data.id}}" ng-if="post.share_data" class="all-post-box">
+                                                        <div class="all-post-top">
+                                                            <div class="post-head">
+                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
+                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'">
+                                                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != '' && post.share_data.data.question_data.is_anonymously == '0'">
+                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                                    </a>
+                                                                                    
+                                                                    <span class="no-img-post"  ng-if="post.share_data.data.user_data.user_image == '' || post.share_data.data.question_data.is_anonymously == '1'">A</span>
+                                                                </div>
+
+                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image != ''">
+                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self">
+                                                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}">
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image == ''">
+                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self">
+                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
+                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'">
+                                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.user_data.business_user_image && post.share_data.data.question_data.is_anonymously == '0'">
+                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                                    </a>
+                                                                                    
+                                                                    <span class="no-img-post"  ng-if="!post.share_data.data.user_data.business_user_image || post.share_data.data.question_data.is_anonymously == '1'">A</span>
+                                                                </div>
+                                                                                
+                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.business_user_image">
+                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self">
+                                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.share_data.data.user_data.business_user_image}}">
+                                                                    </a>
+                                                                </div>
+                                                                                
+                                                                <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && !post.share_data.data.user_data.business_user_image">
+                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self">
+                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="post-detail">
+                                                                    <div class="fw" ng-if="post.share_data.data.post_data.post_for == 'question'">
+                                                                        <a href="javascript:void(0)" class="post-name" ng-if="post.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
+                                                                        <span class="post-time" ng-if="post.share_data.data.question_data.is_anonymously == '1'"></span>
+                                                                        <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'"></a>
+                                                                        <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'"></a>
+                                                                        <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
+                                                                    </div>
+                                                                                    
+                                                                    <div class="fw" ng-if="post.share_data.data.post_data.post_for != 'question'">
+                                                                        <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname"></a>
+                                                                        <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name"></a>
+                                                                        <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
+                                                                    </div>
+
+                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name != null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.title_name"></span>
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.degree_name"></span>
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null && post.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                                    </div>
+                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question'">
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name != null" ng-bind="post.share_data.data.user_data.title_name"></span>
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null" ng-bind="post.share_data.data.user_data.degree_name"></span>
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null">CURRENT WORK</span>
+                                                                    </div>
+
+                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.industry_name != null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.industry_name"></span> 
+                                                                        <span class="post-designation" ng-if="!post.share_data.data.user_data.industry_name && post.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                                    </div>
+                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question'">
+                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.industry_name" ng-bind="post.share_data.data.user_data.industry_name"></span> 
+                                                                        <span class="post-designation" ng-if="!post.share_data.data.user_data.industry_name">CURRENT WORK</span>
+                                                                    </div>
+
+                                                                </div>            
                                                             </div>
-                                                            <div class="form-group"  ng-show = "IsVisible">
-                                                                <input type="url" id="ask_web_link_{{post.post_data.id}}" class="" placeholder="Add Your Web Link">
+                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'opportunity'">
+                                                               
+                                                                <div id="post-opp-detail-{{post.share_data.data.post_data.id}}">
+                                                                    <div class="post-title opp-title-cus">
+                                                                        <p ng-if="post.share_data.data.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="post.share_data.data.opportunity_data.opptitle" id="opp-title-{{post.share_data.data.post_data.id}}"></h1></p>
+                                                                    </div>
+                                                                    <h5 class="post-title">
+                                                                        <p ng-if="post.share_data.data.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.share_data.data.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                        <p ng-if="post.share_data.data.opportunity_data.location"><b>Location:</b><span ng-bind="post.share_data.data.opportunity_data.location" id="opp-post-location-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                        <p ng-if="post.share_data.data.opportunity_data.field"><b>Field:</b><span ng-bind="post.share_data.data.opportunity_data.field" id="opp-post-field-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                        <p ng-if="!post.share_data.data.opportunity_data.field || post.share_data.data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="post.share_data.data.opportunity_data.other_field" id="opp-post-field-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                        <p ng-if="post.share_data.data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                                            <span>
+                                                                                <span class="post-hash-tag" id="opp-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                            </span>
+                                                                        </p>                                            
+                                                                        <p ng-if="post.share_data.data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.share_data.data.opportunity_data.company_name" id="opp-post-company-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    </h5>
+                                                                    <div class="post-des-detail" ng-if="post.share_data.data.opportunity_data.opportunity">
+                                                                        <div id="opp-post-opportunity-{{post.share_data.data.post_data.id}}" ng-class="post.share_data.data.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                                            <b>Opportunity:</b>
+                                                                            <span ng-bind-html="post.share_data.data.opportunity_data.opportunity"></span>
+                                                                            <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>                        
-                                                    </div>
-                                                    <div class="post-field">
-                                                        <div class="form-group">
-                                                            <label>Add Description</label>
-                                                            <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
-                                                            <div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Related Categories</label>
-                                                            
-                                                            
-                                                            <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
-                                                                <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
-                                                            </tags-input>
-                                                            <div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
-                                                            <script type="text/ng-template" id="category-template">
-                                                                <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
-                                                            </script>
-                                                            <script type="text/ng-template" id="category-autocomplete-template">
-                                                                <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
-                                                            </script>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>From which field the Question asked?</label>
-                                                            
-                                                            <span class="select-field-custom">
-                                                                <select ng-model="ask.ask_field_edit" id="ask_field_{{post.post_data.id}}">
-                                                                    <option value="" selected="selected">Select Related Field</option>
-                                                                    <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
-                                                                    <option value="0">Other</option>
-                                                                </select>
-                                                            </span>
-                                                            <div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Question.</div>
-                                                        </div>
+                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'simple'">
+                                                                <p ng-if="post.share_data.data.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.share_data.data.simple_data.sim_title" id="opp-title-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="post.share_data.data.simple_data.hashtag" class="hashtag-grd">
+                                                                    <b>Hashtags:</b>
+                                                                    <span>
+                                                                        <span class="post-hash-tag" id="sim-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                    </span>
+                                                                </p>
+                                                                <div ng-init="limit = 250; moreShown = false">
+                                                                    <span ng-if="post.share_data.data.simple_data.description != ''" id="simple-post-description-{{post.share_data.data.post_data.id}}" ng-bind-html="post.share_data.data.simple_data.description" ng-class="post.share_data.data.simple_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                                    </span>
+                                                                    <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>                                        
+                                                                </div>                                    
+                                                            </div>
+                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'article'">
+                                                                <p ng-if="post.share_data.data.article_data.hashtag" class="hashtag-grd">
+                                                                    <span>
+                                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-images article-post-cus" ng-if="post.share_data.data.post_data.post_for == 'article'">
+                                                                <div class="one-img" ng-class="post.share_data.data.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
+                                                                    <a href="<?php echo base_url(); ?>article/{{post.share_data.data.article_data.article_slug}}" target="_self">
+                                                                        <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.share_data.data.article_data.article_featured_image}}" alt="{{post.share_data.data.article_data.article_title}}" ng-if="post.share_data.data.article_data.article_featured_image != ''">
 
-                                                        <div class="form-group"  ng-if="ask.ask_field_edit == '0'">
-                                                            <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control other-field" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
+                                                                        <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.share_data.data.article_data.article_featured_image}}" alt="{{post.share_data.data.article_data.article_title}}" ng-if="post.share_data.data.article_data.article_featured_image == ''">
+                                                                        <div class="article-post-text">
+                                                                            <h3>{{post.share_data.data.article_data.article_title}}</h3>
+                                                                            <p>{{post.share_data.data.post_data.user_type == '1' ? post.share_data.data.user_data.fullname : post.share_data.data.user_data.company_name}}'s Article on Aileensoul</p>
+                                                                        </div>
+                                                                    </a>                            
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
+                                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
+                                                            </div>
+                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
+                                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" ng-if="post.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
+                                                            </div>
+                                                            <div ng-if="post.share_data.data.post_data.post_for == 'profile_update' || post.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{post.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
+                                                                <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModalShare('myModalCoverPicShare'+post.share_data.data.post_data.id)">×</button>
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                                                                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                        </div>
+                                                                        <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                                        <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}">
+                                                                            <div class="numbertext"></div>
+                                                                            <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
+                                                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{post.share_data.data.post_data.id}}">
+                                                                            </div>
+                                                                            <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
+                                                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{post.share_data.data.post_data.id}}">
+                                                                            </div>
+                                                                        </div>                                
+                                                                    </div>
+                                                                    <div class="caption-container">
+                                                                        <p id="caption"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'question'">
+                                                                <div id="ask-que-{{post.share_data.data.post_data.id}}" class="post-des-detail">
+                                                                    <h5 class="post-title">
+                                                                        <div ng-if="post.share_data.data.question_data.question"><b>Question:</b><span ng-bind="post.share_data.data.question_data.question" id="ask-post-question-{{post.share_data.data.post_data.id}}"></span></div>                                        
+                                                                        <div class="post-des-detail" ng-if="post.share_data.data.question_data.description">
+                                                                            <div id="ask-que-desc-{{post.share_data.data.post_data.id}}" ng-class="post.share_data.data.question_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                                                <b>Description:</b>
+                                                                                <span ng-bind-html="post.share_data.data.question_data.description"></span>
+                                                                                <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                                            </div>                                            
+                                                                        </div>
+                                                                        <p ng-if="post.share_data.data.question_data.link"><b>Link:</b><span ng-bind="post.share_data.data.question_data.link" id="ask-post-link-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                        <p ng-if="post.share_data.data.question_data.category"><b>Category:</b><span ng-bind="post.share_data.data.question_data.category" id="ask-post-category-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                        <p ng-if="post.share_data.data.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.share_data.data.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
+                                                                        <p ng-if="post.share_data.data.question_data.field"><b>Field:</b><span ng-bind="post.share_data.data.question_data.field" id="ask-post-field-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    </h5>
+                                                                    <div class="post-des-detail" ng-if="post.share_data.data.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.share_data.data.opportunity_data.opportunity"></span></div>
+                                                                </div>                                    
+                                                            </div>
+                                                            <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '1'">
+                                                                <div class="one-img" ng-repeat="post_file in post.share_data.data.post_file_data" ng-init="$last ? loadMediaElement() : false">
+                                                                    <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
+                                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">
+                                                                    </a>
+                                                                    <span ng-if="post_file.file_type == 'video'"> 
+                                                                        <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                                                        </video>
+                                                                        <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
+                                                                    </span>
+                                                                    <span  ng-if="post_file.file_type == 'audio'">
+                                                                        <div class = "audio_main_div">
+                                                                            <div class = "audio_img">
+                                                                                <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                                            </div>
+                                                                            <div class = "audio_source">
+                                                                                <audio id = "audio_player" width = "100%" height = "40" controls>
+                                                                                    <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
+                                                                                    Your browser does not support the audio tag.
+                                                                                </audio>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
+                                                                    </span>
+                                                                    <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '2'">
+                                                                <div class="two-img" ng-repeat="post_file in post.share_data.data.post_file_data">
+                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '3'">
+                                                                <span ng-repeat="post_file in post.share_data.data.post_file_data">
+                                                                    <div class="three-img-top" ng-if="$index == '0'">
+                                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                    </div>
+                                                                    <div class="two-img" ng-if="$index == '1'">
+                                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                    </div>
+                                                                    <div class="two-img" ng-if="$index == '2'">
+                                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <div class="post-images four-img" ng-if="post.share_data.data.post_data.total_post_files >= '4'">
+                                                                <div class="two-img" ng-repeat="post_file in post.share_data.data.post_file_data| limitTo:4">
+                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                    <div class="view-more-img" ng-if="$index == 3 && post.share_data.data.post_data.total_post_files > 4">
+                                                                        <span><a href="javascript:void(0);" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">View All ({{post.share_data.data.post_data.total_post_files - 4}})</a></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="myModalShare{{post.share_data.data.post_data.id}}" class="modal modal2" tabindex="-1" role="dialog" style="display: none;">
+                                                                <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+post.share_data.data.post_data.id)">×</button>
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                        </div>
+                                                                        <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                                        <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}" ng-repeat="_photoData in post.share_data.data.post_file_data">
+                                                                            <div class="numbertext">{{$index + 1}} / {{post.share_data.data.post_data.total_post_files}}</div>
+                                                                            <div class="slider_img_p">
+                                                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                                            </div>
+                                                                        </div>                                
+                                                                    </div>
+                                                                    <div class="caption-container">
+                                                                        <p id="caption"></p>
+                                                                    </div>
+                                                                </div> 
+                                                                <a ng-if="post.share_data.data.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.share_data.data.post_data.id)">&#10094;</a>
+                                                                <a ng-if="post.share_data.data.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.share_data.data.post_data.id)">&#10095;</a>
+                                                            </div>                                    
                                                         </div>
-                                                        <input type="hidden" name="post_for" ng-model="ask.post_for" class="form-control" value="question">
-                                                        <input type="hidden" id="ask_edit_post_id_{{$index}}" name="ask_edit_post_id" class="form-control" value="{{post.post_data.id}}">
-                                                    </div>
-                                                    <div class="text-right fw pt10 pb20">
-                                                        <div class="add-anonymously">
-                                                            <label class="control control--checkbox" title="Checked this">Add Anonymously<input type="checkbox" value="1" id="ask_is_anonymously{{post.post_data.id}}" ng-checked="post.question_data.is_anonymously == 1"><div class="control__indicator"></div></label>
+                                                </div>
+                                            </div>
+                                            <div class="post-images" ng-if="post.post_data.total_post_files == '1'">
+                                                <div class="one-img" ng-repeat="post_file in post.post_file_data" ng-init="$last ? loadMediaElement() : false">
+                                                    <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
+                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
+                                                    </a>
+                                                    <span ng-if="post_file.file_type == 'video'"> 
+                                                        <video controls width = "100%" height = "350" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png" preload="none">
+                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                                        </video> 
+                                                    </span>
+                                                    <span  ng-if="post_file.file_type == 'audio'">
+                                                        <div class = "audio_main_div">
+                                                            <div class = "audio_img">
+                                                                <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
+                                                            </div>
+                                                            <div class = "audio_source">
+                                                                <audio id = "audio_player" width = "100%" height = "40" controls>
+                                                                    <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
+                                                                    Your browser does not support the audio tag.
+                                                                </audio>
+                                                            </div>
                                                         </div>
-                                                        <button type="submit" class="btn1" value="Submit">Save</button> 
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <!-- Edit Question End -->
-                                        </div>
-                                        <div class="post-images" ng-if="post.post_data.total_post_files == '1'">
-                                            <div class="one-img" ng-repeat="post_file in post.post_file_data" ng-init="$last ? loadMediaElement() : false">
-                                                <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
-                                                    <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
-                                                </a>
-                                                <span ng-if="post_file.file_type == 'video'"> 
-                                                    <video controls width = "100%" height = "350" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png" preload="none">
-                                                        <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
-                                                    </video> 
-                                                </span>
-                                                <span  ng-if="post_file.file_type == 'audio'">
-                                                    <div class = "audio_main_div">
-                                                        <div class = "audio_img">
-                                                            <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
-                                                        </div>
-                                                        <div class = "audio_source">
-                                                            <audio id = "audio_player" width = "100%" height = "40" controls>
-                                                                <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
-                                                                Your browser does not support the audio tag.
-                                                            </audio>
-                                                        </div>
-                                                    </div>
-                                                    <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
-                                                </span>
-                                                <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
-                                            <div class="two-img" ng-repeat="post_file in post.post_file_data">
-                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
-                                            </div>
-                                        </div>
-                                        <div class="post-images" ng-if="post.post_data.total_post_files == '3'">
-                                            <span ng-repeat="post_file in post.post_file_data">
-                                                <div class="three-img-top" ng-if="$index == '0'">
-                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
-                                                </div>
-                                                <div class="two-img" ng-if="$index == '1'">
-                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
-                                                </div>
-                                                <div class="two-img" ng-if="$index == '2'">
-                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
-                                                </div>
-                                            </span>
-                                        </div>
-                                        <div class="post-images four-img" ng-if="post.post_data.total_post_files >= '4'">
-                                            <div class="two-img" ng-repeat="post_file in post.post_file_data| limitTo:4">
-                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
-                                                <div class="view-more-img" ng-if="$index == 3 && post.post_data.total_post_files > 4">
-                                                    <span><a href="javascript:void(0);" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">View All ({{post.post_data.total_post_files - 4}})</a></span>
+                                                        <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
+                                                    </span>
+                                                    <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="myModal{{post.post_data.id}}" class="modal modal2" style="display: none;">
-                                            <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModal'+post.post_data.id)">×</button>
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
-                                                    </div>
-                                                    <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                                                    <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for != 'article'" ng-repeat="_photoData in post.post_file_data">
-                                                        <div class="numbertext">{{$index + 1}} / {{post.post_data.total_post_files}}</div>
-                                                        <div class="slider_img_p">
-                                                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                                <div class="caption-container">
-                                                    <p id="caption"></p>
-                                                </div>
-                                            </div> 
-                                            <a ng-if="post.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.post_data.id)">&#10094;</a>
-                                            <a ng-if="post.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.post_data.id)">&#10095;</a>
-                                        </div>
-                                        <div class="post-bottom">
-                                            <div class="like-list">
-                                                <ul id="" class="bottom-left like_user_list">
-                                                    <li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
-                                                        <a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
-                                                            <img ng-if="user_like.user_image" ng-src="<?php echo USER_THUMB_UPLOAD_URL; ?>{{user_like.user_image}}">
-                                                            <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                        </a>
-                                                    </li>                                   
-                                                    <li class="like-img">
-                                                        <a href="javascript:void(0)" onclick="open_profile();" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
-                                                    </li>
-                                                </ul>
-                                                <ul class="pull-right">
-                                                    <li class="view-post">
-                                                            <span >25 Views</span>
-                                                        </li>
-                                                </ul>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-9 col-sm-9 col-xs-10 mob-pr0">
-                                                    <ul class="bottom-left">
-                                                        <li class="user-likes">
-                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" onclick="open_profile();" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i>
-                                                                <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
-                                                            </a>
-                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" onclick="open_profile();" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
-                                                                <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="comment-count"><a href="javascript:void(0);" onclick="open_profile();" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment" title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-                                                         <li class="comment-count"><a href="javascript:void(0);" onclick="open_profile();" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"  title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-                                                        <li>
-                                                            <a id="share-post-{{post.post_data.id}}" onclick="open_profile();" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i><span ng-if="post.post_share_count > 0">{{post.post_share_count}}</span></a>
-                                                        </li>
-                                                        
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-2 mob-pl0">
-                                                    <ul class="pull-right bottom-right">
-                                                        <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
-                                                        <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
-
-
-                                                        <li class="post-save">
-                                                            <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" onclick="open_profile();" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.svg'); ?>"></a>
-                                                            <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.svg'); ?>"></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="like-other-box">
                                             
-                                        </div>
-                                    </div>
-                                    <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
-                                        <div class="comment-box">
-                                            <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
-                                                <div class="post-img">
-                                                    <div ng-if="comment.user_image != ''">
-                                                        <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
-                                                            <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
-                                                        </a>
+                                            <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
+                                                <div class="two-img" ng-repeat="post_file in post.post_file_data">
+                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
+                                                </div>
+                                            </div>
+                                            <div class="post-images" ng-if="post.post_data.total_post_files == '3'">
+                                                <span ng-repeat="post_file in post.post_file_data">
+                                                    <div class="three-img-top" ng-if="$index == '0'">
+                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                                     </div>
-                                                    <div class="post-img" ng-if="comment.user_image == ''">
-                                                        <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
-                                                            <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                        </a>
+                                                    <div class="two-img" ng-if="$index == '1'">
+                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
+                                                    </div>
+                                                    <div class="two-img" ng-if="$index == '2'">
+                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <div class="post-images four-img" ng-if="post.post_data.total_post_files >= '4'">
+                                                <div class="two-img" ng-repeat="post_file in post.post_file_data| limitTo:4">
+                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
+                                                    <div class="view-more-img" ng-if="$index == 3 && post.post_data.total_post_files > 4">
+                                                        <span><a href="javascript:void(0);" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">View All ({{post.post_data.total_post_files - 4}})</a></span>
                                                     </div>
                                                 </div>
-                                                <div class="comment-dis">
-                                                    <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
-                                                    <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
-                                                        <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true">{{comment.comment}}</p>
+                                            </div>
+                                            <div id="myModal{{post.post_data.id}}" class="modal modal2" style="display: none;">
+                                                <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModal'+post.post_data.id)">×</button>
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
+                                                        </div>
+                                                        <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                        <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for != 'article'" ng-repeat="_photoData in post.post_file_data">
+                                                            <div class="numbertext">{{$index + 1}} / {{post.post_data.total_post_files}}</div>
+                                                            <div class="slider_img_p">
+                                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                            </div>
+                                                        </div> 
                                                     </div>
-
-                                                    <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
-                                                        <div class="comment-input">
-                                                            <!--<div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" onpaste="OnPaste_StripFormatting(event);"></div>-->
-                                                            <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)"></div>
-                                                        </div>
-                                                        <div class="mob-comment">
-                                                            <button onclick="open_profile();"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
-                                                        </div>
-                                                        
-                                                        <div class="comment-submit hidden-mob">
-                                                            <button class="btn2" onclick="open_profile();">Save</button>
-                                                        </div>
+                                                    <div class="caption-container">
+                                                        <p id="caption"></p>
                                                     </div>
-                                                </div>
-                                                <div class="comment-action">
-                                                    <ul class="pull-left">
-                                                        <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" onclick="open_profile();" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
-
-                                                        <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" onclick="open_profile();"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li> 
-                                                        <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" onclick="open_profile();">Cancel</a></li> 
-                                                        
-                                                        <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
+                                                </div> 
+                                                <a ng-if="post.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.post_data.id)">&#10094;</a>
+                                                <a ng-if="post.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.post_data.id)">&#10095;</a>
+                                            </div>
+                                            <div class="post-bottom">
+                                                <div class="like-list">
+                                                    <ul id="" class="bottom-left like_user_list">
+                                                        <li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
+                                                            <a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
+                                                                <img ng-if="user_like.user_image" ng-src="<?php echo USER_THUMB_UPLOAD_URL; ?>{{user_like.user_image}}">
+                                                                <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            </a>
+                                                        </li>                                   
+                                                        <li class="like-img">
+                                                            <a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                                        </li>
                                                     </ul>
                                                     <ul class="pull-right">
-                                                        <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" onclick="open_profile();"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
-                                                        <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" onclick="open_profile();"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+                                                        <li class="view-post">
+                                                            <span >25 Views</span>
+                                                        </li>
                                                     </ul>
                                                 </div>
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col-md-9 col-sm-9 col-xs-10 mob-pr0">
+                                                        <ul class="bottom-left">
+                                                            <li class="user-likes">
+                                                                <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i>
+                                                                    <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span></a>
+                                                                <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
+                                                                    <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment" title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                            <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"  title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                            <li>
+                                                                <a id="share-post-{{post.post_data.id}}" ng-click="share_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i><span ng-if="post.post_share_count > 0">{{post.post_share_count}}</span></a>
+                                                            </li>
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3 col-xs-2 mob-pl0">
+                                                        <ul class="pull-right bottom-right">
+                                                            <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
+                                                            <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
 
-                                            <div class="add-comment new-comment-{{post.post_data.id}}">
-                                                <div class="post-img">
-                                                    <?php 
-                                                    if ($leftbox_data['user_image'] != '')
-                                                    { ?> 
-                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
-                                                    <?php
-                                                    }
-                                                    else
-                                                    { 
-                                                        if($leftbox_data['user_gender'] == "M")
-                                                        {?>                                
-                                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                            <li class="post-save">
+                                                                <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" ng-click="save_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.svg'); ?>"></a>
+                                                                <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.svg'); ?>"></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="like-other-box">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
+                                            <div class="comment-box">
+                                                <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
+                                                    <div class="post-img">
+                                                        <div ng-if="comment.user_image != ''">
+                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                                            </a>
+                                                        </div>
+                                                        <div class="post-img" ng-if="comment.user_image == ''">
+                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-dis">
+                                                        <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
+                                                        <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
+                                                            <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true">{{comment.comment}}</p>
+                                                        </div>
+
+                                                        <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
+                                                            <div class="comment-input">
+                                                                <!--<div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" onpaste="OnPaste_StripFormatting(event);"></div>-->
+                                                                <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
+                                                            </div>
+                                                            <div class="editCommentTaxBox-{{comment.comment_id}} all-hashtags-list"></div>
+                                                            <div class="mob-comment">
+                                                                <button ng-click="sendEditComment(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                            </div>
+                                                            
+                                                            <div class="comment-submit hidden-mob">
+                                                                <button class="btn2" ng-click="sendEditComment(comment.comment_id, post.post_data.id)">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-action">
+                                                        <ul class="pull-left">
+                                                            <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{comment.comment_id}}" ng-click="comment_reply(postIndex,commentIndex,0,0,comment)">Reply</a></li>
+
+                                                            <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
+
+                                                            <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{comment.comment_id}}" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span> Like</a></li>
+
+                                                            <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, commentIndex)">Cancel</a></li> 
+                                                            
+                                                            <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
+                                                        </ul>
+                                                        <ul class="pull-right">
+                                                            <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
+                                                            <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="post-comment reply-comment" nf-if="comment.comment_reply_data.length > 0" ng-repeat="commentreply in comment.comment_reply_data" ng-init="commentReplyIndex=$index">
+                                                        <div class="post-img">
+                                                            <div ng-if="commentreply.user_image != ''">
+                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self">
+                                                                    <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{commentreply.user_image}}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="post-img" ng-if="commentreply.user_image == ''">
+                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self">
+                                                                    <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                    <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment-dis">
+                                                            <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username"></a></div>
+                                                            <div class="comment-dis-inner" id="comment-reply-dis-inner-{{commentreply.comment_id}}">
+                                                                <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{commentreply.comment}}" dd-text-collapse-cond="true">{{commentreply.comment}}</p>
+                                                            </div>
+
+                                                            <div class="edit-reply-comment" id="edit-reply-comment-{{commentreply.comment_id}}" style="display:none;">
+                                                                <div class="comment-input">                 
+                                                                    <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="send_edit_comment_reply({{commentreply.comment_id}}, post.post_data.id)" id="edit-comment-reply-textbox-{{commentreply.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(commentreply.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
+                                                                </div>
+                                                                <div class="edit-comment-reply-textbox-{{commentreply.comment_id}} all-hashtags-list"></div>
+                                                                <div class="mob-comment">
+                                                                    <button ng-click="send_edit_comment_reply(commentreply.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                                </div>                                        
+                                                                <div class="comment-submit hidden-mob">
+                                                                    <button class="btn2" ng-click="send_edit_comment_reply(commentreply.comment_id, post.post_data.id)">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment-action">
+                                                            <ul class="pull-left">
+                                                                <li><a href="javascript:void(0);" id="cmt-reply-fnc-{{commentreply.comment_id}}" ng-click="comment_reply(postIndex,commentIndex,user_id,commentreply.commented_user_id,commentreply)">Reply</a></li>
+
+                                                                <li ng-if="commentreply.is_userlikePostComment == '1'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="likePostComment(commentreply.comment_id, post.post_data.id)" class="like"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
+
+                                                                <li ng-if="commentreply.is_userlikePostComment == '0'"><a href="javascript:void(0);" id="cmt-like-fnc-{{commentreply.comment_id}}" ng-click="likePostComment(commentreply.comment_id, post.post_data.id)"><span ng-bind="commentreply.postCommentLikeCount" id="post-comment-like-{{commentreply.comment_id}}"></span> Like</a></li>
+
+                                                                <li id="cancel-reply-comment-li-{{commentreply.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancel_post_comment_reply(commentreply.comment_id, post.post_data.id, postIndex, commentIndex,commentReplyIndex)">Cancel</a></li> 
+                                                                
+                                                                <li id="timeago-reply-comment-li-{{commentreply.comment_id}}"><a href="javascript:void(0);" ng-bind="commentreply.comment_time_string"></a></li>
+                                                            </ul>
+                                                            <ul class="pull-right">
+                                                                <li ng-if="commentreply.commented_user_id == user_id" id="edit-comment-li-{{commentreply.comment_id}}"><a href="javascript:void(0);" ng-click="edit_post_comment_reply(commentreply.comment_id, post.post_data.id, postIndex, commentIndex,commentReplyIndex)"><img src="<?php echo base_url('assets/n-images/edit.svg') ?>"></a></li>
+                                                                <li ng-if="post.post_data.user_id == user_id || commentreply.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(commentreply.comment_id, post.post_data.id, postIndex, commentIndex, post)"><img src="<?php echo base_url('assets/n-images/delet.svg') ?>"></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <div id="comment-reply-{{postIndex}}-{{commentIndex}}" class="comment-reply" style="display: none;">
+                                                        <div class="post-img">
+                                                            <?php 
+                                                            if ($leftbox_data['user_image'] != '')
+                                                            { ?> 
+                                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                                            <?php
+                                                            }
+                                                            else
+                                                            { 
+                                                                if($leftbox_data['user_gender'] == "M")
+                                                                {?>                                
+                                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                <?php
+                                                                }
+                                                                if($leftbox_data['user_gender'] == "F")
+                                                                {
+                                                                ?>
+                                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                                <?php
+                                                                }                                
+                                                            } ?>
+
+                                                        </div>
+                                                        <div class="comment-dis">
+                                                            <div class="edit-comment">
+                                                                <div class="comment-input">             
+                                                                    <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendCommentReply({{comment.comment_id}}, post.post_data.id,postIndex, commentIndex)" id="reply-comment-{{postIndex}}-{{commentIndex}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="cmt_handle_paste_edit($event)" ng-keydown="check_comment_char_count_edit(comment.comment_id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
+                                                                </div>
+                                                                <div class="reply-comment-{{postIndex}}-{{commentIndex}} all-hashtags-list"></div>
+                                                                <div class="mob-comment">
+                                                                    <button ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                                </div>
+                                                                
+                                                                <div class="comment-submit hidden-mob">
+                                                                    <button class="btn2" ng-click="sendCommentReply(comment.comment_id, post.post_data.id,postIndex, commentIndex)">Send</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="add-comment new-comment-{{post.post_data.id}}">
+                                                    <div class="post-img">
+                                                        <?php 
+                                                        if ($leftbox_data['user_image'] != '')
+                                                        { ?> 
+                                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                                         <?php
                                                         }
-                                                        if($leftbox_data['user_gender'] == "F")
-                                                        {
-                                                        ?>
-                                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                        <?php
-                                                        }                                
-                                                    } ?>
+                                                        else
+                                                        { 
+                                                            if($leftbox_data['user_gender'] == "M")
+                                                            {?>                                
+                                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                            <?php
+                                                            }
+                                                            if($leftbox_data['user_gender'] == "F")
+                                                            {
+                                                            ?>
+                                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <?php
+                                                            }                                
+                                                        } ?>
 
-                                                </div>
-                                                <div class="comment-input">
-                                                    <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)"></div>
-                                                </div>
-                                                <div class="mob-comment">
-                                                    <button id="cmt-btn-mob-{{post.post_data.id}}"  onclick="open_profile();"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
-                                                </div>
-                                                <div class="comment-submit hidden-mob">
-                                                    <button id="cmt-btn-{{post.post_data.id}}" class="btn2" onclick="open_profile();">Comment</button>
+                                                    </div>
+                                                    <div class="comment-input">
+                                                        <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="cmt_handle_paste($event)" ng-keydown="check_comment_char_count(post.post_data.id,$event)" onkeyup="autocomplete_mention(this.id);"></div>
+                                                    </div>
+                                                    <div class="commentTaxBox-{{post.post_data.id}} all-hashtags-list"></div>
+                                                    <div class="mob-comment">
+                                                        <button id="cmt-btn-mob-{{post.post_data.id}}"  ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
+                                                    </div>
+                                                    <div class="comment-submit hidden-mob">
+                                                        <button id="cmt-btn-{{post.post_data.id}}" class="btn2" ng-click="sendComment(post.post_data.id, $index, post)">Comment</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div ng-if="(postIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
-                                    <div class="tab-add">
-                                        <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
-                                        <?php //$this->load->view('infeed_add'); ?>
+                                    <div ng-if="(postIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
+                                        <div class="tab-add">
+                                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
+                                            <?php //$this->load->view('infeed_add'); ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Post</h3>
-                                <div class="user-img-nn">
-                                    <div class="user_no_post_img">
-                                        <img src="<?php echo base_url('assets/img/no-post.png?ver=' . time()); ?>" alt="no post">
-                                    </div>
-                                    <div class="art_no_post_text">No Post Available.</div>
-                                </div>
-                            </div>
 
-                            <!-- <div class="business-all-post">
-                            </div> -->
-                            <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loader" /></div>
-							<div class="banner-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
+                                <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Post</h3>
+                                    <div class="user-img-nn">
+                                        <div class="user_no_post_img">
+                                            <img src="<?php echo base_url('assets/img/no-post.png?ver=' . time()); ?>" alt="no post">
+                                        </div>
+                                        <div class="art_no_post_text">No Post Available.</div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="business-all-post">
+                                </div> -->
+                                <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
+                            </div>
                         </div>
-                        
-                    </div>
-
-                    <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-						<?php $this->load->view('right_add_box'); ?>
-                        <div>
-                            <div class="move-website">
-                                <div class="right-info-box" ng-if="user_social_links.length > '0' || user_personal_links.length > '0'">
-                                    <div class="dtl-title">
+						
+						</div>
+                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
+							
+							<?php $this->load->view('right_add_box');
+                            if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
+                            <div id="profile-progress" class="edit_profile_progress right-add-box" style="display: none;">
+                                <div class="count_main_progress">
+                                    <div class="circles">
+                                        <div class="second circle-1">
+                                            <div>
+                                                <strong></strong>
+                                                <span id="progress-txt"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <div>
+								<div class="move-website">
+    							<div class="right-info-box" ng-if="user_social_links.length > '0' || user_personal_links.length > '0'">
+    								<div class="dtl-title">
+					                 
                                         <svg viewBox="0 0 58 58" width="25px" height="25px">
-                                            <path d="M50.688,48.222C55.232,43.101,58,36.369,58,29c0-7.667-2.996-14.643-7.872-19.834c0,0,0-0.001,0-0.001  c-0.004-0.006-0.01-0.008-0.013-0.013c-5.079-5.399-12.195-8.855-20.11-9.126l-0.001-0.001L29.439,0.01C29.293,0.005,29.147,0,29,0  s-0.293,0.005-0.439,0.01l-0.563,0.015l-0.001,0.001c-7.915,0.271-15.031,3.727-20.11,9.126c-0.004,0.005-0.01,0.007-0.013,0.013  c0,0,0,0.001-0.001,0.002C2.996,14.357,0,21.333,0,29c0,7.369,2.768,14.101,7.312,19.222c0.006,0.009,0.006,0.019,0.013,0.028  c0.018,0.025,0.044,0.037,0.063,0.06c5.106,5.708,12.432,9.385,20.608,9.665l0.001,0.001l0.563,0.015C28.707,57.995,28.853,58,29,58  s0.293-0.005,0.439-0.01l0.563-0.015l0.001-0.001c8.185-0.281,15.519-3.965,20.625-9.685c0.013-0.017,0.034-0.022,0.046-0.04  C50.682,48.241,50.682,48.231,50.688,48.222z M2.025,30h12.003c0.113,4.239,0.941,8.358,2.415,12.217  c-2.844,1.029-5.563,2.409-8.111,4.131C4.585,41.891,2.253,36.21,2.025,30z M8.878,11.023c2.488,1.618,5.137,2.914,7.9,3.882  C15.086,19.012,14.15,23.44,14.028,28H2.025C2.264,21.493,4.812,15.568,8.878,11.023z M55.975,28H43.972  c-0.122-4.56-1.058-8.988-2.75-13.095c2.763-0.968,5.412-2.264,7.9-3.882C53.188,15.568,55.736,21.493,55.975,28z M28,14.963  c-2.891-0.082-5.729-0.513-8.471-1.283C21.556,9.522,24.418,5.769,28,2.644V14.963z M28,16.963V28H16.028  c0.123-4.348,1.035-8.565,2.666-12.475C21.7,16.396,24.821,16.878,28,16.963z M30,16.963c3.179-0.085,6.3-0.566,9.307-1.438  c1.631,3.91,2.543,8.127,2.666,12.475H30V16.963z M30,14.963V2.644c3.582,3.125,6.444,6.878,8.471,11.036  C35.729,14.45,32.891,14.881,30,14.963z M40.409,13.072c-1.921-4.025-4.587-7.692-7.888-10.835  c5.856,0.766,11.125,3.414,15.183,7.318C45.4,11.017,42.956,12.193,40.409,13.072z M17.591,13.072  c-2.547-0.879-4.991-2.055-7.294-3.517c4.057-3.904,9.327-6.552,15.183-7.318C22.178,5.38,19.512,9.047,17.591,13.072z M16.028,30  H28v10.038c-3.307,0.088-6.547,0.604-9.661,1.541C16.932,37.924,16.141,34.019,16.028,30z M28,42.038v13.318  c-3.834-3.345-6.84-7.409-8.884-11.917C21.983,42.594,24.961,42.124,28,42.038z M30,55.356V42.038  c3.039,0.085,6.017,0.556,8.884,1.4C36.84,47.947,33.834,52.011,30,55.356z M30,40.038V30h11.972  c-0.113,4.019-0.904,7.924-2.312,11.58C36.547,40.642,33.307,40.126,30,40.038z M43.972,30h12.003  c-0.228,6.21-2.559,11.891-6.307,16.348c-2.548-1.722-5.267-3.102-8.111-4.131C43.032,38.358,43.859,34.239,43.972,30z   M9.691,47.846c2.366-1.572,4.885-2.836,7.517-3.781c1.945,4.36,4.737,8.333,8.271,11.698C19.328,54.958,13.823,52.078,9.691,47.846  z M32.521,55.763c3.534-3.364,6.326-7.337,8.271-11.698c2.632,0.945,5.15,2.209,7.517,3.781  C44.177,52.078,38.672,54.958,32.521,55.763z" fill="#5c5c5c"/>
+                                        <path d="M50.688,48.222C55.232,43.101,58,36.369,58,29c0-7.667-2.996-14.643-7.872-19.834c0,0,0-0.001,0-0.001  c-0.004-0.006-0.01-0.008-0.013-0.013c-5.079-5.399-12.195-8.855-20.11-9.126l-0.001-0.001L29.439,0.01C29.293,0.005,29.147,0,29,0  s-0.293,0.005-0.439,0.01l-0.563,0.015l-0.001,0.001c-7.915,0.271-15.031,3.727-20.11,9.126c-0.004,0.005-0.01,0.007-0.013,0.013  c0,0,0,0.001-0.001,0.002C2.996,14.357,0,21.333,0,29c0,7.369,2.768,14.101,7.312,19.222c0.006,0.009,0.006,0.019,0.013,0.028  c0.018,0.025,0.044,0.037,0.063,0.06c5.106,5.708,12.432,9.385,20.608,9.665l0.001,0.001l0.563,0.015C28.707,57.995,28.853,58,29,58  s0.293-0.005,0.439-0.01l0.563-0.015l0.001-0.001c8.185-0.281,15.519-3.965,20.625-9.685c0.013-0.017,0.034-0.022,0.046-0.04  C50.682,48.241,50.682,48.231,50.688,48.222z M2.025,30h12.003c0.113,4.239,0.941,8.358,2.415,12.217  c-2.844,1.029-5.563,2.409-8.111,4.131C4.585,41.891,2.253,36.21,2.025,30z M8.878,11.023c2.488,1.618,5.137,2.914,7.9,3.882  C15.086,19.012,14.15,23.44,14.028,28H2.025C2.264,21.493,4.812,15.568,8.878,11.023z M55.975,28H43.972  c-0.122-4.56-1.058-8.988-2.75-13.095c2.763-0.968,5.412-2.264,7.9-3.882C53.188,15.568,55.736,21.493,55.975,28z M28,14.963  c-2.891-0.082-5.729-0.513-8.471-1.283C21.556,9.522,24.418,5.769,28,2.644V14.963z M28,16.963V28H16.028  c0.123-4.348,1.035-8.565,2.666-12.475C21.7,16.396,24.821,16.878,28,16.963z M30,16.963c3.179-0.085,6.3-0.566,9.307-1.438  c1.631,3.91,2.543,8.127,2.666,12.475H30V16.963z M30,14.963V2.644c3.582,3.125,6.444,6.878,8.471,11.036  C35.729,14.45,32.891,14.881,30,14.963z M40.409,13.072c-1.921-4.025-4.587-7.692-7.888-10.835  c5.856,0.766,11.125,3.414,15.183,7.318C45.4,11.017,42.956,12.193,40.409,13.072z M17.591,13.072  c-2.547-0.879-4.991-2.055-7.294-3.517c4.057-3.904,9.327-6.552,15.183-7.318C22.178,5.38,19.512,9.047,17.591,13.072z M16.028,30  H28v10.038c-3.307,0.088-6.547,0.604-9.661,1.541C16.932,37.924,16.141,34.019,16.028,30z M28,42.038v13.318  c-3.834-3.345-6.84-7.409-8.884-11.917C21.983,42.594,24.961,42.124,28,42.038z M30,55.356V42.038  c3.039,0.085,6.017,0.556,8.884,1.4C36.84,47.947,33.834,52.011,30,55.356z M30,40.038V30h11.972  c-0.113,4.019-0.904,7.924-2.312,11.58C36.547,40.642,33.307,40.126,30,40.038z M43.972,30h12.003  c-0.228,6.21-2.559,11.891-6.307,16.348c-2.548-1.722-5.267-3.102-8.111-4.131C43.032,38.358,43.859,34.239,43.972,30z   M9.691,47.846c2.366-1.572,4.885-2.836,7.517-3.781c1.945,4.36,4.737,8.333,8.271,11.698C19.328,54.958,13.823,52.078,9.691,47.846  z M32.521,55.763c3.534-3.364,6.326-7.337,8.271-11.698c2.632,0.945,5.15,2.209,7.517,3.781  C44.177,52.078,38.672,54.958,32.521,55.763z" fill="#5c5c5c"/>
+
                                         </svg>
                                         <span>Website </span>
-                                    </div>
-                                    <div class="dtl-dis">
-                                        <div class="social-links" ng-if="user_social_links.length > '0'">
+					                </div>
+    								<div class="dtl-dis">
+    									<div class="social-links" ng-if="user_social_links.length > '0'">
                                             <h4>Social</h4>
                                             <ul class="social-link-list">
                                                 <li ng-repeat="social_links in user_social_links">
@@ -1058,260 +1517,1231 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>                            
-                            <div class="right-info-box move-review">
-                                <div class="dtl-title">
-                                    <svg viewBox="0 0 511.999 511.999" width="25px" height="25px">
+    								</div>
+    							</div>
+								</div>
+								<div class="move-jobs">								
+								</div>
+    							<div class="right-info-box move-review">
+    								
+    								<div class="dtl-title">
+    									
+                                        <svg viewBox="0 0 511.999 511.999" width="25px" height="25px">
                                         <g>
-                                            <g>
-                                                <path d="M150.447,312.003c7.476-3.772,16.448-0.955,20.427,6.413l28.239,52.29c2.176,4.029,6.811,6.063,11.25,4.943    c4.439-1.122,7.549-5.116,7.549-9.695v-76.351c-0.001-5.522-4.478-9.999-10.001-9.999s-10,4.478-10,10v36.79l-9.44-17.48    c-9.162-16.963-29.823-23.452-47.033-14.766c-14.729,7.431-22.314,23.821-18.445,39.858l18.307,75.881    c4.279,17.738,11.908,34.202,22.674,48.935l35.864,49.077c1.958,2.68,4.999,4.101,8.082,4.101c2.047,0,4.113-0.627,5.892-1.927    c4.459-3.259,5.433-9.516,2.174-13.975l-35.864-49.077c-9.202-12.592-15.722-26.663-19.379-41.824l-18.307-75.882    C140.755,322.349,144.05,315.231,150.447,312.003z" fill="#5c5c5c"/>
-                                            </g>
+                                        	<g>
+                                        		<path d="M150.447,312.003c7.476-3.772,16.448-0.955,20.427,6.413l28.239,52.29c2.176,4.029,6.811,6.063,11.25,4.943    c4.439-1.122,7.549-5.116,7.549-9.695v-76.351c-0.001-5.522-4.478-9.999-10.001-9.999s-10,4.478-10,10v36.79l-9.44-17.48    c-9.162-16.963-29.823-23.452-47.033-14.766c-14.729,7.431-22.314,23.821-18.445,39.858l18.307,75.881    c4.279,17.738,11.908,34.202,22.674,48.935l35.864,49.077c1.958,2.68,4.999,4.101,8.082,4.101c2.047,0,4.113-0.627,5.892-1.927    c4.459-3.259,5.433-9.516,2.174-13.975l-35.864-49.077c-9.202-12.592-15.722-26.663-19.379-41.824l-18.307-75.882    C140.755,322.349,144.05,315.231,150.447,312.003z" fill="#5c5c5c"/>
+                                        	</g>
                                         </g>
                                         <g>
-                                            <g>
-                                                <path d="M376.225,269.38c-5.901,0-11.456,1.511-16.3,4.164c-4.907-12.782-17.302-21.883-31.791-21.883    c-6.249,0-12.105,1.7-17.144,4.65c-5.386-11.718-17.227-19.88-30.946-19.88c-5.007,0-9.76,1.095-14.045,3.044v-47.811    c0-18.772-15.272-34.045-34.045-34.045c-18.773,0-34.045,15.272-34.045,34.045v17.334c0,5.522,4.477,10,10,10s10-4.478,10-10    v-17.333c0-7.744,6.301-14.045,14.045-14.045c7.744,0,14.045,6.301,14.045,14.045v141.107c0,5.522,4.477,10,10,10    c5.523,0,10-4.478,10-10v-62.297c0-7.744,6.3-14.045,14.045-14.045c7.745,0,14.045,6.301,14.045,14.045v62.297    c0,5.522,4.477,10,10,10c5.523,0,10-4.478,10-10v-47.066c0-7.745,6.3-14.046,14.045-14.046c7.745,0,14.045,6.301,14.045,14.046    v47.066c0,5.522,4.477,10,10,10s10-4.478,10-10v-29.349c0-7.744,6.301-14.045,14.045-14.045s14.045,6.301,14.045,14.045v84.379    c0,22.484-3.412,44.764-10.14,66.218l-14.106,44.982c-1.652,5.27,1.28,10.882,6.55,12.534c0.996,0.313,2.003,0.461,2.995,0.461    c4.254-0.001,8.199-2.737,9.539-7.011l14.106-44.982c7.336-23.394,11.056-47.687,11.056-72.202v-84.379    C410.27,284.653,394.998,269.38,376.225,269.38z" fill="#5c5c5c"/>
-                                            </g>
+                                        	<g>
+                                        		<path d="M376.225,269.38c-5.901,0-11.456,1.511-16.3,4.164c-4.907-12.782-17.302-21.883-31.791-21.883    c-6.249,0-12.105,1.7-17.144,4.65c-5.386-11.718-17.227-19.88-30.946-19.88c-5.007,0-9.76,1.095-14.045,3.044v-47.811    c0-18.772-15.272-34.045-34.045-34.045c-18.773,0-34.045,15.272-34.045,34.045v17.334c0,5.522,4.477,10,10,10s10-4.478,10-10    v-17.333c0-7.744,6.301-14.045,14.045-14.045c7.744,0,14.045,6.301,14.045,14.045v141.107c0,5.522,4.477,10,10,10    c5.523,0,10-4.478,10-10v-62.297c0-7.744,6.3-14.045,14.045-14.045c7.745,0,14.045,6.301,14.045,14.045v62.297    c0,5.522,4.477,10,10,10c5.523,0,10-4.478,10-10v-47.066c0-7.745,6.3-14.046,14.045-14.046c7.745,0,14.045,6.301,14.045,14.046    v47.066c0,5.522,4.477,10,10,10s10-4.478,10-10v-29.349c0-7.744,6.301-14.045,14.045-14.045s14.045,6.301,14.045,14.045v84.379    c0,22.484-3.412,44.764-10.14,66.218l-14.106,44.982c-1.652,5.27,1.28,10.882,6.55,12.534c0.996,0.313,2.003,0.461,2.995,0.461    c4.254-0.001,8.199-2.737,9.539-7.011l14.106-44.982c7.336-23.394,11.056-47.687,11.056-72.202v-84.379    C410.27,284.653,394.998,269.38,376.225,269.38z" fill="#5c5c5c"/>
+                                        	</g>
                                         </g>
                                         <g>
-                                            <g>
-                                                <path d="M511.161,53.029c-1.996-6.139-7.205-10.528-13.594-11.455l-30.629-4.441L453.233,9.381C450.376,3.594,444.592,0,438.139,0    c-0.001,0-0.003,0-0.004,0c-6.456,0.001-12.24,3.599-15.095,9.389l-13.69,27.758l-30.627,4.459    c-6.388,0.93-11.595,5.322-13.587,11.463c-1.993,6.14-0.358,12.752,4.265,17.256l22.169,21.598l-5.224,30.506    c-1.089,6.363,1.479,12.672,6.702,16.464c2.95,2.143,6.401,3.23,9.875,3.23c2.677,0,5.368-0.646,7.854-1.953l27.391-14.41    l27.399,14.396c5.714,3.004,12.508,2.51,17.729-1.287c5.221-3.796,7.786-10.105,6.692-16.468l-5.24-30.503l22.157-21.609    C511.526,65.781,513.157,59.167,511.161,53.029z M469.594,78.741c-3.969,3.869-5.777,9.441-4.838,14.903l4.436,25.823    l-23.194-12.186c-4.907-2.58-10.765-2.577-15.67,0.003l-23.188,12.199l4.423-25.827c0.934-5.462-0.877-11.031-4.847-14.899    l-18.768-18.284l25.93-3.774c5.483-0.799,10.221-4.243,12.672-9.214l11.59-23.498l11.602,23.491    c2.454,4.97,7.193,8.411,12.679,9.208l25.93,3.761L469.594,78.741z" fill="#5c5c5c"/>
-                                            </g>
+                                        	<g>
+                                        		<path d="M511.161,53.029c-1.996-6.139-7.205-10.528-13.594-11.455l-30.629-4.441L453.233,9.381C450.376,3.594,444.592,0,438.139,0    c-0.001,0-0.003,0-0.004,0c-6.456,0.001-12.24,3.599-15.095,9.389l-13.69,27.758l-30.627,4.459    c-6.388,0.93-11.595,5.322-13.587,11.463c-1.993,6.14-0.358,12.752,4.265,17.256l22.169,21.598l-5.224,30.506    c-1.089,6.363,1.479,12.672,6.702,16.464c2.95,2.143,6.401,3.23,9.875,3.23c2.677,0,5.368-0.646,7.854-1.953l27.391-14.41    l27.399,14.396c5.714,3.004,12.508,2.51,17.729-1.287c5.221-3.796,7.786-10.105,6.692-16.468l-5.24-30.503l22.157-21.609    C511.526,65.781,513.157,59.167,511.161,53.029z M469.594,78.741c-3.969,3.869-5.777,9.441-4.838,14.903l4.436,25.823    l-23.194-12.186c-4.907-2.58-10.765-2.577-15.67,0.003l-23.188,12.199l4.423-25.827c0.934-5.462-0.877-11.031-4.847-14.899    l-18.768-18.284l25.93-3.774c5.483-0.799,10.221-4.243,12.672-9.214l11.59-23.498l11.602,23.491    c2.454,4.97,7.193,8.411,12.679,9.208l25.93,3.761L469.594,78.741z" fill="#5c5c5c"/>
+                                        	</g>
                                         </g>
                                         <g>
-                                            <g>
-                                                <path d="M329.01,53.029c-1.996-6.139-7.204-10.529-13.593-11.455l-30.629-4.441L271.083,9.381C268.225,3.594,262.442,0,255.988,0    c-0.001,0-0.003,0-0.005,0c-6.455,0.001-12.239,3.599-15.094,9.389l-13.69,27.758l-30.627,4.459    c-6.388,0.93-11.595,5.322-13.587,11.463c-1.993,6.14-0.358,12.752,4.265,17.256l22.168,21.597l-5.224,30.506    c-1.089,6.363,1.479,12.672,6.702,16.464c2.95,2.143,6.401,3.23,9.875,3.23c2.677,0,5.368-0.646,7.854-1.953l27.392-14.409    l27.399,14.395c5.714,3.004,12.508,2.51,17.729-1.287c5.221-3.796,7.786-10.105,6.692-16.468l-5.24-30.503l22.157-21.609    C329.375,65.781,331.006,59.168,329.01,53.029z M287.444,78.741c-3.968,3.868-5.776,9.439-4.838,14.903l4.436,25.823    l-23.194-12.186c-4.908-2.579-10.767-2.578-15.67,0.003l-23.189,12.199l4.423-25.827c0.934-5.463-0.877-11.032-4.847-14.899    l-18.767-18.284l25.929-3.774c5.483-0.799,10.221-4.243,12.673-9.214l11.59-23.499l11.602,23.492    c2.453,4.969,7.192,8.411,12.679,9.208l25.93,3.761L287.444,78.741z" fill="#5c5c5c"/>
-                                            </g>
+                                        	<g>
+                                        		<path d="M329.01,53.029c-1.996-6.139-7.204-10.529-13.593-11.455l-30.629-4.441L271.083,9.381C268.225,3.594,262.442,0,255.988,0    c-0.001,0-0.003,0-0.005,0c-6.455,0.001-12.239,3.599-15.094,9.389l-13.69,27.758l-30.627,4.459    c-6.388,0.93-11.595,5.322-13.587,11.463c-1.993,6.14-0.358,12.752,4.265,17.256l22.168,21.597l-5.224,30.506    c-1.089,6.363,1.479,12.672,6.702,16.464c2.95,2.143,6.401,3.23,9.875,3.23c2.677,0,5.368-0.646,7.854-1.953l27.392-14.409    l27.399,14.395c5.714,3.004,12.508,2.51,17.729-1.287c5.221-3.796,7.786-10.105,6.692-16.468l-5.24-30.503l22.157-21.609    C329.375,65.781,331.006,59.168,329.01,53.029z M287.444,78.741c-3.968,3.868-5.776,9.439-4.838,14.903l4.436,25.823    l-23.194-12.186c-4.908-2.579-10.767-2.578-15.67,0.003l-23.189,12.199l4.423-25.827c0.934-5.463-0.877-11.032-4.847-14.899    l-18.767-18.284l25.929-3.774c5.483-0.799,10.221-4.243,12.673-9.214l11.59-23.499l11.602,23.492    c2.453,4.969,7.192,8.411,12.679,9.208l25.93,3.761L287.444,78.741z" fill="#5c5c5c"/>
+                                        	</g>
                                         </g>
                                         <g>
-                                            <g>
-                                                <path d="M146.86,53.029c-1.996-6.139-7.205-10.528-13.594-11.455l-30.629-4.441L88.933,9.381C86.075,3.594,80.292,0,73.838,0    c-0.001,0-0.003,0-0.005,0c-6.455,0.001-12.239,3.599-15.094,9.389l-13.69,27.758l-30.627,4.459    c-6.388,0.93-11.594,5.322-13.587,11.462S0.475,65.82,5.099,70.325l22.169,21.598l-5.224,30.506    c-1.089,6.363,1.479,12.672,6.702,16.465c2.951,2.142,6.401,3.23,9.876,3.229c2.677,0,5.368-0.646,7.854-1.953l27.392-14.409    l27.399,14.395c5.715,3.002,12.508,2.509,17.729-1.286c5.221-3.797,7.785-10.108,6.692-16.47l-5.24-30.503l22.157-21.609    C147.225,65.781,148.856,59.168,146.86,53.029z M105.294,78.74c-3.969,3.868-5.778,9.44-4.839,14.904l4.436,25.823l-23.193-12.186    c-4.907-2.579-10.766-2.578-15.67,0.003l-23.19,12.2l4.422-25.825c0.936-5.462-0.875-11.032-4.846-14.901L23.648,60.473    l25.929-3.774c5.483-0.799,10.221-4.243,12.672-9.214l11.59-23.499l11.602,23.492c2.453,4.969,7.192,8.411,12.679,9.208    l25.931,3.761L105.294,78.74z" fill="#5c5c5c"/>
-                                            </g>
+                                        	<g>
+                                        		<path d="M146.86,53.029c-1.996-6.139-7.205-10.528-13.594-11.455l-30.629-4.441L88.933,9.381C86.075,3.594,80.292,0,73.838,0    c-0.001,0-0.003,0-0.005,0c-6.455,0.001-12.239,3.599-15.094,9.389l-13.69,27.758l-30.627,4.459    c-6.388,0.93-11.594,5.322-13.587,11.462S0.475,65.82,5.099,70.325l22.169,21.598l-5.224,30.506    c-1.089,6.363,1.479,12.672,6.702,16.465c2.951,2.142,6.401,3.23,9.876,3.229c2.677,0,5.368-0.646,7.854-1.953l27.392-14.409    l27.399,14.395c5.715,3.002,12.508,2.509,17.729-1.286c5.221-3.797,7.785-10.108,6.692-16.47l-5.24-30.503l22.157-21.609    C147.225,65.781,148.856,59.168,146.86,53.029z M105.294,78.74c-3.969,3.868-5.778,9.44-4.839,14.904l4.436,25.823l-23.193-12.186    c-4.907-2.579-10.766-2.578-15.67,0.003l-23.19,12.2l4.422-25.825c0.936-5.462-0.875-11.032-4.846-14.901L23.648,60.473    l25.929-3.774c5.483-0.799,10.221-4.243,12.672-9.214l11.59-23.499l11.602,23.492c2.453,4.969,7.192,8.411,12.679,9.208    l25.931,3.761L105.294,78.74z" fill="#5c5c5c"/>
+                                        	</g>
                                         </g>
                                         <g>
-                                            <g>
-                                                <path d="M214.981,243.13c-1.86-1.861-4.439-2.93-7.07-2.93c-2.63,0-5.21,1.069-7.07,2.93s-2.93,4.439-2.93,7.07    c0,2.63,1.07,5.21,2.93,7.069c1.86,1.86,4.44,2.931,7.07,2.931c2.63,0,5.21-1.07,7.07-2.931c1.86-1.859,2.93-4.439,2.93-7.069    C217.911,247.568,216.841,244.989,214.981,243.13z" fill="#5c5c5c"/>
-                                            </g>
+                                        	<g>
+                                        		<path d="M214.981,243.13c-1.86-1.861-4.439-2.93-7.07-2.93c-2.63,0-5.21,1.069-7.07,2.93s-2.93,4.439-2.93,7.07    c0,2.63,1.07,5.21,2.93,7.069c1.86,1.86,4.44,2.931,7.07,2.931c2.63,0,5.21-1.07,7.07-2.931c1.86-1.859,2.93-4.439,2.93-7.069    C217.911,247.568,216.841,244.989,214.981,243.13z" fill="#5c5c5c"/>
+                                        	</g>
                                         </g>
 
                                         </svg>
 
-                                        <span>Reviews</span>                                    
-                                </div>
-                                <div class="dtl-dis">
-                                    <div class="no-info" ng-if="review_data.length < '1'">
-                                        <img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
-                                            <span>There are no reviews right now.</span>
-                                    </div>
-                                    <div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
-                                        <span class="total-rat">{{avarage_review}}</span>
-                                        <span class="rating-star">
-                                            <input id="avarage_review" type="number" value="{{avarage_review}}">
-                                        </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
-                                    </div>
-                                    <ul class="review-list">
-                                        <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">               
-                                            <div class="review-left">
-                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{review_list.user_image}}" ng-if="review_list.user_image != ''">
-                                                <img ng-if="review_list.user_image == '' && review_list.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                <img ng-if="review_list.user_image == '' && review_list.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                            </div>
-                                            <div class="review-right">
-                                                <h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
-                                                <div class="rating-star-cus">
-                                                    <span class="rating-star">
-                                                        <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
-                                                    </span>
+                                        <span>Reviews</span>
+                                        <?php if($login_user_data['user_id'] != $business_data[0]['user_id']): ?>
+                                        <a ng-if="from_user_id != to_user_id" href="javascript:void(0);" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="<?php echo base_url('assets/n-images/detail/write.png?ver=' . time()) ?>">
+                                            <span>Write a review</span>
+                                        </a>
+                                        <?php endif; ?>
+    								</div>
+    								<div class="dtl-dis">
+                                        <div class="no-info" ng-if="review_data.length < '1'">
+                                            <img src="<?php echo base_url('assets/n-images/detail/edit-profile.png?ver=' . time()) ?>">
+                                            <?php if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
+                                                <span>There are no reviews right now.</span>
+                                            <?php else: ?>
+                                                <span>Be the first to post your review.</span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
+                                            <span class="total-rat">{{avarage_review}}</span>
+                                            <span class="rating-star">
+                                                <input id="avarage_review" type="number" value="{{avarage_review}}">
+                                            </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
+                                        </div>
+                                        <ul class="review-list">
+                                            <li ng-if="review_data.length > '0'" ng-repeat="review_list in review_data">                    
+                                                <div class="review-left">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{review_list.user_image}}" ng-if="review_list.user_image != ''">
+                                                    <img ng-if="review_list.user_image == '' && review_list.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="review_list.user_image == '' && review_list.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </div>
-                                                <div class="review-dis" ng-if="review_list.review_desc">
-                                                    {{review_list.review_desc}}
+                                                <div class="review-right">
+                                                    <h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
+                                                    <div class="rating-star-cus">
+                                                        <span class="rating-star">
+                                                            <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
+                                                        </span>
+                                                    </div>
+                                                    <div class="review-dis" ng-if="review_list.review_desc">
+                                                        {{review_list.review_desc}}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
-                            </div>
-                            <div class="move-bus-started">
-                                <div class="right-info-box" ng-if="story_data">
-                                    <div class="dtl-title">
+                                            </li>
+                                        </ul>
+                                        <div class="form-group"></div>
+                                    </div>
+    							
+    							</div>
+								<div class="move-bus-started">
+    							<div class="right-info-box" ng-if="story_data">
+    								<div class="dtl-title">
                                         <svg viewBox="0 0 511.999 511.999" width="25px" height="25px">
-                                            <g>
-                                                <g>
-                                                    <circle cx="10.06" cy="500.446" r="10.06" fill="#5c5c5c"/>
-                                                </g>
-                                            </g>
-                                            <g>
-                                                <g>
-                                                    <circle cx="267.005" cy="245.308" r="10.04" fill="#5c5c5c"/>
-                                                </g>
-                                            </g>
-                                            <g>
-                                                <g>
-                                                    <path d="M398.479,118.032c-8.071-8.072-18.802-12.516-30.216-12.516c-11.414,0-22.146,4.446-30.216,12.516    c-16.661,16.662-16.661,43.772,0,60.433c8.332,8.331,19.272,12.495,30.216,12.495c10.941,0,21.886-4.166,30.216-12.495    C415.14,161.803,415.14,134.693,398.479,118.032z M384.282,164.266c-8.833,8.832-23.206,8.832-32.037,0    c-8.833-8.832-8.833-23.204,0-32.037c4.279-4.279,9.967-6.635,16.018-6.635c6.051,0,11.739,2.356,16.018,6.635    C393.114,141.062,393.114,155.434,384.282,164.266z" fill="#5c5c5c"/>
-                                                </g>
-                                            </g>
-                                            <g>
-                                                <g>
-                                                    <path d="M125.409,411.45c-4.964-2.472-10.99-0.451-13.462,4.512l-11.958,24.015c-5.2,10.441-15.658,17.423-27.296,18.219    l-13.908,0.952c-2.351,0.157-3.897-1.014-4.612-1.729s-1.889-2.264-1.729-4.613l0.952-13.907    c0.797-11.637,7.779-22.096,18.219-27.296l24.014-11.958c4.964-2.472,6.984-8.499,4.512-13.462    c-2.471-4.963-8.498-6.984-13.462-4.512l-24.014,11.958c-16.792,8.362-28.02,25.182-29.302,43.898l-0.952,13.907    c-0.514,7.507,2.242,14.863,7.562,20.183c4.898,4.898,11.523,7.624,18.403,7.624c0.591,0,1.186-0.02,1.78-0.061l13.908-0.952    c18.716-1.281,35.536-12.508,43.898-29.302l11.958-24.014C132.392,419.948,130.372,413.922,125.409,411.45z" fill="#5c5c5c"/>
-                                                </g>
-                                            </g>
-                                            <g>
-                                                <g>
-                                                    <path d="M505.07,8.18c-4.711-4.641-11.201-7.068-17.793-6.639l-9.348,0.596c-83.819,5.351-162.262,45.81-215.215,111.004    L240.71,140.23l-57.583-1.691c-0.098-0.003-0.197-0.004-0.294-0.004c-45.668,0-88.603,17.784-120.896,50.076L2.959,247.59    c-2.805,2.805-3.696,7-2.272,10.702c1.424,3.703,4.894,6.221,8.856,6.423l124.844,6.414l-5.09,6.267    c-2.565,3.159-2.971,7.553-1.026,11.127c1.956,3.596,4.006,7.135,6.144,10.617l-29.606,35.147    c-2.531,3.005-3.076,7.211-1.397,10.763c6.467,13.665,15.05,25.943,25.514,36.493c10.718,10.808,23.251,19.646,37.249,26.271    c1.368,0.648,2.835,0.965,4.293,0.965c2.261,0,4.503-0.764,6.327-2.243c6.378-5.174,13.731-11.311,20.843-17.245    c5.069-4.23,10.255-8.557,15.102-12.547c2.893,1.741,5.822,3.429,8.795,5.046c1.504,0.818,3.153,1.221,4.796,1.221    c2.186,0,4.358-0.712,6.156-2.108l6.843-5.31l6.442,125.37c0.204,3.962,2.721,7.432,6.423,8.856c1.172,0.45,2.39,0.67,3.6,0.67    c2.615,0,5.183-1.023,7.101-2.942l58.979-58.979c32.293-32.293,50.076-75.227,50.076-120.896v-54.995l23.267-18.055    c69.729-54.11,112.196-135.704,116.512-223.862l0.239-4.886C512.295,19.27,509.779,12.822,505.07,8.18z M33.123,245.822    l43.012-43.012c28.465-28.465,66.303-44.157,106.553-44.196l42.085,1.236l-74.71,91.98L33.123,245.822z M184.774,373.874    c-5.241,4.372-10.614,8.856-15.6,12.957c-9.644-5.223-18.368-11.74-25.992-19.428c-7.384-7.445-13.669-15.922-18.737-25.26    l21.676-25.733c6.554,8.793,13.728,17.122,21.478,24.925c0.006,0.006,0.012,0.011,0.018,0.017    c0.002,0.002,0.004,0.005,0.006,0.007c0.003,0.003,0.006,0.005,0.009,0.008c8.593,8.648,17.836,16.584,27.641,23.761    C191.811,368.002,188.264,370.962,184.774,373.874z M351.875,327.672c0,40.305-15.695,78.197-44.196,106.698l-43.012,43.012    l-6.002-116.792l93.209-72.33V327.672z M491.678,29.779c-4.029,82.297-43.673,158.467-108.767,208.98l-157.46,122.189    c-13.058-7.63-25.229-16.639-36.368-26.846l53.086-53.086c3.92-3.92,3.92-10.278,0-14.199c-3.921-3.921-10.278-3.921-14.199,0    l-53.036,53.036c-9.751-10.795-18.387-22.541-25.74-35.104L278.3,125.8C327.732,64.941,400.96,27.171,479.207,22.177l9.348-0.596    c1.225-0.076,2.045,0.532,2.423,0.904c0.377,0.371,1,1.178,0.94,2.409L491.678,29.779z" fill="#5c5c5c"/>
-                                                </g>
-                                            </g>
+                                        <g>
+                                        	<g>
+                                        		<circle cx="10.06" cy="500.446" r="10.06" fill="#5c5c5c"/>
+                                        	</g>
+                                        </g>
+                                        <g>
+                                        	<g>
+                                        		<circle cx="267.005" cy="245.308" r="10.04" fill="#5c5c5c"/>
+                                        	</g>
+                                        </g>
+                                        <g>
+                                        	<g>
+                                        		<path d="M398.479,118.032c-8.071-8.072-18.802-12.516-30.216-12.516c-11.414,0-22.146,4.446-30.216,12.516    c-16.661,16.662-16.661,43.772,0,60.433c8.332,8.331,19.272,12.495,30.216,12.495c10.941,0,21.886-4.166,30.216-12.495    C415.14,161.803,415.14,134.693,398.479,118.032z M384.282,164.266c-8.833,8.832-23.206,8.832-32.037,0    c-8.833-8.832-8.833-23.204,0-32.037c4.279-4.279,9.967-6.635,16.018-6.635c6.051,0,11.739,2.356,16.018,6.635    C393.114,141.062,393.114,155.434,384.282,164.266z" fill="#5c5c5c"/>
+                                        	</g>
+                                        </g>
+                                        <g>
+                                        	<g>
+                                        		<path d="M125.409,411.45c-4.964-2.472-10.99-0.451-13.462,4.512l-11.958,24.015c-5.2,10.441-15.658,17.423-27.296,18.219    l-13.908,0.952c-2.351,0.157-3.897-1.014-4.612-1.729s-1.889-2.264-1.729-4.613l0.952-13.907    c0.797-11.637,7.779-22.096,18.219-27.296l24.014-11.958c4.964-2.472,6.984-8.499,4.512-13.462    c-2.471-4.963-8.498-6.984-13.462-4.512l-24.014,11.958c-16.792,8.362-28.02,25.182-29.302,43.898l-0.952,13.907    c-0.514,7.507,2.242,14.863,7.562,20.183c4.898,4.898,11.523,7.624,18.403,7.624c0.591,0,1.186-0.02,1.78-0.061l13.908-0.952    c18.716-1.281,35.536-12.508,43.898-29.302l11.958-24.014C132.392,419.948,130.372,413.922,125.409,411.45z" fill="#5c5c5c"/>
+                                        	</g>
+                                        </g>
+                                        <g>
+                                        	<g>
+                                        		<path d="M505.07,8.18c-4.711-4.641-11.201-7.068-17.793-6.639l-9.348,0.596c-83.819,5.351-162.262,45.81-215.215,111.004    L240.71,140.23l-57.583-1.691c-0.098-0.003-0.197-0.004-0.294-0.004c-45.668,0-88.603,17.784-120.896,50.076L2.959,247.59    c-2.805,2.805-3.696,7-2.272,10.702c1.424,3.703,4.894,6.221,8.856,6.423l124.844,6.414l-5.09,6.267    c-2.565,3.159-2.971,7.553-1.026,11.127c1.956,3.596,4.006,7.135,6.144,10.617l-29.606,35.147    c-2.531,3.005-3.076,7.211-1.397,10.763c6.467,13.665,15.05,25.943,25.514,36.493c10.718,10.808,23.251,19.646,37.249,26.271    c1.368,0.648,2.835,0.965,4.293,0.965c2.261,0,4.503-0.764,6.327-2.243c6.378-5.174,13.731-11.311,20.843-17.245    c5.069-4.23,10.255-8.557,15.102-12.547c2.893,1.741,5.822,3.429,8.795,5.046c1.504,0.818,3.153,1.221,4.796,1.221    c2.186,0,4.358-0.712,6.156-2.108l6.843-5.31l6.442,125.37c0.204,3.962,2.721,7.432,6.423,8.856c1.172,0.45,2.39,0.67,3.6,0.67    c2.615,0,5.183-1.023,7.101-2.942l58.979-58.979c32.293-32.293,50.076-75.227,50.076-120.896v-54.995l23.267-18.055    c69.729-54.11,112.196-135.704,116.512-223.862l0.239-4.886C512.295,19.27,509.779,12.822,505.07,8.18z M33.123,245.822    l43.012-43.012c28.465-28.465,66.303-44.157,106.553-44.196l42.085,1.236l-74.71,91.98L33.123,245.822z M184.774,373.874    c-5.241,4.372-10.614,8.856-15.6,12.957c-9.644-5.223-18.368-11.74-25.992-19.428c-7.384-7.445-13.669-15.922-18.737-25.26    l21.676-25.733c6.554,8.793,13.728,17.122,21.478,24.925c0.006,0.006,0.012,0.011,0.018,0.017    c0.002,0.002,0.004,0.005,0.006,0.007c0.003,0.003,0.006,0.005,0.009,0.008c8.593,8.648,17.836,16.584,27.641,23.761    C191.811,368.002,188.264,370.962,184.774,373.874z M351.875,327.672c0,40.305-15.695,78.197-44.196,106.698l-43.012,43.012    l-6.002-116.792l93.209-72.33V327.672z M491.678,29.779c-4.029,82.297-43.673,158.467-108.767,208.98l-157.46,122.189    c-13.058-7.63-25.229-16.639-36.368-26.846l53.086-53.086c3.92-3.92,3.92-10.278,0-14.199c-3.921-3.921-10.278-3.921-14.199,0    l-53.036,53.036c-9.751-10.795-18.387-22.541-25.74-35.104L278.3,125.8C327.732,64.941,400.96,27.171,479.207,22.177l9.348-0.596    c1.225-0.076,2.045,0.532,2.423,0.904c0.377,0.371,1,1.178,0.94,2.409L491.678,29.779z" fill="#5c5c5c"/>
+                                        	</g>
+                                        </g>
                                         </svg>
                                         <span>Business Started</span>
-                                    </div>
-                                    <div class="dtl-dis dtl-box-height">
+    								</div>
+    								<div class="dtl-dis dtl-box-height">
                                         <div class="bus-story" ng-if="story_data.story_file" ng-click="open_business_story();">
                                             <img ng-src="<?php echo BUSINESS_USER_STORY_UPLOAD_URL;?>{{story_data.story_file}}">
                                         </div>
                                         <div class="bus-story" ng-if="!story_data.story_file" ng-click="open_business_story();">
                                             <div class="gradient-bg"></div>
                                         </div>
-                                        <ul class="dis-list list-ul-cus">
-                                            <li>
-                                                <span>Description</span>
-                                                <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_desc}}" dd-text-collapse-cond="true">{{story_data.story_desc}}</label>
-                                            </li>
-                                        
-                                            <li>
-                                                <span>What differentiate you from your competitiors</span>
-                                                <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_diff}}" dd-text-collapse-cond="true">{{story_data.story_diff}}</label>
-                                            </li>
-                                    
-                                        </ul>
-                                    </div>
-                                    <div class="about-more" ng-if="story_data">
-                                        <a href="#" ng-click="open_business_story();">View More <img src="<?php echo base_url().'assets/'; ?>n-images/detail/down-arrow.png"></a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="add-menu move-menu">
-                                <div class="right-info-box" ng-if="menu_info_data.length > '0'">
-                                    <div class="dtl-title">
-                                        <svg width="25" height="25" viewBox="0 0 400 400" ><g id="svgg">
-                                            <path id="path0" d="M116.263 32.069 C 116.629 32.474,117.035 32.689,117.164 32.548 C 117.294 32.406,117.174 32.210,116.898 32.111 C 116.621 32.012,116.478 31.797,116.580 31.633 C 116.682 31.468,116.502 31.333,116.181 31.333 C 115.698 31.333,115.713 31.461,116.263 32.069 M178.283 31.988 C 179.048 32.883,179.339 32.827,178.967 31.857 C 178.828 31.496,178.465 31.200,178.161 31.200 C 177.731 31.200,177.758 31.376,178.283 31.988 M283.200 32.076 C 283.200 32.847,283.260 32.877,283.700 32.322 C 283.975 31.976,284.470 31.596,284.800 31.478 C 285.132 31.359,284.908 31.249,284.300 31.232 C 283.425 31.206,283.200 31.379,283.200 32.076 M345.372 31.645 C 345.077 32.123,345.965 32.869,346.463 32.561 C 346.838 32.329,346.437 31.200,345.981 31.200 C 345.797 31.200,345.524 31.400,345.372 31.645 M31.297 34.174 C 31.252 34.766,31.327 34.841,31.570 34.448 C 31.755 34.150,32.150 33.755,32.448 33.570 C 32.841 33.327,32.766 33.252,32.174 33.297 C 31.663 33.335,31.335 33.663,31.297 34.174 M93.467 33.467 C 92.738 34.195,93.184 35.338,93.932 34.661 C 94.335 34.297,94.795 34.128,94.954 34.287 C 95.112 34.446,95.124 34.266,94.978 33.888 C 94.711 33.191,93.954 32.980,93.467 33.467 M306.200 34.096 C 306.234 34.568,306.460 35.020,306.700 35.100 C 306.964 35.188,307.051 34.918,306.920 34.417 C 306.621 33.271,306.123 33.049,306.200 34.096 M367.600 33.624 C 367.600 33.857,367.761 33.948,367.958 33.826 C 368.155 33.704,368.429 33.899,368.568 34.260 C 368.706 34.620,368.909 34.825,369.019 34.715 C 369.129 34.605,369.105 34.219,368.967 33.857 C 368.689 33.134,367.600 32.948,367.600 33.624 M184.000 35.354 C 184.000 35.439,184.269 36.024,184.598 36.654 C 184.976 37.379,185.196 37.552,185.198 37.124 C 185.199 36.752,185.017 36.334,184.793 36.196 C 184.570 36.058,184.491 35.777,184.617 35.572 C 184.744 35.368,184.657 35.200,184.424 35.200 C 184.191 35.200,184.000 35.269,184.000 35.354 M215.569 35.385 C 215.553 35.393,215.476 35.731,215.400 36.135 C 215.265 36.846,215.288 36.846,216.130 36.139 C 216.609 35.737,217.065 35.371,217.145 35.326 C 217.257 35.262,215.702 35.320,215.569 35.385 M89.467 37.467 C 88.738 38.195,89.184 39.338,89.932 38.661 C 90.335 38.297,90.795 38.128,90.954 38.287 C 91.112 38.446,91.124 38.266,90.978 37.888 C 90.711 37.191,89.954 36.980,89.467 37.467 M310.200 38.096 C 310.234 38.568,310.460 39.020,310.700 39.100 C 310.964 39.188,311.051 38.918,310.920 38.417 C 310.621 37.271,310.123 37.049,310.200 38.096 M62.232 39.549 C 62.078 39.797,62.143 40.000,62.376 40.000 C 62.609 40.000,62.814 40.315,62.832 40.700 C 62.849 41.092,62.950 41.187,63.060 40.915 C 63.343 40.218,62.588 38.973,62.232 39.549 M251.200 47.989 C 251.200 48.847,251.804 49.369,252.383 49.011 C 252.881 48.703,252.497 47.723,251.769 47.443 C 251.399 47.302,251.200 47.493,251.200 47.989 M233.288 48.063 C 233.373 48.318,233.879 48.593,234.413 48.675 C 235.357 48.819,235.362 48.806,234.592 48.224 C 233.636 47.502,233.078 47.433,233.288 48.063 M351.200 51.048 C 351.200 51.655,351.368 51.943,351.627 51.783 C 351.862 51.638,351.954 51.258,351.832 50.939 C 351.709 50.620,351.775 50.461,351.977 50.586 C 352.179 50.711,352.435 50.667,352.545 50.490 C 352.655 50.312,352.397 50.140,351.972 50.108 C 351.400 50.065,351.200 50.308,351.200 51.048 M48.228 51.231 C 48.713 51.767,49.036 51.893,49.139 51.584 C 49.226 51.322,49.051 50.951,48.749 50.760 C 47.751 50.128,47.464 50.387,48.228 51.231 M314.893 52.000 C 314.893 52.770,314.975 53.085,315.076 52.700 C 315.176 52.315,315.176 51.685,315.076 51.300 C 314.975 50.915,314.893 51.230,314.893 52.000 M39.600 52.233 C 39.600 52.582,39.814 52.795,40.075 52.708 C 40.817 52.461,40.940 51.600,40.233 51.600 C 39.885 51.600,39.600 51.885,39.600 52.233 M359.279 52.036 C 359.480 52.642,361.200 52.919,361.200 52.345 C 361.200 52.155,361.035 52.000,360.833 52.000 C 360.631 52.000,360.156 51.881,359.778 51.736 C 359.295 51.551,359.147 51.640,359.279 52.036 M5.829 55.829 C 5.483 56.174,5.200 56.624,5.200 56.829 C 5.200 57.326,5.890 57.302,6.204 56.793 C 6.342 56.570,6.668 56.514,6.928 56.670 C 7.233 56.853,7.217 56.728,6.883 56.316 C 6.461 55.794,6.461 55.640,6.883 55.470 C 7.229 55.332,7.244 55.253,6.929 55.232 C 6.669 55.214,6.174 55.483,5.829 55.829 M393.060 55.503 C 392.759 55.990,393.902 57.308,394.373 57.016 C 394.608 56.871,394.800 56.590,394.800 56.390 C 394.800 55.893,393.294 55.125,393.060 55.503 M0.000 61.600 C 0.000 61.820,0.270 62.000,0.600 62.000 C 0.930 62.000,1.200 61.820,1.200 61.600 C 1.200 61.380,0.930 61.200,0.600 61.200 C 0.270 61.200,0.000 61.380,0.000 61.600 M16.267 69.867 C 15.753 70.380,16.009 70.626,17.100 70.668 C 17.774 70.694,17.906 70.635,17.442 70.515 C 16.833 70.357,16.793 70.250,17.242 69.966 C 17.701 69.675,17.688 69.611,17.167 69.606 C 16.818 69.603,16.413 69.720,16.267 69.867 M188.212 106.387 C 187.670 106.985,187.645 107.199,188.074 107.546 C 188.363 107.780,189.246 108.512,190.037 109.172 C 192.730 111.421,195.213 111.896,194.892 110.100 C 194.571 108.303,193.608 107.494,192.086 107.741 C 190.971 107.922,190.694 107.805,190.327 107.000 C 189.741 105.713,189.012 105.502,188.212 106.387 M23.200 201.000 L 23.200 252.800 33.200 252.800 L 43.200 252.800 43.200 222.655 L 43.200 192.511 44.183 192.699 C 45.105 192.875,45.174 193.067,45.283 195.743 C 45.389 198.343,45.480 198.611,46.283 198.726 C 47.087 198.840,47.176 199.108,47.283 201.726 C 47.390 204.343,47.479 204.611,48.283 204.726 C 49.087 204.840,49.176 205.108,49.283 207.726 C 49.390 210.343,49.479 210.611,50.283 210.726 C 51.087 210.840,51.176 211.108,51.283 213.726 C 51.390 216.343,51.479 216.611,52.283 216.726 C 53.087 216.840,53.176 217.108,53.283 219.726 C 53.390 222.343,53.479 222.611,54.283 222.726 C 55.087 222.840,55.176 223.108,55.283 225.726 C 55.390 228.343,55.479 228.611,56.283 228.726 C 57.087 228.840,57.176 229.108,57.283 231.726 C 57.390 234.343,57.479 234.611,58.283 234.726 C 59.087 234.840,59.176 235.108,59.283 237.726 C 59.390 240.343,59.479 240.611,60.283 240.726 C 61.087 240.840,61.176 241.108,61.283 243.726 C 61.390 246.343,61.479 246.611,62.283 246.726 C 63.087 246.840,63.176 247.108,63.283 249.726 L 63.400 252.600 73.972 252.707 C 85.970 252.828,85.185 253.066,85.194 249.300 C 85.199 247.116,85.296 246.800,85.957 246.800 C 86.943 246.800,87.200 246.050,87.200 243.167 C 87.200 241.111,87.300 240.800,87.957 240.800 C 88.943 240.800,89.200 240.050,89.200 237.167 C 89.200 235.111,89.300 234.800,89.957 234.800 C 90.943 234.800,91.200 234.050,91.200 231.167 C 91.200 229.111,91.300 228.800,91.957 228.800 C 92.943 228.800,93.200 228.050,93.200 225.167 C 93.200 223.111,93.300 222.800,93.957 222.800 C 94.943 222.800,95.200 222.050,95.200 219.167 C 95.200 217.111,95.300 216.800,95.957 216.800 C 96.943 216.800,97.200 216.050,97.200 213.167 C 97.200 211.111,97.300 210.800,97.957 210.800 C 98.943 210.800,99.200 210.050,99.200 207.167 C 99.200 205.111,99.300 204.800,99.957 204.800 C 100.943 204.800,101.200 204.050,101.200 201.167 C 101.200 199.111,101.300 198.800,101.957 198.800 C 102.943 198.800,103.200 198.050,103.200 195.167 C 103.200 193.101,103.297 192.800,103.967 192.800 C 104.388 192.800,104.824 192.575,104.935 192.300 C 105.046 192.025,105.151 205.525,105.168 222.300 L 105.200 252.800 115.200 252.800 L 125.200 252.800 125.200 201.000 L 125.200 149.200 112.200 149.200 L 99.200 149.200 99.200 150.172 C 99.200 150.876,98.951 151.180,98.300 151.272 C 97.475 151.389,97.390 151.640,97.283 154.274 C 97.176 156.892,97.087 157.160,96.283 157.274 C 95.479 157.389,95.390 157.657,95.283 160.274 C 95.176 162.892,95.087 163.160,94.283 163.274 C 93.479 163.389,93.390 163.657,93.283 166.274 C 93.176 168.892,93.087 169.160,92.283 169.274 C 91.479 169.389,91.390 169.657,91.283 172.274 C 91.176 174.892,91.087 175.160,90.283 175.274 C 89.451 175.393,89.393 175.623,89.286 179.300 C 89.173 183.147,89.158 183.200,88.186 183.200 C 87.226 183.200,87.200 183.278,87.200 186.200 C 87.200 189.133,87.178 189.200,86.200 189.200 C 85.222 189.200,85.200 189.267,85.200 192.200 C 85.200 195.133,85.178 195.200,84.200 195.200 C 83.222 195.200,83.200 195.267,83.200 198.200 C 83.200 201.133,83.178 201.200,82.200 201.200 C 81.222 201.200,81.200 201.267,81.200 204.200 C 81.200 207.133,81.178 207.200,80.200 207.200 C 79.222 207.200,79.200 207.267,79.200 210.200 C 79.200 213.133,79.178 213.200,78.200 213.200 C 77.222 213.200,77.200 213.267,77.200 216.200 C 77.200 219.133,77.178 219.200,76.200 219.200 C 75.437 219.200,75.194 219.413,75.175 220.100 L 75.149 221.000 74.788 220.100 C 74.589 219.605,74.150 219.200,73.813 219.200 C 73.345 219.200,73.200 218.732,73.200 217.226 C 73.200 214.837,72.635 213.200,71.810 213.200 C 71.346 213.200,71.200 212.728,71.200 211.226 C 71.200 208.837,70.635 207.200,69.810 207.200 C 69.346 207.200,69.200 206.728,69.200 205.226 C 69.200 202.837,68.635 201.200,67.810 201.200 C 67.346 201.200,67.200 200.728,67.200 199.226 C 67.200 196.837,66.635 195.200,65.810 195.200 C 65.332 195.200,65.200 194.687,65.200 192.833 C 65.200 189.962,64.943 189.200,63.975 189.200 C 63.334 189.200,63.219 188.812,63.118 186.300 C 63.010 183.656,62.922 183.389,62.117 183.274 C 61.313 183.160,61.224 182.892,61.117 180.274 C 61.010 177.657,60.921 177.389,60.117 177.274 C 59.313 177.160,59.224 176.892,59.117 174.274 C 59.010 171.657,58.921 171.389,58.117 171.274 C 57.313 171.160,57.224 170.892,57.117 168.274 C 57.010 165.657,56.921 165.389,56.117 165.274 C 55.313 165.160,55.224 164.892,55.117 162.274 C 55.010 159.657,54.921 159.389,54.117 159.274 C 53.313 159.160,53.224 158.892,53.117 156.274 C 53.003 153.469,52.974 153.397,51.900 153.273 C 50.866 153.154,50.800 153.029,50.800 151.173 L 50.800 149.200 37.000 149.200 L 23.200 149.200 23.200 201.000 M161.200 176.195 C 161.200 177.179,161.137 177.200,158.200 177.200 C 155.267 177.200,155.200 177.222,155.200 178.200 C 155.200 179.000,155.000 179.200,154.200 179.200 C 153.400 179.200,153.200 179.400,153.200 180.200 C 153.200 181.133,153.067 181.200,151.200 181.200 C 149.333 181.200,149.200 181.267,149.200 182.200 C 149.200 183.000,149.000 183.200,148.200 183.200 C 147.400 183.200,147.200 183.400,147.200 184.200 C 147.200 185.000,147.000 185.200,146.200 185.200 C 145.267 185.200,145.200 185.333,145.200 187.200 C 145.200 189.067,145.133 189.200,144.200 189.200 C 143.400 189.200,143.200 189.400,143.200 190.200 C 143.200 191.000,143.000 191.200,142.200 191.200 C 141.269 191.200,141.200 191.335,141.200 193.172 C 141.200 194.913,141.094 195.159,140.300 195.272 C 139.447 195.393,139.394 195.601,139.286 199.274 C 139.178 202.928,139.121 203.155,138.286 203.274 L 137.400 203.400 137.400 215.000 L 137.400 226.600 138.300 226.728 C 139.164 226.851,139.200 227.013,139.200 230.828 C 139.200 234.798,139.200 234.800,140.200 234.800 C 141.133 234.800,141.200 234.933,141.200 236.800 C 141.200 238.667,141.267 238.800,142.200 238.800 C 143.133 238.800,143.200 238.933,143.200 240.800 C 143.200 242.667,143.267 242.800,144.200 242.800 C 145.000 242.800,145.200 243.000,145.200 243.800 C 145.200 244.600,145.400 244.800,146.200 244.800 C 147.000 244.800,147.200 245.000,147.200 245.800 C 147.200 246.600,147.400 246.800,148.200 246.800 C 149.000 246.800,149.200 247.000,149.200 247.800 C 149.200 248.600,149.400 248.800,150.200 248.800 C 151.000 248.800,151.200 249.000,151.200 249.800 C 151.200 250.733,151.333 250.800,153.200 250.800 C 155.067 250.800,155.200 250.867,155.200 251.800 C 155.200 252.778,155.267 252.800,158.200 252.800 C 161.133 252.800,161.200 252.822,161.200 253.800 L 161.200 254.800 176.200 254.800 L 191.200 254.800 191.200 253.800 C 191.200 252.829,191.281 252.800,193.992 252.800 C 196.637 252.800,196.798 252.747,197.036 251.800 C 197.216 251.082,197.557 250.800,198.243 250.800 C 198.997 250.800,199.200 250.588,199.200 249.800 C 199.200 248.882,199.347 248.800,200.992 248.800 C 202.571 248.800,202.815 248.681,203.036 247.800 C 203.192 247.179,203.570 246.800,204.036 246.800 C 204.501 246.800,204.880 246.421,205.036 245.800 C 205.191 245.182,205.571 244.800,206.030 244.800 C 206.619 244.800,206.827 244.387,207.038 242.800 C 207.272 241.037,207.415 240.800,208.252 240.800 C 209.121 240.800,209.200 240.636,209.200 238.828 C 209.200 237.087,209.306 236.841,210.100 236.728 C 210.949 236.607,211.006 236.392,211.115 232.900 L 211.230 229.200 210.205 229.200 C 209.480 229.200,209.069 228.908,208.800 228.200 L 208.420 227.200 199.810 227.200 L 191.200 227.200 191.200 228.200 C 191.200 229.000,191.000 229.200,190.200 229.200 C 189.400 229.200,189.200 229.400,189.200 230.200 C 189.200 231.000,189.000 231.200,188.200 231.200 C 187.400 231.200,187.200 231.400,187.200 232.200 C 187.200 233.000,187.000 233.200,186.200 233.200 C 185.400 233.200,185.200 233.400,185.200 234.200 C 185.200 235.000,185.000 235.200,184.200 235.200 C 183.400 235.200,183.200 235.400,183.200 236.200 C 183.200 237.178,183.133 237.200,180.200 237.200 C 177.267 237.200,177.200 237.222,177.200 238.200 C 177.200 239.003,177.001 239.200,176.190 239.200 C 175.481 239.200,175.067 238.902,174.800 238.200 C 174.449 237.276,174.224 237.200,171.838 237.200 C 169.465 237.200,169.245 237.127,169.128 236.300 C 169.019 235.532,168.721 235.382,167.100 235.278 C 165.385 235.168,165.200 235.061,165.200 234.178 C 165.200 233.401,164.994 233.200,164.200 233.200 C 163.400 233.200,163.200 233.000,163.200 232.200 C 163.200 231.400,163.000 231.200,162.200 231.200 C 161.328 231.200,161.200 231.024,161.200 229.833 C 161.200 227.948,160.847 227.200,159.957 227.200 C 159.317 227.200,159.200 226.896,159.200 225.226 C 159.200 222.798,158.676 221.327,157.723 221.080 C 157.325 220.977,169.195 220.872,184.100 220.846 L 211.200 220.800 211.200 211.026 C 211.200 201.259,210.958 199.200,209.810 199.200 C 209.332 199.200,209.200 198.687,209.200 196.833 C 209.200 193.950,208.943 193.200,207.957 193.200 C 207.362 193.200,207.200 192.908,207.200 191.833 C 207.200 189.948,206.847 189.200,205.957 189.200 C 205.416 189.200,205.200 188.914,205.200 188.200 C 205.200 187.400,205.000 187.200,204.200 187.200 C 203.400 187.200,203.200 187.000,203.200 186.200 C 203.200 185.400,203.000 185.200,202.200 185.200 C 201.400 185.200,201.200 185.000,201.200 184.200 C 201.200 183.400,201.000 183.200,200.200 183.200 C 199.400 183.200,199.200 183.000,199.200 182.200 C 199.200 181.408,198.998 181.200,198.228 181.200 C 197.524 181.200,197.220 180.951,197.128 180.300 C 197.019 179.532,196.721 179.382,195.100 179.278 C 193.385 179.168,193.200 179.061,193.200 178.178 C 193.200 177.273,193.053 177.200,191.228 177.200 C 189.487 177.200,189.241 177.094,189.128 176.300 L 189.000 175.400 175.100 175.295 L 161.200 175.190 161.200 176.195 M247.472 175.462 C 247.322 175.611,247.200 176.063,247.200 176.467 C 247.200 177.080,246.873 177.200,245.200 177.200 C 243.333 177.200,243.200 177.267,243.200 178.200 C 243.200 179.000,243.000 179.200,242.200 179.200 C 241.400 179.200,241.200 179.000,241.200 178.200 L 241.200 177.200 232.200 177.200 L 223.200 177.200 223.200 215.000 L 223.200 252.800 233.200 252.800 L 243.200 252.800 243.200 228.828 L 243.200 204.856 244.100 204.728 C 244.868 204.619,245.018 204.321,245.122 202.700 C 245.222 201.139,245.380 200.800,246.008 200.800 C 246.623 200.800,246.824 200.410,247.038 198.800 C 247.272 197.037,247.415 196.800,248.252 196.800 C 248.997 196.800,249.200 196.586,249.200 195.800 C 249.200 194.882,249.347 194.800,250.992 194.800 C 252.571 194.800,252.815 194.681,253.036 193.800 C 253.261 192.904,253.490 192.800,255.243 192.800 C 257.064 192.800,257.200 192.730,257.200 191.800 C 257.200 191.000,257.400 190.800,258.200 190.800 C 259.000 190.800,259.200 191.000,259.200 191.800 C 259.200 192.731,259.335 192.800,261.172 192.800 C 262.913 192.800,263.159 192.906,263.272 193.700 C 263.381 194.466,263.679 194.618,265.279 194.721 L 267.158 194.842 267.279 196.721 C 267.382 198.321,267.534 198.619,268.300 198.728 L 269.200 198.856 269.200 225.828 L 269.200 252.800 279.200 252.800 L 289.200 252.800 289.200 221.026 C 289.200 189.269,289.115 187.200,287.810 187.200 C 287.430 187.200,287.200 186.832,287.200 186.226 C 287.200 184.765,286.496 183.200,285.838 183.200 C 285.518 183.200,285.198 182.795,285.128 182.300 C 285.048 181.735,284.679 181.354,284.138 181.277 C 283.613 181.202,283.179 180.772,283.030 180.177 C 282.816 179.323,282.559 179.200,280.992 179.200 C 279.347 179.200,279.200 179.118,279.200 178.200 C 279.200 177.269,279.065 177.200,277.228 177.200 C 275.487 177.200,275.241 177.094,275.128 176.300 L 275.000 175.400 261.372 175.295 C 253.876 175.237,247.621 175.312,247.472 175.462 M305.298 207.900 L 305.400 238.600 306.283 238.726 C 307.087 238.840,307.176 239.108,307.283 241.726 C 307.390 244.360,307.475 244.611,308.300 244.728 C 308.951 244.820,309.200 245.124,309.200 245.828 C 309.200 246.598,309.408 246.800,310.200 246.800 C 311.000 246.800,311.200 247.000,311.200 247.800 C 311.200 248.600,311.400 248.800,312.200 248.800 C 313.000 248.800,313.200 249.000,313.200 249.800 C 313.200 250.600,313.400 250.800,314.200 250.800 C 315.000 250.800,315.200 251.000,315.200 251.800 C 315.200 252.778,315.267 252.800,318.200 252.800 C 321.133 252.800,321.200 252.822,321.200 253.800 L 321.200 254.800 333.992 254.800 L 346.785 254.800 347.031 253.820 C 347.241 252.981,347.543 252.823,349.138 252.720 C 350.720 252.618,351.019 252.465,351.128 251.700 C 351.322 250.335,353.200 250.425,353.200 251.800 L 353.200 252.800 362.200 252.800 L 371.200 252.800 371.200 215.000 L 371.200 177.200 361.200 177.200 L 351.200 177.200 351.200 202.200 L 351.200 227.200 350.200 227.200 C 349.267 227.200,349.200 227.333,349.200 229.200 C 349.200 231.067,349.133 231.200,348.200 231.200 C 347.400 231.200,347.200 231.400,347.200 232.200 C 347.200 233.000,347.000 233.200,346.200 233.200 C 345.400 233.200,345.200 233.400,345.200 234.200 C 345.200 235.000,345.000 235.200,344.200 235.200 C 343.400 235.200,343.200 235.400,343.200 236.200 C 343.200 237.178,343.133 237.200,340.200 237.200 C 337.267 237.200,337.200 237.222,337.200 238.200 C 337.200 239.000,337.000 239.200,336.200 239.200 C 335.400 239.200,335.200 239.000,335.200 238.200 C 335.200 237.269,335.065 237.200,333.228 237.200 C 331.487 237.200,331.241 237.094,331.128 236.300 C 331.047 235.730,330.679 235.354,330.125 235.275 C 329.579 235.198,329.202 234.821,329.125 234.275 C 329.046 233.721,328.670 233.353,328.100 233.272 C 327.371 233.169,327.200 232.889,327.200 231.805 C 327.200 229.947,326.843 229.200,325.957 229.200 C 325.222 229.200,325.200 228.444,325.200 203.200 L 325.200 177.200 315.198 177.200 L 305.195 177.200 305.298 207.900 M177.200 191.800 C 177.200 192.731,177.335 192.800,179.172 192.800 C 180.913 192.800,181.159 192.906,181.272 193.700 C 181.381 194.468,181.679 194.618,183.300 194.722 C 185.015 194.832,185.200 194.939,185.200 195.822 C 185.200 196.599,185.406 196.800,186.200 196.800 C 187.000 196.800,187.200 197.000,187.200 197.800 C 187.200 198.600,187.400 198.800,188.200 198.800 C 189.133 198.800,189.200 198.933,189.200 200.800 C 189.200 202.667,189.267 202.800,190.200 202.800 C 191.044 202.800,191.200 202.987,191.200 204.000 L 191.200 205.200 175.200 205.200 L 159.200 205.200 159.200 204.000 C 159.200 203.074,159.379 202.800,159.986 202.800 C 160.628 202.800,160.821 202.432,161.038 200.800 C 161.272 199.037,161.415 198.800,162.252 198.800 C 162.997 198.800,163.200 198.586,163.200 197.800 C 163.200 197.000,163.400 196.800,164.200 196.800 C 165.000 196.800,165.200 196.600,165.200 195.800 C 165.200 195.000,165.400 194.800,166.200 194.800 C 167.000 194.800,167.200 194.600,167.200 193.800 C 167.200 192.822,167.267 192.800,170.200 192.800 C 173.133 192.800,173.200 192.778,173.200 191.800 C 173.200 190.867,173.333 190.800,175.200 190.800 C 177.067 190.800,177.200 190.867,177.200 191.800 M1.200 363.026 C 1.200 363.668,2.102 364.800,2.614 364.800 C 3.410 364.800,3.351 364.261,2.469 363.462 C 1.729 362.793,1.200 362.611,1.200 363.026 M397.417 363.172 C 397.291 363.377,397.389 363.670,397.636 363.822 C 397.954 364.019,397.927 364.200,397.543 364.444 C 397.223 364.647,397.185 364.790,397.451 364.794 C 398.106 364.803,398.913 363.706,398.611 363.218 C 398.291 362.700,397.722 362.678,397.417 363.172 " stroke="none" fill="#5c5c5c" fill-rule="evenodd"></path><path id="path1" d="M36.100 32.198 C 35.332 33.071,35.473 33.200,37.200 33.200 C 38.956 33.200,39.161 32.962,38.100 32.157 C 37.207 31.479,36.724 31.489,36.100 32.198 M50.611 32.387 C 49.974 33.092,50.039 33.129,52.160 33.261 C 54.473 33.406,54.532 33.025,52.338 32.100 C 51.452 31.726,51.167 31.773,50.611 32.387 M112.926 32.200 C 112.992 32.850,113.343 33.021,114.803 33.110 C 115.975 33.182,116.411 33.095,116.056 32.859 C 115.756 32.661,115.143 32.594,114.693 32.712 C 114.068 32.876,113.955 32.793,114.214 32.363 C 114.498 31.892,114.448 31.886,113.910 32.321 C 113.368 32.761,113.234 32.730,113.056 32.121 C 112.882 31.523,112.860 31.537,112.926 32.200 M160.527 32.180 C 160.567 32.411,160.375 32.555,160.100 32.500 C 159.825 32.445,159.600 32.588,159.600 32.818 C 159.600 33.060,160.346 33.198,161.370 33.145 C 162.810 33.071,163.129 32.917,163.084 32.320 C 163.041 31.752,162.738 31.606,161.741 31.673 C 161.033 31.721,160.486 31.949,160.527 32.180 M223.000 32.000 C 222.864 32.220,222.898 32.403,223.076 32.406 C 223.254 32.409,223.168 32.560,222.884 32.740 C 222.562 32.944,223.007 33.093,224.060 33.134 C 225.659 33.197,225.710 33.165,224.977 32.570 C 224.549 32.224,224.453 32.072,224.762 32.232 C 225.131 32.424,225.226 32.365,225.038 32.062 C 224.688 31.495,223.338 31.454,223.000 32.000 M237.894 31.839 C 237.396 32.337,238.124 33.200,239.043 33.200 C 240.095 33.200,240.258 32.818,239.520 32.080 C 239.002 31.562,238.278 31.455,237.894 31.839 M299.762 32.062 C 299.586 32.346,299.652 32.415,299.934 32.241 C 300.229 32.058,300.307 32.178,300.153 32.579 C 299.879 33.292,301.770 33.496,302.200 32.800 C 302.336 32.580,302.167 32.400,301.824 32.400 C 301.481 32.400,301.200 32.220,301.200 32.000 C 301.200 31.449,300.112 31.495,299.762 32.062 M348.000 32.157 C 348.000 32.478,347.685 32.830,347.300 32.938 C 346.915 33.047,347.410 33.105,348.400 33.068 C 350.444 32.991,350.974 31.971,349.100 31.720 C 348.335 31.617,348.000 31.750,348.000 32.157 M98.000 32.604 C 98.000 32.973,98.381 33.200,99.000 33.200 C 99.550 33.200,100.000 32.969,100.000 32.687 C 100.000 32.405,99.550 32.137,99.000 32.092 C 98.344 32.037,98.000 32.214,98.000 32.604 M174.933 32.624 C 174.933 33.020,175.379 33.172,176.423 33.131 C 177.586 33.085,177.812 32.963,177.456 32.576 C 177.205 32.302,176.940 32.241,176.867 32.439 C 176.793 32.638,176.558 32.800,176.343 32.800 C 176.128 32.800,176.041 32.657,176.149 32.483 C 176.256 32.309,176.027 32.142,175.639 32.113 C 175.251 32.084,174.933 32.314,174.933 32.624 M284.867 32.666 C 284.457 33.106,284.660 33.200,286.018 33.200 C 287.124 33.200,287.614 33.042,287.506 32.719 C 287.284 32.053,285.474 32.017,284.867 32.666 M361.733 32.680 C 361.733 33.002,362.237 33.200,363.054 33.200 C 364.067 33.200,364.321 33.059,364.143 32.597 C 363.860 31.857,361.733 31.931,361.733 32.680 M32.894 33.796 C 33.055 33.975,32.875 34.358,32.494 34.648 C 31.854 35.133,31.871 35.176,32.700 35.187 C 33.671 35.201,33.939 34.242,33.100 33.759 C 32.825 33.601,32.732 33.618,32.894 33.796 M54.988 33.922 C 54.171 34.507,54.420 35.200,55.449 35.200 C 56.385 35.200,56.440 35.125,55.962 34.500 C 55.667 34.115,55.415 33.765,55.402 33.722 C 55.388 33.679,55.202 33.769,54.988 33.922 M179.043 34.233 C 178.693 35.144,178.722 35.200,179.533 35.200 C 180.549 35.200,180.876 34.774,180.348 34.137 C 179.759 33.428,179.340 33.459,179.043 34.233 M219.830 34.424 C 219.069 35.191,219.073 35.200,220.130 35.200 C 220.933 35.200,221.200 35.001,221.200 34.400 C 221.200 33.411,220.828 33.418,219.830 34.424 M344.996 34.007 C 344.858 34.230,344.549 34.292,344.311 34.145 C 344.064 33.992,343.990 34.061,344.141 34.304 C 344.286 34.539,344.179 34.823,343.902 34.934 C 343.626 35.046,343.884 35.151,344.475 35.168 C 345.313 35.193,345.537 35.023,345.490 34.400 C 345.422 33.491,345.350 33.434,344.996 34.007 M281.862 34.583 C 281.696 35.015,281.871 35.200,282.446 35.200 C 282.902 35.200,283.196 34.989,283.108 34.725 C 282.861 33.984,282.124 33.900,281.862 34.583 M366.533 34.680 C 366.533 34.966,366.863 35.200,367.267 35.200 C 367.670 35.200,368.000 34.941,368.000 34.625 C 368.000 34.309,367.670 34.075,367.267 34.105 C 366.863 34.135,366.533 34.394,366.533 34.680 M30.124 36.173 C 29.603 36.766,29.833 37.200,30.667 37.200 C 30.960 37.200,31.200 36.840,31.200 36.400 C 31.200 35.478,30.806 35.395,30.124 36.173 M92.500 35.865 C 91.797 36.149,91.875 37.200,92.600 37.200 C 92.933 37.200,93.200 36.844,93.200 36.400 C 93.200 35.960,93.155 35.614,93.100 35.632 C 93.045 35.649,92.775 35.754,92.500 35.865 M245.067 35.867 C 244.463 36.471,244.817 37.549,245.600 37.490 C 246.555 37.418,246.646 36.980,245.775 36.646 C 245.431 36.514,245.261 36.224,245.398 36.003 C 245.679 35.548,245.471 35.462,245.067 35.867 M306.673 36.441 C 306.518 37.036,306.690 37.200,307.467 37.200 C 308.175 37.200,308.422 37.011,308.329 36.538 C 308.146 35.600,306.912 35.528,306.673 36.441 M368.800 36.413 C 368.800 36.929,369.071 37.200,369.587 37.200 C 370.104 37.200,370.300 37.004,370.157 36.631 C 369.793 35.685,368.800 35.525,368.800 36.413 M154.000 36.557 C 154.000 36.864,154.270 37.218,154.600 37.345 C 155.008 37.501,155.200 37.323,155.200 36.787 C 155.200 36.354,154.930 36.000,154.600 36.000 C 154.270 36.000,154.000 36.251,154.000 36.557 M59.200 38.376 C 59.200 38.829,59.380 39.200,59.600 39.200 C 59.820 39.200,60.000 38.941,60.000 38.624 C 60.000 38.307,59.820 37.936,59.600 37.800 C 59.380 37.664,59.200 37.923,59.200 38.376 M278.400 38.424 C 278.400 38.657,278.175 38.718,277.900 38.559 C 277.625 38.401,277.540 38.426,277.712 38.614 C 278.239 39.193,279.200 39.161,279.200 38.565 C 279.200 38.254,279.020 38.000,278.800 38.000 C 278.580 38.000,278.400 38.191,278.400 38.424 M340.133 38.638 C 340.133 38.947,340.373 39.200,340.667 39.200 C 340.960 39.200,341.200 39.039,341.200 38.843 C 341.200 38.646,340.960 38.393,340.667 38.281 C 340.373 38.168,340.133 38.329,340.133 38.638 M184.800 40.214 C 184.800 41.262,185.224 41.687,185.859 41.274 C 186.537 40.832,186.329 39.675,185.533 39.467 C 184.976 39.321,184.800 39.500,184.800 40.214 M213.738 39.791 C 213.194 40.373,213.663 41.304,214.568 41.436 C 214.988 41.498,215.200 41.220,215.200 40.607 C 215.200 39.532,214.398 39.084,213.738 39.791 M275.884 40.800 C 275.729 41.393,275.872 41.600,276.437 41.600 C 276.933 41.600,277.200 41.320,277.200 40.800 C 277.200 40.360,276.951 40.000,276.647 40.000 C 276.342 40.000,275.999 40.360,275.884 40.800 M122.800 40.733 C 122.800 41.297,123.251 41.555,123.839 41.330 C 124.674 41.009,124.517 40.400,123.600 40.400 C 123.160 40.400,122.800 40.550,122.800 40.733 M26.100 42.225 C 25.404 42.978,25.473 43.200,26.400 43.200 C 26.840 43.200,27.200 42.941,27.200 42.624 C 27.200 41.789,26.678 41.600,26.100 42.225 M373.204 42.195 C 372.666 42.844,373.741 43.615,374.317 42.995 C 374.473 42.827,374.374 42.610,374.098 42.511 C 373.821 42.412,373.697 42.167,373.821 41.966 C 374.183 41.381,373.745 41.544,373.204 42.195 M212.298 43.900 C 211.145 45.189,211.106 47.200,212.235 47.200 C 213.126 47.200,213.200 47.047,213.200 45.200 C 213.200 42.960,213.173 42.921,212.298 43.900 M125.212 44.185 C 124.657 44.855,125.026 46.400,125.742 46.400 C 126.311 46.400,126.580 44.158,126.050 43.831 C 125.852 43.709,125.475 43.868,125.212 44.185 M187.043 44.233 C 186.479 45.703,186.769 46.794,187.703 46.716 C 188.498 46.651,188.589 46.459,188.461 45.121 C 188.312 43.562,187.496 43.051,187.043 44.233 M274.524 43.919 C 273.770 44.392,273.570 46.303,274.247 46.563 C 274.946 46.831,275.308 46.045,275.130 44.644 C 275.044 43.971,274.837 43.723,274.524 43.919 M336.288 44.580 C 335.632 45.064,335.629 45.126,336.245 45.362 C 337.054 45.672,337.316 45.465,337.135 44.658 C 337.022 44.150,336.887 44.137,336.288 44.580 M42.640 45.360 C 42.881 45.989,43.867 46.032,43.867 45.413 C 43.867 45.164,43.547 44.936,43.156 44.907 C 42.734 44.875,42.524 45.059,42.640 45.360 M45.447 45.421 C 45.316 45.762,45.373 45.941,45.572 45.817 C 45.772 45.694,46.220 45.877,46.568 46.225 C 47.144 46.801,47.200 46.766,47.200 45.829 C 47.200 44.659,45.859 44.347,45.447 45.421 M104.133 45.382 C 104.133 45.703,104.283 45.872,104.467 45.759 C 104.650 45.645,104.800 45.828,104.800 46.164 C 104.800 46.542,105.028 46.687,105.398 46.546 C 105.726 46.419,105.897 46.157,105.777 45.963 C 105.657 45.768,105.838 45.716,106.179 45.847 C 106.522 45.979,106.800 45.876,106.800 45.619 C 106.800 45.363,107.008 45.281,107.262 45.438 C 107.548 45.615,107.615 45.548,107.438 45.262 C 107.005 44.561,104.133 44.666,104.133 45.382 M108.157 45.433 C 108.291 45.781,108.400 46.141,108.400 46.233 C 108.400 46.325,108.580 46.400,108.800 46.400 C 109.020 46.400,109.200 46.040,109.200 45.600 C 109.200 45.132,108.933 44.800,108.557 44.800 C 108.135 44.800,107.998 45.018,108.157 45.433 M166.547 45.300 C 166.702 46.325,167.257 46.851,167.751 46.441 C 168.014 46.222,168.834 46.138,169.571 46.254 C 170.818 46.451,171.575 46.019,171.594 45.100 C 171.597 44.935,170.446 44.800,169.035 44.800 C 167.210 44.800,166.493 44.944,166.547 45.300 M228.800 45.643 C 228.800 46.228,228.984 46.415,229.400 46.255 C 229.730 46.129,230.003 46.244,230.006 46.513 C 230.010 46.817,230.123 46.850,230.306 46.600 C 230.746 46.002,231.617 45.916,232.214 46.412 C 232.617 46.746,232.847 46.659,233.172 46.052 C 233.824 44.834,233.771 44.800,231.200 44.800 C 229.026 44.800,228.800 44.879,228.800 45.643 M291.073 45.445 C 291.326 46.105,292.400 46.194,292.400 45.554 C 292.400 45.275,292.753 45.339,293.344 45.727 C 294.489 46.477,295.700 46.365,295.827 45.497 C 295.904 44.971,295.481 44.863,293.390 44.875 C 291.400 44.886,290.905 45.008,291.073 45.445 M352.876 45.500 C 352.950 45.885,353.276 46.200,353.600 46.200 C 353.924 46.200,354.250 45.885,354.324 45.500 C 354.418 45.009,354.202 44.800,353.600 44.800 C 352.998 44.800,352.782 45.009,352.876 45.500 M249.200 47.000 C 249.200 47.328,249.500 47.447,250.000 47.316 C 250.440 47.201,250.800 47.059,250.800 47.000 C 250.800 46.941,250.440 46.799,250.000 46.684 C 249.500 46.553,249.200 46.672,249.200 47.000 M172.075 47.071 C 172.447 47.169,172.831 47.553,172.929 47.925 C 173.055 48.403,173.121 48.338,173.154 47.700 C 173.189 47.007,172.993 46.811,172.300 46.846 C 171.662 46.879,171.597 46.945,172.075 47.071 M226.800 47.400 C 226.800 47.730,227.070 48.000,227.400 48.000 C 227.730 48.000,228.000 47.730,228.000 47.400 C 228.000 47.070,227.730 46.800,227.400 46.800 C 227.070 46.800,226.800 47.070,226.800 47.400 M24.490 48.070 C 24.551 48.362,24.402 48.564,24.159 48.520 C 23.885 48.470,23.692 49.338,23.647 50.820 C 23.596 52.519,23.722 53.203,24.088 53.212 C 24.397 53.219,24.328 53.383,23.917 53.623 C 23.064 54.120,23.424 55.200,24.443 55.200 C 25.301 55.200,25.624 48.309,24.790 47.794 C 24.565 47.655,24.430 47.779,24.490 48.070 M39.196 48.100 C 39.091 48.867,39.072 49.784,39.150 50.387 C 39.178 50.601,39.469 50.672,39.798 50.546 C 40.126 50.419,40.283 50.135,40.146 49.913 C 40.010 49.692,40.146 49.353,40.449 49.161 C 40.890 48.882,40.866 48.811,40.329 48.806 C 39.960 48.803,39.576 48.485,39.476 48.100 C 39.302 47.433,39.288 47.433,39.196 48.100 M360.173 47.959 C 360.653 48.147,360.782 48.364,360.511 48.531 C 360.020 48.835,360.301 50.400,360.847 50.400 C 361.041 50.400,361.200 49.770,361.200 49.000 C 361.200 47.806,361.067 47.604,360.300 47.628 C 359.473 47.654,359.463 47.681,360.173 47.959 M297.927 48.433 C 297.357 48.752,297.098 50.205,297.664 49.911 C 297.781 49.850,298.175 50.047,298.539 50.349 C 299.129 50.839,299.200 50.767,299.200 49.673 C 299.200 48.256,298.851 47.916,297.927 48.433 M375.029 48.710 C 374.894 49.134,374.810 50.768,374.842 52.341 L 374.901 55.200 376.151 55.194 C 377.104 55.189,377.258 55.096,376.800 54.800 C 376.267 54.455,376.267 54.411,376.800 54.400 C 377.303 54.390,377.309 54.330,376.841 54.034 C 376.235 53.650,375.977 50.799,376.549 50.800 C 376.741 50.800,376.688 50.548,376.432 50.239 C 376.176 49.930,376.128 49.615,376.325 49.539 C 376.523 49.463,376.367 49.071,375.979 48.669 C 375.296 47.961,375.266 47.962,375.029 48.710 M101.007 48.789 C 100.778 49.160,101.157 50.400,101.499 50.400 C 101.741 50.400,102.768 49.113,102.787 48.785 C 102.809 48.424,101.230 48.428,101.007 48.789 M63.375 50.385 C 62.720 51.040,63.153 53.593,63.873 53.317 C 64.242 53.175,64.383 52.780,64.249 52.266 C 64.130 51.812,64.251 51.173,64.517 50.844 C 64.859 50.420,64.864 50.328,64.534 50.526 C 64.278 50.679,64.006 50.617,63.929 50.387 C 63.833 50.099,63.662 50.098,63.375 50.385 M335.753 51.443 C 335.594 52.079,335.676 52.600,335.965 52.778 C 336.316 52.995,336.288 53.195,335.858 53.552 C 335.403 53.930,335.236 53.922,335.085 53.517 C 334.966 53.199,334.739 53.386,334.496 54.000 C 334.144 54.891,334.208 55.014,335.084 55.130 C 336.878 55.367,337.200 54.983,337.200 52.613 C 337.200 50.195,336.258 49.434,335.753 51.443 M63.992 53.605 C 62.732 54.384,63.226 55.201,64.935 55.168 C 65.851 55.151,66.375 55.046,66.100 54.935 C 65.825 54.824,65.600 54.498,65.600 54.209 C 65.600 53.529,64.676 53.182,63.992 53.605 M38.800 54.400 C 38.800 55.054,39.067 55.200,40.261 55.200 L 41.722 55.200 40.800 54.400 C 40.293 53.960,39.635 53.600,39.339 53.600 C 39.042 53.600,38.800 53.960,38.800 54.400 M272.661 54.186 C 272.356 54.981,272.540 55.363,273.121 55.142 C 273.326 55.064,273.368 54.653,273.216 54.229 C 272.954 53.497,272.926 53.495,272.661 54.186 M359.200 54.254 C 359.200 54.518,358.975 54.824,358.700 54.935 C 358.425 55.046,358.875 55.151,359.700 55.168 C 360.941 55.195,361.200 55.063,361.200 54.404 C 361.200 53.801,360.959 53.629,360.200 53.692 C 359.650 53.737,359.200 53.990,359.200 54.254 M12.654 54.602 C 12.515 54.965,12.656 55.200,13.013 55.200 C 13.660 55.200,13.807 54.575,13.242 54.226 C 13.045 54.104,12.781 54.274,12.654 54.602 M14.607 54.388 C 14.277 54.922,15.953 55.289,17.838 55.095 C 19.144 54.961,19.040 54.922,17.200 54.861 C 15.615 54.808,15.168 54.679,15.600 54.400 C 16.117 54.066,16.107 54.011,15.524 54.006 C 15.152 54.003,14.739 54.175,14.607 54.388 M47.700 54.500 C 47.791 54.775,48.170 55.027,48.541 55.059 C 49.063 55.105,49.077 55.076,48.603 54.929 C 48.266 54.825,48.093 54.573,48.219 54.370 C 48.344 54.166,48.242 54.000,47.990 54.000 C 47.739 54.000,47.608 54.225,47.700 54.500 M127.500 54.276 C 126.575 54.517,126.600 55.200,127.533 55.200 C 127.937 55.200,128.267 54.930,128.267 54.600 C 128.267 54.270,128.252 54.021,128.233 54.046 C 128.215 54.072,127.885 54.175,127.500 54.276 M166.901 54.400 C 167.018 54.833,167.667 55.011,169.231 55.040 L 171.400 55.080 169.408 54.914 C 168.312 54.823,167.263 54.535,167.077 54.274 C 166.842 53.945,166.788 53.983,166.901 54.400 M190.903 54.400 C 191.042 54.911,192.431 55.002,200.233 55.012 L 209.400 55.024 200.419 54.904 C 193.883 54.817,191.342 54.650,191.088 54.292 C 190.835 53.934,190.784 53.964,190.903 54.400 M295.200 54.333 C 295.200 54.590,294.705 54.825,294.100 54.854 C 293.090 54.904,293.078 54.924,293.946 55.088 C 294.919 55.273,295.960 54.627,295.473 54.140 C 295.323 53.990,295.200 54.077,295.200 54.333 M351.781 54.370 C 351.907 54.573,351.734 54.825,351.397 54.929 C 350.923 55.076,350.937 55.105,351.459 55.059 C 352.212 54.993,352.729 54.000,352.010 54.000 C 351.758 54.000,351.656 54.166,351.781 54.370 M385.829 54.447 C 385.936 54.620,384.893 54.825,383.512 54.904 C 381.004 55.046,381.005 55.046,384.087 55.123 C 386.518 55.184,387.131 55.087,386.970 54.667 C 386.858 54.373,386.511 54.133,386.200 54.133 C 385.890 54.133,385.723 54.275,385.829 54.447 M73.717 55.097 C 75.211 55.174,77.551 55.174,78.917 55.096 C 80.282 55.018,79.060 54.955,76.200 54.955 C 73.340 54.956,72.222 55.020,73.717 55.097 M136.100 55.097 C 137.805 55.172,140.595 55.172,142.300 55.097 C 144.005 55.022,142.610 54.961,139.200 54.961 C 135.790 54.961,134.395 55.022,136.100 55.097 M230.100 55.087 C 230.705 55.178,231.695 55.178,232.300 55.087 C 232.905 54.995,232.410 54.920,231.200 54.920 C 229.990 54.920,229.495 54.995,230.100 55.087 M258.100 55.097 C 259.805 55.172,262.595 55.172,264.300 55.097 C 266.005 55.022,264.610 54.961,261.200 54.961 C 257.790 54.961,256.395 55.022,258.100 55.097 M321.717 55.097 C 323.211 55.174,325.551 55.174,326.917 55.096 C 328.282 55.018,327.060 54.955,324.200 54.955 C 321.340 54.956,320.222 55.020,321.717 55.097 M7.887 56.055 C 6.972 56.567,7.379 57.200,8.624 57.200 C 9.690 57.200,9.886 56.735,9.096 56.079 C 8.759 55.800,8.357 55.792,7.887 56.055 M390.617 56.299 C 390.284 57.169,390.318 57.200,391.600 57.200 C 392.816 57.200,393.026 56.956,392.494 56.161 C 392.077 55.538,390.875 55.626,390.617 56.299 M4.477 58.032 C 4.545 58.345,4.375 58.555,4.100 58.500 C 3.825 58.445,3.600 58.580,3.600 58.800 C 3.600 59.020,4.050 59.200,4.600 59.200 C 5.741 59.200,5.885 58.734,4.977 57.981 C 4.463 57.554,4.376 57.563,4.477 58.032 M394.598 58.403 C 394.461 58.624,394.638 58.917,394.992 59.052 C 395.758 59.346,396.185 59.022,395.816 58.427 C 395.484 57.889,394.922 57.878,394.598 58.403 M0.000 64.600 C 0.000 65.222,0.227 65.600,0.600 65.600 C 0.973 65.600,1.200 65.222,1.200 64.600 C 1.200 63.978,0.973 63.600,0.600 63.600 C 0.227 63.600,0.000 63.978,0.000 64.600 M399.098 63.900 C 398.800 64.497,399.011 65.337,399.500 65.500 C 399.814 65.605,400.000 65.282,400.000 64.633 C 400.000 63.673,399.439 63.216,399.098 63.900 M14.800 69.176 C 14.800 69.857,15.396 69.939,16.181 69.365 C 16.916 68.827,16.901 68.800,15.876 68.800 C 15.284 68.800,14.800 68.969,14.800 69.176 M384.162 69.262 C 383.972 69.569,384.054 69.614,384.406 69.396 C 384.794 69.156,384.865 69.253,384.673 69.755 C 384.516 70.163,384.570 70.342,384.805 70.197 C 385.308 69.886,385.323 68.800,384.824 68.800 C 384.617 68.800,384.319 69.008,384.162 69.262 M386.198 211.000 C 386.198 287.120,386.244 318.200,386.300 280.068 C 386.356 241.935,386.356 179.655,386.300 141.668 C 386.244 103.680,386.198 134.880,386.198 211.000 M15.646 353.924 C 15.621 354.432,15.420 354.736,15.200 354.600 C 14.980 354.464,14.800 354.543,14.800 354.776 C 14.800 355.020,15.610 355.187,16.700 355.168 C 17.745 355.151,18.374 355.046,18.098 354.934 C 17.821 354.823,17.684 354.588,17.793 354.411 C 17.902 354.235,17.623 353.995,17.173 353.877 C 16.496 353.700,16.437 353.763,16.834 354.241 C 17.223 354.709,17.193 354.772,16.679 354.575 C 16.331 354.441,15.966 354.032,15.869 353.666 C 15.751 353.218,15.678 353.303,15.646 353.924 M109.733 353.900 C 159.636 353.956,241.176 353.956,290.933 353.900 C 340.690 353.844,299.860 353.798,200.200 353.798 C 100.540 353.798,59.830 353.844,109.733 353.900 M383.388 353.981 C 383.614 354.346,383.483 354.417,382.917 354.237 C 382.374 354.065,382.133 354.175,382.133 354.594 C 382.133 355.030,382.564 355.200,383.667 355.200 C 384.763 355.200,385.200 355.029,385.200 354.600 C 385.200 354.270,385.020 354.000,384.800 354.000 C 384.580 354.000,384.400 354.180,384.400 354.400 C 384.400 354.620,384.209 354.800,383.976 354.800 C 383.743 354.800,383.656 354.632,383.783 354.428 C 383.909 354.223,383.802 353.925,383.545 353.766 C 383.238 353.576,383.184 353.651,383.388 353.981 M19.200 354.800 C 19.200 355.066,79.800 355.200,200.200 355.200 C 320.600 355.200,381.200 355.066,381.200 354.800 C 381.200 354.534,320.600 354.400,200.200 354.400 C 79.800 354.400,19.200 354.534,19.200 354.800 M1.700 361.290 C 1.807 361.813,2.814 362.666,4.346 363.531 C 5.128 363.971,5.257 363.971,5.112 363.531 C 5.016 363.239,4.546 362.942,4.069 362.872 C 3.450 362.781,3.200 362.464,3.200 361.772 C 3.200 361.067,2.981 360.800,2.400 360.800 C 1.960 360.800,1.645 361.021,1.700 361.290 M396.800 361.804 C 396.800 362.919,396.922 362.977,398.026 362.386 C 399.113 361.805,398.989 360.990,397.800 360.892 C 396.979 360.824,396.800 360.987,396.800 361.804 M6.108 365.237 C 6.498 365.464,6.695 365.846,6.547 366.086 C 6.385 366.349,6.461 366.409,6.738 366.238 C 7.541 365.742,7.252 364.799,6.300 364.812 C 5.489 364.823,5.470 364.865,6.108 365.237 M392.800 365.400 C 392.800 365.730,392.980 366.000,393.200 366.000 C 393.420 366.000,393.724 366.005,393.875 366.011 C 394.026 366.017,394.190 365.747,394.240 365.411 C 394.293 365.045,394.023 364.800,393.565 364.800 C 393.144 364.800,392.800 365.070,392.800 365.400 M10.000 367.200 C 9.333 367.631,9.806 367.776,11.344 367.614 C 11.788 367.567,11.980 367.709,11.820 367.967 C 11.490 368.502,11.997 368.519,12.800 368.000 C 13.130 367.787,13.220 367.597,13.000 367.578 C 12.780 367.559,12.960 367.389,13.400 367.200 C 14.009 366.938,13.770 366.851,12.400 366.834 C 11.410 366.822,10.330 366.987,10.000 367.200 M387.429 367.162 C 387.519 367.253,387.392 367.569,387.146 367.865 C 386.753 368.339,388.425 368.416,389.600 367.980 C 389.710 367.939,389.935 367.927,390.100 367.953 C 390.265 367.979,390.400 367.809,390.400 367.576 C 390.400 367.343,390.580 367.264,390.800 367.400 C 391.020 367.536,391.200 367.448,391.200 367.203 C 391.200 366.922,390.479 366.803,389.233 366.879 C 388.151 366.945,387.339 367.072,387.429 367.162 " stroke="none" fill="#347c9c" fill-rule="evenodd"></path><path id="path2" d="M42.800 32.210 C 42.800 33.458,41.569 34.000,38.732 34.000 C 37.057 34.000,36.582 34.170,35.929 35.000 C 35.496 35.550,34.911 36.000,34.628 36.000 C 34.013 36.000,30.000 39.933,30.000 40.535 C 30.000 40.767,29.580 41.416,29.067 41.978 C 27.766 43.403,27.269 45.498,27.022 50.600 C 26.724 56.732,26.234 57.199,20.094 57.203 C 13.190 57.208,9.265 57.788,8.010 58.990 C 7.431 59.546,6.767 60.000,6.537 60.000 C 5.887 60.000,4.125 61.776,3.820 62.738 C 3.669 63.213,3.198 63.787,2.773 64.014 C 2.288 64.274,2.000 64.851,2.000 65.564 C 2.000 67.725,1.495 69.302,0.739 69.500 C -0.285 69.768,-0.438 353.600,0.586 353.600 C 1.450 353.600,2.000 354.907,2.000 356.960 C 2.000 358.318,2.187 358.872,2.745 359.171 C 3.155 359.390,3.717 360.116,3.994 360.785 C 4.271 361.453,4.615 362.000,4.759 362.000 C 4.904 362.000,5.613 362.540,6.336 363.200 C 7.058 363.860,7.976 364.400,8.376 364.400 C 8.775 364.400,9.349 364.765,9.651 365.211 L 10.200 366.022 199.998 366.016 C 337.227 366.012,389.837 365.889,389.943 365.572 C 390.023 365.331,390.878 364.795,391.843 364.382 C 393.583 363.636,396.400 361.192,396.400 360.429 C 396.400 360.210,396.767 359.689,397.216 359.271 C 397.665 358.853,398.127 357.811,398.242 356.955 C 398.622 354.137,398.809 353.600,399.408 353.600 C 399.930 353.600,400.000 336.744,400.000 211.600 C 400.000 88.613,399.923 69.600,399.427 69.600 C 398.766 69.600,398.507 68.917,398.211 66.400 C 398.079 65.285,397.695 64.347,397.199 63.936 C 396.760 63.571,396.400 63.082,396.400 62.850 C 396.400 62.217,394.352 60.268,393.100 59.709 C 392.495 59.438,392.000 59.047,392.000 58.840 C 392.000 58.041,389.082 57.574,382.270 57.280 C 373.704 56.910,373.627 56.869,373.371 52.556 C 372.947 45.431,372.451 43.204,371.023 42.019 C 370.680 41.735,370.400 41.247,370.400 40.936 C 370.400 40.200,365.744 35.600,364.999 35.600 C 364.685 35.600,364.235 35.240,364.000 34.800 C 363.648 34.143,363.162 34.000,361.275 34.000 C 358.606 34.000,357.160 33.238,357.483 32.003 C 357.670 31.287,357.499 31.200,355.902 31.200 C 354.226 31.200,354.117 31.265,354.220 32.205 C 354.365 33.523,353.424 34.000,350.675 34.000 C 349.192 34.000,348.333 34.199,347.981 34.623 C 347.696 34.966,346.909 35.491,346.232 35.791 C 344.515 36.549,341.600 39.411,341.600 40.338 C 341.600 40.761,341.150 41.403,340.600 41.763 C 339.762 42.312,339.600 42.731,339.600 44.350 C 339.600 45.954,339.395 46.496,338.390 47.548 C 337.408 48.575,337.257 48.959,337.590 49.581 C 337.815 50.002,338.000 51.501,338.000 52.912 C 338.000 57.123,338.451 56.979,324.859 57.115 L 313.400 57.231 312.079 56.115 L 310.758 55.000 310.532 49.601 C 310.327 44.724,310.215 44.096,309.380 43.103 C 308.871 42.499,308.333 41.619,308.184 41.149 C 307.884 40.205,303.907 36.000,303.313 36.000 C 303.108 36.000,302.517 35.550,302.000 35.000 C 301.239 34.190,300.674 33.999,299.030 33.994 C 296.572 33.987,295.044 33.287,294.872 32.090 C 294.768 31.361,294.487 31.200,293.326 31.200 C 292.112 31.200,291.936 31.314,292.112 31.985 C 292.416 33.146,291.525 33.647,288.715 33.895 C 286.886 34.057,285.892 34.374,285.069 35.059 C 284.447 35.576,283.703 36.000,283.415 36.000 C 283.127 36.000,282.606 36.436,282.257 36.970 C 281.907 37.503,281.257 38.055,280.811 38.197 C 280.365 38.338,280.000 38.687,280.000 38.972 C 280.000 39.257,279.472 40.154,278.827 40.966 C 278.182 41.777,277.538 42.972,277.395 43.621 C 277.253 44.269,277.010 44.800,276.855 44.800 C 276.700 44.800,276.600 45.295,276.633 45.900 C 276.666 46.505,276.492 47.360,276.246 47.800 C 276.001 48.240,275.710 50.206,275.600 52.169 C 275.311 57.330,275.842 57.134,262.069 57.171 L 251.138 57.200 250.035 56.097 C 249.115 55.177,248.891 54.530,248.680 52.197 C 248.542 50.659,248.335 48.955,248.220 48.411 C 248.105 47.867,248.176 46.825,248.378 46.096 C 248.703 44.919,248.612 44.635,247.572 43.571 C 246.927 42.912,246.400 42.107,246.400 41.784 C 246.400 41.460,245.950 40.803,245.400 40.325 C 244.850 39.847,244.400 39.222,244.400 38.937 C 244.400 38.652,243.905 38.104,243.300 37.719 C 242.695 37.334,242.056 36.790,241.880 36.510 C 241.704 36.229,241.312 36.000,241.009 36.000 C 240.706 36.000,240.111 35.558,239.686 35.018 C 239.034 34.190,238.503 34.014,236.285 33.890 C 233.505 33.735,232.400 33.184,232.400 31.951 C 232.400 30.769,230.099 30.899,229.928 32.090 C 229.755 33.294,228.225 33.987,225.723 33.994 C 224.158 33.999,223.516 34.183,223.123 34.743 C 222.835 35.151,222.240 35.602,221.800 35.745 C 221.063 35.984,218.808 38.023,217.088 40.004 C 216.696 40.455,216.077 41.449,215.714 42.212 C 215.350 42.976,214.790 43.600,214.470 43.600 C 214.006 43.600,213.937 44.012,214.131 45.645 C 214.290 46.989,214.184 48.144,213.821 49.013 C 213.517 49.740,213.373 50.439,213.501 50.567 C 213.629 50.695,213.144 50.800,212.423 50.800 C 211.130 50.800,211.116 50.821,211.365 52.300 C 211.794 54.857,211.936 57.200,211.662 57.208 C 208.313 57.304,188.682 57.216,188.570 57.104 C 188.071 56.604,188.133 53.600,188.643 53.600 C 189.013 53.600,189.200 53.129,189.200 52.200 C 189.200 50.919,189.100 50.800,188.031 50.800 C 186.638 50.800,185.833 48.977,185.943 46.071 C 185.994 44.730,185.777 44.050,185.005 43.133 C 184.452 42.476,184.000 41.726,184.000 41.466 C 184.000 41.205,183.640 40.768,183.200 40.493 C 182.760 40.218,182.400 39.766,182.400 39.488 C 182.400 38.913,180.042 36.782,178.100 35.602 C 177.385 35.167,176.800 34.629,176.800 34.406 C 176.800 34.183,175.894 34.000,174.787 34.000 C 171.993 34.000,169.990 33.126,170.276 32.033 C 170.467 31.302,170.315 31.200,169.047 31.200 C 167.786 31.200,167.600 31.323,167.600 32.161 C 167.600 33.336,165.998 34.000,163.163 34.000 C 161.756 34.000,161.106 34.196,160.723 34.737 C 160.435 35.142,159.750 35.709,159.200 35.998 C 157.885 36.688,154.000 40.792,154.000 41.490 C 154.000 41.791,153.512 42.523,152.915 43.118 C 151.948 44.082,151.820 44.527,151.745 47.200 C 151.574 53.303,151.258 55.600,150.589 55.600 C 150.295 55.600,149.940 55.960,149.800 56.400 C 149.554 57.175,149.195 57.200,138.419 57.200 C 124.233 57.200,124.417 57.270,124.406 51.880 C 124.402 49.907,124.181 48.336,123.803 47.605 C 123.474 46.970,123.304 46.194,123.425 45.880 C 123.633 45.337,122.764 43.381,121.000 40.420 C 119.937 38.635,117.354 36.099,116.270 35.775 C 115.791 35.632,115.107 35.145,114.749 34.692 C 114.230 34.036,113.692 33.884,112.091 33.941 C 109.318 34.039,108.000 33.481,108.000 32.210 C 108.000 30.630,105.312 30.700,105.127 32.284 C 104.979 33.546,104.084 33.900,100.887 33.960 C 99.383 33.989,98.707 34.177,98.539 34.615 C 98.409 34.953,97.740 35.521,97.052 35.876 C 95.645 36.603,92.000 40.322,92.000 41.030 C 92.000 41.283,91.460 42.169,90.800 43.000 C 89.612 44.495,89.600 44.561,89.600 49.475 L 89.600 54.440 88.237 55.843 L 86.875 57.246 75.251 57.123 C 61.538 56.978,62.177 57.187,62.322 52.901 C 62.372 51.415,62.512 49.887,62.632 49.505 C 62.769 49.070,62.461 48.448,61.812 47.846 C 61.033 47.124,60.713 46.345,60.536 44.741 C 60.369 43.219,60.026 42.335,59.350 41.684 C 58.828 41.180,58.400 40.498,58.400 40.169 C 58.400 39.331,55.030 36.144,53.822 35.841 C 53.273 35.703,52.632 35.233,52.397 34.795 C 52.048 34.143,51.558 34.000,49.662 34.000 C 46.979 34.000,45.766 33.339,46.100 32.060 C 46.305 31.276,46.169 31.200,44.563 31.200 C 42.945 31.200,42.800 31.283,42.800 32.210 M45.307 43.300 C 45.413 43.575,46.339 44.047,47.365 44.349 C 48.903 44.801,49.334 45.145,49.823 46.316 C 50.149 47.097,50.772 47.985,51.208 48.291 C 52.084 48.904,52.384 54.135,51.625 55.554 C 50.959 56.798,48.491 57.283,43.573 57.136 C 37.079 56.944,37.218 57.106,37.213 49.720 C 37.213 49.236,37.389 48.730,37.606 48.596 C 37.823 48.462,38.000 48.039,38.000 47.655 C 38.000 46.516,40.568 44.000,41.730 44.000 C 42.293 44.000,42.866 43.817,43.004 43.593 C 43.142 43.370,43.423 43.291,43.628 43.417 C 43.832 43.544,44.000 43.457,44.000 43.224 C 44.000 42.630,45.073 42.693,45.307 43.300 M107.589 43.390 C 107.947 43.714,108.927 44.122,109.767 44.297 C 111.061 44.565,111.392 44.858,111.929 46.207 C 112.278 47.083,112.916 48.087,113.348 48.437 C 114.830 49.641,114.702 54.597,113.152 56.045 L 111.915 57.200 106.424 57.200 C 103.404 57.200,100.849 57.116,100.746 57.012 C 100.198 56.464,100.961 53.909,101.785 53.534 C 102.469 53.222,102.629 52.887,102.476 52.085 L 102.276 51.041 101.869 52.021 L 101.461 53.000 101.294 52.035 C 101.202 51.504,100.874 50.817,100.564 50.507 C 98.674 48.617,101.342 44.399,104.774 43.851 C 105.668 43.708,106.400 43.413,106.400 43.195 C 106.400 42.635,106.832 42.705,107.589 43.390 M172.385 44.404 C 173.782 44.414,175.481 46.896,175.804 49.400 C 176.779 56.970,176.455 57.299,168.200 57.115 L 163.000 57.000 162.643 55.555 C 162.096 53.344,163.138 50.296,163.994 51.600 C 164.331 52.114,164.389 52.099,164.394 51.500 C 164.398 51.072,164.099 50.800,163.625 50.800 C 160.598 50.800,163.198 44.760,166.469 44.191 C 167.201 44.064,168.038 43.724,168.328 43.437 C 168.763 43.007,169.114 43.046,170.313 43.658 C 171.114 44.066,172.046 44.402,172.385 44.404 M233.717 44.214 C 237.065 44.835,239.494 50.698,236.457 50.828 C 235.926 50.851,235.945 50.913,236.558 51.154 C 237.432 51.497,237.720 53.016,237.382 55.500 L 237.151 57.200 231.875 57.195 C 225.586 57.188,225.006 57.063,224.394 55.585 C 223.630 53.741,224.280 46.757,225.238 46.506 C 225.643 46.400,226.080 45.979,226.209 45.570 C 226.358 45.102,227.251 44.573,228.623 44.140 C 229.820 43.763,230.800 43.279,230.800 43.065 C 230.800 42.851,231.115 42.959,231.500 43.304 C 231.885 43.650,232.883 44.059,233.717 44.214 M293.940 43.300 C 294.451 43.811,294.615 43.863,295.986 43.950 C 298.445 44.106,301.377 49.502,299.600 50.600 C 299.380 50.736,299.200 51.231,299.200 51.700 C 299.200 52.536,299.188 52.537,298.613 51.776 C 298.058 51.043,298.025 51.073,298.013 52.324 C 298.005 53.113,298.163 53.547,298.403 53.398 C 298.889 53.098,299.131 53.700,299.339 55.728 L 299.496 57.256 293.558 57.128 C 286.218 56.970,285.950 56.812,285.950 52.645 C 285.950 50.321,286.114 49.714,287.175 48.112 C 287.849 47.095,288.400 45.937,288.400 45.539 C 288.400 45.074,288.794 44.729,289.500 44.575 C 291.276 44.187,292.800 43.530,292.800 43.151 C 292.800 42.646,293.359 42.719,293.940 43.300 M356.624 43.387 C 357.051 43.710,357.791 43.980,358.269 43.987 C 362.074 44.043,365.029 53.340,362.113 56.083 C 360.024 58.048,349.525 57.503,348.384 55.370 C 347.571 53.851,348.096 49.684,349.329 47.867 C 349.899 47.027,350.477 45.989,350.613 45.560 C 350.773 45.055,351.500 44.610,352.679 44.294 C 353.680 44.027,354.586 43.581,354.692 43.304 C 354.949 42.636,355.671 42.667,356.624 43.387 M147.693 52.000 C 147.693 52.770,147.775 53.085,147.876 52.700 C 147.976 52.315,147.976 51.685,147.876 51.300 C 147.775 50.915,147.693 51.230,147.693 52.000 M17.800 68.754 C 20.696 69.331,380.442 69.330,382.600 68.753 C 386.330 67.756,388.195 68.016,387.711 69.466 C 387.627 69.719,387.973 70.216,388.479 70.570 L 389.400 71.215 389.499 211.180 C 389.587 336.508,389.534 351.209,388.984 351.759 C 388.647 352.096,388.087 353.053,387.740 353.886 C 387.394 354.719,386.905 355.532,386.655 355.694 C 385.519 356.429,13.756 356.035,13.092 355.298 C 12.746 354.914,12.341 354.112,12.192 353.516 C 12.043 352.920,11.669 352.223,11.361 351.967 C 10.482 351.238,10.521 70.800,11.400 70.800 C 11.730 70.800,12.000 70.570,12.000 70.289 C 12.000 70.008,12.292 69.361,12.649 68.851 C 13.341 67.864,13.333 67.864,17.800 68.754 M18.179 69.635 C 17.992 69.936,18.043 70.021,18.311 69.855 C 18.549 69.708,18.858 69.770,18.996 69.993 C 19.343 70.554,381.200 70.561,381.200 70.000 C 381.200 69.734,320.678 69.600,200.433 69.600 C 101.011 69.600,19.399 69.498,19.073 69.373 C 18.747 69.248,18.345 69.366,18.179 69.635 " stroke="none" fill="#1b8cbc" fill-rule="evenodd"></path><path id="path3" d="M35.200 32.179 C 35.200 33.052,35.011 33.209,33.900 33.261 C 33.185 33.294,32.330 33.340,32.001 33.361 C 31.671 33.383,31.401 33.761,31.401 34.201 C 31.400 34.775,31.091 35.036,30.300 35.127 C 29.446 35.225,29.200 35.465,29.200 36.199 C 29.200 36.875,28.943 37.181,28.300 37.272 C 27.408 37.399,27.340 37.581,27.243 40.100 C 27.208 41.003,27.016 41.200,26.175 41.200 C 24.747 41.200,24.863 43.724,26.300 43.928 C 26.795 43.998,27.200 43.863,27.200 43.628 C 27.200 43.393,26.840 43.200,26.400 43.200 C 25.451 43.200,25.396 42.947,26.177 42.166 C 26.680 41.663,26.807 41.680,27.165 42.294 C 27.544 42.945,27.859 41.642,27.647 40.300 C 27.621 40.135,27.948 40.000,28.373 40.000 C 28.920 40.000,29.184 39.677,29.273 38.900 C 29.365 38.104,29.654 37.764,30.322 37.669 C 30.855 37.594,31.398 37.131,31.612 36.569 C 31.814 36.036,32.300 35.587,32.690 35.572 C 33.306 35.547,33.294 35.500,32.600 35.215 C 31.867 34.914,31.859 34.862,32.498 34.601 C 32.881 34.444,33.079 34.127,32.936 33.896 C 32.784 33.651,32.869 33.595,33.138 33.762 C 33.392 33.919,33.600 34.307,33.600 34.624 C 33.600 34.941,33.950 35.200,34.377 35.200 C 34.939 35.200,35.111 34.978,35.000 34.400 C 34.915 33.960,35.016 33.600,35.223 33.600 C 35.430 33.600,35.600 33.407,35.600 33.171 C 35.600 32.105,36.815 31.473,37.825 32.014 C 38.361 32.300,38.800 32.685,38.800 32.868 C 38.800 33.608,40.230 33.130,40.636 32.254 C 41.070 31.316,41.064 31.313,38.136 31.236 C 35.235 31.159,35.200 31.170,35.200 32.179 M48.400 31.540 C 48.400 33.196,49.474 33.644,50.562 32.442 C 51.206 31.730,51.345 31.722,52.829 32.304 C 54.527 32.971,55.235 32.778,54.346 31.889 C 53.699 31.242,48.400 30.931,48.400 31.540 M97.680 31.680 C 97.416 31.944,97.200 32.394,97.200 32.680 C 97.200 32.995,96.710 33.200,95.957 33.200 C 94.998 33.200,94.769 33.342,94.953 33.821 C 95.084 34.162,95.033 34.344,94.841 34.225 C 94.648 34.106,94.268 34.277,93.996 34.604 C 93.724 34.932,93.068 35.200,92.538 35.200 C 91.529 35.200,91.154 35.748,91.058 37.365 C 91.026 37.897,90.925 38.257,90.832 38.165 C 90.452 37.786,89.200 39.394,89.200 40.262 C 89.200 40.996,88.982 41.200,88.200 41.200 C 87.256 41.200,87.202 41.318,87.232 43.300 C 87.249 44.455,87.348 45.194,87.451 44.942 C 87.554 44.691,87.990 44.577,88.419 44.689 C 89.021 44.847,89.214 44.677,89.261 43.947 C 89.294 43.426,89.364 42.820,89.415 42.600 C 89.466 42.380,89.528 41.975,89.554 41.700 C 89.579 41.425,89.960 41.200,90.400 41.200 C 91.228 41.200,91.504 40.235,90.800 39.800 C 90.580 39.664,90.414 39.338,90.432 39.076 C 90.454 38.733,90.519 38.739,90.665 39.100 C 90.985 39.893,91.600 39.681,91.600 38.776 C 91.600 38.323,91.757 38.050,91.948 38.168 C 92.448 38.477,94.000 37.028,94.000 36.253 C 94.000 35.894,94.191 35.600,94.424 35.600 C 94.657 35.600,94.759 35.458,94.652 35.284 C 94.544 35.110,95.059 35.038,95.795 35.124 C 96.949 35.258,97.154 35.150,97.276 34.340 C 97.355 33.823,97.621 33.439,97.868 33.486 C 98.131 33.537,98.232 33.245,98.112 32.787 C 97.943 32.141,98.092 32.017,98.954 32.088 C 99.529 32.136,100.000 32.379,100.000 32.629 C 100.000 33.584,102.989 33.079,103.128 32.100 C 103.275 31.063,98.653 30.707,97.680 31.680 M110.400 31.593 C 110.400 31.850,110.617 31.917,110.900 31.747 C 111.299 31.507,111.300 31.571,110.903 32.060 C 109.886 33.318,112.363 33.702,113.737 32.500 C 114.213 32.084,114.403 32.028,114.206 32.363 C 113.954 32.792,114.070 32.875,114.693 32.712 C 115.143 32.594,115.756 32.653,116.056 32.843 C 116.437 33.084,116.240 33.206,115.400 33.248 C 114.481 33.295,114.407 33.349,115.081 33.480 C 115.566 33.574,116.079 34.017,116.221 34.466 C 116.397 35.021,116.610 35.150,116.888 34.872 C 117.113 34.647,117.561 34.563,117.882 34.687 C 118.361 34.870,118.370 34.973,117.934 35.250 C 117.525 35.509,117.564 35.589,118.100 35.594 C 118.531 35.598,118.800 35.907,118.800 36.400 C 118.800 37.203,119.410 37.401,120.542 36.967 C 120.891 36.833,121.059 36.450,120.937 36.067 C 120.755 35.495,120.786 35.485,121.156 36.000 C 121.701 36.757,121.731 37.728,121.200 37.400 C 120.972 37.259,120.800 37.608,120.800 38.214 C 120.800 38.938,121.054 39.341,121.600 39.484 C 122.040 39.599,122.400 39.852,122.400 40.047 C 122.400 40.241,122.850 40.400,123.400 40.400 C 123.950 40.400,124.400 40.580,124.400 40.800 C 124.400 41.176,123.818 41.367,123.070 41.237 C 122.889 41.206,122.862 41.377,123.010 41.617 C 123.159 41.857,123.382 41.951,123.508 41.826 C 123.633 41.701,124.050 41.883,124.434 42.231 C 125.155 42.883,125.194 42.654,124.857 39.700 C 124.826 39.425,124.440 39.200,124.000 39.200 C 123.477 39.200,123.200 38.933,123.200 38.431 C 123.200 37.401,121.267 35.151,120.450 35.229 C 119.268 35.343,118.750 35.205,118.978 34.836 C 119.408 34.139,118.708 33.200,117.757 33.200 C 117.231 33.200,116.778 33.020,116.750 32.800 C 116.722 32.580,116.678 32.175,116.650 31.900 C 116.583 31.231,110.400 30.926,110.400 31.593 M159.829 31.829 C 159.483 32.174,159.200 32.624,159.200 32.829 C 159.200 33.033,158.750 33.200,158.200 33.200 C 157.393 33.200,157.200 33.398,157.200 34.227 C 157.200 35.951,159.356 35.455,159.526 33.692 C 159.595 32.973,159.800 32.476,159.981 32.588 C 160.161 32.700,160.532 32.523,160.804 32.196 C 161.305 31.592,163.240 31.348,163.153 31.900 C 162.905 33.468,164.679 33.638,165.244 32.100 C 165.669 30.942,160.952 30.706,159.829 31.829 M172.400 31.824 C 172.400 32.167,172.578 32.337,172.795 32.203 C 173.026 32.060,173.087 32.230,172.940 32.611 C 172.739 33.137,172.914 33.238,173.845 33.132 C 174.480 33.059,174.959 32.786,174.908 32.525 C 174.858 32.265,175.165 32.077,175.591 32.109 C 176.017 32.141,176.292 32.241,176.202 32.331 C 175.912 32.622,177.122 33.600,177.771 33.600 C 178.153 33.600,178.405 33.954,178.412 34.500 C 178.424 35.374,178.437 35.377,178.871 34.600 C 179.519 33.441,179.523 33.438,180.195 33.996 C 180.633 34.359,180.690 34.650,180.395 35.006 C 180.097 35.365,180.152 35.573,180.590 35.741 C 180.925 35.870,181.200 36.238,181.200 36.560 C 181.200 36.883,181.560 37.260,182.000 37.400 C 182.440 37.540,182.800 38.002,182.800 38.427 C 182.800 38.933,183.076 39.200,183.600 39.200 C 184.040 39.200,184.411 39.425,184.425 39.700 C 184.439 39.975,184.626 39.762,184.839 39.228 C 185.087 38.607,185.090 37.860,184.847 37.162 C 184.637 36.560,184.586 35.934,184.733 35.770 C 184.880 35.606,184.775 35.601,184.500 35.759 C 184.225 35.918,184.000 35.857,184.000 35.624 C 184.000 35.391,183.383 35.200,182.628 35.200 C 181.511 35.200,181.232 35.033,181.128 34.304 C 181.053 33.781,180.667 33.350,180.200 33.267 C 179.760 33.190,178.988 32.693,178.484 32.163 C 177.340 30.961,172.400 30.685,172.400 31.824 M221.356 31.670 C 221.233 31.871,221.352 32.302,221.623 32.627 C 221.893 32.953,221.998 33.335,221.857 33.476 C 221.716 33.618,221.600 33.555,221.600 33.336 C 221.600 33.117,221.060 33.018,220.400 33.115 C 219.561 33.238,219.200 33.514,219.200 34.033 C 219.200 34.528,219.400 34.698,219.800 34.545 C 220.130 34.418,220.400 34.154,220.400 33.957 C 220.400 33.154,221.204 33.669,221.246 34.500 C 221.283 35.212,221.332 35.249,221.480 34.677 C 221.583 34.280,222.122 33.782,222.677 33.571 C 223.456 33.274,223.586 33.066,223.247 32.657 C 223.005 32.365,222.925 32.008,223.070 31.863 C 223.496 31.437,224.729 31.562,225.038 32.062 C 225.226 32.365,225.131 32.424,224.762 32.232 C 224.453 32.072,224.549 32.224,224.976 32.570 C 226.058 33.448,227.200 33.377,227.200 32.433 C 227.200 32.012,227.425 31.572,227.700 31.456 C 227.975 31.340,226.711 31.258,224.891 31.275 C 223.071 31.292,221.480 31.470,221.356 31.670 M234.873 32.200 C 235.444 33.453,238.122 33.717,237.918 32.500 C 237.743 31.458,239.282 31.611,239.819 32.689 C 240.349 33.752,241.222 33.172,240.907 31.966 C 240.731 31.293,240.324 31.200,237.562 31.200 L 234.417 31.200 234.873 32.200 M284.556 31.592 C 284.091 31.780,283.602 32.218,283.468 32.567 C 283.334 32.915,282.769 33.200,282.213 33.200 C 281.399 33.200,281.200 33.397,281.200 34.200 C 281.200 34.750,281.065 35.213,280.900 35.230 C 278.873 35.431,277.424 36.192,277.828 36.845 C 277.949 37.040,277.812 37.203,277.524 37.206 C 277.143 37.211,277.164 37.318,277.600 37.600 C 278.000 37.858,278.033 37.990,277.700 37.994 C 277.425 37.997,277.200 38.227,277.200 38.505 C 277.200 38.783,276.795 39.188,276.300 39.405 C 275.606 39.710,275.397 40.137,275.387 41.270 C 275.379 42.079,275.519 42.650,275.697 42.540 C 275.875 42.430,275.995 42.128,275.963 41.870 C 275.817 40.683,276.049 40.000,276.600 40.000 C 276.930 40.000,277.211 40.315,277.225 40.700 C 277.245 41.236,277.335 41.190,277.612 40.500 C 277.811 40.005,278.261 39.600,278.611 39.600 C 278.961 39.600,279.134 39.417,278.996 39.193 C 278.858 38.970,278.590 38.883,278.400 39.000 C 278.210 39.117,277.925 39.002,277.766 38.745 C 277.585 38.452,277.650 38.384,277.938 38.562 C 278.192 38.719,278.400 38.657,278.400 38.424 C 278.400 38.191,278.670 38.000,279.000 38.000 C 279.330 38.000,279.600 37.820,279.600 37.600 C 279.600 37.380,279.938 37.200,280.350 37.200 C 280.844 37.200,281.182 36.824,281.339 36.100 C 281.749 34.214,282.315 33.669,282.972 34.528 C 283.505 35.224,283.540 35.220,283.791 34.428 C 283.936 33.972,284.357 33.597,284.727 33.594 C 285.161 33.590,285.238 33.484,284.944 33.294 C 284.603 33.074,284.603 32.897,284.944 32.592 C 285.592 32.013,287.168 32.101,287.563 32.739 C 287.931 33.335,289.396 33.220,289.406 32.595 C 289.409 32.378,289.555 31.975,289.730 31.700 C 290.105 31.109,285.964 31.023,284.556 31.592 M296.957 31.833 C 297.091 32.181,297.200 32.636,297.200 32.845 C 297.200 33.430,299.949 33.110,300.184 32.498 C 300.311 32.166,300.215 32.067,299.934 32.241 C 299.652 32.415,299.586 32.346,299.762 32.062 C 300.112 31.495,301.200 31.449,301.200 32.000 C 301.200 32.220,301.464 32.400,301.787 32.400 C 302.171 32.400,302.286 32.631,302.119 33.066 C 301.960 33.482,302.023 33.633,302.289 33.468 C 302.528 33.321,302.819 33.621,302.952 34.152 C 303.118 34.813,303.570 35.174,304.452 35.350 C 305.146 35.489,305.952 35.917,306.244 36.301 C 306.725 36.935,306.776 36.939,306.787 36.335 C 306.803 35.488,308.154 35.639,308.323 36.507 C 308.400 36.900,308.099 37.206,307.523 37.318 L 306.600 37.498 307.520 37.801 C 308.328 38.067,309.158 39.909,308.898 40.860 C 308.859 41.003,309.260 41.229,309.789 41.362 C 310.555 41.554,310.777 41.905,310.876 43.075 C 311.048 45.118,312.983 45.819,313.130 43.891 C 313.270 42.043,312.857 41.200,311.810 41.200 C 311.053 41.200,310.917 41.038,311.097 40.349 C 311.240 39.805,311.088 39.369,310.676 39.139 C 310.323 38.941,310.129 38.530,310.246 38.226 C 310.372 37.895,310.111 37.562,309.599 37.400 C 309.126 37.250,308.842 37.025,308.966 36.900 C 309.091 36.776,308.993 36.432,308.748 36.137 C 308.503 35.842,308.459 35.576,308.651 35.547 C 308.843 35.518,308.370 35.378,307.600 35.235 C 306.706 35.068,306.244 34.776,306.321 34.424 C 306.497 33.624,305.526 33.166,304.837 33.723 C 304.374 34.097,304.311 34.092,304.547 33.700 C 304.738 33.382,304.611 33.200,304.200 33.200 C 303.789 33.200,303.662 33.382,303.853 33.700 C 304.065 34.052,303.957 34.041,303.490 33.662 C 303.124 33.366,302.841 33.006,302.860 32.862 C 303.054 31.393,302.778 31.200,300.480 31.200 C 299.178 31.200,297.924 31.419,297.621 31.700 C 297.190 32.100,297.139 32.100,297.365 31.700 C 297.520 31.424,297.438 31.200,297.181 31.200 C 296.920 31.200,296.821 31.479,296.957 31.833 M346.496 31.959 C 346.564 32.375,346.355 32.559,345.900 32.482 C 345.515 32.418,345.200 32.532,345.200 32.736 C 345.200 32.940,344.827 33.204,344.370 33.324 C 343.914 33.443,343.443 33.914,343.324 34.370 C 343.181 34.917,342.782 35.200,342.153 35.200 C 341.403 35.200,341.200 35.413,341.200 36.200 C 341.200 37.000,341.000 37.200,340.200 37.200 C 339.400 37.200,339.200 37.400,339.200 38.200 C 339.200 38.750,339.020 39.223,338.800 39.250 C 338.580 39.278,338.176 39.323,337.903 39.350 C 336.969 39.444,337.299 41.786,338.266 41.923 C 339.070 42.038,339.922 40.818,339.679 39.900 C 339.636 39.735,340.005 39.587,340.500 39.572 C 341.149 39.552,341.233 39.468,340.800 39.272 C 339.831 38.833,339.919 38.058,340.914 38.276 C 341.624 38.431,341.681 38.386,341.200 38.047 C 340.713 37.703,340.840 37.576,341.878 37.366 C 342.871 37.166,343.213 36.851,343.410 35.954 C 343.549 35.319,343.840 34.800,344.055 34.800 C 344.271 34.800,344.318 34.575,344.159 34.300 C 344.001 34.025,344.019 33.933,344.199 34.097 C 344.379 34.260,344.778 34.184,345.086 33.929 C 345.393 33.673,345.614 33.630,345.575 33.832 C 345.384 34.836,345.608 35.406,345.969 34.836 C 346.165 34.526,346.238 34.044,346.131 33.765 C 345.997 33.414,346.223 33.321,346.868 33.464 C 347.611 33.628,347.678 33.583,347.200 33.241 C 346.682 32.871,346.695 32.811,347.300 32.806 C 347.685 32.803,348.000 32.530,348.000 32.200 C 348.000 31.870,348.281 31.600,348.624 31.600 C 348.967 31.600,349.144 31.768,349.017 31.972 C 348.891 32.177,348.957 32.450,349.166 32.579 C 349.374 32.708,349.675 32.602,349.834 32.345 C 350.027 32.033,349.949 31.984,349.600 32.200 C 349.251 32.416,349.173 32.367,349.366 32.055 C 349.755 31.426,350.511 31.933,350.240 32.640 C 349.951 33.393,351.093 33.364,351.857 32.600 C 352.319 32.138,352.336 31.999,351.929 31.994 C 351.537 31.989,351.555 31.884,352.000 31.586 C 352.423 31.303,351.687 31.204,349.496 31.251 C 346.893 31.306,346.409 31.421,346.496 31.959 M359.200 31.751 C 359.200 32.054,359.461 32.519,359.781 32.784 C 360.434 33.326,361.839 33.164,361.728 32.559 C 361.688 32.343,362.183 32.126,362.828 32.077 C 363.906 31.994,364.214 32.313,364.037 33.330 C 364.006 33.511,364.159 33.549,364.378 33.413 C 364.597 33.278,364.894 33.634,365.037 34.204 C 365.295 35.235,366.715 35.499,366.500 34.476 C 366.445 34.214,366.603 34.045,366.850 34.100 C 367.098 34.155,367.378 33.987,367.474 33.727 C 367.581 33.437,367.137 33.205,366.324 33.127 C 365.596 33.057,365.030 32.820,365.066 32.600 C 365.225 31.635,364.195 31.200,361.751 31.200 C 359.851 31.200,359.200 31.341,359.200 31.751 M53.305 33.491 C 53.693 33.584,53.919 33.808,53.807 33.988 C 53.696 34.169,53.883 34.423,54.223 34.554 C 54.563 34.684,54.743 34.632,54.623 34.437 C 54.503 34.243,54.641 33.993,54.931 33.882 C 55.221 33.771,55.671 34.022,55.932 34.440 C 56.330 35.077,56.293 35.204,55.703 35.225 C 55.160 35.245,55.205 35.333,55.900 35.612 C 56.395 35.811,56.800 36.238,56.800 36.559 C 56.800 36.881,57.205 37.202,57.700 37.272 C 58.294 37.357,58.646 37.722,58.734 38.346 C 58.808 38.867,59.207 39.381,59.621 39.489 C 60.035 39.598,60.494 40.072,60.641 40.543 C 60.974 41.613,61.486 41.955,62.398 41.716 C 63.133 41.524,63.073 40.000,62.330 40.000 C 62.122 40.000,62.064 39.820,62.200 39.600 C 62.336 39.380,62.179 39.200,61.851 39.200 C 61.524 39.200,61.198 38.795,61.128 38.300 C 61.048 37.735,60.679 37.354,60.138 37.277 C 59.613 37.202,59.179 36.772,59.030 36.177 C 58.874 35.556,58.499 35.200,58.000 35.200 C 57.513 35.200,57.127 34.848,56.983 34.273 C 56.777 33.455,56.506 33.345,54.675 33.334 C 53.534 33.327,52.917 33.398,53.305 33.491 M240.800 34.200 C 240.800 35.035,240.990 35.200,241.951 35.200 C 243.071 35.200,243.928 35.800,243.936 36.590 C 243.944 37.407,244.620 37.150,245.083 36.153 C 245.543 35.163,245.517 35.123,244.545 35.308 C 243.701 35.470,243.455 35.305,243.123 34.352 C 242.581 32.797,240.800 32.680,240.800 34.200 M368.000 34.294 C 368.000 34.760,367.775 35.219,367.500 35.313 C 367.225 35.408,367.315 35.438,367.700 35.380 C 368.204 35.304,368.400 35.548,368.400 36.247 C 368.400 37.272,370.053 38.261,370.895 37.741 C 371.156 37.580,371.206 37.666,371.023 37.962 C 370.572 38.692,371.564 40.789,372.237 40.530 C 372.636 40.377,372.800 40.632,372.800 41.406 C 372.800 42.381,372.872 42.439,373.477 41.949 C 373.937 41.576,374.057 41.560,373.853 41.900 C 373.688 42.175,373.743 42.400,373.976 42.400 C 374.209 42.400,374.400 42.601,374.400 42.847 C 374.400 43.096,374.047 43.201,373.600 43.084 C 373.080 42.948,372.800 43.072,372.800 43.437 C 372.800 43.793,373.232 44.000,373.973 44.000 C 375.549 44.000,375.691 41.738,374.139 41.349 C 373.424 41.170,373.200 40.837,373.200 39.957 C 373.200 39.320,373.040 38.800,372.844 38.800 C 372.649 38.800,372.514 38.489,372.544 38.110 C 372.575 37.730,372.390 37.415,372.133 37.410 C 371.536 37.397,371.000 36.862,371.000 36.278 C 371.000 36.028,370.553 35.601,370.007 35.328 C 369.461 35.056,368.786 34.521,368.507 34.140 C 368.039 33.501,368.000 33.512,368.000 34.294 M153.617 35.780 C 153.352 36.099,153.195 36.954,153.268 37.680 C 153.386 38.861,153.285 39.013,152.300 39.127 C 151.446 39.225,151.200 39.465,151.200 40.199 C 151.200 40.875,150.943 41.181,150.300 41.272 C 149.469 41.390,149.391 41.633,149.284 44.452 C 149.192 46.880,149.008 47.650,148.384 48.214 C 147.454 49.057,147.357 50.332,148.200 50.655 C 148.594 50.806,148.800 51.431,148.800 52.471 C 148.800 54.356,147.797 53.811,147.492 51.761 L 147.320 50.600 147.254 51.800 C 147.188 52.991,146.419 54.716,146.406 53.700 C 146.401 53.314,144.001 53.188,135.900 53.146 C 130.125 53.116,125.805 53.013,126.300 52.918 C 127.055 52.772,127.200 52.486,127.200 51.143 C 127.200 49.400,126.061 48.990,125.692 50.600 C 125.041 53.434,125.426 55.070,126.801 55.309 C 127.350 55.405,127.575 55.406,127.300 55.312 C 126.549 55.055,126.698 54.520,127.586 54.288 C 128.033 54.171,128.335 54.269,128.286 54.516 C 128.226 54.820,131.372 54.958,138.700 54.975 L 149.200 55.000 149.247 52.200 C 149.273 50.660,149.271 49.200,149.242 48.954 C 149.214 48.709,149.615 48.556,150.135 48.613 C 151.054 48.714,151.082 48.629,151.141 45.498 C 151.202 42.304,151.589 41.200,152.649 41.200 C 152.957 41.200,153.200 40.795,153.200 40.280 C 153.200 39.162,153.900 38.387,154.649 38.674 C 154.965 38.795,155.200 38.632,155.200 38.292 C 155.200 37.965,155.451 37.490,155.757 37.236 C 156.063 36.982,156.406 36.420,156.519 35.987 C 156.775 35.008,154.398 34.839,153.617 35.780 M216.132 35.796 C 216.169 36.018,216.011 36.167,215.780 36.127 C 215.549 36.086,215.316 36.711,215.262 37.514 C 215.207 38.318,214.946 39.113,214.682 39.282 C 214.320 39.512,214.317 39.589,214.672 39.594 C 214.932 39.597,215.222 40.005,215.318 40.500 C 215.490 41.395,215.491 41.395,215.546 40.527 C 215.575 40.047,215.941 39.546,216.357 39.414 C 216.773 39.282,217.210 38.806,217.327 38.357 C 217.445 37.908,217.914 37.443,218.370 37.324 C 218.827 37.204,219.200 36.781,219.200 36.383 C 219.200 35.984,219.515 35.570,219.900 35.461 C 220.285 35.353,219.579 35.293,218.332 35.328 C 217.060 35.364,216.094 35.569,216.132 35.796 M245.628 35.766 C 245.197 36.286,245.218 36.432,245.755 36.638 C 246.110 36.774,246.400 37.057,246.400 37.266 C 246.400 37.476,246.256 37.558,246.081 37.450 C 245.905 37.342,245.526 37.398,245.239 37.576 C 244.858 37.811,245.032 38.057,245.876 38.478 C 246.991 39.035,247.040 39.020,247.117 38.100 C 247.247 36.524,246.270 34.992,245.628 35.766 M31.200 36.400 C 31.200 36.840,30.960 37.200,30.667 37.200 C 29.833 37.200,29.603 36.766,30.124 36.173 C 30.806 35.395,31.200 35.478,31.200 36.400 M93.200 36.400 C 93.200 36.844,92.933 37.200,92.600 37.200 C 91.510 37.200,91.888 36.014,93.100 35.632 C 93.155 35.614,93.200 35.960,93.200 36.400 M370.157 36.631 C 370.300 37.004,370.104 37.200,369.587 37.200 C 369.071 37.200,368.800 36.929,368.800 36.413 C 368.800 35.525,369.793 35.685,370.157 36.631 M155.200 36.787 C 155.200 37.323,155.008 37.501,154.600 37.345 C 154.270 37.218,154.000 36.864,154.000 36.557 C 154.000 36.251,154.270 36.000,154.600 36.000 C 154.930 36.000,155.200 36.354,155.200 36.787 M60.000 38.624 C 60.000 38.941,59.820 39.200,59.600 39.200 C 59.380 39.200,59.200 38.829,59.200 38.376 C 59.200 37.923,59.380 37.664,59.600 37.800 C 59.820 37.936,60.000 38.307,60.000 38.624 M185.600 39.528 C 186.875 40.106,186.450 41.477,185.070 41.237 C 184.889 41.206,184.844 41.348,184.971 41.553 C 185.097 41.757,185.528 41.839,185.928 41.735 C 186.789 41.510,188.112 42.825,187.300 43.098 C 187.025 43.191,186.814 43.567,186.832 43.933 C 186.851 44.349,186.939 44.412,187.065 44.100 C 187.502 43.016,188.320 43.640,188.466 45.169 C 188.548 46.032,188.522 46.731,188.408 46.722 C 186.613 46.579,186.240 47.565,187.779 48.389 C 188.330 48.684,188.828 49.369,188.919 49.956 C 189.058 50.860,189.088 50.825,189.140 49.700 C 189.177 48.897,189.009 48.398,188.700 48.394 C 188.319 48.389,188.324 48.309,188.724 48.056 C 189.504 47.561,189.014 43.287,188.055 42.228 C 187.642 41.773,187.188 40.905,187.045 40.300 C 186.854 39.493,186.547 39.207,185.892 39.228 C 185.246 39.248,185.165 39.331,185.600 39.528 M247.300 39.460 C 246.446 39.813,246.749 40.732,247.900 41.284 C 248.964 41.794,248.998 41.908,248.937 44.794 C 248.880 47.474,248.971 47.867,249.837 48.669 C 250.366 49.160,250.800 49.840,250.800 50.181 C 250.800 50.521,250.991 50.800,251.224 50.800 C 251.457 50.800,251.537 50.622,251.403 50.405 C 251.268 50.187,251.397 50.101,251.689 50.213 C 252.047 50.350,252.169 50.943,252.065 52.034 C 251.966 53.074,251.741 53.586,251.436 53.469 C 251.159 53.363,250.960 53.647,250.960 54.149 C 250.960 55.009,250.997 55.012,260.380 55.006 C 265.561 55.003,270.610 55.133,271.600 55.295 C 272.590 55.458,273.169 55.443,272.886 55.263 C 272.580 55.068,272.486 54.641,272.654 54.204 C 272.913 53.528,272.959 53.538,273.255 54.336 C 273.642 55.383,274.400 55.479,274.400 54.480 C 274.400 54.084,274.616 53.544,274.880 53.280 C 275.348 52.812,275.298 52.753,274.333 52.650 C 274.077 52.623,273.793 52.330,273.703 52.000 C 273.576 51.537,273.622 51.518,273.905 51.919 C 274.203 52.342,274.355 52.337,274.724 51.892 C 275.067 51.478,275.029 51.133,274.566 50.473 C 273.628 49.133,273.200 49.424,273.200 51.400 L 273.200 53.200 263.600 53.200 C 257.040 53.200,254.000 53.336,254.000 53.629 C 254.000 53.864,253.730 53.787,253.400 53.457 C 253.065 53.122,252.800 52.144,252.800 51.243 C 252.800 49.677,251.500 48.099,251.129 49.213 C 251.054 49.437,251.055 48.221,251.130 46.510 C 251.275 43.198,250.789 41.200,249.838 41.200 C 249.518 41.200,249.198 40.797,249.128 40.304 C 249.001 39.412,248.253 39.067,247.300 39.460 M213.212 40.804 C 213.205 41.136,212.833 41.637,212.384 41.917 C 211.936 42.197,211.677 42.600,211.808 42.813 C 211.940 43.026,211.857 43.200,211.624 43.200 C 211.391 43.200,211.225 43.875,211.254 44.700 C 211.285 45.542,211.383 45.824,211.477 45.342 C 211.569 44.870,211.995 44.167,212.422 43.780 C 212.850 43.393,213.200 42.834,213.200 42.538 C 213.200 42.242,213.459 42.000,213.776 42.000 C 214.093 42.000,214.481 41.792,214.638 41.538 C 214.809 41.261,214.749 41.185,214.486 41.347 C 214.246 41.495,213.864 41.298,213.637 40.908 C 213.313 40.352,213.222 40.329,213.212 40.804 M62.553 44.247 C 62.254 45.436,63.411 47.358,64.235 47.042 C 64.670 46.875,64.752 47.051,64.573 47.767 C 64.442 48.287,64.523 48.829,64.753 48.971 C 65.025 49.139,65.161 48.457,65.144 47.016 C 65.127 45.577,64.970 44.895,64.697 45.064 C 64.452 45.215,64.395 45.132,64.560 44.865 C 64.943 44.245,64.361 43.413,63.497 43.344 C 63.062 43.309,62.701 43.655,62.553 44.247 M124.800 43.849 C 124.800 44.362,124.918 44.400,125.364 44.030 C 126.064 43.449,126.428 43.959,126.312 45.360 C 126.223 46.434,125.421 46.782,125.065 45.900 C 124.954 45.625,124.862 45.850,124.860 46.400 C 124.855 47.869,125.292 48.589,126.248 48.686 C 127.009 48.763,127.410 45.338,126.797 44.000 C 126.747 43.890,126.727 43.665,126.753 43.500 C 126.779 43.335,126.350 43.200,125.800 43.200 C 125.144 43.200,124.800 43.423,124.800 43.849 M273.425 43.559 C 272.731 44.682,273.306 48.634,274.173 48.706 C 274.857 48.763,275.050 48.535,275.122 47.586 C 275.172 46.931,275.075 46.418,274.907 46.445 C 273.934 46.602,273.668 46.316,273.851 45.309 C 274.138 43.725,274.942 43.387,275.271 44.711 C 275.541 45.799,275.541 45.798,275.471 44.600 C 275.398 43.371,273.986 42.653,273.425 43.559 M335.467 43.467 C 335.038 43.895,335.160 48.400,335.600 48.400 C 335.820 48.400,336.000 48.040,336.000 47.600 C 336.000 47.160,336.252 46.800,336.561 46.800 C 337.326 46.800,338.015 44.728,337.535 43.870 C 337.159 43.199,335.967 42.966,335.467 43.467 M337.093 45.441 C 336.995 45.539,336.613 45.503,336.245 45.362 C 335.629 45.126,335.632 45.064,336.288 44.580 C 336.959 44.084,337.679 44.854,337.093 45.441 M40.645 45.762 C 40.475 46.442,40.112 46.800,39.592 46.800 C 38.988 46.800,38.807 47.061,38.828 47.900 C 38.853 48.875,38.895 48.909,39.200 48.200 C 39.494 47.516,39.548 47.501,39.572 48.100 C 39.589 48.529,39.916 48.800,40.418 48.800 C 40.867 48.800,41.206 48.575,41.170 48.300 C 40.991 46.922,41.221 46.800,44.000 46.800 C 45.600 46.800,46.800 46.629,46.800 46.400 C 46.800 46.036,46.242 45.839,45.514 45.948 C 45.357 45.971,45.333 45.718,45.461 45.385 C 45.641 44.916,45.418 44.801,44.467 44.874 C 43.489 44.948,43.331 45.076,43.688 45.506 C 44.029 45.917,44.001 46.016,43.569 45.923 C 43.258 45.855,42.805 45.548,42.563 45.239 C 42.215 44.797,42.056 44.785,41.811 45.182 C 41.571 45.570,41.432 45.575,41.203 45.205 C 41.010 44.893,40.814 45.090,40.645 45.762 M47.357 47.159 C 47.440 49.230,47.626 49.854,48.330 50.424 C 49.574 51.431,49.512 53.200,48.233 53.200 C 47.702 53.200,47.176 53.425,47.065 53.700 C 46.904 54.100,46.857 54.100,46.832 53.700 C 46.810 53.360,46.043 53.200,44.433 53.200 C 42.914 53.200,41.994 53.379,41.865 53.700 C 41.704 54.100,41.657 54.100,41.632 53.700 C 41.612 53.390,41.031 53.210,40.100 53.225 C 38.770 53.248,38.705 53.293,39.525 53.622 C 40.034 53.826,40.725 54.267,41.061 54.603 C 41.549 55.092,42.627 55.200,46.436 55.143 L 51.200 55.071 51.200 52.985 C 51.200 51.508,51.002 50.738,50.523 50.349 C 49.941 49.876,49.889 49.883,50.153 50.400 C 50.321 50.730,50.176 50.651,49.830 50.224 C 49.222 49.474,49.088 48.982,49.092 47.510 C 49.093 47.131,48.769 46.717,48.372 46.591 C 47.975 46.465,47.561 45.966,47.452 45.481 C 47.343 44.996,47.300 45.752,47.357 47.159 M102.800 45.800 C 102.800 46.514,102.584 46.800,102.043 46.800 C 101.380 46.800,100.800 47.516,100.800 48.334 C 100.800 48.481,101.340 48.609,102.000 48.618 C 102.989 48.631,103.200 48.472,103.200 47.717 C 103.200 47.067,103.433 46.800,104.000 46.800 C 104.891 46.800,105.056 46.016,104.320 45.280 C 103.526 44.486,102.800 44.735,102.800 45.800 M106.936 45.423 C 106.804 45.766,106.441 45.948,106.128 45.828 C 105.815 45.707,105.659 45.772,105.782 45.970 C 105.905 46.169,105.779 46.423,105.502 46.534 C 105.226 46.646,105.945 46.751,107.100 46.768 C 109.150 46.799,109.401 46.980,109.230 48.300 C 109.193 48.586,109.600 48.800,110.182 48.800 C 111.298 48.800,111.468 48.428,110.703 47.663 C 110.308 47.268,110.328 47.090,110.803 46.789 C 111.307 46.471,111.289 46.411,110.687 46.406 C 110.295 46.403,109.811 45.995,109.612 45.500 L 109.251 44.600 109.225 45.500 C 109.194 46.615,108.542 46.679,108.200 45.600 C 107.897 44.645,107.268 44.557,106.936 45.423 M165.687 45.250 C 165.790 45.553,165.525 46.107,165.098 46.481 C 164.487 47.016,164.396 47.387,164.669 48.207 C 165.009 49.227,165.037 49.235,165.836 48.526 C 166.782 47.688,167.267 46.601,166.872 46.206 C 166.723 46.056,166.600 45.738,166.600 45.500 C 166.600 45.262,166.353 44.984,166.050 44.883 C 165.716 44.772,165.573 44.916,165.687 45.250 M227.881 45.837 C 227.486 46.367,227.351 46.800,227.581 46.800 C 227.812 46.800,228.000 47.070,228.000 47.400 C 228.000 47.730,227.676 48.000,227.280 48.000 C 226.106 48.000,225.549 48.806,226.243 49.501 C 227.048 50.305,226.929 54.205,226.120 53.533 C 225.693 53.179,225.639 53.236,225.859 53.809 C 226.050 54.306,225.990 54.441,225.668 54.242 C 225.393 54.072,225.200 54.192,225.200 54.532 C 225.200 55.011,226.094 55.102,230.350 55.056 L 235.499 55.000 235.483 52.800 C 235.471 51.294,235.417 51.066,235.310 52.079 C 235.190 53.214,235.011 53.502,234.537 53.320 C 234.197 53.190,233.760 53.335,233.566 53.642 C 233.313 54.041,233.211 54.057,233.206 53.700 C 233.202 53.345,232.326 53.200,230.180 53.200 L 227.160 53.200 227.280 50.900 C 227.370 49.177,227.550 48.599,228.000 48.598 C 228.369 48.596,228.582 48.250,228.552 47.698 C 228.519 47.070,228.729 46.800,229.252 46.800 C 229.663 46.800,230.000 46.626,230.000 46.413 C 230.000 46.199,229.744 46.123,229.432 46.243 C 229.077 46.379,228.814 46.163,228.732 45.668 C 228.607 44.920,228.559 44.929,227.881 45.837 M233.244 45.862 C 232.840 46.750,232.872 46.831,233.539 46.619 C 234.002 46.473,234.499 46.653,234.844 47.091 C 235.346 47.732,235.334 47.748,234.718 47.266 C 233.758 46.514,232.938 47.102,233.876 47.868 C 234.274 48.193,234.347 48.328,234.038 48.168 C 233.666 47.975,233.574 48.034,233.766 48.345 C 233.925 48.602,234.235 48.702,234.454 48.566 C 234.674 48.431,235.106 48.653,235.414 49.060 C 235.722 49.467,235.994 49.710,236.018 49.600 C 236.299 48.304,236.275 48.030,235.902 48.261 C 235.637 48.425,235.543 48.235,235.655 47.763 C 235.766 47.294,235.424 46.589,234.767 45.934 L 233.698 44.868 233.244 45.862 M290.365 45.600 C 290.332 46.150,290.321 46.718,290.340 46.862 C 290.359 47.006,290.117 47.337,289.803 47.597 C 289.335 47.986,289.261 47.920,289.395 47.225 C 289.485 46.758,289.388 46.484,289.179 46.613 C 288.971 46.742,288.800 47.446,288.800 48.178 C 288.800 49.162,288.535 49.682,287.780 50.176 C 286.871 50.772,286.773 51.071,286.880 52.922 L 287.000 55.000 290.932 54.972 C 293.861 54.951,294.967 54.799,295.270 54.372 C 295.598 53.909,295.633 53.931,295.455 54.487 C 295.275 55.049,295.478 55.165,296.563 55.124 C 297.293 55.097,297.887 54.878,297.882 54.637 C 297.824 51.485,298.031 50.605,298.600 51.600 C 299.152 52.566,299.172 52.570,299.186 51.724 C 299.199 50.882,298.671 50.294,297.779 50.158 C 297.547 50.123,297.314 50.732,297.262 51.513 C 297.170 52.878,296.438 54.762,296.412 53.700 C 296.404 53.349,295.574 53.200,293.633 53.200 C 291.794 53.200,290.799 53.368,290.665 53.700 C 290.504 54.100,290.457 54.100,290.432 53.700 C 290.414 53.425,290.174 53.200,289.898 53.200 C 289.622 53.200,289.201 52.577,288.963 51.816 C 288.725 51.056,288.680 50.526,288.865 50.640 C 289.049 50.754,289.200 50.387,289.200 49.824 C 289.200 49.070,289.409 48.800,289.992 48.800 C 290.504 48.800,290.874 48.446,291.036 47.800 C 291.430 46.228,297.200 46.241,297.200 47.814 C 297.200 48.680,297.309 48.770,297.947 48.428 C 298.358 48.208,298.808 48.142,298.947 48.281 C 299.086 48.420,299.200 48.143,299.200 47.667 C 299.200 47.009,298.959 46.800,298.200 46.800 C 297.392 46.800,297.200 46.602,297.200 45.771 C 297.200 45.006,297.020 44.776,296.500 44.876 C 296.115 44.950,295.800 45.261,295.800 45.567 C 295.800 46.343,294.427 46.464,293.442 45.775 C 292.991 45.459,292.806 45.200,293.031 45.200 C 293.256 45.200,293.657 45.379,293.921 45.599 C 294.186 45.818,294.121 45.683,293.777 45.299 C 293.181 44.634,293.126 44.634,292.631 45.300 C 292.346 45.685,291.971 46.000,291.800 46.000 C 291.629 46.000,291.249 45.685,290.957 45.300 C 290.469 44.657,290.421 44.681,290.365 45.600 M352.425 45.473 C 352.411 45.980,352.065 46.452,351.600 46.600 C 350.643 46.904,350.556 48.099,351.429 48.971 C 351.984 49.527,351.986 49.600,351.447 49.600 C 349.714 49.600,348.080 53.116,349.106 54.635 C 349.432 55.117,351.310 55.701,351.018 55.230 C 350.918 55.067,352.256 55.017,353.992 55.117 C 357.632 55.328,359.200 55.042,359.200 54.169 C 359.200 53.830,359.335 53.631,359.500 53.726 C 359.665 53.822,360.160 53.755,360.600 53.578 C 361.228 53.325,361.085 53.250,359.933 53.228 C 359.111 53.212,358.378 53.419,358.265 53.700 C 358.104 54.100,358.057 54.100,358.032 53.700 C 358.009 53.342,357.036 53.200,354.600 53.200 L 351.200 53.200 351.200 51.600 C 351.200 50.720,351.391 50.000,351.624 50.000 C 351.857 50.000,351.919 50.208,351.762 50.462 C 351.596 50.730,351.651 50.816,351.893 50.666 C 352.122 50.525,352.549 49.597,352.842 48.605 L 353.375 46.800 356.287 46.800 L 359.200 46.800 359.200 48.920 C 359.200 51.018,359.672 52.000,360.680 52.000 C 360.966 52.000,361.200 51.640,361.200 51.200 C 361.200 50.760,361.041 50.400,360.847 50.400 C 360.301 50.400,360.020 48.835,360.511 48.531 C 360.782 48.364,360.653 48.147,360.173 47.959 C 359.463 47.681,359.473 47.654,360.300 47.628 C 361.412 47.593,361.508 46.800,360.400 46.800 C 359.639 46.800,359.425 46.415,359.570 45.300 C 359.606 45.025,359.437 44.800,359.194 44.800 C 358.951 44.800,358.856 44.968,358.983 45.172 C 359.109 45.377,359.049 45.646,358.848 45.770 C 358.648 45.894,358.365 45.686,358.220 45.309 C 357.994 44.720,357.903 44.706,357.578 45.211 C 357.340 45.583,357.089 45.652,356.900 45.399 C 356.292 44.584,354.518 44.706,354.290 45.578 C 354.006 46.663,353.264 46.624,352.812 45.500 L 352.451 44.600 352.425 45.473 M171.336 45.822 C 171.151 46.305,170.728 46.405,169.561 46.242 C 168.719 46.124,167.923 46.201,167.791 46.414 C 167.652 46.639,168.353 46.820,169.476 46.847 C 171.402 46.895,171.577 46.886,172.491 46.700 C 172.760 46.645,173.019 47.050,173.064 47.600 C 173.115 48.207,173.066 48.316,172.940 47.877 C 172.715 47.093,171.567 47.098,171.305 47.885 C 171.216 48.152,171.606 48.487,172.172 48.629 C 172.949 48.824,173.201 49.144,173.206 49.943 L 173.212 51.000 173.727 50.000 C 174.011 49.450,174.098 48.940,173.922 48.867 C 173.745 48.793,173.600 48.331,173.600 47.839 C 173.600 46.619,171.685 44.913,171.336 45.822 M87.478 45.856 C 87.158 46.175,87.519 46.800,88.024 46.800 C 88.231 46.800,88.400 46.530,88.400 46.200 C 88.400 45.581,87.928 45.405,87.478 45.856 M312.642 46.068 C 312.833 46.377,312.718 46.454,312.305 46.296 C 311.652 46.045,311.625 46.333,312.153 47.906 C 312.332 48.439,312.651 48.703,312.929 48.547 C 313.251 48.366,313.274 48.421,313.000 48.720 C 312.445 49.327,312.860 55.426,313.449 55.317 C 315.278 54.979,328.041 54.811,330.689 55.091 L 333.978 55.438 334.368 54.319 L 334.758 53.200 325.813 53.200 C 319.030 53.200,316.818 53.321,316.665 53.700 C 316.504 54.100,316.457 54.100,316.432 53.700 C 316.414 53.425,316.017 53.200,315.548 53.200 C 314.760 53.200,314.716 53.054,314.957 51.238 C 315.246 49.059,314.603 47.036,313.729 47.372 C 313.219 47.568,313.034 47.148,313.170 46.100 C 313.206 45.825,313.037 45.600,312.794 45.600 C 312.551 45.600,312.483 45.811,312.642 46.068 M230.400 46.485 C 230.400 46.658,230.861 46.800,231.424 46.800 C 231.987 46.800,232.343 46.631,232.216 46.425 C 231.941 45.981,230.400 46.031,230.400 46.485 M213.200 46.800 C 213.200 47.020,212.750 47.200,212.200 47.200 C 211.578 47.200,211.200 47.427,211.200 47.800 C 211.200 48.584,212.175 48.568,212.971 47.771 C 213.576 47.167,213.816 46.400,213.400 46.400 C 213.290 46.400,213.200 46.580,213.200 46.800 M250.800 47.000 C 250.800 47.059,250.440 47.201,250.000 47.316 C 249.500 47.447,249.200 47.328,249.200 47.000 C 249.200 46.672,249.500 46.553,250.000 46.684 C 250.440 46.799,250.800 46.941,250.800 47.000 M86.400 47.184 C 85.464 47.418,85.392 47.618,85.282 50.317 L 85.165 53.200 76.016 53.200 C 69.071 53.200,66.818 53.320,66.665 53.700 C 66.504 54.100,66.457 54.100,66.432 53.700 C 66.414 53.425,66.130 53.200,65.800 53.200 C 65.183 53.200,65.021 52.580,65.159 50.750 C 65.209 50.084,64.993 49.606,64.568 49.443 C 63.867 49.174,62.800 49.811,62.800 50.498 C 62.800 50.721,63.065 50.678,63.400 50.400 C 63.847 50.029,64.000 50.022,64.000 50.375 C 64.000 50.646,64.213 50.719,64.500 50.547 C 64.891 50.312,64.889 50.383,64.493 50.873 C 64.214 51.217,64.106 51.810,64.251 52.190 C 64.408 52.598,64.288 53.024,63.958 53.230 C 63.536 53.493,63.340 53.264,63.153 52.289 C 62.949 51.228,62.896 51.375,62.853 53.124 C 62.819 54.472,62.948 55.156,63.207 54.996 C 63.430 54.858,63.515 54.586,63.395 54.392 C 63.120 53.946,64.434 53.249,65.100 53.487 C 65.375 53.586,65.600 53.922,65.600 54.233 C 65.600 54.545,65.735 54.818,65.900 54.841 C 67.761 55.093,87.600 54.970,87.600 54.706 C 87.600 54.512,87.458 54.441,87.284 54.548 C 87.110 54.656,87.127 53.181,87.323 51.272 C 87.519 49.362,87.856 47.690,88.073 47.556 C 88.698 47.168,87.515 46.906,86.400 47.184 M23.829 47.829 C 23.388 48.269,23.200 49.223,23.200 51.016 C 23.200 53.198,23.106 53.539,22.560 53.329 C 22.207 53.194,21.760 53.335,21.566 53.642 C 21.301 54.059,21.211 54.071,21.206 53.687 C 21.201 53.298,20.117 53.187,16.700 53.227 C 12.274 53.278,11.200 53.556,11.200 54.649 C 11.200 55.391,12.366 55.353,12.654 54.602 C 12.781 54.274,13.057 54.112,13.269 54.243 C 13.481 54.374,13.565 54.715,13.455 55.001 C 13.297 55.411,13.559 55.436,14.704 55.120 C 16.054 54.747,20.655 54.931,23.377 55.466 C 24.512 55.689,24.529 55.671,23.833 54.976 C 23.138 54.281,23.138 54.235,23.832 53.727 C 24.229 53.437,24.333 53.200,24.064 53.200 C 23.726 53.200,23.598 52.461,23.648 50.793 C 23.688 49.470,23.812 48.478,23.923 48.590 C 24.181 48.848,25.200 48.019,25.200 47.551 C 25.200 47.001,24.518 47.139,23.829 47.829 M374.806 48.104 C 374.811 48.766,374.903 48.857,375.159 48.452 C 375.442 48.006,375.580 48.035,375.901 48.608 C 376.386 49.475,377.195 49.067,376.938 48.085 C 376.645 46.963,374.798 46.980,374.806 48.104 M335.238 51.535 C 335.162 53.883,335.216 54.085,335.796 53.604 C 336.265 53.214,336.310 52.992,335.965 52.778 C 335.317 52.378,335.852 50.400,336.608 50.400 C 337.575 50.400,337.281 49.309,336.261 49.114 C 335.360 48.941,335.318 49.039,335.238 51.535 M40.132 49.767 C 40.252 50.079,40.102 50.429,39.801 50.544 C 39.499 50.660,39.166 50.540,39.062 50.278 C 38.957 50.015,38.885 50.475,38.901 51.300 C 38.927 52.684,39.600 53.550,39.600 52.200 C 39.600 51.870,39.840 51.600,40.133 51.600 C 40.427 51.600,40.675 51.375,40.686 51.100 C 40.696 50.825,40.835 50.285,40.995 49.900 C 41.206 49.393,41.097 49.200,40.600 49.200 C 40.173 49.200,39.996 49.414,40.132 49.767 M102.049 49.861 C 101.673 50.501,101.562 50.520,101.219 50.000 C 100.940 49.579,100.896 49.876,101.068 51.000 C 101.378 53.019,101.493 53.142,101.966 51.958 L 102.349 51.000 102.421 52.000 C 102.472 52.722,102.580 52.554,102.808 51.400 C 103.161 49.618,102.718 48.722,102.049 49.861 M111.200 51.409 L 111.200 53.200 107.633 53.200 C 105.154 53.200,104.005 53.352,103.865 53.700 C 103.704 54.100,103.657 54.100,103.632 53.700 C 103.586 52.980,102.530 53.084,102.241 53.836 C 102.107 54.186,102.082 54.609,102.186 54.777 C 102.499 55.284,110.562 55.173,110.894 54.657 C 111.106 54.327,111.189 54.339,111.194 54.700 C 111.197 54.975,111.650 55.200,112.200 55.200 C 113.153 55.200,113.200 55.089,113.200 52.864 C 113.200 50.761,113.100 50.483,112.200 50.073 C 111.214 49.624,111.200 49.643,111.200 51.409 M376.400 50.200 C 376.674 50.530,376.741 50.800,376.549 50.800 C 376.357 50.800,376.223 51.475,376.251 52.300 C 376.292 53.509,376.447 53.786,377.051 53.730 C 377.763 53.663,377.765 53.685,377.088 54.182 C 376.413 54.678,376.413 54.719,377.075 54.974 C 377.955 55.311,386.042 54.792,385.808 54.413 C 385.713 54.259,385.897 54.133,386.218 54.133 C 386.744 54.133,386.962 54.522,386.856 55.273 C 386.835 55.423,387.324 55.532,387.942 55.514 C 388.899 55.487,389.040 55.343,388.888 54.546 C 388.789 54.031,388.562 53.700,388.382 53.811 C 388.202 53.922,387.942 53.830,387.804 53.607 C 387.654 53.364,385.403 53.200,382.226 53.200 L 376.898 53.200 377.101 51.400 C 377.273 49.874,377.197 49.600,376.603 49.600 C 376.025 49.600,375.990 49.705,376.400 50.200 M25.194 53.082 C 25.087 54.446,25.145 55.417,25.323 55.239 C 25.500 55.060,25.588 53.944,25.517 52.757 L 25.389 50.600 25.194 53.082 M164.860 52.020 C 164.827 52.581,164.584 53.256,164.320 53.520 C 163.961 53.879,163.958 54.000,164.307 54.000 C 164.565 54.000,164.671 54.270,164.545 54.600 C 164.366 55.064,164.638 55.200,165.745 55.200 C 166.926 55.200,167.136 55.078,166.950 54.500 C 166.812 54.072,166.856 53.972,167.062 54.241 C 167.820 55.231,173.599 55.323,174.436 54.359 C 175.378 53.273,175.386 53.134,174.500 53.282 C 173.999 53.367,173.809 53.144,173.832 52.500 C 173.849 52.005,173.727 51.600,173.560 51.600 C 173.392 51.600,173.198 52.005,173.128 52.500 C 173.058 52.995,172.865 53.355,172.700 53.300 C 172.535 53.245,170.792 53.200,168.827 53.200 L 165.253 53.200 165.087 52.100 C 164.922 51.015,164.919 51.013,164.860 52.020 M189.200 54.100 L 189.200 55.000 200.187 55.000 L 211.174 55.000 211.100 54.100 L 211.026 53.200 200.886 53.200 L 190.746 53.200 190.975 54.100 L 191.204 55.000 190.741 54.100 C 190.486 53.605,190.035 53.200,189.739 53.200 C 189.442 53.200,189.200 53.605,189.200 54.100 M361.200 54.504 C 361.200 54.855,360.885 55.224,360.500 55.324 C 359.844 55.496,359.845 55.510,360.513 55.554 C 361.236 55.601,361.906 54.573,361.449 54.116 C 361.312 53.979,361.200 54.153,361.200 54.504 M6.544 55.885 C 6.114 56.278,5.967 56.467,6.218 56.303 C 6.469 56.140,6.777 56.110,6.903 56.236 C 7.028 56.362,7.503 56.266,7.957 56.023 C 8.637 55.659,8.870 55.723,9.287 56.391 C 9.945 57.445,10.266 57.413,10.484 56.271 C 10.722 55.030,7.793 54.743,6.544 55.885 M389.692 56.200 C 389.597 57.347,390.234 57.554,390.573 56.485 C 390.828 55.682,392.367 55.389,392.461 56.125 C 392.494 56.386,392.543 56.780,392.569 57.001 C 392.666 57.838,393.839 59.098,394.800 59.397 C 395.350 59.568,396.250 60.165,396.800 60.723 C 397.350 61.281,397.575 61.606,397.300 61.445 C 396.395 60.916,396.778 61.782,397.929 62.869 C 398.722 63.617,399.229 63.827,399.629 63.573 C 400.116 63.265,400.112 63.210,399.600 63.200 C 399.067 63.189,399.067 63.144,399.600 62.794 C 400.086 62.475,400.100 62.335,399.673 62.060 C 399.189 61.747,398.908 60.960,398.831 59.700 C 398.814 59.425,398.350 59.200,397.800 59.200 C 397.250 59.200,396.821 59.065,396.847 58.900 C 397.004 57.908,396.695 57.362,395.943 57.306 C 395.472 57.270,394.607 56.782,394.021 56.221 C 392.495 54.758,389.812 54.745,389.692 56.200 M6.233 56.747 C 6.114 56.939,5.487 57.203,4.840 57.332 C 4.155 57.469,3.560 57.897,3.413 58.358 C 3.275 58.793,2.766 59.206,2.281 59.275 C 1.612 59.370,1.370 59.713,1.275 60.700 C 1.197 61.505,0.931 62.000,0.575 62.000 C -0.255 62.000,-0.135 62.795,0.700 62.828 C 1.307 62.852,1.296 62.897,0.621 63.161 C -0.122 63.452,-0.117 63.476,0.721 63.695 C 1.205 63.822,1.600 63.762,1.600 63.563 C 1.600 63.363,1.863 63.200,2.184 63.200 C 2.521 63.200,2.976 62.506,3.259 61.559 C 3.552 60.583,4.085 59.783,4.576 59.585 C 5.377 59.260,5.375 59.250,4.500 59.225 C 4.005 59.211,3.600 59.020,3.600 58.800 C 3.600 58.580,3.825 58.445,4.100 58.500 C 4.375 58.555,4.552 58.330,4.494 58.000 C 4.430 57.633,4.698 57.763,5.187 58.336 C 5.901 59.172,6.050 59.207,6.593 58.664 C 7.308 57.949,7.400 57.429,6.738 57.838 C 6.467 58.006,6.384 57.949,6.539 57.699 C 6.683 57.466,7.206 57.375,7.700 57.497 C 8.731 57.750,8.591 57.512,7.324 56.853 C 6.843 56.603,6.351 56.555,6.233 56.747 M395.816 58.427 C 396.185 59.022,395.758 59.346,394.992 59.052 C 394.638 58.917,394.461 58.624,394.598 58.403 C 394.922 57.878,395.484 57.889,395.816 58.427 M398.955 65.828 C 399.090 66.179,399.200 66.541,399.200 66.633 C 399.200 66.725,399.380 66.800,399.600 66.800 C 400.252 66.800,400.055 65.707,399.355 65.438 C 398.884 65.257,398.776 65.362,398.955 65.828 M0.000 66.200 C 0.000 66.530,0.270 66.800,0.600 66.800 C 0.930 66.800,1.200 66.530,1.200 66.200 C 1.200 65.870,0.930 65.600,0.600 65.600 C 0.270 65.600,0.000 65.870,0.000 66.200 M13.847 69.421 C 13.690 69.831,13.777 69.955,14.105 69.786 C 14.377 69.646,14.196 69.861,13.703 70.265 L 12.806 71.000 12.801 212.078 L 12.797 353.155 13.798 354.236 C 14.349 354.830,14.800 355.100,14.800 354.835 C 14.800 354.570,14.980 354.464,15.200 354.600 C 15.600 354.847,15.779 353.513,15.397 353.131 C 15.286 353.019,15.195 289.509,15.196 211.997 C 15.198 58.964,15.053 69.600,17.138 69.600 C 17.617 69.600,17.581 69.729,16.976 70.185 C 15.997 70.922,380.297 71.123,382.235 70.387 C 382.839 70.157,383.439 70.111,383.567 70.284 C 384.063 70.955,384.687 70.722,384.644 69.881 C 384.586 68.726,382.864 68.424,382.122 69.438 C 381.835 69.831,381.600 69.939,381.600 69.676 C 381.600 69.308,340.350 69.223,200.300 69.300 L 19.000 69.399 200.100 69.500 C 320.367 69.567,381.200 69.735,381.200 70.000 C 381.200 70.561,19.342 70.554,18.996 69.993 C 18.858 69.770,18.532 69.714,18.272 69.870 C 18.013 70.026,18.066 69.826,18.392 69.425 C 18.950 68.739,18.903 68.713,17.592 68.985 C 16.826 69.145,15.991 69.540,15.736 69.865 C 15.338 70.370,15.234 70.336,15.009 69.628 C 14.698 68.647,14.180 68.555,13.847 69.421 M385.200 69.487 C 385.200 69.901,385.416 70.456,385.680 70.720 C 386.053 71.093,386.053 71.200,385.680 71.200 C 385.308 71.200,385.200 102.800,385.200 212.200 L 385.200 353.200 200.600 353.200 C 10.365 353.200,13.044 353.180,16.657 354.566 C 17.191 354.772,17.224 354.711,16.834 354.241 C 16.437 353.763,16.496 353.700,17.173 353.877 C 17.623 353.995,17.904 354.232,17.798 354.404 C 17.692 354.575,17.915 354.835,18.295 354.981 C 18.674 355.127,19.048 355.055,19.126 354.823 C 19.328 354.216,381.200 354.227,381.200 354.833 C 381.200 355.072,381.425 355.184,381.700 355.083 C 381.975 354.982,382.148 354.675,382.084 354.401 C 382.012 354.094,382.204 353.998,382.584 354.151 C 382.923 354.288,383.470 354.509,383.800 354.643 C 384.130 354.776,384.400 354.686,384.400 354.443 C 384.400 354.199,384.580 354.000,384.800 354.000 C 385.020 354.000,385.200 354.270,385.200 354.600 C 385.200 354.930,385.380 355.200,385.600 355.200 C 385.820 355.200,386.000 354.995,386.000 354.744 C 386.000 354.493,386.315 354.049,386.700 353.757 C 387.363 353.253,387.362 353.225,386.671 353.213 C 386.008 353.201,385.999 353.144,386.574 352.569 C 387.405 351.738,387.545 70.330,386.714 70.501 C 386.452 70.556,386.229 70.255,386.219 69.834 C 386.194 68.834,385.200 68.494,385.200 69.487 M386.300 280.068 C 386.244 318.200,386.198 287.120,386.198 211.000 C 386.198 134.880,386.244 103.680,386.300 141.668 C 386.356 179.655,386.356 241.935,386.300 280.068 M290.933 353.900 C 241.176 353.956,159.636 353.956,109.733 353.900 C 59.830 353.844,100.540 353.798,200.200 353.798 C 299.860 353.798,340.690 353.844,290.933 353.900 M0.000 356.400 C 0.000 356.620,0.270 356.800,0.600 356.800 C 0.930 356.800,1.200 356.620,1.200 356.400 C 1.200 356.180,0.930 356.000,0.600 356.000 C 0.270 356.000,0.000 356.180,0.000 356.400 M399.067 356.267 C 398.920 356.413,398.800 357.403,398.800 358.467 C 398.800 359.951,398.655 360.400,398.176 360.400 C 397.833 360.400,397.666 360.583,397.804 360.807 C 397.942 361.030,398.223 361.109,398.428 360.983 C 398.632 360.856,398.800 361.027,398.800 361.362 C 398.800 361.951,397.564 362.866,396.916 362.758 C 395.539 362.528,394.800 362.869,394.800 363.733 C 394.800 364.247,394.665 364.802,394.500 364.967 C 394.335 365.132,394.200 365.432,394.200 365.633 C 394.200 365.835,394.065 366.000,393.900 366.000 C 393.735 366.000,393.420 366.000,393.200 366.000 C 392.980 366.000,392.786 365.685,392.768 365.300 C 392.743 364.743,392.690 364.722,392.509 365.200 C 392.123 366.214,390.921 367.587,390.653 367.320 C 390.514 367.181,390.400 367.277,390.400 367.533 C 390.400 367.790,390.265 367.979,390.100 367.953 C 389.935 367.927,389.710 367.939,389.600 367.980 C 388.291 368.466,386.752 368.340,387.213 367.784 C 387.496 367.443,387.979 367.260,388.285 367.377 C 388.591 367.495,388.732 367.414,388.598 367.197 C 388.291 366.700,14.556 366.702,13.400 367.200 C 12.960 367.389,12.780 367.559,13.000 367.578 C 13.220 367.597,13.130 367.787,12.800 368.000 C 11.980 368.530,11.492 368.498,11.839 367.937 C 12.033 367.623,11.861 367.543,11.307 367.688 C 10.857 367.806,10.244 367.727,9.944 367.513 C 9.533 367.220,9.576 367.182,10.121 367.358 C 10.543 367.494,10.740 367.427,10.597 367.195 C 10.463 366.978,10.016 366.800,9.605 366.800 C 8.713 366.800,7.498 365.689,7.820 365.168 C 7.945 364.965,7.857 364.800,7.624 364.800 C 7.391 364.800,7.200 365.059,7.200 365.376 C 7.200 365.693,6.992 366.081,6.738 366.238 C 6.451 366.416,6.385 366.348,6.564 366.059 C 6.724 365.799,6.576 365.489,6.228 365.355 C 5.885 365.224,5.721 364.927,5.864 364.696 C 6.028 364.432,5.927 364.398,5.594 364.604 C 5.210 364.841,5.134 364.749,5.318 364.270 C 5.457 363.907,5.443 363.636,5.286 363.668 C 4.512 363.827,1.318 361.811,1.476 361.264 C 1.518 361.119,1.968 360.883,2.476 360.740 L 3.400 360.480 2.487 360.440 C 1.986 360.418,1.471 360.130,1.345 359.800 C 0.998 358.897,0.000 359.080,0.000 360.047 C 0.000 360.671,0.193 360.843,0.734 360.701 C 1.313 360.550,1.433 360.695,1.300 361.390 C 1.098 362.448,3.257 364.800,4.431 364.800 C 4.979 364.800,5.200 365.080,5.200 365.773 C 5.200 366.538,5.436 366.774,6.300 366.873 C 7.091 366.964,7.400 367.225,7.401 367.800 C 7.401 368.599,7.668 368.600,199.801 368.600 L 392.200 368.600 392.587 367.718 C 392.811 367.208,393.401 366.786,393.987 366.718 C 394.687 366.636,395.039 366.322,395.128 365.700 C 395.221 365.043,395.523 364.800,396.247 364.800 C 397.476 364.800,399.200 363.014,399.200 361.742 C 399.200 361.224,399.380 360.800,399.600 360.800 C 399.820 360.800,400.000 360.440,400.000 360.000 C 400.000 359.560,399.775 359.197,399.500 359.194 C 399.167 359.190,399.200 359.058,399.600 358.800 C 400.133 358.455,400.133 358.411,399.600 358.400 C 399.067 358.389,399.067 358.344,399.600 357.994 C 400.133 357.644,400.133 357.556,399.600 357.206 C 399.199 356.943,399.166 356.810,399.500 356.806 C 399.775 356.803,400.000 356.620,400.000 356.400 C 400.000 355.945,399.465 355.868,399.067 356.267 M0.000 357.600 C 0.000 357.820,0.270 358.000,0.600 358.000 C 0.930 358.000,1.200 357.820,1.200 357.600 C 1.200 357.380,0.930 357.200,0.600 357.200 C 0.270 357.200,0.000 357.380,0.000 357.600 " stroke="none" fill="#2c7c9c" fill-rule="evenodd"></path><path id="path4" d="M40.475 31.583 C 40.607 33.039,40.371 33.200,38.100 33.206 C 35.541 33.213,34.865 33.487,35.015 34.456 C 35.089 34.936,34.697 35.178,33.546 35.362 C 32.381 35.549,31.881 35.862,31.609 36.576 C 31.398 37.131,30.853 37.594,30.322 37.669 C 29.654 37.764,29.365 38.104,29.273 38.900 C 29.184 39.677,28.920 40.000,28.373 40.000 C 27.948 40.000,27.637 40.135,27.683 40.300 C 28.084 41.752,27.111 44.076,26.176 43.898 L 25.176 43.706 25.288 49.513 L 25.400 55.320 17.759 55.281 L 10.119 55.241 10.306 56.220 C 10.467 57.065,10.335 57.209,9.347 57.268 C 8.716 57.306,7.895 57.356,7.521 57.380 C 7.148 57.404,6.698 57.582,6.521 57.776 C 6.342 57.973,6.421 58.001,6.700 57.841 C 6.975 57.682,7.200 57.666,7.200 57.805 C 7.200 58.295,6.171 59.076,5.018 59.461 C 4.140 59.753,3.712 60.265,3.292 61.525 C 2.985 62.446,2.498 63.200,2.209 63.200 C 1.567 63.200,1.200 64.085,1.200 65.633 C 1.200 66.404,0.996 66.800,0.600 66.800 C 0.179 66.800,-0.000 67.225,-0.000 68.229 C -0.000 71.443,1.871 69.233,1.960 65.914 C 1.988 64.882,2.236 64.302,2.773 64.014 C 3.198 63.787,3.669 63.213,3.820 62.738 C 4.125 61.776,5.887 60.000,6.537 60.000 C 6.767 60.000,7.431 59.546,8.010 58.990 C 9.265 57.788,13.190 57.208,20.094 57.203 C 26.234 57.199,26.724 56.732,27.022 50.600 C 27.269 45.498,27.766 43.403,29.067 41.978 C 29.580 41.416,30.000 40.767,30.000 40.535 C 30.000 39.933,34.013 36.000,34.628 36.000 C 34.911 36.000,35.496 35.550,35.929 35.000 C 36.582 34.170,37.057 34.000,38.732 34.000 C 41.574 34.000,42.800 33.459,42.800 32.204 C 42.800 31.326,42.640 31.199,41.628 31.277 C 40.983 31.326,40.464 31.464,40.475 31.583 M46.267 31.467 C 44.979 32.755,46.696 34.000,49.760 34.000 C 51.558 34.000,52.051 34.149,52.397 34.795 C 52.632 35.233,53.273 35.703,53.822 35.841 C 55.030 36.144,58.400 39.331,58.400 40.169 C 58.400 40.498,58.828 41.180,59.350 41.684 C 60.026 42.335,60.369 43.219,60.536 44.741 C 60.713 46.345,61.033 47.124,61.812 47.846 C 62.461 48.448,62.769 49.070,62.632 49.505 C 62.512 49.887,62.372 51.415,62.322 52.901 C 62.177 57.187,61.538 56.978,75.251 57.123 L 86.875 57.246 88.237 55.843 L 89.600 54.440 89.600 49.475 C 89.600 44.561,89.612 44.495,90.800 43.000 C 91.460 42.169,92.000 41.283,92.000 41.030 C 92.000 40.322,95.645 36.603,97.052 35.876 C 97.740 35.521,98.409 34.953,98.539 34.615 C 98.707 34.177,99.383 33.989,100.887 33.960 C 104.084 33.900,104.979 33.546,105.127 32.284 C 105.235 31.354,105.107 31.200,104.227 31.200 C 103.461 31.200,103.200 31.407,103.200 32.013 C 103.200 33.003,102.855 33.132,99.800 33.282 C 97.658 33.387,97.386 33.497,97.272 34.300 C 97.181 34.942,96.875 35.200,96.205 35.200 C 94.818 35.200,94.000 35.606,94.000 36.296 C 94.000 37.009,92.442 38.473,91.984 38.190 C 91.812 38.084,91.549 38.717,91.400 39.598 C 91.195 40.814,90.946 41.200,90.365 41.200 C 89.944 41.200,89.579 41.425,89.554 41.700 C 89.528 41.975,89.466 42.380,89.415 42.600 C 89.364 42.820,89.294 43.426,89.261 43.947 C 89.214 44.674,89.021 44.846,88.426 44.691 C 87.964 44.570,87.560 44.726,87.426 45.077 C 87.098 45.932,87.135 46.000,87.800 45.745 C 88.190 45.595,88.400 45.755,88.400 46.200 C 88.400 46.679,88.189 46.812,87.700 46.642 C 87.058 46.418,87.060 46.444,87.721 46.959 C 88.180 47.315,88.274 47.575,87.978 47.674 C 87.676 47.775,87.494 49.113,87.457 51.495 L 87.400 55.162 76.000 55.281 C 61.531 55.432,62.800 55.690,62.800 52.602 C 62.800 50.199,63.431 48.804,64.282 49.326 C 64.457 49.433,64.613 48.926,64.628 48.200 C 64.648 47.302,64.497 46.941,64.158 47.071 C 63.219 47.432,62.199 45.267,62.693 43.960 C 63.020 43.094,63.013 42.798,62.665 42.794 C 62.401 42.790,62.459 42.620,62.800 42.400 C 63.130 42.187,63.220 41.982,63.000 41.945 C 62.780 41.908,62.420 41.836,62.200 41.785 C 61.980 41.734,61.595 41.672,61.343 41.646 C 61.092 41.621,60.779 41.172,60.648 40.648 C 60.516 40.124,60.062 39.605,59.638 39.494 C 59.211 39.382,58.808 38.871,58.734 38.346 C 58.646 37.722,58.294 37.357,57.700 37.272 C 57.205 37.202,56.800 36.882,56.800 36.562 C 56.800 36.242,56.336 35.804,55.770 35.589 C 54.674 35.172,53.320 34.019,53.871 33.972 C 54.949 33.880,52.276 33.251,50.708 33.228 C 49.033 33.203,48.786 33.085,48.564 32.200 C 48.322 31.233,46.941 30.793,46.267 31.467 M108.000 32.210 C 108.000 33.481,109.318 34.039,112.091 33.941 C 113.692 33.884,114.230 34.036,114.749 34.692 C 115.107 35.145,115.791 35.632,116.270 35.775 C 117.354 36.099,119.937 38.635,121.000 40.420 C 122.764 43.381,123.633 45.337,123.425 45.880 C 123.304 46.194,123.474 46.970,123.803 47.605 C 124.181 48.336,124.402 49.907,124.406 51.880 C 124.417 57.270,124.233 57.200,138.419 57.200 C 149.195 57.200,149.554 57.175,149.800 56.400 C 149.940 55.960,150.295 55.600,150.589 55.600 C 151.258 55.600,151.574 53.303,151.745 47.200 C 151.820 44.527,151.948 44.082,152.915 43.118 C 153.512 42.523,154.000 41.791,154.000 41.490 C 154.000 40.792,157.885 36.688,159.200 35.998 C 159.750 35.709,160.435 35.142,160.723 34.737 C 161.106 34.196,161.756 34.000,163.163 34.000 C 165.998 34.000,167.600 33.336,167.600 32.161 C 167.600 30.769,165.733 30.799,165.200 32.200 C 164.837 33.155,163.377 33.434,160.100 33.176 C 159.935 33.163,159.702 33.568,159.583 34.076 C 159.426 34.746,159.009 35.055,158.067 35.200 C 156.827 35.391,156.031 36.243,155.360 38.099 C 155.188 38.575,154.804 38.744,154.163 38.628 C 153.644 38.533,153.236 38.579,153.257 38.728 C 153.442 40.054,153.082 41.062,152.300 41.405 C 151.493 41.759,151.379 42.154,151.200 45.235 C 151.014 48.432,150.941 48.665,150.151 48.605 C 149.356 48.545,149.298 48.746,149.234 51.755 C 149.196 53.522,149.122 55.011,149.069 55.064 C 148.905 55.228,125.964 55.298,125.802 55.135 C 125.004 54.337,125.365 52.936,126.338 53.055 L 127.400 53.185 126.400 52.865 C 125.715 52.646,125.438 52.301,125.520 51.772 C 125.586 51.348,125.661 50.750,125.687 50.445 C 125.712 50.140,126.063 49.804,126.467 49.698 C 127.281 49.486,127.474 48.800,126.720 48.800 C 126.347 48.800,126.347 48.693,126.720 48.320 C 126.984 48.056,127.200 47.696,127.200 47.520 C 127.200 47.344,126.808 47.592,126.330 48.070 C 125.202 49.198,124.869 48.505,124.828 44.949 C 124.802 42.654,124.151 41.183,123.465 41.868 C 123.321 42.012,123.011 41.579,122.777 40.905 C 122.542 40.231,122.001 39.589,121.575 39.478 C 120.715 39.253,120.469 37.377,121.264 37.112 C 121.614 36.995,121.611 36.766,121.254 36.179 C 120.788 35.413,120.782 35.413,120.890 36.200 C 120.974 36.809,120.738 37.030,119.900 37.127 C 119.027 37.227,118.800 37.089,118.800 36.458 C 118.800 35.903,118.444 35.585,117.618 35.404 C 116.968 35.261,116.333 34.818,116.206 34.420 C 115.967 33.667,114.441 33.200,112.217 33.200 C 110.641 33.200,110.253 32.864,110.903 32.060 C 111.300 31.571,111.299 31.507,110.900 31.747 C 110.625 31.912,110.400 31.857,110.400 31.624 C 110.400 31.391,109.860 31.200,109.200 31.200 C 108.184 31.200,108.000 31.354,108.000 32.210 M170.276 32.033 C 169.990 33.126,171.993 34.000,174.787 34.000 C 175.894 34.000,176.800 34.183,176.800 34.406 C 176.800 34.629,177.385 35.167,178.100 35.602 C 180.042 36.782,182.400 38.913,182.400 39.488 C 182.400 39.766,182.760 40.218,183.200 40.493 C 183.640 40.768,184.000 41.205,184.000 41.466 C 184.000 41.726,184.452 42.476,185.005 43.133 C 185.777 44.050,185.994 44.730,185.943 46.071 C 185.841 48.770,186.652 50.800,187.831 50.800 C 189.193 50.800,189.171 49.134,187.800 48.400 C 186.667 47.793,186.257 43.449,187.300 43.098 C 188.116 42.824,186.788 41.510,185.923 41.736 C 185.070 41.959,184.400 41.020,184.400 39.600 C 184.400 39.380,184.040 39.200,183.600 39.200 C 183.076 39.200,182.800 38.933,182.800 38.427 C 182.800 38.002,182.440 37.540,182.000 37.400 C 181.560 37.260,181.200 36.895,181.200 36.587 C 181.200 35.869,180.042 35.200,178.800 35.200 C 178.580 35.200,178.400 34.863,178.400 34.450 C 178.400 33.619,177.027 33.200,174.307 33.200 C 173.032 33.200,172.762 33.076,172.953 32.579 C 173.089 32.223,173.022 32.063,172.795 32.203 C 172.578 32.337,172.400 32.167,172.400 31.824 C 172.400 30.842,170.539 31.025,170.276 32.033 M227.700 31.465 C 227.425 31.576,227.200 32.012,227.200 32.433 C 227.200 33.186,226.344 33.345,222.324 33.342 C 221.952 33.342,221.658 33.445,221.671 33.571 C 221.787 34.685,221.450 35.169,220.400 35.400 C 219.608 35.574,219.200 35.909,219.200 36.385 C 219.200 36.782,218.827 37.204,218.370 37.324 C 217.914 37.443,217.445 37.908,217.327 38.357 C 217.210 38.806,216.773 39.282,216.357 39.414 C 215.941 39.546,215.600 40.017,215.600 40.462 C 215.600 40.996,215.185 41.426,214.375 41.732 C 213.157 42.192,213.151 42.207,213.336 44.708 C 213.528 47.301,213.062 48.400,211.771 48.400 C 211.403 48.400,211.200 48.827,211.200 49.600 C 211.200 50.681,211.326 50.800,212.467 50.800 C 213.163 50.800,213.629 50.695,213.501 50.567 C 213.373 50.439,213.517 49.740,213.821 49.013 C 214.184 48.144,214.290 46.989,214.131 45.645 C 213.937 44.012,214.006 43.600,214.470 43.600 C 214.790 43.600,215.350 42.976,215.714 42.212 C 216.077 41.449,216.696 40.455,217.088 40.004 C 218.808 38.023,221.063 35.984,221.800 35.745 C 222.240 35.602,222.835 35.151,223.123 34.743 C 223.516 34.183,224.158 33.999,225.723 33.994 C 228.225 33.987,229.755 33.294,229.928 32.090 C 230.056 31.198,229.056 30.918,227.700 31.465 M232.400 31.951 C 232.400 33.184,233.505 33.735,236.285 33.890 C 238.503 34.014,239.034 34.190,239.686 35.018 C 240.111 35.558,240.706 36.000,241.009 36.000 C 241.312 36.000,241.704 36.229,241.880 36.510 C 242.056 36.790,242.695 37.334,243.300 37.719 C 243.905 38.104,244.400 38.652,244.400 38.937 C 244.400 39.222,244.850 39.847,245.400 40.325 C 245.950 40.803,246.400 41.460,246.400 41.784 C 246.400 42.107,246.927 42.912,247.572 43.571 C 248.612 44.635,248.703 44.919,248.378 46.096 C 248.176 46.825,248.105 47.867,248.220 48.411 C 248.335 48.955,248.542 50.659,248.680 52.197 C 248.891 54.530,249.115 55.177,250.035 56.097 L 251.138 57.200 262.069 57.171 C 275.842 57.134,275.311 57.330,275.600 52.169 C 275.710 50.206,276.001 48.240,276.246 47.800 C 276.492 47.360,276.666 46.505,276.633 45.900 C 276.600 45.295,276.700 44.800,276.855 44.800 C 277.010 44.800,277.253 44.269,277.395 43.621 C 277.538 42.972,278.182 41.777,278.827 40.966 C 279.472 40.154,280.000 39.257,280.000 38.972 C 280.000 38.687,280.365 38.338,280.811 38.197 C 281.257 38.055,281.907 37.503,282.257 36.970 C 282.606 36.436,283.127 36.000,283.415 36.000 C 283.703 36.000,284.447 35.576,285.069 35.059 C 285.892 34.374,286.886 34.057,288.715 33.895 C 291.525 33.647,292.416 33.146,292.112 31.985 C 291.751 30.604,289.429 31.131,289.406 32.600 C 289.403 32.820,288.770 33.047,288.000 33.104 C 285.052 33.323,284.044 33.632,283.803 34.389 C 283.661 34.839,283.119 35.202,282.481 35.275 C 281.712 35.364,281.363 35.660,281.272 36.300 C 281.189 36.883,280.869 37.200,280.362 37.200 C 279.813 37.200,279.508 37.558,279.340 38.400 C 279.208 39.061,278.843 39.600,278.529 39.600 C 278.215 39.600,277.774 40.129,277.549 40.776 C 277.304 41.478,276.930 41.871,276.621 41.753 C 275.917 41.483,275.541 42.545,275.330 45.400 C 275.232 46.720,275.133 48.038,275.109 48.329 C 275.084 48.638,274.762 48.779,274.334 48.667 C 273.153 48.358,273.103 49.067,274.227 50.191 C 275.088 51.052,275.183 51.339,274.770 51.836 C 274.368 52.321,274.200 52.337,273.905 51.919 C 273.622 51.518,273.576 51.537,273.703 52.000 C 273.793 52.330,274.077 52.623,274.333 52.650 C 275.298 52.753,275.348 52.812,274.880 53.280 C 274.616 53.544,274.400 54.084,274.400 54.480 C 274.400 55.170,273.954 55.338,272.200 55.308 C 271.760 55.301,266.801 55.274,261.180 55.248 L 250.960 55.200 250.960 54.243 C 250.960 53.623,251.143 53.357,251.480 53.486 C 252.152 53.744,252.208 50.576,251.538 50.162 C 251.252 49.985,251.185 50.052,251.362 50.338 C 251.519 50.592,251.457 50.800,251.224 50.800 C 250.991 50.800,250.800 50.521,250.800 50.181 C 250.800 49.840,250.366 49.160,249.837 48.669 C 248.971 47.867,248.880 47.474,248.937 44.794 C 248.998 41.908,248.964 41.794,247.900 41.284 C 246.749 40.732,246.445 39.810,247.300 39.465 C 247.685 39.310,247.679 39.256,247.276 39.232 C 246.988 39.214,246.841 39.057,246.949 38.883 C 247.056 38.709,246.783 38.539,246.340 38.505 C 245.281 38.426,243.684 36.784,243.819 35.912 C 243.878 35.534,243.807 35.241,243.663 35.260 C 241.845 35.502,240.800 35.135,240.800 34.255 C 240.800 33.543,240.578 33.308,239.900 33.303 C 235.591 33.272,235.336 33.216,234.873 32.200 C 234.305 30.954,232.400 30.762,232.400 31.951 M294.884 32.179 C 295.045 33.292,296.632 33.987,299.030 33.994 C 300.674 33.999,301.239 34.190,302.000 35.000 C 302.517 35.550,303.108 36.000,303.313 36.000 C 303.907 36.000,307.884 40.205,308.184 41.149 C 308.333 41.619,308.871 42.499,309.380 43.103 C 310.215 44.096,310.327 44.724,310.532 49.601 L 310.758 55.000 312.079 56.115 L 313.400 57.231 324.859 57.115 C 338.451 56.979,338.000 57.123,338.000 52.912 C 338.000 51.501,337.815 50.002,337.590 49.581 C 337.257 48.959,337.408 48.575,338.390 47.548 C 339.395 46.496,339.600 45.954,339.600 44.350 C 339.600 42.731,339.762 42.312,340.600 41.763 C 341.150 41.403,341.600 40.761,341.600 40.338 C 341.600 39.411,344.515 36.549,346.232 35.791 C 346.909 35.491,347.696 34.966,347.981 34.623 C 348.336 34.196,349.205 33.998,350.749 33.994 C 353.281 33.987,354.084 33.635,354.265 32.453 C 354.425 31.403,353.824 31.053,352.477 31.412 C 351.885 31.569,351.623 31.781,351.896 31.881 C 352.827 32.224,351.334 33.200,349.879 33.200 C 348.045 33.200,345.972 33.630,346.180 33.968 C 346.523 34.522,345.669 35.280,344.635 35.339 C 343.897 35.381,343.498 35.671,343.345 36.277 C 343.219 36.779,342.755 37.207,342.262 37.277 C 341.788 37.345,341.378 37.625,341.350 37.900 C 341.322 38.175,341.278 38.670,341.250 39.000 C 341.223 39.330,340.840 39.600,340.400 39.600 C 339.960 39.600,339.636 39.735,339.679 39.900 C 339.946 40.909,339.064 42.067,338.161 41.895 C 337.632 41.794,337.200 41.866,337.200 42.055 C 337.200 42.245,337.425 42.403,337.700 42.406 C 338.065 42.411,338.053 42.506,337.653 42.758 C 337.256 43.010,337.217 43.301,337.508 43.822 C 337.983 44.670,337.375 46.800,336.659 46.800 C 336.404 46.800,336.009 47.398,335.780 48.129 C 335.385 49.389,335.411 49.449,336.282 49.282 C 337.176 49.111,337.200 49.188,337.200 52.253 L 337.200 55.400 325.127 55.294 C 318.487 55.235,313.007 55.141,312.951 55.084 C 312.894 55.028,312.795 53.243,312.731 51.118 C 312.666 48.993,312.478 47.467,312.313 47.727 C 312.148 47.987,311.996 48.020,311.976 47.800 C 311.955 47.580,311.879 47.087,311.806 46.705 C 311.692 46.111,311.797 46.077,312.536 46.471 C 313.316 46.886,313.347 46.866,312.851 46.265 C 312.549 45.899,312.474 45.600,312.684 45.600 C 312.895 45.600,313.067 45.370,313.067 45.089 C 313.067 44.804,312.610 44.583,312.033 44.589 C 311.126 44.599,310.985 44.417,310.876 43.102 C 310.777 41.903,310.559 41.555,309.789 41.362 C 309.260 41.229,308.859 41.003,308.898 40.860 C 309.125 40.029,308.341 38.000,307.791 38.000 C 307.446 38.000,306.856 37.465,306.481 36.810 C 306.057 36.070,305.347 35.522,304.600 35.360 C 303.349 35.088,302.817 34.581,302.806 33.651 C 302.801 33.186,302.907 33.186,303.500 33.651 C 304.133 34.148,304.148 34.134,303.655 33.504 C 303.355 33.122,302.918 32.927,302.685 33.071 C 302.223 33.357,297.519 33.252,297.216 32.949 C 297.114 32.847,297.277 32.367,297.579 31.882 C 298.081 31.077,298.071 31.048,297.464 31.549 C 297.040 31.900,296.800 31.938,296.800 31.653 C 296.800 31.409,296.343 31.247,295.784 31.293 C 295.016 31.357,294.796 31.573,294.884 32.179 M357.483 32.003 C 357.160 33.238,358.606 34.000,361.275 34.000 C 363.162 34.000,363.648 34.143,364.000 34.800 C 364.235 35.240,364.685 35.600,364.999 35.600 C 365.744 35.600,370.400 40.200,370.400 40.936 C 370.400 41.247,370.680 41.735,371.023 42.019 C 372.451 43.204,372.947 45.431,373.371 52.556 C 373.627 56.869,373.704 56.910,382.270 57.280 C 389.082 57.574,392.000 58.041,392.000 58.840 C 392.000 59.047,392.495 59.438,393.100 59.709 C 394.352 60.268,396.400 62.217,396.400 62.850 C 396.400 63.082,396.760 63.571,397.199 63.936 C 397.695 64.347,398.079 65.285,398.211 66.400 C 398.507 68.917,398.766 69.600,399.427 69.600 C 400.203 69.600,400.183 67.326,399.400 66.543 C 399.070 66.213,398.800 65.414,398.800 64.768 C 398.800 64.069,398.464 63.310,397.971 62.896 C 397.516 62.513,396.905 61.639,396.614 60.954 C 396.272 60.146,395.698 59.611,394.983 59.431 C 394.376 59.279,393.533 58.715,393.111 58.177 C 392.558 57.474,391.950 57.200,390.946 57.200 C 389.729 57.200,389.566 57.085,389.675 56.304 L 389.800 55.409 382.431 55.302 C 378.378 55.243,375.002 55.135,374.928 55.061 C 374.665 54.799,374.710 44.869,374.976 44.439 C 375.150 44.157,374.810 44.000,374.024 44.000 C 372.836 44.000,372.800 43.946,372.800 42.157 C 372.800 40.738,372.671 40.364,372.237 40.530 C 371.564 40.789,370.572 38.692,371.023 37.962 C 371.206 37.666,371.156 37.580,370.895 37.741 C 370.022 38.281,368.400 37.270,368.400 36.186 C 368.400 35.618,368.238 35.253,368.041 35.375 C 367.247 35.866,365.263 35.105,365.042 34.225 C 364.848 33.452,364.523 33.326,362.522 33.245 C 360.161 33.149,359.200 32.717,359.200 31.751 C 359.200 30.887,357.718 31.105,357.483 32.003 M44.000 43.224 C 44.000 43.457,43.832 43.544,43.628 43.417 C 43.423 43.291,43.142 43.370,43.004 43.593 C 42.866 43.817,42.293 44.000,41.730 44.000 C 40.568 44.000,38.000 46.516,38.000 47.655 C 38.000 48.039,37.823 48.462,37.606 48.596 C 37.389 48.730,37.213 49.236,37.213 49.720 C 37.218 57.106,37.079 56.944,43.573 57.136 C 48.491 57.283,50.959 56.798,51.625 55.554 C 52.384 54.135,52.084 48.904,51.208 48.291 C 50.772 47.985,50.149 47.097,49.823 46.316 C 49.334 45.145,48.903 44.801,47.365 44.349 C 46.339 44.047,45.413 43.575,45.307 43.300 C 45.073 42.693,44.000 42.630,44.000 43.224 M106.400 43.195 C 106.400 43.413,105.668 43.708,104.774 43.851 C 101.561 44.364,99.251 47.584,100.243 50.167 C 100.627 51.168,101.109 50.903,100.899 49.807 C 100.594 48.210,101.113 46.800,102.008 46.800 C 102.586 46.800,102.800 46.530,102.800 45.800 C 102.800 44.812,102.840 44.800,106.200 44.800 C 109.044 44.800,109.600 44.904,109.600 45.437 C 109.600 45.788,109.960 46.169,110.400 46.284 C 111.028 46.448,111.200 46.830,111.200 48.055 C 111.200 49.333,111.382 49.700,112.200 50.073 C 113.101 50.483,113.200 50.760,113.200 52.875 L 113.200 55.223 107.700 55.111 C 102.240 55.001,102.201 54.993,102.298 54.087 C 102.381 53.308,102.285 53.233,101.642 53.577 C 100.950 53.948,100.273 56.540,100.746 57.012 C 100.849 57.116,103.404 57.200,106.424 57.200 L 111.915 57.200 113.152 56.045 C 114.702 54.597,114.830 49.641,113.348 48.437 C 112.916 48.087,112.278 47.083,111.929 46.207 C 111.392 44.858,111.061 44.565,109.767 44.297 C 108.927 44.122,107.947 43.714,107.589 43.390 C 106.832 42.705,106.400 42.635,106.400 43.195 M168.328 43.437 C 168.038 43.724,167.201 44.064,166.469 44.191 C 163.198 44.760,160.598 50.800,163.625 50.800 C 164.099 50.800,164.398 51.072,164.394 51.500 C 164.389 52.099,164.331 52.114,163.994 51.600 C 163.138 50.296,162.096 53.344,162.643 55.555 L 163.000 57.000 168.200 57.115 C 176.455 57.299,176.779 56.970,175.804 49.400 C 175.481 46.896,173.782 44.414,172.385 44.404 C 172.046 44.402,171.114 44.066,170.313 43.658 C 169.114 43.046,168.763 43.007,168.328 43.437 M230.800 43.065 C 230.800 43.279,229.820 43.763,228.623 44.140 C 227.251 44.573,226.358 45.102,226.209 45.570 C 226.080 45.979,225.643 46.400,225.238 46.506 C 224.280 46.757,223.630 53.741,224.394 55.585 C 225.006 57.063,225.586 57.188,231.875 57.195 L 237.151 57.200 237.382 55.500 C 237.720 53.016,237.432 51.497,236.558 51.154 C 235.945 50.913,235.926 50.851,236.457 50.828 C 239.494 50.698,237.065 44.835,233.717 44.214 C 232.883 44.059,231.885 43.650,231.500 43.304 C 231.115 42.959,230.800 42.851,230.800 43.065 M292.800 43.151 C 292.800 43.530,291.276 44.187,289.500 44.575 C 288.794 44.729,288.400 45.074,288.400 45.539 C 288.400 45.937,287.849 47.095,287.175 48.112 C 286.114 49.714,285.950 50.321,285.950 52.645 C 285.950 56.812,286.218 56.970,293.558 57.128 L 299.496 57.256 299.339 55.728 C 299.096 53.361,298.905 53.015,298.177 53.619 C 297.840 53.899,297.658 54.374,297.774 54.675 C 297.946 55.125,297.006 55.203,292.492 55.111 L 287.000 55.000 286.880 52.922 C 286.773 51.082,286.873 50.770,287.758 50.191 C 288.465 49.727,288.791 49.110,288.878 48.069 C 288.960 47.084,289.198 46.600,289.600 46.600 C 289.930 46.600,290.258 46.195,290.328 45.700 C 290.539 44.215,297.200 44.312,297.200 45.800 C 297.200 46.600,297.400 46.800,298.200 46.800 C 299.135 46.800,299.200 46.932,299.200 48.824 C 299.200 50.071,299.353 50.752,299.600 50.600 C 301.377 49.502,298.445 44.106,295.986 43.950 C 294.615 43.863,294.451 43.811,293.940 43.300 C 293.359 42.719,292.800 42.646,292.800 43.151 M354.692 43.304 C 354.586 43.581,353.680 44.027,352.679 44.294 C 351.500 44.610,350.773 45.055,350.613 45.560 C 350.477 45.989,349.899 47.027,349.329 47.867 C 348.096 49.684,347.571 53.851,348.384 55.370 C 349.525 57.503,360.024 58.048,362.113 56.083 C 365.029 53.340,362.074 44.043,358.269 43.987 C 357.791 43.980,357.051 43.710,356.624 43.387 C 355.671 42.667,354.949 42.636,354.692 43.304 M47.600 45.573 C 47.600 45.998,47.960 46.460,48.400 46.600 C 48.983 46.785,49.200 47.205,49.200 48.151 C 49.200 48.864,49.483 49.796,49.830 50.224 C 50.176 50.651,50.321 50.730,50.153 50.400 C 49.889 49.883,49.941 49.876,50.523 50.349 C 51.007 50.741,51.200 51.511,51.200 53.049 L 51.200 55.200 45.800 55.271 C 42.830 55.311,40.003 55.356,39.518 55.371 C 38.737 55.397,38.646 55.216,38.722 53.800 C 38.769 52.920,38.797 50.985,38.783 49.500 C 38.760 47.044,38.831 46.800,39.571 46.800 C 40.105 46.800,40.471 46.457,40.636 45.800 C 40.982 44.421,47.600 44.206,47.600 45.573 M172.436 45.899 C 173.076 46.503,173.600 47.403,173.600 47.899 C 173.600 48.394,173.766 48.800,173.969 48.800 C 174.172 48.800,174.059 49.360,173.718 50.045 C 173.376 50.729,173.255 51.404,173.448 51.545 C 173.642 51.685,173.800 52.160,173.800 52.600 C 173.800 53.140,174.027 53.362,174.500 53.282 C 175.383 53.134,175.377 53.274,174.453 54.339 C 173.483 55.457,164.121 55.704,164.545 54.600 C 164.671 54.270,164.565 54.000,164.307 54.000 C 163.958 54.000,163.961 53.879,164.320 53.520 C 164.999 52.841,164.918 50.196,164.200 49.600 C 163.870 49.326,163.606 48.899,163.613 48.651 C 163.620 48.403,163.910 48.560,164.257 49.000 C 164.858 49.761,164.877 49.731,164.643 48.389 C 164.449 47.277,164.559 46.862,165.162 46.427 C 165.583 46.124,165.834 45.634,165.721 45.338 C 165.267 44.155,171.105 44.643,172.436 45.899 M234.716 45.914 C 235.319 46.531,235.742 47.356,235.664 47.762 C 235.584 48.179,235.697 48.387,235.926 48.245 C 236.151 48.106,236.278 48.307,236.212 48.698 C 236.147 49.084,235.938 49.370,235.747 49.333 C 235.556 49.296,235.463 50.262,235.540 51.481 C 235.652 53.252,235.571 53.635,235.140 53.390 C 234.705 53.142,234.697 53.187,235.100 53.621 C 236.370 54.989,235.743 55.200,230.400 55.200 C 225.957 55.200,225.200 55.109,225.200 54.576 C 225.200 54.202,225.387 54.068,225.668 54.242 C 225.990 54.441,226.050 54.306,225.859 53.809 C 225.639 53.236,225.693 53.179,226.120 53.533 C 226.941 54.215,227.046 50.303,226.229 49.486 C 225.698 48.955,225.695 48.819,226.207 48.394 C 226.528 48.128,226.701 47.763,226.591 47.585 C 225.202 45.339,232.656 43.806,234.716 45.914 M359.570 45.300 C 359.427 46.403,359.635 46.800,360.355 46.800 C 361.244 46.800,361.450 47.884,361.420 52.387 L 361.400 55.373 355.423 55.285 C 348.944 55.189,348.817 55.144,348.806 52.918 C 348.800 51.540,350.344 49.600,351.447 49.600 C 351.986 49.600,351.984 49.527,351.429 48.971 C 350.556 48.099,350.643 46.904,351.600 46.600 C 352.040 46.460,352.400 45.998,352.400 45.573 C 352.400 44.866,352.709 44.800,356.018 44.800 C 358.680 44.800,359.618 44.932,359.570 45.300 M148.006 51.900 C 148.009 52.505,148.187 53.270,148.400 53.600 C 148.684 54.039,148.789 53.745,148.794 52.500 C 148.797 51.565,148.620 50.800,148.400 50.800 C 148.180 50.800,148.003 51.295,148.006 51.900 M211.154 53.433 C 211.129 53.635,211.140 54.115,211.179 54.500 C 211.245 55.151,210.486 55.200,200.225 55.200 C 189.467 55.200,189.200 55.181,189.200 54.400 C 189.200 53.960,188.950 53.600,188.643 53.600 C 188.133 53.600,188.071 56.604,188.570 57.104 C 188.682 57.216,208.313 57.304,211.662 57.208 C 212.007 57.198,211.843 53.709,211.480 53.347 C 211.326 53.193,211.179 53.232,211.154 53.433 M12.623 68.889 C 12.280 69.378,12.000 70.008,12.000 70.289 C 12.000 70.570,11.730 70.800,11.400 70.800 C 10.521 70.800,10.482 351.238,11.361 351.967 C 11.669 352.223,12.043 352.920,12.192 353.516 C 12.341 354.112,12.746 354.914,13.092 355.298 C 13.756 356.035,385.519 356.429,386.655 355.694 C 386.905 355.532,387.394 354.719,387.740 353.886 C 388.087 353.053,388.647 352.096,388.984 351.759 C 389.534 351.209,389.587 336.508,389.499 211.180 L 389.400 71.215 388.479 70.570 C 387.973 70.216,387.627 69.719,387.711 69.466 C 388.096 68.311,385.889 67.589,384.133 68.294 C 383.561 68.524,383.708 68.634,384.800 68.794 C 385.856 68.949,386.205 69.197,386.219 69.800 C 386.229 70.240,386.454 70.555,386.719 70.500 C 387.026 70.436,387.200 70.943,387.201 71.900 C 387.345 263.814,387.154 353.435,386.601 353.844 C 386.270 354.088,386.000 354.493,386.000 354.744 C 386.000 355.085,339.025 355.200,200.346 355.200 L 14.692 355.200 13.744 354.178 L 12.797 353.155 12.801 212.078 L 12.806 71.000 13.703 70.265 C 14.196 69.861,14.377 69.646,14.105 69.786 C 13.777 69.955,13.690 69.831,13.847 69.421 C 13.992 69.044,14.580 68.798,15.343 68.794 C 16.302 68.789,16.458 68.696,16.000 68.400 C 14.931 67.709,13.282 67.948,12.623 68.889 M0.000 354.800 C 0.000 355.600,0.200 356.000,0.600 356.000 C 1.113 356.000,1.489 358.504,1.267 360.441 C 1.252 360.573,1.662 360.601,2.179 360.502 C 2.963 360.352,3.164 360.528,3.391 361.561 C 3.580 362.422,3.898 362.800,4.432 362.800 C 5.165 362.800,5.374 363.195,5.228 364.306 C 5.192 364.585,5.306 364.788,5.481 364.759 C 6.492 364.589,8.013 364.855,7.820 365.168 C 6.756 366.889,-3.525 366.807,200.329 366.700 L 391.800 366.600 392.195 365.700 C 392.467 365.079,392.932 364.800,393.695 364.800 C 394.599 364.800,394.800 364.623,394.800 363.828 C 394.800 363.124,395.049 362.820,395.700 362.728 C 396.278 362.646,396.646 362.278,396.728 361.701 C 396.807 361.140,397.221 360.710,397.828 360.557 C 398.693 360.340,398.800 360.096,398.800 358.344 C 398.800 356.963,398.979 356.306,399.400 356.145 C 400.202 355.837,400.209 353.600,399.408 353.600 C 398.809 353.600,398.622 354.137,398.242 356.955 C 398.127 357.811,397.665 358.853,397.216 359.271 C 396.767 359.689,396.400 360.210,396.400 360.429 C 396.400 361.192,393.583 363.636,391.843 364.382 C 390.878 364.795,390.023 365.331,389.943 365.572 C 389.837 365.889,337.227 366.012,199.998 366.016 L 10.200 366.022 9.651 365.211 C 9.349 364.765,8.775 364.400,8.376 364.400 C 7.976 364.400,7.058 363.860,6.336 363.200 C 5.613 362.540,4.904 362.000,4.759 362.000 C 4.615 362.000,4.271 361.453,3.994 360.785 C 3.717 360.116,3.155 359.390,2.745 359.171 C 2.187 358.872,2.000 358.318,2.000 356.960 C 2.000 354.907,1.450 353.600,0.586 353.600 C 0.202 353.600,0.000 354.013,0.000 354.800 " stroke="none" fill="#2c7ca4" fill-rule="evenodd"></path></g>
-                                        </svg>
-                                        <span>Menu</span>
-                                    </div>
-                                    <div class="dtl-dis">
-                                        <ul class="dis-list">
-                                            <li ng-repeat="menu_info in menu_info_data | limitTo:6">
+    									<ul class="dis-list list-ul-cus">
+    										<li>
+    											<span>Description</span>
+    											<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_desc}}" dd-text-collapse-cond="true">{{story_data.story_desc}}</label>
+    										</li>
+    									
+    										<li>
+    											<span>What differentiate you from your competitiors</span>
+    											<label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{story_data.story_diff}}" dd-text-collapse-cond="true">{{story_data.story_diff}}</label>
+    										</li>
+    								
+    									</ul>
+    								</div>
+    								<div class="about-more" ng-if="story_data">
+    									<a href="#" ng-click="open_business_story();">View More <img src="<?php echo base_url().'assets/'; ?>n-images/detail/down-arrow.png"></a>
+    								</div>
+    								
+    							</div>
+								</div>
+								<div class="add-menu move-menu">
+    							<div class="right-info-box" ng-if="menu_info_data.length > '0'">
+    								<div class="dtl-title">
+    									<svg width="25" height="25" viewBox="0 0 400 400" ><g id="svgg"><path id="path0" d="M116.263 32.069 C 116.629 32.474,117.035 32.689,117.164 32.548 C 117.294 32.406,117.174 32.210,116.898 32.111 C 116.621 32.012,116.478 31.797,116.580 31.633 C 116.682 31.468,116.502 31.333,116.181 31.333 C 115.698 31.333,115.713 31.461,116.263 32.069 M178.283 31.988 C 179.048 32.883,179.339 32.827,178.967 31.857 C 178.828 31.496,178.465 31.200,178.161 31.200 C 177.731 31.200,177.758 31.376,178.283 31.988 M283.200 32.076 C 283.200 32.847,283.260 32.877,283.700 32.322 C 283.975 31.976,284.470 31.596,284.800 31.478 C 285.132 31.359,284.908 31.249,284.300 31.232 C 283.425 31.206,283.200 31.379,283.200 32.076 M345.372 31.645 C 345.077 32.123,345.965 32.869,346.463 32.561 C 346.838 32.329,346.437 31.200,345.981 31.200 C 345.797 31.200,345.524 31.400,345.372 31.645 M31.297 34.174 C 31.252 34.766,31.327 34.841,31.570 34.448 C 31.755 34.150,32.150 33.755,32.448 33.570 C 32.841 33.327,32.766 33.252,32.174 33.297 C 31.663 33.335,31.335 33.663,31.297 34.174 M93.467 33.467 C 92.738 34.195,93.184 35.338,93.932 34.661 C 94.335 34.297,94.795 34.128,94.954 34.287 C 95.112 34.446,95.124 34.266,94.978 33.888 C 94.711 33.191,93.954 32.980,93.467 33.467 M306.200 34.096 C 306.234 34.568,306.460 35.020,306.700 35.100 C 306.964 35.188,307.051 34.918,306.920 34.417 C 306.621 33.271,306.123 33.049,306.200 34.096 M367.600 33.624 C 367.600 33.857,367.761 33.948,367.958 33.826 C 368.155 33.704,368.429 33.899,368.568 34.260 C 368.706 34.620,368.909 34.825,369.019 34.715 C 369.129 34.605,369.105 34.219,368.967 33.857 C 368.689 33.134,367.600 32.948,367.600 33.624 M184.000 35.354 C 184.000 35.439,184.269 36.024,184.598 36.654 C 184.976 37.379,185.196 37.552,185.198 37.124 C 185.199 36.752,185.017 36.334,184.793 36.196 C 184.570 36.058,184.491 35.777,184.617 35.572 C 184.744 35.368,184.657 35.200,184.424 35.200 C 184.191 35.200,184.000 35.269,184.000 35.354 M215.569 35.385 C 215.553 35.393,215.476 35.731,215.400 36.135 C 215.265 36.846,215.288 36.846,216.130 36.139 C 216.609 35.737,217.065 35.371,217.145 35.326 C 217.257 35.262,215.702 35.320,215.569 35.385 M89.467 37.467 C 88.738 38.195,89.184 39.338,89.932 38.661 C 90.335 38.297,90.795 38.128,90.954 38.287 C 91.112 38.446,91.124 38.266,90.978 37.888 C 90.711 37.191,89.954 36.980,89.467 37.467 M310.200 38.096 C 310.234 38.568,310.460 39.020,310.700 39.100 C 310.964 39.188,311.051 38.918,310.920 38.417 C 310.621 37.271,310.123 37.049,310.200 38.096 M62.232 39.549 C 62.078 39.797,62.143 40.000,62.376 40.000 C 62.609 40.000,62.814 40.315,62.832 40.700 C 62.849 41.092,62.950 41.187,63.060 40.915 C 63.343 40.218,62.588 38.973,62.232 39.549 M251.200 47.989 C 251.200 48.847,251.804 49.369,252.383 49.011 C 252.881 48.703,252.497 47.723,251.769 47.443 C 251.399 47.302,251.200 47.493,251.200 47.989 M233.288 48.063 C 233.373 48.318,233.879 48.593,234.413 48.675 C 235.357 48.819,235.362 48.806,234.592 48.224 C 233.636 47.502,233.078 47.433,233.288 48.063 M351.200 51.048 C 351.200 51.655,351.368 51.943,351.627 51.783 C 351.862 51.638,351.954 51.258,351.832 50.939 C 351.709 50.620,351.775 50.461,351.977 50.586 C 352.179 50.711,352.435 50.667,352.545 50.490 C 352.655 50.312,352.397 50.140,351.972 50.108 C 351.400 50.065,351.200 50.308,351.200 51.048 M48.228 51.231 C 48.713 51.767,49.036 51.893,49.139 51.584 C 49.226 51.322,49.051 50.951,48.749 50.760 C 47.751 50.128,47.464 50.387,48.228 51.231 M314.893 52.000 C 314.893 52.770,314.975 53.085,315.076 52.700 C 315.176 52.315,315.176 51.685,315.076 51.300 C 314.975 50.915,314.893 51.230,314.893 52.000 M39.600 52.233 C 39.600 52.582,39.814 52.795,40.075 52.708 C 40.817 52.461,40.940 51.600,40.233 51.600 C 39.885 51.600,39.600 51.885,39.600 52.233 M359.279 52.036 C 359.480 52.642,361.200 52.919,361.200 52.345 C 361.200 52.155,361.035 52.000,360.833 52.000 C 360.631 52.000,360.156 51.881,359.778 51.736 C 359.295 51.551,359.147 51.640,359.279 52.036 M5.829 55.829 C 5.483 56.174,5.200 56.624,5.200 56.829 C 5.200 57.326,5.890 57.302,6.204 56.793 C 6.342 56.570,6.668 56.514,6.928 56.670 C 7.233 56.853,7.217 56.728,6.883 56.316 C 6.461 55.794,6.461 55.640,6.883 55.470 C 7.229 55.332,7.244 55.253,6.929 55.232 C 6.669 55.214,6.174 55.483,5.829 55.829 M393.060 55.503 C 392.759 55.990,393.902 57.308,394.373 57.016 C 394.608 56.871,394.800 56.590,394.800 56.390 C 394.800 55.893,393.294 55.125,393.060 55.503 M0.000 61.600 C 0.000 61.820,0.270 62.000,0.600 62.000 C 0.930 62.000,1.200 61.820,1.200 61.600 C 1.200 61.380,0.930 61.200,0.600 61.200 C 0.270 61.200,0.000 61.380,0.000 61.600 M16.267 69.867 C 15.753 70.380,16.009 70.626,17.100 70.668 C 17.774 70.694,17.906 70.635,17.442 70.515 C 16.833 70.357,16.793 70.250,17.242 69.966 C 17.701 69.675,17.688 69.611,17.167 69.606 C 16.818 69.603,16.413 69.720,16.267 69.867 M188.212 106.387 C 187.670 106.985,187.645 107.199,188.074 107.546 C 188.363 107.780,189.246 108.512,190.037 109.172 C 192.730 111.421,195.213 111.896,194.892 110.100 C 194.571 108.303,193.608 107.494,192.086 107.741 C 190.971 107.922,190.694 107.805,190.327 107.000 C 189.741 105.713,189.012 105.502,188.212 106.387 M23.200 201.000 L 23.200 252.800 33.200 252.800 L 43.200 252.800 43.200 222.655 L 43.200 192.511 44.183 192.699 C 45.105 192.875,45.174 193.067,45.283 195.743 C 45.389 198.343,45.480 198.611,46.283 198.726 C 47.087 198.840,47.176 199.108,47.283 201.726 C 47.390 204.343,47.479 204.611,48.283 204.726 C 49.087 204.840,49.176 205.108,49.283 207.726 C 49.390 210.343,49.479 210.611,50.283 210.726 C 51.087 210.840,51.176 211.108,51.283 213.726 C 51.390 216.343,51.479 216.611,52.283 216.726 C 53.087 216.840,53.176 217.108,53.283 219.726 C 53.390 222.343,53.479 222.611,54.283 222.726 C 55.087 222.840,55.176 223.108,55.283 225.726 C 55.390 228.343,55.479 228.611,56.283 228.726 C 57.087 228.840,57.176 229.108,57.283 231.726 C 57.390 234.343,57.479 234.611,58.283 234.726 C 59.087 234.840,59.176 235.108,59.283 237.726 C 59.390 240.343,59.479 240.611,60.283 240.726 C 61.087 240.840,61.176 241.108,61.283 243.726 C 61.390 246.343,61.479 246.611,62.283 246.726 C 63.087 246.840,63.176 247.108,63.283 249.726 L 63.400 252.600 73.972 252.707 C 85.970 252.828,85.185 253.066,85.194 249.300 C 85.199 247.116,85.296 246.800,85.957 246.800 C 86.943 246.800,87.200 246.050,87.200 243.167 C 87.200 241.111,87.300 240.800,87.957 240.800 C 88.943 240.800,89.200 240.050,89.200 237.167 C 89.200 235.111,89.300 234.800,89.957 234.800 C 90.943 234.800,91.200 234.050,91.200 231.167 C 91.200 229.111,91.300 228.800,91.957 228.800 C 92.943 228.800,93.200 228.050,93.200 225.167 C 93.200 223.111,93.300 222.800,93.957 222.800 C 94.943 222.800,95.200 222.050,95.200 219.167 C 95.200 217.111,95.300 216.800,95.957 216.800 C 96.943 216.800,97.200 216.050,97.200 213.167 C 97.200 211.111,97.300 210.800,97.957 210.800 C 98.943 210.800,99.200 210.050,99.200 207.167 C 99.200 205.111,99.300 204.800,99.957 204.800 C 100.943 204.800,101.200 204.050,101.200 201.167 C 101.200 199.111,101.300 198.800,101.957 198.800 C 102.943 198.800,103.200 198.050,103.200 195.167 C 103.200 193.101,103.297 192.800,103.967 192.800 C 104.388 192.800,104.824 192.575,104.935 192.300 C 105.046 192.025,105.151 205.525,105.168 222.300 L 105.200 252.800 115.200 252.800 L 125.200 252.800 125.200 201.000 L 125.200 149.200 112.200 149.200 L 99.200 149.200 99.200 150.172 C 99.200 150.876,98.951 151.180,98.300 151.272 C 97.475 151.389,97.390 151.640,97.283 154.274 C 97.176 156.892,97.087 157.160,96.283 157.274 C 95.479 157.389,95.390 157.657,95.283 160.274 C 95.176 162.892,95.087 163.160,94.283 163.274 C 93.479 163.389,93.390 163.657,93.283 166.274 C 93.176 168.892,93.087 169.160,92.283 169.274 C 91.479 169.389,91.390 169.657,91.283 172.274 C 91.176 174.892,91.087 175.160,90.283 175.274 C 89.451 175.393,89.393 175.623,89.286 179.300 C 89.173 183.147,89.158 183.200,88.186 183.200 C 87.226 183.200,87.200 183.278,87.200 186.200 C 87.200 189.133,87.178 189.200,86.200 189.200 C 85.222 189.200,85.200 189.267,85.200 192.200 C 85.200 195.133,85.178 195.200,84.200 195.200 C 83.222 195.200,83.200 195.267,83.200 198.200 C 83.200 201.133,83.178 201.200,82.200 201.200 C 81.222 201.200,81.200 201.267,81.200 204.200 C 81.200 207.133,81.178 207.200,80.200 207.200 C 79.222 207.200,79.200 207.267,79.200 210.200 C 79.200 213.133,79.178 213.200,78.200 213.200 C 77.222 213.200,77.200 213.267,77.200 216.200 C 77.200 219.133,77.178 219.200,76.200 219.200 C 75.437 219.200,75.194 219.413,75.175 220.100 L 75.149 221.000 74.788 220.100 C 74.589 219.605,74.150 219.200,73.813 219.200 C 73.345 219.200,73.200 218.732,73.200 217.226 C 73.200 214.837,72.635 213.200,71.810 213.200 C 71.346 213.200,71.200 212.728,71.200 211.226 C 71.200 208.837,70.635 207.200,69.810 207.200 C 69.346 207.200,69.200 206.728,69.200 205.226 C 69.200 202.837,68.635 201.200,67.810 201.200 C 67.346 201.200,67.200 200.728,67.200 199.226 C 67.200 196.837,66.635 195.200,65.810 195.200 C 65.332 195.200,65.200 194.687,65.200 192.833 C 65.200 189.962,64.943 189.200,63.975 189.200 C 63.334 189.200,63.219 188.812,63.118 186.300 C 63.010 183.656,62.922 183.389,62.117 183.274 C 61.313 183.160,61.224 182.892,61.117 180.274 C 61.010 177.657,60.921 177.389,60.117 177.274 C 59.313 177.160,59.224 176.892,59.117 174.274 C 59.010 171.657,58.921 171.389,58.117 171.274 C 57.313 171.160,57.224 170.892,57.117 168.274 C 57.010 165.657,56.921 165.389,56.117 165.274 C 55.313 165.160,55.224 164.892,55.117 162.274 C 55.010 159.657,54.921 159.389,54.117 159.274 C 53.313 159.160,53.224 158.892,53.117 156.274 C 53.003 153.469,52.974 153.397,51.900 153.273 C 50.866 153.154,50.800 153.029,50.800 151.173 L 50.800 149.200 37.000 149.200 L 23.200 149.200 23.200 201.000 M161.200 176.195 C 161.200 177.179,161.137 177.200,158.200 177.200 C 155.267 177.200,155.200 177.222,155.200 178.200 C 155.200 179.000,155.000 179.200,154.200 179.200 C 153.400 179.200,153.200 179.400,153.200 180.200 C 153.200 181.133,153.067 181.200,151.200 181.200 C 149.333 181.200,149.200 181.267,149.200 182.200 C 149.200 183.000,149.000 183.200,148.200 183.200 C 147.400 183.200,147.200 183.400,147.200 184.200 C 147.200 185.000,147.000 185.200,146.200 185.200 C 145.267 185.200,145.200 185.333,145.200 187.200 C 145.200 189.067,145.133 189.200,144.200 189.200 C 143.400 189.200,143.200 189.400,143.200 190.200 C 143.200 191.000,143.000 191.200,142.200 191.200 C 141.269 191.200,141.200 191.335,141.200 193.172 C 141.200 194.913,141.094 195.159,140.300 195.272 C 139.447 195.393,139.394 195.601,139.286 199.274 C 139.178 202.928,139.121 203.155,138.286 203.274 L 137.400 203.400 137.400 215.000 L 137.400 226.600 138.300 226.728 C 139.164 226.851,139.200 227.013,139.200 230.828 C 139.200 234.798,139.200 234.800,140.200 234.800 C 141.133 234.800,141.200 234.933,141.200 236.800 C 141.200 238.667,141.267 238.800,142.200 238.800 C 143.133 238.800,143.200 238.933,143.200 240.800 C 143.200 242.667,143.267 242.800,144.200 242.800 C 145.000 242.800,145.200 243.000,145.200 243.800 C 145.200 244.600,145.400 244.800,146.200 244.800 C 147.000 244.800,147.200 245.000,147.200 245.800 C 147.200 246.600,147.400 246.800,148.200 246.800 C 149.000 246.800,149.200 247.000,149.200 247.800 C 149.200 248.600,149.400 248.800,150.200 248.800 C 151.000 248.800,151.200 249.000,151.200 249.800 C 151.200 250.733,151.333 250.800,153.200 250.800 C 155.067 250.800,155.200 250.867,155.200 251.800 C 155.200 252.778,155.267 252.800,158.200 252.800 C 161.133 252.800,161.200 252.822,161.200 253.800 L 161.200 254.800 176.200 254.800 L 191.200 254.800 191.200 253.800 C 191.200 252.829,191.281 252.800,193.992 252.800 C 196.637 252.800,196.798 252.747,197.036 251.800 C 197.216 251.082,197.557 250.800,198.243 250.800 C 198.997 250.800,199.200 250.588,199.200 249.800 C 199.200 248.882,199.347 248.800,200.992 248.800 C 202.571 248.800,202.815 248.681,203.036 247.800 C 203.192 247.179,203.570 246.800,204.036 246.800 C 204.501 246.800,204.880 246.421,205.036 245.800 C 205.191 245.182,205.571 244.800,206.030 244.800 C 206.619 244.800,206.827 244.387,207.038 242.800 C 207.272 241.037,207.415 240.800,208.252 240.800 C 209.121 240.800,209.200 240.636,209.200 238.828 C 209.200 237.087,209.306 236.841,210.100 236.728 C 210.949 236.607,211.006 236.392,211.115 232.900 L 211.230 229.200 210.205 229.200 C 209.480 229.200,209.069 228.908,208.800 228.200 L 208.420 227.200 199.810 227.200 L 191.200 227.200 191.200 228.200 C 191.200 229.000,191.000 229.200,190.200 229.200 C 189.400 229.200,189.200 229.400,189.200 230.200 C 189.200 231.000,189.000 231.200,188.200 231.200 C 187.400 231.200,187.200 231.400,187.200 232.200 C 187.200 233.000,187.000 233.200,186.200 233.200 C 185.400 233.200,185.200 233.400,185.200 234.200 C 185.200 235.000,185.000 235.200,184.200 235.200 C 183.400 235.200,183.200 235.400,183.200 236.200 C 183.200 237.178,183.133 237.200,180.200 237.200 C 177.267 237.200,177.200 237.222,177.200 238.200 C 177.200 239.003,177.001 239.200,176.190 239.200 C 175.481 239.200,175.067 238.902,174.800 238.200 C 174.449 237.276,174.224 237.200,171.838 237.200 C 169.465 237.200,169.245 237.127,169.128 236.300 C 169.019 235.532,168.721 235.382,167.100 235.278 C 165.385 235.168,165.200 235.061,165.200 234.178 C 165.200 233.401,164.994 233.200,164.200 233.200 C 163.400 233.200,163.200 233.000,163.200 232.200 C 163.200 231.400,163.000 231.200,162.200 231.200 C 161.328 231.200,161.200 231.024,161.200 229.833 C 161.200 227.948,160.847 227.200,159.957 227.200 C 159.317 227.200,159.200 226.896,159.200 225.226 C 159.200 222.798,158.676 221.327,157.723 221.080 C 157.325 220.977,169.195 220.872,184.100 220.846 L 211.200 220.800 211.200 211.026 C 211.200 201.259,210.958 199.200,209.810 199.200 C 209.332 199.200,209.200 198.687,209.200 196.833 C 209.200 193.950,208.943 193.200,207.957 193.200 C 207.362 193.200,207.200 192.908,207.200 191.833 C 207.200 189.948,206.847 189.200,205.957 189.200 C 205.416 189.200,205.200 188.914,205.200 188.200 C 205.200 187.400,205.000 187.200,204.200 187.200 C 203.400 187.200,203.200 187.000,203.200 186.200 C 203.200 185.400,203.000 185.200,202.200 185.200 C 201.400 185.200,201.200 185.000,201.200 184.200 C 201.200 183.400,201.000 183.200,200.200 183.200 C 199.400 183.200,199.200 183.000,199.200 182.200 C 199.200 181.408,198.998 181.200,198.228 181.200 C 197.524 181.200,197.220 180.951,197.128 180.300 C 197.019 179.532,196.721 179.382,195.100 179.278 C 193.385 179.168,193.200 179.061,193.200 178.178 C 193.200 177.273,193.053 177.200,191.228 177.200 C 189.487 177.200,189.241 177.094,189.128 176.300 L 189.000 175.400 175.100 175.295 L 161.200 175.190 161.200 176.195 M247.472 175.462 C 247.322 175.611,247.200 176.063,247.200 176.467 C 247.200 177.080,246.873 177.200,245.200 177.200 C 243.333 177.200,243.200 177.267,243.200 178.200 C 243.200 179.000,243.000 179.200,242.200 179.200 C 241.400 179.200,241.200 179.000,241.200 178.200 L 241.200 177.200 232.200 177.200 L 223.200 177.200 223.200 215.000 L 223.200 252.800 233.200 252.800 L 243.200 252.800 243.200 228.828 L 243.200 204.856 244.100 204.728 C 244.868 204.619,245.018 204.321,245.122 202.700 C 245.222 201.139,245.380 200.800,246.008 200.800 C 246.623 200.800,246.824 200.410,247.038 198.800 C 247.272 197.037,247.415 196.800,248.252 196.800 C 248.997 196.800,249.200 196.586,249.200 195.800 C 249.200 194.882,249.347 194.800,250.992 194.800 C 252.571 194.800,252.815 194.681,253.036 193.800 C 253.261 192.904,253.490 192.800,255.243 192.800 C 257.064 192.800,257.200 192.730,257.200 191.800 C 257.200 191.000,257.400 190.800,258.200 190.800 C 259.000 190.800,259.200 191.000,259.200 191.800 C 259.200 192.731,259.335 192.800,261.172 192.800 C 262.913 192.800,263.159 192.906,263.272 193.700 C 263.381 194.466,263.679 194.618,265.279 194.721 L 267.158 194.842 267.279 196.721 C 267.382 198.321,267.534 198.619,268.300 198.728 L 269.200 198.856 269.200 225.828 L 269.200 252.800 279.200 252.800 L 289.200 252.800 289.200 221.026 C 289.200 189.269,289.115 187.200,287.810 187.200 C 287.430 187.200,287.200 186.832,287.200 186.226 C 287.200 184.765,286.496 183.200,285.838 183.200 C 285.518 183.200,285.198 182.795,285.128 182.300 C 285.048 181.735,284.679 181.354,284.138 181.277 C 283.613 181.202,283.179 180.772,283.030 180.177 C 282.816 179.323,282.559 179.200,280.992 179.200 C 279.347 179.200,279.200 179.118,279.200 178.200 C 279.200 177.269,279.065 177.200,277.228 177.200 C 275.487 177.200,275.241 177.094,275.128 176.300 L 275.000 175.400 261.372 175.295 C 253.876 175.237,247.621 175.312,247.472 175.462 M305.298 207.900 L 305.400 238.600 306.283 238.726 C 307.087 238.840,307.176 239.108,307.283 241.726 C 307.390 244.360,307.475 244.611,308.300 244.728 C 308.951 244.820,309.200 245.124,309.200 245.828 C 309.200 246.598,309.408 246.800,310.200 246.800 C 311.000 246.800,311.200 247.000,311.200 247.800 C 311.200 248.600,311.400 248.800,312.200 248.800 C 313.000 248.800,313.200 249.000,313.200 249.800 C 313.200 250.600,313.400 250.800,314.200 250.800 C 315.000 250.800,315.200 251.000,315.200 251.800 C 315.200 252.778,315.267 252.800,318.200 252.800 C 321.133 252.800,321.200 252.822,321.200 253.800 L 321.200 254.800 333.992 254.800 L 346.785 254.800 347.031 253.820 C 347.241 252.981,347.543 252.823,349.138 252.720 C 350.720 252.618,351.019 252.465,351.128 251.700 C 351.322 250.335,353.200 250.425,353.200 251.800 L 353.200 252.800 362.200 252.800 L 371.200 252.800 371.200 215.000 L 371.200 177.200 361.200 177.200 L 351.200 177.200 351.200 202.200 L 351.200 227.200 350.200 227.200 C 349.267 227.200,349.200 227.333,349.200 229.200 C 349.200 231.067,349.133 231.200,348.200 231.200 C 347.400 231.200,347.200 231.400,347.200 232.200 C 347.200 233.000,347.000 233.200,346.200 233.200 C 345.400 233.200,345.200 233.400,345.200 234.200 C 345.200 235.000,345.000 235.200,344.200 235.200 C 343.400 235.200,343.200 235.400,343.200 236.200 C 343.200 237.178,343.133 237.200,340.200 237.200 C 337.267 237.200,337.200 237.222,337.200 238.200 C 337.200 239.000,337.000 239.200,336.200 239.200 C 335.400 239.200,335.200 239.000,335.200 238.200 C 335.200 237.269,335.065 237.200,333.228 237.200 C 331.487 237.200,331.241 237.094,331.128 236.300 C 331.047 235.730,330.679 235.354,330.125 235.275 C 329.579 235.198,329.202 234.821,329.125 234.275 C 329.046 233.721,328.670 233.353,328.100 233.272 C 327.371 233.169,327.200 232.889,327.200 231.805 C 327.200 229.947,326.843 229.200,325.957 229.200 C 325.222 229.200,325.200 228.444,325.200 203.200 L 325.200 177.200 315.198 177.200 L 305.195 177.200 305.298 207.900 M177.200 191.800 C 177.200 192.731,177.335 192.800,179.172 192.800 C 180.913 192.800,181.159 192.906,181.272 193.700 C 181.381 194.468,181.679 194.618,183.300 194.722 C 185.015 194.832,185.200 194.939,185.200 195.822 C 185.200 196.599,185.406 196.800,186.200 196.800 C 187.000 196.800,187.200 197.000,187.200 197.800 C 187.200 198.600,187.400 198.800,188.200 198.800 C 189.133 198.800,189.200 198.933,189.200 200.800 C 189.200 202.667,189.267 202.800,190.200 202.800 C 191.044 202.800,191.200 202.987,191.200 204.000 L 191.200 205.200 175.200 205.200 L 159.200 205.200 159.200 204.000 C 159.200 203.074,159.379 202.800,159.986 202.800 C 160.628 202.800,160.821 202.432,161.038 200.800 C 161.272 199.037,161.415 198.800,162.252 198.800 C 162.997 198.800,163.200 198.586,163.200 197.800 C 163.200 197.000,163.400 196.800,164.200 196.800 C 165.000 196.800,165.200 196.600,165.200 195.800 C 165.200 195.000,165.400 194.800,166.200 194.800 C 167.000 194.800,167.200 194.600,167.200 193.800 C 167.200 192.822,167.267 192.800,170.200 192.800 C 173.133 192.800,173.200 192.778,173.200 191.800 C 173.200 190.867,173.333 190.800,175.200 190.800 C 177.067 190.800,177.200 190.867,177.200 191.800 M1.200 363.026 C 1.200 363.668,2.102 364.800,2.614 364.800 C 3.410 364.800,3.351 364.261,2.469 363.462 C 1.729 362.793,1.200 362.611,1.200 363.026 M397.417 363.172 C 397.291 363.377,397.389 363.670,397.636 363.822 C 397.954 364.019,397.927 364.200,397.543 364.444 C 397.223 364.647,397.185 364.790,397.451 364.794 C 398.106 364.803,398.913 363.706,398.611 363.218 C 398.291 362.700,397.722 362.678,397.417 363.172 " stroke="none" fill="#5c5c5c" fill-rule="evenodd"></path><path id="path1" d="M36.100 32.198 C 35.332 33.071,35.473 33.200,37.200 33.200 C 38.956 33.200,39.161 32.962,38.100 32.157 C 37.207 31.479,36.724 31.489,36.100 32.198 M50.611 32.387 C 49.974 33.092,50.039 33.129,52.160 33.261 C 54.473 33.406,54.532 33.025,52.338 32.100 C 51.452 31.726,51.167 31.773,50.611 32.387 M112.926 32.200 C 112.992 32.850,113.343 33.021,114.803 33.110 C 115.975 33.182,116.411 33.095,116.056 32.859 C 115.756 32.661,115.143 32.594,114.693 32.712 C 114.068 32.876,113.955 32.793,114.214 32.363 C 114.498 31.892,114.448 31.886,113.910 32.321 C 113.368 32.761,113.234 32.730,113.056 32.121 C 112.882 31.523,112.860 31.537,112.926 32.200 M160.527 32.180 C 160.567 32.411,160.375 32.555,160.100 32.500 C 159.825 32.445,159.600 32.588,159.600 32.818 C 159.600 33.060,160.346 33.198,161.370 33.145 C 162.810 33.071,163.129 32.917,163.084 32.320 C 163.041 31.752,162.738 31.606,161.741 31.673 C 161.033 31.721,160.486 31.949,160.527 32.180 M223.000 32.000 C 222.864 32.220,222.898 32.403,223.076 32.406 C 223.254 32.409,223.168 32.560,222.884 32.740 C 222.562 32.944,223.007 33.093,224.060 33.134 C 225.659 33.197,225.710 33.165,224.977 32.570 C 224.549 32.224,224.453 32.072,224.762 32.232 C 225.131 32.424,225.226 32.365,225.038 32.062 C 224.688 31.495,223.338 31.454,223.000 32.000 M237.894 31.839 C 237.396 32.337,238.124 33.200,239.043 33.200 C 240.095 33.200,240.258 32.818,239.520 32.080 C 239.002 31.562,238.278 31.455,237.894 31.839 M299.762 32.062 C 299.586 32.346,299.652 32.415,299.934 32.241 C 300.229 32.058,300.307 32.178,300.153 32.579 C 299.879 33.292,301.770 33.496,302.200 32.800 C 302.336 32.580,302.167 32.400,301.824 32.400 C 301.481 32.400,301.200 32.220,301.200 32.000 C 301.200 31.449,300.112 31.495,299.762 32.062 M348.000 32.157 C 348.000 32.478,347.685 32.830,347.300 32.938 C 346.915 33.047,347.410 33.105,348.400 33.068 C 350.444 32.991,350.974 31.971,349.100 31.720 C 348.335 31.617,348.000 31.750,348.000 32.157 M98.000 32.604 C 98.000 32.973,98.381 33.200,99.000 33.200 C 99.550 33.200,100.000 32.969,100.000 32.687 C 100.000 32.405,99.550 32.137,99.000 32.092 C 98.344 32.037,98.000 32.214,98.000 32.604 M174.933 32.624 C 174.933 33.020,175.379 33.172,176.423 33.131 C 177.586 33.085,177.812 32.963,177.456 32.576 C 177.205 32.302,176.940 32.241,176.867 32.439 C 176.793 32.638,176.558 32.800,176.343 32.800 C 176.128 32.800,176.041 32.657,176.149 32.483 C 176.256 32.309,176.027 32.142,175.639 32.113 C 175.251 32.084,174.933 32.314,174.933 32.624 M284.867 32.666 C 284.457 33.106,284.660 33.200,286.018 33.200 C 287.124 33.200,287.614 33.042,287.506 32.719 C 287.284 32.053,285.474 32.017,284.867 32.666 M361.733 32.680 C 361.733 33.002,362.237 33.200,363.054 33.200 C 364.067 33.200,364.321 33.059,364.143 32.597 C 363.860 31.857,361.733 31.931,361.733 32.680 M32.894 33.796 C 33.055 33.975,32.875 34.358,32.494 34.648 C 31.854 35.133,31.871 35.176,32.700 35.187 C 33.671 35.201,33.939 34.242,33.100 33.759 C 32.825 33.601,32.732 33.618,32.894 33.796 M54.988 33.922 C 54.171 34.507,54.420 35.200,55.449 35.200 C 56.385 35.200,56.440 35.125,55.962 34.500 C 55.667 34.115,55.415 33.765,55.402 33.722 C 55.388 33.679,55.202 33.769,54.988 33.922 M179.043 34.233 C 178.693 35.144,178.722 35.200,179.533 35.200 C 180.549 35.200,180.876 34.774,180.348 34.137 C 179.759 33.428,179.340 33.459,179.043 34.233 M219.830 34.424 C 219.069 35.191,219.073 35.200,220.130 35.200 C 220.933 35.200,221.200 35.001,221.200 34.400 C 221.200 33.411,220.828 33.418,219.830 34.424 M344.996 34.007 C 344.858 34.230,344.549 34.292,344.311 34.145 C 344.064 33.992,343.990 34.061,344.141 34.304 C 344.286 34.539,344.179 34.823,343.902 34.934 C 343.626 35.046,343.884 35.151,344.475 35.168 C 345.313 35.193,345.537 35.023,345.490 34.400 C 345.422 33.491,345.350 33.434,344.996 34.007 M281.862 34.583 C 281.696 35.015,281.871 35.200,282.446 35.200 C 282.902 35.200,283.196 34.989,283.108 34.725 C 282.861 33.984,282.124 33.900,281.862 34.583 M366.533 34.680 C 366.533 34.966,366.863 35.200,367.267 35.200 C 367.670 35.200,368.000 34.941,368.000 34.625 C 368.000 34.309,367.670 34.075,367.267 34.105 C 366.863 34.135,366.533 34.394,366.533 34.680 M30.124 36.173 C 29.603 36.766,29.833 37.200,30.667 37.200 C 30.960 37.200,31.200 36.840,31.200 36.400 C 31.200 35.478,30.806 35.395,30.124 36.173 M92.500 35.865 C 91.797 36.149,91.875 37.200,92.600 37.200 C 92.933 37.200,93.200 36.844,93.200 36.400 C 93.200 35.960,93.155 35.614,93.100 35.632 C 93.045 35.649,92.775 35.754,92.500 35.865 M245.067 35.867 C 244.463 36.471,244.817 37.549,245.600 37.490 C 246.555 37.418,246.646 36.980,245.775 36.646 C 245.431 36.514,245.261 36.224,245.398 36.003 C 245.679 35.548,245.471 35.462,245.067 35.867 M306.673 36.441 C 306.518 37.036,306.690 37.200,307.467 37.200 C 308.175 37.200,308.422 37.011,308.329 36.538 C 308.146 35.600,306.912 35.528,306.673 36.441 M368.800 36.413 C 368.800 36.929,369.071 37.200,369.587 37.200 C 370.104 37.200,370.300 37.004,370.157 36.631 C 369.793 35.685,368.800 35.525,368.800 36.413 M154.000 36.557 C 154.000 36.864,154.270 37.218,154.600 37.345 C 155.008 37.501,155.200 37.323,155.200 36.787 C 155.200 36.354,154.930 36.000,154.600 36.000 C 154.270 36.000,154.000 36.251,154.000 36.557 M59.200 38.376 C 59.200 38.829,59.380 39.200,59.600 39.200 C 59.820 39.200,60.000 38.941,60.000 38.624 C 60.000 38.307,59.820 37.936,59.600 37.800 C 59.380 37.664,59.200 37.923,59.200 38.376 M278.400 38.424 C 278.400 38.657,278.175 38.718,277.900 38.559 C 277.625 38.401,277.540 38.426,277.712 38.614 C 278.239 39.193,279.200 39.161,279.200 38.565 C 279.200 38.254,279.020 38.000,278.800 38.000 C 278.580 38.000,278.400 38.191,278.400 38.424 M340.133 38.638 C 340.133 38.947,340.373 39.200,340.667 39.200 C 340.960 39.200,341.200 39.039,341.200 38.843 C 341.200 38.646,340.960 38.393,340.667 38.281 C 340.373 38.168,340.133 38.329,340.133 38.638 M184.800 40.214 C 184.800 41.262,185.224 41.687,185.859 41.274 C 186.537 40.832,186.329 39.675,185.533 39.467 C 184.976 39.321,184.800 39.500,184.800 40.214 M213.738 39.791 C 213.194 40.373,213.663 41.304,214.568 41.436 C 214.988 41.498,215.200 41.220,215.200 40.607 C 215.200 39.532,214.398 39.084,213.738 39.791 M275.884 40.800 C 275.729 41.393,275.872 41.600,276.437 41.600 C 276.933 41.600,277.200 41.320,277.200 40.800 C 277.200 40.360,276.951 40.000,276.647 40.000 C 276.342 40.000,275.999 40.360,275.884 40.800 M122.800 40.733 C 122.800 41.297,123.251 41.555,123.839 41.330 C 124.674 41.009,124.517 40.400,123.600 40.400 C 123.160 40.400,122.800 40.550,122.800 40.733 M26.100 42.225 C 25.404 42.978,25.473 43.200,26.400 43.200 C 26.840 43.200,27.200 42.941,27.200 42.624 C 27.200 41.789,26.678 41.600,26.100 42.225 M373.204 42.195 C 372.666 42.844,373.741 43.615,374.317 42.995 C 374.473 42.827,374.374 42.610,374.098 42.511 C 373.821 42.412,373.697 42.167,373.821 41.966 C 374.183 41.381,373.745 41.544,373.204 42.195 M212.298 43.900 C 211.145 45.189,211.106 47.200,212.235 47.200 C 213.126 47.200,213.200 47.047,213.200 45.200 C 213.200 42.960,213.173 42.921,212.298 43.900 M125.212 44.185 C 124.657 44.855,125.026 46.400,125.742 46.400 C 126.311 46.400,126.580 44.158,126.050 43.831 C 125.852 43.709,125.475 43.868,125.212 44.185 M187.043 44.233 C 186.479 45.703,186.769 46.794,187.703 46.716 C 188.498 46.651,188.589 46.459,188.461 45.121 C 188.312 43.562,187.496 43.051,187.043 44.233 M274.524 43.919 C 273.770 44.392,273.570 46.303,274.247 46.563 C 274.946 46.831,275.308 46.045,275.130 44.644 C 275.044 43.971,274.837 43.723,274.524 43.919 M336.288 44.580 C 335.632 45.064,335.629 45.126,336.245 45.362 C 337.054 45.672,337.316 45.465,337.135 44.658 C 337.022 44.150,336.887 44.137,336.288 44.580 M42.640 45.360 C 42.881 45.989,43.867 46.032,43.867 45.413 C 43.867 45.164,43.547 44.936,43.156 44.907 C 42.734 44.875,42.524 45.059,42.640 45.360 M45.447 45.421 C 45.316 45.762,45.373 45.941,45.572 45.817 C 45.772 45.694,46.220 45.877,46.568 46.225 C 47.144 46.801,47.200 46.766,47.200 45.829 C 47.200 44.659,45.859 44.347,45.447 45.421 M104.133 45.382 C 104.133 45.703,104.283 45.872,104.467 45.759 C 104.650 45.645,104.800 45.828,104.800 46.164 C 104.800 46.542,105.028 46.687,105.398 46.546 C 105.726 46.419,105.897 46.157,105.777 45.963 C 105.657 45.768,105.838 45.716,106.179 45.847 C 106.522 45.979,106.800 45.876,106.800 45.619 C 106.800 45.363,107.008 45.281,107.262 45.438 C 107.548 45.615,107.615 45.548,107.438 45.262 C 107.005 44.561,104.133 44.666,104.133 45.382 M108.157 45.433 C 108.291 45.781,108.400 46.141,108.400 46.233 C 108.400 46.325,108.580 46.400,108.800 46.400 C 109.020 46.400,109.200 46.040,109.200 45.600 C 109.200 45.132,108.933 44.800,108.557 44.800 C 108.135 44.800,107.998 45.018,108.157 45.433 M166.547 45.300 C 166.702 46.325,167.257 46.851,167.751 46.441 C 168.014 46.222,168.834 46.138,169.571 46.254 C 170.818 46.451,171.575 46.019,171.594 45.100 C 171.597 44.935,170.446 44.800,169.035 44.800 C 167.210 44.800,166.493 44.944,166.547 45.300 M228.800 45.643 C 228.800 46.228,228.984 46.415,229.400 46.255 C 229.730 46.129,230.003 46.244,230.006 46.513 C 230.010 46.817,230.123 46.850,230.306 46.600 C 230.746 46.002,231.617 45.916,232.214 46.412 C 232.617 46.746,232.847 46.659,233.172 46.052 C 233.824 44.834,233.771 44.800,231.200 44.800 C 229.026 44.800,228.800 44.879,228.800 45.643 M291.073 45.445 C 291.326 46.105,292.400 46.194,292.400 45.554 C 292.400 45.275,292.753 45.339,293.344 45.727 C 294.489 46.477,295.700 46.365,295.827 45.497 C 295.904 44.971,295.481 44.863,293.390 44.875 C 291.400 44.886,290.905 45.008,291.073 45.445 M352.876 45.500 C 352.950 45.885,353.276 46.200,353.600 46.200 C 353.924 46.200,354.250 45.885,354.324 45.500 C 354.418 45.009,354.202 44.800,353.600 44.800 C 352.998 44.800,352.782 45.009,352.876 45.500 M249.200 47.000 C 249.200 47.328,249.500 47.447,250.000 47.316 C 250.440 47.201,250.800 47.059,250.800 47.000 C 250.800 46.941,250.440 46.799,250.000 46.684 C 249.500 46.553,249.200 46.672,249.200 47.000 M172.075 47.071 C 172.447 47.169,172.831 47.553,172.929 47.925 C 173.055 48.403,173.121 48.338,173.154 47.700 C 173.189 47.007,172.993 46.811,172.300 46.846 C 171.662 46.879,171.597 46.945,172.075 47.071 M226.800 47.400 C 226.800 47.730,227.070 48.000,227.400 48.000 C 227.730 48.000,228.000 47.730,228.000 47.400 C 228.000 47.070,227.730 46.800,227.400 46.800 C 227.070 46.800,226.800 47.070,226.800 47.400 M24.490 48.070 C 24.551 48.362,24.402 48.564,24.159 48.520 C 23.885 48.470,23.692 49.338,23.647 50.820 C 23.596 52.519,23.722 53.203,24.088 53.212 C 24.397 53.219,24.328 53.383,23.917 53.623 C 23.064 54.120,23.424 55.200,24.443 55.200 C 25.301 55.200,25.624 48.309,24.790 47.794 C 24.565 47.655,24.430 47.779,24.490 48.070 M39.196 48.100 C 39.091 48.867,39.072 49.784,39.150 50.387 C 39.178 50.601,39.469 50.672,39.798 50.546 C 40.126 50.419,40.283 50.135,40.146 49.913 C 40.010 49.692,40.146 49.353,40.449 49.161 C 40.890 48.882,40.866 48.811,40.329 48.806 C 39.960 48.803,39.576 48.485,39.476 48.100 C 39.302 47.433,39.288 47.433,39.196 48.100 M360.173 47.959 C 360.653 48.147,360.782 48.364,360.511 48.531 C 360.020 48.835,360.301 50.400,360.847 50.400 C 361.041 50.400,361.200 49.770,361.200 49.000 C 361.200 47.806,361.067 47.604,360.300 47.628 C 359.473 47.654,359.463 47.681,360.173 47.959 M297.927 48.433 C 297.357 48.752,297.098 50.205,297.664 49.911 C 297.781 49.850,298.175 50.047,298.539 50.349 C 299.129 50.839,299.200 50.767,299.200 49.673 C 299.200 48.256,298.851 47.916,297.927 48.433 M375.029 48.710 C 374.894 49.134,374.810 50.768,374.842 52.341 L 374.901 55.200 376.151 55.194 C 377.104 55.189,377.258 55.096,376.800 54.800 C 376.267 54.455,376.267 54.411,376.800 54.400 C 377.303 54.390,377.309 54.330,376.841 54.034 C 376.235 53.650,375.977 50.799,376.549 50.800 C 376.741 50.800,376.688 50.548,376.432 50.239 C 376.176 49.930,376.128 49.615,376.325 49.539 C 376.523 49.463,376.367 49.071,375.979 48.669 C 375.296 47.961,375.266 47.962,375.029 48.710 M101.007 48.789 C 100.778 49.160,101.157 50.400,101.499 50.400 C 101.741 50.400,102.768 49.113,102.787 48.785 C 102.809 48.424,101.230 48.428,101.007 48.789 M63.375 50.385 C 62.720 51.040,63.153 53.593,63.873 53.317 C 64.242 53.175,64.383 52.780,64.249 52.266 C 64.130 51.812,64.251 51.173,64.517 50.844 C 64.859 50.420,64.864 50.328,64.534 50.526 C 64.278 50.679,64.006 50.617,63.929 50.387 C 63.833 50.099,63.662 50.098,63.375 50.385 M335.753 51.443 C 335.594 52.079,335.676 52.600,335.965 52.778 C 336.316 52.995,336.288 53.195,335.858 53.552 C 335.403 53.930,335.236 53.922,335.085 53.517 C 334.966 53.199,334.739 53.386,334.496 54.000 C 334.144 54.891,334.208 55.014,335.084 55.130 C 336.878 55.367,337.200 54.983,337.200 52.613 C 337.200 50.195,336.258 49.434,335.753 51.443 M63.992 53.605 C 62.732 54.384,63.226 55.201,64.935 55.168 C 65.851 55.151,66.375 55.046,66.100 54.935 C 65.825 54.824,65.600 54.498,65.600 54.209 C 65.600 53.529,64.676 53.182,63.992 53.605 M38.800 54.400 C 38.800 55.054,39.067 55.200,40.261 55.200 L 41.722 55.200 40.800 54.400 C 40.293 53.960,39.635 53.600,39.339 53.600 C 39.042 53.600,38.800 53.960,38.800 54.400 M272.661 54.186 C 272.356 54.981,272.540 55.363,273.121 55.142 C 273.326 55.064,273.368 54.653,273.216 54.229 C 272.954 53.497,272.926 53.495,272.661 54.186 M359.200 54.254 C 359.200 54.518,358.975 54.824,358.700 54.935 C 358.425 55.046,358.875 55.151,359.700 55.168 C 360.941 55.195,361.200 55.063,361.200 54.404 C 361.200 53.801,360.959 53.629,360.200 53.692 C 359.650 53.737,359.200 53.990,359.200 54.254 M12.654 54.602 C 12.515 54.965,12.656 55.200,13.013 55.200 C 13.660 55.200,13.807 54.575,13.242 54.226 C 13.045 54.104,12.781 54.274,12.654 54.602 M14.607 54.388 C 14.277 54.922,15.953 55.289,17.838 55.095 C 19.144 54.961,19.040 54.922,17.200 54.861 C 15.615 54.808,15.168 54.679,15.600 54.400 C 16.117 54.066,16.107 54.011,15.524 54.006 C 15.152 54.003,14.739 54.175,14.607 54.388 M47.700 54.500 C 47.791 54.775,48.170 55.027,48.541 55.059 C 49.063 55.105,49.077 55.076,48.603 54.929 C 48.266 54.825,48.093 54.573,48.219 54.370 C 48.344 54.166,48.242 54.000,47.990 54.000 C 47.739 54.000,47.608 54.225,47.700 54.500 M127.500 54.276 C 126.575 54.517,126.600 55.200,127.533 55.200 C 127.937 55.200,128.267 54.930,128.267 54.600 C 128.267 54.270,128.252 54.021,128.233 54.046 C 128.215 54.072,127.885 54.175,127.500 54.276 M166.901 54.400 C 167.018 54.833,167.667 55.011,169.231 55.040 L 171.400 55.080 169.408 54.914 C 168.312 54.823,167.263 54.535,167.077 54.274 C 166.842 53.945,166.788 53.983,166.901 54.400 M190.903 54.400 C 191.042 54.911,192.431 55.002,200.233 55.012 L 209.400 55.024 200.419 54.904 C 193.883 54.817,191.342 54.650,191.088 54.292 C 190.835 53.934,190.784 53.964,190.903 54.400 M295.200 54.333 C 295.200 54.590,294.705 54.825,294.100 54.854 C 293.090 54.904,293.078 54.924,293.946 55.088 C 294.919 55.273,295.960 54.627,295.473 54.140 C 295.323 53.990,295.200 54.077,295.200 54.333 M351.781 54.370 C 351.907 54.573,351.734 54.825,351.397 54.929 C 350.923 55.076,350.937 55.105,351.459 55.059 C 352.212 54.993,352.729 54.000,352.010 54.000 C 351.758 54.000,351.656 54.166,351.781 54.370 M385.829 54.447 C 385.936 54.620,384.893 54.825,383.512 54.904 C 381.004 55.046,381.005 55.046,384.087 55.123 C 386.518 55.184,387.131 55.087,386.970 54.667 C 386.858 54.373,386.511 54.133,386.200 54.133 C 385.890 54.133,385.723 54.275,385.829 54.447 M73.717 55.097 C 75.211 55.174,77.551 55.174,78.917 55.096 C 80.282 55.018,79.060 54.955,76.200 54.955 C 73.340 54.956,72.222 55.020,73.717 55.097 M136.100 55.097 C 137.805 55.172,140.595 55.172,142.300 55.097 C 144.005 55.022,142.610 54.961,139.200 54.961 C 135.790 54.961,134.395 55.022,136.100 55.097 M230.100 55.087 C 230.705 55.178,231.695 55.178,232.300 55.087 C 232.905 54.995,232.410 54.920,231.200 54.920 C 229.990 54.920,229.495 54.995,230.100 55.087 M258.100 55.097 C 259.805 55.172,262.595 55.172,264.300 55.097 C 266.005 55.022,264.610 54.961,261.200 54.961 C 257.790 54.961,256.395 55.022,258.100 55.097 M321.717 55.097 C 323.211 55.174,325.551 55.174,326.917 55.096 C 328.282 55.018,327.060 54.955,324.200 54.955 C 321.340 54.956,320.222 55.020,321.717 55.097 M7.887 56.055 C 6.972 56.567,7.379 57.200,8.624 57.200 C 9.690 57.200,9.886 56.735,9.096 56.079 C 8.759 55.800,8.357 55.792,7.887 56.055 M390.617 56.299 C 390.284 57.169,390.318 57.200,391.600 57.200 C 392.816 57.200,393.026 56.956,392.494 56.161 C 392.077 55.538,390.875 55.626,390.617 56.299 M4.477 58.032 C 4.545 58.345,4.375 58.555,4.100 58.500 C 3.825 58.445,3.600 58.580,3.600 58.800 C 3.600 59.020,4.050 59.200,4.600 59.200 C 5.741 59.200,5.885 58.734,4.977 57.981 C 4.463 57.554,4.376 57.563,4.477 58.032 M394.598 58.403 C 394.461 58.624,394.638 58.917,394.992 59.052 C 395.758 59.346,396.185 59.022,395.816 58.427 C 395.484 57.889,394.922 57.878,394.598 58.403 M0.000 64.600 C 0.000 65.222,0.227 65.600,0.600 65.600 C 0.973 65.600,1.200 65.222,1.200 64.600 C 1.200 63.978,0.973 63.600,0.600 63.600 C 0.227 63.600,0.000 63.978,0.000 64.600 M399.098 63.900 C 398.800 64.497,399.011 65.337,399.500 65.500 C 399.814 65.605,400.000 65.282,400.000 64.633 C 400.000 63.673,399.439 63.216,399.098 63.900 M14.800 69.176 C 14.800 69.857,15.396 69.939,16.181 69.365 C 16.916 68.827,16.901 68.800,15.876 68.800 C 15.284 68.800,14.800 68.969,14.800 69.176 M384.162 69.262 C 383.972 69.569,384.054 69.614,384.406 69.396 C 384.794 69.156,384.865 69.253,384.673 69.755 C 384.516 70.163,384.570 70.342,384.805 70.197 C 385.308 69.886,385.323 68.800,384.824 68.800 C 384.617 68.800,384.319 69.008,384.162 69.262 M386.198 211.000 C 386.198 287.120,386.244 318.200,386.300 280.068 C 386.356 241.935,386.356 179.655,386.300 141.668 C 386.244 103.680,386.198 134.880,386.198 211.000 M15.646 353.924 C 15.621 354.432,15.420 354.736,15.200 354.600 C 14.980 354.464,14.800 354.543,14.800 354.776 C 14.800 355.020,15.610 355.187,16.700 355.168 C 17.745 355.151,18.374 355.046,18.098 354.934 C 17.821 354.823,17.684 354.588,17.793 354.411 C 17.902 354.235,17.623 353.995,17.173 353.877 C 16.496 353.700,16.437 353.763,16.834 354.241 C 17.223 354.709,17.193 354.772,16.679 354.575 C 16.331 354.441,15.966 354.032,15.869 353.666 C 15.751 353.218,15.678 353.303,15.646 353.924 M109.733 353.900 C 159.636 353.956,241.176 353.956,290.933 353.900 C 340.690 353.844,299.860 353.798,200.200 353.798 C 100.540 353.798,59.830 353.844,109.733 353.900 M383.388 353.981 C 383.614 354.346,383.483 354.417,382.917 354.237 C 382.374 354.065,382.133 354.175,382.133 354.594 C 382.133 355.030,382.564 355.200,383.667 355.200 C 384.763 355.200,385.200 355.029,385.200 354.600 C 385.200 354.270,385.020 354.000,384.800 354.000 C 384.580 354.000,384.400 354.180,384.400 354.400 C 384.400 354.620,384.209 354.800,383.976 354.800 C 383.743 354.800,383.656 354.632,383.783 354.428 C 383.909 354.223,383.802 353.925,383.545 353.766 C 383.238 353.576,383.184 353.651,383.388 353.981 M19.200 354.800 C 19.200 355.066,79.800 355.200,200.200 355.200 C 320.600 355.200,381.200 355.066,381.200 354.800 C 381.200 354.534,320.600 354.400,200.200 354.400 C 79.800 354.400,19.200 354.534,19.200 354.800 M1.700 361.290 C 1.807 361.813,2.814 362.666,4.346 363.531 C 5.128 363.971,5.257 363.971,5.112 363.531 C 5.016 363.239,4.546 362.942,4.069 362.872 C 3.450 362.781,3.200 362.464,3.200 361.772 C 3.200 361.067,2.981 360.800,2.400 360.800 C 1.960 360.800,1.645 361.021,1.700 361.290 M396.800 361.804 C 396.800 362.919,396.922 362.977,398.026 362.386 C 399.113 361.805,398.989 360.990,397.800 360.892 C 396.979 360.824,396.800 360.987,396.800 361.804 M6.108 365.237 C 6.498 365.464,6.695 365.846,6.547 366.086 C 6.385 366.349,6.461 366.409,6.738 366.238 C 7.541 365.742,7.252 364.799,6.300 364.812 C 5.489 364.823,5.470 364.865,6.108 365.237 M392.800 365.400 C 392.800 365.730,392.980 366.000,393.200 366.000 C 393.420 366.000,393.724 366.005,393.875 366.011 C 394.026 366.017,394.190 365.747,394.240 365.411 C 394.293 365.045,394.023 364.800,393.565 364.800 C 393.144 364.800,392.800 365.070,392.800 365.400 M10.000 367.200 C 9.333 367.631,9.806 367.776,11.344 367.614 C 11.788 367.567,11.980 367.709,11.820 367.967 C 11.490 368.502,11.997 368.519,12.800 368.000 C 13.130 367.787,13.220 367.597,13.000 367.578 C 12.780 367.559,12.960 367.389,13.400 367.200 C 14.009 366.938,13.770 366.851,12.400 366.834 C 11.410 366.822,10.330 366.987,10.000 367.200 M387.429 367.162 C 387.519 367.253,387.392 367.569,387.146 367.865 C 386.753 368.339,388.425 368.416,389.600 367.980 C 389.710 367.939,389.935 367.927,390.100 367.953 C 390.265 367.979,390.400 367.809,390.400 367.576 C 390.400 367.343,390.580 367.264,390.800 367.400 C 391.020 367.536,391.200 367.448,391.200 367.203 C 391.200 366.922,390.479 366.803,389.233 366.879 C 388.151 366.945,387.339 367.072,387.429 367.162 " stroke="none" fill="#347c9c" fill-rule="evenodd"></path><path id="path2" d="M42.800 32.210 C 42.800 33.458,41.569 34.000,38.732 34.000 C 37.057 34.000,36.582 34.170,35.929 35.000 C 35.496 35.550,34.911 36.000,34.628 36.000 C 34.013 36.000,30.000 39.933,30.000 40.535 C 30.000 40.767,29.580 41.416,29.067 41.978 C 27.766 43.403,27.269 45.498,27.022 50.600 C 26.724 56.732,26.234 57.199,20.094 57.203 C 13.190 57.208,9.265 57.788,8.010 58.990 C 7.431 59.546,6.767 60.000,6.537 60.000 C 5.887 60.000,4.125 61.776,3.820 62.738 C 3.669 63.213,3.198 63.787,2.773 64.014 C 2.288 64.274,2.000 64.851,2.000 65.564 C 2.000 67.725,1.495 69.302,0.739 69.500 C -0.285 69.768,-0.438 353.600,0.586 353.600 C 1.450 353.600,2.000 354.907,2.000 356.960 C 2.000 358.318,2.187 358.872,2.745 359.171 C 3.155 359.390,3.717 360.116,3.994 360.785 C 4.271 361.453,4.615 362.000,4.759 362.000 C 4.904 362.000,5.613 362.540,6.336 363.200 C 7.058 363.860,7.976 364.400,8.376 364.400 C 8.775 364.400,9.349 364.765,9.651 365.211 L 10.200 366.022 199.998 366.016 C 337.227 366.012,389.837 365.889,389.943 365.572 C 390.023 365.331,390.878 364.795,391.843 364.382 C 393.583 363.636,396.400 361.192,396.400 360.429 C 396.400 360.210,396.767 359.689,397.216 359.271 C 397.665 358.853,398.127 357.811,398.242 356.955 C 398.622 354.137,398.809 353.600,399.408 353.600 C 399.930 353.600,400.000 336.744,400.000 211.600 C 400.000 88.613,399.923 69.600,399.427 69.600 C 398.766 69.600,398.507 68.917,398.211 66.400 C 398.079 65.285,397.695 64.347,397.199 63.936 C 396.760 63.571,396.400 63.082,396.400 62.850 C 396.400 62.217,394.352 60.268,393.100 59.709 C 392.495 59.438,392.000 59.047,392.000 58.840 C 392.000 58.041,389.082 57.574,382.270 57.280 C 373.704 56.910,373.627 56.869,373.371 52.556 C 372.947 45.431,372.451 43.204,371.023 42.019 C 370.680 41.735,370.400 41.247,370.400 40.936 C 370.400 40.200,365.744 35.600,364.999 35.600 C 364.685 35.600,364.235 35.240,364.000 34.800 C 363.648 34.143,363.162 34.000,361.275 34.000 C 358.606 34.000,357.160 33.238,357.483 32.003 C 357.670 31.287,357.499 31.200,355.902 31.200 C 354.226 31.200,354.117 31.265,354.220 32.205 C 354.365 33.523,353.424 34.000,350.675 34.000 C 349.192 34.000,348.333 34.199,347.981 34.623 C 347.696 34.966,346.909 35.491,346.232 35.791 C 344.515 36.549,341.600 39.411,341.600 40.338 C 341.600 40.761,341.150 41.403,340.600 41.763 C 339.762 42.312,339.600 42.731,339.600 44.350 C 339.600 45.954,339.395 46.496,338.390 47.548 C 337.408 48.575,337.257 48.959,337.590 49.581 C 337.815 50.002,338.000 51.501,338.000 52.912 C 338.000 57.123,338.451 56.979,324.859 57.115 L 313.400 57.231 312.079 56.115 L 310.758 55.000 310.532 49.601 C 310.327 44.724,310.215 44.096,309.380 43.103 C 308.871 42.499,308.333 41.619,308.184 41.149 C 307.884 40.205,303.907 36.000,303.313 36.000 C 303.108 36.000,302.517 35.550,302.000 35.000 C 301.239 34.190,300.674 33.999,299.030 33.994 C 296.572 33.987,295.044 33.287,294.872 32.090 C 294.768 31.361,294.487 31.200,293.326 31.200 C 292.112 31.200,291.936 31.314,292.112 31.985 C 292.416 33.146,291.525 33.647,288.715 33.895 C 286.886 34.057,285.892 34.374,285.069 35.059 C 284.447 35.576,283.703 36.000,283.415 36.000 C 283.127 36.000,282.606 36.436,282.257 36.970 C 281.907 37.503,281.257 38.055,280.811 38.197 C 280.365 38.338,280.000 38.687,280.000 38.972 C 280.000 39.257,279.472 40.154,278.827 40.966 C 278.182 41.777,277.538 42.972,277.395 43.621 C 277.253 44.269,277.010 44.800,276.855 44.800 C 276.700 44.800,276.600 45.295,276.633 45.900 C 276.666 46.505,276.492 47.360,276.246 47.800 C 276.001 48.240,275.710 50.206,275.600 52.169 C 275.311 57.330,275.842 57.134,262.069 57.171 L 251.138 57.200 250.035 56.097 C 249.115 55.177,248.891 54.530,248.680 52.197 C 248.542 50.659,248.335 48.955,248.220 48.411 C 248.105 47.867,248.176 46.825,248.378 46.096 C 248.703 44.919,248.612 44.635,247.572 43.571 C 246.927 42.912,246.400 42.107,246.400 41.784 C 246.400 41.460,245.950 40.803,245.400 40.325 C 244.850 39.847,244.400 39.222,244.400 38.937 C 244.400 38.652,243.905 38.104,243.300 37.719 C 242.695 37.334,242.056 36.790,241.880 36.510 C 241.704 36.229,241.312 36.000,241.009 36.000 C 240.706 36.000,240.111 35.558,239.686 35.018 C 239.034 34.190,238.503 34.014,236.285 33.890 C 233.505 33.735,232.400 33.184,232.400 31.951 C 232.400 30.769,230.099 30.899,229.928 32.090 C 229.755 33.294,228.225 33.987,225.723 33.994 C 224.158 33.999,223.516 34.183,223.123 34.743 C 222.835 35.151,222.240 35.602,221.800 35.745 C 221.063 35.984,218.808 38.023,217.088 40.004 C 216.696 40.455,216.077 41.449,215.714 42.212 C 215.350 42.976,214.790 43.600,214.470 43.600 C 214.006 43.600,213.937 44.012,214.131 45.645 C 214.290 46.989,214.184 48.144,213.821 49.013 C 213.517 49.740,213.373 50.439,213.501 50.567 C 213.629 50.695,213.144 50.800,212.423 50.800 C 211.130 50.800,211.116 50.821,211.365 52.300 C 211.794 54.857,211.936 57.200,211.662 57.208 C 208.313 57.304,188.682 57.216,188.570 57.104 C 188.071 56.604,188.133 53.600,188.643 53.600 C 189.013 53.600,189.200 53.129,189.200 52.200 C 189.200 50.919,189.100 50.800,188.031 50.800 C 186.638 50.800,185.833 48.977,185.943 46.071 C 185.994 44.730,185.777 44.050,185.005 43.133 C 184.452 42.476,184.000 41.726,184.000 41.466 C 184.000 41.205,183.640 40.768,183.200 40.493 C 182.760 40.218,182.400 39.766,182.400 39.488 C 182.400 38.913,180.042 36.782,178.100 35.602 C 177.385 35.167,176.800 34.629,176.800 34.406 C 176.800 34.183,175.894 34.000,174.787 34.000 C 171.993 34.000,169.990 33.126,170.276 32.033 C 170.467 31.302,170.315 31.200,169.047 31.200 C 167.786 31.200,167.600 31.323,167.600 32.161 C 167.600 33.336,165.998 34.000,163.163 34.000 C 161.756 34.000,161.106 34.196,160.723 34.737 C 160.435 35.142,159.750 35.709,159.200 35.998 C 157.885 36.688,154.000 40.792,154.000 41.490 C 154.000 41.791,153.512 42.523,152.915 43.118 C 151.948 44.082,151.820 44.527,151.745 47.200 C 151.574 53.303,151.258 55.600,150.589 55.600 C 150.295 55.600,149.940 55.960,149.800 56.400 C 149.554 57.175,149.195 57.200,138.419 57.200 C 124.233 57.200,124.417 57.270,124.406 51.880 C 124.402 49.907,124.181 48.336,123.803 47.605 C 123.474 46.970,123.304 46.194,123.425 45.880 C 123.633 45.337,122.764 43.381,121.000 40.420 C 119.937 38.635,117.354 36.099,116.270 35.775 C 115.791 35.632,115.107 35.145,114.749 34.692 C 114.230 34.036,113.692 33.884,112.091 33.941 C 109.318 34.039,108.000 33.481,108.000 32.210 C 108.000 30.630,105.312 30.700,105.127 32.284 C 104.979 33.546,104.084 33.900,100.887 33.960 C 99.383 33.989,98.707 34.177,98.539 34.615 C 98.409 34.953,97.740 35.521,97.052 35.876 C 95.645 36.603,92.000 40.322,92.000 41.030 C 92.000 41.283,91.460 42.169,90.800 43.000 C 89.612 44.495,89.600 44.561,89.600 49.475 L 89.600 54.440 88.237 55.843 L 86.875 57.246 75.251 57.123 C 61.538 56.978,62.177 57.187,62.322 52.901 C 62.372 51.415,62.512 49.887,62.632 49.505 C 62.769 49.070,62.461 48.448,61.812 47.846 C 61.033 47.124,60.713 46.345,60.536 44.741 C 60.369 43.219,60.026 42.335,59.350 41.684 C 58.828 41.180,58.400 40.498,58.400 40.169 C 58.400 39.331,55.030 36.144,53.822 35.841 C 53.273 35.703,52.632 35.233,52.397 34.795 C 52.048 34.143,51.558 34.000,49.662 34.000 C 46.979 34.000,45.766 33.339,46.100 32.060 C 46.305 31.276,46.169 31.200,44.563 31.200 C 42.945 31.200,42.800 31.283,42.800 32.210 M45.307 43.300 C 45.413 43.575,46.339 44.047,47.365 44.349 C 48.903 44.801,49.334 45.145,49.823 46.316 C 50.149 47.097,50.772 47.985,51.208 48.291 C 52.084 48.904,52.384 54.135,51.625 55.554 C 50.959 56.798,48.491 57.283,43.573 57.136 C 37.079 56.944,37.218 57.106,37.213 49.720 C 37.213 49.236,37.389 48.730,37.606 48.596 C 37.823 48.462,38.000 48.039,38.000 47.655 C 38.000 46.516,40.568 44.000,41.730 44.000 C 42.293 44.000,42.866 43.817,43.004 43.593 C 43.142 43.370,43.423 43.291,43.628 43.417 C 43.832 43.544,44.000 43.457,44.000 43.224 C 44.000 42.630,45.073 42.693,45.307 43.300 M107.589 43.390 C 107.947 43.714,108.927 44.122,109.767 44.297 C 111.061 44.565,111.392 44.858,111.929 46.207 C 112.278 47.083,112.916 48.087,113.348 48.437 C 114.830 49.641,114.702 54.597,113.152 56.045 L 111.915 57.200 106.424 57.200 C 103.404 57.200,100.849 57.116,100.746 57.012 C 100.198 56.464,100.961 53.909,101.785 53.534 C 102.469 53.222,102.629 52.887,102.476 52.085 L 102.276 51.041 101.869 52.021 L 101.461 53.000 101.294 52.035 C 101.202 51.504,100.874 50.817,100.564 50.507 C 98.674 48.617,101.342 44.399,104.774 43.851 C 105.668 43.708,106.400 43.413,106.400 43.195 C 106.400 42.635,106.832 42.705,107.589 43.390 M172.385 44.404 C 173.782 44.414,175.481 46.896,175.804 49.400 C 176.779 56.970,176.455 57.299,168.200 57.115 L 163.000 57.000 162.643 55.555 C 162.096 53.344,163.138 50.296,163.994 51.600 C 164.331 52.114,164.389 52.099,164.394 51.500 C 164.398 51.072,164.099 50.800,163.625 50.800 C 160.598 50.800,163.198 44.760,166.469 44.191 C 167.201 44.064,168.038 43.724,168.328 43.437 C 168.763 43.007,169.114 43.046,170.313 43.658 C 171.114 44.066,172.046 44.402,172.385 44.404 M233.717 44.214 C 237.065 44.835,239.494 50.698,236.457 50.828 C 235.926 50.851,235.945 50.913,236.558 51.154 C 237.432 51.497,237.720 53.016,237.382 55.500 L 237.151 57.200 231.875 57.195 C 225.586 57.188,225.006 57.063,224.394 55.585 C 223.630 53.741,224.280 46.757,225.238 46.506 C 225.643 46.400,226.080 45.979,226.209 45.570 C 226.358 45.102,227.251 44.573,228.623 44.140 C 229.820 43.763,230.800 43.279,230.800 43.065 C 230.800 42.851,231.115 42.959,231.500 43.304 C 231.885 43.650,232.883 44.059,233.717 44.214 M293.940 43.300 C 294.451 43.811,294.615 43.863,295.986 43.950 C 298.445 44.106,301.377 49.502,299.600 50.600 C 299.380 50.736,299.200 51.231,299.200 51.700 C 299.200 52.536,299.188 52.537,298.613 51.776 C 298.058 51.043,298.025 51.073,298.013 52.324 C 298.005 53.113,298.163 53.547,298.403 53.398 C 298.889 53.098,299.131 53.700,299.339 55.728 L 299.496 57.256 293.558 57.128 C 286.218 56.970,285.950 56.812,285.950 52.645 C 285.950 50.321,286.114 49.714,287.175 48.112 C 287.849 47.095,288.400 45.937,288.400 45.539 C 288.400 45.074,288.794 44.729,289.500 44.575 C 291.276 44.187,292.800 43.530,292.800 43.151 C 292.800 42.646,293.359 42.719,293.940 43.300 M356.624 43.387 C 357.051 43.710,357.791 43.980,358.269 43.987 C 362.074 44.043,365.029 53.340,362.113 56.083 C 360.024 58.048,349.525 57.503,348.384 55.370 C 347.571 53.851,348.096 49.684,349.329 47.867 C 349.899 47.027,350.477 45.989,350.613 45.560 C 350.773 45.055,351.500 44.610,352.679 44.294 C 353.680 44.027,354.586 43.581,354.692 43.304 C 354.949 42.636,355.671 42.667,356.624 43.387 M147.693 52.000 C 147.693 52.770,147.775 53.085,147.876 52.700 C 147.976 52.315,147.976 51.685,147.876 51.300 C 147.775 50.915,147.693 51.230,147.693 52.000 M17.800 68.754 C 20.696 69.331,380.442 69.330,382.600 68.753 C 386.330 67.756,388.195 68.016,387.711 69.466 C 387.627 69.719,387.973 70.216,388.479 70.570 L 389.400 71.215 389.499 211.180 C 389.587 336.508,389.534 351.209,388.984 351.759 C 388.647 352.096,388.087 353.053,387.740 353.886 C 387.394 354.719,386.905 355.532,386.655 355.694 C 385.519 356.429,13.756 356.035,13.092 355.298 C 12.746 354.914,12.341 354.112,12.192 353.516 C 12.043 352.920,11.669 352.223,11.361 351.967 C 10.482 351.238,10.521 70.800,11.400 70.800 C 11.730 70.800,12.000 70.570,12.000 70.289 C 12.000 70.008,12.292 69.361,12.649 68.851 C 13.341 67.864,13.333 67.864,17.800 68.754 M18.179 69.635 C 17.992 69.936,18.043 70.021,18.311 69.855 C 18.549 69.708,18.858 69.770,18.996 69.993 C 19.343 70.554,381.200 70.561,381.200 70.000 C 381.200 69.734,320.678 69.600,200.433 69.600 C 101.011 69.600,19.399 69.498,19.073 69.373 C 18.747 69.248,18.345 69.366,18.179 69.635 " stroke="none" fill="#1b8cbc" fill-rule="evenodd"></path><path id="path3" d="M35.200 32.179 C 35.200 33.052,35.011 33.209,33.900 33.261 C 33.185 33.294,32.330 33.340,32.001 33.361 C 31.671 33.383,31.401 33.761,31.401 34.201 C 31.400 34.775,31.091 35.036,30.300 35.127 C 29.446 35.225,29.200 35.465,29.200 36.199 C 29.200 36.875,28.943 37.181,28.300 37.272 C 27.408 37.399,27.340 37.581,27.243 40.100 C 27.208 41.003,27.016 41.200,26.175 41.200 C 24.747 41.200,24.863 43.724,26.300 43.928 C 26.795 43.998,27.200 43.863,27.200 43.628 C 27.200 43.393,26.840 43.200,26.400 43.200 C 25.451 43.200,25.396 42.947,26.177 42.166 C 26.680 41.663,26.807 41.680,27.165 42.294 C 27.544 42.945,27.859 41.642,27.647 40.300 C 27.621 40.135,27.948 40.000,28.373 40.000 C 28.920 40.000,29.184 39.677,29.273 38.900 C 29.365 38.104,29.654 37.764,30.322 37.669 C 30.855 37.594,31.398 37.131,31.612 36.569 C 31.814 36.036,32.300 35.587,32.690 35.572 C 33.306 35.547,33.294 35.500,32.600 35.215 C 31.867 34.914,31.859 34.862,32.498 34.601 C 32.881 34.444,33.079 34.127,32.936 33.896 C 32.784 33.651,32.869 33.595,33.138 33.762 C 33.392 33.919,33.600 34.307,33.600 34.624 C 33.600 34.941,33.950 35.200,34.377 35.200 C 34.939 35.200,35.111 34.978,35.000 34.400 C 34.915 33.960,35.016 33.600,35.223 33.600 C 35.430 33.600,35.600 33.407,35.600 33.171 C 35.600 32.105,36.815 31.473,37.825 32.014 C 38.361 32.300,38.800 32.685,38.800 32.868 C 38.800 33.608,40.230 33.130,40.636 32.254 C 41.070 31.316,41.064 31.313,38.136 31.236 C 35.235 31.159,35.200 31.170,35.200 32.179 M48.400 31.540 C 48.400 33.196,49.474 33.644,50.562 32.442 C 51.206 31.730,51.345 31.722,52.829 32.304 C 54.527 32.971,55.235 32.778,54.346 31.889 C 53.699 31.242,48.400 30.931,48.400 31.540 M97.680 31.680 C 97.416 31.944,97.200 32.394,97.200 32.680 C 97.200 32.995,96.710 33.200,95.957 33.200 C 94.998 33.200,94.769 33.342,94.953 33.821 C 95.084 34.162,95.033 34.344,94.841 34.225 C 94.648 34.106,94.268 34.277,93.996 34.604 C 93.724 34.932,93.068 35.200,92.538 35.200 C 91.529 35.200,91.154 35.748,91.058 37.365 C 91.026 37.897,90.925 38.257,90.832 38.165 C 90.452 37.786,89.200 39.394,89.200 40.262 C 89.200 40.996,88.982 41.200,88.200 41.200 C 87.256 41.200,87.202 41.318,87.232 43.300 C 87.249 44.455,87.348 45.194,87.451 44.942 C 87.554 44.691,87.990 44.577,88.419 44.689 C 89.021 44.847,89.214 44.677,89.261 43.947 C 89.294 43.426,89.364 42.820,89.415 42.600 C 89.466 42.380,89.528 41.975,89.554 41.700 C 89.579 41.425,89.960 41.200,90.400 41.200 C 91.228 41.200,91.504 40.235,90.800 39.800 C 90.580 39.664,90.414 39.338,90.432 39.076 C 90.454 38.733,90.519 38.739,90.665 39.100 C 90.985 39.893,91.600 39.681,91.600 38.776 C 91.600 38.323,91.757 38.050,91.948 38.168 C 92.448 38.477,94.000 37.028,94.000 36.253 C 94.000 35.894,94.191 35.600,94.424 35.600 C 94.657 35.600,94.759 35.458,94.652 35.284 C 94.544 35.110,95.059 35.038,95.795 35.124 C 96.949 35.258,97.154 35.150,97.276 34.340 C 97.355 33.823,97.621 33.439,97.868 33.486 C 98.131 33.537,98.232 33.245,98.112 32.787 C 97.943 32.141,98.092 32.017,98.954 32.088 C 99.529 32.136,100.000 32.379,100.000 32.629 C 100.000 33.584,102.989 33.079,103.128 32.100 C 103.275 31.063,98.653 30.707,97.680 31.680 M110.400 31.593 C 110.400 31.850,110.617 31.917,110.900 31.747 C 111.299 31.507,111.300 31.571,110.903 32.060 C 109.886 33.318,112.363 33.702,113.737 32.500 C 114.213 32.084,114.403 32.028,114.206 32.363 C 113.954 32.792,114.070 32.875,114.693 32.712 C 115.143 32.594,115.756 32.653,116.056 32.843 C 116.437 33.084,116.240 33.206,115.400 33.248 C 114.481 33.295,114.407 33.349,115.081 33.480 C 115.566 33.574,116.079 34.017,116.221 34.466 C 116.397 35.021,116.610 35.150,116.888 34.872 C 117.113 34.647,117.561 34.563,117.882 34.687 C 118.361 34.870,118.370 34.973,117.934 35.250 C 117.525 35.509,117.564 35.589,118.100 35.594 C 118.531 35.598,118.800 35.907,118.800 36.400 C 118.800 37.203,119.410 37.401,120.542 36.967 C 120.891 36.833,121.059 36.450,120.937 36.067 C 120.755 35.495,120.786 35.485,121.156 36.000 C 121.701 36.757,121.731 37.728,121.200 37.400 C 120.972 37.259,120.800 37.608,120.800 38.214 C 120.800 38.938,121.054 39.341,121.600 39.484 C 122.040 39.599,122.400 39.852,122.400 40.047 C 122.400 40.241,122.850 40.400,123.400 40.400 C 123.950 40.400,124.400 40.580,124.400 40.800 C 124.400 41.176,123.818 41.367,123.070 41.237 C 122.889 41.206,122.862 41.377,123.010 41.617 C 123.159 41.857,123.382 41.951,123.508 41.826 C 123.633 41.701,124.050 41.883,124.434 42.231 C 125.155 42.883,125.194 42.654,124.857 39.700 C 124.826 39.425,124.440 39.200,124.000 39.200 C 123.477 39.200,123.200 38.933,123.200 38.431 C 123.200 37.401,121.267 35.151,120.450 35.229 C 119.268 35.343,118.750 35.205,118.978 34.836 C 119.408 34.139,118.708 33.200,117.757 33.200 C 117.231 33.200,116.778 33.020,116.750 32.800 C 116.722 32.580,116.678 32.175,116.650 31.900 C 116.583 31.231,110.400 30.926,110.400 31.593 M159.829 31.829 C 159.483 32.174,159.200 32.624,159.200 32.829 C 159.200 33.033,158.750 33.200,158.200 33.200 C 157.393 33.200,157.200 33.398,157.200 34.227 C 157.200 35.951,159.356 35.455,159.526 33.692 C 159.595 32.973,159.800 32.476,159.981 32.588 C 160.161 32.700,160.532 32.523,160.804 32.196 C 161.305 31.592,163.240 31.348,163.153 31.900 C 162.905 33.468,164.679 33.638,165.244 32.100 C 165.669 30.942,160.952 30.706,159.829 31.829 M172.400 31.824 C 172.400 32.167,172.578 32.337,172.795 32.203 C 173.026 32.060,173.087 32.230,172.940 32.611 C 172.739 33.137,172.914 33.238,173.845 33.132 C 174.480 33.059,174.959 32.786,174.908 32.525 C 174.858 32.265,175.165 32.077,175.591 32.109 C 176.017 32.141,176.292 32.241,176.202 32.331 C 175.912 32.622,177.122 33.600,177.771 33.600 C 178.153 33.600,178.405 33.954,178.412 34.500 C 178.424 35.374,178.437 35.377,178.871 34.600 C 179.519 33.441,179.523 33.438,180.195 33.996 C 180.633 34.359,180.690 34.650,180.395 35.006 C 180.097 35.365,180.152 35.573,180.590 35.741 C 180.925 35.870,181.200 36.238,181.200 36.560 C 181.200 36.883,181.560 37.260,182.000 37.400 C 182.440 37.540,182.800 38.002,182.800 38.427 C 182.800 38.933,183.076 39.200,183.600 39.200 C 184.040 39.200,184.411 39.425,184.425 39.700 C 184.439 39.975,184.626 39.762,184.839 39.228 C 185.087 38.607,185.090 37.860,184.847 37.162 C 184.637 36.560,184.586 35.934,184.733 35.770 C 184.880 35.606,184.775 35.601,184.500 35.759 C 184.225 35.918,184.000 35.857,184.000 35.624 C 184.000 35.391,183.383 35.200,182.628 35.200 C 181.511 35.200,181.232 35.033,181.128 34.304 C 181.053 33.781,180.667 33.350,180.200 33.267 C 179.760 33.190,178.988 32.693,178.484 32.163 C 177.340 30.961,172.400 30.685,172.400 31.824 M221.356 31.670 C 221.233 31.871,221.352 32.302,221.623 32.627 C 221.893 32.953,221.998 33.335,221.857 33.476 C 221.716 33.618,221.600 33.555,221.600 33.336 C 221.600 33.117,221.060 33.018,220.400 33.115 C 219.561 33.238,219.200 33.514,219.200 34.033 C 219.200 34.528,219.400 34.698,219.800 34.545 C 220.130 34.418,220.400 34.154,220.400 33.957 C 220.400 33.154,221.204 33.669,221.246 34.500 C 221.283 35.212,221.332 35.249,221.480 34.677 C 221.583 34.280,222.122 33.782,222.677 33.571 C 223.456 33.274,223.586 33.066,223.247 32.657 C 223.005 32.365,222.925 32.008,223.070 31.863 C 223.496 31.437,224.729 31.562,225.038 32.062 C 225.226 32.365,225.131 32.424,224.762 32.232 C 224.453 32.072,224.549 32.224,224.976 32.570 C 226.058 33.448,227.200 33.377,227.200 32.433 C 227.200 32.012,227.425 31.572,227.700 31.456 C 227.975 31.340,226.711 31.258,224.891 31.275 C 223.071 31.292,221.480 31.470,221.356 31.670 M234.873 32.200 C 235.444 33.453,238.122 33.717,237.918 32.500 C 237.743 31.458,239.282 31.611,239.819 32.689 C 240.349 33.752,241.222 33.172,240.907 31.966 C 240.731 31.293,240.324 31.200,237.562 31.200 L 234.417 31.200 234.873 32.200 M284.556 31.592 C 284.091 31.780,283.602 32.218,283.468 32.567 C 283.334 32.915,282.769 33.200,282.213 33.200 C 281.399 33.200,281.200 33.397,281.200 34.200 C 281.200 34.750,281.065 35.213,280.900 35.230 C 278.873 35.431,277.424 36.192,277.828 36.845 C 277.949 37.040,277.812 37.203,277.524 37.206 C 277.143 37.211,277.164 37.318,277.600 37.600 C 278.000 37.858,278.033 37.990,277.700 37.994 C 277.425 37.997,277.200 38.227,277.200 38.505 C 277.200 38.783,276.795 39.188,276.300 39.405 C 275.606 39.710,275.397 40.137,275.387 41.270 C 275.379 42.079,275.519 42.650,275.697 42.540 C 275.875 42.430,275.995 42.128,275.963 41.870 C 275.817 40.683,276.049 40.000,276.600 40.000 C 276.930 40.000,277.211 40.315,277.225 40.700 C 277.245 41.236,277.335 41.190,277.612 40.500 C 277.811 40.005,278.261 39.600,278.611 39.600 C 278.961 39.600,279.134 39.417,278.996 39.193 C 278.858 38.970,278.590 38.883,278.400 39.000 C 278.210 39.117,277.925 39.002,277.766 38.745 C 277.585 38.452,277.650 38.384,277.938 38.562 C 278.192 38.719,278.400 38.657,278.400 38.424 C 278.400 38.191,278.670 38.000,279.000 38.000 C 279.330 38.000,279.600 37.820,279.600 37.600 C 279.600 37.380,279.938 37.200,280.350 37.200 C 280.844 37.200,281.182 36.824,281.339 36.100 C 281.749 34.214,282.315 33.669,282.972 34.528 C 283.505 35.224,283.540 35.220,283.791 34.428 C 283.936 33.972,284.357 33.597,284.727 33.594 C 285.161 33.590,285.238 33.484,284.944 33.294 C 284.603 33.074,284.603 32.897,284.944 32.592 C 285.592 32.013,287.168 32.101,287.563 32.739 C 287.931 33.335,289.396 33.220,289.406 32.595 C 289.409 32.378,289.555 31.975,289.730 31.700 C 290.105 31.109,285.964 31.023,284.556 31.592 M296.957 31.833 C 297.091 32.181,297.200 32.636,297.200 32.845 C 297.200 33.430,299.949 33.110,300.184 32.498 C 300.311 32.166,300.215 32.067,299.934 32.241 C 299.652 32.415,299.586 32.346,299.762 32.062 C 300.112 31.495,301.200 31.449,301.200 32.000 C 301.200 32.220,301.464 32.400,301.787 32.400 C 302.171 32.400,302.286 32.631,302.119 33.066 C 301.960 33.482,302.023 33.633,302.289 33.468 C 302.528 33.321,302.819 33.621,302.952 34.152 C 303.118 34.813,303.570 35.174,304.452 35.350 C 305.146 35.489,305.952 35.917,306.244 36.301 C 306.725 36.935,306.776 36.939,306.787 36.335 C 306.803 35.488,308.154 35.639,308.323 36.507 C 308.400 36.900,308.099 37.206,307.523 37.318 L 306.600 37.498 307.520 37.801 C 308.328 38.067,309.158 39.909,308.898 40.860 C 308.859 41.003,309.260 41.229,309.789 41.362 C 310.555 41.554,310.777 41.905,310.876 43.075 C 311.048 45.118,312.983 45.819,313.130 43.891 C 313.270 42.043,312.857 41.200,311.810 41.200 C 311.053 41.200,310.917 41.038,311.097 40.349 C 311.240 39.805,311.088 39.369,310.676 39.139 C 310.323 38.941,310.129 38.530,310.246 38.226 C 310.372 37.895,310.111 37.562,309.599 37.400 C 309.126 37.250,308.842 37.025,308.966 36.900 C 309.091 36.776,308.993 36.432,308.748 36.137 C 308.503 35.842,308.459 35.576,308.651 35.547 C 308.843 35.518,308.370 35.378,307.600 35.235 C 306.706 35.068,306.244 34.776,306.321 34.424 C 306.497 33.624,305.526 33.166,304.837 33.723 C 304.374 34.097,304.311 34.092,304.547 33.700 C 304.738 33.382,304.611 33.200,304.200 33.200 C 303.789 33.200,303.662 33.382,303.853 33.700 C 304.065 34.052,303.957 34.041,303.490 33.662 C 303.124 33.366,302.841 33.006,302.860 32.862 C 303.054 31.393,302.778 31.200,300.480 31.200 C 299.178 31.200,297.924 31.419,297.621 31.700 C 297.190 32.100,297.139 32.100,297.365 31.700 C 297.520 31.424,297.438 31.200,297.181 31.200 C 296.920 31.200,296.821 31.479,296.957 31.833 M346.496 31.959 C 346.564 32.375,346.355 32.559,345.900 32.482 C 345.515 32.418,345.200 32.532,345.200 32.736 C 345.200 32.940,344.827 33.204,344.370 33.324 C 343.914 33.443,343.443 33.914,343.324 34.370 C 343.181 34.917,342.782 35.200,342.153 35.200 C 341.403 35.200,341.200 35.413,341.200 36.200 C 341.200 37.000,341.000 37.200,340.200 37.200 C 339.400 37.200,339.200 37.400,339.200 38.200 C 339.200 38.750,339.020 39.223,338.800 39.250 C 338.580 39.278,338.176 39.323,337.903 39.350 C 336.969 39.444,337.299 41.786,338.266 41.923 C 339.070 42.038,339.922 40.818,339.679 39.900 C 339.636 39.735,340.005 39.587,340.500 39.572 C 341.149 39.552,341.233 39.468,340.800 39.272 C 339.831 38.833,339.919 38.058,340.914 38.276 C 341.624 38.431,341.681 38.386,341.200 38.047 C 340.713 37.703,340.840 37.576,341.878 37.366 C 342.871 37.166,343.213 36.851,343.410 35.954 C 343.549 35.319,343.840 34.800,344.055 34.800 C 344.271 34.800,344.318 34.575,344.159 34.300 C 344.001 34.025,344.019 33.933,344.199 34.097 C 344.379 34.260,344.778 34.184,345.086 33.929 C 345.393 33.673,345.614 33.630,345.575 33.832 C 345.384 34.836,345.608 35.406,345.969 34.836 C 346.165 34.526,346.238 34.044,346.131 33.765 C 345.997 33.414,346.223 33.321,346.868 33.464 C 347.611 33.628,347.678 33.583,347.200 33.241 C 346.682 32.871,346.695 32.811,347.300 32.806 C 347.685 32.803,348.000 32.530,348.000 32.200 C 348.000 31.870,348.281 31.600,348.624 31.600 C 348.967 31.600,349.144 31.768,349.017 31.972 C 348.891 32.177,348.957 32.450,349.166 32.579 C 349.374 32.708,349.675 32.602,349.834 32.345 C 350.027 32.033,349.949 31.984,349.600 32.200 C 349.251 32.416,349.173 32.367,349.366 32.055 C 349.755 31.426,350.511 31.933,350.240 32.640 C 349.951 33.393,351.093 33.364,351.857 32.600 C 352.319 32.138,352.336 31.999,351.929 31.994 C 351.537 31.989,351.555 31.884,352.000 31.586 C 352.423 31.303,351.687 31.204,349.496 31.251 C 346.893 31.306,346.409 31.421,346.496 31.959 M359.200 31.751 C 359.200 32.054,359.461 32.519,359.781 32.784 C 360.434 33.326,361.839 33.164,361.728 32.559 C 361.688 32.343,362.183 32.126,362.828 32.077 C 363.906 31.994,364.214 32.313,364.037 33.330 C 364.006 33.511,364.159 33.549,364.378 33.413 C 364.597 33.278,364.894 33.634,365.037 34.204 C 365.295 35.235,366.715 35.499,366.500 34.476 C 366.445 34.214,366.603 34.045,366.850 34.100 C 367.098 34.155,367.378 33.987,367.474 33.727 C 367.581 33.437,367.137 33.205,366.324 33.127 C 365.596 33.057,365.030 32.820,365.066 32.600 C 365.225 31.635,364.195 31.200,361.751 31.200 C 359.851 31.200,359.200 31.341,359.200 31.751 M53.305 33.491 C 53.693 33.584,53.919 33.808,53.807 33.988 C 53.696 34.169,53.883 34.423,54.223 34.554 C 54.563 34.684,54.743 34.632,54.623 34.437 C 54.503 34.243,54.641 33.993,54.931 33.882 C 55.221 33.771,55.671 34.022,55.932 34.440 C 56.330 35.077,56.293 35.204,55.703 35.225 C 55.160 35.245,55.205 35.333,55.900 35.612 C 56.395 35.811,56.800 36.238,56.800 36.559 C 56.800 36.881,57.205 37.202,57.700 37.272 C 58.294 37.357,58.646 37.722,58.734 38.346 C 58.808 38.867,59.207 39.381,59.621 39.489 C 60.035 39.598,60.494 40.072,60.641 40.543 C 60.974 41.613,61.486 41.955,62.398 41.716 C 63.133 41.524,63.073 40.000,62.330 40.000 C 62.122 40.000,62.064 39.820,62.200 39.600 C 62.336 39.380,62.179 39.200,61.851 39.200 C 61.524 39.200,61.198 38.795,61.128 38.300 C 61.048 37.735,60.679 37.354,60.138 37.277 C 59.613 37.202,59.179 36.772,59.030 36.177 C 58.874 35.556,58.499 35.200,58.000 35.200 C 57.513 35.200,57.127 34.848,56.983 34.273 C 56.777 33.455,56.506 33.345,54.675 33.334 C 53.534 33.327,52.917 33.398,53.305 33.491 M240.800 34.200 C 240.800 35.035,240.990 35.200,241.951 35.200 C 243.071 35.200,243.928 35.800,243.936 36.590 C 243.944 37.407,244.620 37.150,245.083 36.153 C 245.543 35.163,245.517 35.123,244.545 35.308 C 243.701 35.470,243.455 35.305,243.123 34.352 C 242.581 32.797,240.800 32.680,240.800 34.200 M368.000 34.294 C 368.000 34.760,367.775 35.219,367.500 35.313 C 367.225 35.408,367.315 35.438,367.700 35.380 C 368.204 35.304,368.400 35.548,368.400 36.247 C 368.400 37.272,370.053 38.261,370.895 37.741 C 371.156 37.580,371.206 37.666,371.023 37.962 C 370.572 38.692,371.564 40.789,372.237 40.530 C 372.636 40.377,372.800 40.632,372.800 41.406 C 372.800 42.381,372.872 42.439,373.477 41.949 C 373.937 41.576,374.057 41.560,373.853 41.900 C 373.688 42.175,373.743 42.400,373.976 42.400 C 374.209 42.400,374.400 42.601,374.400 42.847 C 374.400 43.096,374.047 43.201,373.600 43.084 C 373.080 42.948,372.800 43.072,372.800 43.437 C 372.800 43.793,373.232 44.000,373.973 44.000 C 375.549 44.000,375.691 41.738,374.139 41.349 C 373.424 41.170,373.200 40.837,373.200 39.957 C 373.200 39.320,373.040 38.800,372.844 38.800 C 372.649 38.800,372.514 38.489,372.544 38.110 C 372.575 37.730,372.390 37.415,372.133 37.410 C 371.536 37.397,371.000 36.862,371.000 36.278 C 371.000 36.028,370.553 35.601,370.007 35.328 C 369.461 35.056,368.786 34.521,368.507 34.140 C 368.039 33.501,368.000 33.512,368.000 34.294 M153.617 35.780 C 153.352 36.099,153.195 36.954,153.268 37.680 C 153.386 38.861,153.285 39.013,152.300 39.127 C 151.446 39.225,151.200 39.465,151.200 40.199 C 151.200 40.875,150.943 41.181,150.300 41.272 C 149.469 41.390,149.391 41.633,149.284 44.452 C 149.192 46.880,149.008 47.650,148.384 48.214 C 147.454 49.057,147.357 50.332,148.200 50.655 C 148.594 50.806,148.800 51.431,148.800 52.471 C 148.800 54.356,147.797 53.811,147.492 51.761 L 147.320 50.600 147.254 51.800 C 147.188 52.991,146.419 54.716,146.406 53.700 C 146.401 53.314,144.001 53.188,135.900 53.146 C 130.125 53.116,125.805 53.013,126.300 52.918 C 127.055 52.772,127.200 52.486,127.200 51.143 C 127.200 49.400,126.061 48.990,125.692 50.600 C 125.041 53.434,125.426 55.070,126.801 55.309 C 127.350 55.405,127.575 55.406,127.300 55.312 C 126.549 55.055,126.698 54.520,127.586 54.288 C 128.033 54.171,128.335 54.269,128.286 54.516 C 128.226 54.820,131.372 54.958,138.700 54.975 L 149.200 55.000 149.247 52.200 C 149.273 50.660,149.271 49.200,149.242 48.954 C 149.214 48.709,149.615 48.556,150.135 48.613 C 151.054 48.714,151.082 48.629,151.141 45.498 C 151.202 42.304,151.589 41.200,152.649 41.200 C 152.957 41.200,153.200 40.795,153.200 40.280 C 153.200 39.162,153.900 38.387,154.649 38.674 C 154.965 38.795,155.200 38.632,155.200 38.292 C 155.200 37.965,155.451 37.490,155.757 37.236 C 156.063 36.982,156.406 36.420,156.519 35.987 C 156.775 35.008,154.398 34.839,153.617 35.780 M216.132 35.796 C 216.169 36.018,216.011 36.167,215.780 36.127 C 215.549 36.086,215.316 36.711,215.262 37.514 C 215.207 38.318,214.946 39.113,214.682 39.282 C 214.320 39.512,214.317 39.589,214.672 39.594 C 214.932 39.597,215.222 40.005,215.318 40.500 C 215.490 41.395,215.491 41.395,215.546 40.527 C 215.575 40.047,215.941 39.546,216.357 39.414 C 216.773 39.282,217.210 38.806,217.327 38.357 C 217.445 37.908,217.914 37.443,218.370 37.324 C 218.827 37.204,219.200 36.781,219.200 36.383 C 219.200 35.984,219.515 35.570,219.900 35.461 C 220.285 35.353,219.579 35.293,218.332 35.328 C 217.060 35.364,216.094 35.569,216.132 35.796 M245.628 35.766 C 245.197 36.286,245.218 36.432,245.755 36.638 C 246.110 36.774,246.400 37.057,246.400 37.266 C 246.400 37.476,246.256 37.558,246.081 37.450 C 245.905 37.342,245.526 37.398,245.239 37.576 C 244.858 37.811,245.032 38.057,245.876 38.478 C 246.991 39.035,247.040 39.020,247.117 38.100 C 247.247 36.524,246.270 34.992,245.628 35.766 M31.200 36.400 C 31.200 36.840,30.960 37.200,30.667 37.200 C 29.833 37.200,29.603 36.766,30.124 36.173 C 30.806 35.395,31.200 35.478,31.200 36.400 M93.200 36.400 C 93.200 36.844,92.933 37.200,92.600 37.200 C 91.510 37.200,91.888 36.014,93.100 35.632 C 93.155 35.614,93.200 35.960,93.200 36.400 M370.157 36.631 C 370.300 37.004,370.104 37.200,369.587 37.200 C 369.071 37.200,368.800 36.929,368.800 36.413 C 368.800 35.525,369.793 35.685,370.157 36.631 M155.200 36.787 C 155.200 37.323,155.008 37.501,154.600 37.345 C 154.270 37.218,154.000 36.864,154.000 36.557 C 154.000 36.251,154.270 36.000,154.600 36.000 C 154.930 36.000,155.200 36.354,155.200 36.787 M60.000 38.624 C 60.000 38.941,59.820 39.200,59.600 39.200 C 59.380 39.200,59.200 38.829,59.200 38.376 C 59.200 37.923,59.380 37.664,59.600 37.800 C 59.820 37.936,60.000 38.307,60.000 38.624 M185.600 39.528 C 186.875 40.106,186.450 41.477,185.070 41.237 C 184.889 41.206,184.844 41.348,184.971 41.553 C 185.097 41.757,185.528 41.839,185.928 41.735 C 186.789 41.510,188.112 42.825,187.300 43.098 C 187.025 43.191,186.814 43.567,186.832 43.933 C 186.851 44.349,186.939 44.412,187.065 44.100 C 187.502 43.016,188.320 43.640,188.466 45.169 C 188.548 46.032,188.522 46.731,188.408 46.722 C 186.613 46.579,186.240 47.565,187.779 48.389 C 188.330 48.684,188.828 49.369,188.919 49.956 C 189.058 50.860,189.088 50.825,189.140 49.700 C 189.177 48.897,189.009 48.398,188.700 48.394 C 188.319 48.389,188.324 48.309,188.724 48.056 C 189.504 47.561,189.014 43.287,188.055 42.228 C 187.642 41.773,187.188 40.905,187.045 40.300 C 186.854 39.493,186.547 39.207,185.892 39.228 C 185.246 39.248,185.165 39.331,185.600 39.528 M247.300 39.460 C 246.446 39.813,246.749 40.732,247.900 41.284 C 248.964 41.794,248.998 41.908,248.937 44.794 C 248.880 47.474,248.971 47.867,249.837 48.669 C 250.366 49.160,250.800 49.840,250.800 50.181 C 250.800 50.521,250.991 50.800,251.224 50.800 C 251.457 50.800,251.537 50.622,251.403 50.405 C 251.268 50.187,251.397 50.101,251.689 50.213 C 252.047 50.350,252.169 50.943,252.065 52.034 C 251.966 53.074,251.741 53.586,251.436 53.469 C 251.159 53.363,250.960 53.647,250.960 54.149 C 250.960 55.009,250.997 55.012,260.380 55.006 C 265.561 55.003,270.610 55.133,271.600 55.295 C 272.590 55.458,273.169 55.443,272.886 55.263 C 272.580 55.068,272.486 54.641,272.654 54.204 C 272.913 53.528,272.959 53.538,273.255 54.336 C 273.642 55.383,274.400 55.479,274.400 54.480 C 274.400 54.084,274.616 53.544,274.880 53.280 C 275.348 52.812,275.298 52.753,274.333 52.650 C 274.077 52.623,273.793 52.330,273.703 52.000 C 273.576 51.537,273.622 51.518,273.905 51.919 C 274.203 52.342,274.355 52.337,274.724 51.892 C 275.067 51.478,275.029 51.133,274.566 50.473 C 273.628 49.133,273.200 49.424,273.200 51.400 L 273.200 53.200 263.600 53.200 C 257.040 53.200,254.000 53.336,254.000 53.629 C 254.000 53.864,253.730 53.787,253.400 53.457 C 253.065 53.122,252.800 52.144,252.800 51.243 C 252.800 49.677,251.500 48.099,251.129 49.213 C 251.054 49.437,251.055 48.221,251.130 46.510 C 251.275 43.198,250.789 41.200,249.838 41.200 C 249.518 41.200,249.198 40.797,249.128 40.304 C 249.001 39.412,248.253 39.067,247.300 39.460 M213.212 40.804 C 213.205 41.136,212.833 41.637,212.384 41.917 C 211.936 42.197,211.677 42.600,211.808 42.813 C 211.940 43.026,211.857 43.200,211.624 43.200 C 211.391 43.200,211.225 43.875,211.254 44.700 C 211.285 45.542,211.383 45.824,211.477 45.342 C 211.569 44.870,211.995 44.167,212.422 43.780 C 212.850 43.393,213.200 42.834,213.200 42.538 C 213.200 42.242,213.459 42.000,213.776 42.000 C 214.093 42.000,214.481 41.792,214.638 41.538 C 214.809 41.261,214.749 41.185,214.486 41.347 C 214.246 41.495,213.864 41.298,213.637 40.908 C 213.313 40.352,213.222 40.329,213.212 40.804 M62.553 44.247 C 62.254 45.436,63.411 47.358,64.235 47.042 C 64.670 46.875,64.752 47.051,64.573 47.767 C 64.442 48.287,64.523 48.829,64.753 48.971 C 65.025 49.139,65.161 48.457,65.144 47.016 C 65.127 45.577,64.970 44.895,64.697 45.064 C 64.452 45.215,64.395 45.132,64.560 44.865 C 64.943 44.245,64.361 43.413,63.497 43.344 C 63.062 43.309,62.701 43.655,62.553 44.247 M124.800 43.849 C 124.800 44.362,124.918 44.400,125.364 44.030 C 126.064 43.449,126.428 43.959,126.312 45.360 C 126.223 46.434,125.421 46.782,125.065 45.900 C 124.954 45.625,124.862 45.850,124.860 46.400 C 124.855 47.869,125.292 48.589,126.248 48.686 C 127.009 48.763,127.410 45.338,126.797 44.000 C 126.747 43.890,126.727 43.665,126.753 43.500 C 126.779 43.335,126.350 43.200,125.800 43.200 C 125.144 43.200,124.800 43.423,124.800 43.849 M273.425 43.559 C 272.731 44.682,273.306 48.634,274.173 48.706 C 274.857 48.763,275.050 48.535,275.122 47.586 C 275.172 46.931,275.075 46.418,274.907 46.445 C 273.934 46.602,273.668 46.316,273.851 45.309 C 274.138 43.725,274.942 43.387,275.271 44.711 C 275.541 45.799,275.541 45.798,275.471 44.600 C 275.398 43.371,273.986 42.653,273.425 43.559 M335.467 43.467 C 335.038 43.895,335.160 48.400,335.600 48.400 C 335.820 48.400,336.000 48.040,336.000 47.600 C 336.000 47.160,336.252 46.800,336.561 46.800 C 337.326 46.800,338.015 44.728,337.535 43.870 C 337.159 43.199,335.967 42.966,335.467 43.467 M337.093 45.441 C 336.995 45.539,336.613 45.503,336.245 45.362 C 335.629 45.126,335.632 45.064,336.288 44.580 C 336.959 44.084,337.679 44.854,337.093 45.441 M40.645 45.762 C 40.475 46.442,40.112 46.800,39.592 46.800 C 38.988 46.800,38.807 47.061,38.828 47.900 C 38.853 48.875,38.895 48.909,39.200 48.200 C 39.494 47.516,39.548 47.501,39.572 48.100 C 39.589 48.529,39.916 48.800,40.418 48.800 C 40.867 48.800,41.206 48.575,41.170 48.300 C 40.991 46.922,41.221 46.800,44.000 46.800 C 45.600 46.800,46.800 46.629,46.800 46.400 C 46.800 46.036,46.242 45.839,45.514 45.948 C 45.357 45.971,45.333 45.718,45.461 45.385 C 45.641 44.916,45.418 44.801,44.467 44.874 C 43.489 44.948,43.331 45.076,43.688 45.506 C 44.029 45.917,44.001 46.016,43.569 45.923 C 43.258 45.855,42.805 45.548,42.563 45.239 C 42.215 44.797,42.056 44.785,41.811 45.182 C 41.571 45.570,41.432 45.575,41.203 45.205 C 41.010 44.893,40.814 45.090,40.645 45.762 M47.357 47.159 C 47.440 49.230,47.626 49.854,48.330 50.424 C 49.574 51.431,49.512 53.200,48.233 53.200 C 47.702 53.200,47.176 53.425,47.065 53.700 C 46.904 54.100,46.857 54.100,46.832 53.700 C 46.810 53.360,46.043 53.200,44.433 53.200 C 42.914 53.200,41.994 53.379,41.865 53.700 C 41.704 54.100,41.657 54.100,41.632 53.700 C 41.612 53.390,41.031 53.210,40.100 53.225 C 38.770 53.248,38.705 53.293,39.525 53.622 C 40.034 53.826,40.725 54.267,41.061 54.603 C 41.549 55.092,42.627 55.200,46.436 55.143 L 51.200 55.071 51.200 52.985 C 51.200 51.508,51.002 50.738,50.523 50.349 C 49.941 49.876,49.889 49.883,50.153 50.400 C 50.321 50.730,50.176 50.651,49.830 50.224 C 49.222 49.474,49.088 48.982,49.092 47.510 C 49.093 47.131,48.769 46.717,48.372 46.591 C 47.975 46.465,47.561 45.966,47.452 45.481 C 47.343 44.996,47.300 45.752,47.357 47.159 M102.800 45.800 C 102.800 46.514,102.584 46.800,102.043 46.800 C 101.380 46.800,100.800 47.516,100.800 48.334 C 100.800 48.481,101.340 48.609,102.000 48.618 C 102.989 48.631,103.200 48.472,103.200 47.717 C 103.200 47.067,103.433 46.800,104.000 46.800 C 104.891 46.800,105.056 46.016,104.320 45.280 C 103.526 44.486,102.800 44.735,102.800 45.800 M106.936 45.423 C 106.804 45.766,106.441 45.948,106.128 45.828 C 105.815 45.707,105.659 45.772,105.782 45.970 C 105.905 46.169,105.779 46.423,105.502 46.534 C 105.226 46.646,105.945 46.751,107.100 46.768 C 109.150 46.799,109.401 46.980,109.230 48.300 C 109.193 48.586,109.600 48.800,110.182 48.800 C 111.298 48.800,111.468 48.428,110.703 47.663 C 110.308 47.268,110.328 47.090,110.803 46.789 C 111.307 46.471,111.289 46.411,110.687 46.406 C 110.295 46.403,109.811 45.995,109.612 45.500 L 109.251 44.600 109.225 45.500 C 109.194 46.615,108.542 46.679,108.200 45.600 C 107.897 44.645,107.268 44.557,106.936 45.423 M165.687 45.250 C 165.790 45.553,165.525 46.107,165.098 46.481 C 164.487 47.016,164.396 47.387,164.669 48.207 C 165.009 49.227,165.037 49.235,165.836 48.526 C 166.782 47.688,167.267 46.601,166.872 46.206 C 166.723 46.056,166.600 45.738,166.600 45.500 C 166.600 45.262,166.353 44.984,166.050 44.883 C 165.716 44.772,165.573 44.916,165.687 45.250 M227.881 45.837 C 227.486 46.367,227.351 46.800,227.581 46.800 C 227.812 46.800,228.000 47.070,228.000 47.400 C 228.000 47.730,227.676 48.000,227.280 48.000 C 226.106 48.000,225.549 48.806,226.243 49.501 C 227.048 50.305,226.929 54.205,226.120 53.533 C 225.693 53.179,225.639 53.236,225.859 53.809 C 226.050 54.306,225.990 54.441,225.668 54.242 C 225.393 54.072,225.200 54.192,225.200 54.532 C 225.200 55.011,226.094 55.102,230.350 55.056 L 235.499 55.000 235.483 52.800 C 235.471 51.294,235.417 51.066,235.310 52.079 C 235.190 53.214,235.011 53.502,234.537 53.320 C 234.197 53.190,233.760 53.335,233.566 53.642 C 233.313 54.041,233.211 54.057,233.206 53.700 C 233.202 53.345,232.326 53.200,230.180 53.200 L 227.160 53.200 227.280 50.900 C 227.370 49.177,227.550 48.599,228.000 48.598 C 228.369 48.596,228.582 48.250,228.552 47.698 C 228.519 47.070,228.729 46.800,229.252 46.800 C 229.663 46.800,230.000 46.626,230.000 46.413 C 230.000 46.199,229.744 46.123,229.432 46.243 C 229.077 46.379,228.814 46.163,228.732 45.668 C 228.607 44.920,228.559 44.929,227.881 45.837 M233.244 45.862 C 232.840 46.750,232.872 46.831,233.539 46.619 C 234.002 46.473,234.499 46.653,234.844 47.091 C 235.346 47.732,235.334 47.748,234.718 47.266 C 233.758 46.514,232.938 47.102,233.876 47.868 C 234.274 48.193,234.347 48.328,234.038 48.168 C 233.666 47.975,233.574 48.034,233.766 48.345 C 233.925 48.602,234.235 48.702,234.454 48.566 C 234.674 48.431,235.106 48.653,235.414 49.060 C 235.722 49.467,235.994 49.710,236.018 49.600 C 236.299 48.304,236.275 48.030,235.902 48.261 C 235.637 48.425,235.543 48.235,235.655 47.763 C 235.766 47.294,235.424 46.589,234.767 45.934 L 233.698 44.868 233.244 45.862 M290.365 45.600 C 290.332 46.150,290.321 46.718,290.340 46.862 C 290.359 47.006,290.117 47.337,289.803 47.597 C 289.335 47.986,289.261 47.920,289.395 47.225 C 289.485 46.758,289.388 46.484,289.179 46.613 C 288.971 46.742,288.800 47.446,288.800 48.178 C 288.800 49.162,288.535 49.682,287.780 50.176 C 286.871 50.772,286.773 51.071,286.880 52.922 L 287.000 55.000 290.932 54.972 C 293.861 54.951,294.967 54.799,295.270 54.372 C 295.598 53.909,295.633 53.931,295.455 54.487 C 295.275 55.049,295.478 55.165,296.563 55.124 C 297.293 55.097,297.887 54.878,297.882 54.637 C 297.824 51.485,298.031 50.605,298.600 51.600 C 299.152 52.566,299.172 52.570,299.186 51.724 C 299.199 50.882,298.671 50.294,297.779 50.158 C 297.547 50.123,297.314 50.732,297.262 51.513 C 297.170 52.878,296.438 54.762,296.412 53.700 C 296.404 53.349,295.574 53.200,293.633 53.200 C 291.794 53.200,290.799 53.368,290.665 53.700 C 290.504 54.100,290.457 54.100,290.432 53.700 C 290.414 53.425,290.174 53.200,289.898 53.200 C 289.622 53.200,289.201 52.577,288.963 51.816 C 288.725 51.056,288.680 50.526,288.865 50.640 C 289.049 50.754,289.200 50.387,289.200 49.824 C 289.200 49.070,289.409 48.800,289.992 48.800 C 290.504 48.800,290.874 48.446,291.036 47.800 C 291.430 46.228,297.200 46.241,297.200 47.814 C 297.200 48.680,297.309 48.770,297.947 48.428 C 298.358 48.208,298.808 48.142,298.947 48.281 C 299.086 48.420,299.200 48.143,299.200 47.667 C 299.200 47.009,298.959 46.800,298.200 46.800 C 297.392 46.800,297.200 46.602,297.200 45.771 C 297.200 45.006,297.020 44.776,296.500 44.876 C 296.115 44.950,295.800 45.261,295.800 45.567 C 295.800 46.343,294.427 46.464,293.442 45.775 C 292.991 45.459,292.806 45.200,293.031 45.200 C 293.256 45.200,293.657 45.379,293.921 45.599 C 294.186 45.818,294.121 45.683,293.777 45.299 C 293.181 44.634,293.126 44.634,292.631 45.300 C 292.346 45.685,291.971 46.000,291.800 46.000 C 291.629 46.000,291.249 45.685,290.957 45.300 C 290.469 44.657,290.421 44.681,290.365 45.600 M352.425 45.473 C 352.411 45.980,352.065 46.452,351.600 46.600 C 350.643 46.904,350.556 48.099,351.429 48.971 C 351.984 49.527,351.986 49.600,351.447 49.600 C 349.714 49.600,348.080 53.116,349.106 54.635 C 349.432 55.117,351.310 55.701,351.018 55.230 C 350.918 55.067,352.256 55.017,353.992 55.117 C 357.632 55.328,359.200 55.042,359.200 54.169 C 359.200 53.830,359.335 53.631,359.500 53.726 C 359.665 53.822,360.160 53.755,360.600 53.578 C 361.228 53.325,361.085 53.250,359.933 53.228 C 359.111 53.212,358.378 53.419,358.265 53.700 C 358.104 54.100,358.057 54.100,358.032 53.700 C 358.009 53.342,357.036 53.200,354.600 53.200 L 351.200 53.200 351.200 51.600 C 351.200 50.720,351.391 50.000,351.624 50.000 C 351.857 50.000,351.919 50.208,351.762 50.462 C 351.596 50.730,351.651 50.816,351.893 50.666 C 352.122 50.525,352.549 49.597,352.842 48.605 L 353.375 46.800 356.287 46.800 L 359.200 46.800 359.200 48.920 C 359.200 51.018,359.672 52.000,360.680 52.000 C 360.966 52.000,361.200 51.640,361.200 51.200 C 361.200 50.760,361.041 50.400,360.847 50.400 C 360.301 50.400,360.020 48.835,360.511 48.531 C 360.782 48.364,360.653 48.147,360.173 47.959 C 359.463 47.681,359.473 47.654,360.300 47.628 C 361.412 47.593,361.508 46.800,360.400 46.800 C 359.639 46.800,359.425 46.415,359.570 45.300 C 359.606 45.025,359.437 44.800,359.194 44.800 C 358.951 44.800,358.856 44.968,358.983 45.172 C 359.109 45.377,359.049 45.646,358.848 45.770 C 358.648 45.894,358.365 45.686,358.220 45.309 C 357.994 44.720,357.903 44.706,357.578 45.211 C 357.340 45.583,357.089 45.652,356.900 45.399 C 356.292 44.584,354.518 44.706,354.290 45.578 C 354.006 46.663,353.264 46.624,352.812 45.500 L 352.451 44.600 352.425 45.473 M171.336 45.822 C 171.151 46.305,170.728 46.405,169.561 46.242 C 168.719 46.124,167.923 46.201,167.791 46.414 C 167.652 46.639,168.353 46.820,169.476 46.847 C 171.402 46.895,171.577 46.886,172.491 46.700 C 172.760 46.645,173.019 47.050,173.064 47.600 C 173.115 48.207,173.066 48.316,172.940 47.877 C 172.715 47.093,171.567 47.098,171.305 47.885 C 171.216 48.152,171.606 48.487,172.172 48.629 C 172.949 48.824,173.201 49.144,173.206 49.943 L 173.212 51.000 173.727 50.000 C 174.011 49.450,174.098 48.940,173.922 48.867 C 173.745 48.793,173.600 48.331,173.600 47.839 C 173.600 46.619,171.685 44.913,171.336 45.822 M87.478 45.856 C 87.158 46.175,87.519 46.800,88.024 46.800 C 88.231 46.800,88.400 46.530,88.400 46.200 C 88.400 45.581,87.928 45.405,87.478 45.856 M312.642 46.068 C 312.833 46.377,312.718 46.454,312.305 46.296 C 311.652 46.045,311.625 46.333,312.153 47.906 C 312.332 48.439,312.651 48.703,312.929 48.547 C 313.251 48.366,313.274 48.421,313.000 48.720 C 312.445 49.327,312.860 55.426,313.449 55.317 C 315.278 54.979,328.041 54.811,330.689 55.091 L 333.978 55.438 334.368 54.319 L 334.758 53.200 325.813 53.200 C 319.030 53.200,316.818 53.321,316.665 53.700 C 316.504 54.100,316.457 54.100,316.432 53.700 C 316.414 53.425,316.017 53.200,315.548 53.200 C 314.760 53.200,314.716 53.054,314.957 51.238 C 315.246 49.059,314.603 47.036,313.729 47.372 C 313.219 47.568,313.034 47.148,313.170 46.100 C 313.206 45.825,313.037 45.600,312.794 45.600 C 312.551 45.600,312.483 45.811,312.642 46.068 M230.400 46.485 C 230.400 46.658,230.861 46.800,231.424 46.800 C 231.987 46.800,232.343 46.631,232.216 46.425 C 231.941 45.981,230.400 46.031,230.400 46.485 M213.200 46.800 C 213.200 47.020,212.750 47.200,212.200 47.200 C 211.578 47.200,211.200 47.427,211.200 47.800 C 211.200 48.584,212.175 48.568,212.971 47.771 C 213.576 47.167,213.816 46.400,213.400 46.400 C 213.290 46.400,213.200 46.580,213.200 46.800 M250.800 47.000 C 250.800 47.059,250.440 47.201,250.000 47.316 C 249.500 47.447,249.200 47.328,249.200 47.000 C 249.200 46.672,249.500 46.553,250.000 46.684 C 250.440 46.799,250.800 46.941,250.800 47.000 M86.400 47.184 C 85.464 47.418,85.392 47.618,85.282 50.317 L 85.165 53.200 76.016 53.200 C 69.071 53.200,66.818 53.320,66.665 53.700 C 66.504 54.100,66.457 54.100,66.432 53.700 C 66.414 53.425,66.130 53.200,65.800 53.200 C 65.183 53.200,65.021 52.580,65.159 50.750 C 65.209 50.084,64.993 49.606,64.568 49.443 C 63.867 49.174,62.800 49.811,62.800 50.498 C 62.800 50.721,63.065 50.678,63.400 50.400 C 63.847 50.029,64.000 50.022,64.000 50.375 C 64.000 50.646,64.213 50.719,64.500 50.547 C 64.891 50.312,64.889 50.383,64.493 50.873 C 64.214 51.217,64.106 51.810,64.251 52.190 C 64.408 52.598,64.288 53.024,63.958 53.230 C 63.536 53.493,63.340 53.264,63.153 52.289 C 62.949 51.228,62.896 51.375,62.853 53.124 C 62.819 54.472,62.948 55.156,63.207 54.996 C 63.430 54.858,63.515 54.586,63.395 54.392 C 63.120 53.946,64.434 53.249,65.100 53.487 C 65.375 53.586,65.600 53.922,65.600 54.233 C 65.600 54.545,65.735 54.818,65.900 54.841 C 67.761 55.093,87.600 54.970,87.600 54.706 C 87.600 54.512,87.458 54.441,87.284 54.548 C 87.110 54.656,87.127 53.181,87.323 51.272 C 87.519 49.362,87.856 47.690,88.073 47.556 C 88.698 47.168,87.515 46.906,86.400 47.184 M23.829 47.829 C 23.388 48.269,23.200 49.223,23.200 51.016 C 23.200 53.198,23.106 53.539,22.560 53.329 C 22.207 53.194,21.760 53.335,21.566 53.642 C 21.301 54.059,21.211 54.071,21.206 53.687 C 21.201 53.298,20.117 53.187,16.700 53.227 C 12.274 53.278,11.200 53.556,11.200 54.649 C 11.200 55.391,12.366 55.353,12.654 54.602 C 12.781 54.274,13.057 54.112,13.269 54.243 C 13.481 54.374,13.565 54.715,13.455 55.001 C 13.297 55.411,13.559 55.436,14.704 55.120 C 16.054 54.747,20.655 54.931,23.377 55.466 C 24.512 55.689,24.529 55.671,23.833 54.976 C 23.138 54.281,23.138 54.235,23.832 53.727 C 24.229 53.437,24.333 53.200,24.064 53.200 C 23.726 53.200,23.598 52.461,23.648 50.793 C 23.688 49.470,23.812 48.478,23.923 48.590 C 24.181 48.848,25.200 48.019,25.200 47.551 C 25.200 47.001,24.518 47.139,23.829 47.829 M374.806 48.104 C 374.811 48.766,374.903 48.857,375.159 48.452 C 375.442 48.006,375.580 48.035,375.901 48.608 C 376.386 49.475,377.195 49.067,376.938 48.085 C 376.645 46.963,374.798 46.980,374.806 48.104 M335.238 51.535 C 335.162 53.883,335.216 54.085,335.796 53.604 C 336.265 53.214,336.310 52.992,335.965 52.778 C 335.317 52.378,335.852 50.400,336.608 50.400 C 337.575 50.400,337.281 49.309,336.261 49.114 C 335.360 48.941,335.318 49.039,335.238 51.535 M40.132 49.767 C 40.252 50.079,40.102 50.429,39.801 50.544 C 39.499 50.660,39.166 50.540,39.062 50.278 C 38.957 50.015,38.885 50.475,38.901 51.300 C 38.927 52.684,39.600 53.550,39.600 52.200 C 39.600 51.870,39.840 51.600,40.133 51.600 C 40.427 51.600,40.675 51.375,40.686 51.100 C 40.696 50.825,40.835 50.285,40.995 49.900 C 41.206 49.393,41.097 49.200,40.600 49.200 C 40.173 49.200,39.996 49.414,40.132 49.767 M102.049 49.861 C 101.673 50.501,101.562 50.520,101.219 50.000 C 100.940 49.579,100.896 49.876,101.068 51.000 C 101.378 53.019,101.493 53.142,101.966 51.958 L 102.349 51.000 102.421 52.000 C 102.472 52.722,102.580 52.554,102.808 51.400 C 103.161 49.618,102.718 48.722,102.049 49.861 M111.200 51.409 L 111.200 53.200 107.633 53.200 C 105.154 53.200,104.005 53.352,103.865 53.700 C 103.704 54.100,103.657 54.100,103.632 53.700 C 103.586 52.980,102.530 53.084,102.241 53.836 C 102.107 54.186,102.082 54.609,102.186 54.777 C 102.499 55.284,110.562 55.173,110.894 54.657 C 111.106 54.327,111.189 54.339,111.194 54.700 C 111.197 54.975,111.650 55.200,112.200 55.200 C 113.153 55.200,113.200 55.089,113.200 52.864 C 113.200 50.761,113.100 50.483,112.200 50.073 C 111.214 49.624,111.200 49.643,111.200 51.409 M376.400 50.200 C 376.674 50.530,376.741 50.800,376.549 50.800 C 376.357 50.800,376.223 51.475,376.251 52.300 C 376.292 53.509,376.447 53.786,377.051 53.730 C 377.763 53.663,377.765 53.685,377.088 54.182 C 376.413 54.678,376.413 54.719,377.075 54.974 C 377.955 55.311,386.042 54.792,385.808 54.413 C 385.713 54.259,385.897 54.133,386.218 54.133 C 386.744 54.133,386.962 54.522,386.856 55.273 C 386.835 55.423,387.324 55.532,387.942 55.514 C 388.899 55.487,389.040 55.343,388.888 54.546 C 388.789 54.031,388.562 53.700,388.382 53.811 C 388.202 53.922,387.942 53.830,387.804 53.607 C 387.654 53.364,385.403 53.200,382.226 53.200 L 376.898 53.200 377.101 51.400 C 377.273 49.874,377.197 49.600,376.603 49.600 C 376.025 49.600,375.990 49.705,376.400 50.200 M25.194 53.082 C 25.087 54.446,25.145 55.417,25.323 55.239 C 25.500 55.060,25.588 53.944,25.517 52.757 L 25.389 50.600 25.194 53.082 M164.860 52.020 C 164.827 52.581,164.584 53.256,164.320 53.520 C 163.961 53.879,163.958 54.000,164.307 54.000 C 164.565 54.000,164.671 54.270,164.545 54.600 C 164.366 55.064,164.638 55.200,165.745 55.200 C 166.926 55.200,167.136 55.078,166.950 54.500 C 166.812 54.072,166.856 53.972,167.062 54.241 C 167.820 55.231,173.599 55.323,174.436 54.359 C 175.378 53.273,175.386 53.134,174.500 53.282 C 173.999 53.367,173.809 53.144,173.832 52.500 C 173.849 52.005,173.727 51.600,173.560 51.600 C 173.392 51.600,173.198 52.005,173.128 52.500 C 173.058 52.995,172.865 53.355,172.700 53.300 C 172.535 53.245,170.792 53.200,168.827 53.200 L 165.253 53.200 165.087 52.100 C 164.922 51.015,164.919 51.013,164.860 52.020 M189.200 54.100 L 189.200 55.000 200.187 55.000 L 211.174 55.000 211.100 54.100 L 211.026 53.200 200.886 53.200 L 190.746 53.200 190.975 54.100 L 191.204 55.000 190.741 54.100 C 190.486 53.605,190.035 53.200,189.739 53.200 C 189.442 53.200,189.200 53.605,189.200 54.100 M361.200 54.504 C 361.200 54.855,360.885 55.224,360.500 55.324 C 359.844 55.496,359.845 55.510,360.513 55.554 C 361.236 55.601,361.906 54.573,361.449 54.116 C 361.312 53.979,361.200 54.153,361.200 54.504 M6.544 55.885 C 6.114 56.278,5.967 56.467,6.218 56.303 C 6.469 56.140,6.777 56.110,6.903 56.236 C 7.028 56.362,7.503 56.266,7.957 56.023 C 8.637 55.659,8.870 55.723,9.287 56.391 C 9.945 57.445,10.266 57.413,10.484 56.271 C 10.722 55.030,7.793 54.743,6.544 55.885 M389.692 56.200 C 389.597 57.347,390.234 57.554,390.573 56.485 C 390.828 55.682,392.367 55.389,392.461 56.125 C 392.494 56.386,392.543 56.780,392.569 57.001 C 392.666 57.838,393.839 59.098,394.800 59.397 C 395.350 59.568,396.250 60.165,396.800 60.723 C 397.350 61.281,397.575 61.606,397.300 61.445 C 396.395 60.916,396.778 61.782,397.929 62.869 C 398.722 63.617,399.229 63.827,399.629 63.573 C 400.116 63.265,400.112 63.210,399.600 63.200 C 399.067 63.189,399.067 63.144,399.600 62.794 C 400.086 62.475,400.100 62.335,399.673 62.060 C 399.189 61.747,398.908 60.960,398.831 59.700 C 398.814 59.425,398.350 59.200,397.800 59.200 C 397.250 59.200,396.821 59.065,396.847 58.900 C 397.004 57.908,396.695 57.362,395.943 57.306 C 395.472 57.270,394.607 56.782,394.021 56.221 C 392.495 54.758,389.812 54.745,389.692 56.200 M6.233 56.747 C 6.114 56.939,5.487 57.203,4.840 57.332 C 4.155 57.469,3.560 57.897,3.413 58.358 C 3.275 58.793,2.766 59.206,2.281 59.275 C 1.612 59.370,1.370 59.713,1.275 60.700 C 1.197 61.505,0.931 62.000,0.575 62.000 C -0.255 62.000,-0.135 62.795,0.700 62.828 C 1.307 62.852,1.296 62.897,0.621 63.161 C -0.122 63.452,-0.117 63.476,0.721 63.695 C 1.205 63.822,1.600 63.762,1.600 63.563 C 1.600 63.363,1.863 63.200,2.184 63.200 C 2.521 63.200,2.976 62.506,3.259 61.559 C 3.552 60.583,4.085 59.783,4.576 59.585 C 5.377 59.260,5.375 59.250,4.500 59.225 C 4.005 59.211,3.600 59.020,3.600 58.800 C 3.600 58.580,3.825 58.445,4.100 58.500 C 4.375 58.555,4.552 58.330,4.494 58.000 C 4.430 57.633,4.698 57.763,5.187 58.336 C 5.901 59.172,6.050 59.207,6.593 58.664 C 7.308 57.949,7.400 57.429,6.738 57.838 C 6.467 58.006,6.384 57.949,6.539 57.699 C 6.683 57.466,7.206 57.375,7.700 57.497 C 8.731 57.750,8.591 57.512,7.324 56.853 C 6.843 56.603,6.351 56.555,6.233 56.747 M395.816 58.427 C 396.185 59.022,395.758 59.346,394.992 59.052 C 394.638 58.917,394.461 58.624,394.598 58.403 C 394.922 57.878,395.484 57.889,395.816 58.427 M398.955 65.828 C 399.090 66.179,399.200 66.541,399.200 66.633 C 399.200 66.725,399.380 66.800,399.600 66.800 C 400.252 66.800,400.055 65.707,399.355 65.438 C 398.884 65.257,398.776 65.362,398.955 65.828 M0.000 66.200 C 0.000 66.530,0.270 66.800,0.600 66.800 C 0.930 66.800,1.200 66.530,1.200 66.200 C 1.200 65.870,0.930 65.600,0.600 65.600 C 0.270 65.600,0.000 65.870,0.000 66.200 M13.847 69.421 C 13.690 69.831,13.777 69.955,14.105 69.786 C 14.377 69.646,14.196 69.861,13.703 70.265 L 12.806 71.000 12.801 212.078 L 12.797 353.155 13.798 354.236 C 14.349 354.830,14.800 355.100,14.800 354.835 C 14.800 354.570,14.980 354.464,15.200 354.600 C 15.600 354.847,15.779 353.513,15.397 353.131 C 15.286 353.019,15.195 289.509,15.196 211.997 C 15.198 58.964,15.053 69.600,17.138 69.600 C 17.617 69.600,17.581 69.729,16.976 70.185 C 15.997 70.922,380.297 71.123,382.235 70.387 C 382.839 70.157,383.439 70.111,383.567 70.284 C 384.063 70.955,384.687 70.722,384.644 69.881 C 384.586 68.726,382.864 68.424,382.122 69.438 C 381.835 69.831,381.600 69.939,381.600 69.676 C 381.600 69.308,340.350 69.223,200.300 69.300 L 19.000 69.399 200.100 69.500 C 320.367 69.567,381.200 69.735,381.200 70.000 C 381.200 70.561,19.342 70.554,18.996 69.993 C 18.858 69.770,18.532 69.714,18.272 69.870 C 18.013 70.026,18.066 69.826,18.392 69.425 C 18.950 68.739,18.903 68.713,17.592 68.985 C 16.826 69.145,15.991 69.540,15.736 69.865 C 15.338 70.370,15.234 70.336,15.009 69.628 C 14.698 68.647,14.180 68.555,13.847 69.421 M385.200 69.487 C 385.200 69.901,385.416 70.456,385.680 70.720 C 386.053 71.093,386.053 71.200,385.680 71.200 C 385.308 71.200,385.200 102.800,385.200 212.200 L 385.200 353.200 200.600 353.200 C 10.365 353.200,13.044 353.180,16.657 354.566 C 17.191 354.772,17.224 354.711,16.834 354.241 C 16.437 353.763,16.496 353.700,17.173 353.877 C 17.623 353.995,17.904 354.232,17.798 354.404 C 17.692 354.575,17.915 354.835,18.295 354.981 C 18.674 355.127,19.048 355.055,19.126 354.823 C 19.328 354.216,381.200 354.227,381.200 354.833 C 381.200 355.072,381.425 355.184,381.700 355.083 C 381.975 354.982,382.148 354.675,382.084 354.401 C 382.012 354.094,382.204 353.998,382.584 354.151 C 382.923 354.288,383.470 354.509,383.800 354.643 C 384.130 354.776,384.400 354.686,384.400 354.443 C 384.400 354.199,384.580 354.000,384.800 354.000 C 385.020 354.000,385.200 354.270,385.200 354.600 C 385.200 354.930,385.380 355.200,385.600 355.200 C 385.820 355.200,386.000 354.995,386.000 354.744 C 386.000 354.493,386.315 354.049,386.700 353.757 C 387.363 353.253,387.362 353.225,386.671 353.213 C 386.008 353.201,385.999 353.144,386.574 352.569 C 387.405 351.738,387.545 70.330,386.714 70.501 C 386.452 70.556,386.229 70.255,386.219 69.834 C 386.194 68.834,385.200 68.494,385.200 69.487 M386.300 280.068 C 386.244 318.200,386.198 287.120,386.198 211.000 C 386.198 134.880,386.244 103.680,386.300 141.668 C 386.356 179.655,386.356 241.935,386.300 280.068 M290.933 353.900 C 241.176 353.956,159.636 353.956,109.733 353.900 C 59.830 353.844,100.540 353.798,200.200 353.798 C 299.860 353.798,340.690 353.844,290.933 353.900 M0.000 356.400 C 0.000 356.620,0.270 356.800,0.600 356.800 C 0.930 356.800,1.200 356.620,1.200 356.400 C 1.200 356.180,0.930 356.000,0.600 356.000 C 0.270 356.000,0.000 356.180,0.000 356.400 M399.067 356.267 C 398.920 356.413,398.800 357.403,398.800 358.467 C 398.800 359.951,398.655 360.400,398.176 360.400 C 397.833 360.400,397.666 360.583,397.804 360.807 C 397.942 361.030,398.223 361.109,398.428 360.983 C 398.632 360.856,398.800 361.027,398.800 361.362 C 398.800 361.951,397.564 362.866,396.916 362.758 C 395.539 362.528,394.800 362.869,394.800 363.733 C 394.800 364.247,394.665 364.802,394.500 364.967 C 394.335 365.132,394.200 365.432,394.200 365.633 C 394.200 365.835,394.065 366.000,393.900 366.000 C 393.735 366.000,393.420 366.000,393.200 366.000 C 392.980 366.000,392.786 365.685,392.768 365.300 C 392.743 364.743,392.690 364.722,392.509 365.200 C 392.123 366.214,390.921 367.587,390.653 367.320 C 390.514 367.181,390.400 367.277,390.400 367.533 C 390.400 367.790,390.265 367.979,390.100 367.953 C 389.935 367.927,389.710 367.939,389.600 367.980 C 388.291 368.466,386.752 368.340,387.213 367.784 C 387.496 367.443,387.979 367.260,388.285 367.377 C 388.591 367.495,388.732 367.414,388.598 367.197 C 388.291 366.700,14.556 366.702,13.400 367.200 C 12.960 367.389,12.780 367.559,13.000 367.578 C 13.220 367.597,13.130 367.787,12.800 368.000 C 11.980 368.530,11.492 368.498,11.839 367.937 C 12.033 367.623,11.861 367.543,11.307 367.688 C 10.857 367.806,10.244 367.727,9.944 367.513 C 9.533 367.220,9.576 367.182,10.121 367.358 C 10.543 367.494,10.740 367.427,10.597 367.195 C 10.463 366.978,10.016 366.800,9.605 366.800 C 8.713 366.800,7.498 365.689,7.820 365.168 C 7.945 364.965,7.857 364.800,7.624 364.800 C 7.391 364.800,7.200 365.059,7.200 365.376 C 7.200 365.693,6.992 366.081,6.738 366.238 C 6.451 366.416,6.385 366.348,6.564 366.059 C 6.724 365.799,6.576 365.489,6.228 365.355 C 5.885 365.224,5.721 364.927,5.864 364.696 C 6.028 364.432,5.927 364.398,5.594 364.604 C 5.210 364.841,5.134 364.749,5.318 364.270 C 5.457 363.907,5.443 363.636,5.286 363.668 C 4.512 363.827,1.318 361.811,1.476 361.264 C 1.518 361.119,1.968 360.883,2.476 360.740 L 3.400 360.480 2.487 360.440 C 1.986 360.418,1.471 360.130,1.345 359.800 C 0.998 358.897,0.000 359.080,0.000 360.047 C 0.000 360.671,0.193 360.843,0.734 360.701 C 1.313 360.550,1.433 360.695,1.300 361.390 C 1.098 362.448,3.257 364.800,4.431 364.800 C 4.979 364.800,5.200 365.080,5.200 365.773 C 5.200 366.538,5.436 366.774,6.300 366.873 C 7.091 366.964,7.400 367.225,7.401 367.800 C 7.401 368.599,7.668 368.600,199.801 368.600 L 392.200 368.600 392.587 367.718 C 392.811 367.208,393.401 366.786,393.987 366.718 C 394.687 366.636,395.039 366.322,395.128 365.700 C 395.221 365.043,395.523 364.800,396.247 364.800 C 397.476 364.800,399.200 363.014,399.200 361.742 C 399.200 361.224,399.380 360.800,399.600 360.800 C 399.820 360.800,400.000 360.440,400.000 360.000 C 400.000 359.560,399.775 359.197,399.500 359.194 C 399.167 359.190,399.200 359.058,399.600 358.800 C 400.133 358.455,400.133 358.411,399.600 358.400 C 399.067 358.389,399.067 358.344,399.600 357.994 C 400.133 357.644,400.133 357.556,399.600 357.206 C 399.199 356.943,399.166 356.810,399.500 356.806 C 399.775 356.803,400.000 356.620,400.000 356.400 C 400.000 355.945,399.465 355.868,399.067 356.267 M0.000 357.600 C 0.000 357.820,0.270 358.000,0.600 358.000 C 0.930 358.000,1.200 357.820,1.200 357.600 C 1.200 357.380,0.930 357.200,0.600 357.200 C 0.270 357.200,0.000 357.380,0.000 357.600 " stroke="none" fill="#2c7c9c" fill-rule="evenodd"></path><path id="path4" d="M40.475 31.583 C 40.607 33.039,40.371 33.200,38.100 33.206 C 35.541 33.213,34.865 33.487,35.015 34.456 C 35.089 34.936,34.697 35.178,33.546 35.362 C 32.381 35.549,31.881 35.862,31.609 36.576 C 31.398 37.131,30.853 37.594,30.322 37.669 C 29.654 37.764,29.365 38.104,29.273 38.900 C 29.184 39.677,28.920 40.000,28.373 40.000 C 27.948 40.000,27.637 40.135,27.683 40.300 C 28.084 41.752,27.111 44.076,26.176 43.898 L 25.176 43.706 25.288 49.513 L 25.400 55.320 17.759 55.281 L 10.119 55.241 10.306 56.220 C 10.467 57.065,10.335 57.209,9.347 57.268 C 8.716 57.306,7.895 57.356,7.521 57.380 C 7.148 57.404,6.698 57.582,6.521 57.776 C 6.342 57.973,6.421 58.001,6.700 57.841 C 6.975 57.682,7.200 57.666,7.200 57.805 C 7.200 58.295,6.171 59.076,5.018 59.461 C 4.140 59.753,3.712 60.265,3.292 61.525 C 2.985 62.446,2.498 63.200,2.209 63.200 C 1.567 63.200,1.200 64.085,1.200 65.633 C 1.200 66.404,0.996 66.800,0.600 66.800 C 0.179 66.800,-0.000 67.225,-0.000 68.229 C -0.000 71.443,1.871 69.233,1.960 65.914 C 1.988 64.882,2.236 64.302,2.773 64.014 C 3.198 63.787,3.669 63.213,3.820 62.738 C 4.125 61.776,5.887 60.000,6.537 60.000 C 6.767 60.000,7.431 59.546,8.010 58.990 C 9.265 57.788,13.190 57.208,20.094 57.203 C 26.234 57.199,26.724 56.732,27.022 50.600 C 27.269 45.498,27.766 43.403,29.067 41.978 C 29.580 41.416,30.000 40.767,30.000 40.535 C 30.000 39.933,34.013 36.000,34.628 36.000 C 34.911 36.000,35.496 35.550,35.929 35.000 C 36.582 34.170,37.057 34.000,38.732 34.000 C 41.574 34.000,42.800 33.459,42.800 32.204 C 42.800 31.326,42.640 31.199,41.628 31.277 C 40.983 31.326,40.464 31.464,40.475 31.583 M46.267 31.467 C 44.979 32.755,46.696 34.000,49.760 34.000 C 51.558 34.000,52.051 34.149,52.397 34.795 C 52.632 35.233,53.273 35.703,53.822 35.841 C 55.030 36.144,58.400 39.331,58.400 40.169 C 58.400 40.498,58.828 41.180,59.350 41.684 C 60.026 42.335,60.369 43.219,60.536 44.741 C 60.713 46.345,61.033 47.124,61.812 47.846 C 62.461 48.448,62.769 49.070,62.632 49.505 C 62.512 49.887,62.372 51.415,62.322 52.901 C 62.177 57.187,61.538 56.978,75.251 57.123 L 86.875 57.246 88.237 55.843 L 89.600 54.440 89.600 49.475 C 89.600 44.561,89.612 44.495,90.800 43.000 C 91.460 42.169,92.000 41.283,92.000 41.030 C 92.000 40.322,95.645 36.603,97.052 35.876 C 97.740 35.521,98.409 34.953,98.539 34.615 C 98.707 34.177,99.383 33.989,100.887 33.960 C 104.084 33.900,104.979 33.546,105.127 32.284 C 105.235 31.354,105.107 31.200,104.227 31.200 C 103.461 31.200,103.200 31.407,103.200 32.013 C 103.200 33.003,102.855 33.132,99.800 33.282 C 97.658 33.387,97.386 33.497,97.272 34.300 C 97.181 34.942,96.875 35.200,96.205 35.200 C 94.818 35.200,94.000 35.606,94.000 36.296 C 94.000 37.009,92.442 38.473,91.984 38.190 C 91.812 38.084,91.549 38.717,91.400 39.598 C 91.195 40.814,90.946 41.200,90.365 41.200 C 89.944 41.200,89.579 41.425,89.554 41.700 C 89.528 41.975,89.466 42.380,89.415 42.600 C 89.364 42.820,89.294 43.426,89.261 43.947 C 89.214 44.674,89.021 44.846,88.426 44.691 C 87.964 44.570,87.560 44.726,87.426 45.077 C 87.098 45.932,87.135 46.000,87.800 45.745 C 88.190 45.595,88.400 45.755,88.400 46.200 C 88.400 46.679,88.189 46.812,87.700 46.642 C 87.058 46.418,87.060 46.444,87.721 46.959 C 88.180 47.315,88.274 47.575,87.978 47.674 C 87.676 47.775,87.494 49.113,87.457 51.495 L 87.400 55.162 76.000 55.281 C 61.531 55.432,62.800 55.690,62.800 52.602 C 62.800 50.199,63.431 48.804,64.282 49.326 C 64.457 49.433,64.613 48.926,64.628 48.200 C 64.648 47.302,64.497 46.941,64.158 47.071 C 63.219 47.432,62.199 45.267,62.693 43.960 C 63.020 43.094,63.013 42.798,62.665 42.794 C 62.401 42.790,62.459 42.620,62.800 42.400 C 63.130 42.187,63.220 41.982,63.000 41.945 C 62.780 41.908,62.420 41.836,62.200 41.785 C 61.980 41.734,61.595 41.672,61.343 41.646 C 61.092 41.621,60.779 41.172,60.648 40.648 C 60.516 40.124,60.062 39.605,59.638 39.494 C 59.211 39.382,58.808 38.871,58.734 38.346 C 58.646 37.722,58.294 37.357,57.700 37.272 C 57.205 37.202,56.800 36.882,56.800 36.562 C 56.800 36.242,56.336 35.804,55.770 35.589 C 54.674 35.172,53.320 34.019,53.871 33.972 C 54.949 33.880,52.276 33.251,50.708 33.228 C 49.033 33.203,48.786 33.085,48.564 32.200 C 48.322 31.233,46.941 30.793,46.267 31.467 M108.000 32.210 C 108.000 33.481,109.318 34.039,112.091 33.941 C 113.692 33.884,114.230 34.036,114.749 34.692 C 115.107 35.145,115.791 35.632,116.270 35.775 C 117.354 36.099,119.937 38.635,121.000 40.420 C 122.764 43.381,123.633 45.337,123.425 45.880 C 123.304 46.194,123.474 46.970,123.803 47.605 C 124.181 48.336,124.402 49.907,124.406 51.880 C 124.417 57.270,124.233 57.200,138.419 57.200 C 149.195 57.200,149.554 57.175,149.800 56.400 C 149.940 55.960,150.295 55.600,150.589 55.600 C 151.258 55.600,151.574 53.303,151.745 47.200 C 151.820 44.527,151.948 44.082,152.915 43.118 C 153.512 42.523,154.000 41.791,154.000 41.490 C 154.000 40.792,157.885 36.688,159.200 35.998 C 159.750 35.709,160.435 35.142,160.723 34.737 C 161.106 34.196,161.756 34.000,163.163 34.000 C 165.998 34.000,167.600 33.336,167.600 32.161 C 167.600 30.769,165.733 30.799,165.200 32.200 C 164.837 33.155,163.377 33.434,160.100 33.176 C 159.935 33.163,159.702 33.568,159.583 34.076 C 159.426 34.746,159.009 35.055,158.067 35.200 C 156.827 35.391,156.031 36.243,155.360 38.099 C 155.188 38.575,154.804 38.744,154.163 38.628 C 153.644 38.533,153.236 38.579,153.257 38.728 C 153.442 40.054,153.082 41.062,152.300 41.405 C 151.493 41.759,151.379 42.154,151.200 45.235 C 151.014 48.432,150.941 48.665,150.151 48.605 C 149.356 48.545,149.298 48.746,149.234 51.755 C 149.196 53.522,149.122 55.011,149.069 55.064 C 148.905 55.228,125.964 55.298,125.802 55.135 C 125.004 54.337,125.365 52.936,126.338 53.055 L 127.400 53.185 126.400 52.865 C 125.715 52.646,125.438 52.301,125.520 51.772 C 125.586 51.348,125.661 50.750,125.687 50.445 C 125.712 50.140,126.063 49.804,126.467 49.698 C 127.281 49.486,127.474 48.800,126.720 48.800 C 126.347 48.800,126.347 48.693,126.720 48.320 C 126.984 48.056,127.200 47.696,127.200 47.520 C 127.200 47.344,126.808 47.592,126.330 48.070 C 125.202 49.198,124.869 48.505,124.828 44.949 C 124.802 42.654,124.151 41.183,123.465 41.868 C 123.321 42.012,123.011 41.579,122.777 40.905 C 122.542 40.231,122.001 39.589,121.575 39.478 C 120.715 39.253,120.469 37.377,121.264 37.112 C 121.614 36.995,121.611 36.766,121.254 36.179 C 120.788 35.413,120.782 35.413,120.890 36.200 C 120.974 36.809,120.738 37.030,119.900 37.127 C 119.027 37.227,118.800 37.089,118.800 36.458 C 118.800 35.903,118.444 35.585,117.618 35.404 C 116.968 35.261,116.333 34.818,116.206 34.420 C 115.967 33.667,114.441 33.200,112.217 33.200 C 110.641 33.200,110.253 32.864,110.903 32.060 C 111.300 31.571,111.299 31.507,110.900 31.747 C 110.625 31.912,110.400 31.857,110.400 31.624 C 110.400 31.391,109.860 31.200,109.200 31.200 C 108.184 31.200,108.000 31.354,108.000 32.210 M170.276 32.033 C 169.990 33.126,171.993 34.000,174.787 34.000 C 175.894 34.000,176.800 34.183,176.800 34.406 C 176.800 34.629,177.385 35.167,178.100 35.602 C 180.042 36.782,182.400 38.913,182.400 39.488 C 182.400 39.766,182.760 40.218,183.200 40.493 C 183.640 40.768,184.000 41.205,184.000 41.466 C 184.000 41.726,184.452 42.476,185.005 43.133 C 185.777 44.050,185.994 44.730,185.943 46.071 C 185.841 48.770,186.652 50.800,187.831 50.800 C 189.193 50.800,189.171 49.134,187.800 48.400 C 186.667 47.793,186.257 43.449,187.300 43.098 C 188.116 42.824,186.788 41.510,185.923 41.736 C 185.070 41.959,184.400 41.020,184.400 39.600 C 184.400 39.380,184.040 39.200,183.600 39.200 C 183.076 39.200,182.800 38.933,182.800 38.427 C 182.800 38.002,182.440 37.540,182.000 37.400 C 181.560 37.260,181.200 36.895,181.200 36.587 C 181.200 35.869,180.042 35.200,178.800 35.200 C 178.580 35.200,178.400 34.863,178.400 34.450 C 178.400 33.619,177.027 33.200,174.307 33.200 C 173.032 33.200,172.762 33.076,172.953 32.579 C 173.089 32.223,173.022 32.063,172.795 32.203 C 172.578 32.337,172.400 32.167,172.400 31.824 C 172.400 30.842,170.539 31.025,170.276 32.033 M227.700 31.465 C 227.425 31.576,227.200 32.012,227.200 32.433 C 227.200 33.186,226.344 33.345,222.324 33.342 C 221.952 33.342,221.658 33.445,221.671 33.571 C 221.787 34.685,221.450 35.169,220.400 35.400 C 219.608 35.574,219.200 35.909,219.200 36.385 C 219.200 36.782,218.827 37.204,218.370 37.324 C 217.914 37.443,217.445 37.908,217.327 38.357 C 217.210 38.806,216.773 39.282,216.357 39.414 C 215.941 39.546,215.600 40.017,215.600 40.462 C 215.600 40.996,215.185 41.426,214.375 41.732 C 213.157 42.192,213.151 42.207,213.336 44.708 C 213.528 47.301,213.062 48.400,211.771 48.400 C 211.403 48.400,211.200 48.827,211.200 49.600 C 211.200 50.681,211.326 50.800,212.467 50.800 C 213.163 50.800,213.629 50.695,213.501 50.567 C 213.373 50.439,213.517 49.740,213.821 49.013 C 214.184 48.144,214.290 46.989,214.131 45.645 C 213.937 44.012,214.006 43.600,214.470 43.600 C 214.790 43.600,215.350 42.976,215.714 42.212 C 216.077 41.449,216.696 40.455,217.088 40.004 C 218.808 38.023,221.063 35.984,221.800 35.745 C 222.240 35.602,222.835 35.151,223.123 34.743 C 223.516 34.183,224.158 33.999,225.723 33.994 C 228.225 33.987,229.755 33.294,229.928 32.090 C 230.056 31.198,229.056 30.918,227.700 31.465 M232.400 31.951 C 232.400 33.184,233.505 33.735,236.285 33.890 C 238.503 34.014,239.034 34.190,239.686 35.018 C 240.111 35.558,240.706 36.000,241.009 36.000 C 241.312 36.000,241.704 36.229,241.880 36.510 C 242.056 36.790,242.695 37.334,243.300 37.719 C 243.905 38.104,244.400 38.652,244.400 38.937 C 244.400 39.222,244.850 39.847,245.400 40.325 C 245.950 40.803,246.400 41.460,246.400 41.784 C 246.400 42.107,246.927 42.912,247.572 43.571 C 248.612 44.635,248.703 44.919,248.378 46.096 C 248.176 46.825,248.105 47.867,248.220 48.411 C 248.335 48.955,248.542 50.659,248.680 52.197 C 248.891 54.530,249.115 55.177,250.035 56.097 L 251.138 57.200 262.069 57.171 C 275.842 57.134,275.311 57.330,275.600 52.169 C 275.710 50.206,276.001 48.240,276.246 47.800 C 276.492 47.360,276.666 46.505,276.633 45.900 C 276.600 45.295,276.700 44.800,276.855 44.800 C 277.010 44.800,277.253 44.269,277.395 43.621 C 277.538 42.972,278.182 41.777,278.827 40.966 C 279.472 40.154,280.000 39.257,280.000 38.972 C 280.000 38.687,280.365 38.338,280.811 38.197 C 281.257 38.055,281.907 37.503,282.257 36.970 C 282.606 36.436,283.127 36.000,283.415 36.000 C 283.703 36.000,284.447 35.576,285.069 35.059 C 285.892 34.374,286.886 34.057,288.715 33.895 C 291.525 33.647,292.416 33.146,292.112 31.985 C 291.751 30.604,289.429 31.131,289.406 32.600 C 289.403 32.820,288.770 33.047,288.000 33.104 C 285.052 33.323,284.044 33.632,283.803 34.389 C 283.661 34.839,283.119 35.202,282.481 35.275 C 281.712 35.364,281.363 35.660,281.272 36.300 C 281.189 36.883,280.869 37.200,280.362 37.200 C 279.813 37.200,279.508 37.558,279.340 38.400 C 279.208 39.061,278.843 39.600,278.529 39.600 C 278.215 39.600,277.774 40.129,277.549 40.776 C 277.304 41.478,276.930 41.871,276.621 41.753 C 275.917 41.483,275.541 42.545,275.330 45.400 C 275.232 46.720,275.133 48.038,275.109 48.329 C 275.084 48.638,274.762 48.779,274.334 48.667 C 273.153 48.358,273.103 49.067,274.227 50.191 C 275.088 51.052,275.183 51.339,274.770 51.836 C 274.368 52.321,274.200 52.337,273.905 51.919 C 273.622 51.518,273.576 51.537,273.703 52.000 C 273.793 52.330,274.077 52.623,274.333 52.650 C 275.298 52.753,275.348 52.812,274.880 53.280 C 274.616 53.544,274.400 54.084,274.400 54.480 C 274.400 55.170,273.954 55.338,272.200 55.308 C 271.760 55.301,266.801 55.274,261.180 55.248 L 250.960 55.200 250.960 54.243 C 250.960 53.623,251.143 53.357,251.480 53.486 C 252.152 53.744,252.208 50.576,251.538 50.162 C 251.252 49.985,251.185 50.052,251.362 50.338 C 251.519 50.592,251.457 50.800,251.224 50.800 C 250.991 50.800,250.800 50.521,250.800 50.181 C 250.800 49.840,250.366 49.160,249.837 48.669 C 248.971 47.867,248.880 47.474,248.937 44.794 C 248.998 41.908,248.964 41.794,247.900 41.284 C 246.749 40.732,246.445 39.810,247.300 39.465 C 247.685 39.310,247.679 39.256,247.276 39.232 C 246.988 39.214,246.841 39.057,246.949 38.883 C 247.056 38.709,246.783 38.539,246.340 38.505 C 245.281 38.426,243.684 36.784,243.819 35.912 C 243.878 35.534,243.807 35.241,243.663 35.260 C 241.845 35.502,240.800 35.135,240.800 34.255 C 240.800 33.543,240.578 33.308,239.900 33.303 C 235.591 33.272,235.336 33.216,234.873 32.200 C 234.305 30.954,232.400 30.762,232.400 31.951 M294.884 32.179 C 295.045 33.292,296.632 33.987,299.030 33.994 C 300.674 33.999,301.239 34.190,302.000 35.000 C 302.517 35.550,303.108 36.000,303.313 36.000 C 303.907 36.000,307.884 40.205,308.184 41.149 C 308.333 41.619,308.871 42.499,309.380 43.103 C 310.215 44.096,310.327 44.724,310.532 49.601 L 310.758 55.000 312.079 56.115 L 313.400 57.231 324.859 57.115 C 338.451 56.979,338.000 57.123,338.000 52.912 C 338.000 51.501,337.815 50.002,337.590 49.581 C 337.257 48.959,337.408 48.575,338.390 47.548 C 339.395 46.496,339.600 45.954,339.600 44.350 C 339.600 42.731,339.762 42.312,340.600 41.763 C 341.150 41.403,341.600 40.761,341.600 40.338 C 341.600 39.411,344.515 36.549,346.232 35.791 C 346.909 35.491,347.696 34.966,347.981 34.623 C 348.336 34.196,349.205 33.998,350.749 33.994 C 353.281 33.987,354.084 33.635,354.265 32.453 C 354.425 31.403,353.824 31.053,352.477 31.412 C 351.885 31.569,351.623 31.781,351.896 31.881 C 352.827 32.224,351.334 33.200,349.879 33.200 C 348.045 33.200,345.972 33.630,346.180 33.968 C 346.523 34.522,345.669 35.280,344.635 35.339 C 343.897 35.381,343.498 35.671,343.345 36.277 C 343.219 36.779,342.755 37.207,342.262 37.277 C 341.788 37.345,341.378 37.625,341.350 37.900 C 341.322 38.175,341.278 38.670,341.250 39.000 C 341.223 39.330,340.840 39.600,340.400 39.600 C 339.960 39.600,339.636 39.735,339.679 39.900 C 339.946 40.909,339.064 42.067,338.161 41.895 C 337.632 41.794,337.200 41.866,337.200 42.055 C 337.200 42.245,337.425 42.403,337.700 42.406 C 338.065 42.411,338.053 42.506,337.653 42.758 C 337.256 43.010,337.217 43.301,337.508 43.822 C 337.983 44.670,337.375 46.800,336.659 46.800 C 336.404 46.800,336.009 47.398,335.780 48.129 C 335.385 49.389,335.411 49.449,336.282 49.282 C 337.176 49.111,337.200 49.188,337.200 52.253 L 337.200 55.400 325.127 55.294 C 318.487 55.235,313.007 55.141,312.951 55.084 C 312.894 55.028,312.795 53.243,312.731 51.118 C 312.666 48.993,312.478 47.467,312.313 47.727 C 312.148 47.987,311.996 48.020,311.976 47.800 C 311.955 47.580,311.879 47.087,311.806 46.705 C 311.692 46.111,311.797 46.077,312.536 46.471 C 313.316 46.886,313.347 46.866,312.851 46.265 C 312.549 45.899,312.474 45.600,312.684 45.600 C 312.895 45.600,313.067 45.370,313.067 45.089 C 313.067 44.804,312.610 44.583,312.033 44.589 C 311.126 44.599,310.985 44.417,310.876 43.102 C 310.777 41.903,310.559 41.555,309.789 41.362 C 309.260 41.229,308.859 41.003,308.898 40.860 C 309.125 40.029,308.341 38.000,307.791 38.000 C 307.446 38.000,306.856 37.465,306.481 36.810 C 306.057 36.070,305.347 35.522,304.600 35.360 C 303.349 35.088,302.817 34.581,302.806 33.651 C 302.801 33.186,302.907 33.186,303.500 33.651 C 304.133 34.148,304.148 34.134,303.655 33.504 C 303.355 33.122,302.918 32.927,302.685 33.071 C 302.223 33.357,297.519 33.252,297.216 32.949 C 297.114 32.847,297.277 32.367,297.579 31.882 C 298.081 31.077,298.071 31.048,297.464 31.549 C 297.040 31.900,296.800 31.938,296.800 31.653 C 296.800 31.409,296.343 31.247,295.784 31.293 C 295.016 31.357,294.796 31.573,294.884 32.179 M357.483 32.003 C 357.160 33.238,358.606 34.000,361.275 34.000 C 363.162 34.000,363.648 34.143,364.000 34.800 C 364.235 35.240,364.685 35.600,364.999 35.600 C 365.744 35.600,370.400 40.200,370.400 40.936 C 370.400 41.247,370.680 41.735,371.023 42.019 C 372.451 43.204,372.947 45.431,373.371 52.556 C 373.627 56.869,373.704 56.910,382.270 57.280 C 389.082 57.574,392.000 58.041,392.000 58.840 C 392.000 59.047,392.495 59.438,393.100 59.709 C 394.352 60.268,396.400 62.217,396.400 62.850 C 396.400 63.082,396.760 63.571,397.199 63.936 C 397.695 64.347,398.079 65.285,398.211 66.400 C 398.507 68.917,398.766 69.600,399.427 69.600 C 400.203 69.600,400.183 67.326,399.400 66.543 C 399.070 66.213,398.800 65.414,398.800 64.768 C 398.800 64.069,398.464 63.310,397.971 62.896 C 397.516 62.513,396.905 61.639,396.614 60.954 C 396.272 60.146,395.698 59.611,394.983 59.431 C 394.376 59.279,393.533 58.715,393.111 58.177 C 392.558 57.474,391.950 57.200,390.946 57.200 C 389.729 57.200,389.566 57.085,389.675 56.304 L 389.800 55.409 382.431 55.302 C 378.378 55.243,375.002 55.135,374.928 55.061 C 374.665 54.799,374.710 44.869,374.976 44.439 C 375.150 44.157,374.810 44.000,374.024 44.000 C 372.836 44.000,372.800 43.946,372.800 42.157 C 372.800 40.738,372.671 40.364,372.237 40.530 C 371.564 40.789,370.572 38.692,371.023 37.962 C 371.206 37.666,371.156 37.580,370.895 37.741 C 370.022 38.281,368.400 37.270,368.400 36.186 C 368.400 35.618,368.238 35.253,368.041 35.375 C 367.247 35.866,365.263 35.105,365.042 34.225 C 364.848 33.452,364.523 33.326,362.522 33.245 C 360.161 33.149,359.200 32.717,359.200 31.751 C 359.200 30.887,357.718 31.105,357.483 32.003 M44.000 43.224 C 44.000 43.457,43.832 43.544,43.628 43.417 C 43.423 43.291,43.142 43.370,43.004 43.593 C 42.866 43.817,42.293 44.000,41.730 44.000 C 40.568 44.000,38.000 46.516,38.000 47.655 C 38.000 48.039,37.823 48.462,37.606 48.596 C 37.389 48.730,37.213 49.236,37.213 49.720 C 37.218 57.106,37.079 56.944,43.573 57.136 C 48.491 57.283,50.959 56.798,51.625 55.554 C 52.384 54.135,52.084 48.904,51.208 48.291 C 50.772 47.985,50.149 47.097,49.823 46.316 C 49.334 45.145,48.903 44.801,47.365 44.349 C 46.339 44.047,45.413 43.575,45.307 43.300 C 45.073 42.693,44.000 42.630,44.000 43.224 M106.400 43.195 C 106.400 43.413,105.668 43.708,104.774 43.851 C 101.561 44.364,99.251 47.584,100.243 50.167 C 100.627 51.168,101.109 50.903,100.899 49.807 C 100.594 48.210,101.113 46.800,102.008 46.800 C 102.586 46.800,102.800 46.530,102.800 45.800 C 102.800 44.812,102.840 44.800,106.200 44.800 C 109.044 44.800,109.600 44.904,109.600 45.437 C 109.600 45.788,109.960 46.169,110.400 46.284 C 111.028 46.448,111.200 46.830,111.200 48.055 C 111.200 49.333,111.382 49.700,112.200 50.073 C 113.101 50.483,113.200 50.760,113.200 52.875 L 113.200 55.223 107.700 55.111 C 102.240 55.001,102.201 54.993,102.298 54.087 C 102.381 53.308,102.285 53.233,101.642 53.577 C 100.950 53.948,100.273 56.540,100.746 57.012 C 100.849 57.116,103.404 57.200,106.424 57.200 L 111.915 57.200 113.152 56.045 C 114.702 54.597,114.830 49.641,113.348 48.437 C 112.916 48.087,112.278 47.083,111.929 46.207 C 111.392 44.858,111.061 44.565,109.767 44.297 C 108.927 44.122,107.947 43.714,107.589 43.390 C 106.832 42.705,106.400 42.635,106.400 43.195 M168.328 43.437 C 168.038 43.724,167.201 44.064,166.469 44.191 C 163.198 44.760,160.598 50.800,163.625 50.800 C 164.099 50.800,164.398 51.072,164.394 51.500 C 164.389 52.099,164.331 52.114,163.994 51.600 C 163.138 50.296,162.096 53.344,162.643 55.555 L 163.000 57.000 168.200 57.115 C 176.455 57.299,176.779 56.970,175.804 49.400 C 175.481 46.896,173.782 44.414,172.385 44.404 C 172.046 44.402,171.114 44.066,170.313 43.658 C 169.114 43.046,168.763 43.007,168.328 43.437 M230.800 43.065 C 230.800 43.279,229.820 43.763,228.623 44.140 C 227.251 44.573,226.358 45.102,226.209 45.570 C 226.080 45.979,225.643 46.400,225.238 46.506 C 224.280 46.757,223.630 53.741,224.394 55.585 C 225.006 57.063,225.586 57.188,231.875 57.195 L 237.151 57.200 237.382 55.500 C 237.720 53.016,237.432 51.497,236.558 51.154 C 235.945 50.913,235.926 50.851,236.457 50.828 C 239.494 50.698,237.065 44.835,233.717 44.214 C 232.883 44.059,231.885 43.650,231.500 43.304 C 231.115 42.959,230.800 42.851,230.800 43.065 M292.800 43.151 C 292.800 43.530,291.276 44.187,289.500 44.575 C 288.794 44.729,288.400 45.074,288.400 45.539 C 288.400 45.937,287.849 47.095,287.175 48.112 C 286.114 49.714,285.950 50.321,285.950 52.645 C 285.950 56.812,286.218 56.970,293.558 57.128 L 299.496 57.256 299.339 55.728 C 299.096 53.361,298.905 53.015,298.177 53.619 C 297.840 53.899,297.658 54.374,297.774 54.675 C 297.946 55.125,297.006 55.203,292.492 55.111 L 287.000 55.000 286.880 52.922 C 286.773 51.082,286.873 50.770,287.758 50.191 C 288.465 49.727,288.791 49.110,288.878 48.069 C 288.960 47.084,289.198 46.600,289.600 46.600 C 289.930 46.600,290.258 46.195,290.328 45.700 C 290.539 44.215,297.200 44.312,297.200 45.800 C 297.200 46.600,297.400 46.800,298.200 46.800 C 299.135 46.800,299.200 46.932,299.200 48.824 C 299.200 50.071,299.353 50.752,299.600 50.600 C 301.377 49.502,298.445 44.106,295.986 43.950 C 294.615 43.863,294.451 43.811,293.940 43.300 C 293.359 42.719,292.800 42.646,292.800 43.151 M354.692 43.304 C 354.586 43.581,353.680 44.027,352.679 44.294 C 351.500 44.610,350.773 45.055,350.613 45.560 C 350.477 45.989,349.899 47.027,349.329 47.867 C 348.096 49.684,347.571 53.851,348.384 55.370 C 349.525 57.503,360.024 58.048,362.113 56.083 C 365.029 53.340,362.074 44.043,358.269 43.987 C 357.791 43.980,357.051 43.710,356.624 43.387 C 355.671 42.667,354.949 42.636,354.692 43.304 M47.600 45.573 C 47.600 45.998,47.960 46.460,48.400 46.600 C 48.983 46.785,49.200 47.205,49.200 48.151 C 49.200 48.864,49.483 49.796,49.830 50.224 C 50.176 50.651,50.321 50.730,50.153 50.400 C 49.889 49.883,49.941 49.876,50.523 50.349 C 51.007 50.741,51.200 51.511,51.200 53.049 L 51.200 55.200 45.800 55.271 C 42.830 55.311,40.003 55.356,39.518 55.371 C 38.737 55.397,38.646 55.216,38.722 53.800 C 38.769 52.920,38.797 50.985,38.783 49.500 C 38.760 47.044,38.831 46.800,39.571 46.800 C 40.105 46.800,40.471 46.457,40.636 45.800 C 40.982 44.421,47.600 44.206,47.600 45.573 M172.436 45.899 C 173.076 46.503,173.600 47.403,173.600 47.899 C 173.600 48.394,173.766 48.800,173.969 48.800 C 174.172 48.800,174.059 49.360,173.718 50.045 C 173.376 50.729,173.255 51.404,173.448 51.545 C 173.642 51.685,173.800 52.160,173.800 52.600 C 173.800 53.140,174.027 53.362,174.500 53.282 C 175.383 53.134,175.377 53.274,174.453 54.339 C 173.483 55.457,164.121 55.704,164.545 54.600 C 164.671 54.270,164.565 54.000,164.307 54.000 C 163.958 54.000,163.961 53.879,164.320 53.520 C 164.999 52.841,164.918 50.196,164.200 49.600 C 163.870 49.326,163.606 48.899,163.613 48.651 C 163.620 48.403,163.910 48.560,164.257 49.000 C 164.858 49.761,164.877 49.731,164.643 48.389 C 164.449 47.277,164.559 46.862,165.162 46.427 C 165.583 46.124,165.834 45.634,165.721 45.338 C 165.267 44.155,171.105 44.643,172.436 45.899 M234.716 45.914 C 235.319 46.531,235.742 47.356,235.664 47.762 C 235.584 48.179,235.697 48.387,235.926 48.245 C 236.151 48.106,236.278 48.307,236.212 48.698 C 236.147 49.084,235.938 49.370,235.747 49.333 C 235.556 49.296,235.463 50.262,235.540 51.481 C 235.652 53.252,235.571 53.635,235.140 53.390 C 234.705 53.142,234.697 53.187,235.100 53.621 C 236.370 54.989,235.743 55.200,230.400 55.200 C 225.957 55.200,225.200 55.109,225.200 54.576 C 225.200 54.202,225.387 54.068,225.668 54.242 C 225.990 54.441,226.050 54.306,225.859 53.809 C 225.639 53.236,225.693 53.179,226.120 53.533 C 226.941 54.215,227.046 50.303,226.229 49.486 C 225.698 48.955,225.695 48.819,226.207 48.394 C 226.528 48.128,226.701 47.763,226.591 47.585 C 225.202 45.339,232.656 43.806,234.716 45.914 M359.570 45.300 C 359.427 46.403,359.635 46.800,360.355 46.800 C 361.244 46.800,361.450 47.884,361.420 52.387 L 361.400 55.373 355.423 55.285 C 348.944 55.189,348.817 55.144,348.806 52.918 C 348.800 51.540,350.344 49.600,351.447 49.600 C 351.986 49.600,351.984 49.527,351.429 48.971 C 350.556 48.099,350.643 46.904,351.600 46.600 C 352.040 46.460,352.400 45.998,352.400 45.573 C 352.400 44.866,352.709 44.800,356.018 44.800 C 358.680 44.800,359.618 44.932,359.570 45.300 M148.006 51.900 C 148.009 52.505,148.187 53.270,148.400 53.600 C 148.684 54.039,148.789 53.745,148.794 52.500 C 148.797 51.565,148.620 50.800,148.400 50.800 C 148.180 50.800,148.003 51.295,148.006 51.900 M211.154 53.433 C 211.129 53.635,211.140 54.115,211.179 54.500 C 211.245 55.151,210.486 55.200,200.225 55.200 C 189.467 55.200,189.200 55.181,189.200 54.400 C 189.200 53.960,188.950 53.600,188.643 53.600 C 188.133 53.600,188.071 56.604,188.570 57.104 C 188.682 57.216,208.313 57.304,211.662 57.208 C 212.007 57.198,211.843 53.709,211.480 53.347 C 211.326 53.193,211.179 53.232,211.154 53.433 M12.623 68.889 C 12.280 69.378,12.000 70.008,12.000 70.289 C 12.000 70.570,11.730 70.800,11.400 70.800 C 10.521 70.800,10.482 351.238,11.361 351.967 C 11.669 352.223,12.043 352.920,12.192 353.516 C 12.341 354.112,12.746 354.914,13.092 355.298 C 13.756 356.035,385.519 356.429,386.655 355.694 C 386.905 355.532,387.394 354.719,387.740 353.886 C 388.087 353.053,388.647 352.096,388.984 351.759 C 389.534 351.209,389.587 336.508,389.499 211.180 L 389.400 71.215 388.479 70.570 C 387.973 70.216,387.627 69.719,387.711 69.466 C 388.096 68.311,385.889 67.589,384.133 68.294 C 383.561 68.524,383.708 68.634,384.800 68.794 C 385.856 68.949,386.205 69.197,386.219 69.800 C 386.229 70.240,386.454 70.555,386.719 70.500 C 387.026 70.436,387.200 70.943,387.201 71.900 C 387.345 263.814,387.154 353.435,386.601 353.844 C 386.270 354.088,386.000 354.493,386.000 354.744 C 386.000 355.085,339.025 355.200,200.346 355.200 L 14.692 355.200 13.744 354.178 L 12.797 353.155 12.801 212.078 L 12.806 71.000 13.703 70.265 C 14.196 69.861,14.377 69.646,14.105 69.786 C 13.777 69.955,13.690 69.831,13.847 69.421 C 13.992 69.044,14.580 68.798,15.343 68.794 C 16.302 68.789,16.458 68.696,16.000 68.400 C 14.931 67.709,13.282 67.948,12.623 68.889 M0.000 354.800 C 0.000 355.600,0.200 356.000,0.600 356.000 C 1.113 356.000,1.489 358.504,1.267 360.441 C 1.252 360.573,1.662 360.601,2.179 360.502 C 2.963 360.352,3.164 360.528,3.391 361.561 C 3.580 362.422,3.898 362.800,4.432 362.800 C 5.165 362.800,5.374 363.195,5.228 364.306 C 5.192 364.585,5.306 364.788,5.481 364.759 C 6.492 364.589,8.013 364.855,7.820 365.168 C 6.756 366.889,-3.525 366.807,200.329 366.700 L 391.800 366.600 392.195 365.700 C 392.467 365.079,392.932 364.800,393.695 364.800 C 394.599 364.800,394.800 364.623,394.800 363.828 C 394.800 363.124,395.049 362.820,395.700 362.728 C 396.278 362.646,396.646 362.278,396.728 361.701 C 396.807 361.140,397.221 360.710,397.828 360.557 C 398.693 360.340,398.800 360.096,398.800 358.344 C 398.800 356.963,398.979 356.306,399.400 356.145 C 400.202 355.837,400.209 353.600,399.408 353.600 C 398.809 353.600,398.622 354.137,398.242 356.955 C 398.127 357.811,397.665 358.853,397.216 359.271 C 396.767 359.689,396.400 360.210,396.400 360.429 C 396.400 361.192,393.583 363.636,391.843 364.382 C 390.878 364.795,390.023 365.331,389.943 365.572 C 389.837 365.889,337.227 366.012,199.998 366.016 L 10.200 366.022 9.651 365.211 C 9.349 364.765,8.775 364.400,8.376 364.400 C 7.976 364.400,7.058 363.860,6.336 363.200 C 5.613 362.540,4.904 362.000,4.759 362.000 C 4.615 362.000,4.271 361.453,3.994 360.785 C 3.717 360.116,3.155 359.390,2.745 359.171 C 2.187 358.872,2.000 358.318,2.000 356.960 C 2.000 354.907,1.450 353.600,0.586 353.600 C 0.202 353.600,0.000 354.013,0.000 354.800 " stroke="none" fill="#2c7ca4" fill-rule="evenodd"></path></g></svg><span>Menu</span>
+    								</div>
+    								<div class="dtl-dis">
+    									<ul class="dis-list">
+    										<li ng-repeat="menu_info in menu_info_data | limitTo:6">
                                                 <p class="screen-shot" data-target="#add-menu" data-toggle="modal">
                                                     <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
                                                 </p>
                                             </li>
                                         </ul>
-                                    </div>                                  
+    								</div>    								
+    							</div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div style="display:none;" class="modal fade dtl-modal timeline-cus bus-start-cus" id="bus-name-started-display" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
+                        <div class="modal-body-cus"> 
+                            <div class="dtl-title">
+                                <span>How <?php echo ucwords($business_data[0]['company_name']); ?> Started?</span>
+                            </div>                  
+                            <div class="dtl-dis">                       
+                                <div class="bus-story no-img-upload" style="float: left;width: 100%;">
+                                    <label class="upload-file">                                 
+                                        <span id="upload-file1" style="display: none;">Change</span>
+                                    </label>
+                                </div>                                              
+                                <div class="form-group">
+                                    <h4>Description</h4>
+                                    <label>{{story_data.story_desc}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Difference between <?php echo ucwords($business_data[0]['company_name']); ?> and competitiors</h4>
+                                    <label>{{story_data.story_diff}}</label>
                                 </div>
                             </div>
+                            <div class="dtl-btn bottom-btn">
+                                <a href="#" class="save" data-dismiss="modal">
+                                    <span>Close</span>
+                                </a>                        
+                            </div>
                         </div>
-					</div>
-
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <div style="display:none;" class="modal fade dtl-modal timeline-cus bus-start-cus" id="bus-name-started-display" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
-                    <div class="modal-body-cus"> 
-                        <div class="dtl-title">
-                            <span>How <?php echo ucwords($business_data[0]['company_name']); ?> Started?</span>
-                        </div>                  
-                        <div class="dtl-dis">                       
-                            <div class="bus-story no-img-upload" style="float: left;width: 100%;">
-                                <label class="upload-file">                                 
-                                    <span id="upload-file1" style="display: none;">Change</span>
-                                </label>
-                            </div>                                              
-                            <div class="form-group">
-                                <h4>Description</h4>
-                                <label>{{story_data.story_desc}}</label>
+            <div style="display:none;" class="modal fade dtl-modal" id="add-menu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
+                        <div class="modal-body-cus"> 
+                            <div class="dtl-title">
+                                <span class="timeline-tital">Menu</span>
+                            </div>                            
+                            <div class="dtl-dis" ng-if="menu_info_data.length > '0'">
+                                <div class="menu-privew">
+                                    <ul>
+                                        <li ng-repeat="menu_info in menu_info_data">
+                                            <p ng-click="openModal();currentSlide($index + 1)">
+                                                <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <h4>Difference between <?php echo ucwords($business_data[0]['company_name']); ?> and competitiors</h4>
-                                <label>{{story_data.story_diff}}</label>
+                            <div class="dtl-btn bottom-btn">
+                                <a href="#" class="save" data-dismiss="modal">
+                                    <span>Close</span>
+                                </a>                        
                             </div>
                         </div>
-                        <div class="dtl-btn bottom-btn">
-                            <a href="#" class="save" data-dismiss="modal">
-                                <span>Close</span>
-                            </a>                        
+                    </div>
+                </div>
+            </div>
+
+            <div id="myModalPhotos" class="modal modal2" style="display: none;">
+                <button type="button" class="new-modal-close" data-dismiss="modal" ng-click="closeModal()">×</button>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                        </div>
+                        <div class="mySlides" ng-repeat="menu_info in menu_info_data">
+                            <div class="numbertext"></div>
+                            <div class="slider_img_p">                  
+                                <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL ?>{{menu_info.file_name}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">                       
+                            </div>
+                        </div>          
+                    </div>
+                    <div class="caption-container">
+                        <p id="caption"></p>
+                    </div>
+                </div> 
+                <a class="prev" style="left:0px;" ng-click="plusSlides(-1)">&#10094;</a>
+                <a class="next" ng-click="plusSlides(1)">&#10095;</a>
+            </div>
+
+            <div style="display:none;" class="modal fade dtl-modal" id="reviews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
+                        <div class="modal-body-cus"> 
+                            <div class="dtl-title">
+                                <span>Reviews</span>
+                            </div>
+                            <form id="business_review" name="business_review" ng-validate="business_review_validate">
+                                <div class="dtl-dis">
+                                    <div class="form-group">
+                                        <div class="rev-img">
+                                            <?php
+                                                if($login_user_data['user_image'] != ''):
+                                                    $user_img = USER_THUMB_UPLOAD_URL . $login_user_data['user_image'];
+                                                else:
+                                                    if($login_user_data['user_gender']  == 'M')
+                                                    {
+                                                        $user_img = base_url('assets/img/man-user.jpg');
+                                                    }
+
+                                                    if($login_user_data['user_gender']  == 'F')
+                                                    {
+                                                        $user_img = base_url('assets/img/female-user.jpg');
+                                                    }
+                                                endif; ?>
+                                                <img src="<?php echo $user_img; ?>">
+                                        </div>
+                                        <div class="total-rev-top">
+                                            <h4><?php echo ucwords($login_user_data['first_name'].' '.$login_user_data['last_name']); ?></h4>
+                                            <span id="star-rate" class="rating-star">
+                                                <input id="review_star" value="0.5" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="sm" required name="review_star">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea type="text" placeholder="Description" id="review_desc" name="review_desc" maxlength="700" ng-model="review_desc"></textarea>
+                                        <span class="pull-right">{{700 - review_desc.length}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="upload-file">
+                                            <span class="fw">Upload Photo</span>
+                                            <input type="file" id="review_file" name="review_file">
+                                            <span id="review_file_error" class="error" style="display: none;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dtl-btn bottom-btn">
+                                    <a id="save_review" href="#" ng-click="save_review()" class="save">
+                                        <span>Save</span>
+                                    </a>
+                                    <div id="review_loader" class="dtl-popup-loader" style="display: none;">
+                                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="modal fade message-box" id="likeusermodal" role="dialog">
+                <div class="modal-dialog modal-lm">
+                    <div class="modal-content">
+                        <button type="button" class="modal-close1" data-dismiss="modal">&times;</button>       
+                        <div class="modal-body">
+                            <span class="mes">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->            
+
+            <div class="modal fade message-box" id="postedit" role="dialog">
+                <div class="modal-dialog modal-lm">
+                    <div class="modal-content">
+                        <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                        <div class="modal-body">
+                            <span class="mes">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade message-box" id="query" role="dialog">
+                <div class="modal-dialog modal-lm">
+                    <div class="modal-content">
+                        <button type="button" class="profile-modal-close" id="query" data-dismiss="modal">&times;</button>       
+                        <div class="modal-body">
+                            <span class="mes">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade message-box" id="bidmodal-3" role="dialog">
+                <div class="modal-dialog modal-lm">
+                    <div class="modal-content">
+                        <button type="button" class="profile-modal-close" data-dismiss="modal">&times;</button>       
+                        <div class="modal-body">
+                            <span class="mes">
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="display:none;" class="modal fade dtl-modal" id="add-menu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div style="display:none;" class="modal fade" id="post-share" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <button type="button" class="new-modal-close" data-dismiss="modal">×</button>
-                    <div class="modal-body-cus"> 
-                        <div class="dtl-title">
-                            <span class="timeline-tital">Menu</span>
-                        </div>                            
-                        <div class="dtl-dis" ng-if="menu_info_data.length > '0'">
-                            <div class="menu-privew">
-                                <ul>
-                                    <li ng-repeat="menu_info in menu_info_data">
-                                        <p ng-click="openModal();currentSlide($index + 1)">
-                                            <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL; ?>{{menu_info.file_name}}">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="post-popup-box">
+                        <div class="share-post">
+                            <div class="share-post-head">
+                                <div class="post-head">
+                                    <div class="post-img">
+                                        <?php
+                                        if($login_user_data['user_image'] != ''):
+                                            $user_img = USER_THUMB_UPLOAD_URL . $login_user_data['user_image'];
+                                        else:
+                                            if($login_user_data['user_gender']  == 'M')
+                                            {
+                                                $user_img = base_url('assets/img/man-user.jpg');
+                                            }
+
+                                            if($login_user_data['user_gender']  == 'F')
+                                            {
+                                                $user_img = base_url('assets/img/female-user.jpg');
+                                            }
+                                        endif; ?>
+                                        <img src="<?php echo $user_img; ?>">
+                                    </div>
+                                    <div class="post-detail">
+                                        <div class="fw">
+                                            <a class="post-name" href="<?php echo $login_user_data['user_slug']; ?>"><?php echo ucwords($login_user_data['first_name'].' '.$login_user_data['last_name']); ?></a>
+                                        </div>
+                                        <div class="fw">                            
+                                            <span class="post-designation">
+                                                <?php
+                                                if($login_user_data['title_name'])
+                                                    echo $login_user_data['title_name'];
+                                                else if($login_user_data['degree_name'])
+                                                    echo $login_user_data['degree_name'];
+                                                else
+                                                    echo "CURRENT WORK"; ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-text">
+                                    <textarea id="share_post_text" class="hashtag-textarea" placeholder="Say something about post." autocomplete="off" maxlength="500"></textarea>
+                                </div>
+                            </div>
+                            <div id="main-post-{{share_post_data.post_data.id}}" ng-if="share_post_data" class="all-post-box">
+                                <div class="all-post-top">
+                                    <div class="post-head" ng-if="share_post_data.post_data.post_for != 'share'">
+                                        <div class="post-img" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for == 'question'">
+                                            <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" target="_self" ng-if="share_post_data.question_data.is_anonymously == '0'">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.user_data.user_image}}" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image != '' && share_post_data.question_data.is_anonymously == '0'">
+                                                <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image == '' && share_post_data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image == '' && share_post_data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
+                                                            
+                                            <span class="no-img-post"  ng-if="share_post_data.user_data.user_image == '' || share_post_data.question_data.is_anonymously == '1'">A</span>
+                                        </div>
+
+                                        <div class="post-img" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for != 'question' && share_post_data.user_data.user_image != ''">
+                                            <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" target="_self">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.user_data.user_image}}">
+                                            </a>
+                                        </div>
+
+                                        <div class="post-img no-profile-pic" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for != 'question' && share_post_data.user_data.user_image == ''">
+                                            <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" target="_self">
+                                                <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
+                                        </div>
+
+                                        <div class="post-img" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.post_data.post_for == 'question'">
+                                            <a ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" target="_self" ng-if="share_post_data.question_data.is_anonymously == '0'">
+                                                <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{share_post_data.user_data.business_user_image}}" ng-if="share_post_data.user_data.business_user_image && share_post_data.question_data.is_anonymously == '0'">
+                                                <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!share_post_data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                            </a>
+                                                            
+                                            <span class="no-img-post"  ng-if="!share_post_data.user_data.business_user_image || share_post_data.question_data.is_anonymously == '1'">A</span>
+                                        </div>
+                                                        
+                                        <div class="post-img" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.post_data.post_for != 'question' && share_post_data.user_data.business_user_image">
+                                            <a ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" target="_self">
+                                                <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{share_post_data.user_data.business_user_image}}">
+                                            </a>
+                                        </div>
+                                                        
+                                        <div class="post-img no-profile-pic" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.post_data.post_for != 'question' && !share_post_data.user_data.business_user_image">
+                                            <a ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" target="_self">
+                                                <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                            </a>
+                                        </div>
+
+                                        <div class="post-detail">
+                                            <div class="fw" ng-if="share_post_data.post_data.post_for == 'question'">
+                                                <a href="javascript:void(0)" class="post-name" ng-if="share_post_data.question_data.is_anonymously == '1'">Anonymous</a>
+                                                <span class="post-time" ng-if="share_post_data.question_data.is_anonymously == '1'"></span>
+                                                <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.user_data.fullname" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.question_data.is_anonymously == '0'"></a>
+                                                <a ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.user_data.company_name" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.question_data.is_anonymously == '0'"></a><span class="post-time">{{share_post_data.post_data.time_string}}</span>
+                                            </div>
+                                                            
+                                            <div class="fw" ng-if="share_post_data.post_data.post_for != 'question'">
+                                                <a ng-if="share_post_data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.user_data.fullname"></a>
+                                                <a ng-if="share_post_data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.user_data.company_name"></a><span class="post-time">{{share_post_data.post_data.time_string}}</span>
+                                            </div>
+
+                                            <div class="fw" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for == 'question'">
+                                                <span class="post-designation" ng-if="share_post_data.user_data.title_name != null && share_post_data.question_data.is_anonymously == '0'" ng-bind="share_post_data.user_data.title_name"></span>
+                                                <span class="post-designation" ng-if="share_post_data.user_data.title_name == null && share_post_data.question_data.is_anonymously == '0'" ng-bind="share_post_data.user_data.degree_name"></span>
+                                                <span class="post-designation" ng-if="share_post_data.user_data.title_name == null && share_post_data.user_data.degree_name == null && share_post_data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                            </div>
+                                            <div class="fw" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for != 'question'">
+                                                <span class="post-designation" ng-if="share_post_data.user_data.title_name != null" ng-bind="share_post_data.user_data.title_name"></span>
+                                                <span class="post-designation" ng-if="share_post_data.user_data.title_name == null" ng-bind="share_post_data.user_data.degree_name"></span>
+                                                <span class="post-designation" ng-if="share_post_data.user_data.title_name == null && share_post_data.user_data.degree_name == null">CURRENT WORK</span>
+                                            </div>
+
+                                            <div class="fw" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.post_data.post_for == 'question'">
+                                                <span class="post-designation" ng-if="share_post_data.user_data.industry_name != null && share_post_data.question_data.is_anonymously == '0'" ng-bind="share_post_data.user_data.industry_name"></span> 
+                                                <span class="post-designation" ng-if="!share_post_data.user_data.industry_name && share_post_data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                            </div>
+                                            <div class="fw" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.post_data.post_for != 'question'">
+                                                <span class="post-designation" ng-if="share_post_data.user_data.industry_name" ng-bind="share_post_data.user_data.industry_name"></span> 
+                                                <span class="post-designation" ng-if="!share_post_data.user_data.industry_name">CURRENT WORK</span>
+                                            </div>
+
+                                        </div>            
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'opportunity'">
+                                       
+                                        <div id="post-opp-detail-{{share_post_data.post_data.id}}">
+                                            <div class="post-title opp-title-cus">
+                                                <p ng-if="share_post_data.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="share_post_data.opportunity_data.opptitle" id="opp-title-{{share_post_data.post_data.id}}"></h1></p>
+                                            </div>
+                                            <h5 class="post-title">
+                                                <p ng-if="share_post_data.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="share_post_data.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{share_post_data.post_data.id}}"></span></p>
+                                                <p ng-if="share_post_data.opportunity_data.location"><b>Location:</b><span ng-bind="share_post_data.opportunity_data.location" id="opp-post-location-{{share_post_data.post_data.id}}"></span></p>
+                                                <p ng-if="share_post_data.opportunity_data.field"><b>Field:</b><span ng-bind="share_post_data.opportunity_data.field" id="opp-post-field-{{share_post_data.post_data.id}}"></span></p>
+                                                <p ng-if="!share_post_data.opportunity_data.field || share_post_data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="share_post_data.opportunity_data.other_field" id="opp-post-field-{{share_post_data.post_data.id}}"></span></p>
+                                                <p ng-if="share_post_data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                    <span>
+                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                    </span>
+                                                </p>                                            
+                                                <p ng-if="share_post_data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="share_post_data.opportunity_data.company_name" id="opp-post-company-{{share_post_data.post_data.id}}"></span></p>
+                                            </h5>
+                                            <div class="post-des-detail" ng-if="share_post_data.opportunity_data.opportunity">
+                                                <div id="opp-post-opportunity-{{share_post_data.post_data.id}}" ng-class="share_post_data.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                    <b>Opportunity:</b>
+                                                    <span ng-bind-html="share_post_data.opportunity_data.opportunity"></span>
+                                                    <a id="remove-view-more{{share_post_data.post_data.id}}" ng-if="share_post_data.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+share_post_data.post_data.id,'remove-view-more'+share_post_data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'simple'">
+                                        <p ng-if="share_post_data.simple_data.sim_title"><b>Title:</b> <span ng-bind="share_post_data.simple_data.sim_title" id="opp-title-{{share_post_data.post_data.id}}"></span></p>
+                                        <p ng-if="share_post_data.simple_data.hashtag" class="hashtag-grd">
+                                            <b>Hashtags:</b>
+                                            <span>
+                                                <span class="post-hash-tag" id="sim-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                            </span>
                                         </p>
-                                    </li>
-                                </ul>
+                                        <div ng-init="limit = 250; moreShown = false">
+                                            <span ng-if="share_post_data.simple_data.description != ''" id="simple-post-description-{{share_post_data.post_data.id}}" ng-bind-html="share_post_data.simple_data.description" ng-class="share_post_data.simple_data.description.length > 250 ? 'view-more-expand' : ''">
+                                            </span>
+                                            <a id="remove-view-more{{share_post_data.post_data.id}}" ng-if="share_post_data.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+share_post_data.post_data.id,'remove-view-more'+share_post_data.post_data.id);" class="read-more-post">.... Read More</a>                                        
+                                        </div>                                    
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'article'">
+                                        <p ng-if="share_post_data.article_data.hashtag" class="hashtag-grd">
+                                            <span>
+                                                <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="post-images article-post-cus" ng-if="share_post_data.post_data.post_for == 'article'">
+                                        <div class="one-img" ng-class="share_post_data.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
+                                            <a href="<?php echo base_url(); ?>article/{{share_post_data.article_data.article_slug}}" target="_self">
+                                                <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{share_post_data.article_data.article_featured_image}}" alt="{{share_post_data.article_data.article_title}}" ng-if="share_post_data.article_data.article_featured_image != ''">
+
+                                                <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{share_post_data.article_data.article_featured_image}}" alt="{{share_post_data.article_data.article_title}}" ng-if="share_post_data.article_data.article_featured_image == ''">
+                                                <div class="article-post-text">
+                                                    <h3>{{share_post_data.article_data.article_title}}</h3>
+                                                    <p>{{share_post_data.post_data.user_type == '1' ? share_post_data.user_data.fullname : share_post_data.user_data.company_name}}'s Article on Aileensoul</p>
+                                                </div>
+                                            </a>                            
+                                        </div>
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'share'">
+                                        <div id="share-post-detail-{{share_post_data.post_data.id}}" ng-if="share_post_data.share_data" class="all-post-box">
+                                                <div class="all-post-top">
+                                                    <div class="post-head">
+                                                        <div class="post-img" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for == 'question'">
+                                                            <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '0'">
+                                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.user_image}}" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image != '' && share_post_data.share_data.data.question_data.is_anonymously == '0'">
+                                                                <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image == '' && share_post_data.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image == '' && share_post_data.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            </a>
+                                                                            
+                                                            <span class="no-img-post"  ng-if="share_post_data.share_data.data.user_data.user_image == '' || share_post_data.share_data.data.question_data.is_anonymously == '1'">A</span>
+                                                        </div>
+
+                                                        <div class="post-img" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for != 'question' && share_post_data.share_data.data.user_data.user_image != ''">
+                                                            <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" target="_self">
+                                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.user_image}}">
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="post-img no-profile-pic" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for != 'question' && share_post_data.share_data.data.user_data.user_image == ''">
+                                                            <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" target="_self">
+                                                                <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="post-img" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.post_data.post_for == 'question'">
+                                                            <a ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" target="_self" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '0'">
+                                                                <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.business_user_image}}" ng-if="share_post_data.share_data.data.user_data.business_user_image && share_post_data.share_data.data.question_data.is_anonymously == '0'">
+                                                                <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!share_post_data.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                            </a>
+                                                                            
+                                                            <span class="no-img-post"  ng-if="!share_post_data.share_data.data.user_data.business_user_image || share_post_data.share_data.data.question_data.is_anonymously == '1'">A</span>
+                                                        </div>
+                                                                        
+                                                        <div class="post-img" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.post_data.post_for != 'question' && share_post_data.share_data.data.user_data.business_user_image">
+                                                            <a ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" target="_self">
+                                                                <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{share_post_data.share_data.data.user_data.business_user_image}}">
+                                                            </a>
+                                                        </div>
+                                                                        
+                                                        <div class="post-img no-profile-pic" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.post_data.post_for != 'question' && !share_post_data.share_data.data.user_data.business_user_image">
+                                                            <a ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" target="_self">
+                                                                <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="post-detail">
+                                                            <div class="fw" ng-if="share_post_data.share_data.data.post_data.post_for == 'question'">
+                                                                <a href="javascript:void(0)" class="post-name" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
+                                                                <span class="post-time" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '1'"></span>
+                                                                <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.fullname" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.question_data.is_anonymously == '0'"></a>
+                                                                <a ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.company_name" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.question_data.is_anonymously == '0'"></a>
+                                                                <!-- <span class="post-time">{{share_post_data.share_data.data.post_data.time_string}}</span> -->
+                                                            </div>
+                                                                            
+                                                            <div class="fw" ng-if="share_post_data.share_data.data.post_data.post_for != 'question'">
+                                                                <a ng-if="share_post_data.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.fullname"></a>
+                                                                <a ng-if="share_post_data.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.company_name"></a>
+                                                                <!-- <span class="post-time">{{share_post_data.share_data.data.post_data.time_string}}</span> -->
+                                                            </div>
+
+                                                            <div class="fw" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for == 'question'">
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.title_name != null && share_post_data.share_data.data.question_data.is_anonymously == '0'" ng-bind="share_post_data.share_data.data.user_data.title_name"></span>
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.title_name == null && share_post_data.share_data.data.question_data.is_anonymously == '0'" ng-bind="share_post_data.share_data.data.user_data.degree_name"></span>
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.title_name == null && share_post_data.share_data.data.user_data.degree_name == null && share_post_data.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                            </div>
+                                                            <div class="fw" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for != 'question'">
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.title_name != null" ng-bind="share_post_data.share_data.data.user_data.title_name"></span>
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.title_name == null" ng-bind="share_post_data.share_data.data.user_data.degree_name"></span>
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.title_name == null && share_post_data.share_data.data.user_data.degree_name == null">CURRENT WORK</span>
+                                                            </div>
+
+                                                            <div class="fw" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.post_data.post_for == 'question'">
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.industry_name != null && share_post_data.share_data.data.question_data.is_anonymously == '0'" ng-bind="share_post_data.share_data.data.user_data.industry_name"></span> 
+                                                                <span class="post-designation" ng-if="!share_post_data.share_data.data.user_data.industry_name && share_post_data.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                            </div>
+                                                            <div class="fw" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.post_data.post_for != 'question'">
+                                                                <span class="post-designation" ng-if="share_post_data.share_data.data.user_data.industry_name" ng-bind="share_post_data.share_data.data.user_data.industry_name"></span> 
+                                                                <span class="post-designation" ng-if="!share_post_data.share_data.data.user_data.industry_name">CURRENT WORK</span>
+                                                            </div>
+
+                                                        </div>            
+                                                    </div>
+                                                    <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'opportunity'">
+                                                       
+                                                        <div id="post-opp-detail-{{share_post_data.share_data.data.post_data.id}}">
+                                                            <div class="post-title opp-title-cus">
+                                                                <p ng-if="share_post_data.share_data.data.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="share_post_data.share_data.data.opportunity_data.opptitle" id="opp-title-{{share_post_data.share_data.data.post_data.id}}"></h1></p>
+                                                            </div>
+                                                            <h5 class="post-title">
+                                                                <p ng-if="share_post_data.share_data.data.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="share_post_data.share_data.data.opportunity_data.location"><b>Location:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.location" id="opp-post-location-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="share_post_data.share_data.data.opportunity_data.field"><b>Field:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.field" id="opp-post-field-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="!share_post_data.share_data.data.opportunity_data.field || share_post_data.share_data.data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.other_field" id="opp-post-field-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="share_post_data.share_data.data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                                    <span>
+                                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                    </span>
+                                                                </p>                                            
+                                                                <p ng-if="share_post_data.share_data.data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.company_name" id="opp-post-company-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                            </h5>
+                                                            <div class="post-des-detail" ng-if="share_post_data.share_data.data.opportunity_data.opportunity">
+                                                                <div id="opp-post-opportunity-{{share_post_data.share_data.data.post_data.id}}" ng-class="share_post_data.share_data.data.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                                    <b>Opportunity:</b>
+                                                                    <span ng-bind-html="share_post_data.share_data.data.opportunity_data.opportunity"></span>
+                                                                    <a id="remove-view-more{{share_post_data.share_data.data.post_data.id}}" ng-if="share_post_data.share_data.data.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+share_post_data.share_data.data.post_data.id,'remove-view-more'+share_post_data.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'simple'">
+                                                        <p ng-if="share_post_data.share_data.data.simple_data.sim_title"><b>Title:</b> <span ng-bind="share_post_data.share_data.data.simple_data.sim_title" id="opp-title-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                        <p ng-if="share_post_data.share_data.data.simple_data.hashtag" class="hashtag-grd">
+                                                            <b>Hashtags:</b>
+                                                            <span>
+                                                                <span class="post-hash-tag" id="sim-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                            </span>
+                                                        </p>
+                                                        <div ng-init="limit = 250; moreShown = false">
+                                                            <span ng-if="share_post_data.share_data.data.simple_data.description != ''" id="simple-post-description-{{share_post_data.share_data.data.post_data.id}}" ng-bind-html="share_post_data.share_data.data.simple_data.description" ng-class="share_post_data.share_data.data.simple_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                            </span>
+                                                            <a id="remove-view-more{{share_post_data.share_data.data.post_data.id}}" ng-if="share_post_data.share_data.data.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+share_post_data.share_data.data.post_data.id,'remove-view-more'+share_post_data.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'article'">
+                                                        <p ng-if="share_post_data.share_data.data.article_data.hashtag" class="hashtag-grd">
+                                                            <span>
+                                                                <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="post-images article-post-cus" ng-if="share_post_data.share_data.data.post_data.post_for == 'article'">
+                                                        <div class="one-img" ng-class="share_post_data.share_data.data.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
+                                                            <a href="<?php echo base_url(); ?>article/{{share_post_data.share_data.data.article_data.article_slug}}" target="_self">
+                                                                <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{share_post_data.share_data.data.article_data.article_featured_image}}" alt="{{share_post_data.share_data.data.article_data.article_title}}" ng-if="share_post_data.share_data.data.article_data.article_featured_image != ''">
+
+                                                                <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{share_post_data.share_data.data.article_data.article_featured_image}}" alt="{{share_post_data.share_data.data.article_data.article_title}}" ng-if="share_post_data.share_data.data.article_data.article_featured_image == ''">
+                                                                <div class="article-post-text">
+                                                                    <h3>{{share_post_data.share_data.data.article_data.article_title}}</h3>
+                                                                    <p>{{share_post_data.share_data.data.post_data.user_type == '1' ? share_post_data.share_data.data.user_data.fullname : share_post_data.share_data.data.user_data.company_name}}'s Article on Aileensoul</p>
+                                                                </div>
+                                                            </a>                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'profile_update'">
+                                                        <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id);">
+                                                    </div>
+                                                    <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'cover_update'">
+                                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.cover_update.data_value}}" ng-if="share_post_data.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id);">
+                                                    </div>
+                                                    <div ng-if="share_post_data.share_data.data.post_data.post_for == 'profile_update' || share_post_data.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicInnerShare{{share_post_data.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
+                                                        <button type="button" class="modal-close" ng-click="closeModalShare('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id)">×</button>
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                                                                    <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                </div>
+                                                                <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                                <div class="mySlides mySlides2{{share_post_data.share_data.data.post_data.id}}">
+                                                                    <div class="numbertext"></div>
+                                                                    <div class="slider_img_p" ng-if="share_post_data.share_data.data.post_data.post_for == 'cover_update'">
+                                                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{share_post_data.share_data.data.post_data.id}}">
+                                                                    </div>
+                                                                    <div class="slider_img_p" ng-if="share_post_data.share_data.data.post_data.post_for == 'profile_update'">
+                                                                        <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{share_post_data.share_data.data.post_data.id}}">
+                                                                    </div>
+                                                                </div>                          
+                                                            </div>
+                                                            <div class="caption-container">
+                                                                <p id="caption"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'question'">
+                                                        <div id="ask-que-{{share_post_data.share_data.data.post_data.id}}" class="post-des-detail">
+                                                            <h5 class="post-title">
+                                                                <div ng-if="share_post_data.share_data.data.question_data.question"><b>Question:</b><span ng-bind="share_post_data.share_data.data.question_data.question" id="ask-post-question-{{share_post_data.share_data.data.post_data.id}}"></span></div>                                        
+                                                                <div class="post-des-detail" ng-if="share_post_data.share_data.data.question_data.description">
+                                                                    <div id="ask-que-desc-{{share_post_data.share_data.data.post_data.id}}" ng-class="share_post_data.share_data.data.question_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                                        <b>Description:</b>
+                                                                        <span ng-bind-html="share_post_data.share_data.data.question_data.description"></span>
+                                                                        <a id="remove-view-more{{share_post_data.share_data.data.post_data.id}}" ng-if="share_post_data.share_data.data.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+share_post_data.share_data.data.post_data.id,'remove-view-more'+share_post_data.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                                    </div>                                            
+                                                                </div>
+                                                                <p ng-if="share_post_data.share_data.data.question_data.link"><b>Link:</b><span ng-bind="share_post_data.share_data.data.question_data.link" id="ask-post-link-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="share_post_data.share_data.data.question_data.category"><b>Category:</b><span ng-bind="share_post_data.share_data.data.question_data.category" id="ask-post-category-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                                <p ng-if="share_post_data.share_data.data.question_data.hashtag"><b>Hashtag:</b><span ng-bind="share_post_data.share_data.data.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{share_post_data.post_data.id}}"></span></p>
+                                                                <p ng-if="share_post_data.share_data.data.question_data.field"><b>Field:</b><span ng-bind="share_post_data.share_data.data.question_data.field" id="ask-post-field-{{share_post_data.share_data.data.post_data.id}}"></span></p>
+                                                            </h5>
+                                                            <div class="post-des-detail" ng-if="share_post_data.share_data.data.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.opportunity"></span></div>
+                                                        </div>                                    
+                                                    </div>
+                                                    <div class="post-images" ng-if="share_post_data.share_data.data.post_data.total_post_files == '1'">
+                                                        <div class="one-img" ng-repeat="post_file in share_post_data.share_data.data.post_file_data" ng-init="$last ? loadMediaElement() : false">
+                                                            <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
+                                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)">
+                                                            </a>
+                                                            <span ng-if="post_file.file_type == 'video'"> 
+                                                                <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                                    <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                                                </video>
+                                                                <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
+                                                            </span>
+                                                            <span  ng-if="post_file.file_type == 'audio'">
+                                                                <div class = "audio_main_div">
+                                                                    <div class = "audio_img">
+                                                                        <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                                    </div>
+                                                                    <div class = "audio_source">
+                                                                        <audio id = "audio_player" width = "100%" height = "40" controls>
+                                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
+                                                                            Your browser does not support the audio tag.
+                                                                        </audio>
+                                                                    </div>
+                                                                </div>
+                                                                <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
+                                                            </span>
+                                                            <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-images" ng-if="share_post_data.share_data.data.post_data.total_post_files == '2'">
+                                                        <div class="two-img" ng-repeat="post_file in share_post_data.share_data.data.post_file_data">
+                                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-images" ng-if="share_post_data.share_data.data.post_data.total_post_files == '3'">
+                                                        <span ng-repeat="post_file in share_post_data.share_data.data.post_file_data">
+                                                            <div class="three-img-top" ng-if="$index == '0'">
+                                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)"></a>
+                                                            </div>
+                                                            <div class="two-img" ng-if="$index == '1'">
+                                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)"></a>
+                                                            </div>
+                                                            <div class="two-img" ng-if="$index == '2'">
+                                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)"></a>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="post-images four-img" ng-if="share_post_data.share_data.data.post_data.total_post_files >= '4'">
+                                                        <div class="two-img" ng-repeat="post_file in share_post_data.share_data.data.post_file_data| limitTo:4">
+                                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)"></a>
+                                                            <div class="view-more-img" ng-if="$index == 3 && share_post_data.share_data.data.post_data.total_post_files > 4">
+                                                                <span><a href="javascript:void(0);" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)">View All ({{share_post_data.share_data.data.post_data.total_post_files - 4}})</a></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="myModalShareInner{{share_post_data.share_data.data.post_data.id}}" class="modal modal2" tabindex="-1" role="dialog" style="display: none;">
+                                                        <button type="button" class="modal-close" ng-click="closeModalShare('myModalShareInner'+share_post_data.share_data.data.post_data.id)">×</button>
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                </div>
+                                                                <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                                <div class="mySlides mySlides2{{share_post_data.share_data.data.post_data.id}}" ng-repeat="_photoData in share_post_data.share_data.data.post_file_data">
+                                                                    <div class="numbertext">{{$index + 1}} / {{share_post_data.share_data.data.post_data.total_post_files}}</div>
+                                                                    <div class="slider_img_p">
+                                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                                    </div>
+                                                                </div>                                
+                                                            </div>
+                                                            <div class="caption-container">
+                                                                <p id="caption"></p>
+                                                            </div>
+                                                        </div> 
+                                                        <a ng-if="share_post_data.share_data.data.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,share_post_data.share_data.data.post_data.id)">&#10094;</a>
+                                                        <a ng-if="share_post_data.share_data.data.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,share_post_data.share_data.data.post_data.id)">&#10095;</a>
+                                                    </div>                                    
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'profile_update'">
+                                        <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+share_post_data.post_data.id);">
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'cover_update'">
+                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.cover_update.data_value}}" ng-if="share_post_data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+share_post_data.post_data.id);">
+                                    </div>
+                                    <div ng-if="share_post_data.post_data.post_for == 'profile_update' || share_post_data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{share_post_data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
+                                        <button type="button" class="modal-close" ng-click="closeModalShare('myModalCoverPicShare'+share_post_data.post_data.id)">×</button>
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                                                    <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                </div>
+                                                <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                <div class="mySlides mySlides2{{share_post_data.post_data.id}}">
+                                                    <div class="numbertext"></div>
+                                                    <div class="slider_img_p" ng-if="share_post_data.post_data.post_for == 'cover_update'">
+                                                        <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.cover_update.data_value}}" alt="Cover Image" id="cover{{share_post_data.post_data.id}}">
+                                                    </div>
+                                                    <div class="slider_img_p" ng-if="share_post_data.post_data.post_for == 'profile_update'">
+                                                        <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.profile_update.data_value}}" alt="Profile Image" id="cover{{share_post_data.post_data.id}}">
+                                                    </div>
+                                                </div>                                
+                                            </div>
+                                            <div class="caption-container">
+                                                <p id="caption"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'question'">
+                                        <div id="ask-que-{{share_post_data.post_data.id}}" class="post-des-detail">
+                                            <h5 class="post-title">
+                                                <div ng-if="share_post_data.question_data.question"><b>Question:</b><span ng-bind="share_post_data.question_data.question" id="ask-post-question-{{share_post_data.post_data.id}}"></span></div>                                        
+                                                <div class="post-des-detail" ng-if="share_post_data.question_data.description">
+                                                    <div id="ask-que-desc-{{share_post_data.post_data.id}}" ng-class="share_post_data.question_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                        <b>Description:</b>
+                                                        <span ng-bind-html="share_post_data.question_data.description"></span>
+                                                        <a id="remove-view-more{{share_post_data.post_data.id}}" ng-if="share_post_data.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+share_post_data.post_data.id,'remove-view-more'+share_post_data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                    </div>                                            
+                                                </div>
+                                                <p ng-if="share_post_data.question_data.link"><b>Link:</b><span ng-bind="share_post_data.question_data.link" id="ask-post-link-{{share_post_data.post_data.id}}"></span></p>
+                                                <p ng-if="share_post_data.question_data.category"><b>Category:</b><span ng-bind="share_post_data.question_data.category" id="ask-post-category-{{share_post_data.post_data.id}}"></span></p>
+                                                <p ng-if="share_post_data.question_data.hashtag"><b>Hashtag:</b><span ng-bind="share_post_data.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="share_post_data.question_data.field"><b>Field:</b><span ng-bind="share_post_data.question_data.field" id="ask-post-field-{{share_post_data.post_data.id}}"></span></p>
+                                            </h5>
+                                            <div class="post-des-detail" ng-if="share_post_data.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="share_post_data.opportunity_data.opportunity"></span></div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="post-images" ng-if="share_post_data.post_data.total_post_files == '1'">
+                                        <div class="one-img" ng-repeat="post_file in share_post_data.post_file_data" ng-init="$last ? loadMediaElement() : false">
+                                            <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
+                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)">
+                                            </a>
+                                            <span ng-if="post_file.file_type == 'video'"> 
+                                                <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                    <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                                </video>
+                                                <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
+                                            </span>
+                                            <span  ng-if="post_file.file_type == 'audio'">
+                                                <div class = "audio_main_div">
+                                                    <div class = "audio_img">
+                                                        <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                    </div>
+                                                    <div class = "audio_source">
+                                                        <audio id = "audio_player" width = "100%" height = "40" controls>
+                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
+                                                            Your browser does not support the audio tag.
+                                                        </audio>
+                                                    </div>
+                                                </div>
+                                                <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
+                                            </span>
+                                            <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                        </div>
+                                    </div>
+                                    <div class="post-images" ng-if="share_post_data.post_data.total_post_files == '2'">
+                                        <div class="two-img" ng-repeat="post_file in share_post_data.post_file_data">
+                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)"></a>
+                                        </div>
+                                    </div>
+                                    <div class="post-images" ng-if="share_post_data.post_data.total_post_files == '3'">
+                                        <span ng-repeat="post_file in share_post_data.post_file_data">
+                                            <div class="three-img-top" ng-if="$index == '0'">
+                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)"></a>
+                                            </div>
+                                            <div class="two-img" ng-if="$index == '1'">
+                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)"></a>
+                                            </div>
+                                            <div class="two-img" ng-if="$index == '2'">
+                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)"></a>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="post-images four-img" ng-if="share_post_data.post_data.total_post_files >= '4'">
+                                        <div class="two-img" ng-repeat="post_file in share_post_data.post_file_data| limitTo:4">
+                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)"></a>
+                                            <div class="view-more-img" ng-if="$index == 3 && share_post_data.post_data.total_post_files > 4">
+                                                <span><a href="javascript:void(0);" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)">View All ({{share_post_data.post_data.total_post_files - 4}})</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="myModalShare{{share_post_data.post_data.id}}" class="modal modal2" tabindex="-1" role="dialog" style="display: none;">
+                                        <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+share_post_data.post_data.id)">×</button>
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                </div>
+                                                <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                <div class="mySlides mySlides2{{share_post_data.post_data.id}}" ng-repeat="_photoData in share_post_data.post_file_data">
+                                                    <div class="numbertext">{{$index + 1}} / {{share_post_data.post_data.total_post_files}}</div>
+                                                    <div class="slider_img_p">
+                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                    </div>
+                                                </div>                                
+                                            </div>
+                                            <div class="caption-container">
+                                                <p id="caption"></p>
+                                            </div>
+                                        </div> 
+                                        <a ng-if="share_post_data.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,share_post_data.post_data.id)">&#10094;</a>
+                                        <a ng-if="share_post_data.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,share_post_data.post_data.id)">&#10095;</a>
+                                    </div>                                    
+                                </div>
                             </div>
-                        </div>
-                        <div class="dtl-btn bottom-btn">
-                            <a href="#" class="save" data-dismiss="modal">
-                                <span>Close</span>
-                            </a>                        
+                            <div class="post-box-bottom" >
+                                <p class="pull-right">
+                                    <button ng-click="share_post_fnc(post_index);" class="btn1">Post</button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="myModalPhotos" class="modal modal2" style="display: none;">
-            <button type="button" class="new-modal-close" data-dismiss="modal" ng-click="closeModal()">×</button>
+        <div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                        <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="post-popup-box">
+                        <form  id="post_something" name="post_something" ng-submit="post_something_check(event)">
+                            <div class="post-box">
+                                <!-- <div class="post-img"> -->
+                                    <?php
+                                    /*if ($business_login_user_image) {
+                                        if (IMAGEPATHFROM == 'upload') {
+                                            if (!file_exists($this->config->item('bus_profile_main_upload_path') . $business_login_user_image)) {
+                                                ?>
+                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
+                                            <?php } else {
+                                                ?>
+                                                <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="Business Login User">
+                                                <?php
+                                            }
+                                        } else {
+                                            $filename = $this->config->item('bus_profile_thumb_upload_path') . $business_login_user_image;
+                                            $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                            if (!$info) {
+                                                ?>
+                                                <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image">
+                                            <?php } else {
+                                                ?>
+                                                <img  src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>"  alt="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $business_login_user_image; ?>">
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                    else{ ?>
+                                        <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="No Business Image"><?php 
+                                    }*/ ?>
+                                <!-- </div> -->
+                                <div class="form-group">
+                                    <label>Post title</label>
+                                    <input type="text" class="form-control" placeholder="Etnter Title" id="sim_title" maxlength="100" ng-model="sim.sim_title" >
+									<div id="simple-post-title" class="tooltip-custom" style="display: none;">Give a relevant title to your post that describes your post in a single sentence.</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>
+                                    <textarea id="sim_hashtag" type="text" class="hashtag-textarea" ng-model="sim.sim_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="sim_hashtag all-hashtags-list"></div>
+                                    <div id="simple-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
+                                </div>
+                                <div class="form-group"><!-- <div class="post-text"> -->
+                                    <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share knowledge, opportunities & articles"></textarea>
+                                </div>
+                                <div class="all-upload" ng-if="is_edit != 1">
+                                    <div class="form-group">
+                                        <div id="fileCountSim"></div>
+                                        <div id="selectedFiles" class="file-preview">
+                                        </div>
+                                        <input file-input="files" ng-file-model="sim.postfiles" type="file" id="fileInput1" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
+                                    </div>
+                                    <label for="fileInput1" ng-click="postFiles()">
+                                        <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput1').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
+                                        <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput1').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
+                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput1').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                        <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput1').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
+                                    </label>
+                                </div>
+                                <div class="post-box-bottom" >
+                                    <ul ng-if="is_edit != 1">
+                                        <li>
+                                            <a href="#"  class="post-opportunity-modal" data-target="#opportunity-popup" data-toggle="modal" data-dismiss="modal">
+                                                <img src="<?php echo base_url('assets/n-images/post-op.png') ?>"><span><span class="none-479">Post</span> <span>Opportunity</span></span>
+                                            </a>
+                                        </li>
+                                        <li class="pl15">
+                                            <a href="<?php echo base_url('new-business-article'); ?>" target="_self">
+                                                <img src="<?php echo base_url('assets/n-images/article.png') ?>"><span><span class="none-479">Post</span> <span>Article</span></span>
+                                            </a>
+                                        </li>                                        
+                                    </ul>
+                                    <input type="hidden" name="post_for" ng-model="sim.post_for" class="form-control" value="simple" ng-init="sim.post_for='simple'">
+                                    <input type="hidden" ng-if="is_edit == 1" id="edit_post_id" name="edit_post_id" ng-model="sim.edit_post_id" class="form-control" value="{{sim.edit_post_id}}">
+                                    <p class="pull-right">
+                                        <button type="submit" class="btn1" value="Submit">Post</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mySlides" ng-repeat="menu_info in menu_info_data">
-                        <div class="numbertext"></div>
-                        <div class="slider_img_p">                  
-                            <img ng-src="<?php echo BUSINESS_USER_MENU_IMG_UPLOAD_URL ?>{{menu_info.file_name}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">                       
-                        </div>
-                    </div>          
                 </div>
-                <div class="caption-container">
-                    <p id="caption"></p>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade" id="opportunity-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="post-popup-box">
+                        <form id="post_opportunity" name="post_opportunity" ng-submit="post_opportunity_check(event)">
+                           
+                            <div class="post-field">
+                                <div class="form-group title-op-op">
+                                    <label>Title of Opportunity</label>
+                                    <input id="opptitle"  type="text" class="form-control" ng-model="opp.opptitle" placeholder="Enter Title of Opportunity" autocomplete="off" maxlength="100">
+                                    <div id="opptitletooltip" class="tooltip-custom" style="display: none;">Enter the specific "title" of this opportunity. Ex: Hiring Software Developer, Contractors Needed for Bridge Construction, Fund Raising Opportunities for Entrepreneur etc.</div>
+                                </div>
+                                <div id="content" class="form-group">
+                                    <label>For whom this opportunity?</label>
+                                    
+                                    <tags-input id="job_title" ng-model="opp.job_title" display-property="name" placeholder="Ex: Singer, SEO, HR, Photographer, Designer…" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
+                                        <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                    </tags-input>
+                                    <div id="jobtitletooltip" class="tooltip-custom" style="display: none;">Type the designation which best matches for given opportunity.</div>
+                                    <script type="text/ng-template" id="title-template">
+                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                    </script>
+                                    <script type="text/ng-template" id="title-autocomplete-template">
+                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                    </script>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>For which location?</label>
+                                    
+                                    <tags-input id="location" ng-model="opp.location" display-property="city_name" placeholder="Ex: Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
+                                        <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
+                                    </tags-input>
+                                    <div id="locationtooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select the location for the opportunity.</div>
+                                    <script type="text/ng-template" id="location-template">
+                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                    </script>
+                                    <script type="text/ng-template" id="location-autocomplete-template">
+                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <label>For which field?</label>
+                                    
+                                    <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
+                                    <span class="select-field-custom">
+                                        <select name="field" ng-model="opp.field" id="field" ng-change="other_field(this)" class="post-opportunity-field">
+                                            <option value="" selected="selected">Select Related Fields</option>
+                                            <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                                            <option value="0">Other</option>
+                                        </select>
+                                    </span>
+                                    <div id="fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Opportunity.</div>
+                                </div>
+                                <div class="form-group" ng-if="opp.field == '0'">
+                                    <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>Add hashtag (Topic)</label>  
+                                    <textarea id="opp_hashtag" type="text" class="hashtag-textarea" ng-model="opp.opp_hashtag" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
+                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
+                                    <div class="opp_hashtag all-hashtags-list"></div>
+									<div id="opp-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company Name (Optional)</label>
+                                    <input id="company_name"  type="text" class="form-control" ng-model="opp.company_name" placeholder="Enter Company Name" autocomplete="off" maxlength="100">
+									<div id="op-post-company" class="tooltip-custom" style="display: none;">Enter the company name of opportunity</div>
+                                </div>
+
+                                <div class="post-text form-group pt20">
+                                    <textarea name="description" ng-model="opp.description" id="description" class="title-text-area" placeholder="Post Opportunity"></textarea>
+                                </div>
+
+                                <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="opportunity" ng-init="opp.post_for='opportunity'">
+                                <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">
+                                <div class="all-upload form-group" ng-if="is_edit != 1">
+                                    <div class="form-group">
+                                        <div id="fileCountOpp"></div>
+                                        <div id="selectedFilesOpp" class="file-preview"></div>
+
+                                        <input file-input="files" ng-file-model="opp.postfiles" type="file" id="fileInput" name="postfiles[]" data-overwrite-initial="false" data-min-file-count="2"  multiple style="display: none;">
+                                    </div>
+                                    <label for="fileInput" ng-click="postFiles()">
+                                        <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
+                                        <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
+                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                        <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="text-right fw post-op-btn pb20 pr20">
+                                <button type="submit" class="btn1"  value="Submit">Post</button>    
+                            </div>
+                            <?php // echo form_close(); ?>
+                        </form>
+                    </div>
                 </div>
-            </div> 
-            <a class="prev" style="left:0px;" ng-click="plusSlides(-1)">&#10094;</a>
-            <a class="next" ng-click="plusSlides(1)">&#10095;</a>
+            </div>
         </div>        
 
-        <div class="modal fade message-box" id="likeusermodal" role="dialog">
+        <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
-                    <button type="button" class="modal-close1" data-dismiss="modal">&times;</button>       
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <h3 ng-if="count_likeUser > 0 && count_likeUser < 2">{{count_likeUser}} Like</h3>
+                    <h3 ng-if="count_likeUser > 1">{{count_likeUser}} Likes</h3>
+                    <div class="modal-body padding_less_right">
+                        <div class="">
+                            <ul class="custom-scroll">
+                                <li class="like-img" ng-repeat="userlist in get_like_user_list">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''">
+                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
+                                    </a>
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null">
+                                        <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                        <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                    </a>
+                                    <div class="like-detail">
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
+                                        <p ng-if="(userlist.title_name == null) && (userlist.degree_name != null)">{{userlist.degree_name}}</p>
+                                        <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
+                                        <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade message-box" id="delete_model" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
                     <div class="modal-body">
                         <span class="mes">
+                            <div class="pop_content">Do you want to delete this comment?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="deleteComment(c_d_comment_id, c_d_post_id, c_d_parent_index, c_d_index, c_d_post)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade message-box" id="post" role="dialog">
+        <div class="modal fade message-box" id="delete_post_model" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class="pop_content">Do you want to delete this post?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="deletedPost(p_d_post_id, p_d_index)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade message-box biderror post-error" id="posterrormodal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;
+                    </button>       
+                    <div class="modal-body">
+                        <span class="mes"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade message-box biderror post-error" id="post" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" id="post"data-dismiss="modal">&times;</button>       
@@ -1323,77 +2753,111 @@ $login_user_id = $this->session->userdata('aileenuser');
             </div>
         </div>
 
-        <div class="modal fade message-box" id="postedit" role="dialog">
-            <div class="modal-dialog modal-lm">
+        <div style="display:none;" class="modal fade" id="report-spam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
-                    <div class="modal-body">
-                        <span class="mes">
-                        </span>
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="report-box">
+                        <form name="report_spam_form" id="report_spam_form" ng-validate="report_spam_validate">
+                            <h3>What’s Wrong with This Post?</h3>
+                            <ul>
+                                <li>
+                                    <label class="control control--radio">Not Intersed in This Post
+                                        <input name="report_spam" type="radio" class="report-cls" value="1">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Spam, or Promotional
+                                        <input name="report_spam" type="radio" class="report-cls" value="2">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Nudity or Sexually Explicit
+                                        <input name="report_spam" type="radio" class="report-cls" value="3">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Fake News & Fake Account
+                                        <input name="report_spam" type="radio" class="report-cls" value="4">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                
+                                <li>
+                                    <label class="control control--radio">Scam, Phishing or Malware
+                                        <input name="report_spam" type="radio" class="report-cls" value="5">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="control control--radio">Abusive, Violent or Hate Speech
+                                        <input name="report_spam" type="radio" class="report-cls" value="6">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </li>
+                                <li class="fw">
+                                    <label class="control control--radio">Other Reasons
+                                        <input name="report_spam" type="radio" class="report-cls" value="0">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <!--other-rsn <label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other Reasons
+                                    </label> -->
+                                </li>
+                                <li class="fw report-other-res" id="report_other" style="display: none;">
+                                    <input name="other_report_spam" type="text" id="other_report_spam" style="opacity: 1;z-index: 1;">
+                                </li>
+                                <li class="report-err-li" id="err_report"></li>
+                                <li>
+                                    <button id="save_report_spam" class="btn1" type="button" ng-click="save_report_spam();">Submit</button>
+                                    <div id="save_report_spam_loader" class="dtl-popup-loader" style="display: none;">
+                                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" class="modal fade" id="other-reason" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="report-box">
+                        
+                        <div class="other-reason-box">
+                            <textarea placeholder="Enter your reason for reporting"></textarea>
+                            <p class="text-center">
+                                <button class="btn3">Back</button> <button class="btn1">Submit</button>
+                            </p>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Login  -->
-		<?php $this->load->view('mobile_side_slide'); ?>
-        <!-- Bid-modal  -->
-        <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
-            <div class="modal-dialog modal-lm">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
-                    <div class="modal-body">
-                        <span class="mes">
-                            <div class='pop_content pop-content-cus'>
-                                <h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1 login_link' href='<?php echo base_url(); ?>login'>Login</a> or <a class='btn1 login_link' href='<?php echo base_url(); ?>business-profile/create-account'>Register</a></p>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- Model Popup Close -->
         <?php echo $footer; ?>
+        <script>
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';            
+            var no_business_post_html = '<?php echo $no_business_post_html ?>';
+            var header_all_profile = '<?php echo $header_all_profile ?>';
+        </script>
         
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-        <script type = "text/javascript" src="<?php echo base_url('assets/js/jquery.form.3.51.js') ?>"></script> 
+        <script type = "text/javascript" src="<?php echo base_url('assets/js/jquery.form.3.51.js?ver=' . time()) ?>"></script> 
         <script src="<?php echo base_url('assets/dragdrop/js/plugins/sortable.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/dragdrop/js/fileinput.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/dragdrop/js/locales/fr.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/dragdrop/js/locales/es.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
-        
-        <script>
-            var base_url = '<?php echo base_url(); ?>';
-            var slug = '<?php echo $slugid; ?>';
-            var no_business_post_html = '<?php echo $no_business_post_html ?>';
-            var ismainregister = '<?php echo $ismainregister ?>';
-            var isbusiness_register = '<?php echo $isbusiness_register ?>';
-            var isbusiness_deactive = '<?php echo $isbusiness_deactive ?>';
-            var user_id = '<?php echo $this->session->userdata('aileenuser') ?>';
-        </script>
-        <script>
-            function open_profile() {
-                register_profile();
-            }
-            function login_profile() {                 
-                $('#bidmodal').modal('show');
-            }
-            function register_profile() {
-                if(ismainregister == false || isbusiness_deactive == true){                   
-                    $('#bidmodal').modal('show');
-                }else{
-                    window.location.href = '<?php echo business_register_step1; ?>'
-                }
-            }
-        </script>
-
-        
+        <script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>">
         </script>
 
@@ -1409,217 +2873,344 @@ $login_user_id = $this->session->userdata('aileenuser');
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var user_slug = '<?php echo $business_data[0]['business_slug']; ?>';
             var cmt_maxlength = '700';
-            var business_slug = '<?php echo $login_bussiness_data->business_slug; ?>';
+            var business_slug = '<?php echo '';//$login_user_data->business_slug; ?>';
+            // var company_name = '<?php echo $login_user_data->company_name; ?>';
             var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
             
-            var from_user_id = '<?php echo $login_bussiness_data->user_id; ?>';
+            var from_user_id = '<?php echo $login_user_data['user_id']; ?>';
             var to_user_id = '<?php echo $business_data[0]['user_id']; ?>';
-            var company_name = '<?php echo $company_name_txt; ?>';
             
             var app = angular.module("businessProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/user_dashboard.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/dashboard.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/dashboard_new.js?ver=' . time()); ?>"></script>
-        
+
+        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>
-            $(document).on('click', '[data-toggle*=modal]', function () {
-                $('[role*=dialog]').each(function () {
-                    switch ($(this).css('display')) {
-                        case('block'):
-                        {
-                            $('#' + $(this).attr('id')).modal('hide');
-                            break;
-                        }
+			$(document).ready(function () {
+				if (screen.width <= 1279) {
+					
+					$(".move-website").appendTo($("#move-website"));
+					$(".move-jobs").appendTo($("#move-jobs"));
+					$(".move-review").appendTo($("#move-review"));
+					$(".move-bus-started").appendTo($("#move-bus-started"));
+					$(".move-menu").appendTo($("#move-menu"));
+					
+				}
+			
+			});
+            $(document).ready(function () {
+
+                $(document).on('show.bs.modal', '.modal', function (event) {
+                    var zIndex = 1040 + (20 * $('.modal:visible').length);
+                    $(this).css('z-index', zIndex);
+                    setTimeout(function() {
+                        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                    }, 0);
+                });
+
+                $(document).on('hidden.bs.modal', function (event) {
+                    if($('.modal.in').length > 0)
+                    {
+                        if ($('body').hasClass('modal-open') == false) {
+                            $('body').addClass('modal-open');
+                        };            
                     }
                 });
+
             });
-            $(document).ready(function () {
-                // setTimeout(function () {
-                //     $('#register').modal('show');
-                // }, 2000);
-            });
-            $('select').on('change', function () {
-                if ($(this).val()) {
-                    $(this).css('color', 'black');
+			$(document).ready(function () {
+				if (screen.width <= 991) {
+					$(".move-middle").appendTo($("#move-middle"));
+				}
+			});
+            function open_popup(clicked_id)
+            {
+                var dropDownClass = document.getElementById('myDropdown' + clicked_id).className;
+                dropDownClass = dropDownClass.split(" ").pop(-1);
+                if (dropDownClass != 'show') {
+                    $('.dropdown-content1').removeClass('show');
+                    $('#myDropdown' + clicked_id).addClass('show');
                 } else {
-                    $(this).css('color', '#acacac');
+                    $('.dropdown-content1').removeClass('show');
                 }
-            });
-            $(document).on('click', '.comment-edit-butn,.ripple like_h_w', function (e) {
-                if($(e.target).prop("class") != "")
-                {
-                    var classNames = $(e.target).prop("class").toString().split(' ').pop();
-                    if (classNames != 'login_link' && classNames != 'click-profiles') {
-                        if(user_id != "")
+                $(document).on('keydown', function (e) {
+                    if (e.keyCode === 27) {
+                        document.getElementById('myDropdown' + clicked_id).classList.toggle("hide");
+                        $(".dropdown-content1").removeClass('show');
+                    }
+                });
+            }
+
+            function split( val ) {
+                return val.split( / \s*/ );
+            }
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
+
+            function autocomplete_hashtag_keypress(e)
+            {
+                var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                if (!re.test(e.key)) {
+                    e.preventDefault();                        
+                    return false;
+                }
+            }
+
+            function autocomplete_hashtag(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 2,
+                    source: function( request, response ) {                         
+                        var search_key = extractLast( request.term );
+                        if(search_key[0] == "#")
                         {
-                            window.location = '<?php echo business_register_step1; ?>'
+                            search_key = search_key.substr(1);
+                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
                         }
                         else
                         {
                             return false;
-                            open_profile();                            
                         }
-                    }
-                }                
-            });
-        </script>
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebSite",
-            "name": "Aileensoul",
-            "url": "https://www.aileensoul.com"
-        }
-        </script>
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "LocalBusiness",
-            
-            "name": "<?php echo $company_name_txt; ?>",
-            "image": "<?php echo $business_user_image_txt; ?>",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "<?php echo $address_txt; ?>",
-                "addressLocality": "<?php echo $city_txt; ?>",
-                "addressRegion": "<?php echo $state_txt; ?>",
-                "addressCountry": "<?php echo $county_txt; ?>",
-                "postalCode": "<?php echo $pincode_txt; ?>"
-            },
-           
-           "telephone": "<?php echo $contact_mobile_txt; ?>",
-           "email": "<?php echo $contact_email_txt; ?>",
-           "url": "<?php echo $business_slug_txt; ?>",
-            "description": "Description: <?php echo addslashes($description_txt); ?>"
-          }
-        </script>
-        <?php if($this->session->userdata('aileenuser') == "" && ($county_txt != "" || $business_data[0]['industriyal'] != 0)):
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( " " );
+                        return false;
+                    },
+                });                
+            }
+		</script>
+		<script>
+			$(document).ready(function () {
+				$("#opptitle").focusin(function(){
+					$('#opptitletooltip').show();
+				});
+				$("#opptitle").focusout(function(){
+					$('#opptitletooltip').hide();
+				});
 
-            $category_arr = $this->db->select('industry_slug,industry_name')->get_where('industry_type', array('industry_id' => $business_data[0]['industriyal']))->row_array();
-            $category_slug = $category_arr['industry_slug'];
-            $category_txt = $category_arr['industry_name'];
-            
-        ?>
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement":
-            [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url(); ?>",
-                        "name": "Aileensoul"
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url(); ?>business-search",
-                        "name": "Business"
-                    }
-                },
-                <?php
-                if($city_txt != "" && $category_txt != "" && array_search(trim($city_txt),array_column($top_city, 'city_name')) != ''): ?>
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url('business'); ?>",
-                        "name": "All Business"                
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url().$category_slug."-business-in-".$city_slug; ?>",
-                        "name": "<?php echo $category_txt." Business in ".$city_txt; ?>"
-                    }
-                },
-                <?php
-                elseif($category_txt != ""): ?>
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url('business-by-categories'); ?>",
-                        "name": "Business by Category"                
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url().$category_slug."-business"; ?>",
-                        "name": "<?php echo $category_txt." Business"; ?>"
-                    }
-                },
-                <?php
-                elseif($city_txt != ""): ?>
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url('business-by-location'); ?>",
-                        "name": "Business by Location"                
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "item":
-                    {
-                        "@id": "<?php echo base_url()."business-in-".$city_slug; ?>",
-                        "name": "<?php echo $city_txt; ?>"
-                    }
-                },
-                <?php
-                endif; ?>
-                {
-                    "@type": "ListItem",
-                    "position": 5,
-                    "item":
-                    {
-                        "@id": "<?php echo current_url(); ?>",
-                        "name": "<?php echo $company_name_txt; ?>"                
-                    }
+				$("#job_title").focusin(function(){
+					$('#jobtitletooltip').show();
+				});
+				$("#job_title").focusout(function(){
+					$('#jobtitletooltip').hide();
+				});
+
+				$("#location").focusin(function(){
+					$('#locationtooltip').show();
+				});
+				$("#location").focusout(function(){
+					$('#locationtooltip').hide();
+				});
+
+				$("#field").focusin(function(){
+					$('#fieldtooltip').show();
+				});
+				$("#field").focusout(function(){
+					$('#fieldtooltip').hide();
+				});
+
+				$("#ask_desc").focusin(function(){
+					$('#ask_desctooltip').show();
+				});
+				$("#ask_desc").focusout(function(){
+					$('#ask_desctooltip').hide();
+				});
+
+				$("#ask_related_category").focusin(function(){
+					$('#rlcattooltip').show();
+				});
+				$("#ask_related_category").focusout(function(){
+					$('#rlcattooltip').hide();
+				});
+
+				$("#ask_field").focusin(function(){
+					$('#ask_fieldtooltip').show();
+				});
+				$("#ask_field").focusout(function(){
+					$('#ask_fieldtooltip').hide();
+				});
+				
+				$("#sim_title").focusin(function(){
+					$('#simple-post-title').show();
+				});
+				$("#sim_title").focusout(function(){
+					$('#simple-post-title').hide();
+				});
+				
+				$("#sim_hashtag").focusin(function(){
+					$('#simple-post-hashtag').show();
+				});
+				$("#sim_hashtag").focusout(function(){
+					$('#simple-post-hashtag').hide();
+				});
+				
+				$("#opp_hashtag").focusin(function(){
+					$('#opp-post-hashtag').show();
+				});
+				$("#opp_hashtag").focusout(function(){
+					$('#opp-post-hashtag').hide();
+				});
+				
+				$("#company_name").focusin(function(){
+					$('#op-post-company').show();
+				});
+				$("#company_name").focusout(function(){
+					$('#op-post-company').hide();
+				});
+
+				$("#ask_hashtag").focusin(function(){
+					$('#ask-post-hashtag').show();
+				});
+				$("#ask_hashtag").focusout(function(){
+					$('#ask-post-hashtag').hide();
+				});
+				
+			});
+
+            function placeCaretAtEnd(el) {
+                el.focus();
+                if (typeof window.getSelection != "undefined"
+                        && typeof document.createRange != "undefined") {
+                    var range = document.createRange();
+                    range.selectNodeContents(el);
+                    range.collapse(false);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else if (typeof document.body.createTextRange != "undefined") {
+                    var textRange = document.body.createTextRange();
+                    textRange.moveToElementText(el);
+                    textRange.collapse(false);
+                    textRange.select();
                 }
-            ]
-        }
-        </script>
-        <?php endif; ?>
-        <script src="<?php echo base_url('assets/js/star-rating.js?ver=' . time()); ?>"></script>
-        <script>
-            $(document).ready(function () {
-                if (screen.width <= 1279) {
-                    
-                    $(".move-website").appendTo($("#move-website"));
-                    $(".move-jobs").appendTo($("#move-jobs"));
-                    $(".move-review").appendTo($("#move-review"));
-                    $(".move-bus-started").appendTo($("#move-bus-started"));
-                    $(".move-menu").appendTo($("#move-menu"));
-                    
-                }
-            
-            });
-            $(document).ready(function () {
-                if (screen.width <= 991) {
-                    $(".move-middle").appendTo($("#move-middle"));
-                }
-            });
-        </script>
+            }
+
+            function split_m( val ) {
+                // return val.split( /,\s*/ );
+                return val.split( /@/ );
+            }
+            function extractLast_m( term ) {
+                return split_m( term ).pop();
+            }
+
+            var startTyping = "Start Typing";
+
+            function autocomplete_mention(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 0,
+                    create: function (event,ui) {                            
+                        $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
+                            if(item.fullname != undefined)
+                            {
+                                var content = '<a href="javascript:void(0);" contenteditable="false">';
+                                var img_content = "";
+
+                                if(item.user_image)
+                                {
+                                    var img_url = "<?php echo USER_THUMB_UPLOAD_URL;?>"+item.user_image;
+                                    img_content = '<img src="'+img_url+'" alt="'+item.first_name+'" onError="this.onerror=null;this.src='+(item.user_gender == "M" ? '\''+base_url+'assets/img/man-user.jpg\'' : '\''+base_url+'assets/img/female-user.jpg\'')+'">';
+                                }
+                                else
+                                {
+                                    if(item.user_gender == "M")
+                                    {
+                                        img_content = '<img src="'+base_url+'assets/img/man-user.jpg'+'">';
+                                    }
+                                    else if(item.user_gender == "F")
+                                    {                                            
+                                        img_content = '<img src="'+base_url+'assets/img/female-user.jpg'+'">';   
+                                    }
+                                }
+                                content += '<div class="post-img">'+img_content+'</div>';
+                                content += '<div class="dropdown-user-detail">';
+                                content += '<b>'+item.fullname+'</b>';
+                                content += '<div class="msg-discription">';
+                                if(item.title_name)
+                                {
+                                    content += '<span class="time_ago">'+item.title_name+'</span>';
+                                }
+                                else if(item.degree_name)
+                                {
+                                    content += '<span class="time_ago">'+item.degree_name+'</span>';
+                                }
+                                else
+                                {
+                                    content += '<span class="time_ago">Current Work</span>';
+                                }
+                                content += '</div>';
+                                content += '</div>';                                    
+                                content += '</a>';
+
+                                return $('<li>').append(content)
+                                    .appendTo(ul);
+                            }
+                        };
+                    },
+                    source: function( request, response ) {                            
+                        var term = request.term,
+                            results = [];
+                        if (term.indexOf("@") >= 0) {
+                            term = extractLast_m(request.term);
+                            if (term.length > 0) {
+                                results = $.getJSON(base_url +"userprofile/get_user_list", { term : term},response);
+                                response(results);
+                            } else {
+                                results = [startTyping];
+                            }
+                        }                            
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        if (ui.item.fullname !== startTyping) {
+                            var value = $("#"+this.id).html();
+                            var terms = split_m(value);
+                            terms.pop();
+                            var content = '<a contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
+                            terms.push(content);
+                            $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
+                            placeCaretAtEnd($("#"+this.id)[0]);
+                        }
+                        return false;
+                    },
+                });
+            }
+            autosize(document.getElementsByClassName('hashtag-textarea'));
+		</script>
     </body>
 </html>

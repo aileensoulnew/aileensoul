@@ -16,8 +16,7 @@ class Business_live extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('user_post_model');
         $this->load->model('data_model');
-        $this->load->model('business_model');
-        $this->load->model('job_model');
+        $this->load->model('business_model');        
         $this->load->library('S3');
         
         include ('main_profile_link.php');
@@ -488,7 +487,7 @@ class Business_live extends MY_Controller {
         $page = 1;
         $limit = 20;
         $jobCat = $this->business_model->get_business_by_categories($page,$limit);
-        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $jobCity = $this->business_model->get_job_city($page,$limit);        
         $all_link = array();
         foreach ($jobCity as $key => $value) {
             $i=0;
@@ -539,7 +538,7 @@ class Business_live extends MY_Controller {
         $page = 1;
         $limit = 20;
         $jobCat = $this->business_model->get_business_by_categories($page,$limit);
-        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $jobCity = $this->business_model->get_job_city($page,$limit);        
         $all_link = array();
         foreach ($jobCity['job_city'] as $key => $value) {
             $i=0;

@@ -804,4 +804,28 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function get_job_city($page = "",$limit = '5',$from_sitemap = 0) {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
+        $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        if($from_sitemap == 1)
+        {
+            $this->db->where('DATEDIFF(rp.post_last_date,NOW()) >= ','0');
+        }
+        $this->db->group_by('rp.city');        
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();
+        $jobCity = $query->result_array();
+        return $jobCity;
+    }
+
 }

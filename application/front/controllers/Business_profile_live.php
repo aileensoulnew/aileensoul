@@ -14,8 +14,7 @@ class Business_profile_live extends MY_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('user_post_model');
-        $this->load->model('data_model');
-        $this->load->model('job_model');
+        $this->load->model('data_model');        
         $this->load->model('business_model');
         $this->lang->load('message', 'english');
         $this->load->helper('smiley');
@@ -280,15 +279,15 @@ class Business_profile_live extends MY_Controller {
             $this->load->view('404', $this->data);
         } else {
             if ($this->session->userdata('aileenuser')){ // && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
-                $this->load->view('business_profile_live/business_profile_manage_post', $this->data);
+                $this->load->view('business_profile_live/business_dashboard', $this->data);
             } else {
                 $page = 1;
                 $limit = 20;
-                $this->data['top_city'] = $this->job_model->get_job_city($page,$limit);  
+                $this->data['top_city'] = $this->business_model->get_job_city($page,$limit);  
                 include ('business_profile_include.php');
                 $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
                 $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
-                $this->load->view('business_profile_live/business_dashboard', $this->data);
+                $this->load->view('business_profile_live/business_dashboard_no_login', $this->data);
                 //No login
             }
         }
@@ -1027,29 +1026,29 @@ class Business_profile_live extends MY_Controller {
                             <div class = "else_post_d">
                                 <div class = "post-design-product">
                                     <a class = "post_dot" href = "' . base_url('company/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
-<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
-<span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">
-' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
-</span> </div></div>
-</li>';
+        <p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
+        <span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">
+        ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
+        </span> </div></div>
+        </li>';
         } else {
             $return_html .= '<li>
                             <div class = "post-design-product">
                                 <a class = "post_dot" href = "' . base_url('company/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
-' . ucfirst(strtolower($post_company_name)) . '</a>
-                    <span role = "presentation" aria-hidden = "true"> · </span>
-<div class = "datespan"> <span class = "ctre_date" >
-' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
+        ' . ucfirst(strtolower($post_company_name)) . '</a>
+                            <span role = "presentation" aria-hidden = "true"> · </span>
+        <div class = "datespan"> <span class = "ctre_date" >
+        ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 
-</span></div>
+        </span></div>
 
-</div>
-</li>';
+        </div>
+        </li>';
         }
 
         $return_html .= '<li>
-<div class = "post-design-product">
-<a class = "buuis_desc_a" href = "javascript:void(0);" title = "Category">';
+        <div class = "post-design-product">
+        <a class = "buuis_desc_a" href = "javascript:void(0);" title = "Category">';
         if ($post_industriyal) {
             $return_html .= ucfirst(strtolower($post_category));
         } else {
@@ -1057,14 +1056,14 @@ class Business_profile_live extends MY_Controller {
         }
 
         $return_html .= '</a>
-</div>
-</li>
+        </div>
+        </li>
 
-<li>
-</li>
-</ul>
-</div>
-<div class = "dropdown1">';
+        <li>
+        </li>
+        </ul>
+        </div>
+        <div class = "dropdown1">';
         if ($id == 'manage') {
             $return_html .= '<a onClick = "myFunction1(' . $post_business_profile_post_id . ')" class = "dropbtn_common  dropbtn1 fa fa-ellipsis-v"></a>';
         } else {
@@ -1077,53 +1076,53 @@ class Business_profile_live extends MY_Controller {
             if ($userid == $post_posted_user_id) {
 
                 $return_html .= '<a onclick = "user_postdelete(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>
-<a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
-<i class = "fa fa-pencil-square-o" aria-hidden = "true">
-</i>Edit
-</a>';
+            <i class = "fa fa-trash-o" aria-hidden = "true">
+            </i> Delete Post
+            </a>
+            <a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
+            <i class = "fa fa-pencil-square-o" aria-hidden = "true">
+            </i>Edit
+            </a>';
             } else {
 
                 $return_html .= '<a onclick = "user_postdelete(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>';
+            <i class = "fa fa-trash-o" aria-hidden = "true">
+            </i> Delete Post
+            </a>';
             }
         } else {
             if ($userid == $post_user_id) {
                 $return_html .= '<a onclick = "user_postdelete(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>
-<a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
-<i class = "fa fa-pencil-square-o" aria-hidden = "true">
-</i>Edit
-</a>';
+            <i class = "fa fa-trash-o" aria-hidden = "true">
+            </i> Delete Post
+            </a>
+            <a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
+            <i class = "fa fa-pencil-square-o" aria-hidden = "true">
+            </i>Edit
+            </a>';
             } else {
 
                 $return_html .= '<a onclick = "user_postdeleteparticular(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>';
+            <i class = "fa fa-trash-o" aria-hidden = "true">
+            </i> Delete Post
+            </a>';
             }
         }
 
         $return_html .= '</div>
-</div>
-<div class = "post-design-desc">
-<div class = "ft-15 t_artd">
-<div id = "editpostdata' . $post_business_profile_post_id . '" style = "display:block;">
-<a>' . $this->common->make_links($post_product_name) . '</a>
-</div>
-<div id = "editpostbox' . $post_business_profile_post_id . '" style = "display:none;">
+        </div>
+        <div class = "post-design-desc">
+        <div class = "ft-15 t_artd">
+        <div id = "editpostdata' . $post_business_profile_post_id . '" style = "display:block;">
+        <a>' . $this->common->make_links($post_product_name) . '</a>
+        </div>
+        <div id = "editpostbox' . $post_business_profile_post_id . '" style = "display:none;">
 
 
-<input type = "text" class="productpostname" id = "editpostname' . $post_business_profile_post_id . '" name = "editpostname" placeholder = "Product Name" value = "' . $post_product_name . '" tabindex="' . $post_business_profile_post_id . '" onKeyDown = check_lengthedit(' . $post_business_profile_post_id . ');
-onKeyup = check_lengthedit(' . $post_business_profile_post_id . ');
-onblur = check_lengthedit(' . $post_business_profile_post_id . ');
->';
+        <input type = "text" class="productpostname" id = "editpostname' . $post_business_profile_post_id . '" name = "editpostname" placeholder = "Product Name" value = "' . $post_product_name . '" tabindex="' . $post_business_profile_post_id . '" onKeyDown = check_lengthedit(' . $post_business_profile_post_id . ');
+        onKeyup = check_lengthedit(' . $post_business_profile_post_id . ');
+        onblur = check_lengthedit(' . $post_business_profile_post_id . ');
+        >';
 
         if ($post_product_name) {
             $counter = $post_product_name;
@@ -1135,8 +1134,8 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
         }
         $return_html .= '</div>
 
-</div>
-<div id = "khyati' . $post_business_profile_post_id . '" style = "display:block;">';
+        </div>
+        <div id = "khyati' . $post_business_profile_post_id . '" style = "display:block;">';
 
         $small = substr($post_product_description, 0, 180);
         $return_html .= nl2br($this->common->make_links($small));
@@ -1145,20 +1144,20 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
         }
 
         $return_html .= '</div>
-<div id = "khyatii' . $post_business_profile_post_id . '" style = "display:none;">
-' . $post_product_description . '</div>
-<div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
-<div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" class = "textbuis editable_text margin_btm" name = "editpostdesc" placeholder = "Description" tabindex="' . ($post_business_profile_post_id + 1) . '" onpaste = "OnPaste_StripFormatting(this, event);" onfocus="cursorpointer(' . $post_business_profile_post_id . ')">' . $post_product_description . '</div>
-</div>
-<div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
-<div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" placeholder = "Product Description" class = "textbuis  editable_text" name = "editpostdesc" onpaste = "OnPaste_StripFormatting(this, event);">' . $post_product_description . '</div>
-</div>
-<button class = "fr" id = "editpostsubmit' . $post_business_profile_post_id . '" style = "display:none;margin: 5px 7px; border-radius: 3px;" onClick = "edit_postinsert(' . $post_business_profile_post_id . ')">Save
-</button>
-</div>
-</div>
-<div class = "post-design-mid col-md-12 padding_adust" >
-<div>';
+        <div id = "khyatii' . $post_business_profile_post_id . '" style = "display:none;">
+        ' . $post_product_description . '</div>
+        <div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
+        <div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" class = "textbuis editable_text margin_btm" name = "editpostdesc" placeholder = "Description" tabindex="' . ($post_business_profile_post_id + 1) . '" onpaste = "OnPaste_StripFormatting(this, event);" onfocus="cursorpointer(' . $post_business_profile_post_id . ')">' . $post_product_description . '</div>
+        </div>
+        <div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
+        <div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" placeholder = "Product Description" class = "textbuis  editable_text" name = "editpostdesc" onpaste = "OnPaste_StripFormatting(this, event);">' . $post_product_description . '</div>
+        </div>
+        <button class = "fr" id = "editpostsubmit' . $post_business_profile_post_id . '" style = "display:none;margin: 5px 7px; border-radius: 3px;" onClick = "edit_postinsert(' . $post_business_profile_post_id . ')">Save
+        </button>
+        </div>
+        </div>
+        <div class = "post-design-mid col-md-12 padding_adust" >
+        <div>';
 
         $contition_array = array('post_id' => $post_business_profile_post_id, 'is_deleted' => '1', 'insert_profile' => '2');
         $businessmultiimage = $this->common->select_data_by_condition('post_files', $contition_array, $data = 'file_name,post_files_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1166,7 +1165,7 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
         if (count($businessmultiimage) == 1) {
 
             $allowed = array('jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg');
-//            $allowed = VALID_IMAGE;
+           // $allowed = VALID_IMAGE;
             $allowespdf = array('pdf');
             $allowesvideo = array('mp4', 'webm', 'qt', 'mov', 'MP4');
             $allowesaudio = array('mp3');
@@ -1177,17 +1176,17 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
                 $return_html .= '<div class = "one-image">';
 
                 $return_html .= '<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
-</a>
-</div>';
+        <img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
+        </a>
+        </div>';
             } elseif (in_array($ext, $allowespdf)) {
 
                 $return_html .= '<div>
-<a title = "click to open" href = "' . base_url('business-profile/pdf-view/' . $post_business_profile_post_id) . '" target="_blank"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg?ver=' . time()) . '" alt="PDF.jpg">
-</div>
-</a>
-</div>';
+        <a title = "click to open" href = "' . base_url('business-profile/pdf-view/' . $post_business_profile_post_id) . '" target="_blank"><div class = "pdf_img">
+            <img src="' . base_url('assets/images/PDF.jpg?ver=' . time()) . '" alt="PDF.jpg">
+        </div>
+        </a>
+        </div>';
             } elseif (in_array($ext, $allowesvideo)) {
                 $post_poster = $businessmultiimage[0]['file_name'];
                 $post_poster1 = explode('.', $post_poster);
@@ -1222,57 +1221,57 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
             } elseif (in_array($ext, $allowesaudio)) {
 
                 $return_html .= '<div class = "audio_main_div">
-<div class = "audio_img">
-<img src = "' . base_url('assets/images/music-icon.png?ver=' . time()) . '" alt="music-icon.png">
-</div>
-<div class = "audio_source">
-<audio id = "audio_player" width = "100%" height = "100" controls>
-<source src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" type = "audio/mp3">
-Your browser does not support the audio tag.
-</audio>
-</div>
-<div class = "audio_mp3" id = "' . "postname" . $post_business_profile_post_id . '">
-<p title = "' . $post_product_name . '">' . $post_product_name . '</p>
-</div>
-</div>';
+        <div class = "audio_img">
+        <img src = "' . base_url('assets/images/music-icon.png?ver=' . time()) . '" alt="music-icon.png">
+        </div>
+        <div class = "audio_source">
+        <audio id = "audio_player" width = "100%" height = "100" controls>
+        <source src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" type = "audio/mp3">
+        Your browser does not support the audio tag.
+        </audio>
+        </div>
+        <div class = "audio_mp3" id = "' . "postname" . $post_business_profile_post_id . '">
+        <p title = "' . $post_product_name . '">' . $post_product_name . '</p>
+        </div>
+        </div>';
             }
         } elseif (count($businessmultiimage) == 2) {
 
             foreach ($businessmultiimage as $multiimage) {
 
                 $return_html .= '<div class = "two-images">
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img class = "two-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
-</a>
-</div>';
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img class = "two-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
+            </a>
+            </div>';
             }
         } elseif (count($businessmultiimage) == 3) {
 
             $return_html .= '<div class = "three-image-top" >
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img class = "three-columns" src = "' . BUS_POST_RESIZE4_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '" alt="' . $businessmultiimage[0]['file_name'] . '">
-</a>
-</div>
-<div class = "three-image" >
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img class = "three-columns" src = "' . BUS_POST_RESIZE4_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '" alt="' . $businessmultiimage[0]['file_name'] . '">
+            </a>
+            </div>
+            <div class = "three-image" >
 
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[1]['file_name'] . '" alt="' . $businessmultiimage[1]['file_name'] . '">
-</a>
-</div>
-<div class = "three-image" >
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[2]['file_name'] . '" alt="' . $businessmultiimage[2]['file_name'] . '">
-</a>
-</div>';
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[1]['file_name'] . '" alt="' . $businessmultiimage[1]['file_name'] . '">
+            </a>
+            </div>
+            <div class = "three-image" >
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[2]['file_name'] . '" alt="' . $businessmultiimage[2]['file_name'] . '">
+            </a>
+            </div>';
         } elseif (count($businessmultiimage) == 4) {
 
             foreach ($businessmultiimage as $multiimage) {
 
                 $return_html .= '<div class = "four-image">
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img class = "breakpoint" src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
-</a>
-</div>';
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img class = "breakpoint" src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
+            </a>
+            </div>';
             }
         } elseif (count($businessmultiimage) > 4) {
 
@@ -1280,10 +1279,10 @@ Your browser does not support the audio tag.
             foreach ($businessmultiimage as $multiimage) {
 
                 $return_html .= '<div class = "four-image">
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '?ver=' . time() . '" alt="' . $multiimage['file_name'] . '">
-</a>
-</div>';
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '?ver=' . time() . '" alt="' . $multiimage['file_name'] . '">
+            </a>
+            </div>';
 
                 $i++;
                 if ($i == 3)
@@ -1291,28 +1290,28 @@ Your browser does not support the audio tag.
             }
 
             $return_html .= '<div class = "four-image">
-<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $businessmultiimage[3]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[3]['file_name'] . '">
-</a>
-<a class = "text-center" href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<div class = "more-image" >
-<span>View All (+
-' . (count($businessmultiimage) - 4) . ')</span>
+            <a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $businessmultiimage[3]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[3]['file_name'] . '">
+            </a>
+            <a class = "text-center" href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
+            <div class = "more-image" >
+            <span>View All (+
+            ' . (count($businessmultiimage) - 4) . ')</span>
 
-</div>
+            </div>
 
-</a>
-</div>';
+            </a>
+            </div>';
         }
         $return_html .= '<div>
-</div>
-</div>
-</div>
-<div class = "post-design-like-box col-md-12">
-<div class = "post-design-menu">
-<ul class = "col-md-6 col-sm-6 col-xs-6">
-<li class = "likepost' . $post_business_profile_post_id . '">
-<a id = "' . $post_business_profile_post_id . '" class = "ripple like_h_w" onClick = "post_like(this.id)">';
+            </div>
+            </div>
+            </div>
+            <div class = "post-design-like-box col-md-12">
+            <div class = "post-design-menu">
+            <ul class = "col-md-6 col-sm-6 col-xs-6">
+            <li class = "likepost' . $post_business_profile_post_id . '">
+            <a id = "' . $post_business_profile_post_id . '" class = "ripple like_h_w" onClick = "post_like(this.id)">';
 
         $likeuser = $post_business_like_user;
         $likeuserarray = explode(',', $post_business_like_user);
@@ -1326,18 +1325,18 @@ Your browser does not support the audio tag.
             $return_html .= $post_business_likes_count;
         }
         $return_html .= '</span>
-</a>
-</li>
-<li id = "insertcount' . $post_business_profile_post_id . '" style = "visibility:show">';
+        </a>
+        </li>
+        <li id = "insertcount' . $post_business_profile_post_id . '" style = "visibility:show">';
         $commnetcount = $this->business_model->getBusinessPostComment($post_business_profile_post_id);
 
         $return_html .= '<a onClick = "commentall(this.id)" id = "' . $post_business_profile_post_id . '" class = "ripple like_h_w">
-<i class = "fa fa-comment-o" aria-hidden = "true">
-</i>
-</a>
-</li>
-</ul>
-<ul class = "col-md-6 col-sm-6 col-xs-6 like_cmnt_count">';
+        <i class = "fa fa-comment-o" aria-hidden = "true">
+        </i>
+        </a>
+        </li>
+        </ul>
+        <ul class = "col-md-6 col-sm-6 col-xs-6 like_cmnt_count">';
 
         $contition_array = array('post_id' => $row['business_profile_post_id'], 'insert_profile' => '2');
         $postformat = $this->common->select_data_by_condition('post_files', $contition_array, $data = 'post_format', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1359,8 +1358,8 @@ Your browser does not support the audio tag.
         }
 
         $return_html .= '<li>
-<div class = "like_count_ext">
-<span class = "comment_count' . $post_business_profile_post_id . '" >';
+        <div class = "like_count_ext">
+        <span class = "comment_count' . $post_business_profile_post_id . '" >';
 
         if (count($commnetcount) > 0) {
             $return_html .= count($commnetcount);
@@ -1368,12 +1367,12 @@ Your browser does not support the audio tag.
         }
         $return_html .= '</span>
 
-</div>
-</li>
+        </div>
+        </li>
 
-<li>
-<div class = "comnt_count_ext">
-<span class = "comment_like_count' . $post_business_profile_post_id . '">';
+        <li>
+        <div class = "comnt_count_ext">
+        <span class = "comment_like_count' . $post_business_profile_post_id . '">';
         if ($post_business_likes_count > 0) {
             $return_html .= $post_business_likes_count;
 
@@ -1381,10 +1380,10 @@ Your browser does not support the audio tag.
         }
         $return_html .= '</span>
 
-</div></li>
-</ul>
-</div>
-</div>';
+        </div></li>
+        </ul>
+        </div>
+        </div>';
 
         if ($post_business_likes_count > 0) {
 
@@ -1417,7 +1416,7 @@ Your browser does not support the audio tag.
                 $return_html .= "others";
             }
             $return_html .= '</a></div>
-</div>';
+        </div>';
         }
 
         $return_html .= '<div class = "likeusername' . $post_business_profile_post_id . '" id = "likeusername' . $post_business_profile_post_id . '" style = "display:none">';
@@ -1448,13 +1447,13 @@ Your browser does not support the audio tag.
             $return_html .= "others";
         }
         $return_html .= '</a></div>
-</div>
+        </div>
 
-<div class = "art-all-comment col-md-12">
-<div id = "fourcomment' . $post_business_profile_post_id . '" style = "display:none;">
-</div>
-<div id = "threecomment' . $post_business_profile_post_id . '" style = "display:block">
-<div class = "hidebottomborder insertcomment' . $post_business_profile_post_id . '">';
+        <div class = "art-all-comment col-md-12">
+        <div id = "fourcomment' . $post_business_profile_post_id . '" style = "display:none;">
+        </div>
+        <div id = "threecomment' . $post_business_profile_post_id . '" style = "display:block">
+        <div class = "hidebottomborder insertcomment' . $post_business_profile_post_id . '">';
 
         $businessprofiledata = $this->data['businessprofiledata'] = $this->business_model->getBusinessPostComment($post_business_profile_post_id, $sortby = 'business_profile_post_comment_id', $orderby = 'DESC', $limit = '1');
 
@@ -1464,7 +1463,7 @@ Your browser does not support the audio tag.
                 $slugname1 = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_slug;
 
                 $return_html .= '<div class = "all-comment-comment-box">
-<div class = "post-design-pro-comment-img">';
+            <div class = "post-design-pro-comment-img">';
                 $business_userimage = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_user_image;
 
                 if ($business_userimage) {
@@ -1491,14 +1490,14 @@ Your browser does not support the audio tag.
                     $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                 }
                 $return_html .= '</div>
-<div class = "comment-name"><a href="' . base_url() . 'company/' . $slugname1 . '">
-<b title = "' . $companyname . '">';
+            <div class = "comment-name"><a href="' . base_url() . 'company/' . $slugname1 . '">
+            <b title = "' . $companyname . '">';
                 $return_html .= $companyname;
                 $return_html .= '</br>';
 
                 $return_html .= '</b></a>
-</div>
-<div class = "comment-details" id = "showcomment' . $rowdata['business_profile_post_comment_id'] . '">';
+            </div>
+            <div class = "comment-details" id = "showcomment' . $rowdata['business_profile_post_comment_id'] . '">';
 
                 $return_html .= '<div id = "lessmore' . $rowdata['business_profile_post_comment_id'] . '" style = "display:block;">';
                 $small = substr($rowdata['comments'], 0, 180);
@@ -1513,15 +1512,15 @@ Your browser does not support the audio tag.
                 $return_html .= nl2br(htmlspecialchars_decode(htmlentities($new_product_comment, ENT_QUOTES, 'UTF-8')));
                 $return_html .= '</div>';
                 $return_html .= '</div>
-<div class = "edit-comment-box">
-<div class = "inputtype-edit-comment">
-<div contenteditable = "true" class = "editable_text editav_2" name = "' . $rowdata['business_profile_post_comment_id'] . '" id = "editcomment' . $rowdata['business_profile_post_comment_id'] . '" placeholder = "Enter Your Comment " value = "" onkeyup = "commentedit(' . $rowdata['business_profile_post_comment_id'] . ')" onpaste = "OnPaste_StripFormatting(this, event);">' . $rowdata['comments'] . '</div>
-<span class = "comment-edit-button"><button id = "editsubmit' . $rowdata['business_profile_post_comment_id'] . '" style = "display:none" onClick = "edit_comment(' . $rowdata['business_profile_post_comment_id'] . ')">Save</button></span>
-</div>
-</div>
-<div class = "art-comment-menu-design">
-<div class = "comment-details-menu" id = "likecomment1' . $rowdata['business_profile_post_comment_id'] . '">
-<a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_like1(this.id)">';
+            <div class = "edit-comment-box">
+            <div class = "inputtype-edit-comment">
+            <div contenteditable = "true" class = "editable_text editav_2" name = "' . $rowdata['business_profile_post_comment_id'] . '" id = "editcomment' . $rowdata['business_profile_post_comment_id'] . '" placeholder = "Enter Your Comment " value = "" onkeyup = "commentedit(' . $rowdata['business_profile_post_comment_id'] . ')" onpaste = "OnPaste_StripFormatting(this, event);">' . $rowdata['comments'] . '</div>
+            <span class = "comment-edit-button"><button id = "editsubmit' . $rowdata['business_profile_post_comment_id'] . '" style = "display:none" onClick = "edit_comment(' . $rowdata['business_profile_post_comment_id'] . ')">Save</button></span>
+            </div>
+            </div>
+            <div class = "art-comment-menu-design">
+            <div class = "comment-details-menu" id = "likecomment1' . $rowdata['business_profile_post_comment_id'] . '">
+            <a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_like1(this.id)">';
 
                 $businesscommentlike = $this->data['businesscommentlike'] = $commnetcount = $this->business_model->getBusinessPostComment($rowdata['business_profile_post_comment_id']);
                 $likeuserarray = explode(',', $businesscommentlike[0]['business_comment_like_user']);
@@ -1530,7 +1529,7 @@ Your browser does not support the audio tag.
                     $return_html .= '<i class = "fa fa-thumbs-up" style = "color: #999;" aria-hidden = "true"></i>';
                 } else {
                     $return_html .= '<i class = "fa fa-thumbs-up main_color" aria-hidden = "true">
-</i>';
+            </i>';
                 }
                 $return_html .= '<span>';
 
@@ -1539,57 +1538,57 @@ Your browser does not support the audio tag.
                 }
 
                 $return_html .= '</span>
-</a>
-</div>';
+            </a>
+            </div>';
                 $userid = $this->session->userdata('aileenuser');
                 if ($rowdata['user_id'] == $userid) {
 
                     $return_html .= '<span role = "presentation" aria-hidden = "true"> ·
-</span>
-<div class = "comment-details-menu">
-<div id = "editcommentbox' . $rowdata['business_profile_post_comment_id'] . '" style = "display:block;">
-<a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_editbox(this.id)" class = "editbox">Edit
-</a>
-</div>
-<div id = "editcancle' . $rowdata['business_profile_post_comment_id'] . '" style = "display:none;">
-<a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_editcancle(this.id)">Cancel
-</a>
-</div>
-</div>';
+            </span>
+            <div class = "comment-details-menu">
+            <div id = "editcommentbox' . $rowdata['business_profile_post_comment_id'] . '" style = "display:block;">
+            <a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_editbox(this.id)" class = "editbox">Edit
+            </a>
+            </div>
+            <div id = "editcancle' . $rowdata['business_profile_post_comment_id'] . '" style = "display:none;">
+            <a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_editcancle(this.id)">Cancel
+            </a>
+            </div>
+            </div>';
                 }
                 $userid = $this->session->userdata('aileenuser');
                 $business_userid = $this->db->get_where('business_profile_post', array('business_profile_post_id' => $rowdata['business_profile_post_id'], 'status' => '1'))->row()->user_id;
                 if ($rowdata['user_id'] == $userid || $business_userid == $userid) {
 
                     $return_html .= '<span role = "presentation" aria-hidden = "true"> ·
-</span>
-<div class = "comment-details-menu">
-<input type = "hidden" name = "post_delete" id = "post_delete' . $rowdata['business_profile_post_comment_id'] . '" value = "' . $rowdata['business_profile_post_id'] . '">
-<a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_delete(this.id)"> Delete
-<span class = "insertcomment' . $rowdata['business_profile_post_comment_id'] . '">
-</span>
-</a>
-</div>';
+            </span>
+            <div class = "comment-details-menu">
+            <input type = "hidden" name = "post_delete" id = "post_delete' . $rowdata['business_profile_post_comment_id'] . '" value = "' . $rowdata['business_profile_post_id'] . '">
+            <a id = "' . $rowdata['business_profile_post_comment_id'] . '" onClick = "comment_delete(this.id)"> Delete
+            <span class = "insertcomment' . $rowdata['business_profile_post_comment_id'] . '">
+            </span>
+            </a>
+            </div>';
                 }
                 $return_html .= '<span role = "presentation" aria-hidden = "true"> ·
-</span>
-<div class = "comment-details-menu">
-<p>';
+            </span>
+            <div class = "comment-details-menu">
+            <p>';
 
                 $return_html .= $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($rowdata['created_date'])));
                 $return_html .= '</br>';
 
                 $return_html .= '</p>
-</div>
-</div>
-</div>';
+        </div>
+        </div>
+        </div>';
             }
         }
         $return_html .= '</div>
-</div>
-</div>
-<div class = "post-design-commnet-box col-md-12">
-<div class = "post-design-proo-img hidden-mob">';
+        </div>
+        </div>
+        <div class = "post-design-commnet-box col-md-12">
+        <div class = "post-design-proo-img hidden-mob">';
 
         $userid = $this->session->userdata('aileenuser');
         $business_userimage = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_user_image;
@@ -1614,22 +1613,22 @@ Your browser does not support the audio tag.
         }
         $return_html .= '</div>
 
-<div id = "content" class = "col-md-12  inputtype-comment cmy_2" >
-<div contenteditable = "true" class = "edt_2 editable_text" name = "' . $post_business_profile_post_id . '" id = "post_comment' . $post_business_profile_post_id . '" placeholder = "Add a Comment ..." onClick = "entercomment(' . $post_business_profile_post_id . ')" onpaste = "OnPaste_StripFormatting(this, event);"></div>
-<div class="mob-comment">       
+                        <div id = "content" class = "col-md-12  inputtype-comment cmy_2" >
+                        <div contenteditable = "true" class = "edt_2 editable_text" name = "' . $post_business_profile_post_id . '" id = "post_comment' . $post_business_profile_post_id . '" placeholder = "Add a Comment ..." onClick = "entercomment(' . $post_business_profile_post_id . ')" onpaste = "OnPaste_StripFormatting(this, event);"></div>
+                        <div class="mob-comment">       
                             <button id="' . $post_business_profile_post_id . '" onClick="insert_comment(this.id)"><img src="' . base_url('assets/img/send.png') . '?ver=' . time() . '" alt="send.png">
                             </button>
                         </div>
-</div>
-' . form_error('post_comment') . '
-<div class = "comment-edit-butn hidden-mob">
-<button id = "' . $post_business_profile_post_id . '" onClick = "insert_comment(this.id)">Comment
-</button>
-</div>
+        </div>
+        ' . form_error('post_comment') . '
+        <div class = "comment-edit-butn hidden-mob">
+        <button id = "' . $post_business_profile_post_id . '" onClick = "insert_comment(this.id)">Comment
+        </button>
+        </div>
 
-</div>
-</div>
-</div></div>';
+        </div>
+        </div>
+        </div></div>';
 
         echo $return_html;
     }
@@ -2081,117 +2080,7 @@ Your browser does not support the audio tag.
             $this->load->view('404', $this->data);
         } else {
             if ($this->session->userdata('aileenuser')) {
-                $this->load->view('business_profile_live/business_resume_new', $this->data);
-            } else {                
-                redirect(base_url("company/".$this->data['slugid']),"refresh");
-                // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
-                // $this->load->view('business_profile/business_details', $this->data);
-            }
-        }
-    }
-
-    public function business_resume_new($id = "") {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $this->data['slugid'] = $id;
-        $userid = $this->session->userdata('aileenuser');
-        if ($userid) {
-            $this->business_profile_active_check();
-            $this->is_business_profile_register();
-        }
-        if (!$this->session->userdata('aileenuser')) {
-            include ('business_profile_include.php');
-        }
-        if ($id != '') {
-            $id = $this->business_model->removelocationfromslug($id);
-            $contition_array = array('business_profile.business_slug' => $id, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
-            $join_str[0]['table'] = 'countries';
-            $join_str[0]['join_table_id'] = 'countries.country_id';
-            $join_str[0]['from_table_id'] = 'business_profile.country';
-            $join_str[0]['join_type'] = '';
-            $join_str[1]['table'] = 'states';
-            $join_str[1]['join_table_id'] = 'states.state_id';
-            $join_str[1]['from_table_id'] = 'business_profile.state';
-            $join_str[1]['join_type'] = '';
-            $join_str[2]['table'] = 'cities';
-            $join_str[2]['join_table_id'] = 'cities.city_id';
-            $join_str[2]['from_table_id'] = 'business_profile.city';
-            $join_str[2]['join_type'] = 'LEFT';
-            $join_str[3]['table'] = 'business_type';
-            $join_str[3]['join_table_id'] = 'business_type.type_id';
-            $join_str[3]['from_table_id'] = 'business_profile.business_type';
-            $join_str[3]['join_type'] = 'LEFT';
-            $join_str[4]['table'] = 'industry_type';
-            $join_str[4]['join_table_id'] = 'industry_type.industry_id';
-            $join_str[4]['from_table_id'] = 'business_profile.industriyal';
-            $join_str[4]['join_type'] = 'LEFT';
-            $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-        }
-        // else {
-        //     $userid = $this->session->userdata('aileenuser');
-        //     $contition_array = array('business_profile.user_id' => $userid, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
-        //     $join_str[0]['table'] = 'countries';
-        //     $join_str[0]['join_table_id'] = 'countries.country_id';
-        //     $join_str[0]['from_table_id'] = 'business_profile.country';
-        //     $join_str[0]['join_type'] = '';
-        //     $join_str[1]['table'] = 'states';
-        //     $join_str[1]['join_table_id'] = 'states.state_id';
-        //     $join_str[1]['from_table_id'] = 'business_profile.state';
-        //     $join_str[1]['join_type'] = '';
-        //     $join_str[2]['table'] = 'cities';
-        //     $join_str[2]['join_table_id'] = 'cities.city_id';
-        //     $join_str[2]['from_table_id'] = 'business_profile.city';
-        //     $join_str[2]['join_type'] = '';
-        //     $join_str[3]['table'] = 'business_type';
-        //     $join_str[3]['join_table_id'] = 'business_type.type_id';
-        //     $join_str[3]['from_table_id'] = 'business_profile.business_type';
-        //     $join_str[3]['join_type'] = 'LEFT';
-        //     $join_str[4]['table'] = 'industry_type';
-        //     $join_str[4]['join_table_id'] = 'industry_type.industry_id';
-        //     $join_str[4]['from_table_id'] = 'business_profile.industriyal';
-        //     $join_str[4]['join_type'] = 'LEFT';
-        //     $business_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile.company_name,countries.country_name,states.state_name,cities.city_name,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.contact_website,business_type.business_name,industry_type.industry_name,business_profile.details,business_profile.other_business_type,business_profile.other_industrial', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-        // }
-
-
-        $this->data['business_data']['company_name'] = $business_data[0]['company_name'] == '' ? PROFILENA : $business_data[0]['company_name'];
-        $this->data['business_data']['country_name'] = $business_data[0]['country_name'] == '' ? PROFILENA : $business_data[0]['country_name'];
-        $this->data['business_data']['state_name'] = $business_data[0]['state_name'] == '' ? PROFILENA : $business_data[0]['state_name'];
-        $this->data['business_data']['city_name'] = $business_data[0]['city_name'] == '' ? PROFILENA : $business_data[0]['city_name'];
-        $this->data['business_data']['pincode'] = $business_data[0]['pincode'] == '' ? PROFILENA : $business_data[0]['pincode'];
-        $this->data['business_data']['address'] = $business_data[0]['address'] == '' ? PROFILENA : $business_data[0]['address'];
-        $this->data['business_data']['contact_person'] = $business_data[0]['contact_person'] == '' ? PROFILENA : $business_data[0]['contact_person'];
-        $this->data['business_data']['contact_mobile'] = $business_data[0]['contact_mobile'] == '0' ? PROFILENA : $business_data[0]['contact_mobile'];
-        $this->data['business_data']['contact_email'] = $business_data[0]['contact_email'] == '' ? PROFILENA : $business_data[0]['contact_email'];
-        $this->data['business_data']['contact_website'] = $business_data[0]['contact_website'] == '' ? PROFILENA : $business_data[0]['contact_website'];
-        $this->data['business_data']['business_type'] = $business_data[0]['business_name'] == '' ? PROFILENA : $business_data[0]['business_name'];
-        if ($this->data['business_data']['business_type'] == '--') {
-            $this->data['business_data']['business_type'] = $business_data[0]['other_business_type'];
-        }
-        $this->data['business_data']['industry_name'] = $business_data[0]['industry_name'] == '' ? PROFILENA : $business_data[0]['industry_name'];
-        if ($this->data['business_data']['industry_name'] == '--') {
-            $this->data['business_data']['industry_name'] = $business_data[0]['other_industrial'];
-        }
-        $this->data['business_data']['details'] = $business_data[0]['details'] == '' ? PROFILENA : $business_data[0]['details'];
-
-        if ($id == $slug_data[0]['business_slug'] || $id == '') {
-            $contition_array = array('user_id' => $userid, 'is_delete' => '0');
-            $this->data['busimagedata'] = $this->common->select_data_by_condition('bus_image', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        } else {
-            $contition_array = array('user_id' => $this->data['business_common_data'][0]['user_id'], 'is_delete' => '0');
-            $this->data['busimagedata'] = $this->common->select_data_by_condition('bus_image', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        }
-        $this->data['company_name'] = $company_name = $this->get_company_name($id);
-
-        $this->data['title'] = ucwords($company_name) . ' | Details' . TITLEPOSTFIX;
-
-        if (count($business_data) == 0) {
-            // $this->load->view('business_profile/notavalible');
-            // redirect(base_url("404"),"refresh");
-            $this->data['title'] = "404".TITLEPOSTFIX;
-            $this->load->view('404', $this->data);
-        } else {
-            if ($this->session->userdata('aileenuser')) {
-                $this->load->view('business_profile_live/business_resume_new', $this->data);
+                $this->load->view('business_profile_live/business_detail', $this->data);
             } else {                
                 redirect(base_url("company/".$this->data['slugid']),"refresh");
                 // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
@@ -3637,13 +3526,13 @@ Your browser does not support the audio tag.
             foreach ($userlist as $user) {
 
                 $return_html .= '<div class="job-contact-frnd ">
-                                                    <div class="profile-job-post-detail clearfix">
-                                                        <div class="profile-job-post-title-inside clearfix">
-                                                            <div class="profile-job-post-location-name">
-                                                                <div class="user_lst">
-                                                                    <ul>
-                                                                        <li class="fl">
-                                                                            <div class="follow-img">';
+                                <div class="profile-job-post-detail clearfix">
+                                    <div class="profile-job-post-title-inside clearfix">
+                                        <div class="profile-job-post-location-name">
+                                            <div class="user_lst">
+                                                <ul>
+                                                    <li class="fl">
+                                                        <div class="follow-img">';
                 $followerimage = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->business_user_image;
                 $followername = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->company_name;
                 $followerslug = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->business_slug;
@@ -3673,12 +3562,12 @@ Your browser does not support the audio tag.
                                                                                     </a>';
                 }
                 $return_html .= '</div>
-                                                                        </li>
-                                                                        <li class="folle_text">
-                                                                            <div class="">
-                                                                                <div class="follow-li-text " style="padding: 0;">
-                                                                                    <a href="' . base_url('company/' . $followerslug) . '">' . ucfirst(strtolower($followername)) . '</a></div>
-                                                                                <div>';
+                                </li>
+                                <li class="folle_text">
+                                    <div class="">
+                                        <div class="follow-li-text " style="padding: 0;">
+                                            <a href="' . base_url('company/' . $followerslug) . '">' . ucfirst(strtolower($followername)) . '</a></div>
+                                        <div>';
                 $categoryid = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from'], 'status' => '1'))->row()->industriyal;
                 $category = $this->db->get_where('industry_type', array('industry_id' => $categoryid, 'status' => '1'))->row()->industry_name;
                 $othercategory = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from'], 'status' => '1'))->row()->other_industrial;
@@ -3691,9 +3580,9 @@ Your browser does not support the audio tag.
                 }
 
                 $return_html .= '</a>
-                                                                                </div>
-                                                                        </li>
-                                                                        <li class="fr" id ="frfollow' . $user['follow_from'] . '">';
+                                </div>
+                        </li>
+                        <li class="fr" id ="frfollow' . $user['follow_from'] . '">';
                 $contition_array = array('user_id' => $userid, 'status' => '1');
                 $busdatauser = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -3704,32 +3593,32 @@ Your browser does not support the audio tag.
                 if (($status_list[0]['follow_status'] == 0 || $status_list[0]['follow_status'] == ' ' ) && $user['follow_from'] != $busdatauser[0]['business_profile_id']) {
 
                     $return_html .= '<div class="user_btn follow_btn_' . $user['follow_from'] . '" id= "followdiv">
-                                                                                    <button id="follow' . $user['follow_from'] . '" onClick="followuser_list_two(' . $user['follow_from'] . ')"><span>Follow</span></button>
-                                                                                </div>';
+                                <button id="follow' . $user['follow_from'] . '" onClick="followuser_list_two(' . $user['follow_from'] . ')"><span>Follow</span></button>
+                                </div>';
                 } else if ($user['follow_from'] == $busdatauser[0]['business_profile_id']) {
                     
                 } else {
                     $return_html .= '<div class="user_btn follow_btn_' . $user['follow_from'] . '" id= "unfollowdiv">
-                                                                                    <button class="bg_following" id="unfollow' . $user['follow_from'] . '" onClick="unfollowuser_list_two(' . $user['follow_from'] . ')"><span>Following</span></button>
-                                                                                </div>';
+                                        <button class="bg_following" id="unfollow' . $user['follow_from'] . '" onClick="unfollowuser_list_two(' . $user['follow_from'] . ')"><span>Following</span></button>
+                                    </div>';
                 }
                 $return_html .= '</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>';
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
             }
         } else {
             $return_html .= '<div class="art-img-nn" id= "art-blank">
-                                                <div class="art_no_post_img">
-                                                    <img src="' . base_url('assets/img/icon_no_follower.png?ver=' . time()) . '" alt="icon_no_follower.png">
-                                                </div>
-                                                <div class="art_no_post_text">
-                                                    No Followers Available.
-                                                </div>
-                                            </div>';
+                                <div class="art_no_post_img">
+                                    <img src="' . base_url('assets/img/icon_no_follower.png?ver=' . time()) . '" alt="icon_no_follower.png">
+                                </div>
+                                <div class="art_no_post_text">
+                                    No Followers Available.
+                                </div>
+                            </div>';
         }
 
         echo $return_html;
