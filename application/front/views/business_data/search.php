@@ -30,7 +30,6 @@
         <div id="main_page_load" style="display: block;">
         <?php 
             if($ismainregister == false){
-                // $this->load->view('business_live/login_header');
             }else if($isbusiness_register == true && !$isbusiness_deactive){
                 echo $business_header2;
             }else{

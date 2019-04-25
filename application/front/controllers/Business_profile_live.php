@@ -11654,22 +11654,22 @@ Your browser does not support the audio tag.
         $this->data['metadesc'] = "Grow your business network by listing your business at Aileensoul";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
-        $this->load->view('business_live/business_register', $this->data);
+        $this->load->view('business_data/business_register', $this->data);
     }
 
     public function business_register()
     {
-        $this->load->view('business_live/business_register_main', $this->data);
+        $this->load->view('business_data/business_register_main', $this->data);
     }
 
     public function business_basic_info()
     {
-        $this->load->view('business_live/business_basic_info', $this->data);   
+        $this->load->view('business_data/business_basic_info', $this->data);   
     }
 
     public function business_education_info()
     {        
-        $this->load->view('business_live/business_education_info', $this->data);   
+        $this->load->view('business_data/business_education_info', $this->data);   
     }
 
     public function business_create_profile()
@@ -11678,7 +11678,7 @@ Your browser does not support the audio tag.
         $this->data['user_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
         $contition_array = array('status' => '1');
         $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $this->load->view('business_live/business_create_profile', $this->data);
+        $this->load->view('business_data/business_create_profile', $this->data);
     }
 
     function save_user_links()

@@ -48,7 +48,7 @@ class Business_profile_registration_live extends MY_Controller {
         $businessdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         if ($businessdata) {
-            $this->load->view('business_profile_live/reactivate', $this->data);
+            $this->load->view('business_data/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
             $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
@@ -68,9 +68,9 @@ class Business_profile_registration_live extends MY_Controller {
             $this->data['profile_login'] = "live";
             }
             if(!$this->session->userdata('aileenuser')){
-                $this->load->view('business_profile_live/ng_business_registration_live', $this->data);
+                $this->load->view('business_data/ng_business_registration_live', $this->data);
             }else{
-                $this->load->view('business_profile_live/ng_business_registration', $this->data);
+                $this->load->view('business_data/ng_business_registration', $this->data);
             }
             
         }

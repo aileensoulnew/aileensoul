@@ -58,7 +58,7 @@ class Business_live extends MY_Controller {
        
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
         $this->data['title'] = "Grow Business Network and Get Your Business Listed".TITLEPOSTFIX;
         $this->data['metadesc'] = "Search for Real Estate, Fashion, Home appliance, and many more businesses at your near by locations from Aileensoul. Also, you can List your business Now. It's Free.";
         $this->data['business_profile_set'] = $this->business_profile_set;
@@ -66,7 +66,7 @@ class Business_live extends MY_Controller {
         $this->data['businessCategory'] = $this->business_model->businessCategory($limit);
         $this->data['businessLocation'] = $this->business_model->businessLocation($limit);
         $this->data['business_related_list'] = $this->business_model->business_related_blog_list();
-        $this->load->view('business_live/index', $this->data);
+        $this->load->view('business_data/index', $this->data);
     }
 
     public function category() {
@@ -113,9 +113,9 @@ class Business_live extends MY_Controller {
         $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->data['businessAllCategory'] = $this->business_model->businessAllCategory($page,$limit)['bus_cat'];
         $this->data['links'] = $this->pagination->create_links();
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
 
-        $this->load->view('business_live/category', $this->data);
+        $this->load->view('business_data/category', $this->data);
     }
 
     public function categoryBusinessList($category = '', $location = '',$sertype = "") {
@@ -134,7 +134,7 @@ class Business_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
         $this->data['category_id'] = "";
         $category_id = "";
         if($category != "")
@@ -172,7 +172,7 @@ class Business_live extends MY_Controller {
         $limit_cl = 5;
         $this->data['businessCategory'] = $this->business_model->businessCategory($limit_cl);
         $this->data['businessLocation'] = $this->business_model->businessLocation($limit_cl);
-        $this->data['business_left'] = $this->load->view('business_live/business_left', $this->data, TRUE);
+        $this->data['business_left'] = $this->load->view('business_data/business_left', $this->data, TRUE);
 
         $limit = 15;
         $config = array(); 
@@ -199,7 +199,7 @@ class Business_live extends MY_Controller {
         // print_r($this->data['businessList']);
         $this->data['links'] = $this->pagination->create_links();
 
-        $this->load->view('business_live/categoryBusinessList', $this->data);
+        $this->load->view('business_data/categoryBusinessList', $this->data);
     }
 
     public function business_search($searchquery = '') {
@@ -217,7 +217,7 @@ class Business_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Search - Business Profile | Aileensoul";
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
         $this->data['category_id'] = $category_id['industry_id'];
         $this->data['ismainregister'] = false;
@@ -257,7 +257,7 @@ class Business_live extends MY_Controller {
         $this->data['l'] = str_replace("+"," ",$this->data['l']);
 
         $this->data['business_profile_set'] = $this->business_profile_set;
-        $this->load->view('business_live/search', $this->data);
+        $this->load->view('business_data/search', $this->data);
     }
 
     public function businessCategory() {
@@ -377,8 +377,8 @@ class Business_live extends MY_Controller {
         $this->data['links'] = $this->pagination->create_links();
         $this->data['title'] = "Search Top Businesses by Location".TITLEPOSTFIX;
         $this->data['metadesc'] = "Find and get details of various business and services nearby your location on Aileensoul.com"; 
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->load->view('business_live/location', $this->data);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
+        $this->load->view('business_data/location', $this->data);
     }
 
     public function locationBusinessList($location = '') {
@@ -404,7 +404,7 @@ class Business_live extends MY_Controller {
         //$this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
         $this->data['title'] = "Businesses in ".$location_txt.": Get Details of Top Business".TITLEPOSTFIX;
         $this->data['metadesc'] = "View address and contact information of business established in ".$location_txt.". Register to connect and know more about business."; 
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
         $this->data['business_profile_set'] = $this->business_profile_set;
         $limit = 5;
         $this->data['businessCategory'] = $this->business_model->businessCategory($limit);
@@ -413,7 +413,7 @@ class Business_live extends MY_Controller {
         $this->data['industry_name'] = $industry_name = ($this->input->post('industry_name') ? $this->input->post('industry_name') : "");
         $this->data['city_name'] = $city_name = ($this->input->post('city_name') ? $this->input->post('city_name') : "");
 
-        $this->data['business_left'] = $this->load->view('business_live/business_left', $this->data, TRUE);
+        $this->data['business_left'] = $this->load->view('business_data/business_left', $this->data, TRUE);
         $limit = 15;
         $config = array(); 
         $config["base_url"] = $this->data["filter_url"] = base_url().$this->uri->segment(1);
@@ -438,7 +438,7 @@ class Business_live extends MY_Controller {
         $this->data['businessList'] = $businessListByLocation = $this->business_model->businessListByLocation($location_id,$page,$limit,$industry_name,$city_name);
         // print_r($this->data['businessList']);exit;
         $this->data['links'] = $this->pagination->create_links();
-        $this->load->view('business_live/categoryBusinessList', $this->data);
+        $this->load->view('business_data/categoryBusinessList', $this->data);
     }
 
     // Get Location list from city id
@@ -507,8 +507,8 @@ class Business_live extends MY_Controller {
         
         $this->data['title'] = "Search Top 20 Location-Wise Business by Category | Aileensoul";
         $this->data['metadesc'] = "View details of top 20 sector businesses nearby your location. Visit Aileensoul.com to know more."; 
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->load->view('business_live/business_by_business', $this->data);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
+        $this->load->view('business_data/business_by_business', $this->data);
     }
 
     public function view_more_business()
@@ -529,8 +529,8 @@ class Business_live extends MY_Controller {
         $this->data['title'] = "Categories - Business Profile | Aileensoul";
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->load->view('business_live/view_more_business', $this->data);
+        $this->data['search_banner'] = $this->load->view('business_data/search_banner', $this->data, TRUE);
+        $this->load->view('business_data/view_more_business', $this->data);
     }
 
     public function business_by_category_location_ajax()

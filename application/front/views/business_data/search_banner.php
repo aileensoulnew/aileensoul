@@ -3,7 +3,7 @@
 <div class="search-banner" ng-controller="searchBusinessController">
 	<?php  
 		if($ismainregister == false){
-		    $this->load->view('business_live/login_header');
+		    $this->load->view('business_data/login_header');
 		}
 	?>
 	<div class="container">

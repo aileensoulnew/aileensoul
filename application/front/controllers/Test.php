@@ -26,7 +26,7 @@ class Test extends MY_Controller {
 
     public function index() {
         $user_id = $this->session->userdata('user_id');
-        $this->load->view('test/amazon_add', $this->data);
+        // $this->load->view('test/amazon_add', $this->data);
     }
 
     public function testmail()

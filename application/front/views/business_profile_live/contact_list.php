@@ -28,7 +28,7 @@
             <?php //echo $dash_header_menu; ?>
             <?php 
                 if($ismainregister == false){
-                    $this->load->view('business_live/login_header');
+                    $this->load->view('business_data/login_header');
                 }else if($isbusiness_register == true && $isbusiness_deactive == false){
                     echo $business_header2;
                 }else{

@@ -28,8 +28,7 @@
         <?php //$this->load->view('page_loader'); ?>
         <div id="main_page_load">
             <?php 
-                if($ismainregister == false){
-                    // $this->load->view('business_live/login_header');
+                if($ismainregister == false){                    
                 }else if($isbusiness_register == true && $isbusiness_deactive == false){
                     echo $business_header2;
                 }else{

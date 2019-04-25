@@ -1579,7 +1579,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         <div class="total-rev" ng-if="review_data.length > '0' && review_count > '0'">
                                             <span class="total-rat">{{avarage_review}}</span>
                                             <span class="rating-star">
-                                                <input id="avarage_review" type="number" value="{{avarage_review}}">
+                                                <input id="avarage_review" type="number" ng-value="{{avarage_review}}">
                                             </span><span class="rev-count">{{review_count}} Review{{review_count > 1 ? 's' : ''}}</span>
                                         </div>
                                         <ul class="review-list">
@@ -1593,7 +1593,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <h4>{{review_list.first_name | wordFirstCase}} {{review_list.last_name | wordFirstCase}}</h4>
                                                     <div class="rating-star-cus">
                                                         <span class="rating-star">
-                                                            <input id="rating-{{$index}}" value="{{review_list.review_star}}" type="number" class="rating user-rating">
+                                                            <input id="rating-{{$index}}" ng-value="{{review_list.review_star}}" type="number" class="rating user-rating">
                                                         </span>
                                                     </div>
                                                     <div class="review-dis" ng-if="review_list.review_desc">
