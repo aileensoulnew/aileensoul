@@ -360,8 +360,7 @@
         <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script src="<?php echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script>
-        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
-        <!-- <script src="<?php //echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>        
         <script>
             var base_url = '<?php echo base_url(); ?>';
             //var user_slug = '<?php echo $this->uri->segment(2); ?>';

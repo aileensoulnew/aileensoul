@@ -157,8 +157,8 @@
                 $('[data-toggle="tooltip"]').tooltip();   
             });
         </script>        
-        <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/common/searchJob.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/business_regi_main.js?ver=' . time()) ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/common/search_job_reg&skill.js?ver='.time()); ?>"></script>
     </body>
 </html>
