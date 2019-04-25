@@ -3648,10 +3648,14 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .analytic-detail .tab-content .tab-inner h3{text-align: center; padding:10px 15px; border-bottom: 1px solid #d2d2d2;}
 .analytic-detail .tab-content .point-table{padding: 75px;}
 .analytic-detail .tab-content .ana-tab-box{padding: 15px; width: 100%; float: left;}
+.analytic-detail .progress canvas{display: none}
 .ana-tab-box .progress{margin-bottom: 0;}
 .analytic-left-tab .nav > li > a{padding: 5px; color: #5c5c5c; margin-bottom: 2px;}
 .analytic-left-tab .nav > li > a:hover{border-radius: 5px;}
 .analytic-left-tab .nav > li.active > a{background: #eee; border-radius: 5px;}
+.price-table{width: 100%;}
+.price-table th, .price-table td {padding: 5px; font-size: 14px; color: #5c5c5c; text-align: center;}
+.price-table th{background: #f6f6f6; }
 
 /***  end monetize css  ***/
 .error{color: #ff0000;}
@@ -5458,4 +5462,4 @@ tags-input .tags{padding: 0;}
 }
 
 .sub-header .sub-menu li:nth-child(3) ul li:nth-child(2){display:block;}
-.view-post{}
+.view-post{display: none;}

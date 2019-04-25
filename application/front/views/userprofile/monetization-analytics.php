@@ -6,7 +6,7 @@
                 <nav class="nav-sidebar">
                     <ul class="nav tabs">
                       <li ng-class="{active: isSet(1)}"><a href="" ng-click="setTab(1)" data-toggle="tab">Home</a></li>
-                      <li ng-class="{active: isSet(2)}"><a href="" ng-click="setTab(2)" data-toggle="tab">Point</a></li>
+                      <li ng-class="{active: isSet(2)}"><a href="" ng-click="setTab(2)" data-toggle="tab">Payment</a></li>
                       <li ng-class="{active: isSet(3)}"><a href="" ng-click="setTab(3)" data-toggle="tab">Bank Details</a></li>
                     </ul>
                 </nav>
@@ -29,7 +29,7 @@
                 </div>
                 <div ng-show="isSet(2)">
                     <div class="tab-inner text-style">
-                        <h3>Point earning</h3>
+                        <h3>Payment earning</h3>
                         <div class="ana-tab-box">
                             <p class="pb15">We'll send your payment once your payment threshold is reached</p>
                             <div class="progress">
@@ -41,10 +41,10 @@
                                 <span class="pull-left">$ 0 </span>
                                 <span class="pull-right">$ 10 </span>
                             </div>
-                            <p class="pb15">Lorem ipsum its a dummy text its use full for all.</p>
+                           
                         </div>
                         <div class="ana-tab-box" ng-if="payment_history.length > 0">
-                            <table>
+                            <table class="price-table">
                                 <tr>
                                     <th>Earning</th>
                                     <th>Status</th>
@@ -67,33 +67,55 @@
                       <div class="ana-tab-box">                            
                             <div class="monetize-payment-detail">
                                 <form class="pt15 new-form" id="bank_detail" name="bank_detail" ng-submit="submit_bank_info()" ng-validate="bank_info_validate">
-                                    <div class="form-group">
-                                        <input type="text" id="bank_name" name="bank_name" ng-model="bank_name" placeholder="Enter Bank name" maxlength="200">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_name" name="bank_name" ng-model="bank_name" placeholder="Enter Bank name" maxlength="200">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_ac_holder_name" name="bank_ac_holder_name" ng-model="bank_ac_holder_name" placeholder="Enter Account Holder name" maxlength="200">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_ac_number" name="bank_ac_number" ng-model="bank_ac_number" placeholder="Enter Account number" maxlength="200">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_ac_re_number" name="bank_ac_re_number" ng-model="bank_ac_re_number" placeholder="Re-enter Account number" maxlength="200">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_ifsc" name="bank_ifsc" ng-model="bank_ifsc" placeholder="Enter Ifsc Code" maxlength="50">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_swift" name="bank_swift" ng-model="bank_swift" placeholder="Enter Swift bic" maxlength="50">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-ms-6">
+                                            <div class="form-group">
+                                                <input type="text" id="country_code" name="country_code" ng-model="country_code" placeholder="Enter country code" maxlength="4">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-ms-6">
+                                            <div class="form-group">
+                                                <input type="text" id="contact_number" name="contact_number" ng-model="contact_number" placeholder="Enter contact number" maxlength="50">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="text-center pt15">
+                                                <!-- <a href="" class="btn-new-3" ng-click="add_bank_detail();">Submit</a> -->
+                                                <button type="submit" id="submit" class="btn-new-3">Submit<span class="ajax_load" id="bank_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                            </div>
+                                            <label id="success-bankinfo"></label>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" id="bank_ac_holder_name" name="bank_ac_holder_name" ng-model="bank_ac_holder_name" placeholder="Enter Account Holder name" maxlength="200">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="bank_ac_number" name="bank_ac_number" ng-model="bank_ac_number" placeholder="Enter Account number" maxlength="200">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="bank_ac_re_number" name="bank_ac_re_number" ng-model="bank_ac_re_number" placeholder="Re-enter Account number" maxlength="200">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="bank_ifsc" name="bank_ifsc" ng-model="bank_ifsc" placeholder="Enter Ifsc Code" maxlength="50">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="bank_swift" name="bank_swift" ng-model="bank_swift" placeholder="Enter Swift bic" maxlength="50">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="country_code" name="country_code" ng-model="country_code" placeholder="Enter country code" maxlength="4">
-                                        <input type="text" id="contact_number" name="contact_number" ng-model="contact_number" placeholder="Enter contact number" maxlength="50">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <!-- <a href="" class="btn-new-3" ng-click="add_bank_detail();">Submit</a> -->
-                                        <button type="submit" id="submit" class="btn-new-3">Submit<span class="ajax_load" id="bank_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-                                    </div>
-                                    <label id="success-bankinfo"></label>
                                 </form>
                             </div>
                       </div>
