@@ -859,7 +859,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                         </a>
                                                     </li>                                   
                                                     <li class="like-img">
-                                                        <a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                                        <a href="javascript:void(0)" onclick="open_profile();" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
                                                     </li>
                                                 </ul>
                                                 <ul class="pull-right">
@@ -872,15 +872,17 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                 <div class="col-md-9 col-sm-9 col-xs-10 mob-pr0">
                                                     <ul class="bottom-left">
                                                         <li class="user-likes">
-                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i><span>1</span></a>
-                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
-                                                                <span>1</span>
+                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" onclick="open_profile();" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i>
+                                                                <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
+                                                            </a>
+                                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" onclick="open_profile();" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
+                                                                <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
                                                             </a>
                                                         </li>
-                                                        <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment" title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-                                                         <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"  title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                        <li class="comment-count"><a href="javascript:void(0);" onclick="open_profile();" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment" title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                                         <li class="comment-count"><a href="javascript:void(0);" onclick="open_profile();" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"  title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
                                                         <li>
-                                                            <a id="share-post-{{post.post_data.id}}" ng-click="share_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i><span ng-if="post.post_share_count > 0">{{post.post_share_count}}</span></a>
+                                                            <a id="share-post-{{post.post_data.id}}" onclick="open_profile();" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i><span ng-if="post.post_share_count > 0">{{post.post_share_count}}</span></a>
                                                         </li>
                                                         
                                                     </ul>
@@ -892,7 +894,7 @@ $login_user_id = $this->session->userdata('aileenuser');
 
 
                                                         <li class="post-save">
-                                                            <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" ng-click="save_post(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.svg'); ?>"></a>
+                                                            <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" onclick="open_profile();" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.svg'); ?>"></a>
                                                             <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.svg'); ?>"></a>
                                                         </li>
                                                     </ul>
