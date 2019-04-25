@@ -29,7 +29,7 @@
                 </div>
                 <div ng-show="isSet(2)">
                     <div class="tab-inner text-style">
-                        <h3>Payment earning</h3>
+                        <h3>Payment Earning</h3>
                         <div class="ana-tab-box">
                             <p class="pb15">We'll send your payment once your payment threshold is reached</p>
                             <div class="progress">
@@ -41,6 +41,7 @@
                                 <span class="pull-left">$ 0 </span>
                                 <span class="pull-right">$ 10 </span>
                             </div>
+                            <p>we will send you payment when you reach 10 dollar payment benchmark.</p>
                            
                         </div>
                         <div class="ana-tab-box" ng-if="payment_history.length > 0">
@@ -98,18 +99,18 @@
                                                 <input type="text" id="bank_swift" name="bank_swift" ng-model="bank_swift" placeholder="Enter Swift bic" maxlength="50">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-ms-6">
+                                        <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" id="country_code" name="country_code" ng-model="country_code" placeholder="Enter country code" maxlength="4">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-ms-6">
+                                        <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" id="contact_number" name="contact_number" ng-model="contact_number" placeholder="Enter contact number" maxlength="50">
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="text-center pt15">
+                                        <div class="col-md-12 fw">
+                                            <div class="text-center pt15 ">
                                                 <!-- <a href="" class="btn-new-3" ng-click="add_bank_detail();">Submit</a> -->
                                                 <button type="submit" id="submit" class="btn-new-3">Submit<span class="ajax_load" id="bank_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                             </div>
