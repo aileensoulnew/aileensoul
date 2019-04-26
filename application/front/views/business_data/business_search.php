@@ -1,6 +1,6 @@
 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
     <div class="job-search-box1 clearfix">
-        <form action=<?php echo base_url('search/business_search') ?> method="get">
+        <form action="<?php echo base_url('search/business_search') ?>" method="get">
             <fieldset class="col-md-3 col-sm-6 col-xs-5 sec_h2">
                 <input type="text" id="tags" class="tags" name="skills" placeholder="Companies, Category, Products">
             </fieldset>

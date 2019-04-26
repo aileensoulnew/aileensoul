@@ -58,7 +58,7 @@ class Introduction extends CI_Controller {
     }
 
     public function business_profile() {
-        header("Location: /",TRUE,301);
+        // header("Location: /",TRUE,301);
 
         $this->data['title'] = 'Business Profile - How It Works'.TITLEPOSTFIX;
         $this->data['metadesc'] = 'All about the Aileensoul Business Profile Working!';

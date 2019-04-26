@@ -238,7 +238,7 @@ class Business_profile_live extends MY_Controller {
                 $this->data['top_city'] = $this->business_model->get_job_city($page,$limit);  
                 include ('business_profile_include.php');
                 $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-                $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
+                $this->data['business_common_profile'] = $this->load->view('business_data/business_common_profile', $this->data, true);
                 $this->load->view('business_data/business_dashboard_no_login', $this->data);
                 //No login
             }
@@ -418,7 +418,7 @@ class Business_profile_live extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '1');
         $this->data['businessdata'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->load->view('business_profile/business_profile_addpost', $this->data);
+        $this->load->view('business_data/business_profile_addpost', $this->data);
     }
 
     public function business_profile_addpost_insert($id = "", $para = "") {
@@ -1594,7 +1594,7 @@ class Business_profile_live extends MY_Controller {
         $contition_array = array('business_profile_post_id' => $id);
         $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->load->view('business_profile/business_profile_editpost', $this->data);
+        $this->load->view('business_data/business_profile_editpost', $this->data);
     }
 
     public function business_profile_editpost_insert($id) {
@@ -1608,7 +1608,7 @@ class Business_profile_live extends MY_Controller {
         $this->form_validation->set_rules('productname', 'Product name', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('business_profile/business_profile_editpost');
+            $this->load->view('business_data/business_profile_editpost');
         } else {
 
 
@@ -2025,18 +2025,14 @@ class Business_profile_live extends MY_Controller {
 
         $this->data['title'] = ucwords($company_name) . ' | Details' . TITLEPOSTFIX;
 
-        if (count($business_data) == 0) {
-            // $this->load->view('business_profile/notavalible');
-            // redirect(base_url("404"),"refresh");
+        if (count($business_data) == 0) {            
             $this->data['title'] = "404".TITLEPOSTFIX;
             $this->load->view('404', $this->data);
         } else {
             if ($this->session->userdata('aileenuser')) {
                 $this->load->view('business_data/business_detail', $this->data);
             } else {                
-                redirect(base_url("company/".$this->data['slugid']),"refresh");
-                // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
-                // $this->load->view('business_profile/business_details', $this->data);
+                redirect(base_url("company/".$this->data['slugid']),"refresh");                
             }
         }
     }
@@ -2056,10 +2052,10 @@ class Business_profile_live extends MY_Controller {
         $contition_array = array('user_id' => $id);
         $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->load->view('business_profile/business_profile_manage_post', $this->data);
+        $this->load->view('business_data/business_profile_manage_post', $this->data);
     }
 
-//Business Profile Save Post Start
+    //Business Profile Save Post Start
     public function business_profile_save() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
 
@@ -3869,30 +3865,14 @@ class Business_profile_live extends MY_Controller {
         echo "yes";
     }
 
-// create pdf start
 
-    public function creat_pdf1($id) {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $contition_array = array('business_profile_post_id' => $id, 'status' => '1');
-        $this->data['businessdata'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $this->load->view('business_profile/business_pdfdispaly', $this->data);
-    }
-
-    public function creat_pdf($id) {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $contition_array = array('post_files_id' => $id, 'is_deleted' => '1');
-        $this->data['busdata'] = $this->common->select_data_by_condition('post_files', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $this->load->view('business_profile/business_pdfdispaly', $this->data);
-    }
-
-//create pdf end
-// cover pic controller
+    // cover pic controller
 
     public function ajaxpro() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
-// REMOVE OLD IMAGE FROM FOLDER
+        // REMOVE OLD IMAGE FROM FOLDER
         $contition_array = array('user_id' => $userid);
         $user_reg_data = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'profile_background, profile_background_main', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -11258,16 +11238,6 @@ Your browser does not support the audio tag.
         return $contactcount;
     }
 
-
-
-    public function pdf_display($id) { 
-        $this->data['title'] =   "PDF | Business Profile" . TITLEPOSTFIX;
-        $contition_array = array('post_id' => $id, 'is_deleted' => '1', 'insert_profile' => '2', 'post_format' => 'pdf');
-        $this->data['bus_data'] = $bus_data = $this->common->select_data_by_condition('post_files', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        //echo "<pre>"; print_r($this->data['title']); die();
-        $this->load->view('business_profile/bus_pdf', $this->data);
-    }
-
     public function business_register_new()
     {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
@@ -11285,7 +11255,7 @@ Your browser does not support the audio tag.
             }
             else
             {
-                // redirect(base_url());
+                redirect(base_url());
             }
         }
         $this->data['title'] = "Signup - List you Business with Aileensoul".TITLEPOSTFIX;

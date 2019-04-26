@@ -146,7 +146,7 @@ class Search extends MY_Controller {
         $this->data['profile'] = $business_profile;
 
         if ($is_business) {
-            $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, TRUE);
+            $this->data['business_left'] = $this->load->view('business_data/business_left', $this->data, TRUE);
         }
         $title = '';
         if ($search_business && $search_place) {
@@ -164,10 +164,10 @@ class Search extends MY_Controller {
 
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
         if ($this->session->userdata('aileenuser')) {
-            $this->load->view('business_profile/recommen_business', $this->data);
+            $this->load->view('business_data/recommen_business', $this->data);
         } else {
 
-            $this->load->view('business_profile/business_search_login', $this->data);
+            $this->load->view('business_data/business_search_login', $this->data);
         }
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA END
     }
@@ -332,9 +332,7 @@ class Search extends MY_Controller {
         // $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         // $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
         // $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
-
-
-        //$this->load->view('business_profile/recommen_business', $this->data);
+        
         //AJAX DATA
         //$return_html = '';
         if (count($profile) > 0 || count($description) > 0) {
@@ -1175,8 +1173,7 @@ class Search extends MY_Controller {
                 $this->load->view('freelancer/freelancer_hire/hire_search', $this->data);
             }
         } else {
-            // $this->data['business_common_profile'] = $this->load->view('business_profile/businesscommentlikesiness_common_profile', $this->data, true);
-                    $this->load->view('freelancer/freelancer_hire/hire_search', $this->data);
+                $this->load->view('freelancer/freelancer_hire/hire_search', $this->data);
                 }
             // $this->load->view('freelancer/freelancer_hire/recommen_freelancer_hire', $this->data);
     }
@@ -2020,7 +2017,7 @@ class Search extends MY_Controller {
                 $this->load->view('freelancer/freelancer_post/apply_search', $this->data);
             }
         } else {
-            // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
+            
             $this->load->view('freelancer/freelancer_post/apply_search', $this->data);
         }
 
@@ -2449,8 +2446,7 @@ class Search extends MY_Controller {
 
         $description = $business_post;
         $profile = $business_profile;
-
-        //$this->load->view('business_profile/recommen_business', $this->data);
+        
         //AJAX DATA
         $return_html = '';
         if (count($profile) > 0 || count($description) > 0) {

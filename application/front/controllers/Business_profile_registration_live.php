@@ -60,8 +60,7 @@ class Business_profile_registration_live extends MY_Controller {
             // GET BUSINESS PROFILE DATA
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-            //$this->load->view('business_profile/ng_business_registration_old', $this->data);
+            
             if($userid){
             $this->data['profile_login'] = "login";
              }else{
@@ -83,7 +82,7 @@ class Business_profile_registration_live extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '0');
         $businessdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($businessdata) {
-            $this->load->view('business_profile/reactivate', $this->data);
+            $this->load->view('business_data/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
             // GET BUSINESS PROFILE DATA
@@ -103,7 +102,7 @@ class Business_profile_registration_live extends MY_Controller {
                     redirect('business-profile/home', refresh);
                 }
             } else {
-                $this->load->view('business_profile/ng_business_info', $this->data);
+                $this->load->view('business_data/ng_business_info', $this->data);
             }
         }
     }
@@ -152,7 +151,7 @@ class Business_profile_registration_live extends MY_Controller {
             }
         }
         $this->data['title'] = 'Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile/ng_business_info_edit', $this->data);
+        $this->load->view('business_data/ng_business_info_edit', $this->data);
     }
 
     public function getCountry() {
@@ -344,7 +343,7 @@ class Business_profile_registration_live extends MY_Controller {
             }
         }
         $this->data['title'] = 'Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile/ng_contact_info', $this->data);
+        $this->load->view('business_data/ng_contact_info', $this->data);
     }
 
     public function getContactInformation() {
@@ -415,7 +414,7 @@ class Business_profile_registration_live extends MY_Controller {
         $this->data['business_type'] = $this->User_model->getBusinessType();
         $this->data['category_list'] = $this->User_model->getCategory();
         $this->data['title'] = 'Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile/ng_description', $this->data);
+        $this->load->view('business_data/ng_description', $this->data);
     }
 
     public function getDescription() {
@@ -511,7 +510,7 @@ class Business_profile_registration_live extends MY_Controller {
         $this->business_profile_active_check();
 
         $this->data['title'] = 'Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile/ng_image', $this->data);
+        $this->load->view('business_data/ng_image', $this->data);
     }
 
     public function getImage() {
@@ -901,9 +900,4 @@ class Business_profile_registration_live extends MY_Controller {
     public function mail_test() {
         $send_email = $this->email_model->test_email($subject = 'This is a testing mail', $templ = '', $to_email = 'ankit.aileensoul@gmail.com');
     }
-
-    public function reg_country() {
-        $this->load->view('business_profile/khytai_business', $this->data);
-    }
-
 }

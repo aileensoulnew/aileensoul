@@ -36,22 +36,22 @@ class Business_userprofile extends CI_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '0');
         $businessdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($businessdata) {
-            $this->load->view('business_profile/reactivate', $this->data);
+            $this->load->view('business_data/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
-// GET BUSINESS PROFILE DATA
+            // GET BUSINESS PROFILE DATA
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// GET COUNTRY DATA
+            // GET COUNTRY DATA
             $contition_array = array('status' => '1');
             $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// GET STATE DATA
+            // GET STATE DATA
             $contition_array = array('status' => '1');
             $this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = 'state_id,state_name,country_id', $sortby = 'state_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// GET CITY DATA
+            // GET CITY DATA
             $contition_array = array('status' => '1');
             $this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name,state_id', $sortby = 'city_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -69,7 +69,7 @@ class Business_userprofile extends CI_Controller {
                     redirect('business-profile/home', refresh);
                 }
             } else {
-                $this->load->view('business_profile/business_info', $this->data);
+                $this->load->view('business_data/business_info', $this->data);
             }
         }
     }

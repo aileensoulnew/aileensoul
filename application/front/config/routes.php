@@ -160,10 +160,7 @@ $route['business-profile/business-profile-contactperson'] = "business_profile/bu
 $route['business-profile/contact-person/(:any)'] = "business_profile/business_profile_contactperson/$1";
 $route['business-profile/post-detail'] = "business_profile_live/postnewpage";
 
-$route['business-profile/creat-pdf'] = "business_profile/creat_pdf";
 $route['business-profile/business-profile-editpost'] = "business_profile/business_profile_editpost";
-$route['notification/business-profile-post/(:any)'] = "notification/business_post/$1";
-$route['notification/business-profile-post-detail/(:any)/(:any)'] = "notification/bus_post_img/$1/$2";
 
 $route['business-profile/registration/business-information'] = "business_profile_registration_live/business_registration/$1";
 $route['business-profile/registration/contact-information'] = "business_profile_registration_live/business_registration/$1";

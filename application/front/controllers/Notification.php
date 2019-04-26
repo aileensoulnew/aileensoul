@@ -28,66 +28,7 @@ class Notification extends MY_Controller {
         $this->data['title']  = "Notification | Aileensoul";
         $userid = $this->session->userdata('aileenuser');
         $this->load->view('notification/index', $this->data);
-    }
-
-    public function business_post($id) {
-        $userid = $this->session->userdata('aileenuser');
-        include ('business_include.php');
-        $userid = $this->session->userdata('aileenuser');
-        $contition_array = array('user_id' => $userid, 'status' => '1');
-        $this->data['businessdata'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $contition_array = array('business_profile_post_id' => $id, 'status' => '1', 'is_delete' => '0');
-        $this->data['busienss_data'] = $busienss_data = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, true);
-
-        $this->load->view('notification/business_post', $this->data);
-    }
-
-    public function bus_post_img($id, $imageid) { 
-        $userid = $this->session->userdata('aileenuser');
-        include ('business_include.php');
-        $contition_array = array('user_id' => $userid, 'status' => '1');
-        $this->data['businessdata'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $contition_array = array('business_profile_post_id' => $id, 'status' => '1');
-        $this->data['busienss_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        $contition_array = array('post_id' => $id, 'is_deleted' => '1', 'insert_profile' => '2');
-        $busmultiimage = $this->data['busmultiimage'] = $this->common->select_data_by_condition('post_files', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        $i = 1;
-        foreach ($busmultiimage as $artimg) {
-            if ($artimg['post_files_id'] == $imageid) {
-                $count = $i;
-            }
-            $i++;
-        }
-        $this->data['count'] = $count;
-
-        $contition_array = array('status' => '1', 'business_profile.is_deleted' => '0');
-        $businessdata = $this->data['results'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'company_name,other_industrial,other_business_type', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
-
-        $contition_array = array('status' => '1', 'is_delete' => '0');
-        $businesstype = $this->data['results'] = $this->common->select_data_by_condition('business_type', $contition_array, $data = 'business_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
-        $contition_array = array('status' => '1', 'is_delete' => '0');
-        $industrytype = $this->data['results'] = $this->common->select_data_by_condition('industry_type', $contition_array, $data = 'industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
-        $unique = array_merge($businessdata, $businesstype, $industrytype);
-        foreach ($unique as $key => $value) {
-            foreach ($value as $ke => $val) {
-                if ($val != "") {
-                    $result[] = $val;
-                }
-            }
-        }
-
-        foreach ($result as $key => $value) {
-            $result1[$key]['label'] = $value;
-            $result1[$key]['value'] = $value;
-        }
-
-        $this->data['demo'] = $result1;
-        $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, true);
-        $this->load->view('notification/bus_image', $this->data);
-    }
+    }    
 
     public function ajax_business_home_post($post_id) {
         $userid = $this->session->userdata('aileenuser');

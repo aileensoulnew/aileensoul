@@ -82,7 +82,7 @@ $userid = $this->session->userdata('aileenuser');
                                 </div>
                                 <div id="search">
                                     <button type="button" class="close">×</button>
-                                    <form action=<?php echo base_url('search/business_search') ?> method="get">
+                                    <form action="<?php echo base_url('search/business_search') ?>" method="get">
                                         <div class="new-search-input">
                                             <input type="text" id="tags1" class="tags" name="skills" placeholder="Companies, Category, Products">
                                             <input type="text" id="searchplace1" class="searchplace" name="searchplace" placeholder="Find Location">
