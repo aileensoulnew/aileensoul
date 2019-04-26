@@ -2091,8 +2091,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"  ad-class="infeed"></adsense>').appendTo('.tab-add');
         $compile($el)($scope);*/
 
-        var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-            $compile($elm)($scope);
+        /*var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+            $compile($elm)($scope);*/
     },2000);
 
     $scope.getHashTags = function(inputText) {  
@@ -5388,8 +5388,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     function load_add_detail()
     {
         setTimeout(function(){
-            var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
-            $compile($el)($scope);
+            /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
+            $compile($el)($scope);*/
         },1000);        
     }
 
@@ -10193,11 +10193,11 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     var isProcessing = false;
 
     setTimeout(function(){        
-    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+    /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
         $compile($el)($scope);
 
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-        $compile($el)($scope);
+        $compile($el)($scope);*/
     },1000);
 
     $scope.prettifyNumber = function(value) {
@@ -10465,11 +10465,11 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     $scope.$parent.title = "Follower | Aileensoul";
 
     setTimeout(function(){
-    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+    /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
         $compile($el)($scope);
 
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-        $compile($el)($scope);
+        $compile($el)($scope);*/
     },1000);
 
     $scope.prettifyNumber = function(value) {
@@ -10699,11 +10699,11 @@ app.controller('followingController', function ($scope, $http, $location, $compi
 
     
     setTimeout(function(){
-    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+    /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
         $compile($el)($scope);
 
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-        $compile($el)($scope);
+        $compile($el)($scope);*/
     },1000);
 
     $scope.prettifyNumber = function(value) {
@@ -10983,11 +10983,11 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     $scope.$parent.title = "Questions | Aileensoul";
 
     setTimeout(function(){
-    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+    /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
         $compile($el)($scope);
 
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-        $compile($el)($scope);
+        $compile($el)($scope);*/
     },1000);
 
     $scope.getHashTags = function(inputText) {  
@@ -11708,8 +11708,8 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
     });
     
     setTimeout(function(){
-        var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-            $compile($elm)($scope);
+        /*var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+            $compile($elm)($scope);*/
     },2000);
 
     $scope.getHashTags = function(inputText) {  

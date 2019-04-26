@@ -2,6 +2,9 @@
 <div class="container pt20 mobp0">
     <div class="custom-user-list question-page">
 		<div class="tab-add-991 ads">
+            <?php
+            $data['data'] = 'ads';
+            $this->load->view('ads_box',$data); ?>
 		</div>
         <div class="list-box-custom">
             <h3 class="border-none mob-border-top-1">Questions</h3>
@@ -220,12 +223,14 @@
             </div>
         </div>
 		<div class="tab-add ads">
+            <?php
+            $data['data'] = 'ads';
+            $this->load->view('ads_box',$data); ?>
 		</div>
         <div class="fw post_loader" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
     </div>
     <div class="right-add">
-        <div class="right-add-box">
-        </div>
+        <?php $this->load->view('right_add_box'); ?>
     </div>
 </div>
 

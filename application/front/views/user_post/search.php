@@ -1670,14 +1670,13 @@
         <script src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
+        <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js') ?>"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js'); ?>"></script>        
+        <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_slug = '<?php echo $this->uri->segment(2); ?>';
@@ -1686,7 +1685,7 @@
             var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
             var keyword = "<?php echo $search_keyword; ?>";
             var cmt_maxlength = '700';
-            var app = angular.module("searchApp", ['ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
+            var app = angular.module("searchApp", ['ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_search.js?ver=' . time()) ?>"></script>

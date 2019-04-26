@@ -4,7 +4,10 @@
 			
 			<div class="dtl-add-mob">
 				<div class="right-add-box">
-					<div class="dtl-box p10 dtl-adv">                
+					<div class="dtl-box p10 dtl-adv">
+                        <?php
+                        $data['data'] = 'dtl-adv';
+                        $this->load->view('ads_box',$data); ?>
 					</div> 
 				</div>
 			</div>
@@ -18,7 +21,10 @@
 				<!-- 02  advertize  -->
                 <div class="gallery-item tab-add">
 					<div class="right-add-box">
-						<div class="dtl-box p10 dtl-adv">                
+						<div class="dtl-box p10 dtl-adv">
+                            <?php
+                            $data['data'] = 'dtl-adv';
+                            $this->load->view('ads_box',$data); ?>
 						</div> 
 					</div>
                 </div>
@@ -888,7 +894,10 @@
         </div>
         <div class="right-add add-detail">
             <div class="right-add-box">                
-                <div class="dtl-box p10 dtl-adv">                
+                <div class="dtl-box p10 dtl-adv">
+                    <?php
+                    $data['data'] = 'dtl-adv';
+                    $this->load->view('ads_box',$data); ?>
                 </div>
             </div>
             <!-- Edit Profile Start -->

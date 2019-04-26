@@ -155,8 +155,10 @@
                     </div>
                     <?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
                     <div ng-if="(busIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
-                        <div class="tab-add">
-                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>                            
+                        <div class="tab-add">                            
+                            <?php
+                            $data['data'] = 'infeed';
+                            $this->load->view('ads_box',$data); ?>
                         </div>
                     </div>
                     <?php } ?>
@@ -271,9 +273,8 @@
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
-        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>        
+        <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
         
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -283,7 +284,7 @@
             var category_id = '<?php echo $category_id; ?>';
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';
-            var app = angular.module('businessSearchListApp', ['ui.bootstrap','angular-google-adsense']);
+            var app = angular.module('businessSearchListApp', ['ui.bootstrap']);
             $(".tags").val(q);
             $(".searchplace").val(l);
         </script>   

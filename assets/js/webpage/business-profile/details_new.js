@@ -147,8 +147,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
     function load_add_detail()
     {
         setTimeout(function(){
-            var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
-            $compile($el)($scope);
+            /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
+            $compile($el)($scope);*/
         },1000);        
     }
 
@@ -3187,7 +3187,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var count_profile = profile_progress.user_process;
             $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
-            load_add_detail();
+            // load_add_detail();
 
         });
     }

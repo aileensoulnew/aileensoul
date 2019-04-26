@@ -1,6 +1,9 @@
 <div class="container pt20 mobp0 following-page">
     <div class="custom-user-list">
-		<div class="tab-add-991 ads">			
+		<div class="tab-add-991 ads">
+            <?php
+            $data['data'] = 'ads';
+            $this->load->view('ads_box',$data); ?>			
 		</div>
         <div class="list-box-custom">
             <h3 class="mob-border-top-1">Following</h3>
@@ -68,13 +71,13 @@
                 </div>
             </div>
         </div>
-		<div class="tab-add ads">			
+		<div class="tab-add ads">
+            <?php
+            $data['data'] = 'ads';
+            $this->load->view('ads_box',$data); ?>
 		</div>
     </div>
     <div class="right-add">
-        <div class="right-add-box">
-        </div>
+        <?php $this->load->view('right_add_box'); ?>
     </div>
-
-
 </div>

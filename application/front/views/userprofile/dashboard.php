@@ -1440,9 +1440,7 @@
             <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
         </div>
         <div class="right-part">
-            <div class="right-add-box">        
-            </div>            
-            <?php
+            <?php $this->load->view('right_add_box');            
             $all_c_no_login = "";
             if($user_id == ""){
                 $all_c_no_login = "hide";

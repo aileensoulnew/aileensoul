@@ -2214,8 +2214,7 @@
     <div class="right-section">
     <div id="right-fixed" class="fw">
         
-        <div class="right-add-box">            
-        </div> 
+        <?php $this->load->view('right_add_box'); ?>
         
         <div class="box-border">
             <a href="<?php echo base_url('monetize-aileensoul-account'); ?>">
@@ -2301,10 +2300,9 @@
             </div>
         </div>
 
-        <div class="right-add-box">
-        </div>
+        <?php $this->load->view('right_add_box'); ?>
         
-        <div id="business-move" class="follow-box">                        
+        <div id="business-move" class="follow-box">
             <div class="all-user-list">
                 <h4><a href="<?php echo base_url('company/userlist'); ?>" class="">All Businesses</a></h4>                
                 <data-owl-carousel class="owl-carousel owl-theme" data-options="">
@@ -3507,14 +3505,13 @@
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
+        <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js') ?>"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js'); ?>"></script>        
+        <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
         <script>
         var base_url = '<?php echo base_url(); ?>';
         /*var slug = '<?php //echo $slugid; ?>';*/
@@ -3526,7 +3523,7 @@
         var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
         var no_user_post_html = '<?php echo $no_user_post_html; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
-        var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
+        var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
@@ -3901,50 +3898,7 @@
                             return false;
                         },
                     });
-                }
-                /*$( "#sim_hashtag" ).bind( "keydown", function( event ) {
-                    if ( event.keyCode === $.ui.keyCode.TAB &&
-                        $( this ).autocomplete( "instance" ).menu.active ) {
-                        event.preventDefault();
-                    }
-                })
-                .autocomplete({
-                    appendTo: "#sim-hashtag-list",
-                    minLength: 2,
-                    source: function( request, response ) {                         
-                        var search_key = extractLast( request.term );
-                        if(search_key[0] == "#")
-                        {
-                            search_key = search_key.substr(1);
-                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    },
-                    focus: function() {
-                        // prevent value inserted on focus
-                        return false;
-                    },
-                    select: function( event, ui ) {
-                        var terms = split( this.value );
-                        // remove the current input
-                        terms.pop();
-                        // add the selected item
-                        terms.push( ui.item.value );
-                        // add placeholder to get the comma-and-space at the end
-                        terms.push( "" );
-                        this.value = terms.join( " " );
-                        return false;
-                    }
-                });  */              
-            // });
-            //$("#sim_hashtag").hashtags();
-
-            /*$('.hashtag-textarea').on( 'change keyup keydown paste cut', function (){
-                $(this).height(30).height(this.scrollHeight);
-            }).change();*/
+                }                
             autosize(document.getElementsByClassName('hashtag-textarea'));
 
         </script>

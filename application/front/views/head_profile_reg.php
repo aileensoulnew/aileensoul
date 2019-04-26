@@ -78,7 +78,7 @@ if ($this->uri->segment(1) == 'profiles') {
 ?>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js?ver="<?php echo time() ?>></script> -->
     <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js?ver="<?php echo time() ?>></script>
+    <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>?ver="<?php echo time() ?>></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> 
 

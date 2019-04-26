@@ -10,7 +10,7 @@ li {
 }
 </style>
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
 
 <div id="fixed" when-scrolled="loadMore()">
   <ul>

@@ -1137,8 +1137,10 @@
                     </div>
                     <div ng-if="(postIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
-                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
-                            
+                            <?php
+                            $data['data'] = 'infeed';
+                            $this->load->view('ads_box',$data); ?>
+                            <!-- <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense> -->
                         </div>
                     </div>
                 </div>

@@ -401,12 +401,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
         });
         $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
-    }
-
-    setTimeout(function(){
-        var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-            $compile($elm)($scope);
-    },2000);
+    }    
 
     $scope.openModal2 = function(myModal2Id) {        
         document.getElementById(myModal2Id).style.display = "block";
