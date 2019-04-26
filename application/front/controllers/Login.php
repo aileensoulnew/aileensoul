@@ -22,10 +22,6 @@ class Login extends CI_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('business_model');
-        $this->load->model('job_model');
-        $this->load->model('recruiter_model');
-        $this->load->model('freelancer_hire_model');
-        $this->load->model('freelancer_apply_model');
         $this->load->helper('cookie');
         include ('main_profile_link.php');
     }
@@ -107,100 +103,6 @@ class Login extends CI_Controller {
     }
 
     // login check and email validation start
-    public function freelancer_hire_login() {
-        $email_login = $this->input->post('email_login');
-        $password_login = $this->input->post('password_login');
-
-        $userinfo = $this->logins->check_login($email_login, $password_login);
-        $user_slug = '';
-
-        if ($userinfo['user_id'] != '') {
-            if ($userinfo['status'] == "2") {
-                echo 'Sorry, user is Inactive.';
-            } else {
-                if ($userinfo['password'] == md5($password_login)) {
-                    $this->session->set_userdata('aileenuser', $userinfo['user_id']);
-                    $user_slug = $this->user_model->getUserSlugById($userinfo['user_id']);
-                    $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
-
-                    //Set Cookie for Message
-                    $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                    set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
-                    set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
-
-                    $data = 'ok';
-                }else if ($userinfo['password'] != md5($password_login)) {
-                    $data = 'password';
-                    $id = $result[0]['user_id'];
-                }
-            }
-        } else if ($email_login == $userinfo['email']) {
-            $data = 'password';
-            $id = $userinfo['user_id'];
-        } else {
-            $data = 'email';
-        }
-
-        $select_data = 'freelancer_hire_slug';
-        $this->data['freehiredata'] = $this->freelancer_hire_model->getfreelancerhiredata($userinfo['user_id'], $select_data);
-        $freelancer_hire_user = count($this->data['freehiredata']);
-
-        echo json_encode(
-                array(
-                    "data" => $data,
-                    "user_slug" => $user_slug['user_slug'],
-                    "freelancerhire" => $freelancer_hire_user,
-                    "id" => $userinfo['user_id']
-        ));
-    }
-
-    public function freelancer_apply_login() {
-
-        $email_login = $this->input->post('email_login');
-        $password_login = $this->input->post('password_login');
-
-        $userinfo = $this->logins->check_login($email_login, $password_login);
-        $user_slug = '';
-
-        if ($userinfo['user_id'] != '') {
-            if ($userinfo['status'] == "2") {
-                echo 'Sorry, user is Inactive.';
-            } else {
-                if ($userinfo['password'] == md5($password_login)) {
-                $this->session->set_userdata('aileenuser', $userinfo['user_id']);
-                $user_slug = $this->user_model->getUserSlugById($userinfo['user_id']);
-                $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
-
-                //Set Cookie for Message
-                $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
-
-                $data = 'ok';
-                }else if ($userinfo['password'] != md5($password_login)) {
-                    $data = 'password';
-                    $id = $result[0]['user_id'];
-                }
-            }
-        } else if ($email_login == $userinfo['email']) {
-            $data = 'password';
-            $id = $userinfo['user_id'];
-        } else {
-            $data = 'email';
-        }
-
-        $select_data = 'freelancer_apply_slug';
-        $this->data['freepostdata'] = $this->freelancer_apply_model->getfreelancerapplydata($userinfo['user_id'], $select_data);
-        $freelancer_apply_user = count($this->data['freepostdata']);
-
-        echo json_encode(
-                array(
-                    "data" => $data,
-                    "user_slug" => $user_slug['user_slug'],
-                    "freelancerapply" => $freelancer_apply_user,
-                    "id" => $userinfo['user_id']
-        ));
-    }
 
     public function main_check_login() {
         $email_login = $this->input->post('email_login');
@@ -465,96 +367,7 @@ class Login extends CI_Controller {
         echo json_encode(array('status' => $status, 'userid' => $userid));
     }
 
-    public function rec_check_login() {
-        $email_login = $this->input->post('email_login');
-        $password_login = $this->input->post('password_login');
-
-        $result = $this->user_model->getUserByEmail($email_login);
-      //  echo "<pre>"; print_r($result);die();
-        $userinfo = $this->logins->check_login($email_login, $password_login);
-        if (count($userinfo) > 0) {
-            if ($userinfo['status'] == "2") {
-                echo 'Sorry, user is Inactive.';
-            } else {
-                if ($userinfo['password'] == md5($password_login)) {
-                $this->session->set_userdata('aileenuser', $userinfo['user_id']);
-                $user_slug = $this->user_model->getUserSlugById($userinfo['user_id']);
-                $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
-
-                //Set Cookie for Message
-                $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
-
-                $is_data = 'ok';
-                }else if ($userinfo['password'] != md5($password_login)) {
-                    $is_data = 'password';
-                    $id = $result['user_id'];
-                }
-            }
-        } else if ($email_login == $result['user_email']) {
-            $is_data = 'password';
-            $id = $result['user_id'];
-        } else {
-            $is_data = 'email';
-        }
-        $rec_result = $this->recruiter_model->CheckRecruiterAvailable($result['user_id']);
-        $rec = 0;
-        if ($rec_result['total'] > 0) {
-            $rec = 1;
-        }
-        echo json_encode(
-                array(
-                    "data" => $is_data, "id" => $id, "is_rec" => $rec,
-        ));
-    }
-
-    public function job_check_login() {
-        $email_login = $this->input->post('email_login');
-        $password_login = $this->input->post('password_login');
-
-        $result = $this->user_model->getUserByEmail($email_login);
-        $userinfo = $this->logins->check_login($email_login, $password_login);
-
-        if (count($userinfo) > 0) {
-            if ($userinfo['status'] == "2") {
-                echo 'Sorry, user is Inactive.';
-            } else {
-                if ($userinfo['password'] == md5($password_login)) {
-                $this->session->set_userdata('aileenuser', $userinfo['user_id']);
-                $user_slug = $this->user_model->getUserSlugById($userinfo['user_id']);
-                $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
-
-                //Set Cookie for Message
-                $msg_user_data = $this->user_model->get_user_for_message($userinfo['user_id']);
-                set_cookie("ast",base64_encode(base64_encode($msg_user_data['token'])),315360000,COOKIEHOST,"/");
-                set_cookie("ask",base64_encode(base64_encode($msg_user_data['encrypt_key'])),315360000,COOKIEHOST,"/");
-
-                $is_data = 'ok';
-                }else if ($userinfo['password'] != md5($password_login)) {
-                    $is_data = 'password';
-                    $id = $result[0]['user_id'];
-                }
-            }
-        } else if ($email_login == $result[0]['user_email']) {
-            $is_data = 'password';
-            $id = $result[0]['user_id'];
-        } else {
-            $is_data = 'email';
-        }
-        $job_result = $this->job_model->isJobAvailable($userinfo['user_id']);
-        $job = 0;
-        if ($job_result['total'] > 0) {
-            $job = 1;
-        }
-        echo json_encode(
-                array(
-                    "data" => $is_data,
-                    "id" => $id,
-                    "is_job" => $job,
-        ));
-    }
-
+    
     public function business_check_login() {
         $email_login = $this->input->post('email_login');
         $password_login = $this->input->post('password_login');

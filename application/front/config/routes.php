@@ -147,7 +147,7 @@ $route['business-profile/dashboard'] = "business_profile_live/business_profile_m
 $route['business-profile/followers'] = "business_profile_live/followers";
 $route['business-profile/following'] = "business_profile_live/following";
 $route['business-profile/userlist'] = "business_profile_live/userlist";
-$route['company/contact-requests'] = "business_profile_live/contact_list";
+
 $route['business-profile/contacts'] = "business_profile_live/bus_contact";
 $route['business-profile/user-image-change'] = "business_profile/user_image_insert";
 $route['business-profile/business-profile-save-post'] = "business_profile/business_profile_save_post";
@@ -230,9 +230,6 @@ $route['business-by-categories/(:num)'] = "business_live/category";
 $route['business-by-location'] = "business_live/location";
 $route['business-by-location/(:num)'] = "business_live/location";
 $route['business'] = "business_live/business_by_business";
-
-$route['artist/pdf-view/(:any)'] = "artist/pdf_display/$1";
-$route['business-profile/pdf-view/(:any)'] = "business_profile/pdf_display/$1";
 
 $route['(:any)/post/(:any)'] = 'user_post/post_detail/$2';
 $route['(:any)/photos/(:any)'] = 'user_post/post_detail/$2';

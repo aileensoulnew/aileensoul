@@ -546,48 +546,49 @@
                                 <a ng-if="post.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.post_data.id)">&#10095;</a>
                             </div>
                             <div class="post-bottom">
+                                <div class="like-list">
+                                    <ul id="" class="bottom-left like_user_list">
+                                        <li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
+                                            <a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
+                                                <img ng-if="user_like.user_image" ng-src="<?php echo USER_THUMB_UPLOAD_URL; ?>{{user_like.user_image}}">
+                                                <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
+                                        </li>                                   
+                                        <li class="like-img">
+                                            <a href="javascript:void(0)" ng-click="no_login_pop(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="pull-right">
+                                        <li class="view-post">
+                                                <span >25 Views</span>
+                                            </li>
+                                    </ul>
+                                </div>
                                 <div class="row">
-                                    <div class="col-md-9 col-sm-9 col-xs-9 mob-pr0">
+                                    <div class="col-md-9 col-sm-9 col-xs-10 mob-pr0">
                                         <ul class="bottom-left">
                                             <li class="user-likes">
-                                                <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="no_login_pop()" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i></a>
-                                                <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="no_login_pop()" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i></a>
-                                            </li>
-                                            <!--li><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i></a></li-->
-                                            <!-- <li><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i></a></li> -->
-                                        </ul>
-                                        <ul id="" class="bottom-left like_user_list">
-                                            <li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
-                                                <a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
-                                                    <img ng-if="user_like.user_image" ng-src="<?php echo USER_THUMB_UPLOAD_URL; ?>{{user_like.user_image}}">
-                            
-                                                    <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                    
-                                                    <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
+                                                <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span></a>
+                                                
+                                                <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
+                                                    <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
                                                 </a>
-                                            </li>                                   
-                                            <li class="like-img">
-                                                <a href="javascript:void(0)" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
                                             </li>
+                                            <li class="comment-count"><a href="javascript:void(0);" ng-click="no_login_pop(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment" title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                             <li class="comment-count"><a href="javascript:void(0);" ng-click="no_login_pop(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"  title="View Comments"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
+                                            <li>
+                                                <a id="share-post-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id, $index, post)" href="javascript:void(0);" title="Share Post"><i class="fa fa-share-alt" aria-hidden="true"></i><span ng-if="post.post_share_count > 0">{{post.post_share_count}}</span></a>
+                                            </li>
+                                            
                                         </ul>
-                                        
-                                        
                                     </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-3 mob-pl0">
+                                    <div class="col-md-3 col-sm-3 col-xs-2 mob-pl0">
                                         <ul class="pull-right bottom-right">
-                                            <!--li class="like-count" ng-click="like_user_list(post.post_data.id);"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li-->
-                                            <!-- <li class="comment-count"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
-
                                             <li class="post-save">
-                                                <a ng-if="post.is_user_saved_post == '0'" class="save-post-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.png'); ?>"></a>
-
-                                                <a ng-if="post.is_user_saved_post == '1'" ng-click="no_login_pop(post.post_data.id, $index, post)" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.png'); ?>"></a>
+                                                <a ng-if="post.is_user_saved_post == '0'" id="save-post-{{post.post_data.id}}" ng-click="no_login_pop(post.post_data.id, $index, post)" href="javascript:void(0);" title="Save Post"><img src="<?php echo base_url('assets/n-images/save-post.svg'); ?>"></a>
+                                                <a ng-if="post.is_user_saved_post == '1'" id="saved-post-{{post.post_data.id}}" href="javascript:void(0);" title="Saved Post"><img src="<?php echo base_url('assets/n-images/saved-post.svg'); ?>"></a>
                                             </li>
-
-                                            <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-                                            <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><i class="fa fa-comment-o"></i><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span></a></li>
-
                                         </ul>
                                     </div>
                                 </div>

@@ -50,7 +50,7 @@ class Business_profile_live extends MY_Controller {
         $businessdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id,business_slug,company_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($businessdata) {
             $this->data['title'] = ucwords($businessdata[0]['company_name']) . ' | Reactive | ' . ' Business Profile - Aileensoul';
-            $this->load->view('business_profile_live/reactivate', $this->data);
+            $this->load->view('business_data/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
         // GET BUSINESS PROFILE DATA
@@ -84,19 +84,7 @@ class Business_profile_live extends MY_Controller {
         }
     }
 
-    public function minify_css() {
-        $this->load->library('minify');
-        $this->load->helper('url');
-        $this->load->view('business_profile/minify_css');
-    }
-
-    public function minify_js() {
-        $this->load->library('minify');
-        $this->load->helper('url');
-        $this->load->view('business_profile/minify_js');
-    }
-
-// BUSINESS PROFILE SLUG START
+    // BUSINESS PROFILE SLUG START
 
     public function setcategory_slug($slugname, $filedname, $tablename, $notin_id = array()) {
         $slugname = $oldslugname = $this->create_slug($slugname);
@@ -174,40 +162,6 @@ class Business_profile_live extends MY_Controller {
         }
 
         // print_r($this->data['business_common_data']);exit();
-
-        // GET USER BUSINESS DATA FROM INCLUDE START
-        $business_profile_id = $this->data['business_common_data'][0]['business_profile_id'];
-        $industriyal = $this->data['business_common_data'][0]['industriyal'];
-        $city = $this->data['business_common_data'][0]['city'];
-        $state = $this->data['business_common_data'][0]['state'];
-        $other_industrial = $this->data['business_common_data'][0]['other_industrial'];
-        $business_type = $this->data['business_common_data'][0]['business_type'];
-        // GET USER BUSINESS DATA FROM INCLUDE END
-        // GET BUSINESS USER FOLLOWING LIST START
-        $contition_array = array('follow_from' => $business_profile_id, 'follow_status' => '1', 'follow_type' => '2');
-        $followdata = $this->common->select_data_by_condition('follow', $contition_array, $data = 'GROUP_CONCAT(follow_to) as follow_list', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = 'follow_from');
-        $follow_list = $followdata[0]['follow_list'];
-        $follow_list = str_replace(",", "','", $followdata[0]['follow_list']);
-        // GET BUSINESS USER FOLLOWING LIST END
-        // GET BUSINESS USER IGNORE LIST START
-        $contition_array = array('user_from' => $business_profile_id, 'profile' => '2');
-        $userdata = $this->common->select_data_by_condition('user_ignore', $contition_array, $data = 'GROUP_CONCAT(user_to) as user_list', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = 'user_from');
-        $user_list = $followdata[0]['user_list'];
-        $user_list = str_replace(",", "','", $userdata[0]['user_list']);
-        // GET BUSINESS USER IGNORE LIST END
-        //GET BUSINESS USER SUGGESTED USER LIST 
-        $contition_array = array('is_deleted' => '0', 'status' => '1', 'user_id != ' => $userid, 'business_step' => '4');
-        $search_condition = "business_profile_id NOT IN ('$follow_list') AND business_profile_id NOT IN ('$user_list')";
-        $userlistview = $this->common->select_data_by_search('business_profile', $search_condition, $contition_array, $data = 'count(*) as total', $sortby = 'CASE WHEN (industriyal = ' . $industriyal . ') THEN business_profile_id END, CASE WHEN (state = ' . $state . ') THEN business_profile_id END', $orderby = 'DESC', $limit = '3', $offset = '', $join_str_contact = array(), $groupby = '');
-
-        $this->data['follow_user_suggest_count'] = $userlistview[0]['total'];
-
-        /* COUNT FOR USER THREE LIST IN FOLLOW SUGGEST BOX */
-
-        $this->data['title'] = 'Business Feed'.TITLEPOSTFIX;
-        $this->data['metadesc'] = 'Get the lastest updates about your business connection and stay informed about business world.';
-        $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, true);
-        $this->load->view('business_profile_live/business_profile_post', $this->data);
     }
 
     public function business_profile_manage_post($id = "") {
@@ -272,14 +226,12 @@ class Business_profile_live extends MY_Controller {
 
         $this->data['title'] = ucwords($company_name)." ".($cityname != "" ? $cityname."," : "")." ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "")." - ".$industry_name.TITLEPOSTFIX;
         $this->data['metadesc'] = ucwords($company_name)." is ".$industry_name." company based in ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "").". To know more about it's contact details and services, Visit Aileensoul website.";
-        if (count($business_data) == 0) {
-            // $this->load->view('business_profile/notavalible', $this->data);
-            // redirect(base_url("404"),"refresh");
+        if (count($business_data) == 0) {            
             $this->data['title'] = "404".TITLEPOSTFIX;
             $this->load->view('404', $this->data);
         } else {
             if ($this->session->userdata('aileenuser')){ // && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
-                $this->load->view('business_profile_live/business_dashboard', $this->data);
+                $this->load->view('business_data/business_dashboard', $this->data);
             } else {
                 $page = 1;
                 $limit = 20;
@@ -287,7 +239,7 @@ class Business_profile_live extends MY_Controller {
                 include ('business_profile_include.php');
                 $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
                 $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
-                $this->load->view('business_profile_live/business_dashboard_no_login', $this->data);
+                $this->load->view('business_data/business_dashboard_no_login', $this->data);
                 //No login
             }
         }
@@ -2080,7 +2032,7 @@ class Business_profile_live extends MY_Controller {
             $this->load->view('404', $this->data);
         } else {
             if ($this->session->userdata('aileenuser')) {
-                $this->load->view('business_profile_live/business_detail', $this->data);
+                $this->load->view('business_data/business_detail', $this->data);
             } else {                
                 redirect(base_url("company/".$this->data['slugid']),"refresh");
                 // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
@@ -2195,9 +2147,9 @@ class Business_profile_live extends MY_Controller {
         }
         // $compnay_name = $this->get_company_name($id);
         $this->data['title'] = 'All Business User ' . TITLEPOSTFIX;
-        $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, TRUE);
+        $this->data['business_left'] = $this->load->view('business_data/business_left_live', $this->data, TRUE);
 
-        $this->load->view('business_profile_live/business_userlist', $this->data);
+        $this->load->view('business_data/business_userlist', $this->data);
     }
 
     public function ajax_userlist() {
@@ -3467,13 +3419,11 @@ class Business_profile_live extends MY_Controller {
 
         $company_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($company_name) . ' | Followers' . ' | Business Profile' . TITLEPOSTFIX;
-        if ($company_name == '') {
-            // $this->load->view('business_profile_live/notavalible');
-            // redirect(base_url("404"),"refresh");
+        if ($company_name == '') {            
             $this->data['title'] = "404".TITLEPOSTFIX;
             $this->load->view('404', $this->data);
         } else {
-            $this->load->view('business_profile_live/business_followers', $this->data);
+            $this->load->view('business_data/business_followers', $this->data);
         }
     }
 
@@ -3645,13 +3595,11 @@ class Business_profile_live extends MY_Controller {
 
         $company_name = $this->get_company_name($id);
         $this->data['title'] = $company_name . ' | Following' . ' | Business Profile' . TITLEPOSTFIX;
-        if ($company_name == '') {
-            // $this->load->view('business_profile_live/notavalible');
-            // redirect(base_url("404"),"refresh");
+        if ($company_name == '') {            
             $this->data['title'] = "404".TITLEPOSTFIX;
             $this->load->view('404', $this->data);
         } else {
-            $this->load->view('business_profile_live/business_following', $this->data);
+            $this->load->view('business_data/business_following', $this->data);
         }
     }
 
@@ -5492,10 +5440,10 @@ class Business_profile_live extends MY_Controller {
 
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($company_name) . ' | Post Detail' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, true);
+        $this->data['business_left'] = $this->load->view('business_data/business_left_live', $this->data, true);
         include ('business_profile_include.php');
 
-        $this->load->view('business_profile_live/postnewpage', $this->data);
+        $this->load->view('business_data/postnewpage', $this->data);
     }
 
 // click on post after post open on new page end 
@@ -5557,7 +5505,7 @@ class Business_profile_live extends MY_Controller {
             redirect('business-profile/home', refresh);
         } else {
             $this->data['title'] = 'Reactive | ' . ' Business Profile' . TITLEPOSTFIX;
-            $this->load->view('business_profile_live/reactivate', $this->data);
+            $this->load->view('business_data/reactivate', $this->data);
         }
     }
 
@@ -5731,8 +5679,8 @@ class Business_profile_live extends MY_Controller {
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | Photo' . ' | Business Profile' . TITLEPOSTFIX;
 
-        $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
-        $this->load->view('business_profile_live/business_photos', $this->data);
+        $this->data['file_header'] = $this->load->view('business_data/file_header', $this->data, true);
+        $this->load->view('business_data/business_photos', $this->data);
     }
 
 //multiple iamge for manage user end   
@@ -5764,10 +5712,10 @@ class Business_profile_live extends MY_Controller {
             $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
             $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
-        $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
+        $this->data['file_header'] = $this->load->view('business_data/file_header', $this->data, true);
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | Video' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile_live/business_videos', $this->data);
+        $this->load->view('business_data/business_videos', $this->data);
     }
 
 //multiple video for manage user end 
@@ -5800,10 +5748,10 @@ class Business_profile_live extends MY_Controller {
             $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
             $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
-        $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
+        $this->data['file_header'] = $this->load->view('business_data/file_header', $this->data, true);
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($businessdata1[0]['company_namebusiness_pdf']) . ' | Audio' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile_live/business_audios', $this->data);
+        $this->load->view('business_data/business_audios', $this->data);
     }
 
     //multiple audio for manage user end   
@@ -5836,10 +5784,10 @@ class Business_profile_live extends MY_Controller {
             $contition_array = array('user_id' => $businessdata1[0]['user_id'], 'status' => '1', 'is_delete' => '0');
             $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
-        $this->data['file_header'] = $this->load->view('business_profile_live/file_header', $this->data, true);
+        $this->data['file_header'] = $this->load->view('business_data/file_header', $this->data, true);
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | PDF' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile_live/business_pdf', $this->data);
+        $this->load->view('business_data/business_pdf', $this->data);
     }
 
     public function business_article($id) {
@@ -5870,10 +5818,10 @@ class Business_profile_live extends MY_Controller {
             $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
         $this->data['buss_article_data'] = $this->business_model->get_user_business_article($businessdata1[0]['user_id'],$userid);
-        $this->data['file_header'] = $this->load->view('business_profile/file_header', $this->data, true);
+        $this->data['file_header'] = $this->load->view('business_data/file_header', $this->data, true);
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($businessdata1[0]['company_name']) . ' | Article' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile_live/business_article', $this->data);
+        $this->load->view('business_data/business_article', $this->data);
     }
 
     //multiple pdf for manage user end 
@@ -8612,317 +8560,6 @@ class Business_profile_live extends MY_Controller {
         ));
     }
 
-    public function contact_list() {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $userid = $this->session->userdata('aileenuser');
-        $this->business_profile_active_check();
-        $this->is_business_profile_register();
-
-        $bussdata = $this->common->select_data_by_id('business_profile', 'user_id', $userid, $data = '*', $join_str = array());
-
-        // $join_str[0]['table'] = 'business_profile';
-        // $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        // $join_str[0]['from_table_id'] = 'contact_person.contact_from_id';
-        // $join_str[0]['join_type'] = '';
-
-        // $contition_array = array('contact_to_id' => $userid, 'contact_person.status' => 'pending');
-        // $friendlist_req = $this->data['friendlist_req'] = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
-        $fri_req_sql = "SELECT cp.*, IF (bp.city IS NULL, concat(bp.business_slug, '-', s.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
-            bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.other_business_type,bp.other_industrial
-            FROM ailee_contact_person cp
-            JOIN ailee_business_profile bp ON bp.user_id=cp.contact_from_id 
-            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city  
-            LEFT JOIN ailee_states s ON s.state_name = bp.state 
-            WHERE contact_to_id = '103' 
-            AND cp.status = 'pending' 
-            ORDER BY contact_id DESC";
-
-        // echo $fri_req_sql;
-        // exit;
-        $req_query = $this->db->query($fri_req_sql);
-        $friendlist_req = $this->data['friendlist_req'] = $req_query->result_array();
-        // echo $this->db->last_query();
-        // exit;
-        // $join_str[0]['table'] = 'business_profile';
-        // $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        // $join_str[0]['from_table_id'] = 'contact_person.contact_to_id';
-        // $join_str[0]['join_type'] = '';
-
-        // $contition_array = array('contact_from_id' => $userid, 'contact_person.status' => 'confirm');
-        // $friendlist_con = $this->data['friendlist_con'] = $this->common->select_data_by_condition('contact_person', $contition_array, $data = 'business_profile.business_profile_id,business_profile.company_name,business_profile.country,business_profile.state,business_profile.city,business_profile.pincode,business_profile.address,business_profile.contact_person,business_profile.contact_mobile,business_profile.contact_email,business_profile.business_type,business_profile.industriyal,business_profile.details,business_profile.user_id,business_profile.status,business_profile.is_deleted, business_profile.created_date,business_profile.business_user_image, business_profile.business_slug,contact_person.contact_id,contact_person.contact_from_id,contact_person.contact_to_id,contact_person.contact_type,contact_person.created_date,contact_person.status,contact_person.not_read', $sortby = 'contact_person.created_date', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
-
-        $sql = "SELECT ailee_business_profile.business_profile_id, ailee_business_profile.company_name, ailee_business_profile.country, ailee_business_profile.state, ailee_business_profile.city, ailee_business_profile.pincode, ailee_business_profile.address, ailee_business_profile.contact_person, ailee_business_profile.contact_mobile, ailee_business_profile.contact_email, ailee_business_profile.business_type, ailee_business_profile.industriyal, ailee_business_profile.details, ailee_business_profile.user_id, ailee_business_profile.status, ailee_business_profile.is_deleted, ailee_business_profile.created_date, ailee_business_profile.business_user_image,ailee_contact_person.contact_id, ailee_contact_person.contact_from_id, ailee_contact_person.contact_to_id, ailee_contact_person.contact_type, ailee_contact_person.created_date, ailee_contact_person.status, ailee_contact_person.not_read, IF (ailee_business_profile.city IS NULL, concat(ailee_business_profile.business_slug, '-', s.state_name) ,concat(ailee_business_profile.business_slug, '-', ct.city_name)) as business_slug
-            FROM ailee_contact_person 
-            JOIN ailee_business_profile ON ailee_business_profile.user_id=ailee_contact_person.contact_to_id 
-            LEFT JOIN ailee_cities ct ON ct.city_id = ailee_business_profile.city  
-            LEFT JOIN ailee_states s ON s.state_name = ailee_business_profile.state 
-            WHERE contact_from_id = '". $userid ."' AND ailee_contact_person.status = 'confirm' 
-            ORDER BY ailee_contact_person.created_date DESC";
-
-            $query = $this->db->query($sql);
-            $friendlist_con = $this->data['friendlist_con'] = $query->result_array();
-            // return $result_array;
-        // echo $this->db->last_query();
-        // exit;
-
-        $this->data['friendlist'] = array_merge($friendlist_con, $friendlist_req);
-
-        $company_name = $this->get_company_name($slug_id);
-        $this->data['title'] = ucwords($bussdata[0]['company_name']) . ' | Contact Request' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile_live/contact_list', $this->data);
-    }
-
-    public function ajax_contact_list() {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $perpage = 9;
-        $page = 1;
-        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
-            $page = $_GET["page"];
-        }
-
-        $start = ($page - 1) * $perpage;
-        if ($start < 0)
-            $start = 0;
-
-        $userid = $this->session->userdata('aileenuser');
-
-        $bussdata = $this->common->select_data_by_id('business_profile', 'user_id', $userid, $data = '*', $join_str = array());
-
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        $join_str[0]['from_table_id'] = 'contact_person.contact_from_id';
-        $join_str[0]['join_type'] = '';
-
-        $limit = $perpage;
-        $offset = $start;
-
-        $contition_array = array('contact_to_id' => $userid, 'contact_person.status' => 'pending');
-        $friendlist_req = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit, $offset, $join_str, $groupby = '');
-        $friendlist_req1 = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
-
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        $join_str[0]['from_table_id'] = 'contact_person.contact_to_id';
-        $join_str[0]['join_type'] = '';
-
-        $contition_array = array('contact_from_id' => $userid, 'contact_person.status' => 'confirm');
-        $friendlist_con = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
-
-
-        $friendlist = array_merge($friendlist_con, $friendlist_req);
-
-        $return_html = '';
-
-        if (empty($_GET["total_record"])) {
-            $_GET["total_record"] = count($friendlist_req1);
-        }
-
-        $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
-        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
-        $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
-
-        if ($friendlist_req) {
-            foreach ($friendlist_req as $friend) {
-                $inddata = $this->common->select_data_by_id('industry_type', 'industry_id', $friend['industriyal'], $data = '*', $join_str = array());
-
-
-                $userid = $this->session->userdata('aileenuser');
-                if ($friend['contact_to_id'] == $userid) {
-                    $return_html .= '<li id="' . $friend['contact_from_id'] . '">
-                                                    <div class="list-box">
-                                                        <div class="profile-img">';
-                    if ($friend['business_user_image'] != '') {
-                        $return_html .= '<a href="' . base_url('company/' . $friend['business_slug']) . '">
-                                                                    <img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image'] . '?ver=' . time() . '" alt="' . $friend['business_user_image'] . '">
-                                                                </a>';
-                    } else {
-                        $return_html .= '<a href="' . base_url('company/' . $friend['business_slug']) . '">
-                                                                    <img src="' . base_url(NOBUSIMAGE) . '" alt="NOBUSIMAGE"/>
-                                                                </a>';
-                    }
-                    $return_html .= '</div>
-                                                        <div class="profile-content">
-                                                            <a  href="' . base_url('company/' . $friend['business_slug']) . '">
-                                                                <div class="main_data_cq">   <span title="' . $friend['company_name'] . '" class="main_compny_name">' . $friend['company_name'] . '</span></div>
-                                                                <div class="main_data_cq">';
-                    if ($inddata[0]['industry_name']) {
-                        $return_html .= '<span class="dc_cl_m"   title="' . $inddata[0]['industry_name'] . '">' . $inddata[0]['industry_name'] . '</span>';
-                    } else {
-                        $return_html .= '<span class="dc_cl_m"   title="' . $friend['other_industrial'] . '">' . $friend['other_industrial'] . '</span>';
-                    }
-                    $return_html .= '</div>
-                                                            </a>
-                                                            </span>
-
-                                                        </div>
-                                                        <div class="fw">
-                                                            <p class="connect-link">
-                                                                <a href="javascript:void(0);" class="cr-accept acbutton  ani" onclick = "return contactapprove1(' . $friend['contact_from_id'] . ', 1);"><span class="cr-accept1"><i class="fa fa-check" aria-hidden="true"></i>
-                                                                    </span></a>
-                                                                <a href="javascript:void(0);" class="cr-decline" onclick = "return contactapprove1(' . $friend['contact_from_id'] . ', 0);"><span class="cr-decline1"><i class="fa fa-times" aria-hidden="true"></i>
-                                                                    </span></a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>';
-                }
-            }
-        } else {
-
-            $return_html .= '<li><div class="art-img-nn" id= "art-blank">
-                                    <div class="art_no_post_img">
-
-                                        <img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '" alt="No_Contact_Request.png">
-
-                                    </div>
-        <div class="art_no_post_text">
-                                        No Contact Request Available
-                                    </div>
-                                    </div></li>';
-        }
-        echo $return_html;
-    }
-
-    public function contact_list_approve() {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $toid = $_POST['toid'];
-        $status = $_POST['status'];
-        $userid = $this->session->userdata('aileenuser');
-
-        //if user deactive profile then redirect to business_profile/index untill active profile start
-        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
-
-        $business_deactive = $this->data['business_deactive'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
-
-        if ($business_deactive) {
-            redirect('business_profile/');
-        }
-        //if user deactive profile then redirect to business_profile/index untill active profile End
-
-        $contition_array = array('contact_from_id' => $toid, 'contact_to_id' => $userid, 'status' => 'pending');
-        $person = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $contactid = $person[0]['contact_id'];
-        if ($status == 1) {
-            $data = array(
-                'modify_date' => date('Y-m-d', time()),
-                'status' => 'confirm'
-            );
-
-            $updatdata = $this->common->update_data($data, 'contact_person', 'contact_id', $contactid);
-
-            if ($updatdata) {
-
-                $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $toid))->row()->contact_email;
-                if($this->data['business_login_user_image'] != "")
-                {
-                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$this->data['business_login_user_image'];
-                }
-                else
-                {
-                    $img = base_url('uploads/nobusimage.jpg');   
-                }
-                $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is approved your contact request in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">view</a></p>
-                                            </td>
-					</tr>
-                                    </table>';
-                $subject = $this->data['business_login_company_name'] . ' is approved your contact request in Aileensoul.';
-
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $toid))->row();
-
-                $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
-                {
-                    // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
-                    $url = base_url()."user_post/send_email_in_background";
-                    $param = array(
-                        "subject"=>$subject,
-                        "email_html"=>$email_html,
-                        "to_email"=>$to_email_id,
-                        "unsubscribe"=>$unsubscribe,
-                    );
-                    $this->inbackground->do_in_background($url, $param);
-                }
-            }
-        } else {
-
-            $data = array(
-                'modify_date' => date('Y-m-d', time()),
-                'status' => 'reject'
-            );
-
-            $updatdata = $this->common->update_data($data, 'contact_person', 'contact_id', $contactid);
-        }
-
-        $contition_array = array('contact_to_id' => $userid, 'status' => 'pending');
-        $contactperson = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        if ($contactperson) {
-            foreach ($contactperson as $contact) {
-
-                $busdata = $this->common->select_data_by_id('business_profile', 'user_id', $contact['contact_from_id'], $data = '*', $join_str = array());
-                $inddata = $this->common->select_data_by_id('industry_type', 'industry_id', $busdata[0]['industriyal'], $data = '*', $join_str = array());
-                //echo $busdata[0]['industriyal'];  echo '<pre>'; print_r($inddata); die();
-                $contactdata .= '<li id="' . $contact['contact_from_id'] . '">';
-                $contactdata .= '<div class="list-box">';
-                $contactdata .= '<div class="profile-img">';
-                if ($busdata[0]['business_user_image'] != '') {
-                    if (IMAGEPATHFROM == 'upload') {
-                        if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $busdata[0]['business_user_image'])) {
-                            $contactdata .= '<img src="' . base_url() . NOBUSIMAGE . '" alt="NOBUSIMAGE">';
-                        } else {
-                            $contactdata .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $busdata[0]['business_user_image'] . '?ver=' . time() . '" alt="' . $busdata[0]['business_user_image'] . '">';
-                        }
-                    } else {
-                        $filename = $this->config->item('bus_profile_thumb_upload_path') . $busdata[0]['business_user_image'];
-                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                        if (!$info) {
-                            $contactdata .= '<img src="' . base_url() . NOBUSIMAGE . '" alt="NOBUSIMAGE">';
-                        } else {
-                            $contactdata .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $busdata[0]['business_user_image'] . '?ver=' . time() . '" alt="' . $busdata[0]['business_user_image'] . '">';
-                        }
-                    }
-                } else {
-                    $contactdata .= '<img src="' . base_url() . NOBUSIMAGE . '" alt="NOBUSIMAGE">';
-                }
-
-                $contactdata .= '</div>';
-                $contactdata .= '<div class="profile-content">';
-                $contactdata .= '<a href="' . base_url('company/' . $busdata[0]['business_slug']) . '">';
-                $contactdata .= '<div class="main_data_cq">   <span title="' . $busdata[0]['company_name'] . '" class="main_compny_name">' . $busdata[0]['company_name'] . '</span></div>';
-                $contactdata .= '<div class="main_data_cq"><span class="dc_cl_m" title="' . $inddata[0]['industry_name'] . '"> ' . $inddata[0]['industry_name'] . '</span></div>';
-                $contactdata .= '</a></div>';
-                $contactdata .= '<div class="fw"><p class="connect-link">';
-                $contactdata .= '<a href="javascript:void(0);" class="cr-accept acbutton  ani" onclick = "return contactapprove1(' . $contact['contact_from_id'] . ',1);"><span class="cr-accept1"><i class="fa fa-check" aria-hidden="true"></i></span></a>';
-                $contactdata .= '<a href="javascript:void(0);" class="cr-decline" onclick = "return contactapprove1(' . $contact['contact_from_id'] . ',0);"><span class="cr-decline1"><i class="fa fa-times" aria-hidden="true"></i></span></a>';
-                $contactdata .= '</p>';
-                $contactdata .= '</div>';
-                $contactdata .= '</div>';
-                $contactdata .= '</li>';
-            }
-        } else {
-            $contactdata = '<li><div class="art-img-nn" id= "art-blank">
-                                    <div class="art_no_post_img">
-
-                                        <img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '" width="100" alt="No_Contact_Request.png">
-
-                                    </div>
-        <div class="art_no_post_text" style="font-size: 20px;">
-                                        No Notifiaction Available.
-                                    </div>
-                                    </div></li>';
-        }
-        echo $contactdata;
-    }
-
     public function bus_contact($id = "") {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $business_slug_id = $id;
@@ -8931,11 +8568,12 @@ class Business_profile_live extends MY_Controller {
         $company_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($company_name) . ' | Contacts' . ' | Business Profile' . TITLEPOSTFIX;
         if ($company_name == '') {
-            $this->load->view('business_profile_live/notavalible');
+            $this->data['title'] = "404".TITLEPOSTFIX;
+            $this->load->view('404', $this->data);
         } else {
             if($this->session->userdata('aileenuser'))
             {
-                $this->load->view('business_profile_live/bus_contact', $this->data);
+                $this->load->view('business_data/bus_contact', $this->data);
             }
             else
             {
