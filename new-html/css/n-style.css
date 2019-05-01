@@ -3660,7 +3660,8 @@ a:focus{text-decoration: none;}
 .analytic-detail .progress canvas{display: none}
 .analytic-detail .progress .skill{font-weight: bold;}
 
-.ana-tab-box .progress{margin-bottom: 0;}
+.ana-tab-box .progress{margin-bottom: 0; border-radius:20px;}
+.ana-tab-box .progress-bar{border-radius:20px;}
 .analytic-left-tab .nav > li > a{padding: 5px; color: #5c5c5c; margin-bottom: 2px;}
 .analytic-left-tab .nav > li > a:hover{border-radius: 5px;}
 .analytic-left-tab .nav > li.active > a{background: #eee; border-radius: 5px;}
@@ -4789,7 +4790,10 @@ tags-input .tags{padding: 0;}
   .search-new-page .middle-section{width: 100%;}
   .tab-pane img{width: 100%;}
   .search-more-post .btn-new-1{font-size: 13px;}
-
+  .profile-text1 .as-p{padding-left:5px; font-size: 12px;}
+  .email-verify .email-img img{width:22px;}
+  .verify{padding:5px 10px;}
+  .article-post-text h3{font-size: 13px;}
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}

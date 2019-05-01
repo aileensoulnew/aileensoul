@@ -31,7 +31,7 @@
                     <div class="tab-inner text-style">
                         <h3>Payment Earning</h3>
                         <div class="ana-tab-box">
-                            <p class="pb15">We'll send your payment once your payment threshold is reached</p>
+                            <p class="pb15">We will send you payment when you reach 10 dollar payment benchmark.</p>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-custom" style="width: 0%;">
                                     <span class="skill"><i class="val"></i></span>
@@ -41,7 +41,7 @@
                                 <span class="pull-left">$ 0 </span>
                                 <span class="pull-right">$ 10 </span>
                             </div>
-                            <p>we will send you payment when you reach 10 dollar payment benchmark.</p>
+                            
                            
                         </div>
                         <div class="ana-tab-box" ng-if="payment_history.length > 0">
