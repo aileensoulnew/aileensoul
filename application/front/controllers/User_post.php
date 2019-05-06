@@ -3780,48 +3780,57 @@ class User_post extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $this->data['shared_data'] = $shared_data = $this->user_post_model->get_sharepost_from_slug($slug);
         // print_r($shared_data);exit();
-        if($userid == "")
+        if(empty($shared_data))
         {
-            $userid = $shared_data['user_id'];            
-        }
-        $post_id = $shared_data['post_id'];
-        
-        $this->data['userdata'] = $userdata = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['post_id'] = $post_id;
-        $this->data['title'] = "Shared Post ".TITLEPOSTFIX;
-        $this->data['metadesc'] = '';
-        if($this->session->userdata('aileenuser') != "")
-        {
-            if(isset($shared_data) && !empty($shared_data))
-            {
-                $this->load->view('user_post/post_details', $this->data);
-            }
-            else
-            {
-                $this->data['title'] = "404".TITLEPOSTFIX;
-                $this->data['metadesc'] = "404";
-                $this->load->view('404', $this->data);
-            }
+            $this->data['title'] = "404".TITLEPOSTFIX;
+            $this->data['metadesc'] = "404";
+            $this->load->view('404', $this->data);
         }
         else
-        {
-            if(isset($shared_data) && !empty($shared_data))
+        {        
+            if($userid == "")
             {
-                $this->load->view('user_post/sharepost_detail', $this->data);
+                $userid = $shared_data['user_id'];            
+            }
+            $post_id = $shared_data['post_id'];
+            
+            $this->data['userdata'] = $userdata = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+            $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+            $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+            $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+            $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
+            $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+            $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+            $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+            $this->data['post_id'] = $post_id;
+            $this->data['title'] = "Shared Post ".TITLEPOSTFIX;
+            $this->data['metadesc'] = '';
+            if($this->session->userdata('aileenuser') != "")
+            {
+                if(isset($shared_data) && !empty($shared_data))
+                {
+                    $this->load->view('user_post/post_details', $this->data);
+                }
+                else
+                {
+                    $this->data['title'] = "404".TITLEPOSTFIX;
+                    $this->data['metadesc'] = "404";
+                    $this->load->view('404', $this->data);
+                }
             }
             else
             {
-                $this->data['title'] = "404".TITLEPOSTFIX;
-                $this->data['metadesc'] = "404";
-                $this->load->view('404', $this->data);
+                if(isset($shared_data) && !empty($shared_data))
+                {
+                    $this->load->view('user_post/sharepost_detail', $this->data);
+                }
+                else
+                {
+                    $this->data['title'] = "404".TITLEPOSTFIX;
+                    $this->data['metadesc'] = "404";
+                    $this->load->view('404', $this->data);
+                }
             }
         }
     }
