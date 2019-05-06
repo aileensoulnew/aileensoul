@@ -100,9 +100,9 @@
 											<div class="user-info-text text-center">
 												<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
 													<span title="{{suggest.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="suggest.fullname | capitalize"></span>
-													<span class="user-des main_data_cq" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
-													<span class="user-des main_data_cq" title="{{suggest.degree_name}}" ng-if="suggest.degree_name != ''">{{suggest.degree_name}}</span>
-													<span class="user-des main_data_cq" title="Current Work" ng-if="suggest.title_name == null && suggest.degree_name == null">Current Work</span>
+                                                    <span class="user-des main_data_cq" title="{{suggest.title_name}}" ng-if="suggest.title_name">{{suggest.title_name}}</span>
+                                                    <span class="user-des main_data_cq" title="{{suggest.degree_name}}" ng-if="suggest.degree_name">{{suggest.degree_name}}</span>
+                                                    <span class="user-des main_data_cq" title="Current Work" ng-if="!suggest.title_name && !suggest.degree_name">Current Work</span>
 												</a>
 											</div>
 											

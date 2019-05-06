@@ -2154,49 +2154,58 @@ class User_post extends MY_Controller {
 
     public function opprtunity_detail($slug = '') {
         $userid = $this->session->userdata('aileenuser');
-        $this->data['opp_data'] = $opp_data = $this->user_post_model->get_opportunity_from_slug($slug);        
-        if($userid == "")
+        $this->data['opp_data'] = $opp_data = $this->user_post_model->get_opportunity_from_slug($slug);
+        if(empty($opp_data))
         {
-            $userid = $opp_data['user_id'];
-        }
-        $post_id = $opp_data['post_id'];
-        
-        $this->data['userdata'] = $userdata = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['post_id'] = $post_id;
-        $this->data['title'] = $opp_data['opptitle'].TITLEPOSTFIX;
-        $this->data['metadesc'] = ucwords($userdata['first_name'])." posted opportunity for ".$opp_data['opportunity_for']." in ".$opp_data['location'].".";
-        if($this->session->userdata('aileenuser') != "")
-        {
-            if(isset($opp_data) && !empty($opp_data))
-            {
-                $this->load->view('user_post/post_details', $this->data);
-            }
-            else
-            {
-                $this->data['title'] = "404".TITLEPOSTFIX;
-                $this->data['metadesc'] = "404";
-                $this->load->view('404', $this->data);
-            }
+            $this->data['title'] = "404".TITLEPOSTFIX;
+            $this->data['metadesc'] = "404";
+            $this->load->view('404', $this->data);
         }
         else
         {
-            if(isset($opp_data) && !empty($opp_data))
+            if($userid == "")
             {
-                $this->load->view('user_post/opprtunity_detail', $this->data);
+                $userid = $opp_data['user_id'];
+            }
+            $post_id = $opp_data['post_id'];
+            
+            $this->data['userdata'] = $userdata = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+            $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+            $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+            $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+            $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
+            $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+            $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+            $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+            $this->data['post_id'] = $post_id;
+            $this->data['title'] = $opp_data['opptitle'].TITLEPOSTFIX;
+            $this->data['metadesc'] = ucwords($userdata['first_name'])." posted opportunity for ".$opp_data['opportunity_for']." in ".$opp_data['location'].".";
+            if($this->session->userdata('aileenuser') != "")
+            {
+                if(isset($opp_data) && !empty($opp_data))
+                {
+                    $this->load->view('user_post/post_details', $this->data);
+                }
+                else
+                {
+                    $this->data['title'] = "404".TITLEPOSTFIX;
+                    $this->data['metadesc'] = "404";
+                    $this->load->view('404', $this->data);
+                }
             }
             else
             {
-                $this->data['title'] = "404".TITLEPOSTFIX;
-                $this->data['metadesc'] = "404";
-                $this->load->view('404', $this->data);
+                if(isset($opp_data) && !empty($opp_data))
+                {
+                    $this->load->view('user_post/opprtunity_detail', $this->data);
+                }
+                else
+                {
+                    $this->data['title'] = "404".TITLEPOSTFIX;
+                    $this->data['metadesc'] = "404";
+                    $this->load->view('404', $this->data);
+                }
             }
         }
     }
