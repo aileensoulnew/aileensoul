@@ -56,7 +56,7 @@ if($_SERVER['HTTP_HOST']=="localhost" || $_SERVER['HTTP_HOST'] == 'aileensoul.lo
 	$db['default']['database'] = 'aileensoul';
 	$db['default']['dbdriver'] = 'mysqli';
 	$db['default']['dbprefix'] = 'ailee_';
-	$db['default']['pconnect'] = TRUE;
+	$db['default']['pconnect'] = FALSE;
 	$db['default']['db_debug'] = TRUE;
 	$db['default']['cache_on'] = FALSE;
 	$db['default']['cachedir'] = '';
