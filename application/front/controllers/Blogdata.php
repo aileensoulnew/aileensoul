@@ -17,9 +17,9 @@ class Blogdata extends CI_Controller {
 
     //MAIN INDEX PAGE START   
     public function index($slug = '') {
-//                $data = '*';
-//                $contition_array = array('status' => 'publish');
-//                $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str = array(), $groupby = '');
+       // $data = '*';
+       // $contition_array = array('status' => 'publish');
+       // $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str = array(), $groupby = '');
 
         $this->load->view('blogdata/index', $this->data);
     }

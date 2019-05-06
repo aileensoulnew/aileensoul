@@ -173,9 +173,11 @@
             <img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
         </div>
         <!-- Feed Start -->
+        <div id="post-fail" class="user_no_post_avl" style="display: none;">
+            <div class="user-img-nn">Please try again later.</div>
+        </div>
 
         <div id="main-post-{{recentpost.post_data.id}}" class="all-post-box" ng-show="IsVisible" ng-init="postIndex=$index">
-
             <div class="all-post-top">
                 <div class="post-head" ng-class="recentpost.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                     <div class="post-img" ng-if="recentpost.post_data.post_for == 'question'">

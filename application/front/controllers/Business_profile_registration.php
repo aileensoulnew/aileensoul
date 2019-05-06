@@ -289,20 +289,6 @@ class Business_profile_registration extends MY_Controller {
                     $data['contact_email'] = $userdata['email'];
 
                     $insert_id = $this->common->insert_data_getid($data, 'business_profile');
-                    /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
-                        //Openfire Username Generate Start
-                        $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
-                        $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                        $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                        $op_un_ps = "business_".str_replace("-", "_", $business_slug);
-                        $properties = array();
-                        $username = $op_un_ps;
-                        $password = $op_un_ps;
-                        $name = $company_name;
-                        $email = $email_reg;
-                        $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                        //Openfire Username Generate End
-                    }*/
 
                     if(trim($data['country']) != "")
                     {
@@ -460,21 +446,7 @@ class Business_profile_registration extends MY_Controller {
                 {
                     $url = base_url()."business_profile_registration/send_promotional_main_in_back";
                     $param = array("email_id"=>$email,"user_id"=>$userid);
-                    $this->inbackground->do_in_background($url, $param);
-                    /*//Send Promotional Mail Start
-                    $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
-                    $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data_sel = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
-
-                    $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    
-                    $email_html = $this->load->view('email_template/business',$this->userdata,TRUE);                
-
-                    $subject = $userdata[0]['company_name']." is Now Live on Aileensoul Platform ";
-
-                    $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-                    //Send Promotional Mail End*/
+                    $this->inbackground->do_in_background($url, $param);                    
                 }
                 $data['is_success'] = 1;
             } else {
@@ -1105,37 +1077,10 @@ class Business_profile_registration extends MY_Controller {
             $data['modified_date'] = date('Y-m-d H:i:s', time());
 
             $insert_id = $this->common->insert_data_getid($data, 'business_profile');
-
-            /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
-                //Openfire Username Generate Start
-                $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
-                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                $op_un_ps = "business_".str_replace("-", "_", $business_slug);
-                $properties = array();
-                $username = $op_un_ps;
-                $password = $op_un_ps;
-                $name = $company_name;
-                $email = $email_reg;
-                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                //Openfire Username Generate End
-            }*/
-
+            
             $url = base_url()."business_profile_registration/send_promotional_main_in_back";
             $param = array("email_id"=>$email_reg,"user_id"=>$userid);
-            $this->inbackground->do_in_background($url, $param);
-
-            /*//Send Promotional Mail Start            
-            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
-
-            $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-            
-            $email_html = $this->load->view('email_template/business',$this->userdata,TRUE);                
-
-            $subject = $company_name." is Now Live on Aileensoul Platform ";
-
-            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-            //Send Promotional Mail End*/
+            $this->inbackground->do_in_background($url, $param);            
 
             if(trim($data['industriyal']) != "")
             {
@@ -1166,196 +1111,6 @@ class Business_profile_registration extends MY_Controller {
             }
             $insert_id = $this->common->insert_data_getid($data, 'business_profile_search_tmp');
             $data['is_success'] = 1;
-            /*$config = array(
-                'upload_path' => $this->config->item('bus_profile_main_upload_path'),
-                'max_size' => 1024 * 100,
-                'allowed_types' => array('jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg')
-            );
-
-            $images = array();
-            $this->load->library('upload');
-
-            $files = $_FILES;
-            $count = count($_FILES['business_image']['name']);
-            if ($count > 0) {
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-
-                for ($i = 0; $i < $count; $i++) {
-                    $_FILES['business_image']['name'] = $files['business_image']['name'][$i];
-                    $_FILES['business_image']['type'] = $files['business_image']['type'][$i];
-                    $_FILES['business_image']['tmp_name'] = $files['business_image']['tmp_name'][$i];
-                    $_FILES['business_image']['error'] = $files['business_image']['error'][$i];
-                    $_FILES['business_image']['size'] = $files['business_image']['size'][$i];
-
-                    $fileName = $_FILES['business_image']['name'];
-                    $images[] = $fileName;
-                    $config['file_name'] = $fileName;
-
-                    $this->upload->initialize($config);
-                    $this->upload->do_upload();
-
-                    if ($this->upload->do_upload('business_image')) {
-                        $response['result'][] = $this->upload->data();
-                        $main_image_size = $_FILES['business_image']['size'];
-
-                        if ($main_image_size > '1000000') {
-                            $quality = "50%";
-                        } elseif ($main_image_size > '50000' && $main_image_size < '1000000') {
-                            $quality = "55%";
-                        } elseif ($main_image_size > '5000' && $main_image_size < '50000') {
-                            $quality = "60%";
-                        } elseif ($main_image_size > '100' && $main_image_size < '5000') {
-                            $quality = "65%";
-                        } elseif ($main_image_size > '1' && $main_image_size < '100') {
-                            $quality = "70%";
-                        } else {
-                            $quality = "100%";
-                        }
-
-                        // RESIZE 
-
-                        $business_profile_detail_main[$i]['image_library'] = 'gd2';
-                        $business_profile_detail_main[$i]['source_image'] = $this->config->item('bus_detail_main_upload_path') . $response['result'][$i]['file_name'];
-                        $business_profile_detail_main[$i]['new_image'] = $this->config->item('bus_detail_main_upload_path') . $response['result'][$i]['file_name'];
-                        $business_profile_detail_main[$i]['quality'] = $quality;
-                        $instanse10 = "image10_$i";
-                        $this->load->library('image_lib', $business_profile_detail_main[$i], $instanse10);
-                        $this->$instanse10->watermark();
-
-                        // RESIZE 
-
-                        $main_image = $this->config->item('bus_detail_main_upload_path') . $response['result'][$i]['file_name'];
-                        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-
-                        $image_width = $response['result'][$i]['image_width'];
-                        $image_height = $response['result'][$i]['image_height'];
-
-                        $thumb_image_width = $this->config->item('bus_detail_thumb_width');
-                        $thumb_image_height = $this->config->item('bus_detail_thumb_height');
-
-                        if ($image_width > $image_height) {
-                            $n_h = $thumb_image_height;
-                            $image_ratio = $image_height / $n_h;
-                            $n_w = round($image_width / $image_ratio);
-                        } else if ($image_width < $image_height) {
-                            $n_w = $thumb_image_width;
-                            $image_ratio = $image_width / $n_w;
-                            $n_h = round($image_height / $image_ratio);
-                        } else {
-                            $n_w = $thumb_image_width;
-                            $n_h = $thumb_image_height;
-                        }
-
-                        $business_profile_detail_thumb[$i]['image_library'] = 'gd2';
-                        $business_profile_detail_thumb[$i]['source_image'] = $this->config->item('bus_detail_main_upload_path') . $response['result'][$i]['file_name'];
-                        $business_profile_detail_thumb[$i]['new_image'] = $this->config->item('bus_detail_thumb_upload_path') . $response['result'][$i]['file_name'];
-                        $business_profile_detail_thumb[$i]['create_thumb'] = TRUE;
-                        $business_profile_detail_thumb[$i]['maintain_ratio'] = FALSE;
-                        $business_profile_detail_thumb[$i]['thumb_marker'] = '';
-                        $business_profile_detail_thumb[$i]['width'] = $n_w;
-                        $business_profile_detail_thumb[$i]['height'] = $n_h;
-                        $business_profile_detail_thumb[$i]['quality'] = "100%";
-                        $business_profile_detail_thumb[$i]['x_axis'] = '0';
-                        $business_profile_detail_thumb[$i]['y_axis'] = '0';
-                        $instanse = "image_$i";
-                        //Loading Image Library
-                        $this->load->library('image_lib', $business_profile_detail_thumb[$i], $instanse);
-                        $dataimage = $response['result'][$i]['file_name'];
-                        //Creating Thumbnail
-                        $this->$instanse->resize();
-                        // CROP 
-                        // reconfigure the image lib for cropping
-                        $conf_new[$i] = array(
-                            'image_library' => 'gd2',
-                            'source_image' => $business_profile_detail_thumb[$i]['new_image'],
-                            'create_thumb' => FALSE,
-                            'maintain_ratio' => FALSE,
-                            'width' => $thumb_image_width,
-                            'height' => $thumb_image_height
-                        );
-
-                        $conf_new[$i]['new_image'] = $this->config->item('bus_detail_thumb_upload_path') . $response['result'][$i]['file_name'];
-
-                        $left = ($n_w / 2) - ($thumb_image_width / 2);
-                        $top = ($n_h / 2) - ($thumb_image_height / 2);
-
-                        $conf_new[$i]['x_axis'] = $left;
-                        $conf_new[$i]['y_axis'] = $top;
-
-                        $instanse1 = "image1_$i";
-                        //Loading Image Library
-                        $this->load->library('image_lib', $conf_new[$i], $instanse1);
-                        $dataimage = $response['result'][$i]['file_name'];
-                        //Creating Thumbnail
-                        $this->$instanse1->crop();
-
-                        $resize_image = $this->config->item('bus_detail_thumb_upload_path') . $response['result'][$i]['file_name'];
-                        $abc = $s3->putObjectFile($resize_image, bucket, $resize_image, S3::ACL_PUBLIC_READ);
-
-                        // CROP 
-
-                        $response['error'][] = $thumberror = $this->$instanse->display_errors();
-                        $return['data'][] = $imgdata;
-                        $return['status'] = "success";
-                        $return['msg'] = sprintf($this->lang->line('success_item_added'), "Image", "uploaded");
-
-                        if ($_SERVER['HTTP_HOST'] != "localhost") {
-                            if (isset($main_image)) {
-                                unlink($main_image);
-                            }
-                            if (isset($resize_image)) {
-                                unlink($resize_image);
-                            }
-                        }
-                    } else {
-                        $dataimage = '';
-                    }
-                    if (count($response['error']) > 0) {
-                        $data['errors'] = $errors;
-                    }
-                    if ($dataimage) {
-                        $data = array(
-                            'image_name' => $dataimage,
-                            'user_id' => $userid,
-                            'created_date' => date('Y-m-d H:i:s'),
-                            'is_delete' => '0'
-                        );
-                        $insert_id = $this->common->insert_data_getid($data, 'bus_image');
-                    }
-
-                    if ($dataimage) {
-                        $data = array(
-                            'modified_date' => date('Y-m-d H:i:s', time()),
-                            'business_step' => '4'
-                        );
-                        $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                        $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
-                    } else {
-                        $data = array(
-                            'modified_date' => date('Y-m-d H:i:s', time()),
-                            'business_step' => '4'
-                        );
-                        $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                        $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
-                    }
-                }
-            }
-            else
-            {
-                $data = array(
-                    'modified_date' => date('Y-m-d H:i:s', time()),
-                    'business_step' => '4'
-                );
-                $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
-            }
-            if ($updatdata) {
-                $data['is_success'] = 1;
-            } else {
-                $data['is_success'] = 0;
-            }*/
-
         }
         echo json_encode($data);
 

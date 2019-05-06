@@ -619,19 +619,6 @@ class Article extends MY_Controller {
                     $return_array['is_oldLike'] = '1';
                     $return_array['likePost_count'] = $this->likePost_count($post_id);
                     $return_array['post_like_data'] = $this->article_model->postLikeData($post_id);
-                    /*if($userid == $postLikeData['user_id'])
-                    {
-                        $postLikeUsername = "You";
-                    }
-                    else
-                    {
-                        $postLikeUsername = $postLikeData['username'];
-                    }
-                    if ($return_array['likePost_count'] > 1) {
-                        $return_array['post_like_data'] = $postLikeUsername . ' and ' . ($return_array['likePost_count'] - 1) . ' other';
-                    } elseif ($return_array['likePost_count'] == 1) {
-                        $return_array['post_like_data'] = $postLikeUsername;
-                    }*/
                 }
             } else {
                 $data = array();
@@ -644,19 +631,6 @@ class Article extends MY_Controller {
                     $return_array['is_oldLike'] = '0';
                     $return_array['likePost_count'] = $this->likePost_count($post_id);
                     $return_array['post_like_data'] = $this->article_model->postLikeData($post_id);
-                    /*if($userid == $postLikeData['user_id'])
-                    {
-                        $postLikeUsername = "You";
-                    }
-                    else
-                    {
-                        $postLikeUsername = $postLikeData['username'];
-                    }
-                    if ($return_array['likePost_count'] > 1) {
-                        $return_array['post_like_data'] = $postLikeUsername . ' and ' . ($return_array['likePost_count'] - 1) . ' other';
-                    } elseif ($return_array['likePost_count'] == 1) {
-                        $return_array['post_like_data'] = $postLikeUsername;
-                    }*/
                 }
             }
         } else {
@@ -674,19 +648,6 @@ class Article extends MY_Controller {
                 $return_array['is_oldLike'] = '0';
                 $return_array['likePost_count'] = $this->likePost_count($post_id);
                 $return_array['post_like_data'] = $this->article_model->postLikeData($post_id);
-                /*if($userid == $postLikeData['user_id'])
-                {
-                    $postLikeUsername = "You";
-                }
-                else
-                {
-                    $postLikeUsername = $postLikeData['username'];
-                }
-                if ($return_array['likePost_count'] > 1) {
-                    $return_array['post_like_data'] = $postLikeUsername . ' and ' . ($return_array['likePost_count'] - 1) . ' other';
-                } elseif ($return_array['likePost_count'] == 1) {
-                    $return_array['post_like_data'] = $postLikeUsername;
-                }*/
             } else {
                 $return_array['message'] = '0';
                 $return_array['likePost_count'] = $this->likePost_count($post_id);

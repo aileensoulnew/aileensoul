@@ -53,14 +53,7 @@ class Blog extends CI_Controller {
             if($count == 1){
             //FOR GETTING ALL DATA
             $condition_array = array('status' => 'publish');
-            $this->data['blog_all'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = '', $offset = '', $join_str = array());
-
-            // echo count($this->data['blog_all']);exit;
-            //FOR GETTING BLOG
-            /*$condition_array = array('status' => 'publish', 'blog_slug' => $slug);
-            $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());*/
-            // echo $this->db->last_query();
-            // exit;
+            $this->data['blog_all'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = '', $offset = '', $join_str = array());            
 
             $this->data['blog_data'] = $this->blog_model->get_blog_details($slug);
             // random blog end
@@ -268,27 +261,6 @@ class Blog extends CI_Controller {
         $this->load->view('blog/index', $this->data);
     }
 
-    //READ MORE CLICK START
-//    public function read_more() {
-//
-//        $id = $_POST['blog_id'];
-//
-//        //FOR INSERT READ MORE BLOG START
-//        $data = array(
-//            'blog_id' => $id,
-//            'visiter_date' => date('Y-m-d H:i:s')
-//        );
-//        $insert_id = $this->common->insert_data_getid($data, 'blog_visit');
-//
-//        //FOR INSERT READ MORE BLOG END
-//
-//        if ($insert_id) {
-//            echo 1;
-//        } else {
-//            echo 0;
-//        }
-//    }
-
     //READ MORE CLICK END
     //BLOGDETAIL FOR PERICULAR ONE POST START
     public function blogdetail($slug = '') {
@@ -441,8 +413,7 @@ class Blog extends CI_Controller {
                     <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     <li><a href="#"><i class="fa fa-skype"></i></a></li>
 		</ul>
-            </p>
-';
+            </p>';
                    
                         
                         

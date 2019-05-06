@@ -317,48 +317,10 @@ app.controller('EditorController', ['$scope', function ($scope) {
     };
 }]);
 
-// app.directive('scrollableContainer', function ($window, $document, $http) {
-//     return {
-//         link: function ($scope, element, attrs) {
-//             $(window).on('scroll', function () {
-// //                if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
-//                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-//                     //var post_index = $(".post_index:last").val();
-//                     var page = $(".page_number:last").val();
-//                     var total_record = $(".total_record").val();
-//                     var perpage_record = $(".perpage_record").val();
-//                     if (parseInt(perpage_record * page) <= parseInt(total_record)) {
-//                         var available_page = total_record / perpage_record;
-//                         available_page = parseInt(available_page, 10);
-//                         var mod_page = total_record % perpage_record;
-//                         if (mod_page > 0) {
-//                             available_page = available_page + 1;
-//                         }
-//                         //if ($(".page_number:last").val() <= $(".total_record").val()) {
-//                         if (parseInt(page) <= parseInt(available_page)) {
-//                             var pagenum = parseInt($(".page_number:last").val()) + 1;
-//                             getUserPost(pagenum);
-//                         }
-//                     }
-//                 }
-//             });
-//             function getUserPost(pagenum = '') {
-//                 $('#loader').show();
-//                 $http.get(base_url + "user_post/getUserPost?page=" + pagenum).then(function (success) {
-//                     $('#loader').hide();
-//                     for (var i in success.data) {
-//                         $scope.postData.push(success.data[i]);
-//                     }
-//                     $('video,audio').mediaelementplayer(/* Options */);
-//                 }, function (error) {});
-//             }
-//         }
-//     };
-// });
-
 
 app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.IsVisible = false;
+    $scope.recentpost = [];
 
     $(document).on('hidden.bs.modal', function (event) {
         if($('.modal.in').length > 0)
@@ -982,8 +944,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
         content += "</data-owl-carousel>";
         setTimeout(function(){
-            alert(inx);
-            console.log(content);
+            /*alert(inx);
+            console.log(content);*/
             var $elm = $(".corousel"+inx).html(content);
             $compile($elm)($scope);
         },1000);
@@ -1554,6 +1516,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 getUserPost(pg,1);
                                 $scope.IsVisible = true;                                
                                 $scope.recentpost = success.data;
+                                if(success.data.status == '0')
+                                {
+                                    $("#post-fail").fadeIn("slow");
+                                    setTimeout(function() {
+                                        $("#post-fail").fadeOut("slow");
+                                    }, 5000);
+                                }
 
                                 bar.width(100+'%');
                                 percent.html(100+'%');
@@ -1828,6 +1797,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 getUserPost(pg,1);
                                 $scope.IsVisible = true;
                                 $scope.recentpost = success.data;
+                                if(success.data.status == '0')
+                                {
+                                    $("#post-fail").fadeIn("slow");
+                                    setTimeout(function() {
+                                        $("#post-fail").fadeOut("slow");
+                                    }, 5000);
+                                }
 
                                 bar.width(100+'%');
                                 percent.html(100+'%');
@@ -2329,6 +2305,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 getUserPost(pg,1);
                                 $scope.IsVisible = true;
                                 $scope.recentpost = success.data;
+                                // console.log(success);
+                                if(success.data.status == '0')
+                                {
+                                    $("#post-fail").fadeIn("slow");
+                                    setTimeout(function() {
+                                        $("#post-fail").fadeOut("slow");
+                                    }, 5000);
+                                }
 
                                 setTimeout(function(){
                                     // $scope.IsVisible = false;
@@ -2482,7 +2466,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 var index = $scope.contactSuggetion.indexOf(contact);
                 $('.addtobtn-' + user_id).html('Request Sent');
                 $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
-//                $('.owl-carousel').trigger('next.owl.carousel');
+               // $('.owl-carousel').trigger('next.owl.carousel');
             }
         });
     }

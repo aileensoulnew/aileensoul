@@ -66,24 +66,6 @@ class Advertise_with_us extends CI_Controller {
             $email_html .= '</tr></table>';
 
             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
-
-            // email send to user
-
-//
-//            $email_user = '';
-//            $email_user .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
-//                    <tr><td style="padding-left:20px;">Thank you. Your Feedback is important for us.!!<br><br>
-//                         <p style="padding-left:0px; padding-bottom: 20px;"> Your Message has been  received and will be reviewed by the aileensoul team. We appreciate your assistance in making the aileensoul better.</p><br></td></tr>';
-//            $email_user .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
-//            $email_user .= 'Thanks & regards,';
-//            $email_user .= '<br></td></tr>';
-//            $email_user .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
-//            $email_user .= 'Aileensoul team.';
-//            $email_user .= '</td></tr>';
-//            $email_user .= '</table>';
-//
-//            $send_user = $this->email_model->send_email($subject = $subject, $templ = $email_user, $to_email = $touser);
-
             echo 'ok';
         }
     }
