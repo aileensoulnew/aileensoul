@@ -142,7 +142,7 @@ class Dashboard extends MY_Controller {
         closedir($handle);
     }
 
-// cover pic controller
+    // cover pic controller
     public function ajaxpro() {
 
         $userid = $this->session->userdata('aileenuser');
@@ -222,7 +222,7 @@ class Dashboard extends MY_Controller {
         $user_reg_data = $this->dashboard_model->getUserBackImage($userid);
         $user_reg_back_image = $user_reg_data['profile_background'];
 
-//        echo '<img src = "' . $this->data['busdata'][0]['profile_background'] . '" />';
+       // echo '<img src = "' . $this->data['busdata'][0]['profile_background'] . '" />';
         $coverpic = '  <div class="bg-images"><img id="image_src" name="image_src" src = "' . USER_BG_MAIN_UPLOAD_URL . $user_reg_back_image . '" /></div>';
 
         echo $coverpic;
@@ -259,28 +259,8 @@ class Dashboard extends MY_Controller {
             echo "welcome";
         }
     }
-
     // cover pic end
-// resend email for account verify start
 
-    public function resendverifyaccount() {
-        $userid = $this->session->userdata('aileenuser');
-        $userdata = $this->common->select_data_by_id('user', 'user_id', $userid, $data = '*', $join_str = array());
-
-        $email = $userdata[0]['user_email'];
-        $toemail = "ankit.aileensoul@gmail.com";
-
-        $msg = "Hey !" . $userdata[0]['user_name'] . "<br/>";
-        $msg = "hi falgui";
-        $subject = "Verify Your Account";
-
-        $mail = $this->email_model->do_email($msg, $subject, $toemail, $from);
-
-        if ($mail) {
-            echo "hello";
-            die();
-        }
-    }
     public function closever() {
 
         $userid = $this->session->userdata('aileenuser');

@@ -125,12 +125,13 @@ class Email_model extends CI_Model {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        // if ($this->email->send()) {
-        if ($mail->send()) {
+        /*if ($mail->send()) {
             return TRUE;
         } else {
             return FALSE;
-        }
+        }*/
+        return TRUE;
+
     }
 
     function sendEmail($app_name = '', $app_email = '', $to_email = '', $subject = '', $mail_body = '', $cc = '', $bcc = '')
@@ -211,49 +212,7 @@ class Email_model extends CI_Model {
                             </table>
                         </div>
                     </body>
-                    </html>';
-
-        //   echo $mail_html; 
-        //Loading E-mail Class
-//         $config['protocol'] = "smtp";
-//         $config['smtp_host'] = $emailsetting[0]['host_name'];
-//         $config['smtp_port'] = $emailsetting[0]['out_going_port'];
-//         $config['smtp_user'] = $emailsetting[0]['user_name'];
-//         $config['smtp_pass'] = $emailsetting[0]['password'];
-//         $config['smtp_rec_email'] = $emailsetting[0]['receiver_email'];
-//         $config['charset'] = "utf-8";
-//         $config['mailtype'] = "html";
-//         $config['newline'] = "\r\n";
-
-        /*$config['protocol'] = "SMTP";
-                        //$config['smtp_host'] = "email-smtp.us-west-2.amazonaws.com";
-        $config['smtp_host'] = "Smtp.gmail.com";
-                    //$config['smtp_port'] = "587";
-        $config['smtp_port'] = "25";
-        $config['smtp_user'] = "notification.aileensoul@gmail.com";
-        $config['smtp_pass'] = "aileensoul@123";
-        $config['charset'] = "utf-8";
-        $config['mailtype'] = "html";
-        $config['newline'] = "\r\n";*/
-
-//         $this->email->initialize($config);
-//         $this->email->from($config['smtp_user'], $app_name);
-//          $this->email->cc($cc);
-//         $this->email->bcc($bcc);
-        //    $this->email->cc($cc);
-//         $this->email->subject($subject);
-//         $this->email->message(html_entity_decode($mail_body));
-        //$to = "falguni.aileensoul@gmail.com";
-        //$sub = "khytiii";
-        //$this->email->from('aileensoul@gmail.com', 'Aileensoul');
-        /*$this->email->from('notification.aileensoul@gmail.com', 'Aileensoul');
-
-        $this->email->to($to_email);*/
-                    //$this->email->reply_to('no-replay@aileensoul.com', 'Explendid Videos');
-        /*$this->email->subject($subject);
-        $this->email->message($mail_html);
-        $this->email->set_mailtype("html");
-        $this->email->send();*/
+                    </html>';        
 
         require 'phpmailer/vendor/autoload.php';
  
@@ -285,60 +244,12 @@ class Email_model extends CI_Model {
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
         }
-        if ($mail->send()) {
-            //echo "111"; die();
+        return true;
+        /*if ($mail->send()) {
             return true;
-        } else {  //echo "222"; die();
+        } else {
             return FALSE;
-        }
-    }
-
-    function do_email($msg = NULL, $sub = NULL, $to = NULL, $from = NULL, $attachment_url = NULL) {
-        //echo $msg; echo "<br/>";
-        //   echo $sub;  echo "<br/>";
-        //   echo $to; echo "<br/>";
-        //   echo $from; die();
-        $this->load->library('email');
-        /* THIS CODE IS COMMENTED */
-
-       // $config['protocol'] = "SMTP";
-       // $config['smtp_host'] = "SMTP.gmail.com";
-       // $config['smtp_port'] = "587";
-       // $config['smtp_user'] = "aileensoftsolution@gmail.com";
-       // $config['smtp_pass'] = "xyz123456";
-       // $config['charset'] = "utf-8";
-       // $config['mailtype'] = "html";
-       // $config['newline'] = "\r\n";
-
-        /* THIS CODE IS COMMENTED */
-
-        $config['protocol'] = "SMTP";
-        $config['smtp_host'] = "Smtp.gmail.com";
-        $config['smtp_port'] = "25";
-        $config['smtp_user'] = "notification.aileensoul@gmail.com";
-        $config['smtp_pass'] = "aileensoul@123";
-        $config['charset'] = "utf-8";
-        $config['mailtype'] = "html";
-        $config['newline'] = "\r\n";
-
-        $this->email->initialize($config);
-
-        // $system_name    =   $this->db->get_where('settings' , array('type' => 'system_name'))->row()->description;
-        // if ($from == NULL)
-        //     $from       =   $this->db->get_where('settings' , array('type' => 'system_email'))->row()->description;
-        $system_name = "aileensoul";
-        // attachment
-        //if ($attachment_url != NULL)
-        //  $this->email->attach( $attachment_url );
-
-        $this->email->from('aileensoul@gmail.com', 'Aileensoul');
-        $this->email->to($to);
-        $this->email->reply_to('no-replay@aileensoul.com', 'Explendid Videos');
-        $this->email->subject($sub);
-        $this->email->message($msg);
-        $this->email->send();
-
-        //echo $this->email->print_debugger(); die();
+        }*/
     }
 
     function test_email($subject = '', $templ = '', $to_email = '') {
@@ -411,12 +322,12 @@ class Email_model extends CI_Model {
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
         }
-        // if ($this->email->send()) {
-        if ($mail->send()) {
+        return TRUE;
+        /*if ($mail->send()) {
             return TRUE;
         } else {
             return FALSE;
-        }
+        }*/
     }
 
     function send_email_hp($subject = '', $templ = '', $to_email = '',$unsubscribe = '') {
@@ -532,12 +443,11 @@ class Email_model extends CI_Model {
             return true;
         }
 
-        // if ($this->email->send()) {
-        if ($mail->send()) {
+        return TRUE;
+        /*if ($mail->send()) {
             return TRUE;
         } else {
             return FALSE;
-        }
+        }*/
     }
-
 }

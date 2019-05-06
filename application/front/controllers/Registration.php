@@ -303,8 +303,7 @@ class Registration extends CI_Controller {
 
             $subject = ucwords($fname).", Verify your Aileensoul Account";
 
-            $mail = $this->email_model->send_email($subject = $subject, $templ = $msg, $to_email = $toemail);
-            //$mail = $this->email_model->do_email($msg, $subject, $toemail, $from);
+            $mail = $this->email_model->send_email($subject = $subject, $templ = $msg, $to_email = $toemail);            
             $ret_arr = array("success"=>1);
         }
         else
