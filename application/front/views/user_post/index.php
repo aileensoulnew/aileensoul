@@ -623,7 +623,7 @@
                             <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
                             </div>
                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                            <div class="mySlides mySlides2{{recentpost.post_data.id}}" ng-if="recentpost.post_data.post_for != 'article'" ng-repeat="_photoData in recentpost.post_file_data">
+                            <div class="mySlides myModal{{recentpost.post_data.id}}" ng-if="recentpost.post_data.post_for != 'article'" ng-repeat="_photoData in recentpost.post_file_data">
                                 <div class="numbertext">{{$index + 1}} / {{recentpost.post_data.total_post_files}}</div>
                                 <div class="slider_img_p">
                                     <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
@@ -640,8 +640,8 @@
                             <p id="caption"></p>
                         </div>
                     </div> 
-                    <a ng-if="recentpost.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,recentpost.post_data.id)">&#10094;</a>
-                    <a ng-if="recentpost.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,recentpost.post_data.id)">&#10095;</a>
+                    <a ng-if="recentpost.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,'myModal'+recentpost.post_data.id)">&#10094;</a>
+                    <a ng-if="recentpost.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,'myModal'+recentpost.post_data.id)">&#10095;</a>
                 </div>
                 <div class="post-bottom">
                         <div class="like-list">
@@ -1553,7 +1553,7 @@
                                 <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
                                 </div>
                                 <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                                <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for != 'article'" ng-repeat="_photoData in post.post_file_data">
+                                <div class="mySlides myModal{{post.post_data.id}}" ng-if="post.post_data.post_for != 'article'" ng-repeat="_photoData in post.post_file_data">
                                     <div class="numbertext">{{$index + 1}} / {{post.post_data.total_post_files}}</div>
                                     <div class="slider_img_p">
                                         <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
@@ -1570,8 +1570,8 @@
                                 <p id="caption"></p>
                             </div>
                         </div> 
-                        <a ng-if="post.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.post_data.id)">&#10094;</a>
-                        <a ng-if="post.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.post_data.id)">&#10095;</a>
+                        <a ng-if="post.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,'myModal'+post.post_data.id)">&#10094;</a>
+                        <a ng-if="post.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,'myModal'+post.post_data.id)">&#10095;</a>
                     </div>
                     <div class="post-bottom">
                         <div class="like-list">
