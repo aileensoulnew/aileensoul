@@ -3682,9 +3682,18 @@ a:focus{text-decoration: none;}
 .search-more-post{text-align: center; padding-bottom: 30px;}
 .search-left-box .btn-new-1{padding: 7px 25px; margin: 0;}
 .search-left-box .btn-new-1 span img{width: 15px; margin-top: -3px; display: none;}
-.mobile-header .sub-header .search-tab .sub-menu > li a span{display: none;}
-.mob-search-btn{width: 40px; height: 40px; border: 1px solid #5c5c5c; border-radius: 100%; display: none; padding: 8px; position: fixed; bottom: 55px; right:10px;}
+.mobile-header .sub-header .search-tab .sub-menu td a span{display: none;}
+.mob-search-btn{width: 34px; height: 34px; display: none; padding: 6px; position: absolute; bottom: 0px; right:0px;}
 .mob-search-btn img{width: 20px;}
+.cbp-spmenu-bottom{bottom:-100%;}
+.cbp-spmenu-horizontal{height: 100%;}
+.mobile-header .sub-header .search-tab .sub-menu td a{color:#5c5c5c;}
+.mobile-header .sub-header .search-tab table.sub-menu{max-width: 100%; justify-content: inherit; display:inherit; align-items:inherit;}
+.mobile-header .sub-header .search-tab table.sub-menu td{}
+.table-responsive.content table.sub-menu td a.active{background: #fff;}
+.table-responsive.content table.sub-menu td a:hover{background: #fff;}
+.table-responsive.content table.sub-menu td{border: 0px;}
+.search-tab .table-responsive.content{height: 34px !important;}
 
 /*** end search new page  ***/
 
@@ -4785,7 +4794,7 @@ tags-input .tags{padding: 0;}
   .share-post{background: #fff;}
   .analytic-detail .analytic-left-tab{width: 450px;}
   .analytic-detail .tab-content{width: 450px;}
-  .mobile-header .sub-header .search-tab .sub-menu > li a{font-size: 12px;}
+  .mobile-header .sub-header .search-tab .sub-menu td a{font-size: 13px; font-weight: bold; color: #5c5c5c;}
   .mobile-header .sub-header .search-tab .sub-menu{padding: 3px 0px 7px}
   .search-new-page .middle-section{width: 100%;}
   .tab-pane img{width: 100%;}
@@ -4794,6 +4803,13 @@ tags-input .tags{padding: 0;}
   .email-verify .email-img img{width:22px;}
   .verify{padding:5px 10px;}
   .article-post-text h3{font-size: 13px;}
+  .search-tab .table-responsive.content{margin-bottom: 0;}
+  .table-responsive.content table.sub-menu td a.active{-webkit-text-fill-color:inherit; -webkit-background-clip:inherit; background:inherit; color: #5c5c5c;}
+  .table-responsive.content table.sub-menu td a:hover{border-bottom: 0; -webkit-text-fill-color:inherit; -webkit-background-clip:inherit; background:inherit; color: #5c5c5c;}
+  .search-tab .table-responsive{border:0;}
+  .search-box .cbp-spmenu{background: #fff; padding: 65px 20px 46px; }
+  .search-box .cbp-spmenu-horizontal h3{padding: 0; background: none; color: #5c5c5c; font-size: 14px; width: 100%;}
+
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}

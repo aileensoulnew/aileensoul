@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="css/component.css" />
         <link rel="stylesheet" href="css/n-commen.css">
         <link rel="stylesheet" href="css/n-style.css">
 		<style>
@@ -315,6 +316,11 @@
                                         <input type="text" name="q" placeholder="Search.." id="mob_search">
                                     </form>
                                 </div>
+                                <div class="mob-search-btn">
+                                    <a data-toggle="modal" href="#" id="showBottom">
+                                        <span><img src="n-images/filter.png"></span> 
+                                    </a>
+                                </div>
                             </div>
                             <div class="right-header">
                                 <ul>
@@ -435,30 +441,19 @@
             <div class="sub-header">
                 <div class="container">
                     <nav class="search-tab">
-                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <ul class="sub-menu">
-                                <li>
-                                    <a class="nav-item nav-link active" id="search-all-tab" data-toggle="tab" href="#search-all" role="tab" aria-controls="search-all" aria-selected="true">All <span>(785)</span></a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-opp-tab" data-toggle="tab" href="#search-opp" role="tab" aria-controls="search-opp" aria-selected="false">Opportunitis<span>(186)</span></a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-people-tab" data-toggle="tab" href="#search-people" role="tab" aria-controls="search-people" aria-selected="false">People<span>(254)</span></a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-post-tab" data-toggle="tab" href="#search-post" role="tab" aria-controls="search-post" aria-selected="false">Post<span>(102)</span></a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-bus-tab" data-toggle="tab" href="#search-bus" role="tab" aria-controls="search-bus" aria-selected="false">Business<span>(107)</span> </a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-article-tab" data-toggle="tab" href="#search-article" role="tab" aria-controls="search-article" aria-selected="false">Article<span>(108)</span> </a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-que-tab" data-toggle="tab" href="#search-que" role="tab" aria-controls="search-que" aria-selected="false">Question<span>(102)</span></a>
-                                </li>
-                            </ul>
+                        <div class="nav nav-tabs nav-fill table-responsive content" id="nav-tab" role="tablist">
+                            <table class="sub-menu table">
+                                <tr>
+                                    <td><a class="nav-item nav-link active" id="search-all-tab" data-toggle="tab" href="#search-all" role="tab" aria-controls="search-all" aria-selected="true">All <span>(785)</span></a></td>
+                                    <td><a class="nav-item nav-link" id="search-opp-tab" data-toggle="tab" href="#search-opp" role="tab" aria-controls="search-opp" aria-selected="false">Opportunitis<span>(186)</span></a></td>
+                                    <td><a class="nav-item nav-link" id="search-people-tab" data-toggle="tab" href="#search-people" role="tab" aria-controls="search-people" aria-selected="false">People<span>(254)</span></a></td>
+                                    <td><a class="nav-item nav-link" id="search-post-tab" data-toggle="tab" href="#search-post" role="tab" aria-controls="search-post" aria-selected="false">Post<span>(102)</span></a></td>
+                                    <td><a class="nav-item nav-link" id="search-bus-tab" data-toggle="tab" href="#search-bus" role="tab" aria-controls="search-bus" aria-selected="false">Business<span>(107)</span> </a></td>
+                                    <td><a class="nav-item nav-link" id="search-article-tab" data-toggle="tab" href="#search-article" role="tab" aria-controls="search-article" aria-selected="false">Article<span>(108)</span> </a></td>
+                                    <td><a class="nav-item nav-link" id="search-que-tab" data-toggle="tab" href="#search-que" role="tab" aria-controls="search-que" aria-selected="false">Question<span>(102)</span></a></td>
+                                </tr>
+                            </table>
+                            
                         </div>
                     </nav>
                 </div>
@@ -721,11 +716,7 @@
                             </div>
                             
                         </div>
-                        <div class="mob-search-btn">
-                            <a data-toggle="modal" href="#" data-target="mob-search-popup" >
-                                <span><img src="n-images/s-s.png"></span> 
-                            </a>
-                        </div>
+                        
                     </div>
                     
                 </div>
@@ -752,6 +743,157 @@
                 </div>
             </div>
         </div>
+
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
+        <div class="all-profile-box content custom-scroll">
+            <ul class="all-pr-list">
+                <li>
+                    <a href="https://www.aileensoul.com/job">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
+                        </div>
+                        <span>Job Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/recruiter">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i2.jpg?ver=1517557803" alt="Recruiter Profile">
+                        </div>
+                        <span>Recruiter Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/freelance">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i3.jpg?ver=1517557803" alt="Freelance Profile">
+                        </div>
+                        <span>Freelance Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/business-profile">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i4.jpg?ver=1517557803" alt="Business Profile">
+                        </div>
+                        <span>Business Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.aileensoul.com/artist">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="search-box">
+        <nav class="cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-bottom" id="cbp-spmenu-s4">
+            <div class="search-left-box">
+                <h3>Job title</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="Search by Job Title"> 
+                </div>
+            </div>
+            <div class="search-left-box">
+                <h3>Industry</h3>
+                <div class="form-group">
+                    <span class="span-select">
+                        <select placeholder="Search by Industry"> 
+                            <option>It sectop</option>
+                            <option>teacher</option>
+                            <option>Docore</option>
+                            <option>123</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="search-left-box">
+                <h3>City</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="Search by City"> 
+                </div>
+            </div>
+            <div class="search-left-box">
+                <h3>Hash Tag</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="Search by Hash Tag"> 
+                </div>
+            </div>
+            <div class="search-left-box">
+                <h3>Company</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="Search by Company"> 
+                </div>
+            </div>
+            <div class="search-left-box pt15">
+                <div class="form-group">
+                    <button class="pull-left btn-new-1"><span><img src="n-images/s-s.png"></span> Search</button> 
+                    <button class="pull-right btn-new-1"><span><img src="n-images/trash.png"></span> Clear</button> 
+                </div>
+            </div>        
+        </nav>
+    </div>
+
        
 
         
@@ -760,6 +902,47 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/classie.js"></script>
+        <script>
+        var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+            menuBottom = document.getElementById( 'cbp-spmenu-s4' ),
+            showRight = document.getElementById( 'showRight' ),
+            showBottom = document.getElementById( 'showBottom' ),
+            body = document.body;
+
+            showRight.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                disableOther( 'showRight' );
+            };
+            showBottom.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuBottom, 'cbp-spmenu-open' );
+                disableOther( 'showBottom' );
+            };
+        
+            function disableOther( button ) {
+                
+                if( button !== 'showRight' ) {
+                    classie.toggle( showRight, 'disabled' );
+                }
+                if( button !== 'showBottom' ) {
+                    classie.toggle( showBottom, 'disabled' );
+                }
+            }
+            
+        // mcustom scroll bar
+            (function($){
+                $(window).on("load",function(){
+                    
+                    $(".custom-scroll").mCustomScrollbar({
+                        autoHideScrollbar:true,
+                        theme:"minimal"
+                    });
+                    
+                });
+            })(jQuery);
+    </script>
     
 	<script>
         $(function() {
@@ -907,6 +1090,9 @@
 				
 			}
 		});
+
+        
+            
 	</script>
         
 
