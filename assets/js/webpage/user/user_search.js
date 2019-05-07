@@ -163,6 +163,7 @@ app.controller('searchController', function($scope, $http, $compile) {
             $(".post_loader").hide();
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
+            $scope.business_data = success.data.business_data;
             $scope.pro.page_number = 2;
             $scope.pst.page_number = 2;
             $('#main_loader').hide();
