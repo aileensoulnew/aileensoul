@@ -149,6 +149,13 @@ app.controller('searchController', function($scope, $http, $compile) {
     }
     searchData();
     getContactSuggetion();
+    $scope.total_count = '';
+    $scope.opp_count = '';
+    $scope.people_count = '';
+    $scope.simple_count = '';
+    $scope.business_count = '';
+    $scope.article_count = '';
+    $scope.question_count = '';
 
     function searchData() {
         //$(".post_loader").show();
@@ -164,6 +171,16 @@ app.controller('searchController', function($scope, $http, $compile) {
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
             $scope.business_data = success.data.business_data;
+            
+                $scope.total_count = '('+success.data.total_count+')';
+                $scope.opp_count = '('+success.data.opp_count+')';
+                $scope.people_count = '('+success.data.people_count+')';
+                $scope.simple_count = '('+success.data.simple_count+')';
+                $scope.business_count = '('+success.data.business_count+')';
+                $scope.article_count = '('+success.data.article_count+')';
+                $scope.question_count = '('+success.data.question_count+')';
+            
+
             $scope.pro.page_number = 2;
             $scope.pst.page_number = 2;
             $('#main_loader').hide();

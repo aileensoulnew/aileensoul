@@ -2793,6 +2793,341 @@ class User_post_model extends CI_Model {
         return $field;
     }
 
+    public function search_for_opportunity_total_row($userid = '', $searchKeyword = '')
+    {
+        $sql_post_opp_exact = "LOWER(uo.opptitle) LIKE '%".strtolower($searchKeyword)."%' ";
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
+        if ($checkKeywordJobTitle['title_id'] != '') {
+            $keywordJobTitle = $checkKeywordJobTitle['title_id'];
+            $sql_post_opp_exact .= " OR FIND_IN_SET($keywordJobTitle, uo.opportunity_for) > 0 ";
+        }
+
+        $hashtag_data = $this->data_model->get_hashtag_id($searchKeyword);
+        if ($hashtag_data['id'] != '') {
+            $hashtag_id = $hashtag_data['id'];
+            $sql_post_opp_exact .= " OR FIND_IN_SET($hashtag_id, uo.hashtag) > 0 ";            
+        }
+        
+        $sql_post_opp = "";
+        
+        $search_arr = explode(" ", trim($searchKeyword));        
+        if(isset($search_arr) && !empty($search_arr) && count($search_arr) > 1)
+        {            
+            foreach ($search_arr as $key => $value) {
+                $sql_post_opp .= "LOWER(uo.opptitle) LIKE '%".strtolower($value)."%' ";
+
+                $checkKeywordJobTitle = $this->data_model->findJobTitle($value,1);
+                if ($checkKeywordJobTitle['title_id'] != '') {
+                    $keywordJobTitle = $checkKeywordJobTitle['title_id'];
+                    $sql_post_opp .= " OR FIND_IN_SET($keywordJobTitle, uo.opportunity_for) > 0 ";
+                }
+
+                $hashtag_data = $this->data_model->get_hashtag_id($value);
+                if ($hashtag_data['id'] != '') {
+                    $hashtag_id = $hashtag_data['id'];
+                    $sql_post_opp .= " OR FIND_IN_SET($hashtag_id, uo.hashtag) > 0 ";
+                }
+                $sql_post_opp .= " OR ";
+            }
+        }
+
+        $sql_post = "SELECT COUNT(*) as total FROM (
+                        SELECT inner1.* FROM (
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_user_opportunity uo
+                            LEFT JOIN ailee_user_post up ON up.id = uo.post_id 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_opp_exact) AND 
+                            ul.status = '1' AND 
+                            ul.is_delete = '0' ";
+                        if($sql_post_opp != '')
+                        {
+                            $sql_post_opp = trim($sql_post_opp," OR ");
+                            $sql_post .= " UNION
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_user_opportunity uo
+                            LEFT JOIN ailee_user_post up ON up.id = uo.post_id 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_opp) AND 
+                            ul.status = '1' AND 
+                            ul.is_delete = '0'";
+                        }                    
+                    $sql_post .= ") as inner1";
+        $sql_post .= ") as main WHERE main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $userid)";        
+        $query = $this->db->query($sql_post);
+        $user_post_opportuniry = $query->row_array();
+        return $user_post_opportuniry['total'];
+    }
+
+    public function search_for_simple_total_row($userid = '', $searchKeyword = '')
+    {
+        $sql_post_sim_exact = "LOWER(us.simslug) LIKE '%".strtolower($searchKeyword)."%' ";
+
+        $hashtag_data = $this->data_model->get_hashtag_id($searchKeyword);
+        if ($hashtag_data['id'] != '') {
+            $hashtag_id = $hashtag_data['id'];
+            $sql_post_sim_exact .= " OR FIND_IN_SET($hashtag_id, us.hashtag) > 0 ";
+        }
+        
+        $sql_post_sim = "";
+        
+        $search_arr = explode(" ", trim($searchKeyword));        
+        if(isset($search_arr) && !empty($search_arr) && count($search_arr) > 1)
+        {            
+            foreach ($search_arr as $key => $value) {
+                $sql_post_sim .= "LOWER(us.simslug) LIKE '%".strtolower($value)."%' ";
+                $hashtag_data = $this->data_model->get_hashtag_id($value);
+                if ($hashtag_data['id'] != '') {
+                    $hashtag_id = $hashtag_data['id'];
+                    $sql_post_sim .= " OR FIND_IN_SET($hashtag_id, us.hashtag) > 0 ";
+                }
+                $sql_post_sim .= " OR ";
+            }
+        }
+
+        $sql_post = "SELECT COUNT(*) as total FROM (
+                        SELECT inner1.* FROM (
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_user_simple_post us
+                            LEFT JOIN ailee_user_post up ON up.id = us.post_id 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_sim_exact) AND 
+                            ul.status = '1' AND 
+                            ul.is_delete = '0'";
+                        if($sql_post_sim != '')
+                        {
+                            $sql_post_sim = trim($sql_post_sim," OR ");
+                            $sql_post .= " UNION
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_user_simple_post us
+                            LEFT JOIN ailee_user_post up ON up.id = us.post_id 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_sim) AND 
+                            ul.status = '1' AND 
+                            ul.is_delete = '0'";
+                        }
+                    $sql_post .= ") as inner1";
+        $sql_post .= ") as main WHERE main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $userid)";        
+        $query = $this->db->query($sql_post);        
+        $simple_post = $query->row_array();
+        return $simple_post['total'];
+    }
+
+    public function search_for_question_total_row($userid = '', $searchKeyword = '')
+    {
+        $sql_post_que_exact = "LOWER(uq.question) LIKE '%".strtolower($searchKeyword)."%' ";
+
+        $hashtag_data = $this->data_model->get_hashtag_id($searchKeyword);
+        if ($hashtag_data['id'] != '') {
+            $hashtag_id = $hashtag_data['id'];
+            $sql_post_que_exact .= " OR FIND_IN_SET($hashtag_id, uq.hashtag) > 0 ";
+        }
+        
+        $sql_post_que = "";
+        
+        $search_arr = explode(" ", trim($searchKeyword));        
+        if(isset($search_arr) && !empty($search_arr) && count($search_arr) > 1)
+        {            
+            foreach ($search_arr as $key => $value) {
+                $sql_post_que .= "LOWER(uq.question) LIKE '%".strtolower($value)."%' ";
+                $hashtag_data = $this->data_model->get_hashtag_id($value);
+                if ($hashtag_data['id'] != '') {
+                    $hashtag_id = $hashtag_data['id'];
+                    $sql_post_que .= " OR FIND_IN_SET($hashtag_id, uq.hashtag) > 0 ";
+                }
+                $sql_post_que .= " OR ";
+            }
+        }
+
+        $sql_post = "SELECT COUNT(*) as total FROM (
+                        SELECT inner1.* FROM (
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_user_ask_question uq
+                            LEFT JOIN ailee_user_post up ON up.id = uq.post_id 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_que_exact) AND 
+                            ul.status = '1' AND 
+                            ul.is_delete = '0'";
+                        if($sql_post_que != '')
+                        {
+                            $sql_post_que = trim($sql_post_que," OR ");
+                            $sql_post .= " UNION
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_user_ask_question uq
+                            LEFT JOIN ailee_user_post up ON up.id = uq.post_id 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_que) AND 
+                            ul.status = '1' AND 
+                            ul.is_delete = '0'";
+                        }
+                    $sql_post .= ") as inner1";
+        $sql_post .= ") as main WHERE main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $userid)";        
+        $query = $this->db->query($sql_post);        
+        $question_data = $query->row_array();
+        return $question_data['total'];
+    }
+
+    public function search_for_article_total_row($userid = '', $searchKeyword = '')
+    {
+        $sql_post_art_exact = "LOWER(a.article_title) LIKE '%".strtolower($searchKeyword)."%' ";
+
+        $hashtag_data = $this->data_model->get_hashtag_id($searchKeyword);
+        if ($hashtag_data['id'] != '') {
+            $hashtag_id = $hashtag_data['id'];
+            $sql_post_art_exact .= " OR FIND_IN_SET($hashtag_id, a.hashtag) > 0 ";
+        }
+        
+        $sql_post_art = "";
+        
+        $search_arr = explode(" ", trim($searchKeyword));        
+        if(isset($search_arr) && !empty($search_arr) && count($search_arr) > 1)
+        {            
+            foreach ($search_arr as $key => $value) {
+                $sql_post_art .= "LOWER(a.article_title) LIKE '%".strtolower($value)."%' ";
+                $hashtag_data = $this->data_model->get_hashtag_id($value);
+                if ($hashtag_data['id'] != '') {
+                    $hashtag_id = $hashtag_data['id'];
+                    $sql_post_art .= " OR FIND_IN_SET($hashtag_id, a.hashtag) > 0 ";
+                }
+                $sql_post_art .= " OR ";
+            }
+        }
+
+        $sql_post = "SELECT COUNT(*) as total FROM (
+                        SELECT inner1.* FROM (
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_post_article a
+                            LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_art_exact) AND 
+                            ul.status = '1' AND up.post_for = 'article' AND
+                            ul.is_delete = '0'";
+                        if($sql_post_art != '')
+                        {
+                            $sql_post_art = trim($sql_post_art," OR ");
+                            $sql_post .= " UNION
+                            SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type
+                            FROM ailee_post_article a
+                            LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article 
+                            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
+                            WHERE ($sql_post_art) AND up.post_for = 'article' AND
+                            ul.status = '1' AND 
+                            ul.is_delete = '0'";
+                        }
+                    $sql_post .= ") as inner1";
+        $sql_post .= ") as main WHERE main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $userid)";        
+        $query = $this->db->query($sql_post);        
+        $article_data = $query->row_array();
+        return $article_data['total'];
+    }
+
+    public function search_for_business_total_row($userid = '', $searchKeyword = '')
+    {
+        $sql_post_bus_exact = "LOWER(bp.company_name) LIKE '%".strtolower($searchKeyword)."%' ";
+
+        $sql_bus = "";
+        
+        $search_arr = explode(" ", trim($searchKeyword));        
+        if(isset($search_arr) && !empty($search_arr) && count($search_arr) > 1)
+        {            
+            foreach ($search_arr as $key => $value) {
+                $sql_bus .= "LOWER(bp.company_name) LIKE '%".strtolower($value)."%' ";
+                $sql_bus .= " OR ";
+            }
+        }
+
+        $sql_buss = "SELECT COUNT(*) as total FROM ( SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name FROM ailee_business_profile bp
+            LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+            LEFT JOIN ailee_states st on bp.state = st.state_id
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND ($sql_post_bus_exact)";
+        if($sql_bus != '')
+        {
+            $sql_bus = trim($sql_bus," OR ");
+            $sql_buss .= "UNION SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name FROM ailee_business_profile bp
+            LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+            LEFT JOIN ailee_states st on bp.state = st.state_id
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND ($sql_bus)";
+        }
+        $sql_buss .= ") as main";        
+        $query = $this->db->query($sql_buss);
+        $business_data = $query->row_array();
+        return $business_data['total'];
+    }
+
+    public function search_for_people_total_row($userid = '', $searchKeyword = '')
+    {
+        $sql_ser_exact = "LOWER(u.first_name) Like '%".strtolower($searchKeyword)."%' OR LOWER(u.last_name) Like '%".strtolower($searchKeyword)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '%".strtolower($searchKeyword)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '%".strtolower($searchKeyword)."%'";
+
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
+        if ($checkKeywordJobTitle['title_id'] != '') {
+            $keywordJobTitle = $checkKeywordJobTitle['title_id'];
+            $sql_ser_exact .= " OR up.designation = '$keywordJobTitle'";
+        }
+
+        $checkKeywordDegreeList = $this->data_model->findDegreeList($searchKeyword);
+        if ($checkKeywordDegreeList['degree_id'] != '') {
+            $keywordDegreeList = $checkKeywordDegreeList['degree_id'];
+            $sql_ser_exact .= " OR us.current_study = '$keywordDegreeList'";
+        }
+        
+        $sql_ser = "";
+        
+        $search_arr = explode(" ", trim($searchKeyword));        
+        if(isset($search_arr) && !empty($search_arr) && count($search_arr) > 1)
+        {            
+            foreach ($search_arr as $key => $value) {
+                $sql_ser .= " LOWER(u.first_name) Like '%".strtolower($value)."%' OR LOWER(u.last_name) Like '%".strtolower($value)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '%".strtolower($value)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '%".strtolower($value)."%'";
+                $checkKeywordJobTitle = $this->data_model->findJobTitle($value,1);
+                if ($checkKeywordJobTitle['title_id'] != '') {
+                    $keywordJobTitle = $checkKeywordJobTitle['title_id'];
+                    $sql_ser .= " OR up.designation = '$keywordJobTitle'";                    
+                }
+
+                $checkKeywordDegreeList = $this->data_model->findDegreeList($value);
+                if ($checkKeywordDegreeList['degree_id'] != '') {
+                    $keywordDegreeList = $checkKeywordDegreeList['degree_id'];
+                    $sql_ser .= " OR us.current_study = '$keywordDegreeList'";
+                }
+                $sql_ser .= " OR ";
+            }
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM (
+                    SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image,jt.name as title_name,d.degree_name,it.industry_name,up.city as profession_city,us.city as student_city,un.university_name FROM ailee_user u
+                    LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
+                    LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
+                    LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
+                    LEFT JOIN ailee_job_title jt ON jt.title_id = up.designation
+                    LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
+                    LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
+                    LEFT JOIN ailee_industry_type it ON it.industry_id = up.field
+                    LEFT JOIN ailee_university un ON un.university_name = us.university_name
+                    WHERE u.user_id !=  $userid AND ( $sql_ser_exact ) AND ul.status = '1' AND ul.is_delete = '0' ";
+        if($sql_ser != '')
+        {
+            $sql_ser = trim($sql_ser," OR ");
+            $sql .= "UNION
+                    SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image,jt.name as title_name,d.degree_name,it.industry_name,up.city as profession_city,us.city as student_city,un.university_name FROM ailee_user u
+                    LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
+                    LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
+                    LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
+                    LEFT JOIN ailee_job_title jt ON jt.title_id = up.designation
+                    LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
+                    LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
+                    LEFT JOIN ailee_industry_type it ON it.industry_id = up.field
+                    LEFT JOIN ailee_university un ON un.university_name = us.university_name
+                    WHERE u.user_id !=  $userid AND ( $sql_ser ) AND ul.status = '1' AND ul.is_delete = '0'";
+        }
+        $sql .= ") as main";        
+        $query = $this->db->query($sql);
+        $searchProfileData = $query->row_array();
+        return $searchProfileData['total'];
+    }
+
     public function searchData($userid = '', $searchKeyword = '') {
         $searchPostData = array();
         $sql_ser_exact = "LOWER(u.first_name) Like '%".strtolower($searchKeyword)."%' OR LOWER(u.last_name) Like '%".strtolower($searchKeyword)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '%".strtolower($searchKeyword)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '%".strtolower($searchKeyword)."%'";
@@ -2836,11 +3171,14 @@ class User_post_model extends CI_Model {
         {            
             foreach ($search_arr as $key => $value) {                
                 $sql_ser .= " LOWER(u.first_name) Like '%".strtolower($value)."%' OR LOWER(u.last_name) Like '%".strtolower($value)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '%".strtolower($value)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '%".strtolower($value)."%'";
+
+                $sql_post_opp .= "LOWER(uo.opptitle) LIKE '%".strtolower($value)."%' ";
                 
                 $checkKeywordJobTitle = $this->data_model->findJobTitle($value,1);
                 if ($checkKeywordJobTitle['title_id'] != '') {
                     $keywordJobTitle = $checkKeywordJobTitle['title_id'];
-                    $sql_ser .= " OR up.designation = '$keywordJobTitle'";            
+                    $sql_ser .= " OR up.designation = '$keywordJobTitle'";
+                    $sql_post_opp .= " OR FIND_IN_SET($keywordJobTitle, uo.opportunity_for) > 0 ";
                 }
 
                 $checkKeywordDegreeList = $this->data_model->findDegreeList($value);
@@ -2849,8 +3187,8 @@ class User_post_model extends CI_Model {
                     $sql_ser .= " OR us.current_study = '$keywordDegreeList'";
                 }
                 $sql_ser .= " OR ";
-
-                $sql_post_opp .= "LOWER(uo.opptitle) LIKE '%".strtolower($value)."%' ";
+                // $sql_post_opp .= " OR ";
+                
                 $sql_post_sim .= "LOWER(us.simslug) LIKE '%".strtolower($value)."%' ";
                 $sql_post_que .= "LOWER(uq.question) LIKE '%".strtolower($value)."%' ";
                 $sql_post_art .= "LOWER(a.article_title) LIKE '%".strtolower($value)."%' ";
@@ -3005,7 +3343,7 @@ class User_post_model extends CI_Model {
                                     LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article 
                                     LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
                                     WHERE ($sql_post_art_exact) AND 
-                                    ul.status = '1' AND 
+                                    ul.status = '1' AND up.post_for = 'article' AND
                                     ul.is_delete = '0'";
                                 if($sql_post_art != '')
                                 {
@@ -3016,7 +3354,7 @@ class User_post_model extends CI_Model {
                                     LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article 
                                     LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id 
                                     WHERE ($sql_post_art) AND 
-                                    ul.status = '1' AND 
+                                    ul.status = '1' AND up.post_for = 'article' AND
                                     ul.is_delete = '0'";
                                 }
                                 $sql_post .= " ORDER BY id DESC LIMIT 1 ";
@@ -3168,6 +3506,13 @@ class User_post_model extends CI_Model {
         $business_data = $query->result();
         $searchData['business_data'] = $business_data;
 
+        $searchData['opp_count'] = $opp_count = $this->search_for_opportunity_total_row($userid,$searchKeyword);
+        $searchData['simple_count'] = $simple_count = $this->search_for_simple_total_row($userid,$searchKeyword);
+        $searchData['question_count'] = $question_count = $this->search_for_question_total_row($userid,$searchKeyword);
+        $searchData['article_count'] = $article_count = $this->search_for_article_total_row($userid,$searchKeyword);
+        $searchData['business_count'] = $business_count = $this->search_for_business_total_row($userid,$searchKeyword);
+        $searchData['people_count'] = $people_count = $this->search_for_people_total_row($userid,$searchKeyword);
+        $searchData['total_count'] = $opp_count + $simple_count + $question_count + $article_count + $business_count + $people_count;
         return $searchData;
     }
 

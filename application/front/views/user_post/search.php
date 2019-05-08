@@ -38,25 +38,25 @@
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <ul class="sub-menu">
                                 <li>
-                                    <a class="nav-item nav-link active" id="search-all-tab" data-toggle="tab" href="#search-all" role="tab" aria-controls="search-all" aria-selected="true">All(785) </a>
+                                    <a class="nav-item nav-link active" id="search-all-tab" data-toggle="tab" href="#search-all" role="tab" aria-controls="search-all" aria-selected="true">All {{total_count}}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link" id="search-opp-tab" data-toggle="tab" href="#search-opp" role="tab" aria-controls="search-opp" aria-selected="false">Opportunitis(186)</a>
+                                    <a class="nav-item nav-link" id="search-opp-tab" data-toggle="tab" href="#search-opp" role="tab" aria-controls="search-opp" aria-selected="false">Opportunitis {{opp_count}}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link" id="search-people-tab" data-toggle="tab" href="#search-people" role="tab" aria-controls="search-people" aria-selected="false">People(254)</a>
+                                    <a class="nav-item nav-link" id="search-people-tab" data-toggle="tab" href="#search-people" role="tab" aria-controls="search-people" aria-selected="false">People {{people_count}}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link" id="search-post-tab" data-toggle="tab" href="#search-post" role="tab" aria-controls="search-post" aria-selected="false">Post(102)</a>
+                                    <a class="nav-item nav-link" id="search-post-tab" data-toggle="tab" href="#search-post" role="tab" aria-controls="search-post" aria-selected="false">Post {{simple_count}}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link" id="search-bus-tab" data-toggle="tab" href="#search-bus" role="tab" aria-controls="search-bus" aria-selected="false">Business(107) </a>
+                                    <a class="nav-item nav-link" id="search-bus-tab" data-toggle="tab" href="#search-bus" role="tab" aria-controls="search-bus" aria-selected="false">Business {{business_count}}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link" id="search-article-tab" data-toggle="tab" href="#search-article" role="tab" aria-controls="search-article" aria-selected="false">Article(108) </a>
+                                    <a class="nav-item nav-link" id="search-article-tab" data-toggle="tab" href="#search-article" role="tab" aria-controls="search-article" aria-selected="false">Article {{article_count}}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link" id="search-que-tab" data-toggle="tab" href="#search-que" role="tab" aria-controls="search-que" aria-selected="false">Question(102)</a>
+                                    <a class="nav-item nav-link" id="search-que-tab" data-toggle="tab" href="#search-que" role="tab" aria-controls="search-que" aria-selected="false">Question {{question_count}}</a>
                                 </li>
                             </ul>
                         </div>
