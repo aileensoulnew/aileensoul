@@ -787,9 +787,14 @@ class User_post extends MY_Controller {
         }
         else
         {
-            echo json_encode(array('all_post_data'=>$post_data));   
+            echo json_encode(array('all_post_data'=>$post_data));
         }
         // echo json_encode($post_data);
+    }
+    public function getUserPromotedPost() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_data = $this->user_post_model->user_promoted_post($userid);
+        echo json_encode($post_data);
     }
 
     public function getUserDashboardPost() {

@@ -957,6 +957,21 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     var fl_addpost="";
     var processing = false;
     $scope.contact_suggetion = [];
+
+    $scope.promotedPostData = [];
+    function getUserPromotedPost() {
+        $http.get(base_url + "user_post/getUserPromotedPost").then(function (success) {            
+            $('body').removeClass("body-loader");
+            if (success.data) {                
+                $scope.promotedPostData = success.data; 
+            } else {
+                isLoadingData = true;
+            }
+
+            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+        }, function (error) {});
+    }
+
     getUserPost(pg);
     var isProcessing = false;
     function getUserPost(pg,fl_addpost) {
@@ -981,13 +996,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 // $scope.contact_suggetion.push(success.data.contact_suggetion);
                 // $scope.contact_suggetion = success.data.contact_suggetion;
                 // $scope.set_owl_carousel(success.data.contact_suggetion,$scope.page);
+                getUserPromotedPost();
             } else {
                 isLoadingData = true;
             }
 
             setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
         }, function (error) {});
-    }
+    }    
 
     $(window).on('scroll', function () {
         if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
@@ -2471,7 +2487,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
     }
 
-    $scope.post_like = function (post_id,parent_index) {
+    $scope.post_like = function (post_id,parent_index,is_promoted) {
         $('#post-like-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
@@ -2512,7 +2528,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 }
-                $scope.postData[parent_index].user_like_list = success.data.user_like_list;
+                if(is_promoted == 1)
+                {
+                    $scope.promotedPostData[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else
+                {
+                    $scope.postData[parent_index].user_like_list = success.data.user_like_list;
+                }
             }            
         });
     }
@@ -2574,7 +2597,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
     };
 
-    $scope.sendComment = function (post_id, index, post) {        
+    $scope.sendComment = function (post_id, index, post,is_promoted) {        
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
         //comment = comment.replace(/^(<br\s*\/?>)+/, '');
@@ -2601,8 +2624,16 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                 if (data.message == '1') {
                     if (commentClassName == 'last-comment') {
-                        $scope.postData[index].post_comment_data.splice(0, 1);
-                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        if(is_promoted == 1)
+                        {
+                            $scope.promotedPostData[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else
+                        {                            
+                            $scope.postData[index].post_comment_data.splice(0, 1);
+                            $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        }
                         if(data.comment_count > 0)
                         {
                             $('.post-comment-count-' + post_id).show();
@@ -2632,7 +2663,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
     }
 
-    $scope.viewAllComment = function (post_id, index, post) {
+    $scope.viewAllComment = function (post_id, index, post,is_promoted) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/viewAllComment',
@@ -2641,13 +2672,21 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         })
         .then(function (success) {
             data = success.data;
-            $scope.postData[index].post_comment_data = data.all_comment_data;
-            $scope.postData[index].post_comment_count = data.post_comment_count;
+            if(is_promoted == 1)
+            {
+                $scope.promotedPostData[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
+            }
+            else
+            {                
+                $scope.postData[index].post_comment_data = data.all_comment_data;
+                $scope.postData[index].post_comment_count = data.post_comment_count;
+            }
         });
 
     }
 
-    $scope.viewLastComment = function (post_id, index, post) {
+    $scope.viewLastComment = function (post_id, index, post,is_promoted) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/viewLastComment',
@@ -2656,22 +2695,31 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         })
         .then(function (success) {
             data = success.data;
-            $scope.postData[index].post_comment_data = data.comment_data;
-            $scope.postData[index].post_comment_count = data.post_comment_count;
+            if(is_promoted == 1)
+            {
+                $scope.promotedPostData[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
+            }
+            else
+            {
+                $scope.postData[index].post_comment_data = data.comment_data;
+                $scope.postData[index].post_comment_count = data.post_comment_count;
+            }
         });
 
     }
-    $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
+    $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post,is_promoted) {
         $scope.c_d_comment_id = comment_id;
         $scope.c_d_post_id = post_id;
         $scope.c_d_parent_index = parent_index;
         $scope.c_d_index = index;
         $scope.c_d_post = post;
+        $scope.c_d_is_promoted = is_promoted;
 
         $('#delete_model').modal('show');
     }
 
-    $scope.deleteComment = function (comment_id, post_id, parent_index, index, post) {
+    $scope.deleteComment = function (comment_id, post_id, parent_index, index, post,is_promoted) {
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         $http({
             method: 'POST',
@@ -2682,8 +2730,16 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         .then(function (success) {
             data = success.data;
             if (commentClassName == 'last-comment') {
-                $scope.postData[parent_index].post_comment_data.splice(0, 1);
-                $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                if(is_promoted == 1)
+                {
+                    $scope.promotedPostData[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else
+                {                    
+                    $scope.postData[parent_index].post_comment_data.splice(0, 1);
+                    $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
                 if(data.comment_count < 1)
                 {
                     $('.post-comment-count-' + post_id).hide();
@@ -2691,7 +2747,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $('.post-comment-count-' + post_id).html(data.comment_count);
                 $('.editable_text').html('');
             } else {
-                $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                if(is_promoted == 1)
+                {
+                    $scope.promotedPostData[parent_index].post_comment_data.splice(index, 1);
+                }
+                else
+                {
+                    $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                }
                 if(data.comment_count < 1)
                 {
                     $('.post-comment-count-' + post_id).hide();
@@ -2737,15 +2800,23 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             },100);
         });
     }
-    $scope.editPostComment = function (comment_id, post_id, parent_index, index) {       
+    $scope.editPostComment = function (comment_id, post_id, parent_index, index,is_promoted) {
         $(".comment-for-post-"+post_id+" .edit-comment").hide();
         $(".comment-for-post-"+post_id+" .comment-dis-inner").show();
         $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
         $(".comment-for-post-"+post_id+" li[id^=cancel-comment-li-]").hide();
         // var editContent = $('#comment-dis-inner-' + comment_id).html();
         // var editContent = $('#comment-dis-inner-' + comment_id).text();
-        var editContent = $scope.postData[parent_index].post_comment_data[index].comment;
-        editContent = editContent.substring(0,cmt_maxlength);
+        if(is_promoted == 1)
+        {
+            var editContent = $scope.promotedPostData[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else
+        {
+            var editContent = $scope.postData[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
         $('#edit-comment-' + comment_id).show();
         $('#editCommentTaxBox-' + comment_id).html(editContent);
         $('#comment-dis-inner-' + comment_id).hide();
@@ -3110,7 +3181,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
     }
 
-    $scope.sendCommentReply = function (comment_id,post_id,postIndex,commentIndex) {
+    $scope.sendCommentReply = function (comment_id,post_id,postIndex,commentIndex,is_promoted) {
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#reply-comment-'+postIndex+'-'+commentIndex).html();
         comment = comment.replace(/&nbsp;/gi, " ");
@@ -3143,11 +3214,25 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 if (data.message == '1') {                    
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
-                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        if(is_promoted == 1)
+                        {
+                            $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        }
+                        else
+                        {
+                            $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        }
                         
                         $('.editable_text').html('');
                     } else {
-                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        if(is_promoted == 1)
+                        {
+                            $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        }
+                        else
+                        {
+                            $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                        }
                         
                         $('.editable_text').html('');
                     }
@@ -4120,7 +4205,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
         };
 
-    $scope.save_post = function(post_id,index,postData){
+    $scope.save_post = function(post_id,index,postData,is_promoted){
         $('#save-post-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
@@ -4131,11 +4216,25 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var result = success.data;
             if(result.status == '1')
             {
-                $scope.postData[index].is_user_saved_post = result.status;                
+                if(is_promoted == 1)
+                {
+                    $scope.promotedPostData[index].is_user_saved_post = result.status;
+                }
+                else
+                {
+                    $scope.postData[index].is_user_saved_post = result.status;
+                }
             }
             else
             {
-                $scope.postData[index].is_user_saved_post = result.status;
+                if(is_promoted == 1)
+                {
+                    $scope.promotedPostData[index].is_user_saved_post = result.status;
+                }
+                else
+                {
+                    $scope.postData[index].is_user_saved_post = result.status;
+                }
             }
         });
     };
@@ -4160,9 +4259,17 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
     };
 
-    $scope.share_post = function(post_id,index,postData){
-        $scope.share_post_data = $scope.postData[index];
+    $scope.share_post = function(post_id,index,postData,is_promoted){
+        if(is_promoted == 1)
+        {
+            $scope.share_post_data = $scope.promotedPostData[index];
+        }
+        else
+        {
+            $scope.share_post_data = $scope.postData[index];
+        }
         $scope.post_index = index;
+        $scope.share_is_promoted = is_promoted;
         $("#post-share").modal("show");
         setTimeout(function(){
             $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
@@ -4170,7 +4277,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         },300);
     };
 
-    $scope.share_post_fnc = function(post_index){        
+    $scope.share_post_fnc = function(post_index,is_promoted){        
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
         var post_id = 0;
@@ -4198,7 +4305,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             {
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
-                $scope.postData[post_index].post_share_count = result.post_share_count;
+                if(is_promoted == 1)
+                {
+                    $scope.promotedPostData[post_index].post_share_count = result.post_share_count;
+                }
+                else
+                {
+                    $scope.postData[post_index].post_share_count = result.post_share_count;
+                }
             }
             else
             {
