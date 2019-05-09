@@ -2562,8 +2562,8 @@
                                     </li>
                                 </ul>
                                 <ul class="pull-right">
-                                    <li>
-                                        <a href="https://www.commissioncrowd.com/?ref=dZeBOICH"><span>Visit</span></a>
+                                    <li class="visit-post">
+                                        <a class="btn3" href="https://www.commissioncrowd.com/?ref=dZeBOICH" ><span>Visit</span></a>
                                     </li>
                                     <li class="view-post">
                                         <span>25 Views</span>
