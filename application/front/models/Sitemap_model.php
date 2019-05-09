@@ -487,10 +487,11 @@ class Sitemap_model extends CI_Model {
                 jt.name as designaation,d.degree_name
                 FROM ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
+                LEFT JOIN ailee_user_login ul on ul.user_id = u.user_id
                 LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
                 LEFT JOIN ailee_user_student us on us.user_id = u.user_id
                 LEFT JOIN ailee_degree d on d.degree_id = us.current_study
-                WHERE user_slug != '' AND (
+                WHERE user_slug != '' AND ul.status = '1' AND ul.is_delete = '0' AND (
                     u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
                     OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
         )". $search_query ." ORDER BY u.user_id DESC";
@@ -513,10 +514,11 @@ class Sitemap_model extends CI_Model {
         $sql = "SELECT COUNT(*) AS total_rec 
                 FROM ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
+                LEFT JOIN ailee_user_login ul on ul.user_id = u.user_id
                 LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
                 LEFT JOIN ailee_user_student us on us.user_id = u.user_id
                 LEFT JOIN ailee_degree d on d.degree_id = us.current_study
-                WHERE user_slug != '' AND (
+                WHERE user_slug != '' AND ul.status = '1' AND ul.is_delete = '0' AND (
                     u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
                     OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
         )". $search_query ." ORDER BY u.user_id DESC";
@@ -566,7 +568,8 @@ class Sitemap_model extends CI_Model {
         $sql = "SELECT u.* FROM ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
                 LEFT JOIN ailee_user_student us on us.user_id = u.user_id
-                WHERE u.user_slug != '' AND (
+                LEFT JOIN ailee_user_login ul on ul.user_id = u.user_id
+                WHERE u.user_slug != '' AND ul.status = '1' AND ul.is_delete = '0' AND (
                     u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
                     OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
                 ) ORDER BY u.user_id DESC";        

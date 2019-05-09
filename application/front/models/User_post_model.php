@@ -856,7 +856,7 @@ class User_post_model extends CI_Model {
     public function user_post_new_total($user_id = '')
     {
         $new_signup = $this->get_new_signup($user_id);
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city');
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city,jt.name');
         $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');
 
         //Start Old Feed before 14-03-2019
@@ -982,6 +982,19 @@ class User_post_model extends CI_Model {
             {
                 if($getUserProfessionData)
                 {
+                    $cond_sql = "";
+                    $job_title_arr = explode(" ", $getUserProfessionData['name']);
+                    if(count($job_title_arr) > 1)
+                    {
+                        foreach ($job_title_arr as $key => $value) {
+                            $cond_sql .= "LOWER(c1.opptitle) LIKE '%".strtolower($value)."%' OR ";
+                        }
+                    }
+                    else
+                    {
+                        $cond_sql .= "LOWER(c1.opptitle) LIKE '%".strtolower($getUserProfessionData['name'])."%' OR ";
+                    }
+                    $cond_sql = "(".trim($cond_sql," OR ").")";
                     /*$sql = "SELECT COUNT(*) as total FROM(
                             SELECT oppcon1.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_opportunity uo JOIN ailee_user_post up  ON up.post_id = uo.id WHERE upr.`user_id` = $user_id AND (IF(upr.field = 0, CONCAT(LOWER(uo.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(uo.other_field) LIKE '%'),'%'),upr.field = uo.field)) AND FIND_IN_SET(upr.city , uo.location) != 0 AND up.status = 'publish' AND FIND_IN_SET(upr.designation , uo.opportunity_for) != 0 AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity') as oppcon1
                             
@@ -1056,7 +1069,7 @@ class User_post_model extends CI_Model {
 
                             SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS main6
                     ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";*/
-                    $query = $this->db->query("CALL feed_new_signup_total_row_profession($user_id)");
+                    $query = $this->db->query("CALL feed_new_signup_total_row_profession($user_id,$cond_sql)");
                     $user_post_total = $query->row_array();
 
                     $query->next_result(); 
@@ -1418,7 +1431,7 @@ class User_post_model extends CI_Model {
         $total_record  = $this->user_post_new_total($user_id);
         $new_signup = $this->get_new_signup($user_id);
 
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city');
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city,jt.name');
         $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');
         //Start Old Feed before 14-03-2019
         /*if($getUserProfessionData)
@@ -1547,6 +1560,19 @@ class User_post_model extends CI_Model {
             {
                 if($getUserProfessionData)
                 {
+                    $cond_sql = "";
+                    $job_title_arr = explode(" ", $getUserProfessionData['name']);
+                    if(count($job_title_arr) > 1)
+                    {
+                        foreach ($job_title_arr as $key => $value) {
+                            $cond_sql .= "LOWER(c1.opptitle) LIKE '%".strtolower($value)."%' OR ";
+                        }
+                    }
+                    else
+                    {
+                        $cond_sql .= "LOWER(c1.opptitle) LIKE '%".strtolower($getUserProfessionData['name'])."%' OR ";
+                    }
+                    $cond_sql = "(".trim($cond_sql," OR ").")";
                     /*$sql = "SELECT main.* FROM(
                         SELECT oppcon1.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_opportunity uo JOIN ailee_user_post up  ON up.post_id = uo.id WHERE upr.`user_id` = $user_id AND (IF(upr.field = 0, CONCAT(LOWER(uo.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(uo.other_field) LIKE '%'),'%'),upr.field = uo.field)) AND FIND_IN_SET(upr.city , uo.location) != 0 AND up.status = 'publish' AND FIND_IN_SET(upr.designation , uo.opportunity_for) != 0 AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) as oppcon1
 
@@ -1621,7 +1647,7 @@ class User_post_model extends CI_Model {
 
                         SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main6
                     ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";*/
-                    $query = $this->db->query("CALL feed_new_signup_get_rows_profession($user_id,$limit,$start,$total_record)");
+                    $query = $this->db->query("CALL feed_new_signup_get_rows_profession($user_id,$limit,$start,$total_record,$cond_sql)");
 
                     $user_post = $query->result_array();
 
@@ -2139,7 +2165,7 @@ class User_post_model extends CI_Model {
         $this->db->where('user_id', $user_id);
         $this->db->where('up.status', 'publish');
         $this->db->where('up.user_type', '1');
-        $this->db->where('up.post_for != ', 'question');
+        $this->db->where("up.post_for != 'profile_update' AND up.post_for != 'cover_update' AND up.post_for != 'question'");
         $this->db->where('up.is_delete', '0');
         if ($getDeleteUserPost) {
             $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
@@ -3238,7 +3264,8 @@ class User_post_model extends CI_Model {
                     WHERE u.user_id !=  $userid AND ( $sql_ser ) AND ul.status = '1' AND ul.is_delete = '0'";
         }
         $sql .= ") as main limit 5";
-        // echo $sql;exit();
+        echo $sql."\n\n\n\n";
+        // exit();
         $query = $this->db->query($sql);
         $searchProfileData = $query->result_array();
 
@@ -3360,7 +3387,8 @@ class User_post_model extends CI_Model {
                                 $sql_post .= " ORDER BY id DESC LIMIT 1 ";
                     $sql_post .= ") as inner4";
         $sql_post .= ") as main WHERE main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $userid)";
-        // echo $sql_post;exit();
+        echo $sql_post."\n\n\n";
+        // exit();
         $query = $this->db->query($sql_post);
         $user_post = $query->result_array();
 
@@ -3502,6 +3530,7 @@ class User_post_model extends CI_Model {
             WHERE bp.status = '1' AND ($sql_bus)";
         }
         $sql_buss .= " ORDER BY business_profile_id DESC LIMIT 1";
+        echo $sql_buss."\n\n\n";exit();
         $query = $this->db->query($sql_buss);
         $business_data = $query->result();
         $searchData['business_data'] = $business_data;

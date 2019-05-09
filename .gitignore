@@ -60,3 +60,4 @@ application/front/controllers/Business_profile.php
 application/front/controllers/Business_profile_live.php
 application/front/controllers/Business_profile_live.php
 mongo/*
+es/*
