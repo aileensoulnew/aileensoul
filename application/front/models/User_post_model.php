@@ -3264,7 +3264,7 @@ class User_post_model extends CI_Model {
                     WHERE u.user_id !=  $userid AND ( $sql_ser ) AND ul.status = '1' AND ul.is_delete = '0'";
         }
         $sql .= ") as main limit 5";
-        echo $sql."\n\n\n\n";
+        // echo $sql."\n\n\n\n";
         // exit();
         $query = $this->db->query($sql);
         $searchProfileData = $query->result_array();
@@ -3387,7 +3387,7 @@ class User_post_model extends CI_Model {
                                 $sql_post .= " ORDER BY id DESC LIMIT 1 ";
                     $sql_post .= ") as inner4";
         $sql_post .= ") as main WHERE main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $userid)";
-        echo $sql_post."\n\n\n";
+        // echo $sql_post."\n\n\n";
         // exit();
         $query = $this->db->query($sql_post);
         $user_post = $query->result_array();
@@ -3513,24 +3513,24 @@ class User_post_model extends CI_Model {
 
         $searchData['post'] = $searchPostData;
 
-        $sql_buss = "SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name FROM ailee_business_profile bp
+        $sql_buss = "SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name FROM ailee_business_profile bp
             LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
             LEFT JOIN ailee_cities ct on bp.city = ct.city_id
             LEFT JOIN ailee_states st on bp.state = st.state_id
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
-            WHERE bp.status = '1' AND ($sql_post_bus_exact)";
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND ($sql_post_bus_exact)";
         if($sql_bus != '')
         {
             $sql_bus = trim($sql_bus," OR ");
-            $sql_buss .= "UNION SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name FROM ailee_business_profile bp
+            $sql_buss .= "UNION SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name FROM ailee_business_profile bp
             LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
             LEFT JOIN ailee_cities ct on bp.city = ct.city_id
             LEFT JOIN ailee_states st on bp.state = st.state_id
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
-            WHERE bp.status = '1' AND ($sql_bus)";
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND ($sql_bus)";
         }
         $sql_buss .= " ORDER BY business_profile_id DESC LIMIT 1";
-        echo $sql_buss."\n\n\n";exit();
+        // echo $sql_buss."\n\n\n";exit();
         $query = $this->db->query($sql_buss);
         $business_data = $query->result();
         $searchData['business_data'] = $business_data;

@@ -284,6 +284,7 @@ $route['recruiter/jobpost/(:any)'] = "My404Page";
 //Monetize
 $route['monetize-aileensoul-account'] = "Userprofile/monetize";
 $route['searchelastic'] = "Searchelastic";
+$route['searchelastic/search/(:any)'] = "Searchelastic/search/$1";
 
 $route['(:any)'] = 'Userprofile';
 

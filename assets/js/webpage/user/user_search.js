@@ -161,7 +161,8 @@ app.controller('searchController', function($scope, $http, $compile) {
         //$(".post_loader").show();
         $http({
             method: 'POST',
-            url: base_url + 'user_post/searchData',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search',
             data: 'searchKeyword=' + searchKeyword,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

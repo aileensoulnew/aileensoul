@@ -76,15 +76,16 @@
                                         <input type="text" placeholder="Search by Job Title"> 
                                     </div>
                                 </div>
+                                <?php $getFieldList = $this->data_model->getNewFieldList();?>
                                 <div class="search-left-box">
                                     <h3>Industry</h3>
                                     <div class="form-group">
                                         <span class="span-select">
-                                            <select placeholder="Search by Industry"> 
-                                                <option>It sectop</option>
-                                                <option>teacher</option>
-                                                <option>Docore</option>
-                                                <option>123</option>
+                                            <select placeholder="Search by Industry">
+                                                <option value="">Select Industry</option>
+                                                <?php foreach ($getFieldList as $key => $value) { ?>
+                                                    <option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </span>
                                     </div>
@@ -95,13 +96,13 @@
                                         <input type="text" placeholder="Search by City"> 
                                     </div>
                                 </div>
-                                <div class="search-left-box">
+                                <div class="search-left-box hide">
                                     <h3>Hash Tag</h3>
                                     <div class="form-group">
                                         <input type="text" placeholder="Search by Hash Tag"> 
                                     </div>
                                 </div>
-                                <div class="search-left-box">
+                                <div class="search-left-box hide">
                                     <h3>Company</h3>
                                     <div class="form-group">
                                         <input type="text" placeholder="Search by Company"> 
