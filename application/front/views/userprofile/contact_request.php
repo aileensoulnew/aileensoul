@@ -17,7 +17,7 @@
         <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
     	<?php $this->load->view('adsense'); ?>
     </head>
-    <body class=" body-loader">
+    <body class="contact-request body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
             <?php echo $header_profile; ?>
@@ -25,6 +25,9 @@
                 <div class="container pt20 mobp0">
 					<div class="tab-add-991">
 						<?php $this->load->view('banner_add'); ?>
+                        <div class="request-noti-move">
+                        </div>
+
 					</div>
                     <div class="custom-user-list">
                         <div class="list-box-custom" ng-if="pending_contact_request_data.length > '0'">
@@ -122,7 +125,7 @@
                     </div>
                     <div class="right-add">
 						<?php $this->load->view('right_add_box'); ?>
-                        <div class="request-noti">
+                        <div id="request-noti-move" class="request-noti">
                             <div class="right-title">
                                 Contact Request Notifications
                             </div>
@@ -183,20 +186,27 @@
         </script>
         <script>
         
-        $(function () {
-            $('a[href="#search"]').on('click', function (event) {
-                event.preventDefault();
-                $('#search').addClass('open');
-                $('#search > form > input[type="search"]').focus();
+            $(function () {
+                $('a[href="#search"]').on('click', function (event) {
+                    event.preventDefault();
+                    $('#search').addClass('open');
+                    $('#search > form > input[type="search"]').focus();
+                });
+                $('#search, #search button.close-new').on('click keyup', function (event) {
+                    if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                        $(this).removeClass('open');
+                    }
+                });
             });
-            $('#search, #search button.close-new').on('click keyup', function (event) {
-                if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
-                    $(this).removeClass('open');
+            $(document).ready(function () {
+                if (screen.width <= 991) {
+                    $("#request-noti-move").appendTo($(".request-noti-move"));
                 }
             });
-        });
+
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/contact_request.js?ver=' . time()) ?>"></script>
+
     </body>
 </html>

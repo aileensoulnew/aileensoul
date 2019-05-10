@@ -3793,7 +3793,9 @@ tags-input .tags{padding: 0;}
 #post-share .all-post-box{border-bottom: 0;}
 .view-post span{font-size: 12px; padding-top: 5px; display: inline-block; color: #7b7b7b;}
 .share-post{width: 100%; float: left;}
-.visit-post .btn3{line-height: 1.2; margin: 0;}
+.visit-post .btn3{line-height: 1.2; margin: 0; padding:6px 14px; color:#5c5c5c; }
+.visit-post a svg{margin-bottom:-2px; margin-right:5px;}
+.visit-post a svg path{fill:#5c5c5c;}
 .share-post-head textarea.hashtag-textarea {min-height: 25px; padding-bottom: 0; height: 25px;}
 .search-page .availabel-data-box .comment-dis{width:91%;}
 
