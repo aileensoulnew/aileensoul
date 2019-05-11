@@ -5033,6 +5033,19 @@ class User_post_model extends CI_Model {
         return $shared_data;
     }
 
+    public function get_user_payment()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        $this->db->select("earn_points as total_points,earn_amount as total_earn")->from("user_payment_mapper");
+        $this->db->where('user_id', $user_id);
+        $this->db->where('earn_amount < 10');
+        $this->db->where('status','unpaid');
+        $this->db->order_by('created_date', 'desc');        
+        $query = $this->db->get();        
+        $payment_data = $query->row_array();        
+        return $payment_data;
+    }
+
     public function get_user_payment_history($userid)
     {
         $this->db->select("*,DATE_FORMAT(modify_date, '%d %M, %Y') as modify_date_str ,DATE_FORMAT(payment_date, '%d %M, %Y') as payment_date_str")->from("user_payment_mapper");        

@@ -126,8 +126,7 @@
         </div>
         <div class="right-section">
             <div id="right-fixed" class="fw">
-                <div class="right-add-box">
-                </div>
+                <?php $this->load->view('right_add_box');?>
             </div>
         </div>
     </div>

@@ -3535,7 +3535,8 @@ class User_post extends MY_Controller {
     public function get_user_monetize()
     {
         $userid = $this->session->userdata('aileenuser');
-        $monetize_data = $this->common->get_monetize();
+        // $monetize_data = $this->common->get_monetize();
+        $monetize_data = $this->user_post_model->get_user_payment();
         $monetize_data['payment_history'] = $this->user_post_model->get_user_payment_history($userid);
         $monetize_data['user_bank_detail'] = $this->user_post_model->get_user_bank_detail($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($monetize_data));
