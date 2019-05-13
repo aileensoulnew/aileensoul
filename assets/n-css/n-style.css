@@ -3419,6 +3419,7 @@ text-transform:uppercase;}
 .sugg-list{width:100%; float:left;}
 .sugg-list ul{width:100%; float:left; padding:0; display:inline-block; text-align:center; margin-bottom: 0;}
 .sugg-list ul li{width:33.33%; list-style-type:none; border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; float: left;}
+.sugg-list ul.first-pending-req li{float: none; display: inline-block; border: 1px solid #d2d2d2 !important; border-radius: 4px; margin: 5px 5px 2px;}
 .sugg-list ul li:nth-child(3n+0) {border-right: 0;}
 .sugg-list ul li:nth-last-child(3), .sugg-list ul li:nth-last-child(2), .sugg-list ul li:nth-last-child(1) {border-bottom: 0;}
 .sugg-list .custom-user-list h3{border-bottom:0;}
@@ -3815,6 +3816,7 @@ tags-input .tags{padding: 0;}
   .cd-horizontal-timeline .events-content em {font-size:18px; color:#7b7b7b; }
   .cd-horizontal-timeline .events-content p {font-size:16px; color:#7b7b7b;}
   .mob-progressbar.temp{display:none}
+
 }
 @media screen and (min-width: 992px) {
 
@@ -3826,6 +3828,7 @@ tags-input .tags{padding: 0;}
   .cd-horizontal-timeline::before {
     content: 'desktop';
   }
+
 }
 @media screen and (min-width: 1200px) {
 
@@ -3967,6 +3970,9 @@ tags-input .tags{padding: 0;}
   .error-top-box h1{padding-bottom: 0;}
   .sugg-list ul li:nth-child(even){border-right: 0;}
   .sugg-list ul li:nth-child(odd){border-right: 1px solid #d2d2d2;}
+  .sugg-list ul.first-pending-req li{float: left; border:0 !important; border-radius: 0; margin: 0;}
+  .sugg-list ul.first-pending-req li:nth-child(even){border-right: 0 !important;}
+  .sugg-list ul.first-pending-req li:nth-child(odd){border-right: 1px solid #d2d2d2 !important;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -4359,6 +4365,9 @@ tags-input .tags{padding: 0;}
   .main-user-option-scroll{border-bottom:0;}
   .table-responsive{margin-bottom:10px;}
   .middle-part .add-post, .all-post-box {border-left: 0px; border-right: 0px; border-radius: 0;}
+  .post-discription .all-post-box{border:1px solid #d2d2d2; border-radius: 4px;}
+  .post-images{padding: 0 10px 5px;}
+  .post-discription .post-discription{padding: 10px 10px 0;}
   .middle-section.custom-mob-pd{padding: 60px 0 50px;}
   body.questions{position:relative;}
   .mob-pd0{padding: 0;}
@@ -5379,6 +5388,7 @@ tags-input .tags{padding: 0;}
   .visit-post .btn3{padding: 4px 12px; font-size: 12px; margin-top: 3px;}
   .request-noti-move .right-title{font-size: 16px; text-align: center;}
   .custom-user-list h3{font-size: 16px;}
+  .sugg-list ul.first-pending-req li:nth-child(1){border-bottom: 1px solid #d2d2d2 !important;}
 }
 @media screen and (max-width: 359px) {
   .main-banner{max-height:170px;}

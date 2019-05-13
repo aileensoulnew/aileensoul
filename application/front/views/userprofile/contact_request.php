@@ -36,7 +36,7 @@
                                 <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                 </div>                                
-                                <ul class="">
+                                <ul class="pendin-req" ng-class="pending_contact_request_data.length < '3' ? 'first-pending-req' : ''">
                                     <li ng-repeat="contact in pending_contact_request_data">
                                         <div class="arti-profile-box">
                                         	<div class="user-cover-img">
