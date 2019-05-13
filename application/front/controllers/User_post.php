@@ -2062,6 +2062,34 @@ class User_post extends MY_Controller {
         $this->load->view('user_post/search', $this->data);
     }
 
+    public function search_all() {
+        $this->load->view('user_post/search_all');
+    }
+
+    public function search_opportunity() {
+        $this->load->view('user_post/search_opportunity');
+    }
+
+    public function search_people() {
+        $this->load->view('user_post/search_people');
+    }
+
+    public function search_post() {
+        $this->load->view('user_post/search_post');
+    }
+
+    public function search_business() {
+        $this->load->view('user_post/search_business');
+    }
+
+    public function search_article() {
+        $this->load->view('user_post/search_article');
+    }
+
+    public function search_question() {
+        $this->load->view('user_post/search_question');
+    }
+
     public function searchData() {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];

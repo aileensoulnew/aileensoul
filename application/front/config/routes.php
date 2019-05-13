@@ -74,7 +74,14 @@ $route['followers/(:any)'] = 'Userprofile';
 $route['following/(:any)'] = 'Userprofile';
 $route['contacts/(:any)'] = 'Userprofile';
 $route['questions/(:any)'] = 'Userprofile';
+
 $route['search'] = 'user_post/search';
+$route['search/opportunity'] = 'user_post/search';
+$route['search/people'] = 'user_post/search';
+$route['search/post'] = 'user_post/search';
+$route['search/business'] = 'user_post/search';
+$route['search/article'] = 'user_post/search';
+$route['search/question'] = 'user_post/search';
 
 $route['userprofile_page'] = 'userprofile_page';
 $route['userprofile_page/(:any)'] = 'userprofile_page/$1';
@@ -284,7 +291,8 @@ $route['recruiter/jobpost/(:any)'] = "My404Page";
 //Monetize
 $route['monetize-aileensoul-account'] = "Userprofile/monetize";
 $route['searchelastic'] = "Searchelastic";
-$route['searchelastic/search/(:any)'] = "Searchelastic/search/$1";
+$route['searchelastic/search'] = "Searchelastic/search";
+$route['searchelastic/search_opportunity_data'] = "Searchelastic/search_opportunity_data";
 
 $route['(:any)'] = 'Userprofile';
 

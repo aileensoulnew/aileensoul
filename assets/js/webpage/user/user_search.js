@@ -107,7 +107,8 @@ app.filter('removeLastCharacter', function() {
     };
 });
 // AUTO SCROLL MESSAGE DIV FIRST TIME END
-app.directive('ngEnter', function() { // custom directive for sending message on enter click
+app.directive('ngEnter', function() { 
+    // custom directive for sending message on enter click
     return function(scope, element, attrs) {
         element.bind("keydown keypress", function(event) {
             if (event.which === 13 && !event.shiftKey) {
@@ -121,21 +122,105 @@ app.directive('ngEnter', function() { // custom directive for sending message on
 });
 app.directive("editableText", function() {
     return {
-        controller: 'EditorController',
+        controller: 'SearchDefaultController',
         restrict: 'C',
         replace: true,
         transclude: true,
     };
 });
-app.controller('EditorController', ['$scope', function($scope) {
+// app.controller('SearchDefaultController', ['$scope,$http', function($scope,$http) {   
+app.service('likeService', function($http) {
+    this.post_like = function(post_id,parent_index) {
+        return $http({
+            method: 'POST',
+            url: base_url + 'user_post/likePost',
+            data: 'post_id=' + post_id,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            if (success.data.message == 1) {
+                if (success.data.is_newLike == 1) {
+                    $('#post-like-count-' + post_id).show();
+                    $('#post-like-' + post_id).addClass('like');
+                    $('#post-like-count-' + post_id).html(success.data.likePost_count);
+                    if (success.data.likePost_count == '0') {
+                        $('#post-other-like-' + post_id).html('');
+                    } else {
+                        $('#post-other-like-' + post_id).html(success.data.post_like_data);
+                    }
+                } else if (success.data.is_oldLike == 1) {
+                    if (success.data.likePost_count < 1) {
+                        $('#post-like-count-' + post_id).hide();
+                    } else {
+                        $('#post-like-count-' + post_id).show();
+                    }
+                    $('#post-like-' + post_id).removeClass('like');
+                    $('#post-like-count-' + post_id).html(success.data.likePost_count);
+                    if (success.data.likePost_count == '0') {
+                        $('#post-other-like-' + post_id).html('');
+                    } else {
+                        $('#post-other-like-' + post_id).html(success.data.post_like_data);
+                    }
+                }
+                // console.log(success.data.user_like_list);
+                return success.data.user_like_list;
+                // $scope.postData[parent_index].user_like_list = success.data.user_like_list;
+            }
+        });
+    };
+}); 
+app.controller('SearchDefaultController', function($scope, $http, $compile) {
     $scope.handlePaste = function(e) {
         e.preventDefault();
         e.stopPropagation();
         var value = e.originalEvent.clipboardData.getData("Text");
         document.execCommand('inserttext', false, value);
     };
-}]);
+
+    $scope.active_tab = 0;
+
+    // getContactSuggetion();
+    function getContactSuggetion() {
+        $http.get(base_url + "user_post/getContactSuggetion").then(function(success) {
+            $scope.contactSuggetion = success.data;
+        }, function(error) {});
+    };
+});
+app.config(function ($routeProvider, $locationProvider) {
+    $routeProvider
+            .when("/search/opportunity", {
+                templateUrl: base_url + "user_post/search_opportunity",
+                controller: 'opportunityController'
+            })
+            .when("/search/people", {
+                templateUrl: base_url + "user_post/search_people",
+                controller: 'peopleController'
+            })
+            .when("/search/post", {
+                templateUrl: base_url + "user_post/search_post",
+                controller: 'postController'
+            })
+            .when("/search/business", {
+                templateUrl: base_url + "user_post/search_business",
+                controller: 'businessController'
+            })
+            .when("/search/article", {
+                templateUrl: base_url + "user_post/search_article",
+                controller: 'articleController'
+            })
+            .when("/search/question", {
+                templateUrl: base_url + "user_post/search_question",
+                controller: 'questionController'
+            })
+            .otherwise({
+                templateUrl: base_url + "user_post/search_all",
+                controller: 'searchController'
+            });
+    $locationProvider.html5Mode(true);
+});
 app.controller('searchController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '1';
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     $scope.pro = {};
@@ -148,14 +233,14 @@ app.controller('searchController', function($scope, $http, $compile) {
         window.location = "/";
     }
     searchData();
-    getContactSuggetion();
-    $scope.total_count = '';
+    
+    /*$scope.total_count = '';
     $scope.opp_count = '';
     $scope.people_count = '';
     $scope.simple_count = '';
     $scope.business_count = '';
     $scope.article_count = '';
-    $scope.question_count = '';
+    $scope.question_count = '';*/
 
     function searchData() {
         //$(".post_loader").show();
@@ -170,17 +255,37 @@ app.controller('searchController', function($scope, $http, $compile) {
         }).then(function(success) {
             $(".post_loader").hide();
             $scope.searchProfileData = success.data.profile;
-            $scope.postData = success.data.post;
+            $scope.postData = success.data.opp_post;
+            if(success.data.sim_post.length > 0)
+            {
+                $scope.postData.push(success.data.sim_post[0]);
+            }
+            if(success.data.question_post.length > 0)
+            {
+                $scope.postData.push(success.data.question_post[0]);
+            }
+            if(success.data.article_post.length > 0)
+            {
+                $scope.postData.push(success.data.article_post[0]);
+            }
+
             $scope.business_data = success.data.business_data;
             
-                $scope.total_count = '('+success.data.total_count+')';
-                $scope.opp_count = '('+success.data.opp_count+')';
-                $scope.people_count = '('+success.data.people_count+')';
-                $scope.simple_count = '('+success.data.simple_count+')';
-                $scope.business_count = '('+success.data.business_count+')';
-                $scope.article_count = '('+success.data.article_count+')';
-                $scope.question_count = '('+success.data.question_count+')';
+                $scope.$parent.opp_count = '('+success.data.opp_count+')';
+                $scope.$parent.people_count = '('+success.data.people_count+')';
+                $scope.$parent.simple_count = '('+success.data.simple_count+')';
+                $scope.$parent.business_count = '('+success.data.business_count+')';
+                $scope.$parent.article_count = '('+success.data.article_count+')';
+                $scope.$parent.question_count = '('+success.data.question_count+')';
+                $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
             
+                /*$("#search-all-tab").html('All '+$scope.total_count);
+                $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+                $("#search-people-tab").html('People '+$scope.people_count);
+                $("#search-post-tab").html('Post '+$scope.simple_count);
+                $("#search-bus-tab").html('Business '+$scope.business_count);
+                $("#search-article-tab").html('Article '+$scope.article_count);
+                $("#search-que-tab").html('Question '+$scope.question_count);*/
 
             $scope.pro.page_number = 2;
             $scope.pst.page_number = 2;
@@ -199,7 +304,7 @@ app.controller('searchController', function($scope, $http, $compile) {
         });
     };
     
-    $scope.load_more_profile = function() {
+    /*$scope.load_more_profile = function() {
         var pagenum = $scope.pro.page_number;
         if (isProcessing) {
             return;
@@ -219,10 +324,7 @@ app.controller('searchController', function($scope, $http, $compile) {
             $('#load_more_pro').html("Load more");
             if (success.data.profile.length > 0) {
                 for (var i in success.data.profile) {
-                    $scope.searchProfileData.push(success.data.profile[i]);
-                    /*$scope.$apply(function () {
-                        $scope.searchProfileData.push(success.data.profile[i]);
-                    });*/
+                    $scope.searchProfileData.push(success.data.profile[i]);                    
                 }
                 $scope.pro.page_number = parseInt($scope.pro.page_number) + 1;
                 isProcessing = false;
@@ -254,10 +356,7 @@ app.controller('searchController', function($scope, $http, $compile) {
             $('#load_more_pst').html("Load more");
             if (success.data.post.length > 0) {
                 for (var i in success.data.post) {
-                    $scope.postData.push(success.data.post[i]);
-                    /*$scope.$apply(function () {
-                        $scope.postData.push(success.data.post[i]);
-                    });*/
+                    $scope.postData.push(success.data.post[i]);                    
                     setTimeout(function() {
                         $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                     }, 300);
@@ -271,13 +370,7 @@ app.controller('searchController', function($scope, $http, $compile) {
                 $('#load_more_pst_div').remove();
             }
         });
-    };
-
-    function getContactSuggetion() {
-        $http.get(base_url + "user_post/getContactSuggetion").then(function(success) {
-            $scope.contactSuggetion = success.data;
-        }, function(error) {});
-    };
+    };*/    
 
     $scope.removeViewMore = function(mainId, removeViewMore) {
         $("#" + mainId).removeClass("view-more-expand");
@@ -356,6 +449,11 @@ app.controller('searchController', function($scope, $http, $compile) {
             }
         });
     };
+    /*$scope.post_like = function(post_id,parent_index) {
+        likeService.post_like(post_id,parent_index).then(function(success) {
+            $scope.postData[parent_index].user_like_list = success;
+        });
+    };*/
 
     $scope.post_like = function(post_id,parent_index) {
         $http({
@@ -619,7 +717,8 @@ app.controller('searchController', function($scope, $http, $compile) {
         $(".new-comment-"+post_id).show();
     }
 
-    $scope.comment_reply = function(post_index,comment_id,login_user_id,comment_user_id,cmt_reply_obj){
+    $scope.comment_reply = function(post_index,comment_id,login_user_id,comment_user_id,cmt_reply_obj)
+    {
         $scope.comment_reply_data = cmt_reply_obj;
         if(login_user_id == 0 && comment_user_id == 0)
         {
@@ -844,7 +943,7 @@ app.controller('searchController', function($scope, $http, $compile) {
         $("#report-spam").modal('show');
     };
 
-    $scope.report_spam_validate = {        
+    $scope.report_spam_validate = {
         rules: {           
             report_spam: {
                 required: true,
@@ -904,11 +1003,11 @@ app.controller('searchController', function($scope, $http, $compile) {
         }
     };
 
-    $scope.openModal2 = function(myModal2Id) {        
+    $scope.openModal2 = function(myModal2Id) {
         document.getElementById(myModal2Id).style.display = "block";
         $("body").addClass("modal-open");
     };
-    $scope.closeModal2 = function(myModal2Id) {    
+    $scope.closeModal2 = function(myModal2Id) {
         document.getElementById(myModal2Id).style.display = "none";
         $("body").removeClass("modal-open");
     };
@@ -984,7 +1083,7 @@ app.controller('searchController', function($scope, $http, $compile) {
         },300);
     };
 
-    $scope.share_post_fnc = function(post_index){        
+    $scope.share_post_fnc = function(post_index){
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
         var post_id = 0;
@@ -1022,6 +1121,443 @@ app.controller('searchController', function($scope, $http, $compile) {
             $('.post-popup-box').attr('style','pointer-events: all;');
         });
     };
+});
+app.controller('opportunityController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '2';
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
+    
+    $scope.searchData = function() {
+        //$(".post_loader").show();
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search_opportunity_data',
+            data: 'searchKeyword=' + searchKeyword,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $(".post_loader").hide();
+            
+            $scope.postData = success.data.opp_post;
+
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
+            $('#main_loader').hide();
+            if (success.data.profile_total_rec > 5) {
+                $("#load_more_pro_div").show();
+            }
+            if (success.data.post_total_rec > 3) {
+                $("#load_more_pst_div").show();
+            }
+            // $('#main_page_load').show();
+            
+            setTimeout(function() {
+                $('video,audio').mediaelementplayer( /* Options */ );
+            }, 300);
+        });
+    };
+
+    $scope.get_search_total_count = function() {
+        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+            $scope.$parent.opp_count = '('+success.data.opp_count+')';
+            $scope.$parent.people_count = '('+success.data.people_count+')';
+            $scope.$parent.simple_count = '('+success.data.simple_count+')';
+            $scope.$parent.business_count = '('+success.data.business_count+')';
+            $scope.$parent.article_count = '('+success.data.article_count+')';
+            $scope.$parent.question_count = '('+success.data.question_count+')';
+            $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+        
+            /*$("#search-all-tab").html('All '+$scope.total_count);
+            $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+            $("#search-people-tab").html('People '+$scope.people_count);
+            $("#search-post-tab").html('Post '+$scope.simple_count);
+            $("#search-bus-tab").html('Business '+$scope.business_count);
+            $("#search-article-tab").html('Article '+$scope.article_count);
+            $("#search-que-tab").html('Question '+$scope.question_count);*/
+        }, function(error) {});
+    };
+
+    $scope.searchData();
+    $scope.get_search_total_count();
+});
+app.controller('peopleController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '3';
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
+    
+    $scope.searchData = function() {
+        //$(".post_loader").show();
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search_people_data',
+            data: 'searchKeyword=' + searchKeyword,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $(".post_loader").hide();
+            
+            $scope.searchProfileData = success.data.profile;
+
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
+            $('#main_loader').hide();
+            if (success.data.profile_total_rec > 5) {
+                $("#load_more_pro_div").show();
+            }
+            if (success.data.post_total_rec > 3) {
+                $("#load_more_pst_div").show();
+            }
+            // $('#main_page_load').show();
+            
+            setTimeout(function() {
+                $('video,audio').mediaelementplayer( /* Options */ );
+            }, 300);
+        });
+    };
+
+    $scope.get_search_total_count = function() {
+        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+            $scope.$parent.opp_count = '('+success.data.opp_count+')';
+            $scope.$parent.people_count = '('+success.data.people_count+')';
+            $scope.$parent.simple_count = '('+success.data.simple_count+')';
+            $scope.$parent.business_count = '('+success.data.business_count+')';
+            $scope.$parent.article_count = '('+success.data.article_count+')';
+            $scope.$parent.question_count = '('+success.data.question_count+')';
+            $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+        
+            /*$("#search-all-tab").html('All '+$scope.total_count);
+            $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+            $("#search-people-tab").html('People '+$scope.people_count);
+            $("#search-post-tab").html('Post '+$scope.simple_count);
+            $("#search-bus-tab").html('Business '+$scope.business_count);
+            $("#search-article-tab").html('Article '+$scope.article_count);
+            $("#search-que-tab").html('Question '+$scope.question_count);*/
+        }, function(error) {});
+    };
+
+    $scope.searchData();
+    $scope.get_search_total_count();
+
+    $scope.follow_user = function(id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/follow_user',
+            data: 'to_id=' + id,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $("#" + id).html($compile(success.data)($scope));
+        });
+    };
+
+    $scope.unfollow_user = function(id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/unfollow_user',
+            data: 'to_id=' + id,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $("#" + id).html($compile(success.data)($scope));
+        });
+    };
+
+    $scope.followSearch = function(user_id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addfollow',
+            data: 'to_id=' + user_id + '&status=1',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            if (success.data == 1) {
+                $('#search-profile-follow-' + user_id).html('Following');
+            }
+        });
+    };
+});
+app.controller('postController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '4';
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
+    
+    $scope.searchData = function() {
+        //$(".post_loader").show();
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search_post_data',
+            data: 'searchKeyword=' + searchKeyword,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $(".post_loader").hide();
+            
+            $scope.postData = success.data.sim_post;
+
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
+            $('#main_loader').hide();
+            if (success.data.profile_total_rec > 5) {
+                $("#load_more_pro_div").show();
+            }
+            if (success.data.post_total_rec > 3) {
+                $("#load_more_pst_div").show();
+            }
+            // $('#main_page_load').show();
+            
+            setTimeout(function() {
+                $('video,audio').mediaelementplayer( /* Options */ );
+            }, 300);
+        });
+    };
+
+    $scope.get_search_total_count = function() {
+        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+            $scope.$parent.opp_count = '('+success.data.opp_count+')';
+            $scope.$parent.people_count = '('+success.data.people_count+')';
+            $scope.$parent.simple_count = '('+success.data.simple_count+')';
+            $scope.$parent.business_count = '('+success.data.business_count+')';
+            $scope.$parent.article_count = '('+success.data.article_count+')';
+            $scope.$parent.question_count = '('+success.data.question_count+')';
+            $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+        
+            /*$("#search-all-tab").html('All '+$scope.total_count);
+            $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+            $("#search-people-tab").html('People '+$scope.people_count);
+            $("#search-post-tab").html('Post '+$scope.simple_count);
+            $("#search-bus-tab").html('Business '+$scope.business_count);
+            $("#search-article-tab").html('Article '+$scope.article_count);
+            $("#search-que-tab").html('Question '+$scope.question_count);*/
+        }, function(error) {});
+    };
+
+    $scope.searchData();
+    $scope.get_search_total_count();
+});
+app.controller('businessController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '5';
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
+    
+    $scope.searchData = function() {
+        //$(".post_loader").show();
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search_business_data',
+            data: 'searchKeyword=' + searchKeyword,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $(".post_loader").hide();
+            
+            $scope.business_data = success.data.business_data;
+
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
+            $('#main_loader').hide();
+            if (success.data.profile_total_rec > 5) {
+                $("#load_more_pro_div").show();
+            }
+            if (success.data.post_total_rec > 3) {
+                $("#load_more_pst_div").show();
+            }
+            // $('#main_page_load').show();
+            
+            setTimeout(function() {
+                $('video,audio').mediaelementplayer( /* Options */ );
+            }, 300);
+        });
+    };
+
+    $scope.get_search_total_count = function() {
+        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+            $scope.$parent.opp_count = '('+success.data.opp_count+')';
+            $scope.$parent.people_count = '('+success.data.people_count+')';
+            $scope.$parent.simple_count = '('+success.data.simple_count+')';
+            $scope.$parent.business_count = '('+success.data.business_count+')';
+            $scope.$parent.article_count = '('+success.data.article_count+')';
+            $scope.$parent.question_count = '('+success.data.question_count+')';
+            $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+        
+            /*$("#search-all-tab").html('All '+$scope.total_count);
+            $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+            $("#search-people-tab").html('People '+$scope.people_count);
+            $("#search-post-tab").html('Post '+$scope.simple_count);
+            $("#search-bus-tab").html('Business '+$scope.business_count);
+            $("#search-article-tab").html('Article '+$scope.article_count);
+            $("#search-que-tab").html('Question '+$scope.question_count);*/
+        }, function(error) {});
+    };
+
+    $scope.searchData();
+    $scope.get_search_total_count();
+});
+app.controller('articleController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '6';
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
+    
+    $scope.searchData = function() {
+        //$(".post_loader").show();
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search_article_data',
+            data: 'searchKeyword=' + searchKeyword,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $(".post_loader").hide();
+            
+            $scope.postData = success.data.article_post;
+
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
+            $('#main_loader').hide();
+            if (success.data.profile_total_rec > 5) {
+                $("#load_more_pro_div").show();
+            }
+            if (success.data.post_total_rec > 3) {
+                $("#load_more_pst_div").show();
+            }
+            // $('#main_page_load').show();
+            
+            setTimeout(function() {
+                $('video,audio').mediaelementplayer( /* Options */ );
+            }, 300);
+        });
+    };
+
+    $scope.get_search_total_count = function() {
+        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+            $scope.$parent.opp_count = '('+success.data.opp_count+')';
+            $scope.$parent.people_count = '('+success.data.people_count+')';
+            $scope.$parent.simple_count = '('+success.data.simple_count+')';
+            $scope.$parent.business_count = '('+success.data.business_count+')';
+            $scope.$parent.article_count = '('+success.data.article_count+')';
+            $scope.$parent.question_count = '('+success.data.question_count+')';
+            $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+        
+            /*$("#search-all-tab").html('All '+$scope.total_count);
+            $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+            $("#search-people-tab").html('People '+$scope.people_count);
+            $("#search-post-tab").html('Post '+$scope.simple_count);
+            $("#search-bus-tab").html('Business '+$scope.business_count);
+            $("#search-article-tab").html('Article '+$scope.article_count);
+            $("#search-que-tab").html('Question '+$scope.question_count);*/
+        }, function(error) {});
+    };
+
+    $scope.searchData();
+    $scope.get_search_total_count();
+});
+app.controller('questionController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '7';
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
+    
+    $scope.searchData = function() {
+        //$(".post_loader").show();
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + 'searchelastic/search_question_data',
+            data: 'searchKeyword=' + searchKeyword,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $(".post_loader").hide();
+            
+            $scope.postData = success.data.question_post;
+
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
+            $('#main_loader').hide();
+            if (success.data.profile_total_rec > 5) {
+                $("#load_more_pro_div").show();
+            }
+            if (success.data.post_total_rec > 3) {
+                $("#load_more_pst_div").show();
+            }
+            // $('#main_page_load').show();
+            
+            setTimeout(function() {
+                $('video,audio').mediaelementplayer( /* Options */ );
+            }, 300);
+        });
+    };
+
+    $scope.get_search_total_count = function() {
+        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+            $scope.$parent.opp_count = '('+success.data.opp_count+')';
+            $scope.$parent.people_count = '('+success.data.people_count+')';
+            $scope.$parent.simple_count = '('+success.data.simple_count+')';
+            $scope.$parent.business_count = '('+success.data.business_count+')';
+            $scope.$parent.article_count = '('+success.data.article_count+')';
+            $scope.$parent.question_count = '('+success.data.question_count+')';
+            $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+        
+            /*$("#search-all-tab").html('All '+$scope.total_count);
+            $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
+            $("#search-people-tab").html('People '+$scope.people_count);
+            $("#search-post-tab").html('Post '+$scope.simple_count);
+            $("#search-bus-tab").html('Business '+$scope.business_count);
+            $("#search-article-tab").html('Article '+$scope.article_count);
+            $("#search-que-tab").html('Question '+$scope.question_count);*/
+        }, function(error) {});
+    };
+
+    $scope.searchData();
+    $scope.get_search_total_count();
 });
 $(window).on("load", function() {
     $(".custom-scroll").mCustomScrollbar({
