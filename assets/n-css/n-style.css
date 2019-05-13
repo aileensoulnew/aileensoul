@@ -3418,10 +3418,10 @@ text-transform:uppercase;}
 
 .sugg-list{width:100%; float:left;}
 .sugg-list ul{width:100%; float:left; padding:0; display:inline-block; text-align:center; margin-bottom: 0;}
-.sugg-list ul li{width:33.33%; list-style-type:none; border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; float: left;}
-.sugg-list ul.first-pending-req li{float: none; display: inline-block; border: 1px solid #d2d2d2 !important; border-radius: 4px; margin: 5px 5px 2px;}
+.sugg-list ul li{width:33.33%; list-style-type:none; border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; float: left; }
+.sugg-list ul.first-pending-req li{float: none; display: inline-block; border: 1px solid #d2d2d2 !important; border-radius: 4px; margin: 8px 5px 2px;}
 .sugg-list ul li:nth-child(3n+0) {border-right: 0;}
-.sugg-list ul li:nth-last-child(3), .sugg-list ul li:nth-last-child(2), .sugg-list ul li:nth-last-child(1) {border-bottom: 0;}
+.sugg-list ul li:nth-child(3), .sugg-list ul li:nth-child(2), .sugg-list ul li:nth-child(1) {border-top: 0;}
 .sugg-list .custom-user-list h3{border-bottom:0;}
 .sugg-list .user-info-text .user-name{font-size:15px; color:#5c5c5c; display:block; font-weight:bold;}
 .sugg-list .user-info-text .user-des{font-size:14px; color:#8c8c8c; display:block;}
@@ -3432,6 +3432,8 @@ text-transform:uppercase;}
 .sugg-list .arti-profile-box .author-btn{padding:0 10px 10px;}
 .sugg-list .request-btn .btn1{font-size:14px;}
 .sugg-list .request-btn .btn3{font-size:14px;}
+.list-box-custom.pd-req{border-bottom: 0px; position: relative;}
+.list-box-custom.pd-req:after{border-bottom: 1px solid #d2d2d2; position: absolute; width: 100%; left: 0; bottom: 0px; content: "";}
 
 #comp_profile{height:150px;}
 .post-box-bottom svg path{ fill: #7b7b7b;}
@@ -3802,6 +3804,7 @@ tags-input .tags{padding: 0;}
 .visit-post a svg path{fill:#5c5c5c;}
 .share-post-head textarea.hashtag-textarea {min-height: 25px; padding-bottom: 0; height: 25px;}
 .search-page .availabel-data-box .comment-dis{width:91%;}
+.bnr-cus-sec .search-box{border: 0px;}
 
 /***  media query  ***/
 @media print {
