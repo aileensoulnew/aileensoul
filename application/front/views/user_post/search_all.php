@@ -1,49 +1,61 @@
 <div class="left-section">
     <div class="search-box">
-        <div class="search-left-box">
-            <h3>Title</h3>
-            <div class="form-group">
-                <input type="text" placeholder="Search by Title"> 
+        <form id="main_search" name="main_search" action="javascript:void(0);" method="post">
+            <div class="search-left-box">
+                <h3>Title</h3>
+                <div class="form-group">
+                    <!-- <input type="text" placeholder="Search by Title"> -->
+                    <!-- <input type="text" placeholder="Search by Title" id="search_job_title" name="search_job_title" ng-model="search_job_title" ng-keyup="search_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off" maxlength="200"> -->
+                    <tags-input id="search_job_title" name="search_job_title" ng-model="search_job_title" display-property="name" placeholder="Search by Title" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" max-tags="5">
+                        <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                    </tags-input>
+                    <div id="jobtitletooltip" class="tooltip-custom" style="display: none;">Type the designation which best matches for given opportunity.</div>
+                    <script type="text/ng-template" id="title-template">
+                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                    </script>
+                    <script type="text/ng-template" id="title-autocomplete-template">
+                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                    </script>
+                </div>
             </div>
-        </div>
-        <?php $getFieldList = $this->data_model->getNewFieldList();?>
-        <div class="search-left-box">
-            <h3>Industry</h3>
-            <div class="form-group">
-                <span class="span-select">
-                    <select placeholder="Search by Industry">
-                        <option value="">Select Industry</option>
-                        <?php foreach ($getFieldList as $key => $value) { ?>
-                            <option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
-                        <?php } ?>
-                    </select>
-                </span>
+            <?php $getFieldList = $this->data_model->getNewFieldList();?>
+            <div class="search-left-box">
+                <h3>Industry</h3>
+                <div class="form-group">
+                    <span class="span-select">
+                        <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field">
+                            <option value="">Select Industry</option>
+                            <?php foreach ($getFieldList as $key => $value) { ?>
+                                <option value="<?php echo $value['industry_name']; ?>"><?php echo $value['industry_name']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </span>
+                </div>
             </div>
-        </div>
-        <div class="search-left-box">
-            <h3>City</h3>
-            <div class="form-group">
-                <input type="text" placeholder="Search by City"> 
+            <div class="search-left-box">
+                <h3>City</h3>
+                <div class="form-group">
+                    <!-- <input type="text" placeholder="Search by City"> -->
+                    <!-- <input type="text" placeholder="Search by City" id="search_city" name="search_city" ng-model="search_city" ng-keyup="search_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off" maxlength="200"> -->
+                    <tags-input id="search_city" ng-model="search_city" name="search_city" display-property="city_name" placeholder="Search by City" replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()" max-tags="5">
+                        <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
+                    </tags-input>
+                    <div id="locationtooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select the location for the opportunity.</div>
+                    <script type="text/ng-template" id="location-template">
+                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                    </script>
+                    <script type="text/ng-template" id="location-autocomplete-template">
+                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                    </script>
+                </div>            
+            </div>        
+            <div class="search-left-box pt15">
+                <div class="form-group">
+                    <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
+                    <a class="pull-right btn-new-1"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
+                </div>
             </div>
-        </div>
-        <div class="search-left-box hide">
-            <h3>Hash Tag</h3>
-            <div class="form-group">
-                <input type="text" placeholder="Search by Hash Tag"> 
-            </div>
-        </div>
-        <div class="search-left-box hide">
-            <h3>Company</h3>
-            <div class="form-group">
-                <input type="text" placeholder="Search by Company"> 
-            </div>
-        </div>
-        <div class="search-left-box pt15">
-            <div class="form-group">
-                <a class="pull-left btn-new-1"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
-                <a class="pull-right btn-new-1"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
-            </div>
-        </div>
+        </form>
     </div>    
 </div>
 <div class="middle-section">
@@ -70,7 +82,7 @@
         </div>
     </div>
     <div class="search-more-post" ng-if="searchProfileData.length != '0'">
-        <a class="btn-new-1" href="#">View More People...</a> 
+        <a class="btn-new-1" href="<?php echo base_url('search/people?q={{search_keyword}}'); ?>">View More People...</a> 
     </div>
     <div class="mobp0" ng-if="postData.length != '0'">
         <div class="">
@@ -778,16 +790,16 @@
                     </div>
                 </div>
                 <div class="search-more-post" ng-if="post.post_data.post_for == 'opportunity'">
-                    <a class="btn-new-1" href="#">View More Opportunity...</a> 
+                    <a class="btn-new-1" href="<?php echo base_url('search/opportunity?q={{search_keyword}}'); ?>">View More Opportunity...</a> 
                 </div>
                 <div class="search-more-post" ng-if="post.post_data.post_for == 'simple'">
-                    <a class="btn-new-1" href="#">View More Post...</a> 
+                    <a class="btn-new-1" href="<?php echo base_url('search/post?q={{search_keyword}}'); ?>">View More Post...</a> 
                 </div>
                 <div class="search-more-post" ng-if="post.post_data.post_for == 'question'">
-                    <a class="btn-new-1" href="#">View More Question...</a> 
+                    <a class="btn-new-1" href="<?php echo base_url('search/question?q={{search_keyword}}'); ?>">View More Question...</a> 
                 </div>
                 <div class="search-more-post" ng-if="post.post_data.post_for == 'article'">
-                    <a class="btn-new-1" href="#">View More Article...</a> 
+                    <a class="btn-new-1" href="<?php echo base_url('search/article?q={{search_keyword}}'); ?>">View More Article...</a> 
                 </div>
             </div>
         </div>
@@ -832,7 +844,7 @@
         </div>
     </div>
     <div class="search-more-post" ng-if="business_data.length != 0">
-        <a class="btn-new-1" href="<?php echo base_url('business/search/'.$search_keyword) ?>">View More Business...</a> 
+        <a class="btn-new-1" href="<?php echo base_url('search/business?q={{search_keyword}}'); ?>">View More Business...</a> 
     </div>
 </div>
 

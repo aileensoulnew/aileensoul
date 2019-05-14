@@ -2063,11 +2063,15 @@ class User_post extends MY_Controller {
     }
 
     public function search_all() {
-        $this->load->view('user_post/search_all');
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/search_all', $this->data);
     }
 
     public function search_opportunity() {
-        $this->load->view('user_post/search_opportunity');
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/search_opportunity', $this->data);
     }
 
     public function search_people() {
@@ -2075,7 +2079,9 @@ class User_post extends MY_Controller {
     }
 
     public function search_post() {
-        $this->load->view('user_post/search_post');
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/search_post', $this->data);
     }
 
     public function search_business() {
@@ -2083,11 +2089,15 @@ class User_post extends MY_Controller {
     }
 
     public function search_article() {
-        $this->load->view('user_post/search_article');
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/search_article', $this->data);
     }
 
     public function search_question() {
-        $this->load->view('user_post/search_question');
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/search_question', $this->data);
     }
 
     public function searchData() {

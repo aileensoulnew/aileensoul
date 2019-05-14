@@ -71,6 +71,9 @@ class Searchelastic extends MY_Controller {
                             'university_name' => [
                                 'type' => 'string'
                             ],
+                            'city_name' => [
+                                'type' => 'string'
+                            ],
                         ]
                     ]
                 ]
@@ -86,7 +89,7 @@ class Searchelastic extends MY_Controller {
             'index' => 'aileensoul_search_people',
             'type'  => 'aileensoul_search_people',
             'id'=> 1,
-            'body'  => ['first_name' => 'Pratik', 'last_name' => 'Suthar','user_gender' => 'M', 'fullname' => 'Pratik Suthar', 'user_slug' => 'pratik-suthar', 'user_image' => 'pratik-suthar', 'title_name' => 'pratik-suthar', 'degree_name' => 'pratik-suthar', 'profession_field' => 'pratik-suthar', 'student_field' => 'pratik-suthar', 'profession_city' => 'pratik-suthar', 'student_city' => 'pratik-suthar', 'university_name' => 'pratik-suthar',],
+            'body'  => ['first_name' => 'Pratik', 'last_name' => 'Suthar','user_gender' => 'M', 'fullname' => 'Pratik Suthar', 'user_slug' => 'pratik-suthar', 'user_image' => 'pratik-suthar', 'title_name' => 'pratik-suthar', 'degree_name' => 'pratik-suthar', 'profession_field' => 'pratik-suthar', 'student_field' => 'pratik-suthar', 'profession_city' => 'pratik-suthar', 'student_city' => 'pratik-suthar', 'university_name' => 'pratik-suthar', 'city_name' => 'pratik-suthar',],
         ];
         $response = $client->index($params);
         print_r($response);
@@ -98,7 +101,7 @@ class Searchelastic extends MY_Controller {
 
         // $this->Mapping();exit();
 
-        $sql = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name FROM ailee_user u
+        $sql = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
             LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
             LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
             LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
@@ -108,6 +111,8 @@ class Searchelastic extends MY_Controller {
             LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
             LEFT JOIN ailee_industry_type it2 ON it2.industry_id = us.interested_fields
             LEFT JOIN ailee_university un ON un.university_name = us.university_name
+            LEFT JOIN ailee_cities ct1 ON ct1.city_id = up.city
+            LEFT JOIN ailee_cities ct2 ON ct2.city_id = us.city
             WHERE  ul.status = '1' AND ul.is_delete = '0'";
         $query = $this->db->query($sql);
         $result = $query->result_array();
@@ -121,7 +126,7 @@ class Searchelastic extends MY_Controller {
                     '_id' => $row['user_id'],
                 ),
             );
-            $params['body'][] = ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'], 'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], ];            
+            $params['body'][] = ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'], 'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],];            
             // print_r($params);exit();
         }
         echo "<pre>";
@@ -134,7 +139,7 @@ class Searchelastic extends MY_Controller {
     public function insert_one_people_data($user_id)
     {
         $client = $this->elasticclient;
-        $stmt = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name FROM ailee_user u
+        $stmt = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
             LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
             LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
             LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
@@ -144,12 +149,14 @@ class Searchelastic extends MY_Controller {
             LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
             LEFT JOIN ailee_industry_type it2 ON it2.industry_id = us.interested_fields
             LEFT JOIN ailee_university un ON un.university_name = us.university_name
-                WHERE ul.status = '1' AND ul.is_delete = '0' AND u.user_id= $user_id";
+            LEFT JOIN ailee_cities ct1 ON ct1.city_id = up.city
+            LEFT JOIN ailee_cities ct2 ON ct2.city_id = us.city
+            WHERE ul.status = '1' AND ul.is_delete = '0' AND u.user_id= $user_id";
         $query = $this->db->query($stmt);
         $result = $query->result_array();
         $params = null;
         foreach($result as $k=>$row) {
-           $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'],]];
+           $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],]];
         }
         $responses = $client->index($params);
         // print_r($responses);exit();
@@ -159,7 +166,7 @@ class Searchelastic extends MY_Controller {
     public function update_people_data($user_id)
     {
         $client = $this->elasticclient;
-        $stmt = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name FROM ailee_user u
+        $stmt = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
             LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
             LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
             LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
@@ -169,12 +176,14 @@ class Searchelastic extends MY_Controller {
             LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
             LEFT JOIN ailee_industry_type it2 ON it2.industry_id = us.interested_fields
             LEFT JOIN ailee_university un ON un.university_name = us.university_name
-                WHERE ul.status = '1' AND ul.is_delete = '0' AND u.user_id= $user_id";
+            LEFT JOIN ailee_cities ct1 ON ct1.city_id = up.city
+            LEFT JOIN ailee_cities ct2 ON ct2.city_id = us.city
+            WHERE ul.status = '1' AND ul.is_delete = '0' AND u.user_id= $user_id";
         $query = $this->db->query($stmt);
         $result = $query->result_array();
         $params = null;
         foreach($result as $k=>$row) {
-           $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'],]];
+           $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],]];
         }
 
         $responses = $client->update($params);
@@ -784,7 +793,7 @@ class Searchelastic extends MY_Controller {
     }
 
     public function search()
-    {
+    {        
         $search_people = $this->search_people();
         $search_business = $this->search_business();
         $search_opp = $this->search_opportunity();
@@ -801,6 +810,23 @@ class Searchelastic extends MY_Controller {
     {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];
+
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        $search_city = $this->input->post('search_city');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        if($search_city != undefined && $search_city != '')
+        {
+            $search_city = json_decode($search_city);
+        }
+        
+        /*print_r($search_job_title);
+        echo($search_field);
+        print_r($search_city);
+        exit();*/
 
         $client = $this->elasticclient;
         $result = array();
@@ -832,11 +858,52 @@ class Searchelastic extends MY_Controller {
                                                 'id' => $userid
                                             ]
                                         ]
-                                    ]//must not end
+                                    ],//must not end
+                                    /*'filter' =>
+                                    [
+                                        'term' =>
+                                        [
+                                            'profession_city' => '783',
+                                            // ['profession_city' => '3683'],
+                                        ],
+                                    ]//Filter end*/
+                                    /*"should" => [
+                                        [
+                                            "match_phrase"=>
+                                            [
+                                                "profession_city"=> "3683"
+                                            ]
+                                        ],
+                                        [
+                                            "match_phrase"=>
+                                            [
+                                                "profession_city" => "783"
+                                            ]
+                                        ],                                         
+                                    ],*/
                                 ]//bool end                                
                             ]//query end                            
                         ],//body end
         ];
+        if(!empty($search_city))
+        {            
+            foreach ($search_city as $key => $value) {            
+                $params['body']['query']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+            }
+        }
+        if($search_field != undefined && $search_field != '')
+        {
+            $params['body']['query']['bool']['should'][] = array('match_phrase'=>array('profession_field'=>$search_field));
+            $params['body']['query']['bool']['should'][] = array('match_phrase'=>array('student_field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params['body']['query']['bool']['should'][]['match_phrase']['degree_name'] = $value->name;
+                $params['body']['query']['bool']['should'][]['match_phrase']['title_name'] = $value->name;
+            }   
+        }
+        // print_r($params['body']['query']['bool']);exit();
 
         /*
         /*[
@@ -1826,7 +1893,16 @@ class Searchelastic extends MY_Controller {
     public function search_opportunity_data()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_POST['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');        
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
 
         $client = $this->elasticclient;
         $result = array();
@@ -1834,8 +1910,8 @@ class Searchelastic extends MY_Controller {
         $params = [
             'index' => 'aileensoul_search_opportunity', 
             'type'  => 'aileensoul_search_opportunity',
-            'from'  => 0,
-            'size'  => 10,
+            'from'  => $start,
+            'size'  => $limit,
             'body'  => [
                             'query' =>
                             [
@@ -1954,6 +2030,7 @@ class Searchelastic extends MY_Controller {
         }        
 
         $searchData['opp_post'] = $searchOpportunityDataMain;
+        $searchData['page'] = $page;
         echo json_encode($searchData);        
     }
 
@@ -1961,6 +2038,15 @@ class Searchelastic extends MY_Controller {
     {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
 
         $client = $this->elasticclient;
         $result = array();
@@ -1968,11 +2054,11 @@ class Searchelastic extends MY_Controller {
         $params = [
             'index' => 'aileensoul_search_people', 
             'type'  => 'aileensoul_search_people',
-            'from'  => 0,
-            'size'  => 10,
+            'from'  => $start,
+            'size'  => $limit,
             'body'  => [
                             'query' =>
-                            [    
+                            [
                                 'bool' =>
                                 [
                                     'must' =>
@@ -1994,15 +2080,22 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end                                
-                            ]//query end                            
+                            ],//query end
+                            /*'sort' =>
+                            [
+                                'id' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],*/
+
                         ],//body end
         ];       
 
         $query = $client->search($params);        
         
         $searchData = array();
-        $search_data = $query['hits'];
-        $searchData['people_count'] = $search_data['total']['value'];
+        $search_data = $query['hits'];        
         $searchProfileData = $search_data['hits'];
         $searchProfileDataMain = array();
 
@@ -2026,7 +2119,7 @@ class Searchelastic extends MY_Controller {
             $searchProfileDataMain[$key]['contact_status'] = $contact_detail['status'];
             $searchProfileDataMain[$key]['contact_not_read'] = $contact_detail['not_read'];
 
-            $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['_id'] . ' AND follow_to =' . $userid . ') OR (follow_to =' . $value['_id'] . ' AND follow_from =' . $userid . ')')->get()->row_array();
+            $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['_id'] . ' AND follow_from =' . $userid . ')')->get()->row_array();
             $searchProfileDataMain[$key]['follow_from'] = $follow_detail['follow_from'];
             $searchProfileDataMain[$key]['follow_to'] = $follow_detail['follow_to'];
             $searchProfileDataMain[$key]['follow_status'] = $follow_detail['status'];
@@ -2035,6 +2128,7 @@ class Searchelastic extends MY_Controller {
         /*print_r($result);exit();
         return $result;*/
         $searchData['profile'] = $searchProfileDataMain;
+        $searchData['page'] = $page;
         echo json_encode($searchData);        
     }
 
@@ -2043,14 +2137,24 @@ class Searchelastic extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];
 
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $client = $this->elasticclient;
         $result = array();
         $i = 0;
         $params = [
             'index' => 'aileensoul_search_post', 
             'type'  => 'aileensoul_search_post',
-            'from'  => 0,
-            'size'  => 10,
+            'from'  => $start,
+            'size'  => $limit,
             'body'  => [
                             'query' =>
                             [
@@ -2164,6 +2268,7 @@ class Searchelastic extends MY_Controller {
         /*print_r($result);exit();
         return $result;*/
         $searchData['sim_post'] = $searchSimpleDataMain;
+        $searchData['page'] = $page;
         echo json_encode($searchData);        
     }
 
@@ -2172,14 +2277,24 @@ class Searchelastic extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];
 
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $client = $this->elasticclient;
         $result = array();
         $i = 0;
         $params = [
             'index' => 'aileensoul_search_business', 
             'type'  => 'aileensoul_search_business',
-            'from'  => 0,
-            'size'  => 10,
+            'from'  => $start,
+            'size'  => $limit,
             'body'  => [
                             'query' =>
                             [
@@ -2220,6 +2335,7 @@ class Searchelastic extends MY_Controller {
             $searchBusinessDataMain[$key]['user_id'] = $value['_id'];
         }
 
+        $searchData['page'] = $page;
         $searchData['business_data'] = $searchBusinessDataMain;
         echo json_encode($searchData);        
     }
@@ -2229,14 +2345,24 @@ class Searchelastic extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];
 
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $client = $this->elasticclient;
         $result = array();
         $i = 0;
         $params = [
             'index' => 'aileensoul_search_article', 
             'type'  => 'aileensoul_search_article',
-            'from'  => 0,
-            'size'  => 10,
+            'from'  => $start,
+            'size'  => $limit,
             'body'  => [
                             'query' =>
                             [
@@ -2358,6 +2484,7 @@ class Searchelastic extends MY_Controller {
         /*print_r($result);exit();
         return $result;*/
         $searchData['article_post'] = $searchArticleDataMain;
+        $searchData['page'] = $page;
         echo json_encode($searchData);        
     }
 
@@ -2366,14 +2493,24 @@ class Searchelastic extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $searchKeyword = $_POST['searchKeyword'];
 
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $client = $this->elasticclient;
         $result = array();
         $i = 0;
         $params = [
             'index' => 'aileensoul_search_question', 
             'type'  => 'aileensoul_search_question',
-            'from'  => 0,
-            'size'  => 10,
+            'from'  => $start,
+            'size'  => $limit,
             'body'  => [
                             'query' =>
                             [
@@ -2491,6 +2628,7 @@ class Searchelastic extends MY_Controller {
         /*print_r($result);exit();
         return $result;*/
         $searchData['question_post'] = $searchQuestionDataMain;
+        $searchData['page'] = $page;
         echo json_encode($searchData);        
     }
 }

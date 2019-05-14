@@ -63,5 +63,8 @@
                 <a ng-if="searchProfile.follow_status == 0 || !searchProfile.follow_status" class="btn3 follow" ng-click="follow_user(searchProfile.user_id)">Follow</a>
             </div>
         </div>
-    </div>    
+    </div>
+    <div id="people-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
+        <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+    </div>
 </div>

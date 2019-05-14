@@ -52,9 +52,6 @@
             <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
                 <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
                     <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
-                    <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
-                    <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
-                    <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
                     
                     <div class="all-post-top">
                         <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
@@ -752,6 +749,9 @@
                         </div>
                     </div>
                 </div>                
+            </div>
+            <div id="post-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
+                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
             </div>
         </div>
     </div>    
