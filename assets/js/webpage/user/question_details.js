@@ -658,6 +658,19 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         //If DIV is visible it will be hidden and vice versa.
         $scope.IsVisible = $scope.IsVisible ? false : true;
     }
+
+    $scope.getHashTags = function(inputText) {  
+        var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        var matches = [];
+        var match;
+
+        while ((match = regex.exec(inputText))) {
+            matches.push(match[1]);
+        }
+
+        return matches;
+    };
+    
     $scope.ask_question_check = function(event, queIndex) {
         if (document.getElementById("ask_edit_post_id_" + queIndex)) {
             var post_id = document.getElementById("ask_edit_post_id_" + queIndex).value;

@@ -809,7 +809,7 @@ class Searchelastic extends MY_Controller {
     public function search_people()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_POST['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');
 
         $search_job_title = $this->input->post('search_job_title');
         $search_field = $this->input->post('search_field');
@@ -835,7 +835,7 @@ class Searchelastic extends MY_Controller {
             'index' => 'aileensoul_search_people', 
             'type'  => 'aileensoul_search_people',
             'from'  => 0,
-            'size'  => 10,
+            'size'  => 5,
             'body'  => [
                             'query' =>
                             [    
@@ -848,7 +848,7 @@ class Searchelastic extends MY_Controller {
                                             'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
                                             'query'=>'*'.$searchKeyword.'*',
                                             'analyzer'=>'standard'
-                                        ],                                            
+                                        ],
                                     ],//must end
                                     'must_not' =>
                                     [
@@ -888,19 +888,19 @@ class Searchelastic extends MY_Controller {
         if(!empty($search_city))
         {            
             foreach ($search_city as $key => $value) {            
-                $params['body']['query']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
             }
         }
         if($search_field != undefined && $search_field != '')
         {
-            $params['body']['query']['bool']['should'][] = array('match_phrase'=>array('profession_field'=>$search_field));
-            $params['body']['query']['bool']['should'][] = array('match_phrase'=>array('student_field'=>$search_field));
+            $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['profession_field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+            $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['student_field'] = $search_field;//array('match_phrase'=>array('student_field'=>$search_field));
         }
         if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
-                $params['body']['query']['bool']['should'][]['match_phrase']['degree_name'] = $value->name;
-                $params['body']['query']['bool']['should'][]['match_phrase']['title_name'] = $value->name;
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['degree_name'] = $value->name;
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['title_name'] = $value->name;
             }   
         }
         // print_r($params['body']['query']['bool']);exit();
@@ -1057,7 +1057,19 @@ class Searchelastic extends MY_Controller {
     public function search_opportunity()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_POST['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');
+
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        $search_city = $this->input->post('search_city');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        if($search_city != undefined && $search_city != '')
+        {
+            $search_city = json_decode($search_city);
+        }
 
         $client = $this->elasticclient;
         $result = array();
@@ -1094,6 +1106,23 @@ class Searchelastic extends MY_Controller {
                             ]//query end                            
                         ],//body end
         ];
+
+        if(!empty($search_city))
+        {            
+            foreach ($search_city as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
+            }
+        }
+        if($search_field != undefined && $search_field != '')
+        {
+            $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
+            }   
+        }
 
         /*[
             ['wildcard' => 
@@ -1210,7 +1239,14 @@ class Searchelastic extends MY_Controller {
     public function search_post()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_POST['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');
+
+        $search_job_title = $this->input->post('search_job_title');        
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        
 
         $client = $this->elasticclient;
         $result = array();
@@ -1219,7 +1255,7 @@ class Searchelastic extends MY_Controller {
             'index' => 'aileensoul_search_post', 
             'type'  => 'aileensoul_search_post',
             'from'  => 0,
-            'size'  => 1,
+            'size'  => 10,
             'body'  => [
                             'query' =>
                             [
@@ -1247,6 +1283,14 @@ class Searchelastic extends MY_Controller {
                             ]//query end                        
                         ],//body end
         ];
+
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['sim_title'] = $value->name;
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+            }   
+        }
 
         /*[
             ['wildcard' => 
@@ -1357,8 +1401,14 @@ class Searchelastic extends MY_Controller {
     public function search_question()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_POST['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');
 
+        $search_job_title = $this->input->post('search_job_title');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        
         $client = $this->elasticclient;
         $result = array();
         $i = 0;
@@ -1394,6 +1444,14 @@ class Searchelastic extends MY_Controller {
                             ]//query end
                         ],//body end
         ];
+
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['question'] = $value->name;
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+            }   
+        }
 
         /*[
             ['wildcard' => 
@@ -1509,7 +1567,16 @@ class Searchelastic extends MY_Controller {
     public function search_article()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_POST['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');
+
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        
 
         $client = $this->elasticclient;
         $result = array();
@@ -1546,6 +1613,19 @@ class Searchelastic extends MY_Controller {
                             ]//query end
                         ],//body end
         ];
+
+
+        if($search_field != undefined && $search_field != '')
+        {
+            $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['article_title'] = $value->name;
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+            }   
+        }
 
         /*[
             ['wildcard' => 
@@ -1665,7 +1745,19 @@ class Searchelastic extends MY_Controller {
     public function search_total_count()
     {
         $userid = $this->session->userdata('aileenuser');
-        $searchKeyword = $_GET['searchKeyword'];
+        $searchKeyword = $this->input->post('searchKeyword');
+
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        $search_city = $this->input->post('search_city');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        if($search_city != undefined && $search_city != '')
+        {
+            $search_city = json_decode($search_city);
+        }
 
         $client = $this->elasticclient;
         $return_arr = array();
@@ -1702,6 +1794,26 @@ class Searchelastic extends MY_Controller {
                             ]//query end                            
                         ],//body end
         ];
+
+        if(!empty($search_city))
+        {            
+            foreach ($search_city as $key => $value) {            
+                $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+            }
+        }
+        if($search_field != undefined && $search_field != '')
+        {
+            $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['profession_field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+            $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['student_field'] = $search_field;//array('match_phrase'=>array('student_field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['degree_name'] = $value->name;
+                $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['title_name'] = $value->name;
+            }   
+        }
+
         $query_people = $client->search($params_people);        
         $search_data_people = $query_people['hits'];
         $return_arr['people_count'] = $search_data_people['total']['value'];
@@ -1774,6 +1886,22 @@ class Searchelastic extends MY_Controller {
                             ]//query end                            
                         ],//body end
         ];
+        if(!empty($search_city))
+        {            
+            foreach ($search_city as $key => $value) {            
+                $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
+            }
+        }
+        if($search_field != undefined && $search_field != '')
+        {
+            $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
+            }   
+        }
         $query_opp = $client->search($params_opp); 
         $search_data_opp = $query_opp['hits'];
         $return_arr['opp_count'] = $search_data_opp['total']['value'];
@@ -1810,6 +1938,13 @@ class Searchelastic extends MY_Controller {
                             ]//query end                        
                         ],//body end
         ];
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params_post['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['sim_title'] = $value->name;
+                $params_post['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+            }   
+        }
         $query_post = $client->search($params_post);
         $search_data_post = $query_post['hits'];
         $return_arr['simple_count'] = $search_data_post['total']['value'];
@@ -1846,6 +1981,13 @@ class Searchelastic extends MY_Controller {
                             ]//query end
                         ],//body end
         ];
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params_que['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['question'] = $value->name;
+                $params_que['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+            }   
+        }
         $query_que = $client->search($params_que);
         $search_data_que = $query_que['hits'];
         $return_arr['question_count'] = $search_data_que['total']['value'];
@@ -1882,6 +2024,17 @@ class Searchelastic extends MY_Controller {
                             ]//query end
                         ],//body end
         ];
+        if($search_field != undefined && $search_field != '')
+        {
+            $params_article['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params_article['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['article_title'] = $value->name;
+                $params_article['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+            }   
+        }
         $query_article = $client->search($params_article);
         $search_data_article = $query_article['hits'];
         $return_arr['article_count'] = $search_data_article['total']['value'];
@@ -1898,6 +2051,30 @@ class Searchelastic extends MY_Controller {
         if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
             $page = $this->input->post('page');
         }
+
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        $search_city = $this->input->post('search_city');
+        $search_hashtag = $this->input->post('search_hashtag');
+        $search_company = $this->input->post('search_company');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        if($search_city != undefined && $search_city != '')
+        {
+            $search_city = json_decode($search_city);
+        }
+
+        if($search_hashtag != undefined && $search_hashtag != '')
+        {
+            $search_hashtag = json_decode($search_hashtag);
+        }
+        if($search_company != undefined && $search_company != '')
+        {
+            $search_company = json_decode($search_company);
+        }
+
 
         $limit = '10';
         $start = ($page - 1) * $limit;
@@ -1939,6 +2116,35 @@ class Searchelastic extends MY_Controller {
                             ]//query end                            
                         ],//body end
         ];
+
+        if(!empty($search_city))
+        {            
+            foreach ($search_city as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
+            }
+        }
+        if($search_field != undefined && $search_field != '')
+        {
+            $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+        }
+        if(!empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
+            }   
+        }
+        if(!empty($search_hashtag))
+        {
+            foreach ($search_hashtag as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
+            }   
+        }
+        if(!empty($search_company))
+        {
+            foreach ($search_company as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['company_name'] = $value->company_name;
+            }   
+        }
         
 
         $query = $client->search($params);        

@@ -240,6 +240,26 @@ class User_post_model extends CI_Model {
         return $result_array;
     }
 
+    public function get_hashtag() {
+        $this->db->select("hashtag")->from("hashtag");
+        $this->db->where('status', '1');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_all_business() {
+        $this->db->distinct();
+        $this->db->select("uo.company_name")->from("user_opportunity uo");
+        $this->db->join('user_post up', 'up.post_id = uo.id', 'left');
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');
+        $this->db->where("uo.company_name != ''");
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
     public function get_category() {
         $this->db->select("name")->from("tags t");
         $this->db->where('status', 'publish');

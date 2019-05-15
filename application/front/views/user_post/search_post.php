@@ -3,7 +3,17 @@
         <div class="search-left-box">
             <h3>Hash Tag</h3>
             <div class="form-group">
-                <input type="text" placeholder="Search by Hash Tags">
+                <!-- <input type="text" placeholder="Search by Hash Tags">-->
+                <tags-input id="search_hashtag" ng-model="search_hashtag" name="search_hashtag" display-property="hashtag" placeholder="Search by Hash Tags" replace-spaces-with-dashes="false" template="hashtag-template" on-tag-added="onKeyup()" max-tags="5">
+                    <auto-complete source="loadHashtag($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="hashtag-autocomplete-template"></auto-complete>
+                </tags-input>
+                <div id="locationtooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select the location for the opportunity.</div>
+                <script type="text/ng-template" id="hashtag-template">
+                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                </script>
+                <script type="text/ng-template" id="hashtag-autocomplete-template">
+                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                </script>
             </div>
         </div>
         

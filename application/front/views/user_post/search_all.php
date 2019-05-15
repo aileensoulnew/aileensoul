@@ -18,7 +18,7 @@
                     </script>
                 </div>
             </div>
-            <?php $getFieldList = $this->data_model->getNewFieldList();?>
+            <?php $getFieldList = $this->data_model->getFieldList();?>
             <div class="search-left-box">
                 <h3>Industry</h3>
                 <div class="form-group">
@@ -33,11 +33,11 @@
                 </div>
             </div>
             <div class="search-left-box">
-                <h3>City</h3>
+                <h3>Location</h3>
                 <div class="form-group">
                     <!-- <input type="text" placeholder="Search by City"> -->
                     <!-- <input type="text" placeholder="Search by City" id="search_city" name="search_city" ng-model="search_city" ng-keyup="search_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off" maxlength="200"> -->
-                    <tags-input id="search_city" ng-model="search_city" name="search_city" display-property="city_name" placeholder="Search by City" replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()" max-tags="5">
+                    <tags-input id="search_city" ng-model="search_city" name="search_city" display-property="city_name" placeholder="Search by Location" replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()" max-tags="5">
                         <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
                     </tags-input>
                     <div id="locationtooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select the location for the opportunity.</div>
@@ -48,11 +48,11 @@
                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                     </script>
                 </div>            
-            </div>        
+            </div>
             <div class="search-left-box pt15">
                 <div class="form-group">
                     <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
-                    <a class="pull-right btn-new-1"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
+                    <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
                 </div>
             </div>
         </form>

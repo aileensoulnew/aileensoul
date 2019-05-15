@@ -229,6 +229,16 @@ class User_post extends MY_Controller {
         echo json_encode($job_title);
     }
 
+    public function get_hashtag() {
+        $hashtags = $this->user_post_model->get_hashtag();
+        echo json_encode($hashtags);
+    }
+
+    public function get_all_business() {
+        $business_data = $this->user_post_model->get_all_business();
+        echo json_encode($business_data);
+    }
+
     public function get_location() {
         $location = $this->user_post_model->get_location();
         echo json_encode($location);
