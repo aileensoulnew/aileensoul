@@ -51,14 +51,14 @@
         <div class="search-left-box">
             <h3>Gender</h3>
             <div class="form-group">
-                <input type="radio" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag"> Male
-                <input type="radio" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag"> Female
+                <input type="radio" value="M" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag"> Male
+                <input type="radio" value="F" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag"> Female
             </div>
         </div>        
         <div class="search-left-box pt15">
             <div class="form-group">
-                <a class="pull-left btn-new-1"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
-                <a class="pull-right btn-new-1"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
+                <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
+                <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
             </div>
         </div>
     </div>    

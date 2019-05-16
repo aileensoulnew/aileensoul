@@ -1,22 +1,52 @@
 <div class="left-section">
     <div class="search-box">
-        <div class="search-left-box">
-            <h3>Top Categories</h3>            
-            <div class="form-group">
+        <form id="main_search" name="main_search" action="javascript:void(0);" method="post">
+            <div class="search-left-box">
+                <h3>Top Categories</h3>            
+                <div class="form-group">
+                    <?php $businessCategory = $this->business_model->businessCategory(5);
+                    if(isset($businessCategory) && !empty($businessCategory)):
+                        foreach($businessCategory as $_businessCategory): ?>                    
+                            <label class="control control--checkbox">
+                                <span><?php echo ucwords($_businessCategory['industry_name']); ?>
+                                    <span class="pull-right hide">(<?php echo $_businessCategory['count']; ?>)</span>
+                                </span>
+                                    <input id="fields" class="categorycheckbox" type="checkbox" name="industry_name[]" value="<?php echo $_businessCategory['industry_name']; ?>" style="height: 12px;">
+                                <div class="control__indicator"></div>
+                            </label>
+                        
+                    <?php
+                        endforeach;
+                    endif;?>
+                </div>
             </div>
-        </div>
-        
-        <div class="search-left-box">
-            <h3>City</h3>
-            <div class="form-group">
+            
+            <div class="search-left-box">
+                <h3>City</h3>
+                <div class="form-group">
+                    <?php $businessLocation = $this->business_model->businessLocation(5);
+                    if(isset($businessLocation) && !empty($businessLocation)):
+                        foreach($businessLocation as $_businessLocation): ?>
+                        
+                            <label class="control control--checkbox">
+                                <span><?php echo ucwords($_businessLocation['city_name']); ?>
+                                    <span class="pull-right hide">(<?php echo $_businessLocation['count']; ?>)</span>
+                                </span>
+                                    <input class="locationcheckbox" type="checkbox" name="city_name[]" value="<?php echo $_businessLocation['city_name']; ?>" style="height: 12px;">
+                                <div class="control__indicator"></div>
+                            </label>                    
+                    <?php
+                        endforeach;
+                    endif;?>
+                </div>
+            </div>        
+            <div class="search-left-box pt15">
+                <div class="form-group">
+                    <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
+                    <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
+                </div>
             </div>
-        </div>        
-        <div class="search-left-box pt15">
-            <div class="form-group">
-                <a class="pull-left btn-new-1"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
-                <a class="pull-right btn-new-1"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
-            </div>
-        </div>
+        </form>
     </div>    
 </div>
 <div class="middle-section">    

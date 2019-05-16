@@ -17,6 +17,7 @@ class User_post extends MY_Controller {
         $this->load->model('user_post_model');
         $this->load->model('userprofile_model');
         $this->load->model('data_model');
+        $this->load->model('business_model');
         $this->load->library('S3');
         $this->load->library('inbackground');
 

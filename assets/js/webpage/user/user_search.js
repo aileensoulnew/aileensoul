@@ -312,15 +312,7 @@ app.controller('searchController', function($scope, $http, $compile) {
             $scope.$parent.article_count = '('+success.data.article_count+')';
             $scope.$parent.question_count = '('+success.data.question_count+')';
             $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
-            
-                /*$("#search-all-tab").html('All '+$scope.total_count);
-                $("#search-opp-tab").html('Opportunitis '+$scope.opp_count);
-                $("#search-people-tab").html('People '+$scope.people_count);
-                $("#search-post-tab").html('Post '+$scope.simple_count);
-                $("#search-bus-tab").html('Business '+$scope.business_count);
-                $("#search-article-tab").html('Article '+$scope.article_count);
-                $("#search-que-tab").html('Question '+$scope.question_count);*/
-            
+
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");
             setTimeout(function() {
@@ -339,75 +331,7 @@ app.controller('searchController', function($scope, $http, $compile) {
         $scope.$parent.search_gender = '';
 
         $scope.searchData();
-    }
-    
-    /*$scope.load_more_profile = function() {
-        var pagenum = $scope.pro.page_number;
-        if (isProcessing) {
-            return;
-        }
-        isProcessing = true;
-        $('#load_more_pro').attr("disabled", "disabled");
-        $('#load_more_pro').html('<img src="' + base_url + 'assets/images/loading.gif" alt="loaderimage">');
-        $http({
-            method: 'POST',
-            url: base_url + 'user_post/searchDataProfileAjax',
-            data: 'searchKeyword=' + searchKeyword + '&pagenum=' + pagenum,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(function(success) {
-            $('#load_more_pro').removeAttr("disabled");
-            $('#load_more_pro').html("Load more");
-            if (success.data.profile.length > 0) {
-                for (var i in success.data.profile) {
-                    $scope.searchProfileData.push(success.data.profile[i]);                    
-                }
-                $scope.pro.page_number = parseInt($scope.pro.page_number) + 1;
-                isProcessing = false;
-            } else {
-                $scope.showLoadmore = false;
-                isProcessing = true;
-                $('#load_more_pro').attr("disabled", "disabled");
-                $('#load_more_pro_div').remove();
-            }
-        });
-    };
-    $scope.load_more_post = function() {
-        var pagenum_pst = $scope.pst.page_number;
-        if (isProcessingPst) {
-            return;
-        }
-        isProcessingPst = true;
-        $('#load_more_pst').attr("disabled", "disabled");
-        $('#load_more_pst').html('<img src="' + base_url + 'assets/images/loading.gif" alt="loaderimage">');
-        $http({
-            method: 'POST',
-            url: base_url + 'user_post/searchDataPostAjax',
-            data: 'searchKeyword=' + searchKeyword + '&pagenum=' + pagenum_pst,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(function(success) {
-            $('#load_more_pst').removeAttr("disabled");
-            $('#load_more_pst').html("Load more");
-            if (success.data.post.length > 0) {
-                for (var i in success.data.post) {
-                    $scope.postData.push(success.data.post[i]);                    
-                    setTimeout(function() {
-                        $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
-                    }, 300);
-                }
-                $scope.pst.page_number = parseInt($scope.pst.page_number) + 1;
-                isProcessingPst = false;
-            } else {
-                $scope.showLoadmore = false;
-                isProcessingPst = true;
-                $('#load_more_pst').attr("disabled", "disabled");
-                $('#load_more_pst_div').remove();
-            }
-        });
-    };*/
+    }    
 
     $scope.follow_user = function(id) {
         $http({
@@ -1202,6 +1126,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
     $scope.postData = [];
 
     $scope.searchData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $("#post-loader").show();
         var search_job_title = '';
         var search_city = '';
@@ -1230,16 +1158,24 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         }).then(function(success) {
             $("#post-loader").hide();
 
-            $scope.page_number = success.data.page;            
-            if (pagenum != 0 && $scope.postData != undefined) {
-                for (var i in success.data.opp_post) {                        
-                    $scope.postData.push(success.data.opp_post[i]);                    
+            $scope.page_number = success.data.page;
+            if(success.data.opp_post.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.postData != undefined) {
+                    for (var i in success.data.opp_post) {                        
+                        $scope.postData.push(success.data.opp_post[i]);                    
+                    }
+                }
+                else{
+                    $scope.$parent.opp_count = '('+success.data.opp_count+')';
+                    $scope.total_record = success.data.opp_count;
+                    $scope.postData = success.data.opp_post;
                 }
             }
-            else{
-                $scope.$parent.opp_count = '('+success.data.opp_count+')';
-                $scope.total_record = success.data.opp_count;
-                $scope.postData = success.data.opp_post;
+            else
+            {
+                isProcessing = true;
             }
 
             $('#main_loader').hide();
@@ -1260,6 +1196,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         $scope.search_gender = '';
 
         pagenum = 0;
+        isProcessing = false;
         $scope.searchData(pagenum);
         // $scope.get_search_total_count();
     }
@@ -2044,6 +1981,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         else
         {
             pagenum = 0;
+            isProcessing = false;
             var search_job_title = JSON.stringify($scope.search_job_title);
             var search_city = JSON.stringify($scope.search_city);
             var search_hashtag = JSON.stringify($scope.search_hashtag);
@@ -2089,14 +2027,36 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
 
     var pagenum = 0
     $scope.perpage_record = 10;
-    
+
     $scope.searchData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $("#people-loader").show();
+
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.search_job_title);
+        }        
+        if($scope.search_city != '')
+        {
+            search_city = JSON.stringify($scope.search_city);
+        }
+        if($scope.search_field != '')
+        {
+            search_field = $scope.search_field;
+        }
+        // console.log($scope.search_gender);
+
         $http({
             method: 'POST',
             // url: base_url + 'user_post/searchData',
             url: base_url + 'searchelastic/search_people_data',
-            data: 'searchKeyword=' + searchKeyword+'&page='+pagenum,
+            data: 'searchKeyword=' + searchKeyword+'&page='+pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_gender='+$scope.search_gender,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -2104,22 +2064,119 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
             $("#people-loader").hide();
 
             $scope.page_number = success.data.page;
-            if ($scope.searchProfileData != undefined) {
-                for (var i in success.data.profile) {
-                    $scope.searchProfileData.push(success.data.profile[i]);
+            if(success.data.profile.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.searchProfileData != undefined) {
+                    for (var i in success.data.profile) {
+                        $scope.searchProfileData.push(success.data.profile[i]);
+                    }
+                }
+                else{                
+                    $scope.searchProfileData = success.data.profile;
+                    $scope.$parent.people_count = '('+success.data.people_count+')';
+                    $scope.total_record = success.data.people_count;
                 }
             }
-            else{                
-                $scope.searchProfileData = success.data.profile;
-            }            
+            else
+            {
+                isProcessing = true;
+            }
             
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         });
     };
 
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_gender == undefined || $scope.search_gender == ''))
+        {
+            return false;
+        }
+        else
+        {            
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = '';
+            var search_city = '';
+            var search_field = '';
+            if($scope.search_job_title != '')
+            {
+                search_job_title = JSON.stringify($scope.search_job_title);
+            }        
+            if($scope.search_city != '')
+            {
+                search_city = JSON.stringify($scope.search_city);
+            }
+            if($scope.search_field != '')
+            {
+                search_field = $scope.search_field;
+            }
+
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_people_data',
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_gender='+$scope.search_gender,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.searchProfileData = success.data.profile;
+                
+                $scope.$parent.people_count = '('+success.data.people_count+')';
+                $scope.total_record = success.data.people_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");                
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.searchData(pagenum);
+        // $scope.get_search_total_count();
+    }
+
     $scope.get_search_total_count = function() {
-        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.$parent.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.$parent.search_job_title);
+        }        
+        if($scope.$parent.search_city != '')
+        {
+            search_city = JSON.stringify($scope.$parent.search_city);
+        }
+        if($scope.$parent.search_field != '')
+        {
+            search_field = $scope.$parent.search_field;
+        }
+
+        // $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword)
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + "searchelastic/search_total_count",
+            data: 'searchKeyword=' + searchKeyword +'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
             $scope.$parent.opp_count = '('+success.data.opp_count+')';
             $scope.$parent.people_count = '('+success.data.people_count+')';
             $scope.$parent.simple_count = '('+success.data.simple_count+')';
@@ -2206,7 +2263,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
                 return location.city_name.toLowerCase().indexOf($query.toLowerCase()) != -1;
             });
         });
-    };
+    };    
 });
 app.controller('postController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '4';
@@ -2224,26 +2281,41 @@ app.controller('postController', function($scope, $http, $compile, $window) {
     $scope.postData = [];
     
     $scope.searchData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $("#post-loader").show();
+        var search_hashtag = JSON.stringify($scope.search_hashtag);
         $http({
             method: 'POST',
             // url: base_url + 'user_post/searchData',
             url: base_url + 'searchelastic/search_post_data',
-            data: 'searchKeyword=' + searchKeyword + '&page='+pagenum,
+            data: 'searchKeyword=' + searchKeyword + '&page='+pagenum+'&search_hashtag='+search_hashtag,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function(success) {
             $("#post-loader").hide();            
             
-            $scope.page_number = success.data.page;            
-            if ($scope.postData != undefined) {
-                for (var i in success.data.sim_post) {                        
-                    $scope.postData.push(success.data.sim_post[i]);                    
+            $scope.page_number = success.data.page;
+            if(success.data.sim_post.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.postData != undefined) {
+                    for (var i in success.data.sim_post) {                        
+                        $scope.postData.push(success.data.sim_post[i]);                    
+                    }
+                }
+                else{
+                    $scope.postData = success.data.sim_post;
+                    $scope.$parent.simple_count = '('+success.data.simple_count+')';
+                    $scope.total_record = success.data.simple_count;
                 }
             }
-            else{
-                $scope.postData = success.data.sim_post;
+            else
+            {
+                isProcessing = true;
             }
             
             $('#main_loader').hide();
@@ -2255,8 +2327,83 @@ app.controller('postController', function($scope, $http, $compile, $window) {
         });
     };
 
+    $scope.main_search_function = function(){
+        if($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1)
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_hashtag = JSON.stringify($scope.search_hashtag);            
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_post_data',
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_hashtag='+search_hashtag,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.sim_post;
+                
+                $scope.$parent.simple_count = '('+success.data.simple_count+')';
+                $scope.total_record = success.data.simple_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+                
+                setTimeout(function() {
+                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                }, 300);
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.searchData(pagenum);
+    }
+
     $scope.get_search_total_count = function() {
-        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.$parent.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.$parent.search_job_title);
+        }        
+        if($scope.$parent.search_city != '')
+        {
+            search_city = JSON.stringify($scope.$parent.search_city);
+        }
+        if($scope.$parent.search_field != '')
+        {
+            search_field = $scope.$parent.search_field;
+        }
+
+        // $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city)
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + "searchelastic/search_total_count",
+            data: 'searchKeyword=' + searchKeyword +'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
             $scope.$parent.opp_count = '('+success.data.opp_count+')';
             $scope.$parent.people_count = '('+success.data.people_count+')';
             $scope.$parent.simple_count = '('+success.data.simple_count+')';
@@ -2981,6 +3128,10 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
     $scope.perpage_record = 10;
     
     $scope.searchData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $("#business-loader").show();
         $http({
             method: 'POST',
@@ -2992,14 +3143,23 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
             }
         }).then(function(success) {
             $("#business-loader").hide();
-            $scope.page_number = success.data.page;            
-            if ($scope.business_data != undefined) {
-                for (var i in success.data.business_data) {                        
-                    $scope.business_data.push(success.data.business_data[i]);                    
+            $scope.page_number = success.data.page;
+            if(success.data.business_data.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.business_data != undefined) {
+                    for (var i in success.data.business_data) {                        
+                        $scope.business_data.push(success.data.business_data[i]);                    
+                    }
+                }
+                else{                
+                    $scope.business_data = success.data.business_data;
+                    $scope.$parent.business_count = '('+success.data.business_count+')';
+                    $scope.total_record = success.data.business_count;
                 }
             }
-            else{                
-                $scope.business_data = success.data.business_data;
+            else{
+                isProcessing = true;
             }
 
             $('#main_loader').hide();
@@ -3008,7 +3168,32 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
     };
 
     $scope.get_search_total_count = function() {
-        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.$parent.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.$parent.search_job_title);
+        }        
+        if($scope.$parent.search_city != '')
+        {
+            search_city = JSON.stringify($scope.$parent.search_city);
+        }
+        if($scope.$parent.search_field != '')
+        {
+            search_field = $scope.$parent.search_field;
+        }
+
+        // $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city)
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + "searchelastic/search_total_count",
+            data: 'searchKeyword=' + searchKeyword +'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
             $scope.$parent.opp_count = '('+success.data.opp_count+')';
             $scope.$parent.people_count = '('+success.data.people_count+')';
             $scope.$parent.simple_count = '('+success.data.simple_count+')';
@@ -3021,6 +3206,55 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
 
         }, function(error) {});
     };
+
+    $scope.main_search_function = function(){
+        var formdata = $('#main_search').serialize();
+        if(formdata == undefined || formdata.length < 1)
+        {
+            return false;
+        }
+        else
+        {            
+            pagenum = 0;
+            isProcessing = false;
+
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_business_data',
+                data: formdata+'&searchKeyword=' + searchKeyword + "&page=" + pagenum,//{searchKeyword:searchKeyword,page:pagenum,formdata:formdata},
+                // data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&formdata='+formdata,
+                headers: {
+                    'Content-Type':  'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.business_data = success.data.business_data;
+                
+                $scope.$parent.business_count = '('+success.data.business_count+')';
+                $scope.total_record = success.data.business_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        /*$scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';*/
+
+        pagenum = 0;
+        isProcessing = false;
+        $('#main_search')[0].reset();
+        $scope.searchData(pagenum);
+    }
 
     $scope.searchData();
     $scope.get_search_total_count();
@@ -3066,39 +3300,127 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
     $scope.perpage_record = 10;
     
     $scope.searchData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $("#post-loader").show();
+        var search_field = '';
+        if($scope.search_field != '')
+        {
+            search_field = $scope.search_field;
+        }
+        var search_hashtag = JSON.stringify($scope.search_hashtag);
         $http({
             method: 'POST',
             // url: base_url + 'user_post/searchData',
             url: base_url + 'searchelastic/search_article_data',
-            data: 'searchKeyword=' + searchKeyword + '&page='+pagenum,
+            data: 'searchKeyword=' + searchKeyword + '&page='+pagenum+'&search_field='+btoa(search_field)+'&search_hashtag='+search_hashtag,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function(success) {
             $("#post-loader").hide();
-
-            $scope.page_number = success.data.page;            
-            if ($scope.postData != undefined) {
-                for (var i in success.data.article_post) {                        
-                    $scope.postData.push(success.data.article_post[i]);                    
+            if(success.data.article_post.length > 0)
+            {
+                isProcessing = false;
+                $scope.page_number = success.data.page;            
+                if (pagenum != 0 && $scope.postData != undefined) {
+                    for (var i in success.data.article_post) {                        
+                        $scope.postData.push(success.data.article_post[i]);                    
+                    }
+                }
+                else{
+                    $scope.postData = success.data.article_post;
+                    $scope.$parent.article_count = '('+success.data.article_count+')';
+                    $scope.total_record = success.data.article_count;
                 }
             }
-            else{
-                $scope.postData = success.data.article_post;
-            }           
-            
+            else
+            {
+                isProcessing = true;
+            }            
             $('#main_loader').hide();
             $('body').removeClass("body-loader");
-            
-            setTimeout(function() {
-                $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-            }, 300);
         });
     };
 
+    $scope.main_search_function = function(){
+        if(($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_field == undefined || $scope.search_field == ''))
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            $scope.$parent.search_field = $scope.search_field;
+            var search_field = $scope.search_field;            
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_article_data',
+                // data: {searchKeyword:searchKeyword,page:pagenum,search_field:btoa(search_field),search_hashtag:search_hashtag},
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_field='+btoa(search_field)+'&search_hashtag='+search_hashtag,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.article_post;
+                
+                $scope.$parent.article_count = '('+success.data.article_count+')';
+                $scope.total_record = success.data.article_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.searchData(pagenum);
+    }
+
     $scope.get_search_total_count = function() {
-        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.$parent.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.$parent.search_job_title);
+        }        
+        if($scope.$parent.search_city != '')
+        {
+            search_city = JSON.stringify($scope.$parent.search_city);
+        }
+        if($scope.$parent.search_field != '')
+        {
+            search_field = $scope.$parent.search_field;
+        }
+
+        // $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city)
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + "searchelastic/search_total_count",
+            data: 'searchKeyword=' + searchKeyword +'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
             $scope.$parent.opp_count = '('+success.data.opp_count+')';
             $scope.$parent.people_count = '('+success.data.people_count+')';
             $scope.$parent.simple_count = '('+success.data.simple_count+')';
@@ -3822,27 +4144,49 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
     $scope.perpage_record = 10;
     
     $scope.searchData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $("#post-loader").show();
+
+        var search_field = '';
+        if($scope.search_field != '')
+        {
+            search_field = $scope.search_field;
+        }
+        var search_hashtag = JSON.stringify($scope.search_hashtag);
         $http({
             method: 'POST',
             // url: base_url + 'user_post/searchData',
             url: base_url + 'searchelastic/search_question_data',
-            data: 'searchKeyword=' + searchKeyword + '&page='+pagenum,
+            data: 'searchKeyword=' + searchKeyword + '&page='+pagenum+'&search_field='+btoa(search_field)+'&search_hashtag='+search_hashtag,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function(success) {
             $("#post-loader").hide();
 
-            $scope.page_number = success.data.page;            
-            if ($scope.postData != undefined) {
-                for (var i in success.data.question_post) {                        
-                    $scope.postData.push(success.data.question_post[i]);                    
+            $scope.page_number = success.data.page;
+
+            if(success.data.question_post.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.postData != undefined) {
+                    for (var i in success.data.question_post) {
+                        $scope.postData.push(success.data.question_post[i]);
+                    }
                 }
+                else{
+                    $scope.postData = success.data.question_post;
+                    $scope.$parent.question_count = '('+success.data.question_count+')';
+                    $scope.total_record = success.data.question_count;
+                }            
             }
-            else{
-                $scope.postData = success.data.question_post;
-            }            
+            else
+            {
+                isProcessing = true;
+            }
             
             $('#main_loader').hide();
             $('body').removeClass("body-loader");
@@ -3853,8 +4197,82 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
         });
     };
 
+    $scope.main_search_function = function(){
+        if(($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_field == undefined || $scope.search_field == ''))
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            $scope.$parent.search_field = $scope.search_field;
+            var search_field = $scope.search_field;            
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_question_data',
+                // data: {searchKeyword:searchKeyword,page:pagenum,search_field:btoa(search_field),search_hashtag:search_hashtag},
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_field='+btoa(search_field)+'&search_hashtag='+search_hashtag,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.question_post;
+                
+                $scope.$parent.question_count = '('+success.data.question_count+')';
+                $scope.total_record = success.data.question_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.searchData(pagenum);
+    }
+
     $scope.get_search_total_count = function() {
-        $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword).then(function(success) {
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.$parent.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.$parent.search_job_title);
+        }        
+        if($scope.$parent.search_city != '')
+        {
+            search_city = JSON.stringify($scope.$parent.search_city);
+        }
+        if($scope.$parent.search_field != '')
+        {
+            search_field = $scope.$parent.search_field;
+        }
+
+        // $http.get(base_url + "searchelastic/search_total_count?searchKeyword="+searchKeyword+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city)
+        $http({
+            method: 'POST',
+            // url: base_url + 'user_post/searchData',
+            url: base_url + "searchelastic/search_total_count",
+            data: 'searchKeyword=' + searchKeyword +'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
             $scope.$parent.opp_count = '('+success.data.opp_count+')';
             $scope.$parent.people_count = '('+success.data.people_count+')';
             $scope.$parent.simple_count = '('+success.data.simple_count+')';
