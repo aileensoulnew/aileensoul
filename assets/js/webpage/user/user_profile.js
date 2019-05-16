@@ -14905,7 +14905,7 @@ function profile_pic() {
         size: { width: 450, height: 450 }
     }).then(function (resp) {
         $.ajax({
-            url: base_url + "userprofile_page/user_image_insert1",
+            url: base_url + "userprofile_page/user_profile_pic_update",
             type: "POST",
             data: {"image": resp},
             beforeSend: function () {

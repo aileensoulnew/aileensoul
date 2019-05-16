@@ -14,6 +14,7 @@ class Profile extends CI_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('data_model');
+        $this->load->model('searchelastic_model');
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
@@ -75,6 +76,7 @@ class Profile extends CI_Controller {
 
         if ($updatdata) {
             $this->session->set_flashdata('success', 'Profile information updated successfully');
+            $this->searchelastic_model->add_edit_single_people($id);
             // redirect(base_url(), 'refresh');// . $this->session->userdata('aileenuser_slug'), 'refresh');
         } else {
             $this->session->flashdata('error', 'Sorry!! Your data not updated');

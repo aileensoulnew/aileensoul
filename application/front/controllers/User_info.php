@@ -13,6 +13,7 @@ class User_info extends MY_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('data_model');
+        $this->load->model('searchelastic_model');
         $this->load->library('S3');
         $this->load->library('inbackground');
     }
@@ -128,6 +129,8 @@ class User_info extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'user_profession');
             if ($insert_id) {
+
+                $new_people = $this->searchelastic_model->add_edit_single_people($userid);
 
                 $this->userdata['user_data'] = $user_data = $this->user_model->getUserData($userid);
                 $fullname = ucwords($user_data['first_name']);
@@ -269,6 +272,9 @@ class User_info extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'user_student');
             if ($insert_id) {
+                
+                $new_people = $this->searchelastic_model->add_edit_single_people($userid);
+
                 $this->userdata['user_data'] = $this->user_model->getUserData($userid);
                 $fullname = ucwords($user_data['first_name']);
                 $to_email_id = $user_data['email'];

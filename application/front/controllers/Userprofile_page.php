@@ -16,6 +16,7 @@ class Userprofile_page extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('userprofile_model');
         $this->load->model('email_model');
+        $this->load->model('searchelastic_model');
         $this->load->library('upload');
         $this->load->library('inbackground');
         include ('main_profile_link.php');
@@ -784,7 +785,7 @@ class Userprofile_page extends MY_Controller {
 
     //PROFILE PIC INSERT END  
 
-    public function user_image_insert1() {
+    public function user_profile_pic_update() {
         $userid = $this->session->userdata('aileenuser');
         $userslug = $this->session->userdata('aileenuser_slug');
         $userdata = $this->user_model->getUserDataByslug($userslug, $data = 'ui.user_image,u.user_slug,u.user_id');
@@ -881,6 +882,8 @@ class Userprofile_page extends MY_Controller {
 
         if ($update) {
             $userdata = $this->user_model->getUserDataByslug($userslug, $data = 'ui.user_image');
+
+            $new_people = $this->searchelastic_model->add_edit_single_people($userid);
 
             $userImageContent = '<a class="other-user-profile" hrerf="#" data-toggle="modal" data-target="#other-user-profile-img"><img src="' . USER_MAIN_UPLOAD_URL . $userdata['user_image'] . '"></a>';
             $userImageContent .= '<div class="upload-profile"><a class="cusome_upload" href="#" onclick="updateprofilepopup();" title="Update profile picture">
@@ -2650,6 +2653,7 @@ class Userprofile_page extends MY_Controller {
         {
             $this->common->delete_data('user_student', 'user_id', $userid);
             $ret_arr = array("success"=>1);
+            $this->searchelastic_model->add_edit_single_people($userid);
         }
         else
         {
@@ -2739,6 +2743,7 @@ class Userprofile_page extends MY_Controller {
         {                
             $id = $studentData['id'];
             $updatdata_up = $this->common->update_data($data_up, 'user_student','user_id', $userid);
+            $new_people = $this->searchelastic_model->add_edit_single_people($userid);
         }
         else
         {

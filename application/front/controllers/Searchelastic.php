@@ -9,13 +9,14 @@ class Searchelastic extends MY_Controller {
     private $elasticclient = null;
     public function __construct() {
         parent::__construct();
+        $this->load->model('searchelastic_model');
         $this->load->model('user_model');
         $this->load->model('data_model');
         $this->load->model('user_post_model');
         $this->load->model('common');
         $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
     }
-
+    
     public function index() {
         $this->insert_people_data();
         $this->insert_business_data();
@@ -138,7 +139,7 @@ class Searchelastic extends MY_Controller {
 
     public function insert_one_people_data($user_id)
     {
-        $client = $this->elasticclient;
+        /*$client = $this->elasticclient;
         $stmt = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
             LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
             LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
@@ -160,7 +161,11 @@ class Searchelastic extends MY_Controller {
         }
         $responses = $client->index($params);
         // print_r($responses);exit();
-        return $responses;
+        return $responses;*/
+
+        $user_id = $this->input->post('user_id');
+        $new_people = $this->searchelastic_model->add_edit_single_people($user_id);
+        json_encode($new_people);
     }
 
     public function update_people_data($user_id)
@@ -193,7 +198,7 @@ class Searchelastic extends MY_Controller {
     public function delete_people_data($id = 0)
     {
         $client = $this->elasticclient;
-        $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $id, ];
+        $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => 16024, ];
         $responses = $client->delete($params);
         return true;
     }
