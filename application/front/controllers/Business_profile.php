@@ -16,6 +16,7 @@ class Business_profile extends MY_Controller {
         $this->load->model('user_post_model');
         $this->load->model('data_model');
         $this->load->model('business_model');
+        $this->load->model('searchelastic_model');
         $this->lang->load('message', 'english');
         $this->load->helper('smiley');
         //AWS access info start
@@ -543,6 +544,8 @@ class Business_profile extends MY_Controller {
                     unlink($thumb_image);
                 }*/
             }
+            
+            $this->searchelastic_model->add_edit_single_business($userid);
 
             $contition_array = array('user_id' => $userid, 'status' => '1', 'is_deleted' => '0');
             $businesspostdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
@@ -2360,6 +2363,7 @@ class Business_profile extends MY_Controller {
 
         $update = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
         $update1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
+        $this->searchelastic_model->add_edit_single_business($userid);
 
         if ($update) {
             if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
@@ -2405,6 +2409,7 @@ class Business_profile extends MY_Controller {
 
         $updatedata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
         $updatedata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
+        $this->searchelastic_model->add_edit_single_business($userid);
 
         if ($updatedata) {
             echo $userid;

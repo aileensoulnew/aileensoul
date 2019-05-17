@@ -140,6 +140,9 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
     $scope.$on('$destroy', function() {
         // cancelNextLoad();
     });*/
+    setTimeout(function(){
+
+
 
     if(typeof(EventSource) !== "undefined") {
         var source = new EventSource(base_url+"cron/unread_message_count_wc");
@@ -224,6 +227,8 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
     } else {
         console.log("Sorry, your browser does not support server-sent events...");
     }
+
+    },2000);
 });
 $(".dropdown-menu").click(function (event) {
     $(this).parent('li').addClass('open');

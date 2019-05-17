@@ -283,7 +283,7 @@ class Searchelastic extends MY_Controller {
 
     public function insert_one_business_data($business_id)
     {
-        $client = $this->elasticclient;
+        /*$client = $this->elasticclient;
         $stmt = "SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) AS industry_name FROM ailee_business_profile bp
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
             LEFT JOIN ailee_cities ct ON bp.city = ct.city_id
@@ -296,9 +296,14 @@ class Searchelastic extends MY_Controller {
         foreach($result as $k=>$row) {
            $params = ['index' => 'aileensoul_search_business', 'type' => 'aileensoul_search_business', 'id' => $row['business_profile_id'], 'body' => ['company_name' => $row['company_name'],'country' => $row['country'],'state' => $row['state'], 'city' => $row['city'],'pincode' => $row['pincode'],'address' => $row['address'],'contact_person' => $row['contact_person'], 'contact_mobile' => $row['contact_mobile'], 'contact_email' => $row['contact_email'],'contact_website' => $row['contact_website'],'business_type' => $row['business_type'],'industriyal' => $row['industriyal'],'details' => $row['details'],'addmore' => $row['addmore'],'user_id' => $row['user_id'],'status' => $row['status'],'is_deleted' => $row['is_deleted'],'created_date' => $row['created_date'],'modified_date' => $row['modified_date'],'business_step' => $row['business_step'],'business_user_image' => $row['business_user_image'],'profile_background' => $row['profile_background'],'profile_background_main' => $row['profile_background_main'],'other_business_type' => $row['other_business_type'],'other_industrial' => $row['other_industrial'],'city_name' => $row['city_name'],'state_name' => $row['state_name'],'country_name' => $row['country_name'],'other_city' => $row['other_city'],'business_slug' => $row['business_slug'],'industry_name' => $row['industry_name'],]];
         }
-        $responses = $client->index($params);
+        $responses = $client->index($params);*/
+
+        $business_id = $this->input->post('business_id');
+        $new_business = $this->searchelastic_model->add_edit_single_business($business_id);
+        json_encode($new_business);
+
         // print_r($responses);exit();
-        return $responses;
+        // return $responses;
     }
 
     public function update_business_data($business_id)
@@ -397,9 +402,9 @@ class Searchelastic extends MY_Controller {
         return true;
     }
 
-    public function insert_one_opportunity_data($id_post)
+    public function insert_one_opportunity_data()
     {
-        $client = $this->elasticclient;
+        /*$client = $this->elasticclient;
         $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,GROUP_CONCAT(DISTINCT(jt.name)) AS opportunity_for,opportunity_for AS opportunity_for_id,GROUP_CONCAT(DISTINCT(c.city_name)) AS location,location AS location_id,uo.opportunity,it.industry_name AS field, uo.other_field, uo.opptitle ,uo.oppslug, uo.company_name,IF(uo.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag,uo.hashtag AS hashtag_id
             FROM ailee_user_opportunity uo
             LEFT JOIN ailee_user_post up ON up.id = uo.post_id
@@ -417,7 +422,11 @@ class Searchelastic extends MY_Controller {
         }
         $responses = $client->index($params);
         // print_r($responses);exit();
-        return $responses;
+        return $responses;*/
+
+        $id_post = $this->input->post('id_post');
+        $new_opportunity = $this->searchelastic_model->add_edit_single_opportunity($id_post);
+        json_encode($new_opportunity);
     }
 
     public function update_opportunity_data($id_post)
@@ -509,9 +518,9 @@ class Searchelastic extends MY_Controller {
         return true;
     }
 
-    public function insert_one_post_data($id_post)
+    public function insert_one_post_data()
     {
-        $client = $this->elasticclient;
+        /*$client = $this->elasticclient;
         $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag, usp.hashtag AS hashtag_id,usp.sim_title, usp.simslug
             FROM ailee_user_simple_post usp
             LEFT JOIN ailee_user_post up ON up.id = usp.post_id
@@ -526,7 +535,11 @@ class Searchelastic extends MY_Controller {
         }
         $responses = $client->index($params);
         // print_r($responses);exit();
-        return $responses;
+        return $responses;*/
+
+        $id_post = $this->input->post('id_post');
+        $new_post = $this->searchelastic_model->add_edit_single_post($id_post);
+        json_encode($new_post);
     }
 
     public function update_post_data($id_post)
@@ -624,7 +637,7 @@ class Searchelastic extends MY_Controller {
 
     public function insert_one_question_data($id_post)
     {
-        $client = $this->elasticclient;
+        /*$client = $this->elasticclient;
         $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category, uaq.description, it.industry_name AS field, uaq.others_field, uaq.is_anonymously ,uaq.link, uaq.modify_date, uaq.question,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag,uaq.hashtag AS hashtag_id
             FROM ailee_user_ask_question uaq
             LEFT JOIN ailee_user_post up ON up.id = uaq.post_id
@@ -642,7 +655,11 @@ class Searchelastic extends MY_Controller {
         }
         $responses = $client->index($params);
         // print_r($responses);exit();
-        return $responses;
+        return $responses;*/
+
+        $id_post = $this->input->post('id_post');
+        $new_question = $this->searchelastic_model->add_edit_single_question($id_post);
+        json_encode($new_question);
     }
 
     public function update_question_data($id_post)
@@ -743,9 +760,9 @@ class Searchelastic extends MY_Controller {
         return true;
     }
 
-    public function insert_one_article_data($id_post)
+    public function insert_one_article_data()
     {
-        $client = $this->elasticclient;
+        /*$client = $this->elasticclient;
         $stmt = "SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id, up.user_type, pa.article_desc, pa.article_main_category, pa.article_other_category, pa.article_featured_image, pa.article_meta_description, pa.article_meta_title, pa.article_slug, pa.article_sub_category, pa.article_title, pa.hashtag as hashtag_id , pa.id_post_article, IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') AS hashtag,it.industry_name AS field
             FROM ailee_post_article pa
             LEFT JOIN ailee_user_post up ON up.post_id = pa.id_post_article
@@ -763,7 +780,11 @@ class Searchelastic extends MY_Controller {
         }
         $responses = $client->index($params);
         // print_r($responses);exit();
-        return $responses;
+        return $responses;*/
+
+        $id_post = $this->input->post('id_post');
+        $new_article = $this->searchelastic_model->add_edit_single_article($id_post);
+        json_encode($new_article);
     }
 
     public function update_article_data($id_post)

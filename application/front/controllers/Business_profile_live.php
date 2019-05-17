@@ -16,6 +16,7 @@ class Business_profile_live extends MY_Controller {
         $this->load->model('user_post_model');
         $this->load->model('data_model');        
         $this->load->model('business_model');
+        $this->load->model('searchelastic_model');
         $this->lang->load('message', 'english');
         $this->load->helper('smiley');
         //AWS access info start
@@ -12127,6 +12128,9 @@ Your browser does not support the audio tag.
                 }
             }
             $member_insert = $this->business_model->save_contact_info($user_id,$contact_person,$jobtitle,$contact_mobile,$contact_email,$contact_website,$contact_fax,$contact_tollfree);
+
+            $this->searchelastic_model->add_edit_single_business($user_id);
+            
             $contact_info_data = $this->business_model->get_contact_info($user_id);
             $ret_arr = array("success"=>1,"contact_info_data"=>$contact_info_data);
         }
@@ -12233,6 +12237,9 @@ Your browser does not support the audio tag.
         if($user_id != "")
         {
             $address_insert = $this->business_model->save_address_info($user_id,$address_country,$address_state,$address_city,$address_other_city,$address_address,$address_pincode,$address_no_location,$address_office_location);
+
+            $this->searchelastic_model->add_edit_single_business($user_id);
+
             $address_info_data = $this->business_model->get_address_info($user_id);
             $ret_arr = array("success"=>1,"address_info_data"=>$address_info_data);
         }
@@ -12351,6 +12358,9 @@ Your browser does not support the audio tag.
         if($user_id != "")
         {
             $address_insert = $this->business_model->save_business($user_id,$business_name,$business_type,$other_business_type,$business_category,$other_business_category,$business_desc,$business_tot_emp,$business_year_found,$business_ext_benifit_txt,$business_pay_mode,$business_keyword_txt,$business_mission,$business_legal_name,$business_ser_pro_txt,$city_txt,$business_tagline,$business_formly_known);
+
+            $this->searchelastic_model->add_edit_single_business($user_id);
+
             $business_info_data = $this->business_model->get_business_info($user_id);
             $ret_arr = array("success"=>1,"business_info_data"=>$business_info_data);
         }
