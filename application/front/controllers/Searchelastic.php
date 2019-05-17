@@ -943,7 +943,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['people_count'] = $search_data['total']['value'];
+        $searchData['people_count'] = $search_data['total'];
         $searchProfileData = $search_data['hits'];
         $searchProfileDataMain = array();
 
@@ -1043,7 +1043,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['business_count'] = $search_data['total']['value'];
+        $searchData['business_count'] = $search_data['total'];
         $searchBusinessData = $search_data['hits'];
         $searchBusinessDataMain = array();
 
@@ -1150,7 +1150,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['opp_count'] = $search_data['total']['value'];
+        $searchData['opp_count'] = $search_data['total'];
         $searchOpportunityData = $search_data['hits'];
         $searchOpportunityDataMain = array();        
 
@@ -1318,7 +1318,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['simple_count'] = $search_data['total']['value'];
+        $searchData['simple_count'] = $search_data['total'];
         $searchSimpleData = $search_data['hits'];
         $searchSimpleDataMain = array();        
 
@@ -1479,7 +1479,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['question_count'] = $search_data['total']['value'];
+        $searchData['question_count'] = $search_data['total'];
         $searchQuestionData = $search_data['hits'];
         $searchQuestionDataMain = array();        
 
@@ -1653,7 +1653,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['article_count'] = $search_data['total']['value'];
+        $searchData['article_count'] = $search_data['total'];
         $searchArticleData = $search_data['hits'];
         $searchArticleDataMain = array();        
 
@@ -1822,7 +1822,7 @@ class Searchelastic extends MY_Controller {
         $query_people = $client->search($params_people);
         // print_r($params_people['body']['query']['bool']);exit();
         $search_data_people = $query_people['hits'];
-        $return_arr['people_count'] = $search_data_people['total']['value'];
+        $return_arr['people_count'] = $search_data_people['total'];
 
         $params_buss = [
             'index' => 'aileensoul_search_business', 
@@ -1858,7 +1858,7 @@ class Searchelastic extends MY_Controller {
         ];
         $query_buss = $client->search($params_buss);
         $search_data_buss = $query_buss['hits'];
-        $return_arr['business_count'] = $search_data_buss['total']['value'];
+        $return_arr['business_count'] = $search_data_buss['total'];
 
         $params_opp = [
             'index' => 'aileensoul_search_opportunity', 
@@ -1910,7 +1910,7 @@ class Searchelastic extends MY_Controller {
         }
         $query_opp = $client->search($params_opp); 
         $search_data_opp = $query_opp['hits'];
-        $return_arr['opp_count'] = $search_data_opp['total']['value'];
+        $return_arr['opp_count'] = $search_data_opp['total'];
 
         $params_post = [
             'index' => 'aileensoul_search_post', 
@@ -1953,7 +1953,7 @@ class Searchelastic extends MY_Controller {
         }
         $query_post = $client->search($params_post);
         $search_data_post = $query_post['hits'];
-        $return_arr['simple_count'] = $search_data_post['total']['value'];
+        $return_arr['simple_count'] = $search_data_post['total'];
 
         $params_que = [
             'index' => 'aileensoul_search_question', 
@@ -1996,7 +1996,7 @@ class Searchelastic extends MY_Controller {
         }
         $query_que = $client->search($params_que);
         $search_data_que = $query_que['hits'];
-        $return_arr['question_count'] = $search_data_que['total']['value'];
+        $return_arr['question_count'] = $search_data_que['total'];
 
         $params_article = [
             'index' => 'aileensoul_search_article', 
@@ -2043,8 +2043,8 @@ class Searchelastic extends MY_Controller {
         }
         $query_article = $client->search($params_article);
         $search_data_article = $query_article['hits'];
-        $return_arr['article_count'] = $search_data_article['total']['value'];
-        $return_arr['total_count'] = $search_data_people['total']['value']+$search_data_buss['total']['value']+$search_data_opp['total']['value']+$search_data_post['total']['value']+$search_data_que['total']['value']+$search_data_article['total']['value'];
+        $return_arr['article_count'] = $search_data_article['total'];
+        $return_arr['total_count'] = $search_data_people['total']+$search_data_buss['total']+$search_data_opp['total']+$search_data_post['total']+$search_data_que['total']+$search_data_article['total'];
 
         echo json_encode($return_arr);        
     }
@@ -2157,7 +2157,7 @@ class Searchelastic extends MY_Controller {
         
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['opp_count'] = $search_data['total']['value'];
+        $searchData['opp_count'] = $search_data['total'];
         $searchOpportunityData = $search_data['hits'];
         $searchOpportunityDataMain = array();        
 
@@ -2344,7 +2344,7 @@ class Searchelastic extends MY_Controller {
         
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['people_count'] = $search_data['total']['value'];
+        $searchData['people_count'] = $search_data['total'];
         $searchProfileData = $search_data['hits'];
         $searchProfileDataMain = array();
 
@@ -2449,7 +2449,7 @@ class Searchelastic extends MY_Controller {
         
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['simple_count'] = $search_data['total']['value'];
+        $searchData['simple_count'] = $search_data['total'];
         $searchSimpleData = $search_data['hits'];
         $searchSimpleDataMain = array();        
 
@@ -2606,7 +2606,7 @@ class Searchelastic extends MY_Controller {
         
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['business_count'] = $search_data['total']['value'];
+        $searchData['business_count'] = $search_data['total'];
         $searchBusinessData = $search_data['hits'];
         $searchBusinessDataMain = array();
 
@@ -2695,7 +2695,7 @@ class Searchelastic extends MY_Controller {
        
         $searchData = array();
         $search_data = $query['hits'];        
-        $searchData['article_count'] = $search_data['total']['value'];
+        $searchData['article_count'] = $search_data['total'];
         $searchArticleData = $search_data['hits'];
         $searchArticleDataMain = array();        
 
@@ -2864,7 +2864,7 @@ class Searchelastic extends MY_Controller {
         
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['question_count'] = $search_data['total']['value'];
+        $searchData['question_count'] = $search_data['total'];
         $searchQuestionData = $search_data['hits'];
         $searchQuestionDataMain = array();        
 

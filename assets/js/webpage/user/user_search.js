@@ -179,11 +179,11 @@ app.controller('SearchDefaultController', function($scope, $http, $compile) {
 
     $scope.active_tab = 0;
     $scope.contactSuggetion = [];
-    if($scope.contactSuggetion.length == 0)
+    /*if($scope.contactSuggetion.length == 0)
     {
         getContactSuggetion();
-    }
-    function getContactSuggetion() {
+    }*/
+    $scope.getContactSuggetion = function() {
         $http.get(base_url + "user_post/getContactSuggetion").then(function(success) {
             $scope.contactSuggetion = success.data;
         }, function(error) {});
@@ -321,6 +321,11 @@ app.controller('searchController', function($scope, $http, $compile) {
         });
     };
     $scope.searchData();
+
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
+    }
 
     $scope.clearData = function(){
         $scope.$parent.search_job_title = [];
