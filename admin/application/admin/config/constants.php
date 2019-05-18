@@ -37,32 +37,14 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 if($_SERVER['HTTP_HOST'] == 'aileensoul.localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1'){
-	$db_host 	 = 'localhost';
-	$db_user 	 = 'root';
-	$db_password = '';
-	$db_name 	 = 'laceberry';
-        
     define('SITEURL','http://aileensoul.localhost/');
-	define('SITEPATH',$_SERVER['DOCUMENT_ROOT'].'/aileensoul/');
-	define('SITEMAPPATH',$_SERVER['DOCUMENT_ROOT'].'/laceberry/');
-	define('NEWSITEURL','http://localhost/laceberry/');
-	define('NEWSITEPATH',$_SERVER['DOCUMENT_ROOT'].'/laceberry/');
-	error_reporting(0);
+	define('SITEPATH',$_SERVER['DOCUMENT_ROOT'].'/aileensoul/');	
 }
 else
 {
-	$db_host 	 = 'aileensoul.cd5k72kgdruv.us-west-2.rds.amazonaws.com';
-	$db_user 	 = 'sysadmin';
-	$db_password = 'sysadmin123?';
-	$db_name 	 = 'aileensoulv2';
-	
-	$sitenewpath = str_split($_SERVER['DOCUMENT_ROOT'],23);
-	
-	define('SITEURL','https://www.aileensoul.com/');
-	define('NEWSITEURL','http://laceberry.in/live/');
+	$sitenewpath = str_split($_SERVER['DOCUMENT_ROOT'],23);	
+	define('SITEURL','https://www.aileensoul.com/');	
 	define('SITEPATH',$sitenewpath[0].'/aileensoul/');
-	define('NEWSITEPATH',$_SERVER['DOCUMENT_ROOT'].'/');
-	define('SITEMAPPATH',$_SERVER['DOCUMENT_ROOT'].'/live/');
 	error_reporting(0);
 }
 
@@ -125,8 +107,8 @@ $time	=	array(
 );				  			
 
 
-if($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1'){
-	ini_set('display_errors', '0');
+if($_SERVER['HTTP_HOST'] == 'aileensoul.localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1'){
+	ini_set('display_errors', '0');	
 	error_reporting(0);
 }
 else

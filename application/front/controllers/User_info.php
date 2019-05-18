@@ -33,19 +33,7 @@ class User_info extends MY_Controller {
         $this->data['title'] = "Basic Information | Aileensoul";
         $this->load->view('user_info/index', $this->data);
     }
-
-//    public function index() {
-//        $userid = $this->session->userdata('aileenuser');
-//        $userdata = $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-//        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-//        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-//        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-//        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-//        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-//        $this->data['title'] = "Basic Information | Aileensoul";
-//        $this->load->view('user_basic_info/index', $this->data);
-//    }
-
+    
     public function ng_basic_info_insert() {
         $userid = $this->session->userdata('aileenuser');
         $errors = array();

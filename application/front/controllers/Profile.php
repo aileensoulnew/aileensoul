@@ -39,18 +39,14 @@ class Profile extends CI_Controller {
 
         $id = $this->session->userdata('aileenuser');
 
-
         $contition_array = array('user_id' => $id);
         $this->data['userdata'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-
 
         $this->form_validation->set_rules('first_name', 'first Name', 'required');
         $this->form_validation->set_rules('last_name', 'last Name', 'required');
         $this->form_validation->set_rules('email_profile', ' EmailId', 'required|valid_email');
 
         $this->form_validation->set_rules('gender', ' gender', 'required');
-
 
         $post_data = $this->input->post();
         $date = $this->input->post('selday');
@@ -85,13 +81,12 @@ class Profile extends CI_Controller {
         redirect(base_url());
     }
 
-//User email already exist checking controller start
-
+    //User email already exist checking controller start
     public function check_email() {
         $email = $this->input->post('email');
         $userid = $this->session->userdata('aileenuser');
-//        $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
-//        $userdata = $this->common->select_data_by_condition('user', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+       // $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
+       // $userdata = $this->common->select_data_by_condition('user', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $userdata = $this->user_model->getUserData($userid);
         $email1 = $userdata['email'];
         if ($email1) {
@@ -109,13 +104,10 @@ class Profile extends CI_Controller {
             die();
         }
     }
-
-//User email already exist checking controller End
-
+    //User email already exist checking controller End
 
     public function forgot_password() {
         $forgot_email = $this->input->post('forgot_email');
-
 
         if ($forgot_email != '') {
 
@@ -123,8 +115,6 @@ class Profile extends CI_Controller {
             if (count($forgot_email_check) > 0) {
 
                 $rand_password = $this->random_string(6);
-
-
                 $email = $forgot_email_check[0]['user_email'];
                 $username = $forgot_email_check[0]['user_name'];
                 $firstname = $forgot_email_check[0]['first_name'];
@@ -132,14 +122,13 @@ class Profile extends CI_Controller {
 
                 $toemail = $forgot_email;
 
-
                 $msg .= '<tr>
-              <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
-                $msg .= '<p style="margin:0; font-family:arial;">Hi,' . ucwords($firstname) . ' ' . ucwords($lastname) . '</p>
-                <p style="padding:25px 0 ; font-family:arial; margin:0;">This is your code: ' . $rand_password . '</p>
-                <p><a style="background: #1b8ab9;font-size:16px;color:#fff !important;padding: 8px 20px;text-decoration: none;font-family: arial;letter-spacing: 1px;border-radius:3px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
-              </td>
-            </tr>';
+                  <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
+                    $msg .= '<p style="margin:0; font-family:arial;">Hi,' . ucwords($firstname) . ' ' . ucwords($lastname) . '</p>
+                    <p style="padding:25px 0 ; font-family:arial; margin:0;">This is your code: ' . $rand_password . '</p>
+                    <p><a style="background: #1b8ab9;font-size:16px;color:#fff !important;padding: 8px 20px;text-decoration: none;font-family: arial;letter-spacing: 1px;border-radius:3px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
+                  </td>
+                </tr>';
 
                 $subject = "Forgot password";
                 $mail = $this->email_model->sendEmail($app_name = '', $app_email = '', $toemail, $subject, $msg);
@@ -147,7 +136,6 @@ class Profile extends CI_Controller {
                 $data = array(
                     'password_code' => $rand_password
                 );
-
 
                 $updatdata = $this->common->update_data($data, 'user_login', 'user_id', $forgot_email_check[0]['user_id']);
 
@@ -170,7 +158,6 @@ class Profile extends CI_Controller {
         $this->data['emailid'] = $this->common->select_data_by_id('user', 'user_id', $abc, '*', '');
 
         $this->data['forgetpassword_header'] = $this->load->view('forgetpassword_header', $this->data, TRUE);
-
 
         $this->load->view('profile/change_password', $this->data);
     }
@@ -223,26 +210,26 @@ class Profile extends CI_Controller {
         $emailsetting = $this->common->select_data_by_condition('email_settings', array(), '*');
 
         $mail_html = '<table width="100%" cellspacing="10" cellpadding="10" style="background:#f1f1f1;" style="border:2px solid #ccc;" >
-    <tr>
-     <td valign="center"><img src="' . base_url('assets/img/logo.png') . '" alt="' . $this->data['main_site_name'] . '" style="margin:0px auto;display:block;width:150px;"/></td> 
-  </tr> 
-<tr>
-  <td>
-     
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <p>
-                            "' . $mail_body . '"
-                        </p>
-    </table>
-  </td>
-</tr>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-     
-      <tr>
-      <td style="font-family:Ubuntu, sans-serif;font-size:11px; padding-bottom:15px; padding-top:15px; border-top:1px solid #ccc;text-align:center;background:#eee;"> &copy; ' . date("Y") . ' <a href="' . $this->data['main_site_url'] . '" style="color:#268bb9;text-decoration:none;"> ' . $this->data['main_site_name'] . '</a></td>
-      </tr>
-</table> 
-</table>';
+            <tr>
+             <td valign="center"><img src="' . base_url('assets/img/logo.png') . '" alt="' . $this->data['main_site_name'] . '" style="margin:0px auto;display:block;width:150px;"/></td> 
+          </tr> 
+        <tr>
+          <td>
+             
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <p>
+                                    "' . $mail_body . '"
+                                </p>
+            </table>
+          </td>
+        </tr>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             
+              <tr>
+              <td style="font-family:Ubuntu, sans-serif;font-size:11px; padding-bottom:15px; padding-top:15px; border-top:1px solid #ccc;text-align:center;background:#eee;"> &copy; ' . date("Y") . ' <a href="' . $this->data['main_site_url'] . '" style="color:#268bb9;text-decoration:none;"> ' . $this->data['main_site_name'] . '</a></td>
+              </tr>
+        </table> 
+        </table>';
 
         //Loading E-mail Class
         $config['protocol'] = "smtp";
@@ -268,8 +255,6 @@ class Profile extends CI_Controller {
     }
 
     public function login() {
-
-
         $this->load->view('profile/rec_forgott_password', $this->data);
     }
 
@@ -291,10 +276,7 @@ class Profile extends CI_Controller {
 
     public function check_emailforget() {
 
-        $email_reg = $this->input->post('email_reg');
-        // $contition_array = array('is_delete' => '0', 'status' => '1');
-        // $userdata = $this->common->select_data_by_condition('user', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
+        $email_reg = $this->input->post('email_reg');        
 
         $condition_array = array('is_delete' => '0', 'status' => '1');
 
@@ -311,7 +293,6 @@ class Profile extends CI_Controller {
 
     public function forgot_live() {
         $forgot_email = $this->input->post('forgot_email');
-
 
         if ($forgot_email != '') {
 
@@ -331,12 +312,12 @@ class Profile extends CI_Controller {
                 $toemail = $forgot_email;
 
                 $msg .= '<tr>
-              <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
-                $msg .= '<p style="margin:0; font-family:arial;">Hi,' . ucwords($firstname) . ' ' . ucwords($lastname) . '</p>
-                <p style="padding:25px 0 ; font-family:arial; margin:0;">This is your code: ' . $rand_password . '</p>
-                <p><a style="background: #1b8ab9;font-size:16px;color:#fff !important;padding: 8px 20px;text-decoration: none;font-family: arial;letter-spacing: 1px;border-radius:3px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
-              </td>
-            </tr>';
+                  <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
+                    $msg .= '<p style="margin:0; font-family:arial;">Hi,' . ucwords($firstname) . ' ' . ucwords($lastname) . '</p>
+                    <p style="padding:25px 0 ; font-family:arial; margin:0;">This is your code: ' . $rand_password . '</p>
+                    <p><a style="background: #1b8ab9;font-size:16px;color:#fff !important;padding: 8px 20px;text-decoration: none;font-family: arial;letter-spacing: 1px;border-radius:3px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
+                  </td>
+                </tr>';
 
                 $subject = "Forgot password";
 
@@ -359,8 +340,7 @@ class Profile extends CI_Controller {
                 echo json_encode(
                         array(
                             "data" => 'error',
-                            "message" => '<div class="alert alert-danger">we have not sent a code on provided email address
-.</div>',
+                            "message" => '<div class="alert alert-danger">we have not sent a code on provided email address.</div>',
                 ));
             }
         } else {
@@ -584,26 +564,7 @@ class Profile extends CI_Controller {
                     $data['is_other'] = '1';
                     $universityId = $this->common->insert_data_getid($data, 'university');
                 }
-            }
-
-            // job title start   
-            /*if ($field != " ") {
-                $contition_array = array('name' => $field);
-                $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                if ($jobdata) {
-                    $jobTitleId = $jobdata[0]['title_id'];
-                } else {
-                    $forslug = $this->input->post('studjob_title');
-                    $data = array(
-                        'name' => ucfirst($this->input->post('studjob_title')),
-                        'slug' => $this->common->clean($forslug),
-                        'status' => 'draft',
-                    );
-                    if ($userid) {
-                        $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
-                    }
-                }
-            }*/            
+            }            
 
             $professionData = $this->user_model->getUserProfessionData($userid,"*");            
             if(isset($professionData) && !empty($professionData))

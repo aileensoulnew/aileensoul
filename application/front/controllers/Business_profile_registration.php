@@ -15,6 +15,7 @@ class Business_profile_registration extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('business_model');
         $this->load->model('user_post_model');
+        $this->load->model('searchelastic_model');
         
         $this->lang->load('message', 'english');
         $this->load->helper('smiley');
@@ -547,6 +548,7 @@ class Business_profile_registration extends MY_Controller {
             }
             $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
             if ($updatdata) {
+                $this->searchelastic_model->add_edit_single_business($userid);
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;

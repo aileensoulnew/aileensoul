@@ -16,6 +16,7 @@ class Article extends CI_Controller {
         }
 
         $this->load->model('email_model');
+        $this->load->model('searchelastic_model');
 
         // Get Site Information
         $this->data['title'] = 'Article | Aileensoul';
@@ -112,6 +113,8 @@ class Article extends CI_Controller {
             $this->common->insert_data_getid($inser_point, 'user_point_mapper');
         }
         // $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+        
+        $this->searchelastic_model->add_edit_single_article($post_data['id']);
         
         $sql = "UPDATE ailee_post_article SET article_desc_old = article_desc WHERE id_post_article = '".$id."'";
         $query = $this->db->query($sql); 
