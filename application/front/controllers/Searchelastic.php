@@ -80,7 +80,7 @@ class Searchelastic extends MY_Controller {
                 ]
             ]
         ];
-        $this->elasticclient->indices()->create($params);       
+        $this->elasticclient->indices()->create($params);
     }
 
     public function add_people_index()

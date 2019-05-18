@@ -18,6 +18,7 @@ class User_post extends MY_Controller {
         $this->load->model('userprofile_model');
         $this->load->model('data_model');
         $this->load->model('business_model');
+        $this->load->model('searchelastic_model');        
         $this->load->library('S3');
         $this->load->library('inbackground');
 
@@ -1320,6 +1321,7 @@ class User_post extends MY_Controller {
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');
+
                 if($is_user_monetize > 0)
                 {
 
@@ -1366,6 +1368,7 @@ class User_post extends MY_Controller {
                 $insert_data['is_anonymously'] = $is_anonymously;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_ask_question');
+
                 if($is_user_monetize > 0){
 
                     $update_post_data['is_monetize'] = '1';
@@ -1710,30 +1713,7 @@ class User_post extends MY_Controller {
                             $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                             
                             $insert_post_id = $this->common->insert_data_getid($insert_data, 'user_post_file');
-
-                            /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
-
-                            /*if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
-                                if (isset($main_image)) {
-                                    unlink($main_image);
-                                }
-                                if (isset($thumb_image)) {
-                                    unlink($thumb_image);
-                                }
-                                if (isset($resize_image)) {
-                                    unlink($resize_image);
-                                }
-                                if (isset($resize_image1)) {
-                                    unlink($resize_image1);
-                                }
-                                if (isset($resize_image2)) {
-                                    unlink($resize_image2);
-                                }
-                                if (isset($resize_image4)) {
-                                    unlink($resize_image4);
-                                }
-                            }*/
-                            /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
+                           
                         } else {
                             echo $this->upload->display_errors();
                             exit;
@@ -1777,6 +1757,13 @@ class User_post extends MY_Controller {
             }
             $final_update_post_data = array('status'=> 'publish');
             $update_post = $this->common->update_data($final_update_post_data, 'user_post', 'id', $user_post_id);
+            if ($post_for == 'opportunity') {
+                $this->searchelastic_model->add_edit_single_opportunity($user_post_id);
+            } elseif ($post_for == 'simple') {
+                $this->searchelastic_model->add_edit_single_post($user_post_id);
+            } elseif ($post_for == 'question') {
+                $this->searchelastic_model->add_edit_single_question($user_post_id);
+            }
 
             //$post_data = $this->user_post_model->userPost($userid, $start = '0', $limit = '1');
             //  echo count($post_data); '<pre>'; print_r($post_data); die();
@@ -1806,15 +1793,15 @@ class User_post extends MY_Controller {
             foreach ($post_opp_loc as $key => $value) {
                 $location[$key]['city_name'] = $value;
             }
-//            $post_data['opportunity_for'] = json_encode($opprtunity);
-//            $post_data['location'] = json_encode($location);
+           // $post_data['opportunity_for'] = json_encode($opprtunity);
+           // $post_data['location'] = json_encode($location);
             $post_data['opportunity_for'] = $opprtunity;
             $post_data['location'] = $location;
-//            echo '<pre>';
-//            print_r($opprtunity);
-//            print_r($location);
-//            print_r($post_data);
-//            exit;
+           // echo '<pre>';
+           // print_r($opprtunity);
+           // print_r($location);
+           // print_r($post_data);
+           // exit;
         } else {
             $post_data = $this->user_post_model->askQuestionPost($post_id);
 
@@ -1830,232 +1817,6 @@ class User_post extends MY_Controller {
         echo json_encode($post_data);
     }
 
-    public function edit_post_opportunity() {
-        $userid = $this->session->userdata('aileenuser');
-        $post_id = $_POST['post_id'];
-        $post_for = $_POST['post_for'];
-
-        if ($post_for == 'simple') {
-
-            $hashtag = $_POST['hashtag'];
-            $sptitle = $_POST['sptitle'];
-            $sptitle = substr($sptitle, 0,100);
-            // $sim_title = $this->common->set_slug($sptitle, 'simslug', 'user_simple_post');
-
-            $description = $_POST['description'];
-
-            $hashtag_arr = $this->get_hashtag_array($hashtag);
-            $hashtag_id = "";
-            foreach ($hashtag_arr as $key=>$value) {
-                $ht_arr = $this->data_model->find_hashtag($value);
-                if ($ht_arr['id'] != '') {
-                    $ht_id = $ht_arr['id'];
-                } else {
-                    $data = array();
-                    $data['hashtag'] = $value;
-                    $data['created_date'] = date('Y-m-d H:i:s', time());
-                    $data['modify_date'] = date('Y-m-d H:i:s', time());
-                    $data['status'] = '2';                        
-                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
-                }
-                $hashtag_id .= $ht_id . ',';
-            }
-            $hashtag_id = trim($hashtag_id, ',');
-
-            $update_data = array();
-            $update_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
-            // $update_data['simslug'] = $sim_title;
-            $update_data['sim_title'] = $sptitle;
-            $update_data['description'] = $description;
-            $update_data['modify_date'] = date('Y-m-d H:i:s', time());
-            $update_post_data = $this->common->update_data($update_data, 'user_simple_post', 'post_id', $post_id);
-        } else if ($post_for == 'opportunity') {
-
-            $opp_desc = $_POST['description'];
-            $opptitle = $_POST['opptitle'];
-            $opp_field = $_POST['field'];
-            $company_name = (isset($_POST['company_name']) && $_POST['company_name'] != "undefined" && $_POST['company_name'] != "" ? $_POST['company_name'] : "");
-            if($opp_field == 0)
-                $other_field = $_POST['other_field'];
-            else
-                $other_field = "";
-
-            $hashtag = $_POST['hashtag'];
-            $job_title = json_decode($_POST['job_title'], TRUE);
-            $location = json_decode($_POST['location'], TRUE);
-
-            $job_title_id = "";
-            foreach ($job_title as $title) {
-                $designation = $this->data_model->findJobTitle($title['name']);
-                if ($designation['title_id'] != '') {
-                    $jobTitleId = $designation['title_id'];
-                } else {
-                    $data = array();
-                    $data['name'] = $title['name'];
-                    $data['created_date'] = date('Y-m-d H:i:s', time());
-                    $data['modify_date'] = date('Y-m-d H:i:s', time());
-                    $data['status'] = 'draft';
-                    $data['slug'] = $this->common->clean($title['name']);
-                    $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
-                }
-                $job_title_id .= $jobTitleId . ',';
-            }
-            $job_title_id = trim($job_title_id, ',');
-
-            $city_id = "";
-            foreach ($location as $loc) {
-                $city = $this->data_model->findCityList($loc['city_name']);
-                if ($city['city_id'] != '') {
-                    $cityId = $city['city_id'];
-                } else {
-                    $data = array();
-                    $city_slug = $this->common->set_city_slug(trim($loc['city_name']), 'slug', 'cities');
-                    $data['city_name'] = $loc['city_name'];
-                    $data['state_id'] = '0';
-                    $data['status'] = '2';
-                    $data['group_id'] = '0';
-                    $data['city_image'] =  $city_slug.'.png';
-                    $data['slug'] = $city_slug;
-                    $cityId = $this->common->insert_data_getid($data, 'cities');
-                }
-                $city_id .= $cityId . ',';
-            }
-            $city_id = trim($city_id, ',');
-
-            $hashtag_arr = $this->get_hashtag_array($hashtag);
-            $hashtag_id = "";
-            foreach ($hashtag_arr as $key=>$value) {
-                $ht_arr = $this->data_model->find_hashtag($value);
-                if ($ht_arr['id'] != '') {
-                    $ht_id = $ht_arr['id'];
-                } else {
-                    $data = array();
-                    $data['hashtag'] = $value;
-                    $data['created_date'] = date('Y-m-d H:i:s', time());
-                    $data['modify_date'] = date('Y-m-d H:i:s', time());
-                    $data['status'] = '2';                        
-                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
-                }
-                $hashtag_id .= $ht_id . ',';
-            }
-            $hashtag_id = trim($hashtag_id, ',');
-
-            $opportunity_location = $this->user_post_model->GetLocationName($city_id);
-            $opportunity_title = $this->user_post_model->GetJobTitleName($job_title_id);
-            $opportunity_field = $this->user_post_model->GetIndustryFieldName($opp_field);
-
-            $update_data = array();
-            $opptitle = substr($opptitle, 0,100);
-            $update_data['opptitle'] = $opptitle;
-            $update_data['opportunity_for'] = $job_title_id;
-            $update_data['location'] = $city_id;
-            $update_data['opportunity'] = $opp_desc;
-            $update_data['field'] = $opp_field;
-            $update_data['other_field'] = $other_field;
-            $update_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
-            $update_data['company_name'] = $company_name;
-            $update_data['modify_date'] = date('Y-m-d H:i:s', time());
-            $update_post_data = $this->common->update_data($update_data, 'user_opportunity', 'post_id', $post_id);
-        } else if ($post_for == 'question') {
-            $ask_que = $_POST['question'];
-            $ask_desc = $_POST['description'];
-            $ask_field = $_POST['field'];
-            $ask_other_field = $_POST['other_field'];
-            $ask_web_link = $_POST['weblink'];
-            $hashtag = $_POST['hashtag'];
-            $ask_category = json_decode($_POST['category'], TRUE);
-            $is_anonymously = $_POST['is_anonymously'];
-
-            foreach ($ask_category as $ask) {
-                $asked = $this->data_model->findCategory($ask['name']);
-                if ($asked['id'] != '') {
-                    $categoryId .= $asked['id'] . ',';
-                } else {
-                    $data = array();
-                    $data['name'] = $ask['name'];
-                    $data['created_date'] = date('Y-m-d H:i:s', time());
-                    $data['modify_date'] = date('Y-m-d H:i:s', time());
-                    $data['user_id'] = $userid;
-                    $data['status'] = 'draft';
-                    $categorysId = $this->common->insert_data_getid($data, 'tags');
-                    $categoryId .= $categorysId . ',';
-                }
-            }
-            $categoryId = trim($categoryId, ',');
-            
-            $hashtag_arr = $this->get_hashtag_array($hashtag);
-            $hashtag_id = "";
-            foreach ($hashtag_arr as $key=>$value) {
-                $ht_arr = $this->data_model->find_hashtag($value);
-                if ($ht_arr['id'] != '') {
-                    $ht_id = $ht_arr['id'];
-                } else {
-                    $data = array();
-                    $data['hashtag'] = $value;
-                    $data['created_date'] = date('Y-m-d H:i:s', time());
-                    $data['modify_date'] = date('Y-m-d H:i:s', time());
-                    $data['status'] = '2';                        
-                    $ht_id = $this->common->insert_data_getid($data, 'hashtag');
-                }
-                $hashtag_id .= $ht_id . ',';
-            }
-            $hashtag_id = trim($hashtag_id, ',');
-
-            $question_category = $this->user_post_model->GetQuestionCategoryName($categoryId);
-            $question_field = $this->user_post_model->GetIndustryFieldName($ask_field);
-
-            $update_data = array();
-            $update_data['question'] = $ask_que;
-            $update_data['description'] = $ask_desc;
-            $update_data['hashtag'] = ($hashtag_id != '' ? $hashtag_id : NULL);
-            $update_data['category'] = $categoryId;
-            $update_data['field'] = $ask_field;
-            $update_data['others_field'] = $ask_other_field;
-            $update_data['is_anonymously'] = $is_anonymously;
-            $update_data['link'] = $ask_web_link;
-            $update_data['modify_date'] = date('Y-m-d H:i:s', time());
-            $update_post_data = $this->common->update_data($update_data, 'user_ask_question', 'post_id', $post_id);
-        }
-
-        if ($update_post_data) {
-            if ($post_for == 'opportunity') {
-                $opportunity_data = $this->user_post_model->getOpportunityDataFromId($post_id);
-                $opp_desc = nl2br($this->common->make_links($opportunity_data['opportunity']));
-                $updatedata = array(
-                    'response' => 1,
-                    'opp_location' => $opportunity_location['location'],
-                    'opp_opportunity_for' => $opportunity_title['opportunity_for'],
-                    'opp_field' => ($opp_field != 0 ? $opportunity_field['field'] : $other_field),
-                    'field_id' => $opp_field,
-                    'opportunity' => $opp_desc,
-                    'opptitle' => $opportunity_data['opptitle'],
-                    'hashtag' => $opportunity_data['hashtag'],
-                    'oppslug' => $opportunity_data['oppslug'],
-                    'company_name' => $opportunity_data['company_name'],
-                );                
-            } else if ($post_for == 'simple') {
-                // $description = nl2br($this->common->make_links($description));
-                $simple_data = $this->user_post_model->get_simepl_post_data_from_id($post_id);
-                $updatedata = array(
-                    'response' => 1,
-                    'sim_description' => $simple_data['description'],
-                    'hashtag' => $simple_data['hashtag'],
-                    'sim_title' => $simple_data['sim_title'],
-                );
-            } else if ($post_for == 'question') {
-                //$ask_desc = nl2br($this->common->make_links($ask_desc));
-                
-                $updatedata['question_data'] = $this->user_post_model->getQuestionDataFromId($post_id);
-                $updatedata['response'] = 1;
-            }
-        } else {
-            $updatedata = array(
-                'response' => 0,
-            );
-        }
-
-        echo json_encode($updatedata);
-    }
 
     public function search() {
         $q = $_GET['q'];
@@ -2635,6 +2396,7 @@ class User_post extends MY_Controller {
                 $insert_data['description'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                 $inserted_id = $user_simple_id = $this->common->insert_data_getid($insert_data, 'user_simple_post');
+
             } elseif ($post_for == 'question') {
                 $insert_data = array();
                 $insert_data['post_id'] = $user_post_id;
@@ -2980,30 +2742,7 @@ class User_post extends MY_Controller {
                             $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
                             
                             $insert_post_id = $this->common->insert_data_getid($insert_data, 'user_post_file');
-
-                            /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
-
-                            /*if ($_SERVER['HTTP_HOST'] != "aileensoul.localhost") {
-                                if (isset($main_image)) {
-                                    unlink($main_image);
-                                }
-                                if (isset($thumb_image)) {
-                                    unlink($thumb_image);
-                                }
-                                if (isset($resize_image)) {
-                                    unlink($resize_image);
-                                }
-                                if (isset($resize_image1)) {
-                                    unlink($resize_image1);
-                                }
-                                if (isset($resize_image2)) {
-                                    unlink($resize_image2);
-                                }
-                                if (isset($resize_image4)) {
-                                    unlink($resize_image4);
-                                }
-                            }*/
-                            /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
+                            
                         } else {
                             echo $this->upload->display_errors();
                             exit;
@@ -3016,12 +2755,16 @@ class User_post extends MY_Controller {
                 }
             }
 
-            //$post_data = $this->user_post_model->userPost($userid, $start = '0', $limit = '1');
-            //  echo count($post_data); '<pre>'; print_r($post_data); die();
+            if ($post_for == 'opportunity') {
+                $this->searchelastic_model->add_edit_single_opportunity($user_post_id);
+            } elseif ($post_for == 'simple') {
+                $this->searchelastic_model->add_edit_single_post($user_post_id);
+            } elseif ($post_for == 'question') {
+                $this->searchelastic_model->add_edit_single_question($user_post_id);
+            }
+
             $postDetailData = $this->user_post_model->postDetail($user_post_id, $userid);
-            echo json_encode($postDetailData[0]);
-            // echo json_encode($post_data);
-            // echo json_encode("1");
+            echo json_encode($postDetailData[0]);            
         }
     }
 

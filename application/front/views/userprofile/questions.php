@@ -57,8 +57,7 @@
                     </div>
                     <div class="post-right-dropdown dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
-                        <ul class="dropdown-menu">
-                            <li ng-if="live_slug == user_slug"><a href="javascript:void(0);" ng-click="EditPostQuestion(post.post_data.id, post.post_data.post_for, $index)">Edit Question</a></li>
+                        <ul class="dropdown-menu">                            
                             <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                         </ul>
                     </div>
@@ -66,74 +65,6 @@
                 <div class="post-discription">
                     <div id="ask-que-{{post.post_data.id}}" class="post-des-detail">
                         <p class="question"><a ng-href="<?php echo base_url('questions/') ?>{{post.question_data.id}}/{{post.question_data.question | slugify}}" ng-bind="post.question_data.question" target="_self"></a></p>
-                    </div>
-                    <div id="edit-ask-que-{{post.post_data.id}}" style="display: none;">
-                        <form id="ask_question" class="edit-question-form" name="ask_question" ng-submit="ask_question_check(event,queIndex)">
-                            <div class="post-box">                        
-                                <div class="post-text">                            
-                                    <textarea class="title-text-area" ng-keyup="questionList()" id="ask_que_{{post.post_data.id}}" placeholder="Ask Question"></textarea>
-                                    <ul class="questionSuggetion custom-scroll">
-                                        <li ng-repeat="que in queSearchResult">
-                                            <a ng-href="<?php echo base_url('questions/') ?>{{que.id}}/{{que.question| slugify}}" target="_self" ng-bind="que.question"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="all-upload">                                    
-                                    <div class="add-link" ng-click="ShowHide()">
-                                        <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
-                                    </div>
-                                    <div class="form-group"  ng-show = "IsVisible">
-                                        <input type="text" id="ask_web_link_{{post.post_data.id}}" class="" placeholder="Add Your Web Link">
-                                    </div>
-                                </div>                        
-                            </div>
-                            <div class="post-field">
-                                <div class="form-group">
-                                    <label>Add Description<a href="#" data-toggle="tooltip" data-placement="left" title="Describe your problem in more details with some examples." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                    <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label>Related Categories<span class="pull-right"><img ng-src="<?php //echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
-                                    <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Related Category" replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
-                                        <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
-                                    </tags-input>
-                                    <script type="text/ng-template" id="category-template">
-                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
-                                    </script>
-                                    <script type="text/ng-template" id="category-autocomplete-template">
-                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
-                                    </script>
-                                </div> -->
-                                <div class="form-group">
-                                    <label>Add hashtag (Topic)<a href="#" data-toggle="tooltip" data-placement="left" title="Add topic regarding your post that describes your post." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                    <textarea id="ask_hashtag{{post.post_data.id}}" type="text" class="hashtag-textarea" ng-model="ask.ask_hashtag_edit" placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" autocomplete="off" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);"></textarea>
-                                    <!-- <div contenteditable="true" id="sim_hashtag"></div> -->
-                                    <div class="ask_hashtag{{post.post_data.id}} all-hashtags-list"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label>From which field the Question asked?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Question." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
-                                    <span class="select-field-custom">
-                                        <select ng-model="ask.ask_field" id="ask_field_{{post.post_data.id}}">
-                                            <option value="" selected="selected">What is your field</option>
-                                            <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
-                                            <option value="0">Other</option>
-                                        </select>
-                                    </span>
-                                </div>
-
-                                <div class="form-group"  ng-if="ask.ask_field == '0'">
-                                    <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
-                                </div>
-                                <input type="hidden" name="post_for" ng-model="ask.post_for" class="form-control" value="question">
-                                <input type="hidden" id="ask_edit_post_id_{{queIndex}}" name="ask_edit_post_id" class="form-control" value="{{post.post_data.id}}">
-                            </div>
-                            <div class="text-right fw pt10 pb20">
-                                <div class="add-anonymously">
-                                    <label class="control control--checkbox" title="Checked this">Add Anonymously<input type="checkbox" value="1" id="ask_is_anonymously{{post.post_data.id}}" ng-checked="post.question_data.is_anonymously == 1"><div class="control__indicator"></div></label>
-                                </div>
-                                <button type="submit" class="btn1"  value="Submit">Post</button> 
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="post-bottom">
