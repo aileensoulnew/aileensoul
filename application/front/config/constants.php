@@ -61,8 +61,8 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('COOKIEHOST', '.aileensoul.localhost');
     define('CROSSDOMAIN', 'http://chat.aileensoul.localhost');
     error_reporting(0);
-}else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
-    define('BASEURL', 'http://35.165.1.109:81/');
+}else if ($_SERVER['HTTP_HOST'] == 'staging.aileensoul.com') {
+    define('BASEURL', 'http://staging.aileensoul.com/');
     define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
     define('OPENFIRELINK', 'http://52.43.64.56:7070/http-bind/');
     define('OPENFIRESERVER', '52.43.64.56');
@@ -70,6 +70,15 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('MESSAGE_URL', 'http://message.aileensoul.com/');
     define('OP_ADMIN_UN', 'admin');
     define('OP_ADMIN_PW', 'admin@123');
+
+    define('MONGO_URL', 'mongodb://');
+    define('MONGO_USER', 'admin');
+    define('MONGO_PASS', 'sysadmin123??');
+    define('MONGO_SERVER', '34.222.73.215');
+    define('MONGO_DB', 'aileenchat');
+
+    define('COOKIEHOST', '.aileensoul.com');
+    define('CROSSDOMAIN', 'https://message.aileensoul.com:3000');
     error_reporting(0);
 } else {
     define('BASEURL', 'https://www.aileensoul.com/');
@@ -77,7 +86,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('OPENFIRELINK', 'http://52.43.64.56:7070/http-bind/');
     define('OPENFIRESERVER', '52.43.64.56');
     define('OPENFIRESERVERDASH', '52-43-64-56');
-    define('MESSAGE_URL', 'http://message.aileensoul.com/');
+    define('MESSAGE_URL', 'https://messages.aileensoul.com:3000/');
     define('OP_ADMIN_UN', 'admin');
     define('OP_ADMIN_PW', 'admin@123');
 

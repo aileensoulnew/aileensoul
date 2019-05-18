@@ -51,7 +51,13 @@ class Cron extends MY_Controller {
             $user_data = $this->user_model->getUserData($userid);            
 
             $client = new MongoDB\Client(MONGO_URL.(MONGO_USER != '' ? MONGO_USER.':'.MONGO_PASS.'@' : '').MONGO_SERVER.'/'.MONGO_DB);
-            $collection = $client->testchat->messages;
+            if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
+                $collection = $client->testchat->messages;
+            }
+            else
+            {
+                $collection = $client->aileensoulchat->messages;
+            }
             $pipeline = array(
                 array(
                     '$match' => array(

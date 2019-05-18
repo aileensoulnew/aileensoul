@@ -14,7 +14,17 @@ class Searchelastic extends MY_Controller {
         $this->load->model('data_model');
         $this->load->model('user_post_model');
         $this->load->model('common');
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '139.59.36.139:9200',// IP + Port
+                '139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
     }
     
     public function index() {
