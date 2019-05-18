@@ -55,7 +55,7 @@
                             <span class="post-designation" ng-if="post.user_data.title_name == null && post.user_data.degree_name == null" ng-bind="CURRENT WORK"></span>
                         </div>
                     </div>
-                    <div class="post-right-dropdown dropdown">
+                    <div class="post-right-dropdown dropdown" ng-if="post.post_monetize == 0">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                         <ul class="dropdown-menu">                            
                             <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>

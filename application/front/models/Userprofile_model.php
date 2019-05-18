@@ -372,6 +372,8 @@ class Userprofile_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
+            $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$user_id);
+
             $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
@@ -644,6 +646,8 @@ class Userprofile_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
+            $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$user_id);
+
             $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
@@ -740,6 +744,8 @@ class Userprofile_model extends CI_Model {
             $query = $this->db->get();
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
+
+            $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$user_id);
 
             $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);

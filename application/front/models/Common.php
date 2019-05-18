@@ -1013,4 +1013,21 @@ class Common extends CI_Model {
         $result_array = $query->row('total');
         return $result_array;
     }
+
+    public function is_post_monetize($post_id, $user_id) {
+        $this->db->select("id_user_point_mapper")->from("user_point_mapper");
+        $this->db->where("post_id", $post_id);
+        $this->db->where("user_id", $user_id);
+        $this->db->where("status", '1');
+        $query = $this->db->get();
+        $result_array = $query->row();
+        if(isset($result_array) && !empty($result_array))
+        {
+            return "1";
+        }
+        else
+        {
+            return "0";
+        }
+    }
 }

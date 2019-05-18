@@ -1996,7 +1996,7 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                     $scope.pagecntctData = response.data.photosData;
                     $scope.photoData = response.data.photosData.photosrecord;
                 }
-                if(pagenum == "" || pagenum == 1)
+                if(pagenum == undefined || pagenum == "1" || pagenum == "")
                 {
                     $scope.allPhotosData = response.data.allPhotosData;   
                 }
