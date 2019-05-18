@@ -1039,7 +1039,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -1129,7 +1136,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end                            
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -1306,7 +1320,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end                        
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -1467,7 +1488,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -1636,7 +1664,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -2140,7 +2175,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end                            
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -2456,7 +2498,15 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end                        
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
+
                         ],//body end
         ];
         if(!empty($search_hashtag))
@@ -2606,7 +2656,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -2696,7 +2753,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 
@@ -2865,7 +2929,14 @@ class Searchelastic extends MY_Controller {
                                         ]
                                     ]//must not end
                                 ]//bool end
-                            ]//query end
+                            ],//query end
+                            'sort' =>
+                            [
+                                'created_date.keyword' =>
+                                [
+                                    "order" => "desc"
+                                ],
+                            ],
                         ],//body end
         ];
 

@@ -229,29 +229,6 @@ app.directive("owlCarousel", function () {
         }
     };
 });
-/*app.directive("owlCarousel", function () {
-     $('.owl-carousel1').owlCarousel({
-        loop: false,
-        nav: true,
-        lazyLoad: true,
-        margin: 0,
-        video: true,
-        responsive: {
-            0: {
-                items: 1
-                        },
-                        480: {
-                            items: 2
-                        },
-                        768: {
-                            items: 3,
-                        },
-                        1280: {
-                            items: 2
-                        }
-                    }
-                });
-});*/
 app.directive('owlCarouselItem', [function () {
     return {
         restrict: 'A',
@@ -263,32 +240,8 @@ app.directive('owlCarouselItem', [function () {
         }
     };
 }]);
-/*app.directive('fileInput', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function ($scope, element, attrs) {
-            $(element).fileinput({
-                uploadUrl: '#',
-                allowedFileExtensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg', 'mp4', 'mp3', 'pdf'],
-                overwriteInitial: false,
-                maxFileSize: 1000000,
-                maxFilesNum: 10,
-                //allowedFileTypes: ['image','video', 'flash'],
-                slugCallback: function (filename) {
-                    return filename.replace('(', '_').replace(']', '_');
-                }
-            });
-            element.on("change", function (event) {
-                var files = event.target.files;
-                $parse(attrs.fileInput).assign($scope, element[0].files);
-                $scope.$apply();
-            });
-        }
-    };
-});*/
-
-// AUTO SCROLL MESSAGE DIV FIRST TIME END
-app.directive('ngEnter', function () {			// custom directive for sending message on enter click
+app.directive('ngEnter', function () {
+    // custom directive for sending message on enter click
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if (event.which === 13 && !event.shiftKey) {
@@ -316,8 +269,6 @@ app.controller('EditorController', ['$scope', function ($scope) {
         document.execCommand('inserttext', false, value);
     };
 }]);
-
-
 app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.IsVisible = false;
     $scope.recentpost = [];
@@ -3545,6 +3496,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $('.post-popup-box').attr('style','pointer-events: all;');
         });
     };
+
+    $('#post_something,#post_opportunity input'). keydown(function (e) {
+        if (e. keyCode == 13) {
+            e. preventDefault();
+            return false;
+        }
+    });
 });
 
 $(document).click(function(){
