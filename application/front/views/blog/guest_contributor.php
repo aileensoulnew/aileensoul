@@ -349,7 +349,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
     <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+    <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/angular-pagination.js?ver=' . time()); ?>"></script>
     <script>
         var base_url = '<?php echo base_url(); ?>';
@@ -533,7 +533,5 @@ header("Pragma: no-cache"); // HTTP/1.0
                 }
             });
         });
-
-    </script>
-    </body>
+    </script>    
 </html>

@@ -156,27 +156,20 @@
        
         <script>
             var base_url = '<?php echo base_url(); ?>';
-
-
-$(document).ready(function () { 
-  $('video, audio').mediaelementplayer();
-});
-
-
+            $(document).ready(function () {
+                $('video, audio').mediaelementplayer();
+            });
         </script>
-        <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
     </body>
 </html>
 

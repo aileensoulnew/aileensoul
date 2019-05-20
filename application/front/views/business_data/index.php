@@ -20,8 +20,8 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         
-    <?php $this->load->view('adsense'); ?>
-</head>
+        <?php $this->load->view('adsense'); ?>
+    </head>
     <body class="profile-main-page without-reg bus-main">
         <?php //$this->load->view('page_loader'); ?>
             <div id="main_page_load">
@@ -271,10 +271,14 @@
                 });
             });
             
-        </script>               
+        </script>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
-        <!-- <script src="<?php //echo base_url('assets/js/webpage/business-live/index.js?ver=' . time()) ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
         <?php if($this->session->userdata('aileenuser') == ""): ?>
         <script type="application/ld+json">
         {

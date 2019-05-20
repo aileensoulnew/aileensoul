@@ -2713,6 +2713,8 @@
     <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>    
     <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
     <script>
+    	var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+    	
         var base_url = '<?php echo base_url(); ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         var user_slug = "<?php echo $business_data['business_slug']; ?>"
@@ -2730,11 +2732,15 @@
         $('body').removeClass("body-loader");
         var app = angular.module("businessProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
     </script>
+    <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+    </script>
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details_new.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/details.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-    <!-- <script src="<?php //echo base_url('assets/js/jquery.mobile.custom.min.js?ver=' . time()); ?>"></script> -->
+    <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
 	<script>
 		$(document).ready(function () {
 			if (screen.width > 768)

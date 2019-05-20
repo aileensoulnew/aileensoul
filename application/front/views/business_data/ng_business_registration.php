@@ -357,649 +357,653 @@
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script>
-                    // Defining angularjs application.
-                    app.directive("fileInput", function ($parse) {
-                        return{
-                            link: function ($scope, element, attrs) {
-                                element.on("change", function (event) {
-                                    var files = event.target.files;
-                                    $parse(attrs.fileInput).assign($scope, element[0].files);
-                                    $scope.$apply();
-                                });
-                            }
-                        }
-                    });
-                    app.config(function ($routeProvider, $locationProvider) {
-                        $routeProvider
-                                .when("/business-profile/registration/business-information", {
-                                    templateUrl: base_url + "business-profile/registration/contact-information",
-                                    controller: 'busRegController'
-                                })
-                                .when("/business-profile/registration/contact-information", {
-                                    templateUrl: base_url + "business-profile/registration/contact-information",
-                                    controller: 'busRegController'
-                                })
-                                .when("/business-profile/registration/description", {
-                                    templateUrl: base_url + "business-profile/registration/description",
-                                    controller: 'busRegController'
-                                })
-                                .when("/business-profile/registration/image", {
-                                    templateUrl: base_url + "business-profile/registration/image",
-                                    controller: 'busRegController'
-                                })
-                                /*.otherwise({
-                                    templateUrl: base_url + "userprofile_page/dashboard",
-                                    controller: 'dashboardController'
-                                });*/
-                                
-                        $locationProvider.html5Mode(true);
-                    });
-                    app.controller('busRegController', function ($scope, $http) {
-                        $scope.br = {};
-                        $scope.br.basic = "";
-                        $scope.br.contact = "";
-                        $scope.br.description = "";
-                        $scope.br.business_image = "";
-                        $scope.user = {};
-                        $scope.countryList = undefined;
-                        $scope.stateList = undefined;
-                        $scope.cityList = undefined;
-                        $scope.loader_show = false;
-                        $scope.tab_active = function (data) {
-                            var title;
-                            var url;
-                            if (data == 1) {
-                                history.pushState('Business information', 'Business information', 'business-information');
-                                activeBusinessInformation();
-                            } else if (data == 2) {
-                                history.pushState('Contact information', 'Contact information', 'contact-information');
-                                activeContactInformation();
-                            } else if (data == 3) {
-                                history.pushState('Description', 'Description', 'description');
-                                activeDescription();
-                            } else if (data == 4) {
-                                history.pushState('Business image', 'Business image', 'image');
-                                activeImage();
-                            }
-                            if (typeof (history.pushState) != "undefined") {
-                                var obj = {Title: title, Url: url};
-                                history.pushState(obj, obj.Title, obj.Url);
-                                $(".common-form_border").load(url);
-                            } else {
-                                alert("Browser does not support HTML5.");
-                            }
-                        }
-
-                        function activeBusinessInformation() {
-                            $('.progress-line-filled').removeClass('step1 step2 step3 step4');
-                            $('.progress-line-filled').addClass('step1');
-                            $('ul.left-form-each-ul li').removeClass('active filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-1').addClass('active filled-box');
-                            $('.tab-content .tab-pane').removeClass('active');
-                            $('.tab-content .tab-pane:nth-child(1)').addClass('active');
-                            $scope.title = 'Business Information | Business Profile - Aileensoul';
-                            getCountry();
-                            getBusinessInformation();
-                            $scope.br.basic = "basic";
-                            $scope.br.contact = "";
-                            $scope.br.description = "";
-                            $scope.br.business_image = "";
-                        }
-                        function activeContactInformation() {
-                            $('.progress-line-filled').removeClass('step1 step2 step3 step4');
-                            $('.progress-line-filled').addClass('step2');
-                            $('ul.left-form-each-ul li').removeClass('active filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-1').addClass('filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-2').addClass('active filled-box');
-                            $('.tab-content .tab-pane').removeClass('active');
-                            $('.tab-content .tab-pane:nth-child(2)').addClass('active');
-                            $scope.title = 'Contact Information | Business profile - Aileensoul';
-                            $scope.br.basic = "basic";
-                            $scope.br.contact = "contact";
-                            $scope.br.description = "";
-                            $scope.br.business_image = "";
-                            getContactInformation();
-                        }
-                        function activeDescription() {
-                            $('.progress-line-filled').removeClass('step1 step2 step3 step4');
-                            $('.progress-line-filled').addClass('step3');
-                            $('ul.left-form-each-ul li').removeClass('active filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-3').addClass('active filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-1').addClass('filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-2').addClass('filled-box');
-                            $('.tab-content .tab-pane').removeClass('active');
-                            $('.tab-content .tab-pane:nth-child(3)').addClass('active');
-                            $scope.title = 'Description | Business profile - Aileensoul';
-                            $scope.br.basic = "basic";
-                            $scope.br.contact = "contact";
-                            $scope.br.description = "description";
-                            $scope.br.business_image = "";
-                            getDescription();
-                        }
-                        function activeImage() {
-                            $('.progress-line-filled').removeClass('step1 step2 step3 step4');
-                            $('.progress-line-filled').addClass('step4');
-                            $('ul.left-form-each-ul li').removeClass('active filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-4').addClass('active filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-1').addClass('filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-2').addClass('filled-box');
-                            $('ul.left-form-each-ul li#left-form-each-li-3').addClass('filled-box');
-                            $('.tab-content .tab-pane').removeClass('active');
-                            $('.tab-content .tab-pane:nth-child(4)').addClass('active');
-                            $scope.title = 'Business Image | Business Profile - Aileensoul';
-                            $scope.br.basic = "basic";
-                            $scope.br.contact = "contact";
-                            $scope.br.description = "description";
-                            $scope.br.business_image = "image";
-                            getImage();
-                        }
-                        if (reg_uri == 'business-information') {
-                            activeBusinessInformation();
-                        } else if (reg_uri == 'contact-information') {
-                            activeContactInformation();
-                        } else if (reg_uri == 'description') {
-                            activeDescription();
-                        } else if (reg_uri == 'image') {
-                            activeImage();
-                        }
-                        $(window).bind('popstate', function () {
-                            window.location.href = window.location.href;
-                        });
-                        function getCountry() {
-                            $http({
-                                method: 'GET',
-                                url: base_url + 'business_profile_registration/getCountry',
-                                headers: {'Content-Type': 'application/json'},
-                            }).then(function (data) {
-                                $scope.countryList = data.data;
-                            });
-                        }
-                        $scope.getCountry = function () {
-                            getCountry();
-                        };
-                        function select_color_change() {
-                            var selected_val = $('select').val();
-                            if (selected_val == '') {
-                                $('select').css('color', '#acacac');
-                            } else {
-                                $('select').css('color', 'black');
-                            }
-                        }
-
-                        function onCountryChange(country_id = '') {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getStateByCountryId',
-                                data: {countryId: country_id}
-                            }).then(function (data) {
-                                $scope.stateList = data.data;
-                                $("#state").find("option").eq(0).remove();
-                                select_color_change();
-                            });
-                        }
-                        function onCountryChange1(country_id = '') {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getStateByCountryId',
-                                data: {countryId: country_id}
-                            }).then(function (data) {
-                                if (angular.isDefined($scope.user.state_id)) {
-                                    delete $scope.user.state_id;
-                                }
-                                $scope.user.state_id = "";
-                                $scope.stateList = data.data;
-                                select_color_change();
-                            });
-                        }
-
-                        $scope.onCountryChange = function () {
-                            $scope.countryIdVal = $scope.user.country_id;
-                            onCountryChange1($scope.countryIdVal);
-                            $scope.user.city_id = "";
-                        };
-                        function onStateChange(state_id = '') {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getCityByStateId',
-                                data: {stateId: state_id}
-                            }).then(function (data) {
-                                $scope.cityList = data.data;
-                            });
-                        }
-                        function onStateChange1(state_id = '') {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getCityByStateId',
-                                data: {stateId: state_id}
-                            }).then(function (data) {
-                                if (angular.isDefined($scope.user.city_id)) {
-                                    delete $scope.user.city_id;
-                                }
-                                $scope.cityList = data.data;
-                            });
-                        }
-
-                        $scope.onStateChange = function () {
-                            $scope.stateIdVal = $scope.user.state_id;
-                            onStateChange1($scope.stateIdVal);
-                        };
-                        function getBusinessInformation() {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getBusinessInformation',
-                                headers: {'Content-Type': 'application/json'},
-                            }).then(function (data) {
-                                data = data.data;
-                                if (data[0]) {
-                                    onCountryChange(data[0].country);
-                                    onStateChange(data[0].state);
-                                    $scope.user.companyname = data[0].company_name;
-                                    $scope.user.country_id = data[0].country;
-                                    $scope.user.state_id = data[0].state;
-                                    $scope.user.city_id = data[0].city;
-                                    $scope.user.pincode = data[0].pincode;
-                                    $scope.user.business_address = data[0].address;
-                                    $scope.user.busreg_step = data[0].business_step;
-                                    $scope.busRegStep = data[0].business_step;
-                                }
-                            });
-                        }
-                        $scope.getBusinessInformation = function () {
-                            getBusinessInformation();
-                        };
-                        function getContactInformation() {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getContactInformation',
-                                headers: {'Content-Type': 'application/json'},
-                            }).then(function (data) {
-                                data = data.data;
-                                if (data[0]) {
-                                    $scope.user.contactname = data[0].contact_person;
-                                    $scope.user.contactmobile = data[0].contact_mobile;
-                                    $scope.user.email = data[0].contact_email;
-                                    $scope.user.contactwebsite = data[0].contact_website;
-                                    $scope.user.busreg_step = data[0].business_step;
-                                } else {
-                                    $scope.tab_active(1);
-                                    activeBusinessInformation();
-                                }
-                            });
-                        }
-                        ;
-                        $scope.getContactInformation = function () {
-                            getContactInformation();
-                        };
-                        function getDescription() {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getDescription',
-                                headers: {'Content-Type': 'application/json'},
-                            }).then(function (data) {                                
-                                data = data.data;
-                                if (data['userdata'][0]) {
-                                    if (data['userdata'][0].business_step >= '2') {
-                                        $scope.user.business_type = data['userdata'][0].business_type;
-                                        $scope.user.industriyal = data['userdata'][0].industriyal;
-                                        $scope.user.business_details = data['userdata'][0].details;
-                                        $scope.user.bustype = data['userdata'][0].other_business_type;
-                                        $scope.user.indtype = data['userdata'][0].other_industrial;
-                                        $scope.user.busreg_step = data['userdata'][0].business_step;
-                                        $scope.business_type = data['business_type'];
-                                        $scope.industry_type = data['industriyaldata'];
-                                    } else if (data['userdata'][0].business_step == '1') {
-                                        $scope.tab_active(2);
-                                        activeContactInformation();
-                                    } else {
-                                        $scope.tab_active(1);
-                                        activeBusinessInformation();
-                                    }
-                                } else {
-                                    $scope.tab_active(1);
-                                    activeBusinessInformation();
-                                }
-                            });
-                        }
-                        ;
-                        $scope.getDescription = function () {
-                            getDescription();
-                        };
-                        function getImage() {
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getImage',
-                            }).then(function (data) {
-                                data = data.data;                                
-                                if (data.business_step >= '3') {
-                                    $('.bus_image_prev').html(data.busImageDetail);
-                                } else if (data.business_step == '2') {
-                                    $scope.tab_active(3);
-                                    activeDescription();
-                                } else if (data.business_step == '1') {
-                                    $scope.tab_active(2);
-                                    activeContactInformation();
-                                } else {
-                                    $scope.tab_active(1);
-                                    activeBusinessInformation();
-                                }
-                            });
-                        }
-                        ;
-                        $scope.getImage = function () {
-                            getImage();
-                        };
-                        $.validator.addMethod("regx", function (value, element, regexpr) {
-                            if (!value)
-                            {
-                                return true;
-                            } else
-                            {
-                                return regexpr.test(value);
-                            }
-                        }, "Only space, only number and only special characters are not allow");
-                        $.validator.addMethod("regx1", function (value, element, regexpr) {
-                            if (!value)
-                            {
-                                return true;
-                            } else
-                            {
-                                return regexpr.test(value);
-                            }
-                        }, "You can use letters(a-z), numbers, and periods.");
-                        $scope.busInfoValidate = {
-                            rules: {
-                                companyname: {
-                                    required: true,
-                                    regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
-                                },
-                                country: {
-                                    required: true,
-                                },
-                                state: {
-                                    required: true,
-                                },
-                                other_city: {
-                                    required: {
-                                        depends: function(element) {
-                                            return $("#city option:selected").val() == 0 ? true : false;
-                                        }
-                                    },
-                                },
-                                business_address: {
-                                    required: true,
-                                    regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
-                                }
-                            },
-                            messages: {
-                                companyname: {
-                                    required: company_name_validation,
-                                },
-                                country: {
-                                    required: country_validation,
-                                },
-                                state: {
-                                    required: state_validation,
-                                },
-                                other_city: {
-                                    required: 'Other city is required.',
-                                },
-                                business_address: {
-                                    required: address_validation,
-                                }
-                            }
-                        };
-                        $scope.submitbusinessinfoForm = function () {
-                            if ($scope.businessinfo.validate()) {
-                                angular.element('#businessinfo #next').addClass("form_submit");
-                                $scope.loader_show = true;
-                                $http({
-                                    method: 'POST',
-                                    url: base_url + 'business_profile_registration/ng_bus_info_insert',
-                                    data: $scope.user, //forms user object
-                                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                })
-                                .then(function (data) {
-                                    data = data.data;                                            
-                                    if (data.errors) {
-                                        // Showing errors.
-                                        err_arr = data.errors;                              
-                                        if(err_arr.already_exist)
-                                        {
-                                            $("#bus_err").modal("show");
-                                            angular.element('#businessinfo #next').removeClass("form_submit");
-                                        }
-                                        else
-                                        {
-                                            $scope.errorCompanyName = err_arr.companyname;
-                                            $scope.errorCountry = err_arr.country;
-                                            $scope.errorState = err_arr.state;
-                                            $scope.errorCity = err_arr.city;
-                                            $scope.errorPincode = err_arr.pincode;
-                                            $scope.errorPostalAddress = err_arr.business_address;
-                                        }
-                                    } else {
-                                        if (data.is_success == '1') {
-                                            angular.element('#businessinfo #next').removeClass("form_submit");
-                                            $scope.loader_show = false;
-                                            activeContactInformation();
-                                            $scope.tab_active(2);
-                                            $("li#left-form-each-li-2 a").attr({
-                                                href: "#contact_information",
-                                                'data-toggle': "tab",
-                                                'ng-click': "getContactInformation(); tab_active(2);"
-                                            });
-                                        } else {
-                                            return false;
-                                        }
-                                    }
-                                });
-                            } else {
-                                return false;
-                            }
-                        };
-                        $.validator.addMethod("regx2", function (value, element, regexpr) {
-                            if (!value)
-                            {
-                                return true;
-                            } else
-                            {
-                                return regexpr.test(value);
-                            }
-                        }, "please enter valid mobile number.");
-                        $scope.conInfoValidate = {
-                            rules: {
-                                contactname: {
-                                    required: true,
-                                    regx: /^[a-zA-Z\s]*[a-zA-Z]/
-                                },
-                                contactmobile: {
-                                    required: true,
-                                    number: true,
-                                    minlength: 8,
-                                    maxlength: 15,
-                                    regx2: /^[0-9][0-9]*/
-                                },
-                                email: {
-                                    required: true,
-                                    email: true,
-                                }
-                            },
-                            messages: {
-                                contactname: {
-                                    required: "Person name is required.",
-                                },
-                                contactmobile: {
-                                    required: "Mobile number is required.",
-                                },
-                                email: {
-                                    required: "Email id is required.",
-                                    email: "Please enter valid email id.",
-                                }
-                            }
-                        };
-                        $scope.submitcontactinfoForm = function () {
-                            if ($scope.contactinfo.validate()) {
-                                angular.element('#contactinfo #next').addClass("form_submit");
-                                $scope.loader_show = true;
-                                $http({
-                                    method: 'POST',
-                                    url: base_url + 'business_profile_registration/ng_contact_info_insert',
-                                    data: $scope.user, //forms user object
-                                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                })
-                                .then(function (data) {
-                                    data = data.data;
-                                    if (data.errors) {
-                                        // Showing errors.
-                                        $scope.errorContactName = data.errors.contactname;
-                                        $scope.errorContactMobile = data.errors.contactmobile;
-                                        $scope.errorEmail = data.errors.email;
-                                        $scope.errorCity = data.errors.city;
-                                        $scope.errorContactWebsite = data.errors.contactwebsite;
-                                    } else {
-                                        if (data.is_success == '1') {
-                                            angular.element('#contactinfo #next').removeClass("form_submit");
-                                            $scope.loader_show = false;
-                                            activeDescription();
-                                            $scope.tab_active(3);
-                                            $("li#left-form-each-li-3 a").attr({
-                                                href: "#description",
-                                                'data-toggle': "tab",
-                                                'ng-click': "getDescription(); tab_active(3)"
-                                            });
-                                        } else {
-                                            return false;
-                                        }
-                                    }
-                                });
-                            } else {
-                                return false;
-                            }
-
-                        };
-                        $scope.desValidate = {
-                            rules: {
-                                business_type: {
-                                    required: true,
-                                },
-                                industriyal: {
-                                    required: true,
-                                },
-                                business_details: {
-                                    required: true,
-                                    regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
-                                },
-                            },
-                            messages: {
-                                business_type: {
-                                    required: "Business type is required.",
-                                },
-                                industriyal: {
-                                    required: "Industrial is required.",
-                                },
-                                business_details: {
-                                    required: "Business details is required.",
-                                },
-                            }
-                        };
-                        $scope.submitdescriptionForm = function () {
-                            if ($scope.businessdis.validate()) {
-                                angular.element('#businessdis #next').addClass("form_submit");
-                                $scope.loader_show = true;
-                                $http({
-                                    method: 'POST',
-                                    url: base_url + 'business_profile_registration/ng_description_insert',
-                                    data: $scope.user, //forms user object
-                                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                })
-                                .then(function (data) {
-                                    data = data.data;
-                                    if (data.errors) {
-                                        $scope.errorBusinessType = data.errors.business_type;
-                                        $scope.errorCategory = data.errors.industriyal;
-                                        $scope.errorOtherBusinessType = data.errors.bustype;
-                                        $scope.errorOtherCategory = data.errors.indtype;
-                                        $scope.errorBusinessDetails = data.errors.business_details;
-                                    } else {
-                                        if (data.is_success == '1') {
-                                            angular.element('#businessdis #next').removeClass("form_submit");
-                                            $scope.loader_show = false;
-                                            // activeImage();
-                                            window.location.href = base_url + 'business-profile';
-                                            /*$scope.tab_active(4);
-                                            $("li#left-form-each-li-4 a").attr({
-                                                href: "#business_image",
-                                                'data-toggle': "tab",
-                                                'ng-click': "getImage(); tab_active(4)"
-                                            });*/
-                                        } else {
-                                            return false;
-                                        }
-                                    }
-                                });
-                            } else {
-                                return false;
-                            }
-
-                        };
-                        $scope.submitbusImageForm = function () {
-                            var form_data = new FormData();
-                            angular.element('#businessimage #next').addClass("form_submit");
-                            $scope.loader_show = true;
-                            angular.forEach($scope.files, function (file) {
-                                form_data.append('image1[]', file);
-                            });
-                            $http.post(base_url + 'business_profile_registration/ng_image_insert', form_data,
-                                    {
-                                        transformRequest: angular.identity,
-                                        headers: {'Content-Type': undefined, 'Process-Data': false}
-                                    }).then(function (data) {
-                                        data = data.data;
-                                if (data.errors) {
-                                    // Showing errors.
-                                    $scope.errorImage = data.errors.image1;
-                                } else {
-                                    if (data.is_success == '1') {
-                                        angular.element('#businessimage #next').removeClass("form_submit");
-                                        $scope.loader_show = false;
-                                        window.location.href = base_url + 'business-profile';
-                                    } else {
-                                        return false;
-                                    }
-                                }
-                            });
-                        }
-                    });
-                    function delete_bus_image(image_id) {
-                        $.ajax({
-                            type: 'POST',
-                            url: base_url + "business_profile_registration/bus_img_delete",
-                            data: 'image_id=' + image_id,
-                            success: function (data) {
-                                if (data) {
-                                    $('.job_work_edit_' + image_id).remove();
-                                }
-                            }
+            // Defining angularjs application.
+            app.directive("fileInput", function ($parse) {
+                return{
+                    link: function ($scope, element, attrs) {
+                        element.on("change", function (event) {
+                            var files = event.target.files;
+                            $parse(attrs.fileInput).assign($scope, element[0].files);
+                            $scope.$apply();
                         });
                     }
-                    $('select').on('change', function () {
-                        if ($(this).val()) {
-                            $(this).css('color', 'black');
-                        } else {
-                            $(this).css('color', '#acacac');
+                }
+            });
+            app.config(function ($routeProvider, $locationProvider) {
+                $routeProvider
+                        .when("/business-profile/registration/business-information", {
+                            templateUrl: base_url + "business-profile/registration/contact-information",
+                            controller: 'busRegController'
+                        })
+                        .when("/business-profile/registration/contact-information", {
+                            templateUrl: base_url + "business-profile/registration/contact-information",
+                            controller: 'busRegController'
+                        })
+                        .when("/business-profile/registration/description", {
+                            templateUrl: base_url + "business-profile/registration/description",
+                            controller: 'busRegController'
+                        })
+                        .when("/business-profile/registration/image", {
+                            templateUrl: base_url + "business-profile/registration/image",
+                            controller: 'busRegController'
+                        })
+                        /*.otherwise({
+                            templateUrl: base_url + "userprofile_page/dashboard",
+                            controller: 'dashboardController'
+                        });*/
+                        
+                $locationProvider.html5Mode(true);
+            });
+            app.controller('busRegController', function ($scope, $http) {
+                $scope.br = {};
+                $scope.br.basic = "";
+                $scope.br.contact = "";
+                $scope.br.description = "";
+                $scope.br.business_image = "";
+                $scope.user = {};
+                $scope.countryList = undefined;
+                $scope.stateList = undefined;
+                $scope.cityList = undefined;
+                $scope.loader_show = false;
+                $scope.tab_active = function (data) {
+                    var title;
+                    var url;
+                    if (data == 1) {
+                        history.pushState('Business information', 'Business information', 'business-information');
+                        activeBusinessInformation();
+                    } else if (data == 2) {
+                        history.pushState('Contact information', 'Contact information', 'contact-information');
+                        activeContactInformation();
+                    } else if (data == 3) {
+                        history.pushState('Description', 'Description', 'description');
+                        activeDescription();
+                    } else if (data == 4) {
+                        history.pushState('Business image', 'Business image', 'image');
+                        activeImage();
+                    }
+                    if (typeof (history.pushState) != "undefined") {
+                        var obj = {Title: title, Url: url};
+                        history.pushState(obj, obj.Title, obj.Url);
+                        $(".common-form_border").load(url);
+                    } else {
+                        alert("Browser does not support HTML5.");
+                    }
+                }
+
+                function activeBusinessInformation() {
+                    $('.progress-line-filled').removeClass('step1 step2 step3 step4');
+                    $('.progress-line-filled').addClass('step1');
+                    $('ul.left-form-each-ul li').removeClass('active filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-1').addClass('active filled-box');
+                    $('.tab-content .tab-pane').removeClass('active');
+                    $('.tab-content .tab-pane:nth-child(1)').addClass('active');
+                    $scope.title = 'Business Information | Business Profile - Aileensoul';
+                    getCountry();
+                    getBusinessInformation();
+                    $scope.br.basic = "basic";
+                    $scope.br.contact = "";
+                    $scope.br.description = "";
+                    $scope.br.business_image = "";
+                }
+                function activeContactInformation() {
+                    $('.progress-line-filled').removeClass('step1 step2 step3 step4');
+                    $('.progress-line-filled').addClass('step2');
+                    $('ul.left-form-each-ul li').removeClass('active filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-1').addClass('filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-2').addClass('active filled-box');
+                    $('.tab-content .tab-pane').removeClass('active');
+                    $('.tab-content .tab-pane:nth-child(2)').addClass('active');
+                    $scope.title = 'Contact Information | Business profile - Aileensoul';
+                    $scope.br.basic = "basic";
+                    $scope.br.contact = "contact";
+                    $scope.br.description = "";
+                    $scope.br.business_image = "";
+                    getContactInformation();
+                }
+                function activeDescription() {
+                    $('.progress-line-filled').removeClass('step1 step2 step3 step4');
+                    $('.progress-line-filled').addClass('step3');
+                    $('ul.left-form-each-ul li').removeClass('active filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-3').addClass('active filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-1').addClass('filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-2').addClass('filled-box');
+                    $('.tab-content .tab-pane').removeClass('active');
+                    $('.tab-content .tab-pane:nth-child(3)').addClass('active');
+                    $scope.title = 'Description | Business profile - Aileensoul';
+                    $scope.br.basic = "basic";
+                    $scope.br.contact = "contact";
+                    $scope.br.description = "description";
+                    $scope.br.business_image = "";
+                    getDescription();
+                }
+                function activeImage() {
+                    $('.progress-line-filled').removeClass('step1 step2 step3 step4');
+                    $('.progress-line-filled').addClass('step4');
+                    $('ul.left-form-each-ul li').removeClass('active filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-4').addClass('active filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-1').addClass('filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-2').addClass('filled-box');
+                    $('ul.left-form-each-ul li#left-form-each-li-3').addClass('filled-box');
+                    $('.tab-content .tab-pane').removeClass('active');
+                    $('.tab-content .tab-pane:nth-child(4)').addClass('active');
+                    $scope.title = 'Business Image | Business Profile - Aileensoul';
+                    $scope.br.basic = "basic";
+                    $scope.br.contact = "contact";
+                    $scope.br.description = "description";
+                    $scope.br.business_image = "image";
+                    getImage();
+                }
+                if (reg_uri == 'business-information') {
+                    activeBusinessInformation();
+                } else if (reg_uri == 'contact-information') {
+                    activeContactInformation();
+                } else if (reg_uri == 'description') {
+                    activeDescription();
+                } else if (reg_uri == 'image') {
+                    activeImage();
+                }
+                $(window).bind('popstate', function () {
+                    window.location.href = window.location.href;
+                });
+                function getCountry() {
+                    $http({
+                        method: 'GET',
+                        url: base_url + 'business_profile_registration/getCountry',
+                        headers: {'Content-Type': 'application/json'},
+                    }).then(function (data) {
+                        $scope.countryList = data.data;
+                    });
+                }
+                $scope.getCountry = function () {
+                    getCountry();
+                };
+                function select_color_change() {
+                    var selected_val = $('select').val();
+                    if (selected_val == '') {
+                        $('select').css('color', '#acacac');
+                    } else {
+                        $('select').css('color', 'black');
+                    }
+                }
+
+                function onCountryChange(country_id = '') {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getStateByCountryId',
+                        data: {countryId: country_id}
+                    }).then(function (data) {
+                        $scope.stateList = data.data;
+                        $("#state").find("option").eq(0).remove();
+                        select_color_change();
+                    });
+                }
+                function onCountryChange1(country_id = '') {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getStateByCountryId',
+                        data: {countryId: country_id}
+                    }).then(function (data) {
+                        if (angular.isDefined($scope.user.state_id)) {
+                            delete $scope.user.state_id;
+                        }
+                        $scope.user.state_id = "";
+                        $scope.stateList = data.data;
+                        select_color_change();
+                    });
+                }
+
+                $scope.onCountryChange = function () {
+                    $scope.countryIdVal = $scope.user.country_id;
+                    onCountryChange1($scope.countryIdVal);
+                    $scope.user.city_id = "";
+                };
+                function onStateChange(state_id = '') {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getCityByStateId',
+                        data: {stateId: state_id}
+                    }).then(function (data) {
+                        $scope.cityList = data.data;
+                    });
+                }
+                function onStateChange1(state_id = '') {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getCityByStateId',
+                        data: {stateId: state_id}
+                    }).then(function (data) {
+                        if (angular.isDefined($scope.user.city_id)) {
+                            delete $scope.user.city_id;
+                        }
+                        $scope.cityList = data.data;
+                    });
+                }
+
+                $scope.onStateChange = function () {
+                    $scope.stateIdVal = $scope.user.state_id;
+                    onStateChange1($scope.stateIdVal);
+                };
+                function getBusinessInformation() {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getBusinessInformation',
+                        headers: {'Content-Type': 'application/json'},
+                    }).then(function (data) {
+                        data = data.data;
+                        if (data[0]) {
+                            onCountryChange(data[0].country);
+                            onStateChange(data[0].state);
+                            $scope.user.companyname = data[0].company_name;
+                            $scope.user.country_id = data[0].country;
+                            $scope.user.state_id = data[0].state;
+                            $scope.user.city_id = data[0].city;
+                            $scope.user.pincode = data[0].pincode;
+                            $scope.user.business_address = data[0].address;
+                            $scope.user.busreg_step = data[0].business_step;
+                            $scope.busRegStep = data[0].business_step;
                         }
                     });
-                    $(document).ready(function () {
-                        var selected_val = $('select').val();
-                        if (selected_val == '') {
-                            $('select').css('color', '#acacac');
+                }
+                $scope.getBusinessInformation = function () {
+                    getBusinessInformation();
+                };
+                function getContactInformation() {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getContactInformation',
+                        headers: {'Content-Type': 'application/json'},
+                    }).then(function (data) {
+                        data = data.data;
+                        if (data[0]) {
+                            $scope.user.contactname = data[0].contact_person;
+                            $scope.user.contactmobile = data[0].contact_mobile;
+                            $scope.user.email = data[0].contact_email;
+                            $scope.user.contactwebsite = data[0].contact_website;
+                            $scope.user.busreg_step = data[0].business_step;
                         } else {
-                            $('select').css('color', 'black');
+                            $scope.tab_active(1);
+                            activeBusinessInformation();
                         }
                     });
+                }
+                ;
+                $scope.getContactInformation = function () {
+                    getContactInformation();
+                };
+                function getDescription() {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getDescription',
+                        headers: {'Content-Type': 'application/json'},
+                    }).then(function (data) {                                
+                        data = data.data;
+                        if (data['userdata'][0]) {
+                            if (data['userdata'][0].business_step >= '2') {
+                                $scope.user.business_type = data['userdata'][0].business_type;
+                                $scope.user.industriyal = data['userdata'][0].industriyal;
+                                $scope.user.business_details = data['userdata'][0].details;
+                                $scope.user.bustype = data['userdata'][0].other_business_type;
+                                $scope.user.indtype = data['userdata'][0].other_industrial;
+                                $scope.user.busreg_step = data['userdata'][0].business_step;
+                                $scope.business_type = data['business_type'];
+                                $scope.industry_type = data['industriyaldata'];
+                            } else if (data['userdata'][0].business_step == '1') {
+                                $scope.tab_active(2);
+                                activeContactInformation();
+                            } else {
+                                $scope.tab_active(1);
+                                activeBusinessInformation();
+                            }
+                        } else {
+                            $scope.tab_active(1);
+                            activeBusinessInformation();
+                        }
+                    });
+                }
+                ;
+                $scope.getDescription = function () {
+                    getDescription();
+                };
+                function getImage() {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getImage',
+                    }).then(function (data) {
+                        data = data.data;                                
+                        if (data.business_step >= '3') {
+                            $('.bus_image_prev').html(data.busImageDetail);
+                        } else if (data.business_step == '2') {
+                            $scope.tab_active(3);
+                            activeDescription();
+                        } else if (data.business_step == '1') {
+                            $scope.tab_active(2);
+                            activeContactInformation();
+                        } else {
+                            $scope.tab_active(1);
+                            activeBusinessInformation();
+                        }
+                    });
+                }
+                ;
+                $scope.getImage = function () {
+                    getImage();
+                };
+                $.validator.addMethod("regx", function (value, element, regexpr) {
+                    if (!value)
+                    {
+                        return true;
+                    } else
+                    {
+                        return regexpr.test(value);
+                    }
+                }, "Only space, only number and only special characters are not allow");
+                $.validator.addMethod("regx1", function (value, element, regexpr) {
+                    if (!value)
+                    {
+                        return true;
+                    } else
+                    {
+                        return regexpr.test(value);
+                    }
+                }, "You can use letters(a-z), numbers, and periods.");
+                $scope.busInfoValidate = {
+                    rules: {
+                        companyname: {
+                            required: true,
+                            regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+                        },
+                        country: {
+                            required: true,
+                        },
+                        state: {
+                            required: true,
+                        },
+                        other_city: {
+                            required: {
+                                depends: function(element) {
+                                    return $("#city option:selected").val() == 0 ? true : false;
+                                }
+                            },
+                        },
+                        business_address: {
+                            required: true,
+                            regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+                        }
+                    },
+                    messages: {
+                        companyname: {
+                            required: company_name_validation,
+                        },
+                        country: {
+                            required: country_validation,
+                        },
+                        state: {
+                            required: state_validation,
+                        },
+                        other_city: {
+                            required: 'Other city is required.',
+                        },
+                        business_address: {
+                            required: address_validation,
+                        }
+                    }
+                };
+                $scope.submitbusinessinfoForm = function () {
+                    if ($scope.businessinfo.validate()) {
+                        angular.element('#businessinfo #next').addClass("form_submit");
+                        $scope.loader_show = true;
+                        $http({
+                            method: 'POST',
+                            url: base_url + 'business_profile_registration/ng_bus_info_insert',
+                            data: $scope.user, //forms user object
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        })
+                        .then(function (data) {
+                            data = data.data;                                            
+                            if (data.errors) {
+                                // Showing errors.
+                                err_arr = data.errors;                              
+                                if(err_arr.already_exist)
+                                {
+                                    $("#bus_err").modal("show");
+                                    angular.element('#businessinfo #next').removeClass("form_submit");
+                                }
+                                else
+                                {
+                                    $scope.errorCompanyName = err_arr.companyname;
+                                    $scope.errorCountry = err_arr.country;
+                                    $scope.errorState = err_arr.state;
+                                    $scope.errorCity = err_arr.city;
+                                    $scope.errorPincode = err_arr.pincode;
+                                    $scope.errorPostalAddress = err_arr.business_address;
+                                }
+                            } else {
+                                if (data.is_success == '1') {
+                                    angular.element('#businessinfo #next').removeClass("form_submit");
+                                    $scope.loader_show = false;
+                                    activeContactInformation();
+                                    $scope.tab_active(2);
+                                    $("li#left-form-each-li-2 a").attr({
+                                        href: "#contact_information",
+                                        'data-toggle': "tab",
+                                        'ng-click': "getContactInformation(); tab_active(2);"
+                                    });
+                                } else {
+                                    return false;
+                                }
+                            }
+                        });
+                    } else {
+                        return false;
+                    }
+                };
+                $.validator.addMethod("regx2", function (value, element, regexpr) {
+                    if (!value)
+                    {
+                        return true;
+                    } else
+                    {
+                        return regexpr.test(value);
+                    }
+                }, "please enter valid mobile number.");
+                $scope.conInfoValidate = {
+                    rules: {
+                        contactname: {
+                            required: true,
+                            regx: /^[a-zA-Z\s]*[a-zA-Z]/
+                        },
+                        contactmobile: {
+                            required: true,
+                            number: true,
+                            minlength: 8,
+                            maxlength: 15,
+                            regx2: /^[0-9][0-9]*/
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                        }
+                    },
+                    messages: {
+                        contactname: {
+                            required: "Person name is required.",
+                        },
+                        contactmobile: {
+                            required: "Mobile number is required.",
+                        },
+                        email: {
+                            required: "Email id is required.",
+                            email: "Please enter valid email id.",
+                        }
+                    }
+                };
+                $scope.submitcontactinfoForm = function () {
+                    if ($scope.contactinfo.validate()) {
+                        angular.element('#contactinfo #next').addClass("form_submit");
+                        $scope.loader_show = true;
+                        $http({
+                            method: 'POST',
+                            url: base_url + 'business_profile_registration/ng_contact_info_insert',
+                            data: $scope.user, //forms user object
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        })
+                        .then(function (data) {
+                            data = data.data;
+                            if (data.errors) {
+                                // Showing errors.
+                                $scope.errorContactName = data.errors.contactname;
+                                $scope.errorContactMobile = data.errors.contactmobile;
+                                $scope.errorEmail = data.errors.email;
+                                $scope.errorCity = data.errors.city;
+                                $scope.errorContactWebsite = data.errors.contactwebsite;
+                            } else {
+                                if (data.is_success == '1') {
+                                    angular.element('#contactinfo #next').removeClass("form_submit");
+                                    $scope.loader_show = false;
+                                    activeDescription();
+                                    $scope.tab_active(3);
+                                    $("li#left-form-each-li-3 a").attr({
+                                        href: "#description",
+                                        'data-toggle': "tab",
+                                        'ng-click': "getDescription(); tab_active(3)"
+                                    });
+                                } else {
+                                    return false;
+                                }
+                            }
+                        });
+                    } else {
+                        return false;
+                    }
+
+                };
+                $scope.desValidate = {
+                    rules: {
+                        business_type: {
+                            required: true,
+                        },
+                        industriyal: {
+                            required: true,
+                        },
+                        business_details: {
+                            required: true,
+                            regx: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+                        },
+                    },
+                    messages: {
+                        business_type: {
+                            required: "Business type is required.",
+                        },
+                        industriyal: {
+                            required: "Industrial is required.",
+                        },
+                        business_details: {
+                            required: "Business details is required.",
+                        },
+                    }
+                };
+                $scope.submitdescriptionForm = function () {
+                    if ($scope.businessdis.validate()) {
+                        angular.element('#businessdis #next').addClass("form_submit");
+                        $scope.loader_show = true;
+                        $http({
+                            method: 'POST',
+                            url: base_url + 'business_profile_registration/ng_description_insert',
+                            data: $scope.user, //forms user object
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        })
+                        .then(function (data) {
+                            data = data.data;
+                            if (data.errors) {
+                                $scope.errorBusinessType = data.errors.business_type;
+                                $scope.errorCategory = data.errors.industriyal;
+                                $scope.errorOtherBusinessType = data.errors.bustype;
+                                $scope.errorOtherCategory = data.errors.indtype;
+                                $scope.errorBusinessDetails = data.errors.business_details;
+                            } else {
+                                if (data.is_success == '1') {
+                                    angular.element('#businessdis #next').removeClass("form_submit");
+                                    $scope.loader_show = false;
+                                    // activeImage();
+                                    window.location.href = base_url + 'business-profile';
+                                    /*$scope.tab_active(4);
+                                    $("li#left-form-each-li-4 a").attr({
+                                        href: "#business_image",
+                                        'data-toggle': "tab",
+                                        'ng-click': "getImage(); tab_active(4)"
+                                    });*/
+                                } else {
+                                    return false;
+                                }
+                            }
+                        });
+                    } else {
+                        return false;
+                    }
+
+                };
+                $scope.submitbusImageForm = function () {
+                    var form_data = new FormData();
+                    angular.element('#businessimage #next').addClass("form_submit");
+                    $scope.loader_show = true;
+                    angular.forEach($scope.files, function (file) {
+                        form_data.append('image1[]', file);
+                    });
+                    $http.post(base_url + 'business_profile_registration/ng_image_insert', form_data,
+                            {
+                                transformRequest: angular.identity,
+                                headers: {'Content-Type': undefined, 'Process-Data': false}
+                            }).then(function (data) {
+                                data = data.data;
+                        if (data.errors) {
+                            // Showing errors.
+                            $scope.errorImage = data.errors.image1;
+                        } else {
+                            if (data.is_success == '1') {
+                                angular.element('#businessimage #next').removeClass("form_submit");
+                                $scope.loader_show = false;
+                                window.location.href = base_url + 'business-profile';
+                            } else {
+                                return false;
+                            }
+                        }
+                    });
+                }
+            });
+            function delete_bus_image(image_id) {
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + "business_profile_registration/bus_img_delete",
+                    data: 'image_id=' + image_id,
+                    success: function (data) {
+                        if (data) {
+                            $('.job_work_edit_' + image_id).remove();
+                        }
+                    }
+                });
+            }
+            $('select').on('change', function () {
+                if ($(this).val()) {
+                    $(this).css('color', 'black');
+                } else {
+                    $(this).css('color', '#acacac');
+                }
+            });
+            $(document).ready(function () {
+                var selected_val = $('select').val();
+                if (selected_val == '') {
+                    $('select').css('color', '#acacac');
+                } else {
+                    $('select').css('color', 'black');
+                }
+            });
+        </script>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-            
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
     </body>
 </html>

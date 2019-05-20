@@ -16,12 +16,11 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
-    <?php $this->load->view('adsense'); ?>
-</head>
+	    <?php $this->load->view('adsense'); ?>
+	</head>
     <Style>
     .profile_edit h3{text-align: center;}
-    .common-form fieldset select:focus{ border: 1px solid #1b8ab9 !important;
-color: #1b8ab9 !important;}
+    .common-form fieldset select:focus{ border: 1px solid #1b8ab9 !important;color: #1b8ab9 !important;}
      </Style>
     
     <body class="page-container-bg-solid page-boxed pushmenu-push">
@@ -318,30 +317,24 @@ color: #1b8ab9 !important;}
             <?php echo $footer; ?>
         </footer> 
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-        <?php
-        if(IS_OUTSIDE_JS_MINIFY == '0'){
-        ?>
-            <!-- <script src="<?php echo base_url('assets/js/jquery.js'); ?>"></script> -->
-            <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.validate.min.js"></script>
-            </script>
-        <?php } else{ ?>
-            <!-- <script src="<?php echo base_url('assets/js_min/jquery.js'); ?>"></script> -->
-
-            <script type="text/javascript" src="<?php echo base_url() ?>assets/js_min/jquery.validate.min.js"></script>
-            </script>
-        <?php } ?>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.validate.min.js"></script>
         <script src="<?php echo base_url('assets/js/additional-methods1.15.0.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <!-- POST BOX JAVASCRIPT END --> 
         <script>
             var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
             var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/profile/profile.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
         <script type="text/javascript">
             $("#is_basic").click(function(){                
                 $("#basic_info").hide();

@@ -133,6 +133,7 @@
 								<div class="site-pr-box">
 									<h3>Business Profile</h3>
 									<div class="row">
+										<?php if(!$this->session->userdata('aileenuser')) {?>
 										<div class="col-md-3 col-sm-6">
 											<ul>
 												<li>
@@ -140,6 +141,7 @@
 												</li>
 											</ul>
 										</div>
+										<?php }?>
 										<div class="col-md-3 col-sm-6">
 											<ul>
 												<li>

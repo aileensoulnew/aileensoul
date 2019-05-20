@@ -1241,28 +1241,23 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         </div>
         <?php echo $footer; ?>
 
-        <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+        
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var post_id = '<?php echo $post_id; ?>';
             var header_all_profile = '<?php echo $header_all_profile ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
-        <?php /*if (IS_BUSINESS_JS_MINIFY == '0') { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/post_detail.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/post_detail.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-        <?php }*/ ?>
+        
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/post_detail.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
     </body>
 </html>

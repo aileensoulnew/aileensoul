@@ -311,8 +311,13 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	}
 	autosize(document.getElementsByClassName('hashtag-textarea'));
 </script>
+<script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+</script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
 <script src="<?php echo base_url('assets/js/webpage/article/article_new.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+<script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
 </html>

@@ -27,8 +27,8 @@
                 font-size: 11px!important;
             }
         </style>
-    <?php $this->load->view('adsense'); ?>
-</head>
+        <?php $this->load->view('adsense'); ?>
+    </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer" ng-app="contactInfoApp" ng-controller="contactInfoController">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>
@@ -117,54 +117,56 @@
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
         <script>
-                    var base_url = '<?php echo base_url(); ?>';
-                    var slug = '<?php echo $slugid; ?>';
-                    var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                    var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';
+            var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+            var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+        </script>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
         </script>
         <script>
-                    // Defining angularjs application.
-                    var contactInfoApp = angular.module('contactInfoApp', []);
-                    // Controller function and passing $http service and $scope var.
-                    contactInfoApp.controller('contactInfoController', function ($scope, $http) {
-                        // create a blank object to handle form data.
-                        $scope.user = {};
+            // Defining angularjs application.
+            var contactInfoApp = angular.module('contactInfoApp', []);
+            // Controller function and passing $http service and $scope var.
+            contactInfoApp.controller('contactInfoController', function ($scope, $http) {
+                // create a blank object to handle form data.
+                $scope.user = {};
 
-                        // calling our submit function.
-                        $scope.submitForm = function () {
-                            // Posting data to php file
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/ng_contact_info_insert',
-                                data: $scope.user, //forms user object
-                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                            })
-                                    .success(function (data) {
-                                        if (data.errors) {
-                                            // Showing errors.
-                                            $scope.errorContactName = data.errors.contactname;
-                                            $scope.errorContactMobile = data.errors.contactmobile;
-                                            $scope.errorEmail = data.errors.email;
-                                            $scope.errorCity = data.errors.city;
-                                            $scope.errorContactWebsite = data.errors.contactwebsite;
-                                        } else {
-                                            if(data.is_success == '1'){
-                                                window.location.href = base_url + 'business-profile/signup/description';
-                                            }else{
-                                                return false;
-                                            }
-                                            //$scope.message = data.message;
-                                        }
-                                    });
-                        };
-                    });
+                // calling our submit function.
+                $scope.submitForm = function () {
+                    // Posting data to php file
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/ng_contact_info_insert',
+                        data: $scope.user, //forms user object
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
+                            .success(function (data) {
+                                if (data.errors) {
+                                    // Showing errors.
+                                    $scope.errorContactName = data.errors.contactname;
+                                    $scope.errorContactMobile = data.errors.contactmobile;
+                                    $scope.errorEmail = data.errors.email;
+                                    $scope.errorCity = data.errors.city;
+                                    $scope.errorContactWebsite = data.errors.contactwebsite;
+                                } else {
+                                    if(data.is_success == '1'){
+                                        window.location.href = base_url + 'business-profile/signup/description';
+                                    }else{
+                                        return false;
+                                    }
+                                    //$scope.message = data.message;
+                                }
+                            });
+                };
+            });
         </script>
-        <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
-<!--            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/contact_info.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>-->
-        <?php } else { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/contact_info.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.min.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/contact_info.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
     </body>
 </html>

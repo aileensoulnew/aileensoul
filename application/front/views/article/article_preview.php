@@ -712,6 +712,12 @@ else
 }
 </script>
 
+<script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+</script>
+
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 <script src="<?php echo base_url('assets/js/webpage/article/article_published.js?ver=' . time()) ?>"></script>
+<script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
 </html>

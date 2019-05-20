@@ -551,6 +551,10 @@ if (IS_BUSINESS_JS_MINIFY == '0') {
 			var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
 			var header_all_profile = '<?php echo $header_all_profile; ?>';
 		</script>
+		<script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
 		<!-- script for login  user valoidtaion start -->
 		<script>
 			$(document).ready(function () {
@@ -833,22 +837,22 @@ if (IS_BUSINESS_JS_MINIFY == '0') {
 					{
 						if (response.okmsg == "ok") {
 							$("#btn-register").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
-window.location = "<?php echo base_url() ?>business-search/";
-} else {
-	$("#register_error").fadeIn(1000, function () {
-		$("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
-		$("#btn1").html('Create an account');
-	});
-}
-}
-});
+				window.location = "<?php echo base_url() ?>business-search/";
+				} else {
+					$("#register_error").fadeIn(1000, function () {
+						$("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
+						$("#btn1").html('Create an account');
+					});
+				}
+				}
+				});
 				return false;
-			}
-		});
+				}
+			});
 
-	</script>
-	<!-- forgot password script end -->
-	<script type="text/javascript">
+		</script>
+		<!-- forgot password script end -->
+		<script type="text/javascript">
 			$(document).ready(function () { //aletr("hii");
 				/* validation */
 				$("#forgot_password").validate({
@@ -873,43 +877,43 @@ window.location = "<?php echo base_url() ?>business-search/";
 
 					var post_data = {
 						'forgot_email': email_login,
-//            csrf_token_name: csrf_hash
-}
-$.ajax({
-	type: 'POST',
-	url: base_url + 'profile/forgot_live',
-	data: post_data,
-	dataType: "json",
-	beforeSend: function ()
-	{
-		$("#error").fadeOut();
-//            $("#forgotbuton").html('Your credential has been send in your register email id');
-},
-success: function (response)
-{
-	if (response.data == "success") {
-				//  alert("login");
-				$("#forgotbuton").html(response.message);
-				setTimeout(function () {
-					$('#forgotPassword').modal('hide');
-					$('#login').modal('show');
-					$("#forgotbuton").html('');
-					document.getElementById("forgot_email").value = "";
-				}, 5000); // milliseconds
-				//window.location = base_url + "job/home/live-post";
-			} else {
-				$("#forgotbuton").html(response.message);
+					//            csrf_token_name: csrf_hash
+					}
+					$.ajax({
+						type: 'POST',
+						url: base_url + 'profile/forgot_live',
+						data: post_data,
+						dataType: "json",
+						beforeSend: function ()
+						{
+							$("#error").fadeOut();
+					//            $("#forgotbuton").html('Your credential has been send in your register email id');
+					},
+					success: function (response)
+					{
+						if (response.data == "success") {
+									//  alert("login");
+									$("#forgotbuton").html(response.message);
+									setTimeout(function () {
+										$('#forgotPassword').modal('hide');
+										$('#login').modal('show');
+										$("#forgotbuton").html('');
+										document.getElementById("forgot_email").value = "";
+									}, 5000); // milliseconds
+									//window.location = base_url + "job/home/live-post";
+								} else {
+									$("#forgotbuton").html(response.message);
 
-			}
-		}
-	});
-return false;
-}            /* validation */
+								}
+							}
+						});
+					return false;
+				}            /* validation */
 
-});
-</script>
+			});
+		</script>
 
-<script>
+		<script>
 			// Defining angularjs application.
 			var busRegApp = angular.module('busRegApp', []);
 			busRegApp.controller('busRegController', function ($scope, $http) {
@@ -1102,17 +1106,9 @@ return false;
 
 
 			});
-
-
 		</script>
 		<script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
-		<?php
-		if (IS_BUSINESS_JS_MINIFY == '0') {
-			?>
-			<script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-			<?php } else {
-				?>
-				<script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-				<?php } ?>
-			</body>
-			</html>
+		<script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+		<script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
+		</body>
+		</html>

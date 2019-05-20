@@ -84,13 +84,13 @@
   var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';  
   var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
+<script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+</script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/notification/notification.js'); ?>"></script>
-<?php /*if (IS_NOT_JS_MINIFY == '0') {?>
-  <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/notification/notification.js'); ?>"></script>
-<?php } else {?>
-  <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/notification/notification.js'); ?>"></script>
-<?php }*/ ?>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+<script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
 <script type="text/javascript">
 function not_active(not_id)
 {

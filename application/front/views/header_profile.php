@@ -852,33 +852,9 @@ if($first_segment == "")
                 $(".noti_count").hide();
                 $(".noti_count").html("");
             }
-            int_not_count = setTimeout(function(){
-                // get_notification_unread_count();
-            }, 20000);
         }).fail(function() {
-            int_not_count = setTimeout(function(){
-                // get_notification_unread_count();
-            }, 25000);
+            get_notification_unread_count();            
         });
-        /*$.ajax({
-            type: 'POST',
-            url: '<?php //echo base_url() . "notification/get_notification_unread_count" ?>',
-            dataType: 'json',
-            data: '',
-            success: function (data) {
-                // console.log(data);
-                $("#noti_count").show();
-                if(parseInt(data) > 0)
-                {
-                    $("#noti_count").html(data);
-                }
-                else
-                {
-                    $("#noti_count").hide();
-                    $("#noti_count").html("");
-                }
-            }
-        });*/
     }
     
     function unread_message_count()
@@ -896,26 +872,17 @@ if($first_segment == "")
                 $(".msg-count").hide();
                 $(".msg-count").text('');   
             }
-
-            setTimeout(function(){
-                // unread_message_count();
-            }, 5000);
-        });/*
+        });
         .fail(function() {
-            setTimeout(function(){
-                unread_message_count();
-            }, 5000);
-        });*/
+            unread_message_count();
+        });
     }
 
     setTimeout(function(){
-        // get_notification_unread_count();
-        // unread_message_count();
+        get_notification_unread_count();
+        unread_message_count();
     }, 1000);
-    // get_notification_unread_count();
-    int_not_count = window.setInterval(function(){
-      // get_notification_unread_count();
-    }, 10000);
+    
     function sendmail() {
         $("#vert_email").attr("style","pointer-events: none;");
         $("#mailsendmodal .msg").html('Please verify your email address!<br />Check your inbox or spam folder in order to verify yourself.');
@@ -929,17 +896,7 @@ if($first_segment == "")
             data: post_data,
             dataType:'json',
             success: function (response)
-            {
-                /*if(response.success == '1')
-                {
-                    $("#mailsendmodal .msg").html('Please verify your email address!<br />Check your inbox or spam folder in order to verify yourself.');
-                    $("#mailsendmodal").modal("show");
-                }
-                else
-                {
-                    $("#mailsendmodal .msg").html('Please try again later.');
-                    $("#mailsendmodal").modal("show");
-                }*/
+            {                
                 $("#vert_email").removeAttr("style");
             }
         });
@@ -947,29 +904,6 @@ if($first_segment == "")
     /*if(is_verify == 0)
     {
         $('body').addClass("verify-body");
-    }*/
-</script>
-<script type="text/javascript">
-    /*var idleTime = 0;
-    $(document).ready(function () {
-        //Increment the idle time counter every minute.
-        // var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
-        var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
-
-        //Zero the idle timer on mouse movement.
-        $(this).mousemove(function (e) {
-            idleTime = 0;
-        });
-        $(this).keypress(function (e) {
-            idleTime = 0;
-        });
-    });
-
-    function timerIncrement() {
-        idleTime = idleTime + 1;        
-        if (idleTime > 4) { // 20 minutes
-            window.location.reload();
-        }
     }*/
 </script>
 <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>

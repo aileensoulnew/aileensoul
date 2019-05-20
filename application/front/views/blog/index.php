@@ -404,8 +404,9 @@ if($category_page == 1)
     <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
     <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+    <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/angular-pagination.js?ver=' . time()); ?>"></script>
+
     <script>
         var base_url = '<?php echo base_url(); ?>';
         var keyword = '';
@@ -520,11 +521,18 @@ if($category_page == 1)
 
     </script>
 
-    <?php // if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <!-- <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
-    <?php // } else { ?>
-            <!-- <script src="<?php //echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
-    <?php // }
+    <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+    </script>
+    <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+    </script>
+    <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
+
+    
+    <?php 
     if($blog_page == 'list'){ ?>
         <script type="application/ld+json">
         {

@@ -27,8 +27,8 @@
                 font-size: 11px!important;
             }
         </style>
-    <?php $this->load->view('adsense'); ?>
-</head>
+        <?php $this->load->view('adsense'); ?>
+    </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer" ng-app="busInfoApp" ng-controller="busInfoController">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>
@@ -137,98 +137,96 @@
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
         <script>
-                    var base_url = '<?php echo base_url(); ?>';
-                    var slug = '<?php echo $slugid; ?>';
-                    var company_name_validation = '<?php echo $this->lang->line('company_name_validation') ?>';
-                    var country_validation = '<?php echo $this->lang->line('country_validation') ?>';
-                    var state_validation = '<?php echo $this->lang->line('state_validation') ?>';
-                    var address_validation = '<?php echo $this->lang->line('address_validation') ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';
+            var company_name_validation = '<?php echo $this->lang->line('company_name_validation') ?>';
+            var country_validation = '<?php echo $this->lang->line('country_validation') ?>';
+            var state_validation = '<?php echo $this->lang->line('state_validation') ?>';
+            var address_validation = '<?php echo $this->lang->line('address_validation') ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+        </script>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
         </script>
         <script>
-                    // Defining angularjs application.
-                    var busInfoApp = angular.module('busInfoApp', []);
-                    // Controller function and passing $http service and $scope var.
-                    busInfoApp.controller('busInfoController', function ($scope, $http) {
-                        // create a blank object to handle form data.
-                        $scope.user = {};
+            // Defining angularjs application.
+            var busInfoApp = angular.module('busInfoApp', []);
+            // Controller function and passing $http service and $scope var.
+            busInfoApp.controller('busInfoController', function ($scope, $http) {
+                // create a blank object to handle form data.
+                $scope.user = {};
 
-                        $scope.countryList = undefined;
-                        $scope.stateList = undefined;
-                        $scope.cityList = undefined;
+                $scope.countryList = undefined;
+                $scope.stateList = undefined;
+                $scope.cityList = undefined;
 
-                        $http({
-                            method: 'GET',
-                            url: base_url + 'business_profile_registration/getCountry',
-                        }).success(function (data) {
-                            // console.log(data);
-                            $scope.countryList = data;
-                        });
+                $http({
+                    method: 'GET',
+                    url: base_url + 'business_profile_registration/getCountry',
+                }).success(function (data) {
+                    // console.log(data);
+                    $scope.countryList = data;
+                });
 
-                        $scope.onCountryChange = function () {
-                            $scope.countryIdVal = $scope.user.country_id;
-                            // console.log(“data state processing”+$scope.stateIdVal);
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getStateByCountryId',
-                                data: {countryId: $scope.countryIdVal}
-                            }).success(function (data) {
-                                //console.log(data);
-                                $scope.stateList = data;
-                            });
-                        };
-                        $scope.onStateChange = function () {
-                            $scope.stateIdVal = $scope.user.state_id;
-                            // console.log(“data state processing”+$scope.stateIdVal);
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/getCityByStateId',
-                                data: {stateId: $scope.stateIdVal}
-                            }).success(function (data) {
-                                //console.log(data);
-                                $scope.cityList = data;
-                            });
-                        };
-
-                        // calling our submit function.
-                        $scope.submitForm = function () {
-                            // Posting data to php file
-                            $http({
-                                method: 'POST',
-                                url: base_url + 'business_profile_registration/ng_bus_info_insert',
-                                data: $scope.user, //forms user object
-                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                            })
-                                    .success(function (data) {
-                                        if (data.errors) {
-                                            // Showing errors.
-                                            $scope.errorCompanyName = data.errors.companyname;
-                                            $scope.errorCountry = data.errors.country;
-                                            $scope.errorState = data.errors.state;
-                                            $scope.errorCity = data.errors.city;
-                                            $scope.errorPincode = data.errors.pincode;
-                                            $scope.errorPostalAddress = data.errors.business_address;
-                                        } else {
-                                            if (data.is_success == '1') {
-                                                window.location.href = base_url + 'business-profile/signup/contact-information';
-                                            } else {
-                                                return false;
-                                            }
-                                            //$scope.message = data.message;
-                                        }
-                                    });
-                        };
+                $scope.onCountryChange = function () {
+                    $scope.countryIdVal = $scope.user.country_id;
+                    // console.log(“data state processing”+$scope.stateIdVal);
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getStateByCountryId',
+                        data: {countryId: $scope.countryIdVal}
+                    }).success(function (data) {
+                        //console.log(data);
+                        $scope.stateList = data;
                     });
+                };
+                $scope.onStateChange = function () {
+                    $scope.stateIdVal = $scope.user.state_id;
+                    // console.log(“data state processing”+$scope.stateIdVal);
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/getCityByStateId',
+                        data: {stateId: $scope.stateIdVal}
+                    }).success(function (data) {
+                        //console.log(data);
+                        $scope.cityList = data;
+                    });
+                };
+
+                // calling our submit function.
+                $scope.submitForm = function () {
+                    // Posting data to php file
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'business_profile_registration/ng_bus_info_insert',
+                        data: $scope.user, //forms user object
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
+                    .success(function (data) {
+                        if (data.errors) {
+                            // Showing errors.
+                            $scope.errorCompanyName = data.errors.companyname;
+                            $scope.errorCountry = data.errors.country;
+                            $scope.errorState = data.errors.state;
+                            $scope.errorCity = data.errors.city;
+                            $scope.errorPincode = data.errors.pincode;
+                            $scope.errorPostalAddress = data.errors.business_address;
+                        } else {
+                            if (data.is_success == '1') {
+                                window.location.href = base_url + 'business-profile/signup/contact-information';
+                            } else {
+                                return false;
+                            }
+                            //$scope.message = data.message;
+                        }
+                    });
+                };
+            });
         </script>
-        <?php
-        if (IS_BUSINESS_JS_MINIFY == '0') {
-            ?>
-           <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.min.js?ver=' . time()); ?>"></script>
-        <?php } else {
-            ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/information.min.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.min.js?ver=' . time()); ?>"></script>
-        <?php }
-        ?>
+        
+       <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.min.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
     </body>
 </html>

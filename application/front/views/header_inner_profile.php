@@ -779,34 +779,9 @@ if($browser == "Firefox")
                 $(".noti_count").hide();
                 $(".noti_count").html("");
             }
-            int_not_count = setTimeout(function(){
-                get_notification_unread_count();
-            }, 20000);
         }).fail(function() {
-            int_not_count = setTimeout(function(){
-                get_notification_unread_count();
-            }, 25000);
+            get_notification_unread_count();
         });
-
-        /*$.ajax({
-            type: 'POST',
-            url: '<?php //echo base_url() . "notification/get_notification_unread_count" ?>',
-            dataType: 'json',
-            data: '',
-            success: function (data) {
-                console.clear();
-                $("#noti_count").show();
-                if(parseInt(data) > 0)
-                {
-                    $("#noti_count").html(data);
-                }
-                else
-                {
-                    $("#noti_count").hide();
-                    $("#noti_count").html("");
-                }
-            }
-        });*/
     }
 
     function unread_message_count()
@@ -824,26 +799,16 @@ if($browser == "Firefox")
                 $(".msg-count").hide();
                 $(".msg-count").text('');   
             }
-
-            setTimeout(function(){
-                // unread_message_count();
-            }, 5000);
-        });/*
+        });
         .fail(function() {
-            setTimeout(function(){
-                unread_message_count();
-            }, 5000);
-        });*/
+            unread_message_count();
+        });
     }
     setTimeout(function(){
-        // get_notification_unread_count();
-        // unread_message_count();
-    }, 10000);
+        get_notification_unread_count();
+        unread_message_count();
+    }, 1000);
     
-    get_notification_unread_count();
-    int_not_count = window.setInterval(function(){
-      // get_notification_unread_count();
-    }, 10000);
 
     function sendmail() {
         $("#vert_email").attr("style","pointer-events: none;")

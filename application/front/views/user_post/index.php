@@ -1193,9 +1193,9 @@
                             <div class="col-md-9 col-sm-9 col-xs-10 mob-pr0">
                                 <ul class="bottom-left">
                                     <li class="user-likes">
-                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span></a>
+                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id, $index, 0, post.post_data.user_id)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span></a>
 
-                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
+                                        <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id, $index, 0, post.post_data.user_id)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
                                             <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
                                         </a>
                                     </li>
@@ -1987,9 +1987,9 @@
                                 <div class="col-md-9 col-sm-9 col-xs-10 mob-pr0">
                                     <ul class="bottom-left">
                                         <li class="user-likes">
-                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index,1)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i>
+                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index,1,post.post_data.user_id)" ng-if="post.is_userlikePost == '1'" class="like"><i class="fa fa-thumbs-up"></i>
                                                 <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span></a>
-                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index,1)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
+                                            <a href="javascript:void(0)" id="post-like-{{post.post_data.id}}" ng-click="post_like(post.post_data.id,$index,1,post.post_data.user_id)" ng-if="post.is_userlikePost == '0'"><i class="fa fa-thumbs-up"></i>
                                                 <span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span>
                                             </a>
                                         </li>
@@ -3917,7 +3917,13 @@
         var no_user_post_html = '<?php echo $no_user_post_html; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
-        </script>               
+        </script>
+
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
+
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js') ?>"></script>
@@ -3955,144 +3961,134 @@
         </script>
 
         <script>
-        $(function() {
+            $(function() {
 
-        var $window = $(window);
-        var lastScrollTop = $window.scrollTop();
-        var wasScrollingDown = true;
+            var $window = $(window);
+            var lastScrollTop = $window.scrollTop();
+            var wasScrollingDown = true;
 
-        var $sidebar = $("#left-fixed");
-        if ($sidebar.length > 0) {
+            var $sidebar = $("#left-fixed");
+            if ($sidebar.length > 0) {
 
-        var initialSidebarTop = $sidebar.position().top;
+            var initialSidebarTop = $sidebar.position().top;
 
-        $window.scroll(function(event) {
+            $window.scroll(function(event) {
 
-        var windowHeight = $window.height();
-        var sidebarHeight = $sidebar.outerHeight();
+            var windowHeight = $window.height();
+            var sidebarHeight = $sidebar.outerHeight();
 
-        var scrollTop = $window.scrollTop();
-        var scrollBottom = scrollTop + windowHeight;
+            var scrollTop = $window.scrollTop();
+            var scrollBottom = scrollTop + windowHeight;
 
-        var sidebarTop = $sidebar.position().top;
-        var sidebarBottom = sidebarTop + sidebarHeight;
+            var sidebarTop = $sidebar.position().top;
+            var sidebarBottom = sidebarTop + sidebarHeight;
 
-        var heightDelta = Math.abs(windowHeight - sidebarHeight);
-        var scrollDelta = lastScrollTop - scrollTop;
+            var heightDelta = Math.abs(windowHeight - sidebarHeight);
+            var scrollDelta = lastScrollTop - scrollTop;
 
-        var isScrollingDown = (scrollTop > lastScrollTop);
-        var isWindowLarger = (windowHeight > sidebarHeight);
+            var isScrollingDown = (scrollTop > lastScrollTop);
+            var isWindowLarger = (windowHeight > sidebarHeight);
 
-        if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
-            $sidebar.addClass('fixed-cus');
-        } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
-            $sidebar.removeClass('fixed-cus');
-        }
-
-        var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
-        var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
-
-        if (dragBottomDown) {
-            if (isWindowLarger) {
-                $sidebar.css('top', 0);
-            } else {
-                $sidebar.css('top', -heightDelta );
+            if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
+                $sidebar.addClass('fixed-cus');
+            } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
+                $sidebar.removeClass('fixed-cus');
             }
-        } else if (dragTopUp) {
-            $sidebar.css('top', 0);
-        } else if ($sidebar.hasClass('fixed-cus')) {
-            var currentTop = parseInt($sidebar.css('top'), 10);
-            
-            var minTop = -heightDelta;
-            //var scrolledTop = currentTop + scrollDelta;
-            
-            //var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
-            //var newTop = (isPageAtBottom) ? minTop : scrolledTop;
-            
-            // $sidebar.css('top', newTop);
-        }
 
-        lastScrollTop = scrollTop;
-        wasScrollingDown = isScrollingDown;
-        });
-        }
-        });
-    </script>
-    <script>
-        $(function() {
+            var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
+            var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
 
-        var $window = $(window);
-        var lastScrollTop = $window.scrollTop();
-        var wasScrollingDown = true;
-
-        var $sidebar = $("#right-fixed");
-        if ($sidebar.length > 0) {
-
-        var initialSidebarTop = $sidebar.position().top;
-
-        $window.scroll(function(event) {
-
-        var windowHeight = $window.height();
-        var sidebarHeight = $sidebar.outerHeight();
-
-        var scrollTop = $window.scrollTop();
-        var scrollBottom = scrollTop + windowHeight;
-
-        var sidebarTop = $sidebar.position().top;
-        var sidebarBottom = sidebarTop + sidebarHeight;
-
-        var heightDelta = Math.abs(windowHeight - sidebarHeight);
-        var scrollDelta = lastScrollTop - scrollTop;
-
-        var isScrollingDown = (scrollTop > lastScrollTop);
-        var isWindowLarger = (windowHeight > sidebarHeight);
-
-        if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
-            $sidebar.addClass('fixed-cus1');
-        } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
-            $sidebar.removeClass('fixed-cus1');
-        }
-
-        var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
-        var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
-
-        if (dragBottomDown) {
-            if (isWindowLarger) {
+            if (dragBottomDown) {
+                if (isWindowLarger) {
+                    $sidebar.css('top', 0);
+                } else {
+                    $sidebar.css('top', -heightDelta );
+                }
+            } else if (dragTopUp) {
                 $sidebar.css('top', 0);
-            } else {
-                $sidebar.css('top', -heightDelta );
+            } else if ($sidebar.hasClass('fixed-cus')) {
+                var currentTop = parseInt($sidebar.css('top'), 10);
+                
+                var minTop = -heightDelta;
+                //var scrolledTop = currentTop + scrollDelta;
+                
+                //var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+                //var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+                
+                // $sidebar.css('top', newTop);
             }
-        } else if (dragTopUp) {
-            $sidebar.css('top', 0);
-        } else if ($sidebar.hasClass('fixed-cus1')) {
-            var currentTop = parseInt($sidebar.css('top'), 10);
-            
-            var minTop = -heightDelta;
-            //var scrolledTop = currentTop + scrollDelta;
-            
-           // var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
-           // var newTop = (isPageAtBottom) ? minTop : scrolledTop;
-            
-           // $sidebar.css('top', newTop);
-        }
 
-        lastScrollTop = scrollTop;
-        wasScrollingDown = isScrollingDown;
-        });
-        }
-        });
-    </script>
-
-        <script>
-        /*if(typeof(EventSource) !== "undefined") {            
-            var source = new EventSource("<?php echo base_url(); ?>cron/get_notification_unread_count_wc");
-            source.onmessage = function(event) {
-                console.log(event.data);
-            };
-        } else {
-            console.log("Sorry, your browser does not support server-sent events...");
-        }*/
+            lastScrollTop = scrollTop;
+            wasScrollingDown = isScrollingDown;
+            });
+            }
+            });
         </script>
+        <script>
+            $(function() {
+
+            var $window = $(window);
+            var lastScrollTop = $window.scrollTop();
+            var wasScrollingDown = true;
+
+            var $sidebar = $("#right-fixed");
+            if ($sidebar.length > 0) {
+
+            var initialSidebarTop = $sidebar.position().top;
+
+            $window.scroll(function(event) {
+
+            var windowHeight = $window.height();
+            var sidebarHeight = $sidebar.outerHeight();
+
+            var scrollTop = $window.scrollTop();
+            var scrollBottom = scrollTop + windowHeight;
+
+            var sidebarTop = $sidebar.position().top;
+            var sidebarBottom = sidebarTop + sidebarHeight;
+
+            var heightDelta = Math.abs(windowHeight - sidebarHeight);
+            var scrollDelta = lastScrollTop - scrollTop;
+
+            var isScrollingDown = (scrollTop > lastScrollTop);
+            var isWindowLarger = (windowHeight > sidebarHeight);
+
+            if ((isWindowLarger && scrollTop > initialSidebarTop) || (!isWindowLarger && scrollTop > initialSidebarTop + heightDelta)) {
+                $sidebar.addClass('fixed-cus1');
+            } else if (!isScrollingDown && scrollTop <= initialSidebarTop) {
+                $sidebar.removeClass('fixed-cus1');
+            }
+
+            var dragBottomDown = (sidebarBottom <= scrollBottom && isScrollingDown);
+            var dragTopUp = (sidebarTop >= scrollTop && !isScrollingDown);
+
+            if (dragBottomDown) {
+                if (isWindowLarger) {
+                    $sidebar.css('top', 0);
+                } else {
+                    $sidebar.css('top', -heightDelta );
+                }
+            } else if (dragTopUp) {
+                $sidebar.css('top', 0);
+            } else if ($sidebar.hasClass('fixed-cus1')) {
+                var currentTop = parseInt($sidebar.css('top'), 10);
+                
+                var minTop = -heightDelta;
+                //var scrolledTop = currentTop + scrollDelta;
+                
+               // var isPageAtBottom = (scrollTop + windowHeight >= $(document).height());
+               // var newTop = (isPageAtBottom) ? minTop : scrolledTop;
+                
+               // $sidebar.css('top', newTop);
+            }
+
+            lastScrollTop = scrollTop;
+            wasScrollingDown = isScrollingDown;
+            });
+            }
+            });
+        </script>
+               
         <script>
             $(document).ready(function () {
                 if (screen.width <= 1279) {
@@ -4295,13 +4291,6 @@
             autosize(document.getElementsByClassName('hashtag-textarea'));
 
         </script>
-
-        <!-- <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script> -->
-        <script type="text/javascript">
-            /*var socket = io.connect('http://chat.aileensoul.localhost:3000/');
-            var test = 'testtest';
-            socket.emit('notification from main',test);*/
-        </script>
-
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
     </body>
 </html>

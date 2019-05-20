@@ -2205,7 +2205,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
     }
 
-    $scope.post_like = function (post_id,parent_index,is_promoted) {
+    $scope.post_like = function (post_id,parent_index,is_promoted,user_id) {
         $('#post-like-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
@@ -2216,6 +2216,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $('#post-like-' + post_id).removeAttr('style');
             
             if (success.data.message == 1) {
+                
+                socket.emit('user notification',user_id);
+
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     // $('#post-like-' + post_id).addClass('like');

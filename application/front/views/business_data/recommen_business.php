@@ -232,14 +232,16 @@
 
     var data_con = '<?php echo $profile;?>';
     var data_post = '<?php echo $data; ?>';
+
+    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+</script>
+<script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io.connect('http://chat.aileensoul.localhost:3000/');
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/search.js?ver=' . time()); ?>"></script>
-<?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
-    <!--<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/search.js?ver=' . time()); ?>"></script>-->
-    <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-<?php } else { ?>
-    <!--<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/search.js?ver=' . time()); ?>"></script>-->
-    <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-<?php } ?>
+
+<script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
 </body>
 </html>

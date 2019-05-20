@@ -3,17 +3,10 @@
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head_profile_reg; ?>  
-        <?php
-        if (IS_BUSINESS_CSS_MINIFY == '0') {
-            ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
-            <?php
-        } else {
-            ?>
-              <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/business.css?ver=' . time()); ?>">
-        <?php } ?>
+       
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/business.css?ver=' . time()); ?>">
+            
         <style type="text/css">
             span.error{
                 background: none;
@@ -27,8 +20,8 @@
                 font-size: 11px!important;
             }
         </style>
-    <?php $this->load->view('adsense'); ?>
-</head>
+        <?php $this->load->view('adsense'); ?>
+    </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer" ng-app="busImageApp" ng-controller="busImageController">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>
@@ -87,68 +80,68 @@
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
         <script>
-                    var base_url = '<?php echo base_url(); ?>';
-                    var slug = '<?php echo $slugid; ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
         <script>
 
-                    var busImageApp = angular.module('busImageApp', []);
-                    busImageApp.directive("fileInput", function ($parse) {
-                        return{
-                            link: function ($scope, element, attrs) {
-                                element.on("change", function (event) {
-                                    var files = event.target.files;
-                                    $parse(attrs.fileInput).assign($scope, element[0].files);
-                                    $scope.$apply();
-                                });
-                            }
-                        }
+        var busImageApp = angular.module('busImageApp', []);
+        busImageApp.directive("fileInput", function ($parse) {
+            return{
+                link: function ($scope, element, attrs) {
+                    element.on("change", function (event) {
+                        var files = event.target.files;
+                        $parse(attrs.fileInput).assign($scope, element[0].files);
+                        $scope.$apply();
                     });
-                    busImageApp.controller("busImageController", function ($scope, $http) {
-                        $scope.user = {};
-                        $scope.submitForm = function () {
-                            var form_data = new FormData();
-                            angular.forEach($scope.files, function (file) {
-//                                console.log(file);
-                                form_data.append('image1[]', file);
-                            });
-                            $http.post(base_url + 'business_profile_registration/ng_image_insert', form_data,
-                                    {
-                                        transformRequest: angular.identity,
-                                        headers: {'Content-Type': undefined, 'Process-Data': false}
-                                    }).success(function (data) {
-                                if (data.errors) {
-                                    // Showing errors.
-                                    $scope.errorImage = data.errors.image1;
-                                } else {
-                                    if (data.is_success == '1') {
-                                        window.location.href = base_url + 'business-profile/home';
-                                    } else {
-                                        return false;
-                                    }
-                                    //$scope.message = data.message;
-                                }
+                }
+            }
+        });
+        busImageApp.controller("busImageController", function ($scope, $http) {
+            $scope.user = {};
+            $scope.submitForm = function () {
+                var form_data = new FormData();
+                angular.forEach($scope.files, function (file) {
+                   // console.log(file);
+                    form_data.append('image1[]', file);
+                });
+                $http.post(base_url + 'business_profile_registration/ng_image_insert', form_data,
+                        {
+                            transformRequest: angular.identity,
+                            headers: {'Content-Type': undefined, 'Process-Data': false}
+                        }).success(function (data) {
+                    if (data.errors) {
+                        // Showing errors.
+                        $scope.errorImage = data.errors.image1;
+                    } else {
+                        if (data.is_success == '1') {
+                            window.location.href = base_url + 'business-profile/home';
+                        } else {
+                            return false;
+                        }
+                        //$scope.message = data.message;
+                    }
 
-                                //alert(response);
-                                //$scope.show_images();
-                            });
-                        }
-                        /*$scope.show_images = function () {
-                         $http.get("show_images.php")
-                         .success(function (data) {
-                         $scope.uploaded_images = data;
-                         });
-                         } */
-                    });
+                    //alert(response);
+                    //$scope.show_images();
+                });
+            }
+            /*$scope.show_images = function () {
+             $http.get("show_images.php")
+             .success(function (data) {
+             $scope.uploaded_images = data;
+             });
+             } */
+        });
 
         </script>
-        <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
-                                                                <!--            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/image.js?ver=' . time()); ?>"></script>
-                                                                            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>-->
-        <?php } else { ?>
-                                                                <!--            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/image.min.js?ver=' . time()); ?>"></script>
-                                                                            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.min.js?ver=' . time()); ?>"></script>-->
-        <?php } ?>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
+        
     </body>
 </html>
 

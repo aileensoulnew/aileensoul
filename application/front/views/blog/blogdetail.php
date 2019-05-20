@@ -503,19 +503,15 @@ header("Pragma: no-cache"); // HTTP/1.0
         ?>
 		<?php $this->load->view('mobile_side_slide'); ?>
     </div>
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
-            <script src="<?php echo base_url('assets/js/jquery.validate.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js') ?>"></script>
-            <script src="<?php echo base_url('assets/js_min/jquery.validate.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.validate.js?ver=' . time()); ?>"></script>
+
         <!-- This Js is used for call popup -->
         <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
         <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
 	        var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
@@ -730,13 +726,12 @@ header("Pragma: no-cache"); // HTTP/1.0
                     });
             }
         </script>
-        <!-- <script src="<?php //echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script> -->
-        <?php /* if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
-
-        <?php } */
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
+        <?php 
         list($width,$height) = getimagesize(base_url($this->config->item('blog_main_upload_path')).$blog_data['image']); ?>
         <script type="application/ld+json">
         {

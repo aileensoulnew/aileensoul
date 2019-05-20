@@ -120,9 +120,9 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-route.1.6.4.js') ?>"></script>
         <script>
-                                var base_url = '<?php echo base_url(); ?>';
-                                var slug = '<?php echo $slugid; ?>';
-                                var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
         <script>
             var profileBasicInfoApp = angular.module('profileBasicInfoApp', ['ui.bootstrap', 'ngValidate']);
@@ -216,9 +216,14 @@
                     }
 
                 };
-
-
             });
         </script>
+        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+        </script>
+
+        <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
+
     </body>
 </html>
