@@ -249,7 +249,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
         }).then(function(success) {
 
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
