@@ -3701,7 +3701,7 @@ a:focus{text-decoration: none;}
 .table-responsive.content table.sub-menu td a.active{background: #fff;}
 .table-responsive.content table.sub-menu td a:hover{background: #fff;}
 .table-responsive.content table.sub-menu td{border: 0px;}
-.search-tab .table-responsive.content{height: 34px !important;}
+.search-tab .table-responsive.content{height: 33px !important;}
 .search-box tags-input .tags{border:0px; border-radius: 0;}
 .search-box tags-input .tags input{padding-left: 0;}
 .search-box tags-input{border-bottom: 1px solid #d2d2d2;}
@@ -3716,6 +3716,16 @@ a:focus{text-decoration: none;}
 .search-box tags-input .tags .tag-item {font-size: 12px;}
 .search-box .form-group label{padding: 5px 5px 5px 25px ;}
 .search-box .control__indicator{top: 5px;}
+.filter-sub-header .sub-header .sub-menu{width: auto;}
+.filter-sub-header .table-responsive{padding-top: 6px;}
+.filter-sub-header .table-responsive.content td{width: auto; padding: 0 20px;}
+.filter-sub-header .table-responsive.content td a{font-size: 15px; color: #5c5c5c; float: left; font-weight: bold; padding: 0;}
+.filter-sub-header .table-responsive.content td a.active{color: #1b8ab9;}
+.filter-sub-header .table-responsive.content td a.active span{color: #1b8ab9;}
+.filter-sub-header .table-responsive.content td a:hover span{color: #1b8ab9;}
+.filter-sub-header .table-responsive.content td a:hover{color: #1b8ab9;}
+.filter-sub-header .table-responsive.content td:first-child{padding-left: 0;}
+.filter-sub-header .table-responsive.content td a span{display: inline-block; font-size: 15px; color: #5c5c5c;}
 
 
 /*** end search new page  ***/
@@ -4262,7 +4272,11 @@ tags-input .tags{padding: 0;}
   .search-new-page .middle-section{float: none; margin: 0 auto;}
   .mob-search-btn{display: block;}
   .request-noti .content{height: 210px;}
-  
+  .filter-sub-header .sub-header{top:49px;}
+  .filter-sub-header .table-responsive.content td{padding: 0 12px;}
+  .filter-sub-header .table-responsive.content td a{font-size: 13px;}
+  .filter-sub-header .table-responsive.content td a span{font-size: 13px;}
+  .filter-sub-header .search-tab .table-responsive.content{height: 29px !important;}
 }
 @media screen and (max-width: 767px) {
   .middle-section{width:100%;}

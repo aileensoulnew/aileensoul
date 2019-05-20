@@ -1073,7 +1073,7 @@ a:focus{outline:none;}
 	.web-header{display:none;}
 	.mobile-header{display:block;}
 	.mobile-header header h2{padding-right:10px;}
-	.mobile-header header{padding:8px 0 7px; z-index:999999;}
+	.mobile-header header{padding:8px 0 6px; z-index:999999;}
 	.mobile-header .left-header{width:100%; float:left;}
 	.mobile-header .left-header form{margin:0 auto; float:none; width:100%; padding-left:0;}
 	.mobile-header .left-header input[type="text"]{width:100%; margin-bottom:0px;}

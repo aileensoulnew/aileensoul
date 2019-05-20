@@ -34,37 +34,42 @@
 </head>
     <body class="two-hd search-new-page">
         <?php echo $header_profile ?>
-        <div class="sub-header">
+        <div class="filter-sub-header">
+            <div class="sub-header">
                 <div class="container">
                     <nav class="search-tab">
-                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <ul class="sub-menu">
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '1' ? 'active' : ''" id="search-all-tab" href="<?php echo base_url('search').'?q='.$search_keyword; ?>">All {{total_count}}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('search/opportunity').'?q='.$search_keyword; ?>">Opportunitis {{opp_count}}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('search/people').'?q='.$search_keyword; ?>">People {{people_count}}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('search/post').'?q='.$search_keyword; ?>">Post {{simple_count}}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '5' ? 'active' : ''" id="search-opp-tab" id="search-bus-tab" href="<?php echo base_url('search/business').'?q='.$search_keyword; ?>">Business {{business_count}}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '6' ? 'active' : ''" id="search-opp-tab" id="search-article-tab" href="<?php echo base_url('search/article').'?q='.$search_keyword; ?>">Article {{article_count}}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" ng-class="active_tab == '7' ? 'active' : ''" id="search-opp-tab" id="search-que-tab" href="<?php echo base_url('search/question').'?q='.$search_keyword; ?>">Question {{question_count}}</a>
-                                </li>
-                            </ul>
+                        <div class="nav nav-tabs nav-fill table-responsive content" id="nav-tab" role="tablist">
+                            <table class="sub-menu table">
+                                <tr>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '1' ? 'active' : ''" id="search-all-tab" href="<?php echo base_url('search').'?q='.$search_keyword; ?>">All <span>{{total_count}}</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('search/opportunity').'?q='.$search_keyword; ?>">Opportunitis <span>{{opp_count}}</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('search/people').'?q='.$search_keyword; ?>">People <span>{{people_count}}</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('search/post').'?q='.$search_keyword; ?>">Post <span>{{simple_count}}</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '5' ? 'active' : ''" id="search-opp-tab" id="search-bus-tab" href="<?php echo base_url('search/business').'?q='.$search_keyword; ?>">Business <span>{{business_count}}</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '6' ? 'active' : ''" id="search-opp-tab" id="search-article-tab" href="<?php echo base_url('search/article').'?q='.$search_keyword; ?>">Article <span>{{article_count}}</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '7' ? 'active' : ''" id="search-opp-tab" id="search-que-tab" href="<?php echo base_url('search/question').'?q='.$search_keyword; ?>">Question <span>{{question_count}}</span></a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </nav>
                 </div>
             </div>
+        </div>
+        
 
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
