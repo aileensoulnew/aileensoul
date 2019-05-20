@@ -3677,6 +3677,8 @@ a:focus{text-decoration: none;}
 
 /***  end monetize css  ***/
 /***  search new page  ***/
+.sub-header .sub-menu li a.active{color: #1b8ab9;}
+.sub-header .sub-menu li a:hover{color: #1b8ab9;}
 .search-new-page .middle-section{float:left; width:580px; padding: 0; margin-left: 15px;}
 .search-tab .nav-tabs{border-bottom: 0;}
 .search-box{padding: 15px; border:1px solid #d2d2d2; border-radius: 4px; width: 100%; float: left;}
@@ -3703,6 +3705,17 @@ a:focus{text-decoration: none;}
 .search-box tags-input .tags{border:0px; border-radius: 0;}
 .search-box tags-input .tags input{padding-left: 0;}
 .search-box tags-input{border-bottom: 1px solid #d2d2d2;}
+.search-gender{padding-top: 5px;}
+.search-gender label{padding-right: 15px !important; display: inline-block;}
+.search-gender .control--radio .control__indicator:after{left: 1px; top: 1px; width: 11px; height: 11px;}
+.search-box .form-group tags-input .tags .tag-item{background: #efefef; border-radius: 20px; border:0; padding: 0 12px; padding-top: 2px;} 
+.search-box tags-input .autocomplete{margin-top: 0; padding-top: 0;}
+.search-box tags-input .autocomplete .suggestion-item{color: #5c5c5c; font-size: 14px;}
+.search-box tags-input .autocomplete .suggestion-item em{color: #5c5c5c; font-size: 14px;}
+.search-box tags-input .autocomplete .suggestion-item.selected, .search-box tags-input .autocomplete .suggestion-item.selected em {color: #5c5c5c; background-color: #efefef;}
+.search-box tags-input .tags .tag-item {font-size: 12px;}
+.search-box .form-group label{padding: 5px 5px 5px 25px ;}
+.search-box .control__indicator{top: 5px;}
 
 
 /*** end search new page  ***/

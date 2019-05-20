@@ -50,9 +50,17 @@
         </div>        
         <div class="search-left-box">
             <h3>Gender</h3>
-            <div class="form-group">
-                <input type="radio" value="M" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag"> Male
-                <input type="radio" value="F" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag"> Female
+            <div class="form-group search-gender">
+                <label class="control control--radio">
+                    Male
+                    <input type="radio" value="M" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--radio">
+                    Female
+                    <input type="radio" value="F" name="gender" ng-model="search_gender" placeholder="Search by Hash Tag">
+                    <div class="control__indicator"></div>
+                </label>
             </div>
         </div>        
         <div class="search-left-box pt15">
