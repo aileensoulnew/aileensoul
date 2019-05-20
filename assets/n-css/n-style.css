@@ -3700,6 +3700,10 @@ a:focus{text-decoration: none;}
 .table-responsive.content table.sub-menu td a:hover{background: #fff;}
 .table-responsive.content table.sub-menu td{border: 0px;}
 .search-tab .table-responsive.content{height: 34px !important;}
+.search-box tags-input .tags{border:0px; border-radius: 0;}
+.search-box tags-input .tags input{padding-left: 0;}
+.search-box tags-input{border-bottom: 1px solid #d2d2d2;}
+
 
 /*** end search new page  ***/
 
