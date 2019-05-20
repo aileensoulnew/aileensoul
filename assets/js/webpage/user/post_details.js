@@ -237,7 +237,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $('.modal-close').click();
         }
     });
-    $scope.post_like = function(post_id,parent_index) {
+    $scope.post_like = function(post_id,parent_index, user_id) {
         $('#post-like-' + post_id).attr('style', 'pointer-events: none;');
         $http({
             method: 'POST',
@@ -249,6 +249,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
         }).then(function(success) {
 
             if (success.data.message == 1) {
+                socket.emit('user notification',user_id);
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
@@ -348,12 +349,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 }
             }).then(function(success) {
                 data = success.data;
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                
                 if (data.message == '1') {
+                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
                         $scope.postData[index].post_comment_data.push(data.comment_data[0]);
@@ -458,7 +457,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }
         });
     }
-    $scope.likePostComment = function(comment_id, post_id) {
+    $scope.likePostComment = function(comment_id, post_id,comment_user_id) {
         $('#cmt-like-fnc-' + comment_id).attr("style", "pointer-events:none;")
         $http({
             method: 'POST',
@@ -469,12 +468,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }
         }).then(function(success) {
             data = success.data;
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+            
             if (data.message == '1') {
+                socket.emit('user notification',comment_user_id);
+
                 if (data.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
@@ -565,38 +562,6 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
         $('#cancel-comment-li-' + comment_id).hide();
         $(".new-comment-" + post_id).show();
     }
-    $scope.EditPost = function(post_id, post_for, index) {
-        $scope.is_edit = 1;
-        $http({
-            method: 'POST',
-            url: base_url + 'user_post/getPostData',
-            data: 'post_id=' + post_id + '&post_for=' + post_for,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(function(success) {
-            $scope.is_edit = 1;
-            if (post_for == "opportunity") {
-                $scope.opp.description = success.data.opportunity;
-                $scope.opp.job_title = success.data.opportunity_for;
-                $scope.opp.location = success.data.location;
-                $scope.opp.field = success.data.field;
-                $scope.opp.edit_post_id = post_id;
-                $("#opportunity-popup").modal('show');
-            } else if (post_for == "simple") {
-                $scope.sim.description = success.data.description;
-                $scope.sim.edit_post_id = post_id;
-                $("#post-popup").modal('show');
-            } else if (post_for == "question") {
-                $scope.ask.ask_que = success.data.question;
-                $scope.ask.ask_description = success.data.description;
-                $scope.ask.related_category = success.data.tag_name;
-                $scope.ask.ask_field = success.data.field;
-                $scope.ask.edit_post_id = post_id;
-                $("#ask-question").modal('show');
-            }
-        });
-    }
 
     $scope.share_post = function(post_id,index,postData){
         $scope.share_post_data = $scope.postData[index];
@@ -634,6 +599,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             },100);
             if(result.status == '1')
             {
+                socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
                 $scope.postData[post_index].post_share_count = result.post_share_count;
@@ -669,7 +636,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
         $scope.IsVisible = $scope.IsVisible ? false : true;
     }
     
-    $scope.sendEditComment = function(comment_id, post_id) {
+    $scope.sendEditComment = function(comment_id, post_id, user_id) {
         var comment = $('#editCommentTaxBox-' + comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -687,6 +654,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }).then(function(success) {
                 data = success.data;
                 if (data.message == '1') {
+                    socket.emit('user notification',user_id);
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -731,7 +699,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             .then(function (success) {
                 // console.log(success.data);
                 data = success.data;
-                if (data.message == '1') {                    
+                if (data.message == '1') {
+                    socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;

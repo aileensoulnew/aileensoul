@@ -200,7 +200,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         //dots[slideIndex - 1].className += " active";
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
-    $scope.post_like = function(post_id,parent_index) {
+    $scope.post_like = function(post_id,parent_index, user_id) {
         $('#post-like-' + post_id).attr('style', 'pointer-events: none;');
         $http({
             method: 'POST',
@@ -211,6 +211,8 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             }
         }).then(function(success) {
             if (success.data.message == 1) {
+                socket.emit('user notification',user_id);
+
                 $('#post-like-' + post_id).removeAttr('style');
                 
                 if (success.data.is_newLike == 1) {
@@ -316,6 +318,8 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                   get_notification_unread_count();
                 }, 10000);
                 if (data.message == '1') {
+                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
                         $scope.postData[index].post_comment_data.push(data.comment_data[0]);
@@ -421,7 +425,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             }
         });
     }
-    $scope.likePostComment = function(comment_id, post_id) {
+    $scope.likePostComment = function(comment_id, post_id, comment_user_id) {
         $('#cmt-like-fnc-' + comment_id).attr("style", "pointer-events:none;")
         $http({
             method: 'POST',
@@ -432,12 +436,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             }
         }).then(function(success) {
             data = success.data;
-            clearTimeout(int_not_count);            
-            get_notification_unread_count();
-            int_not_count = setTimeout(function(){
-              get_notification_unread_count();
-            }, 10000);
+            
             if (data.message == '1') {
+                socket.emit('user notification',comment_user_id);
+
                 $('#cmt-like-fnc-' + comment_id).removeAttr("style");
                 if (data.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
@@ -557,99 +559,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         return matches;
     };
     
-    $scope.ask_question_check = function(event, queIndex) {
-        if (document.getElementById("ask_edit_post_id_" + queIndex)) {
-            var post_id = document.getElementById("ask_edit_post_id_" + queIndex).value;
-        } else {
-            var post_id = 0;
-        }
-        if (post_id == 0) {} else {
-            var ask_que = document.getElementById("ask_que_" + post_id).value;
-            var ask_que = ask_que.trim();
-            if ($scope.IsVisible == true) {
-                var ask_web_link = $("#ask_web_link_" + post_id).val();
-            } else {
-                var ask_web_link = "";
-            }
-            var ask_que_desc = $('#ask_que_desc_' + post_id).val();
-            /*ask_que_desc = ask_que_desc.replace(/&nbsp;/gi, " ");
-            ask_que_desc = ask_que_desc.replace(/<br>$/, '');
-            ask_que_desc = ask_que_desc.replace(/&gt;/gi, ">");
-            ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
-            ask_que_desc = ask_que_desc.trim();
-            var related_category_edit = $scope.ask.related_category_edit;
-            var ask_hashtag_edit = $scope.ask.ask_hashtag_edit;            
-            var check_hashtag = (ask_hashtag_edit != '' && ask_hashtag_edit != undefined ? ask_hashtag_edit.replace(/#/g, "") : '');
-            var hashtags_arr = $scope.getHashTags(ask_hashtag_edit);
-
-            var fields = $("#ask_field_" + post_id).val();
-            if (fields == 0) var ask_other = $("#ask_other_" + post_id).val();
-            else var ask_other = "";
-            var ask_is_anonymously = ($("#ask_is_anonymously" + post_id + ":checked").length > 0 ? 1 : 0);
-            if (fields == '' || ask_que == '' || check_hashtag == '' || hashtags_arr.length == 0)
-            {
-                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
-                {
-                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
-                }
-                else
-                {
-                    $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
-                }
-                $('#post').modal('show');
-                $(document).on('keydown', function(e) {
-                    if (e.keyCode === 27) {
-                        $('#posterrormodal').modal('hide');
-                        $('.modal-post').show();
-                    }
-                });
-                //event.preventDefault();
-                return false;
-            } else {
-                var form_data = new FormData();
-                form_data.append('question', ask_que);
-                form_data.append('description', ask_que_desc);
-                form_data.append('field', fields);
-                form_data.append('other_field', ask_other);
-                form_data.append('category', JSON.stringify(related_category_edit));
-                form_data.append('weblink', ask_web_link);
-                form_data.append('hashtag', $scope.ask.ask_hashtag_edit);
-                form_data.append('post_for', "question");
-                form_data.append('is_anonymously', ask_is_anonymously);
-                form_data.append('post_id', post_id);
-                $('body').removeClass('modal-open');
-                $("#opportunity-popup").modal('hide');
-                $("#ask-question").modal('hide');
-                $http.post(base_url + 'user_post/edit_post_opportunity', form_data, {
-                    transformRequest: angular.identity,
-                    headers: {
-                        'Content-Type': undefined,
-                        'Process-Data': false
-                    }
-                }).then(function(success) {
-                    if (success) {
-                        $("#edit-ask-que-" + post_id).hide();
-                        $("#ask-que-" + post_id).show();
-                        $scope.postData[queIndex].question_data = success.data.question_data;
-                        var queUrl = $filter('slugify')(success.data.question_data.question);
-                        //$location.path("/questions/"+success.data.question_data.id+"/"+queUrl,false);
-                        //$location.update_path("/questions/"+success.data.question_data.id+"/"+queUrl);
-                        $window.location.href = base_url + "questions/" + success.data.question_data.id + "/" + queUrl;
-                        //$route.current = base_url+"questions/"+success.data.question_data.id+"/"+queUrl;
-                        //$scope.getQuestions();
-                        /*if (success.data.response == 1) {
-                            $('#ask-post-question-' + post_id).html(success.data.ask_question);
-                            $('#ask-post-description-' + post_id).html(success.data.ask_description);
-                            //   $('#ask-post-link-' + post_id).html(success.data.opp_field);
-                            $('#ask-post-category-' + post_id).html(success.data.ask_category);
-                            $('#ask-post-field-' + post_id).html(success.data.ask_field);
-                        }*/
-                    }
-                });
-            }
-        }
-    }
-    $scope.sendEditComment = function(comment_id, post_id) {
+    $scope.sendEditComment = function(comment_id, post_id, user_id) {
         var comment = $('#editCommentTaxBox-' + comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -667,6 +577,8 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             }).then(function(success) {
                 data = success.data;
                 if (data.message == '1') {
+                    socket.emit('user notification',user_id);
+
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -711,7 +623,9 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             .then(function (success) {
                 // console.log(success.data);
                 data = success.data;
-                if (data.message == '1') {                    
+                if (data.message == '1') {
+                    socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;

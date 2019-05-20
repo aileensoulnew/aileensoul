@@ -4,7 +4,14 @@ socket.on('user notification succ', (data) => {
         if(data.not_count > 0)
         {
             $(".noti_count").show();
-            $(".noti_count").html(data.not_count);
+            if(parseInt(data.not_count) > 99)
+            {
+                $(".noti_count").html('99+');
+            }
+            else
+            {
+                $(".noti_count").html(data.not_count);
+            }            
         }
         else
         {
@@ -15,7 +22,16 @@ socket.on('user notification succ', (data) => {
         if(data.contact_count > 0)
         {
             $(".con_req_cnt").show();
-            $(".con_req_cnt").html(data.contact_count);
+            if(data.contact_count > 99)
+            {
+                $(".con_req_cnt").addClass('not-max');
+                $(".con_req_cnt").html('99+');
+            }
+            else
+            {
+                $(".con_req_cnt").removeClass('not-max');
+                $(".con_req_cnt").html(data.contact_count);
+            }
         }
         else
         {
@@ -25,8 +41,16 @@ socket.on('user notification succ', (data) => {
 
         if(data.msg_count > 0)
         {
-            $(".msg-count").show();
-            $(".msg-count").html(data.msg_count);
+            if(parseInt(data.msg_count) > 99)
+            {
+                $(".msg-count").addClass('not-max');
+                $(".msg-count").html('99+');
+            }
+            else
+            {
+                $(".msg-count").removeClass('not-max');
+                $(".msg-count").html(data.msg_count);
+            }
         }
         else
         {

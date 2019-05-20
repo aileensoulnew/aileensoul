@@ -15,8 +15,62 @@ app.filter('capitalize', function () {
     }
 });
 app.controller('headerCtrl', function ($scope, $http,$timeout) {
-    // contactRequestCount();
-    
+
+    function get_notification_unread_count()
+    {
+        var url = base_url+'notification/get_notification_unread_count';
+        $.get(url, function(data, status){
+            $(".noti_count").show();
+            if(parseInt(data) > 0)
+            {
+                if(parseInt(data) > 99)
+                {
+                    $(".noti_count").html('99+');
+                }
+                else
+                {
+                    $(".noti_count").html(data);
+                }
+            }
+            else
+            {
+                $(".noti_count").hide();
+                $(".noti_count").html("");
+            }
+        }).fail(function() {
+            get_notification_unread_count();
+        });
+    }
+
+    function unread_message_count()
+    {
+        var url = base_url+'cron/unread_message_count_wc';
+        $.get(url, function(data, status){
+            data = JSON.parse(data);            
+            if(data.unread_user > 0)
+            {
+                $(".msg-count").show();
+                if(parseInt(data.unread_user) > 99)
+                {
+                    $(".msg-count").addClass('not-max');
+                    $(".msg-count").html('99+');
+                }
+                else
+                {
+                    $(".msg-count").removeClass('not-max');
+                    $(".msg-count").html(data.unread_user);
+                }
+            }
+            else
+            {
+                $(".msg-count").hide();
+                $(".msg-count").text('');   
+            }
+        }).fail(function() {
+            unread_message_count();
+        });
+    }
+
     function contactRequestCount(){
         $http({
             method: 'POST',
@@ -39,6 +93,12 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
         });
     }
+
+    setTimeout(function(){
+        get_notification_unread_count();
+        unread_message_count();
+        contactRequestCount();
+    }, 1000);
 
     $scope.header_all_profile = function () {
         $('.all .dropdown-menu').html(header_all_profile);

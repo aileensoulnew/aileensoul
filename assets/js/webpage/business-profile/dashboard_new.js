@@ -1201,6 +1201,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 })
                 .then(function (success) {
                     if (success) {
+                        socket.emit('user notification',user_id);
                         $("#post_something")[0].reset();
                         //$('.post_loader').hide();
                         $scope.sim.description = '';
@@ -1582,7 +1583,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 })
                 .then(function (success) {
 
-                    if (success) {                                
+                    if (success) {
+                        socket.emit('user notification',user_id);
                         $('.post_loader').hide();
                         $scope.opp.description = '';
                         $scope.opp.opptitle = '';
@@ -1756,6 +1758,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         })
                         .then(function (success) {
                             if (success) {
+                                socket.emit('user notification',user_id);
                                 //window.location = base_url+user_slug+"/questions";
                                 $('.post_loader').hide();
                                 $scope.opp.description = '';
@@ -1937,7 +1940,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }, function (error) {});
     };
 
-    $scope.post_like = function (post_id,parent_index) {
+    $scope.post_like = function (post_id,parent_index,user_id) {
         $('#post-like-' + post_id).attr('style','pointer-events: none;');
         $http({
             method: 'POST',
@@ -1948,6 +1951,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $('#post-like-' + post_id).removeAttr('style');
             
             if (success.data.message == 1) {
+                socket.emit('user notification',user_id);
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     // $('#post-like-' + post_id).addClass('like');
@@ -2063,12 +2067,9 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             })
             .then(function (success) {
                 data = success.data;
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                
                 if (data.message == '1') {
+                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
                         $scope.postData[index].post_comment_data.push(data.comment_data[0]);
@@ -2177,7 +2178,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         });
     }
 
-    $scope.likePostComment = function (comment_id, post_id) {
+    $scope.likePostComment = function (comment_id, post_id,comment_user_id) {
         $('#cmt-like-fnc-' + comment_id).attr("style","pointer-events:none;")
         $http({
             method: 'POST',
@@ -2188,7 +2189,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         .then(function (success) {
             data = success.data;
             
-            if (data.message == '1') {                
+            if (data.message == '1') {
+                socket.emit('user notification',comment_user_id);
                 if (data.is_newLike == 1) {
                     // $('#post-comment-like-' + comment_id).parent('a').addClass('like');
                     $('#cmt-like-fnc-' + comment_id).addClass('like');
@@ -2286,7 +2288,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         $(".new-comment-"+post_id).show();
     }   
 
-    $scope.sendEditComment = function (comment_id,post_id) {
+    $scope.sendEditComment = function (comment_id,post_id,user_id) {
         var comment = $('#editCommentTaxBox-' + comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -2303,6 +2305,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
+                    socket.emit('user notification',user_id);
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -2347,7 +2350,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             .then(function (success) {
                 // console.log(success.data);
                 data = success.data;
-                if (data.message == '1') {                    
+                if (data.message == '1') {
+                    socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
@@ -2625,6 +2629,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             },100);
             if(result.status == '1')
             {
+                socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
                 $scope.postData[post_index].post_share_count = result.post_share_count;

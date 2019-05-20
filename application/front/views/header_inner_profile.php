@@ -758,57 +758,6 @@ if($browser == "Firefox")
         });
 
     }
-    function get_notification_unread_count()
-    {
-        var url = '<?php echo base_url() . "notification/get_notification_unread_count" ?>';
-        $.get(url, function(data, status){
-            $(".noti_count").show();
-            if(parseInt(data) > 0)
-            {
-                if(parseInt(data) > 99)
-                {
-                    $(".noti_count").html('99+');
-                }
-                else
-                {
-                    $(".noti_count").html(data);
-                }
-            }
-            else
-            {
-                $(".noti_count").hide();
-                $(".noti_count").html("");
-            }
-        }).fail(function() {
-            get_notification_unread_count();
-        });
-    }
-
-    function unread_message_count()
-    {
-        var url = '<?php echo base_url() . "notification/unread_message_count" ?>';
-        $.get(url, function(data, status){
-            data = JSON.parse(data);
-            if(data.unread_user > 0)
-            {
-                $(".msg-count").show();
-                $(".msg-count").text(data.unread_user);
-            }
-            else
-            {
-                $(".msg-count").hide();
-                $(".msg-count").text('');   
-            }
-        });
-        .fail(function() {
-            unread_message_count();
-        });
-    }
-    setTimeout(function(){
-        get_notification_unread_count();
-        unread_message_count();
-    }, 1000);
-    
 
     function sendmail() {
         $("#vert_email").attr("style","pointer-events: none;")

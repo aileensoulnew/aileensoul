@@ -42,8 +42,8 @@ class Cron extends MY_Controller {
 
     public function unread_message_count_wc()
     {
-        header('Content-Type: text/event-stream');
-        header('Cache-Control: no-cache');
+        // header('Content-Type: text/event-stream');
+        // header('Cache-Control: no-cache');
         if(include_once './mongo/vendor/autoload.php')
         {
 
@@ -75,14 +75,17 @@ class Cron extends MY_Controller {
             );
             $result = $collection->aggregate($pipeline)->toArray();
             $msg_cnt = count($result);
-            echo "data:{$msg_cnt}\n\n";
-            flush();
+            echo json_encode(array("unread_user"=>$msg_cnt));
+            // echo "data:{$msg_cnt}\n\n";
+            // flush();
         }
         else
         {
-            echo "data:0\n\n";
-            flush();
+            // echo "data:0\n\n";
+            echo json_encode(array("unread_user"=>0));
+            // flush();
         }
+        exit();
     }
 
     public function contact_request_count_wc()

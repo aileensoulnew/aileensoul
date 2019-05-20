@@ -1,4 +1,4 @@
-function post_like(post_id) {
+function post_like(post_id,user_id) {
     $('#post-like-' + post_id).attr("style","pointer-events:none");
     $.ajax({
         url: base_url + "article/likePost",
@@ -8,6 +8,8 @@ function post_like(post_id) {
         success: function (success) {
             $('#post-like-' + post_id).removeAttr("style");
             if (success.message == 1) {
+                socket.emit('user notification',user_id);
+
                 if (success.is_newLike == 1) {
                     // $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
@@ -85,7 +87,7 @@ function post_like(post_id) {
     });
 }
 
-function likePostComment(comment_id, post_id) {
+function likePostComment(comment_id, post_id,commented_user_id) {
     $.ajax({
         url: base_url + 'user_post/likePostComment',
         type: "POST",
@@ -93,6 +95,7 @@ function likePostComment(comment_id, post_id) {
         dataType: 'json',
         success: function (success) {
             if (success.message == '1') {
+                socket.emit('user notification',commented_user_id);
                 if (success.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
                     $('#post-comment-like-' + comment_id).html(success.commentLikeCount);
@@ -226,6 +229,8 @@ function sendComment(post_id) {
             success: function (result) {
                 $("#send_comment").removeAttr("style");
                 if (result.message == '1') {
+                    socket.emit('user notification',user_id);
+
                     $('#commentTaxBox-' + post_id).html('');
                     comment_data = result.comment_data[0];
 
@@ -322,7 +327,8 @@ function contact(id, status, to_id, confirm = 0) {
         type: "POST",
         data: {"contact_id": id,"status":status,"to_id":to_id},
         dataType: 'text',
-        success: function (result) {            
+        success: function (result) {
+            socket.emit('user notification',to_id);
             $("#contact-btn").removeAttr("style");
             if(result.trim() == 'pending')
             {
@@ -350,6 +356,7 @@ function remove_contact(id, status, to_id) {
         data: {"contact_id": id,"status":status,"to_id":to_id},
         dataType: 'text',
         success: function (result) {
+            socket.emit('user notification',to_id);
             $("#contact-btn").removeAttr("style");
             $("#contact-btn").attr("onclick","contact("+id+",'pending',"+to_id+")");
             $("#contact-btn").html("Add to contact");
@@ -370,6 +377,7 @@ function confirmContactRequestInnerHeader(from_id,to_id) {
         data: {"from_id": from_id,"action":'confirm'},
         dataType: 'json',
         success: function (result) {
+            socket.emit('user notification',to_id);
             $("#contact-btn").removeAttr("style");            
             $("#contact-btn").attr("onclick","contact("+from_id+",'cancel',"+to_id+",1)");
             $("#contact-btn").html("In Contacts");            
@@ -396,6 +404,7 @@ function follow(id, status, to_id) {
         data: {"follow_id": id,"status":status,"to_id":to_id},
         dataType: 'json',
         success: function (result) {
+            socket.emit('user notification',to_id);
             $("#follow-btn").removeAttr("style");
             if(result == '1')
             {
@@ -423,6 +432,7 @@ function follow_business(id, status, to_id)
         data: {"follow_id": id,"status":status,"to_id":to_id},
         dataType: 'json',
         success: function (result) {
+            socket.emit('user notification',to_id);
             $("#follow-btn").removeAttr("style");
             $("#follow-btn").removeAttr("onclick");
             $("#follow-btn").html("Following");
