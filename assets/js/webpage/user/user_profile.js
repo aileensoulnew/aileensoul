@@ -615,7 +615,10 @@ app.controller('userProfileController', function ($scope, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) { 
-            socket.emit('user notification',to_id);
+            if(socket)
+            {
+                socket.emit('user notification',to_id);
+            }
             $scope.contact_value = success.data.trim();
             $scope.get_all_counter();
         });
@@ -629,7 +632,10 @@ app.controller('userProfileController', function ($scope, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) {
-            socket.emit('user notification',to_id);
+            if(socket)
+            {
+                socket.emit('user notification',to_id);
+            }
             $scope.contact_value = success.data.trim();
             $scope.get_all_counter();
         });
@@ -642,7 +648,10 @@ app.controller('userProfileController', function ($scope, $http) {
             data: 'from_id=' + from_id + '&action=confirm',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            socket.emit('user notification',from_id);
+            if(socket)
+            {
+                socket.emit('user notification',from_id);
+            }
             $scope.contact_value = 'confirm';
         });
     };
@@ -654,7 +663,10 @@ app.controller('userProfileController', function ($scope, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) {
-            socket.emit('user notification',to_id);
+            if(socket)
+            {
+                socket.emit('user notification',to_id);
+            }
             $scope.follow_value = success.data;
         });
     };
@@ -3318,8 +3330,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         .then(function (success) {
 
                             if (success) {
-                                
-                                socket.emit('user notification',user_id);
+                                if(socket)
+                                {
+                                    socket.emit('user notification',user_id);
+                                }
 
                                 $("#post_opportunity")[0].reset();
                                 $('.post_loader').hide();
@@ -3510,7 +3524,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         })
                         .then(function (success) {
                             if (success) {
-                                socket.emit('user notification',user_id);
+                                if(socket)
+                                {
+                                    socket.emit('user notification',user_id);
+                                }
                                 window.location = base_url+user_slug+"/questions";
                                 $('.post_loader').hide();
                                 $scope.opp.description = '';
@@ -3960,7 +3977,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         .then(function (success) {
                             if (success) {
                                 
-                                socket.emit('user notification',user_id);
+                                if(socket)
+                                {
+                                    socket.emit('user notification',user_id);
+                                }
 
                                 $("#post_something")[0].reset();
                                 //$('.post_loader').hide();
@@ -4054,7 +4074,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 var index = $scope.contactSuggetion.indexOf(contact);
                 $('.addtobtn-' + user_id).html('Request Sent');
                 $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
@@ -4078,7 +4101,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }).then(function (success) {
             $('#post-like-' + post_id).removeAttr('style');
             if (success.data.message == 1) {
-                socket.emit('user notification',like_user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',like_user_id);
+                }
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
@@ -4197,7 +4223,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    }
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
                         $scope.postData[index].post_comment_data.push(data.comment_data[0]);
@@ -4475,7 +4504,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',user_id);
+                    }
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -4529,11 +4561,17 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
-                        socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                        if(socket)
+                        {
+                            socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                        }
                         $('.editable_text').html('');
                     } else {
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
-                        socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                        if(socket)
+                        {
+                            socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                        }
                         $('.editable_text').html('');
                     }
                 }
@@ -10829,7 +10867,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
         }).then(function (success) {
             
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     // $('#post-like-' + post_id).addClass('like');
@@ -10904,7 +10945,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.questionData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.questionData[index].post_data.user_id);
+                    }
                     $scope.questionData[index].post_comment_count = data.comment_count;
                     $('.post-comment-count-' + post_id).html(data.comment_count);
                     $('.editable_text').html('');
@@ -11802,8 +11846,11 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 var index = $scope.contactSuggetion.indexOf(contact);
                 $('.addtobtn-' + user_id).html('Request Sent');
                 $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
-               // $('.owl-carousel').trigger('next.owl.carousel');
-               socket.emit('user notification',user_id);
+                // $('.owl-carousel').trigger('next.owl.carousel');
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
             }
         });
     }
@@ -11823,7 +11870,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
         }).then(function (success) {
             $('#post-like-' + post_id).removeAttr('style');
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
@@ -11942,7 +11992,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    }
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
                         $scope.postData[index].post_comment_data.push(data.comment_data[0]);
@@ -12065,7 +12118,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             data = success.data;
             
             if (data.message == '1') {
-                socket.emit('user notification',commented_user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',commented_user_id);
+                }
                 if (data.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
@@ -12170,7 +12226,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',user_id);
+                    }
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -12221,7 +12280,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 // console.log(success.data);
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    }
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
@@ -12511,7 +12573,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             },100);
             if(result.status == '1')
             {
-                socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+                }
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
                 $scope.postData[post_index].post_share_count = result.post_share_count;

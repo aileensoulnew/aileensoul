@@ -1461,8 +1461,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         .then(function (success) {
 
                             if (success) {
-
-                                socket.emit('user notification',user_id);
+                                if(socket)
+                                {
+                                    socket.emit('user notification',user_id);
+                                }
 
                                 $('.post_loader').hide();
                                 $scope.opp.description = '';
@@ -1669,7 +1671,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         })
                         .then(function (success) {
                             if (success) {
-                                socket.emit('user notification',user_id);
+                                if(socket)
+                                {
+                                    socket.emit('user notification',user_id);
+                                }
                                 //window.location = base_url+user_slug+"/questions";
                                 $('.post_loader').hide();
                                 $scope.opp.description = '';
@@ -2112,7 +2117,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 })
                 .then(function (success) {
                     if (success) {
-                        socket.emit('user notification',user_id);
+                        if(socket)
+                        {
+                            socket.emit('user notification',user_id);
+                        }
 
                         $("#post_something")[0].reset();
                         //$('.post_loader').hide();
@@ -2203,7 +2211,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 var index = $scope.contactSuggetion.indexOf(contact);
                 $('.addtobtn-' + user_id).html('Request Sent');
                 $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
@@ -2223,8 +2234,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $('#post-like-' + post_id).removeAttr('style');
             
             if (success.data.message == 1) {
-                
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
 
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
@@ -2354,14 +2367,20 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     if (commentClassName == 'last-comment') {
                         if(is_promoted == 1)
                         {
-                            socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                            }
 
                             $scope.promotedPostData[index].post_comment_data.splice(0, 1);
                             $scope.promotedPostData[index].post_comment_data.push(data.comment_data[0]);
                         }
                         else
                         {
-                            socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                            }
 
                             $scope.postData[index].post_comment_data.splice(0, 1);
                             $scope.postData[index].post_comment_data.push(data.comment_data[0]);
@@ -2464,14 +2483,20 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             if (commentClassName == 'last-comment') {
                 if(is_promoted == 1)
                 {
-                    socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                    }
 
                     $scope.promotedPostData[parent_index].post_comment_data.splice(0, 1);
                     $scope.promotedPostData[parent_index].post_comment_data.push(data.comment_data[0]);
                 }
                 else
                 {
-                    socket.emit('user notification',$scope.postData[index].post_data.user_id);                    
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[index].post_data.user_id);                    
+                    }
                     $scope.postData[parent_index].post_comment_data.splice(0, 1);
                     $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
                 }
@@ -2484,12 +2509,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             } else {
                 if(is_promoted == 1)
                 {
-                    socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                    }
                     $scope.promotedPostData[parent_index].post_comment_data.splice(index, 1);
                 }
                 else
                 {
-                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    }
                     $scope.postData[parent_index].post_comment_data.splice(index, 1);
                 }
                 if(data.comment_count < 1)
@@ -2521,7 +2552,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data = success.data;
             
             if (data.message == '1') {
-                socket.emit('user notification',comment_user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',comment_user_id);
+                }
 
                 if (data.is_newLike == 1) {
                     // $('#post-comment-like-' + comment_id).parent('a').addClass('like');
@@ -2641,7 +2675,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',user_id);
+                    }
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -2692,12 +2729,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         if(is_promoted == 1)
                         {
                             $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
-                            socket.emit('user notification',$scope.promotedPostData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
                         }
                         else
                         {
                             $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
-                            socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
                         }
                         
                         $('.editable_text').html('');
@@ -2705,12 +2748,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         if(is_promoted == 1)
                         {
                             $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
-                            socket.emit('user notification',$scope.promotedPostData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
                         }
                         else
                         {
                             $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
-                            socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
                         }
                         
                         $('.editable_text').html('');
@@ -2984,7 +3033,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         })
         .then(function (success) {
             // $scope.follow_value = success.data;
-            socket.emit('user notification',to_id);
+            if(socket)
+            {
+                socket.emit('user notification',to_id);
+            }
             $('.busflwbtn-' + to_id).html('Following');
             $('.busflwbtn-' + to_id).attr('style','pointer-events:none;');
         });
@@ -3023,7 +3075,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $('#post-like-' + post_id).removeAttr('style');
             
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 if (success.data.is_newLike == 1) {
                     $('#post-like-count-' + post_id).show();
                     // $('#post-like-' + post_id).addClass('like');
@@ -3182,7 +3237,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 data = success.data;
                 
                 if (data.message == '1') {
-                    socket.emit('user notification',recentpost.post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',recentpost.post_data.user_id);
+                    }
                     if (commentClassName == 'last-comment') {
                         $scope.recentpost.post_comment_data.splice(0, 1);
                         $scope.recentpost.post_comment_data.push(data.comment_data[0]);
@@ -3341,12 +3399,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $('#posterrormodal').modal('show');
                 if(is_promoted == 1)
                 {
-                    socket.emit('user notification',$scope.promotedPostData[post_index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData[post_index].post_data.user_id);
+                    }
                     $scope.promotedPostData[post_index].post_share_count = result.post_share_count;
                 }
                 else
                 {
-                    socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+                    }
                     $scope.postData[post_index].post_share_count = result.post_share_count;
                 }
             }

@@ -128,7 +128,10 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         }).then(function (success) {
             if (success.data) {
                 $scope.pending_contact_request_data.splice(index, 1);
-                socket.emit('user notification',from_id);
+                if(socket)
+                {
+                    socket.emit('user notification',from_id);
+                }
             }
         });
     }
@@ -142,7 +145,10 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         }).then(function (success) {
             if (success.data) {
                 $scope.pending_contact_request_data.splice(index, 1);
-                socket.emit('user notification',from_id);
+                if(socket)
+                {
+                    socket.emit('user notification',from_id);
+                }
             }
         });
     }
@@ -155,7 +161,10 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         }).then(function (success) {
             if (success.data.message == 1) {
                 $('#item-' + user_id + ' a.btn3').html('Request Sent');
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
                 //$('.owl-carousel').trigger('next.owl.carousel');
             }
         });

@@ -211,7 +211,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             }
         }).then(function(success) {
             if (success.data.message == 1) {
-                socket.emit('user notification',user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',user_id);
+                }
 
                 $('#post-like-' + post_id).removeAttr('style');
                 
@@ -318,7 +321,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                   get_notification_unread_count();
                 }, 10000);
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    }
 
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
@@ -438,7 +444,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             data = success.data;
             
             if (data.message == '1') {
-                socket.emit('user notification',comment_user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',comment_user_id);
+                }
 
                 $('#cmt-like-fnc-' + comment_id).removeAttr("style");
                 if (data.is_newLike == 1) {
@@ -577,7 +586,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             }).then(function(success) {
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',user_id);
+                    }
 
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
@@ -624,7 +636,10 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                 // console.log(success.data);
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    }
                     
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);

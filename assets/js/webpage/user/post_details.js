@@ -354,7 +354,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 data = success.data;
                 
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[index].post_data.user_id);
+                    }
 
                     if (commentClassName == 'last-comment') {
                         $scope.postData[index].post_comment_data.splice(0, 1);
@@ -473,7 +476,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             data = success.data;
             
             if (data.message == '1') {
-                socket.emit('user notification',comment_user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',comment_user_id);
+                }
 
                 if (data.is_newLike == 1) {
                     $('#post-comment-like-' + comment_id).parent('a').addClass('like');
@@ -602,7 +608,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             },100);
             if(result.status == '1')
             {
-                socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+                if(socket)
+                {
+                    socket.emit('user notification',$scope.postData[post_index].post_data.user_id);
+                }
 
                 $('.biderror .mes').html("<div class='pop_content'>Post Shared Successfully.");
                 $('#posterrormodal').modal('show');
@@ -657,7 +666,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }).then(function(success) {
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',user_id);
+                    }
                     $('#comment-dis-inner-' + comment_id).show();
                     $('#comment-dis-inner-' + comment_id).html(comment);
                     $('#edit-comment-' + comment_id).html();
@@ -703,7 +715,10 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 // console.log(success.data);
                 data = success.data;
                 if (data.message == '1') {
-                    socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.postData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                    }
                     if (commentClassName == 'last-comment') {
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
