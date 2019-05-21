@@ -3305,8 +3305,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 .arti-profile-box .user-info-text h3{max-width: 100%; white-space: nowrap;
 text-overflow: ellipsis; overflow: hidden;}
 .last-item-box .arti-profile-box .user-info-text h3{text-align:center;}
-.arti-profile-box .user-info-text p{max-width: 100%; white-space: nowrap;
-text-overflow: ellipsis; overflow: hidden;}
+.arti-profile-box .user-info-text p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .pl4{padding-left:4px;}
 .extra-label{padding-left:4px;}
 .form-group {position: relative;}
@@ -3542,15 +3541,17 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 
 /***  new commen css  ***/
 a:focus{text-decoration: none;}
-.one-hd.verify-body .main-section{padding-top:100px;}
 .two-hd .main-section{padding-top:93px; }
+.verify-body .main-section{padding-top:135px; }
+.one-hd.verify-body .main-section{padding-top:100px;}
 .verify-body-inner .main-section{padding-top:115px;}
 .one-hd .main-section{padding:60px 0 50px;}
 .container-flex{display: flex;}
 .left-section{float:left; width:320px;}
 .right-section{float:right; width:320px;}
 .big-left{width: 915px; float: left;}
-.op-main-page .middle-section{margin:0 auto; width:580px;}
+.big-left .middle-section{padding: 0;}
+.middle-section{margin-left: 15px; width:580px; float: left;}
 .middle-section-cus{margin:0 auto; width:580px;}
 #left-fixed.fixed-cus{position:fixed; width:320px;}
 #right-fixed.fixed-cus1{position:fixed; width:320px;}
@@ -3832,6 +3833,7 @@ tags-input .tags{padding: 0;}
 .share-post-head textarea.hashtag-textarea {min-height: 25px; padding-bottom: 0; height: 25px;}
 .search-page .availabel-data-box .comment-dis{width:91%;}
 .bnr-cus-sec .search-box{border: 0px;}
+#verifydiv{top: 78px !important; float: left; width: 100%; position: fixed; z-index: 9;}
 
 /***  media query  ***/
 @media print {
@@ -3925,7 +3927,8 @@ tags-input .tags{padding: 0;}
 }
 @media screen and (max-width: 1199px) {
   .right-section{display:none;}
-  .middle-section{width:590px;}
+  .middle-section{width:605px;}
+  .big-left{width: 100%;}
   .contact-request .middle-section{width:100%;}
   .block-1199{display:block;}
   .right-part{display:none;}
@@ -4009,6 +4012,7 @@ tags-input .tags{padding: 0;}
 }
 @media screen and (max-width: 991px) {
   .left-section{display:none;}
+  .middle-section{margin: 0 auto; float: none;}
   .tab-plr0{padding-left:0; padding-right:0;}
   .none-991{display:none;}
   .post-box-bottom ul li:nth-child(2){display:none;}

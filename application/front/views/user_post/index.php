@@ -77,7 +77,7 @@
             $verfy_cls = "verify-body";
         } ?>
     </head>
-    <body class="one-hd body-loader <?php echo $verfy_cls; ?>">
+    <body class="two-hd body-loader <?php echo $verfy_cls; ?>">
     <?php $this->load->view('page_loader'); ?>
     <div id="main_page_load" style="display: block;">
         <?php echo $header_profile; ?>
@@ -118,7 +118,7 @@
 
         <div class="main-section op-main-page">
             <div class="container mobp0">
-                <div class="container-flex">
+                <div class="">
                     
                     <div class="big-left">
                         <div ng-view></div>
