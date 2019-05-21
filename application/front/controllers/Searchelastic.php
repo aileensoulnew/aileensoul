@@ -20,8 +20,8 @@ class Searchelastic extends MY_Controller {
         else
         {
             $hosts = [
-                '139.59.36.139:9200',// IP + Port
-                '139.59.36.139',// Just IP          
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
             ];
             $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
         }

@@ -269,6 +269,40 @@ app.controller('EditorController', ['$scope', function ($scope) {
         document.execCommand('inserttext', false, value);
     };
 }]);
+app.controller('mainDefaultController', function($scope, $http, $compile) {
+});
+app.config(function ($routeProvider, $locationProvider) {
+    $routeProvider
+            .when("/peoples", {
+                templateUrl: base_url + "user_post/user_post_people",
+                controller: 'peopleController'
+            })
+            .when("/posts", {
+                templateUrl: base_url + "user_post/user_post_posts",
+                controller: 'postController'
+            })
+            .when("/opportunities", {
+                templateUrl: base_url + "user_post/user_post_opportunity",
+                controller: 'opportunityController'
+            })            
+            .when("/articles", {
+                templateUrl: base_url + "user_post/user_post_article",
+                controller: 'articleController'
+            })
+            .when("/qa", {
+                templateUrl: base_url + "user_post/user_post_question",
+                controller: 'questionController'
+            })
+            .when("/businesses", {
+                templateUrl: base_url + "user_post/user_post_business",
+                controller: 'businessController'
+            })
+            .otherwise({
+                templateUrl: base_url + "user_post/user_post_main",
+                controller: 'userOppoController'
+            });
+    $locationProvider.html5Mode(true);
+});
 app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.IsVisible = false;
     $scope.recentpost = [];
