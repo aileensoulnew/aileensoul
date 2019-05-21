@@ -255,6 +255,13 @@ $route['(:any)/article'] = 'Userprofile';
 $route['(:any)/savedpost'] = 'Userprofile';
 $route['(:any)/monetization-analytics'] = 'Userprofile';
 
+$route['(:any)/peoples'] = 'user_post/user_post_peoples';
+$route['(:any)/posts'] = 'user_post/user_post_posts';
+$route['(:any)/opportunities'] = 'user_post/user_post_opportunity';
+$route['(:any)/articles'] = 'user_post/user_post_article';
+$route['(:any)/qa'] = 'user_post/user_post_question';
+$route['(:any)/businesses'] = 'user_post/user_post_business';
+
 //Article
 $route['article/likePost'] = 'article/likePost';
 $route['article/load_more_comment'] = 'article/load_more_comment';
