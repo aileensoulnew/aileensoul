@@ -9,7 +9,17 @@ class Searchelastic_model extends CI_Model {
     
     public function add_edit_single_people($user_id)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         
         $client = $this->elasticclient;
         $stmt = "SELECT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
@@ -37,7 +47,17 @@ class Searchelastic_model extends CI_Model {
 
     public function add_edit_single_business($user_id)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         $client = $this->elasticclient;
         $stmt = "SELECT bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, bp.other_city, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) AS industry_name FROM ailee_business_profile bp
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
@@ -57,7 +77,17 @@ class Searchelastic_model extends CI_Model {
 
     public function add_edit_single_opportunity($id_post)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         $client = $this->elasticclient;
         $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,GROUP_CONCAT(DISTINCT(jt.name)) AS opportunity_for,opportunity_for AS opportunity_for_id,GROUP_CONCAT(DISTINCT(c.city_name)) AS location,location AS location_id,uo.opportunity,it.industry_name AS field, uo.other_field, uo.opptitle ,uo.oppslug, uo.company_name,IF(uo.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag,uo.hashtag AS hashtag_id
             FROM ailee_user_opportunity uo
@@ -81,7 +111,17 @@ class Searchelastic_model extends CI_Model {
 
     public function add_edit_single_post($id_post)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         $client = $this->elasticclient;
         $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag, usp.hashtag AS hashtag_id,usp.sim_title, usp.simslug
             FROM ailee_user_simple_post usp
@@ -102,7 +142,17 @@ class Searchelastic_model extends CI_Model {
 
     public function add_edit_single_question($id_post)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         $client = $this->elasticclient;
         $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category, uaq.description, it.industry_name AS field, uaq.others_field, uaq.is_anonymously ,uaq.link, uaq.modify_date, uaq.question,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag,uaq.hashtag AS hashtag_id
             FROM ailee_user_ask_question uaq
@@ -126,7 +176,17 @@ class Searchelastic_model extends CI_Model {
 
     public function add_edit_single_article($id_post)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         $client = $this->elasticclient;
         $stmt = "SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id, up.user_type, pa.article_desc, pa.article_main_category, pa.article_other_category, pa.article_featured_image, pa.article_meta_description, pa.article_meta_title, pa.article_slug, pa.article_sub_category, pa.article_title, pa.hashtag as hashtag_id , pa.id_post_article, IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') AS hashtag,it.industry_name AS field
             FROM ailee_post_article pa

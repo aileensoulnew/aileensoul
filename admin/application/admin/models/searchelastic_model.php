@@ -9,7 +9,17 @@ class Searchelastic_model extends CI_Model {
 
     public function add_edit_single_article($id_post)
     {
-        $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();
+        }
+        else
+        {
+            $hosts = [
+                '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
+                '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];
+            $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+        }
         $client = $this->elasticclient;
         $stmt = "SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id, up.user_type, pa.article_desc, pa.article_main_category, pa.article_other_category, pa.article_featured_image, pa.article_meta_description, pa.article_meta_title, pa.article_slug, pa.article_sub_category, pa.article_title, pa.hashtag as hashtag_id , pa.id_post_article, IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') AS hashtag,it.industry_name AS field
             FROM ailee_post_article pa
