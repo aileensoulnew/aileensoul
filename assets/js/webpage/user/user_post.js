@@ -270,6 +270,20 @@ app.controller('EditorController', ['$scope', function ($scope) {
     };
 }]);
 app.controller('mainDefaultController', function($scope, $http, $compile) {
+    $scope.$parent.active_tab = '1';
+    $scope.getContactSuggetion = function() {
+        $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
+            $scope.contactSuggetion = success.data;
+        }, function (error) {});
+    }
+    $scope.getContactSuggetion();
+
+    $scope.get_business_contact_suggetion = function() {
+        $http.get(base_url + "user_post/get_business_contact_suggetion").then(function (success) {
+            $scope.business_suggetion = success.data;
+        }, function (error) {});
+    };
+    $scope.get_business_contact_suggetion();
 });
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -1103,13 +1117,6 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }, function (error) {});
     }
 
-
-    getContactSuggetion();
-    function getContactSuggetion() {
-        $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
-            $scope.contactSuggetion = success.data;
-        }, function (error) {});
-    }
     $scope.job_title = [];
     $scope.loadJobTitle = function ($query) {
         return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
@@ -3051,13 +3058,6 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $scope.old_count_profile = count_profile;
     };
 
-    $scope.get_business_contact_suggetion = function() {
-        $http.get(base_url + "user_post/get_business_contact_suggetion").then(function (success) {
-            $scope.business_suggetion = success.data;
-        }, function (error) {});
-    };
-    $scope.get_business_contact_suggetion();
-
     $scope.add_to_contact_business = function (id, status, to_id) {
         $http({
             method: 'POST',
@@ -3461,6 +3461,519 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         if (e. keyCode == 13) {
             e. preventDefault();
             return false;
+        }
+    });
+});
+
+app.controller('peopleController', function($scope, $http, $compile, $window,$location) {    
+    $scope.$parent.active_tab = '2';
+    $scope.user_id = user_id;
+    
+    var isProcessing = false;
+    var isProcessingPst = false;
+    
+    var pagenum = 0
+    $scope.perpage_record = 10;
+    $scope.total_record = 0;
+
+    $scope.peopleData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        $("#people-loader").show();
+
+        var search_job_title = '';
+        var search_city = '';
+        var search_field = '';
+        if($scope.search_job_title != '')
+        {
+            search_job_title = JSON.stringify($scope.search_job_title);
+        }        
+        if($scope.search_city != '')
+        {
+            search_city = JSON.stringify($scope.search_city);
+        }
+        if($scope.search_field != '')
+        {
+            search_field = $scope.search_field;
+        }
+        // console.log($scope.search_gender);
+
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/peopleData',            
+            data: 'page='+pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_gender='+$scope.search_gender,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+
+            $('#main_loader').hide();            
+            $("#people-loader").hide();
+
+            $scope.page_number = success.data.page;
+            if(success.data.people_data.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.people_data != undefined) {
+                    for (var i in success.data.people_data) {
+                        $scope.people_data.push(success.data.people_data[i]);
+                    }
+                }
+                else{                
+                    $scope.people_data = success.data.people_data;
+                    if($scope.total_record == 0)
+                    {
+                        $scope.total_record = success.data.total_record;
+                    }
+                }
+            }
+            else
+            {
+                isProcessing = true;
+            }
+            
+            $('#main_loader').hide();            
+            $('body').removeClass("body-loader");            
+        });
+    };
+    $scope.peopleData(pagenum);
+
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_gender == undefined || $scope.search_gender == ''))
+        {
+            return false;
+        }
+        else
+        {
+            $scope.people_data = '';
+            $("#people-loader").show();
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = '';
+            var search_city = '';
+            var search_field = '';
+            if($scope.search_job_title != '')
+            {
+                search_job_title = JSON.stringify($scope.search_job_title);
+            }        
+            if($scope.search_city != '')
+            {
+                search_city = JSON.stringify($scope.search_city);
+            }
+            if($scope.search_field != '')
+            {
+                search_field = $scope.search_field;
+            }
+
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'user_post/peopleData',
+                data: 'page=' + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_gender='+$scope.search_gender,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#people-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.people_data = success.data.people_data;
+                $scope.total_record = success.data.total_record;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");                
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.peopleData(pagenum);
+        // $scope.get_search_total_count();
+    }
+
+    angular.element($window).bind("scroll", function (e) {
+        
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'peoples') {
+            // console.log($(window).scrollTop());
+            // console.log($(document).height() - $(window).height());
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage_record;//$(".perpage_record").val();            
+            // console.log(parseInt(perpage_record * page));
+            // console.log(total_record);
+
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.page_number) + 1;// parseInt($(".page_number").val()) + 1;
+                    $scope.peopleData(pagenum);
+                }
+            }
+        }
+    });
+
+    $scope.contact = function (id, status, to_id,indexCon,confirm) {
+        if(confirm == '1')
+        {
+            $("#remove-contact-conform-"+indexCon).modal("show");
+            return false;
+        }
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addToContactNew',
+            data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {            
+            if(success.data != "")
+            {
+                $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
+            }
+            $scope.get_all_counter();
+        });
+    };
+
+    $scope.remove_contact = function (id, status, to_id,indexCon) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addToContactNew',
+            data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            if(success.data != "")
+            {
+                $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
+            }
+            $scope.get_all_counter();
+        });
+    };
+
+    $scope.job_title = [];
+    $scope.loadJobTitle = function ($query) {
+        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+            var job_title = response.data;
+            return job_title.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.location = [];
+    $scope.loadLocation = function ($query) {
+        return $http.get(base_url + 'user_post/get_location', {cache: true}).then(function (response) {
+            var location_data = response.data;
+            return location_data.filter(function (location) {
+                return location.city_name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+});
+
+app.controller('postController', function($scope, $http, $compile, $window,$location) {    
+    $scope.$parent.active_tab = '3';
+    $scope.user_id = user_id;
+    
+    var isProcessing = false;
+    var isProcessingPst = false;
+    
+    var pagenum = 0
+    $scope.perpage_record = 10;
+    $scope.total_record = 0;
+
+    $scope.postsData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        $("#people-loader").show();       
+
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/postsData',            
+            data: 'page='+pagenum,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+
+            $('#main_loader').hide();            
+            $("#people-loader").hide();
+
+            $scope.page_number = success.data.page;
+            if(success.data.sim_post.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.postData != undefined) {
+                    for (var i in success.data.sim_post) {
+                        $scope.postData.push(success.data.sim_post[i]);
+                    }
+                }
+                else{                
+                    $scope.postData = success.data.sim_post;
+                    if($scope.total_record == 0)
+                    {
+                        $scope.total_record = success.data.total_record;
+                    }
+                }
+            }
+            else
+            {
+                isProcessing = true;
+            }
+            
+            $('#main_loader').hide();            
+            $('body').removeClass("body-loader");            
+        });
+    };
+    $scope.postsData(pagenum);
+
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_gender == undefined || $scope.search_gender == ''))
+        {
+            return false;
+        }
+        else
+        {
+            $scope.postData = '';
+            $("#people-loader").show();
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = '';
+            var search_city = '';
+            var search_field = '';
+            if($scope.search_job_title != '')
+            {
+                search_job_title = JSON.stringify($scope.search_job_title);
+            }        
+            if($scope.search_city != '')
+            {
+                search_city = JSON.stringify($scope.search_city);
+            }
+            if($scope.search_field != '')
+            {
+                search_field = $scope.search_field;
+            }
+
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'user_post/postsData',
+                data: 'page=' + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_gender='+$scope.search_gender,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#people-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.sim_post;
+                $scope.total_record = success.data.total_record;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");                
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.postsData(pagenum);        
+    }
+
+    angular.element($window).bind("scroll", function (e) {
+        
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'posts') {
+            // console.log($(window).scrollTop());
+            // console.log($(document).height() - $(window).height());
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage_record;//$(".perpage_record").val();            
+            // console.log(parseInt(perpage_record * page));
+            // console.log(total_record);
+
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.page_number) + 1;// parseInt($(".page_number").val()) + 1;
+                    $scope.postsData(pagenum);
+                }
+            }
+        }
+    });
+});
+
+app.controller('opportunityController', function($scope, $http, $compile, $window,$location) {    
+    $scope.$parent.active_tab = '3';
+    $scope.user_id = user_id;
+    
+    var isProcessing = false;
+    var isProcessingPst = false;
+    
+    var pagenum = 0
+    $scope.perpage_record = 10;
+    $scope.total_record = 0;
+
+    $scope.opportunityData = function(pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        $("#people-loader").show();        
+
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/opportunityData',            
+            data: 'page='+pagenum,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+
+            $('#main_loader').hide();            
+            $("#people-loader").hide();
+
+            $scope.page_number = success.data.page;
+            if(success.data.sim_post.length > 0)
+            {
+                isProcessing = false;
+                if (pagenum != 0 && $scope.postData != undefined) {
+                    for (var i in success.data.sim_post) {
+                        $scope.postData.push(success.data.sim_post[i]);
+                    }
+                }
+                else{                
+                    $scope.postData = success.data.sim_post;
+                    if($scope.total_record == 0)
+                    {
+                        $scope.total_record = success.data.total_record;
+                    }
+                }
+            }
+            else
+            {
+                isProcessing = true;
+            }
+            
+            $('#main_loader').hide();            
+            $('body').removeClass("body-loader");            
+        });
+    };
+    $scope.opportunityData(pagenum);
+
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_gender == undefined || $scope.search_gender == ''))
+        {
+            return false;
+        }
+        else
+        {
+            $scope.postData = '';
+            $("#people-loader").show();
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = '';
+            var search_city = '';
+            var search_field = '';
+            if($scope.search_job_title != '')
+            {
+                search_job_title = JSON.stringify($scope.search_job_title);
+            }        
+            if($scope.search_city != '')
+            {
+                search_city = JSON.stringify($scope.search_city);
+            }
+            if($scope.search_field != '')
+            {
+                search_field = $scope.search_field;
+            }
+
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'user_post/opportunityData',
+                data: 'page=' + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_gender='+$scope.search_gender,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#people-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.sim_post;
+                $scope.total_record = success.data.total_record;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");                
+            });
+        }
+    };
+
+    $scope.clearData = function(){
+        $scope.search_job_title = [];
+        $scope.search_field = '';
+        $scope.search_city = [];
+        $scope.search_hashtag = [];
+        $scope.search_company = [];
+        $scope.search_gender = '';
+
+        pagenum = 0;
+        isProcessing = false;
+        $scope.opportunityData(pagenum);        
+    }
+
+    angular.element($window).bind("scroll", function (e) {
+        
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'opportunities') {
+            // console.log($(window).scrollTop());
+            // console.log($(document).height() - $(window).height());
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage_record;//$(".perpage_record").val();            
+            // console.log(parseInt(perpage_record * page));
+            // console.log(total_record);
+
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.page_number) + 1;// parseInt($(".page_number").val()) + 1;
+                    $scope.opportunityData(pagenum);
+                }
+            }
         }
     });
 });

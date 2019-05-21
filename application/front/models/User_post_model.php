@@ -5265,4 +5265,310 @@ class User_post_model extends CI_Model {
         }
         return $result_array;
     }
+
+    public function get_people_data_total_rec($user_id = "",$search_job_title = "",$search_field = "",$search_city = "",$search_gender = "") {
+
+        $sql = "SELECT COUNT(*) as total_record FROM(
+            SELECT DISTINCT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
+                LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
+                LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
+                LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
+                LEFT JOIN ailee_job_title jt ON jt.title_id = up.designation
+                LEFT JOIN ailee_industry_type it1 ON it1.industry_id = up.field
+                LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
+                LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
+                LEFT JOIN ailee_industry_type it2 ON it2.industry_id = us.interested_fields
+                LEFT JOIN ailee_university un ON un.university_name = us.university_name
+                LEFT JOIN ailee_cities ct1 ON ct1.city_id = up.city
+                LEFT JOIN ailee_cities ct2 ON ct2.city_id = us.city
+                WHERE u.user_id != $user_id AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id'))
+        ) as main WHERE main.user_slug != '' ";
+        $jt_sql = "";
+        if($search_job_title != undefined && !empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {
+                $str1 = str_replace(" ", "%' OR main.degree_name LIKE '%", $value->name);
+                $str1 = "main.degree_name LIKE '%".$str1."%'";
+
+                $str2 = str_replace(" ", "%' OR main.title_name LIKE '%", $value->name);
+                $str2 = "main.title_name LIKE '%".$str2."%'";
+
+                $jt_sql .= "main.degree_name LIKE '%".$value->name."%' OR main.title_name LIKE '%".$value->name."%' OR ".$str1.' OR '.$str2;                
+            }
+            $jt_sql= "(".$jt_sql.") OR ";
+        }
+        $fd_sql = "";
+        if($search_field != undefined && $search_field != '')
+        {
+            $fd_sql .= " (main.profession_field = '".$search_field."' OR main.student_field = '".$search_field."') OR ";            
+        }
+        $ct_sql = "";
+        if($search_city != undefined && !empty($search_city))
+        {
+            foreach ($search_city as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+                $str3 = str_replace(" ", "%' OR main.city_name LIKE '%", $value->city_name);
+                $str3 = "main.city_name LIKE '%".$str3."%'";
+                $ct_sql .= $str3;
+            }
+            $ct_sql= "(".$ct_sql.") OR ";
+        }
+
+        $gen_sql = "";
+        if($search_gender != undefined && $search_gender != '')
+        {
+            $gen_sql .= "(main.user_gender = '".$search_gender."') OR ";
+        }
+
+        if($jt_sql != "" || $fd_sql != "" || $ct_sql != "" || $gen_sql != "")
+        {
+            $sql .= " AND ";
+            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," OR ").")";
+        }
+
+
+        $sql .= " ORDER BY main.user_id DESC ";
+        
+        // echo $sql;exit();
+
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();        
+        return $result_array['total_record'];
+    }
+
+    public function get_people_data($user_id = '', $page = "",$limit = "40",$search_job_title = "",$search_field = "",$search_city = "",$search_gender = "") {
+        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "SELECT * FROM(
+            SELECT DISTINCT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,ui.user_image,jt.name AS title_name,d.degree_name,IF(up.field = 0,up.other_field,it1.industry_name) as profession_field,IF(us.interested_fields = 0,us.other_interested_fields,it2.industry_name) as student_field,up.city AS profession_city,us.city AS student_city,un.university_name,IF(up.city,ct1.city_name,ct2.city_name) AS city_name FROM ailee_user u
+                LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id
+                LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
+                LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
+                LEFT JOIN ailee_job_title jt ON jt.title_id = up.designation
+                LEFT JOIN ailee_industry_type it1 ON it1.industry_id = up.field
+                LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
+                LEFT JOIN ailee_degree d ON d.degree_id = us.current_study
+                LEFT JOIN ailee_industry_type it2 ON it2.industry_id = us.interested_fields
+                LEFT JOIN ailee_university un ON un.university_name = us.university_name
+                LEFT JOIN ailee_cities ct1 ON ct1.city_id = up.city
+                LEFT JOIN ailee_cities ct2 ON ct2.city_id = us.city
+                WHERE u.user_id != $user_id AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id'))
+        ) as main WHERE main.user_slug != '' ";
+        $jt_sql = "";
+        if($search_job_title != undefined && !empty($search_job_title))
+        {
+            foreach ($search_job_title as $key => $value) {
+                $str1 = str_replace(" ", "%' OR main.degree_name LIKE '%", $value->name);
+                $str1 = "main.degree_name LIKE '%".$str1."%'";
+
+                $str2 = str_replace(" ", "%' OR main.title_name LIKE '%", $value->name);
+                $str2 = "main.title_name LIKE '%".$str2."%'";
+
+                $jt_sql .= "main.degree_name LIKE '%".$value->name."%' OR main.title_name LIKE '%".$value->name."%' OR ".$str1.' OR '.$str2;                
+            }
+            $jt_sql= "(".$jt_sql.") OR ";
+        }
+        $fd_sql = "";
+        if($search_field != undefined && $search_field != '')
+        {
+            $fd_sql .= " (main.profession_field = '".$search_field."' OR main.student_field = '".$search_field."') OR ";            
+        }
+        $ct_sql = "";
+        if($search_city != undefined && !empty($search_city))
+        {
+            foreach ($search_city as $key => $value) {            
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+                $str3 = str_replace(" ", "%' OR main.city_name LIKE '%", $value->city_name);
+                $str3 = "main.city_name LIKE '%".$str3."%'";
+                $ct_sql .= $str3;
+            }
+            $ct_sql= "(".$ct_sql.") OR ";
+        }
+
+        $gen_sql = "";
+        if($search_gender != undefined && $search_gender != '')
+        {
+            $gen_sql .= "(main.user_gender = '".$search_gender."') OR ";
+        }
+
+        if($jt_sql != "" || $fd_sql != "" || $ct_sql != "" || $gen_sql != "")
+        {
+            $sql .= " AND ";
+            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," OR ").")";
+        }
+
+
+        $sql .= " ORDER BY main.user_id DESC ";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";            
+        }
+        // echo $sql;exit();
+
+        $query = $this->db->query($sql);
+
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+
+            $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
+            if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+            {
+                $result_array[$key]['contact_detail']['contact_status'] = 1;
+                $result_array[$key]['contact_detail']['contact_value'] = $is_userContactInfo['status'];
+                $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];
+            }
+            else
+            {
+                $result_array[$key]['contact_detail']['contact_status'] = 0;
+                $result_array[$key]['contact_detail']['contact_value'] = 'new';
+                $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];   
+            }
+
+        }
+        $ret_array['people_data'] = $result_array;
+        $ret_array['page'] = $page;
+        if($page == 1)
+        {
+            $ret_array['total_record'] = $this->get_people_data_total_rec($user_id,$search_job_title,$search_field,$search_city,$search_gender);
+        }
+        return $ret_array;
+    }
+
+    public function get_posts_data_total_rec($user_id = "",$search_hashtag = ""){
+        $sql = "SELECT COUNT(*) as total_record FROM ailee_user_post up WHERE up.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for = 'simple' AND up.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY up.created_date DESC";
+
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        // echo $sql;exit();
+
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array['total_record'];
+    }
+
+    public function get_posts_data($user_id = '',$page = '',$limit = '10',$search_hashtag = '')
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "SELECT up.* FROM ailee_user_post up WHERE up.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for = 'simple' AND up.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY up.created_date DESC";
+
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        // echo $sql;exit();
+
+        $query = $this->db->query($sql);
+        $user_post = $query->result_array();
+
+        foreach ($user_post as $key => $value) {
+            $user_post[$key]['time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($user_post[$key]['created_date'])));
+            $result_array[$key]['post_data'] = $user_post[$key];
+
+            $this->db->select("count(*) as file_count")->from("user_post_file upf");
+            $this->db->where('upf.post_id', $value['id']);
+            $query = $this->db->get();
+            $total_post_files = $query->row_array('file_count');
+            $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
+            if($value['user_type'] == '1')
+            {                
+                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+                $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+                $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+                $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+                $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+                $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+                $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+                $this->db->where('u.user_id', $value['user_id']);
+                $query = $this->db->get();
+                $user_data = $query->row_array();
+                $result_array[$key]['user_data'] = $user_data;
+            }
+            else
+            {                
+                $this->db->select("count(*) as file_count")->from("user_post_file upf");
+                $this->db->where('upf.post_id', $value['id']);
+                $query = $this->db->get();
+                $total_post_files = $query->row_array('file_count');
+                $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
+
+                $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
+                $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
+                $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
+                $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
+                $this->db->join('states st', 'st.state_id = bp.state', 'left');
+                $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
+                $this->db->where('bp.user_id', $value['user_id']);
+                $query = $this->db->get();
+                $user_data = $query->row_array();
+                $result_array[$key]['user_data'] = $user_data;
+            }
+
+            if ($value['post_for'] == 'simple') {
+                $this->db->select("usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag, usp.sim_title, usp.simslug")->from("user_simple_post usp, ailee_hashtag ht");
+                $this->db->where('usp.id', $value['post_id']);
+                $sql = "IF(usp.hashtag IS NULL,1=1,FIND_IN_SET(ht.id, usp.hashtag) != 0)";
+                $this->db->where($sql);
+                $this->db->group_by('usp.hashtag');
+                $query = $this->db->get();
+                $simple_data = $query->row_array();
+                $simple_data['description'] = nl2br($this->common->make_links($simple_data['description']));
+                $result_array[$key]['simple_data'] = $simple_data;
+            }
+
+            $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
+            $this->db->where('upf.post_id', $value['id']);
+            $query = $this->db->get();
+            $post_file_data = $query->result_array();
+            $result_array[$key]['post_file_data'] = $post_file_data;
+            
+            $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$user_id);
+            $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
+
+
+            $post_like_data = $this->postLikeData($value['id']);
+            $post_like_count = $this->likepost_count($value['id']);
+            $result_array[$key]['post_like_count'] = $post_like_count;
+            $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
+
+            $result_array[$key]['post_share_count'] = $this->postShareCount($value['id']);
+
+            if($user_id == $post_like_data['user_id'])
+            {
+                $postLikeUsername = "You";
+            }
+            else
+            {
+                $postLikeUsername = $post_like_data['username'];
+            }
+            if ($post_like_count > 1) {
+                $result_array[$key]['post_like_data'] = $postLikeUsername . ' and ' . ($post_like_count - 1) . ' other';
+            } elseif ($post_like_count == 1) {
+                $result_array[$key]['post_like_data'] = $postLikeUsername;
+            }
+            $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
+            $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
+
+            foreach ($postCommentData as $key1 => $value1) {
+                $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
+                $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
+            }
+        }
+
+        $ret_arr = array(
+            "sim_post" => $result_array,
+            "page" => $page
+        );
+        if($page == 1)
+        {
+            $total_record = $this->get_posts_data_total_rec($user_id,$search_hashtag);
+            $ret_arr['total_record'] = $total_record;
+        }
+        return $ret_arr;
+    }
 }

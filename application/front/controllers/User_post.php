@@ -3676,4 +3676,67 @@ class User_post extends MY_Controller {
         $this->data['title'] = "Opportunities | Aileensoul";
         $this->load->view('user_post/user_post_main', $this->data);
     }
+
+    public function user_post_people()
+    {
+        $this->load->view('user_post/user_post_people', $this->data);   
+    }
+
+    public function peopleData()
+    {
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+        $userid = $this->session->userdata('aileenuser');
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        $search_city = $this->input->post('search_city');
+        $search_gender = $this->input->post('search_gender');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        if($search_city != undefined && $search_city != '')
+        {
+            $search_city = json_decode($search_city);
+        }
+        
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $user_data = $this->user_post_model->get_people_data($userid,$page,$limit,$search_job_title,$search_field,$search_city,$search_gender);
+        echo json_encode($user_data);
+    }
+
+    public function user_post_posts()
+    {
+        $this->load->view('user_post/user_post_posts', $this->data);   
+    }
+
+    public function postsData()
+    {
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+        $userid = $this->session->userdata('aileenuser');
+        
+        $search_hashtag = $this->input->post('search_hashtag');
+
+        if($search_hashtag != undefined && $search_hashtag != '')
+        {
+            $search_hashtag = json_decode($search_hashtag);
+        }
+        
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $user_data = $this->user_post_model->get_posts_data($userid,$page,$limit,$search_hashtag);
+        echo json_encode($user_data);
+    }
 }
