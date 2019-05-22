@@ -1,5 +1,6 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
-<div class="container pt15 main-dashboard">
+<div class="main-dashboard">
+<div class="container pt15">
     <div class="left-part">
 		<div class="box-border p5">
             <div class="save-left-box">
@@ -897,7 +898,8 @@
             <div class="right-add-box">        
             </div>
         </div>
-    </div>
+</div>
+</div>
     <div style="display:none;" class="modal fade" id="report-spam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -416,6 +416,7 @@ border-bottom: 1px solid #d2d2d2;}
 .main-user-option ul li a:hover{background:#1b8ab9; color:#fff;}
 .main-user-option ul li a.active{background:#1b8ab9; color:#fff;}
 
+.main-dashboard{width: 100%; float: left;}
 .main-dashboard .left-part{position:absolute;}
 .main-dashboard .right-part{position:absolute;}
 .left-info-box, .right-info-box {width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin-bottom:10px; font-size:14px;}
@@ -3551,7 +3552,8 @@ a:focus{text-decoration: none;}
 .right-section{float:right; width:320px;}
 .big-left{width: 915px; float: left;}
 .big-left .middle-section{padding: 0;}
-.middle-section{margin-left: 15px; width:580px; float: left;}
+.middle-section{width:580px; float: left;}
+.big-left .middle-section{margin-left: 15px; width:580px; float: left;}
 .middle-section-cus{margin:0 auto; width:580px;}
 #left-fixed.fixed-cus{position:fixed; width:320px;}
 #right-fixed.fixed-cus1{position:fixed; width:320px;}

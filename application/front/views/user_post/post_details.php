@@ -28,9 +28,9 @@
         <div id="main_page_load" style="display: block;">
             <?php echo $header_profile ?>
             
-			<div class="main-section op-main-page">
+			<div class="main-section">
 				<div class="container mobp0">
-                <div class="container-flex">
+                <div class="big-left">
 					<div class="left-section">
 						<?php echo $n_leftbar ?>
 					</div>
@@ -822,12 +822,13 @@
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                     </div>
-                    <div class="right-section">
-						<div id="right-fixed" class="fw">
-							<?php $this->load->view('right_add_box'); ?>
-                        </div>
+                </div>
+                <div class="right-section">
+				    <div id="right-fixed" class="fw">
+						<?php $this->load->view('right_add_box'); ?>
                     </div>
                 </div>
+              
             </div>
         </div>
         <div class="modal fade message-box" id="delete_model" role="dialog">

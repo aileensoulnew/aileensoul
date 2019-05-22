@@ -1,5 +1,6 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
-<div class="container pt15 main-dashboard">
+<div class="main-dashboard">
+<div class="container pt15">
     <div class="analytic-detail fw">
         <div class="big-left">
             <div class="analytic-left-tab">
@@ -130,6 +131,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
     
 <div class="modal fade message-box biderror post-error" id="posterrormodal" tabindex="-1" role="dialog">
