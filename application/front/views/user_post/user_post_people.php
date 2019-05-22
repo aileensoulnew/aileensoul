@@ -23,7 +23,7 @@
                     <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field">
                         <option value="">Select Industry</option>
                         <?php foreach ($getFieldList as $key => $value) { ?>
-                            <option value="<?php echo $value['industry_name']; ?>"><?php echo $value['industry_name']; ?></option>
+                            <option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
                         <?php } ?>
                     </select>
                 </span>

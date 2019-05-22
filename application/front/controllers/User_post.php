@@ -3663,7 +3663,7 @@ class User_post extends MY_Controller {
     {
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);        
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
@@ -3713,6 +3713,8 @@ class User_post extends MY_Controller {
 
     public function user_post_posts()
     {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->load->view('user_post/user_post_posts', $this->data);   
     }
 
@@ -3737,6 +3739,126 @@ class User_post extends MY_Controller {
             $start = 0;
 
         $user_data = $this->user_post_model->get_posts_data($userid,$page,$limit,$search_hashtag);
+        echo json_encode($user_data);
+    }
+
+    public function user_post_opportunity()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/user_post_opportunity', $this->data);   
+    }
+
+    public function opportunityData()
+    {
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+        $userid = $this->session->userdata('aileenuser');
+        
+        $search_hashtag = $this->input->post('search_hashtag');
+
+        if($search_hashtag != undefined && $search_hashtag != '')
+        {
+            $search_hashtag = json_decode($search_hashtag);
+        }
+        
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $user_data = $this->user_post_model->get_opportunity_data($userid,$page,$limit,$search_hashtag);
+        echo json_encode($user_data);
+    }
+
+    public function user_post_article()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/user_post_article', $this->data);   
+    }
+
+    public function articleData()
+    {
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+        $userid = $this->session->userdata('aileenuser');
+        
+        $search_field = $this->input->post('search_field');
+
+        $search_hashtag = $this->input->post('search_hashtag');
+        if($search_hashtag != undefined && $search_hashtag != '')
+        {
+            $search_hashtag = json_decode($search_hashtag);
+        }
+        
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $user_data = $this->user_post_model->get_article_data($userid,$page,$limit,$search_field,$search_hashtag);
+        echo json_encode($user_data);
+    }
+
+    public function user_post_question()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->load->view('user_post/user_post_question', $this->data);   
+    }
+
+    public function questionData()
+    {
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+        $userid = $this->session->userdata('aileenuser');
+        
+        $search_field = $this->input->post('search_field');
+
+        $search_hashtag = $this->input->post('search_hashtag');
+        if($search_hashtag != undefined && $search_hashtag != '')
+        {
+            $search_hashtag = json_decode($search_hashtag);
+        }
+        
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $user_data = $this->user_post_model->get_question_data($userid,$page,$limit,$search_field,$search_hashtag);
+        echo json_encode($user_data);
+    }
+
+    public function user_post_business()
+    {
+        $this->load->view('user_post/user_post_business', $this->data);
+    }
+
+    public function businessData()
+    {
+        $page = 1;
+        if (!empty($this->input->post('page')) && $this->input->post('page') != 'undefined') {
+            $page = $this->input->post('page');
+        }
+        $userid = $this->session->userdata('aileenuser');
+
+        $search_field = $this->input->post('industry_name');
+        $search_city = $this->input->post('city_name');
+        
+        $limit = '10';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $user_data = $this->user_post_model->get_business_data($userid,$page,$limit,$search_field,$search_city);
         echo json_encode($user_data);
     }
 }

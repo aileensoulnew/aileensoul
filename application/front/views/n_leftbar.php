@@ -5,7 +5,7 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
 <div id="left-fixed" class="fw">
     <div class="user-profile-box box-border">
         <div class="user-cover-img">
-            <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
+            <a href="<?php echo base_url($leftbox_data['user_slug']) ?>" target="_self">
                 <?php
                 if($leftbox_data['profile_background'] != '')
                 { ?>
@@ -21,7 +21,7 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
         </div>
         <div class="user-detail">
             <div class="user-img">
-                <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
+                <a href="<?php echo base_url($leftbox_data['user_slug']) ?>" target="_self">
                 <?php
                 if ($leftbox_data['user_image'] != '')
                 { ?> 
@@ -47,11 +47,11 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
             <div class="user-detail-right">
                 <div class="user-detail-top">
                     <h4>
-                        <a href="<?php echo base_url($leftbox_data['user_slug']) ?>" title="<?php echo ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name']) ?>">
+                        <a href="<?php echo base_url($leftbox_data['user_slug']) ?>" title="<?php echo ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name']) ?>" target="_self">
                             <?php echo ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name']) ?></a>
                     </h4>
                     <p>
-                        <a href="<?php echo base_url($leftbox_data['user_slug']) ?>">
+                        <a href="<?php echo base_url($leftbox_data['user_slug']) ?>" target="_self">
                             <?php
                             if($leftbox_data['title_name'] == "")
                             {
@@ -70,9 +70,9 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
                 </div>
                 <div class="user-detail-bottom">
                     <ul>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard <span class="dashboard_counter"><?php echo($all_counter['dashboard_counter'] > 0 ? $all_counter['dashboard_counter'] : 0); ?></span></a></li>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>">Contacts <span class="contact_counter"><?php echo($all_counter['contact_counter'] > 0 ? $all_counter['contact_counter'] : 0); ?></span></a></li>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Followers <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>" target="_self">Dashboard <span class="dashboard_counter"><?php echo($all_counter['dashboard_counter'] > 0 ? $all_counter['dashboard_counter'] : 0); ?></span></a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/contacts') ?>" target="_self">Contacts <span class="contact_counter"><?php echo($all_counter['contact_counter'] > 0 ? $all_counter['contact_counter'] : 0); ?></span></a></li>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>" target="_self">Followers <span class="follower_counter"><?php echo($all_counter['follower_counter'] > 0 ? $all_counter['follower_counter'] : 0); ?></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -103,7 +103,7 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
         {
         ?>
             <div class="left-info-box monetize">
-                <a href="<?php echo base_url().$leftbox_data['user_slug'].'/monetization-analytics'; ?>">
+                <a href="<?php echo base_url().$leftbox_data['user_slug'].'/monetization-analytics'; ?>" target="_self">
                     <div class="dash-left-title">
                         <h3><i class="fa fa-money"></i> <span>Analytics</span></h3>
                     </div>
