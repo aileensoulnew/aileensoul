@@ -3757,11 +3757,27 @@ class User_post extends MY_Controller {
         }
         $userid = $this->session->userdata('aileenuser');
         
+        $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+        $search_city = $this->input->post('search_city');
         $search_hashtag = $this->input->post('search_hashtag');
+        $search_company = $this->input->post('search_company');
+        if($search_job_title != undefined && $search_job_title != '')
+        {
+            $search_job_title = json_decode($search_job_title);
+        }
+        if($search_city != undefined && $search_city != '')
+        {
+            $search_city = json_decode($search_city);
+        }
 
         if($search_hashtag != undefined && $search_hashtag != '')
         {
             $search_hashtag = json_decode($search_hashtag);
+        }
+        if($search_company != undefined && $search_company != '')
+        {
+            $search_company = json_decode($search_company);
         }
         
         $limit = '10';
@@ -3769,7 +3785,7 @@ class User_post extends MY_Controller {
         if ($start < 0)
             $start = 0;
 
-        $user_data = $this->user_post_model->get_opportunity_data($userid,$page,$limit,$search_hashtag);
+        $user_data = $this->user_post_model->get_opportunity_data($userid,$page,$limit,$search_job_title,$search_field,$search_city,$search_hashtag,$search_company);
         echo json_encode($user_data);
     }
 
@@ -3851,7 +3867,7 @@ class User_post extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
 
         $search_field = $this->input->post('industry_name');
-        $search_city = $this->input->post('city_name');
+        $search_city = $this->input->post('city_name');        
         
         $limit = '10';
         $start = ($page - 1) * $limit;

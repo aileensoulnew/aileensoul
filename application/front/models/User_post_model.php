@@ -5451,12 +5451,13 @@ class User_post_model extends CI_Model {
                 $str1 = str_replace(" ", "%' OR LOWER(hashtag) LIKE '%", strtolower($value->hashtag));
                 $str1 = "LOWER(hashtag) LIKE '%".$str1."%'";
                 $ht_sql .= $str1;
-            }   
-        }
-        if($ht_sql != '')
-        {
+            }
             $sql .= $ht_sql.")";
         }
+        /*if($ht_sql != '')
+        {
+            $sql .= $ht_sql.")";
+        }*/
         // echo $sql;exit();
 
         $query = $this->db->query($sql);
@@ -5480,12 +5481,13 @@ class User_post_model extends CI_Model {
                 $str1 = str_replace(" ", "%' OR LOWER(hashtag) LIKE '%", strtolower($value->hashtag));
                 $str1 = "LOWER(hashtag) LIKE '%".$str1."%'";
                 $ht_sql .= $str1;
-            }   
-        }
-        if($ht_sql != '')
-        {
+            }
             $sql .= $ht_sql.")";
         }
+        /*if($ht_sql != '')
+        {
+            $sql .= $ht_sql.")";
+        }*/
 
         $sql .= " ORDER BY up.created_date DESC";
         if($limit != '') {
@@ -5603,11 +5605,66 @@ class User_post_model extends CI_Model {
         return $ret_arr;
     }
 
-    public function get_opportunity_data_total_rec($user_id = "",$search_hashtag = ""){
-        $sql = "SELECT COUNT(*) as total_record FROM ailee_user_post up WHERE up.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for = 'opportunity' AND up.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY up.created_date DESC";
+    public function get_opportunity_data_total_rec($user_id = "",$search_job_title = '',$search_field = '',$search_city = '',$search_hashtag = '',$search_company = ''){
+        $sql = "SELECT COUNT(*) as total_record FROM ailee_user_post up LEFT JOIN ailee_user_opportunity uo ON uo.post_id = up.id WHERE up.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for = 'opportunity' AND up.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
 
-        if($limit != '') {
-            $sql .= " LIMIT $start,$limit";
+        $jt_sql = "";
+        if($search_job_title != undefined && !empty($search_job_title))
+        {
+            $jt_uo_sql = "uo.opportunity_for IN (SELECT title_id from ailee_job_title WHERE status='publish' AND (";           
+
+            foreach ($search_job_title as $key => $value) {
+                $str2 = str_replace(" ", "%' OR LOWER(name) LIKE '%", strtolower($value->name));
+                $str2 = "name LIKE '%".$str2."%'";
+                $jt_uo_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
+            }
+            $jt_sql= "(".$jt_uo_sql.") OR ";            
+        }
+
+        $fd_sql = "";
+        if($search_field != undefined && $search_field != '')
+        {
+            $fd_sql .= "(uo.field = '".$search_field."') OR ";
+        }
+
+        $ct_sql = "";
+        if($search_city != undefined && !empty($search_city))
+        {
+            $ct_uo_sql = "uo.location IN (SELECT city_id from ailee_cities WHERE status='1' AND (";
+            foreach ($search_city as $key => $value) {
+                $str1 = str_replace(" ", "%' OR LOWER(city_name) LIKE '%", strtolower($value->city_name));
+                $str1 = "LOWER(city_name) LIKE '%".$str1."%'";                
+                $ct_uo_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
+            }
+            $ct_sql= "(".$ct_uo_sql.") OR ";
+        }
+
+        $ht_sql = "";
+        if($search_hashtag != undefined && !empty($search_hashtag))
+        {
+            $ht_sql = " uo.hashtag IN(SELECT id FROM ailee_hashtag WHERE ";
+            foreach ($search_hashtag as $key => $value) {
+                $str1 = str_replace(" ", "%' OR LOWER(hashtag) LIKE '%", strtolower($value->hashtag));
+                $str1 = "LOWER(hashtag) LIKE '%".$str1."%'";
+                $ht_sql .= $str1;
+            }
+            $ht_sql .= ") OR ";
+        }
+
+        $cp_sql = "";
+        if($search_company != undefined && !empty($search_company))
+        {            
+            foreach ($search_company as $key => $value) {
+                $str1 = str_replace(" ", "%' OR LOWER(uo.company_name) LIKE '%", strtolower($value->company_name));
+                $str1 = "LOWER(uo.company_name) LIKE '%".$str1."%'";                
+                $cp_sql .= "LOWER(uo.company_name) LIKE '%".strtolower($value->company_name)."%' OR ".$str1;
+            }
+            $cp_sql= "(".$cp_sql.") OR ";
+        }
+
+        if($jt_sql != '' || $fd_sql != '' || $ct_sql != '' || $ht_sql != '' || $cp_sql != '')
+        {
+            $sql .= "AND (".trim($jt_sql.$fd_sql.$ct_sql.$ht_sql.$cp_sql," OR ").")";
         }
         // echo $sql;exit();
 
@@ -5616,13 +5673,74 @@ class User_post_model extends CI_Model {
         return $result_array['total_record'];
     }
 
-    public function get_opportunity_data($user_id = '',$page = '',$limit = '10',$search_hashtag = '')
+    public function get_opportunity_data($user_id = '',$page = '',$limit = '10',$search_job_title = '',$search_field = '',$search_city = '',$search_hashtag = '',$search_company = '')
     {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT up.* FROM ailee_user_post up WHERE up.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for = 'opportunity' AND up.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY up.created_date DESC";
+        $sql = "SELECT up.* FROM ailee_user_post up LEFT JOIN ailee_user_opportunity uo ON uo.post_id = up.id WHERE up.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for = 'opportunity' AND up.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+
+        $jt_sql = "";
+        if($search_job_title != undefined && !empty($search_job_title))
+        {
+            $jt_uo_sql = "uo.opportunity_for IN (SELECT title_id from ailee_job_title WHERE status='publish' AND (";           
+
+            foreach ($search_job_title as $key => $value) {
+                $str2 = str_replace(" ", "%' OR LOWER(name) LIKE '%", strtolower($value->name));
+                $str2 = "name LIKE '%".$str2."%'";
+                $jt_uo_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
+            }
+            $jt_sql= "(".$jt_uo_sql.") OR ";            
+        }
+
+        $fd_sql = "";
+        if($search_field != undefined && $search_field != '')
+        {
+            $fd_sql .= "(uo.field = '".$search_field."') OR ";
+        }
+
+        $ct_sql = "";
+        if($search_city != undefined && !empty($search_city))
+        {
+            $ct_uo_sql = "uo.location IN (SELECT city_id from ailee_cities WHERE status='1' AND (";
+            foreach ($search_city as $key => $value) {
+                $str1 = str_replace(" ", "%' OR LOWER(city_name) LIKE '%", strtolower($value->city_name));
+                $str1 = "LOWER(city_name) LIKE '%".$str1."%'";                
+                $ct_uo_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
+            }
+            $ct_sql= "(".$ct_uo_sql.") OR ";
+        }
+
+        $ht_sql = "";
+        if($search_hashtag != undefined && !empty($search_hashtag))
+        {
+            $ht_sql = " uo.hashtag IN(SELECT id FROM ailee_hashtag WHERE ";
+            foreach ($search_hashtag as $key => $value) {
+                $str1 = str_replace(" ", "%' OR LOWER(hashtag) LIKE '%", strtolower($value->hashtag));
+                $str1 = "LOWER(hashtag) LIKE '%".$str1."%'";
+                $ht_sql .= $str1;
+            }
+            $ht_sql .= ") OR ";
+        }
+
+        $cp_sql = "";
+        if($search_company != undefined && !empty($search_company))
+        {            
+            foreach ($search_company as $key => $value) {
+                $str1 = str_replace(" ", "%' OR LOWER(uo.company_name) LIKE '%", strtolower($value->company_name));
+                $str1 = "LOWER(uo.company_name) LIKE '%".$str1."%'";                
+                $cp_sql .= "LOWER(uo.company_name) LIKE '%".strtolower($value->company_name)."%' OR ".$str1;
+            }
+            $cp_sql= "(".$cp_sql.") OR ";
+        }
+
+        if($jt_sql != '' || $fd_sql != '' || $ct_sql != '' || $ht_sql != '' || $cp_sql != '')
+        {
+            $sql .= "AND (".trim($jt_sql.$fd_sql.$ct_sql.$ht_sql.$cp_sql," OR ").")";
+        }
+        
+        $sql .= " ORDER BY up.created_date DESC ";
 
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
@@ -5736,7 +5854,7 @@ class User_post_model extends CI_Model {
         );
         if($page == 1)
         {
-            $total_record = $this->get_opportunity_data_total_rec($user_id,$search_hashtag);
+            $total_record = $this->get_opportunity_data_total_rec($user_id,$search_job_title,$search_field,$search_city,$search_hashtag,$search_company);
             $ret_arr['total_record'] = $total_record;
         }
         return $ret_arr;
@@ -6150,6 +6268,21 @@ class User_post_model extends CI_Model {
             AND ul.status = '1'
             AND ul.is_delete = '0'
             AND bp.user_id NOT IN (select follow_to from ailee_user_follow where follow_from='" . $user_id . "' AND follow_type = '2' AND status = '1')";
+        $fd_sql = "";
+        if(isset($search_field) && !empty($search_field))
+        {
+            $fd_sql .= " bp.industriyal IN(".implode(",", $search_field).") OR ";
+        }
+
+        $ct_sql = "";
+        if(isset($search_city) && !empty($search_city))
+        {
+            $ct_sql .= " bp.city IN(".implode(",", $search_city).") OR ";
+        }
+        if($fd_sql != '' || $ct_sql != '')
+        {
+            $sql .= " AND (".trim($fd_sql.$ct_sql," OR ").")";
+        }
 
         $sql .= " ORDER BY bp.business_profile_id DESC ";
         if($limit != '') {

@@ -11,7 +11,7 @@
                                 <span><?php echo ucwords($_businessCategory['industry_name']); ?>
                                     <span class="pull-right hide">(<?php echo $_businessCategory['count']; ?>)</span>
                                 </span>
-                                    <input id="fields" class="categorycheckbox" type="checkbox" name="industry_name[]" value="<?php echo $_businessCategory['industry_name']; ?>" style="height: 12px;">
+                                    <input id="fields" class="categorycheckbox" type="checkbox" name="industry_name[]" value="<?php echo $_businessCategory['industry_id']; ?>" style="height: 12px;">
                                 <div class="control__indicator"></div>
                             </label>
                         
@@ -32,7 +32,7 @@
                                 <span><?php echo ucwords($_businessLocation['city_name']); ?>
                                     <span class="pull-right hide">(<?php echo $_businessLocation['count']; ?>)</span>
                                 </span>
-                                    <input class="locationcheckbox" type="checkbox" name="city_name[]" value="<?php echo $_businessLocation['city_name']; ?>" style="height: 12px;">
+                                    <input class="locationcheckbox" type="checkbox" name="city_name[]" value="<?php echo $_businessLocation['city_id']; ?>" style="height: 12px;">
                                 <div class="control__indicator"></div>
                             </label>                    
                     <?php
@@ -86,6 +86,16 @@
 
                     <li ng-if="business.details"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{business.details | limitTo:110}}...<a href="<?php echo BASEURL ?>company/{{business.business_slug}}"> Read more</a></p></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+    <div ng-if="total_record == 0 && postData.length == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+        <div class="custom-user-box no-data-available">
+            <div class='art-img-nn'>
+                <div class='art_no_post_img'>
+                    <img src="<?php echo base_url('assets/img/no-post.png'); ?>" alt="No Business">
+                </div>
+                <div class='art_no_post_text'>No Business Available. </div>
             </div>
         </div>
     </div>

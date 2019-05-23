@@ -741,6 +741,16 @@
                     </div>
                 </div>                
             </div>
+            <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+                <div class="custom-user-box no-data-available">
+                    <div class='art-img-nn'>
+                        <div class='art_no_post_img'>
+                            <img src="<?php echo base_url('assets/img/no-article.png'); ?>" alt="No Article">
+                        </div>
+                        <div class='art_no_post_text'>No Article Available. </div>
+                    </div>
+                </div>                                  
+            </div>
             <div id="post-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
                 <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
             </div>

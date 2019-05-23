@@ -573,7 +573,17 @@
                 <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
             </div>
         </div>
-    </div>    
+    </div>
+    <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+        <div class="custom-user-box no-data-available">
+            <div class='art-img-nn'>
+                <div class='art_no_post_img'>
+                    <img src="<?php echo base_url('assets/img/no-post.png'); ?>" alt="No Post">
+                </div>
+                <div class='art_no_post_text'>No Post Available. </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade message-box" id="delete_post_model" role="dialog">

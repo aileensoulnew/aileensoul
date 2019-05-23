@@ -691,6 +691,17 @@
     <div class="search-more-post" ng-if="business_data.length != 0">
         <a class="btn-new-1" href="<?php echo base_url('search/business?q={{search_keyword}}'); ?>">View More Business...</a> 
     </div>
+
+    <div ng-if="searchProfileData.length == 0 && postData.length == 0 && business_data.length == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+        <div class="custom-user-box no-data-available">
+            <div class='art-img-nn'>
+                <div class='art_no_post_img'>
+                    <img src="<?php echo base_url('assets/n-images/no-data.png'); ?>" alt="No Search">
+                </div>
+                <div class='art_no_post_text'>Oops No Data Found.</div>
+            </div>
+        </div>                                  
+    </div>
 </div>
 
 <div class="modal fade message-box" id="delete_post_model" role="dialog">

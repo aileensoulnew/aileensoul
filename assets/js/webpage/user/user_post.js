@@ -4655,12 +4655,18 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             return;
         }
         isProcessing = true;
-        $("#post-loader").show();        
+        $("#post-loader").show();
+
+        var search_job_title = JSON.stringify($scope.search_job_title);
+        var search_city = JSON.stringify($scope.search_city);
+        var search_hashtag = JSON.stringify($scope.search_hashtag);
+        var search_company = JSON.stringify($scope.search_company);
+        var search_field = $scope.search_field;
 
         $http({
             method: 'POST',
             url: base_url + 'user_post/opportunityData',            
-            data: 'page='+pagenum,
+            data: 'page='+pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_hashtag='+search_hashtag+'&search_company='+search_company,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -4695,7 +4701,46 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             $('body').removeClass("body-loader");            
         });
     };
-    $scope.opportunityData(pagenum);    
+    $scope.opportunityData(pagenum);
+
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_company == undefined || $scope.search_company.length < 1))
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = JSON.stringify($scope.search_job_title);
+            var search_city = JSON.stringify($scope.search_city);
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            var search_company = JSON.stringify($scope.search_company);
+            var search_field = $scope.search_field;
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'user_post/opportunityData',
+                data: "page=" + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_hashtag='+search_hashtag+'&search_company='+search_company,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.opportunity_post;
+                $scope.total_record = success.data.total_record;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+                
+                setTimeout(function() {
+                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                }, 300);
+            });
+        }
+    };
 
     $scope.clearData = function(){
         $scope.search_job_title = [];
@@ -4735,6 +4780,46 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             }
         }
     });
+
+    $scope.job_title = [];
+    $scope.loadJobTitle = function ($query) {
+        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+            var job_title = response.data;
+            return job_title.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.location = [];
+    $scope.loadLocation = function ($query) {
+        return $http.get(base_url + 'user_post/get_location', {cache: true}).then(function (response) {
+            var location_data = response.data;
+            return location_data.filter(function (location) {
+                return location.city_name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.hashtags = [];
+    $scope.loadHashtag = function ($query) {
+        return $http.get(base_url + 'user_post/get_hashtag', {cache: true}).then(function (response) {
+            var hashtag_data = response.data;
+            return hashtag_data.filter(function (hashtags) {
+                return hashtags.hashtag.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.business_arr = [];
+    $scope.loadBusiness = function ($query) {
+        return $http.get(base_url + 'user_post/get_all_business', {cache: true}).then(function (response) {
+            var business_data = response.data;
+            return business_data.filter(function (business_arr) {
+                return business_arr.company_name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
 
     $(document).on('hidden.bs.modal', function (event) {
         if($('.modal.in').length > 0)
@@ -7542,15 +7627,10 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
     };
 
     $scope.clearData = function(){
-        $scope.search_job_title = [];
-        $scope.search_field = '';
-        $scope.search_city = [];
-        $scope.search_hashtag = [];
-        $scope.search_company = [];
-        $scope.search_gender = '';
-
+        
         pagenum = 0;
         isProcessing = false;
+        $('#main_search')[0].reset();        
         $scope.businessData(pagenum);        
     }
 
