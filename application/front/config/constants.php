@@ -60,6 +60,8 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
     define('COOKIEHOST', '.aileensoul.localhost');
     define('CROSSDOMAIN', 'http://chat.aileensoul.localhost');
+
+    define('SOCKETSERVER', 'http://chat.aileensoul.localhost:3000');    
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == 'staging.aileensoul.com') {
     define('BASEURL', 'http://staging.aileensoul.com/');
@@ -79,6 +81,8 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
     define('COOKIEHOST', '.aileensoul.com');
     define('CROSSDOMAIN', 'https://message.aileensoul.com:3000');
+
+    define('SOCKETSERVER', 'https://message.aileensoul.com:3000');    
     error_reporting(0);
 } else {
     define('BASEURL', 'https://www.aileensoul.com/');
@@ -98,6 +102,8 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
     define('COOKIEHOST', '.aileensoul.com');
     define('CROSSDOMAIN', 'https://message.aileensoul.com:3000');
+
+    define('SOCKETSERVER', 'https://message.aileensoul.com:3000');
     error_reporting(0);
 }
 

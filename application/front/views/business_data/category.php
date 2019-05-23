@@ -149,7 +149,7 @@
         </script>
         <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
         <script type="text/javascript">
-            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+            var socket = io.connect("<?php echo SOCKETSERVER; ?>");
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>

@@ -320,7 +320,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 </script>
 <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-    var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+    var socket = io.connect("<?php echo SOCKETSERVER; ?>");
 </script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  

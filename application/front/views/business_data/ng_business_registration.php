@@ -1000,7 +1000,7 @@
         </script>
         <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
         <script type="text/javascript">
-            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+            var socket = io.connect("<?php echo SOCKETSERVER; ?>");
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.js?ver=' . time()); ?>"></script>
         <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>

@@ -207,7 +207,7 @@ header('Expires: ' . $date);
         </script>
         <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
         <script type="text/javascript">
-            var socket = io.connect('http://chat.aileensoul.localhost:3000/');
+            var socket = io.connect("<?php echo SOCKETSERVER; ?>");
         </script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
