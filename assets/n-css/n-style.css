@@ -3545,7 +3545,7 @@ a:focus{text-decoration: none;}
 .big-left{width: 915px; float: left;}
 .big-left .middle-section{padding: 0;}
 .middle-section{width:580px; float: left;}
-.big-left .middle-section{margin-left: 15px; width:580px; float: left;}
+.big-left .middle-section{margin-left: 15px; width:580px; float: right;}
 .middle-section-cus{margin:0 auto; width:580px;}
 #left-fixed.fixed-cus{position:fixed; width:320px;}
 #right-fixed.fixed-cus1{position:fixed; width:320px;}
@@ -3683,7 +3683,7 @@ a:focus{text-decoration: none;}
 .search-left-box select{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 5px 0px;}
 .search-all{}
 .search-more-post{text-align: center; padding-bottom: 30px;}
-.search-left-box .btn-new-1{padding: 7px 25px; margin: 0;}
+.search-left-box .btn-new-1{padding: 7px 25px; margin: 0; cursor: pointer;}
 .search-left-box .btn-new-1 span img{width: 15px; margin-top: -3px; display: none;}
 .mobile-header .sub-header .search-tab .sub-menu td a span{display: none;}
 .mob-search-btn{width: 34px; height: 34px; display: none; padding: 6px; position: absolute; bottom: 0px; right:0px;}
@@ -3828,6 +3828,8 @@ tags-input .tags{padding: 0;}
 .search-page .availabel-data-box .comment-dis{width:91%;}
 .bnr-cus-sec .search-box{border: 0px;}
 #verifydiv{top: 78px !important; float: left; width: 100%; position: fixed; z-index: 9;}
+.availabel-data-box .search-profiles .profile-btns{width: 130px;}
+.availabel-data-box .search-profiles .profile-data{width: 365px; padding: 8px 10px;}
 
 /***  media query  ***/
 @media print {
