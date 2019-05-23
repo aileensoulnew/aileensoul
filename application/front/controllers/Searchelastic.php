@@ -19,9 +19,12 @@ class Searchelastic extends MY_Controller {
         }
         else
         {
-            $hosts = [
+            /*$hosts = [
                 '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
                 '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];*/
+            $hosts = [
+                'https://monitor.aileensoul.com:443'
             ];
             $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
         }
@@ -3054,5 +3057,194 @@ class Searchelastic extends MY_Controller {
         $searchData['question_post'] = $searchQuestionDataMain;
         $searchData['page'] = $page;
         echo json_encode($searchData);        
+    }
+
+    public function insert_people_data_from_json()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            // print_r($row);exit;
+            $params['body'][] = array(
+                'index' => array(
+                    '_index' => 'aileensoul_search_people',
+                    '_type' => 'aileensoul_search_people',
+                    '_id' => $row['user_id'],
+                ),
+            );
+            $params['body'][] = ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'], 'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],];            
+            // print_r($params);exit();
+        }
+        echo "<pre>";
+        // print_r($params);
+        $responses = $client->bulk($params);
+        print_r($responses);exit();
+        return true;
+    }
+
+    public function insert_business_data_from_json()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            $params['body'][] = array(
+                'index' => array(
+                    '_index' => 'aileensoul_search_business',
+                    '_type' => 'aileensoul_search_business',
+                    '_id' => $row['business_profile_id'],
+                ),
+            );
+            $params['body'][] = ['company_name' => $row['company_name'],'country' => $row['country'],'state' => $row['state'], 'city' => $row['city'],'pincode' => $row['pincode'],'address' => $row['address'],'contact_person' => $row['contact_person'], 'contact_mobile' => $row['contact_mobile'], 'contact_email' => $row['contact_email'],'contact_website' => $row['contact_website'],'business_type' => $row['business_type'],'industriyal' => $row['industriyal'],'details' => $row['details'],'addmore' => $row['addmore'],'user_id' => $row['user_id'],'status' => $row['status'],'is_deleted' => $row['is_deleted'],'created_date' => $row['created_date'],'modified_date' => $row['modified_date'],'business_step' => $row['business_step'],'business_user_image' => $row['business_user_image'],'profile_background' => $row['profile_background'],'profile_background_main' => $row['profile_background_main'],'other_business_type' => $row['other_business_type'],'other_industrial' => $row['other_industrial'],'city_name' => $row['city_name'],'state_name' => $row['state_name'],'country_name' => $row['country_name'],'other_city' => $row['other_city'],'business_slug' => $row['business_slug'],'industry_name' => $row['industry_name'], ];
+            // print_r($params);exit();
+        }
+        echo "<pre>";
+        print_r($params);
+        $responses = $client->bulk($params);
+        print_r($responses);exit();
+        return true;
+    }
+
+    public function insert_opportunity_data_from_json()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            $params['body'][] = array(
+                'index' => array(
+                    '_index' => 'aileensoul_search_opportunity',
+                    '_type' => 'aileensoul_search_opportunity',
+                    '_id' => $row['id'],
+                ),
+            );
+
+            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'opportunity_for' => $row['opportunity_for'], 'opportunity_for_id' => $row['opportunity_for_id'], 'location' => $row['location'], 'location_id' => $row['location_id'], 'opportunity' => $row['opportunity'], 'field' => $row['field'], 'other_field' => $row['other_field'], 'opptitle' => $row['opptitle'], 'oppslug' => $row['oppslug'], 'company_name' => $row['company_name'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'],];// print_r($params);exit();
+        }
+        echo "<pre>";
+        print_r($params);
+        $responses = $client->bulk($params);
+        print_r($responses);exit();
+        return true;
+    }
+
+    public function insert_post_data_from_json()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            $params['body'][] = array(
+                'index' => array(
+                    '_index' => 'aileensoul_search_post',
+                    '_type' => 'aileensoul_search_post',
+                    '_id' => $row['id'],
+                ),
+            );
+
+            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'description' => $row['description'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'], 'sim_title' => $row['sim_title'], 'simslug' => $row['simslug'],];// print_r($params);exit();
+        }
+        echo "<pre>";
+        print_r($params);
+        $responses = $client->bulk($params);
+        print_r($responses);exit();
+        return true;
+    }
+
+    public function insert_question_data_from_json()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            $params['body'][] = array(
+                'index' => array(
+                    '_index' => 'aileensoul_search_question',
+                    '_type' => 'aileensoul_search_question',
+                    '_id' => $row['id'],
+                ),
+            );
+
+            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'category' => $row['category'],'description' => $row['description'],'field' => $row['field'],'hashtag' => $row['hashtag'],'is_anonymously' => $row['is_anonymously'],'link' => $row['link'],'modify_date' => $row['modify_date'],'others_field' => $row['others_field'],'question' => $row['question'],];
+                // print_r($params);exit();
+        }
+        echo "<pre>";
+        print_r($params);
+        $responses = $client->bulk($params);
+        print_r($responses);exit();
+        return true;
+    }
+
+    public function insert_article_data_from_json()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            $params['body'][] = array(
+                'index' => array(
+                    '_index' => 'aileensoul_search_article',
+                    '_type' => 'aileensoul_search_article',
+                    '_id' => $row['id'],
+                ),
+            );
+
+            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'article_desc' => $row['article_desc'],'article_main_category' => $row['article_main_category'],'article_other_category' => $row['article_other_category'],'article_featured_image' => $row['article_featured_image'],'article_meta_description' => $row['article_meta_description'],'article_meta_title' => $row['article_meta_title'],'article_slug' => $row['article_slug'],'article_sub_category' => $row['article_sub_category'],'article_title' => $row['article_title'],'hashtag_id' => $row['hashtag_id'],'id_post_article' => $row['id_post_article'],'hashtag' => $row['hashtag'],'field' => $row['field'],];
+            // print_r($params);exit();
+        }
+        echo "<pre>";
+        print_r($params);
+        $responses = $client->bulk($params);
+        print_r($responses);exit();
+        return true;
     }
 }

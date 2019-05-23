@@ -79,7 +79,7 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
         </div>
     </div>
     <?php
-    if(isset($url) && empty($url)): ?>
+    if(isset($url) && $url[1] == 'user_post' && $url[2] == 'user_post_main'): ?>
 	<div class="add-detail all-user-list">            
         <div id="profile-progress" class="edit_profile_progress" style="display: none;">
             <div class="count_main_progress">
