@@ -97,7 +97,7 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
 
-        <script src="http://chat.aileensoul.localhost/socket.io/socket.io.js"></script>
+        <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>
         <script type="text/javascript">
             var socket = io.connect("<?php echo SOCKETSERVER; ?>");
         </script>

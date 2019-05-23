@@ -3061,28 +3061,34 @@ class Searchelastic extends MY_Controller {
 
     public function insert_people_data_from_json()
     {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
         $client = $this->elasticclient;
 
         // $this->Mapping();exit();
 
         $str = file_get_contents('assets/ailee_user.json');
+        // echo $str;exit();
         $result = json_decode($str, true); 
         echo "<pre>";
-        // print_r($result);exit();
+        print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
         {
             // print_r($row);exit;
-            $params['body'][] = array(
+            /*$params['body'][] = array(
                 'index' => array(
                     '_index' => 'aileensoul_search_people',
                     '_type' => 'aileensoul_search_people',
                     '_id' => $row['user_id'],
                 ),
             );
-            $params['body'][] = ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'], 'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],];            
+            $params['body'][] = ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'], 'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],];*/            
             // print_r($params);exit();
+            $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],]];
+            $responses = $client->index($params);
         }
         echo "<pre>";
         // print_r($params);
@@ -3097,10 +3103,11 @@ class Searchelastic extends MY_Controller {
 
         // $this->Mapping();exit();
 
-        $str = file_get_contents('assets/ailee_user.json');
-        $result = json_decode($str, true); 
+        $str = file_get_contents('assets/ailee_business_profile.json');        
+        // echo $str;exit();
+        $result = json_decode(($str), true); 
         echo "<pre>";
-        // print_r($result);exit();
+        print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
@@ -3128,10 +3135,10 @@ class Searchelastic extends MY_Controller {
 
         // $this->Mapping();exit();
 
-        $str = file_get_contents('assets/ailee_user.json');
+        $str = file_get_contents('assets/opp_post.json');
         $result = json_decode($str, true); 
         echo "<pre>";
-        // print_r($result);exit();
+        print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
@@ -3159,7 +3166,7 @@ class Searchelastic extends MY_Controller {
 
         // $this->Mapping();exit();
 
-        $str = file_get_contents('assets/ailee_user.json');
+        $str = file_get_contents('assets/sim_post.json');
         $result = json_decode($str, true); 
         echo "<pre>";
         // print_r($result);exit();
