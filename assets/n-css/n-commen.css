@@ -413,7 +413,7 @@ background-repeat: no-repeat; padding: 2px 35px 1px 20px; -webkit-transition: wi
 .right-header ul{padding:6px 0 4px; margin:0; float:right;}
 .right-header ul li{float:left; list-style-type:none; padding:0 10px; border-right:1px solid #1985b3; margin-bottom:0;}
 .right-header ul.notification_data_in li{padding:0;}
-.right-header ul li:last-child{border-right:none;}
+.right-header ul li:last-child{border-right:none; padding-right: 0;}
 .right-header ul li a{color:#fff;}
 .right-header > ul > li > a{width:28px; height:28px; float:left; padding:3px;}
 .right-header > ul.test-cus > li > a{width:auto; height:auto; float:left; padding:5px 20px;}

@@ -82,7 +82,7 @@
     <?php $this->load->view('page_loader'); ?>
     <div id="main_page_load" style="display: block;">
         <?php echo $header_profile; ?>
-        <div class="filter-sub-header">
+        <div class="filter-sub-header op-sub-header">
             <div class="sub-header">
                 <div class="container">
                     <nav class="search-tab">
@@ -90,24 +90,30 @@
                             <table class="sub-menu table">
                                 <tr>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('peoples'); ?>">People</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '1' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url(''); ?>">Home</a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('posts'); ?>">Post</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('peoples'); ?>">Peoples</a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('opportunities'); ?>">Opportunitis</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('posts'); ?>">Posts</a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('opportunities'); ?>">Opportunites</a>
                                     </td>
                                     
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '5' ? 'active' : ''" id="search-opp-tab" id="search-article-tab" href="<?php echo base_url('articles'); ?>">Article</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '5' ? 'active' : ''" id="search-opp-tab" id="search-article-tab" href="<?php echo base_url('articles'); ?>">Articles</a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '6' ? 'active' : ''" id="search-opp-tab" id="search-que-tab" href="<?php echo base_url('qa'); ?>">Question</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '6' ? 'active' : ''" id="search-opp-tab" id="search-que-tab" href="<?php echo base_url('qa'); ?>">Questions</a>
                                     </td>
 
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '7' ? 'active' : ''" id="search-opp-tab" id="search-bus-tab" href="<?php echo base_url('businesses'); ?>">Business</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '7' ? 'active' : ''" id="search-opp-tab" id="search-bus-tab" href="<?php echo base_url('businesses'); ?>">Businesses</a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-item nav-link" target="_self" href="<?php echo base_url('monetize-aileensoul-account'); ?>">Earn Money</a>
                                     </td>
                                 </tr>
                             </table>
