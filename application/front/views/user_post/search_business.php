@@ -20,7 +20,8 @@
                     endif;?>
                 </div>
             </div>
-            
+            <p class="text-left p10"><a href="<?php echo base_url('business-by-categories');?>">View More Categories</a></p>
+
             <div class="search-left-box">
                 <h3>City</h3>
                 <div class="form-group">
@@ -39,7 +40,8 @@
                         endforeach;
                     endif;?>
                 </div>
-            </div>        
+            </div>
+            <p class="text-left p10"><a href="<?php echo base_url('business-by-location');?>">View More Location</a></p>
             <div class="search-left-box pt15">
                 <div class="form-group">
                     <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
@@ -49,7 +51,7 @@
         </form>
     </div>    
 </div>
-<div class="middle-section">    
+<div class="middle-section">
     <div ng-if="business_data.length != 0" ng-repeat="business in business_data" ng-init="busIndex=$index">
         <div class="all-job-box search-business">
             <div class="search-business-top">
@@ -103,3 +105,78 @@
         <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
     </div>
 </div>
+<!-- <div class="search-box">
+    <nav class="cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-bottom" id="cbp-spmenu-s4">
+        <div class="search-left-box">
+            <h3>Job title</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by Job Title"> 
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>Industry</h3>
+            <div class="form-group">
+                <span class="span-select">
+                    <select placeholder="Search by Industry"> 
+                        <option>It sectop</option>
+                        <option>teacher</option>
+                        <option>Docore</option>
+                        <option>123</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>City</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by City"> 
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>Hash Tag</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by Hash Tag"> 
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>Company</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by Company"> 
+            </div>
+        </div>
+        <div class="search-left-box pt15">
+            <div class="form-group">
+                <button class="pull-left btn-new-1"><span><img src="n-images/s-s.png"></span> Search</button> 
+                <button class="pull-right btn-new-1"><span><img src="n-images/trash.png"></span> Clear</button> 
+            </div>
+        </div>        
+    </nav>
+</div> -->
+<script>
+    /*var menuRight = document.getElementById( 'cbp-spmenu-s2' );
+    var menuBottom = document.getElementById( 'cbp-spmenu-s4' );
+    var showRight = document.getElementById( 'showRight' );
+    var showBottom = document.getElementById( 'showBottom' );
+    var body = document.body;
+
+    showRight.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuRight, 'cbp-spmenu-open' );
+        disableOther( 'showRight' );
+    };
+    showBottom.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuBottom, 'cbp-spmenu-open' );
+        disableOther( 'showBottom' );
+    };
+
+    function disableOther( button ) {
+        
+        if( button !== 'showRight' ) {
+            classie.toggle( showRight, 'disabled' );
+        }
+        if( button !== 'showBottom' ) {
+            classie.toggle( showBottom, 'disabled' );
+        }
+    }*/
+</script>

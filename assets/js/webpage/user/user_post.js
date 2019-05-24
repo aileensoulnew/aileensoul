@@ -7626,6 +7626,37 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
         }
     };
 
+    $scope.main_search_mob_function = function(){
+        var formdata = $('#main_search_mob').serialize();
+        if(formdata == undefined || formdata.length < 1)
+        {
+            return false;
+        }
+        else
+        {            
+            pagenum = 0;
+            isProcessing = false;
+
+            $http({
+                method: 'POST',
+                url: base_url + 'user_post/businessData',
+                data: formdata+"&page=" + pagenum,
+                headers: {
+                    'Content-Type':  'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.business_data = success.data.business_data;
+                $scope.total_record = success.data.total_record;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+            });
+        }
+    };
+
     $scope.clearData = function(){
         
         pagenum = 0;
