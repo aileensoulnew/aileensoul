@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="searchApp" ng-controller="SearchDefaultController">
     <head>
-        <title>Search<?php echo TITLEPOSTFIX; ?></title>
+        <title ng-bind="meta_title">Search<?php echo TITLEPOSTFIX; ?></title>
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,22 +45,22 @@
                                         <a class="nav-item nav-link" ng-class="active_tab == '1' ? 'active' : ''" id="search-all-tab" href="<?php echo base_url('search').'?q='.$search_keyword; ?>">All <span>{{total_count}}</span></a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('search/opportunity').'?q='.$search_keyword; ?>">Opportunitis <span>{{opp_count}}</span></a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('search/opportunity').'?q='.$search_keyword; ?>">Opportunities <span>{{opp_count}}</span></a>
                                     </td>
                                     <td>
                                         <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('search/people').'?q='.$search_keyword; ?>">People <span>{{people_count}}</span></a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('search/post').'?q='.$search_keyword; ?>">Post <span>{{simple_count}}</span></a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('search/post').'?q='.$search_keyword; ?>">Posts <span>{{simple_count}}</span></a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '5' ? 'active' : ''" id="search-opp-tab" id="search-bus-tab" href="<?php echo base_url('search/business').'?q='.$search_keyword; ?>">Business <span>{{business_count}}</span></a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '5' ? 'active' : ''" id="search-opp-tab" id="search-bus-tab" href="<?php echo base_url('search/business').'?q='.$search_keyword; ?>">Businesses <span>{{business_count}}</span></a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '6' ? 'active' : ''" id="search-opp-tab" id="search-article-tab" href="<?php echo base_url('search/article').'?q='.$search_keyword; ?>">Article <span>{{article_count}}</span></a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '6' ? 'active' : ''" id="search-opp-tab" id="search-article-tab" href="<?php echo base_url('search/article').'?q='.$search_keyword; ?>">Articles <span>{{article_count}}</span></a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '7' ? 'active' : ''" id="search-opp-tab" id="search-que-tab" href="<?php echo base_url('search/question').'?q='.$search_keyword; ?>">Question <span>{{question_count}}</span></a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '7' ? 'active' : ''" id="search-opp-tab" id="search-que-tab" href="<?php echo base_url('search/question').'?q='.$search_keyword; ?>">Questions <span>{{question_count}}</span></a>
                                     </td>
                                 </tr>
                             </table>

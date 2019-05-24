@@ -317,9 +317,10 @@ app.config(function ($routeProvider, $locationProvider) {
             });
     $locationProvider.html5Mode(true);
 });
-app.controller('userOppoController', function ($scope, $http,$compile) {
+app.controller('userOppoController', function ($scope, $http,$compile,$location) {    
     $scope.IsVisible = false;
     $scope.recentpost = [];
+    $scope.$parent.title = "Aileensoul";
 
     $(document).on('hidden.bs.modal', function (event) {
         if($('.modal.in').length > 0)
@@ -953,6 +954,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.showLoadmore = true;
     var pg="";
     $scope.page = 0;
+    $scope.total_record = 0;
+    $scope.perpage = 5;
     var fl_addpost="";
     var processing = false;
     $scope.contact_suggetion = [];
@@ -991,7 +994,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $('#progress_div').hide();
                 $('.progress-bar').css("width",0);
                 $('.sr-only').text(0+"%");
-                $scope.postData = success.data.all_post_data; 
+                $scope.postData = success.data.all_post_data;
+                $scope.total_record = success.data.total_record;
+                $scope.page = success.data.page;
                 // $scope.contact_suggetion.push(success.data.contact_suggetion);
                 // $scope.contact_suggetion = success.data.contact_suggetion;
                 // $scope.set_owl_carousel(success.data.contact_suggetion,$scope.page);
@@ -1005,11 +1010,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }    
 
     $(window).on('scroll', function () {
-        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == '') {
             // isLoadingData = true;
-            var page = $(".page_number:last").val();
-            var total_record = $(".total_record").val();
-            var perpage_record = $(".perpage_record").val();            
+            var page = $scope.page;//$(".page_number:last").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage;//$(".perpage_record").val();            
             if (parseInt(perpage_record * page) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
@@ -1018,7 +1023,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum = parseInt($(".page_number:last").val()) + 1;
+                    var pagenum = parseInt($scope.page) + 1;//parseInt($(".page_number:last").val()) + 1;
                     getUserPostLoadMore(pagenum);
                 }
             }
@@ -1038,7 +1043,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
         isProcessing = true;
         $('#loader').show();
-        $http.get(base_url + "user_post/getUserPost?page=" + pg).then(function (success) {
+        $http.get(base_url + "user_post/getUserPost?page="+pg+"&tot="+$scope.total_record).then(function (success) {
             $('#loader').hide();
            
             if (success.data.all_post_data[0].post_data) {
@@ -1048,7 +1053,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     $scope.postData.push(success.data.all_post_data[i]);
                 }
                 $scope.showLoadmore = true;
-                $scope.page = $scope.page + 1;
+                $scope.page = success.data.page;//$scope.page + 1;
                 // $scope.set_owl_carousel(success.data.contact_suggetion,$scope.page);
                 // console.log($scope.page);
                 if(success.data.contact_suggetion_1)
@@ -3467,13 +3472,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
 app.controller('peopleController', function($scope, $http, $compile, $window,$location) {    
     $scope.$parent.active_tab = '2';
+    $scope.$parent.title = "People | Aileensoul";
     $scope.user_id = user_id;
     
     var isProcessing = false;
     var isProcessingPst = false;
     
     var pagenum = 0
-    $scope.perpage_record = 10;
+    $scope.perpage_record = 7;
     $scope.total_record = 0;
 
     $scope.peopleData = function(pagenum) {
@@ -3687,6 +3693,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
 });
 
 app.controller('postController', function($scope, $http, $compile, $window,$location) {
+    $scope.$parent.title = "Posts | Aileensoul";
     $scope.$parent.active_tab = '3';
     $scope.user_id = user_id;
     
@@ -4640,6 +4647,7 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
 });
 
 app.controller('opportunityController', function($scope, $http, $compile, $window,$location) {
+    $scope.$parent.title = "Opportunities | Aileensoul";
     $scope.$parent.active_tab = '4';
     $scope.user_id = user_id;
     
@@ -5632,6 +5640,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
 });
 
 app.controller('articleController', function($scope, $http, $compile, $window,$location) {
+    $scope.$parent.title = "Articles | Aileensoul";
     $scope.$parent.active_tab = '5';
     $scope.user_id = user_id;
     
@@ -6587,6 +6596,7 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
 });
 
 app.controller('questionController', function($scope, $http, $compile, $window,$location) {
+    $scope.$parent.title = "Questions | Aileensoul";
     $scope.$parent.active_tab = '6';
     $scope.user_id = user_id;
     
@@ -7538,6 +7548,7 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
 });
 
 app.controller('businessController', function($scope, $http, $compile, $window,$location) {    
+    $scope.$parent.title = "Businesses | Aileensoul";
     $scope.$parent.active_tab = '7';
     $scope.user_id = user_id;
     

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="userOppoApp" ng-controller="mainDefaultController">
     <head>
-        <title><?php echo $title; ?></title>
+        <title ng-bind="title">Aileensoul</title>
         <meta charset="utf-8">
         <base href="/">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -93,13 +93,13 @@
                                         <a class="nav-item nav-link" ng-class="active_tab == '1' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url(''); ?>">Home</a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('peoples'); ?>">Peoples</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('peoples'); ?>">People</a>
                                     </td>
                                     <td>
                                         <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('posts'); ?>">Posts</a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('opportunities'); ?>">Opportunites</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('opportunities'); ?>">Opportunities</a>
                                     </td>
                                     
                                     <td>

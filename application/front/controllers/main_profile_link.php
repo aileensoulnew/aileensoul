@@ -4,26 +4,34 @@
  // exit;
         /*code for business profile link start */
 
-        $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
-        $business_profile_count = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $this->business_profile_link = base_url("business-search/");
+        // $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
+        // $business_profile_count = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        /*$this->business_profile_link = base_url("business-search/");
         if(isset($business_profile_count) && !empty($business_profile_count) && isset($business_profile_count[0]['business_count']) && $business_profile_count[0]['business_count']==1){
-            $this->business_profile_link = base_url("business-profile/home");
-        }
+            $this->business_profile_link = base_url("business-profile");
+        }*/
         /*Code for business profile link end*/
+
+        $sql = "SELECT bp.business_step,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
+            LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+            LEFT JOIN ailee_states st on bp.state = st.state_id
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND user_id = '". $userid ."'";
+        $query = $this->db->query($sql);
+        $business_data = $query->row();
 
         $this->business_profile_link = base_url("business-search");        
         $this->business_profile_set = 0;
         
-        if(!empty($business_profile_count) &&  $business_profile_count[0]['business_step']==4){            
+        if(!empty($business_data) &&  $business_data->business_step == 4){            
             
-            $sql = "SELECT *,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
+            /*$sql = "SELECT bp.business_step,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
             LEFT JOIN ailee_cities ct on bp.city = ct.city_id
             LEFT JOIN ailee_states st on bp.state = st.state_id
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
             WHERE bp.status = '1' AND user_id = '". $userid ."'";
             $query = $this->db->query($sql);
-            $business_slug = $query->row();
+            $business_slug = $query->row();*/
 
             $this->business_profile_link = base_url('company/').$business_slug->business_slug;// base_url("business-profile");
             $this->business_profile_set = 1;
@@ -50,12 +58,12 @@
      
         
         // Check freelancer is active or not and generate uel for create freelancer Search_banner
-        $this->data['isdeactivatefreelancer'] = false;
+        /*$this->data['isdeactivatefreelancer'] = false;
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $freelancerpost_deactive = $this->data['freelancerpost_deactive'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
         if ($freelancerpost_deactive) {
             $this->data['isdeactivatefreelancer'] = true;
-        }
+        }*/
         $this->data['right_profile_view'] = $this->load->view('right_profile', $this->data, TRUE);
         $this->data['left_footer_list_view'] = $this->load->view('leftfooter', $this->data, TRUE);
 ?>

@@ -1422,13 +1422,20 @@ class User_post_model extends CI_Model {
         return $user_post_total['total'];
     }
 
-    public function user_post_new($user_id = '', $page = '')
+    public function user_post_new($user_id = '', $page = '', $tot= 0)
     {
         $limit = '5';
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        $total_record  = $this->user_post_new_total($user_id);
+        if($tot == 0 && $start == 0)
+        {
+            $total_record  = $this->user_post_new_total($user_id);
+        }
+        else
+        {
+            $total_record = $tot;
+        }
         $new_signup = $this->get_new_signup($user_id);
 
         $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city,jt.name');
@@ -1562,21 +1569,21 @@ class User_post_model extends CI_Model {
                 $cond_sql = "(".trim($cond_sql," OR ").")";
                 $sql = "SELECT main.* FROM(
                 
-                    SELECT con5.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_post up
+                    SELECT main11.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_post up
                     LEFT JOIN ailee_user_opportunity c1 ON c1.post_id = up.id
-                    WHERE upr.`user_id` = $user_id AND up.user_id != $user_id AND upr.`designation` IN(c1.`opportunity_for`) AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) AS con5                    
+                    WHERE upr.`user_id` = $user_id AND up.user_id != $user_id AND upr.`designation` IN(c1.`opportunity_for`) AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) AS main11                    
                     
                     UNION
 
-                    SELECT oppcon2.* FROM (SELECT up.* FROM ailee_user_profession upr
+                    SELECT main12.* FROM (SELECT up.* FROM ailee_user_profession upr
                     LEFT JOIN ailee_user_post up ON up.user_id != $user_id
                     LEFT JOIN ailee_user_opportunity c1 ON c1.post_id = up.id
                     LEFT JOIN ailee_job_title jt ON jt.title_id = upr.designation
-                    WHERE upr.`user_id` = $user_id AND up.user_id != $user_id AND (upr.`designation` IN(c1.`opportunity_for`) OR $cond_sql) AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) AS oppcon2
+                    WHERE upr.`user_id` = $user_id AND up.user_id != $user_id AND (upr.`designation` IN(c1.`opportunity_for`) OR $cond_sql) AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) AS main12
                     
                     UNION
 
-                    SELECT oppcon1.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_opportunity uo JOIN ailee_user_post up  ON up.post_id = uo.id WHERE upr.`user_id` = $user_id AND (IF(upr.field = 0, CONCAT(LOWER(uo.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(uo.other_field) LIKE '%'),'%'),upr.field = uo.field)) AND FIND_IN_SET(upr.city , uo.location) != 0 AND up.status = 'publish' AND FIND_IN_SET(upr.designation , uo.opportunity_for) != 0 AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) as oppcon1
+                    SELECT main13.* FROM (SELECT up.* FROM ailee_user_profession upr, ailee_user_opportunity uo JOIN ailee_user_post up  ON up.post_id = uo.id WHERE upr.`user_id` = $user_id AND (IF(upr.field = 0, CONCAT(LOWER(uo.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(uo.other_field) LIKE '%'),'%'),upr.field = uo.field)) AND FIND_IN_SET(upr.city , uo.location) != 0 AND up.status = 'publish' AND FIND_IN_SET(upr.designation , uo.opportunity_for) != 0 AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for = 'opportunity' ORDER BY up.created_date DESC LIMIT $total_record) as main13
 
                     UNION
 
@@ -2133,7 +2140,10 @@ class User_post_model extends CI_Model {
        // echo '<pre>';
        // print_r($result_array);
        // exit;
-        return $result_array;
+        $ret_arr['all_post_data'] = $result_array;
+        $ret_arr['total_record'] = $total_record;
+        $ret_arr['page'] = $page;
+        return $ret_arr;
     }
 
     public function userDashboardPost($user_id = '', $page = '') {
@@ -5248,12 +5258,12 @@ class User_post_model extends CI_Model {
                 $jt_us_sql .= "LOWER(degree_name) LIKE '%".strtolower($value->name)."%' OR ".$str1."))";
                 $jt_up_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
             }
-            $jt_sql= "(".$jt_up_sql." OR ".$jt_us_sql.") OR ";            
+            $jt_sql= "(".$jt_up_sql." OR ".$jt_us_sql.") AND ";            
         }
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= " (up.field = '".$search_field."' OR us.interested_fields = '".$search_field."') OR ";            
+            $fd_sql .= " (up.field = '".$search_field."' OR us.interested_fields = '".$search_field."') AND ";            
         }
         $ct_sql = "";
         if($search_city != undefined && !empty($search_city))
@@ -5270,19 +5280,19 @@ class User_post_model extends CI_Model {
                 $ct_us_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
                 $ct_up_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str2."))";
             }
-            $ct_sql= "(".$ct_up_sql." OR ".$ct_us_sql.") OR ";
+            $ct_sql= "(".$ct_up_sql." OR ".$ct_us_sql.") AND ";
         }
 
         $gen_sql = "";
         if($search_gender != undefined && $search_gender != '')
         {
-            $gen_sql .= "(u.user_gender = '".$search_gender."') OR ";
+            $gen_sql .= "(u.user_gender = '".$search_gender."') AND ";
         }
 
         if($jt_sql != "" || $fd_sql != "" || $ct_sql != "" || $gen_sql != "")
         {
             $sql .= " AND ";
-            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," OR ").")";
+            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," AND ").")";
         }
 
 
@@ -5322,12 +5332,12 @@ class User_post_model extends CI_Model {
                 $jt_us_sql .= "LOWER(degree_name) LIKE '%".strtolower($value->name)."%' OR ".$str1."))";
                 $jt_up_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
             }
-            $jt_sql= "(".$jt_up_sql." OR ".$jt_us_sql.") OR ";            
+            $jt_sql= "(".$jt_up_sql." OR ".$jt_us_sql.") AND ";            
         }
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= " (up.field = '".$search_field."' OR us.interested_fields = '".$search_field."') OR ";            
+            $fd_sql .= " (up.field = '".$search_field."' OR us.interested_fields = '".$search_field."') AND ";            
         }
         $ct_sql = "";
         if($search_city != undefined && !empty($search_city))
@@ -5344,19 +5354,19 @@ class User_post_model extends CI_Model {
                 $ct_us_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
                 $ct_up_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str2."))";
             }
-            $ct_sql= "(".$ct_up_sql." OR ".$ct_us_sql.") OR ";
+            $ct_sql= "(".$ct_up_sql." OR ".$ct_us_sql.") AND ";
         }
 
         $gen_sql = "";
         if($search_gender != undefined && $search_gender != '')
         {
-            $gen_sql .= "(u.user_gender = '".$search_gender."') OR ";
+            $gen_sql .= "(u.user_gender = '".$search_gender."') AND ";
         }
 
         if($jt_sql != "" || $fd_sql != "" || $ct_sql != "" || $gen_sql != "")
         {
             $sql .= " AND ";
-            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," OR ").")";
+            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," AND ").")";
         }
 
 
@@ -5578,13 +5588,13 @@ class User_post_model extends CI_Model {
                 $str2 = "name LIKE '%".$str2."%'";
                 $jt_uo_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
             }
-            $jt_sql= "(".$jt_uo_sql.") OR ";            
+            $jt_sql= "(".$jt_uo_sql.") AND ";            
         }
 
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= "(uo.field = '".$search_field."') OR ";
+            $fd_sql .= "(uo.field = '".$search_field."') AND ";
         }
 
         $ct_sql = "";
@@ -5596,7 +5606,7 @@ class User_post_model extends CI_Model {
                 $str1 = "LOWER(city_name) LIKE '%".$str1."%'";                
                 $ct_uo_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
             }
-            $ct_sql= "(".$ct_uo_sql.") OR ";
+            $ct_sql= "(".$ct_uo_sql.") AND ";
         }
 
         $ht_sql = "";
@@ -5608,7 +5618,7 @@ class User_post_model extends CI_Model {
                 $str1 = "LOWER(hashtag) LIKE '%".$str1."%'";
                 $ht_sql .= $str1;
             }
-            $ht_sql .= ") OR ";
+            $ht_sql .= ") AND ";
         }
 
         $cp_sql = "";
@@ -5619,12 +5629,12 @@ class User_post_model extends CI_Model {
                 $str1 = "LOWER(uo.company_name) LIKE '%".$str1."%'";                
                 $cp_sql .= "LOWER(uo.company_name) LIKE '%".strtolower($value->company_name)."%' OR ".$str1;
             }
-            $cp_sql= "(".$cp_sql.") OR ";
+            $cp_sql= "(".$cp_sql.") AND ";
         }
 
         if($jt_sql != '' || $fd_sql != '' || $ct_sql != '' || $ht_sql != '' || $cp_sql != '')
         {
-            $sql .= "AND (".trim($jt_sql.$fd_sql.$ct_sql.$ht_sql.$cp_sql," OR ").")";
+            $sql .= "AND (".trim($jt_sql.$fd_sql.$ct_sql.$ht_sql.$cp_sql," AND ").")";
         }
         // echo $sql;exit();
 
@@ -5651,13 +5661,13 @@ class User_post_model extends CI_Model {
                 $str2 = "name LIKE '%".$str2."%'";
                 $jt_uo_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
             }
-            $jt_sql= "(".$jt_uo_sql.") OR ";            
+            $jt_sql= "(".$jt_uo_sql.") AND ";            
         }
 
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= "(uo.field = '".$search_field."') OR ";
+            $fd_sql .= "(uo.field = '".$search_field."') AND ";
         }
 
         $ct_sql = "";
@@ -5669,7 +5679,7 @@ class User_post_model extends CI_Model {
                 $str1 = "LOWER(city_name) LIKE '%".$str1."%'";                
                 $ct_uo_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
             }
-            $ct_sql= "(".$ct_uo_sql.") OR ";
+            $ct_sql= "(".$ct_uo_sql.") AND ";
         }
 
         $ht_sql = "";
@@ -5681,7 +5691,7 @@ class User_post_model extends CI_Model {
                 $str1 = "LOWER(hashtag) LIKE '%".$str1."%'";
                 $ht_sql .= $str1;
             }
-            $ht_sql .= ") OR ";
+            $ht_sql .= ") AND ";
         }
 
         $cp_sql = "";
@@ -5692,12 +5702,12 @@ class User_post_model extends CI_Model {
                 $str1 = "LOWER(uo.company_name) LIKE '%".$str1."%'";                
                 $cp_sql .= "LOWER(uo.company_name) LIKE '%".strtolower($value->company_name)."%' OR ".$str1;
             }
-            $cp_sql= "(".$cp_sql.") OR ";
+            $cp_sql= "(".$cp_sql.") AND ";
         }
 
         if($jt_sql != '' || $fd_sql != '' || $ct_sql != '' || $ht_sql != '' || $cp_sql != '')
         {
-            $sql .= "AND (".trim($jt_sql.$fd_sql.$ct_sql.$ht_sql.$cp_sql," OR ").")";
+            $sql .= "AND (".trim($jt_sql.$fd_sql.$ct_sql.$ht_sql.$cp_sql," AND ").")";
         }
         
         $sql .= " ORDER BY up.created_date DESC ";
@@ -5838,12 +5848,12 @@ class User_post_model extends CI_Model {
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= "(pa.article_main_category = '".$search_field."') OR ";
+            $fd_sql .= "(pa.article_main_category = '".$search_field."') AND ";
         }
 
         if($ht_sql != '' || $fd_sql != '')
         {
-            $sql .= "AND (".trim($ht_sql." OR ".$fd_sql," OR ").")";
+            $sql .= "AND (".trim($ht_sql." AND ".$fd_sql," AND ").")";
         }
 
         // echo $sql;exit();
@@ -5876,12 +5886,12 @@ class User_post_model extends CI_Model {
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= "(pa.article_main_category = '".$search_field."') OR ";
+            $fd_sql .= "(pa.article_main_category = '".$search_field."') AND ";
         }
 
         if($ht_sql != '' || $fd_sql != '')
         {
-            $sql .= "AND (".trim($ht_sql." OR ".$fd_sql," OR ").")";
+            $sql .= "AND (".trim($ht_sql." AND ".$fd_sql," AND ").")";
         }
 
         $sql .= " ORDER BY up.created_date DESC";
@@ -6020,12 +6030,12 @@ class User_post_model extends CI_Model {
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= "(uaq.field = '".$search_field."') OR ";
+            $fd_sql .= "(uaq.field = '".$search_field."') AND ";
         }
 
         if($ht_sql != '' || $fd_sql != '')
         {
-            $sql .= "AND (".trim($ht_sql." OR ".$fd_sql," OR ").")";
+            $sql .= "AND (".trim($ht_sql." AND ".$fd_sql," AND ").")";
         }
 
         $query = $this->db->query($sql);
@@ -6056,12 +6066,12 @@ class User_post_model extends CI_Model {
         $fd_sql = "";
         if($search_field != undefined && $search_field != '')
         {
-            $fd_sql .= "(uaq.field = '".$search_field."') OR ";
+            $fd_sql .= "(uaq.field = '".$search_field."') AND ";
         }
 
         if($ht_sql != '' || $fd_sql != '')
         {
-            $sql .= "AND (".trim($ht_sql." OR ".$fd_sql," OR ").")";
+            $sql .= "AND (".trim($ht_sql." AND ".$fd_sql," AND ").")";
         }
 
         $sql .= " ORDER BY up.created_date DESC";
@@ -6197,11 +6207,25 @@ class User_post_model extends CI_Model {
             AND ul.status = '1'
             AND ul.is_delete = '0'
             AND bp.user_id NOT IN (select follow_to from ailee_user_follow where follow_from='" . $user_id . "' AND follow_type = '2' AND status = '1')";
-
-        $sql .= " ORDER BY bp.business_profile_id DESC ";
-        if($limit != '') {
-            $sql .= " LIMIT $start,$limit";
+        
+        $fd_sql = "";
+        if(isset($search_field) && !empty($search_field))
+        {
+            $fd_sql .= " bp.industriyal IN(".implode(",", $search_field).") AND ";
         }
+
+        $ct_sql = "";
+        if(isset($search_city) && !empty($search_city))
+        {
+            $ct_sql .= " bp.city IN(".implode(",", $search_city).") AND ";
+        }
+        if($fd_sql != '' || $ct_sql != '')
+        {
+            $sql .= " AND (".trim($fd_sql.$ct_sql," AND ").")";
+        }
+
+
+        $sql .= " ORDER BY bp.business_profile_id DESC ";        
         // echo $sql;exit;
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
@@ -6231,17 +6255,17 @@ class User_post_model extends CI_Model {
         $fd_sql = "";
         if(isset($search_field) && !empty($search_field))
         {
-            $fd_sql .= " bp.industriyal IN(".implode(",", $search_field).") OR ";
+            $fd_sql .= " bp.industriyal IN(".implode(",", $search_field).") AND ";
         }
 
         $ct_sql = "";
         if(isset($search_city) && !empty($search_city))
         {
-            $ct_sql .= " bp.city IN(".implode(",", $search_city).") OR ";
+            $ct_sql .= " bp.city IN(".implode(",", $search_city).") AND ";
         }
         if($fd_sql != '' || $ct_sql != '')
         {
-            $sql .= " AND (".trim($fd_sql.$ct_sql," OR ").")";
+            $sql .= " AND (".trim($fd_sql.$ct_sql," AND ").")";
         }
 
         $sql .= " ORDER BY bp.business_profile_id DESC ";

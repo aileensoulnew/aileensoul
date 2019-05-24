@@ -88,21 +88,21 @@ class Main extends CI_Controller {
         $this->data['no_user_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
 
         $userid = $this->session->userdata('aileenuser');
-        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
+        // $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
 
         $this->user_model->set_new_signup($userid,1);
         
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);        
+        // $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);        
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        // $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         // $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Opportunities | Aileensoul";        
         $this->load->view('user_post/index', $this->data);
     }
 

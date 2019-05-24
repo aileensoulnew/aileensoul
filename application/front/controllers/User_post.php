@@ -770,8 +770,12 @@ class User_post extends MY_Controller {
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
+        $tot = 0;
+        if (!empty($_GET["tot"]) && $_GET["tot"] != 'undefined') {
+            $tot = $_GET["tot"];
+        }
         // $post_data = $this->user_post_model->userPost($userid, $page);//Old Logic
-        $post_data = $this->user_post_model->user_post_new($userid, $page);
+        $post_data = $this->user_post_model->user_post_new($userid, $page, $tot);
         if($page == 2 || $page == 4 || $page == 6 || $page == 8 || $page == 10)
         {
             if($page == 2)
@@ -795,11 +799,12 @@ class User_post extends MY_Controller {
                 $page = 5;
             }
             $contact_data = $this->user_post_model->get_contact_sugetion_in_post($userid, $page);
-            echo json_encode(array('all_post_data'=>$post_data,'contact_suggetion_'.$page=>$contact_data));
+            $post_data['contact_suggetion_'.$page] = $contact_data;
+            echo json_encode($post_data);
         }
         else
         {
-            echo json_encode(array('all_post_data'=>$post_data));
+            echo json_encode($post_data);
         }
         // echo json_encode($post_data);
     }
@@ -3662,18 +3667,18 @@ class User_post extends MY_Controller {
     public function user_post_main()
     {
         $userid = $this->session->userdata('aileenuser');
-        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
+        // $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.user_slug,u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        // $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        // $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        // $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Opportunities | Aileensoul";        
         $this->load->view('user_post/user_post_main', $this->data);
     }
 
@@ -3702,7 +3707,7 @@ class User_post extends MY_Controller {
             $search_city = json_decode($search_city);
         }
         
-        $limit = '10';
+        $limit = '7';
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;

@@ -39,7 +39,7 @@
     </div>    
 </div>
 <div class="middle-section">
-    <div class="mobp0" ng-if="postData.length != '0'">
+    <div class="mobp0">
         <div class="">
             <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
                 <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">                    

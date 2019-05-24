@@ -252,6 +252,7 @@ app.controller('searchController', function($scope, $http, $compile) {
     $scope.pro = {};
     $scope.pst = {};
     $scope.search_keyword = keyword;
+    $scope.$parent.meta_title = '"'+keyword +'" | Aileensoul Search';
     var isProcessing = false;
     var isProcessingPst = false;
     $("#search").val(keyword);
@@ -1143,6 +1144,7 @@ app.controller('searchController', function($scope, $http, $compile) {
 app.controller('opportunityController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '2';    
     $scope.user_id = user_id;
+    $scope.$parent.meta_title = '"'+keyword +'" - Opportunities | Aileensoul Search';
     $scope.live_slug = live_slug;    
     $scope.pro = {};
     $scope.pst = {};
@@ -1228,6 +1230,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         isProcessing = false;
         $scope.searchData(pagenum);
         // $scope.get_search_total_count();
+    }
+
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
     }
 
     $scope.get_search_total_count = function() {
@@ -2066,6 +2073,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
 });
 app.controller('peopleController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '3';
+    $scope.$parent.meta_title = '"'+keyword +'" - People | Aileensoul Search';
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     
@@ -2076,6 +2084,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
 
     var pagenum = 0
     $scope.perpage_record = 10;
+    $scope.searchProfileData = [];
 
     $scope.searchData = function(pagenum) {
         if (isProcessing) {
@@ -2199,6 +2208,11 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
         // $scope.get_search_total_count();
     }
 
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
+    }
+
     $scope.get_search_total_count = function() {
         var search_job_title = '';
         var search_city = '';
@@ -2316,6 +2330,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
 });
 app.controller('postController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '4';
+    $scope.$parent.meta_title = '"'+keyword +'" - Posts | Aileensoul Search';
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     $scope.pro = {};
@@ -2424,6 +2439,11 @@ app.controller('postController', function($scope, $http, $compile, $window) {
         pagenum = 0;
         isProcessing = false;
         $scope.searchData(pagenum);
+    }
+
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
     }
 
     $scope.get_search_total_count = function() {
@@ -3184,6 +3204,7 @@ app.controller('postController', function($scope, $http, $compile, $window) {
 });
 app.controller('businessController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '5';
+    $scope.$parent.meta_title = '"'+keyword +'" - Businesses | Aileensoul Search';
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     $scope.pro = {};
@@ -3276,6 +3297,11 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
         }, function(error) {});
     };
 
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
+    }
+
     $scope.main_search_function = function(){
         var formdata = $('#main_search').serialize();
         if(formdata == undefined || formdata.length < 1)
@@ -3356,6 +3382,7 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
 });
 app.controller('articleController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '6';
+    $scope.$parent.meta_title = '"'+keyword +'" - Articles | Aileensoul Search';
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     
@@ -3461,6 +3488,11 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
         pagenum = 0;
         isProcessing = false;
         $scope.searchData(pagenum);
+    }
+
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
     }
 
     $scope.get_search_total_count = function() {
@@ -4221,6 +4253,7 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
 });
 app.controller('questionController', function($scope, $http, $compile, $window) {
     $scope.$parent.active_tab = '7';
+    $scope.$parent.meta_title = '"'+keyword +'" - Questions | Aileensoul Search';
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     
@@ -4333,6 +4366,11 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
         pagenum = 0;
         isProcessing = false;
         $scope.searchData(pagenum);
+    }
+
+    if($scope.$parent.contactSuggetion.length == 0)
+    {
+        $scope.$parent.getContactSuggetion();
     }
 
     $scope.get_search_total_count = function() {

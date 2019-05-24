@@ -39,8 +39,8 @@
     </div>    
 </div>
 <div class="middle-section">
-    <div class="mobp0" ng-if="postData.length != '0'">
-        <div class="">
+    <div class="mobp0">
+        <div class="" ng-if="postData.length != '0'">
             <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
                 <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
                     <div class="all-post-top">
@@ -585,10 +585,10 @@
                     </div>
                 </div>                
             </div>
-            <div id="post-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
-                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
-            </div>
         </div>
+    </div>
+    <div id="post-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
+        <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
     </div>
     <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
         <div class="custom-user-box no-data-available">
