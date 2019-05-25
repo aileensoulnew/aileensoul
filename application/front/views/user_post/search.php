@@ -45,7 +45,7 @@
                                         <a class="nav-item nav-link" ng-class="active_tab == '1' ? 'active' : ''" id="search-all-tab" href="<?php echo base_url('search').'?q='.$search_keyword; ?>">All <span>{{total_count}}</span></a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('search/opportunity').'?q='.$search_keyword; ?>">Opportunities <span>{{opp_count}}</span></a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '2' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('search/opportunity').'?q='.$search_keyword; ?>">Opportunities(Jobs) <span>{{opp_count}}</span></a>
                                     </td>
                                     <td>
                                         <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-people-tab" href="<?php echo base_url('search/people').'?q='.$search_keyword; ?>">People <span>{{people_count}}</span></a>

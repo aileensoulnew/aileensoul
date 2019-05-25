@@ -99,7 +99,7 @@
                                         <a class="nav-item nav-link" ng-class="active_tab == '3' ? 'active' : ''" id="search-opp-tab" id="search-post-tab" href="<?php echo base_url('posts'); ?>">Posts</a>
                                     </td>
                                     <td>
-                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('opportunities'); ?>">Opportunities</a>
+                                        <a class="nav-item nav-link" ng-class="active_tab == '4' ? 'active' : ''" id="search-opp-tab" href="<?php echo base_url('opportunities'); ?>">Opportunities(Jobs)</a>
                                     </td>
                                     
                                     <td>
