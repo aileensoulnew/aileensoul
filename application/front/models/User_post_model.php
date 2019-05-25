@@ -851,10 +851,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
 
             $result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
@@ -2128,10 +2128,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
 
             $result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
@@ -2175,12 +2175,6 @@ class User_post_model extends CI_Model {
             $user_post[$key]['time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($user_post[$key]['created_date'])));
             $result_array[$key]['post_data'] = $user_post[$key];
 
-            $this->db->select("count(*) as file_count")->from("user_post_file upf");
-            $this->db->where('upf.post_id', $value['id']);
-            $query = $this->db->get();
-            $total_post_files = $query->row_array('file_count');
-            $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
-
             $this->db->select("u.user_id,u.user_slug,u.user_gender,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
             $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
             $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
@@ -2216,7 +2210,7 @@ class User_post_model extends CI_Model {
                 $simple_data = $query->row_array();
                 $simple_data['description'] = $this->common->make_links(nl2br($simple_data['description']));//nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
-            } elseif ($value['post_for'] == 'question') {
+            } /*elseif ($value['post_for'] == 'question') {
                 $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
                 $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
                 $this->db->where('uaq.id', $value['post_id']);
@@ -2241,7 +2235,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $cover_update = $query->row_array();
                 $result_array[$key]['cover_update'] = $cover_update;
-            }
+            }*/
             elseif ($value['post_for'] == 'article') {
                 $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
                 $this->db->where('pa.id_post_article', $value['post_id']);
@@ -2262,11 +2256,19 @@ class User_post_model extends CI_Model {
                 $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
                 $result_array[$key]['share_data'] = $share_data;
             }
+
+            /*$this->db->select("count(*) as file_count")->from("user_post_file upf");
+            $this->db->where('upf.post_id', $value['id']);
+            $query = $this->db->get();
+            $total_post_files = $query->row_array('file_count');
+            $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];*/
+
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
+            $result_array[$key]['post_data']['total_post_files'] = count($post_file_data);
 
             $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$userid_login);
 
@@ -2293,12 +2295,12 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $postCommentData = $this->postCommentData($value['id'],$user_id);
+            $postCommentData = $this->postCommentData($value['id'],$userid_login);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($userid_login, $value1['comment_id']);
                 $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
             $result_array[$key]['post_comment_data'] = $postCommentData;
 
             $result_array[$key]['page_data']['page'] = $page;
@@ -2492,12 +2494,12 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $postCommentData = $this->postCommentData($value['id'],$user_id);
+            $postCommentData = $this->postCommentData($value['id'],$userid_login);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($userid_login, $value1['comment_id']);
                 $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
             $result_array[$key]['post_comment_data'] = $postCommentData;
 
             $result_array[$key]['page_data']['page'] = $page;
@@ -3505,10 +3507,10 @@ class User_post_model extends CI_Model {
             $searchPostData[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $searchPostData[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$userid);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $searchPostData[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($userid, $value1['comment_id']);
                 $searchPostData[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
 
         $searchData['post'] = $searchPostData;
@@ -4027,10 +4029,10 @@ class User_post_model extends CI_Model {
             $searchPostData[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $searchPostData[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$userid);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $searchPostData[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($userid, $value1['comment_id']);
                 $searchPostData[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
 
         $searchData['post'] = $searchPostData;
@@ -4288,10 +4290,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
 
             /*$result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
@@ -4538,12 +4540,12 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
+            $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$userid_login);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($userid_login, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
 
             $result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->businessUserPostCount($user_id);
@@ -4764,10 +4766,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
         return $result_array;
     }
@@ -5228,10 +5230,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
         return $result_array;
     }
@@ -5557,10 +5559,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
 
         $ret_arr = array(
@@ -5812,10 +5814,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
 
         $ret_arr = array(
@@ -5994,10 +5996,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
 
         $ret_arr = array(
@@ -6177,10 +6179,10 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }
+            }*/
         }
 
         $ret_arr = array(

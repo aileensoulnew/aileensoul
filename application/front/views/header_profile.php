@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
+<!-- <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" /> -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/header.css?ver=' . time()); ?>">
 <?php
 $session_user = $this->session->userdata();
@@ -759,7 +759,7 @@ if($first_segment == "")
     </div>
 </div>
 <!-- Model Popup End -->
-<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
+<!-- <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" /> -->
 <script>
     var userid = "<?php echo $session_user['aileenuser']; ?>";
     var is_verify = "<?php echo $userData['user_verify']; ?>";

@@ -216,7 +216,7 @@
                         <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{post.simple_data.description}}" dd-text-collapse-cond="false" class="audio-title" ng-if="audioData.post_for == 'opportunity'">{{audioData.opportunity}}</label>
                         <div class = "audio_main_div">
                             <div class = "audio_img">
-                                <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                             </div>
                             <div class = "audio_source">
                                 <audio id = "audio_player" width = "100%" height = "40" controls>
@@ -248,7 +248,7 @@
                     <?php endif; ?>
                         <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{pdfData.description}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="pdfData.post_for == 'simple'">{{pdfData.description}}</label>
                         <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{post.simple_data.description}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="pdfData.post_for == 'opportunity'">{{pdfData.opportunity}}</label>
-                        <img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>">
+                        <img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>">
                     </a>
                 </div>
             </div>
@@ -265,8 +265,8 @@
                 <div class="all-meda" ng-repeat="articleData in postArticleData">
                     <a href="{{articleData.article_slug}}" target="_self">
                         <div ng-class="articleData.article_featured_image == '' ? 'article-img default-img' : 'article-img'">
-                            <img ng-if="articleData.article_featured_image == ''" src="<?php echo base_url() ?>assets/img/art-default.jpg">
-                            <img ng-if="articleData.article_featured_image != ''" src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{articleData.article_featured_image}}">
+                            <img ng-if="articleData.article_featured_image == ''" ng-src="<?php echo base_url() ?>assets/img/art-default.jpg">
+                            <img ng-if="articleData.article_featured_image != ''" ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{articleData.article_featured_image}}">
                         </div>
                         <div class="article-hover">
                             <span dd-text-collapse dd-text-collapse-max-length="49" dd-text-collapse-text="{{articleData.article_title != '' ? articleData.article_title : 'Untitled'}}" dd-text-collapse-cond="false"></span>
@@ -428,7 +428,7 @@
                         <div class="art_no_post_text">No Post</div>
                     </div>
                 </div>
-                <div class="fw post_loader" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
+                <div class="fw post_loader" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" /></div>
                 <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
                     <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
                         <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
@@ -583,7 +583,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                            <img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
+                                            <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                         </div>
                                         <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                         <div class="mySlides mySlides2{{post.post_data.id}}">
@@ -780,7 +780,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                            <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
                                                         </div>
                                                         <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                                         <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}">
@@ -823,15 +823,15 @@
                                                         <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">
                                                     </a>
                                                     <span ng-if="post_file.file_type == 'video'"> 
-                                                        <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
-                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                                        <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
                                                         </video>
                                                         <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                                     </span>
                                                     <span  ng-if="post_file.file_type == 'audio'">
                                                         <div class = "audio_main_div">
                                                             <div class = "audio_img">
-                                                                <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                                <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                                                             </div>
                                                             <div class = "audio_source">
                                                                 <audio id = "audio_player" width = "100%" height = "40" controls>
@@ -842,7 +842,7 @@
                                                         </div>
                                                         <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
                                                     </span>
-                                                    <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                                    <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
                                                 </div>
                                             </div>
                                             <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '2'">
@@ -875,7 +875,7 @@
                                                 <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+post.share_data.data.post_data.id)">×</button>
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
                                                         </div>
                                                         <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                                         <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}" ng-repeat="_photoData in post.share_data.data.post_file_data">
@@ -901,8 +901,8 @@
                                         <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
                                     </a>
                                     <span ng-if="post_file.file_type == 'video'"> 
-                                        <video controls width = "100%" height = "350" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png" preload="none">
-                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                        <video controls width = "100%" height = "350" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png" preload="none">
+                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
                                         </video>
                                         <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                     </span>
@@ -954,7 +954,7 @@
                                 <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModal'+post.post_data.id)">×</button>
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
+                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif'); ?>" alt="Loader" />
                                         </div>
                                         <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                         <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for != 'article'" ng-repeat="_photoData in post.post_file_data">
@@ -1232,7 +1232,7 @@
                 </div>				
             </div>
             <!-- Repeated Class Complete -->
-            <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
+            <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif'); ?>" alt="Loader" /></div>
         </div>
         <div class="right-part">
             <?php $this->load->view('right_add_box');            
@@ -1300,7 +1300,7 @@
                                 <div class="arti-profile-box">
                                     <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
                                         <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                            <img src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                            <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                         </a>
                                     </div>
                                     <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
@@ -1369,30 +1369,6 @@
                     </data-owl-carousel>
                 </div>
             </div>
-
-            <!-- <div class="dtl-box">
-                <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url('assets/n-images/detail/website.png'); ?>"><span>Website</span>
-                </div>
-                <div class="dtl-dis">
-                    <h4>Social</h4>
-                    <ul class="social-link-list">
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/fb.png'); ?>"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/in.png'); ?>"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pin.png'); ?>"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/insta.png'); ?>"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/you.png'); ?>"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/git.png'); ?>"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/twt.png'); ?>"></a></li>
-                    </ul>
-                    <h4 class="pt20 fw">Personal</h4>
-                    <ul class="social-link-list">
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pr-web'); ?>.png"></a></li>
-                        <li><a href="#"><img src="<?php echo base_url('assets/n-images/detail/pr-web'); ?>.png"></a></li>
-                    </ul>
-                </div>
-            </div> -->
-            
         </div>
     </div>
 </div>
@@ -1833,7 +1809,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <?php //if($user_id != ""): ?>
-                <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif'); ?>" alt="Loader" />
                 </div>
                 <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                 <div class="mySlides mySlides2Image" ng-repeat="_photoData in postAllImageData">
@@ -1898,7 +1874,7 @@
                             <label dd-text-collapse dd-text-collapse-max-length="70" dd-text-collapse-text="{{_audioData.description}}" dd-text-collapse-cond="false" class="audio-title" ng-if="_audioData.post_for == 'simple'">{{_audioData.description}}</label>
                             <label dd-text-collapse dd-text-collapse-max-length="70" dd-text-collapse-text="{{post.simple_data.description}}" dd-text-collapse-cond="false" class="audio-title" ng-if="_audioData.post_for == 'opportunity'">{{_audioData.opportunity}}</label>
                             <div class = "audio_img">
-                                <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                             </div>
                             <div class = "audio_source">
                                 <audio id = "audio_player" width = "100%" height = "40" controls>
@@ -2268,7 +2244,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
                                                             </div>
                                                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                                             <div class="mySlides mySlides2{{share_post_data.share_data.data.post_data.id}}">
@@ -2311,15 +2287,15 @@
                                                             <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)">
                                                         </a>
                                                         <span ng-if="post_file.file_type == 'video'"> 
-                                                            <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
-                                                                <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                                            <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                                <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
                                                             </video>
                                                             <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                                         </span>
                                                         <span  ng-if="post_file.file_type == 'audio'">
                                                             <div class = "audio_main_div">
                                                                 <div class = "audio_img">
-                                                                    <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                                    <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                                                                 </div>
                                                                 <div class = "audio_source">
                                                                     <audio id = "audio_player" width = "100%" height = "40" controls>
@@ -2330,7 +2306,7 @@
                                                             </div>
                                                             <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
                                                         </span>
-                                                        <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                                        <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
                                                     </div>
                                                 </div>
                                                 <div class="post-images" ng-if="share_post_data.share_data.data.post_data.total_post_files == '2'">
@@ -2363,7 +2339,7 @@
                                                     <button type="button" class="modal-close" ng-click="closeModalShare('myModalShareInner'+share_post_data.share_data.data.post_data.id)">×</button>
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                                             </div>
                                                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                                             <div class="mySlides mySlides2{{share_post_data.share_data.data.post_data.id}}" ng-repeat="_photoData in share_post_data.share_data.data.post_file_data">
@@ -2394,7 +2370,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                             </div>
                                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                             <div class="mySlides mySlides2{{share_post_data.post_data.id}}">
@@ -2437,15 +2413,15 @@
                                             <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)">
                                         </a>
                                         <span ng-if="post_file.file_type == 'video'"> 
-                                            <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
-                                                <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
+                                            <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                <source type="application/x-mpegURL" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}">
                                             </video>
                                             <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                         </span>
                                         <span  ng-if="post_file.file_type == 'audio'">
                                             <div class = "audio_main_div">
                                                 <div class = "audio_img">
-                                                    <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                    <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                                                 </div>
                                                 <div class = "audio_source">
                                                     <audio id = "audio_player" width = "100%" height = "40" controls>
@@ -2456,7 +2432,7 @@
                                             </div>
                                             <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
                                         </span>
-                                        <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                        <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
                                     </div>
                                 </div>
                                 <div class="post-images" ng-if="share_post_data.post_data.total_post_files == '2'">
@@ -2489,7 +2465,7 @@
                                     <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+share_post_data.post_data.id)">×</button>
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                             </div>
                                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                             <div class="mySlides mySlides2{{share_post_data.post_data.id}}" ng-repeat="_photoData in share_post_data.post_file_data">
