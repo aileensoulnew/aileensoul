@@ -1,5 +1,6 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
-<div class="container pt20 mobp0">
+<div class="pt20 fw">
+<div class="container mobp0">
     <div class="custom-user-list question-page">
 		<div class="tab-add-991 ads">
             <?php
@@ -163,6 +164,7 @@
     <div class="right-add">
         <?php $this->load->view('right_add_box'); ?>
     </div>
+</div>
 </div>
 
 <div class="modal fade message-box" id="delete_post_model" role="dialog">

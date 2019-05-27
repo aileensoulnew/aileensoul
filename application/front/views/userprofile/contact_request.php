@@ -21,7 +21,7 @@
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
             <?php echo $header_profile; ?>
-            <div class="middle-section middle-section-banner">
+            <div class="middle-section-banner">
                 <div class="container pt20 mobp0">
 					<div class="tab-add-991">
 						<?php $this->load->view('banner_add'); ?>

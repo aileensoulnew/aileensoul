@@ -1,4 +1,5 @@
-<div class="container mob-plr0 pt20">
+<div class="pt20 fw">
+<div class="container mob-plr0">
     <div class="all-detail-custom">
         <div class="custom-user-list">
 			
@@ -1049,7 +1050,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- All Model Start -->
 <!---  model Profile Overview  -->

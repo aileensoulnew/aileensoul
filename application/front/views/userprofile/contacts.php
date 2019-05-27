@@ -1,4 +1,5 @@
-<div class="container pt20 mobp0 contacts-page">
+<div class="pt20 fw">
+<div class="container mobp0 contacts-page">
     <div class="custom-user-list">
 		<div class="tab-add-991 ads">
             <?php
@@ -78,4 +79,5 @@
     <div class="right-add">
         <?php $this->load->view('right_add_box'); ?>
     </div>
+</div>
 </div>
