@@ -1470,7 +1470,7 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                     $scope.pagecntctData = response.data;
                     $scope.audioData = response.data.videorecord;
                 }
-                // setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+                setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             } else {
                 $scope.showLoadmore = false;
             }
@@ -1747,7 +1747,7 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 {
                     $scope.allVideosData = response.data.allVideosData;   
                 }
-                // setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+                setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             } else {
                 $scope.showLoadmore = false;
             }
@@ -2815,7 +2815,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 isLoadingData = true;
                 $scope.showLoadmore = false;
             }
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
 
@@ -2834,7 +2834,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postVideoData = success.data.userDashboardVideo;
             $scope.postAllVideoData = success.data.userDashboardVideoAll;
-            // setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+            setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             
         }, function (error) {});
     }
@@ -2921,7 +2921,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postAudioData = success.data.userDashboardAudio;
             $scope.postAllAudioData = success.data.userDashboardAudioAll;
-            // setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+            setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
         }, function (error) {});
     }
 
@@ -2930,7 +2930,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $http.get(base_url + "user_post/getUserDashboardPdf?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             $scope.postPdfData = success.data.userDashboardPdf;
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
 
@@ -4035,8 +4035,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
     $scope.loadMediaElement = function ()
     {
-        // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
-        var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        /*var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
         for (i = 0; i < total; i++) {
             new MediaElementPlayer(mediaElements[i], {
@@ -4059,7 +4059,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     });
                 }
             });
-        }
+        }*/
     };
     $scope.addToContact = function (user_id, contact) {
         if(user_id == "" || user_id == undefined)
@@ -4443,7 +4443,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -4842,9 +4842,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('.progress-bar').css("width",0);
             $('.sr-only').text(0+"%");
             // check_no_post_data();
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
 
-            setTimeout(function(){
+            /*setTimeout(function(){
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                 for (i = 0; i < total; i++) {
@@ -4869,7 +4869,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         }
                     });
                 }
-            },1000);
+            },1000);*/
             
             getUserDashboardImage();
             getUserDashboardVideo();
@@ -11729,7 +11729,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 isLoadingData = true;
                 $scope.showLoadmore = false;
             }
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
 
@@ -12515,7 +12515,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $('.progress-bar').css("width",0);
             $('.sr-only').text(0+"%");
             // check_no_post_data();
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
     if($scope.$parent.live_slug != $scope.$parent.segment2)
@@ -12569,7 +12569,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
         $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
-            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -13181,6 +13181,8 @@ function setCursotToEnd(el)
         textRange.select();
     }
 }
+
+/*
 function getQueryStringValue (key) {
     return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
@@ -13279,8 +13281,5 @@ for (var i = 0; i < sourcesTotal; i++) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-
-    // mejs.i18n.language(lang);
-
     
-});
+});*/

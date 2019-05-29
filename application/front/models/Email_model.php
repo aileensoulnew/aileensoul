@@ -124,13 +124,16 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+            return true;
+        }
 
-        /*if ($mail->send()) {
+        if ($mail->send()) {
             return TRUE;
         } else {
             return FALSE;
-        }*/
-        return TRUE;
+        }
+        // return TRUE;
 
     }
 
@@ -244,12 +247,12 @@ class Email_model extends CI_Model {
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
         }
-        return true;
-        /*if ($mail->send()) {
+        // return true;
+        if ($mail->send()) {
             return true;
         } else {
             return FALSE;
-        }*/
+        }
     }
 
     function test_email($subject = '', $templ = '', $to_email = '') {
@@ -322,12 +325,12 @@ class Email_model extends CI_Model {
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
         }
-        return TRUE;
-        /*if ($mail->send()) {
+        // return TRUE;
+        if ($mail->send()) {
             return TRUE;
         } else {
             return FALSE;
-        }*/
+        }
     }
 
     function send_email_hp($subject = '', $templ = '', $to_email = '',$unsubscribe = '') {
@@ -443,11 +446,11 @@ class Email_model extends CI_Model {
             return true;
         }
 
-        return TRUE;
-        /*if ($mail->send()) {
+        // return TRUE;
+        if ($mail->send()) {
             return TRUE;
         } else {
             return FALSE;
-        }*/
+        }
     }
 }

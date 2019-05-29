@@ -106,6 +106,25 @@ app.filter('removeLastCharacter', function() {
         //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });
+app.filter('parseUrl', function($sce) {
+    var urls = /(\b(https:\/\/?|http:\/\/?|ftp:\/\/)[A-Z0-9+&@#\/%?=~_|!:,.;-]*[-A-Z0-9+&@#\/%=~_|])/gim
+    var urlswww = /(\b(www.?)[A-Z0-9+&@#\/%?=~_|!:,.;-]*[-A-Z0-9+&@#\/%=~_|])/gim
+    var emails = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim
+    return function(text, asTrusted) {
+        if (text.match(urls)) {
+            text = text.replace(urls, "<a href=\"$1\" target=\"_self\">$1</a>")
+        } else if (text.match(urlswww)) {
+            text = text.replace(urlswww, "<a href=\"//$1\" target=\"_self\">$1</a>")
+        }
+        if (text.match(emails)) {
+            text = text.replace(emails, "<a href=\"mailto:$1\">$1</a>")
+        }
+        if (asTrusted) {
+            return $sce.trustAsHtml(text);
+        }
+        return text;
+    }
+});
 app.directive('ngEnter', function() { 
     // custom directive for sending message on enter click
     return function(scope, element, attrs) {
@@ -261,6 +280,60 @@ app.controller('searchController', function($scope, $http, $compile) {
         window.location = "/";
     }
 
+    $(document).on('keydown','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_job_title ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Title');
+            $(this).css('width', '100%');
+        }         
+    });
+
+    $(document).on('keydown','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_city ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Location');
+            $(this).css('width', '100%');
+        }         
+    });
+
     $scope.searchData = function() {
         //$(".post_loader").show();
         var search_job_title = '';
@@ -335,6 +408,9 @@ app.controller('searchController', function($scope, $http, $compile) {
         $scope.$parent.search_hashtag = [];
         $scope.$parent.search_company = [];
         $scope.$parent.search_gender = '';
+
+        $('#search_job_title .input').attr('placeholder', 'Search by Title').css('width', '100%');
+        $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
 
         $scope.searchData();
     }    
@@ -1096,6 +1172,8 @@ app.controller('searchController', function($scope, $http, $compile) {
             var search_job_title = JSON.stringify($scope.search_job_title);
             var search_city = JSON.stringify($scope.search_city);
             $scope.$parent.search_field = $scope.search_field;
+            $("#search-loader").show();
+            $("#search-loader").show();
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -1105,6 +1183,8 @@ app.controller('searchController', function($scope, $http, $compile) {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(success) {
+                $("#search-loader").hide();
+                $("#search-loader").hide();
                 $(".post_loader").hide();
                 $scope.searchProfileData = success.data.profile;
                 $scope.postData = success.data.opp_post;
@@ -1139,9 +1219,8 @@ app.controller('searchController', function($scope, $http, $compile) {
             });
         }
     };
-
 });
-app.controller('opportunityController', function($scope, $http, $compile, $window) {
+app.controller('opportunityController', function($scope, $http, $compile, $window,$location) {
     $scope.$parent.active_tab = '2';    
     $scope.user_id = user_id;
     $scope.$parent.meta_title = '"'+keyword +'" - Opportunities | Aileensoul Search';
@@ -1155,6 +1234,114 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
     var pagenum = 0;
     $scope.perpage_record = 10;
     $scope.postData = [];
+
+    $(document).on('keydown','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_job_title ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Title');
+            $(this).css('width', '100%');
+        }         
+    });
+
+    $(document).on('keydown','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_city ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Location');
+            $(this).css('width', '100%');
+        }         
+    });
+
+    $(document).on('keydown','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_hashtag ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Hash Tags');
+            $(this).css('width', '100%');
+        }         
+    });
+
+    $(document).on('keydown','#search_company .input',function () {
+        if($('#search_company ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_company .input',function () {
+        if($('#search_company ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_company .input',function () {
+        if($('#search_company ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_company ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Company');
+            $(this).css('width', '100%');
+        }         
+    });
 
     $scope.searchData = function(pagenum) {
         if (isProcessing) {
@@ -1226,6 +1413,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         $scope.search_company = [];
         $scope.search_gender = '';
 
+        $('#search_job_title .input').attr('placeholder', 'Search by Title').css('width', '100%');
+        $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
+        $('#search_hashtag .input').attr('placeholder', 'Search by Hash Tags').css('width', '100%');
+        $('#search_company .input').attr('placeholder', 'Search by Company').css('width', '100%');
+
         pagenum = 0;
         isProcessing = false;
         $scope.searchData(pagenum);
@@ -1286,9 +1478,54 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
     $scope.searchData(pagenum);
     $scope.get_search_total_count();
 
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_company == undefined || $scope.search_company.length < 1))
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = JSON.stringify($scope.search_job_title);
+            var search_city = JSON.stringify($scope.search_city);
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            var search_company = JSON.stringify($scope.search_company);
+            $scope.$parent.search_field = $scope.search_field;
+            var search_field = $scope.search_field;
+            $("#post-loader").show();
+            $("#search-loader").show();
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_opportunity_data',
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_hashtag='+search_hashtag+'&search_company='+search_company,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+                $("#search-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.opp_post;
+                
+                $scope.$parent.opp_count = '('+success.data.opp_count+')';
+                $scope.total_record = success.data.opp_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+                
+                setTimeout(function() {
+                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                }, 300);
+            });
+        }
+    };
+
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.path() == '/search/opportunity') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -2028,50 +2265,8 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             });
         });
     };
-
-    $scope.main_search_function = function(){
-        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_company == undefined || $scope.search_company.length < 1))
-        {
-            return false;
-        }
-        else
-        {
-            pagenum = 0;
-            isProcessing = false;
-            var search_job_title = JSON.stringify($scope.search_job_title);
-            var search_city = JSON.stringify($scope.search_city);
-            var search_hashtag = JSON.stringify($scope.search_hashtag);
-            var search_company = JSON.stringify($scope.search_company);
-            $scope.$parent.search_field = $scope.search_field;
-            var search_field = $scope.search_field;
-            $http({
-                method: 'POST',
-                // url: base_url + 'user_post/searchData',
-                url: base_url + 'searchelastic/search_opportunity_data',
-                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_hashtag='+search_hashtag+'&search_company='+search_company,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(function(success) {
-                $("#post-loader").hide();
-
-                $scope.page_number = success.data.page;            
-                $scope.postData = success.data.opp_post;
-                
-                $scope.$parent.opp_count = '('+success.data.opp_count+')';
-                $scope.total_record = success.data.opp_count;
-
-                $('#main_loader').hide();
-                $('body').removeClass("body-loader");
-                
-                setTimeout(function() {
-                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                }, 300);
-            });
-        }
-    };
 });
-app.controller('peopleController', function($scope, $http, $compile, $window) {
+app.controller('peopleController', function($scope, $http, $compile, $window, $location) {
     $scope.$parent.active_tab = '3';
     $scope.$parent.meta_title = '"'+keyword +'" - People | Aileensoul Search';
     $scope.user_id = user_id;
@@ -2085,6 +2280,60 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
     var pagenum = 0
     $scope.perpage_record = 10;
     $scope.searchProfileData = [];
+
+    $(document).on('keydown','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_job_title .input',function () {
+        if($('#search_job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_job_title ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Title');
+            $(this).css('width', '100%');
+        }         
+    });
+
+    $(document).on('keydown','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_city .input',function () {
+        if($('#search_city ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_city ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Location');
+            $(this).css('width', '100%');
+        }         
+    });
 
     $scope.searchData = function(pagenum) {
         if (isProcessing) {
@@ -2125,12 +2374,12 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
             if(success.data.profile.length > 0)
             {
                 isProcessing = false;
-                if (pagenum != 0 && $scope.searchProfileData != undefined) {
+                if (pagenum != 0 && $scope.searchProfileData != undefined) {                    
                     for (var i in success.data.profile) {
-                        $scope.searchProfileData.push(success.data.profile[i]);
+                        $scope.searchProfileData.push(success.data.profile[i]);                        
                     }
                 }
-                else{                
+                else{                    
                     $scope.searchProfileData = success.data.profile;
                     $scope.$parent.people_count = '('+success.data.people_count+')';
                     $scope.total_record = success.data.people_count;
@@ -2171,6 +2420,9 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
                 search_field = $scope.search_field;
             }
 
+            $("#people-loader").show();
+            $("#search-loader").show();
+
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -2180,7 +2432,8 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(success) {
-                $("#post-loader").hide();
+                $("#people-loader").hide();
+                $("#search-loader").hide();
 
                 $scope.page_number = success.data.page;            
                 $scope.searchProfileData = success.data.profile;
@@ -2201,6 +2454,9 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+
+        $('#search_job_title .input').attr('placeholder', 'Search by Title').css('width', '100%');
+        $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
 
         pagenum = 0;
         isProcessing = false;
@@ -2258,7 +2514,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.path() == '/search/people') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -2328,7 +2584,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window) {
         });
     };    
 });
-app.controller('postController', function($scope, $http, $compile, $window) {
+app.controller('postController', function($scope, $http, $compile, $window, $location) {
     $scope.$parent.active_tab = '4';
     $scope.$parent.meta_title = '"'+keyword +'" - Posts | Aileensoul Search';
     $scope.user_id = user_id;
@@ -2343,6 +2599,33 @@ app.controller('postController', function($scope, $http, $compile, $window) {
     var pagenum = 0
     $scope.perpage_record = 10;
     $scope.postData = [];
+
+    $(document).on('keydown','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_hashtag ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Hash Tags');
+            $(this).css('width', '100%');
+        }         
+    });
     
     $scope.searchData = function(pagenum) {
         if (isProcessing) {
@@ -2400,7 +2683,9 @@ app.controller('postController', function($scope, $http, $compile, $window) {
         {
             pagenum = 0;
             isProcessing = false;
-            var search_hashtag = JSON.stringify($scope.search_hashtag);            
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            $("#post-loader").show();
+            $("#search-loader").show();
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -2411,6 +2696,7 @@ app.controller('postController', function($scope, $http, $compile, $window) {
                 }
             }).then(function(success) {
                 $("#post-loader").hide();
+                $("#search-loader").hide();
 
                 $scope.page_number = success.data.page;            
                 $scope.postData = success.data.sim_post;
@@ -2435,6 +2721,8 @@ app.controller('postController', function($scope, $http, $compile, $window) {
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+
+        $('#search_hashtag .input').attr('placeholder', 'Search by Hash Tags').css('width', '100%');
 
         pagenum = 0;
         isProcessing = false;
@@ -2491,7 +2779,7 @@ app.controller('postController', function($scope, $http, $compile, $window) {
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.path() == '/search/post') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -3202,7 +3490,7 @@ app.controller('postController', function($scope, $http, $compile, $window) {
         });
     };
 });
-app.controller('businessController', function($scope, $http, $compile, $window) {
+app.controller('businessController', function($scope, $http, $compile, $window, $location) {
     $scope.$parent.active_tab = '5';
     $scope.$parent.meta_title = '"'+keyword +'" - Businesses | Aileensoul Search';
     $scope.user_id = user_id;
@@ -3312,7 +3600,8 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
         {            
             pagenum = 0;
             isProcessing = false;
-
+            $("#business-loader").show();
+            $("#search-loader").show();
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -3323,7 +3612,8 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
                     'Content-Type':  'application/x-www-form-urlencoded'
                 }
             }).then(function(success) {
-                $("#post-loader").hide();
+                $("#business-loader").hide();
+                $("#search-loader").hide();
 
                 $scope.page_number = success.data.page;            
                 $scope.business_data = success.data.business_data;
@@ -3356,7 +3646,7 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.path() == '/search/business') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -3380,7 +3670,7 @@ app.controller('businessController', function($scope, $http, $compile, $window) 
         }
     });
 });
-app.controller('articleController', function($scope, $http, $compile, $window) {
+app.controller('articleController', function($scope, $http, $compile, $window, $location) {
     $scope.$parent.active_tab = '6';
     $scope.$parent.meta_title = '"'+keyword +'" - Articles | Aileensoul Search';
     $scope.user_id = user_id;
@@ -3394,6 +3684,33 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
 
     var pagenum = 0
     $scope.perpage_record = 10;
+
+    $(document).on('keydown','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_hashtag ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Hash Tags');
+            $(this).css('width', '100%');
+        }         
+    });
     
     $scope.searchData = function(pagenum) {
         if (isProcessing) {
@@ -3452,7 +3769,9 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
             isProcessing = false;
             var search_hashtag = JSON.stringify($scope.search_hashtag);
             $scope.$parent.search_field = $scope.search_field;
-            var search_field = $scope.search_field;            
+            var search_field = $scope.search_field;
+            $("#post-loader").show();
+            $("#search-loader").show();
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -3464,6 +3783,7 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
                 }
             }).then(function(success) {
                 $("#post-loader").hide();
+                $("#search-loader").hide();
 
                 $scope.page_number = success.data.page;            
                 $scope.postData = success.data.article_post;
@@ -3484,6 +3804,8 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+
+        $('#search_hashtag .input').attr('placeholder', 'Search by Hash Tags').css('width', '100%');
 
         pagenum = 0;
         isProcessing = false;
@@ -3540,7 +3862,7 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.path() == '/search/article') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -4251,7 +4573,7 @@ app.controller('articleController', function($scope, $http, $compile, $window) {
         });
     };
 });
-app.controller('questionController', function($scope, $http, $compile, $window) {
+app.controller('questionController', function($scope, $http, $compile, $window, $location) {
     $scope.$parent.active_tab = '7';
     $scope.$parent.meta_title = '"'+keyword +'" - Questions | Aileensoul Search';
     $scope.user_id = user_id;
@@ -4264,13 +4586,39 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
 
     var pagenum = 0
     $scope.perpage_record = 10;
+
+    $(document).on('keydown','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+    $(document).on('focusin','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+    });
+    $(document).on('focusout','#search_hashtag .input',function () {
+        if($('#search_hashtag ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '20px');
+        }
+        if($('#search_hashtag ul li').length == 0)
+        {            
+            $(this).attr('placeholder', 'Search by Hash Tags');
+            $(this).css('width', '100%');
+        }         
+    });
     
     $scope.searchData = function(pagenum) {
         if (isProcessing) {
             return;
         }
-        isProcessing = true;
-        $("#post-loader").show();
+        isProcessing = true;        
 
         var search_field = '';
         if($scope.search_field != '')
@@ -4326,11 +4674,14 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
         }
         else
         {
+            $scope.postData = [];
             pagenum = 0;
             isProcessing = false;
             var search_hashtag = JSON.stringify($scope.search_hashtag);
             $scope.$parent.search_field = $scope.search_field;
-            var search_field = $scope.search_field;            
+            var search_field = $scope.search_field;
+            $("#post-loader").show();
+            $("#search-loader").show();
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -4342,6 +4693,7 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
                 }
             }).then(function(success) {
                 $("#post-loader").hide();
+                $("#search-loader").hide();
 
                 $scope.page_number = success.data.page;            
                 $scope.postData = success.data.question_post;
@@ -4362,6 +4714,8 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+
+        $('#search_hashtag .input').attr('placeholder', 'Search by Hash Tags').css('width', '100%');
 
         pagenum = 0;
         isProcessing = false;
@@ -4418,7 +4772,7 @@ app.controller('questionController', function($scope, $http, $compile, $window) 
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) &&  $location.path() == '/search/question') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();

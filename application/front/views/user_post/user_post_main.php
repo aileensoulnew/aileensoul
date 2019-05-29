@@ -149,12 +149,7 @@
 
                                 <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for == 'article'" href="<?php echo base_url(); ?>article/{{recentpost.article_data.article_slug}}" target="_blank">Show in new tab</a>
                                 <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for == 'opportunity'" href="<?php echo base_url(); ?>o/{{recentpost.opportunity_data.oppslug}}" target="_blank">Show in new tab</a>
-                                <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.post_for == 'simple'" href="<?php echo base_url(); ?>p/{{recentpost.simple_data.simslug}}" target="_blank">Show in new tab</a>
-                                <!-- <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{recentpost.user_data.user_slug}}/post/{{recentpost.post_data.id}}" target="_blank">Show in new tab</a>
-                                <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.total_post_files >= '1' && recentpost.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{recentpost.user_data.user_slug}}/photos/{{recentpost.post_data.id}}" target="_blank">Show in new tab</a>
-                                <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.total_post_files >= '1' && recentpost.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{recentpost.user_data.user_slug}}/videos/{{recentpost.post_data.id}}" target="_blank">Show in new tab</a>
-                                <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.total_post_files >= '1' && recentpost.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{recentpost.user_data.user_slug}}/audios/{{recentpost.post_data.id}}" target="_blank">Show in new tab</a>
-                                <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.total_post_files >= '1' && recentpost.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{recentpost.user_data.user_slug}}/pdf/{{recentpost.post_data.id}}" target="_blank">Show in new tab</a> -->
+                                <a ng-if="recentpost.post_data.post_for != 'question' && recentpost.post_data.post_for != 'article' && recentpost.post_data.post_for != 'opportunity' && recentpost.post_data.post_for == 'simple'" href="<?php echo base_url(); ?>p/{{recentpost.simple_data.simslug}}" target="_blank">Show in new tab</a>                                
                                 <a ng-if="recentpost.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{recentpost.question_data.id}}/{{recentpost.question_data.question| slugify}}" target="_blank">Show in new tab</a>
                             </li>
                             <li ng-if="live_slug != recentpost.user_data.user_slug">
@@ -557,13 +552,13 @@
                             <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                 <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
                                 <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'"></a>
-                                <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self"></a>
+                                <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self"></a><span class="post-time">{{post.post_data.time_string}}</span>
                             </div>
                                             
                             <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a>
-                                <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self"></a>
+                                <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self"></a><span class="post-time">{{post.post_data.time_string}}</span>
                             </div>
                                             
                             <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -1379,13 +1374,13 @@
                                 <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                     <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'"></a>
-                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'"></a><span class="post-time">Promoted</span>
+                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self"></a>
+                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self"></a><span class="post-time">Promoted</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                    <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a>
-                                    <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name"></a><span class="post-time">Promoted</span>
+                                    <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self"></a>
+                                    <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self"></a><span class="post-time">Promoted</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -1576,14 +1571,14 @@
                                                 <div class="fw" ng-if="post.share_data.data.post_data.post_for == 'question'">
                                                     <a href="javascript:void(0)" class="post-name" ng-if="post.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
                                                     <span class="post-time" ng-if="post.share_data.data.question_data.is_anonymously == '1'"></span>
-                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'"></a>
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'"></a>
+                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'" target="_self"></a>
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'" target="_self"></a>
                                                     <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
                                                 </div>
                                                                 
                                                 <div class="fw" ng-if="post.share_data.data.post_data.post_for != 'question'">
-                                                    <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname"></a>
-                                                    <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name"></a>
+                                                    <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" target="_self"></a>
+                                                    <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" target="_self"></a>
                                                     <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
                                                 </div>
 
@@ -1888,7 +1883,7 @@
                                 </ul>
                                 <ul class="pull-right">
                                     <li class="visit-post">
-                                        <a class="btn3" href="https://www.commissioncrowd.com/?ref=dZeBOICH" ><svg viewBox="0 0 209.281 209.281" width="13px" height="13px"><g><path d="M203.456,139.065c3.768-10.786,5.824-22.369,5.824-34.425s-2.056-23.639-5.824-34.425c-0.092-0.324-0.201-0.64-0.333-0.944  C188.589,28.926,149.932,0,104.641,0S20.692,28.926,6.159,69.271c-0.132,0.305-0.242,0.62-0.333,0.944  c-3.768,10.786-5.824,22.369-5.824,34.425s2.056,23.639,5.824,34.425c0.092,0.324,0.201,0.64,0.333,0.944  c14.534,40.346,53.191,69.271,98.482,69.271s83.948-28.926,98.482-69.271C203.255,139.705,203.364,139.39,203.456,139.065z   M104.641,194.281c-3.985,0-10.41-7.212-15.78-23.324c-2.592-7.775-4.667-16.713-6.179-26.436H126.6  c-1.512,9.723-3.587,18.66-6.178,26.436C115.051,187.069,108.626,194.281,104.641,194.281z M80.862,129.521  c-0.721-7.998-1.102-16.342-1.102-24.881s0.381-16.883,1.102-24.881h47.557c0.721,7.998,1.102,16.342,1.102,24.881  s-0.381,16.883-1.102,24.881H80.862z M15.001,104.641c0-8.63,1.229-16.978,3.516-24.881h47.3  c-0.701,8.163-1.057,16.529-1.057,24.881s0.355,16.718,1.057,24.881h-47.3C16.23,121.618,15.001,113.271,15.001,104.641z   M104.641,15c3.985,0,10.411,7.212,15.781,23.324c2.591,7.775,4.667,16.713,6.178,26.435H82.681  c1.512-9.723,3.587-18.66,6.179-26.435C94.231,22.212,100.656,15,104.641,15z M143.464,79.76h47.3  c2.287,7.903,3.516,16.251,3.516,24.881s-1.229,16.978-3.516,24.881h-47.3c0.701-8.163,1.057-16.529,1.057-24.881  S144.165,87.923,143.464,79.76z M184.903,64.76h-43.16c-2.668-18.397-7.245-34.902-13.666-46.644  C152.972,24.865,173.597,42.096,184.903,64.76z M81.204,18.115C74.783,29.857,70.206,46.362,67.538,64.76h-43.16  C35.685,42.096,56.309,24.865,81.204,18.115z M24.378,144.521h43.16c2.668,18.397,7.245,34.902,13.666,46.645  C56.309,184.416,35.685,167.186,24.378,144.521z M128.077,191.166c6.421-11.742,10.998-28.247,13.666-46.645h43.16  C173.597,167.186,152.972,184.416,128.077,191.166z" data-original="#7b7b7b" class="active-path" fill="#7b7b7b"/></g> </svg><span>Visit</span></a>
+                                        <a class="btn3" href="https://www.commissioncrowd.com/?ref=dZeBOICH"  target="_self"><svg viewBox="0 0 209.281 209.281" width="13px" height="13px"><g><path d="M203.456,139.065c3.768-10.786,5.824-22.369,5.824-34.425s-2.056-23.639-5.824-34.425c-0.092-0.324-0.201-0.64-0.333-0.944  C188.589,28.926,149.932,0,104.641,0S20.692,28.926,6.159,69.271c-0.132,0.305-0.242,0.62-0.333,0.944  c-3.768,10.786-5.824,22.369-5.824,34.425s2.056,23.639,5.824,34.425c0.092,0.324,0.201,0.64,0.333,0.944  c14.534,40.346,53.191,69.271,98.482,69.271s83.948-28.926,98.482-69.271C203.255,139.705,203.364,139.39,203.456,139.065z   M104.641,194.281c-3.985,0-10.41-7.212-15.78-23.324c-2.592-7.775-4.667-16.713-6.179-26.436H126.6  c-1.512,9.723-3.587,18.66-6.178,26.436C115.051,187.069,108.626,194.281,104.641,194.281z M80.862,129.521  c-0.721-7.998-1.102-16.342-1.102-24.881s0.381-16.883,1.102-24.881h47.557c0.721,7.998,1.102,16.342,1.102,24.881  s-0.381,16.883-1.102,24.881H80.862z M15.001,104.641c0-8.63,1.229-16.978,3.516-24.881h47.3  c-0.701,8.163-1.057,16.529-1.057,24.881s0.355,16.718,1.057,24.881h-47.3C16.23,121.618,15.001,113.271,15.001,104.641z   M104.641,15c3.985,0,10.411,7.212,15.781,23.324c2.591,7.775,4.667,16.713,6.178,26.435H82.681  c1.512-9.723,3.587-18.66,6.179-26.435C94.231,22.212,100.656,15,104.641,15z M143.464,79.76h47.3  c2.287,7.903,3.516,16.251,3.516,24.881s-1.229,16.978-3.516,24.881h-47.3c0.701-8.163,1.057-16.529,1.057-24.881  S144.165,87.923,143.464,79.76z M184.903,64.76h-43.16c-2.668-18.397-7.245-34.902-13.666-46.644  C152.972,24.865,173.597,42.096,184.903,64.76z M81.204,18.115C74.783,29.857,70.206,46.362,67.538,64.76h-43.16  C35.685,42.096,56.309,24.865,81.204,18.115z M24.378,144.521h43.16c2.668,18.397,7.245,34.902,13.666,46.645  C56.309,184.416,35.685,167.186,24.378,144.521z M128.077,191.166c6.421-11.742,10.998-28.247,13.666-46.645h43.16  C173.597,167.186,152.972,184.416,128.077,191.166z" data-original="#7b7b7b" class="active-path" fill="#7b7b7b"/></g> </svg><span>Visit</span></a>
                                     </li>
                                     <li class="view-post">
                                         <span>25 Views</span>
@@ -2137,34 +2132,34 @@
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="arti-profile-box">
                                             <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                 </a>
                                             </div>
                                             <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <div class="gradient-bg" style="height: 100%"></div>
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
                                             </div>
                                             <div class="user-info-text text-center">
                                                 <h3>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)" target="_self"></a>
                                                 </h3>
                                                 <p>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null" target="_self">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null" target="_self">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null" target="_self">CURRENT WORK</a>
                                                 </p>
                                             </div>
                                             <div class="author-btn">
@@ -2178,7 +2173,7 @@
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
                                         <div class="user-cover-img">
-                                            <a href="<?php echo base_url('contact-request') ?>">
+                                            <a href="<?php echo base_url('contact-request') ?>" target="_self">
                                                 <div class="gradient-bg" style="height: 100%"></div>
                                             </a>
                                         </div>
@@ -2187,13 +2182,13 @@
                                         </div>                            
                                         <div class="user-info-text text-center">
                                             <h3>
-                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                <a href="<?php echo base_url('contact-request') ?>" target="_self">Find More Contacts
                                                 </a>
                                             </h3>                                
                                         </div>
                                         <div class="author-btn">
                                             <div class="user-btns">
-                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>" target="_self">View More</a>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -2213,34 +2208,34 @@
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="arti-profile-box">
                                             <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                 </a>
                                             </div>
                                             <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <div class="gradient-bg" style="height: 100%"></div>
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
                                             </div>
                                             <div class="user-info-text text-center">
                                                 <h3>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)" target="_self"></a>
                                                 </h3>
                                                 <p>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null" target="_self">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null" target="_self">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null" target="_self">CURRENT WORK</a>
                                                 </p>
                                             </div>
                                             <div class="author-btn">
@@ -2254,7 +2249,7 @@
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
                                         <div class="user-cover-img">
-                                            <a href="<?php echo base_url('contact-request') ?>">
+                                            <a href="<?php echo base_url('contact-request') ?>" target="_self">
                                                 <div class="gradient-bg" style="height: 100%"></div>
                                             </a>
                                         </div>
@@ -2263,13 +2258,13 @@
                                         </div>                            
                                         <div class="user-info-text text-center">
                                             <h3>
-                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                <a href="<?php echo base_url('contact-request') ?>" target="_self">Find More Contacts
                                                 </a>
                                             </h3>                                
                                         </div>
                                         <div class="author-btn">
                                             <div class="user-btns">
-                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>" target="_self">View More</a>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -2289,34 +2284,34 @@
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="arti-profile-box">
                                             <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                 </a>
                                             </div>
                                             <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"   target="_self">
                                                     <div class="gradient-bg" style="height: 100%"></div>
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
                                             </div>
                                             <div class="user-info-text text-center">
                                                 <h3>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)" target="_self"></a>
                                                 </h3>
                                                 <p>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null" target="_self">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null" target="_self">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null" target="_self">CURRENT WORK</a>
                                                 </p>
                                             </div>
                                             <div class="author-btn">
@@ -2330,7 +2325,7 @@
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
                                         <div class="user-cover-img">
-                                            <a href="<?php echo base_url('contact-request') ?>">
+                                            <a href="<?php echo base_url('contact-request') ?>" target="_self">
                                                 <div class="gradient-bg" style="height: 100%"></div>
                                             </a>
                                         </div>
@@ -2339,13 +2334,13 @@
                                         </div>                            
                                         <div class="user-info-text text-center">
                                             <h3>
-                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                <a href="<?php echo base_url('contact-request') ?>" target="_self">Find More Contacts
                                                 </a>
                                             </h3>                                
                                         </div>
                                         <div class="author-btn">
                                             <div class="user-btns">
-                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>" target="_self">View More</a>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -2365,34 +2360,34 @@
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="arti-profile-box">
                                             <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                 </a>
                                             </div>
                                             <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <div class="gradient-bg" style="height: 100%"></div>
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
                                             </div>
                                             <div class="user-info-text text-center">
                                                 <h3>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)" target="_self"></a>
                                                 </h3>
                                                 <p>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null" target="_self">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null" target="_self">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null" target="_self">CURRENT WORK</a>
                                                 </p>
                                             </div>
                                             <div class="author-btn">
@@ -2415,13 +2410,13 @@
                                         </div>                            
                                         <div class="user-info-text text-center">
                                             <h3>
-                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                <a href="<?php echo base_url('contact-request') ?>" target="_self">Find More Contacts
                                                 </a>
                                             </h3>                                
                                         </div>
                                         <div class="author-btn">
                                             <div class="user-btns">
-                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>" target="_self">View More</a>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -2441,34 +2436,34 @@
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="arti-profile-box">
                                             <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                 </a>
                                             </div>
                                             <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <div class="gradient-bg" style="height: 100%"></div>
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                                 </a>
                                             </div>
                                             <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}"  target="_self">
                                                     <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
                                             </div>
                                             <div class="user-info-text text-center">
                                                 <h3>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)" target="_self"></a>
                                                 </h3>
                                                 <p>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null" target="_self">{{contact.title_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null" target="_self">{{contact.degree_name| uppercase}}</a>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null" target="_self">CURRENT WORK</a>
                                                 </p>
                                             </div>
                                             <div class="author-btn">
@@ -2482,7 +2477,7 @@
                                 <div owl-carousel-item="" class="item last-item-box">
                                     <div class="arti-profile-box">
                                         <div class="user-cover-img">
-                                            <a href="<?php echo base_url('contact-request') ?>">
+                                            <a href="<?php echo base_url('contact-request') ?>" target="_self">
                                                 <div class="gradient-bg" style="height: 100%"></div>
                                             </a>
                                         </div>
@@ -2491,13 +2486,13 @@
                                         </div>                            
                                         <div class="user-info-text text-center">
                                             <h3>
-                                                <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                <a href="<?php echo base_url('contact-request') ?>" target="_self">Find More Contacts
                                                 </a>
                                             </h3>                                
                                         </div>
                                         <div class="author-btn">
                                             <div class="user-btns">
-                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                                <a class="btn3" href="<?php echo base_url('contact-request') ?>" target="_self">View More</a>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -2634,7 +2629,7 @@
                             </div>
                             <div class="post-detail">
                                 <div class="fw">
-                                    <a class="post-name" href="<?php echo $leftbox_data['user_slug']; ?>"><?php echo ucwords($leftbox_data['first_name'].' '.$leftbox_data['last_name']); ?></a>
+                                    <a class="post-name" href="<?php echo $leftbox_data['user_slug']; ?>"  target="_self"><?php echo ucwords($leftbox_data['first_name'].' '.$leftbox_data['last_name']); ?></a>
                                 </div>
                                 <div class="fw">                            
                                     <span class="post-designation">
@@ -2704,13 +2699,13 @@
                                     <div class="fw" ng-if="share_post_data.post_data.post_for == 'question'">
                                         <a href="javascript:void(0)" class="post-name" ng-if="share_post_data.question_data.is_anonymously == '1'">Anonymous</a>
                                         <span class="post-time" ng-if="share_post_data.question_data.is_anonymously == '1'"></span>
-                                        <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.user_data.fullname" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.question_data.is_anonymously == '0'"></a>
-                                        <a ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.user_data.company_name" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.question_data.is_anonymously == '0'"></a><span class="post-time">{{share_post_data.post_data.time_string}}</span>
+                                        <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.user_data.fullname" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.question_data.is_anonymously == '0'" target="_self"></a>
+                                        <a ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.user_data.company_name" ng-if="share_post_data.post_data.user_type == '2' && share_post_data.question_data.is_anonymously == '0'" target="_self"></a><span class="post-time">{{share_post_data.post_data.time_string}}</span>
                                     </div>
                                                     
                                     <div class="fw" ng-if="share_post_data.post_data.post_for != 'question'">
-                                        <a ng-if="share_post_data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.user_data.fullname"></a>
-                                        <a ng-if="share_post_data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.user_data.company_name"></a><span class="post-time">{{share_post_data.post_data.time_string}}</span>
+                                        <a ng-if="share_post_data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.user_data.fullname" target="_self"></a>
+                                        <a ng-if="share_post_data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{share_post_data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.user_data.company_name" target="_self"></a><span class="post-time">{{share_post_data.post_data.time_string}}</span>
                                     </div>
 
                                     <div class="fw" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for == 'question'">
@@ -2848,14 +2843,14 @@
                                                     <div class="fw" ng-if="share_post_data.share_data.data.post_data.post_for == 'question'">
                                                         <a href="javascript:void(0)" class="post-name" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
                                                         <span class="post-time" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '1'"></span>
-                                                        <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.fullname" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.question_data.is_anonymously == '0'"></a>
-                                                        <a ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.company_name" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.question_data.is_anonymously == '0'"></a>
+                                                        <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.fullname" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.question_data.is_anonymously == '0'" target="_self"></a>
+                                                        <a ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.company_name" ng-if="share_post_data.share_data.data.post_data.user_type == '2' && share_post_data.share_data.data.question_data.is_anonymously == '0'" target="_self"></a>
                                                         <!-- <span class="post-time">{{share_post_data.share_data.data.post_data.time_string}}</span> -->
                                                     </div>
                                                                     
                                                     <div class="fw" ng-if="share_post_data.share_data.data.post_data.post_for != 'question'">
-                                                        <a ng-if="share_post_data.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.fullname"></a>
-                                                        <a ng-if="share_post_data.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.company_name"></a>
+                                                        <a ng-if="share_post_data.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.fullname" target="_self"></a>
+                                                        <a ng-if="share_post_data.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{share_post_data.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="share_post_data.share_data.data.user_data.company_name" target="_self"></a>
                                                         <!-- <span class="post-time">{{share_post_data.share_data.data.post_data.time_string}}</span> -->
                                                     </div>
 
@@ -3436,7 +3431,7 @@
                             <textarea class="title-text-area" ng-keyup="questionList()" ng-model="ask.ask_que" id="ask_que" placeholder="Ask Your Question (What you want to ask today?)"></textarea>
                             <ul class="questionSuggetion custom-scroll">
                                 <li ng-repeat="que in queSearchResult">
-                                    <a ng-href="<?php echo base_url('questions/') ?>{{que.id}}/{{que.question| slugify}}" ng-bind="que.question"></a>
+                                    <a ng-href="<?php echo base_url('questions/') ?>{{que.id}}/{{que.question| slugify}}" ng-bind="que.question" target="_self"></a>
                                 </li>
                             </ul>
                         </div>
@@ -3581,15 +3576,15 @@
                 <div class="">
                     <ul class="custom-scroll">
                         <li class="like-img" ng-repeat="userlist in get_like_user_list">
-                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''">
+                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" target="_self">
                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                             </a>
-                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null">
+                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" target="_self">
                                 <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                             </a>
                             <div class="like-detail">
-                                <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
+                                <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
                                 <p ng-if="(userlist.title_name == null) && (userlist.degree_name != null)">{{userlist.degree_name}}</p>
                                 <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                 <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>

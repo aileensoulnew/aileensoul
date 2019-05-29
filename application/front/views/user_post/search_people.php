@@ -1,4 +1,4 @@
-<div class="left-section">
+<div class="left-section filter-fix">
     <div class="search-box">
         <div class="search-left-box">
             <h3>Title</h3>
@@ -65,7 +65,9 @@
         </div>        
         <div class="search-left-box pt15">
             <div class="form-group">
-                <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
+                <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search
+                    <img id="search-loader" ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" style="width: 20px;display: none;"/>
+                </a> 
                 <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
             </div>
         </div>
@@ -76,14 +78,14 @@
         <div class="availabel-data-box">
             <div class="search-profiles" ng-repeat="searchProfile in searchProfileData">
                 <div class="profile-img post-img">
-                    <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}">
+                    <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" target="_self">
                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{searchProfile.user_image}}" alt="{{searchProfile.fullname}}" ng-if="searchProfile.user_image">                                    
                         <img ng-if="!searchProfile.user_image && searchProfile.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                         <img ng-if="!searchProfile.user_image && searchProfile.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                     </a>
                 </div>
                 <div class="profile-data">
-                    <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize"></a></p>
+                    <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize" target="_self"></a></p>
                     <span ng-if="searchProfile.degree_name == null && searchProfile.title_name != null">{{searchProfile.title_name}}</span>
                     <span ng-if="searchProfile.degree_name != null && searchProfile.title_name == null">{{searchProfile.degree_name}}</span>
                     <span ng-if="searchProfile.degree_name == null && searchProfile.title_name == null">Current work</span>

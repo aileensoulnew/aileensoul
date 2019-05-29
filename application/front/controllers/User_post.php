@@ -1841,6 +1841,10 @@ class User_post extends MY_Controller {
         $q = $_GET['q'];
 
         $userid = $this->session->userdata('aileenuser');
+        if($userid == '')
+        {
+            redirect("/","refresh");
+        }
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);

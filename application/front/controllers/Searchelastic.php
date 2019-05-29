@@ -861,11 +861,6 @@ class Searchelastic extends MY_Controller {
         {
             $search_city = json_decode($search_city);
         }
-        
-        /*print_r($search_job_title);
-        echo($search_field);
-        print_r($search_city);
-        exit();*/
 
         $client = $this->elasticclient;
         $result = array();
@@ -932,8 +927,6 @@ class Searchelastic extends MY_Controller {
         }
         if($search_field != undefined && $search_field != '')
         {
-            /*$params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['profession_field'] = $search_field;
-            $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['student_field'] = $search_field;*/
             $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                 'fields'=>array('profession_field.keyword','student_field.keyword'),
                 'query' => $search_field,
@@ -941,52 +934,87 @@ class Searchelastic extends MY_Controller {
         }
         if(!empty($search_job_title))
         {
-            foreach ($search_job_title as $key => $value) {            
-                /*$params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['degree_name'] = $value->name;
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['title_name'] = $value->name;*/
+            foreach ($search_job_title as $key => $value) {
                 $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                     'fields'=>array('degree_name','title_name'),
                     'query' => $value->name,
                 );
-            }   
+            }
         }
         // print_r($params['body']['query']['bool']);exit();
-
-        /*
-        /*[
-            'bool' => [
-                'should' => [
-                    'multi_match' => [
-                        'query' => $searchKeyword,
-                        'type' => 'cross_fields',
-                        'fields' => ['first_name', 'last_name', 'title_name', 'degree_name'],
-                    ],
-                ]
-            ]
-            ]
-                        [
-            ['wildcard' => 
-                ['first_name' => "*".$searchKeyword."*"],
-            ],
-            ['wildcard' => 
-                ['last_name' => "*".$searchKeyword."*"],
-            ],
-        ]*/
+        
 
         $query = $client->search($params);        
         // print_r($query);exit();
-        /*print_r($query['hits']['hits']);exit();
-        $hits = sizeof($query['hits']['hits']);
-        $hit = $query['hits']['hits'];
-        $result['searchfound'] = $hits;
-        while ($i < $hits) {
-            $result['result'][$i] = $query['hits']['hits'][$i]['_source'];
-            $i++;
-        }*/
+        
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['people_count'] = $search_data['total'];
         $searchProfileData = $search_data['hits'];
+        if($search_data['total'] < 1)
+        {        
+            $params = array();
+            $params = [
+                'index' => 'aileensoul_search_people', 
+                'type'  => 'aileensoul_search_people',
+                'from'  => 0,
+                'size'  => 5,
+                'body'  => [
+                            'query' =>
+                            [    
+                                'bool' =>
+                                [
+                                    'must' =>
+                                    [
+                                        'query_string' =>
+                                        [
+                                            'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
+                                            'query'=>'*'.$searchKeyword.'*',
+                                            'analyzer'=>'standard'
+                                        ],
+                                    ],//must end
+                                    'must_not' =>
+                                    [
+                                        [
+                                            'match' =>
+                                            [
+                                                'id' => $userid
+                                            ]
+                                        ]
+                                    ],//must not end                                    
+                                ]//bool end                                
+                            ]//query end                            
+                        ],//body end
+            ];
+            if(!empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+                }
+            }
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
+                    'fields'=>array('profession_field.keyword','student_field.keyword'),
+                    'query' => $search_field,
+                );            
+            }
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
+                        'fields'=>array('degree_name','title_name'),
+                        'query' => "*".$value->name."*",
+                    );
+                }
+            }
+            // print_r($params);exit();
+            $query = $client->search($params);
+
+            $search_data = $query['hits'];
+            $searchData['people_count'] = $search_data['total'];
+            $searchProfileData = $search_data['hits'];
+        }
         $searchProfileDataMain = array();
 
         foreach ($searchProfileData as $key => $value) {
@@ -1015,9 +1043,7 @@ class Searchelastic extends MY_Controller {
             $searchProfileDataMain[$key]['follow_status'] = $follow_detail['status'];
             
         }
-        // echo "<pre>";
-        /*print_r($result);exit();
-        return $result;*/
+        
         $searchData['profile'] = $searchProfileDataMain;
         // echo json_encode($searchData);
         return $searchData;
@@ -1071,25 +1097,9 @@ class Searchelastic extends MY_Controller {
                         ],//body end
         ];
 
-        /*[
-            ['wildcard' => 
-                ['first_name' => "*".$searchKeyword."*"],
-            ],
-            ['wildcard' => 
-                ['last_name' => "*".$searchKeyword."*"],
-            ],
-        ]*/
-
         $query = $client->search($params);        
         // print_r($query);exit();
-        /*print_r($query['hits']['hits']);exit();
-        $hits = sizeof($query['hits']['hits']);
-        $hit = $query['hits']['hits'];
-        $result['searchfound'] = $hits;
-        while ($i < $hits) {
-            $result['result'][$i] = $query['hits']['hits'][$i]['_source'];
-            $i++;
-        }*/
+        
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['business_count'] = $search_data['total'];
@@ -1185,29 +1195,80 @@ class Searchelastic extends MY_Controller {
             }   
         }
 
-        /*[
-            ['wildcard' => 
-                ['first_name' => "*".$searchKeyword."*"],
-            ],
-            ['wildcard' => 
-                ['last_name' => "*".$searchKeyword."*"],
-            ],
-        ]*/
+        $query = $client->search($params);                
 
-        $query = $client->search($params);        
-        // print_r($query);exit();
-        /*print_r($query['hits']['hits']);exit();
-        $hits = sizeof($query['hits']['hits']);
-        $hit = $query['hits']['hits'];
-        $result['searchfound'] = $hits;
-        while ($i < $hits) {
-            $result['result'][$i] = $query['hits']['hits'][$i]['_source'];
-            $i++;
-        }*/
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['opp_count'] = $search_data['total'];
         $searchOpportunityData = $search_data['hits'];
+
+        if($search_data['total'] < 1)
+        {        
+            $params = array();
+            $params = [
+                'index' => 'aileensoul_search_opportunity', 
+                'type'  => 'aileensoul_search_opportunity',
+                'from'  => 0,
+                'size'  => 1,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['opptitle','opportunity_for','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if(!empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
+                }
+            }
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+            }
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
+                }   
+            }
+            
+            // print_r($params);exit();
+            $query = $client->search($params);
+
+            $search_data = $query['hits'];
+            $searchData['opp_count'] = $search_data['total'];
+            $searchOpportunityData = $search_data['hits'];
+        }
         $searchOpportunityDataMain = array();        
 
         foreach ($searchOpportunityData as $key => $value) {
@@ -1284,10 +1345,10 @@ class Searchelastic extends MY_Controller {
             $searchOpportunityDataMain[$key]['post_comment_count'] = $this->user_post_model->postCommentCount($value['_id']);
             $searchOpportunityDataMain[$key]['post_comment_data'] = $postCommentData = $this->user_post_model->postCommentData($value['_id'],$userid);
 
-            foreach ($postCommentData as $key1 => $value1) {
+            /*foreach ($postCommentData as $key1 => $value1) {
                 $searchOpportunityDataMain[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->user_post_model->is_userlikePostComment($userid, $value1['comment_id']);
                 $searchOpportunityDataMain[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->user_post_model->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->user_post_model->postCommentLikeCount($value1['comment_id']);
-            }            
+            }*/
         }
         // echo "<pre>";
         /*print_r($result);exit();
@@ -1352,37 +1413,80 @@ class Searchelastic extends MY_Controller {
                         ],//body end
         ];
 
-        if(!empty($search_job_title))
+        /*if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
                 $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['sim_title'] = $value->name;
                 $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->name;
             }   
-        }
-
-        /*[
-            ['wildcard' => 
-                ['first_name' => "*".$searchKeyword."*"],
-            ],
-            ['wildcard' => 
-                ['last_name' => "*".$searchKeyword."*"],
-            ],
-        ]*/
+        }*/
 
         $query = $client->search($params);        
         // print_r($query);exit();
-        /*print_r($query['hits']['hits']);exit();
-        $hits = sizeof($query['hits']['hits']);
-        $hit = $query['hits']['hits'];
-        $result['searchfound'] = $hits;
-        while ($i < $hits) {
-            $result['result'][$i] = $query['hits']['hits'][$i]['_source'];
-            $i++;
-        }*/
+       
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['simple_count'] = $search_data['total'];
         $searchSimpleData = $search_data['hits'];
+
+        if($search_data['total'] < 1)
+        {        
+            $params = array();
+            $params = [
+                'index' => 'aileensoul_search_post', 
+                'type'  => 'aileensoul_search_post',
+                'from'  => 0,
+                'size'  => 10,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['sim_title','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            /*if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['sim_title'] = $value->name;
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+                }   
+            }*/
+            
+            // print_r($params);exit();
+            $query = $client->search($params);
+
+            $search_data = $query['hits'];
+            $searchData['simple_count'] = $search_data['total'];
+            $searchSimpleData = $search_data['hits'];            
+        }
         $searchSimpleDataMain = array();        
 
         foreach ($searchSimpleData as $key => $value) {
@@ -1472,6 +1576,8 @@ class Searchelastic extends MY_Controller {
         $searchKeyword = $this->input->post('searchKeyword');
 
         $search_job_title = $this->input->post('search_job_title');
+        $search_field = $this->input->post('search_field');
+
         if($search_job_title != undefined && $search_job_title != '')
         {
             $search_job_title = json_decode($search_job_title);
@@ -1520,6 +1626,11 @@ class Searchelastic extends MY_Controller {
                         ],//body end
         ];
 
+        if($search_field != undefined && $search_field != '')
+        {
+            $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+        }
+
         if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
@@ -1528,29 +1639,77 @@ class Searchelastic extends MY_Controller {
             }   
         }
 
-        /*[
-            ['wildcard' => 
-                ['first_name' => "*".$searchKeyword."*"],
-            ],
-            ['wildcard' => 
-                ['last_name' => "*".$searchKeyword."*"],
-            ],
-        ]*/
-
         $query = $client->search($params);        
         // print_r($query);exit();
-        /*print_r($query['hits']['hits']);exit();
-        $hits = sizeof($query['hits']['hits']);
-        $hit = $query['hits']['hits'];
-        $result['searchfound'] = $hits;
-        while ($i < $hits) {
-            $result['result'][$i] = $query['hits']['hits'][$i]['_source'];
-            $i++;
-        }*/
+        
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['question_count'] = $search_data['total'];
         $searchQuestionData = $search_data['hits'];
+
+        if($search_data['total'] < 1)
+        {        
+            $params = array();            
+            $params = [
+                'index' => 'aileensoul_search_question', 
+                'type'  => 'aileensoul_search_question',
+                'from'  => 0,
+                'size'  => 1,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['question','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+            }
+
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['question'] = $value->name;
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+                }   
+            }
+            // print_r($params);exit();
+            $query = $client->search($params);
+
+            $search_data = $query['hits'];
+            $searchData['question_count'] = $search_data['total'];
+            $searchQuestionData = $search_data['hits'];
+        }
+
         $searchQuestionDataMain = array();        
 
         foreach ($searchQuestionData as $key => $value) {
@@ -1701,37 +1860,84 @@ class Searchelastic extends MY_Controller {
         {
             $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
         }
-        if(!empty($search_job_title))
+        /*if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
                 $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['article_title'] = $value->name;
                 $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->name;
             }   
-        }
-
-        /*[
-            ['wildcard' => 
-                ['first_name' => "*".$searchKeyword."*"],
-            ],
-            ['wildcard' => 
-                ['last_name' => "*".$searchKeyword."*"],
-            ],
-        ]*/
+        }*/
 
         $query = $client->search($params);        
         // print_r($query);exit();
-        /*print_r($query['hits']['hits']);exit();
-        $hits = sizeof($query['hits']['hits']);
-        $hit = $query['hits']['hits'];
-        $result['searchfound'] = $hits;
-        while ($i < $hits) {
-            $result['result'][$i] = $query['hits']['hits'][$i]['_source'];
-            $i++;
-        }*/
+       
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['article_count'] = $search_data['total'];
         $searchArticleData = $search_data['hits'];
+
+        if($search_data['total'] < 1)
+        {        
+            $params = array();            
+            $params = [
+                'index' => 'aileensoul_search_question', 
+                'type'  => 'aileensoul_search_question',
+                'from'  => 0,
+                'size'  => 1,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['question','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;
+            }
+
+            /*if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['question'] = $value->name;
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
+                }   
+            }*/
+            // print_r($params);exit();
+            $query = $client->search($params);
+
+            $search_data = $query['hits'];
+            $searchData['article_count'] = $search_data['total'];
+            $searchArticleData = $search_data['hits'];
+        }
         $searchArticleDataMain = array();        
 
         foreach ($searchArticleData as $key => $value) {
@@ -1844,6 +2050,7 @@ class Searchelastic extends MY_Controller {
         $client = $this->elasticclient;
         $return_arr = array();
         
+        //People Start
         $params_people = [
             'index' => 'aileensoul_search_people', 
             'type'  => 'aileensoul_search_people',
@@ -1884,9 +2091,7 @@ class Searchelastic extends MY_Controller {
             }
         }
         if($search_field != undefined && $search_field != '')
-        {
-            /*$params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['profession_field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
-            $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['student_field'] = $search_field;//array('match_phrase'=>array('student_field'=>$search_field));*/
+        {            
             $params_people['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                 'fields'=>array('profession_field.keyword','student_field.keyword'),
                 'query' => $search_field,
@@ -1894,9 +2099,7 @@ class Searchelastic extends MY_Controller {
         }
         if(!empty($search_job_title))
         {
-            foreach ($search_job_title as $key => $value) {            
-                /*$params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['degree_name'] = $value->name;
-                $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['title_name'] = $value->name;*/
+            foreach ($search_job_title as $key => $value) {
                 $params_people['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                     'fields'=>array('degree_name','title_name'),
                     'query' => $value->name,
@@ -1908,6 +2111,69 @@ class Searchelastic extends MY_Controller {
         // print_r($params_people['body']['query']['bool']);exit();
         $search_data_people = $query_people['hits'];
         $return_arr['people_count'] = $search_data_people['total'];
+        if($search_data_people['total'] < 1)
+        {
+            $params_people = [
+                'index' => 'aileensoul_search_people', 
+                'type'  => 'aileensoul_search_people',
+                'from'  => 0,
+                'size'  => 10,
+                'body'  => [
+                                'query' =>
+                                [    
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end                                
+                                ]//query end                            
+                            ],//body end
+            ];
+
+            if(!empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+                }
+            }
+            if($search_field != undefined && $search_field != '')
+            {            
+                $params_people['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
+                    'fields'=>array('profession_field.keyword','student_field.keyword'),
+                    'query' => $search_field,
+                );
+            }
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {
+                    $params_people['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
+                        'fields'=>array('degree_name','title_name'),
+                        'query' => $value->name,
+                    );
+                }   
+            }
+
+            $query_people = $client->search($params_people);
+            // print_r($params_people['body']['query']['bool']);exit();
+            $search_data_people = $query_people['hits'];
+            $return_arr['people_count'] = $search_data_people['total'];
+        }
 
         $params_buss = [
             'index' => 'aileensoul_search_business', 
@@ -1944,7 +2210,9 @@ class Searchelastic extends MY_Controller {
         $query_buss = $client->search($params_buss);
         $search_data_buss = $query_buss['hits'];
         $return_arr['business_count'] = $search_data_buss['total'];
+        //People End
 
+        //Opportunity Start
         $params_opp = [
             'index' => 'aileensoul_search_opportunity', 
             'type'  => 'aileensoul_search_opportunity',
@@ -1996,7 +2264,64 @@ class Searchelastic extends MY_Controller {
         $query_opp = $client->search($params_opp); 
         $search_data_opp = $query_opp['hits'];
         $return_arr['opp_count'] = $search_data_opp['total'];
+        if($search_data_opp['total'] < 1)
+        {
+            $params_opp = array();
+            $params_opp = [
+                'index' => 'aileensoul_search_opportunity', 
+                'type'  => 'aileensoul_search_opportunity',
+                'from'  => 0,
+                'size'  => 1,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['opptitle','opportunity_for','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ]//query end                            
+                            ],//body end
+            ];
+            if(!empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
+                }
+            }
+            if($search_field != undefined && $search_field != '')
+            {
+                $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+            }
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {            
+                    $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
+                }   
+            }
+            $query_opp = $client->search($params_opp); 
+            $search_data_opp = $query_opp['hits'];
+            $return_arr['opp_count'] = $search_data_opp['total'];
+        }
+        //Opportunity End
 
+        //Post Start
         $params_post = [
             'index' => 'aileensoul_search_post', 
             'type'  => 'aileensoul_search_post',
@@ -2029,17 +2354,19 @@ class Searchelastic extends MY_Controller {
                             ]//query end                        
                         ],//body end
         ];
-        if(!empty($search_job_title))
+        /*if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
                 $params_post['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['sim_title'] = $value->name;
                 $params_post['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->name;
             }   
-        }
+        }*/
         $query_post = $client->search($params_post);
         $search_data_post = $query_post['hits'];
         $return_arr['simple_count'] = $search_data_post['total'];
+        //Post End
 
+        //Question Start
         $params_que = [
             'index' => 'aileensoul_search_question', 
             'type'  => 'aileensoul_search_question',
@@ -2072,17 +2399,65 @@ class Searchelastic extends MY_Controller {
                             ]//query end
                         ],//body end
         ];
-        if(!empty($search_job_title))
+        if($search_field != undefined && $search_field != '')
+        {
+            $params_que['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+        }
+        /*if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
                 $params_que['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['question'] = $value->name;
                 $params_que['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->name;
             }   
-        }
+        }*/
         $query_que = $client->search($params_que);
         $search_data_que = $query_que['hits'];
         $return_arr['question_count'] = $search_data_que['total'];
+        if($search_data_que['total'] < 1)
+        {
+            $params_que = [
+                'index' => 'aileensoul_search_question', 
+                'type'  => 'aileensoul_search_question',
+                'from'  => 0,
+                'size'  => 1,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['question','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ]//query end
+                            ],//body end
+            ];
+            if($search_field != undefined && $search_field != '')
+            {
+                $params_que['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
+            }
+            $query_que = $client->search($params_que);
+            $search_data_que = $query_que['hits'];
+            $return_arr['question_count'] = $search_data_que['total'];   
+        }
+        //Question End
 
+        //Article Start
         $params_article = [
             'index' => 'aileensoul_search_article', 
             'type'  => 'aileensoul_search_article',
@@ -2119,16 +2494,57 @@ class Searchelastic extends MY_Controller {
         {
             $params_article['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
         }
-        if(!empty($search_job_title))
+        /*if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {            
                 $params_article['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['article_title'] = $value->name;
                 $params_article['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->name;
             }   
-        }
+        }*/
         $query_article = $client->search($params_article);
         $search_data_article = $query_article['hits'];
         $return_arr['article_count'] = $search_data_article['total'];
+        if($search_data_article['total'] < 1)
+        {
+            $params_article = [
+                'index' => 'aileensoul_search_article', 
+                'type'  => 'aileensoul_search_article',
+                'from'  => 0,
+                'size'  => 1,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [                                            
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['article_title','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ]//query end
+                            ],//body end
+            ];
+            if($search_field != undefined && $search_field != '')
+            {
+                $params_article['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;
+            } 
+        }
+        //Article End
+
         $return_arr['total_count'] = $search_data_people['total']+$search_data_buss['total']+$search_data_opp['total']+$search_data_post['total']+$search_data_que['total']+$search_data_article['total'];
 
         echo json_encode($return_arr);        
@@ -2251,6 +2667,82 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['opp_count'] = $search_data['total'];
         $searchOpportunityData = $search_data['hits'];
+        if($search_data['total'] < 1)
+        {
+            $params = [
+                'index' => 'aileensoul_search_opportunity', 
+                'type'  => 'aileensoul_search_opportunity',
+                'from'  => $start,
+                'size'  => $limit,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['opptitle','opportunity_for','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if(!empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
+                }
+            }
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+            }
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
+                }   
+            }
+            if(!empty($search_hashtag))
+            {
+                foreach ($search_hashtag as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
+                }   
+            }
+            if(!empty($search_company))
+            {
+                foreach ($search_company as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['company_name'] = $value->company_name;
+                }   
+            }            
+
+            $query = $client->search($params);
+            $search_data = $query['hits'];
+            $searchData['opp_count'] = $search_data['total'];
+            $searchOpportunityData = $search_data['hits'];
+        }
         $searchOpportunityDataMain = array();        
 
         foreach ($searchOpportunityData as $key => $value) {
@@ -2411,9 +2903,7 @@ class Searchelastic extends MY_Controller {
         
         if(!empty($search_job_title))
         {
-            foreach ($search_job_title as $key => $value) {            
-                /*$params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['title_name'] = $value->name;
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['degree_name'] = $value->name;*/
+            foreach ($search_job_title as $key => $value) {                
                 $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                 'fields'=>array('degree_name','title_name'),
                 'query' => $value->name,
@@ -2426,8 +2916,6 @@ class Searchelastic extends MY_Controller {
                 'fields'=>array('profession_field.keyword','student_field.keyword'),
                 'query' => $search_field,
             );
-            /*$params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['profession_field'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
-            $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['student_field'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));*/
         }
         if(!empty($search_city))
         {            
@@ -2446,6 +2934,73 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['people_count'] = $search_data['total'];
         $searchProfileData = $search_data['hits'];
+        if($search_data['total'] < 1)
+        {
+            $params = [
+                'index' => 'aileensoul_search_people', 
+                'type'  => 'aileensoul_search_people',
+                'from'  => $start,
+                'size'  => $limit,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                            ],//body end
+            ];
+            
+            if(!empty($search_job_title))
+            {
+                foreach ($search_job_title as $key => $value) {                
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
+                    'fields'=>array('degree_name','title_name'),
+                    'query' => $value->name,
+                );
+                }   
+            }
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
+                    'fields'=>array('profession_field.keyword','student_field.keyword'),
+                    'query' => $search_field,
+                );
+            }
+            if(!empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
+                }
+            }
+            if($search_gender != undefined && $search_gender != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['user_gender'] = $search_gender;
+            }
+            // print_r($params['body']['query']['bool']);exit();
+            $query = $client->search($params);
+            $search_data = $query['hits'];
+            $searchData['people_count'] = $search_data['total'];
+            $searchProfileData = $search_data['hits'];
+        }
         $searchProfileDataMain = array();
 
         foreach ($searchProfileData as $key => $value) {
@@ -2548,7 +3103,7 @@ class Searchelastic extends MY_Controller {
         ];
         if(!empty($search_hashtag))
         {
-            foreach ($search_hashtag as $key => $value) {            
+            foreach ($search_hashtag as $key => $value) {
                 $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->hashtag;
             }   
         }        
@@ -2723,6 +3278,65 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['business_count'] = $search_data['total'];
         $searchBusinessData = $search_data['hits'];
+        if($search_data['total'] < 1)
+        {
+            $params = [
+                'index' => 'aileensoul_search_business', 
+                'type'  => 'aileensoul_search_business',
+                'from'  => $start,
+                'size'  => $limit,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['company_name'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if(isset($search_city) && !empty($search_city))
+            {            
+                foreach ($search_city as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value;
+                }
+            }
+            if(isset($search_field) && !empty($search_field))
+            {
+                foreach ($search_field as $key => $value) {
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['industry_name'] = $value;//array('match_phrase'=>array('field'=>$search_field));
+                }
+            }
+
+            $search_data = $query['hits'];
+            $searchData['business_count'] = $search_data['total'];
+            $searchBusinessData = $search_data['hits'];
+        }
         $searchBusinessDataMain = array();
 
         foreach ($searchBusinessData as $key => $value) {            
@@ -2819,6 +3433,66 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];        
         $searchData['article_count'] = $search_data['total'];
         $searchArticleData = $search_data['hits'];
+        if($search_data['total'] < 1)
+        {
+            $params = [
+                'index' => 'aileensoul_search_article', 
+                'type'  => 'aileensoul_search_article',
+                'from'  => $start,
+                'size'  => $limit,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [                                            
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['article_title','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = base64_decode($search_field);//array('match_phrase'=>array('field'=>$search_field));
+            }
+            
+            if(!empty($search_hashtag))
+            {
+                foreach ($search_hashtag as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
+                }   
+            }
+
+            $query = $client->search($params);
+
+            $search_data = $query['hits'];        
+            $searchData['article_count'] = $search_data['total'];
+            $searchArticleData = $search_data['hits'];
+        }
         $searchArticleDataMain = array();        
 
         foreach ($searchArticleData as $key => $value) {
@@ -2995,6 +3669,67 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['question_count'] = $search_data['total'];
         $searchQuestionData = $search_data['hits'];
+        if($search_data['total'] < 1)
+        {
+            $params = array();
+            $params = [
+                'index' => 'aileensoul_search_question', 
+                'type'  => 'aileensoul_search_question',
+                'from'  => $start,
+                'size'  => $limit,
+                'body'  => [
+                                'query' =>
+                                [
+                                    'bool' =>
+                                    [
+                                        'must' =>
+                                        [
+                                            'query_string' =>
+                                            [
+                                                'fields'=>['question','hashtag'],
+                                                'query'=>'*'.$searchKeyword.'*',
+                                                'analyzer'=>'standard'
+                                            ],                                            
+                                        ],//must end
+                                        'must_not' =>
+                                        [
+                                            [
+                                                'match' =>
+                                                [
+                                                    'user_id' => $userid
+                                                ]
+                                            ]
+                                        ]//must not end
+                                    ]//bool end
+                                ],//query end
+                                'sort' =>
+                                [
+                                    'created_date.keyword' =>
+                                    [
+                                        "order" => "desc"
+                                    ],
+                                ],
+                            ],//body end
+            ];
+
+            if($search_field != undefined && $search_field != '')
+            {
+                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = base64_decode($search_field);//array('match_phrase'=>array('field'=>$search_field));
+            }
+            
+            if(!empty($search_hashtag))
+            {
+                foreach ($search_hashtag as $key => $value) {            
+                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
+                }   
+            }
+
+            $query = $client->search($params);        
+            
+            $search_data = $query['hits'];
+            $searchData['question_count'] = $search_data['total'];
+            $searchQuestionData = $search_data['hits'];
+        }
         $searchQuestionDataMain = array();        
 
         foreach ($searchQuestionData as $key => $value) {

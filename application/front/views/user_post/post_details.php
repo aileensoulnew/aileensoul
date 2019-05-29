@@ -1743,7 +1743,7 @@
                             var value = $("#"+this.id).html();
                             var terms = split_m(value);
                             terms.pop();
-                            var content = '<a contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
+                            var content = '<a target="_self" contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
                             terms.push(content);
                             $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
                             placeCaretAtEnd($("#"+this.id)[0]);

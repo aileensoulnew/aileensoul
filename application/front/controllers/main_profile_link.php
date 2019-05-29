@@ -33,7 +33,7 @@
             $query = $this->db->query($sql);
             $business_slug = $query->row();*/
 
-            $this->business_profile_link = base_url('company/').$business_slug->business_slug;// base_url("business-profile");
+            $this->business_profile_link = base_url('company/').$business_data->business_slug;// base_url("business-profile");
             $this->business_profile_set = 1;
         }
        
