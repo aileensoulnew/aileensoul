@@ -1646,10 +1646,10 @@ ul.blog-details li:first-child{padding-left:0;}
 .all-comments{padding-top:50px;}
 .comment-box{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding:15px;}
 .comment-box:last-child{border-bottom:0px solid #d2d2d2;}
-.comment-img{width:60px; height:60px; float:left; border-radius:100%;}
+.comment-img{width:60px; height:60px; float:left; border-radius:100%; padding: 0;}
 .comment-img img{width:100%; border-radius:100%;}
 .comment-text{width:91%; float:left; padding-left:15px;}
-.comment-text h4{margin-bottom:0; font-size:20px; line-height:1.3;}
+.comment-text h4{margin-bottom:0; font-size:20px; line-height:1.3; margin-top: 0;}
 .comment-text span{font-size:11px;}
 .comment-text p{font-size:15px;}
 .comment-box .post-head .post-img{width:58px; height:58px; padding:18px 0; border-radius:100%;}
@@ -2665,8 +2665,16 @@ padding: 4px;}
 .width-10{width:10%; float:left; padding-left:15px; padding-right:15px;}
 .span-select select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
 .span-select{position:relative; width:100%; float:left;} 
-.span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:12px; right:6px; background-size:100%;}
+.span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; 
+  top:12px; right:6px; background-size:100%;}
 .span-select select{z-index:9; position:relative; background:transparent;}
+.span-select .scrollableList{padding-top: 5px; padding-right: 25px; border-bottom: 1px solid #d2d2d2;}
+.span-select .scrollableList .selectedOption{font-size: 13px; padding-bottom: 5px; cursor:pointer; height: 27px; overflow: hidden;}
+.span-select .scrollableList ul{border:1px solid #d2d2d2; padding: 3px 0; position: absolute; z-index: 9; top:32px;
+  background: #fff;}
+.span-select .scrollableList ul li{list-style-type:none; font-size: 13px; padding: 3px 10px; line-height: 1.3; cursor: pointer; word-break: break-all; color:#7b7b7b;}
+.span-select .scrollableList ul li:hover{background: #f6f6f6;}
+
 .dtl-more-add{text-align:center;}
 .dtl-more-add a{color:#5c5c5c; letter-spacing:1px;}
 .dtl-about-box textarea{height:60px;}

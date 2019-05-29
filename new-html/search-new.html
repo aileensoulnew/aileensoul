@@ -1194,36 +1194,32 @@
             
 	</script>
     <script type="text/javascript">
-       $(function () {
-    $('.cus-select').each(function (index, element) {
-        $(this).parent()
-            .after()
-            .append("<div class='scrollableList'><div class='selectedOption'></div><ul></ul></div>");
-
-        $(element).each(function (idx, elm) {
-            $('option', elm).each(function (id, el) {
-                $('.scrollableList ul:last').append('<li>' + el.text + '</li>');
+        $(function () {
+            $('.cus-select').each(function (index, element) {
+                $(this).parent()
+                    .after()
+                    .append("<div class='scrollableList'><div class='selectedOption'></div><ul></ul></div>");
+                    $(element).each(function (idx, elm) {
+                        $('option', elm).each(function (id, el) {
+                            $('.scrollableList ul:last').append('<li>' + el.text + '</li>');
+                        });
+                        $('.scrollableList ul').hide();
+                        $('.makeMeUl').children('div.selectedOption').text("Select");
+                    });
+                $('.scrollableList:last').children('div.selectedOption').text("Select");
             });
-            $('.scrollableList ul').hide();
-            $('.makeMeUl').children('div.selectedOption').text("Select");
+            $('.selectedOption').on('click', function () {
+                $(this).next('ul').slideToggle(50);
+                $('.selectedOption').not(this).next('ul').hide();
+            });
+            $('.scrollableList ul li').on('click', function () {
+                var selectedLI = $(this).text();
+                $(this).parent().prev('.selectedOption').text(selectedLI);
+                $(this).parent('ul').hide();
+            });
+            $('.scrollableList').show();
+            $('.cus-select').hide();
         });
-        $('.scrollableList:last').children('div.selectedOption').text("Select");
-    });
-
-    $('.selectedOption').on('click', function () {
-        $(this).next('ul').slideToggle(50);
-        $('.selectedOption').not(this).next('ul').hide();
-    });
-
-    $('.scrollableList ul li').on('click', function () {
-        var selectedLI = $(this).text();
-        $(this).parent().prev('.selectedOption').text(selectedLI);
-        $(this).parent('ul').hide();
-    });
-
-    $('.scrollableList').show();
-    $('.cus-select').hide();
-});
     </script>
         
 
