@@ -331,21 +331,20 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .all-contact .arti-profile-box .user-info-text{padding:0px 10px 5px;}
 
 .post-head .post-img .post-img .post-img-mainuser{
-    color:#fff; background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9)); background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    font-size:20px; text-align:center; text-transform:uppercase;
+  color:#fff; background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9)); background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  font-size:20px; text-align:center; text-transform:uppercase;
 }
 .all-post-top .post-head.anonymous-que .post-img{
   background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9));
-    background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-  
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9));
+  background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+  background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
 }
 .all-post-top .post-head .post-img{color:#fff; font-size:20px; text-align:center; text-transform:uppercase;}
 .all-user-list .item .post-img .post-img-mainuser{padding:56px 0;}
@@ -3725,6 +3724,7 @@ a:focus{text-decoration: none;}
 .filter-sub-header.op-sub-header .table-responsive.content td a{float: none;}
 .filter-sub-header.op-sub-header .table-responsive.content td:first-child{text-align: left; padding-left: 0;}
 .filter-sub-header.op-sub-header .table-responsive.content td:last-child{text-align: right;}
+.filter-fix{position: fixed;}
 
 
 /*** end search new page  ***/

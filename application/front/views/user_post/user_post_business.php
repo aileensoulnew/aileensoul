@@ -1,4 +1,4 @@
-<div id="left-fixed" class="left-section">
+<div class="left-section filter-fix">
     <div class="search-box">
         <form id="main_search" name="main_search" action="javascript:void(0);" method="post">
             <div class="search-left-box">

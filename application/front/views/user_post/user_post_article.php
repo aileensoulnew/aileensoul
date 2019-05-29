@@ -1,4 +1,4 @@
-<div id="left-fixed" class="left-section">
+<div class="left-section filter-fix">
     <div class="search-box">
         <div class="search-left-box">
             <h3>Hash Tag</h3>
