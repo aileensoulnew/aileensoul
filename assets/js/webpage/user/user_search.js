@@ -1,37 +1,69 @@
 app.directive('ddTextCollapse', ['$compile', function($compile) {
+
     return {
         restrict: 'A',
         scope: true,
         link: function(scope, element, attrs) {
+
             // start collapsed
             scope.collapsed = false;
+
             // create the function to toggle the collapse
             scope.toggle = function() {
                 scope.collapsed = !scope.collapsed;
+                setTimeout(function(){
+                    $('.comment-dis-inner a').attr('target', '_self');
+                },500);
             };
+
             // wait for changes on the text
             attrs.$observe('ddTextCollapseText', function(text) {
+
                 // get the length from the attributes
                 var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
-                if (text.length > maxLength) {
+                var condition = scope.$eval(attrs.ddTextCollapseCond);
+                var all_html = $.parseHTML(text);
+
+                if ($(all_html).text().length > maxLength) {
                     // split the text in two parts, the first always showing
-                    var firstPart = String(text).substring(0, maxLength);
-                    var secondPart = String(text).substring(maxLength, text.length);
-                    // create some new html elements to hold the separate info
-                    var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
-                    var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
-                    var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
-                    var lineBreak = $compile('<br ng-if="collapsed">')(scope);
-                    var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "" : "View more"}}</span>')(scope); //{{collapsed ? "View less" : "View more"}}
-                    // remove the current contents of the element
-                    // and add the new ones we created
-                    element.empty();
-                    element.append(firstSpan);
-                    element.append(secondSpan);
-                    element.append(moreIndicatorSpan);
-                    element.append(lineBreak);
-                    element.append(toggleButton);
-                } else {
+
+                    if(/^\<a.*\>.*\<\/a\>/i.test(text))
+                    {
+                        var start = text.indexOf("<a href");
+                        var end = text.indexOf('target="_blank">');
+                        element.append(text);
+                    }
+                    else
+                    {
+                        var firstPart = String($(all_html).text()).substring(0, maxLength);                    
+                        var secondPart = String(text).substring(maxLength, text.length);                    
+
+                        // create some new html elements to hold the separate info
+                        var firstSpan = $compile('<span ng-if="!collapsed">' + firstPart + '</span>')(scope);
+                        var secondSpan = $compile('<span ng-if="collapsed">' + text + '</span>')(scope);
+                        var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
+                        var lineBreak = $compile('<br ng-if="collapsed">')(scope);
+                        if(condition == true)
+                        {                        
+                            var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "" : "View more"}}</span>')(scope);//{{collapsed ? "View less" : "View more"}}
+                        }
+                        if(condition == false)
+                        {                        
+                            var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "" : ""}}</span>')(scope);//{{collapsed ? "View less" : "View more"}}
+                        }
+
+                        // remove the current contents of the element
+                        // and add the new ones we created
+                        element.empty();
+                        element.append(firstSpan);
+                        element.append(secondSpan);
+                        element.append(moreIndicatorSpan);
+                        element.append(lineBreak);
+                        element.append(toggleButton);
+
+                    }                    
+                }
+                else {
                     element.empty();
                     element.append(text);
                 }
@@ -39,6 +71,7 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
         }
     };
 }]);
+
 app.directive("owlCarousel", function() {
     return {
         restrict: 'E',
@@ -387,9 +420,11 @@ app.controller('searchController', function($scope, $http, $compile) {
             $scope.$parent.question_count = '('+success.data.question_count+')';
             $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
 
+
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");
             setTimeout(function() {
+                $('.comment-dis-inner a').attr('target', '_self');
                 $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             }, 300);
         });
@@ -413,7 +448,66 @@ app.controller('searchController', function($scope, $http, $compile) {
         $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
 
         $scope.searchData();
-    }    
+    }
+
+    $scope.main_search_function = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1))
+        {
+            return false;
+        }
+        else
+        {    
+            var search_job_title = JSON.stringify($scope.search_job_title);
+            var search_city = JSON.stringify($scope.search_city);
+            $scope.$parent.search_field = $scope.search_field;
+            $("#search-loader").show();
+            $("#search-loader").show();
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search',
+                data: 'searchKeyword=' + searchKeyword+'&search_job_title='+search_job_title+'&search_field='+$scope.search_field+'&search_city='+search_city,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#search-loader").hide();
+                $("#search-loader").hide();
+                $(".post_loader").hide();
+                $scope.searchProfileData = success.data.profile;
+                $scope.postData = success.data.opp_post;
+                if(success.data.sim_post.length > 0)
+                {
+                    $scope.postData.push(success.data.sim_post[0]);
+                }
+                if(success.data.question_post.length > 0)
+                {
+                    $scope.postData.push(success.data.question_post[0]);
+                }
+                if(success.data.article_post.length > 0)
+                {
+                    $scope.postData.push(success.data.article_post[0]);
+                }
+
+                $scope.business_data = success.data.business_data;
+                
+                $scope.$parent.opp_count = '('+success.data.opp_count+')';
+                $scope.$parent.people_count = '('+success.data.people_count+')';
+                $scope.$parent.simple_count = '('+success.data.simple_count+')';
+                $scope.$parent.business_count = '('+success.data.business_count+')';
+                $scope.$parent.article_count = '('+success.data.article_count+')';
+                $scope.$parent.question_count = '('+success.data.question_count+')';
+                $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+                
+                $('#main_loader').hide();            
+                $('body').removeClass("body-loader");
+                setTimeout(function() {
+                    $('.comment-dis-inner a').attr('target', '_self');
+                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                }, 300);
+            });
+        }
+    };
 
     $scope.follow_user = function(id) {
         $http({
@@ -598,6 +692,9 @@ app.controller('searchController', function($scope, $http, $compile) {
             data = success.data;
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -612,6 +709,9 @@ app.controller('searchController', function($scope, $http, $compile) {
             data = success.data;
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -1161,64 +1261,6 @@ app.controller('searchController', function($scope, $http, $compile) {
             });
         });
     };
-
-    $scope.main_search_function = function(){
-        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1))
-        {
-            return false;
-        }
-        else
-        {    
-            var search_job_title = JSON.stringify($scope.search_job_title);
-            var search_city = JSON.stringify($scope.search_city);
-            $scope.$parent.search_field = $scope.search_field;
-            $("#search-loader").show();
-            $("#search-loader").show();
-            $http({
-                method: 'POST',
-                // url: base_url + 'user_post/searchData',
-                url: base_url + 'searchelastic/search',
-                data: 'searchKeyword=' + searchKeyword+'&search_job_title='+search_job_title+'&search_field='+$scope.search_field+'&search_city='+search_city,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(function(success) {
-                $("#search-loader").hide();
-                $("#search-loader").hide();
-                $(".post_loader").hide();
-                $scope.searchProfileData = success.data.profile;
-                $scope.postData = success.data.opp_post;
-                if(success.data.sim_post.length > 0)
-                {
-                    $scope.postData.push(success.data.sim_post[0]);
-                }
-                if(success.data.question_post.length > 0)
-                {
-                    $scope.postData.push(success.data.question_post[0]);
-                }
-                if(success.data.article_post.length > 0)
-                {
-                    $scope.postData.push(success.data.article_post[0]);
-                }
-
-                $scope.business_data = success.data.business_data;
-                
-                $scope.$parent.opp_count = '('+success.data.opp_count+')';
-                $scope.$parent.people_count = '('+success.data.people_count+')';
-                $scope.$parent.simple_count = '('+success.data.simple_count+')';
-                $scope.$parent.business_count = '('+success.data.business_count+')';
-                $scope.$parent.article_count = '('+success.data.article_count+')';
-                $scope.$parent.question_count = '('+success.data.question_count+')';
-                $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
-                
-                $('#main_loader').hide();            
-                $('body').removeClass("body-loader");
-                setTimeout(function() {
-                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                }, 300);
-            });
-        }
-    };
 });
 app.controller('opportunityController', function($scope, $http, $compile, $window,$location) {
     $scope.$parent.active_tab = '2';    
@@ -1400,6 +1442,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             $('body').removeClass("body-loader");
             
             setTimeout(function() {
+                $('.comment-dis-inner a').attr('target', '_self');
                 $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             }, 300);
         });
@@ -1517,6 +1560,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $('body').removeClass("body-loader");
                 
                 setTimeout(function() {
+                    $('.comment-dis-inner a').attr('target', '_self');
                     $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 }, 300);
             });
@@ -1686,6 +1730,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             data = success.data;
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -1700,6 +1747,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             data = success.data;
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -2669,6 +2719,7 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             $('body').removeClass("body-loader");
             
             setTimeout(function() {
+                $('.comment-dis-inner a').attr('target', '_self');
                 $('video,audio').mediaelementplayer( /* Options */ );
             }, 300);
         });
@@ -2708,6 +2759,7 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 $('body').removeClass("body-loader");
                 
                 setTimeout(function() {
+                    $('.comment-dis-inner a').attr('target', '_self');
                     $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 }, 300);
             });
@@ -2940,6 +2992,9 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             data = success.data;
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -2954,6 +3009,9 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             data = success.data;
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -3754,6 +3812,7 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 isProcessing = true;
             }            
             $('#main_loader').hide();
+            $('.comment-dis-inner a').attr('target', '_self');
             $('body').removeClass("body-loader");
         });
     };
@@ -3792,6 +3851,7 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 $scope.total_record = success.data.article_count;
 
                 $('#main_loader').hide();
+                $('.comment-dis-inner a').attr('target', '_self');
                 $('body').removeClass("body-loader");
             });
         }
@@ -4023,6 +4083,9 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
             data = success.data;
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -4037,6 +4100,9 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
             data = success.data;
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -4662,6 +4728,7 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             $('body').removeClass("body-loader");
             
             setTimeout(function() {
+                $('.comment-dis-inner a').attr('target', '_self');
                 $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             }, 300);
         });
@@ -4702,6 +4769,7 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                 $scope.total_record = success.data.question_count;
 
                 $('#main_loader').hide();
+                $('.comment-dis-inner a').attr('target', '_self');
                 $('body').removeClass("body-loader");
             });
         }
@@ -4933,6 +5001,9 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             data = success.data;
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -4947,6 +5018,9 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             data = success.data;
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('.comment-dis-inner a').attr('target', '_self');
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
