@@ -3676,13 +3676,14 @@ a:focus{text-decoration: none;}
 .search-tab .nav-tabs{border-bottom: 0;}
 .search-box{padding: 15px; border:1px solid #d2d2d2; border-radius: 4px; width: 100%; float: left;}
 .search-left-box{width: 100%; float: left;}
-.search-left-box h3{font-size: 18px;}
+.search-left-box h3{font-size: 15px; font-weight: bold;}
 .search-left-box input{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 5px 0px;}
 .search-left-box select{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 5px 0px;}
 .search-all{}
 .search-more-post{text-align: center; padding-bottom: 30px;}
-.search-left-box .btn-new-1{padding: 7px 25px; margin: 0; cursor: pointer;}
-.search-left-box .btn-new-1 span img{width: 15px; margin-top: -3px; display: none;}
+.search-left-box .btn-new-1{padding: 5px 20px; margin: 0; cursor: pointer;}
+.search-left-box .btn-new-1 span img{width: 15px; margin-top: -3px;}
+.search-left-box .pull-left.btn-new-1 span img{width: 17px;}
 .mobile-header .sub-header .search-tab .sub-menu td a span{display: none;}
 .mob-search-btn{width: 34px; height: 34px; display: none; padding: 6px; position: absolute; bottom: 0px; right:0px;}
 .mob-search-btn img{width: 20px;}
@@ -3700,7 +3701,7 @@ a:focus{text-decoration: none;}
 .search-box tags-input{border-bottom: 1px solid #d2d2d2;}
 .search-gender{padding-top: 5px;}
 .search-gender label{padding-right: 15px !important; display: inline-block;}
-.search-gender .control--radio .control__indicator:after{left: 1px; top: 1px; width: 11px; height: 11px;}
+.search-gender .control--radio .control__indicator:after{left: 1px; top: 1px; width: 9px; height: 9px;}
 .search-box .form-group tags-input .tags .tag-item{background: #efefef; border-radius: 20px; border:0; padding: 0 12px; padding-top: 2px;} 
 .search-box tags-input .autocomplete{margin-top: 0; padding-top: 0;}
 .search-box tags-input .autocomplete .suggestion-item{color: #5c5c5c; font-size: 14px;}
@@ -3708,7 +3709,9 @@ a:focus{text-decoration: none;}
 .search-box tags-input .autocomplete .suggestion-item.selected, .search-box tags-input .autocomplete .suggestion-item.selected em {color: #5c5c5c; background-color: #efefef;}
 .search-box tags-input .tags .tag-item {font-size: 12px;}
 .search-box .form-group label{padding: 5px 5px 5px 25px ;}
-.search-box .control__indicator{top: 5px;}
+.search-box .form-group label.control{font-size: 15px;}
+.search-box .form-group .control__indicator{width: 13px; height: 13px;}
+.search-box .control__indicator{top: 6px;}
 .filter-sub-header .sub-header .sub-menu{width: auto;}
 .filter-sub-header .table-responsive{padding-top: 6px;}
 .filter-sub-header .table-responsive.content td{width: auto; padding: 0 20px;}
