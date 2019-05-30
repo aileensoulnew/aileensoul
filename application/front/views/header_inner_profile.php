@@ -57,20 +57,12 @@ if($browser == "Firefox")
                 <div class="col-md-6 col-sm-6 left-header">                    
                     <?php $this->load->view('main_logo'); ?>
                     <?php
-                        $first_segment = $this->uri->segment(1);
-                        $isartist_segment = strpos($first_segment, 'artist');
+                        $first_segment = $this->uri->segment(1);                        
                         $isbusiness_segment = strpos($first_segment, 'business');
-                        // $isbusiness_segment = strpos($first_segment, 'jobs');
-                        if(isset($userData) && !empty($userData) && $this->job_profile_set == 1){                            
-                            $isjobs = strpos($first_segment, '-jobs');
-                            $isjobs_in = strpos($first_segment, 'jobs-in-');
-                            $isjob_vacancy = strpos($first_segment, '-job-vacancy-in-');
-                            $isjobs_open = strpos($first_segment, 'jobs-opening-at-');
-                        }
-                        // $job_page_array = array("job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile");
-                        $job_page_array = array("job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile","-job-vacancy-in-","freelance-jobs-by-fields","freelance-jobs-by-categories","recruiter","recommended-candidates","post-job","hire-freelancer","freelance-employer","freelancer","post-freelance-project","recommended-freelance-work");
-                    ?>
-                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-search' && $first_segment != 'business-profile' && $first_segment != 'business' && $first_segment != 'company' && $isbusiness_segment === FALSE) && ($first_segment != 'find-artist') && ($first_segment != 'artist') && $isartist_segment === FALSE && !in_array($first_segment, $job_page_array) && ($isjobs === FALSE && $isjobs_in === FALSE && $isjob_vacancy === FALSE && $isjobs_open === FALSE )) { ?>
+                        
+                        $job_page_array = array("business-profile","business-search","company","business","business-by-categories","business-by-location");
+                    
+                    if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && !in_array($first_segment, $job_page_array) && $isbusiness_segment == FALSE ) { ?>
                         <form ng-submit="search_submit" action="<?php echo base_url('search') ?>">
                             <input type="text" name="q" placeholder="Search.." id="search">
                         </form>
