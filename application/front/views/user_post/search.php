@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/select2.min.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
@@ -467,5 +468,6 @@
                 });
             }
     	</script>
+        <script src="<?php echo base_url('assets/js/select2-4.0.3.min.js?ver=' . time()) ?>"></script>
     </body>
 </html>
