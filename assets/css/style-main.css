@@ -2530,7 +2530,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .other-hdr .test-cus.drop-down li.hd-profile a:hover{color:#5c5c5c;}
 .other-hdr .test-cus.drop-down li.hd-profile a:focus{color:#5c5c5c !important;}
 .right-header ul.test-cus li{border-right:0; margin-bottom:0;}
-.right-header ul.test-cus li:nth-last-child(2){padding-right:10px;}
+.right-header ul.test-cus li:nth-last-child(2){padding-right:0px;}
 .right-header ul li .all-profile-box li{padding:0;}
 .dropdown.hd-profile .dropdown-menu::before{display:none;}
 .right-header .hd-profile.open .dropdown-menu{margin-top:0;}

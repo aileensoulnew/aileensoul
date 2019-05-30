@@ -1250,7 +1250,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .right-bnr {text-align:center;}
 .right-bnr img{width:70%; margin-left:70px;}
 .banner-left img{/*width:100%;*/}
-.bottom-bnr-div{padding:10px 0; border-bottom:1px solid #d2d2d2;}
+.bottom-bnr-div{padding:10px 0; border-bottom:1px solid #d2d2d2; margin-bottom: 15px;}
 .bottom-bnr-div p{font-size:22px; line-height:1.7;}
 .bottom-bnr-div .btn-1{font-size:16px; line-height:1; padding:10px 25px;}
  
@@ -3719,7 +3719,7 @@ tags-input .tags{padding: 0;}
 .visit-post a svg path{fill:#5c5c5c;}
 .share-post-head textarea.hashtag-textarea {min-height: 25px; padding-bottom: 0; height: 25px;}
 .search-page .availabel-data-box .comment-dis{width:91%;}
-.bnr-cus-sec .search-box{border: 0px;}
+.bnr-cus-sec .search-box{border: 0px; padding: 0;}
 #verifydiv{top: 78px !important; float: left; width: 100%; position: fixed; z-index: 9;}
 .availabel-data-box .search-profiles .profile-btns{width: 130px;}
 .availabel-data-box .search-profiles .profile-data{width: 365px; padding: 8px 10px;}
