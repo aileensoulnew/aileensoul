@@ -1,16 +1,3 @@
-/*app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-    var original = $location.path;
-    $location.path = function (path, reload) {
-        if (reload === false) {
-            var lastRoute = $route.current;
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
-                $route.current = lastRoute;
-                un();
-            });
-        }
-        return original.apply($location, [path]);
-    };
-}]);*/
 app.directive('ddTextCollapse', ['$compile', function($compile) {
     return {
         restrict: 'A',
@@ -419,6 +406,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                 $('.editable_text').html('');
             }
             if (data.comment_count <= 0) {
+                $scope.postData[parent_index].post_comment_data = [];
                 setTimeout(function() {
                     $(".comment-for-post-" + post_id + " .post-comment").remove();
                 }, 100);
