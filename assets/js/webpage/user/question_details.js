@@ -314,12 +314,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(success) {
-                data = success.data;
-                clearTimeout(int_not_count);            
-                get_notification_unread_count();
-                int_not_count = setTimeout(function(){
-                  get_notification_unread_count();
-                }, 10000);
+                data = success.data;                
                 if (data.message == '1') {
                     if(socket)
                     {

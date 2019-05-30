@@ -287,8 +287,7 @@ class User_post extends MY_Controller {
             $comment_count_data = $this->db->select('*')->get_where('user_post_comment', array('post_id' => $post_id,'user_id' => $userid,'is_delete' => '0'))->result();
 
             $is_user_monetize = $this->common->is_user_monetize();            
-
-            if($is_user_monetize > 0 && count($comment_count_data) == 0 && $post_data->post_for == 'question')
+            if($post_data->user_id != $userid && $is_user_monetize > 0 && count($comment_count_data) == 1 && $post_data->post_for == 'question')
             {
                 $inser_point = array(
                     "user_id"       =>  $userid,
