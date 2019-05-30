@@ -655,5 +655,6 @@
 
         </script>
         <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/select2-4.0.3.min.js?ver=' . time()) ?>"></script>
     </body>
 </html>

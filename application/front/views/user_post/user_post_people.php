@@ -20,7 +20,7 @@
             <h3>Industry</h3>
             <div class="form-group">
                 <span class="span-select">
-                    <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field">
+                    <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field" data-minimum-results-for-search="Infinity">
                         <option value="">Select Industry</option>
                         <?php foreach ($getFieldList as $key => $value) { ?>
                             <option value="<?php echo $value['industry_id']; ?>"><?php echo $value['industry_name']; ?></option>
@@ -287,3 +287,34 @@
         }
     });
 </script>
+<script type="text/javascript">
+        /*$(function () {
+            $('.cus-select').each(function (index, element) {
+                $(this).parent()
+                    .after()
+                    .append("<div class='scrollableList'><div class='selectedOption'></div><ul></ul></div>");
+                    $(element).each(function (idx, elm) {
+                        $('option', elm).each(function (id, el) {
+                            $('.scrollableList ul:last').append('<li>' + el.text + '</li>');
+                        });
+                        $('.scrollableList ul').hide();
+                        $('.makeMeUl').children('div.selectedOption').text("Select");
+                    });
+                $('.scrollableList:last').children('div.selectedOption').text("Select");
+            });
+            $('.selectedOption').on('click', function () {
+                $(this).next('ul').slideToggle(50);
+                $('.selectedOption').not(this).next('ul').hide();
+            });
+            $('.scrollableList ul li').on('click', function () {
+                var selectedLI = $(this).text();
+                $(this).parent().prev('.selectedOption').text(selectedLI);
+                $(this).parent('ul').hide();
+            });
+            $('.scrollableList').show();
+            $('.cus-select').hide();
+        });*/
+        $('#search_field').select2({
+            placeholder: 'Select Field',
+        });
+    </script>
