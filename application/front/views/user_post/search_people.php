@@ -86,8 +86,8 @@
                 </div>
                 <div class="profile-data">
                     <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize" target="_self"></a></p>
-                    <span ng-if="searchProfile.degree_name == null && searchProfile.title_name != null">{{searchProfile.title_name}}</span>
-                    <span ng-if="searchProfile.degree_name != null && searchProfile.title_name == null">{{searchProfile.degree_name}}</span>
+                    <span ng-if="searchProfile.degree_name == null && searchProfile.title_name != null">{{searchProfile.title_name.length < 30 ? searchProfile.title_name : ((searchProfile.title_name | limitTo:30)+'...') }}</span>
+                    <span ng-if="searchProfile.degree_name != null && searchProfile.title_name == null">{{searchProfile.degree_name.length < 30 ? searchProfile.degree_name : ((searchProfile.degree_name | limitTo:30)+'...') }}</span>
                     <span ng-if="searchProfile.degree_name == null && searchProfile.title_name == null">Current work</span>
                     
                 </div>
