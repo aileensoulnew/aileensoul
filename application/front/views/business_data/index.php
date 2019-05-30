@@ -22,7 +22,7 @@
         
         <?php $this->load->view('adsense'); ?>
     </head>
-    <body class="profile-main-page without-reg bus-main">
+    <body class="profile-main-page without-reg bus-main two-hd">
         <?php //$this->load->view('page_loader'); ?>
             <div id="main_page_load">
 
@@ -40,12 +40,12 @@
         <?php
            if($ismainregister == false){
         ?>
-            <div class="middle-section middle-section-banner new-ld-page">
+            <div class="main-section middle-section-banner new-ld-page">
         <?php //echo $search_banner; 
             } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
-            <div class="middle-section">
+            <div class="main-section">
         <?php } else { ?>
-            <div class="middle-section middle-section-banner">
+            <div class="main-section middle-section-banner">
         <?php //echo $search_banner;  
         } ?>
 

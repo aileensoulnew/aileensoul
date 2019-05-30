@@ -22,7 +22,7 @@
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <?php $this->load->view('adsense'); ?>
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page two-hd">
         <?php //$this->load->view('page_loader'); ?>
         <div id="main_page_load">
 
@@ -41,17 +41,17 @@
         <?php
            if($ismainregister == false){
         ?>
-            <div class="middle-section middle-section-banner new-ld-page">
+            <div class="main-section middle-section-banner new-ld-page">
         <?php //echo $search_banner; 
             } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
-            <div class="middle-section">
+            <div class="main-section">
         <?php } else { ?>
-            <div class="middle-section middle-section-banner">
+            <div class="main-section middle-section-banner">
         <?php //echo $search_banner;  
         } ?>
         <!-- <div class="middle-section middle-section-banner new-ld-page"> -->
                 <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
-                <div class="container pt20 mobp0 mobmt15">
+                <div class="container mobp0 mobmt15">
                     <div class="left-part">
                         <?php echo $business_left; ?>
 						<?php $this->load->view('right_add_box'); ?>

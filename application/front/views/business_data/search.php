@@ -23,7 +23,7 @@
         <?php } ?>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-main-page body-loader">        
+    <body class="profile-main-page body-loader two-hd">        
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
         <?php $this->load->view('page_loader'); ?>
@@ -39,18 +39,18 @@
        <?php
           if($ismainregister == false){
        ?>
-           <div class="middle-section middle-section-banner new-ld-page">
+           <div class="main-section middle-section-banner new-ld-page">
        <?php //echo $search_banner; 
            } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
-           <div class="middle-section">
+           <div class="main-section">
        <?php } else { ?>
-           <div class="middle-section middle-section-banner">
+           <div class="main-section middle-section-banner">
        <?php //echo $search_banner;  
        } ?>
 
         <!-- <div class="middle-section"> -->
             <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
-            <div class="container pt20 mobp0 mobmt15 searchcontainer">
+            <div class="container mobp0 mobmt15 searchcontainer">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
                         <div class="">

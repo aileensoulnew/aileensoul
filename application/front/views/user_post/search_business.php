@@ -1,6 +1,6 @@
 <div class="left-section filter-fix">
     <div class="search-box">
-        <form id="main_search" name="main_search" action="javascript:void(0);" method="post">
+        <form id="main_search" class="bus-search" name="main_search" action="javascript:void(0);" method="post">
             <div class="search-left-box">
                 <h3>Top Categories</h3>            
                 <div class="form-group">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <p class="text-left p10"><a href="<?php echo base_url('business-by-location');?>" target="_self">View More Location</a></p>
-            <div class="search-left-box pt15">
+            <div class="search-left-box">
                 <div class="form-group">
                     <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search
                         <img id="search-loader" ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" style="width: 20px;display: none;"/>

@@ -1,6 +1,6 @@
 <div class="left-section filter-fix">
     <div class="search-box">
-        <form id="main_search" name="main_search" action="javascript:void(0);" method="post">
+        <form id="main_search" class="bus-search" name="main_search" action="javascript:void(0);" method="post">
             <div class="search-left-box">
                 <h3>Top Categories</h3>            
                 <div class="form-group">
@@ -23,7 +23,7 @@
             <p class="text-left p10"><a href="<?php echo base_url('business-by-categories');?>" target="_self">View More Categories</a></p>
             
             <div class="search-left-box">
-                <h3>City</h3>
+                <h3>Top Locations</h3>
                 <div class="form-group">
                     <?php $businessLocation = $this->business_model->businessLocation(5);
                     if(isset($businessLocation) && !empty($businessLocation)):
@@ -43,7 +43,7 @@
             </div>
 
             <p class="text-left p10"><a href="<?php echo base_url('business-by-location');?>" target="_self">View More Location</a></p>
-            <div class="search-left-box pt15">
+            <div class="search-left-box">
                 <div class="form-group">
                     <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search</a> 
                     <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
