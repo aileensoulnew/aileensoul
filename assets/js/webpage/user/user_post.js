@@ -3660,6 +3660,8 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
         $scope.search_company = [];
         $scope.search_gender = '';
 
+        $('#search_field').val(null).trigger('change');
+
         pagenum = 0;
         isProcessing = false;
         $scope.peopleData(pagenum);
@@ -4855,6 +4857,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         pagenum = 0;
         isProcessing = false;
@@ -5873,6 +5876,7 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         pagenum = 0;
         isProcessing = false;
@@ -6857,6 +6861,7 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         pagenum = 0;
         isProcessing = false;

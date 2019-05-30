@@ -36,7 +36,7 @@
         <div class="search-left-box">
             <h3>Industry</h3>
             <div class="form-group">
-                <span class="span-select">
+                <span class="span-select select-cus">
                     <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field">
                         <option value="">Select Industry</option>
                         <?php foreach ($getFieldList as $key => $value) { ?>
@@ -1364,3 +1364,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('#search_field').select2({
+        placeholder: 'Search by Industry',
+        dropdownParent: $('.select-cus')
+    });
+</script>

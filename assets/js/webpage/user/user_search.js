@@ -443,6 +443,7 @@ app.controller('searchController', function($scope, $http, $compile) {
         $scope.$parent.search_hashtag = [];
         $scope.$parent.search_company = [];
         $scope.$parent.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         $('#search_job_title .input').attr('placeholder', 'Search by Title').css('width', '100%');
         $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
@@ -1455,6 +1456,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         $('#search_job_title .input').attr('placeholder', 'Search by Title').css('width', '100%');
         $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
@@ -2504,6 +2506,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window, $l
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         $('#search_job_title .input').attr('placeholder', 'Search by Title').css('width', '100%');
         $('#search_city .input').attr('placeholder', 'Search by Location').css('width', '100%');
@@ -3864,6 +3867,7 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         $('#search_hashtag .input').attr('placeholder', 'Search by Hash Tags').css('width', '100%');
 
@@ -4782,6 +4786,7 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
         $scope.search_hashtag = [];
         $scope.search_company = [];
         $scope.search_gender = '';
+        $('#search_field').val(null).trigger('change');
 
         $('#search_hashtag .input').attr('placeholder', 'Search by Hash Tags').css('width', '100%');
 
