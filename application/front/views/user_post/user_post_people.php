@@ -80,8 +80,8 @@
                 </div>
                 <div class="profile-data">
                     <p><a href="<?php echo base_url() ?>{{people.user_slug}}" ng-bind="people.fullname | capitalize" target="_self"></a></p>
-                    <span ng-if="people.degree_name == null && people.title_name != null">{{people.title_name}}</span>
-                    <span ng-if="people.degree_name != null && people.title_name == null">{{people.degree_name}}</span>
+                    <span ng-if="people.degree_name == null && people.title_name != null">{{people.title_name.length < 30 ? people.title_name : ((people.title_name | limitTo:30)+'...') }}</span>
+                    <span ng-if="people.degree_name != null && people.title_name == null">{{people.degree_name.length < 30 ? people.degree_name : ((people.degree_name | limitTo:30)+'...') }}</span>
                     <span ng-if="people.degree_name == null && people.title_name == null">Current work</span>
                     
                 </div>
