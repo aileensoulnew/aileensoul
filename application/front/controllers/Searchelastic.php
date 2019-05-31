@@ -1880,8 +1880,8 @@ class Searchelastic extends MY_Controller {
         {        
             $params = array();            
             $params = [
-                'index' => 'aileensoul_search_question', 
-                'type'  => 'aileensoul_search_question',
+                'index' => 'aileensoul_search_article', 
+                'type'  => 'aileensoul_search_article',
                 'from'  => 0,
                 'size'  => 1,
                 'body'  => [
@@ -1893,7 +1893,7 @@ class Searchelastic extends MY_Controller {
                                         [
                                             'query_string' =>
                                             [
-                                                'fields'=>['question','hashtag'],
+                                                'fields'=>['article_title','hashtag'],
                                                 'query'=>'*'.$searchKeyword.'*',
                                                 'analyzer'=>'standard'
                                             ],                                            

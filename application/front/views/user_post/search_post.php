@@ -1,3 +1,8 @@
+<div class="mob-search-btn">
+    <a data-toggle="modal" id="showBottom">
+        <span><img src="<?php echo base_url('assets/n-images/filter.png');?>"></span> 
+    </a>
+</div>
 <div class="left-section filter-fix">
     <div class="search-box">        
         <div class="search-left-box">
@@ -542,6 +547,35 @@
             </div>
         </div>
     </div>
+</div>
+<div class="search-box">
+    <nav class="cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-bottom" id="cbp-spmenu-s4">
+        <div class="search-left-box">
+            <h3>Hash Tag</h3>
+            <div class="form-group">
+                <!-- <input type="text" placeholder="Search by Hash Tags">-->
+                <tags-input id="search_hashtag" ng-model="search_hashtag" name="search_hashtag" display-property="hashtag" placeholder="Search by Hash Tags" replace-spaces-with-dashes="false" template="hashtag-template" on-tag-added="onKeyup()" max-tags="5">
+                    <auto-complete source="loadHashtag($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="hashtag-autocomplete-template"></auto-complete>
+                </tags-input>
+                <div id="locationtooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select the location for the opportunity.</div>
+                <script type="text/ng-template" id="hashtag-template">
+                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                </script>
+                <script type="text/ng-template" id="hashtag-autocomplete-template">
+                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                </script>
+            </div>
+        </div>
+        
+        <div class="search-left-box pt15">
+            <div class="form-group">
+                <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search
+                    <img id="search-loader" ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" style="width: 20px;display: none;"/>
+                </a> 
+                <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
+            </div>
+        </div>
+    </nav>
 </div>
 
 <div class="modal fade message-box" id="delete_post_model" role="dialog">
@@ -1262,3 +1296,30 @@
         </div>
     </div>
 </div>
+<script>
+    var menuBottom = document.getElementById( 'cbp-spmenu-s4' ),
+    showBottom = document.getElementById( 'showBottom' ),
+    body = document.body;
+
+    showBottom.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuBottom, 'cbp-spmenu-open' );
+        disableOther( 'showBottom' );
+    };
+
+    function disableOther( button ) {
+        if( button !== 'showBottom' ) {
+            classie.toggle( showBottom, 'disabled' );
+        }
+    }
+
+    // mcustom scroll bar
+    (function($){
+        $(window).on("load",function(){
+            $(".custom-scroll").mCustomScrollbar({
+                autoHideScrollbar:true,
+                theme:"minimal"
+            });
+        });
+    })(jQuery);
+</script>
