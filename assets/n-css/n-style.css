@@ -3569,7 +3569,7 @@ a:focus{text-decoration: none;}
 .search-left-box .span-select{padding-top: 9px;}
 .search-left-box .span-select:after{top: 17px;}
 .mobile-header .sub-header .search-tab .sub-menu td a span{display: none;}
-.mob-search-btn{width: 34px; height: 34px; display: none; padding: 6px; position: absolute; bottom: 0px; right:0px;}
+.mob-search-btn{width: 34px; height: 34px; display: none; padding: 6px; position: fixed; right: 60px; top: 8px; z-index: 999999; background: #fff;}
 .mob-search-btn img{width: 20px;}
 .cbp-spmenu-bottom{bottom:-100%;}
 .cbp-spmenu-horizontal{height: 100%;}
