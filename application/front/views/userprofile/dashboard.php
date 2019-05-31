@@ -1,6 +1,6 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="main-dashboard">
-<div class="container pt15">
+<div class="container pt15 mobp0">
     <div class="left-part">
         <div class="left-info-box move-middle">
             <div class="dash-left-title">

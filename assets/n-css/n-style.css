@@ -4262,10 +4262,9 @@ tags-input .tags{padding: 0;}
   .main-user-option-scroll tr td a{}
   .main-user-option-scroll tr td a:hover{}
   .table-responsive.content{overflow:scroll;}
-  .table-responsive.content td a:hover{ background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);-webkit-background-clip:text;
-    -webkit-text-fill-color:transparent; border-bottom:2px solid #1b8ab9; color:#1b8ab9;}
+  .table-responsive.content td a:hover{ background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); -webkit-text-fill-color:transparent; -webkit-background-clip:text; color:#1b8ab9;}
   .table-responsive.content td a{padding:0;}
-  .table-responsive.content td a.active{background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);-webkit-background-clip:text; -webkit-text-fill-color:transparent; color:#1b8ab9;}
+  .table-responsive.content td a.active{background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); -webkit-text-fill-color: transparent; -webkit-background-clip: text; color:#1b8ab9; display: inline-block;}
   .search-box{width:100%; float:left;}
   .cat-box ul li{width:33.33%;}
   .search-box .search-input input{width:40%; margin-bottom:15px; float:left;}
