@@ -1,3 +1,8 @@
+<div class="mob-search-btn mob-filter-cus">
+    <a data-toggle="modal" href="#" id="showBottom">
+        <span><img src="<?php echo base_url('assets/n-images/filter.png');?>"></span> 
+    </a>
+</div>
 <div class="left-section filter-fix">
     <div class="search-box">
         <form id="main_search" name="main_search" action="javascript:void(0);" method="post">
@@ -704,6 +709,53 @@
             </div>
         </div>                                  
     </div>
+</div>
+<div class="search-box">
+    <nav class="cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-bottom" id="cbp-spmenu-s4">
+        <div class="search-left-box">
+            <h3>Job title</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by Job Title"> 
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>Industry</h3>
+            <div class="form-group">
+                <span class="span-select">
+                    <select placeholder="Search by Industry"> 
+                        <option>It sectop</option>
+                        <option>teacher</option>
+                        <option>Docore</option>
+                        <option>123</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>City</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by City"> 
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>Hash Tag</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by Hash Tag"> 
+            </div>
+        </div>
+        <div class="search-left-box">
+            <h3>Company</h3>
+            <div class="form-group">
+                <input type="text" placeholder="Search by Company"> 
+            </div>
+        </div>
+        <div class="search-left-box pt15">
+            <div class="form-group">
+                <button class="pull-left btn-new-1"><span><img src="n-images/s-s.png"></span> Search</button> 
+                <button class="pull-right btn-new-1"><span><img src="n-images/trash.png"></span> Clear</button> 
+            </div>
+        </div>        
+    </nav>
 </div>
 
 <div class="modal fade message-box" id="delete_post_model" role="dialog">
@@ -1449,4 +1501,32 @@
         placeholder: 'Search by Industry',
         dropdownParent: $('.select-cus')
     });
+</script>
+
+<script>
+    var menuBottom = document.getElementById( 'cbp-spmenu-s4' ),
+    showBottom = document.getElementById( 'showBottom' ),
+    body = document.body;
+
+    showBottom.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuBottom, 'cbp-spmenu-open' );
+        disableOther( 'showBottom' );
+    };
+
+    function disableOther( button ) {
+        if( button !== 'showBottom' ) {
+            classie.toggle( showBottom, 'disabled' );
+        }
+    }
+
+    // mcustom scroll bar
+    (function($){
+        $(window).on("load",function(){
+            $(".custom-scroll").mCustomScrollbar({
+                autoHideScrollbar:true,
+                theme:"minimal"
+            });
+        });
+    })(jQuery);
 </script>
