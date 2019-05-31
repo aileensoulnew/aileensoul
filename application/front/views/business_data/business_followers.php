@@ -33,7 +33,7 @@
 									<div class="tab-add-991">
 										<?php $this->load->view('banner_add'); ?>
 									</div>
-                                    <div class="job-saved-box">
+                                    <div class="job-saved-box bus-list-cus">
                                         <h3> Followers</h3>
                                         <div class="contact-frnd-post">
                                             <!-- AJAX DATA... -->

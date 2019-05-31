@@ -28,7 +28,7 @@
 
 <?php $this->load->view('adsense');?>
 </head>
-<body class="page-container-bg-solid page-boxed noti-page">
+<body class="page-container-bg-solid page-boxed noti-page one-hd">
 <?php echo $header_inner_profile; ?>
     <?php echo $dash_header; ?>
     <!-- BEGIN HEADER MENU -->
@@ -38,7 +38,7 @@
 
 <!-- END HEADER -->
 
-<div class="user-midd-section" id="paddingtop_fixed">
+<div class="main-section">
    <div class="container mobp0">
 		<div class="custom-user-list">
 			<div class="tab-add-991">

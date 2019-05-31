@@ -730,6 +730,11 @@ box-shadow: 2px 2px 17px 0.8px rgba(217,217,217,1);}
 .detail-box ul{padding:0 15px;}
 .detail-box ul li{list-style-type:none; font-size:13px; padding:3px 0;}
 .detail-box ul li b{width:120px; display:inline-block;}
+.list-cus .custom-user-box{margin-bottom:0; border: 0px; border-bottom: 1px solid #d2d2d2; border-radius: 0;}
+.custom-user-list .list-cus .custom-user-box:last-child{border-bottom: 0;}
+.bus-list-cus .contact-frnd-post{padding: 0;}
+.bus-list-cus .job-contact-frnd .profile-job-post-detail{margin: 0; border-radius: 0; border:0; border-bottom: 1px solid #d2d2d2; }
+.bus-list-cus .job-contact-frnd .profile-job-post-detail:last-child{border-bottom: 0;}
 
 /***  end contacts followers following notification page  ***/ 
 
@@ -2166,9 +2171,7 @@ input[type=text] {-webkit-appearance: none; -moz-appearance: none; appearance: n
 .hs-submit button{color:#fff;}
 #jobseeker_regform .hs-submit{padding-top:15px;}
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
-html{}
 body, body.no-login {padding-bottom:60px;}
-.job-contact-frnd, .job-contact-frnd1, .contact-frnd-post {margin-bottom:15px;}
 .contact-frnd-post .art-img-nn{border:0;}
 .no-data-available .art-img-nn{border:0;}
 .job_reg_page_fprm label.error{right:2px;}
@@ -3409,11 +3412,11 @@ background-color: #e9e9e9; border: 1px solid #5c5c5c; color: #5c5c5c;}
 
 /***  new commen css  ***/
 a:focus{text-decoration: none;}
+.main-section{padding:60px 0 50px;}
 .two-hd .main-section{padding-top:93px; }
 .verify-body .main-section{padding-top:135px; }
 .one-hd.verify-body .main-section{padding-top:100px;}
 .verify-body-inner .main-section{padding-top:115px;}
-.one-hd .main-section{padding:60px 0 50px;}
 .container-flex{display: flex;}
 .left-section{float:left; width:320px;}
 .right-section{float:right; width:320px;}
