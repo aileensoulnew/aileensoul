@@ -3619,6 +3619,8 @@ a:focus{text-decoration: none;}
 #main_search .text-left.p10{width: 100%; float: left; padding: 0px 20px 15px; margin-top: -15px; font-size: 13px; position: relative;}
 .bus-search .search-left-box .form-group{padding-top: 5px;}
 
+.search-box .cbp-spmenu-horizontal a{width: auto; color: #5c5c5c;}
+
 
 /*** end search new page  ***/
 .error{color: #ff0000;}
