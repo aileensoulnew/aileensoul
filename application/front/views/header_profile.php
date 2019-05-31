@@ -1,4 +1,4 @@
-<!-- <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" /> -->
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/header.css?ver=' . time()); ?>">
 <?php
 $session_user = $this->session->userdata();
@@ -411,7 +411,7 @@ if($first_segment == "")
                         <div class="">
                             <?php 
                             $first_segment = $this->uri->segment(1);
-                            $no_ser_arr = array("freelancer","business");
+                            $no_ser_arr = array("freelancer","business","business-search");
                             if(!in_array($first_segment, $no_ser_arr)): ?>
                             <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('search') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">
