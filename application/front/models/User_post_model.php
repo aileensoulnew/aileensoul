@@ -5244,7 +5244,7 @@ class User_post_model extends CI_Model {
             LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
             LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
             LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
-            WHERE u.user_id != $user_id AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id')) ";
+            WHERE u.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id')) ";
         $jt_sql = "";
         if($search_job_title != undefined && !empty($search_job_title))
         {
@@ -5317,7 +5317,7 @@ class User_post_model extends CI_Model {
             LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
             LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
             LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
-            WHERE u.user_id != $user_id AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id')) ";
+            WHERE u.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id')) ";
         $jt_sql = "";
         if($search_job_title != undefined && !empty($search_job_title))
         {

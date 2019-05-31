@@ -319,7 +319,7 @@
                                         </div>
                                         
                                     </div>
-                                    <div class="post-images" ng-if="post.post_data.total_post_files == '1'">
+                                    <div class="post-images" ng-if="post.post_data.total_post_files == 1">
                                         <div class="one-img" ng-repeat="post_file in post.post_file_data" ng-init="$last ? loadMediaElement() : false">
                                             <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
                                                 <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
@@ -347,12 +347,12 @@
                                             <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
                                         </div>
                                     </div>
-                                    <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
+                                    <div class="post-images" ng-if="post.post_data.total_post_files == 2">
                                         <div class="two-img" ng-repeat="post_file in post.post_file_data">
                                             <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                         </div>
                                     </div>
-                                    <div class="post-images" ng-if="post.post_data.total_post_files == '3'">
+                                    <div class="post-images" ng-if="post.post_data.total_post_files == 3">
                                         <span ng-repeat="post_file in post.post_file_data">
                                             <div class="three-img-top" ng-if="$index == '0'">
                                                 <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
@@ -365,7 +365,7 @@
                                             </div>
                                         </span>
                                     </div>
-                                    <div class="post-images four-img" ng-if="post.post_data.total_post_files >= '4'">
+                                    <div class="post-images four-img" ng-if="post.post_data.total_post_files >= 4">
                                         <div class="two-img" ng-repeat="post_file in post.post_file_data| limitTo:4">
                                             <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                             <div class="view-more-img" ng-if="$index == 3 && post.post_data.total_post_files > 4">

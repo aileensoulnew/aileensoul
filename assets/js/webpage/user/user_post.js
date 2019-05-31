@@ -363,7 +363,8 @@ app.config(function ($routeProvider, $locationProvider) {
             });
     $locationProvider.html5Mode(true);
 });
-app.controller('userOppoController', function ($scope, $http,$compile,$location) {    
+app.controller('userOppoController', function ($scope, $http,$compile,$location) {
+    $scope.$parent.active_tab = '1';
     $scope.IsVisible = false;
     $scope.recentpost = [];
     $scope.$parent.title = "Aileensoul";

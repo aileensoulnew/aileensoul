@@ -3988,7 +3988,7 @@ class Searchelastic extends MY_Controller {
 
         // $this->Mapping();exit();
 
-        $str = file_get_contents('assets/ailee_user.json');
+        $str = file_get_contents('assets/ailee_post_article.json');
         $result = json_decode($str, true); 
         echo "<pre>";
         // print_r($result);exit();
@@ -3996,7 +3996,7 @@ class Searchelastic extends MY_Controller {
         $params = null;
         foreach($result as $k=>$row)
         {
-            $params['body'][] = array(
+            /*$params['body'][] = array(
                 'index' => array(
                     '_index' => 'aileensoul_search_article',
                     '_type' => 'aileensoul_search_article',
@@ -4005,12 +4005,15 @@ class Searchelastic extends MY_Controller {
             );
 
             $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'article_desc' => $row['article_desc'],'article_main_category' => $row['article_main_category'],'article_other_category' => $row['article_other_category'],'article_featured_image' => $row['article_featured_image'],'article_meta_description' => $row['article_meta_description'],'article_meta_title' => $row['article_meta_title'],'article_slug' => $row['article_slug'],'article_sub_category' => $row['article_sub_category'],'article_title' => $row['article_title'],'hashtag_id' => $row['hashtag_id'],'id_post_article' => $row['id_post_article'],'hashtag' => $row['hashtag'],'field' => $row['field'],];
-            // print_r($params);exit();
+            $responses = $client->index($params);*/
+            $params = ['index' => 'aileensoul_search_article', 'type' => 'aileensoul_search_article', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'article_desc' => $row['article_desc'],'article_main_category' => $row['article_main_category'],'article_other_category' => $row['article_other_category'],'article_featured_image' => $row['article_featured_image'],'article_meta_description' => $row['article_meta_description'],'article_meta_title' => $row['article_meta_title'],'article_slug' => $row['article_slug'],'article_sub_category' => $row['article_sub_category'],'article_title' => $row['article_title'],'hashtag_id' => $row['hashtag_id'],'id_post_article' => $row['id_post_article'],'hashtag' => $row['hashtag'],'field' => $row['field'],]];
+            $responses = $client->index($params);
+            print_r($params);
         }
         echo "<pre>";
-        print_r($params);
-        $responses = $client->bulk($params);
-        print_r($responses);exit();
+        // print_r($params);
+        // $responses = $client->bulk($params);
+        // print_r($responses);exit();
         return true;
     }
 }

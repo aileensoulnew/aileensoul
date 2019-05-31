@@ -14,9 +14,12 @@ class Searchelastic_model extends CI_Model {
         }
         else
         {
-            $hosts = [
+            /*$hosts = [
                 '10.139.36.226:9200',//'139.59.36.139:9200',// IP + Port
                 '10.139.36.226'//'139.59.36.139',// Just IP          
+            ];*/
+            $hosts = [
+                'https://monitor.aileensoul.com:443'
             ];
             $this->elasticclient = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
         }
