@@ -26,7 +26,7 @@
             <h3>Industry</h3>
             <div class="form-group">
                 <span class="span-select select-cus">
-                    <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field" class="search_field">
+                    <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field">
                         <option value="">Select Industry</option>
                         <?php foreach ($getFieldList as $key => $value) { ?>
                             <option value="<?php echo $value['industry_name']; ?>"><?php echo $value['industry_name']; ?></option>
@@ -546,7 +546,7 @@
             <h3>Industry</h3>
             <div class="form-group">
                 <span class="span-select select-cus">
-                    <select placeholder="Search by Industry" name="search_field" id="search_field" ng-model="search_field" class="search_field">
+                    <select placeholder="Search by Industry" name="search_field" id="search_field_mob" ng-model="search_field">
                         <option value="">Select Industry</option>
                         <?php foreach ($getFieldList as $key => $value) { ?>
                             <option value="<?php echo $value['industry_name']; ?>"><?php echo $value['industry_name']; ?></option>
@@ -1299,7 +1299,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('.search_field').select2({
+    $('#search_field').select2({
         placeholder: 'Search by Industry',
         dropdownParent: $('.select-cus')
     });
