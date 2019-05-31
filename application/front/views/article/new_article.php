@@ -58,7 +58,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-<body class="new-article edit-article">
+<body class="new-article edit-article two-hd">
 	<?php echo $header_inner_profile; ?>
 	<div class="sub-header">
 		<div class="container">
@@ -72,7 +72,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 			</div>
 		</div>
 	</div>
-	<div class="middle-section">
+	<div class="main-section">
 		<div class="container">
 			<div class="right-part">
 				<div class="arti-profile-box">

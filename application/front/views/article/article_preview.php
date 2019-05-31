@@ -54,7 +54,7 @@ else
         </style>
     <?php $this->load->view('adsense');?>
 </head>
-<body class="new-article preview-article<?php echo $no_login_cls; ?>">
+<body class="new-article preview-article<?php echo $no_login_cls; ?> one-hd">
 		<?php 
 			if($userid_login){ 
 				echo $header_inner_profile;
@@ -89,7 +89,7 @@ else
         <?php } ?>
 
 
-	<div class="middle-section">
+	<div class="main-section">
 		<?php 
 			// print_r($user_post_article);exit();
 			$article_pub = 0;
