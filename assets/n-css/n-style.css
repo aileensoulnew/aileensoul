@@ -3571,8 +3571,8 @@ a:focus{text-decoration: none;}
 .mobile-header .sub-header .search-tab .sub-menu td a span{display: none;}
 .mob-search-btn{width: 34px; height: 34px; display: none; padding: 6px; position: fixed; right: 60px; top: 8px; z-index: 999999; background: #fff;}
 .mob-search-btn img{width: 20px;}
-.cbp-spmenu-bottom{bottom:-100%;}
-.cbp-spmenu-horizontal{height: 100%;}
+.search-box .cbp-spmenu-bottom{bottom:-100%;}
+.search-box .cbp-spmenu-horizontal{height: 100%;}
 .mobile-header .sub-header .search-tab .sub-menu td a{color:#5c5c5c;}
 .mobile-header .sub-header .search-tab table.sub-menu{max-width: 100%; justify-content: inherit; display:inherit; align-items:inherit;}
 .mobile-header .sub-header .search-tab table.sub-menu td{}
@@ -3622,6 +3622,8 @@ a:focus{text-decoration: none;}
 .search-box .cbp-spmenu-horizontal a{width: auto; color: #5c5c5c;}
 .bus-filter{position: relative; padding-top: 0; padding-left: 20px; width: 100%; float: left;}
 .bus-filter a{padding: 0; border: 0;}
+.modal-content .search-box h3{color: #5c5c5c; background: inherit; -webkit-text-fill-color: inherit;}
+.cbp-spmenu .search-left-box .span-select .select2-container--default.select2-container--open{/*top:38px !important; left: 0px !important;*/}
 
 /*** end search new page  ***/
 .error{color: #ff0000;}
@@ -4183,6 +4185,7 @@ tags-input .tags{padding: 0;}
   .mid-modal-body .search-box{width: 100%; border:0;}
   .mid-modal-body .search-left-box h3{text-align: left; border: 0; padding: 0; line-height: 1; font-size: 16px;}
   .mid-modal-body .search-box #main_search_mob .form-group label.control{font-size: 14px;}
+  .left-header input[type=text]{background-size:34px; }
 }
 @media screen and (max-width: 767px) {
   .middle-section{width:100%;}
@@ -4263,9 +4266,12 @@ tags-input .tags{padding: 0;}
   .main-user-option-scroll tr td a{}
   .main-user-option-scroll tr td a:hover{}
   .table-responsive.content{overflow:scroll;}
-  .table-responsive.content td a:hover{ background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); -webkit-text-fill-color:transparent; -webkit-background-clip:text; color:#1b8ab9;}
+  .table-responsive.content td a:hover{color:#1b8ab9;}
   .table-responsive.content td a{padding:0;}
-  .table-responsive.content td a.active{background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); -webkit-text-fill-color: transparent; -webkit-background-clip: text; color:#1b8ab9; display: inline-block;}
+  .table-responsive.content td a.active{color:#1b8ab9; display: inline-block; background: #fff;}
+  .table-responsive.content td a:hover{color:#1b8ab9; display: inline-block; background: #fff;}
+  .table-responsive.content td a:hover span{color:#1b8ab9;}
+  .table-responsive.content td a.active span{color:#1b8ab9;}
   .search-box{width:100%; float:left;}
   .cat-box ul li{width:33.33%;}
   .search-box .search-input input{width:40%; margin-bottom:15px; float:left;}
@@ -4754,14 +4760,14 @@ tags-input .tags{padding: 0;}
   .mobile-header .sub-header .search-tab .sub-menu td a{font-size: 13px; font-weight: bold; color: #5c5c5c;}
   .mobile-header .sub-header .search-tab .sub-menu{padding: 3px 0px 7px}
   .search-new-page .middle-section{width: 100%;}
-  .tab-pane img{width: 100%;}
+  .tab-pane img{/*width: 100%;*/}
   .search-more-post .btn-new-1{font-size: 13px;}
   .profile-text1 .as-p{padding-left:5px; font-size: 12px;}
   .email-verify .email-img img{width:22px;}
   .verify{padding:5px 10px;}
   .article-post-text h3{font-size: 13px;}
   .search-tab .table-responsive.content{margin-bottom: 0;}
-  .table-responsive.content table.sub-menu td a.active{-webkit-text-fill-color:inherit; -webkit-background-clip:inherit; background:inherit; color: #5c5c5c;}
+  .table-responsive.content table.sub-menu td a.active{-webkit-text-fill-color:inherit; -webkit-background-clip:inherit; background:inherit;}
   .table-responsive.content table.sub-menu td a:hover{border-bottom: 0; -webkit-text-fill-color:inherit; -webkit-background-clip:inherit; background:inherit; color: #5c5c5c;}
   .search-tab .table-responsive{border:0;}
   .search-box .cbp-spmenu{background: #fff; padding: 65px 20px 46px; }
