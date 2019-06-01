@@ -2547,7 +2547,7 @@ class User_post extends MY_Controller {
                             $image_height = $response['result'][$i]['image_height'];*/
                             //Main Image
                             if ($file_type == 'image') {
-                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,80,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
+                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,100,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
                                 /*{
                                     //Thumb Image
                                     $thumb_image_width = $this->config->item('user_post_thumb_width');
