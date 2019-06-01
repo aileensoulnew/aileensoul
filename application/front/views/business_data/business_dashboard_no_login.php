@@ -127,30 +127,13 @@ $login_user_id = $this->session->userdata('aileenuser');
 				</div>
 			<?php } ?>
             <?php echo $business_common_profile; ?>
-            <div class="text-center tab-block">
-                <div class="mob-inner-page">
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Photo
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Video
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Audio
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        PDf
-                    </a>
-                    <a href="javascript:void(0);" onclick="register_profile();">
-                        Article
-                    </a>
-                </div>
-            </div>
+            
+          
 			
-            <div class="user-midd-section">
-                <div class="container art_container padding-360 manage-post-custom">
+            <div class="main-dashboard">
+                <div class="container mobp0">
 
-                    <div class="profile-box-custom left_side_posrt">
+                    <div class="left-part">
                         
                         <div class="left-info-box bus-info move-middle">
                             <div class="dash-left-title">
@@ -402,7 +385,32 @@ $login_user_id = $this->session->userdata('aileenuser');
 						<?php $this->load->view('right_add_box'); ?>
                         <?php echo $left_footer; ?>
                     </div>
-                    <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
+                    <div class=" middle-part">
+                        <div class="media-pages-tablet">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="register_profile();">                                
+                                        <i class="fa fa-camera"></i>  Photo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="register_profile();">
+                                        <i class="fa fa-video-camera"></i> Video
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="register_profile();">
+                                        <i class="fa fa-music"></i> Audio
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="register_profile();">
+                                        <i class="fa fa-file-pdf-o"></i> PDf
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
                         <?php
                         if ($this->session->flashdata('error')) {
                             echo $this->session->flashdata('error');
@@ -985,7 +993,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                         
                     </div>
 
-                    <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
+                    <div class="right-part"> 
 						<?php $this->load->view('right_add_box'); ?>
                         <div>
                             <div class="move-website">

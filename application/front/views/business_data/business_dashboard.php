@@ -41,28 +41,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <?php echo $business_header2; ?>
             <section>
                 <?php echo $business_common; ?>
-                <div class="text-center tab-block">
-                    <div class="container mob-inner-page">
-                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/photos') ?>">
-                            Photo
-                        </a>
-                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
-                            Video
-                        </a>
-                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
-                            Audio
-                        </a>
-                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
-                            PDf
-                        </a>
-                    </div>
-                </div>
-				
-				
-				
-                <div class="user-midd-section">
-                    <div class="container art_container padding-360 manage-post-custom">
-                        <div class="profile-box-custom left_side_posrt">                            
+                
+                
+                <div class="main-dashboard">
+                    <div class="container mobp0">
+
+                        <div class="left-part">                            
 							
 							<div class="left-info-box bus-info move-middle">
                                 <div class="dash-left-title">
@@ -336,9 +320,34 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php $this->load->view('right_add_box'); ?>
                                 <?php echo $left_footer; ?>
                             </div>
-                            <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
+                            <div class="middle-part">
+                                <div class="media-pages-tablet">
+                                    <ul>
+                                        <li>
+                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/photos') ?>">
+                                                <i class="fa fa-camera"></i>  Photo
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
+                                                <i class="fa fa-video-camera"></i> Video
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
+                                                <i class="fa fa-music"></i> Audio
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
+                                                <i class="fa fa-file-pdf-o"></i> PDf
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
                                 <?php if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
-								<div class="mob-progressbar">
+								<div class="mob-progressbar fw">
 									<p>Complete your profile to get more visibility</p>
 									<p class="mob-edit-pro">
 										<a href="<?php echo base_url().'company/'.$slugid.'/details'; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
@@ -1245,8 +1254,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             </div>
                         </div>
 						
-						</div>
-                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
+					   </div>
+                        <div class="right-part">
 							
 							<?php $this->load->view('right_add_box');
                             if($login_user_data['user_id'] == $business_data[0]['user_id']): ?>
