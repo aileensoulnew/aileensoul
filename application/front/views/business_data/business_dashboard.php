@@ -263,22 +263,20 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 									</div>
                                 </div>
                                 <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/photos' ?>">
-                                    <div class="full-box-module business_data">
-                                        <div class="profile-boxProfileCard  module buisness_he_module" >
-                                            <div class="dash-left-title">
-                                                <h3>
-                                                    <i class="fa fa-camera"></i>
-                                                    Photos
-                                                </h3>
-                                            </div> 
-                                            <div class="bus_photos">
-                                            </div>
+                                    <div class="left-info-box bus-letf business_data">
+                                        <div class="dash-left-title">
+                                            <h3>
+                                                <i class="fa fa-camera"></i>
+                                                <span>Photos</span>
+                                            </h3>
+                                        </div> 
+                                        <div class="bus_photos">
                                         </div>
                                     </div>
                                 </a>
                                 <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
-                                    <div class="full-box-module business_data">
-                                        <div class="profile-boxProfileCard  module">
+                                    <div class="left-info-box bus-letf business_data">
+                                        
                                             <table class="business_data_table">
                                                 <div class="dash-left-title">
                                                     <h3>
@@ -289,16 +287,16 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 <div class="bus_videos">
                                                 </div>
                                             </table>
-                                        </div>
+                                       
                                     </div>
                                 </a>
-                                <div class="full-box-module business_data fw">
-                                    <div class="profile-boxProfileCard  module">
+                                <div class="left-info-box bus-letf business_data">
+                                   
                                         <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
                                             <div class="dash-left-title">
                                                 <h3>
                                                     <i class="fa fa-music"></i>
-                                                    Audio
+                                                    <span>Audio</span>
                                                 </h3>
                                             </div>
                                         </a>
@@ -306,33 +304,33 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                             <div class="bus_audios"> 
                                             </div>
                                         </table>
-                                    </div>
+                                   
                                 </div>
                                 <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
-                                    <div class="full-box-module business_data">
-                                        <div class="profile-boxProfileCard  module buisness_he_module" >
+                                    <div class="left-info-box bus-letf business_data">
+                                        
                                             <div class="dash-left-title">
                                                 <h3>
                                                     <i class="fa fa-file-pdf-o"></i>
-                                                    PDF
+                                                    <span>PDF</span>
                                                 </h3>
                                             </div>     
                                             <div class="bus_pdf"></div>
-                                        </div>
+                                       
                                     </div>
                                 </a>
 
                                 <a class="fw articles-cs" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/article' ?>">
-                                    <div class="full-box-module business_data">
-                                        <div class="profile-boxProfileCard  module buisness_he_module" >
+                                    <div class="left-info-box bus-letf business_data">
+                                        
                                             <div class="dash-left-title">
                                                 <h3>
                                                     <i class="fa fa-file"></i>
-                                                    Article
+                                                    <span>Article</span>
                                                 </h3>
                                             </div>    
                                             <div class="bus_article"></div>
-                                        </div>
+                                       
                                     </div>
                                 </a>
                                 <?php $this->load->view('right_add_box'); ?>

@@ -4187,6 +4187,7 @@ tags-input .tags{padding: 0;}
   .mid-modal-body .search-left-box h3{text-align: left; border: 0; padding: 0; line-height: 1; font-size: 16px;}
   .mid-modal-body .search-box #main_search_mob .form-group label.control{font-size: 14px;}
   .left-header input[type=text]{background-size:34px; }
+  .bottom-left .like .fa-thumbs-up::before{font-size:0; background:url('../n-images/liked-2.png'); width:19px; height:19px; float:left; background-size:100%;}
 }
 @media screen and (max-width: 767px) {
   .middle-section{width:100%;}
