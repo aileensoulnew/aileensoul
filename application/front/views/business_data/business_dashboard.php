@@ -281,7 +281,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 <div class="dash-left-title">
                                                     <h3>
                                                         <i class="fa fa-video-camera"></i>
-                                                        Video
+                                                        <span>Video</span>
                                                     </h3>
                                                 </div>
                                                 <div class="bus_videos">
