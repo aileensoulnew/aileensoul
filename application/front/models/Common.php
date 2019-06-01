@@ -1030,4 +1030,95 @@ class Common extends CI_Model {
             return "0";
         }
     }
+
+    public function createThumbnail($imageDirectory, $imageName, $thumbDirectory, $thumbWidth) {
+        $srcImg = imagecreatefromjpeg($imageDirectory.$imageName);           
+
+        $origWidth = imagesx($srcImg);
+        $origHeight = imagesy($srcImg);
+
+        $ratio = $origWidth / $thumbWidth;
+        $thumbHeight = $origHeight / $ratio;
+
+        $thumbImg = imagecreatetruecolor($thumbWidth, $thumbHeight);
+        imagecopyresized($thumbImg, $srcImg, 0, 0, 0, 0, $thumbWidth, $thumbHeight, $origWidth, $origHeight);
+        imagejpeg($thumbImg, $thumbDirectory.$imageName);
+        return true;
+    }
+
+    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path){
+        $mime = getimagesize($sourceImage);
+        if ($mime['mime'] == 'image/png') {
+            $main_image1 = @imagecreatefrompng($sourceImage);
+            $image       = imagecreatetruecolor(imagesx($main_image1), imagesy($main_image1));
+            imagefill($image, 0, 0, imagecolorallocate($image, 255, 255, 255));
+            imagealphablending($image, true);
+            imagecopy($image, $main_image1, 0, 0, 0, 0, imagesx($main_image1), imagesy($main_image1));
+            imagedestroy($main_image1);
+        }
+        elseif ($mime['mime'] == 'image/jpg'){
+            $image = @imagecreatefromjpeg($sourceImage);
+        }
+        elseif ($mime['mime'] == 'image/jpeg'){
+            $image = @imagecreatefromjpeg($sourceImage);
+        }
+        elseif ($mime['mime'] == 'image/pjpeg'){
+            $image = @imagecreatefromjpeg($sourceImage);
+        }elseif ($info['mime'] == 'image/gif') {
+            $image = imagecreatefromgif($source_url);
+        }
+
+        // Get dimensions of source image.
+        list($origWidth, $origHeight) = getimagesize($sourceImage);
+
+        if ($origWidth < 600) {
+            $maxWidth = $origWidth;
+        }
+        elseif ($origWidth > 600 && $origWidth < 2000) {
+            $maxWidth = $origWidth / 2;
+        } else {
+            $maxWidth = $origWidth / (int) ($origWidth / 1000);
+        }
+
+        if ($origHeight < 600) {
+            $maxHeight = $origHeight;
+        }
+        elseif ($origHeight > 600 && $origHeight < 2000) {
+            $maxHeight = $origHeight / 2;
+        } else {
+            $maxHeight = $origHeight / (int) ($origHeight / 1000);
+        }
+
+        if ($maxWidth == 0) {
+            $maxWidth = $origWidth;
+        }
+
+        if ($maxHeight == 0) {
+            $maxHeight = $origHeight;
+        }
+
+        // Calculate ratio of desired maximum sizes and original sizes.
+        $widthRatio  = $maxWidth / $origWidth;
+        $heightRatio = $maxHeight / $origHeight;
+
+        // Ratio used for calculating new image dimensions.
+        $ratio = min($widthRatio, $heightRatio);
+
+        // Calculate new image dimensions.
+        $newWidth  = (int) $origWidth * $ratio;
+        $newHeight = (int) $origHeight * $ratio;
+
+        // Create final image with new dimensions.
+        $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
+        imagejpeg($newImage, $path.$targetImage, $quality);
+        $this->createThumbnail($path,$targetImage,$thumbs_path,560);//thumb,resize4        
+        $this->createThumbnail($path,$targetImage,$resize1_path,280);//resize1,resize2
+        
+        // Free up the memory.
+        imagedestroy($image);
+        imagedestroy($newImage);
+
+        return true;
+    }
 }
