@@ -21,7 +21,7 @@
 							<ul class="all-tab  video-tab">
 								<li ng-repeat="_videoData in videoData">
 									<a href="#" ng-click="openModal('myModalVideo');currentSlide($index + 1)">
-										<img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename | removeLastCharacter}}png"" alt="Image-{{$index}}">
+										<img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename | removeLastCharacter}}jpg" alt="Image-{{$index}}">
 									</a>
 			                    </li>
 			                    <li ng-class="pagecntctData.pagedata.total_record == 0 ? 'no-data' : ''" ng-if="pagecntctData.pagedata.total_record == 0">

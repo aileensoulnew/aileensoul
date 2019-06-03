@@ -194,7 +194,7 @@
             <div class="media-display">
                 <div class="all-meda" ng-repeat="videoData in postVideoData">
                     <a href="#" ng-click="openModal2('myModalVideo');currentSlide2($index + 1,'Video')">
-                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{videoData.filename | removeLastCharacter}}png" alt="Image">
+                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{videoData.filename | removeLastCharacter}}jpg" alt="Image">
                     </a>
                 </div>
             </div>
@@ -823,7 +823,7 @@
                                                         <img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">
                                                     </a>
                                                     <span ng-if="post_file.file_type == 'video'"> 
-                                                        <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                        <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
                                                             <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
                                                             <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                                         </video>
@@ -902,7 +902,7 @@
                                         <img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
                                     </a>
                                     <span ng-if="post_file.file_type == 'video'"> 
-                                        <video controls width = "100%" height = "350" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png" preload="none">
+                                        <video controls width = "100%" height = "350" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg" preload="none">
                                             <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
                                             <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                         </video>
@@ -2289,7 +2289,7 @@
                                                             <img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShareInner'+share_post_data.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShareInner'+share_post_data.share_data.data.post_data.id)">
                                                         </a>
                                                         <span ng-if="post_file.file_type == 'video'"> 
-                                                            <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                                            <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
                                                                 <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
                                                                 <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                                             </video>
@@ -2416,7 +2416,7 @@
                                             <img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+share_post_data.post_data.id);currentSlide2($index + 1,'myModalShare'+share_post_data.post_data.id)">
                                         </a>
                                         <span ng-if="post_file.file_type == 'video'"> 
-                                            <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                            <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
                                                 <source type="application/x-mpegURL" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}">
                                                 <source type="video/mp4" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}">
                                             </video>
