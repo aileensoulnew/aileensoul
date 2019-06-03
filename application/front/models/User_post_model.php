@@ -1777,7 +1777,7 @@ class User_post_model extends CI_Model {
 
                             SELECT main16.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main16
 
-                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND  main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY ORDER BY RAND() LIMIT $total_record
+                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND  main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main1.created_date, 'Ymd')) LIMIT $total_record
                     ) as inner1
                     UNION
                     SELECT inner2.* FROM(
@@ -1855,7 +1855,7 @@ class User_post_model extends CI_Model {
 
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main26
 
-                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND() LIMIT $total_record
+                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main2.created_date, 'Ymd')) LIMIT $total_record
                     ) as inner2
                 ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
             }
@@ -1910,7 +1910,7 @@ class User_post_model extends CI_Model {
                             UNION
 
                             SELECT main16.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main16
-                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY ORDER BY RAND() 
+                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main1.created_date, 'Ymd')) 
                     ) as inner1
                     UNION
                     SELECT inner2.* FROM(
@@ -1962,7 +1962,7 @@ class User_post_model extends CI_Model {
                             UNION
 
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main26
-                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND() 
+                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main2.created_date, 'Ymd')) 
                     ) as inner2
                 ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
             }

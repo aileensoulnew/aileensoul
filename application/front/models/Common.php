@@ -1032,17 +1032,43 @@ class Common extends CI_Model {
     }
 
     public function createThumbnail($imageDirectory, $imageName, $thumbDirectory, $thumbWidth) {
-        $srcImg = imagecreatefromjpeg($imageDirectory.$imageName);           
+        
+         /* read the source image */
+        $source_image = imagecreatefromjpeg("$imageDirectory/$imageName");
+        $width = imagesx($source_image);
+        $height = imagesy($source_image);
+        
+        /* find the "desired height" of this thumbnail, relative to the desired width  */
+        $desired_height = floor($height * ($thumbWidth / $width));
+        
+        /* create a new, "virtual" image */
+        $virtual_image = imagecreatetruecolor($thumbWidth, $desired_height);
+        
+        /* copy source image at a resized size */
+        imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $thumbWidth, $desired_height, $width, $height);
+        
+        /* create the physical thumbnail image to its destination */
+        imagejpeg($virtual_image, "$thumbDirectory/$imageName");
+
+        /*$srcImg = imagecreatefromjpeg($imageDirectory.$imageName);           
 
         $origWidth = imagesx($srcImg);
         $origHeight = imagesy($srcImg);
 
-        $ratio = $origWidth / $thumbWidth;
-        $thumbHeight = $origHeight / $ratio;
+        if($origWidth < $thumbWidth)
+        {
+            $thumbHeight = $origHeight;
+            $thumbWidth = $origWidth;
+        }
+        else
+        {        
+            $ratio = $origWidth / $thumbWidth;
+            $thumbHeight = $origHeight / $ratio;
+        }
 
         $thumbImg = imagecreatetruecolor($thumbWidth, $thumbHeight);
         imagecopyresized($thumbImg, $srcImg, 0, 0, 0, 0, $thumbWidth, $thumbHeight, $origWidth, $origHeight);
-        imagejpeg($thumbImg, $thumbDirectory.$imageName);
+        imagejpeg($thumbImg, $thumbDirectory.$imageName);*/
         return true;
     }
 
@@ -1064,28 +1090,32 @@ class Common extends CI_Model {
         }
         elseif ($mime['mime'] == 'image/pjpeg'){
             $image = @imagecreatefromjpeg($sourceImage);
-        }elseif ($info['mime'] == 'image/gif') {
-            $image = imagecreatefromgif($source_url);
+        }
+        elseif ($mime['mime'] == 'image/gif') {
+            $image = imagecreatefromgif($sourceImage);
         }
 
         // Get dimensions of source image.
         list($origWidth, $origHeight) = getimagesize($sourceImage);
-
-        if ($origWidth < 600) {
+        $maxWidth = 0;
+        $maxHeight = 0;
+        if ($origWidth < 1500) {
             $maxWidth = $origWidth;
         }
-        elseif ($origWidth > 600 && $origWidth < 2000) {
+        elseif ($origWidth > 1500 && $origWidth < 2000) {
             $maxWidth = $origWidth / 2;
-        } else {
+        }
+        elseif ($origWidth > 2000){
             $maxWidth = $origWidth / (int) ($origWidth / 1000);
         }
 
-        if ($origHeight < 600) {
+        if ($origHeight < 1500) {
             $maxHeight = $origHeight;
         }
-        elseif ($origHeight > 600 && $origHeight < 2000) {
+        elseif ($origHeight > 1500 && $origHeight < 2000) {
             $maxHeight = $origHeight / 2;
-        } else {
+        }
+        elseif ($origHeight > 2000) {
             $maxHeight = $origHeight / (int) ($origHeight / 1000);
         }
 

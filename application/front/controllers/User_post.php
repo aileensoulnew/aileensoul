@@ -1441,20 +1441,14 @@ class User_post extends MY_Controller {
 
                                 // $uploaded_url = base_url() . $this->config->item('user_post_main_upload_path') . $response['result'][$i]['file_name'];
                                 $uploaded_url = $this->config->item('user_post_main_upload_path') . $response['result'][$i]['file_name'];
-                                $to_uploaded_url = $this->config->item('user_post_main_upload_path').$upload_data['raw_name'].".m3u8";
 
-                                exec("ffmpeg -i ".$uploaded_url." -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls ".$to_uploaded_url);
 
-                                // exec("ffmpeg -i ".$uploaded_url." -b:v 1M -g 60 -hls_time 2 -hls_list_size 0 -hls_segment_size 500000 ".$upload_data['file_path'] . $upload_data['raw_name'].".m3u8",$output);
+                                /*$to_uploaded_url = $this->config->item('user_post_main_upload_path').$upload_data['raw_name'].".m3u8";
+                                exec("ffmpeg -i ".$uploaded_url." -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls ".$to_uploaded_url);*/
 
-                                // echo $uploaded_url;
-                                // echo $upload_data['file_path'] . $upload_data['raw_name'].".m3u8";
-                                // var_dump($output);
-                                // echo "here";exit();
+                                exec("ffmpeg -i " . $uploaded_url . " -vcodec h264 -acodec aac -strict -2 " . $upload_data['file_path'] . $upload_data['raw_name'] . $upload_data['file_ext'] . "");
 
-                                //exec("ffmpeg -i " . $uploaded_url . " -vcodec h264 -acodec aac -strict -2 " . $upload_data['file_path'] . $upload_data['raw_name'] . $upload_data['file_ext'] . "");
-
-                                exec("ffmpeg -ss 00:00:05 -i " . $upload_data['full_path'] . " " . $upload_data['file_path'] . $upload_data['raw_name'] . ".png");
+                                exec("ffmpeg -ss 00:00:05 -i " . $upload_data['full_path'] . " -vframes 1 -q:v 2 " . $upload_data['file_path'] . $upload_data['raw_name'] . ".jpg");
                                 //$fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "1" . $upload_data['file_ext'];
                                 $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "" . $upload_data['file_ext'];
                                 if (IMAGEPATHFROM == 's3bucket') {
@@ -1510,7 +1504,7 @@ class User_post extends MY_Controller {
                             $image_height = $response['result'][$i]['image_height'];*/
                             //Main Image
                             if ($file_type == 'image') {
-                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,80,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
+                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,90,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
                                 //Thumb Image
                                 /*{
 
@@ -2490,8 +2484,10 @@ class User_post extends MY_Controller {
 
                             if ($file_type == 'video') {
                                 $uploaded_url = base_url() . $this->config->item('user_post_main_upload_path') . $response['result'][$i]['file_name'];
+                                
                                 exec("ffmpeg -i " . $uploaded_url . " -vcodec h264 -acodec aac -strict -2 " . $upload_data['file_path'] . $upload_data['raw_name'] . $upload_data['file_ext'] . "");
-                                exec("ffmpeg -ss 00:00:05 -i " . $upload_data['full_path'] . " " . $upload_data['file_path'] . $upload_data['raw_name'] . ".png");
+
+                                exec("ffmpeg -ss 00:00:05 -i " . $upload_data['full_path'] . " -vframes 1 -q:v 2 " . $upload_data['file_path'] . $upload_data['raw_name'] . ".jpg");
                                 //$fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "1" . $upload_data['file_ext'];
                                 $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "" . $upload_data['file_ext'];
                                 if (IMAGEPATHFROM == 's3bucket') {
@@ -2547,7 +2543,7 @@ class User_post extends MY_Controller {
                             $image_height = $response['result'][$i]['image_height'];*/
                             //Main Image
                             if ($file_type == 'image') {
-                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,100,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
+                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,90,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
                                 /*{
                                     //Thumb Image
                                     $thumb_image_width = $this->config->item('user_post_thumb_width');
