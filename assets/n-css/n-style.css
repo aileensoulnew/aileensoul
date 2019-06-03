@@ -161,7 +161,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .post-box-bottom ul li a span span.none-479{padding-right: 1px;}
 .post-box-bottom .btn1{padding:3px 20px; border-radius:20px;}
 .modal-content .post-box .post-box-bottom{margin-top:0;}
-.post-popup-box{width:100%; float:left; border-radius:4px;}
+.post-popup-box{width:100%; float:left; border-radius:4px; background: #fff;}
 .post-popup-box .post-box{padding:15px;}
 .post-popup-box .post-box .post-text{padding:9px 0px 10px 10px;}
 .post-popup-box textarea{padding:0px; min-height: 160px; resize: none; border: none; line-height:1.5; letter-spacing:1px; /*overflow-y:scroll;*/}
@@ -180,6 +180,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .all-post-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px;}
 .all-post-box .all-post-top{padding:0; width:100%; float:left;}
 .post-field{width:100%; float:left; padding:10px 0px 0;}
+.post-field tags-input .tags .tag-item{margin-left: 2px;}
 .modal-content .post-popup-box form{padding:0; width:100%; float:left;}
 .modal-content .post-field .form-group{padding:5px 15px; margin-bottom:0; position:relative;}
 .modal-content .post-field .form-group textarea{border:none; min-height:30px; max-height:80px; font-size:13px; border:1px solid #d2d2d2; padding:7px 15px; margin-bottom:9px;}
@@ -3450,6 +3451,13 @@ a:focus{text-decoration: none;}
 .new-form select:focus:-moz-placeholder {color:#1b8ab9; }
 .new-form select:focus::-ms-input-placeholder {color:#1b8ab9;}
 .blok-767{display:none;}
+
+tags-input .tags .tag-item{background: #efefef; border-radius: 20px; border:0; padding: 0 12px; padding-top: 2px; margin-left: 0;} 
+tags-input .autocomplete{margin-top: 0; padding-top: 0;}
+tags-input .autocomplete .suggestion-item{color: #5c5c5c; font-size: 14px;}
+tags-input .autocomplete .suggestion-item em{color: #5c5c5c; font-size: 14px;}
+tags-input .autocomplete .suggestion-item.selected, tags-input .autocomplete .suggestion-item.selected em {color: #5c5c5c; background-color: #efefef;}
+tags-input .tags .tag-item {font-size: 12px;}
 /***  end new commen css  ***/
 
 
@@ -3587,12 +3595,6 @@ a:focus{text-decoration: none;}
 .search-gender{padding-top: 5px; margin-bottom: 8px;}
 .search-gender label{padding-right: 15px !important; display: inline-block;}
 .search-gender .control--radio .control__indicator:after{left: 1px; top: 1px; width: 9px; height: 9px;}
-.search-box .form-group tags-input .tags .tag-item{background: #efefef; border-radius: 20px; border:0; padding: 0 12px; padding-top: 2px; margin-left: 0;} 
-.search-box tags-input .autocomplete{margin-top: 0; padding-top: 0;}
-.search-box tags-input .autocomplete .suggestion-item{color: #5c5c5c; font-size: 14px;}
-.search-box tags-input .autocomplete .suggestion-item em{color: #5c5c5c; font-size: 14px;}
-.search-box tags-input .autocomplete .suggestion-item.selected, .search-box tags-input .autocomplete .suggestion-item.selected em {color: #5c5c5c; background-color: #efefef;}
-.search-box tags-input .tags .tag-item {font-size: 12px;}
 .search-box .form-group label{padding: 5px 5px 5px 20px ;}
 .search-box .form-group label.control{font-size: 13px;}
 .search-box .form-group .control__indicator{width: 13px; height: 13px;}
@@ -3678,7 +3680,7 @@ body.main-reg{padding-bottom:60px;}
 #ask-question .modal-content .post-field .form-group textarea.hashtag-textarea{min-height: 34px; height: 34px;}
 .post-popup-box textarea.hashtag-textarea{min-height: 34px;}
 textarea.hashtag-textarea{border:1px solid #d2d2d2; padding: 6px 15px; line-height: 1.5; height: 34px; max-height: 190px; overflow-y: scroll;}
-.modal-content .post-field textarea.hashtag-textarea{max-height: 190px; margin-bottom: 0; width: 100%; float: left;}
+.modal-content .post-field textarea.hashtag-textarea{max-height: 190px; margin-bottom: 0; width: 100%; float: left; box-shadow:none; -webkit-box-shadow:none; -webkit-appearance: none;}
 #post-popup .post-popup-box textarea.hashtag-textarea:focus{border:1px solid #1b8ab9 !important;}
 .form-control{padding: 5px 15px; font-size: 13px;}
 tags-input .tags .input{height: 34px; margin: 0; padding: 5px 15px;}
