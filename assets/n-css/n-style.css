@@ -3563,7 +3563,8 @@ tags-input .tags .tag-item {font-size: 12px;}
 .sub-header .sub-menu li a:hover{color: #1b8ab9;}
 .search-new-page .middle-section{float:right; width:580px; padding: 0; margin-left: 15px;}
 .search-tab .nav-tabs{border-bottom: 0;}
-.search-box{padding: 15px; border:1px solid #d2d2d2; border-radius: 4px; width: 100%; float: left;}
+.search-box{width: 100%; float: left;}
+.left-section .search-box{padding: 15px; border:1px solid #d2d2d2; border-radius: 4px; width: 100%; float: left;}
 .search-left-box{width: 100%; float: left;}
 .search-left-box h3{font-size: 15px; font-weight: bold;}
 .search-left-box input{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 5px 0px;}
