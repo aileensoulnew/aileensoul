@@ -572,7 +572,7 @@
                 <div class="mid-modal-body">
                     <div class="search-box">
                         <div class="search-left-box">
-                            <h3>Opportunity for</h3>
+                            <h3>Opportunity for(Job Title)</h3>
                             <div class="form-group">
                                 <!-- <input type="text" placeholder="Search by Opportunity for"> -->
                                 <tags-input id="search_job_title" name="search_job_title" ng-model="search_job_title" display-property="name" placeholder="Search by Opportunity for" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" max-tags="5">

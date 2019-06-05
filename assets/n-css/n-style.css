@@ -4187,7 +4187,7 @@ tags-input .tags{padding: 0;}
   .filter-sub-header .table-responsive.content td a{font-size: 13px;}
   .filter-sub-header .table-responsive.content td a span{font-size: 13px;}
   .filter-sub-header .search-tab .table-responsive.content{height: 29px !important;}
-  .mid-modal-body .search-box{width: 100%; border:0;}
+  .mid-modal-body .search-box{width: 100%; border:0; padding: 15px;}
   .mid-modal-body .search-left-box h3{text-align: left; border: 0; padding: 0; line-height: 1; font-size: 16px;}
   .mid-modal-body .search-box #main_search_mob .form-group label.control{font-size: 14px;}
   .left-header input[type=text]{background-size:34px; }
