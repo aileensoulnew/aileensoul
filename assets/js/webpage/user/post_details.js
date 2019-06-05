@@ -125,17 +125,17 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
 
                 for (i = 0; i < total; i++) {
                     new MediaElementPlayer(mediaElements[i], {
-                        stretching: stretching,
-                        pluginPath: '../build/',
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
                         success: function (media) {
                             var renderer = document.getElementById(media.id + '-rendername');
 
                             media.addEventListener('loadedmetadata', function () {
                                 var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
                                 if (src !== null && src !== undefined) {
-                                    renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    renderer.querySelector('.error').innerHTML = '';
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
                                 }
                             });
 
@@ -145,6 +145,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         }
                     });
                 }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
         }, function(error) {});
     }
