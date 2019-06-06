@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="css/tooltipster.main.min.css">
         <link rel="stylesheet" href="css/component.css" />
         <link rel="stylesheet" href="css/n-commen.css">
         <link rel="stylesheet" href="css/n-style.css">
@@ -658,29 +659,21 @@
                         </div>    
                     </div>
                     <div class="middle-section">
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
-                          Tooltip on left
-                        </button>
-                        <!-- HTML to write -->
-                        <a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me132</a>
-
-                        <!-- Generated markup by the plugin -->
-                        <div class="tooltip bs-tooltip-top" role="tooltip">
-                          <div class="arrow"></div>
-                          <div class="tooltip-inner">
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                            Some tooltip text!
-                          </div>
+                        <div class="box">
+                            <h1>12</h1>
+                            <h1>12</h1>
+                            <h1>12</h1>
+                            <button class="btn btn-default tip" data-toggle="tooltip" title="Tooltip on left" type="button">Tooltip</button>
                         </div>
+
+                        <span class="tooltip" data-tooltip-content="#tooltip_content">This span has a tooltip with HTML when you hover over it!</span>
+
+                        <div class="tooltip_templates">
+                            <span id="tooltip_content">
+                                <img src="myimage.png" /> <strong>This is the content of my tooltip!</strong>
+                            </span>
+                        </div>
+                      
                         <div class="user-tooltip">
                             <div class="tooltip-cover-img">
                                 <img src="https://www.aileensoul.com/uploads/user_bg/main/1551782433.png">
@@ -1055,6 +1048,7 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="js/classie.js"></script>
+        <script src="js/tooltipster.main.min.js"></script>
         <script>
         var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
             menuBottom = document.getElementById( 'cbp-spmenu-s4' ),
@@ -1278,9 +1272,28 @@
         });
     </script>
     <script type="text/javascript">
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
+        // $(function(){
+        //    var options = {
+        //        placement: function (context, element) {
+        //           var position = $(element).position();
+        //            console.log(position.top - $(window).scrollTop());
+        //           if (position.top - $(window).scrollTop() < 115){
+        //                return "bottom";
+        //            }
+        //            return "top";
+        //        }, trigger: "hover"
+        //    };
+        //   $(".btn").tooltip(options);
+        //  });
+
+        $(document).ready(function() {
+            //$('.tooltip').tooltipster();
+            $('.tooltip').tooltipster({
+                contentCloning: true
+            });
+        });
+
+   
     </script>
         
 

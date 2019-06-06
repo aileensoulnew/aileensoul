@@ -476,7 +476,7 @@ label.cameraButton input[accept*="camera"] {display: none;}
 .bus-info .dash-info-box ul.skill-list, .art-info .dash-info-box ul.skill-list{margin-top:-5px;}
 .dash-info-box p a{color:#7b7b7b;}
 .dash-info-box p a:hover{color:#1b8ab9;}
-.dash-info-box p span.box-dis{line-height: 1.5; display: inline-block; margin-top: -3px;}
+.dash-info-box p span.box-dis{line-height: 1.5; display: inline-block; margin-top: -3px; word-break: break-all;}
 .dash-info-box p.inner-dis{line-height: 1.5; display: inline-block; margin-top: -3px;}
 .dash-info-box p.dis-mail{word-break: break-all;} 
 .dash-info-box p a span{word-break: break-all;} 
