@@ -1015,35 +1015,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.promotedPostData = success.data; 
             } else {
                 isLoadingData = true;
-            }
-
-            setTimeout(function(){
-                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
-
-                for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
-
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
-
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
-                }
-                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-            },1000);
+            }           
         }, function (error) {});
     }
 
@@ -1082,26 +1054,29 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                 for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
 
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
 
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
@@ -1210,26 +1185,29 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                 for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
 
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
 
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
@@ -1689,26 +1667,29 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                                     var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                                     for (i = 0; i < total; i++) {
-                                        new MediaElementPlayer(mediaElements[i], {
-                                            stretching: 'auto',
-                                            pluginPath: '../../../build/',
-                                            success: function (media) {
-                                                var renderer = document.getElementById(media.id + '-rendername');
+                                        if($(mediaElements[i])[0].id == '')
+                                        {                                            
+                                            new MediaElementPlayer(mediaElements[i], {
+                                                stretching: 'auto',
+                                                pluginPath: '../../../build/',
+                                                success: function (media) {
+                                                    var renderer = document.getElementById(media.id + '-rendername');
 
-                                                media.addEventListener('loadedmetadata', function () {
-                                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                                    if (src !== null && src !== undefined) {
-                                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                                        // renderer.querySelector('.error').innerHTML = '';
-                                                    }
-                                                });
+                                                    media.addEventListener('loadedmetadata', function () {
+                                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                        if (src !== null && src !== undefined) {
+                                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                            // renderer.querySelector('.error').innerHTML = '';
+                                                        }
+                                                    });
 
-                                                media.addEventListener('error', function (e) {
-                                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                                });
-                                            }
-                                        });
+                                                    media.addEventListener('error', function (e) {
+                                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                                    });
+                                                }
+                                            });
+                                        }
                                     }
                                     // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                                 },1000);
@@ -1922,34 +1903,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                                 fileNamesArrQue = [];
                                 formFileExtQue = [];
                                 $("#selectedFilesQue").html("");
-                                $("#fileCountQue").text("");
-                                setTimeout(function(){
-                                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
-
-                                    for (i = 0; i < total; i++) {
-                                        new MediaElementPlayer(mediaElements[i], {
-                                            stretching: 'auto',
-                                            pluginPath: '../../../build/',
-                                            success: function (media) {
-                                                var renderer = document.getElementById(media.id + '-rendername');
-
-                                                media.addEventListener('loadedmetadata', function () {
-                                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                                    if (src !== null && src !== undefined) {
-                                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                                        // renderer.querySelector('.error').innerHTML = '';
-                                                    }
-                                                });
-
-                                                media.addEventListener('error', function (e) {
-                                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                                });
-                                            }
-                                        });
-                                    }
-                                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                                },1000);
+                                $("#fileCountQue").text("");                                
                             }
                         });
             }
@@ -2395,26 +2349,29 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                             var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                             for (i = 0; i < total; i++) {
-                                new MediaElementPlayer(mediaElements[i], {
-                                    stretching: 'auto',
-                                    pluginPath: '../../../build/',
-                                    success: function (media) {
-                                        var renderer = document.getElementById(media.id + '-rendername');
+                                if($(mediaElements[i])[0].id == '')
+                                {                                    
+                                    new MediaElementPlayer(mediaElements[i], {
+                                        stretching: 'auto',
+                                        pluginPath: '../../../build/',
+                                        success: function (media) {
+                                            var renderer = document.getElementById(media.id + '-rendername');
 
-                                        media.addEventListener('loadedmetadata', function () {
-                                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                            if (src !== null && src !== undefined) {
-                                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                                // renderer.querySelector('.error').innerHTML = '';
-                                            }
-                                        });
+                                            media.addEventListener('loadedmetadata', function () {
+                                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                if (src !== null && src !== undefined) {
+                                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                    // renderer.querySelector('.error').innerHTML = '';
+                                                }
+                                            });
 
-                                        media.addEventListener('error', function (e) {
-                                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                        });
-                                    }
-                                });
+                                            media.addEventListener('error', function (e) {
+                                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                            });
+                                        }
+                                    });
+                                }
                             }
                             // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                         },1000);
@@ -2431,26 +2388,29 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
             for (i = 0; i < total; i++) {
-                new MediaElementPlayer(mediaElements[i], {
-                    stretching: 'auto',
-                    pluginPath: '../../../build/',
-                    success: function (media) {
-                        var renderer = document.getElementById(media.id + '-rendername');
+                if($(mediaElements[i])[0].id == '')
+                {                    
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
 
-                        media.addEventListener('loadedmetadata', function () {
-                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                            if (src !== null && src !== undefined) {
-                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                // renderer.querySelector('.error').innerHTML = '';
-                            }
-                        });
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
 
-                        media.addEventListener('error', function (e) {
-                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                        });
-                    }
-                });
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
             }
             // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
         },1000);
@@ -3642,26 +3602,29 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
             for (i = 0; i < total; i++) {
-                new MediaElementPlayer(mediaElements[i], {
-                    stretching: 'auto',
-                    pluginPath: '../../../build/',
-                    success: function (media) {
-                        var renderer = document.getElementById(media.id + '-rendername');
+                if($(mediaElements[i])[0].id == '')
+                {                    
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
 
-                        media.addEventListener('loadedmetadata', function () {
-                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                            if (src !== null && src !== undefined) {
-                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                // renderer.querySelector('.error').innerHTML = '';
-                            }
-                        });
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
 
-                        media.addEventListener('error', function (e) {
-                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                        });
-                    }
-                });
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
             }
             // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
         },1000);
@@ -4017,6 +3980,36 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                         $scope.total_record = success.data.total_record;
                     }
                 }
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             }
             else
             {
@@ -4063,26 +4056,29 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                     for (i = 0; i < total; i++) {
-                        new MediaElementPlayer(mediaElements[i], {
-                            stretching: 'auto',
-                            pluginPath: '../../../build/',
-                            success: function (media) {
-                                var renderer = document.getElementById(media.id + '-rendername');
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
 
-                                media.addEventListener('loadedmetadata', function () {
-                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                    if (src !== null && src !== undefined) {
-                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                        // renderer.querySelector('.error').innerHTML = '';
-                                    }
-                                });
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
 
-                                media.addEventListener('error', function (e) {
-                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                });
-                            }
-                        });
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
                     }
                     // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 },1000);
@@ -4921,26 +4917,29 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
             var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
             for (i = 0; i < total; i++) {
-                new MediaElementPlayer(mediaElements[i], {
-                    stretching: 'auto',
-                    pluginPath: '../../../build/',
-                    success: function (media) {
-                        var renderer = document.getElementById(media.id + '-rendername');
+                if($(mediaElements[i])[0].id == '')
+                {                            
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
 
-                        media.addEventListener('loadedmetadata', function () {
-                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                            if (src !== null && src !== undefined) {
-                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                // renderer.querySelector('.error').innerHTML = '';
-                            }
-                        });
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
 
-                        media.addEventListener('error', function (e) {
-                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                        });
-                    }
-                });
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
             }
             // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
         },1000);
@@ -5058,6 +5057,36 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                         $scope.total_record = success.data.total_record;
                     }
                 }
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             }
             else
             {
@@ -5108,26 +5137,29 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                     for (i = 0; i < total; i++) {
-                        new MediaElementPlayer(mediaElements[i], {
-                            stretching: 'auto',
-                            pluginPath: '../../../build/',
-                            success: function (media) {
-                                var renderer = document.getElementById(media.id + '-rendername');
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
 
-                                media.addEventListener('loadedmetadata', function () {
-                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                    if (src !== null && src !== undefined) {
-                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                        // renderer.querySelector('.error').innerHTML = '';
-                                    }
-                                });
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
 
-                                media.addEventListener('error', function (e) {
-                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                });
-                            }
-                        });
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
                     }
                     // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 },1000);
@@ -6137,6 +6169,37 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                         $scope.total_record = success.data.total_record;
                     }
                 }
+
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             }
             else
             {
@@ -6175,6 +6238,36 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $scope.page_number = success.data.page;            
                 $scope.postData = success.data.article_post;
                 $scope.total_record = success.data.total_record;
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
 
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
@@ -7016,26 +7109,29 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
             var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
             for (i = 0; i < total; i++) {
-                new MediaElementPlayer(mediaElements[i], {
-                    stretching: 'auto',
-                    pluginPath: '../../../build/',
-                    success: function (media) {
-                        var renderer = document.getElementById(media.id + '-rendername');
+                if($(mediaElements[i])[0].id == '')
+                {                            
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
 
-                        media.addEventListener('loadedmetadata', function () {
-                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                            if (src !== null && src !== undefined) {
-                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                // renderer.querySelector('.error').innerHTML = '';
-                            }
-                        });
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
 
-                        media.addEventListener('error', function (e) {
-                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                        });
-                    }
-                });
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
             }
             // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
         },1000);

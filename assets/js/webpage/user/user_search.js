@@ -435,26 +435,29 @@ app.controller('searchController', function($scope, $http, $compile) {
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                 for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
 
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
 
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
@@ -498,9 +501,8 @@ app.controller('searchController', function($scope, $http, $compile) {
             var search_city = JSON.stringify($scope.search_city);
             $scope.search_field = $scope.search_field;
             
-            $("#showBottom").click();
-            $("#search-loader").show();
-            $("#search-loader").show();
+            // $("#showBottom").click();
+            $("#search-loader").show();            
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -510,8 +512,7 @@ app.controller('searchController', function($scope, $http, $compile) {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(success) {
-                $("#search-loader").hide();
-                $("#search-loader").hide();
+                $("#search-loader").hide();                
                 $(".post_loader").hide();
                 $scope.searchProfileData = success.data.profile;
                 $scope.postData = success.data.opp_post;
@@ -544,26 +545,116 @@ app.controller('searchController', function($scope, $http, $compile) {
                     var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                     for (i = 0; i < total; i++) {
-                        new MediaElementPlayer(mediaElements[i], {
-                            stretching: 'auto',
-                            pluginPath: '../../../build/',
-                            success: function (media) {
-                                var renderer = document.getElementById(media.id + '-rendername');
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
 
-                                media.addEventListener('loadedmetadata', function () {
-                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                    if (src !== null && src !== undefined) {
-                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                        // renderer.querySelector('.error').innerHTML = '';
-                                    }
-                                });
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
 
-                                media.addEventListener('error', function (e) {
-                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                });
-                            }
-                        });
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
+                setTimeout(function() {
+                    $('.comment-dis-inner a').attr('target', '_self');                    
+                }, 300);
+            });
+        }
+    };
+    $scope.main_search_function_mob = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1))
+        {
+            return false;
+        }
+        else
+        {
+            var search_job_title = JSON.stringify($scope.search_job_title);
+            var search_city = JSON.stringify($scope.search_city);
+            $scope.search_field = $scope.search_field;
+            
+            $("#showBottom").click();
+            $("#search-loader").show();            
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search',
+                data: 'searchKeyword=' + searchKeyword+'&search_job_title='+search_job_title+'&search_field='+$scope.search_field+'&search_city='+search_city,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#search-loader").hide();                
+                $(".post_loader").hide();
+                $scope.searchProfileData = success.data.profile;
+                $scope.postData = success.data.opp_post;
+                if(success.data.sim_post.length > 0)
+                {
+                    $scope.postData.push(success.data.sim_post[0]);
+                }
+                if(success.data.question_post.length > 0)
+                {
+                    $scope.postData.push(success.data.question_post[0]);
+                }
+                if(success.data.article_post.length > 0)
+                {
+                    $scope.postData.push(success.data.article_post[0]);
+                }
+
+                $scope.business_data = success.data.business_data;
+                
+                $scope.$parent.opp_count = '('+success.data.opp_count+')';
+                $scope.$parent.people_count = '('+success.data.people_count+')';
+                $scope.$parent.simple_count = '('+success.data.simple_count+')';
+                $scope.$parent.business_count = '('+success.data.business_count+')';
+                $scope.$parent.article_count = '('+success.data.article_count+')';
+                $scope.$parent.question_count = '('+success.data.question_count+')';
+                $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
+                
+                $('#main_loader').hide();            
+                $('body').removeClass("body-loader");
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
                     }
                     // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 },1000);
@@ -1543,26 +1634,29 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                 for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
 
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
 
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
@@ -1664,6 +1758,81 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             var search_hashtag = JSON.stringify($scope.search_hashtag);
             var search_company = JSON.stringify($scope.search_company);
             $scope.search_field = $scope.search_field;
+            var search_field = $scope.search_field;            
+            $("#post-loader").show();
+            $("#search-loader").show();
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_opportunity_data',
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_job_title='+search_job_title+'&search_field='+search_field+'&search_city='+search_city+'&search_hashtag='+search_hashtag+'&search_company='+search_company,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+                $("#search-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.opp_post;
+                
+                $scope.$parent.opp_count = '('+success.data.opp_count+')';
+                $scope.total_record = success.data.opp_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
+                
+                setTimeout(function() {
+                    $('.comment-dis-inner a').attr('target', '_self');                    
+                }, 300);
+            });
+        }
+    };
+
+    $scope.main_search_function_mob = function(){
+        if(($scope.search_job_title == undefined || $scope.search_job_title.length < 1) && ($scope.search_field == undefined || $scope.search_field == '') && ($scope.search_city == undefined || $scope.search_city.length < 1) && ($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_company == undefined || $scope.search_company.length < 1))
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_job_title = JSON.stringify($scope.search_job_title);
+            var search_city = JSON.stringify($scope.search_city);
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            var search_company = JSON.stringify($scope.search_company);
+            $scope.search_field = $scope.search_field;
             var search_field = $scope.search_field;
             $("#showBottom").click();
             $("#post-loader").show();
@@ -1692,26 +1861,29 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                     for (i = 0; i < total; i++) {
-                        new MediaElementPlayer(mediaElements[i], {
-                            stretching: 'auto',
-                            pluginPath: '../../../build/',
-                            success: function (media) {
-                                var renderer = document.getElementById(media.id + '-rendername');
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
 
-                                media.addEventListener('loadedmetadata', function () {
-                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                    if (src !== null && src !== undefined) {
-                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                        // renderer.querySelector('.error').innerHTML = '';
-                                    }
-                                });
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
 
-                                media.addEventListener('error', function (e) {
-                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                });
-                            }
-                        });
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
                     }
                     // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 },1000);
@@ -2659,8 +2831,6 @@ app.controller('peopleController', function($scope, $http, $compile, $window, $l
                 search_field = $scope.search_field;
             }
 
-            $("#showBottom").click();
-
             $("#people-loader").show();
             $("#search-loader").show();
 
@@ -2925,26 +3095,29 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                 for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
 
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
 
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
@@ -2955,6 +3128,77 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
     };
 
     $scope.main_search_function = function(){
+        if($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1)
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            
+            $("#post-loader").show();
+            $("#search-loader").show();
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_post_data',
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_hashtag='+search_hashtag,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+                $("#search-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.sim_post;
+                
+                $scope.$parent.simple_count = '('+success.data.simple_count+')';
+                $scope.total_record = success.data.simple_count;
+
+                $('#main_loader').hide();
+                $('body').removeClass("body-loader");
+                
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
+
+                setTimeout(function() {
+                    $('.comment-dis-inner a').attr('target', '_self');                    
+                }, 300);
+            });
+        }
+    };
+    $scope.main_search_function_mob = function(){
         if($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1)
         {
             return false;
@@ -2992,26 +3236,29 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
                     for (i = 0; i < total; i++) {
-                        new MediaElementPlayer(mediaElements[i], {
-                            stretching: 'auto',
-                            pluginPath: '../../../build/',
-                            success: function (media) {
-                                var renderer = document.getElementById(media.id + '-rendername');
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
 
-                                media.addEventListener('loadedmetadata', function () {
-                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                    if (src !== null && src !== undefined) {
-                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                        // renderer.querySelector('.error').innerHTML = '';
-                                    }
-                                });
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
 
-                                media.addEventListener('error', function (e) {
-                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                });
-                            }
-                        });
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
                     }
                     // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                 },1000);
@@ -3952,8 +4199,7 @@ app.controller('businessController', function($scope, $http, $compile, $window, 
             pagenum = 0;
             isProcessing = false;
             $("#business-loader").show();
-            $("#search-loader").show();
-            $("#showBottom").click();
+            $("#search-loader").show();            
             $http({
                 method: 'POST',
                 // url: base_url + 'user_post/searchData',
@@ -4146,6 +4392,37 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     $scope.$parent.article_count = '('+success.data.article_count+')';
                     $scope.total_record = success.data.article_count;
                 }
+
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                        
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             }
             else
             {
@@ -4158,6 +4435,77 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
     };
 
     $scope.main_search_function = function(){
+        if(($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_field == undefined || $scope.search_field == ''))
+        {
+            return false;
+        }
+        else
+        {
+            pagenum = 0;
+            isProcessing = false;
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            $scope.search_field = $scope.search_field;
+            var search_field = $scope.search_field;            
+            $("#post-loader").show();
+            $("#search-loader").show();
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_article_data',
+                // data: {searchKeyword:searchKeyword,page:pagenum,search_field:btoa(search_field),search_hashtag:search_hashtag},
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_field='+btoa(search_field)+'&search_hashtag='+search_hashtag,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+                $("#search-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.article_post;
+                
+                $scope.$parent.article_count = '('+success.data.article_count+')';
+                $scope.total_record = success.data.article_count;
+
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                        
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
+
+                $('#main_loader').hide();
+                $('.comment-dis-inner a').attr('target', '_self');
+                $('body').removeClass("body-loader");
+            });
+        }
+    };
+
+    $scope.main_search_function_mob = function(){
         if(($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_field == undefined || $scope.search_field == ''))
         {
             return false;
@@ -4190,6 +4538,37 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 
                 $scope.$parent.article_count = '('+success.data.article_count+')';
                 $scope.total_record = success.data.article_count;
+
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                        
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
 
                 $('#main_loader').hide();
                 $('.comment-dis-inner a').attr('target', '_self');
@@ -5139,6 +5518,47 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
     };
 
     $scope.main_search_function = function(){
+        if(($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_field == undefined || $scope.search_field == ''))
+        {
+            return false;
+        }
+        else
+        {
+            $scope.postData = [];
+            pagenum = 0;
+            isProcessing = false;
+            var search_hashtag = JSON.stringify($scope.search_hashtag);
+            $scope.search_field = $scope.search_field;
+            var search_field = $scope.search_field;            
+            $("#post-loader").show();
+            $("#search-loader").show();
+            $http({
+                method: 'POST',
+                // url: base_url + 'user_post/searchData',
+                url: base_url + 'searchelastic/search_question_data',
+                // data: {searchKeyword:searchKeyword,page:pagenum,search_field:btoa(search_field),search_hashtag:search_hashtag},
+                data: 'searchKeyword=' + searchKeyword + "&page=" + pagenum+'&search_field='+btoa(search_field)+'&search_hashtag='+search_hashtag,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function(success) {
+                $("#post-loader").hide();
+                $("#search-loader").hide();
+
+                $scope.page_number = success.data.page;            
+                $scope.postData = success.data.question_post;
+                
+                $scope.$parent.question_count = '('+success.data.question_count+')';
+                $scope.total_record = success.data.question_count;
+
+                $('#main_loader').hide();
+                $('.comment-dis-inner a').attr('target', '_self');
+                $('body').removeClass("body-loader");
+            });
+        }
+    };
+
+    $scope.main_search_function_mob = function(){
         if(($scope.search_hashtag == undefined || $scope.search_hashtag.length < 1) && ($scope.search_field == undefined || $scope.search_field == ''))
         {
             return false;

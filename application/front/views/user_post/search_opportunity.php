@@ -725,7 +725,7 @@
         </div>
         <div class="search-left-box pt15">
             <div class="form-group">
-                <a class="pull-left btn-new-1" ng-click="main_search_function();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search
+                <a class="pull-left btn-new-1" ng-click="main_search_function_mob();"><span><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></span> Search
                     <img id="search-loader" ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" style="width: 20px;display: none;"/>
                 </a> 
                 <a class="pull-right btn-new-1" ng-click="clearData();"><span><img src="<?php echo base_url('assets/n-images/trash.png'); ?>"></span> Clear</a> 
