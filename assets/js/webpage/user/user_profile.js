@@ -1470,7 +1470,36 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                     $scope.pagecntctData = response.data;
                     $scope.audioData = response.data.videorecord;
                 }
-                setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        if($(mediaElements[i])[0].id == '')
+                        {                            
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             } else {
                 $scope.showLoadmore = false;
             }
@@ -1743,11 +1772,41 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                     $scope.pagecntctData = response.data.videoData;
                     $scope.videoData = response.data.videoData.videorecord;
                 }
-                if(pagenum == "" || pagenum == 1)
+                if(pagenum == undefined || pagenum == "" || pagenum == 1)
                 {
                     $scope.allVideosData = response.data.allVideosData;   
                 }
-                setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {                        
+                        if($(mediaElements[i])[0].id == '')
+                        {
+
+                            new MediaElementPlayer(mediaElements[i], {
+                                stretching: 'auto',
+                                pluginPath: '../../../build/',
+                                success: function (media) {
+                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                    media.addEventListener('loadedmetadata', function () {
+                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                        if (src !== null && src !== undefined) {
+                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                            // renderer.querySelector('.error').innerHTML = '';
+                                        }
+                                    });
+
+                                    media.addEventListener('error', function (e) {
+                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             } else {
                 $scope.showLoadmore = false;
             }
@@ -2815,7 +2874,36 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 isLoadingData = true;
                 $scope.showLoadmore = false;
             }
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
         }, function (error) {});
     }
 
@@ -2834,7 +2922,36 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postVideoData = success.data.userDashboardVideo;
             $scope.postAllVideoData = success.data.userDashboardVideoAll;
-            setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
             
         }, function (error) {});
     }
@@ -2921,7 +3038,33 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postAudioData = success.data.userDashboardAudio;
             $scope.postAllAudioData = success.data.userDashboardAudioAll;
-            setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
+            /*setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
+
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
+
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);*/
         }, function (error) {});
     }
 
@@ -2929,8 +3072,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardPdf?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
-            $scope.postPdfData = success.data.userDashboardPdf;
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            $scope.postPdfData = success.data.userDashboardPdf;           
         }, function (error) {});
     }
 
@@ -2992,403 +3134,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         document.getElementById('location').value = c;
         document.getElementById('field').value = d;
     }
-
-    $scope.post_opportunity_check = function (event,postIndex) {
-
-        if (document.getElementById("opp_edit_post_id"+postIndex)) {
-            var post_id = document.getElementById("opp_edit_post_id"+postIndex).value;
-        } else {
-            var post_id = 0;
-        }        
-        if (post_id == 0) {
-            var fileInput = document.getElementById("fileInput").files;
-            var description = $scope.opp.description;//document.getElementById("description").value;            
-            var job_title = $scope.opp.job_title;
-            var location = $scope.opp.location;
-            var fields = $scope.opp.field;
-            var otherField_edit = $scope.opp.otherField_edit;
-            var opp_hashtag = $scope.opp.opp_hashtag;            
-            var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
-            var hashtags_arr = $scope.getHashTags(opp_hashtag);
-            
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0)))
-            {
-                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
-                {
-                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
-                }
-                else
-                {
-                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
-                }
-                $('#post').modal('show');
-                $(document).on('keydown', function (e) {
-                    if (e.keyCode === 27) {
-                        $('#posterrormodal').modal('hide');
-                        $('.modal-post').show();
-                    }
-                });
-                //event.preventDefault();
-                return false;
-            }
-            else
-            {
-                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
-                var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
-                var allowesaudio = ['mp3','mpeg'];
-                var allowespdf = ['pdf'];
-                var imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
-
-                if(fileCountOpp > 0 && fileCountOpp < 11)
-                {
-                    $.each(formFileExtOpp, function( index, value ) {
-                        //console.log( index + ": " + value );
-                        if($.inArray(value, allowedExtensions) > -1)
-                        {
-                            imgExt = true;
-                        }
-                        if($.inArray(value, allowesvideo) > -1)
-                        {
-                            videoExt = true;
-                        }
-                        if($.inArray(value, allowesaudio) > -1)
-                        {
-                            audioExt = true;
-                        }
-                        if($.inArray(value, allowespdf) > -1)
-                        {
-                            pdfExt = true;
-                        }
-                    });
-
-                    if(imgExt == true && (videoExt == true || audioExt == true || pdfExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                    }
-                    if(videoExt == true && (imgExt == true || audioExt == true || pdfExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either video or photo or  audio or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;                        
-                    }
-                    if(audioExt == true && (imgExt == true || videoExt == true || pdfExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either audio or photo or video or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;                        
-                    }
-                    else
-                    {
-                        if(audioExt == true && (description == '' || description == undefined))
-                        {
-                            $('.biderror .mes').html("<div class='pop_content'>Please Enter Audio Title.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false; 
-                        }
-
-                    }
-                    if(pdfExt == true && (imgExt == true || videoExt == true || audioExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either pdf or photo or video or audio. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;                        
-                    }
-                    else
-                    {
-                        if(pdfExt == true && (description == '' || description == undefined))
-                        {
-                            $('.biderror .mes').html("<div class='pop_content'>Please Enter PDF Title.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false; 
-                        }
-                    }
-                }
-                else
-                {
-                    if((description == '' || description == undefined) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields.trim() == undefined || fields.trim() == '')))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to Post Opportunity.");
-                        $('#posterrormodal').modal('show');
-                        //$("#post_opportunity")[0].reset();
-                        //setInterval('window.location.reload()', 10000);
-                        $(document).on('keydown', function (e) {
-                            if (e.keyCode === 27) {
-                                $('#posterrormodal').modal('hide');
-                                $('.modal-post').show();
-                            }
-                        });
-                        //event.preventDefault();
-                        return false;
-                    }
-                }
-
-                for (var i = 0; i < fileCountOpp; i++)
-                {
-                    var vname = fileNamesArrOpp[i];
-                    var vfirstname = fileNamesArrOpp[i];
-                    var ext = vfirstname.split('.').pop();
-                    var ext1 = vname.split('.').pop();
-                    var foundPresent = $.inArray(ext, allowedExtensions) > -1;
-                    var foundPresentvideo = $.inArray(ext, allowesvideo) > -1;
-                    var foundPresentaudio = $.inArray(ext, allowesaudio) > -1;
-                    var foundPresentpdf = $.inArray(ext, allowespdf) > -1;
-
-                    if (foundPresent == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowedExtensions) > -1;
-                        if (foundPresent1 == true && fileCountOpp >= 11) {                        
-                            $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 photos at a time.");
-                            $('#posterrormodal').modal('show');
-                            //setInterval('window.location.reload()', 10000);
-                            //$("#post_opportunity")[0].reset();
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentvideo == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowesvideo) > -1;
-                        if (foundPresent1 == true && fileCountOpp == 1) {
-                        } else {
-                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single video.");
-                            $('#posterrormodal').modal('show');
-                            // setInterval('window.location.reload()', 10000);
-                            //$("#post_opportunity")[0].reset();
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentaudio == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowesaudio) > -1;
-                        if (foundPresent1 == true && fileCountOpp == 1) {
-                        } else {
-                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single audio.");
-                            $('#posterrormodal').modal('show');
-                            //setInterval('window.location.reload()', 10000);
-                            //$("#post_opportunity")[0].reset();
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentpdf == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowespdf) > -1;
-                        if (foundPresent1 == true && fileCountOpp == 1) {
-                        } else {                            
-                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single PDF.");                            
-                            $('#posterrormodal').modal('show');
-                            //setInterval('window.location.reload()', 10000);
-                            //$("#post_opportunity")[0].reset();
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentvideo == false) {
-
-                        $('.biderror .mes').html("<div class='pop_content'>This File Format is not supported Please Try to Upload MP4 or WebM files..");
-                        $('#posterrormodal').modal('show');
-                        //setInterval('window.location.reload()', 10000);
-                        //$("#post_opportunity")[0].reset();
-                        $(document).on('keydown', function (e) {
-                            if (e.keyCode === 27) {
-                                $('#posterrormodal').modal('hide');
-                                $('.modal-post').show();
-
-                            }
-                        });
-                        event.preventDefault();
-                        return false;
-                    }
-                }
-
-                /*var form_data = new FormData();
-                $.each($("#fileInput")[0].files, function(i, file) {
-                    form_data.append('postfiles[]', file);
-                });*/
-
-                formFileDataOpp.append('description', $scope.opp.description);
-                formFileDataOpp.append('field', $scope.opp.field);
-                formFileDataOpp.append('other_field', otherField_edit);
-                formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
-                formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
-                formFileDataOpp.append('post_for', $scope.opp.post_for);
-                formFileDataOpp.append('hashtag', $scope.opp.opp_hashtag);
-                formFileDataOpp.append('company_name', $scope.opp.company_name);
-
-                $('body').removeClass('modal-open');
-                $("#opportunity-popup").modal('hide');
-
-                //$('.post_loader').show();
-                $('#progress_div').show();
-                var bar = $('.progress-bar');
-                var percent = $('.sr-only');
-                $http.post(base_url + 'user_post/post_opportunity', formFileDataOpp,
-                        {
-                            transformRequest: angular.identity,
-                            headers: {'Content-Type': undefined, 'Process-Data': false},
-                            uploadEventHandlers: {
-                                progress: function(e) {
-                                     if (e.lengthComputable) {
-                                        progress = Math.round(e.loaded * 100 / e.total);
-
-                                        bar.width((progress - 1) +'%');
-                                        percent.html((progress - 1) +'%');
-
-                                        //console.log("progress: " + progress + "%");
-                                        if (e.loaded == e.total) {
-                                            /*setTimeout(function(){
-                                                $('#progress_div').hide();
-                                                progress = 0;
-                                                bar.width(progress+'%');
-                                                percent.html(progress+'%');
-                                            }, 2000);*/
-                                            //console.log("File upload finished!");
-                                            //console.log("Server will perform extra work now...");
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                        .then(function (success) {
-
-                            if (success) {
-                                if(socket)
-                                {
-                                    socket.emit('user notification',user_id);
-                                }
-
-                                $("#post_opportunity")[0].reset();
-                                $('.post_loader').hide();
-                                $scope.opp.description = ' ';
-                                $scope.opp.job_title = '';
-                                $scope.opp.location = '';
-                                $scope.opp.field = '';
-                                $scope.opp.postfiles = '';
-                                document.getElementById('fileInput').value = '';
-
-                                $('.file-preview-thumbnails').html('');
-                                //$scope.postData.splice(0, 0, success.data[0]);
-                                getUserDashboardPost();
-                                if (foundPresent == true)
-                                {
-                                    getUserDashboardImage();
-                                }
-                                if (foundPresentvideo == true)
-                                {
-                                    getUserDashboardVideo();
-                                }
-                                if (foundPresentaudio == true)
-                                {
-                                    getUserDashboardAudio();
-                                }
-                                if (foundPresentpdf == true)
-                                {
-                                    getUserDashboardPdf();
-                                }
-
-                                bar.width(100+'%');
-                                percent.html(100+'%');
-                                setTimeout(function(){                                    
-                                    progress = 0;
-                                    // bar.width(progress+'%');
-                                    // percent.html(progress+'%');
-                                }, 2000);
-
-                                imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
-
-                                cntImgOpp = 0;
-                                formFileDataOpp = new FormData();
-                                fileCountOpp = 0;
-                                fileNamesArrOpp = [];
-                                formFileExtOpp = [];
-                                $("#selectedFilesOpp").html("");
-                                $("#fileCountOpp").text("");
-
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
-                            }
-                        });
-            }
-
-        }
-    }
+    
     $scope.IsVisible = false;
     $scope.ShowHide = function () {
         //If DIV is visible it will be hidden and vice versa.
@@ -3412,169 +3158,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('.questionSuggetion').removeClass('question-available');
             }
         });
-    }
-    $scope.ask_question_check = function (event) {
-
-        if (document.getElementById("ask_edit_post_id")) {
-            var post_id = document.getElementById("ask_edit_post_id").value;
-        } else {
-            var post_id = 0;
-        }
-        if (post_id == 0) {
-            var field = document.getElementById("ask_field").value;
-            var description = document.getElementById("ask_que").value;
-            var description = description.trim();
-            var fileInput = document.getElementById("fileInput2").files;
-            if ((field == '') || (description == ''))
-            {
-                $('#post .mes').html("<div class='pop_content'>Ask question, Hashtags and Field is required.");
-                $('#post').modal('show');
-                $(document).on('keydown', function (e) {
-                    if (e.keyCode === 27) {
-                        $('#posterrormodal').modal('hide');
-                        $('.modal-post').show();
-                    }
-                });
-                //event.preventDefault();
-                return false;
-            } else {
-
-                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
-                
-                var imgExtNot = false;
-
-                if(fileCountQue > 0)
-                {
-                    $.each(formFileExtQue, function( index, value ) {
-                        //console.log( index + ": " + value );
-                        if($.inArray(value, allowedExtensions) == -1)
-                        {
-                            imgExtNot = true;
-                        }                        
-                    });
-
-                    if(imgExtNot == true || fileCountQue > 10)
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload photo. You cannot upload more than 10 photos at a time.");
-                            $('#posterrormodal').modal('show');
-                            //$("#post_opportunity")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                    }                    
-                }
-
-                /*var form_data = new FormData();
-                angular.forEach($scope.files, function (file) {
-                    form_data.append('postfiles[]', file);
-                });*/
-                //form_data.append('postfiles',$scope.ask.postfiles);
-                formFileDataQue.append('question', $scope.ask.ask_que);
-                formFileDataQue.append('description', $scope.ask.ask_description);
-                formFileDataQue.append('field', $scope.ask.ask_field);
-                formFileDataQue.append('other_field', $scope.ask.otherField);
-                formFileDataQue.append('category', JSON.stringify($scope.ask.related_category));
-                formFileDataQue.append('weblink', $scope.ask.web_link);
-                formFileDataQue.append('post_for', $scope.ask.post_for);
-                formFileDataQue.append('is_anonymously', $scope.ask.is_anonymously);
-
-                $('body').removeClass('modal-open');
-                $("#opportunity-popup").modal('hide');
-                $("#ask-question").modal('hide');
-                //$('.post_loader').show();
-                // $.each($("#fileInput2")[0].files, function(i, file) {
-                //     form_data.append('postfiles[]', file);
-                // });
-                $('#progress_div').show();
-                var bar = $('.progress-bar');
-                var percent = $('.sr-only');
-
-                $http.post(base_url + 'user_post/post_opportunity', formFileDataQue,
-                        {
-                            transformRequest: angular.identity,
-                            headers: {'Content-Type': undefined, 'Process-Data': false},
-                            uploadEventHandlers: {
-                                progress: function(e) {
-                                     if (e.lengthComputable) {
-                                        progress = Math.round(e.loaded * 100 / e.total);
-
-                                        bar.width((progress - 1) +'%');
-                                        percent.html((progress - 1) +'%');
-
-                                        //console.log("progress: " + progress + "%");
-                                        if (e.loaded == e.total) {
-                                            /*setTimeout(function(){
-                                                $('#progress_div').hide();
-                                                progress = 0;
-                                                bar.width(progress+'%');
-                                                percent.html(progress+'%');
-                                            }, 2000);*/
-                                            //console.log("File upload finished!");
-                                            //console.log("Server will perform extra work now...");
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                        .then(function (success) {
-                            if (success) {
-                                if(socket)
-                                {
-                                    socket.emit('user notification',user_id);
-                                }
-                                window.location = base_url+user_slug+"/questions";
-                                $('.post_loader').hide();
-                                $scope.opp.description = '';
-                                $scope.opp.job_title = '';
-                                $scope.opp.location = '';
-                                $scope.opp.field = '';
-                                $scope.opp.postfiles = '';
-                                document.getElementById('fileInput2').value = '';
-                                $('.file-preview-thumbnails').html('');
-                                $scope.ask.postfiles = '';
-                                $scope.ask.ask_que = '';
-                                $scope.ask.ask_description = '';
-                                $scope.ask.ask_field = '';
-                                $scope.ask.otherField = '';
-                                $scope.ask.related_category = '';
-                                $scope.ask.web_link = '';
-                                $scope.ask.post_for = 'question';
-                                $scope.ask.is_anonymously = '';
-
-                                //$scope.postData.splice(0, 0, success.data[0]);
-                                getUserDashboardPost();
-                                getUserDashboardImage();
-
-                                bar.width(100+'%');
-                                percent.html(100+'%');
-                                setTimeout(function(){                                    
-                                    progress = 0;
-                                    // bar.width(progress+'%');
-                                    // percent.html(progress+'%');
-                                }, 2000);
-                                imgExt = false;
-                                cntImgQue = 0;
-                                formFileDataQue = new FormData();
-                                fileCountQue = 0;
-                                fileNamesArrQue = [];
-                                formFileExtQue = [];
-                                $("#selectedFilesQue").html("");
-                                $("#fileCountQue").text("");
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
-                            }
-                        });
-            }
-
-        }
-    }
-    
-    
+    }   
        
     $scope.lightbox = function (idx) {
         //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
@@ -3598,444 +3182,37 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
     // POST SOMETHING UPLOAD START
 
-    $scope.post_something_check = function (event,postIndex) {        
-        //alert(postIndex);return false;
-        if (document.getElementById("edit_post_id"+postIndex)) {
-            var post_id = document.getElementById("edit_post_id"+postIndex).value;
-        } else {
-            var post_id = 0;
-        }        
-        if (post_id == 0) {
-            var fileInput = document.getElementById("fileInput1").files;
-
-            var description = $scope.sim.description;//document.getElementById("description").value;
-            var sim_title = $scope.sim.sim_title_edit;
-            var sim_hashtag = $scope.sim.sim_hashtag_edit;            
-            var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
-            var hashtags_arr = $scope.getHashTags(sim_hashtag);
-            //var description = description.trim();
-            var fileInput1 = document.getElementById("fileInput1").value;
-            //console.log(fileInput1);            
-
-            if ((sim_title == '' || sim_title == undefined) && (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) && fileCountSim == 0 && description == '')
-            {
-                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
-                {
-                    $('#posterrormodal .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
-                }
-                else
-                {
-                    $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.1");
-                }
-                $('#posterrormodal').modal('show');
-                $(document).on('keydown', function (e) {
-                    if (e.keyCode === 27) {
-                        $('#posterrormodal').modal('hide');
-                        $('.modal-post').show();
-                    }
-                });
-                // $("#post_something")[0].reset();
-                //event.preventDefault();
-                return false;
-            } else {
-
-                var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
-                var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
-                var allowesaudio = ['mp3','mpeg'];
-                var allowespdf = ['pdf'];
-                var imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
-
-                if(fileCountSim > 0 && fileCountSim < 11)
-                {
-                    $.each(formFileExtSim, function( index, value ) {
-                        //console.log( index + ": " + value );
-                        if($.inArray(value, allowedExtensions) > -1)
-                        {
-                            imgExt = true;
-                        }
-                        if($.inArray(value, allowesvideo) > -1)
-                        {
-                            videoExt = true;
-                        }
-                        if($.inArray(value, allowesaudio) > -1)
-                        {
-                            audioExt = true;
-                        }
-                        if($.inArray(value, allowespdf) > -1)
-                        {
-                            pdfExt = true;
-                        }
-                    });
-
-                    if(imgExt == true && (videoExt == true || audioExt == true || pdfExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                    }
-                    if(videoExt == true && (imgExt == true || audioExt == true || pdfExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either video or photo or  audio or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;                        
-                    }
-                    if(audioExt == true && (imgExt == true || videoExt == true || pdfExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either audio or photo or video or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;                        
-                    }
-                    else
-                    {
-                        if(audioExt == true && (description == '' || description == undefined || description == ' '))
-                        {
-                            $('.biderror .mes').html("<div class='pop_content'>Please Enter Audio Title.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false; 
-                        }
-
-                    }
-                    if(pdfExt == true && (imgExt == true || videoExt == true || audioExt == true))
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either pdf or photo or video or audio. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;                        
-                    }
-                    else
-                    {
-                        if(pdfExt == true && (description == '' || description == undefined || description == ' '))
-                        {
-                            $('.biderror .mes').html("<div class='pop_content'>Please Enter PDF Title.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false; 
-                        }
-                    }
-                }
-                else
-                {
-                    if(description == '' || description == undefined || description == ' ')
-                    {
-                        $('.biderror .mes').html("<div class='pop_content'>You cannot upload more than 10 files at a time.");
-                        $('#posterrormodal').modal('show');
-                        $("#post_something")[0].reset();
-                        //setInterval('window.location.reload()', 10000);
-                        $(document).on('keydown', function (e) {
-                            if (e.keyCode === 27) {
-                                $('#posterrormodal').modal('hide');
-                                $('.modal-post').show();
-                            }
-                        });
-                        //event.preventDefault();
-                        return false;
-                    }
-                }
-
-                for (var i = 0; i < fileCountSim; i++)
-                {
-                    var vname = fileNamesArrSim[i];
-                    var vfirstname = fileNamesArrSim[i];
-                    var ext = vfirstname.split('.').pop();
-                    var ext1 = vname.split('.').pop();                    
-                    var foundPresent = $.inArray(ext, allowedExtensions) > -1;
-                    var foundPresentvideo = $.inArray(ext, allowesvideo) > -1;
-                    var foundPresentaudio = $.inArray(ext, allowesaudio) > -1;
-                    var foundPresentpdf = $.inArray(ext, allowespdf) > -1;
-
-                    if (foundPresent == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowedExtensions) > -1;
-                        if (foundPresent1 == true && fileCountSim >= 11) {                        
-                            $('.biderror .mes').html("<div class='pop_content'>You can only upload one type of file at a time...either photo or video or audio or pdf. You cannot upload more than 10 files at a time.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    }
-                    else if (foundPresentvideo == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowesvideo) > -1;
-                        if (foundPresent1 == true && fileCountSim == 1) {
-                        } else {
-                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single video.");
-                            $('#posterrormodal').modal('show');
-                            //setInterval('window.location.reload()', 10000);
-                            $("#post_something")[0].reset();
-
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentaudio == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowesaudio) > -1;
-                        if (foundPresent1 == true && fileCountSim == 1) {
-
-                            /*if (product_name == '') {
-                             $('.biderror .mes').html("<div class='pop_content'>You have to add audio title.");
-                             $('#posterrormodal').modal('show');
-                             //setInterval('window.location.reload()', 10000);
-                             
-                             $(document).on('keydown', function (e) {
-                             if (e.keyCode === 27) {
-                             //$( "#bidmodal" ).hide();
-                             $('#posterrormodal').modal('hide');
-                             $('.modal-post').show();
-                             }
-                             });
-                             event.preventDefault();
-                             return false;
-                             } */
-
-                        } else {
-                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single audio.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentpdf == true)
-                    {
-                        var foundPresent1 = $.inArray(ext1, allowespdf) > -1;
-                        if (foundPresent1 == true && fileCountSim == 1) {
-
-                            /*if (product_name == '') {
-                             $('.biderror .mes').html("<div class='pop_content'>You have to add pdf title.");
-                             $('#posterrormodal').modal('show');
-                             setInterval('window.location.reload()', 10000);
-                             
-                             $(document).on('keydown', function (e) {
-                             if (e.keyCode === 27) {
-                             $('#posterrormodal').modal('hide');
-                             $('.modal-post').show();
-                             }
-                             });
-                             event.preventDefault();
-                             return false;
-                             } */
-                        } else {
-                            /*if (fileInput.length > 10) {
-                                $('.biderror .mes').html("<div class='pop_content'>You can not upload more than 10 files at a time.");
-                            } else {
-                            }*/
-                            $('.biderror .mes').html("<div class='pop_content'>Allowed to upload only single PDF.");
-                            $('#posterrormodal').modal('show');
-                            $("#post_something")[0].reset();
-                            //setInterval('window.location.reload()', 10000);
-
-                            $(document).on('keydown', function (e) {
-                                if (e.keyCode === 27) {
-                                    $('#posterrormodal').modal('hide');
-                                    $('.modal-post').show();
-
-                                }
-                            });
-                            //event.preventDefault();
-                            return false;
-                        }
-                    } else if (foundPresentvideo == false) {
-
-                        $('.biderror .mes').html("<div class='pop_content'>This File Format is not supported Please Try to Upload MP4 or WebM files..");
-                        $('#posterrormodal').modal('show');
-                        $("#post_something")[0].reset();
-                        //setInterval('window.location.reload()', 10000);
-
-                        $(document).on('keydown', function (e) {
-                            if (e.keyCode === 27) {
-                                $('#posterrormodal').modal('hide');
-                                $('.modal-post').show();
-
-                            }
-                        });
-                        //event.preventDefault();
-                        return false;
-                    }
-                }
-
-                /*var form_data = new FormData();
-                $.each($("#fileInput1")[0].files, function(i, file) {
-                    form_data.append('postfiles[]', file);
-                });*/               
-
-                formFileDataSim.append('description', description);//$scope.sim.description);
-                formFileDataSim.append('sptitle', sim_title);//$scope.sim.sim_title);
-                formFileDataSim.append('hashtag', sim_hashtag);//$scope.sim.sim_hashtag);
-                formFileDataSim.append('post_for', $scope.sim.post_for);
-                //data.append('data', data);
-
-                $('body').removeClass('modal-open');
-                $("#post-popup").modal('hide');
-
-                //$('.post_loader').show();
-                $('#progress_div').show();
-                var bar = $('.progress-bar');
-                var percent = $('.sr-only');
-                $http.post(base_url + 'user_post/post_opportunity', formFileDataSim,
-                        {
-                            transformRequest: angular.identity,
-                            headers: {'Content-Type': undefined, 'Process-Data': false},
-                            uploadEventHandlers: {
-                                progress: function(e) {
-                                     if (e.lengthComputable) {
-
-                                        //document.getElementById("progress_div").style.display = "block";                                        
-                                        
-                                        progress = Math.round(e.loaded * 100 / e.total);
-
-                                        bar.width((progress - 1) +'%');
-                                        percent.html((progress - 1) +'%');
-
-                                        //console.log("progress: " + progress + "%");
-                                        if (e.loaded == e.total) {
-                                            /*setTimeout(function(){
-                                                $('#progress_div').hide();
-                                                progress = 0;
-                                                bar.width(progress+'%');
-                                                percent.html(progress+'%');
-                                            }, 2000);*/
-                                            //console.log("File upload finished!");
-                                            //console.log("Server will perform extra work now...");
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                        .then(function (success) {
-                            if (success) {
-                                
-                                if(socket)
-                                {
-                                    socket.emit('user notification',user_id);
-                                }
-
-                                $("#post_something")[0].reset();
-                                //$('.post_loader').hide();
-                                $scope.sim.description = '';
-                                $scope.sim.postfiles = '';
-                                document.getElementById('fileInput1').value = '';
-                                $('.file-preview-thumbnails').html('');
-                                //$scope.postData.splice(0, 0, success.data[0]);                                
-                                if (foundPresent == true)
-                                {
-                                    getUserDashboardImage();
-                                }
-                                if (foundPresentvideo == true)
-                                {
-                                    getUserDashboardVideo();
-                                }
-                                if (foundPresentaudio == true)
-                                {
-                                    getUserDashboardAudio();
-                                }
-                                if (foundPresentpdf == true)
-                                {
-                                    getUserDashboardPdf();
-                                }
-                                getUserDashboardPost();
-
-                                bar.width(100+'%');
-                                percent.html(100+'%');
-                                setTimeout(function(){
-                                    //$('#progress_div').hide();
-                                    progress = 0;
-                                    // bar.width(progress+'%');
-                                    // percent.html(progress+'%');
-                                }, 2000);
-
-                                imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
-
-                                cntImgSim = 0;
-                                formFileDataSim = new FormData();
-                                fileCountSim = 0;
-                                fileNamesArrSim = [];
-                                formFileExtSim = [];
-                                $("#selectedFiles").html("");
-                                $("#fileCountSim").text("");
-
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
-                            }
-                        });
-            }
-        }
-    }
-
     $scope.loadMediaElement = function ()
     {
-        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        /*setTimeout(function(){
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);*/
+
+        //$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         /*var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
         for (i = 0; i < total; i++) {
@@ -4442,8 +3619,34 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $scope.share_post_data = $scope.postData[index];        
         $scope.post_index = index;
         $("#post-share").modal("show");
-        setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+       /* setTimeout(function(){
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);*/
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -4841,40 +4044,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#progress_div').hide();
             $('.progress-bar').css("width",0);
             $('.sr-only').text(0+"%");
-            // check_no_post_data();
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
-
-            /*setTimeout(function(){
-                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
-
-                for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: stretching,
-                        pluginPath: '../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
-
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
-
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
-                }
-            },1000);*/
+            // check_no_post_data();           
             
             getUserDashboardImage();
-            getUserDashboardVideo();
             getUserDashboardArticle();
             getUserDashboardAudio();
+            getUserDashboardVideo();
             getUserDashboardPdf();
             $scope.get_user_links();
             $scope.get_user_experience();
@@ -11729,7 +10904,36 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 isLoadingData = true;
                 $scope.showLoadmore = false;
             }
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
         }, function (error) {});
     }
 
@@ -11831,8 +11035,36 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
 
     $scope.loadMediaElement = function ()
     {
-        // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
-        var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+        setTimeout(function(){
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+
+        // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        /*var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
         for (i = 0; i < total; i++) {
             new MediaElementPlayer(mediaElements[i], {
@@ -11855,7 +11087,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     });
                 }
             });
-        }
+        }*/
     };
     $scope.addToContact = function (user_id, contact) {
         if(user_id == "" || user_id == undefined)
@@ -12515,7 +11747,36 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $('.progress-bar').css("width",0);
             $('.sr-only').text(0+"%");
             // check_no_post_data();
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
         }, function (error) {});
     }
     if($scope.$parent.live_slug != $scope.$parent.segment2)
@@ -12568,8 +11829,8 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
         $scope.share_post_data = $scope.postData[index];        
         $scope.post_index = index;
         $("#post-share").modal("show");
-        setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };

@@ -1017,7 +1017,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 isLoadingData = true;
             }
 
-            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
+
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
+
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
         }, function (error) {});
     }
 
@@ -1052,7 +1078,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 isLoadingData = true;
             }
 
-            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
+
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
+
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
         }, function (error) {});
     }    
 
@@ -1154,7 +1206,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.showLoadmore = false;
             }
 
-            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    new MediaElementPlayer(mediaElements[i], {
+                        stretching: 'auto',
+                        pluginPath: '../../../build/',
+                        success: function (media) {
+                            var renderer = document.getElementById(media.id + '-rendername');
+
+                            media.addEventListener('loadedmetadata', function () {
+                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                if (src !== null && src !== undefined) {
+                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                    // renderer.querySelector('.error').innerHTML = '';
+                                }
+                            });
+
+                            media.addEventListener('error', function (e) {
+                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                            });
+                        }
+                    });
+                }
+                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            },1000);
         }, function (error) {            
             getUserPostLoadMore(pg);
         });
@@ -1607,7 +1685,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                                 $("#selectedFilesOpp").html("");
                                 $("#fileCountOpp").text("");
 
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                                setTimeout(function(){
+                                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                                    for (i = 0; i < total; i++) {
+                                        new MediaElementPlayer(mediaElements[i], {
+                                            stretching: 'auto',
+                                            pluginPath: '../../../build/',
+                                            success: function (media) {
+                                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                                media.addEventListener('loadedmetadata', function () {
+                                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                    if (src !== null && src !== undefined) {
+                                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                        // renderer.querySelector('.error').innerHTML = '';
+                                                    }
+                                                });
+
+                                                media.addEventListener('error', function (e) {
+                                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                                });
+                                            }
+                                        });
+                                    }
+                                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                                },1000);
                             }
                         });
             }
@@ -1819,7 +1923,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                                 formFileExtQue = [];
                                 $("#selectedFilesQue").html("");
                                 $("#fileCountQue").text("");
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                                setTimeout(function(){
+                                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                                    for (i = 0; i < total; i++) {
+                                        new MediaElementPlayer(mediaElements[i], {
+                                            stretching: 'auto',
+                                            pluginPath: '../../../build/',
+                                            success: function (media) {
+                                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                                media.addEventListener('loadedmetadata', function () {
+                                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                    if (src !== null && src !== undefined) {
+                                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                        // renderer.querySelector('.error').innerHTML = '';
+                                                    }
+                                                });
+
+                                                media.addEventListener('error', function (e) {
+                                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                                });
+                                            }
+                                        });
+                                    }
+                                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                                },1000);
                             }
                         });
             }
@@ -2261,7 +2391,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         $("#selectedFiles").html("");
                         $("#fileCountSim").text("");
 
-                        $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        setTimeout(function(){
+                            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                            for (i = 0; i < total; i++) {
+                                new MediaElementPlayer(mediaElements[i], {
+                                    stretching: 'auto',
+                                    pluginPath: '../../../build/',
+                                    success: function (media) {
+                                        var renderer = document.getElementById(media.id + '-rendername');
+
+                                        media.addEventListener('loadedmetadata', function () {
+                                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                            if (src !== null && src !== undefined) {
+                                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                // renderer.querySelector('.error').innerHTML = '';
+                                            }
+                                        });
+
+                                        media.addEventListener('error', function (e) {
+                                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                        });
+                                    }
+                                });
+                            }
+                            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        },1000);
                     }
                     $("#post_opportunity_box").removeAttr("style");
                 });
@@ -2271,7 +2427,34 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
     $scope.loadMediaElement = function ()
     {
-        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        setTimeout(function(){
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+        /*$('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
         var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
         for (i = 0; i < total; i++) {
@@ -2295,7 +2478,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     });
                 }
             });
-        }
+        }*/
     };
     
 
@@ -3456,7 +3639,33 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         $scope.share_is_promoted = is_promoted;
         $("#post-share").modal("show");
         setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -3850,9 +4059,33 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
                 
-                setTimeout(function() {
-                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                }, 300);
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             },function errorCallback(response) {
                 $scope.main_search_function();
             });
@@ -4685,7 +4918,33 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
         $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -4845,9 +5104,33 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
                 
-                setTimeout(function() {
-                    $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                }, 300);
+                setTimeout(function(){
+                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                    for (i = 0; i < total; i++) {
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                },1000);
             },function errorCallback(response) {
                 $scope.main_search_function();
             });
@@ -5723,7 +6006,33 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -6704,7 +7013,33 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
         $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };
@@ -7691,7 +8026,33 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
         $scope.post_index = index;
         $("#post-share").modal("show");
         setTimeout(function(){
-            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+            for (i = 0; i < total; i++) {
+                new MediaElementPlayer(mediaElements[i], {
+                    stretching: 'auto',
+                    pluginPath: '../../../build/',
+                    success: function (media) {
+                        var renderer = document.getElementById(media.id + '-rendername');
+
+                        media.addEventListener('loadedmetadata', function () {
+                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                            if (src !== null && src !== undefined) {
+                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                // renderer.querySelector('.error').innerHTML = '';
+                            }
+                        });
+
+                        media.addEventListener('error', function (e) {
+                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                        });
+                    }
+                });
+            }
+            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+        },1000);
+        setTimeout(function(){            
             autosize(document.getElementsByClassName('hashtag-textarea'));
         },300);
     };

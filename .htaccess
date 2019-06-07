@@ -9,6 +9,8 @@ Allow from all
     #RewriteCond %{HTTPS} on
 	#RewriteRule ^(/aileensoulnew/aileensoul/message\.php)$ http://%{HTTP_HOST}/aileensoulnew/aileensoul/$1 [R=301,L,QSA]
 
+	RewriteRule ^freelance-jobs$ / [R=301,L]
+
 
 	#RewriteBase /aileensoulnew/aileensoul/
 	RewriteBase /

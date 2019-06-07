@@ -15,9 +15,9 @@
 
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="video">
-							<input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_number}}">
+							<!-- <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_number}}">
 			                <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.total_record}}">
-			                <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.perpage_record}}">
+			                <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.perpage_record}}"> -->
 							<ul class="all-tab  video-tab">
 								<li ng-repeat="_videoData in videoData">
 									<a href="#" ng-click="openModal('myModalVideo');currentSlide($index + 1)">
@@ -51,8 +51,8 @@
             <div class="mySlides mySlides2Video" ng-repeat="_videoData in allVideosData">
                 <div class="numbertext">{{$index + 1}} / {{allVideosData.length}}</div>
                 <div class="slider_img_p">
-                   <video id="videoplayer_{{$index + 1}}" controls width="100%" preload="none">
-                        <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename}}#t=0.1" type="video/mp4">
+                   <video controls width="100%" preload="none"><!-- id="videoplayer_{{$index + 1}}"  -->
+                        <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename}}#t=0.1" type="application/x-mpegURL">
                     </video>
                 </div>
             </div>

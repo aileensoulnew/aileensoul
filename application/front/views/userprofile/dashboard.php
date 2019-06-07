@@ -825,7 +825,6 @@
                                                     <span ng-if="post_file.file_type == 'video'"> 
                                                         <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
                                                             <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
-                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                                         </video>
                                                         <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                                     </span>
@@ -904,7 +903,6 @@
                                     <span ng-if="post_file.file_type == 'video'"> 
                                         <video controls width = "100%" height = "350" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg" preload="none">
                                             <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
-                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                         </video>
                                         <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                     </span>
@@ -1850,7 +1848,7 @@
                     <div class="numbertext">{{$index + 1}} / {{postAllVideoData.length}}</div>
                     <div class="slider_img_p">
                        <video controls width = "100%" preload="auto">
-                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename}}#t=0.1" type="video/mp4">
+                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename}}#t=0.1" type="application/x-mpegURL">
                         </video>
                     </div>
                 </div>
@@ -2291,7 +2289,6 @@
                                                         <span ng-if="post_file.file_type == 'video'"> 
                                                             <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
                                                                 <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="application/x-mpegURL">
-                                                                <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                                             </video>
                                                             <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                                         </span>
@@ -2418,7 +2415,6 @@
                                         <span ng-if="post_file.file_type == 'video'"> 
                                             <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
                                                 <source type="application/x-mpegURL" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}">
-                                                <source type="video/mp4" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}">
                                             </video>
                                             <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
                                         </span>
