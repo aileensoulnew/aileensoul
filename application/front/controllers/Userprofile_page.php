@@ -811,7 +811,7 @@ class Userprofile_page extends MY_Controller {
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $user_bg_path = $this->config->item('user_main_upload_path');
-        $imageName = time() . '.png';
+        $imageName = time() . '.jpg';
         $data = base64_decode($data);
         $file = $user_bg_path . $imageName;
         file_put_contents($user_bg_path . $imageName, $data);
@@ -941,7 +941,7 @@ class Userprofile_page extends MY_Controller {
         $data = str_replace('data:image/png;base64,', '', $data);
         $data = str_replace(' ', '+', $data);
         $user_bg_path = $this->config->item('user_bg_main_upload_path');
-        $imageName = time() . '.png';
+        $imageName = time() . '.jpg';
         $data = base64_decode($data);
         $file = $user_bg_path . $imageName;
         $success = file_put_contents($file, $data);
@@ -965,13 +965,7 @@ class Userprofile_page extends MY_Controller {
         $this->$instanse4->resize();
         //$this->$instanse4->clear();
 
-        $main_image = $user_bg_path . $imageName;
-
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-        if (IMAGEPATHFROM == 's3bucket') {
-            $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-        }
+        $main_image = $user_bg_path . $imageName;        
 
         $main_image_size = filesize($main_image);
 
@@ -997,8 +991,7 @@ class Userprofile_page extends MY_Controller {
         $upload_image = $user_bg_path . $imageName;
         $thumb_image_uplode = $this->thumb_img_uplode($upload_image, $imageName, $user_thumb_path, $user_thumb_width, $user_thumb_height);
 
-        $thumb_image = $user_thumb_path . $imageName;
-        $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+        $thumb_image = $user_thumb_path . $imageName;       
 
         $data = array(
             'profile_background' => $imageName
