@@ -10,7 +10,7 @@ class Customscript extends CI_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('business_model');
-        $this->load->model('job_model');
+        // $this->load->model('job_model');
         $this->load->library('S3');
     }
 
@@ -699,7 +699,7 @@ class Customscript extends CI_Controller {
         exit();        
     }
 
-    public function convert_to_feed()
+    /*public function convert_to_feed()
     {
         $job_data = $this->job_model->get_all_job_list();
         echo count($job_data);
@@ -886,7 +886,7 @@ class Customscript extends CI_Controller {
                 echo "<br><br><br><br>";
             }
         }
-    }
+    }*/
 
     //Merge Detail Start
     public function convert_detail_job_to_user_hobbies()
@@ -2252,6 +2252,46 @@ class Customscript extends CI_Controller {
                 $updatdata = $this->common->update_data($data, 'user_simple_post', 'id', $_post_data->id);
             }
             print_r($_post_data);
+        }
+    }
+
+    public function dp_check()
+    {
+        $s_sql = "SELECT * FROM ailee_user_profile_update WHERE data_key = 'profile_picture'";
+        $result = $this->db->query($s_sql)->result();
+        echo "<pre>";        
+        // print_r($result);exit();
+        foreach ($result as $_result) {
+            if(!file_exists($this->config->item('user_main_upload_path').$_result->data_value))
+            {
+                /*echo $this->config->item('user_main_upload_path').$_result->data_value."<br>";
+                echo $_result->data_value;exit();*/
+                $data = array(
+                    "status" => "draft",
+                    "is_delete" => "1"
+                );
+                $updatdata = $this->common->update_data($data, 'user_post', 'post_id', $_result->id);
+            }
+        }
+    }
+
+    public function cover_check()
+    {
+        $s_sql = "SELECT * FROM ailee_user_profile_update WHERE data_key = 'cover_picture'";
+        $result = $this->db->query($s_sql)->result();
+        echo "<pre>";        
+        // print_r($result);exit();
+        foreach ($result as $_result) {
+            if(!file_exists($this->config->item('user_bg_main_upload_path').$_result->data_value))
+            {
+                /*echo $this->config->item('user_main_upload_path').$_result->data_value."<br>";
+                echo $_result->data_value;exit();*/
+                $data = array(
+                    "status" => "draft",
+                    "is_delete" => "1"
+                );
+                $updatdata = $this->common->update_data($data, 'user_post', 'post_id', $_result->id);
+            }
         }
     }
 }

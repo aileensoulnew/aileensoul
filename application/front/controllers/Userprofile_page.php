@@ -792,7 +792,7 @@ class Userprofile_page extends MY_Controller {
 
         $user_prev_image = $userdata['user_image'];
 
-        if ($user_prev_image != '') {
+        /*if ($user_prev_image != '') {
             $user_image_main_path = $this->config->item('user_main_upload_path');
             $user_img_full_image = $user_image_main_path . $user_prev_image;
             if (isset($user_img_full_image)) {
@@ -804,7 +804,7 @@ class Userprofile_page extends MY_Controller {
             if (isset($user_bg_thumb_image)) {
                 unlink($user_bg_thumb_image);
             }
-        }
+        }*/
 
 
         $data = $_POST['image'];
@@ -842,10 +842,7 @@ class Userprofile_page extends MY_Controller {
         $instanse10 = "image10";
         $this->load->library('image_lib', $freelancer_hire_profile, $instanse10);
         /* RESIZE */
-
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+        
 
         $user_thumb_path = $this->config->item('user_thumb_upload_path');
         $user_thumb_width = $this->config->item('user_thumb_width');
@@ -855,8 +852,7 @@ class Userprofile_page extends MY_Controller {
 
         $thumb_image_uplode = $this->thumb_img_uplode($upload_image, $imageName, $user_thumb_path, $user_thumb_width, $user_thumb_height);
 
-        $thumb_image = $user_thumb_path . $imageName;
-        $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+        $thumb_image = $user_thumb_path . $imageName;       
 
         $data = array(
             'user_image' => $imageName
@@ -915,7 +911,7 @@ class Userprofile_page extends MY_Controller {
         $user_reg_prev_image = $user_reg_data['profile_background'];
         $user_reg_prev_main_image = $user_reg_data['profile_background_main'];
 
-        if ($user_reg_prev_image != '') {
+        /*if ($user_reg_prev_image != '') {
             $user_image_main_path = $this->config->item('user_bg_main_upload_path');
             $user_bg_full_image = $user_image_main_path . $user_reg_prev_image;
             if (isset($user_bg_full_image)) {
@@ -934,7 +930,7 @@ class Userprofile_page extends MY_Controller {
             if (isset($user_bg_origin_image)) {
                 unlink($user_bg_origin_image);
             }
-        }
+        }*/
 
 
         $data = $_POST['image'];
