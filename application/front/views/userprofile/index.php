@@ -17,8 +17,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>">
-        <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()) ?>" media="all" rel="stylesheet" type="text/css"/>
+        <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>"> -->
+        <!-- <link href="<?php //echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()) ?>" media="all" rel="stylesheet" type="text/css"/> -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
@@ -26,14 +26,11 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
-        <link href="<?php echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" />
+        <!-- <link href="<?php //echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" /> -->
     </head>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
-        <style type="text/css">
-            
-        </style>
-
+        
     <?php $this->load->view('adsense'); ?>
 
     <?php $que_cls = "";
@@ -342,13 +339,13 @@
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/plugins/sortable.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/fileinput.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/locales/fr.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/locales/es.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/dragdrop/js/plugins/sortable.js?ver=' . time()) ?>"></script>
+        <script src="<?php //echo base_url('assets/dragdrop/js/fileinput.js?ver=' . time()) ?>"></script>
+        <script src="<?php //echo base_url('assets/dragdrop/js/locales/fr.js?ver=' . time()) ?>"></script>
+        <script src="<?php //echo base_url('assets/dragdrop/js/locales/es.js?ver=' . time()) ?>"></script>
+        <script src="<?php //echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
         <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
@@ -358,7 +355,7 @@
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>        
         <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script>
+        <!-- <script src="<?php //echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script> -->
         <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>        
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -403,27 +400,10 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
-        <script>
-    		/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-    			showRight = document.getElementById( 'showRight' ),
-    			body = document.body;
-
-    		showRight.onclick = function() {
-    			classie.toggle( this, 'active' );
-    			classie.toggle( menuRight, 'cbp-spmenu-open' );
-    			disableOther( 'showRight' );
-    		};
-    	
-    		function disableOther( button ) {
-    			
-    			if( button !== 'showRight' ) {
-    				classie.toggle( showRight, 'disabled' );
-    			}
-    		}*/
-    		
+        <script>    		
     		$(function () {
     			$('a[href="#search"]').on('click', function (event) {
     				event.preventDefault();

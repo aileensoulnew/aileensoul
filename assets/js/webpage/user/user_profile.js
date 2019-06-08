@@ -2906,22 +2906,39 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             },1000);
         }, function (error) {});
     }
-
+    var all_image_load = false;
+    
     function getUserDashboardImage(pagenum) {        
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardImage?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             $scope.postImageData = success.data.userDashboardImage;
-            $scope.postAllImageData = success.data.userDashboardImageAll;
+            $scope.postAllImageData = success.data.userDashboardImage;//success.data.userDashboardImageAll;
         }, function (error) {});
     }
 
-    function getUserDashboardVideo(pagenum) {
+    $scope.load_more_photos = function()
+    {
+        if($scope.postAllImageData.length == 6 && all_image_load == false)
+        {
+            $('#all_image_loader').show();
+            $http.get(base_url + "user_post/getUserDashboardAllImage?user_slug=" + user_slug).then(function (success) {
+                all_image_load = true;
+                $('#all_image_loader').hide();
+                for (var i in success.data.userDashboardImageAll) {
+                    $scope.postAllImageData.push(success.data.userDashboardImageAll[i]);
+                }
+            }, function (error) {});
+        }
+    }
+
+    var all_video_load = false;
+    function getUserDashboardVideo() {
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardVideo?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             $scope.postVideoData = success.data.userDashboardVideo;
-            $scope.postAllVideoData = success.data.userDashboardVideoAll;
+            $scope.postAllVideoData = success.data.userDashboardVideo;
             setTimeout(function(){
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
@@ -2954,6 +2971,51 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             },1000);
             
         }, function (error) {});
+    }
+
+    $scope.load_more_videos = function()
+    {
+        if($scope.postAllVideoData.length == 6 && all_video_load == false)
+        {
+            $('#loader').show();
+            $http.get(base_url + "user_post/getUserDashboardVideoAll?user_slug=" + user_slug).then(function (success) {
+                    all_video_load = true;
+                    $('#loader').hide();
+                    for (var i in success.data.userDashboardVideoAll) {
+                        $scope.postAllVideoData.push(success.data.userDashboardVideoAll[i]);
+                    }
+                    setTimeout(function(){
+                        var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                        for (i = 0; i < total; i++) {
+                            if($(mediaElements[i])[0].id == '')
+                            {                        
+                                new MediaElementPlayer(mediaElements[i], {
+                                    stretching: 'auto',
+                                    pluginPath: '../../../build/',
+                                    success: function (media) {
+                                        var renderer = document.getElementById(media.id + '-rendername');
+
+                                        media.addEventListener('loadedmetadata', function () {
+                                            var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                            if (src !== null && src !== undefined) {
+                                                // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                // renderer.querySelector('.error').innerHTML = '';
+                                            }
+                                        });
+
+                                        media.addEventListener('error', function (e) {
+                                            renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                        // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                    },1000);
+                }, function (error) {});
+        }
     }
 
     function getUserDashboardArticle() {

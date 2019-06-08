@@ -37,36 +37,21 @@ else
     </nav>
 </div>
 <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
-<script>
-/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-showRight = document.getElementById( 'showRight' ),
-body = document.body;
-showRight.onclick = function() {
-    classie.toggle( this, 'active' );
-    classie.toggle( menuRight, 'cbp-spmenu-open' );
-    disableOther( 'showRight' );
-};
-
-function disableOther( button ) {
-    if( button !== 'showRight' ) {
-        classie.toggle( showRight, 'disabled' );
-    }
-}*/
-
-$('#showRight').click(function(e){
-    e.stopPropagation();
-    $('#cbp-spmenu-s2').toggleClass('cbp-spmenu-open');
-    $('body').toggleClass('spmenu-open');
-});
-$('#cbp-spmenu-s2').click(function(e){
-    e.stopPropagation();
-});
-$('body,html').click(function(e){
-    $('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
-    $('body').removeClass('spmenu-open');
-});
-$(".mob-side-close-btn").click(function(){
-    $(".mob-side-menu .cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right").removeClass("cbp-spmenu-open");
-    $("body").removeClass("spmenu-open");
-});
+<script type="text/javascript">
+    $('#showRight').click(function(e){
+        e.stopPropagation();
+        $('#cbp-spmenu-s2').toggleClass('cbp-spmenu-open');
+        $('body').toggleClass('spmenu-open');
+    });
+    $('#cbp-spmenu-s2').click(function(e){
+        e.stopPropagation();
+    });
+    $('body,html').click(function(e){
+        $('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
+        $('body').removeClass('spmenu-open');
+    });
+    $(".mob-side-close-btn").click(function(){
+        $(".mob-side-menu .cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right").removeClass("cbp-spmenu-open");
+        $("body").removeClass("spmenu-open");
+    });
 </script>

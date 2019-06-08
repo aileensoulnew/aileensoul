@@ -115,3 +115,15 @@ FileETag None
 <IfModule pagespeed_module>
     ModPagespeed off
 </IfModule>
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/x-javascript .js
+    AddType image/bmp .bmp
+    AddType image/gif .gif
+    AddType application/x-gzip .gz .gzip
+    AddType image/x-icon .ico
+    AddType image/jpeg .jpg .jpeg .jpe
+    AddType image/png .png
+    AddType application/x-font-ttf .ttf .ttc
+    AddType application/zip .zip
+</IfModule>

@@ -175,10 +175,10 @@
                 </h3>
             </div>
             <div class="media-display">
-                <div class="all-meda" ng-repeat="imageData in postImageData">
-                    <img ng-if="imageData.filetype == 'profile_picture'" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image')">
-                    <img ng-if="imageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image')">
-                    <img ng-if="imageData.filetype == 'image'" ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image')">
+                <div class="all-meda" ng-repeat="imageData in postImageData | limitTo : 6">
+                    <img ng-if="imageData.filetype == 'profile_picture'" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
+                    <img ng-if="imageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
+                    <img ng-if="imageData.filetype == 'image'" ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
                 </div>
             </div>
         </div>
@@ -192,8 +192,8 @@
                     <?php endif; ?><i class="fa fa-video-camera"></i> Video</a></h3>
             </div>
             <div class="media-display">
-                <div class="all-meda" ng-repeat="videoData in postVideoData">
-                    <a href="#" ng-click="openModal2('myModalVideo');currentSlide2($index + 1,'Video')">
+                <div class="all-meda" ng-repeat="videoData in postVideoData | limitTo : 6">
+                    <a href="#" ng-click="openModal2('myModalVideo');currentSlide2($index + 1,'Video');load_more_videos();">
                         <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{videoData.filename | removeLastCharacter}}jpg" alt="Image">
                     </a>
                 </div>
@@ -1812,12 +1812,12 @@
                 <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif'); ?>" alt="Loader" />
                 </div>
                 <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                <div class="mySlides mySlides2Image" ng-repeat="_photoData in postAllImageData">
+                <div class="mySlides mySlides2Image" ng-repeat="_postAllImageData in postAllImageData" style="display: none;">
                     <div class="numbertext">{{$index + 1}} / {{postAllImageData.length}}</div>
                     <div class="slider_img_p">
-                        <img ng-if="_photoData.filetype == 'profile_picture'" ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
-                        <img ng-if="_photoData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
-                        <img ng-if="_photoData.filetype == 'image'" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                        <img ng-if="_postAllImageData.filetype == 'profile_picture'" ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                        <img ng-if="_postAllImageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                        <img ng-if="_postAllImageData.filetype == 'image'" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
                     </div>
                 </div>
                 <?php /*else: ?>
@@ -1835,8 +1835,8 @@
                 <p id="caption"></p>
             </div>
         </div> 
-        <a class="prev" style="left:0px;" ng-click="plusSlides2(-1,'Image')">&#10094;</a>
-        <a class="next" ng-click="plusSlides2(1,'Image')">&#10095;</a>
+        <a class="prev" style="left:0px;" ng-click="plusSlides2(-1,'Image');">&#10094;</a>
+        <a class="next" ng-click="plusSlides2(1,'Image');">&#10095;</a>
     </div>
 
     <div id="myModalVideo" class="modal modal2" style="display: none;">
@@ -1844,7 +1844,7 @@
         <div class="modal-dialog">
             <div class="modal-content">     
                 <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                <div class="mySlides mySlides2Video" ng-repeat="_videoData in postAllVideoData">
+                <div class="mySlides mySlides2Video" ng-repeat="_videoData in postAllVideoData" style="display: none;">
                     <div class="numbertext">{{$index + 1}} / {{postAllVideoData.length}}</div>
                     <div class="slider_img_p">
                        <video controls width = "100%" preload="auto">

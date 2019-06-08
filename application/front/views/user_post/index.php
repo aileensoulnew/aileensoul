@@ -150,34 +150,34 @@
                                             <div class="item" id="item-{{contact.user_id}}">
                                                 <div class="arti-profile-box">
                                                     <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
                                                             <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                         </a>
                                                     </div>
                                                     <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
                                                             <div class="gradient-bg" style="height: 100%"></div>
                                                         </a>
                                                     </div>
                                                     <div class="user-pr-img" ng-if="contact.user_image != ''">
-                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
                                                             <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                                         </a>
                                                     </div>
                                                     <div class="user-pr-img" ng-if="contact.user_image == ''">
-                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
                                                             <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                             <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                         </a>
                                                     </div>
                                                     <div class="user-info-text text-center">
                                                         <h3>
-                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)" target="_self"></a>
                                                         </h3>
                                                         <p>
-                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null">{{contact.title_name| uppercase}}</a>
-                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null">{{contact.degree_name| uppercase}}</a>
-                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != null && contact.degree_name == null" target="_self">{{contact.title_name| uppercase}}</a>
+                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.degree_name != null && contact.title_name == null" target="_self">{{contact.degree_name| uppercase}}</a>
+                                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null" target="_self">CURRENT WORK</a>
                                                         </p>
                                                     </div>
                                                     <div class="author-btn">
@@ -195,13 +195,13 @@
                                                 </div>                            
                                                 <div class="user-info-text text-center">
                                                     <h3>
-                                                        <a href="<?php echo base_url('contact-request') ?>">Find More Contacts
+                                                        <a href="<?php echo base_url('contact-request') ?>" target="_self">Find More Contacts
                                                         </a>
                                                     </h3>                                
                                                 </div>
                                                 <div class="author-btn">
                                                     <div class="user-btns">
-                                                        <a class="btn3" href="<?php echo base_url('contact-request') ?>">View More</a>
+                                                        <a class="btn3" href="<?php echo base_url('contact-request') ?>" target="_self">View More</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,25 +231,25 @@
                                             <div class="item" id="item-{{contact.user_id}}">
                                                 <div class="arti-profile-box">
                                                     <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
-                                                        <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
+                                                        <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" target="_self">
                                                             <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
                                                         </a>
                                                         
                                                     </div>
                                                     <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
-                                                        <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
+                                                        <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" target="_self">
                                                             <div class="gradient-bg" style="height: 100%"></div>
                                                         </a>
                                                        
                                                     </div>
                                                     <div class="follow-user-detail">
                                                         <div class="user-pr-img" ng-if="contact.business_user_image">
-                                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
+                                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" target="_self">
                                                                 <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{contact.business_user_image}}">
                                                             </a>
                                                         </div>
                                                         <div class="user-pr-img" ng-if="!contact.business_user_image">
-                                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" >
+                                                            <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" target="_self">
                                                                 <img ng-src="<?php echo base_url(NOBUSIMAGE3); ?>">
                                                             </a>
                                                         </div>                                    
@@ -259,12 +259,12 @@
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="user-info-text">
                                                                 <h3>
-                                                                    <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)"></a>
+                                                                    <a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" ng-bind="(contact.company_name | limitTo:1 | uppercase) + (contact.company_name.substr(1) | lowercase)" target="_self"></a>
                                                                 </h3>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-8 col-sm-8 col-xs-8 user-city">
-                                                                <p><a href="<?php echo base_url(); ?>company/{{contact.business_slug}}">{{contact.industry_name | uppercase}}</a></p>
+                                                                <p><a href="<?php echo base_url(); ?>company/{{contact.business_slug}}" target="_self">{{contact.industry_name | uppercase}}</a></p>
                                                                 <p class="">{{contact.city_name}}</p>
                                                             </div>
                                                             <div class="user-btns col-md-4 col-sm-4 col-xs-4">
@@ -282,13 +282,13 @@
                                                 </div>                            
                                                 <div class="user-info-text text-center">
                                                     <h3>
-                                                        <a href="<?php echo base_url('company/userlist'); ?>">Find More Businesses
+                                                        <a href="<?php echo base_url('company/userlist'); ?>" target="_self">Find More Businesses
                                                         </a>
                                                     </h3>                                
                                                 </div>
                                                 <div class="author-btn">
                                                     <div class="user-btns">
-                                                        <a class="btn3" href="<?php echo base_url('company/userlist'); ?>">View More</a>
+                                                        <a class="btn3" href="<?php echo base_url('company/userlist'); ?>" target="_self">View More</a>
                                                     </div>
                                                 </div>
                                             </div>                        

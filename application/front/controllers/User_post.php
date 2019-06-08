@@ -828,6 +828,13 @@ class User_post extends MY_Controller {
         $user_slug = $_GET["user_slug"];
         $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
         $resdata['userDashboardImage'] = $this->user_post_model->userDashboardImage($userid);
+        // $resdata['userDashboardImageAll'] = $this->user_post_model->userDashboardImageAll($userid);
+        echo json_encode($resdata);
+    }
+
+    public function getUserDashboardAllImage() {
+        $user_slug = $_GET["user_slug"];
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
         $resdata['userDashboardImageAll'] = $this->user_post_model->userDashboardImageAll($userid);
         echo json_encode($resdata);
     }
@@ -836,7 +843,14 @@ class User_post extends MY_Controller {
         $user_slug = $_GET["user_slug"];
         $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
         $resdata['userDashboardVideo'] = $this->user_post_model->userDashboardVideo($userid);
-        $resdata['userDashboardVideoAll'] = $this->user_post_model->userDashboardVideo($userid);
+        // $resdata['userDashboardVideoAll'] = $this->user_post_model->userDashboardVideo($userid);
+        echo json_encode($resdata);
+    }
+
+    public function getUserDashboardVideoAll() {
+        $user_slug = $_GET["user_slug"];
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $resdata['userDashboardVideoAll'] = $this->user_post_model->userDashboardVideoAll($userid);
         echo json_encode($resdata);
     }
 

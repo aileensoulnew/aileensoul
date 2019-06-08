@@ -7,6 +7,7 @@ class User_post_model extends CI_Model {
 
     public function getContactSuggetion($user_id = '', $detailsdata = '') {
 
+        $limit = 15;
         if ($detailsdata == "student") {
 
             $this->db->select("u.user_slug,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,ui.profile_background,d.degree_name")->from("user u");
@@ -29,7 +30,7 @@ class User_post_model extends CI_Model {
             // $this->db->order_by('us.city', 'asc');
             $this->db->order_by('u.user_id', 'desc');
 
-            $this->db->limit('30');
+            $this->db->limit($limit);
             $query = $this->db->get();            
             return $result_array = $query->result_array();
         } else {
@@ -54,7 +55,7 @@ class User_post_model extends CI_Model {
             // $this->db->order_by('up.field', 'asc');
             // $this->db->order_by('up.city', 'asc');
             $this->db->order_by('u.user_id', 'desc');
-            $this->db->limit('30');
+            $this->db->limit($limit);
             $query = $this->db->get();
             $result_array = $query->result_array();
             if(isset($result_array) && empty($result_array))
@@ -79,7 +80,7 @@ class User_post_model extends CI_Model {
                 // $this->db->order_by('up.field', 'asc');
                 // $this->db->order_by('up.city', 'asc');
                 $this->db->order_by('u.user_id', 'desc');
-                $this->db->limit('30');
+                $this->db->limit($limit);
                 $query = $this->db->get();
                 $in_result_array = $query->result_array();
                 if(isset($in_result_array) && empty($in_result_array))
@@ -104,7 +105,7 @@ class User_post_model extends CI_Model {
                     // $this->db->order_by('up.field', 'asc');
                     // $this->db->order_by('up.city', 'asc');
                     $this->db->order_by('u.user_id', 'desc');
-                    $this->db->limit('30');
+                    $this->db->limit($limit);
                     $query = $this->db->get();
                     $result_array = $query->result_array();
                 }
@@ -2553,10 +2554,9 @@ class User_post_model extends CI_Model {
         return $userDashboardImage;
     }
 
-    public function userDashboardImageAll($user_id = '') {
-        $getDeleteUserPost = $this->deletePostUser($user_id);
+    public function userDashboardImageCount($user_id = '') {
         
-        $sql = "SELECT main.* FROM (SELECT upf.post_id,upf.filename,'image' as filetype,up.created_date FROM ailee_user_post_file upf 
+        $sql = "SELECT COUNT(*) as total_record FROM (SELECT upf.post_id,upf.filename,'image' as filetype,up.created_date FROM ailee_user_post_file upf 
                 LEFT JOIN ailee_user_post up ON up.id = upf.post_id 
                 LEFT JOIN ailee_user_profile_update upu ON upu.id = up.post_id 
                 WHERE upf.file_type = 'image' AND up.user_id = $user_id AND up.user_type = '1' AND up.status = 'publish' AND up.is_delete = '0' 
@@ -2565,11 +2565,26 @@ class User_post_model extends CI_Model {
                 LEFT JOIN ailee_user_post up ON upu.id = up.post_id 
                 WHERE upu.user_id = $user_id AND up.user_type = '1' AND ( up.post_for = 'profile_update' OR up.post_for = 'cover_update') AND up.status = 'publish' AND up.is_delete = '0'
                 ) as main ";
-        if ($getDeleteUserPost) {
-            $sql .= "WHERE main.post_id NOT IN ($getDeleteUserPost) ";
-        }
-        $sql .= "ORDER BY main.created_date DESC";
+        $sql .= "WHERE main.post_id NOT IN (SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id)";
+        
+        $query = $this->db->query($sql);
+        return $query->row_array()['total_record'];
+    }
 
+    public function userDashboardImageAll($user_id = '') {        
+        $total_record = $this->userDashboardImageCount($user_id);
+        $sql = "SELECT main.* FROM (SELECT upf.post_id,upf.filename,'image' as filetype,up.created_date FROM ailee_user_post_file upf 
+                LEFT JOIN ailee_user_post up ON up.id = upf.post_id 
+                LEFT JOIN ailee_user_profile_update upu ON upu.id = up.post_id 
+                WHERE upf.file_type = 'image' AND up.user_id = $user_id AND up.user_type = '1' AND up.status = 'publish' AND up.is_delete = '0' 
+                UNION
+                SELECT up.id,upu.data_value as filename,upu.data_key as filetype,up.created_date FROM ailee_user_profile_update upu 
+                LEFT JOIN ailee_user_post up ON upu.id = up.post_id 
+                WHERE upu.user_id = $user_id AND up.user_type = '1' AND ( up.post_for = 'profile_update' OR up.post_for = 'cover_update') AND up.status = 'publish' AND up.is_delete = '0'
+                ) as main ";        
+        $sql .= "WHERE main.post_id NOT IN (SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id)";        
+        $sql .= "ORDER BY main.created_date DESC LIMIT 6,$total_record";
+        
         $query = $this->db->query($sql);
 
         $userDashboardImage = $query->result_array();
@@ -2600,9 +2615,9 @@ class User_post_model extends CI_Model {
         return $userDashboardVideo;
     }
 
-    public function userDashboardVideoAll($user_id = '') {
-        $getDeleteUserPost = $this->deletePostUser($user_id);
-        $this->db->select('filename')->from('user_post_file upf');
+    public function userDashboardVideoCount($user_id = '') {
+        $getDeleteUserPost = "SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id";
+        $this->db->select('COUNT(*) as total_record')->from('user_post_file upf');
         $this->db->join('user_post up', 'up.id = upf.post_id', 'left');
         $this->db->where('upf.file_type', 'video');
         if($user_id != "")
@@ -2616,6 +2631,28 @@ class User_post_model extends CI_Model {
         $this->db->where('up.is_delete', '0');
         $this->db->where('up.user_type', '1');
         $this->db->order_by('upf.id', 'desc');        
+        $query = $this->db->get();        
+        return $query->row_array()['total_record'];
+    }
+
+    public function userDashboardVideoAll($user_id = '') {
+        $total_record = $this->userDashboardVideoCount($user_id);
+        $getDeleteUserPost = "SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id";
+        $this->db->select('filename')->from('user_post_file upf');
+        $this->db->join('user_post up', 'up.id = upf.post_id', 'left');
+        $this->db->where('upf.file_type', 'video');
+        if($user_id != "")
+        {
+            $this->db->where('up.user_id', $user_id);
+        }
+        if ($getDeleteUserPost) {
+            $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
+        }
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');
+        $this->db->where('up.user_type', '1');
+        $this->db->order_by('upf.id', 'desc');
+        $this->db->limit($total_record, 6);
         $query = $this->db->get();
         $userDashboardVideoAll = $query->result_array();
         //$result_array['userDashboardVideo'] = $userDashboardVideo;
