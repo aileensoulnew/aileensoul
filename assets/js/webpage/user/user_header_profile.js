@@ -25,10 +25,12 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             {
                 if(parseInt(data) > 99)
                 {
+                    $(".noti_count").addClass('not-max');
                     $(".noti_count").html('99+');
                 }
                 else
                 {
+                    $(".noti_count").removeClass('not-max');
                     $(".noti_count").html(data);
                 }
             }

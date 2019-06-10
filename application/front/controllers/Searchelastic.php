@@ -3831,7 +3831,7 @@ class Searchelastic extends MY_Controller {
         // echo $str;exit();
         $result = json_decode($str, true); 
         echo "<pre>";
-        print_r($result);exit();
+        // print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
@@ -3848,11 +3848,13 @@ class Searchelastic extends MY_Controller {
             // print_r($params);exit();
             $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],]];
             $responses = $client->index($params);
+            // print_r($responses);
+            print_r($params);
         }
-        echo "<pre>";
+        // echo "<pre>";
         // print_r($params);
-        $responses = $client->bulk($params);
-        print_r($responses);exit();
+        // $responses = $client->bulk($params);
+        exit();
         return true;
     }
 
@@ -3866,25 +3868,19 @@ class Searchelastic extends MY_Controller {
         // echo $str;exit();
         $result = json_decode(($str), true); 
         echo "<pre>";
-        print_r($result);exit();
+        // print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
         {
-            $params['body'][] = array(
-                'index' => array(
-                    '_index' => 'aileensoul_search_business',
-                    '_type' => 'aileensoul_search_business',
-                    '_id' => $row['business_profile_id'],
-                ),
-            );
-            $params['body'][] = ['company_name' => $row['company_name'],'country' => $row['country'],'state' => $row['state'], 'city' => $row['city'],'pincode' => $row['pincode'],'address' => $row['address'],'contact_person' => $row['contact_person'], 'contact_mobile' => $row['contact_mobile'], 'contact_email' => $row['contact_email'],'contact_website' => $row['contact_website'],'business_type' => $row['business_type'],'industriyal' => $row['industriyal'],'details' => $row['details'],'addmore' => $row['addmore'],'user_id' => $row['user_id'],'status' => $row['status'],'is_deleted' => $row['is_deleted'],'created_date' => $row['created_date'],'modified_date' => $row['modified_date'],'business_step' => $row['business_step'],'business_user_image' => $row['business_user_image'],'profile_background' => $row['profile_background'],'profile_background_main' => $row['profile_background_main'],'other_business_type' => $row['other_business_type'],'other_industrial' => $row['other_industrial'],'city_name' => $row['city_name'],'state_name' => $row['state_name'],'country_name' => $row['country_name'],'other_city' => $row['other_city'],'business_slug' => $row['business_slug'],'industry_name' => $row['industry_name'], ];
-            // print_r($params);exit();
+            $params = ['index' => 'aileensoul_search_business', 'type' => 'aileensoul_search_business', 'id' => $row['business_profile_id'], 'body' => ['company_name' => $row['company_name'],'country' => $row['country'],'state' => $row['state'], 'city' => $row['city'],'pincode' => $row['pincode'],'address' => $row['address'],'contact_person' => $row['contact_person'], 'contact_mobile' => $row['contact_mobile'], 'contact_email' => $row['contact_email'],'contact_website' => $row['contact_website'],'business_type' => $row['business_type'],'industriyal' => $row['industriyal'],'details' => $row['details'],'addmore' => $row['addmore'],'user_id' => $row['user_id'],'status' => $row['status'],'is_deleted' => $row['is_deleted'],'created_date' => $row['created_date'],'modified_date' => $row['modified_date'],'business_step' => $row['business_step'],'business_user_image' => $row['business_user_image'],'profile_background' => $row['profile_background'],'profile_background_main' => $row['profile_background_main'],'other_business_type' => $row['other_business_type'],'other_industrial' => $row['other_industrial'],'city_name' => $row['city_name'],'state_name' => $row['state_name'],'country_name' => $row['country_name'],'other_city' => $row['other_city'],'business_slug' => $row['business_slug'],'industry_name' => $row['industry_name'],]];
+            $responses = $client->index($params);
+            print_r($params);
         }
-        echo "<pre>";
-        print_r($params);
-        $responses = $client->bulk($params);
-        print_r($responses);exit();
+        // echo "<pre>";
+        // $responses = $client->bulk($params);
+        // print_r($responses);
+        exit();
         return true;
     }
 
@@ -3897,25 +3893,19 @@ class Searchelastic extends MY_Controller {
         $str = file_get_contents('assets/opp_post.json');
         $result = json_decode($str, true); 
         echo "<pre>";
-        print_r($result);exit();
+        print_r($result);
 
         $params = null;
         foreach($result as $k=>$row)
         {
-            $params['body'][] = array(
-                'index' => array(
-                    '_index' => 'aileensoul_search_opportunity',
-                    '_type' => 'aileensoul_search_opportunity',
-                    '_id' => $row['id'],
-                ),
-            );
-
-            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'opportunity_for' => $row['opportunity_for'], 'opportunity_for_id' => $row['opportunity_for_id'], 'location' => $row['location'], 'location_id' => $row['location_id'], 'opportunity' => $row['opportunity'], 'field' => $row['field'], 'other_field' => $row['other_field'], 'opptitle' => $row['opptitle'], 'oppslug' => $row['oppslug'], 'company_name' => $row['company_name'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'],];// print_r($params);exit();
+            $params = ['index' => 'aileensoul_search_opportunity', 'type' => 'aileensoul_search_opportunity', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'opportunity_for' => $row['opportunity_for'], 'opportunity_for_id' => $row['opportunity_for_id'], 'location' => $row['location'], 'location_id' => $row['location_id'], 'opportunity' => $row['opportunity'], 'field' => $row['field'], 'other_field' => $row['other_field'], 'opptitle' => $row['opptitle'], 'oppslug' => $row['oppslug'], 'company_name' => $row['company_name'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'],]];
+            $responses = $client->index($params);
+            print_r($params);
         }
-        echo "<pre>";
-        print_r($params);
-        $responses = $client->bulk($params);
-        print_r($responses);exit();
+        // echo "<pre>";
+        // $responses = $client->bulk($params);
+        // print_r($responses);
+        exit();
         return true;
     }
 
@@ -3933,20 +3923,14 @@ class Searchelastic extends MY_Controller {
         $params = null;
         foreach($result as $k=>$row)
         {
-            $params['body'][] = array(
-                'index' => array(
-                    '_index' => 'aileensoul_search_post',
-                    '_type' => 'aileensoul_search_post',
-                    '_id' => $row['id'],
-                ),
-            );
-
-            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'description' => $row['description'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'], 'sim_title' => $row['sim_title'], 'simslug' => $row['simslug'],];// print_r($params);exit();
+            $params = ['index' => 'aileensoul_search_post', 'type' => 'aileensoul_search_post', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'description' => $row['description'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'], 'sim_title' => $row['sim_title'], 'simslug' => $row['simslug'],]];
+            $responses = $client->index($params);
+            print_r($params);
         }
-        echo "<pre>";
-        print_r($params);
-        $responses = $client->bulk($params);
-        print_r($responses);exit();
+        // echo "<pre>";
+        // $responses = $client->bulk($params);
+        // print_r($responses);
+        exit();
         return true;
     }
 
@@ -3956,7 +3940,7 @@ class Searchelastic extends MY_Controller {
 
         // $this->Mapping();exit();
 
-        $str = file_get_contents('assets/ailee_user.json');
+        $str = file_get_contents('assets/ailee_question.json');
         $result = json_decode($str, true); 
         echo "<pre>";
         // print_r($result);exit();
@@ -3964,21 +3948,14 @@ class Searchelastic extends MY_Controller {
         $params = null;
         foreach($result as $k=>$row)
         {
-            $params['body'][] = array(
-                'index' => array(
-                    '_index' => 'aileensoul_search_question',
-                    '_type' => 'aileensoul_search_question',
-                    '_id' => $row['id'],
-                ),
-            );
-
-            $params['body'][] = ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'category' => $row['category'],'description' => $row['description'],'field' => $row['field'],'hashtag' => $row['hashtag'],'is_anonymously' => $row['is_anonymously'],'link' => $row['link'],'modify_date' => $row['modify_date'],'others_field' => $row['others_field'],'question' => $row['question'],];
-                // print_r($params);exit();
+            $params = ['index' => 'aileensoul_search_question', 'type' => 'aileensoul_search_question', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'category' => $row['category'],'description' => $row['description'],'field' => $row['field'],'hashtag' => $row['hashtag'],'is_anonymously' => $row['is_anonymously'],'link' => $row['link'],'modify_date' => $row['modify_date'],'others_field' => $row['others_field'],'question' => $row['question'],]];// print_r($params);exit();
+            $responses = $client->index($params);
+            print_r($params);
         }
-        echo "<pre>";
-        print_r($params);
-        $responses = $client->bulk($params);
-        print_r($responses);exit();
+        // echo "<pre>";
+        // $responses = $client->bulk($params);
+        // print_r($responses);
+        exit();
         return true;
     }
 

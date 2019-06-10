@@ -6,10 +6,12 @@ socket.on('user notification succ', (data) => {
             $(".noti_count").show();
             if(parseInt(data.not_count) > 99)
             {
+                $(".noti_count").addClass('not-max');
                 $(".noti_count").html('99+');
             }
             else
             {
+                $(".noti_count").removeClass('not-max');
                 $(".noti_count").html(data.not_count);
             }            
         }

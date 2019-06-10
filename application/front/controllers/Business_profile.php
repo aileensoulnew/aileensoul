@@ -471,7 +471,7 @@ class Business_profile extends MY_Controller {
 
         $user_reg_prev_image = $user_reg_data[0]['business_user_image'];
 
-        if ($user_reg_prev_image != '') {
+        /*if ($user_reg_prev_image != '') {
             $user_image_main_path = $this->config->item('bus_profile_main_upload_path');
             $user_bg_full_image = $user_image_main_path . $user_reg_prev_image;
             if (isset($user_bg_full_image)) {
@@ -483,14 +483,14 @@ class Business_profile extends MY_Controller {
             if (isset($user_bg_thumb_image)) {
                 unlink($user_bg_thumb_image);
             }
-        }
+        }*/
 
 
         $data = $_POST['image'];
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $user_bg_path = $this->config->item('bus_profile_main_upload_path');
-        $imageName = time() . '.png';
+        $imageName = time() . '.jpg';
         $data = base64_decode($data);
         $file = $user_bg_path . $imageName;
         file_put_contents($user_bg_path . $imageName, $data);
@@ -512,10 +512,6 @@ class Business_profile extends MY_Controller {
             $quality = "100%";
         }
 
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-
         $user_thumb_path = $this->config->item('bus_profile_thumb_upload_path');
         $user_thumb_width = $this->config->item('bus_profile_thumb_width');
         $user_thumb_height = $this->config->item('bus_profile_thumb_height');
@@ -524,8 +520,6 @@ class Business_profile extends MY_Controller {
         $thumb_image = $user_thumb_path . $imageName;
 
         copy($main_image, $thumb_image);
-
-        $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
 
         $data = array(
             'business_user_image' => $imageName
@@ -606,8 +600,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-//Business Profile Save Post End
-//Business Profile Remove Save Post Start
+    //Business Profile Save Post End
+    //Business Profile Remove Save Post Start
     public function business_profile_delete($id) {
         $s3 = new S3(awsAccessKey, awsSecretKey);
 
@@ -622,8 +616,8 @@ class Business_profile extends MY_Controller {
         $updatedata = $this->common->update_data($data, 'business_profile_save', 'save_id', $id);
     }
 
-//Business Profile Remove Save Post Start
-//location automatic retrieve controller start
+    //Business Profile Remove Save Post Start
+    //location automatic retrieve controller start
     public function location() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $json = [];
@@ -2051,9 +2045,9 @@ class Business_profile extends MY_Controller {
 
             foreach ($userlist as $user) {
                 $return_html .= '<div class = "job-contact-frnd" id = "removefollow' . $user['follow_to'] . '">
-    <div class = "profile-job-post-detail clearfix">
-        <div class = "profile-job-post-title-inside clearfix">
-            <div class = "profile-job-post-location-name">
+                <div class = "profile-job-post-detail clearfix">
+                <div class = "profile-job-post-title-inside clearfix">
+                <div class = "profile-job-post-location-name">
                 <div class = "user_lst">
                     <ul>
                         <li class = "fl">
@@ -2173,8 +2167,8 @@ class Business_profile extends MY_Controller {
         echo $return_html;
     }
 
-// end of user list
-//deactivate user start
+    // end of user list
+    //deactivate user start
     public function deactivate() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
 
@@ -2187,7 +2181,7 @@ class Business_profile extends MY_Controller {
         $update = $this->common->update_data($data, 'business_profile', 'user_id', $id);
     }
 
-// deactivate user end
+    // deactivate user end
 
     public function image_upload_ajax() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -2212,7 +2206,7 @@ class Business_profile extends MY_Controller {
                         $config['allowed_types'] = array('jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg');
                         $config['file_name'] = $_FILES['photoimg']['name'];
 
-//Load upload library and initialize configuration
+                        //Load upload library and initialize configuration
                         $this->load->library('upload', $config);
                         $this->upload->initialize($config);
 
@@ -2294,7 +2288,7 @@ class Business_profile extends MY_Controller {
         $user_reg_prev_image = $user_reg_data[0]['profile_background'];
         $user_reg_prev_main_image = $user_reg_data[0]['profile_background_main'];
 
-        if ($user_reg_prev_image != '') {
+        /*if ($user_reg_prev_image != '') {
             $user_image_main_path = $this->config->item('bus_bg_main_upload_path');
             $user_bg_full_image = $user_image_main_path . $user_reg_prev_image;
             if (isset($user_bg_full_image)) {
@@ -2313,16 +2307,14 @@ class Business_profile extends MY_Controller {
             if (isset($user_bg_origin_image)) {
                 unlink($user_bg_origin_image);
             }
-        }
+        }*/
 
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
 
         $data = $_POST['image'];
         $data = str_replace('data:image/png;base64,', '', $data);
         $data = str_replace(' ', '+', $data);
         $user_bg_path = $this->config->item('bus_bg_main_upload_path');
-        $imageName = time() . '.png';
+        $imageName = time() . '.jpg';
         $data = base64_decode($data);
         $file = $user_bg_path . $imageName;
         $success = file_put_contents($file, $data);
@@ -2345,7 +2337,6 @@ class Business_profile extends MY_Controller {
         }
 
         $cover_image = $this->config->item('bus_bg_main_upload_path') . $imageName;
-        $abc1 = $s3->putObjectFile($cover_image, bucket, $cover_image, S3::ACL_PUBLIC_READ);
 
         $user_thumb_path = $this->config->item('bus_bg_thumb_upload_path');
         $user_thumb_width = $this->config->item('bus_bg_thumb_width');
@@ -2355,8 +2346,7 @@ class Business_profile extends MY_Controller {
         $thumb_image_uplode = $this->thumb_img_uplode($upload_image, $imageName, $user_thumb_path, $user_thumb_width, $user_thumb_height);
 
         $thumb_image = $user_thumb_path . $imageName;
-        $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
-
+     
         $data = array(
             'profile_background' => $imageName
         );
@@ -2389,7 +2379,7 @@ class Business_profile extends MY_Controller {
         $config['allowed_types'] = array('jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg');
         $config['file_name'] = $_FILES['image']['name'];
 
-//Load upload library and initialize configuration
+        //Load upload library and initialize configuration
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -2418,8 +2408,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-// cover pic end
-// busienss_profile like comment ajax start
+    // cover pic end
+    // busienss_profile like comment ajax start
 
     public function like_comment() {
         
@@ -2763,8 +2753,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-// Business_profile comment like end 
-//Business_profile comment delete start
+    // Business_profile comment like end 
+    //Business_profile comment delete start
     public function delete_comment() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
@@ -2867,13 +2857,13 @@ class Business_profile extends MY_Controller {
                 $cmtinsert .= '<span role="presentation" aria-hidden="true"> · </span>';
                 $cmtinsert .= '<div class="comment-details-menu">';
                 $cmtinsert .= '<p>' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($business_profile['created_date']))) . '</p></div></div></div>';
-// comment aount variable start
+                // comment aount variable start
                 $idpost = $business_profile['business_profile_post_id'];
                 $cmtcount = '<a onClick="commentall(this.id)" id="' . $idpost . '">';
                 $cmtcount .= '<i class="fa fa-comment-o" aria-hidden="true">';
                 $cmtcount .= ' ' . count($buscmtcnt) . '';
                 $cmtcount .= '</i></a>';
-// comment count variable end 
+                // comment count variable end 
             }
             if (count($buscmtcnt) > 0) {
                 $cntinsert .= '' . count($buscmtcnt) . '';
@@ -2892,7 +2882,7 @@ class Business_profile extends MY_Controller {
         ));
     }
 
-//second page manage in manage post for function start
+    //second page manage in manage post for function start
 
     public function delete_commenttwo() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -3017,14 +3007,14 @@ class Business_profile extends MY_Controller {
                 $cmtinsert .= '<span role="presentation" aria-hidden="true"> · </span>';
                 $cmtinsert .= '<div class="comment-details-menu">';
                 $cmtinsert .= '<p>' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($business_profile['created_date']))) . '</p></div></div></div>';
-// comment aount variable start
+                // comment aount variable start
                 $idpost = $business_profile['business_profile_post_id'];
                 $cmtcount = '<a onClick="commentall1(this.id)" id="' . $idpost . '">';
                 $cmtcount .= '<i class="fa fa-comment-o" aria-hidden="true">';
                 $cmtcount .= ' ' . count($businessprofiledata) . '';
                 $cmtcount .= '</i></a>';
 
-// comment count variable end 
+                // comment count variable end 
             }
 
             if (count($businessprofiledata) > 0) {
@@ -3045,8 +3035,8 @@ class Business_profile extends MY_Controller {
         ));
     }
 
-//Business_profile comment delete end     
-// Business_profile post like start
+    //Business_profile comment delete end     
+    // Business_profile post like start
 
     public function like_post() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -3333,8 +3323,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-// business_profile post  like end
-//business_profile comment insert start
+    // business_profile post  like end
+    //business_profile comment insert start
 
     public function insert_commentthree() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -3849,8 +3839,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-//edit post end
-//reactivate account start
+    //edit post end
+    //reactivate account start
 
     public function reactivate() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -3870,8 +3860,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-//reactivate accont end    
-//delete post particular user start
+    //reactivate accont end    
+    //delete post particular user start
     public function del_particular_userpost() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
@@ -3903,7 +3893,7 @@ class Business_profile extends MY_Controller {
         $updatdata = $this->common->update_data($data, 'business_profile_post', 'business_profile_post_id', $post_id);
         $business_profile_id = $businessdata[0]['business_profile_id'];
 
-// for post count start
+        // for post count start
         $contition_array = array('follow_from' => $business_profile_id, 'follow_status' => '1', 'follow_type' => '2');
         $followerdata = $this->data['followerdata'] = $this->common->select_data_by_condition('follow', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -3915,8 +3905,8 @@ class Business_profile extends MY_Controller {
             $this->data['business_profile_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             $followerabc[] = $this->data['business_profile_data'];
         }
-//data fatch using follower end
-//data fatch using industriyal start
+        //data fatch using follower end
+        //data fatch using industriyal start
 
         $userselectindustriyal = $businessdata[0]['industriyal'];
         $contition_array = array('industriyal' => $userselectindustriyal, 'status' => '1', 'business_step' => '4');
@@ -3926,15 +3916,15 @@ class Business_profile extends MY_Controller {
             $this->data['business_data'] = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             $industriyalabc[] = $this->data['business_data'];
         }
-//data fatch using industriyal end
-//data fatch using login user last post start
+        //data fatch using industriyal end
+        //data fatch using login user last post start
 
         $condition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
         $business_datauser = $this->data['business_datauser'] = $this->common->select_data_by_condition('business_profile_post', $condition_array, $data = '*', $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $userabc[][] = $this->data['business_datauser'][0];
 
-//data fatch using login user last post end
-//array merge and get unique value  
+        //data fatch using login user last post end
+        //array merge and get unique value  
 
         if (count($industriyalabc) == 0 && count($business_datauser) != 0) {
             $unique = $userabc;
@@ -4018,7 +4008,7 @@ class Business_profile extends MY_Controller {
                 'is_unlike' => '0'
             );
             $insertdata = $this->common->insert_data_getid($data, 'bus_post_image_like');
-// insert notification
+            // insert notification
             if ($likepostid[0]['user_id'] == $userid) {
                 
             } else {
@@ -4087,7 +4077,7 @@ class Business_profile extends MY_Controller {
                     }
                 }
             }
-// end notification
+            // end notification
 
 
             $contition_array = array('post_image_id' => $_POST["post_image_id"], 'is_unlike' => '0');
@@ -4244,7 +4234,7 @@ class Business_profile extends MY_Controller {
                 $this->db->where('post_image_id', $post_image);
                 $this->db->where('user_id', $userid);
                 $updatdata = $this->db->update('bus_post_image_like', $data);
-// insert notification
+                // insert notification
                 if ($likepostid[0]['user_id'] == $userid) {
                     
                 } else {
@@ -4327,7 +4317,7 @@ class Business_profile extends MY_Controller {
                         }
                     }
                 }
-// end notification
+                // end notification
 
                 $contition_array = array('post_image_id' => $_POST["post_image_id"], 'is_unlike' => '0');
                 $bdata2 = $this->data['bdata2'] = $this->common->select_data_by_condition('bus_post_image_like', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -4395,8 +4385,8 @@ class Business_profile extends MY_Controller {
         }
     }
 
-//multiple iamges like end 
-//multiple images comment strat
+    //multiple iamges like end 
+    //multiple images comment strat
 
     public function pnmulimg_comment() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4420,7 +4410,7 @@ class Business_profile extends MY_Controller {
         );
         $insert_id = $this->common->insert_data_getid($data, 'bus_post_image_comment');
 
-// insert notification
+        // insert notification
 
         if ($buspostid[0]['user_id'] == $userid) {
             
@@ -4488,7 +4478,7 @@ class Business_profile extends MY_Controller {
                 }
             }
         }
-// end notification
+        // end notification
 
 
         $contition_array = array('post_image_id' => $post_image_id, 'is_delete' => '0');
@@ -4608,7 +4598,7 @@ class Business_profile extends MY_Controller {
             $cmtcount .= ' ' . count($buscmtcnt) . '';
             $cmtcount .= '</i></a>';
 
-// comment count variable end 
+            // comment count variable end 
 
             $cntinsert = '<span class="comment_count" >';
             if (count($buscmtcnt) > 0) {
@@ -4656,7 +4646,7 @@ class Business_profile extends MY_Controller {
         );
         $insert_id = $this->common->insert_data_getid($data, 'bus_post_image_comment');
 
-// insert notification
+        // insert notification
 
         if ($buspostid[0]['user_id'] == $userid) {
             
@@ -4724,7 +4714,7 @@ class Business_profile extends MY_Controller {
                 }
             }
         }
-// end notification
+            // end notification
 
         $contition_array = array('post_image_id' => $post_image_id, 'is_delete' => '0');
         $businesscomment = $this->common->select_data_by_condition('bus_post_image_comment', $contition_array, $data = '*', $sortby = 'post_image_comment_id', $orderby = 'DESC', $limit = '1', $offset = '', $join_str = array(), $groupby = '');
@@ -4851,7 +4841,7 @@ class Business_profile extends MY_Controller {
             $cmtcount .= ' ' . count($buscmtcnt) . '';
             $cmtcount .= '</i></a>';
 
-// comment count variable end 
+            // comment count variable end 
 
             $cntinsert = '<span class="comment_count" >';
             if (count($buscmtcnt) > 0) {
@@ -4861,7 +4851,7 @@ class Business_profile extends MY_Controller {
             }
         }
 
-// GET NOTIFICATION COUNT
+        // GET NOTIFICATION COUNT
         $to_id = $buspostid[0]['user_id'];
         $not_count = $this->business_notification_count($to_id);
 
@@ -4875,8 +4865,8 @@ class Business_profile extends MY_Controller {
         ));
     }
 
-//multiple images comment end 
-//multiple images comment like start
+    //multiple images comment end 
+    //multiple images comment like start
     public function mulimg_comment_like() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
@@ -4905,7 +4895,7 @@ class Business_profile extends MY_Controller {
 
             $insertdata = $this->common->insert_data_getid($data, 'bus_comment_image_like');
 
-// insert notification
+        // insert notification
 
             if ($busimglike[0]['user_id'] == $userid) {
                 
@@ -4972,7 +4962,7 @@ class Business_profile extends MY_Controller {
                     }
                 }
             }
-// end notification
+        // end notification
 
             $contition_array = array('post_image_comment_id' => $_POST["post_image_comment_id"], 'is_unlike' => '0');
             $bdatacm = $this->data['bdatacm'] = $this->common->select_data_by_condition('bus_comment_image_like', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -5033,7 +5023,7 @@ class Business_profile extends MY_Controller {
                 $this->db->where($where);
                 $updatdata = $this->db->update('bus_comment_image_like ', $data);
 
-// insert notification
+            // insert notification
 
                 if ($busimglike[0]['user_id'] == $userid) {
                     
@@ -5117,7 +5107,7 @@ class Business_profile extends MY_Controller {
                         }
                     }
                 }
-// end notification 
+            // end notification 
 
 
                 $contition_array = array('post_image_comment_id' => $_POST["post_image_comment_id"], 'is_unlike' => '0');
@@ -7144,9 +7134,9 @@ class Business_profile extends MY_Controller {
                 $user_contact_status = $this->db->get('contact_person')->row()->status;
 
                 $return_html .= '<div class="job-contact-frnd"><div class="profile-job-post-detail clearfix" id="removecontact' . $user_id . '">
-    <div class="profile-job-post-title-inside clearfix">
-        <div class="profile-job-post-location-name">
-            <div class="user_lst">
+        <div class="profile-job-post-title-inside clearfix">
+            <div class="profile-job-post-location-name">
+                <div class="user_lst">
                 <ul>
                     <li class="fl">
                         <div class="follow-img">
@@ -7227,8 +7217,8 @@ class Business_profile extends MY_Controller {
                 $return_html .= '</ul>
             </div>
         </div>
-    </div>
-</div></div>';
+        </div>
+        </div></div>';
             }
         }
         echo $return_html;
@@ -7256,8 +7246,8 @@ class Business_profile extends MY_Controller {
 
         $updatdata = $this->common->update_data($data, 'contact_person', 'contact_id', $contact_id);
 
-//$contactdata =  '<button>';
-// for count list user start
+        //$contactdata =  '<button>';
+        // for count list user start
 
         $contition_array = array('contact_person.status' => 'confirm', 'contact_type' => '2');
         $search_condition = "(contact_to_id = '$userid' OR contact_from_id = '$userid')";
@@ -7271,16 +7261,16 @@ class Business_profile extends MY_Controller {
 
         if (count($unique_user) == 0) {
             $nomsg = ' <div class = "art-img-nn">
-<div class = "art_no_post_img">
+        <div class = "art_no_post_img">
 
-<img src = "' . base_url('assets/img/No_Contact_Request.png') . '?ver=' . time() . '" alt="No_Contact_Request.png">
+        <img src = "' . base_url('assets/img/No_Contact_Request.png') . '?ver=' . time() . '" alt="No_Contact_Request.png">
 
-</div>
-<div class = "art_no_post_text">
-No Contacts Available.
-</div>
-</div>
-';
+        </div>
+        <div class = "art_no_post_text">
+        No Contacts Available.
+        </div>
+        </div>
+        ';
         }
 
         if ($showdata == $businessdata1[0]['business_slug']) {
@@ -7300,7 +7290,7 @@ No Contacts Available.
         }
     }
 
-// for contact list function start
+    // for contact list function start
 
 
     public function contact_person_menu() {
@@ -7380,8 +7370,8 @@ No Contacts Available.
         ));
     }
 
-//contact list end
-//conatct request count start
+    //contact list end
+    //conatct request count start
 
     public function contact_count() {
         $userid = $this->session->userdata('aileenuser');
@@ -7416,7 +7406,7 @@ No Contacts Available.
         echo "";// $count;
     }
 
-//contact request count end
+    //contact request count end
 
 
     public function edit_more_insert() {
@@ -8323,8 +8313,8 @@ No Contacts Available.
         }
 
 
-// IF USER DEACTIVE PROFILE THEN REDIRECT TO BUSINESS-PROFILE/INDEX UNTILL ACTIVE PROFILE END
-// DEACTIVATE PROFILE END
+        // IF USER DEACTIVE PROFILE THEN REDIRECT TO BUSINESS-PROFILE/INDEX UNTILL ACTIVE PROFILE END
+        // DEACTIVATE PROFILE END
     }
 
     public function is_business_profile_register() {
@@ -8347,8 +8337,8 @@ No Contacts Available.
             redirect('business-profile/registration/business-information', refresh);
         }
 
-// IF USER DEACTIVE PROFILE THEN REDIRECT TO BUSINESS-PROFILE/INDEX UNTILL ACTIVE PROFILE END
-// DEACTIVATE PROFILE END
+        // IF USER DEACTIVE PROFILE THEN REDIRECT TO BUSINESS-PROFILE/INDEX UNTILL ACTIVE PROFILE END
+        // DEACTIVATE PROFILE END
     }
 
     // BUSIENSS PROFILE USER FOLLOWING COUNT START
@@ -8425,7 +8415,7 @@ No Contacts Available.
         $test_email = $this->email_model->test_email($subject = 'This is a testing mail', $templ = '', $to_email = 'ankit.aileensoul@gmail.com');
     }
 
-//video show user count start
+    //video show user count start
 
     public function showuser() {
 

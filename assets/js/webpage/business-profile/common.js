@@ -126,7 +126,8 @@ $('#upload-one').on('change', function () {
         },
         submitHandler: profile_pic
     });
-    function profile_pic() {        
+    function profile_pic() {
+        $("#profilepicsubmit").attr("style","pointer-events:none");
         $uploadCrop1.croppie('result', {
             type: 'canvas',
             size: 'viewport'
@@ -144,6 +145,7 @@ $('#upload-one').on('change', function () {
                 },
                 complete: function () {
                     //   document.getElementById('loader').style.display = 'none';
+                    $("#profilepicsubmit").attr("style","all");
                 },
                 success: function (data) {
                     $('#profile_loader').hide();
@@ -153,7 +155,10 @@ $('#upload-one').on('change', function () {
                     document.getElementById('upload-demo-one').value = '';
                    // html = '<img src="' + resp + '" />';
                    // $("#upload-demo-i").html(html);
-                }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    profile_pic();
+                },
             });
         });
     }
