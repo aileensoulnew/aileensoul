@@ -252,6 +252,7 @@ class User_model extends CI_Model {
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
         $this->db->where("uc.to_id", $user_id);
         $this->db->where('uc.status', 'pending');
+        $this->db->order_by('uc.modify_date', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {

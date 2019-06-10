@@ -236,6 +236,7 @@ class User_post_model extends CI_Model {
         $this->db->select("city_name")->from("cities");
         $this->db->where('status', '1');
         $this->db->where('state_id !=', '0');
+        $this->db->order_by("city_name");
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;

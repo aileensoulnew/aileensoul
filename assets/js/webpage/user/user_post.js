@@ -482,14 +482,14 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         if($('#job_title ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '10px');
+            $(this).css('width', '35px');
         }
     });
     $(document).on('focusout','#job_title .input',function () {
         if($('#job_title ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', '10px');
+            $(this).css('width', '35px');
         }
         if($('#job_title ul li').length == 0)
         {            
@@ -509,14 +509,14 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         if($('#location ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '10px');
+            $(this).css('width', '35px');            
         }
     });
     $(document).on('focusout','#location .input',function () {
         if($('#location ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '10px');
+            $(this).css('width', '35px');            
         }
         if($('#location ul li').length == 0)
         {            
@@ -537,14 +537,14 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         if($('#ask_related_category ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', 'auto');
+            $(this).css('width', '35px');
         }
     });
     $(document).on('focusout','#ask_related_category .input',function () {
         if($('#ask_related_category ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', 'auto');
+            $(this).css('width', '35px');
         }
         if($('#ask_related_category ul li').length == 0)
         {            

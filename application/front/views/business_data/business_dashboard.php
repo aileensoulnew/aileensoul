@@ -353,7 +353,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 										<a href="<?php echo base_url().'company/'.$slugid.'/details'; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 									</p>
 									<div class="progress skill-bar ">
-										<div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+										<div class="progress-bar-custom" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
 											<span class="skill"><i class="val">35%</i></span>
 										</div>
 									</div>
@@ -2684,7 +2684,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/dashboard_new.js?ver=' . time()); ?>"></script>
 
         <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
+        <!-- <script type="text/javascript" src="<?php //echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
