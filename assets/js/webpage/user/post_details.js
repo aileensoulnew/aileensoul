@@ -367,10 +367,11 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $("#cmt-btn-" + post_id).attr("style", "pointer-events: none;");
             $("#cmt-btn-" + post_id).attr("disabled", "disabled");
             $scope.isMsg = true;
+            var data = $.param({comment:comment,post_id:post_id});
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data:data,// 'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

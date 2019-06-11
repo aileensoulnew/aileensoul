@@ -793,11 +793,12 @@ app.controller('searchController', function($scope, $http, $compile) {
             $("#cmt-btn-mob-" + post_id).attr("disabled", "disabled");
             $("#cmt-btn-" + post_id).attr("style", "pointer-events: none;");
             $("#cmt-btn-" + post_id).attr("disabled", "disabled");
+            var data = $.param({comment:comment,post_id:post_id});
             $scope.isMsg = true;
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: data,//'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -2003,11 +2004,12 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             $("#cmt-btn-mob-" + post_id).attr("disabled", "disabled");
             $("#cmt-btn-" + post_id).attr("style", "pointer-events: none;");
             $("#cmt-btn-" + post_id).attr("disabled", "disabled");
+            var data = $.param({comment:comment,post_id:post_id});
             $scope.isMsg = true;
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: data,//'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -3443,11 +3445,12 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             $("#cmt-btn-mob-" + post_id).attr("disabled", "disabled");
             $("#cmt-btn-" + post_id).attr("style", "pointer-events: none;");
             $("#cmt-btn-" + post_id).attr("disabled", "disabled");
+            var data = $.param({comment:comment,post_id:post_id});
             $scope.isMsg = true;
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: data,//'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -4753,11 +4756,12 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
             $("#cmt-btn-mob-" + post_id).attr("disabled", "disabled");
             $("#cmt-btn-" + post_id).attr("style", "pointer-events: none;");
             $("#cmt-btn-" + post_id).attr("disabled", "disabled");
+            var data = $.param({comment:comment,post_id:post_id});
             $scope.isMsg = true;
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: data,//'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -5775,11 +5779,12 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             $("#cmt-btn-mob-" + post_id).attr("disabled", "disabled");
             $("#cmt-btn-" + post_id).attr("style", "pointer-events: none;");
             $("#cmt-btn-" + post_id).attr("disabled", "disabled");
+            var data = $.param({comment:comment,post_id:post_id});
             $scope.isMsg = true;
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: data,//'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

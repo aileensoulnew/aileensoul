@@ -292,11 +292,12 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
         comment = comment.replace(/&gt;/gi, ">");
         comment = comment.replace(/&/g, "%26");
         if (comment) {
+            var data = $.param({comment:comment,post_id:post_id});
             $scope.isMsg = true;
             $http({
                 method: 'POST',
                 url: base_url + 'user_post/postCommentInsert',
-                data: 'comment=' + comment + '&post_id=' + post_id,
+                data: data,//'comment=' + comment + '&post_id=' + post_id,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
