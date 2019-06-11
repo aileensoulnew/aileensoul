@@ -11395,16 +11395,22 @@ Your browser does not support the audio tag.
             $store = $_FILES['award_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['award_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('award_file')){
-                $main_image = $business_user_award_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['award_file']['tmp_name'],$this->config->item('business_user_award_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -11508,16 +11514,22 @@ Your browser does not support the audio tag.
             $store = $_FILES['portfolio_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['portfolio_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('portfolio_file')){
-                $main_image = $business_user_portfolio_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['portfolio_file']['tmp_name'],$this->config->item('business_user_portfolio_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -11615,16 +11627,22 @@ Your browser does not support the audio tag.
             $store = $_FILES['review_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['review_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('review_file')){
-                $main_image = $review_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['review_file']['tmp_name'],$this->config->item('review_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -11768,19 +11786,20 @@ Your browser does not support the audio tag.
             }
             
             $story_file_path = $this->config->item('business_user_story_upload_path');
-            $story_file = time() . '.png';
+            // $story_file = time() . '.png';
+            $story_file = time() . '.jpg';
             $data = base64_decode($data);
             $file = $story_file_path . $story_file;
             file_put_contents($story_file_path . $story_file, $data);
             $success = file_put_contents($file, $data);
             $main_image = $story_file_path . $story_file;
-            $main_image_size = filesize($main_image);        
-
-            $s3 = new S3(awsAccessKey, awsSecretKey);
+            $main_image_size = filesize($main_image);
+            $this->common->resizeImage($file,$this->config->item('business_user_story_upload_path'),$story_file,90,'','',0);
+            /*$s3 = new S3(awsAccessKey, awsSecretKey);
             $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
             if (IMAGEPATHFROM == 's3bucket') {
                 $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-            }
+            }*/
         }
 
         $story_desc = $this->input->post('story_desc');        
@@ -11861,16 +11880,22 @@ Your browser does not support the audio tag.
             $store = $_FILES['timeline_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['timeline_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('timeline_file')){
-                $main_image = $business_user_timeline_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['timeline_file']['tmp_name'],$this->config->item('business_user_timeline_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -12031,14 +12056,7 @@ Your browser does not support the audio tag.
                 $config2['quality'] = '100%';
                 $this->image_lib->initialize($config2);
                 $this->image_lib->resize();
-                // $this->image_lib->crop();
-
-                $main_image = $business_member_img_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-                }
+                // $this->image_lib->crop();                
             }
         }
         $user_id = $this->session->userdata('aileenuser');
@@ -12160,16 +12178,22 @@ Your browser does not support the audio tag.
             $store = $_FILES['menu_file_name']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['menu_file_name']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('menu_file_name')){
-                $main_image = $business_user_menu_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['menu_file_name']['tmp_name'],$this->config->item('business_user_menu_upload_path'),$fileName,90,'','',0);
                 }
             }
         }

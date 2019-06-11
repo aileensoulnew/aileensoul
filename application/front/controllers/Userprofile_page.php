@@ -1440,16 +1440,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('file'))            {
-                $main_image = $user_research_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['file']['tmp_name'],$this->config->item('user_research_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -1699,16 +1705,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['pub_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['pub_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('pub_file'))            {
-                $main_image = $user_publication_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['pub_file']['tmp_name'],$this->config->item('user_publication_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -1773,16 +1785,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['patent_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['patent_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('patent_file'))            {
-                $main_image = $user_patent_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['patent_file']['tmp_name'],$this->config->item('user_patent_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -1843,16 +1861,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['award_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['award_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('award_file')){
-                $main_image = $user_award_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['award_file']['tmp_name'],$this->config->item('user_award_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -1913,17 +1937,23 @@ class Userprofile_page extends MY_Controller {
             );
             $store = $_FILES['activity_file']['name'];
             $store_ext = explode('.', $store);        
-            $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $store_ext = $store_ext[count($store_ext)-1];            
+            $file_type = explode("/", $_FILES['activity_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('activity_file')){
-                $main_image = $user_activity_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['activity_file']['tmp_name'],$this->config->item('user_activity_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -1985,16 +2015,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['addicourse_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['addicourse_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('addicourse_file')){
-                $main_image = $user_addicourse_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['addicourse_file']['tmp_name'],$this->config->item('user_addicourse_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -2113,16 +2149,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['exp_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['exp_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('exp_file')){
-                $main_image = $user_experience_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['exp_file']['tmp_name'],$this->config->item('user_experience_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
@@ -2312,16 +2354,22 @@ class Userprofile_page extends MY_Controller {
             $store = $_FILES['project_file']['name'];
             $store_ext = explode('.', $store);        
             $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $file_type = explode("/", $_FILES['project_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('project_file')){
-                $main_image = $user_project_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['project_file']['tmp_name'],$this->config->item('user_project_upload_path'),$fileName,90,'','',0);
                 }
             }
         }
