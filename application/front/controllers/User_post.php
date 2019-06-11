@@ -1476,7 +1476,6 @@ class User_post extends MY_Controller {
                                 $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . ".m3u8";
                                 if (IMAGEPATHFROM == 's3bucket') {
                                     //unlink($this->config->item('user_post_main_upload_path') . $upload_data['raw_name'] . "" . $upload_data['file_ext']);
-                                    $abc = $s3->putObjectFile($fileName, bucket, $fileName, S3::ACL_PUBLIC_READ);
                                 }
                             }                                
 

@@ -1072,7 +1072,7 @@ class Common extends CI_Model {
         return true;
     }
 
-    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path){
+    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path,$create_thumb = 1){
         $mime = getimagesize($sourceImage);
         if ($mime['mime'] == 'image/png') {
             $main_image1 = @imagecreatefrompng($sourceImage);
@@ -1142,8 +1142,11 @@ class Common extends CI_Model {
         $newImage = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
         imagejpeg($newImage, $path.$targetImage, $quality);
-        $this->createThumbnail($path,$targetImage,$thumbs_path,560);//thumb,resize4        
-        $this->createThumbnail($path,$targetImage,$resize1_path,280);//resize1,resize2
+        if($create_thumb == 1)
+        {            
+            $this->createThumbnail($path,$targetImage,$thumbs_path,560);//thumb,resize4        
+            $this->createThumbnail($path,$targetImage,$resize1_path,280);//resize1,resize2
+        }
         
         // Free up the memory.
         imagedestroy($image);

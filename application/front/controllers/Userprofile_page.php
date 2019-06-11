@@ -2440,17 +2440,23 @@ class Userprofile_page extends MY_Controller {
             );
             $store = $_FILES['edu_file']['name'];
             $store_ext = explode('.', $store);        
-            $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $store_ext = $store_ext[count($store_ext)-1];            
+            $file_type = explode("/", $_FILES['edu_file']['type']);
+            if($file_type[0] == 'image')
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.jpg';
+            }
+            else
+            {
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;
+            }
             $config['file_name'] = $fileName;
             $this->upload->initialize($config);
             $imgdata = $this->upload->data();
             if($this->upload->do_upload('edu_file')){
-                $main_image = $user_education_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                if($file_type[0] == 'image')
+                {
+                    $this->common->resizeImage($_FILES['edu_file']['tmp_name'],$this->config->item('user_education_upload_path'),$fileName,90,'','',0);
                 }
             }
         }

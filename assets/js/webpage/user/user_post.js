@@ -3846,7 +3846,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'peoples') {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == 'peoples') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -4103,7 +4103,7 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'posts') {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == 'posts') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -5187,7 +5187,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'opportunities') {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == 'opportunities') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -6295,7 +6295,7 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'articles') {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == 'articles') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -7311,7 +7311,7 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'qa') {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == 'qa') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -8346,7 +8346,7 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
 
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height()) && $location.url().substr(1) == 'businesses') {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == 'businesses') {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
