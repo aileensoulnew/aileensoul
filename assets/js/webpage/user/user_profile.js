@@ -9359,6 +9359,9 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
     $scope.$parent.title = "Follower | Aileensoul";
+    $scope.page_number = 0;
+    $scope.total_record = '';
+    $scope.perpage = 10;
 
     setTimeout(function(){
     /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
@@ -9488,9 +9491,14 @@ app.controller('followersController', function ($scope, $http, $location, $compi
         }, function (error) {});
     }
     $scope.get_all_counter();
+    var isProcessing = false;
 
     // Fetch data
     $scope.getFollowers = function (pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)
@@ -9498,6 +9506,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $('#main_loader').show();            
             }
         }
+        $('.loadmore').show();
         $http({
             method: 'post',
             url: base_url + "userprofile_page/followers_data?page=" + pagenum +"&user_slug="+user_slug,
@@ -9506,18 +9515,26 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
+            $('.loadmore').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
-                if ($scope.contactData != undefined) {
+                if ($scope.followersData != undefined) {
+                    isProcessing = false;
                     $scope.page_number = response.data.pagedata.page;
-                    for (var i in response.data.contactrecord) {
+                    $scope.total_record = response.data.pagedata.total_record;
+                    $scope.perpage = response.data.pagedata.perpage_record;
+                    for (var i in response.data.followerrecord) {
                         $scope.followersData.push(response.data.followerrecord[i]);
                     }
                 } else {
-                    $scope.pagecntctData = response.data;
+                    isProcessing = false;
+                    // $scope.pagecntctData = response.data;
                     $scope.followersData = response.data.followerrecord;
+                    $scope.page_number = response.data.pagedata.page;
+                    $scope.total_record = response.data.pagedata.total_record;
+                    $scope.perpage = response.data.pagedata.perpage_record;
                 }
             } else {
                 $scope.showLoadmore = false;
@@ -9526,10 +9543,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
         });
     }
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            var page = $(".page_number").val();
-            var total_record = $(".total_record").val();
-            var perpage_record = $(".perpage_record").val();
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage;//$(".perpage_record").val();
             if (parseInt(perpage_record * page) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
@@ -9538,7 +9555,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum = parseInt($(".page_number").val()) + 1;
+                    var pagenum = parseInt($scope.page_number) + 1;// parseInt($(".page_number").val()) + 1;
                     // alert(pagenum);
                     $scope.getFollowers(pagenum);
                 }
@@ -9592,6 +9609,9 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
     $scope.$parent.title = "Following | Aileensoul";
+    $scope.page_number = 0;
+    $scope.total_record = '';
+    $scope.perpage = 10;
 
     
     setTimeout(function(){
@@ -9722,10 +9742,13 @@ app.controller('followingController', function ($scope, $http, $location, $compi
         }, function (error) {});
     }
     $scope.get_all_counter();
-
+    var isProcessing = false;
     // Fetch data
     $scope.getFollowing = function (pagenum) {
-
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)
@@ -9733,6 +9756,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 $('#main_loader').show();            
             }
         }
+        $('.loadmore').show();
 
         $http({
             method: 'post',
@@ -9742,18 +9766,26 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
+            $('.loadmore').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
-                if ($scope.contactData != undefined) {
+                if ($scope.followingData != undefined) {
+                    isProcessing = false;
                     $scope.page_number = response.data.pagedata.page;
+                    $scope.total_record = response.data.pagedata.total_record;
+                    $scope.perpage = response.data.pagedata.perpage_record;
                     for (var i in response.data.followingrecord) {
                         $scope.followingData.push(response.data.followingrecord[i]);
                     }
                 } else {
-                    $scope.pagecntctData = response.data;
+                    isProcessing = false;
+                    // $scope.pagecntctData = response.data;
                     $scope.followingData = response.data.followingrecord;
+                    $scope.page_number = response.data.pagedata.page;
+                    $scope.total_record = response.data.pagedata.total_record;
+                    $scope.perpage = response.data.pagedata.perpage_record;
                 }
             } else {
                 $scope.showLoadmore = false;
@@ -9761,11 +9793,11 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             $('footer').show();
         });
     }
-    angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            var page = $(".page_number").val();
-            var total_record = $(".total_record").val();
-            var perpage_record = $(".perpage_record").val();
+    angular.element($window).bind("scroll", function (e) {        
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage;//$(".perpage_record").val();
             if (parseInt(perpage_record * page) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
@@ -9774,7 +9806,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum = parseInt($(".page_number").val()) + 1;
+                    var pagenum = parseInt($scope.page_number) + 1;
                     $scope.getFollowing(pagenum);
                 }
             }

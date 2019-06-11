@@ -97,7 +97,9 @@ class Userprofile_model extends CI_Model {
         $this->db->where("ul.is_delete","0");
         $this->db->where($where);
         $this->db->order_by("uf.id", "DESC");
-
+        if ($limit != '') {
+            $this->db->limit($limit, $start);
+        }
         $query = $this->db->get();
         $result_array = $query->result_array();
         $user_follow_array = array();
@@ -153,7 +155,9 @@ class Userprofile_model extends CI_Model {
         $this->db->where("ul.is_delete","0");
         $this->db->where($where);
         $this->db->order_by("uf.id", "DESC");
-
+        if ($limit != '') {
+            $this->db->limit($limit, $start);
+        }
         $query = $this->db->get();
         // echo $this->db->last_query();exit();
         $result_array = $query->result_array();
