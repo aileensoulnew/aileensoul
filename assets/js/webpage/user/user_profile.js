@@ -10086,8 +10086,9 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     }
 
     $scope.getQuestions = function (pagenum) {
+        $('.loadmore').show();
+        console.log($scope.$parent.pade_reload);
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            // $('.post_loader').show();
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)
             {
@@ -10102,6 +10103,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
+            $('.loadmore').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
             $('.post_loader').hide();

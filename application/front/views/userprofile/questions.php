@@ -159,7 +159,7 @@
             $data['data'] = 'ads';
             $this->load->view('ads_box',$data); ?>
 		</div>
-        <div class="fw post_loader" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
+        <div class="fw post_loader loadmore" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
     </div>
     <div class="right-add">
         <?php $this->load->view('right_add_box'); ?>
