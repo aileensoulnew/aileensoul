@@ -1612,7 +1612,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                             if (success) {
                                 if(socket)
                                 {
-                                    socket.emit('user notification',user_id);
+                                    setTimeout(function(){
+                                        socket.emit('user notification',user_id);
+                                    },1000);
                                 }
 
                                 $('.post_loader').hide();
@@ -1853,7 +1855,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                             if (success) {
                                 if(socket)
                                 {
-                                    socket.emit('user notification',user_id);
+                                    setTimeout(function(){
+                                        socket.emit('user notification',user_id);
+                                    },1000);
                                 }
                                 //window.location = base_url+user_slug+"/questions";
                                 $('.post_loader').hide();
@@ -2298,7 +2302,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     if (success) {
                         if(socket)
                         {
-                            socket.emit('user notification',user_id);
+                            setTimeout(function(){
+                                socket.emit('user notification',user_id);
+                            },1000);
                         }
 
                         $("#post_something")[0].reset();

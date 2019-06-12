@@ -1063,7 +1063,7 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
     }
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -1269,7 +1269,7 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
     }
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -1508,7 +1508,7 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
     }
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -1815,7 +1815,7 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
     }
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -2083,7 +2083,7 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
     }
     angular.element($window).bind("scroll", function (e) {
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             // console.log($(window).scrollTop());
             // console.log($(document).height() - $(window).height());
             var page = $scope.page_number;//$(".page_number").val();
@@ -2828,7 +2828,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $(window).on('scroll', function () {
-        if ($(window).scrollTop() == $(document).height() - $(window).height())
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)
         {
             var page = $(".page_number:last").val();
             var total_record = $(".total_record").val();
@@ -9311,7 +9311,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
         // console.log($(document).height() - $(window).height());
         // console.log(($(document).height() - $(window).height()) * 0.7);
         
-        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
         // if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
             var page = $scope.pagi.page;
             var total_record = $scope.pagi.total_record;

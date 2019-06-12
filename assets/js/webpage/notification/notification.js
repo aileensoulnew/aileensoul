@@ -6,10 +6,9 @@ var main_perpage_record = "";
 $(document).ready(function () {
     notificatin_ajax_data();
     
-    $(window).scroll(function () {
-        //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-      
+    $(window).scroll(function () {        
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
+
             var page = main_page_number;//$(".page_number:last").val();
             var total_record = main_total_record;//$(".total_record").val();
             var perpage_record = main_perpage_record;//$(".perpage_record").val();

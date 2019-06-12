@@ -1762,7 +1762,7 @@ class User_post extends MY_Controller {
                         echo json_encode(array("status"=>"0","data"=>array()));
                         exit;
                     }
-                $i++;
+                    $i++;
                 }
 
                 // echo $file_type;exit();
@@ -1796,6 +1796,16 @@ class User_post extends MY_Controller {
             }
             $final_update_post_data = array('status'=> 'publish');
             $update_post = $this->common->update_data($final_update_post_data, 'user_post', 'id', $user_post_id);
+
+            // $this->send_notification($user_post_id);
+            
+            $url_add_post = base_url()."user_post/send_notification";
+            $param_add_post = array(
+                "user_id"=> $userid,
+                "post_id"=> $user_post_id
+            );
+            $this->inbackground->do_in_background($url_add_post, $param_add_post);
+
             if ($post_for == 'opportunity') {
                 $this->searchelastic_model->add_edit_single_opportunity($user_post_id);
             } elseif ($post_for == 'simple') {
@@ -2817,6 +2827,15 @@ class User_post extends MY_Controller {
                 }
             }
 
+            // $this->send_notification($user_post_id);
+            
+            $url_add_post = base_url()."user_post/send_notification";
+            $param_add_post = array(
+                "user_id"=> $userid,
+                "post_id"=> $user_post_id
+            );
+            $this->inbackground->do_in_background($url_add_post, $param_add_post);
+            
             if ($post_for == 'opportunity') {
                 $this->searchelastic_model->add_edit_single_opportunity($user_post_id);
             } elseif ($post_for == 'simple') {
@@ -3938,5 +3957,96 @@ class User_post extends MY_Controller {
 
         $user_data = $this->user_post_model->get_business_data($userid,$page,$limit,$search_field,$search_city);
         echo json_encode($user_data);
+    }
+
+    public function send_notification()
+    {
+        $user_id = $this->input->post('user_id');
+        $post_id = $this->input->post('post_id');
+
+        $all_user_data = $this->user_post_model->get_contact_follower_data($user_id);        
+        $post_data = $this->user_post_model->get_post_from_id($post_id);
+
+        if($post_data['post_data']['post_for'] == 'opportunity')
+        {
+            $url = base_url().'o/'.$post_data['opportunity_data']['oppslug'];
+        }
+        elseif($post_data['post_data']['post_for'] == 'simple')
+        {
+            $url = base_url().'p/'.$post_data['simple_data']['simslug'];
+        }
+        elseif($post_data['post_data']['post_for'] == 'question')
+        {
+            $url = base_url().'questions/'.$post_data['question_data']['id'].'/'.$this->common->create_slug($post_data['question_data']['question']);
+        }
+        elseif($post_data['post_data']['post_for'] == 'article')
+        {
+            $url = base_url().'article/'.$post_data['article_data']['article_slug'];
+        }
+
+        $login_userdata = $this->user_model->getUserData($user_id);        
+
+        if($login_userdata['user_image'] != "")
+        {
+            $user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+        }
+        else
+        {
+            if($login_userdata['user_gender']  == 'M')
+            {
+                $user_img = base_url('assets/img/man-user.jpg');
+            }
+
+            if($login_userdata['user_gender']  == 'F')
+            {
+                $user_img = base_url('assets/img/female-user.jpg');
+            }
+        }
+        $email_html = '';
+        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="'.MAIL_TD_1.'">
+                                <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                            </td>
+                            <td style="padding:5px;">
+                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> add new post.</p>
+                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                            </td>
+                            <td style="'.MAIL_TD_3.'">
+                                <p><a class="btn" href="'.$url.'">view</a></p>
+                            </td>
+                        </tr>
+                        </table>';
+        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' add new post in Aileensoul.';        
+
+        foreach ($all_user_data as $_all_user_data) {
+            $data_notification = array(
+                'not_type' => '13',
+                'not_from_id' => $user_id,
+                'not_product_id'=>$post_id,
+                'not_to_id' => $_all_user_data['user_id'],
+                'not_read' => '2',
+                'not_from' => '9',
+                'not_img' => '1',
+                'not_created_date' => date('Y-m-d H:i:s'),
+                'not_active' => '1'
+            );
+            $insert_id = $this->common->insert_data_getid($data_notification, 'notification');
+
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $_all_user_data['user_id']))->row();
+
+            $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+            if($unsubscribeData->is_subscribe == 1)
+            {
+                $url = base_url()."user_post/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$_all_user_data['email'],
+                    "unsubscribe"=>$unsubscribe,
+                );
+                $this->inbackground->do_in_background($url, $param);
+            }
+        }
     }
 }

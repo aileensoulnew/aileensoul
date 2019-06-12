@@ -215,14 +215,15 @@ class User_post_model extends CI_Model {
         return $result_array;
     }
 
-//    public function get_jobtitle($search){
-//        $this->db->select("name")->from("job_title jt");
-//        $this->db->where('status','publish');
-//        $this->db->like('name',$search);
-//        $query = $this->db->get();
-//        $result_array = $query->result_array();
-//        return $result_array;
-//    }
+    /*public function get_jobtitle($search){
+       $this->db->select("name")->from("job_title jt");
+       $this->db->where('status','publish');
+       $this->db->like('name',$search);
+       $query = $this->db->get();
+       $result_array = $query->result_array();
+       return $result_array;
+    }*/
+
     public function get_jobtitle() {
         $this->db->select("name")->from("job_title jt");
         $this->db->where('status', 'publish');
@@ -870,7 +871,7 @@ class User_post_model extends CI_Model {
 
     public function get_new_signup($user_id = '')
     {
-         $this->db->select("new_signup")->from("user");                
+        $this->db->select("new_signup")->from("user");                
         $this->db->where('user_id', $user_id);        
         $query = $this->db->get();                
         $user_data = $query->row_array();                
@@ -5943,6 +5944,7 @@ class User_post_model extends CI_Model {
 
         $query = $this->db->query($sql);
         $user_post = $query->result_array();
+        $result_array = array();
 
         foreach ($user_post as $key => $value) {
             $user_post[$key]['time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($user_post[$key]['created_date'])));
@@ -6326,5 +6328,19 @@ class User_post_model extends CI_Model {
             $ret_arr['total_record'] = $total_record;
         }
         return $ret_arr;
+    }
+
+    public function get_contact_follower_data($user_id = '') {
+
+        $sql = "SELECT ul.user_id,ul.email FROM ailee_user_contact uc 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = (CASE WHEN uc.from_id= $user_id THEN uc.to_id ELSE uc.from_id END) 
+                WHERE (uc.from_id =  $user_id  OR uc.to_id = $user_id) AND uc.status = 'confirm' AND ul.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0'
+                UNION
+                SELECT ul.user_id,ul.email FROM ailee_user_follow uf 
+                LEFT JOIN ailee_user_login ul ON ul.user_id = uf.follow_from 
+                WHERE uf.follow_to =  $user_id AND uf.follow_type = '1' AND ul.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        return $result_array;
     }
 }

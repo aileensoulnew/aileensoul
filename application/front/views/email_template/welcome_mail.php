@@ -76,31 +76,31 @@
 											</table>
 										</td>
 									</tr>
-									<tr>
+									<!-- <tr>
 										<td style="padding-top:30px;">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td style="width:90px; vertical-align:top; padding-top:3px;">
-														<img src="<?php echo base_url(); ?>assets/img/mail/m-job.png">
+														<img src="<?php //echo base_url(); ?>assets/img/mail/m-job.png">
 													</td>
 													<td>
 														<p style="font-size:17px; font-weight:bold;">Get Job</p>
-														<p style="line-height:1.5; padding-top:5px;"><a href="<?php echo base_url(); ?>job-search?utm_source=email&utm_medium=email&utm_campaign=welcome_job">Search job</a> opportunities, apply, connect with recruiters and get hired.</p>
+														<p style="line-height:1.5; padding-top:5px;"><a href="<?php //echo base_url(); ?>job-search?utm_source=email&utm_medium=email&utm_campaign=welcome_job">Search job</a> opportunities, apply, connect with recruiters and get hired.</p>
 													</td>
 												</tr>
 											</table>
 										</td>
-									</tr>
+									</tr> 
 									<tr>
 										<td style="padding-top:30px;">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td style="width:90px; vertical-align:top; padding-top:3px;">
-														<img src="<?php echo base_url(); ?>assets/img/mail/m-rec.png">
+														<img src="<?php //echo base_url(); ?>assets/img/mail/m-rec.png">
 													</td>
 													<td>
 														<p style="font-size:17px; font-weight:bold;">Hire People</p>
-														<p style="line-height:1.5; padding-top:5px;"><a href="<?php echo base_url(); ?>recruiter?utm_source=email&utm_medium=email&utm_campaign=welcome_recruiter">Post your job</a> or search and recruit the best talent from aileensoul.</p>
+														<p style="line-height:1.5; padding-top:5px;"><a href="<?php //echo base_url(); ?>recruiter?utm_source=email&utm_medium=email&utm_campaign=welcome_recruiter">Post your job</a> or search and recruit the best talent from aileensoul.</p>
 													</td>
 												</tr>
 											</table>
@@ -111,11 +111,11 @@
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td style="width:90px; vertical-align:top; padding-top:3px;">
-														<img src="<?php echo base_url(); ?>assets/img/mail/m-get-free.png">
+														<img src="<?php //echo base_url(); ?>assets/img/mail/m-get-free.png">
 													</td>
 													<td>
 														<p style="font-size:17px; font-weight:bold;">Get Freelance Work</p>
-														<p style="line-height:1.5; padding-top:5px;">Search <a href="<?php echo base_url(); ?>freelance-jobs?utm_source=email&utm_medium=email&utm_campaign=welcome_freelancer">freelance jobs</a>, save, apply and get the job.</p>
+														<p style="line-height:1.5; padding-top:5px;">Search <a href="<?php //echo base_url(); ?>freelance-jobs?utm_source=email&utm_medium=email&utm_campaign=welcome_freelancer">freelance jobs</a>, save, apply and get the job.</p>
 													</td>
 												</tr>
 											</table>
@@ -126,16 +126,16 @@
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td style="width:90px; vertical-align:top; padding-top:3px;">
-														<img src="<?php echo base_url(); ?>assets/img/mail/m-hire-free.png">
+														<img src="<?php //echo base_url(); ?>assets/img/mail/m-hire-free.png">
 													</td>
 													<td>
 														<p style="font-size:17px; font-weight:bold;">Hire Freelancers</p>
-														<p style="line-height:1.5; padding-top:5px;">Post your requirement; Get best recommendations, and <a href="<?php echo base_url(); ?>freelance-employer?utm_source=email&utm_medium=email&utm_campaign=welcome_employer">hire freelancers.</a></p>
+														<p style="line-height:1.5; padding-top:5px;">Post your requirement; Get best recommendations, and <a href="<?php //echo base_url(); ?>freelance-employer?utm_source=email&utm_medium=email&utm_campaign=welcome_employer">hire freelancers.</a></p>
 													</td>
 												</tr>
 											</table>
 										</td>
-									</tr>
+									</tr>-->
 									<tr>
 										<td style="padding-top:30px;">
 											<table width="100%" cellpadding="0" cellspacing="0">
@@ -166,21 +166,21 @@
 											</table>
 										</td>
 									</tr>
-									<tr>
+									<!--<tr>
 										<td style="padding-top:30px;">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td style="width:90px; vertical-align:top; padding-top:3px;">
-														<img src="<?php echo base_url(); ?>assets/img/mail/m-art.png">
+														<img src="<?php //echo base_url(); ?>assets/img/mail/m-art.png">
 													</td>
 													<td>
 														<p style="font-size:17px; font-weight:bold;">Show Your Talent</p>
-														<p style="line-height:1.5; padding-top:5px;">Find, <a href="<?php echo base_url(); ?>find-artist?utm_source=email&utm_medium=email&utm_campaign=welcome_artist">connect with other artist</a> and showcase your art and talent.</p>
+														<p style="line-height:1.5; padding-top:5px;">Find, <a href="<?php //echo base_url(); ?>find-artist?utm_source=email&utm_medium=email&utm_campaign=welcome_artist">connect with other artist</a> and showcase your art and talent.</p>
 													</td>
 												</tr>
 											</table>
 										</td>
-									</tr>
+									</tr>-->
 									<tr>
 										<td style="padding-top:30px;">
 											<table width="100%" cellpadding="0" cellspacing="0">

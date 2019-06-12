@@ -211,7 +211,7 @@ class Searchelastic extends MY_Controller {
     public function delete_people_data($id = 0)
     {
         $client = $this->elasticclient;
-        $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => 16024, ];
+        $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $id];
         $responses = $client->delete($params);
         return true;
     }
