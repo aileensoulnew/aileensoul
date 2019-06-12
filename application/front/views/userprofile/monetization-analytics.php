@@ -1,6 +1,6 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="main-dashboard">
-<div class="container pt15">
+<div class="container pt15 mobp0">
     <div class="analytic-detail fw">
         <div class="big-left">
             <div class="analytic-left-tab">

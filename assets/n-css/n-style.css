@@ -3276,7 +3276,7 @@ color: #5c5c5c !important;}
 .mob-progressbar p{font-size:13px; font-weight:bold;}
 .mob-progressbar .progress .skill{line-height:22px; padding:0; margin:0 0 0 20px;
 text-transform:uppercase;}
-.mob-progressbar .progress .skill .val{font-style:normal; margin:0 20px 0 0;}
+.mob-progressbar .progress .skill .val{font-style:normal; margin:0 20px 0 0; color: #fff; font-size: 12px;}
 .mob-progressbar .progress-bar{text-align:center; transition-duration:3s;}
 .mob-progressbar .progress-bar-custom{
     background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
@@ -4477,7 +4477,7 @@ tags-input .tags{padding: 0;}
   .old-no-login .btn-right{padding-top:0;}
   
   .search-mob-block a{padding-left:0;}
-  .add-comment .mob-comment{bottom:6px; right:5px;}
+  .add-comment .mob-comment{bottom:5px; right:5px;}
   
   /***  bus art  ***/
   .mob-inner-page{width:100%; border-width:1px 0 1px 0; border-radius:0;}
@@ -4805,7 +4805,7 @@ tags-input .tags{padding: 0;}
   .request-noti-move .content{height: auto !important; min-height: auto !important; max-height: 200px !important;}
   .request-noti-move .right-title{border-top: 1px solid #d2d2d2;}
   .contact-request .tab-add-991 .banner-add{display: none;}
-
+  
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}
@@ -5337,7 +5337,7 @@ tags-input .tags{padding: 0;}
   .error-btn .btn-new-1 img{height: 16px;}
   .all-post-box .bottom-left.like_user_list .like-img:last-child a{padding: 10px 0px 8px 5px !important;}
   .all-post-box .bottom-left.like_user_list li:first-child{/*margin-left: 5px;*/}
-  .post-detail .post-name{max-width: 72%;}
+  .post-detail .post-name{max-width: 72%; font-weight: bold;}
   .monetize-box h1{font-size: 20px; padding: 10px;}
   .monetize-detail .monetize-detail-sec h2{font-size: 18px;}
   .monetize-box .monetize-detail{padding: 0 10px 10px;}
@@ -5380,7 +5380,7 @@ tags-input .tags{padding: 0;}
   .search-left-box .pull-left.btn-new-1 span{margin-bottom: 0;}
   .search-left-box .pull-right.btn-new-1{padding: 5px 16px 5px; width: 90px;}
   .search-left-box .pull-right.btn-new-1 span{margin-bottom: 1px;}
-
+  .analytic-detail .analytic-left-tab{padding: 0;}
 }
 @media screen and (max-width: 359px) {
   .main-banner{max-height:170px;}
