@@ -2835,7 +2835,7 @@ class User_post extends MY_Controller {
                 "post_id"=> $user_post_id
             );
             $this->inbackground->do_in_background($url_add_post, $param_add_post);
-            
+
             if ($post_for == 'opportunity') {
                 $this->searchelastic_model->add_edit_single_opportunity($user_post_id);
             } elseif ($post_for == 'simple') {
@@ -4047,6 +4047,7 @@ class User_post extends MY_Controller {
                 );
                 $this->inbackground->do_in_background($url, $param);
             }
+            sleep(1);
         }
     }
 }

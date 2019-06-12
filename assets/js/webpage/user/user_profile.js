@@ -2034,8 +2034,13 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
         //dots[slideIndex - 1].className += " active";
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
+    var isProcessing = false;
     // Fetch data
     $scope.getDashboardPhotos = function (pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
@@ -2063,11 +2068,13 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 $scope.perpage_record = response.data.photosData.pagedata.perpage_record;
                 //$scope.row += $scope.rowperpage;
                 if ($scope.photoData != undefined) {
+                    isProcessing = false;
                     $scope.page_number = response.data.photosData.pagedata.page;
                     for (var i in response.data.photosData.photosrecord) {
                         $scope.photoData.push(response.data.photosData.photosrecord[i]);
                     }
                 } else {
+                    isProcessing = false;
                     $scope.pagecntctData = response.data.photosData;
                     $scope.photoData = response.data.photosData.photosrecord;
                 }
