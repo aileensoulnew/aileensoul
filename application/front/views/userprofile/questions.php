@@ -105,7 +105,7 @@
 								
 							</ul>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-4">
+                        <div class="col-md-3 col-sm-3 col-xs-3">
                             <ul class="pull-right bottom-right">
                                 <li class="comment-count pt5"><a href="javascript:void(0)" ng-click="giveAnswer(post.post_data.id)"><span class="post-comment-count-{{post.post_data.id}}" ng-if="post.post_comment_count > 0" ng-bind="post.post_comment_count"></span><span>Answers</span></a></li>
                             </ul>

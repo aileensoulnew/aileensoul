@@ -4131,7 +4131,6 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 
 
 .comment-action ul{padding-left:40px;}
-.editable_text{padding: 4px 15px 3px !important;}
 .right_side_posrt .add-post{padding-bottom: 10px;}
 .bus-post-btn{padding-top: 4px;}
 
@@ -4576,7 +4575,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
 	#btn-move .btn-n2{padding:6px 5px;}
     .bui-menu-profile .follow-msg{padding-bottom: 20px;}
 
-	
+    .top-tab ul li:last-child{display: none;}	
 }
 @media screen and (max-width:800px){
     .cmy_2,.mySlides .post-design-commnet-box .cmy_2{
