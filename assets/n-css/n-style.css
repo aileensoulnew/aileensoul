@@ -3770,7 +3770,7 @@ tags-input .tags{padding: 0;}
 .media-tab ul li a .fa-music:before{background: url(../n-images/music.svg); background-size: 100%;}  
 .media-tab ul li a .fa-file-pdf-o:before{background: url(../n-images/pdf.svg); background-size: 100%;}
 .media-tab ul li a .fa-newspaper-o:before{background: url(../n-images/file.svg); background-size: 100%;}
-.media-tab ul.nav-tabs li.active a .fa-camera:before{background: url(../n-images/camera-active.jpg);}
+.media-tab ul.nav-tabs li.active a .fa-camera:before{/*background: url(../n-images/camera-active.svg);*/}
 
 
 /***  media query  ***/
