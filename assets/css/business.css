@@ -2239,13 +2239,6 @@ label.cameraButton:active{
 .active,.close2,.tablet-hi a:focus{
     color:#fff
 }
-.tabs-left>li>a{
-    margin-right:0;
-    display:block;
-    letter-spacing:2px;
-    font-size:18px;
-    font-weight:600
-}
 .tabs-right>li>a{
     border-radius:0 4px 4px 0;
     margin-right:0

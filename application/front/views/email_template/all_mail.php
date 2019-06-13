@@ -18,8 +18,8 @@
 	.column-wrap {padding: 0px; max-width: 600px; margin: 0 auto;}
 	table {width: 100%;}
 	.column{float: left; width: 100%;}
-	.column-right{width: 110px; float: left;}
-	.user-img{width: 50px; height: 50px; background: #5c5c5c;}
+	.user-img{width: 50px; height: 50px;}
+	.user-img img{width: 100%;}
 	.btn{background: #1b8ab9; font-size: 14px; color: #fff; padding: 5px 15px; text-decoration: none; border-radius: 3px; display: inline-block;}
 	.user-content p{margin: 0; color: #5c5c5c; font-size: 14px;}
 	.user-content span{font-size:12px; color: #7b7b7b; }
@@ -27,6 +27,10 @@
 	.fw{width: 100%; float: left;}
 	.user-img-td{width: 40px; padding-left: 10px; padding-right: 10px;}
 	.mail-btn{padding-right: 10px; text-align: right;}
+	.column-bottom{border-top: 1px solid #d2d2d2; width: 100%; float: left; text-align: center; font-size: 12px;}
+	.column-bottom table{padding: 15px 10px; }
+	.column-bottom table td{color:#7b7b7b;}
+	.column-bottom a{font-size: 13px; text-decoration: none; color:#5c5c5c;}
 	@media only screen and (max-width: 600px) {
 		div[class="column"] { width: 100% !important; float:left !important; display: none !important;}
 		div[class="column-right"] { width: 100% !important; float:left !important; padding-top: 15px;}		
@@ -72,19 +76,27 @@
 								</tr>
 							</table>
 						</div>
-						<div class="column-right">
+						<div class="p10 fw"></div>
+						<div class="column-bottom">
 							<table cellpadding="0" cellspacing="0">
 								<tr>
-									<td>
-										<div class="mail-btn">
-											
-										</div>
+									<td style="padding-bottom: 10px;">
+										<a href="#">Unsubscribe</a>
 									</td>
 								</tr>
+								<tr>
+									<td>
+										Aileensoul Technologies Private Limited
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Titanium City Centre, 100 Feet Road, Satellite, Ahmedabad, India.
+									</td>
+								</tr>
+								
 							</table>
-						</div>
-						<div class="p10 fw"></div>
-					
+						</div>					
 					</div>
 				</td>
 			</tr>
