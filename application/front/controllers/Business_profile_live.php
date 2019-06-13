@@ -2357,17 +2357,25 @@ class Business_profile_live extends MY_Controller {
                     }
 
                     $email_html = '';
-                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' .$loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' .$loginBusinessUserData->company_name . '</b> Started following you in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-					</tr>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">View</a>
+                                            </td>
+                                        </tr>
                                     </table>';
                     $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
@@ -2448,15 +2456,23 @@ class Business_profile_live extends MY_Controller {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img. '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="user-content">
+                                                <p>
+                                                    <b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.
+                                                </p>
+                                                <span>'.date('j F').' at '.date('H:i').'</span>
+                                            </div>
+                                        </td>
+                                        <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -2725,15 +2741,23 @@ class Business_profile_live extends MY_Controller {
                     }
 
                     $email_html = '';
-                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>                                                
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -2804,15 +2828,23 @@ class Business_profile_live extends MY_Controller {
                 }
 
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="user-content">
+                                                <p>
+                                                    <b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.
+                                                </p>
+                                                <span>'.date('j F').' at '.date('H:i').'</span>
+                                            </div>
+                                        </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -3139,15 +3171,23 @@ class Business_profile_live extends MY_Controller {
                     }
 
                     $email_html = '';
-                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -3221,15 +3261,23 @@ class Business_profile_live extends MY_Controller {
                 }
 
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '">
+                                            </div>
+                                        </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -4081,15 +4129,23 @@ class Business_profile_live extends MY_Controller {
 
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img  . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img  . '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name . '</b> like your comment in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -4241,15 +4297,23 @@ class Business_profile_live extends MY_Controller {
 
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL .$url. '">view</a></p>
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="user-img-td">
+                                                    <div class="user-img">
+                                                        <img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="user-content">
+                                                        <p>
+                                                            <b>' . $businessUser->company_name . '</b> like your comment in business profile.
+                                                        </p>
+                                                        <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    </div>
+                                                </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL .$url. '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -4709,15 +4773,23 @@ class Business_profile_live extends MY_Controller {
 
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name. '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessLoginUser->company_name . '</b> like your post in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL. $url . '">view</a></p>
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="user-img-td">
+                                                    <div class="user-img">
+                                                        <img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name. '">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="user-content">
+                                                        <p>
+                                                            <b>' . $businessLoginUser->company_name . '</b> like your post in business profile.
+                                                        </p>
+                                                        <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    </div>
+                                                </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL. $url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -4976,15 +5048,23 @@ class Business_profile_live extends MY_Controller {
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img. '" width="50" height="50" alt="' . $businessLoginUser->company_name . '">
+                                            </div>
+                                        </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url. '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -5196,15 +5276,23 @@ class Business_profile_live extends MY_Controller {
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' .$businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL .$url . '">view</a></p>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img. '" width="50" height="50" alt="' . $businessLoginUser->company_name . '">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="user-content">
+                                                <p>
+                                                    <b>' .$businessLoginUser->company_name . '</b> is comment on your post in business profile.
+                                                </p>
+                                                <span>'.date('j F').' at '.date('H:i').'</span>
+                                            </div>
+                                        </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL .$url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -5865,15 +5953,23 @@ class Business_profile_live extends MY_Controller {
 
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $likepostid[0]['user_id']))->row()->contact_email;
                     $email_html = '';
-                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is like your photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name . '</b> is like your photo in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -6104,15 +6200,23 @@ class Business_profile_live extends MY_Controller {
 
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $likepostid[0]['user_id']))->row()->contact_email;
                             $email_html = '';
-                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is like your photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
+                            $email_html .= '<table cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td class="user-img-td">
+                                                        <div class="user-img">
+                                                            <img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-content">
+                                                            <p>
+                                                                <b>' . $businessUser->company_name . '</b> is like your photo in business profile.
+                                                            </p>
+                                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                                        </div>
+                                                    </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url. '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -6266,15 +6370,23 @@ class Business_profile_live extends MY_Controller {
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $buspostid[0]['user_id']))->row()->contact_email;
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is comment on your photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                            </div>
+                                        </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name . '</b> is comment on your photo in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -6502,15 +6614,23 @@ class Business_profile_live extends MY_Controller {
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $buspostid[0]['user_id']))->row()->contact_email;
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name. '</b> is comment on your photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                            </div>
+                                        </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name. '</b> is comment on your photo in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -6750,15 +6870,23 @@ class Business_profile_live extends MY_Controller {
 
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                     $email_html = '';
-                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url. '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -6892,15 +7020,23 @@ class Business_profile_live extends MY_Controller {
 
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                             $email_html = '';
-                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-                                            </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url  . '">view</a></p>
+                            $email_html .= '<table cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td class="user-img-td">
+                                                        <div class="user-img">
+                                                            <img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-content">
+                                                            <p>
+                                                                <b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.
+                                                            </p>
+                                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                                        </div>
+                                                    </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url  . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -7016,15 +7152,23 @@ class Business_profile_live extends MY_Controller {
 
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                     $email_html = '';
-                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                    $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . $url. '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -7155,15 +7299,23 @@ class Business_profile_live extends MY_Controller {
                 
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                             $email_html = '';
-                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                            $email_html .= '<table cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td class="user-img-td">
+                                                        <div class="user-img">
+                                                            <img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '">
+                                                        </div>
+                                                    </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL .$url . '">view</a></p>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL .$url . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -8187,15 +8339,23 @@ class Business_profile_live extends MY_Controller {
                 }
 
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
-                                            <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> send contact request in business profile.</p>
-						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                $email_html .= '<table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="user-img-td">
+                                            <div class="user-img">
+                                                <img src="' . $img . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '">
+                                            </div>
+                                        </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>' . $this->data['business_login_company_name'] . '</b> send contact request in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">view</a></p>
+                                            <td class="mail-btn">
+                                                <a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">View</a>
                                             </td>
 					</tr>
                                     </table>';
@@ -11706,17 +11866,23 @@ Your browser does not support the audio tag.
                             }
 
                             $email_html = '';
-                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            $email_html .= '<table cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="'.MAIL_TD_1.'">
-                                                    <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                <td class="user-img-td">
+                                                    <div class="user-img">
+                                                        <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                    </div>
                                                 </td>
-                                                <td style="padding:5px;">
-                                                    <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> gives a review to your business profile.</p>
-                                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                <td>
+                                                    <div class="user-content">
+                                                        <p>
+                                                            <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> gives a review to your business profile.
+                                                        </p>
+                                                        <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    </div>
                                                 </td>
-                                                <td style="'.MAIL_TD_3.'">
-                                                    <p><a class="btn" href="'.BASEURL.'company/'.$business_slug.'">view</a></p>
+                                                <td class="mail-btn">
+                                                    <a class="btn" href="'.BASEURL.'company/'.$business_slug.'">View</a>
                                                 </td>
                                             </tr>
                                             </table>';

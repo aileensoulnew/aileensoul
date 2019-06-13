@@ -111,17 +111,24 @@ class User_post extends MY_Controller {
                     }
                 }
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                $email_html .= '<table cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td style="'.MAIL_TD_1.'">
-                                        <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                    <td class="user-img-td">
+                                        <div class="user-img">
+                                            <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                        </div>
                                     </td>
-                                    <td style="padding:5px;">
-                                        <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
-                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    <td>
+                                        <div class="user-content">
+                                            <p>
+                                                <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.
+                                            </p>
+                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                            
+                                        </div>                                        
                                     </td>
-                                    <td style="'.MAIL_TD_3.'">
-                                        <p><a class="btn" href="'.$url.'">view</a></p>
+                                    <td class="mail-btn">
+                                        <a href="'.$url.'" class="btn">View</a>
                                     </td>
                                 </tr>
                                 </table>';
@@ -178,17 +185,24 @@ class User_post extends MY_Controller {
                     }
                 }
                 $email_html = '';
-                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                $email_html .= '<table cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td style="'.MAIL_TD_1.'">
-                                        <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                    <td class="user-img-td">
+                                        <div class="user-img">
+                                            <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                        </div>                                        
                                     </td>
-                                    <td style="padding:5px;">
-                                        <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
-                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    <td>
+                                        <div class="user-content">
+                                            <p>
+                                                <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.
+                                            </p>
+                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                            
+                                        </div>
                                     </td>
-                                    <td style="'.MAIL_TD_3.'">
-                                        <p><a class="btn" href="'.$url.'">view</a></p>
+                                    <td class="mail-btn">                                        
+                                        <a href="'.$url.'" class="btn">View</a>
                                     </td>
                                 </tr>
                                 </table>';
@@ -386,17 +400,24 @@ class User_post extends MY_Controller {
                         }
 
                         $email_html = '';
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="'.MAIL_TD_1.'">
-                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>                                                
                                             </td>
-                                            <td style="padding:5px;">
-                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> commented on your post.</p>
-                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> commented on your post.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    
+                                                </div>                                                
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            <td class="mail-btn">
+                                                <a href="'.$url.'" class="btn">View</a>
                                             </td>
                                         </tr>
                                         </table>';
@@ -501,20 +522,25 @@ class User_post extends MY_Controller {
                                 }
 
                                 $email_html = '';
-                                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                $email_html .= '<table cellpadding="0" cellspacing="0">
                                                 <tr>
-                                                    <td style="'.MAIL_TD_1.'">
-                                                        <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                    <td class="user-img-td">
+                                                        <div class="user-img">
+                                                            <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                        </div>       
                                                     </td>
-                                                    <td style="padding:5px;">';
-                                
-                                $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.</p>';   
-                                
-                                $email_html .= '<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
-                                        </td>
-                                        <td style="'.MAIL_TD_3.'">
-                                            <p><a class="btn" href="'.$url.'">view</a></p>
-                                        </td>
+                                                    <td style="padding:5px;">
+                                                        <div class="user-content">
+                                                            <p>
+                                                                <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.
+                                                            </p>
+                                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                                            
+                                                        </div>
+                                                    </td>
+                                            <td class="mail-btn">
+                                                <a href="'.$url.'" class="btn">View</a>
+                                            </td>
                                     </tr>
                                     </table>';
 
@@ -693,17 +719,24 @@ class User_post extends MY_Controller {
                         }
 
                         $email_html = '';
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="'.MAIL_TD_1.'">
-                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your comment.</p>
-                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your comment.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            <td class="mail-btn">
+                                                <a href="'.$url.'" class="btn">View</a>
                                             </td>
                                         </tr>
                                         </table>';
@@ -1076,17 +1109,23 @@ class User_post extends MY_Controller {
                                 $login_user_img = base_url('assets/img/female-user.jpg');
                             }
                         }
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="'.MAIL_TD_1.'">
-                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your post.</p>
-                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your post.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            <td class="mail-btn">
+                                                <a href="'.$url.'" class="btn">View</a>
                                             </td>
                                         </tr>
                                         </table>';
@@ -2068,9 +2107,15 @@ class User_post extends MY_Controller {
         $to_email = $this->input->post('to_email');
         $email_data = $this->user_model->getUserByEmail($to_email);
         if($email_data)
-        {
-            $unsubscribe = $this->input->post('unsubscribe');
-            $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe);
+        {            
+            $unsubscribe_link = $this->input->post('unsubscribe');
+
+            $this->data['main_part'] = $email_html;
+            $this->data['unsubscribe_link'] = $unsubscribe_link;
+
+            $email_html = $this->load->view('email_template/all_mail',$this->data,TRUE);
+
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email,$unsubscribe);
         }
     }
 
@@ -2169,17 +2214,24 @@ class User_post extends MY_Controller {
                         }
 
                         $email_html = '';
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="'.MAIL_TD_1.'">
-                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> started following you in business profile.</p>
-                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> started following you in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="'.BASEURL.$login_userdata['user_slug'].'">view</a></p>
+                                            <td class="mail-btn">
+                                                <a href="'.BASEURL.$login_userdata['user_slug'].'" class="btn">View</a>
                                             </td>
                                         </tr>
                                         </table>';
@@ -3004,12 +3056,14 @@ class User_post extends MY_Controller {
                             }
 
                             $email_html = '';
-                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            $email_html .= '<table cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="'.MAIL_TD_1.'">
-                                                    <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                <td class="user-img-td">
+                                                    <div class="user-img">
+                                                        <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                    </div>
                                                 </td>
-                                                <td style="padding:5px;">';
+                                                <td><div class="user-content">';
                             if($mention == 0)
                             {
                                 $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> replied on your comment.</p>';
@@ -3018,10 +3072,10 @@ class User_post extends MY_Controller {
                             {
                                 $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.</p>';   
                             }
-                            $email_html .= '<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                            $email_html .= '<span>'.date('j F').' at '.date('H:i').'</span></div>
                                     </td>
-                                    <td style="'.MAIL_TD_3.'">
-                                        <p><a class="btn" href="'.$url.'">view</a></p>
+                                    <td class="mail-btn">
+                                        <a href="'.$url.'" class="btn">View</a>
                                     </td>
                                 </tr>
                                 </table>';
@@ -3103,17 +3157,24 @@ class User_post extends MY_Controller {
                                 }
 
                                 $email_html = '';
-                                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                $email_html .= '<table cellpadding="0" cellspacing="0">
                                                 <tr>
-                                                    <td style="'.MAIL_TD_1.'">
-                                                        <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                    <td class="user-img-td">
+                                                        <div class="user-img">
+                                                            <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                        </div>
                                                     </td>
                                                     <td style="padding:5px;">
-                                                    <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> replied on your comment.</p>
-                                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                        <div class="user-content">
+                                                            <p>
+                                                                <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> replied on your comment.
+                                                            </p>
+                                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                                            
+                                                        </div>
                                                     </td>
-                                                    <td style="'.MAIL_TD_3.'">
-                                                        <p><a class="btn" href="'.$url.'">view</a></p>
+                                                    <td class="mail-btn">
+                                                        <a href="'.$url.'" class="btn">View</a>       
                                                     </td>
                                                 </tr>
                                                 </table>';
@@ -3220,12 +3281,14 @@ class User_post extends MY_Controller {
                                     }
 
                                     $email_html = '';
-                                    $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                    $email_html .= '<table cellpadding="0" cellspacing="0">
                                                     <tr>
-                                                        <td style="'.MAIL_TD_1.'">
-                                                            <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                        <td class="user-img-td">
+                                                            <div class="user-img">
+                                                                <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                            </div>
                                                         </td>
-                                                        <td style="padding:5px;">';
+                                                        <td><div class="user-content">';
                                     if($mention == 0)
                                     {
                                         $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> replied on your comment.</p>';
@@ -3234,10 +3297,10 @@ class User_post extends MY_Controller {
                                     {
                                         $email_html .= '<p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> mentioned you in a comment.</p>';   
                                     }
-                                    $email_html .= '<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    $email_html .= '<span>'.date('j F').' at '.date('H:i').'</span></div>  
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            <td class="mail-btn">
+                                                <a href="'.$url.'" class="btn">View</a>
                                             </td>
                                         </tr>
                                         </table>';
@@ -3507,16 +3570,23 @@ class User_post extends MY_Controller {
                                     $login_user_img = base_url('assets/img/female-user.jpg');
                                 }
                             }
-                            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            $email_html .= '<table cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="'.MAIL_TD_1.'">
-                                                    <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                <td class="user-img-td">
+                                                    <div class="user-img">
+                                                        <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                    </div>
                                                 </td>
-                                                <td style="padding:5px;">
-                                                    <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> shared your post.</p>
-                                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                <td>
+                                                    <div class="user-content">
+                                                        <p>
+                                                            <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> shared your post.
+                                                        </p>
+                                                        <span>'.date('j F').' at '.date('H:i').'</span>
+                                                        
+                                                    </div>
                                                 </td>
-                                                <td style="'.MAIL_TD_3.'">
+                                                <td class="mail-btn">
                                                     <p><a class="btn" href="'.$share_post_url.'">view</a></p>
                                                 </td>
                                             </tr>
@@ -4003,17 +4073,24 @@ class User_post extends MY_Controller {
             }
         }
         $email_html = '';
-        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+        $email_html .= '<table cellpadding="0" cellspacing="0">
                         <tr>
-                            <td style="'.MAIL_TD_1.'">
-                                <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                            <td class="user-img-td">
+                                <div class="user-img">
+                                    <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                </div>
                             </td>
-                            <td style="padding:5px;">
-                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> add new post.</p>
-                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                            <td>
+                                <div class="user-content">
+                                    <p>
+                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> add new post.
+                                    </p>
+                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                    
+                                </div>
                             </td>
-                            <td style="'.MAIL_TD_3.'">
-                                <p><a class="btn" href="'.$url.'">view</a></p>
+                            <td class="mail-btn">
+                                <a href="'.$url.'" class="btn">View</a>                                
                             </td>
                         </tr>
                         </table>';

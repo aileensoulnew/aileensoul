@@ -53,35 +53,14 @@
 					</div>
 					<div class="column-wrap">
 						<div class="column">
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-									<td class="user-img-td">
-										<div class="user-img">
-										</div>
-									</td>
-									<td>
-										<div class="user-content">
-											<p>
-												<b>Ailsa Adam</b>  accepted your contact request.
-											</p>
-											<span>8 June at 16:17</span>
-											
-										</div>
-										
-									</td>
-									<td class="mail-btn">
-										<a href="" class="btn">View</a>
-									</td>
-									
-								</tr>
-							</table>
+							<?php echo $main_part; ?>
 						</div>
 						<div class="p10 fw"></div>
 						<div class="column-bottom">
 							<table cellpadding="0" cellspacing="0">
 								<tr>
 									<td style="padding-bottom: 10px;">
-										<a href="#">Unsubscribe</a>
+										<a href="<?php echo $unsubscribe_link; ?>">Unsubscribe</a>
 									</td>
 								</tr>
 								<tr>
