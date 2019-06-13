@@ -1224,10 +1224,18 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
     $scope.rowperpage = 6;
     $scope.buttonText = "Load More";
 
-    
+    $scope.page_number = 0;
+    $scope.total_record = '';
+    $scope.perpage_record = 5;
+
+    var isProcessing = false;
     // Fetch data
     $scope.getDashboardPdf = function (pagenum) {
-        $('.post_loader').show();
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        $('.loadmore').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
              if($scope.$parent.pade_reload == true)
             {
@@ -1240,7 +1248,7 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             url: base_url + "userprofile_page/pdf_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
-            $('.post_loader').hide();
+            $('.loadmore').hide();
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
@@ -1253,11 +1261,13 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $scope.perpage_record = response.data.pagedata.perpage_record;
                 //$scope.row += $scope.rowperpage;
                 if ($scope.pdfData != undefined) {
+                    isProcessing = false;
                     $scope.page_number = response.data.pagedata.page;
                     for (var i in response.data.pdfrecord) {
                         $scope.pdfData.push(response.data.pdfrecord[i]);
                     }
                 } else {
+                    isProcessing = false;
                     $scope.pagecntctData = response.data;
                     $scope.pdfData = response.data.pdfrecord;
                 }                
@@ -1679,6 +1689,10 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
     $scope.rowperpage = 6;
     $scope.buttonText = "Load More";
 
+    $scope.page_number = 0;
+    $scope.total_record = '';
+    $scope.perpage_record = 5;
+
     $scope.openModal = function() {
         document.getElementById('myModalVideo').style.display = "block";
         $("body").addClass("modal-open");
@@ -1733,11 +1747,15 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
         //$("#videoplayer_"+slideIndex)[0].play(); 
         setTimeout(function(){ $("#videoplayer_"+slideIndex)[0].play(); }, 300);
     }
-
+    var isProcessing = false;
     
     // Fetch data
     $scope.getDashboardVideos = function (pagenum) {
-        $('.post_loader').show();
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        $('.loadmore').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
              if($scope.$parent.pade_reload == true)
@@ -1761,14 +1779,16 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 $scope.pagedata = response.data.videoData.pagedata;
                 $scope.page_number = response.data.videoData.pagedata.page;
                 $scope.total_record = response.data.videoData.pagedata.total_record;
-                $scope.perpage_record = response.data.videoData.pagedata.perpage_record;
+                $scope.perpage_record = response.data.videoData.pagedata.perpage_record;                
                 //$scope.row += $scope.rowperpage;
                 if ($scope.videoData != undefined) {
+                    isProcessing = false;
                     $scope.page_number = response.data.videoData.pagedata.page;
                     for (var i in response.data.videoData.videorecord) {
                         $scope.videoData.push(response.data.videoData.videorecord[i]);
                     }
                 } else {
+                    isProcessing = false;
                     $scope.pagecntctData = response.data.videoData;
                     $scope.videoData = response.data.videoData.videorecord;
                 }
@@ -1831,7 +1851,7 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 if (mod_page > 0) {
                     available_page = available_page + 1;
                 }
-                if (parseInt(page) <= parseInt(available_page)) {
+                if (parseInt(page) <= parseInt(available_page)) {                    
                     var pagenum = parseInt($scope.page_number) + 1;// parseInt($(".page_number").val()) + 1;
                     $scope.getDashboardVideos(pagenum);
                 }
@@ -2041,7 +2061,7 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             return;
         }
         isProcessing = true;
-        $('.post_loader').show();
+        $('.loadmore').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
              if($scope.$parent.pade_reload == true)
@@ -2054,7 +2074,7 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             url: base_url + "userprofile_page/photos_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
-            $('.post_loader').hide();
+            $('.loadmore').hide();
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
