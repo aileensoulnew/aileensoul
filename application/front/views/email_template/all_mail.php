@@ -20,7 +20,7 @@
 	.column{float: left; width: 100%;}
 	.user-img{width: 50px; height: 50px;}
 	.user-img img{width: 100%;}
-	.btn{background: #1b8ab9; font-size: 14px; color: #fff; padding: 5px 15px; text-decoration: none; border-radius: 3px; display: inline-block;}
+	.btn{background: #1b8ab9; font-size: 14px; color: #fff !important; padding: 5px 15px; text-decoration: none; border-radius: 3px; display: inline-block;}
 	.user-content p{margin: 0; color: #5c5c5c; font-size: 14px;}
 	.user-content span{font-size:12px; color: #7b7b7b; }
 	.p10{padding: 10px;}

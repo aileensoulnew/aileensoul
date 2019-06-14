@@ -9,12 +9,14 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-        <link rel="stylesheet" href="css/tooltipster.main.min.css">
+        <!-- <link rel="stylesheet" href="css/tooltipster.main.min.css"> -->
+        <link rel="stylesheet" href="css/tooltipster.bundle.min.css">
         <link rel="stylesheet" href="css/component.css" />
         <link rel="stylesheet" href="css/n-commen.css">
         <link rel="stylesheet" href="css/n-style.css">
 		<style>
 			.all-post-box .post-bottom{border-bottom:1px solid #d2d2d2;}
+            .tooltip_templates { display: none; }
 		</style>
     </head>
     <body class="two-hd search-new-page">
@@ -658,21 +660,7 @@
                             </div>
                         </div>    
                     </div>
-                    <div class="middle-section">
-                        <div class="box">
-                            <h1>12</h1>
-                            <h1>12</h1>
-                            <h1>12</h1>
-                            <button class="btn btn-default tip" data-toggle="tooltip" title="Tooltip on left" type="button">Tooltip</button>
-                        </div>
-
-                        <span class="tooltip" data-tooltip-content="#tooltip_content">This span has a tooltip with HTML when you hover over it!</span>
-
-                        <div class="tooltip_templates">
-                            <span id="tooltip_content">
-                                <img src="myimage.png" /> <strong>This is the content of my tooltip!</strong>
-                            </span>
-                        </div>
+                    <div class="middle-section">                        
                       
                         <div class="user-tooltip">
                             <div class="tooltip-cover-img">
@@ -707,6 +695,43 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- HTML to write -->
+                        <a href="#" id="example" data-toggle="tooltip" title='<div class="user-tooltip">
+                            <div class="tooltip-cover-img">
+                                <img src="https://www.aileensoul.com/uploads/user_bg/main/1551782433.png">
+                            </div>
+                            <div class="tooltip-user-detail">
+                                <div class="tooltip-user-img">
+                                    <img src="https://www.aileensoul.com/uploads/user_profile/thumbs/1556805253.png">
+                                </div>
+                                <h4>Harshad Patel</h4>
+                                <p>Project Scientist from Ahmedabad</p>
+                                <p><span><b>104</b> Posts</span> <span><b>257</b> Connections</span> <span><b>543</b> Followers</span></p>
+                                <ul class="">
+                                    <li>
+                                        <div class="user-img">
+                                            <img src="https://www.aileensoul.com/uploads/user_profile/thumbs/1556805253.png">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="user-img">
+                                            <img src="https://www.aileensoul.com/uploads/user_profile/thumbs/1556805253.png">
+                                        </div>
+                                    </li>
+                                    <li class="m-contacts">
+                                        <b>Nehal Kher</b> and <b>23</b> more Mutual contacts
+                                    </li>
+                                </ul>
+                                <div class="tooltip-btns">
+                                    <a href="" class="btn-new-1">Add to Contact</a>
+                                    <a href="" class="btn-new-1">Follow</a>
+                                    <a href="" class="btn-new-1">Message</a>
+                                </div>
+                            </div>
+                        </div>'>Hover over me</a>
+                       
+
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane search-all fade active in" id="search-all" role="tabpanel" aria-labelledby="search-all-tab">
                                 <div class="search-all-box">
@@ -1043,12 +1068,13 @@
 
         
        
-    <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="js/classie.js"></script>
-        <script src="js/tooltipster.main.min.js"></script>
+        <script src="js/tooltipster.bundle.min.js"></script>
+        <!-- <script src="js/tooltipster.main.min.js"></script> -->
         <script>
         var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
             menuBottom = document.getElementById( 'cbp-spmenu-s4' ),
@@ -1286,13 +1312,24 @@
         //   $(".btn").tooltip(options);
         //  });
 
-        $(document).ready(function() {
+        /*$(document).ready(function() {
             //$('.tooltip').tooltipster();
             $('.tooltip').tooltipster({
                 contentCloning: true
             });
-        });
+        });*/
 
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltipster({
+                contentCloning: true,
+                contentAsHTML: true,
+            });
+          /*$('[data-toggle="tooltip"]').tooltip({
+                contentAsHTML:true,                
+                repositionOnScroll:true
+            });*/
+          // $('#example').tooltip();
+        });
    
     </script>
         
