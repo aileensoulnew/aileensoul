@@ -211,14 +211,18 @@ class Registration extends CI_Controller {
                             $login_user_img = base_url('assets/img/man-user.jpg');
                         }                        
                         $msg = "";
-                        $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
+                        $msg .= '<table cellpadding="0" cellspacing="0">
                                     <tr>                                
-                                        <td style="padding:5px;">
-                                            <p><b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.</p>
-                                            <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                        <td>
+                                            <div class="user-content">
+                                                <p>
+                                                    <b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.
+                                                </p>
+                                                <span>'.date('j F').' at '.date('H:i').'</span>
+                                            </div>
                                         </td>
-                                        <td style="'.MAIL_TD_3.'">
-                                            <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_insert . '">Verify</a></p>
+                                        <td class="mail-btn">
+                                            <a href="' . base_url() . 'registration/verify/' . $user_insert . '" class="btn">View</a>
                                         </td>
                                     </tr>
                                 </table>';
@@ -712,14 +716,18 @@ class Registration extends CI_Controller {
                         $login_user_img = base_url('assets/img/man-user.jpg');
                     }                        
                     $msg = "";
-                    $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
+                    $msg .= '<table cellpadding="0" cellspacing="0">
                                 <tr>                                
-                                    <td style="padding:5px;">
-                                        <p><b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.</p>
-                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    <td>
+                                        <div class="user-content">
+                                            <p>
+                                                <b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.
+                                            </p>
+                                            <span>'.date('j F').' at '.date('H:i').'</span>
+                                        </div>
                                     </td>
-                                    <td style="'.MAIL_TD_3.'">
-                                        <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_insert . '">Verify</a></p>
+                                    <td class="mail-btn">
+                                        <a href="' . base_url() . 'registration/verify/' . $user_insert . '" class="btn">View</a>
                                     </td>
                                 </tr>
                             </table>';
@@ -901,7 +909,16 @@ class Registration extends CI_Controller {
         $subject = $this->input->post('subject');
         $email_html = $this->input->post('email_html');
         $to_email = $this->input->post('to_email');
-        $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe = "");
+        $unsubscribe_link = "";
+
+        $this->data['main_part'] = $email_html;
+        $this->data['unsubscribe_link'] = $unsubscribe_link;
+
+        $email_html = $this->load->view('email_template/all_mail',$this->data,TRUE);
+
+        $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email,$unsubscribe);
+
+        // $send_email = $this->email_model->send_email($subject, $email_html, $to_email,$unsubscribe = "");
         
     }
 

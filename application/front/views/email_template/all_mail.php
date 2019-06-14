@@ -58,11 +58,13 @@
 						<div class="p10 fw"></div>
 						<div class="column-bottom">
 							<table cellpadding="0" cellspacing="0">
+								<?php if($unsubscribe_link != ''): ?>
 								<tr>
 									<td style="padding-bottom: 10px;">
 										<a href="<?php echo $unsubscribe_link; ?>">Unsubscribe</a>
 									</td>
 								</tr>
+								<?php endif; ?>
 								<tr>
 									<td>
 										Aileensoul Technologies Private Limited
