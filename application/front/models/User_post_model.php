@@ -1994,7 +1994,7 @@ class User_post_model extends CI_Model {
             $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
             if($value['user_type'] == '1')
             {                
-                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background ,jt.name as title_name,d.degree_name")->from("user u");
                 $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
                 $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
                 $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
@@ -2005,6 +2005,11 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
+                $result_array[$key]['user_data']['follower_count'] = $this->common->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['contact_count'] = $this->common->getContactCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['post_count'] = $this->common->get_post_count($value['user_id'])[0];
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['user_id'] . ' AND follow_to =' . $user_id . ') OR (follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
+                $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
             }
             else
             {                
@@ -2024,6 +2029,11 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
+                $result_array[$key]['user_data']['follower_count'] = $this->common->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['contact_count'] = '';
+                $result_array[$key]['user_data']['post_count'] = $this->common->get_post_count($value['user_id'])[0];
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['user_id'] . ' AND follow_to =' . $user_id . ') OR (follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
+                $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
             }
 
             if ($value['post_for'] == 'opportunity') {
@@ -2062,9 +2072,7 @@ class User_post_model extends CI_Model {
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
-
-            }
-            elseif ($value['post_for'] == 'article') {
+            } elseif ($value['post_for'] == 'article') {
                 $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
                 $this->db->where('pa.id_post_article', $value['post_id']);
                 $this->db->where('pa.status', 'publish');
@@ -2074,9 +2082,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();                
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
-
-            }
-            elseif($value['post_for'] == 'share'){
+            } elseif($value['post_for'] == 'share'){
                 $this->db->select("*")->from("user_post_share");
                 $this->db->where('id_user_post_share', $value['post_id']);                
                 $query = $this->db->get();
@@ -2130,15 +2136,16 @@ class User_post_model extends CI_Model {
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
+            $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['user_id']);
 
             /*foreach ($postCommentData as $key1 => $value1) {
                 $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
                 $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
             }*/
 
-            $result_array[$key]['page_data']['page'] = $page;
+            /*$result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
-            $result_array[$key]['page_data']['perpage_record'] = $limit;
+            $result_array[$key]['page_data']['perpage_record'] = $limit;*/
         }
        // echo '<pre>';
        // print_r($result_array);

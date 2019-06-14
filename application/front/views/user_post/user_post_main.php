@@ -497,6 +497,57 @@
 
         <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
             <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
+
+                <div class="user-tooltip">
+                    <div class="tooltip-cover-img">
+                        <img ng-if="post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
+                        <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                    </div>
+                    <div class="tooltip-user-detail">
+                        <div class="tooltip-user-img">
+                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.post_data.user_type == '1' && post.user_data.user_image != ''">
+
+                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                        </div>
+                        <h4 ng-if="post.post_data.user_type == '1'" ng-bind="post.user_data.fullname"></h4>
+                        <h4 ng-if="post.post_data.user_type == '2'" ng-bind="post.user_data.company_name"></h4>
+
+                        <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name != null" ng-bind="post.user_data.title_name"></p>
+                        <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
+                        <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
+                        <p ng-if="post.post_data.user_type == '2' && post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
+                        <p ng-if="post.post_data.user_type == '2' && !post.user_data.industry_name">CURRENT WORK</p>
+
+                        <p>
+                            <span><b>{{post.user_data.post_count}}</b> Posts</span>
+                            <span><b>{{post.user_data.contact_count.total}}</b> Connections</span>
+                            <span><b>{{post.user_data.follower_count.total}}</b> Followers</span>
+                        </p>
+
+                        <ul class="">
+                            <li ng-repeat="_friend in post.mutual_friend | limitTo:2">
+                                <div class="user-img">
+                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+
+                                    <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                    <img ng-if="_friend.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                </div>
+                            </li>                            
+                            <li class="m-contacts">
+                                <b>Nehal Kher</b>{{post.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{post.mutual_friend.length - 1}}</b> more Mutual contacts
+                            </li>
+                        </ul>
+                        <div class="tooltip-btns">
+                            <a href="" class="btn-new-1">Add to Contact</a>
+                            <a href="" class="btn-new-1">Follow</a>
+                            <a href="" class="btn-new-1">Message</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
                 <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">

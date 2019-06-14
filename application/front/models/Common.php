@@ -1032,8 +1032,7 @@ class Common extends CI_Model {
     }
 
     public function createThumbnail($imageDirectory, $imageName, $thumbDirectory, $thumbWidth) {
-        
-         /* read the source image */
+        /* read the source image */
         $source_image = imagecreatefromjpeg("$imageDirectory/$imageName");
         $width = imagesx($source_image);
         $height = imagesy($source_image);
@@ -1153,5 +1152,12 @@ class Common extends CI_Model {
         imagedestroy($newImage);
 
         return true;
+    }
+
+    public function mutual_friend($login_user_id,$user_id){
+        $sql = "SELECT u.user_id,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background,u.user_gender FROM ailee_user_contact uc LEFT JOIN ailee_user AS u ON u.user_id = (CASE WHEN uc.from_id='$user_id' THEN uc.to_id ELSE uc.from_id END) LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id WHERE (uc.from_id = '$user_id' OR uc.to_id = '$user_id') AND uc.status = 'confirm' AND u.user_id IN(SELECT u.user_id FROM ailee_user_contact uc LEFT JOIN ailee_user AS u ON u.user_id = (CASE WHEN uc.from_id='$login_user_id' THEN uc.to_id ELSE uc.from_id END) WHERE (uc.from_id = '$login_user_id' OR uc.to_id = '$login_user_id') AND uc.status = 'confirm') ORDER BY uc.modify_date DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
     }
 }
