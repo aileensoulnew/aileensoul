@@ -2005,10 +2005,17 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
-                $result_array[$key]['user_data']['follower_count'] = $this->common->getFollowerCount($value['user_id'])[0];
-                $result_array[$key]['user_data']['contact_count'] = $this->common->getContactCount($value['user_id'])[0];
-                $result_array[$key]['user_data']['post_count'] = $this->common->get_post_count($value['user_id'])[0];
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['user_id'] . ' AND follow_to =' . $user_id . ') OR (follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
+                
+                $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+                $contact_count = $this->common->getContactCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+                $post_count = $this->common->get_post_count($value['user_id']);
+                $result_array[$key]['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
                 $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
 
                 $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
@@ -2043,10 +2050,13 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
-                $result_array[$key]['user_data']['follower_count'] = $this->common->getFollowerCount($value['user_id'])[0];
+                
+                $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
                 $result_array[$key]['user_data']['contact_count'] = '';
-                $result_array[$key]['user_data']['post_count'] = $this->common->get_post_count($value['user_id'])[0];
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['user_id'] . ' AND follow_to =' . $user_id . ') OR (follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
+                $result_array[$key]['user_data']['post_count'] = '';
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
                 $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
             }
 

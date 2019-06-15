@@ -1080,7 +1080,8 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
 
-                $('[data-toggle="tooltip"]').tooltipster({                    
+                $('[data-toggle="tooltip"]').tooltipster({
+                    contentCloning: false,
                     contentAsHTML: true,
                     interactive: true,
                     delay:500,
@@ -1155,32 +1156,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 if(success.data.contact_suggetion_5)
                 {
                     $scope.contact_suggetion_5 = success.data.contact_suggetion_5;
-                }
-                /*$scope.contact_suggetion.push(success.data.contact_suggetion);
-                /*$scope.contact_suggetion.push(success.data.contact_suggetion);
-                console.log($scope.contact_suggetion);
-                var defaultOptions = {
-                    loop: false,
-                    nav: true,
-                    lazyLoad: true,
-                    margin: 0,
-                    video: true,
-                    responsive: {
-                        0: {
-                            items: 2
-                        },
-                        480: {
-                            items: 2
-                        },
-                        768: {
-                            items: 2,
-                        },
-                        1280: {
-                            items: 2
-                        }
-                    }
-                };
-                $('.owl-carousel1').owlCarousel(defaultOptions);*/
+                }                
             } else {
                 // processing = false;
                 // isLoadingData = false;                
@@ -1215,6 +1191,14 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         });
                     }
                 }
+
+                $('[data-toggle="tooltip"]').tooltipster({
+                    contentCloning: false,
+                    contentAsHTML: true,
+                    interactive: true,
+                    delay:500,
+                });
+
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
         }, function (error) {            
@@ -3761,7 +3745,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         })
         .then(function (success) {
             $(".follow-btn-" + id).attr('style','pointer-events:all;');
-            $(".follow-btn-" + id).html($compile(success.data)($scope));
+            setTimeout(function(){
+                $(".follow-btn-" + id).html($compile(success.data)($scope));
+                // $(".follow-btn-" + id).html(success.data);
+            },500);
         },function errorCallback(response) {
             $scope.follow_user(id);
         });
@@ -3776,7 +3763,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         })
         .then(function (success) {
             $(".follow-btn-" + id).attr('style','pointer-events:all;');
-            $(".follow-btn-" + id).html($compile(success.data)($scope));
+            setTimeout(function(){
+                $(".follow-btn-" + id).html($compile(success.data)($scope));
+                // $(".follow-btn-" + id).html(success.data);
+            },500);
         },function errorCallback(response) {
             $scope.unfollow_user(id);
         });
