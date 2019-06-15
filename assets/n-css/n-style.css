@@ -300,6 +300,8 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .user-tooltip .tooltip-user-detail ul li.m-contacts{font-size: 13px; color: #7b7b7b; margin-left: 0;}
 .user-tooltip .tooltip-user-detail .tooltip-btns{padding-top: 10px;}
 .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1{font-size: 14px; color: #7b7b7b; border-color: #d2d2d2;     padding: 4px 20px; font-weight: normal;}
+.tooltip_templates { display: none; }
+.tooltipster-content .tooltip_templates { display: block; }
 
 /***  end middle part  ***/
 
