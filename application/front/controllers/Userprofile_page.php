@@ -2900,4 +2900,156 @@ class Userprofile_page extends MY_Controller {
         $all_counter['detail_counter'] = round($user_detail_counter);
         return $this->output->set_content_type('application/json')->set_output(json_encode($all_counter));
     }
+
+    public function addToContactNewTooltip() {
+        $userid = $this->session->userdata('aileenuser');
+        $contact_id = $_POST['contact_id'];
+        $status = $_POST['status'];
+        $id = $_POST['to_id'];
+        $indexCon = $_POST['indexCon'];
+        $contact = $this->userprofile_model->userContactStatus($userid, $id);
+
+        if (count($contact) != 0) {
+            $data = array('status' => $status, 'modify_date' => date('Y-m-d H:i:s', time()));
+            $insert_id = $this->common->update_data($data, 'user_contact', 'id', $contact['id']);
+            $response['status'] = $status;
+        } else {
+            $data = array(
+                'status' => $status,
+                'from_id' => $userid,
+                'to_id' => $id,
+                'not_read' => '2',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_contact');
+            $response['status'] = $status;
+        }
+
+        if($status == "cancel")
+        {            
+            $response['button'] = '<a class="btn-new-1" ng-click="contact('. $contact_id.', \'pending\', '.$id.','.$indexCon.')">Add to contact</a>';
+        }
+        if($status == "pending")
+        {
+            //Send Mail Start
+            $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $id))->row()->email;
+            $login_userdata = $this->user_model->getUserData($userid);
+
+            $url = base_url().$login_userdata['user_slug'];
+            if($login_userdata['user_image'] != "")
+            {
+                $user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+            }
+            else
+            {
+                if($login_userdata['user_gender']  == 'M')
+                {
+                    $user_img = base_url('assets/img/man-user.jpg');
+                }
+
+                if($login_userdata['user_gender']  == 'F')
+                {
+                    $user_img = base_url('assets/img/female-user.jpg');
+                }
+            }
+            $email_html = '';
+            $email_html .= '<table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="user-img-td">
+                                    <div class="user-img">
+                                        <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-content">
+                                        <p>
+                                            <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.
+                                        </p>
+                                        <span>'.date('j F').' at '.date('H:i').'</span>
+                                    </div>
+                                </td>
+                                <td class="mail-btn">
+                                    <a href="'.$url.'" class="btn">View</a>
+                                </td>
+                            </tr>
+                            </table>';
+            $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request in Aileensoul.';
+
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $id))->row();
+            $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+            if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
+            {
+                // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                $url = base_url()."user_post/send_email_in_background";
+                $param = array(
+                    "subject"=>$subject,
+                    "email_html"=>$email_html,
+                    "to_email"=>$to_email_id,
+                    "unsubscribe"=>$unsubscribe,
+                );
+                $this->inbackground->do_in_background($url, $param);
+            }
+            //Send Mail End
+            $response['button'] = '<a class="btn-new-1" ng-click="contact('. $contact_id.', \'cancel\', '.$id.','.$indexCon.')">Request sent</a>';
+        }
+        echo json_encode($response);
+    }
+
+    public function follow_user_tooltip() {
+        $userid = $this->session->userdata('aileenuser');
+        //$follow_id = $_POST['follow_id'];
+        $id = $_POST['to_id'];
+        $follow = $this->userprofile_model->userFollowStatus($userid, $id);
+
+        if (count($follow) != 0) {
+            $data = array('status' => '1');
+            $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            //   $response = $status;
+            $html = '<a class="btn-new-1 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
+        } else {
+            $data = array(
+                'status' => '1',
+                'follow_from' => $userid,
+                'follow_to' => $id,
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_follow');
+            // $response = $status;
+            $html = '<a class="btn-new-1 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
+        }
+
+
+        echo $html;
+    }
+
+    public function unfollow_user_tooltip() {
+        $userid = $this->session->userdata('aileenuser');
+        //$follow_id = $_POST['follow_id'];
+        $id = $_POST['to_id'];
+        $follow = $this->userprofile_model->userFollowStatus($userid, $id);
+
+        if (count($follow) != 0) {
+            $data = array('status' => '0','modify_date' => date("Y-m-d h:i:s"));
+            $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            //   $response = $status;
+
+            $html = '<a class="btn-new-1 follow"  ng-click="follow_user(' . $id . ')">Follow</a>';
+        } else {
+            $data = array(
+                'status' => '0',
+                'follow_from' => $userid,
+                'follow_to' => $id,
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_follow');
+            // $response = $status;
+            $html = '<a class="btn-new-1 follow"  ng-click="follow_user(' . $id . ')">Follow</a>';
+        }
+
+
+        echo $html;
+    }
 }

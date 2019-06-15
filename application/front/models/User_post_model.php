@@ -2010,6 +2010,20 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['user_data']['post_count'] = $this->common->get_post_count($value['user_id'])[0];
                 $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['user_id'] . ' AND follow_to =' . $user_id . ') OR (follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
                 $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
+
+                $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
+                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                {
+                    $result_array[$key]['user_data']['contact_status'] = 1;
+                    $result_array[$key]['user_data']['contact_value'] = $is_userContactInfo['status'];
+                    $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];
+                }
+                else
+                {
+                    $result_array[$key]['user_data']['contact_status'] = 0;
+                    $result_array[$key]['user_data']['contact_value'] = 'new';
+                    $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];   
+                }
             }
             else
             {                

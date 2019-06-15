@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/select2.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/tooltipster.bundle.min.css') ?>">
         <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url('assets/n-css/angular-tooltips.css') ?>"> -->
         <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script>
@@ -657,5 +658,6 @@
         </script>
         <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/select2-4.0.3.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/tooltipster.bundle.min.js?ver=' . time()) ?>"></script>
     </body>
 </html>

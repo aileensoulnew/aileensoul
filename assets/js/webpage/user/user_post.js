@@ -1079,6 +1079,12 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+
+                $('[data-toggle="tooltip"]').tooltipster({                    
+                    contentAsHTML: true,
+                    interactive: true,
+                    delay:500,
+                });
             },1000);
         }, function (error) {});
     }    
@@ -3701,6 +3707,80 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             return false;
         }
     });
+
+    $scope.contact = function (id, status, to_id,indexCon,confirm) {
+        if(confirm == '1')
+        {
+            $("#remove-contact-conform-"+indexCon).modal("show");
+            return false;
+        }
+        $(".contact-btn-"+to_id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addToContactNewTooltip',
+            data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {            
+            if(success.data != "")
+            {
+                $(".contact-btn-"+to_id).attr('style','pointer-events:all;');
+                $(".contact-btn-"+to_id).html($compile(success.data.button)($scope));
+            }
+            $scope.get_all_counter();
+        },function errorCallback(response) {
+            $scope.contact(id, status, to_id,indexCon,confirm);
+        });
+    };
+
+    $scope.remove_contact = function (id, status, to_id,indexCon) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addToContactNewTooltip',
+            data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            if(success.data != "")
+            {
+                $(".contact-btn-"+to_id).html($compile(success.data.button)($scope));
+            }
+            $scope.get_all_counter();
+        },function errorCallback(response) {
+            $scope.remove_contact(id, status, to_id,indexCon);
+        });
+    };
+
+    $scope.follow_user = function (id) {
+        $(".follow-btn-" + id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/follow_user_tooltip',
+            data: 'to_id=' + id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $(".follow-btn-" + id).attr('style','pointer-events:all;');
+            $(".follow-btn-" + id).html($compile(success.data)($scope));
+        },function errorCallback(response) {
+            $scope.follow_user(id);
+        });
+    }
+    $scope.unfollow_user = function (id) {
+        $(".follow-btn-" + id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/unfollow_user_tooltip',
+            data: 'to_id=' + id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $(".follow-btn-" + id).attr('style','pointer-events:all;');
+            $(".follow-btn-" + id).html($compile(success.data)($scope));
+        },function errorCallback(response) {
+            $scope.unfollow_user(id);
+        });
+    }
 });
 
 app.controller('peopleController', function($scope, $http, $compile, $window,$location) {    

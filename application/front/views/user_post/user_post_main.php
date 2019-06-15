@@ -497,53 +497,85 @@
 
         <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
             <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
-
-                <div class="user-tooltip">
-                    <div class="tooltip-cover-img">
-                        <img ng-if="post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
-                        <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                    </div>
-                    <div class="tooltip-user-detail">
-                        <div class="tooltip-user-img">
-                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.post_data.user_type == '1' && post.user_data.user_image != ''">
-
-                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                <div id="tooltip_content_{{post.user_data.user_id}}" class="tooltip_templates">
+                    <div class="user-tooltip">
+                        <div class="tooltip-cover-img">
+                            <img ng-if="post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
+                            <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
                         </div>
-                        <h4 ng-if="post.post_data.user_type == '1'" ng-bind="post.user_data.fullname"></h4>
-                        <h4 ng-if="post.post_data.user_type == '2'" ng-bind="post.user_data.company_name"></h4>
+                        <div class="tooltip-user-detail">
+                            <div class="tooltip-user-img">
+                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.post_data.user_type == '1' && post.user_data.user_image != ''">
 
-                        <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name != null" ng-bind="post.user_data.title_name"></p>
-                        <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
-                        <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
-                        <p ng-if="post.post_data.user_type == '2' && post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
-                        <p ng-if="post.post_data.user_type == '2' && !post.user_data.industry_name">CURRENT WORK</p>
+                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
 
-                        <p>
-                            <span><b>{{post.user_data.post_count}}</b> Posts</span>
-                            <span><b>{{post.user_data.contact_count.total}}</b> Connections</span>
-                            <span><b>{{post.user_data.follower_count.total}}</b> Followers</span>
-                        </p>
+                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                            </div>
+                            <h4 ng-if="post.post_data.user_type == '1'" ng-bind="post.user_data.fullname"></h4>
+                            <h4 ng-if="post.post_data.user_type == '2'" ng-bind="post.user_data.company_name"></h4>
 
-                        <ul class="">
-                            <li ng-repeat="_friend in post.mutual_friend | limitTo:2">
-                                <div class="user-img">
-                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+                            <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name != null" ng-bind="post.user_data.title_name"></p>
+                            <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
+                            <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
+                            <p ng-if="post.post_data.user_type == '2' && post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
+                            <p ng-if="post.post_data.user_type == '2' && !post.user_data.industry_name">CURRENT WORK</p>
 
-                                    <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                            <p>
+                                <span><b>{{post.user_data.post_count}}</b> Posts</span>
+                                <span><b>{{post.user_data.contact_count.total}}</b> Connections</span>
+                                <span><b>{{post.user_data.follower_count.total}}</b> Followers</span>
+                            </p>
 
-                                    <img ng-if="_friend.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                </div>
-                            </li>                            
-                            <li class="m-contacts">
-                                <b>Nehal Kher</b>{{post.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{post.mutual_friend.length - 1}}</b> more Mutual contacts
-                            </li>
-                        </ul>
-                        <div class="tooltip-btns">
-                            <a href="" class="btn-new-1">Add to Contact</a>
-                            <a href="" class="btn-new-1">Follow</a>
-                            <a href="" class="btn-new-1">Message</a>
+                            <ul class="">
+                                <li ng-repeat="_friend in post.mutual_friend | limitTo:2">
+                                    <div class="user-img">
+                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+
+                                        <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                        <img ng-if="_friend.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                    </div>
+                                </li>                            
+                                <li class="m-contacts">
+                                    <span ng-if="post.mutual_friend.length == 1">
+                                        <b>{{post.mutual_friend[0].fullname}}</b> is in mutual contact.
+                                    </span>
+                                    <span ng-if="post.mutual_friend.length > 1">
+                                        <b>{{post.mutual_friend[0].fullname}}</b>{{post.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{post.mutual_friend.length - 1}}</b> more mutual contacts.
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="tooltip-btns">
+                                <ul>
+                                    <li class="contact-btn-{{post.user_data.user_id}}">
+                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'new'" ng-click="contact(post.user_data.contact_id, 'pending', post.user_data.user_id,$index + 1)">Add to contact</a>
+                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'confirm'" ng-click="contact(post.user_data.contact_id, 'cancel', post.user_data.user_id,$index + 1,1)">In Contacts</a>
+                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'pending'" ng-click="contact(post.user_data.contact_id, 'cancel', post.user_data.user_id,$index + 1)">Request sent</a>
+                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'cancel'" ng-click="contact(post.user_data.contact_id, 'pending', post.user_data.user_id,$index + 1)">Add to contact</a>
+                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'reject'" ng-click="contact(post.user_data.contact_id, 'pending', post.user_data.user_id,$index + 1)">Add to contact</a>
+                                    </li>
+                                    <li class="follow-btn-{{post.user_data.user_id}}">
+                                        <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" ng-click="unfollow_user(post.user_data.user_id)">Following</a>
+                                        <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" ng-click="follow_user(post.user_data.user_id)">Follow</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo MESSAGE_URL; ?>user/{{post.user_data.user_slug}}" class="btn-new-1" target="_blank">Message</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade message-box" id="remove-contact-conform-{{$index + 1}}" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lm">
+                        <div class="modal-content">
+                            <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                            <div class="modal-body">
+                                <span class="mes">
+                                    <div class="pop_content">Do you want to remove this contact?<div class="model_ok_cancel"><a class="okbtn" ng-click="remove_contact(post.user_data.contact_id, 'cancel', post.user_data.user_id,$index + 1)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -556,7 +588,7 @@
                 <div class="all-post-top">
                     <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                         <div class="post-img" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
-                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'">
+                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}">
                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.post_data.user_type == '1' && post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
@@ -566,19 +598,19 @@
                         </div>
                                         
                         <div class="post-img" ng-if="post.post_data.user_type == '1' && post.post_data.post_for != 'question' && post.user_data.user_image != ''">
-                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}">
                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
                             </a>
                         </div>
                                         
                         <div class="post-img no-profile-pic" ng-if="post.post_data.user_type == '1' && post.post_data.post_for != 'question' && post.user_data.user_image == ''">
-                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}">
                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                             </a>
                         </div>
 
-                        <div class="post-img" ng-if="post.post_data.user_type == '2' && post.post_data.post_for == 'question'">
+                        <div class="post-img" ng-if="post.post_data.user_type == '2' && post.post_data.post_for == 'question'" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}">
                             <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'">
                                 <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image && post.question_data.is_anonymously == '0'">
                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!post.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
@@ -588,13 +620,13 @@
                         </div>
                                         
                         <div class="post-img" ng-if="post.post_data.user_type == '2' && post.post_data.post_for != 'question' && post.user_data.business_user_image">
-                            <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
+                            <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}">
                                 <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.user_data.business_user_image}}">
                             </a>
                         </div>
                                         
                         <div class="post-img no-profile-pic" ng-if="post.post_data.user_type == '2' && post.post_data.post_for != 'question' && !post.user_data.business_user_image">
-                            <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self">
+                            <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}">
                                 <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE3); ?>"> 
                             </a>
                         </div>
@@ -603,12 +635,12 @@
                             <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                 <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
                                 <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self"></a>
+                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}"></a>
                                 <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self"></a><span class="post-time">{{post.post_data.time_string}}</span>
                             </div>
                                             
                             <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self"></a>
+                                <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="tooltip" data-tooltip-content="#tooltip_content_{{post.user_data.user_id}}"></a>
                                 <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self"></a><span class="post-time">{{post.post_data.time_string}}</span>
                             </div>
                                             
