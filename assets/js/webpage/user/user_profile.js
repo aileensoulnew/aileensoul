@@ -9557,7 +9557,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                     }
                 } else {
                     isProcessing = false;
-                    // $scope.pagecntctData = response.data;
+                    $scope.pagecntctData = response.data;
                     $scope.followersData = response.data.followerrecord;
                     $scope.page_number = response.data.pagedata.page;
                     $scope.total_record = response.data.pagedata.total_record;
@@ -9808,7 +9808,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     }
                 } else {
                     isProcessing = false;
-                    // $scope.pagecntctData = response.data;
+                    $scope.pagecntctData = response.data;
                     $scope.followingData = response.data.followingrecord;
                     $scope.page_number = response.data.pagedata.page;
                     $scope.total_record = response.data.pagedata.total_record;
