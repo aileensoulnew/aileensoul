@@ -3770,7 +3770,14 @@ tags-input .tags{padding: 0;}
 .media-tab ul li a .fa-music:before{background: url(../n-images/music.svg); background-size: 100%;}  
 .media-tab ul li a .fa-file-pdf-o:before{background: url(../n-images/pdf.svg); background-size: 100%;}
 .media-tab ul li a .fa-newspaper-o:before{background: url(../n-images/file.svg); background-size: 100%;}
-.media-tab ul.nav-tabs li.active a .fa-camera:before{/*background: url(../n-images/camera-active.svg);*/}
+
+.media-tab ul.nav-tabs li a:hover .fa:before{ margin-bottom: -2px;}
+.media-tab ul.nav-tabs li.active a .fa-camera:before, .media-tab ul.nav-tabs li a:hover .fa-camera:before {background: url(../n-images/camera-active.png); background-size: 100%;}
+.media-tab ul.nav-tabs li.active a .fa-video-camera:before, .media-tab ul.nav-tabs li a:hover .fa-video-camera:before {background: url(../n-images/video-active.png); background-size: 100%;}  
+.media-tab ul.nav-tabs li.active a .fa-music:before, .media-tab ul.nav-tabs li a:hover .fa-music:before {background: url(../n-images/music-active.png); background-size: 100%;}  
+.media-tab ul.nav-tabs li.active a .fa-file-pdf-o:before, .media-tab ul.nav-tabs li a:hover .fa-file-pdf-o:before {background: url(../n-images/pdf-active.png); background-size: 100%;}
+.media-tab ul.nav-tabs li.active a .fa-newspaper-o:before, .media-tab ul.nav-tabs li a:hover .fa-newspaper-o:before {background: url(../n-images/file-active.png); background-size: 100%;}
+
 
 
 /***  media query  ***/
