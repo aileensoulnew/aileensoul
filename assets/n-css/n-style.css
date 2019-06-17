@@ -319,6 +319,14 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .tooltipster-sidetip.tooltipster-right .tooltipster-arrow-background{border-right-color:#7b7b7b !important;}
 .user-tooltip .tooltip-user-detail  .tooltip-btns ul li{margin: 0;}
 
+.bus-tooltip .user-tooltip .tooltip-user-detail{margin-top: -75px; text-align: left;}
+.bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-user-img{margin-left: 0;}
+.bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns{float: right;}
+.bus-tooltip .tooltip-detail{width: 270px; float: left;}
+.bus-tooltip .tooltip-detail h4{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.bus-tooltip .tooltip-detail p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns{padding-top: 15px;}
+
 /***  end middle part  ***/
 
 /***  right part  ***/
@@ -514,87 +522,7 @@ label.cameraButton input[accept*="camera"] {display: none;}
 .dash-left-title h3 span{vertical-align:top; padding-top:4px; display:inline-block;}
 .bus-letf .dash-left-title h3 span{padding-top: 0;}
 .latest_audio .all-meda a:hover .audio-title, .latest_pdf .all-meda:hover .pdf-title{position: absolute; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 9; text-align: center; padding: 15px 10px; font-size: 13px; font-weight: normal; line-height: 1.2; color: #5c5c5c; cursor: pointer;}
-/** ripple effects  **
 
-.ripple .fa-thumbs-up {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0)
-}
-.ripple .fa-thumbs-up:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10, 10);
-    opacity: 0;
-    transition: transform .5s, opacity 1s
-}
-.ripple .fa-thumbs-up:active:after {
-    transform: scale(0, 0);
-    opacity: .2;
-    transition: 0s
-}
-.ripple .fa-comment-o {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0)
-}
-.ripple .fa-comment-o:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10, 10);
-    opacity: 0;
-    transition: transform .5s, opacity 1s
-}
-.ripple .fa-comment-o:active:after {
-    transform: scale(0, 0);
-    opacity: .2;
-    transition: 0s
-}
-.ripple .fa-thumbs-up.main_color {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0)
-}
-.ripple .fa-thumbs-up.main_color:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #1b8ab9 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10, 10);
-    opacity: 0;
-    transition: transform .5s, opacity 1s
-}
-.ripple .fa-thumbs-up.main_color:active:after {
-    transform: scale(0, 0);
-    opacity: .2;
-    transition: 0s
-}
-/** end ripple effects  **/
 .main-user-option-tablet{display:none;}
 .media-pages-tablet{display:none;}
 .user-btns a.btn3 img{display:none;}
