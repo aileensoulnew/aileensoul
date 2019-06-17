@@ -1228,21 +1228,91 @@
                 <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
                     <div class="comment-box">
                         <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
+
+                            <div id="comment_tooltip_content_{{commentIndex}}" class="tooltip_templates">
+                                <div class="user-tooltip">
+                                    <div class="tooltip-cover-img">
+                                        <img ng-if="comment.profile_background != null && comment.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{comment.profile_background}}">                                        
+                                        <div ng-if="comment.profile_background == null || comment.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                                    </div>
+                                    <div class="tooltip-user-detail">
+                                        <div class="tooltip-user-img">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}" ng-if="comment.user_image != ''">
+
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="comment.user_image == '' && comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="comment.user_image == '' && comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+
+                                        </div>
+
+                                        <h4 ng-bind="comment.username"></h4>
+
+                                        <p ng-if="comment.title_name != null" ng-bind="comment.title_name"></p>
+                                        <p ng-if="comment.title_name == null" ng-bind="comment.degree_name"></p>
+                                        <p ng-if="comment.title_name == null && comment.degree_name == null">CURRENT WORK</p>                                        
+
+                                        <p>
+                                            <span><b>{{comment.post_count}}</b> Posts</span>
+                                            <span><b>{{comment.contact_count}}</b> Connections</span>
+                                            <span><b>{{comment.follower_count}}</b> Followers</span>
+                                        </p>
+
+                                        <ul class="">
+                                            <li ng-if="user_id != comment.commented_user_id" ng-repeat="_friend in comment.mutual_friend | limitTo:2">
+                                                <div class="user-img">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+
+                                                    <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                    <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </div>
+                                            </li>                            
+                                            <li ng-if="user_id != comment.commented_user_id" class="m-contacts">
+                                                <span ng-if="comment.mutual_friend.length == 1">
+                                                    <b>{{comment.mutual_friend[0].fullname}}</b> is in mutual contact.
+                                                </span>
+                                                <span ng-if="comment.mutual_friend.length > 1">
+                                                    <b>{{comment.mutual_friend[0].fullname}}</b>{{comment.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{comment.mutual_friend.length - 1}}</b> more mutual contacts.
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <div class="tooltip-btns" ng-if="user_id != comment.commented_user_id">
+                                            <ul>
+                                                <li class="contact-btn-{{comment.user_id}}">
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'new'" ng-click="contact(comment.contact_id, 'pending', comment.user_id,$index + 1)">Add to contact</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" ng-click="contact(comment.contact_id, 'cancel', comment.user_id,$index + 1,1)">In Contacts</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'pending'" ng-click="contact(comment.contact_id, 'cancel', comment.user_id,$index + 1)">Request sent</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'cancel'" ng-click="contact(comment.contact_id, 'pending', comment.user_id,$index + 1)">Add to contact</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'reject'" ng-click="contact(comment.contact_id, 'pending', comment.user_id,$index + 1)">Add to contact</a>
+                                                </li>
+                                                <li class="follow-btn-{{comment.user_id}}">
+                                                    <a ng-if="comment.follow_status == 1" class="btn-new-1 following" ng-click="unfollow_user(comment.user_id)">Following</a>
+                                                    <a ng-if="comment.follow_status == 0 || !comment.follow_status" class="btn-new-1 follow" ng-click="follow_user(comment.user_id)">Follow</a>
+                                                </li>
+                                                <li>
+                                                    <a href="<?php echo MESSAGE_URL; ?>user/{{comment.user_slug}}" class="btn-new-1" target="_blank">Message</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="post-img">
                                 <div ng-if="comment.user_image != ''">
-                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#comment_tooltip_content_{{commentIndex}}">
                                         <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
                                     </a>
                                 </div>
                                 <div class="post-img" ng-if="comment.user_image == ''">
-                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#comment_tooltip_content_{{commentIndex}}">
                                         <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                 </div>
                             </div>
                             <div class="comment-dis">
-                                <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
+                                <div class="comment-name" data-toggle="tooltip" data-tooltip-content="#comment_tooltip_content_{{commentIndex}}"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
                                 <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
                                     <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true"></p>
                                 </div>
@@ -1281,21 +1351,91 @@
                             </div>
 
                             <div class="post-comment reply-comment" nf-if="comment.comment_reply_data.length > 0" ng-repeat="commentreply in comment.comment_reply_data" ng-init="commentReplyIndex=$index">
+
+                                <div id="comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}" class="tooltip_templates">
+                                    <div class="user-tooltip">
+                                        <div class="tooltip-cover-img">
+                                            <img ng-if="commentreply.profile_background != null && commentreply.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{commentreply.profile_background}}">                                        
+                                            <div ng-if="commentreply.profile_background == null || commentreply.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                                        </div>
+                                        <div class="tooltip-user-detail">
+                                            <div class="tooltip-user-img">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{commentreply.user_image}}" ng-if="commentreply.user_image != ''">
+
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="commentreply.user_image == '' && commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="commentreply.user_image == '' && commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+
+                                            </div>
+
+                                            <h4 ng-bind="commentreply.username"></h4>
+
+                                            <p ng-if="commentreply.title_name != null" ng-bind="commentreply.title_name"></p>
+                                            <p ng-if="commentreply.title_name == null" ng-bind="commentreply.degree_name"></p>
+                                            <p ng-if="commentreply.title_name == null && commentreply.degree_name == null">CURRENT WORK</p>                                        
+
+                                            <p>
+                                                <span><b>{{commentreply.post_count}}</b> Posts</span>
+                                                <span><b>{{commentreply.contact_count}}</b> Connections</span>
+                                                <span><b>{{commentreply.follower_count}}</b> Followers</span>
+                                            </p>
+
+                                            <ul class="">
+                                                <li ng-if="user_id != commentreply.commented_user_id" ng-repeat="_friend in commentreply.mutual_friend | limitTo:2">
+                                                    <div class="user-img">
+                                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+
+                                                        <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                        <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                    </div>
+                                                </li>                            
+                                                <li ng-if="user_id != commentreply.commented_user_id" class="m-contacts">
+                                                    <span ng-if="commentreply.mutual_friend.length == 1">
+                                                        <b>{{commentreply.mutual_friend[0].fullname}}</b> is in mutual contact.
+                                                    </span>
+                                                    <span ng-if="commentreply.mutual_friend.length > 1">
+                                                        <b>{{commentreply.mutual_friend[0].fullname}}</b>{{commentreply.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{commentreply.mutual_friend.length - 1}}</b> more mutual contacts.
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <div class="tooltip-btns" ng-if="user_id != commentreply.commented_user_id">
+                                                <ul>
+                                                    <li class="contact-btn-{{commentreply.user_id}}">
+                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'new'" ng-click="contact(commentreply.contact_id, 'pending', commentreply.user_id,$index + 1)">Add to contact</a>
+                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'confirm'" ng-click="contact(commentreply.contact_id, 'cancel', commentreply.user_id,$index + 1,1)">In Contacts</a>
+                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'pending'" ng-click="contact(commentreply.contact_id, 'cancel', commentreply.user_id,$index + 1)">Request sent</a>
+                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'cancel'" ng-click="contact(commentreply.contact_id, 'pending', commentreply.user_id,$index + 1)">Add to contact</a>
+                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'reject'" ng-click="contact(commentreply.contact_id, 'pending', commentreply.user_id,$index + 1)">Add to contact</a>
+                                                    </li>
+                                                    <li class="follow-btn-{{commentreply.user_id}}">
+                                                        <a ng-if="commentreply.follow_status == 1" class="btn-new-1 following" ng-click="unfollow_user(commentreply.user_id)">Following</a>
+                                                        <a ng-if="commentreply.follow_status == 0 || !commentreply.follow_status" class="btn-new-1 follow" ng-click="follow_user(commentreply.user_id)">Follow</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="<?php echo MESSAGE_URL; ?>user/{{commentreply.user_slug}}" class="btn-new-1" target="_blank">Message</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="post-img">
                                     <div ng-if="commentreply.user_image != ''">
-                                        <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self">
+                                        <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}">
                                             <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{commentreply.user_image}}">
                                         </a>
                                     </div>
                                     <div class="post-img" ng-if="commentreply.user_image == ''">
-                                        <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self">
+                                        <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="tooltip" data-tooltip-content="#comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}">
                                             <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="comment-dis">
-                                    <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username"></a></div>
+                                    <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username" data-toggle="tooltip" data-tooltip-content="#comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}"></a></div>
                                     <div class="comment-dis-inner" id="comment-reply-dis-inner-{{commentreply.comment_id}}">
                                         <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{commentreply.comment}}" dd-text-collapse-cond="true">{{commentreply.comment}}</p>
                                     </div>

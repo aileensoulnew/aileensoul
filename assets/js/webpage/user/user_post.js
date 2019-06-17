@@ -2651,6 +2651,16 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.postData[index].post_comment_data = data.all_comment_data;
                 $scope.postData[index].post_comment_count = data.post_comment_count;
             }
+            
+            setTimeout(function(){
+                $('[data-toggle="tooltip"]').tooltipster({
+                    contentCloning: false,
+                    contentAsHTML: true,
+                    interactive: true,
+                    delay:500,
+                });
+            },500);
+
         }, function errorCallback(response) {            
             $scope.viewAllComment(post_id, index, post,is_promoted);
         });
@@ -2676,6 +2686,14 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.postData[index].post_comment_data = data.comment_data;
                 $scope.postData[index].post_comment_count = data.post_comment_count;
             }
+            setTimeout(function(){
+                $('[data-toggle="tooltip"]').tooltipster({
+                    contentCloning: false,
+                    contentAsHTML: true,
+                    interactive: true,
+                    delay:500,
+                });
+            },500);
         },function errorCallback(response) {            
             $scope.viewLastComment(post_id, index, post,is_promoted);
         });
