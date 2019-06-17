@@ -826,6 +826,13 @@
                     </div>
                 </div>
                 <div class="right-section">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <button id="test" type="button" class="btn btn-lg btn-danger" data-toggle="popover">Click to toggle popover</button>
+                    <div class="test" style="display: none;">Test Popover Content</div>
+
 				    <div id="right-fixed" class="fw">
 						<?php $this->load->view('right_add_box'); ?>
                     </div>
@@ -1538,6 +1545,38 @@
         var cmt_maxlength = '700';
         var app = angular.module("postDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         var header_all_profile = '<?php echo $header_all_profile; ?>';
+
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                trigger: "manual" ,
+                html: true, 
+                animation:false,
+                content: function () {
+                    return $('.'+$(this).attr('id')).html();
+                    // return $('#popover-content').html();
+                },
+                placement: function (context, element) {
+                    var position = $(element).position();                    
+                    if (position.top - $(window).scrollTop() < 115){
+                        return "bottom";
+                    }
+                    return "top";
+                }
+            }).on("mouseenter", function () {
+                var _this = this;
+                $(this).popover("show");
+                $(".popover").on("mouseleave", function () {
+                    $(_this).popover('hide');
+                });
+            }).on("mouseleave", function () {
+                var _this = this;
+                setTimeout(function () {
+                    if (!$(".popover:hover").length) {
+                        $(_this).popover("hide");
+                    }
+                }, 300);
+            });
+        })
         </script>
         <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>
         <script type="text/javascript">

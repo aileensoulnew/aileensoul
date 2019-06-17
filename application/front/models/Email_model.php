@@ -106,12 +106,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notification@aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';// 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtpout.asia.secureserver.net';//'smtp.gmail.com';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'QAZplm1092';// 'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.gmail.com';
+        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -122,10 +122,16 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 3535;// 587;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;// 587;
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
+        }
+
+        $failed_email = explode(",", FAILED_EMAIL);
+        if(in_array($to_email, $failed_email))
+        {
+            return TRUE;
         }
 
         if ($mail->send()) {
@@ -223,12 +229,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notification@aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtpout.asia.secureserver.net';// 'smtp.gmail.com';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'QAZplm1092';//Amazon SES SMTP password.
+        $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';// 'smtp.gmail.com';
+        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -239,13 +245,19 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 3535;//587;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;//587;
 
         //echo '<pre>'; print_r($this->email->print_debugger()); die();
         // if ($this->email->send()) {
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
+        }
+
+        $failed_email = explode(",", FAILED_EMAIL);
+        if(in_array($to_email, $failed_email))
+        {
+            return TRUE;
         }
         // return true;
         if ($mail->send()) {
@@ -303,12 +315,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notification@aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';//'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'; //Amazon SES SMTP password.
-        $mail->Host = 'smtpout.asia.secureserver.net';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'QAZplm1092';//'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'; //Amazon SES SMTP password.
+        $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
+        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -320,10 +332,16 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 3535;// 587;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;// 587;
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
+        }
+
+        $failed_email = explode(",", FAILED_EMAIL);
+        if(in_array($to_email, $failed_email))
+        {
+            return TRUE;
         }
         // return TRUE;
         if ($mail->send()) {
@@ -461,12 +479,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notification@aileensoul.com';// 'pratik.aileensoul@gmail.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123'; //'pratik@aileensoul';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
-        $mail->Host = 'smtpout.asia.secureserver.net';//'smtp.gmail.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Username = 'notifications@staging.aileensoul.com';// 'pratik.aileensoul@gmail.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'QAZplm1092'; //'pratik@aileensoul';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
+        $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.gmail.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
+        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -478,10 +496,16 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 3535;//587;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;//587;
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
+        }
+
+        $failed_email = explode(",", FAILED_EMAIL);
+        if(in_array($to_email, $failed_email))
+        {
+            return TRUE;
         }
         // return TRUE;
         if ($mail->send()) {
@@ -501,12 +525,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notification@aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
-        $mail->Host = 'smtpout.asia.secureserver.net';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'QAZplm1092';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
+        $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
+        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -518,10 +542,15 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 3535;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             return true;
+        }
+        $failed_email = explode(",", FAILED_EMAIL);
+        if(in_array($to_email, $failed_email))
+        {
+            return TRUE;
         }
         // return TRUE;
         if ($mail->send()) {

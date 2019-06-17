@@ -4110,7 +4110,7 @@ class User_post extends MY_Controller {
             );
             $insert_id = $this->common->insert_data_getid($data_notification, 'notification');
 
-            /*$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $_all_user_data['user_id']))->row();
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $_all_user_data['user_id']))->row();
 
             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
             if($unsubscribeData->is_subscribe == 1)
@@ -4124,7 +4124,7 @@ class User_post extends MY_Controller {
                 );
                 $this->inbackground->do_in_background($url, $param);
             }
-            sleep(1);*/
+            sleep(1);
         }
     }
 }
