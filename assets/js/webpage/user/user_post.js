@@ -329,7 +329,7 @@ app.controller('mainDefaultController', function($scope, $http, $compile) {
         }, function errorCallback(response) {            
             $scope.addToContact(user_id,contact);
         });
-    }
+    };
 });
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -364,6 +364,7 @@ app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 });
 app.controller('userOppoController', function ($scope, $http,$compile,$location) {
+    $scope.today = new Date(); 
     $scope.$parent.active_tab = '1';
     $scope.IsVisible = false;
     $scope.recentpost = [];
@@ -1086,7 +1087,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();
+                        return $($(this).data('tooltip-content')).html();                        
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -1130,6 +1131,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         }
                     }, 100);
                 });
+
             },1000);
         }, function (error) {});
     }    
@@ -2741,11 +2743,55 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             }
             
             setTimeout(function(){
-                $('[data-toggle="tooltip"]').tooltipster({
-                    contentCloning: false,
-                    contentAsHTML: true,
-                    interactive: true,
-                    delay:500,
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
                 });
             },500);
 
@@ -2775,11 +2821,55 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.postData[index].post_comment_count = data.post_comment_count;
             }
             setTimeout(function(){
-                $('[data-toggle="tooltip"]').tooltipster({
-                    contentCloning: false,
-                    contentAsHTML: true,
-                    interactive: true,
-                    delay:500,
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
                 });
             },500);
         },function errorCallback(response) {            
@@ -3841,7 +3931,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     };
 
-    $scope.follow_user = function (id) {
+    /*$scope.follow_user = function (id) {
         $(".follow-btn-" + id).attr('style','pointer-events:none;');
         $http({
             method: 'POST',
@@ -3859,6 +3949,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             $scope.follow_user(id);
         });
     }
+
     $scope.unfollow_user = function (id) {
         $(".follow-btn-" + id).attr('style','pointer-events:none;');
         $http({
@@ -3876,7 +3967,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         },function errorCallback(response) {
             $scope.unfollow_user(id);
         });
-    }
+    }*/
 });
 
 app.controller('peopleController', function($scope, $http, $compile, $window,$location) {    
@@ -8580,4 +8671,86 @@ function setCursotToEnd(el)
         textRange.collapse(false);
         textRange.select();
     }
+}
+
+function follow_user(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/follow_user_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/unfollow_user_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function contact(elid)
+{
+    var params = $("#"+elid).data('param').split(",");
+    var id = params[0];
+    var status = params[1];
+    var to_id = params[2];
+    var indexCon = params[3];
+    var confirm = params[4];
+
+    if(confirm == '1')
+    {
+        $("#remove-contact-conform-"+indexCon.slice(0, -6)).modal("show");
+        return false;
+    }
+    $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:none;');
+
+    $.ajax({
+        url: base_url + "userprofile_page/addToContactNewTooltip",        
+        type: "POST",
+        data: 'contact_id='+id+'&status='+status+'&to_id='+to_id+'&indexCon='+indexCon+'&elid='+elid,
+        dataType:"JSON",
+        success: function (data) {
+            console.log(data);
+            $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+            },500);
+        }
+    });
+
+    /*$http({
+        method: 'POST',
+        url: base_url + 'userprofile_page/addToContactNewTooltip',
+        data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .then(function (success) {            
+        if(success.data != "")
+        {
+            $(".contact-btn-"+to_id).attr('style','pointer-events:all;');
+            $(".contact-btn-"+to_id).html($compile(success.data.button)($scope));
+        }
+        $scope.get_all_counter();
+    },function errorCallback(response) {
+        $scope.contact(id, status, to_id,indexCon,confirm);
+    });*/
+
 }

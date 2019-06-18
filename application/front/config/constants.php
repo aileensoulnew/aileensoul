@@ -793,4 +793,4 @@ define('MAIL_TD_3','padding:5px;text-align:right;');
 
 define('RESERVE_KEYWORD', 'Job, Jobs, Skills, Categories, Locations, Companies, Designations, Jobs Opening, Jobs in, Job Vacancy in, Freelance Employer, Freelance Jobs, Freelance Jobs by, Fields,Business, Business Search, Business By, Business in, Find Artist, Artist in, Guest Contributor, About us, Privacy, Disclaimer, Policy, Contact Us, Report Abuse, Artist, Business, In, Profile, Recruiter, Search, Freelance, Employer, Find, Freelancer, peoples, posts, opportunities, articles, qa, businesses, aileensoul');
 
-define('FAILED_EMAIL', 'jaingeetica612@gmail.com,manshreegupta0@gmail.com,chauhanaishwarya@2306gmail.com,sakshi.ralsha21@gmail.com');
+define('FAILED_EMAIL', 'jaingeetica612@gmail.com,manshreegupta0@gmail.com,chauhanaishwarya@2306gmail.com,sakshi.ralsha21@gmail.com,thakurakanksh10@gmail.com,rjmishrsg4s@gmail.com,smithloren707@gmail.com,jaydave146@yahoo.com,rajvishah@gmail.com,bharat2149@email.com,dhavalshah1711@icloud.com,mccormickmech@aol.com,rakesh.deore@hotmail.com,jobs@bombaysoftwares.com,glorioushimalaya@yahoo.com,twinkle.vyas@satyuamconsult.com');

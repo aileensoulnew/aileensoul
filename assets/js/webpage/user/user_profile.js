@@ -10113,8 +10113,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     }
 
     $scope.getQuestions = function (pagenum) {
-        $('.loadmore').show();
-        console.log($scope.$parent.pade_reload);
+        $('.loadmore').show();        
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)

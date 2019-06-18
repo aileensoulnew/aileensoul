@@ -2903,10 +2903,11 @@ class Userprofile_page extends MY_Controller {
 
     public function addToContactNewTooltip() {
         $userid = $this->session->userdata('aileenuser');
-        $contact_id = $_POST['contact_id'];
+        $elid = $_POST['elid'];
+        $contact_id = substr($_POST['contact_id'], 0,-6);
         $status = $_POST['status'];
-        $id = $_POST['to_id'];
-        $indexCon = $_POST['indexCon'];
+        $id = substr($_POST['to_id'],0,-6);
+        $indexCon = substr($_POST['indexCon'],0,-6);
         $contact = $this->userprofile_model->userContactStatus($userid, $id);
 
         if (count($contact) != 0) {
@@ -2928,7 +2929,7 @@ class Userprofile_page extends MY_Controller {
 
         if($status == "cancel")
         {            
-            $response['button'] = '<a class="btn-new-1" ng-click="contact('. $contact_id.', \'pending\', '.$id.','.$indexCon.')">Add to contact</a>';
+            $response['button'] = '<a class="btn-new-1" data-param="'. $contact_id.date('his').',pending,'.$id.date('his').','.$indexCon.date('his').'" onclick="contact(this.id);" id="'.$elid.'">Add to contact</a>';
         }
         if($status == "pending")
         {
@@ -2991,7 +2992,8 @@ class Userprofile_page extends MY_Controller {
                 $this->inbackground->do_in_background($url, $param);
             }
             //Send Mail End
-            $response['button'] = '<a class="btn-new-1" ng-click="contact('. $contact_id.', \'cancel\', '.$id.','.$indexCon.')">Request sent</a>';
+
+            $response['button'] = '<a class="btn-new-1" data-param="'. $contact_id.date('his').',cancel,'.$id.date('his').','.$indexCon.date('his').'" onclick="contact(this.id);" id="'.$elid.'">Request sent</a>';
         }
         echo json_encode($response);
     }
@@ -2999,14 +3001,16 @@ class Userprofile_page extends MY_Controller {
     public function follow_user_tooltip() {
         $userid = $this->session->userdata('aileenuser');
         //$follow_id = $_POST['follow_id'];
-        $id = $_POST['to_id'];
+        $id = substr($_POST['to_id'], 0,-6);
+        $ele_id = $_POST['ele_id'];
         $follow = $this->userprofile_model->userFollowStatus($userid, $id);
 
         if (count($follow) != 0) {
             $data = array('status' => '1');
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             //   $response = $status;
-            $html = '<a class="btn-new-1 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
+            $id = $id.date('his');
+            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
         } else {
             $data = array(
                 'status' => '1',
@@ -3017,7 +3021,8 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             // $response = $status;
-            $html = '<a class="btn-new-1 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
+            $id = $id.date('his');
+            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
         }
 
 
@@ -3027,15 +3032,16 @@ class Userprofile_page extends MY_Controller {
     public function unfollow_user_tooltip() {
         $userid = $this->session->userdata('aileenuser');
         //$follow_id = $_POST['follow_id'];
-        $id = $_POST['to_id'];
+        $id = substr($_POST['to_id'], 0,-6);
+        $ele_id = $_POST['ele_id'];
         $follow = $this->userprofile_model->userFollowStatus($userid, $id);
 
         if (count($follow) != 0) {
             $data = array('status' => '0','modify_date' => date("Y-m-d h:i:s"));
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             //   $response = $status;
-
-            $html = '<a class="btn-new-1 follow"  ng-click="follow_user(' . $id . ')">Follow</a>';
+            $id = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user(this.id)" id="'.$ele_id.'">Follow</a>';
         } else {
             $data = array(
                 'status' => '0',
@@ -3046,7 +3052,8 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             // $response = $status;
-            $html = '<a class="btn-new-1 follow"  ng-click="follow_user(' . $id . ')">Follow</a>';
+            $id = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user(this.id)" id="'.$ele_id.'">Follow</a>';
         }
 
 
