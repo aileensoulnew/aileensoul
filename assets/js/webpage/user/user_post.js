@@ -1084,6 +1084,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
                         return $($(this).data('tooltip-content')).html();
                         // return $('#popover-content').html();
@@ -1127,7 +1128,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         if (!$(".popover:hover").length) {
                             $(_this).popover("hide");
                         }
-                    }, 300);
+                    }, 100);
                 });
             },1000);
         }, function (error) {});
@@ -1239,6 +1240,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
                         return $($(this).data('tooltip-content')).html();
                         // return $('#popover-content').html();
@@ -1282,7 +1284,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         if (!$(".popover:hover").length) {
                             $(_this).popover("hide");
                         }
-                    }, 300);
+                    }, 100);
                 });
 
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
