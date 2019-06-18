@@ -1089,16 +1089,30 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
                         var position = $(element).position();
-                        console.log(position.top);
-                        console.log($(window).scrollTop());
                         
-                        console.log(parseInt(position.top - $(window).scrollTop()));
-                        if (parseInt(position.top - $(window).scrollTop()) < 115){
-                            console.log("bottom");
-                            return "bottom";
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
                         }
-                        console.log("top");
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
                         return "top";
                     }
                 }).on("mouseenter", function () {
@@ -1221,11 +1235,54 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     }
                 }
 
-                $('[data-toggle="tooltip"]').tooltipster({
-                    contentCloning: false,
-                    contentAsHTML: true,
-                    interactive: true,
-                    delay:500,
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 300);
                 });
 
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
