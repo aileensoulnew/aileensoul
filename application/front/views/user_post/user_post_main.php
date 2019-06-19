@@ -4,28 +4,26 @@
 <div class="middle-section op-middle">    
     <div class="add-post">
         <div class="post-box">
-                <?php if ($leftbox_data['user_image'] != '') { ?> 
+            <?php if ($leftbox_data['user_image'] != '') { ?> 
                 <div class="post-img">
                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
-                </div>
-                <?php } else { 
-                    
-                echo '<div class="post-img no-profile-pic">';
-                    
+                </div><?php
+                }
+                else { ?>
+                    <div class="post-img no-profile-pic"><?php
                         if($leftbox_data['user_gender'] == "M")
-                        {?>                                
+                        {?>
                             <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                         <?php
                         }
                         if($leftbox_data['user_gender'] == "F")
-                        {
-                        ?>
+                        {?>
                             <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                         <?php
-                        }
-                echo "</div>";
-                    } ?>
-                
+                        }?>
+                    </div>
+                    <?php
+                } ?>
             <div id="post_opportunity_box" class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
                 Express Yourself 
             </div>
@@ -1402,21 +1400,21 @@
                                         </ul>
                                         <div class="tooltip-btns" ng-if="user_id != comment.commented_user_id">
                                             <ul>
-                                                <li class="contact-btn-{{comment.user_id}}">
-                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'new'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
+                                                <li class="contact-btn-{{comment.commented_user_id}}">
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'new'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
                                                     
-                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
                                                     
-                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'pending'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Request sent</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'pending'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Request sent</a>
                                                     
-                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'cancel'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'cancel'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
                                                     
-                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'reject'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'reject'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
                                                 </li>
-                                                <li class="follow-btn-{{comment.user_id}}">
-                                                    <a ng-if="comment.follow_status == 1" class="btn-new-1 following" data-uid="{{comment.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Following</a>
+                                                <li class="follow-btn-user-{{comment.commented_user_id}}">
+                                                    <a ng-if="comment.follow_status == 1" class="btn-new-1 following" data-uid="{{comment.commented_user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Following</a>
 
-                                                    <a ng-if="comment.follow_status == 0 || !comment.follow_status" class="btn-new-1 follow" data-uid="{{comment.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Follow</a>
+                                                    <a ng-if="comment.follow_status == 0 || !comment.follow_status" class="btn-new-1 follow" data-uid="{{comment.commented_user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Follow</a>
                                                 </li>
                                                 <li>
                                                     <a href="<?php echo MESSAGE_URL; ?>user/{{comment.user_slug}}" class="btn-new-1" target="_blank">Message</a>
@@ -1541,7 +1539,7 @@
                                                         
                                                         <a class="btn-new-1" ng-if="commentreply.contact_value == 'reject'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
                                                     </li>
-                                                    <li class="follow-btn-{{commentreply.commented_user_id}}">
+                                                    <li class="follow-btn-user-{{commentreply.commented_user_id}}">
                                                         <a ng-if="commentreply.follow_status == 1" class="btn-new-1 following" data-uid="{{commentreply.commented_user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{commentreply.comment_id}}">Following</a>
 
                                                         <a ng-if="commentreply.follow_status == 0 || !commentreply.follow_status" class="btn-new-1 follow" data-uid="{{commentreply.commented_user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{commentreply.comment_id}}">Follow</a>
@@ -1761,7 +1759,7 @@
                                             
                                             <a class="btn-new-1" ng-if="post.user_data.contact_value == 'reject'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
                                         </li>
-                                        <li class="follow-btn-{{post.user_data.user_id}}">
+                                        <li class="follow-btn-user-{{post.user_data.user_id}}">
                                             <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{post.post_data.id}}">Following</a>
 
                                             <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{post.post_data.id}}">Follow</a>
@@ -2453,7 +2451,7 @@
                                                         
                                                         <a class="btn-new-1" ng-if="comment.contact_value == 'reject'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
                                                     </li>
-                                                    <li class="follow-btn-{{comment.user_id}}">
+                                                    <li class="follow-btn-user-{{comment.user_id}}">
                                                         <a ng-if="comment.follow_status == 1" class="btn-new-1 following" data-uid="{{comment.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Following</a>
 
                                                         <a ng-if="comment.follow_status == 0 || !comment.follow_status" class="btn-new-1 follow" data-uid="{{comment.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Follow</a>
@@ -2581,7 +2579,7 @@
                                                             
                                                             <a class="btn-new-1" ng-if="commentreply.contact_value == 'reject'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
                                                         </li>
-                                                        <li class="follow-btn-{{commentreply.commented_user_id}}">
+                                                        <li class="follow-btn-user-{{commentreply.commented_user_id}}">
                                                             <a ng-if="commentreply.follow_status == 1" class="btn-new-1 following" data-uid="{{commentreply.commented_user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{commentreply.comment_id}}">Following</a>
 
                                                             <a ng-if="commentreply.follow_status == 0 || !commentreply.follow_status" class="btn-new-1 follow" data-uid="{{commentreply.commented_user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{commentreply.comment_id}}">Follow</a>
@@ -4250,7 +4248,7 @@
                                                     
                                                     <a class="btn-new-1" ng-if="userlist.contact_value == 'reject'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
                                                 </li>
-                                                <li class="follow-btn-{{userlist.user_id}}">
+                                                <li class="follow-btn-user-{{userlist.user_id}}">
                                                     <a ng-if="userlist.follow_status == 1" class="btn-new-1 following" data-uid="{{userlist.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{userlist.comment_id}}">Following</a>
 
                                                     <a ng-if="userlist.follow_status == 0 || !userlist.follow_status" class="btn-new-1 follow" data-uid="{{userlist.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{userlist.comment_id}}">Follow</a>

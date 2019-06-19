@@ -117,7 +117,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <div class="tooltip-btns" ng-if="user_id != people.people">
+                            <div class="tooltip-btns" ng-if="user_id != people.user_id">
                                 <ul>
                                     <li class="contact-btn-{{people.user_id}}">
                                         <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'new'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">Add to contact</a>
@@ -130,7 +130,7 @@
                                         
                                         <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'reject'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">Add to contact</a>
                                     </li>
-                                    <li class="follow-btn-{{people.user_id}}">
+                                    <li class="follow-btn-user-{{people.user_id}}">
                                         <a ng-if="people.follow_status == 1" class="btn-new-1 following" data-uid="{{people.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{people.user_id}}">Following</a>
 
                                         <a ng-if="people.follow_status == 0 || !people.follow_status" class="btn-new-1 follow" data-uid="{{people.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{people.user_id}}">Follow</a>
