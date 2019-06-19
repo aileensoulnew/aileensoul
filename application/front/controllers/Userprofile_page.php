@@ -3008,6 +3008,7 @@ class Userprofile_page extends MY_Controller {
         if (count($follow) != 0) {
             $data = array('status' => '1');
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            $send_noti_mail = 0;
             //   $response = $status;
             $id = $id.date('his');
             $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
@@ -3020,9 +3021,101 @@ class Userprofile_page extends MY_Controller {
                 'modify_date' => date("Y-m-d h:i:s"),
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
+            $send_noti_mail = 1;
             // $response = $status;
             $id = $id.date('his');
             $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
+        }
+
+        if($send_noti_mail == 1)
+        {
+            if($userid != $id)
+            {
+                $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '0');
+                $follownotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                if ($follownotification[0]['not_read'] == 2) {                
+                }
+                elseif($follownotification[0]['not_read'] == 1)
+                {
+                    $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                    $where = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '0');
+                    $this->db->where($where);
+                    $updatdata = $this->db->update('notification', $dataFollow);
+                }
+                else
+                {
+                    $dataFollow = array(
+                        'not_type' => '8',
+                        'not_from_id' => $userid,
+                        'not_to_id' => $id,
+                        'not_read' => '2',                    
+                        'not_from' => '7',
+                        'not_img' => '0',
+                        'not_created_date' => date('Y-m-d H:i:s'),
+                        'not_active' => '1'
+                    );
+                    $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                    if ($insert_id) {
+                        $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $id))->row()->email;
+                        $login_userdata = $this->user_model->getUserData($userid);
+                        if($login_userdata['user_image'] != "")
+                        {
+                            $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                        }
+                        else
+                        {
+                            if($login_userdata['user_gender']  == 'M')
+                            {
+                                $login_user_img = base_url('assets/img/man-user.jpg');
+                            }
+
+                            if($login_userdata['user_gender']  == 'F')
+                            {
+                                $login_user_img = base_url('assets/img/female-user.jpg');
+                            }
+                        }
+
+                        $email_html = '';
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> started following you.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a href="'.BASEURL.$login_userdata['user_slug'].'" class="btn">View</a>
+                                            </td>
+                                        </tr>
+                                        </table>';
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' started following you in Aileensoul.';
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $id))->row();
+                        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                        if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
+                        {
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
+                        }
+                    }
+                }
+            }            
         }
 
 
@@ -3057,6 +3150,164 @@ class Userprofile_page extends MY_Controller {
         }
 
 
+        echo $html;
+    }
+
+    public function business_follow_tooltip() {
+        $userid = $this->session->userdata('aileenuser');        
+        $id = substr($_POST['to_id'], 0,-6);;
+        $ele_id = $_POST['ele_id'];
+        $follow = $this->userprofile_model->userBusinessFollowStatus($userid, $id);
+        // print_r($follow);exit();
+
+        if (count($follow) != 0) {
+            $data = array('status' => 1,'modify_date' => date("Y-m-d h:i:s"));
+            // $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            $where = array('id' => $follow['id'], 'follow_type' => '2');
+            $this->db->where($where);
+            $updatdata = $this->db->update('user_follow', $data);
+            $send_noti_mail = 0;
+            $id = $id.date('his');
+            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
+        } else {
+            $data = array(
+                'status' => 1,
+                'follow_from' => $userid,
+                'follow_to' => $id,
+                'follow_type' => '2',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_follow');
+            $send_noti_mail = 1;
+            $id = $id.date('his');
+            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
+        }
+
+        if($send_noti_mail == 1)
+        {
+            if($userid != $id)
+            {
+                $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '1');
+                $follownotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                if ($follownotification[0]['not_read'] == 2) {                
+                }
+                elseif($follownotification[0]['not_read'] == 1)
+                {
+                    $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                    $where = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $id, 'not_from' => '7', 'not_img' => '1');
+                    $this->db->where($where);
+                    $updatdata = $this->db->update('notification', $dataFollow);
+                }
+                else
+                {
+                    $dataFollow = array(
+                        'not_type' => '8',
+                        'not_from_id' => $userid,
+                        'not_to_id' => $id,
+                        'not_read' => '2',                    
+                        'not_from' => '7',
+                        'not_img' => '1',
+                        'not_created_date' => date('Y-m-d H:i:s'),
+                        'not_active' => '1'
+                    );
+                    $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                    if ($insert_id) {
+                        $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $id))->row()->contact_email;
+                        $login_userdata = $this->user_model->getUserData($userid);
+                        if($login_userdata['user_image'] != "")
+                        {
+                            $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                        }
+                        else
+                        {
+                            if($login_userdata['user_gender']  == 'M')
+                            {
+                                $login_user_img = base_url('assets/img/man-user.jpg');
+                            }
+
+                            if($login_userdata['user_gender']  == 'F')
+                            {
+                                $login_user_img = base_url('assets/img/female-user.jpg');
+                            }
+                        }
+
+                        $email_html = '';
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>
+                                            </td>
+                                            <td style="padding:5px;">
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> started following you in business profile.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                    
+                                                </div>
+                                            </td>
+                                            <td class="mail-btn">
+                                                <a href="'.BASEURL.$login_userdata['user_slug'].'" class="btn">View</a>
+                                            </td>
+                                        </tr>
+                                        </table>';
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' started following you in Aileensoul.';
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $id))->row();
+                        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                        if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
+                        {
+                            // $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
+                        }
+                    }
+                }
+            }            
+        }
+        echo $html;
+    }
+
+    public function business_unfollow_tooltip() {
+        $userid = $this->session->userdata('aileenuser');        
+        $id = substr($_POST['to_id'], 0,-6);;
+        $ele_id = $_POST['ele_id'];
+        $follow = $this->userprofile_model->userBusinessFollowStatus($userid, $id);
+        // print_r($follow);exit();
+
+        if (count($follow) != 0) {
+            $data = array('status' => 0,'modify_date' => date("Y-m-d h:i:s"));
+            // $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
+            $where = array('id' => $follow['id'], 'follow_type' => '2');
+            $this->db->where($where);
+            $updatdata = $this->db->update('user_follow', $data);
+
+            $id = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
+        } else {
+            $data = array(
+                'status' => 0,
+                'follow_from' => $userid,
+                'follow_to' => $id,
+                'follow_type' => '2',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_follow');
+            
+            $id = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
+        }
         echo $html;
     }
 }

@@ -13,6 +13,7 @@ class Searchelastic extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('data_model');
         $this->load->model('user_post_model');
+        $this->load->model('userprofile_model');
         $this->load->model('common');
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
             $this->elasticclient = Elasticsearch\ClientBuilder::create()->build();

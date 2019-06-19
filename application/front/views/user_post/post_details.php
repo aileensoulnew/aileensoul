@@ -826,14 +826,7 @@
                     </div>
                 </div>
                 <div class="right-section">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <button id="test" type="button" class="btn btn-lg btn-danger" data-toggle="popover">Click to toggle popover</button>
-                    <div class="test" style="display: none;">Test Popover Content</div>
-
-				    <div id="right-fixed" class="fw">
+                    <div id="right-fixed" class="fw">
 						<?php $this->load->view('right_add_box'); ?>
                     </div>
                 </div>

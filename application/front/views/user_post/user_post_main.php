@@ -499,41 +499,59 @@
             <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
 
                 <div id="tooltip_content_{{postIndex}}" class="tooltip_templates">
-                    <div class="user-tooltip">
+                    <div class="bus-tooltip" ng-if="post.post_data.user_type == '2'">
+                        <div class="user-tooltip">
+                            <div class="tooltip-cover-img">
+                                <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}">
+                                <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                            </div>
+                            <div class="tooltip-user-detail">
+                                <div class="tooltip-user-img">
+                                    <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image">                                
+                                    <img ng-if="!post.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                </div>
+                                <div class="fw">
+                                    <div class="tooltip-detail">
+                                        <h4 ng-bind="post.user_data.company_name"></h4>
+                                        <p ng-if="post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
+                                        <p ng-if="!post.user_data.industry_name">CURRENT WORK</p>
+                                        <p>{{post.user_data.city_name}}{{post.user_data.city_name != '' ? ',' : ''}}{{post.user_data.state_name}}{{post.user_data.state_name != '' ? ',' : ''}}{{post.user_data.country_name}}</p>
+                                    </div>
+                                    
+                                    <div class="tooltip-btns follow-btn-bus-{{post.user_data.user_id}}">
+                                        <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{post.post_data.id}}">Following</a>
+
+                                        <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{post.post_data.id}}">Follow</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-tooltip" ng-if="post.post_data.user_type == '1'">
                         <div class="tooltip-cover-img">
-                            <img ng-if="post.post_data.user_type == '1' && post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
-                            <img ng-if="post.post_data.user_type == '2'" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}">
+                            <img ng-if="post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
                             <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
                         </div>
                         <div class="tooltip-user-detail">
-                            <div class="tooltip-user-img" ng-if="post.post_data.user_type == '1'">
-                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.post_data.user_type == '1' && post.user_data.user_image != ''">
+                            <div class="tooltip-user-img">
+                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">
 
-                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
 
-                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.post_data.user_type == '1' && post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
-                            </div>
-
-                            <div class="tooltip-user-img" ng-if="post.post_data.user_type == '2'">
-                                <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.post_data.user_type == '2' && post.user_data.business_user_image">
-                                
-                                <img ng-if="post.post_data.user_type == '2' && !post.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
 
                             </div>
-                            <h4 ng-if="post.post_data.user_type == '1'" ng-bind="post.user_data.fullname"></h4>
-                            <h4 ng-if="post.post_data.user_type == '2'" ng-bind="post.user_data.company_name"></h4>
+                            
+                            <h4 ng-bind="post.user_data.fullname"></h4>
 
-                            <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name != null" ng-bind="post.user_data.title_name"></p>
-                            <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
-                            <p ng-if="post.post_data.user_type == '1' && post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
-                            <p ng-if="post.post_data.user_type == '2' && post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
-                            <p ng-if="post.post_data.user_type == '2' && !post.user_data.industry_name">CURRENT WORK</p>
+                            <p ng-if="post.user_data.title_name != null" ng-bind="post.user_data.title_name"></p>
+                            <p ng-if="post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
+                            <p ng-if="post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
 
-                            <p>
-                                <span><b>{{post.user_data.post_count}}</b> Posts</span>
-                                <span><b>{{post.user_data.contact_count}}</b> Connections</span>
-                                <span><b>{{post.user_data.follower_count}}</b> Followers</span>
+                            <p ng-if="post.user_data.post_count > 0 || post.user_data.contact_count > 0 || post.user_data.follower_count > 0">
+                                <span ng-if="post.user_data.post_count > 0"><b>{{post.user_data.post_count}}</b> Posts</span>
+                                <span ng-if="post.user_data.contact_count > 0"><b>{{post.user_data.contact_count}}</b> Connections</span>
+                                <span ng-if="post.user_data.follower_count > 0"><b>{{post.user_data.follower_count}}</b> Followers</span>
                             </p>
 
                             <ul class="" ng-if="post.mutual_friend.length > 0">
@@ -560,7 +578,7 @@
                                     <li class="contact-btn-{{post.user_data.user_id}}">
                                         <a class="btn-new-1" ng-if="post.user_data.contact_value == 'new'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
                                         
-                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'confirm'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">In Contacts</a>
+                                        <a class="btn-new-1" ng-if="post.user_data.contact_value == 'confirm'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">In Contacts</a>
                                         
                                         <a class="btn-new-1" ng-if="post.user_data.contact_value == 'pending'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Request sent</a>
                                         
@@ -568,7 +586,7 @@
                                         
                                         <a class="btn-new-1" ng-if="post.user_data.contact_value == 'reject'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
                                     </li>
-                                    <li class="follow-btn-{{post.user_data.user_id}}">
+                                    <li class="follow-btn-user-{{post.user_data.user_id}}">
                                         <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{post.post_data.id}}">Following</a>
 
                                         <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{post.post_data.id}}">Follow</a>
@@ -823,41 +841,59 @@
 
                         <div id="share-post-detail-{{post.post_data.id}}" ng-if="post.share_data" class="all-post-box">
                             <div id="tooltip_content_share_{{postIndex}}" class="tooltip_templates">
-                                <div class="user-tooltip">
+                                <div class="bus-tooltip" ng-if="post.share_data.data.post_data.user_type == '2'">
+                                    <div class="user-tooltip">
+                                        <div class="tooltip-cover-img">
+                                            <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.user_data.profile_background}}">
+                                            <div ng-if="post.share_data.data.user_data.profile_background == null || post.share_data.data.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                                        </div>
+                                        <div class="tooltip-user-detail">
+                                            <div class="tooltip-user-img">
+                                                <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.user_data.business_user_image">                                
+                                                <img ng-if="!post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                            </div>
+                                            <div class="fw">
+                                                <div class="tooltip-detail">
+                                                    <h4 ng-bind="post.share_data.data.user_data.company_name"></h4>
+                                                    <p ng-if="post.share_data.data.user_data.industry_name != null" ng-bind="post.share_data.data.user_data.industry_name"></p> 
+                                                    <p ng-if="!post.share_data.data.user_data.industry_name">CURRENT WORK</p>
+                                                    <p>{{post.share_data.data.user_data.city_name}}{{post.share_data.data.user_data.city_name != '' ? ',' : ''}}{{post.share_data.data.user_data.state_name}}{{post.share_data.data.user_data.state_name != '' ? ',' : ''}}{{post.share_data.data.user_data.country_name}}</p>
+                                                </div>
+                                                
+                                                <div class="tooltip-btns follow-btn-bus-{{post.share_data.data.user_data.user_id}}">
+                                                    <a ng-if="post.share_data.data.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{post.share_data.data.post_data.id}}">Following</a>
+
+                                                    <a ng-if="post.share_data.data.user_data.follow_status == 0 || !post.share_data.data.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.share_data.data.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{post.share_data.data.post_data.id}}">Follow</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-tooltip" ng-if="post.share_data.data.post_data.user_type == '1'">
                                     <div class="tooltip-cover-img">
-                                        <img ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.profile_background != null && post.share_data.data.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.share_data.data.user_data.profile_background}}">
-                                        <img ng-if="post.share_data.data.post_data.user_type == '2'" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.user_data.profile_background}}">
+                                        <img ng-if="post.share_data.data.user_data.profile_background != null && post.share_data.data.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.share_data.data.user_data.profile_background}}">
                                         <div ng-if="post.share_data.data.user_data.profile_background == null || post.share_data.data.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
                                     </div>
                                     <div class="tooltip-user-detail">
-                                        <div class="tooltip-user-img" ng-if="post.share_data.data.post_data.user_type == '1'">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != ''">
+                                        <div class="tooltip-user-img">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.user_data.user_image != ''">
 
-                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
 
-                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
-                                        </div>
-
-                                        <div class="tooltip-user-img" ng-if="post.share_data.data.post_data.user_type == '2'">
-                                            <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.user_data.business_user_image">
-                                            
-                                            <img ng-if="post.share_data.data.post_data.user_type == '2' && !post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
 
                                         </div>
-                                        <h4 ng-if="post.share_data.data.post_data.user_type == '1'" ng-bind="post.share_data.data.user_data.fullname"></h4>
-                                        <h4 ng-if="post.share_data.data.post_data.user_type == '2'" ng-bind="post.share_data.data.user_data.company_name"></h4>
+                                        
+                                        <h4 ng-bind="post.share_data.data.user_data.fullname"></h4>
 
-                                        <p ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.title_name != null" ng-bind="post.share_data.data.user_data.title_name"></p>
-                                        <p ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.title_name == null" ng-bind="post.share_data.data.user_data.degree_name"></p>
-                                        <p ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null">CURRENT WORK</p>
-                                        <p ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.user_data.industry_name != null" ng-bind="post.share_data.data.user_data.industry_name"></p> 
-                                        <p ng-if="post.share_data.data.post_data.user_type == '2' && !post.share_data.data.user_data.industry_name">CURRENT WORK</p>
+                                        <p ng-if="post.share_data.data.user_data.title_name != null" ng-bind="post.share_data.data.user_data.title_name"></p>
+                                        <p ng-if="post.share_data.data.user_data.title_name == null" ng-bind="post.share_data.data.user_data.degree_name"></p>
+                                        <p ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null">CURRENT WORK</p>
 
-                                        <p>
-                                            <span><b>{{post.share_data.data.user_data.post_count}}</b> Posts</span>
-                                            <span><b>{{post.share_data.data.user_data.contact_count}}</b> Connections</span>
-                                            <span><b>{{post.share_data.data.user_data.follower_count}}</b> Followers</span>
+                                        <p ng-if="post.share_data.data.user_data.post_count > 0 || post.share_data.data.user_data.contact_count > 0 || post.share_data.data.user_data.follower_count > 0">
+                                            <span ng-if="post.share_data.data.user_data.post_count > 0"><b>{{post.share_data.data.user_data.post_count}}</b> Posts</span>
+                                            <span ng-if="post.share_data.data.user_data.contact_count > 0"><b>{{post.share_data.data.user_data.contact_count}}</b> Connections</span>
+                                            <span ng-if="post.share_data.data.user_data.follower_count > 0"><b>{{post.share_data.data.user_data.follower_count}}</b> Followers</span>
                                         </p>
 
                                         <ul class="" ng-if="post.share_data.data.mutual_friend.length > 0">
@@ -884,7 +920,7 @@
                                                 <li class="contact-btn-{{post.share_data.data.user_data.user_id}}">
                                                     <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'new'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Add to contact</a>
                                                     
-                                                    <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'confirm'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">In Contacts</a>
+                                                    <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'confirm'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">In Contacts</a>
                                                     
                                                     <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'pending'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Request sent</a>
                                                     
@@ -892,7 +928,7 @@
                                                     
                                                     <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'reject'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Add to contact</a>
                                                 </li>
-                                                <li class="follow-btn-{{post.share_data.data.user_data.user_id}}">
+                                                <li class="follow-btn-user-{{post.share_data.data.user_data.user_id}}">
                                                     <a ng-if="post.share_data.data.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{post.share_data.data.post_data.id}}">Following</a>
 
                                                     <a ng-if="post.share_data.data.user_data.follow_status == 0 || !post.share_data.data.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.share_data.data.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{post.share_data.data.post_data.id}}">Follow</a>
@@ -1317,7 +1353,7 @@
                     <div class="comment-box">
                         <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
 
-                            <div id="comment_tooltip_content_{{commentIndex}}" class="tooltip_templates">
+                            <div id="comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}" class="tooltip_templates">
                                 <div class="user-tooltip">
                                     <div class="tooltip-cover-img">
                                         <img ng-if="comment.profile_background != null && comment.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{comment.profile_background}}">                                        
@@ -1339,10 +1375,10 @@
                                         <p ng-if="comment.title_name == null" ng-bind="comment.degree_name"></p>
                                         <p ng-if="comment.title_name == null && comment.degree_name == null">CURRENT WORK</p>                                        
 
-                                        <p>
-                                            <span><b>{{comment.post_count}}</b> Posts</span>
-                                            <span><b>{{comment.contact_count}}</b> Connections</span>
-                                            <span><b>{{comment.follower_count}}</b> Followers</span>
+                                        <p ng-if="comment.post_count > 0 || comment.contact_count > 0 || comment.follower_count > 0">
+                                            <span ng-if="comment.post_count > 0"><b>{{comment.post_count}}</b> Posts</span>
+                                            <span ng-if="comment.contact_count > 0"><b>{{comment.contact_count}}</b> Connections</span>
+                                            <span ng-if="comment.follower_count > 0"><b>{{comment.follower_count}}</b> Followers</span>
                                         </p>
 
                                         <ul class="" ng-if="comment.mutual_friend.length > 0">
@@ -1369,7 +1405,7 @@
                                                 <li class="contact-btn-{{comment.user_id}}">
                                                     <a class="btn-new-1" ng-if="comment.contact_value == 'new'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
                                                     
-                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
+                                                    <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
                                                     
                                                     <a class="btn-new-1" ng-if="comment.contact_value == 'pending'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Request sent</a>
                                                     
@@ -1393,19 +1429,19 @@
 
                             <div class="post-img">
                                 <div ng-if="comment.user_image != ''">
-                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{commentIndex}}">
+                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}">
                                         <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
                                     </a>
                                 </div>
                                 <div class="post-img" ng-if="comment.user_image == ''">
-                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{commentIndex}}">
+                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}">
                                         <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                 </div>
                             </div>
                             <div class="comment-dis">
-                                <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{commentIndex}}"></a></div>
+                                <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}"></a></div>
                                 <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
                                     <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true"></p>
                                 </div>
@@ -1467,10 +1503,10 @@
                                             <p ng-if="commentreply.title_name == null" ng-bind="commentreply.degree_name"></p>
                                             <p ng-if="commentreply.title_name == null && commentreply.degree_name == null">CURRENT WORK</p>                                        
 
-                                            <p>
-                                                <span><b>{{commentreply.post_count}}</b> Posts</span>
-                                                <span><b>{{commentreply.contact_count}}</b> Connections</span>
-                                                <span><b>{{commentreply.follower_count}}</b> Followers</span>
+                                            <p ng-if="commentreply.post_count > 0 || commentreply.contact_count > 0 || commentreply.follower_count > 0">
+                                                <span ng-if="commentreply.post_count > 0"><b>{{commentreply.post_count}}</b> Posts</span>
+                                                <span ng-if="commentreply.contact_count > 0"><b>{{commentreply.contact_count}}</b> Connections</span>
+                                                <span ng-if="commentreply.follower_count > 0"><b>{{commentreply.follower_count}}</b> Followers</span>
                                             </p>
 
                                             <ul class="" ng-if="commentreply.mutual_friend.length > 0">
@@ -1497,7 +1533,7 @@
                                                     <li class="contact-btn-{{commentreply.commented_user_id}}">
                                                         <a class="btn-new-1" ng-if="commentreply.contact_value == 'new'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
                                                         
-                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'confirm'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">In Contacts</a>
+                                                        <a class="btn-new-1" ng-if="commentreply.contact_value == 'confirm'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">In Contacts</a>
                                                         
                                                         <a class="btn-new-1" ng-if="commentreply.contact_value == 'pending'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Request sent</a>
                                                         
@@ -1687,10 +1723,10 @@
                                 <p ng-if="post.post_data.user_type == '2' && post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
                                 <p ng-if="post.post_data.user_type == '2' && !post.user_data.industry_name">CURRENT WORK</p>
 
-                                <p>
-                                    <span><b>{{post.user_data.post_count}}</b> Posts</span>
-                                    <span><b>{{post.user_data.contact_count}}</b> Connections</span>
-                                    <span><b>{{post.user_data.follower_count}}</b> Followers</span>
+                                <p ng-if="post.user_data.post_count > 0 || post.user_data.contact_count > 0 || post.user_data.follower_count > 0">
+                                    <span ng-if="post.user_data.post_count > 0"><b>{{post.user_data.post_count}}</b> Posts</span>
+                                    <span ng-if="post.user_data.contact_count > 0"><b>{{post.user_data.contact_count}}</b> Connections</span>
+                                    <span ng-if="post.user_data.follower_count > 0"><b>{{post.user_data.follower_count}}</b> Followers</span>
                                 </p>
 
                                 <ul class="" ng-if="post.mutual_friend.length > 0">
@@ -1717,7 +1753,7 @@
                                         <li class="contact-btn-{{post.user_data.user_id}}">
                                             <a class="btn-new-1" ng-if="post.user_data.contact_value == 'new'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
                                             
-                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'confirm'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">In Contacts</a>
+                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'confirm'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">In Contacts</a>
                                             
                                             <a class="btn-new-1" ng-if="post.user_data.contact_value == 'pending'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Request sent</a>
                                             
@@ -2379,10 +2415,10 @@
                                             <p ng-if="comment.title_name == null" ng-bind="comment.degree_name"></p>
                                             <p ng-if="comment.title_name == null && comment.degree_name == null">CURRENT WORK</p>                                        
 
-                                            <p>
-                                                <span><b>{{comment.post_count}}</b> Posts</span>
-                                                <span><b>{{comment.contact_count}}</b> Connections</span>
-                                                <span><b>{{comment.follower_count}}</b> Followers</span>
+                                            <p ng-if="comment.post_count > 0 || comment.contact_count > 0 || comment.follower_count > 0">
+                                                <span ng-if="comment.post_count > 0"><b>{{comment.post_count}}</b> Posts</span>
+                                                <span ng-if="comment.contact_count > 0"><b>{{comment.contact_count}}</b> Connections</span>
+                                                <span ng-if="comment.follower_count > 0"><b>{{comment.follower_count}}</b> Followers</span>
                                             </p>
 
                                             <ul class="" ng-if="comment.mutual_friend.length > 0">
@@ -2409,7 +2445,7 @@
                                                     <li class="contact-btn-{{comment.user_id}}">
                                                         <a class="btn-new-1" ng-if="comment.contact_value == 'new'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
                                                         
-                                                        <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
+                                                        <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
                                                         
                                                         <a class="btn-new-1" ng-if="comment.contact_value == 'pending'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Request sent</a>
                                                         
@@ -2507,10 +2543,10 @@
                                                 <p ng-if="commentreply.title_name == null" ng-bind="commentreply.degree_name"></p>
                                                 <p ng-if="commentreply.title_name == null && commentreply.degree_name == null">CURRENT WORK</p>                                        
 
-                                                <p>
-                                                    <span><b>{{commentreply.post_count}}</b> Posts</span>
-                                                    <span><b>{{commentreply.contact_count}}</b> Connections</span>
-                                                    <span><b>{{commentreply.follower_count}}</b> Followers</span>
+                                                <p ng-if="commentreply.post_count > 0 || commentreply.contact_count > 0 || commentreply.follower_count > 0">
+                                                    <span ng-if="commentreply.post_count > 0"><b>{{commentreply.post_count}}</b> Posts</span>
+                                                    <span ng-if="commentreply.contact_count > 0"><b>{{commentreply.contact_count}}</b> Connections</span>
+                                                    <span ng-if="commentreply.follower_count > 0"><b>{{commentreply.follower_count}}</b> Followers</span>
                                                 </p>
 
                                                 <ul class="" ng-if="commentreply.mutual_friend.length > 0">
@@ -2537,7 +2573,7 @@
                                                         <li class="contact-btn-{{commentreply.commented_user_id}}">
                                                             <a class="btn-new-1" ng-if="commentreply.contact_value == 'new'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
                                                             
-                                                            <a class="btn-new-1" ng-if="commentreply.contact_value == 'confirm'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">In Contacts</a>
+                                                            <a class="btn-new-1" ng-if="commentreply.contact_value == 'confirm'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">In Contacts</a>
                                                             
                                                             <a class="btn-new-1" ng-if="commentreply.contact_value == 'pending'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Request sent</a>
                                                             
@@ -4153,15 +4189,90 @@
                 <div class="">
                     <ul class="custom-scroll">
                         <li class="like-img" ng-repeat="userlist in get_like_user_list">
-                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" target="_self">
+
+                            <div id="like_tooltip_content_{{$index}}" class="tooltip_templates">
+                                <div class="user-tooltip">
+                                    <div class="tooltip-cover-img">
+                                        <img ng-if="userlist.profile_background != null && userlist.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{userlist.profile_background}}">                                        
+                                        <div ng-if="userlist.profile_background == null || userlist.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                                    </div>
+                                    <div class="tooltip-user-detail">
+                                        <div class="tooltip-user-img">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}" ng-if="userlist.user_image != ''">
+
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="userlist.user_image == '' && userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="userlist.user_image == '' && userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+
+                                        </div>
+
+                                        <h4 ng-bind="userlist.fullname"></h4>
+
+                                        <p ng-if="userlist.title_name != null" ng-bind="userlist.title_name"></p>
+                                        <p ng-if="userlist.title_name == null" ng-bind="userlist.degree_name"></p>
+                                        <p ng-if="userlist.title_name == null && userlist.degree_name == null">CURRENT WORK</p>                                        
+
+                                        <p ng-if="userlist.post_count > 0 || userlist.contact_count > 0 || userlist.follower_count > 0">
+                                            <span ng-if="userlist.post_count > 0"><b>{{userlist.post_count}}</b> Posts</span>
+                                            <span ng-if="userlist.contact_count > 0"><b>{{userlist.contact_count}}</b> Connections</span>
+                                            <span ng-if="userlist.follower_count > 0"><b>{{userlist.follower_count}}</b> Followers</span>
+                                        </p>
+
+                                        <ul class="" ng-if="userlist.mutual_friend.length > 0">
+                                            <li ng-if="user_id != userlist.commented_user_id" ng-repeat="_friend in userlist.mutual_friend | limitTo:2">
+                                                <div class="user-img">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+
+                                                    <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                    <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </div>
+                                            </li>                            
+                                            <li ng-if="user_id != userlist.commented_user_id" class="m-contacts">
+                                                <span ng-if="userlist.mutual_friend.length == 1">
+                                                    <b>{{userlist.mutual_friend[0].fullname}}</b> is in mutual contact.
+                                                </span>
+                                                <span ng-if="userlist.mutual_friend.length > 1">
+                                                    <b>{{userlist.mutual_friend[0].fullname}}</b>{{userlist.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{userlist.mutual_friend.length - 1}}</b> more mutual contacts.
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <div class="tooltip-btns" ng-if="user_id != userlist.user_id">
+                                            <ul>
+                                                <li class="contact-btn-{{userlist.user_id}}">
+                                                    <a class="btn-new-1" ng-if="userlist.contact_value == 'new'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
+                                                    
+                                                    <a class="btn-new-1" ng-if="userlist.contact_value == 'confirm'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">In Contacts</a>
+                                                    
+                                                    <a class="btn-new-1" ng-if="userlist.contact_value == 'pending'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Request sent</a>
+                                                    
+                                                    <a class="btn-new-1" ng-if="userlist.contact_value == 'cancel'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
+                                                    
+                                                    <a class="btn-new-1" ng-if="userlist.contact_value == 'reject'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
+                                                </li>
+                                                <li class="follow-btn-{{userlist.user_id}}">
+                                                    <a ng-if="userlist.follow_status == 1" class="btn-new-1 following" data-uid="{{userlist.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{userlist.comment_id}}">Following</a>
+
+                                                    <a ng-if="userlist.follow_status == 0 || !userlist.follow_status" class="btn-new-1 follow" data-uid="{{userlist.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{userlist.comment_id}}">Follow</a>
+                                                </li>
+                                                <li>
+                                                    <a href="<?php echo MESSAGE_URL; ?>user/{{userlist.user_slug}}" class="btn-new-1" target="_blank">Message</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" target="_self" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">
                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                             </a>
-                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" target="_self">
+                            <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" target="_self" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">
                                 <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                             </a>
                             <div class="like-detail">
-                                <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
+                                <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
                                 <p ng-if="(userlist.title_name == null) && (userlist.degree_name != null)">{{userlist.degree_name}}</p>
                                 <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                 <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>

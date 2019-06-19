@@ -1014,6 +1014,59 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             $('body').removeClass("body-loader");
             if (success.data) {                
                 $scope.promotedPostData = success.data; 
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
+
             } else {
                 isLoadingData = true;
             }           
@@ -1291,8 +1344,13 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
-        }, function (error) {            
-            getUserPostLoadMore(pg);
+        }, function (error) {
+            console.log(error);
+            console.log(pg);
+            setTimeout(function(){
+                isProcessing = false;
+                getUserPostLoadMore(pg)
+            },200);
         });
     }
 
@@ -1661,122 +1719,122 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 var bar = $('.progress-bar');
                 var percent = $('.sr-only');
                 $http.post(base_url + 'user_post/post_opportunity', formFileDataOpp,
-                        {
-                            transformRequest: angular.identity,
-                            headers: {'Content-Type': undefined, 'Process-Data': false},
-                            uploadEventHandlers: {
-                                progress: function(e) {
-                                     if (e.lengthComputable) {
-                                        progress = Math.round(e.loaded * 100 / e.total);
+                {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined, 'Process-Data': false},
+                    uploadEventHandlers: {
+                        progress: function(e) {
+                             if (e.lengthComputable) {
+                                progress = Math.round(e.loaded * 100 / e.total);
 
-                                        bar.width((progress - 1) +'%');
-                                        percent.html((progress - 1) +'%');
+                                bar.width((progress - 1) +'%');
+                                percent.html((progress - 1) +'%');
 
-                                        //console.log("progress: " + progress + "%");
-                                        if (e.loaded == e.total) {
-                                            /*setTimeout(function(){
-                                                $('#progress_div').hide();
-                                                progress = 0;
-                                                bar.width(progress+'%');
-                                                percent.html(progress+'%');
-                                            }, 2000);*/
-                                            //console.log("File upload finished!");
-                                            //console.log("Server will perform extra work now...");
-                                        }
-                                    }
+                                //console.log("progress: " + progress + "%");
+                                if (e.loaded == e.total) {
+                                    /*setTimeout(function(){
+                                        $('#progress_div').hide();
+                                        progress = 0;
+                                        bar.width(progress+'%');
+                                        percent.html(progress+'%');
+                                    }, 2000);*/
+                                    //console.log("File upload finished!");
+                                    //console.log("Server will perform extra work now...");
                                 }
                             }
-                        })
-                        .then(function (success) {
+                        }
+                    }
+                })
+                .then(function (success) {
 
-                            if (success) {
-                                if(socket)
-                                {
-                                    setTimeout(function(){
-                                        socket.emit('user notification',user_id);
-                                    },1000);
-                                }
+                    if (success) {
+                        if(socket)
+                        {
+                            setTimeout(function(){
+                                socket.emit('user notification',user_id);
+                            },1000);
+                        }
 
-                                $('.post_loader').hide();
-                                $scope.opp.description = '';
-                                $scope.opp.opptitle = '';
-                                $scope.opp.job_title = '';
-                                $scope.opp.location = '';
-                                $scope.opp.field = '';
-                                $scope.opp.postfiles = '';
-                                document.getElementById('fileInput').value = '';
-                                $('#job_title .input').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-                                $('#job_title .input').css('width', '100%');
+                        $('.post_loader').hide();
+                        $scope.opp.description = '';
+                        $scope.opp.opptitle = '';
+                        $scope.opp.job_title = '';
+                        $scope.opp.location = '';
+                        $scope.opp.field = '';
+                        $scope.opp.postfiles = '';
+                        document.getElementById('fileInput').value = '';
+                        $('#job_title .input').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
+                        $('#job_title .input').css('width', '100%');
 
-                                $('#location .input').attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
-                                $('#location .input').css('width', '100%');
+                        $('#location .input').attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
+                        $('#location .input').css('width', '100%');
 
 
-                                $("#post_opportunity")[0].reset();
+                        $("#post_opportunity")[0].reset();
 
-                                $('.file-preview-thumbnails').html('');
-                                //$scope.postData.splice(0, 0, success.data[0]);
-                                getUserPost(pg,1);
-                                $scope.IsVisible = true;                                
-                                $scope.recentpost = success.data;
-                                if(success.data.status == '0')
-                                {
-                                    $("#post-fail").fadeIn("slow");
-                                    setTimeout(function() {
-                                        $("#post-fail").fadeOut("slow");
-                                    }, 5000);
-                                }
+                        $('.file-preview-thumbnails').html('');
+                        //$scope.postData.splice(0, 0, success.data[0]);
+                        getUserPost(pg,1);
+                        $scope.IsVisible = true;                                
+                        $scope.recentpost = success.data;
+                        if(success.data.status == '0')
+                        {
+                            $("#post-fail").fadeIn("slow");
+                            setTimeout(function() {
+                                $("#post-fail").fadeOut("slow");
+                            }, 5000);
+                        }
 
-                                bar.width(100+'%');
-                                percent.html(100+'%');
-                                setTimeout(function(){                                    
-                                    progress = 0;
-                                    // bar.width(progress+'%');
-                                    // percent.html(progress+'%');
-                                }, 2000);
+                        bar.width(100+'%');
+                        percent.html(100+'%');
+                        setTimeout(function(){                                    
+                            progress = 0;
+                            // bar.width(progress+'%');
+                            // percent.html(progress+'%');
+                        }, 2000);
 
-                                imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
+                        imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
 
-                                cntImgOpp = 0;
-                                formFileDataOpp = new FormData();
-                                fileCountOpp = 0;
-                                fileNamesArrOpp = [];
-                                formFileExtOpp = [];
-                                $("#selectedFilesOpp").html("");
-                                $("#fileCountOpp").text("");
+                        cntImgOpp = 0;
+                        formFileDataOpp = new FormData();
+                        fileCountOpp = 0;
+                        fileNamesArrOpp = [];
+                        formFileExtOpp = [];
+                        $("#selectedFilesOpp").html("");
+                        $("#fileCountOpp").text("");
 
-                                setTimeout(function(){
-                                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+                        setTimeout(function(){
+                            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
-                                    for (i = 0; i < total; i++) {
-                                        if($(mediaElements[i])[0].id == '')
-                                        {                                            
-                                            new MediaElementPlayer(mediaElements[i], {
-                                                stretching: 'auto',
-                                                pluginPath: '../../../build/',
-                                                success: function (media) {
-                                                    var renderer = document.getElementById(media.id + '-rendername');
+                            for (i = 0; i < total; i++) {
+                                if($(mediaElements[i])[0].id == '')
+                                {                                            
+                                    new MediaElementPlayer(mediaElements[i], {
+                                        stretching: 'auto',
+                                        pluginPath: '../../../build/',
+                                        success: function (media) {
+                                            var renderer = document.getElementById(media.id + '-rendername');
 
-                                                    media.addEventListener('loadedmetadata', function () {
-                                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                                        if (src !== null && src !== undefined) {
-                                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                                            // renderer.querySelector('.error').innerHTML = '';
-                                                        }
-                                                    });
-
-                                                    media.addEventListener('error', function (e) {
-                                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                                                    });
+                                            media.addEventListener('loadedmetadata', function () {
+                                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                if (src !== null && src !== undefined) {
+                                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                    // renderer.querySelector('.error').innerHTML = '';
                                                 }
                                             });
+
+                                            media.addEventListener('error', function (e) {
+                                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                            });
                                         }
-                                    }
-                                    // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                                },1000);
+                                    });
+                                }
                             }
-                        });
+                            // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        },1000);
+                    }
+                });
             }
 
         }
@@ -1997,7 +2055,6 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
 
     // POST SOMETHING UPLOAD START
-
     $scope.post_something_check = function (event,postIndex) {
         //alert(postIndex);return false;
         if (document.getElementById("edit_post_id"+postIndex)) {
@@ -2713,6 +2770,58 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     $("#cmt-btn-mob-"+post_id).removeAttr("disabled");
                     $("#cmt-btn-"+post_id).removeAttr("style");
                     $("#cmt-btn-"+post_id).removeAttr("disabled");
+
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+
                 },1000);
             }, function errorCallback(response) {            
                 $scope.sendComment(post_id, index, post,is_promoted);
@@ -3189,6 +3298,59 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         $('.editable_text').html('');
                     }
                 }
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+
+                },500);
             },function errorCallback(response) {            
                 $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex,is_promoted);
             });
@@ -3274,6 +3436,60 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             {                
                 $('#likeusermodal').modal('show');
             }
+
+            setTimeout(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
+                });
+                
+            },300);
         },function errorCallback(response) {
             $scope.like_user_list(post_id);
         });
@@ -3907,7 +4123,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $(".contact-btn-"+to_id).attr('style','pointer-events:all;');
                 $(".contact-btn-"+to_id).html($compile(success.data.button)($scope));
             }
-            $scope.get_all_counter();
+            
         },function errorCallback(response) {
             $scope.contact(id, status, to_id,indexCon,confirm);
         });
@@ -3925,7 +4141,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             {
                 $(".contact-btn-"+to_id).html($compile(success.data.button)($scope));
             }
-            $scope.get_all_counter();
+            
         },function errorCallback(response) {
             $scope.remove_contact(id, status, to_id,indexCon);
         });
@@ -3970,7 +4186,8 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
     }*/
 });
 
-app.controller('peopleController', function($scope, $http, $compile, $window,$location) {    
+app.controller('peopleController', function($scope, $http, $compile, $window,$location) {
+    $scope.today = new Date(); 
     $scope.$parent.active_tab = '2';
     $scope.$parent.title = "People | Aileensoul";
     $scope.user_id = user_id;
@@ -4034,6 +4251,59 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                         $scope.total_record = success.data.total_record;
                     }
                 }
+
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
             }
             else
             {
@@ -4043,6 +4313,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
+            console.log(response);
             $scope.peopleData();
         });
     };
@@ -4089,6 +4360,59 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                 $scope.page_number = success.data.page;            
                 $scope.people_data = success.data.people_data;
                 $scope.total_record = success.data.total_record;
+
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
 
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");                
@@ -4160,7 +4484,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             {
                 $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
             }
-            $scope.get_all_counter();
+            
         },function errorCallback(response) {
             $scope.contact(id, status, to_id,indexCon,confirm);
         });
@@ -4178,7 +4502,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             {
                 $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
             }
-            $scope.get_all_counter();
+            
         },function errorCallback(response) {
             $scope.remove_contact(id, status, to_id,indexCon);
         });
@@ -8676,15 +9000,15 @@ function setCursotToEnd(el)
 function follow_user(id)
 {
     var uid = $("#"+id).data('uid').toString();
-    $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
     $.ajax({
         url: base_url + "userprofile_page/follow_user_tooltip",        
         type: "POST",
         data: 'to_id=' + uid + '&ele_id=' + id,
         success: function (data) {            
-            $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
-                $(".follow-btn-" + uid.slice(0, -6)).html(data);
+                $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
             },500);
         }
     });
@@ -8692,15 +9016,48 @@ function follow_user(id)
 
 function unfollow_user(id) {
     var uid = $("#"+id).data('uid').toString();
-    $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
     $.ajax({
         url: base_url + "userprofile_page/unfollow_user_tooltip",        
         type: "POST",
         data: 'to_id=' + uid + '&ele_id=' + id,
         success: function (data) {            
-            $(".follow-btn-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
-                $(".follow-btn-" + uid.slice(0, -6)).html(data);
+                $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function follow_user_bus(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_follow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user_bus(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_unfollow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
             },500);
         }
     });
@@ -8715,11 +9072,7 @@ function contact(elid)
     var indexCon = params[3];
     var confirm = params[4];
 
-    if(confirm == '1')
-    {
-        $("#remove-contact-conform-"+indexCon.slice(0, -6)).modal("show");
-        return false;
-    }
+    
     $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:none;');
 
     $.ajax({
@@ -8735,22 +9088,4 @@ function contact(elid)
             },500);
         }
     });
-
-    /*$http({
-        method: 'POST',
-        url: base_url + 'userprofile_page/addToContactNewTooltip',
-        data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    })
-    .then(function (success) {            
-        if(success.data != "")
-        {
-            $(".contact-btn-"+to_id).attr('style','pointer-events:all;');
-            $(".contact-btn-"+to_id).html($compile(success.data.button)($scope));
-        }
-        $scope.get_all_counter();
-    },function errorCallback(response) {
-        $scope.contact(id, status, to_id,indexCon,confirm);
-    });*/
-
 }
