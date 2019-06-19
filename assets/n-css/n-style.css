@@ -1180,7 +1180,7 @@ appearance:         none;}
 .search-business-top .bus-cover a{display:block;}
 .search-business-top .all-job-top{border-bottom:0;}
 .search-business-top .all-job-top .post-img{width:100px; height:100px; border:5px solid #fff; margin-top:-50px; position:relative; border-radius:4px;}
-.search-business-top .job-top-detail h5{font-size:18px; font-weight:normal;}
+.search-business-top .job-top-detail h5{font-size:18px; font-weight:normal; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .search-business .search-detail{padding:0; width:100%; float:left; margin:0;} 
 .search-business .search-detail li{list-style-type:none; font-size:16px; width:100%; float:left; padding:3px 0;}
 .search-business .search-detail li a{color:#5c5c5c;} 
@@ -3586,6 +3586,12 @@ tags-input .tags .tag-item {font-size: 12px;}
 .search-box .cbp-spmenu a:hover{background: #fff;}
 .search-box .cbp-spmenu a:active{background: #fff; color: #5c5c5c;}
 
+.bus-search-top .bus-follow{width: 110px; float: right; padding-top: 8px; display: none;}
+.bus-search-top .bus-follow .btn-new-1{font-size: 14px; padding: 3px 20px; margin: 0;}
+.all-job-top.bus-search-top{padding-left: 5px; padding-right: 5px;}
+.bus-search-top .job-top-detail{width: 340px;}
+.job-top-detail h5.bus-ind{font-size: 16px; }
+
 /*** end search new page  ***/
 .error{color: #ff0000;}
 .user-profile-box .user-detail-bottom ul li:nth-child(1){width:72px;}
@@ -4760,6 +4766,8 @@ tags-input .tags{padding: 0;}
   .contact-request .tab-add-991 .banner-add{display: none;}
   .middle-section{width: 100%;}
   .big-left .middle-section{width: 100%;}
+  .search-business-top .bus-search-top .job-top-detail{width:65%;}
+  .search-business-top .job-top-detail h5.bus-ind{font-size: 14px;}
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}
@@ -4827,6 +4835,7 @@ tags-input .tags{padding: 0;}
   .message-box .modal-content{width:100%;}
   .comment-input .all-hashtags-list ul.ui-menu{width: 94% !important;}
   .media-tab ul li a .fa:before {width: 18px; height: 18px; margin-bottom: -3px;}
+  .search-business-top .bus-search-top .job-top-detail{width:54%;}
 }
 @media screen and (max-width: 539px) {
   .fw-539{width:100%; float:left;}
@@ -5334,6 +5343,9 @@ tags-input .tags{padding: 0;}
   .search-left-box .pull-right.btn-new-1{padding: 5px 16px 5px; width: 90px;}
   .search-left-box .pull-right.btn-new-1 span{margin-bottom: 1px;}
   .analytic-detail .analytic-left-tab{padding: 0;}
+  .search-business-top .bus-search-top .job-top-detail{width: 100%;}
+  .bus-search-top .bus-follow .btn-new-1{line-height: inherit;}
+  .bus-search-top .bus-follow{width: 100%; text-align: center;}
 }
 @media screen and (max-width: 359px) {
   .main-banner{max-height:170px;}
