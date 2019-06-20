@@ -33,7 +33,7 @@
 				<div class="search-box">
 					<form onsubmit="return searchSubmit();" method="post" action="javascript:void(0);">
 						<div class="pb20 search-input">
-							<input type="text" ng-model="keyword" id="q" name="q" placeholder="Company, Category, or Products" autocomplete="off" class="business_category">
+							<input type="text" ng-model="keyword" id="q" name="q" placeholder="Company and Categorie" autocomplete="off" class="business_category">
 							<input type="text" class="city-input business_location" ng-model="city" id="l" name="l" placeholder="City, State or Country" autocomplete="off">
 						</div>
 						<div class="fw pt20">
