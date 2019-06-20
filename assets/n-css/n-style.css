@@ -311,7 +311,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .bus-tooltip .user-tooltip .tooltip-user-detail{margin-top: -75px; text-align: left;}
 .bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-user-img{margin-left: 0;}
 .bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns{float: right;}
-.bus-tooltip .tooltip-detail{width: 285px; float: left;}
+.bus-tooltip .tooltip-detail{width: 270px; float: left;}
 .bus-tooltip .tooltip-detail h4{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .bus-tooltip .tooltip-detail p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns{padding-top: 15px;}
