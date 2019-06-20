@@ -4313,7 +4313,6 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            console.log(response);
             $scope.peopleData();
         });
     };

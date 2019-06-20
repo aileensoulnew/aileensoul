@@ -1239,7 +1239,36 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $("#selectedFiles").html("");
                         $("#fileCountSim").text("");
 
-                        $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        // $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        setTimeout(function(){
+                            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                            for (i = 0; i < total; i++) {
+                                if($(mediaElements[i])[0].id == '')
+                                {                        
+                                    new MediaElementPlayer(mediaElements[i], {
+                                        stretching: 'auto',
+                                        pluginPath: '../../../build/',
+                                        success: function (media) {
+                                            var renderer = document.getElementById(media.id + '-rendername');
+
+                                            media.addEventListener('loadedmetadata', function () {
+                                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                if (src !== null && src !== undefined) {
+                                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                    // renderer.querySelector('.error').innerHTML = '';
+                                                }
+                                            });
+
+                                            media.addEventListener('error', function (e) {
+                                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        },1000);
                     }
                     $("#post_opportunity_box").removeAttr("style");
                 });
@@ -1632,7 +1661,36 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $("#selectedFilesOpp").html("");
                         $("#fileCountOpp").text("");
 
-                        $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        // $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                        setTimeout(function(){
+                            var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                            for (i = 0; i < total; i++) {
+                                if($(mediaElements[i])[0].id == '')
+                                {                        
+                                    new MediaElementPlayer(mediaElements[i], {
+                                        stretching: 'auto',
+                                        pluginPath: '../../../build/',
+                                        success: function (media) {
+                                            var renderer = document.getElementById(media.id + '-rendername');
+
+                                            media.addEventListener('loadedmetadata', function () {
+                                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                if (src !== null && src !== undefined) {
+                                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                    // renderer.querySelector('.error').innerHTML = '';
+                                                }
+                                            });
+
+                                            media.addEventListener('error', function (e) {
+                                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        },1000);
                     }
                 });
             }
@@ -1810,7 +1868,36 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                                 formFileExtQue = [];
                                 $("#selectedFilesQue").html("");
                                 $("#fileCountQue").text("");
-                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                                // $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
+                                setTimeout(function(){
+                                    var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                                    for (i = 0; i < total; i++) {
+                                        if($(mediaElements[i])[0].id == '')
+                                        {                        
+                                            new MediaElementPlayer(mediaElements[i], {
+                                                stretching: 'auto',
+                                                pluginPath: '../../../build/',
+                                                success: function (media) {
+                                                    var renderer = document.getElementById(media.id + '-rendername');
+
+                                                    media.addEventListener('loadedmetadata', function () {
+                                                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                                        if (src !== null && src !== undefined) {
+                                                            // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                                            // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                                            // renderer.querySelector('.error').innerHTML = '';
+                                                        }
+                                                    });
+
+                                                    media.addEventListener('error', function (e) {
+                                                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                },1000);
                             }
                         });
             }
@@ -1891,7 +1978,36 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 isLoadingData = true;
             }
 
-            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+            // setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+                for (i = 0; i < total; i++) {
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                }
+            },1000);
         }, function (error) {});
     }
 
@@ -1944,8 +2060,37 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 // isLoadingData = false;                
                 $scope.showLoadmore = false;
             }
+            setTimeout(function(){
+                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
-            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
+                for (i = 0; i < total; i++) {
+                    if($(mediaElements[i])[0].id == '')
+                    {                        
+                        new MediaElementPlayer(mediaElements[i], {
+                            stretching: 'auto',
+                            pluginPath: '../../../build/',
+                            success: function (media) {
+                                var renderer = document.getElementById(media.id + '-rendername');
+
+                                media.addEventListener('loadedmetadata', function () {
+                                    var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                                    if (src !== null && src !== undefined) {
+                                        // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                                        // renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                                        // renderer.querySelector('.error').innerHTML = '';
+                                    }
+                                });
+
+                                media.addEventListener('error', function (e) {
+                                    renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                                });
+                            }
+                        });
+                    }
+                }
+            },1000);
+
+            // setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
         }, function (error) {});
     };
 
@@ -2495,8 +2640,8 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
 
     $scope.loadMediaElement = function ()
     {
-        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
-        var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+        // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        /*var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
         for (i = 0; i < total; i++) {
             new MediaElementPlayer(mediaElements[i], {
@@ -2519,7 +2664,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     });
                 }
             });
-        }
+        }*/
     };
 
     $scope.save_post = function(post_id,index,postData){

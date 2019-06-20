@@ -124,7 +124,7 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;// 587;
-        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }
 
@@ -250,7 +250,7 @@ class Email_model extends CI_Model {
 
         //echo '<pre>'; print_r($this->email->print_debugger()); die();
         // if ($this->email->send()) {
-        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }
 
@@ -334,7 +334,7 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;// 587;
-        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }
 
@@ -460,7 +460,7 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }
 
@@ -498,7 +498,7 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;//587;
-        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }
 
@@ -544,7 +544,7 @@ class Email_model extends CI_Model {
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
-        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost") {
+        if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }
         $failed_email = explode(",", FAILED_EMAIL);

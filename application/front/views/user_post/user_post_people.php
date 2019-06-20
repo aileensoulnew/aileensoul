@@ -157,12 +157,16 @@
                     <span ng-if="people.degree_name == null && people.title_name == null">Current work</span>
                     
                 </div>
-                <div id="contact-btn-{{$index + 1}}" ng-if="people.user_id != user_id" class="profile-btns">
-                    <a class="btn3" ng-if="people.contact_detail.contact_value == 'new'" ng-click="contact(people.contact_detail.contact_id, 'pending', people.user_id,$index + 1)">Add to contact</a>
-                    <a class="btn1" ng-if="people.contact_detail.contact_value == 'confirm'" ng-click="contact(people.contact_detail.contact_id, 'cancel', people.user_id,$index + 1,1)">In people</a>
-                    <a class="btn3" ng-if="people.contact_detail.contact_value == 'pending'" ng-click="contact(people.contact_detail.contact_id, 'cancel', people.user_id,$index + 1)">Request sent</a>
-                    <a class="btn3" ng-if="people.contact_detail.contact_value == 'cancel'" ng-click="contact(people.contact_detail.contact_id, 'pending', people.user_id,$index + 1)">Add to contact</a>
-                    <a class="btn3" ng-if="people.contact_detail.contact_value == 'reject'" ng-click="contact(people.contact_detail.contact_id, 'pending', people.user_id,$index + 1)">Add to contact</a>
+                <div id="contact-btn-{{$index + 1}}" ng-if="people.user_id != user_id" class="profile-btns contact-btn-{{people.user_id}}">
+                    <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'new'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">Add to contact</a>
+                                        
+                    <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'confirm'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">In Contacts</a>
+                    
+                    <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'pending'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">Request sent</a>
+                    
+                    <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'cancel'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">Add to contact</a>
+                    
+                    <a class="btn-new-1" ng-if="people.contact_detail.contact_value == 'reject'" data-param="{{people.contact_detail.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ people.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{people.user_id}}">Add to contact</a>
                 </div>
                 <div class="modal fade message-box" id="remove-contact-conform-{{$index + 1}}" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-lm">

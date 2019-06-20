@@ -2120,7 +2120,7 @@ class User_post_model extends CI_Model {
 
                 if($user_id != '')
                 {                    
-                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2"')->get()->row_array();
+                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
                     $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
 
                     $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
@@ -2166,9 +2166,6 @@ class User_post_model extends CI_Model {
                 
                 $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
                 $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-                $result_array[$key]['user_data']['contact_count'] = '';
-                $result_array[$key]['user_data']['post_count'] = '';
                 if($user_id != '')
                 {
                     $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
@@ -2177,7 +2174,7 @@ class User_post_model extends CI_Model {
                 else
                 {
                     $result_array[$key]['user_data']['follow_status'] = '';
-                }                
+                }
 
             }
 
@@ -5759,6 +5756,19 @@ class User_post_model extends CI_Model {
             $result_array[$key]['user_image'] = $img_data->user_image;            
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
+
+            $result_array[$key]['follow_from'] = $follow_detail['follow_from'];
+            $result_array[$key]['follow_to'] = $follow_detail['follow_to'];
+            $result_array[$key]['follow_status'] = $follow_detail['status'];
+
+            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
+            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+            $contact_count = $this->common->getContactCount($value['user_id'])[0];
+            $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+            $post_count = $this->common->get_post_count($value['user_id']);
+            $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
 
             $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
             $result_array[$key]['follow_status'] = $follow_detail['status'];
