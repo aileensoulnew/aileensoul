@@ -3161,7 +3161,7 @@ class Userprofile_page extends MY_Controller {
         // print_r($follow);exit();
 
         if (count($follow) != 0) {
-            $data = array('status' => 1,'modify_date' => date("Y-m-d h:i:s"));
+            $data = array('status' => '1','modify_date' => date("Y-m-d h:i:s"));
             // $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             $where = array('id' => $follow['id'], 'follow_type' => '2');
             $this->db->where($where);
@@ -3171,7 +3171,7 @@ class Userprofile_page extends MY_Controller {
             $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
         } else {
             $data = array(
-                'status' => 1,
+                'status' => '1',
                 'follow_from' => $userid,
                 'follow_to' => $id,
                 'follow_type' => '2',

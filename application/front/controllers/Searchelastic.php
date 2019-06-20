@@ -1032,11 +1032,12 @@ class Searchelastic extends MY_Controller {
                 $state_id = $this->data_model->getStateIdByCityId($value['_source']['student_city']);
                 $searchProfileDataMain[$key]['country'] = $this->data_model->getCountryByStateId($state_id);
             }
-            $contact_detail = $this->db->select('from_id,to_id,status,not_read')->from('user_contact')->where('(from_id =' . $value['_id'] . ' AND to_id =' . $userid . ') OR (to_id =' . $value['_id'] . ' AND from_id =' . $userid . ')')->get()->row_array();
+            $contact_detail = $this->db->select('id,from_id,to_id,status,not_read')->from('user_contact')->where('(from_id =' . $value['_id'] . ' AND to_id =' . $userid . ') OR (to_id =' . $value['_id'] . ' AND from_id =' . $userid . ')')->get()->row_array();
             $searchProfileDataMain[$key]['contact_from_id'] = $contact_detail['from_id'];
             $searchProfileDataMain[$key]['contact_to_id'] = $contact_detail['to_id'];
             $searchProfileDataMain[$key]['contact_status'] = $contact_detail['status'];
             $searchProfileDataMain[$key]['contact_not_read'] = $contact_detail['not_read'];
+            $searchProfileDataMain[$key]['contact_id'] = $contact_detail['id'];
 
             $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_from =' . $value['_id'] . ' AND follow_to =' . $userid . ') OR (follow_to =' . $value['_id'] . ' AND follow_from =' . $userid . ')')->get()->row_array();
             $searchProfileDataMain[$key]['follow_from'] = $follow_detail['follow_from'];
@@ -1121,7 +1122,7 @@ class Searchelastic extends MY_Controller {
 
     public function search_opportunity()
     {
-        $userid = $this->session->userdata('aileenuser');
+        $user_id = $this->session->userdata('aileenuser');
         $searchKeyword = $this->input->post('searchKeyword');
 
         $search_job_title = $this->input->post('search_job_title');
@@ -1163,7 +1164,7 @@ class Searchelastic extends MY_Controller {
                                         [
                                             'match' =>
                                             [
-                                                'user_id' => $userid
+                                                'user_id' => $user_id
                                             ]
                                         ]
                                     ]//must not end
@@ -1230,7 +1231,7 @@ class Searchelastic extends MY_Controller {
                                             [
                                                 'match' =>
                                                 [
-                                                    'user_id' => $userid
+                                                    'user_id' => $user_id
                                                 ]
                                             ]
                                         ]//must not end
@@ -1297,7 +1298,7 @@ class Searchelastic extends MY_Controller {
 
             if($searchOpportunityDataMain[$key]['user_type'] == '1')
             {                
-                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background ,jt.name as title_name,d.degree_name")->from("user u");
                 $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
                 $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
                 $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
@@ -1308,10 +1309,45 @@ class Searchelastic extends MY_Controller {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $searchOpportunityDataMain[$key]['user_data'] = $user_data;
+                $follower_count = $this->common->getFollowerCount($searchOpportunityDataMain[$key]['user_id'])[0];
+                $searchOpportunityDataMain[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+                $contact_count = $this->common->getContactCount($searchOpportunityDataMain[$key]['user_id'])[0];
+                $searchOpportunityDataMain[$key]['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+                $post_count = $this->common->get_post_count($searchOpportunityDataMain[$key]['user_id']);
+                $searchOpportunityDataMain[$key]['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+                if($user_id != '')
+                {                    
+                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $searchOpportunityDataMain[$key]['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2"')->get()->row_array();
+                    $searchOpportunityDataMain[$key]['user_data']['follow_status'] = $follow_detail['status'];
+
+                    $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $searchOpportunityDataMain[$key]['user_id']);
+                    if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                    {
+                        $searchOpportunityDataMain[$key]['user_data']['contact_status'] = 1;
+                        $searchOpportunityDataMain[$key]['user_data']['contact_value'] = $is_userContactInfo['status'];
+                        $searchOpportunityDataMain[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];
+                    }
+                    else
+                    {
+                        $searchOpportunityDataMain[$key]['user_data']['contact_status'] = 0;
+                        $searchOpportunityDataMain[$key]['user_data']['contact_value'] = 'new';
+                        $searchOpportunityDataMain[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];   
+                    }
+                }
+                else
+                {
+                    $result_array[$key]['user_data']['follow_status'] = '';
+                    $result_array[$key]['user_data']['contact_status'] = '';
+                    $result_array[$key]['user_data']['contact_value'] = '';
+                    $result_array[$key]['user_data']['contact_id'] = '';
+                }
             }
             else
             {
-                $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
+                $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
                 $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
                 $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
                 $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
@@ -1321,6 +1357,18 @@ class Searchelastic extends MY_Controller {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $searchOpportunityDataMain[$key]['user_data'] = $user_data;
+                $searchOpportunityDataMain[$key]['user_data']['follower_count'] = '';
+                $searchOpportunityDataMain[$key]['user_data']['contact_count'] = '';
+                $searchOpportunityDataMain[$key]['user_data']['post_count'] = '';
+                if($user_id != '')
+                {
+                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $searchOpportunityDataMain[$key]['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                    $searchOpportunityDataMain[$key]['user_data']['follow_status'] = $follow_detail['status'];
+                }
+                else
+                {
+                    $searchOpportunityDataMain[$key]['user_data']['follow_status'] = '';
+                }
             }
 
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
@@ -1333,8 +1381,8 @@ class Searchelastic extends MY_Controller {
             $post_like_data = $this->user_post_model->postLikeData($value['_id']);
             $post_like_count = $this->user_post_model->likepost_count($value['_id']);
             $searchOpportunityDataMain[$key]['post_like_count'] = $post_like_count;
-            $searchOpportunityDataMain[$key]['is_userlikePost'] = $this->user_post_model->is_userlikePost($userid, $value['_id']);
-            $searchOpportunityDataMain[$key]['is_user_saved_post'] = $this->user_post_model->is_user_saved_post($userid, $value['_id']);
+            $searchOpportunityDataMain[$key]['is_userlikePost'] = $this->user_post_model->is_userlikePost($user_id, $value['_id']);
+            $searchOpportunityDataMain[$key]['is_user_saved_post'] = $this->user_post_model->is_user_saved_post($user_id, $value['_id']);
 
             $searchOpportunityDataMain[$key]['post_share_count'] = $this->user_post_model->postShareCount($value['_id']);
 
@@ -1344,10 +1392,19 @@ class Searchelastic extends MY_Controller {
                 $searchOpportunityDataMain[$key]['post_like_data'] = $post_like_data['username'];
             }
             $searchOpportunityDataMain[$key]['post_comment_count'] = $this->user_post_model->postCommentCount($value['_id']);
-            $searchOpportunityDataMain[$key]['post_comment_data'] = $postCommentData = $this->user_post_model->postCommentData($value['_id'],$userid);
+            $searchOpportunityDataMain[$key]['post_comment_data'] = $postCommentData = $this->user_post_model->postCommentData($value['_id'],$user_id);
+
+            if($user_id != $value['user_id'])
+            {
+                $searchOpportunityDataMain[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['user_id']);
+            }
+            else
+            {
+                $searchOpportunityDataMain[$key]['mutual_friend'] = array();
+            }
 
             /*foreach ($postCommentData as $key1 => $value1) {
-                $searchOpportunityDataMain[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->user_post_model->is_userlikePostComment($userid, $value1['comment_id']);
+                $searchOpportunityDataMain[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->user_post_model->is_userlikePostComment($user_id, $value1['comment_id']);
                 $searchOpportunityDataMain[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->user_post_model->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->user_post_model->postCommentLikeCount($value1['comment_id']);
             }*/
         }
