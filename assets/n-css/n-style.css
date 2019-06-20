@@ -3712,6 +3712,7 @@ tags-input .tags{padding: 0;}
 .media-tab ul.nav-tabs li.active a .fa-music:before, .media-tab ul.nav-tabs li a:hover .fa-music:before {background: url(../n-images/music-active.png); background-size: 100%;}  
 .media-tab ul.nav-tabs li.active a .fa-file-pdf-o:before, .media-tab ul.nav-tabs li a:hover .fa-file-pdf-o:before {background: url(../n-images/pdf-active.png); background-size: 100%;}
 .media-tab ul.nav-tabs li.active a .fa-newspaper-o:before, .media-tab ul.nav-tabs li a:hover .fa-newspaper-o:before {background: url(../n-images/file-active.png); background-size: 100%;}
+.search-profiles .profile-btns a.btn-new-1{padding: 4px 10px; font-size: 14px; font-weight: normal; border: 1px solid #d2d2d2;}
 
 
 
