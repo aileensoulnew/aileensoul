@@ -114,7 +114,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 					<div class="col-md-6 col-sm-6">
 						<div class="right-reg">
 							<div class="right-reg-content">
-								<p>We provide platform & Opportunities to every person in the world to make their career.</p>
+								<p>A place where everyone can learn, earn and grow</p>
 								
 								<div class="reg-btns">
 									<a href="javascript:void(0);" id="login-btn-id" class="btn-new-1">Login</a>

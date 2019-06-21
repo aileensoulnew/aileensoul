@@ -33,7 +33,7 @@
     <div id="main_page_load">
         <?php echo $header_profile; ?>        
         <div class="main-section">
-            <div class="container">            	
+            <div class="container mobp0">            	
                 <div class="big-left">
                     <div class="monetize-box">
                         <h1>Monetize Aileensoul Account</h1>

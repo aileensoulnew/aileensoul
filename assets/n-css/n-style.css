@@ -693,7 +693,8 @@ box-shadow: 2px 2px 17px 0.8px rgba(217,217,217,1);}
 .custom-user-list .list-cus .custom-user-box:last-child{border-bottom: 0;}
 .bus-list-cus .contact-frnd-post{padding: 0;}
 .bus-list-cus .job-contact-frnd .profile-job-post-detail{margin: 0; border-radius: 0; border:0; border-bottom: 1px solid #d2d2d2; }
-.bus-list-cus .job-contact-frnd .profile-job-post-detail:last-child{border-bottom: 0;}
+.bus-list-cus .job-contact-frnd .profile-job-post-detail:last-child{/*border-bottom: 0;*/}
+.bus-list-cus .contact-frnd-post .job-contact-frnd:last-child .profile-job-post-detail{border-bottom: 0;}
 
 /***  end contacts followers following notification page  ***/ 
 

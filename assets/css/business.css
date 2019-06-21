@@ -2057,7 +2057,7 @@ label.cameraButton:active{
     height:100%
 }
 .profile-job-post-location-name{
-    padding:15px;
+    padding:10px;
     font-weight:700;
     width:100%;
     float:left
@@ -2093,7 +2093,8 @@ label.cameraButton:active{
 }
 .profile-job-post-location-name ul li .follow-img img{
     height:100%;
-    width:100%
+    width:100%;
+    border-radius: 100%;
 }
 .profile-job-post-location-name ul li .follow-li-text{
     font-size:18px;
