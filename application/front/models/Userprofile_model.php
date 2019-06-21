@@ -780,6 +780,44 @@ class Userprofile_model extends CI_Model {
             $user_data = $query->row_array();
             $result_array[$key]['user_data'] = $user_data;
 
+            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
+            $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+            $contact_count = $this->common->getContactCount($value['user_id'])[0];
+            $result_array[$key]['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+            $post_count = $this->common->get_post_count($value['user_id']);
+            $result_array[$key]['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+            if($userid_login != '' && $userid_login != $value['user_id'] )
+            {
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $userid_login . ') AND follow_type = "1"')->get()->row_array();
+
+                $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
+
+                $is_userContactInfo = $this->userprofile_model->userContactStatus($userid_login, $value['user_id']);
+
+                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                {
+                    $result_array[$key]['user_data']['contact_status'] = 1;
+                    $result_array[$key]['user_data']['contact_value'] = $is_userContactInfo['status'];
+                    $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];
+                }
+                else
+                {
+                    $result_array[$key]['user_data']['contact_status'] = 0;
+                    $result_array[$key]['user_data']['contact_value'] = 'new';
+                    $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];   
+                }
+            }
+            else
+            {
+                $result_array[$key]['user_data']['follow_status'] = '';
+                $result_array[$key]['user_data']['contact_status'] = '';
+                $result_array[$key]['user_data']['contact_value'] = '';
+                $result_array[$key]['user_data']['contact_id'] = '';
+            }
+
             $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t,ailee_hashtag ht");
             $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
             $this->db->where('uaq.id', $value['post_id']);
@@ -820,13 +858,15 @@ class Userprofile_model extends CI_Model {
                 $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $postCommentData = $this->postCommentData($value['id']);            
-            foreach ($postCommentData as $key1 => $value1) {
-                $postCommentData[$key1]['comment'] = nl2br($this->common->make_links($postCommentData[$key1]['comment']));
-
-                $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
-                $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-                $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['id'],$value1['comment_id'],$user_id);
+            $postCommentData = $this->user_post_model->postCommentCount($value['id']);            
+            
+            if($userid_login != $value['user_id'])
+            {
+                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($userid_login,$value['user_id']);
+            }
+            else
+            {
+                $result_array[$key]['mutual_friend'] = array();
             }
 
             // $result_array[$key]['post_comment_data'] = $postCommentData;
