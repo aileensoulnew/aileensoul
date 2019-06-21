@@ -106,6 +106,8 @@ app.controller('EditorController', ['$scope', function($scope) {
     };
 }]);
 app.controller('postDetailsController', function($scope, $http, $window, $filter, $location, $route) {
+    $scope.today = new Date();
+
     $scope.ask = {};
     $scope.title = "Post | Aileensoul";
     $scope.user_id = user_id;
@@ -145,6 +147,57 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         }
                     });
                 }
+
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();                        
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
+                });
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
         }, function(error) {});
@@ -406,6 +459,57 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                     $("#cmt-btn-mob-" + post_id).removeAttr("disabled");
                     $("#cmt-btn-" + post_id).removeAttr("style");
                     $("#cmt-btn-" + post_id).removeAttr("disabled");
+
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
                 }, 1000);
             });
         } else {
@@ -424,6 +528,58 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             data = success.data;
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();                        
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
+                });
+            },500);
         });
     }
     $scope.viewLastComment = function(post_id, index, post) {
@@ -438,6 +594,58 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             data = success.data;
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
+            setTimeout(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();                        
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
+                });
+            },500);
         });
     }
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -664,6 +872,58 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $scope.get_like_user_list = success.data.likeuserlist;
             if (success.data.countlike > 0) {
                 $('#likeusermodal').modal('show');
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
             }
         });
     }
@@ -754,6 +1014,58 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         
                         $('.editable_text').html('');
                     }
+                    setTimeout(function(){
+                        $('[data-toggle="popover"]').popover({
+                            trigger: "manual" ,
+                            html: true, 
+                            animation:false,
+                            template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                            content: function () {
+                                return $($(this).data('tooltip-content')).html();                        
+                                // return $('#popover-content').html();
+                            },
+                            placement: function (context, element) {
+
+                                var $this = $(element);
+                                var offset = $this.offset();
+                                var width = $this.width();
+                                var height = $this.height();
+
+                                var centerX = offset.left + width / 2;
+                                var centerY = offset.top + height / 2;
+                                var position = $(element).position();
+                                
+                                if(centerY > $(window).scrollTop())
+                                {
+                                    scroll_top = $(window).scrollTop();
+                                    scroll_center = centerY;
+                                }
+                                if($(window).scrollTop() > centerY)
+                                {
+                                    scroll_top = centerY;
+                                    scroll_center = $(window).scrollTop();
+                                }
+                                
+                                if (parseInt(scroll_center - scroll_top) < 340){
+                                    return "bottom";
+                                }                        
+                                return "top";
+                            }
+                        }).on("mouseenter", function () {
+                            var _this = this;
+                            $(this).popover("show");
+                            $(".popover").on("mouseleave", function () {
+                                $(_this).popover('hide');
+                            });
+                        }).on("mouseleave", function () {
+                            var _this = this;
+                            setTimeout(function () {
+                                if (!$(".popover:hover").length) {
+                                    $(_this).popover("hide");
+                                }
+                            }, 100);
+                        });
+                    },500);
                 }
             });
         } else {
@@ -866,3 +1178,95 @@ $(window).on("load", function() {
         theme: "minimal"
     });
 });
+function follow_user(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/follow_user_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/unfollow_user_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function follow_user_bus(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_follow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user_bus(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_unfollow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function contact(elid)
+{
+    var params = $("#"+elid).data('param').split(",");
+    var id = params[0];
+    var status = params[1];
+    var to_id = params[2];
+    var indexCon = params[3];
+    var confirm = params[4];
+
+    
+    $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:none;');
+
+    $.ajax({
+        url: base_url + "userprofile_page/addToContactNewTooltip",        
+        type: "POST",
+        data: 'contact_id='+id+'&status='+status+'&to_id='+to_id+'&indexCon='+indexCon+'&elid='+elid,
+        dataType:"JSON",
+        success: function (data) {
+            console.log(data);
+            $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+            },500);
+        }
+    });
+}

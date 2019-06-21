@@ -312,7 +312,7 @@ class Userprofile_model extends CI_Model {
             $total_post_files = $query->row_array('file_count');
             $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
 
-            $this->db->select("u.user_id,u.user_slug,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+            $this->db->select("u.user_id,u.user_slug,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background,jt.name as title_name,d.degree_name")->from("user u");
             $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
             $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
             $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
@@ -600,7 +600,7 @@ class Userprofile_model extends CI_Model {
 
             if($value['user_type'] == '1')
             {
-                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+                $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background ,jt.name as title_name,d.degree_name")->from("user u");
                 $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
                 $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
                 $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
@@ -611,6 +611,42 @@ class Userprofile_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
+
+                $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+                $contact_count = $this->common->getContactCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+                $post_count = $this->common->get_post_count($value['user_id']);
+                $result_array[$key]['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+                if($user_id != '')
+                {                    
+                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
+                    $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
+
+                    $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
+                    if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                    {
+                        $result_array[$key]['user_data']['contact_status'] = 1;
+                        $result_array[$key]['user_data']['contact_value'] = $is_userContactInfo['status'];
+                        $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];
+                    }
+                    else
+                    {
+                        $result_array[$key]['user_data']['contact_status'] = 0;
+                        $result_array[$key]['user_data']['contact_value'] = 'new';
+                        $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];   
+                    }
+                }
+                else
+                {
+                    $result_array[$key]['user_data']['follow_status'] = '';
+                    $result_array[$key]['user_data']['contact_status'] = '';
+                    $result_array[$key]['user_data']['contact_value'] = '';
+                    $result_array[$key]['user_data']['contact_id'] = '';
+                }
             }
             else
             {
@@ -620,7 +656,7 @@ class Userprofile_model extends CI_Model {
                 $total_post_files = $query->row_array('file_count');
                 $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
 
-                $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
+                $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
                 $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
                 $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
                 $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
@@ -630,6 +666,18 @@ class Userprofile_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
+
+                $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+                if($user_id != '')
+                {
+                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                    $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
+                }
+                else
+                {
+                    $result_array[$key]['user_data']['follow_status'] = '';
+                }
             }
 
             $this->db->select("uaq.*,IF(uaq.category != '',GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
@@ -663,19 +711,20 @@ class Userprofile_model extends CI_Model {
             } elseif ($post_like_count == 1) {
                 $result_array[$key]['post_like_data'] = $post_like_data['username'];
             }
-            $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $postCommentData = $this->postCommentData($value['id']);
-
-            foreach ($postCommentData as $key1 => $value1) {
-                $postCommentData[$key1]['comment'] = nl2br($this->common->make_links($postCommentData[$key1]['comment']));
-
-                $postCommentData[$key1]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($postCommentData[$key1]['created_date'])));
-                $postCommentData[$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
-                $postCommentData[$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-                $postCommentData[$key]['comment_reply_data'] = $this->post_comment_reply_data($value['id'],$value1['comment_id'],$user_id);
-            }
+            $result_array[$key]['post_comment_count'] = $this->user_post_model->postCommentCount($value['id']);
+            $postCommentData = $this->user_post_model->postCommentData($value['id']);
+            
 
             $result_array[$key]['post_comment_data'] = $postCommentData;
+
+            if($user_id != $value['user_id'])
+            {
+                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['user_id']);
+            }
+            else
+            {
+                $result_array[$key]['mutual_friend'] = array();
+            }
 
             $result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
@@ -719,7 +768,7 @@ class Userprofile_model extends CI_Model {
             $total_post_files = $query->row_array('file_count');
             $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
 
-            $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name,u.user_gender")->from("user u");
+            $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background,jt.name as title_name,d.degree_name,u.user_gender")->from("user u");
             $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
             $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
             $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');

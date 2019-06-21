@@ -15,6 +15,7 @@ class Userprofile_page extends MY_Controller {
         $this->load->model('data_model');
         $this->load->model('user_model');
         $this->load->model('userprofile_model');
+        $this->load->model('user_post_model');
         $this->load->model('email_model');
         $this->load->model('searchelastic_model');
         $this->load->library('upload');
