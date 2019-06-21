@@ -3426,7 +3426,7 @@ tags-input .tags .tag-item {font-size: 12px;}
 .left-reg ul li span{vertical-align:middle; font-size:18px; font-weight:bold;}
 .right-reg{padding:20px; position:relative;}
 .right-reg .right-reg-content{text-align:center; padding:0px 25px;}
-.right-reg .right-reg-content p{font-size:23px; line-height:2; padding:0;}
+.right-reg .right-reg-content p{font-size:23px; line-height:2; padding:5px 0 s;}
 .right-reg .right-reg-content .reg-btns{padding:30px 0;}
 .reg-btns .btn-new-1, .reg-btns .btn-new-3 {width:250px; font-size:20px; font-weight:normal; line-height:1.1;}
 .reg-btns .btn-new-1{margin-bottom:40px;}
@@ -5343,6 +5343,7 @@ tags-input .tags{padding: 0;}
   .search-business-top .bus-search-top .job-top-detail{width: 100%;}
   .bus-search-top .bus-follow .btn-new-1{line-height: inherit;}
   .bus-search-top .bus-follow{width: 100%; text-align: center;}
+  .right-reg .right-reg-content p{padding: 0 40px;}
 }
 @media screen and (max-width: 359px) {
   .main-banner{max-height:170px;}
