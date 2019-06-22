@@ -1606,7 +1606,7 @@ class Business_model extends CI_Model {
 
         $where = "((uf.follow_to = '" . $user_id . "'))";
 
-        $this->db->select("u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,jt.name as title_name,d.degree_name,u.user_slug")->from("user_follow  uf");
+        $this->db->select("u.user_id,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,ui.user_image,ui.profile_background ,jt.name as title_name,d.degree_name,u.user_slug,uf.follow_type")->from("user_follow  uf");
         $this->db->join('user u', 'u.user_id = uf.follow_from', 'left');
         $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
         $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
@@ -1627,11 +1627,11 @@ class Business_model extends CI_Model {
         $query = $this->db->get();
         $result_array = $query->result_array();        
         // echo $this->db->last_query();die;
-        // echo '<pre>'; print_r($result_array); die();        
-        foreach ($result_array as $key => $result) {
-            if($login_user_id != $result['user_id'])
+        
+        foreach ($result_array as $key => $value) {
+            if($login_user_id != $value['user_id'])
             {
-                $condition = "((uf.follow_to = '" . $login_user_id . "' AND uf.follow_from = '" . $result['user_id'] . "'))";
+                $condition = "((uf.follow_to = '" . $login_user_id . "' AND uf.follow_from = '" . $value['user_id'] . "'))";
                 $this->db->select("uf.id as follow_user_id")->from("user_follow uf");
                 $this->db->where('uf.status', '1');
                 $this->db->where($condition);
@@ -1644,9 +1644,48 @@ class Business_model extends CI_Model {
                 else
                 {
                     $result_array[$key]["follow_status"] = 0;
-                }                
+                }
+                
+                $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+                $contact_count = $this->common->getContactCount($value['user_id'])[0];
+                $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+                $post_count = $this->common->get_post_count($value['user_id']);
+                $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $login_user_id . ') AND follow_type = "1"')->get()->row_array();
+                $result_array[$key]['follow_from'] = $follow_detail['follow_from'];
+                $result_array[$key]['follow_to'] = $follow_detail['follow_to'];
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+
+                if($login_user_id != $value['user_id'])
+                {
+                    $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($login_user_id,$value['user_id']);
+                }
+                else
+                {
+                    $result_array[$key]['mutual_friend'] = array();
+                }
+
+                $is_userContactInfo= $this->userprofile_model->userContactStatus($login_user_id, $value['user_id']);
+                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                {
+                    $result_array[$key]['contact_status'] = 1;
+                    $result_array[$key]['contact_value'] = $is_userContactInfo['status'];
+                    $result_array[$key]['contact_id'] = $is_userContactInfo['id'];
+                }
+                else
+                {
+                    $result_array[$key]['contact_status'] = 0;
+                    $result_array[$key]['contact_value'] = 'new';
+                    $result_array[$key]['contact_id'] = $is_userContactInfo['id'];   
+                }
+                
             }
         }        
+        // echo '<pre>'; print_r($result_array); die();        
         $total_record = $this->getFollowerCount($user_id, $select_data = '');
         $page_array['page'] = $page;
         $page_array['total_record'] = $total_record[0]['total'];

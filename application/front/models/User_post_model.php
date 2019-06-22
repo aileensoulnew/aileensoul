@@ -4805,7 +4805,7 @@ class User_post_model extends CI_Model {
             $total_post_files = $query->row_array('file_count');
             $result_array[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
 
-            $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
+            $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
             $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
             $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
             $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
@@ -4818,9 +4818,10 @@ class User_post_model extends CI_Model {
 
             $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
             $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-            if($user_id != '')
+            if($user_id != '' && $userid_login != $value['user_id'])
             {
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $userid_login . ') AND follow_type = "2" ')->get()->row_array();
+                
                 $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
             }
             else
@@ -4864,8 +4865,7 @@ class User_post_model extends CI_Model {
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
-            }
-            elseif($value['post_for'] == 'share'){
+            } elseif($value['post_for'] == 'share'){
                 $this->db->select("*")->from("user_post_share");
                 $this->db->where('id_user_post_share', $value['post_id']);                
                 $query = $this->db->get();
@@ -4873,8 +4873,7 @@ class User_post_model extends CI_Model {
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
                 $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
                 $result_array[$key]['share_data'] = $share_data;
-            }
-            elseif ($value['post_for'] == 'profile_update') {
+            } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
                 $query = $this->db->get();
@@ -4886,8 +4885,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $cover_update = $query->row_array();
                 $result_array[$key]['cover_update'] = $cover_update;
-            }
-            elseif ($value['post_for'] == 'article') {
+            } elseif ($value['post_for'] == 'article') {
                 $this->db->select("pa.*,IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') as hashtag")->from('post_article pa, ailee_hashtag ht');
                 $this->db->where('pa.id_post_article', $value['post_id']);
                 $this->db->where('pa.status', 'publish');

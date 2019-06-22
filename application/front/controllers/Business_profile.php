@@ -17,6 +17,7 @@ class Business_profile extends MY_Controller {
         $this->load->model('data_model');
         $this->load->model('business_model');
         $this->load->model('searchelastic_model');
+        $this->load->model('userprofile_model');
         $this->lang->load('message', 'english');
         $this->load->helper('smiley');
         //AWS access info start
@@ -1917,10 +1918,6 @@ class Business_profile extends MY_Controller {
             $page = $_GET["page"];
         }
 
-        /*$start = ($page - 1) * $perpage;
-        if ($start < 0)
-            $start = 0;*/
-
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
         $artdata = $artisticdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $slugid = $artdata[0]['business_slug'];
@@ -1944,8 +1941,13 @@ class Business_profile extends MY_Controller {
             $userlist = $this->business_model->get_business_follower_data($businessdata1[0]['user_id'], $sortby = '', $orderby = '', $limit, $offset,$userid);            
             $total_record = $userlist['pagedata']['total_record'];
         }
+        $this->data['total_record'] = $total_record;
+        $this->data['offset'] = $offset;
+        $this->data['perpage'] = $perpage;
+        $this->data['userlist'] = $userlist;
+        $this->load->view('business_data/business_follower_html', $this->data);
 
-        $return_html = '';
+        /*$return_html = '';
         $return_html .= '<input type="hidden" class="page_number" value="' . $offset . '" />';
         $return_html .= '<input type="hidden" class="total_record" value="' . $total_record . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
@@ -2001,18 +2003,8 @@ class Business_profile extends MY_Controller {
                     $return_html .= '</a>
                     </div>
                     </li>
-                    <li class="fr" id ="frfollow' . $user['user_id'] . '">';               
-
-                    if ($user['follow_status'] == 0) {
-                        /*$return_html .= '<div class="user_btn follow_btn_' . $user['user_id'] . '" id= "followdiv">
-                        <button id="follow' . $user['user_id'] . '" onClick="business_user_follow(' . $user['user_id'] . ')"><span>Follow</span></button>
-                        </div>';*/
-                    }
-                    else {
-                        /*$return_html .= '<div class="user_btn follow_btn_' . $user['user_id'] . '" id= "unfollowdiv">
-                        <button class="bg_following" id="unfollow' . $user['user_id'] . '" onClick="business_user_unfollow(' . $user['user_id'] . ')"><span>Unfollow</span></button>
-                        </div>';*/
-                    }
+                    <li class="fr" id ="frfollow' . $user['user_id'] . '">'; 
+                    
                     $return_html .= '</li>
                     </ul>
                     </div>
@@ -2031,7 +2023,7 @@ class Business_profile extends MY_Controller {
                                 </div>
                             </div>';
         }
-        echo $return_html;        
+        echo $return_html; */       
     }
 
     public function ajax_following($id = "") {
