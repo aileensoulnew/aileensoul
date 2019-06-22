@@ -18,6 +18,7 @@ class Userprofile_page extends MY_Controller {
         $this->load->model('user_post_model');
         $this->load->model('email_model');
         $this->load->model('searchelastic_model');
+        $this->load->model('business_model');
         $this->load->library('upload');
         $this->load->library('inbackground');
         include ('main_profile_link.php');

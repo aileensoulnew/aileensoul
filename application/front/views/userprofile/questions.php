@@ -283,15 +283,88 @@
                         <div class="">
                             <ul>
                                 <li class="like-img" ng-repeat="userlist in get_like_user_list">
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''">
+                                    <div id="like_tooltip_content_{{$index}}" class="tooltip_templates">
+                                        <div class="user-tooltip">
+                                            <div class="tooltip-cover-img">
+                                                <img ng-if="userlist.profile_background != null && userlist.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{userlist.profile_background}}">                                        
+                                                <div ng-if="userlist.profile_background == null || userlist.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                                            </div>
+                                            <div class="tooltip-user-detail">
+                                                <div class="tooltip-user-img">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}" ng-if="userlist.user_image != ''">
+
+                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="userlist.user_image == '' && userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="userlist.user_image == '' && userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+
+                                                </div>
+
+                                                <h4 ng-bind="userlist.fullname"></h4>
+
+                                                <p ng-if="userlist.title_name != null" ng-bind="userlist.title_name"></p>
+                                                <p ng-if="userlist.title_name == null" ng-bind="userlist.degree_name"></p>
+                                                <p ng-if="userlist.title_name == null && userlist.degree_name == null">CURRENT WORK</p>                                        
+
+                                                <p ng-if="userlist.post_count != '' || userlist.contact_count != '' || userlist.follower_count != ''">
+                                                    <span ng-if="userlist.post_count != ''"><b>{{userlist.post_count}}</b> Posts</span>
+                                                    <span ng-if="userlist.contact_count != ''"><b>{{userlist.contact_count}}</b> Connections</span>
+                                                    <span ng-if="userlist.follower_count != ''"><b>{{userlist.follower_count}}</b> Followers</span>
+                                                </p>
+
+                                                <ul class="" ng-if="userlist.mutual_friend.length > 0">
+                                                    <li ng-if="user_id != userlist.user_id" ng-repeat="_friend in userlist.mutual_friend | limitTo:2">
+                                                        <div class="user-img">
+                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
+
+                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+
+                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                        </div>
+                                                    </li>                            
+                                                    <li ng-if="user_id != userlist.user_id" class="m-contacts">
+                                                        <span ng-if="userlist.mutual_friend.length == 1">
+                                                            <b>{{userlist.mutual_friend[0].fullname}}</b> is in mutual contact.
+                                                        </span>
+                                                        <span ng-if="userlist.mutual_friend.length > 1">
+                                                            <b>{{userlist.mutual_friend[0].fullname}}</b>{{userlist.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{userlist.mutual_friend.length - 1}}</b> more mutual contacts.
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                                <div class="tooltip-btns" ng-if="user_id != userlist.user_id">
+                                                    <ul>
+                                                        <li class="contact-btn-{{userlist.user_id}}">
+                                                            <a class="btn-new-1" ng-if="userlist.contact_value == 'new'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
+                                                            
+                                                            <a class="btn-new-1" ng-if="userlist.contact_value == 'confirm'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">In Contacts</a>
+                                                            
+                                                            <a class="btn-new-1" ng-if="userlist.contact_value == 'pending'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Request sent</a>
+                                                            
+                                                            <a class="btn-new-1" ng-if="userlist.contact_value == 'cancel'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
+                                                            
+                                                            <a class="btn-new-1" ng-if="userlist.contact_value == 'reject'" data-param="{{userlist.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ userlist.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{userlist.comment_id}}">Add to contact</a>
+                                                        </li>
+                                                        <li class="follow-btn-user-{{userlist.user_id}}">
+                                                            <a ng-if="userlist.follow_status == 1" class="btn-new-1 following" data-uid="{{userlist.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{userlist.comment_id}}">Following</a>
+
+                                                            <a ng-if="userlist.follow_status == 0 || !userlist.follow_status" class="btn-new-1 follow" data-uid="{{userlist.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{userlist.comment_id}}">Follow</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?php echo MESSAGE_URL; ?>user/{{userlist.user_slug}}" class="btn-new-1" target="_blank">Message</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" target="_self" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                                     </a>
-                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == ''">
+                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == ''" target="_self" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">
                                         <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{(userlist.user_id == <?php echo $user_id; ?> ? 'You' : userlist.fullname)}}</a></h4>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">{{(userlist.user_id == <?php echo $user_id; ?> ? 'You' : userlist.fullname)}}</a></h4>
                                         <p ng-if="(userlist.degree_name != null) && (userlist.title_name == null)">{{userlist.degree_name}}</p>
                                         <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>

@@ -1055,6 +1055,15 @@ class Searchelastic extends MY_Controller {
 
             $post_count = $this->common->get_post_count($value['_id']);
             $searchProfileDataMain[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+            if($user_id != $value['_id'])
+            {
+                $searchProfileDataMain[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['_id']);
+            }
+            else
+            {
+                $searchProfileDataMain[$key]['mutual_friend'] = array();
+            }
             
         }
         
@@ -3328,6 +3337,15 @@ class Searchelastic extends MY_Controller {
 
             $post_count = $this->common->get_post_count($value['_id']);
             $searchProfileDataMain[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+            if($user_id != $value['_id'])
+            {
+                $searchProfileDataMain[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['_id']);
+            }
+            else
+            {
+                $searchProfileDataMain[$key]['mutual_friend'] = array();
+            }
         }
         // echo "<pre>";
         /*print_r($result);exit();
