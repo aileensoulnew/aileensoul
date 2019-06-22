@@ -103,10 +103,10 @@
                             <p ng-if="searchProfile.title_name != null && searchProfile.degree_name == null">{{searchProfile.title_name.length < 30 ? searchProfile.title_name : ((searchProfile.title_name | limitTo:30)+'...') }}</p>
                             <p ng-if="searchProfile.title_name == null && searchProfile.degree_name != null">{{searchProfile.degree_name.length < 30 ? searchProfile.degree_name : ((searchProfile.degree_name | limitTo:30)+'...') }}</p>
                             <p ng-if="searchProfile.title_name == null && searchProfile.degree_name == null">Current Work</p>
-                            <p ng-if="searchProfile.post_count > 0 || searchProfile.contact_count > 0 || searchProfile.follower_count > 0">
-                                <span ng-if="searchProfile.post_count > 0"><b>{{searchProfile.post_count}}</b> Posts</span>
-                                <span ng-if="searchProfile.contact_count > 0"><b>{{searchProfile.contact_count}}</b> Connections</span>
-                                <span ng-if="searchProfile.follower_count > 0"><b>{{searchProfile.follower_count}}</b> Followers</span>
+                            <p ng-if="searchProfile.post_count != '' || searchProfile.contact_count != '' || searchProfile.follower_count != ''">
+                                <span ng-if="searchProfile.post_count != ''"><b>{{searchProfile.post_count}}</b> Posts</span>
+                                <span ng-if="searchProfile.contact_count != ''"><b>{{searchProfile.contact_count}}</b> Connections</span>
+                                <span ng-if="searchProfile.follower_count != ''"><b>{{searchProfile.follower_count}}</b> Followers</span>
                             </p>
 
                             <ul class="" ng-if="searchProfile.mutual_friend.length > 0">

@@ -92,10 +92,10 @@
                             <p ng-if="people.title_name != null">{{people.title_name.length < 30 ? people.title_name : ((people.title_name | limitTo:30)+'...') }}</p>
                             <p ng-if="people.title_name == null">{{people.degree_name.length < 30 ? people.degree_name : ((people.degree_name | limitTo:30)+'...') }}</p>
                             <p ng-if="people.title_name == null && people.degree_name == null">Current Work</p>
-                            <p ng-if="people.post_count > 0 || people.contact_count > 0 || people.follower_count > 0">
-                                <span ng-if="people.post_count > 0"><b>{{people.post_count}}</b> Posts</span>
-                                <span ng-if="people.contact_count > 0"><b>{{people.contact_count}}</b> Connections</span>
-                                <span ng-if="people.follower_count > 0"><b>{{people.follower_count}}</b> Followers</span>
+                            <p ng-if="people.post_count != '' || people.contact_count != '' || people.follower_count != ''">
+                                <span ng-if="people.post_count != ''"><b>{{people.post_count}}</b> Posts</span>
+                                <span ng-if="people.contact_count != ''"><b>{{people.contact_count}}</b> Connections</span>
+                                <span ng-if="people.follower_count != ''"><b>{{people.follower_count}}</b> Followers</span>
                             </p>
 
                             <ul class="" ng-if="people.mutual_friend.length > 0">

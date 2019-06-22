@@ -141,10 +141,10 @@
                                 <p ng-if="post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
                                 <p ng-if="post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
 
-                                <p ng-if="post.user_data.post_count > 0 || post.user_data.contact_count > 0 || post.user_data.follower_count > 0">
-                                    <span ng-if="post.user_data.post_count > 0"><b>{{post.user_data.post_count}}</b> Posts</span>
-                                    <span ng-if="post.user_data.contact_count > 0"><b>{{post.user_data.contact_count}}</b> Connections</span>
-                                    <span ng-if="post.user_data.follower_count > 0"><b>{{post.user_data.follower_count}}</b> Followers</span>
+                                <p ng-if="post.user_data.post_count != '' || post.user_data.contact_count != '' || post.user_data.follower_count != ''">
+                                    <span ng-if="post.user_data.post_count != ''"><b>{{post.user_data.post_count}}</b> Posts</span>
+                                    <span ng-if="post.user_data.contact_count != ''"><b>{{post.user_data.contact_count}}</b> Connections</span>
+                                    <span ng-if="post.user_data.follower_count != ''"><b>{{post.user_data.follower_count}}</b> Followers</span>
                                 </p>
 
                                 <ul class="" ng-if="post.mutual_friend.length > 0">
@@ -458,10 +458,10 @@
                                             <p ng-if="comment.title_name == null" ng-bind="comment.degree_name"></p>
                                             <p ng-if="comment.title_name == null && comment.degree_name == null">CURRENT WORK</p>                                        
 
-                                            <p ng-if="comment.post_count > 0 || comment.contact_count > 0 || comment.follower_count > 0">
-                                                <span ng-if="comment.post_count > 0"><b>{{comment.post_count}}</b> Posts</span>
-                                                <span ng-if="comment.contact_count > 0"><b>{{comment.contact_count}}</b> Connections</span>
-                                                <span ng-if="comment.follower_count > 0"><b>{{comment.follower_count}}</b> Followers</span>
+                                            <p ng-if="comment.post_count != '' || comment.contact_count != '' || comment.follower_count != ''">
+                                                <span ng-if="comment.post_count != ''"><b>{{comment.post_count}}</b> Posts</span>
+                                                <span ng-if="comment.contact_count != ''"><b>{{comment.contact_count}}</b> Connections</span>
+                                                <span ng-if="comment.follower_count != ''"><b>{{comment.follower_count}}</b> Followers</span>
                                             </p>
 
                                             <ul class="" ng-if="comment.mutual_friend.length > 0">
@@ -585,10 +585,10 @@
                                                 <p ng-if="commentreply.title_name == null" ng-bind="commentreply.degree_name"></p>
                                                 <p ng-if="commentreply.title_name == null && commentreply.degree_name == null">CURRENT WORK</p>                                        
 
-                                                <p ng-if="commentreply.post_count > 0 || commentreply.contact_count > 0 || commentreply.follower_count > 0">
-                                                    <span ng-if="commentreply.post_count > 0"><b>{{commentreply.post_count}}</b> Posts</span>
-                                                    <span ng-if="commentreply.contact_count > 0"><b>{{commentreply.contact_count}}</b> Connections</span>
-                                                    <span ng-if="commentreply.follower_count > 0"><b>{{commentreply.follower_count}}</b> Followers</span>
+                                                <p ng-if="commentreply.post_count != '' || commentreply.contact_count != '' || commentreply.follower_count != ''">
+                                                    <span ng-if="commentreply.post_count != ''"><b>{{commentreply.post_count}}</b> Posts</span>
+                                                    <span ng-if="commentreply.contact_count != ''"><b>{{commentreply.contact_count}}</b> Connections</span>
+                                                    <span ng-if="commentreply.follower_count != ''"><b>{{commentreply.follower_count}}</b> Followers</span>
                                                 </p>
 
                                                 <ul class="" ng-if="commentreply.mutual_friend.length > 0">
@@ -963,10 +963,10 @@
                                         <p ng-if="userlist.title_name == null" ng-bind="userlist.degree_name"></p>
                                         <p ng-if="userlist.title_name == null && userlist.degree_name == null">CURRENT WORK</p>                                        
 
-                                        <p ng-if="userlist.post_count > 0 || userlist.contact_count > 0 || userlist.follower_count > 0">
-                                            <span ng-if="userlist.post_count > 0"><b>{{userlist.post_count}}</b> Posts</span>
-                                            <span ng-if="userlist.contact_count > 0"><b>{{userlist.contact_count}}</b> Connections</span>
-                                            <span ng-if="userlist.follower_count > 0"><b>{{userlist.follower_count}}</b> Followers</span>
+                                        <p ng-if="userlist.post_count != '' || userlist.contact_count != '' || userlist.follower_count != ''">
+                                            <span ng-if="userlist.post_count != ''"><b>{{userlist.post_count}}</b> Posts</span>
+                                            <span ng-if="userlist.contact_count != ''"><b>{{userlist.contact_count}}</b> Connections</span>
+                                            <span ng-if="userlist.follower_count != ''"><b>{{userlist.follower_count}}</b> Followers</span>
                                         </p>
 
                                         <ul class="" ng-if="userlist.mutual_friend.length > 0">
