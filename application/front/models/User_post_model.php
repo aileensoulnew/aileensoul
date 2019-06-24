@@ -5901,14 +5901,69 @@ class User_post_model extends CI_Model {
             $jt_us_sql = "us.current_study IN (SELECT degree_id from ailee_degree WHERE status='1' AND (";
 
             foreach ($search_job_title as $key => $value) {
+                $jt_us_sql .= "LOWER(degree_name) LIKE '".strtolower($value->name)."'))";
+                $jt_up_sql .= "LOWER(name) LIKE '".strtolower($value->name)."'))";
+            }
+            $jt_sql= "(".$jt_up_sql." OR ".$jt_us_sql.") AND ";            
+        }
+
+        $fd_sql = "";
+        if($search_field != undefined && $search_field != '')
+        {
+            $fd_sql .= " (up.field = '".$search_field."' OR us.interested_fields = '".$search_field."') AND ";            
+        }
+        $ct_sql = "";
+        if($search_city != undefined && !empty($search_city))
+        {
+            $ct_up_sql = "up.city IN (SELECT city_id from ailee_cities WHERE status='1' AND (";
+            $ct_us_sql = "us.city IN (SELECT city_id from ailee_cities WHERE status='1' AND (";
+            foreach ($search_city as $key => $value) {                
+
+                $str1 = str_replace(" ", "%' OR LOWER(city_name) LIKE '%", strtolower($value->city_name));
+                $str1 = "LOWER(city_name) LIKE '%".$str1."%'";
+
+                $str2 = str_replace(" ", "%' OR LOWER(city_name) LIKE '%", strtolower($value->city_name));
+                $str2 = "LOWER(city_name) LIKE '%".$str2."%'";
+                $ct_us_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str1."))";
+                $ct_up_sql .= "LOWER(city_name) LIKE '%".strtolower($value->city_name)."%' OR ".$str2."))";
+            }
+            $ct_sql= "(".$ct_up_sql." OR ".$ct_us_sql.") AND ";
+        }
+
+        $gen_sql = "";
+        if($search_gender != undefined && $search_gender != '')
+        {
+            $gen_sql .= "(u.user_gender = '".$search_gender."') AND ";
+        }
+
+        if($jt_sql != "" || $fd_sql != "" || $ct_sql != "" || $gen_sql != "")
+        {
+            $sql .= " AND ";
+            $sql .= "(".trim(($jt_sql != '' ? $jt_sql : '') . ($fd_sql != '' ? $fd_sql : '') . ($ct_sql != '' ? $ct_sql : '') . ($gen_sql != '' ? $gen_sql: '')," AND ").")";
+        }
+
+        $sql .= " UNION ";
+
+        $sql .= "SELECT DISTINCT u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) AS fullname,u.user_slug,up.designation,us.current_study FROM ailee_user u
+            LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id
+            LEFT JOIN ailee_user_profession up ON up.user_id = u.user_id
+            LEFT JOIN ailee_user_student us ON us.user_id = u.user_id
+            WHERE u.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND u.user_id NOT IN (select from_id from ailee_user_contact where to_id = $user_id) AND u.user_id NOT IN (select to_id from ailee_user_contact where from_id = $user_id) AND ( u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession WHERE  user_id != '$user_id') OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student WHERE user_id != '$user_id')) ";
+        $jt_sql = "";
+        if($search_job_title != undefined && !empty($search_job_title))
+        {
+            $jt_up_sql = "up.designation IN (SELECT title_id from ailee_job_title WHERE status='publish' AND (";
+            $jt_us_sql = "us.current_study IN (SELECT degree_id from ailee_degree WHERE status='1' AND (";
+
+            foreach ($search_job_title as $key => $value) {
                 $str1 = str_replace(" ", "%' OR LOWER(degree_name) LIKE '%", strtolower($value->name));
                 $str1 = "degree_name LIKE '%".$str1."%'";
 
                 $str2 = str_replace(" ", "%' OR LOWER(name) LIKE '%", strtolower($value->name));
                 $str2 = "name LIKE '%".$str2."%'";
 
-                $jt_us_sql .= "LOWER(degree_name) LIKE '%".strtolower($value->name)."%' OR ".$str1."))";
-                $jt_up_sql .= "LOWER(name) LIKE '%".strtolower($value->name)."%' OR ".$str2."))";
+                $jt_us_sql .= $str1."))";
+                $jt_up_sql .= $str2."))";
             }
             $jt_sql= "(".$jt_up_sql." OR ".$jt_us_sql.") AND ";            
         }
@@ -5948,7 +6003,7 @@ class User_post_model extends CI_Model {
         }
 
 
-        $sql .= " ORDER BY u.user_id DESC ";
+        // $sql .= " ORDER BY user_id DESC ";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";            
         }
