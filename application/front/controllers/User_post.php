@@ -1065,30 +1065,23 @@ class User_post extends MY_Controller {
                     if ($insert_id) {
                         $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
                         $login_userdata = $this->user_model->getUserData($userid);
-                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
-                        if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid)[0];
+
+                        if($postDetailData['post_data']['post_for'] == 'opportunity')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'o/'.$postDetailData['opportunity_data']['oppslug'];
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                        elseif($postDetailData['post_data']['post_for'] == 'simple')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'p/'.$postDetailData['simple_data']['simslug'];
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                        elseif($postDetailData['post_data']['post_for'] == 'question')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'questions/'.$postDetailData['question_data']['id'].'/'.$this->common->create_slug($postDetailData['question_data']['question']);
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                        elseif($postDetailData['post_data']['post_for'] == 'article')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
-                        }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
-                        {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
-                        }
-                        else
-                        {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
                         }
 
                         $email_html = '';

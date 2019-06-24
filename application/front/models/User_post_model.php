@@ -168,6 +168,51 @@ class User_post_model extends CI_Model {
             $result_array[$key]['profile_background'] = $img_data->profile_background;            
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
+
+            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
+            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+            $contact_count = $this->common->getContactCount($value['user_id'])[0];
+            $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+            $post_count = $this->common->get_post_count($value['user_id']);
+            $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+            if($user_id != '')
+            {                    
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+
+                $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
+                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                {
+                    $result_array[$key]['contact_status'] = 1;
+                    $result_array[$key]['contact_value'] = $is_userContactInfo['status'];
+                    $result_array[$key]['contact_id'] = $is_userContactInfo['id'];
+                }
+                else
+                {
+                    $result_array[$key]['contact_status'] = 0;
+                    $result_array[$key]['contact_value'] = 'new';
+                    $result_array[$key]['contact_id'] = $is_userContactInfo['id'];   
+                }
+            }
+            else
+            {
+                $result_array[$key]['follow_status'] = '';
+                $result_array[$key]['contact_status'] = '';
+                $result_array[$key]['contact_value'] = '';
+                $result_array[$key]['contact_id'] = '';
+            }
+
+            if($user_id != $value['user_id'])
+            {
+                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['user_id']);
+            }
+            else
+            {
+                $result_array[$key]['mutual_friend'] = array();
+            }
         }
         $ret_array['con_sugg_data'] = $result_array;
         $ret_array['total_record'] =$this->getContactAllSuggetion_total_rec($user_id);

@@ -10,6 +10,8 @@ app.directive('onErrorSrc', function() {
     }
 });
 app.controller('businessSearchListController', function ($scope, $http,$compile,$window) {
+    $scope.today = new Date();
+    
     $scope.title = title;
     $scope.businessCategory = {};
     $scope.businessLocation = {};
@@ -133,6 +135,58 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
             $scope.business.total_record = success.data.total_record;
             $scope.business.perpage_record = 5;            
             isProcessing = false;
+            setTimeout(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();                        
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
+                });
+            },500);
         }, function (error) {});
     }
 
@@ -169,6 +223,59 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
                 $scope.business.total_record = result.total_record;
                 $scope.business.perpage_record = 5;            
                 isProcessing = false;
+
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
             }
             else
             {

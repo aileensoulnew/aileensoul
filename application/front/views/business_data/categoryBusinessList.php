@@ -85,97 +85,152 @@
                         </div>
                         <?php 
                         if(isset($businessList) && !empty($businessList)):
-                            foreach($businessList as $_businessList): ?>
-                        <div class="all-job-box search-business">
-                            <div class="search-business-top">
-                                <div class="bus-cover no-cover-upload">
-                                    <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
-                                        <?php if($_businessList['profile_background'] != ""){ ?>
-                                            <img src="<?php echo BUS_BG_MAIN_UPLOAD_URL.$_businessList['profile_background']; ?>">
-                                        <?php }
-                                        else{ ?>
-                                            <img src="<?php echo BASEURL . WHITEIMAGE ?>">
-                                        <?php }
-                                        ?>
-                                    </a>                                    
-                                </div>
-                                <div class="all-job-top">
-                                    <div class="post-img">
-                                        <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
-                                            <?php if($_businessList['business_user_image'] != ""){ ?>
-                                                <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL.$_businessList['business_user_image'] ?>">
-                                            <?php }
-                                        else{ ?>
-                                            <img src="<?php echo BASEURL . NOBUSIMAGE ?>">
-                                        <?php }
-                                        ?>
-                                        </a>                                        
+                            foreach($businessList as $index=>$_businessList): ?>
+                                <div class="all-job-box search-business">
+                                    <div id="tooltip_content_<?php echo $index;?>" class="tooltip_templates">
+                                        <div class="bus-tooltip">
+                                            <div class="user-tooltip">
+                                                <div class="tooltip-cover-img">
+                                                    <?php if($_businessList['profile_background'] != ''){ ?>
+                                                        <img src="<?php echo BUS_BG_MAIN_UPLOAD_URL.$_businessList['profile_background']; ?>">
+                                                        <?php
+                                                    }
+                                                    else
+                                                    { ?>
+                                                        <div class="gradient-bg" style="height: 100%"></div>
+                                                        <?php
+                                                    } ?>
+                                                </div>
+                                                <div class="tooltip-user-detail">
+                                                    <div class="tooltip-user-img">
+                                                        <?php if($_businessList['business_user_image'] != ''){ ?>
+                                                            <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL.$_businessList['business_user_image']; ?>">
+                                                        <?php }
+                                                        else{ ?>
+                                                            <img src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                                        <?php } ?>
+                                                    </div>
+                                                    <div class="fw">
+                                                        <div class="tooltip-detail">
+                                                            <h4><?php echo $_businessList['company_name'];?></h4>
+                                                            <p>
+                                                            <?php 
+                                                            $category = $this->db->get_where('industry_type', array('industry_id' => $_businessList['industriyal'], 'status' => '1'))->row()->industry_name;
+                                                            if ($category) {
+                                                                echo $category;
+                                                            } else {
+                                                                echo ucfirst($_businessList['other_industrial']);
+                                                            } ?>
+                                                            </p>
+                                                            <p>
+                                                                <?php echo $_businessList['city'].($_businessList['city'] != '' ? ', ' : ' ').$_businessList['state_name'].($_businessList['state_name'] != '' ? ', ' : ' ').$_businessList['country']; ?>
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <div class="tooltip-btns follow-btn-bus-<?php echo $_businessList['user_id'];?>">
+                                                            <?php
+                                                            if($_businessList['follow_status'] == 1): ?>
+                                                            <a class="btn-new-1 following" data-uid="<?php echo $_businessList['user_id'].date('his');?>" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_<?php echo $_businessList['user_id'];?>">Following</a>
+                                                            <?php
+                                                            else: ?>
+                                                            <a class="btn-new-1 follow" data-uid="<?php echo $_businessList['user_id'].date('his');?>" onclick="follow_user_bus(this.id)" id="follow_btn_bus_<?php echo $_businessList['user_id'];?>">Follow</a>
+                                                            <?php
+                                                            endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="job-top-detail">
-                                        <h5>
+                                    <div class="search-business-top">
+                                        <div class="bus-cover no-cover-upload">
                                             <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
-                                                <?php echo $_businessList['company_name']; ?>
-                                            </a>
-                                        </h5>
-                                        <?php if($_businessList['industry_name'] != ""): ?>
-                                            <h5>
-                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
-                                                    <?php echo ucwords($_businessList['industry_name']); ?>
-                                                </a>
-                                            </h5>
-                                        <?php
-                                        else: ?>
-                                            <h5>
-                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
-                                                    <?php echo ucwords($_businessList['other_industrial']); ?>
-                                                </a>                                                
-                                            </h5>
-                                        <?php endif; ?>
+                                                <?php if($_businessList['profile_background'] != ""){ ?>
+                                                    <img src="<?php echo BUS_BG_MAIN_UPLOAD_URL.$_businessList['profile_background']; ?>">
+                                                <?php }
+                                                else{ ?>
+                                                    <img src="<?php echo BASEURL . WHITEIMAGE ?>">
+                                                <?php }
+                                                ?>
+                                            </a>                                    
+                                        </div>
+                                        <div class="all-job-top">
+                                            <div class="post-img">
+                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" data-toggle="popover" data-tooltip-content="#tooltip_content_<?php echo $index;?>">
+                                                    <?php if($_businessList['business_user_image'] != ""){ ?>
+                                                        <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL.$_businessList['business_user_image'] ?>">
+                                                    <?php }
+                                                else{ ?>
+                                                    <img src="<?php echo BASEURL . NOBUSIMAGE ?>">
+                                                <?php }
+                                                ?>
+                                                </a>                                        
+                                            </div>
+                                            <div class="job-top-detail">
+                                                <h5>
+                                                    <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" data-toggle="popover" data-tooltip-content="#tooltip_content_<?php echo $index;?>">
+                                                        <?php echo $_businessList['company_name']; ?>
+                                                    </a>
+                                                </h5>
+                                                <?php if($_businessList['industry_name'] != ""): ?>
+                                                    <h5>
+                                                        <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                                            <?php echo ucwords($_businessList['industry_name']); ?>
+                                                        </a>
+                                                    </h5>
+                                                <?php
+                                                else: ?>
+                                                    <h5>
+                                                        <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                                            <?php echo ucwords($_businessList['other_industrial']); ?>
+                                                        </a>                                                
+                                                    </h5>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="all-job-middle">
+                                        <ul class="search-detail">
+                                            <?php 
+                                            if($_businessList['contact_website'] != ""): ?>
+                                            <li>
+                                                <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/website.png') ?>"></span> <p class="detail-content"><a href="<?php echo $_businessList['contact_website']; ?>" target="_self"><?php echo $_businessList['contact_website']; ?></a></p>
+                                            </li>
+                                            <?php endif; ?>
+                                            <li>
+                                                <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/location.png') ?>"></span>
+                                                <p class="detail-content">
+                                                    <span><?php 
+                                                    if($_businessList['city'] != '')
+                                                    {
+                                                        echo $_businessList['city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");
+                                                    }
+                                                    elseif ($_businessList['city'] == '' && $_businessList['other_city']) {
+                                                        echo $_businessList['other_city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");
+                                                    }
+                                                    else
+                                                    {
+                                                        echo $_businessList['country'];
+                                                    }
+                                                    
+                                                    ?>
+                                                    </span>
+                                                </p>
+                                            </li>
+                                            <?php 
+                                            if($_businessList['details'] != ""): ?>
+                                            <li>
+                                                <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content view-more-expand" style="position: relative;">
+                                                    <?php echo $_businessList['details']; ?>
+                                                    <?php if(strlen($_businessList['details']) > 100): ?><a class="read-more-post" href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" style="bottom: 3px;">&nbsp;...Read more</a>
+                                                    <?php endif; ?>
+                                                </p>
+                                            </li>
+                                            <?php endif; ?>
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="all-job-middle">
-                                <ul class="search-detail">
-                                    <?php 
-                                    if($_businessList['contact_website'] != ""): ?>
-                                    <li>
-                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/website.png') ?>"></span> <p class="detail-content"><a href="<?php echo $_businessList['contact_website']; ?>" target="_self"><?php echo $_businessList['contact_website']; ?></a></p>
-                                    </li>
-                                    <?php endif; ?>
-                                    <li>
-                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/location.png') ?>"></span>
-                                        <p class="detail-content">
-                                            <span><?php 
-                                            if($_businessList['city'] != '')
-                                            {
-                                                echo $_businessList['city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");
-                                            }
-                                            elseif ($_businessList['city'] == '' && $_businessList['other_city']) {
-                                                echo $_businessList['other_city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");
-                                            }
-                                            else
-                                            {
-                                                echo $_businessList['country'];
-                                            }
-                                            
-                                            ?>
-                                            </span>
-                                        </p>
-                                    </li>
-                                    <?php 
-                                    if($_businessList['details'] != ""): ?>
-                                    <li>
-                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content view-more-expand" style="position: relative;">
-                                            <?php echo $_businessList['details']; ?>
-                                            <?php if(strlen($_businessList['details']) > 100): ?><a class="read-more-post" href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" style="bottom: 3px;">&nbsp;...Read more</a>
-                                            <?php endif; ?>
-                                        </p>
-                                    </li>
-                                    <?php endif; ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <?php 
+                            <?php 
                             endforeach;
                         endif;
                         if(isset($businessList) && empty($businessList) && $page == 0):?>
@@ -288,7 +343,8 @@
 		</div>
         <?php // $this->load->view('mobile_side_slide'); ?>
 		
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
@@ -324,6 +380,58 @@
                     $('.frm-job-company-filter').attr('action', this.href);
                     $(".frm-job-company-filter").submit();
                 });
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
             });
         </script>
         <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>

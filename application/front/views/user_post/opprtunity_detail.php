@@ -230,6 +230,31 @@
                                         </div>
                                     </div>
 
+                                    <div class="post-discription" ng-if="post.post_data.post_for == 'opportunity'">                                        
+                                        <div id="post-opp-detail-{{post.post_data.id}}">
+                                            <h5 class="post-title">
+                                                <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><span ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="!post.opportunity_data.field || post.opportunity_data.field == 0"><b>Field:</b><span ng-bind="post.opportunity_data.other_field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                                <p ng-if="post.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                    <span>
+                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                    </span>
+                                                </p>                                            
+                                                <p ng-if="post.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.opportunity_data.company_name" id="opp-post-company-{{post.post_data.id}}"></span></p>
+                                            </h5>
+                                            <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
+                                                <div id="opp-post-opportunity-{{post.post_data.id}}" ng-class="post.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                    <b>Opportunity:</b>
+                                                    <span ng-bind-html="post.opportunity_data.opportunity"></span>
+                                                    <a id="remove-view-more{{post.post_data.id}}" ng-if="post.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
                                         <div ng-init="limit = 250; moreShown = false">
                                             <span ng-if="post.simple_data.description != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.simple_data.description" ng-class="post.simple_data.description.length > 250 ? 'view-more-expand' : ''">

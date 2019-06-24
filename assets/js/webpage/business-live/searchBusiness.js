@@ -135,6 +135,39 @@ $('#content').on( 'change keyup keydown paste cut', 'textarea', function (){
     $(this).height(0).height(this.scrollHeight);
 }).find( 'textarea' ).change();
 
+function follow_user_bus(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_follow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user_bus(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_unfollow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
 /*AOS.init({
   easing: 'ease-in-out-sine'
 });

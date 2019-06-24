@@ -45,8 +45,6 @@ $(document).ready(function () {
     business_userlist();
 
     $(window).scroll(function () {
-        //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-//        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
         if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
 
             var page = $(".page_number:last").val();
@@ -115,6 +113,58 @@ function business_userlist(pagenum, from = "") {
             } else {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
+            setTimeout(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger: "manual" ,
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        return $($(this).data('tooltip-content')).html();                        
+                        // return $('#popover-content').html();
+                    },
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
+                });
+            },500);
             isProcessing = false;
         }
     });
@@ -192,4 +242,37 @@ function getLocationCategoryId(){
     var result = (category != "") ? ("&category_id=" + category) : "";
     result += (location != "") ? ("&location_id=" + location) : "";
     return result;
+}
+
+function follow_user_bus(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_follow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user_bus(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/business_unfollow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
 }

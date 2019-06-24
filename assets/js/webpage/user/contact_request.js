@@ -1,5 +1,6 @@
 var isscroll = true;
 app.controller('contactRequestController', function ($scope, $http,$window ) {
+    $scope.today = new Date();
     $scope.title = "Contact Request | Aileensoul";
     pending_contact_request();
     var offset="40";
@@ -76,6 +77,59 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
                 $scope.jobs.page_number = start;
                 $scope.jobs.total_record = success.data.total_record;
                 $scope.jobs.perpage_record = 40;
+
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
             }
             else
             {
@@ -176,3 +230,61 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
+function follow_user(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/follow_user_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $.ajax({
+        url: base_url + "userprofile_page/unfollow_user_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function contact(elid)
+{
+    var params = $("#"+elid).data('param').split(",");
+    var id = params[0];
+    var status = params[1];
+    var to_id = params[2];
+    var indexCon = params[3];
+    var confirm = params[4];
+
+    
+    $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:none;');
+
+    $.ajax({
+        url: base_url + "userprofile_page/addToContactNewTooltip",        
+        type: "POST",
+        data: 'contact_id='+id+'&status='+status+'&to_id='+to_id+'&indexCon='+indexCon+'&elid='+elid,
+        dataType:"JSON",
+        success: function (data) {            
+            $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+            },500);
+        }
+    });
+}

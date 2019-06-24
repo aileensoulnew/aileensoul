@@ -243,7 +243,7 @@ class User_model extends CI_Model {
     public function contact_request_pending($user_id = '') {
        // $this->db->select("uc.from_id,uc.to_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname")->from("user_contact uc");
        // $this->db->join('user u', 'u.user_id = (CASE WHEN uc.from_id=' . $user_id . ' THEN uc.to_id ELSE uc.from_id END)');
-        $this->db->select("uc.from_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname,u.user_gender, u.user_slug,ui.user_image,ui.profile_background,jt.name as designation,d.degree_name as degree")->from("user_contact uc");
+        $this->db->select("uc.from_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname,u.user_gender, u.user_slug,ui.user_image,ui.profile_background, jt.name as designation,d.degree_name as degree")->from("user_contact uc");
         $this->db->join('user u', 'u.user_id = uc.from_id');
         $this->db->join('user_info ui', 'ui.user_id = uc.from_id');
         $this->db->join('user_profession up', 'up.user_id = uc.from_id', 'left');
@@ -256,7 +256,51 @@ class User_model extends CI_Model {
         $query = $this->db->get();
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-            $result_array[$key]['time_string'] = $this->common->time_elapsed_string($value['modify_date']);    
+            $result_array[$key]['time_string'] = $this->common->time_elapsed_string($value['modify_date']);
+            $follower_count = $this->common->getFollowerCount($value['from_id'])[0];
+            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+            $contact_count = $this->common->getContactCount($value['from_id'])[0];
+            $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+            $post_count = $this->common->get_post_count($value['from_id']);
+            $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+            if($user_id != '')
+            {                    
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['from_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+
+                $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['from_id']);
+                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                {
+                    $result_array[$key]['contact_status'] = 1;
+                    $result_array[$key]['contact_value'] = $is_userContactInfo['status'];
+                    $result_array[$key]['contact_id'] = $is_userContactInfo['id'];
+                }
+                else
+                {
+                    $result_array[$key]['contact_status'] = 0;
+                    $result_array[$key]['contact_value'] = 'new';
+                    $result_array[$key]['contact_id'] = $is_userContactInfo['id'];   
+                }
+            }
+            else
+            {
+                $result_array[$key]['follow_status'] = '';
+                $result_array[$key]['contact_status'] = '';
+                $result_array[$key]['contact_value'] = '';
+                $result_array[$key]['contact_id'] = '';
+            }
+
+            if($user_id != $value['from_id'])
+            {
+                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['from_id']);
+            }
+            else
+            {
+                $result_array[$key]['mutual_friend'] = array();
+            }
         }
         return $result_array;
     }

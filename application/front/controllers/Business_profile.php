@@ -663,9 +663,15 @@ class Business_profile extends MY_Controller {
         $userlist1 = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc');
 
         if (empty($_GET["total_record"])) {
-            $_GET["total_record"] = count($userlist1);
+            $total_record = count($userlist1);
         }
-        $return_html = '';
+
+        $this->data['total_record'] = $total_record;
+        $this->data['offset'] = $offset;
+        $this->data['perpage'] = $limit;
+        $this->data['userlist'] = $userlist;
+        $this->load->view('business_data/business_userlist_html', $this->data);
+        /*$return_html = '';
         $return_html .= '<input type="hidden" class="page_number" value="' . $page . '" />';
         $return_html .= '<input type="hidden" class="total_record" value="' . $_GET["total_record"] . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
@@ -726,19 +732,7 @@ class Business_profile extends MY_Controller {
                 $return_html .= '<div id= "followdiv " class="user_btn">
                 <button id="follow' . $user['user_id'] . '" onClick="followuser('.$userid.',1,'.$user['user_id'].')">
                 <span> Follow </span>
-                </button></div>';
-            /*$status = $this->db->get_where('follow', array('follow_type' => 2, 'follow_from' => $artdata[0]['business_profile_id'], 'follow_to' => $user['business_profile_id']))->row()->follow_status;
-            if ($status == 0 || $status == " ") {
-                $return_html .= '<div id= "followdiv " class="user_btn">
-                <button id="follow' . $user['business_profile_id'] . '" onClick="followuser(' . $user['business_profile_id'] . ')">
-                <span> Follow </span>
-                </button></div>';
-            } elseif ($status == 1) {
-                $return_html .= '<div id= "unfollowdiv"  class="user_btn" >
-                <button class="bg_following" id="unfollow' . $user['business_profile_id'] . '" onClick="unfollowuser(' . $user['business_profile_id'] . ')">
-                <span>Following</span> 
-                </button></div>';
-            }*/
+                </button></div>';           
             $return_html .= '</li>
                                 </ul>
                             </div>
@@ -747,7 +741,7 @@ class Business_profile extends MY_Controller {
                 </div>
             </div>';
         }
-        echo $return_html;
+        echo $return_html;*/
     }
 
     public function follow() {

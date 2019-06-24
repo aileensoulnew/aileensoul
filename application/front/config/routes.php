@@ -141,7 +141,13 @@ $route['profiles/basic-information/(:any)'] = "user_basic_info";
 $route['profiles/opportunities/(:any)'] = "user_opportunities";
 
 $route['business-search'] = "business_live/index";
+
 $route['business/search'] = "business_live/business_search";
+$route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
+$route['business/search/(:any)'] = "business_live/business_search/$1";
+$route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";
+
+
 $route['business/reactivateacc'] = "business_profile/reactivateacc";
 $route['business-profile'] = "business_profile_live/business_profile_post";
 $route['business-profile/image-insert'] = "business_profile/image_insert";
@@ -302,10 +308,6 @@ $route['searchelastic/search'] = "Searchelastic/search";
 $route['searchelastic/search_opportunity_data'] = "Searchelastic/search_opportunity_data";
 
 $route['(:any)'] = 'Userprofile';
-
-$route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
-$route['business/search/(:any)'] = "business_live/business_search/$1";
-$route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";
 
 $route['company/userlist'] = "business_profile_live/userlist";
 $route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";

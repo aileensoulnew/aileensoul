@@ -99,7 +99,7 @@
                             </p>
 
                             <ul class="" ng-if="people.mutual_friend.length > 0">
-                                <li ng-if="user_id != people.people" ng-repeat="_friend in people.mutual_friend | limitTo:2">
+                                <li ng-if="user_id != people.user_id" ng-repeat="_friend in people.mutual_friend | limitTo:2">
                                     <div class="user-img">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
 
@@ -108,7 +108,7 @@
                                         <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </div>
                                 </li>                            
-                                <li ng-if="user_id != people.people" class="m-contacts">
+                                <li ng-if="user_id != people.user_id" class="m-contacts">
                                     <span ng-if="people.mutual_friend.length == 1">
                                         <b>{{people.mutual_friend[0].fullname}}</b> is in mutual contact.
                                     </span>

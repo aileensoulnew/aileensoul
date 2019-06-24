@@ -141,6 +141,7 @@ class Business_model extends CI_Model {
     }*/
 
     function searchBusinessData($keyword = '', $location = '',  $category_id = '',$location_id = '',$page = 0,$limit = '5') {
+        $user_id = $this->session->userdata('aileenuser');
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
@@ -203,7 +204,7 @@ class Business_model extends CI_Model {
         }
 
 
-        $tot_sql = $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, bp.industry_name, bp.city_name AS city, bp.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', bp.city_name),IF(bp.state_name != '',CONCAT(bp.business_slug, '-', bp.state_name),CONCAT(bp.business_slug, '-', bp.country_name))) AS business_slug ,bp.other_city
+        $tot_sql = $sql = "SELECT bp.user_id, bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, bp.industry_name, bp.city_name AS city, bp.state_name, bp.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', bp.city_name),IF(bp.state_name != '',CONCAT(bp.business_slug, '-', bp.state_name),CONCAT(bp.business_slug, '-', bp.country_name))) AS business_slug ,bp.other_city
             FROM ailee_business_profile_search_tmp bp                 
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
             . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
@@ -215,6 +216,19 @@ class Business_model extends CI_Model {
         // echo $sql;exit;
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            if($user_id != '')
+            {
+                $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
+                $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+            }
+            else
+            {
+                $result_array[$key]['follow_status'] = '';
+            }
+        }
 
         $query2 = $this->db->query($tot_sql);
         $total_record = $query2->num_rows();
@@ -288,7 +302,7 @@ class Business_model extends CI_Model {
         $this->db->where('ul.status', '1');
         $this->db->where('ul.is_delete', '0');*/
 
-        $sql = "SELECT ul.*, bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug
+        $sql = "SELECT ul.*, bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, it.industry_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug
             FROM ailee_business_profile bp
             LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
@@ -317,6 +331,19 @@ class Business_model extends CI_Model {
         // echo $sql;exit;
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
+            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+            if($user_id != '')
+            {
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+            }
+            else
+            {
+                $result_array[$key]['follow_status'] = '';
+            }
+        }
         return $result_array;
     }
 
@@ -599,7 +626,7 @@ class Business_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country ,bp.other_city
+        $sql = "SELECT bp.user_id, bp.business_user_image, bp.profile_background,IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, bp.industriyal, it.industry_name, ct.city_name as city, st.state_name, cr.country_name as country ,bp.other_city
             FROM ailee_business_profile bp 
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
@@ -629,6 +656,19 @@ class Business_model extends CI_Model {
             }
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
+            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+            if($user_id != '')
+            {
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+            }
+            else
+            {
+                $result_array[$key]['follow_status'] = '';
+            }
+        }
         return $result_array;
     }
 

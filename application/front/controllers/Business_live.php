@@ -196,7 +196,7 @@ class Business_live extends MY_Controller {
 
         $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->data['businessList'] = $businessListByLocation = $this->business_model->businessListByFilter($category_id,$location_id,$page,$limit,$industry_name,$city_name);
-        // print_r($this->data['businessList']);
+        // print_r($this->data['businessList']);exit();
         $this->data['links'] = $this->pagination->create_links();
 
         $this->load->view('business_data/categoryBusinessList', $this->data);
