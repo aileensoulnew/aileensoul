@@ -300,8 +300,10 @@ app.controller('mainDefaultController', function($scope, $http, $compile) {
             }
             $('.busflwbtn-' + to_id).html('Following');
             $('.busflwbtn-' + to_id).attr('style','pointer-events:none;');
-        }, function errorCallback(response) {            
-            $scope.add_to_contact_business(id, status, to_id);
+        }, function errorCallback(response) {
+            setTimeout(function(){
+                $scope.add_to_contact_business(id, status, to_id);
+            },200);
         });
     };
 
@@ -326,8 +328,10 @@ app.controller('mainDefaultController', function($scope, $http, $compile) {
                 }
                 var index = $scope.contactSuggetion.indexOf(contact);
             }
-        }, function errorCallback(response) {            
-            $scope.addToContact(user_id,contact);
+        }, function errorCallback(response) {
+            setTimeout(function(){
+                $scope.addToContact(user_id,contact);
+            },200);
         });
     };
 });
@@ -1070,7 +1074,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             } else {
                 isLoadingData = true;
             }           
-        }, function (error) {});
+        }, function (error) {
+            getUserPromotedPost();
+        });
     }
 
     getUserPost(pg);
@@ -1186,7 +1192,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 });
 
             },1000);
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserPost(pg);
+            },200);
+        });
     }    
 
     $(window).on('scroll', function () {
@@ -1345,8 +1355,6 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
         }, function (error) {
-            console.log(error);
-            console.log(pg);
             setTimeout(function(){
                 isProcessing = false;
                 getUserPostLoadMore(pg)
@@ -1360,7 +1368,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
     function getFieldList() {
         $http.get(base_url + "general_data/getFieldList").then(function (success) {
             $scope.fieldList = success.data;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getFieldList();
+            },200);
+        });
     }
 
     $scope.job_title = [];
@@ -1834,6 +1846,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                             // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                         },1000);
                     }
+                }, function (error) {
+                    setTimeout(function(){
+                        $scope.post_opportunity_check();
+                    },200);
                 });
             }
 
@@ -2046,7 +2062,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                                 formFileExtQue = [];
                                 $("#selectedFilesQue").html("");
                                 $("#fileCountQue").text("");                                
-                            }
+                            }                        
+                        }, function (error) {
+                            setTimeout(function(){
+                                $scope.ask_question_check();
+                            },200);
                         });
             }
 
@@ -2520,6 +2540,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         },1000);
                     }
                     $("#post_opportunity_box").removeAttr("style");
+                }, function (error) {
+                    setTimeout(function(){
+                        $scope.post_something_check();
+                    },200);
                 });
             }
         }
@@ -2640,8 +2664,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     $scope.postData[parent_index].user_like_list = success.data.user_like_list;
                 }
             }            
-        }, function errorCallback(response) {            
-            $scope.post_like(post_id,parent_index,is_promoted,user_id);
+        }, function errorCallback(response) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,is_promoted,user_id);
+            },200);
         });
     }
 
@@ -2823,8 +2849,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     });
 
                 },1000);
-            }, function errorCallback(response) {            
-                $scope.sendComment(post_id, index, post,is_promoted);
+            }, function errorCallback(response) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post,is_promoted);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -2903,9 +2931,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     }, 100);
                 });
             },500);
-
-        }, function errorCallback(response) {            
-            $scope.viewAllComment(post_id, index, post,is_promoted);
+        }, function errorCallback(response) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post,is_promoted);
+            },200);
         });
 
     }
@@ -2981,8 +3010,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     }, 100);
                 });
             },500);
-        },function errorCallback(response) {            
-            $scope.viewLastComment(post_id, index, post,is_promoted);
+        },function errorCallback(response) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post,is_promoted);
+            },200);
         });
 
     }
@@ -3064,8 +3095,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 },100);
                 $(".new-comment-"+post_id).show();
             }
-        },function errorCallback(response) {            
-            $scope.deleteComment(comment_id, post_id, parent_index, index, post,is_promoted);
+        },function errorCallback(response) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post,is_promoted);
+            },200);
         });
     }
 
@@ -3100,8 +3133,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             setTimeout(function(){
                 $('#cmt-like-fnc-' + comment_id).removeAttr("style");
             },100);
-        },function errorCallback(response) {            
-            $scope.likePostComment(comment_id, post_id,comment_user_id);
+        },function errorCallback(response) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id,comment_user_id);
+            },200);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index,is_promoted) {
@@ -3218,8 +3253,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }
-            },function errorCallback(response) {            
-                $scope.sendEditComment(comment_id,post_id,user_id);
+            },function errorCallback(response) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3351,8 +3388,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     });
 
                 },500);
-            },function errorCallback(response) {            
-                $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex,is_promoted);
+            },function errorCallback(response) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex,is_promoted);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3383,8 +3422,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
-            },function errorCallback(response) {            
-                $scope.send_edit_comment_reply(reply_comment_id,post_id);
+            },function errorCallback(response) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3410,8 +3451,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 //$scope.postData.splice(index, 1);
                 getUserPost();
             }
-        },function errorCallback(response) {            
-            $scope.deletedPost(post_id, index);
+        },function errorCallback(response) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },200);
         });
     }
 
@@ -3491,7 +3534,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 
             },300);
         },function errorCallback(response) {
-            $scope.like_user_list(post_id);
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },200);
         });
 
     }
@@ -3517,21 +3562,20 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $('.editable_text').html('');
             }
         },function errorCallback(response) {
-            $scope.like_user_model_list(comment_id, post_id, parent_index, index, post);
+            setTimeout(function(){
+                $scope.like_user_model_list(comment_id, post_id, parent_index, index, post);
+            },200);
         });
     }
     
     
-     $scope.lightbox = function (idx) {
-                 //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
-            var ninjaSldr = document.getElementById("ninja-slider");
-            ninjaSldr.parentNode.style.display = "block";
-
-            nslider.init(idx);
-
-            var fsBtn = document.getElementById("fsBtn");
-            fsBtn.click();
-        alert("hiiii");
+    $scope.lightbox = function (idx) {
+        //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
+        var ninjaSldr = document.getElementById("ninja-slider");
+        ninjaSldr.parentNode.style.display = "block";
+        nslider.init(idx);
+        var fsBtn = document.getElementById("fsBtn");
+        fsBtn.click();        
     };
     
     function fsIconClick(isFullscreen, ninjaSldr) {
@@ -3558,7 +3602,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         $("#report-spam").modal('show');
     };
 
-    $scope.report_spam_validate = {        
+    $scope.report_spam_validate = {
         rules: {           
             report_spam: {
                 required: true,
@@ -3615,7 +3659,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $("#save_report_spam_loader").hide();
                 $("#report-spam .modal-close").click();
             },function errorCallback(response) {
-                $scope.save_report_spam();
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },200);
             });
         }
     };
@@ -3637,7 +3683,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             }
             $scope.set_progress(count_profile_value,count_profile);
         },function errorCallback(response) {
-            $scope.get_user_progress();
+            setTimeout(function(){
+                $scope.get_user_progress();
+            },200);
         });
     };
 
@@ -3691,7 +3739,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.recentpost = {};
             }
         },function errorCallback(response) {
-            $scope.deletedRecentPost(post_id, index);
+            setTimeout(function(){
+                $scope.deletedRecentPost(post_id, index);
+            },200);
         });
     }
 
@@ -3743,7 +3793,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.recentpost.user_like_list = success.data.user_like_list;
             }            
         },function errorCallback(response) {
-            $scope.post_recent_like(post_id,parent_index,user_id);
+            setTimeout(function(){
+                $scope.post_recent_like(post_id,parent_index,user_id);
+            },200);
         });
     }
 
@@ -3759,7 +3811,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             $scope.recentpost.post_comment_data = data.all_comment_data;
             $scope.recentpost.post_comment_count = data.post_comment_count;
         },function errorCallback(response) {
-            $scope.viewAllCommentRecent(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewAllCommentRecent(post_id, index, post);
+            },200);
         });
 
     }
@@ -3776,7 +3830,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             $scope.recentpost.post_comment_data = data.comment_data;
             $scope.recentpost.post_comment_count = data.post_comment_count;
         },function errorCallback(response) {
-            $scope.viewLastCommentRecent(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewLastCommentRecent(post_id, index, post);
+            },200);
         });
     };
 
@@ -3846,7 +3902,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $(".new-comment-"+post_id).show();
             }
         },function errorCallback(response) {
-            $scope.deleteRecentComment(comment_id, post_id, parent_index, index, post);
+            setTimeout(function(){
+                $scope.deleteRecentComment(comment_id, post_id, parent_index, index, post);
+            },200);
         });
     };
 
@@ -3904,7 +3962,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     $("#cmt-btn-"+post_id).removeAttr("disabled");
                 },1000);
             },function errorCallback(response) {
-                $scope.sendRecentComment(post_id, index, post);
+                setTimeout(function(){
+                    $scope.sendRecentComment(post_id, index, post);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3968,7 +4028,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 }
             }
         },function errorCallback(response) {
-            $scope.save_post(post_id,index,postData,is_promoted);
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData,is_promoted);
+            },200);
         });
     };
 
@@ -3990,7 +4052,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.recentpost.is_user_saved_post = result.status;
             }
         },function errorCallback(response) {
-            $scope.save_recent_post(post_id,postData);
+            setTimeout(function(){
+                $scope.save_recent_post(post_id,postData);
+            },200);
         });
     };
 
@@ -4093,7 +4157,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
         },function errorCallback(response) {
-            $scope.share_post_fnc(post_index,is_promoted);
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index,is_promoted);
+            },200);
         });
     };
 
@@ -4125,7 +4191,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             }
             
         },function errorCallback(response) {
-            $scope.contact(id, status, to_id,indexCon,confirm);
+            setTimeout(function(){
+                $scope.contact(id, status, to_id,indexCon,confirm);
+            },200);
         });
     };
 
@@ -4143,7 +4211,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             }
             
         },function errorCallback(response) {
-            $scope.remove_contact(id, status, to_id,indexCon);
+            setTimeout(function(){
+                $scope.remove_contact(id, status, to_id,indexCon);
+            },200);
         });
     };
 
@@ -4313,7 +4383,9 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            $scope.peopleData();
+            setTimeout(function(){
+                $scope.peopleData();
+            },200);
         });
     };
     $scope.peopleData(pagenum);
@@ -4416,7 +4488,9 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");                
             },function errorCallback(response) {
-                $scope.main_search_function();
+                setTimeout(function(){
+                    $scope.main_search_function();
+                },200);
             });
         }
     };
@@ -4485,7 +4559,9 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             }
             
         },function errorCallback(response) {
-            $scope.contact(id, status, to_id,indexCon,confirm);
+            setTimeout(function(){
+                $scope.contact(id, status, to_id,indexCon,confirm);
+            },200);
         });
     };
 
@@ -4503,7 +4579,9 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
             }
             
         },function errorCallback(response) {
-            $scope.remove_contact(id, status, to_id,indexCon);
+            setTimeout(function(){
+                $scope.remove_contact(id, status, to_id,indexCon);
+            },200);
         });
     };
 
@@ -4669,7 +4747,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            $scope.postsData(pagenum);
+            setTimeout(function(){
+                $scope.postsData(pagenum);
+            },200);
         });
     };
     $scope.postsData(pagenum);    
@@ -4783,7 +4863,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     });
                 },1000);
             },function errorCallback(response) {
-                $scope.main_search_function();
+                setTimeout(function(){
+                    $scope.main_search_function();
+                },200);
             });
         }
     };
@@ -5009,7 +5091,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         },function errorCallback(response) {
-            $scope.post_like(post_id,parent_index,user_id);
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },200);
         });
     }
 
@@ -5173,7 +5257,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     });
                 },1000);
             },function errorCallback(response) {
-                $scope.sendComment(post_id, index, post);
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -5249,7 +5335,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 });
             },1000);            
         },function errorCallback(response) {
-            $scope.viewAllComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },200);
         });
     }
 
@@ -5322,7 +5410,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 });
             },1000);            
         },function errorCallback(response) {
-            $scope.viewLastComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },200);
         });
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -5369,7 +5459,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 $(".new-comment-"+post_id).show();                
             }
         },function errorCallback(response) {
-            $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },200);
         });
     }
 
@@ -5403,7 +5495,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
 
             }
         },function errorCallback(response) {
-            $scope.likePostComment(comment_id, post_id,commented_user_id);
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id,commented_user_id);
+            },200);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
@@ -5564,7 +5658,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     },1000);                    
                 }
             },function errorCallback(response) {
-                $scope.sendEditComment(comment_id,post_id,user_id);
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -5675,7 +5771,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     },1000);                    
                 }
             },function errorCallback(response) {
-                $scope.save_recent_post(comment_id,post_id,postIndex,commentIndex);
+                setTimeout(function(){
+                    $scope.save_recent_post(comment_id,post_id,postIndex,commentIndex);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -5707,7 +5805,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     $('.new-comment-'+post_id).show();
                 }                
             },function errorCallback(response) {
-                $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -5739,7 +5839,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 $scope.postData.splice(index, 1);
             }
         },function errorCallback(response) {
-            $scope.deletedPost(post_id, index);
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },200);
         });
     }
     
@@ -5810,7 +5912,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 });
             },1000);
         },function errorCallback(response) {
-            $scope.like_user_list(post_id);
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },200);
         });
 
     }
@@ -5838,7 +5942,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 $scope.postData[index].is_user_saved_post = result.status;
             }
         },function errorCallback(response) {
-            $scope.save_post(post_id,index,postData);
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },200);
         });
     };
 
@@ -5915,7 +6021,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 $("#save_report_spam_loader").hide();
                 $("#report-spam .modal-close").click();
             },function errorCallback(response) {
-                $scope.save_report_spam();
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },200);
             });
         }
     };
@@ -6000,7 +6108,9 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
         },function errorCallback(response) {
-            $scope.share_post_fnc(post_index);
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },200);
         });
     };
 
@@ -6166,7 +6276,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            $scope.opportunityData(pagenum);
+            setTimeout(function(){
+                $scope.opportunityData(pagenum);
+            },200);
         });
     };
     $scope.opportunityData(pagenum);
@@ -6285,7 +6397,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     });
                 },1000);
             },function errorCallback(response) {
-                $scope.main_search_function();
+                setTimeout(function(){
+                    $scope.main_search_function();
+                },200);
             });
         }
     };
@@ -6554,7 +6668,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         },function errorCallback(response) {
-            $scope.post_like(post_id,parent_index,user_id);
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },200);
         });
     }
 
@@ -6718,7 +6834,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     });
                 },1000);
             },function errorCallback(response) {
-                $scope.sendComment(post_id, index, post);
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -6794,7 +6912,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 });
             },500);
         },function errorCallback(response) {
-            $scope.viewAllComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },200);
         });
     }
 
@@ -6867,7 +6987,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 });
             },500);
         },function errorCallback(response) {
-            $scope.viewLastComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },200);
         });
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -6914,7 +7036,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $(".new-comment-"+post_id).show();                
             }
         },function errorCallback(response) {
-            $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },200);
         });
     }
 
@@ -6948,7 +7072,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
 
             }
         },function errorCallback(response) {
-            $scope.likePostComment(comment_id, post_id,commented_user_id);
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id,commented_user_id);
+            },200);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
@@ -7110,7 +7236,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     },500);
                 }
             },function errorCallback(response) {
-                $scope.sendEditComment(comment_id,post_id,user_id);
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -7222,7 +7350,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     },500);
                 }
             },function errorCallback(response) {
-                $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -7254,7 +7384,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     $('.new-comment-'+post_id).show();
                 }                
             },function errorCallback(response) {
-                $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -7286,7 +7418,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $scope.postData.splice(index, 1);
             }
         },function errorCallback(response) {
-            $scope.deletedPost(post_id, index);
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },200);
         });
     }
     
@@ -7357,7 +7491,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 });
             },500);
         },function errorCallback(response) {
-            $scope.like_user_list(post_id);
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },200);
         });
 
     }
@@ -7385,7 +7521,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $scope.postData[index].is_user_saved_post = result.status;
             }
         },function errorCallback(response) {
-            $scope.save_post(post_id,index,postData);
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },200);
         });
     };
 
@@ -7462,7 +7600,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $("#save_report_spam_loader").hide();
                 $("#report-spam .modal-close").click();
             },function errorCallback(response) {
-                $scope.save_report_spam();
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },200);
             });
         }
     };
@@ -7544,7 +7684,9 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
         },function errorCallback(response) {
-            $scope.share_post_fnc(post_index);
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },200);
         });
     };
 
@@ -7701,7 +7843,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            $scope.articleData(pagenum);
+            setTimeout(function(){
+                $scope.articleData(pagenum);
+            },200);
         });
     };
     $scope.articleData(pagenum);
@@ -7815,7 +7959,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
             },function errorCallback(response) {
-                $scope.main_search_function();
+                setTimeout(function(){
+                    $scope.main_search_function();
+                },200);
             });
         }
     };    
@@ -8044,7 +8190,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         },function errorCallback(response) {
-            $scope.post_like(post_id,parent_index,user_id);
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },200);
         });
     }
 
@@ -8210,7 +8358,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
             
                 },1000);
             },function errorCallback(response) {
-                $scope.sendComment(post_id, index, post);
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8286,7 +8436,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 });
             },500);
         },function errorCallback(response) {
-            $scope.viewAllComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },200);
         });
     }
 
@@ -8359,7 +8511,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 });
             },500);
         },function errorCallback(response) {
-            $scope.viewLastComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },200);
         });
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -8406,7 +8560,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $(".new-comment-"+post_id).show();                
             }
         },function errorCallback(response) {
-            $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },200);
         });
     }
 
@@ -8440,7 +8596,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
 
             }
         },function errorCallback(response) {
-            $scope.likePostComment(comment_id, post_id,commented_user_id);
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id,commented_user_id);
+            },200);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
@@ -8549,7 +8707,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                     $('.new-comment-'+post_id).show();
                 }
             },function errorCallback(response) {
-                $scope.sendEditComment(comment_id,post_id,user_id);
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8660,7 +8820,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                     });
                 },500);
             },function errorCallback(response) {
-                $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8692,7 +8854,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                     $('.new-comment-'+post_id).show();
                 }                
             },function errorCallback(response) {
-                $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8724,7 +8888,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $scope.postData.splice(index, 1);
             }
         },function errorCallback(response) {
-            $scope.deletedPost(post_id, index);
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },200);
         });
     }
     
@@ -8795,7 +8961,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 });
             },500);
         },function errorCallback(response) {
-            $scope.like_user_list(post_id);
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },200);
         });
 
     }
@@ -8823,7 +8991,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $scope.postData[index].is_user_saved_post = result.status;
             }
         },function errorCallback(response) {
-            $scope.save_post(post_id,index,postData);
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },200);
         });
     };
 
@@ -8900,7 +9070,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 $("#save_report_spam_loader").hide();
                 $("#report-spam .modal-close").click();
             },function errorCallback(response) {
-                $scope.save_report_spam();
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },200);
             });
         }
     };
@@ -8985,7 +9157,9 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
         },function errorCallback(response) {
-            $scope.share_post_fnc(post_index);
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },200);
         });
     };
 
@@ -9118,7 +9292,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            $scope.questionData(pagenum);
+            setTimeout(function(){
+                $scope.questionData(pagenum);
+            },200);
         });
     };
     $scope.questionData(pagenum);
@@ -9203,7 +9379,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
             },function errorCallback(response) {
-                $scope.main_search_function();
+                setTimeout(function(){
+                    $scope.main_search_function();
+                },200);
             });
         }
     };
@@ -9432,7 +9610,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
         },function errorCallback(response) {
-            $scope.post_like(post_id,parent_index,user_id);
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },200);
         });
     }
 
@@ -9597,7 +9777,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
             
                 },1000);
             },function errorCallback(response) {
-                $scope.sendComment(post_id, index, post);
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -9673,7 +9855,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 });
             },500);
         },function errorCallback(response) {
-            $scope.viewAllComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },200);
         });
     }
 
@@ -9746,7 +9930,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 });
             },500);
         },function errorCallback(response) {
-            $scope.viewLastComment(post_id, index, post);
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },200);
         });
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -9793,7 +9979,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $(".new-comment-"+post_id).show();                
             }
         },function errorCallback(response) {
-            $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },200);
         });
     }
 
@@ -9827,7 +10015,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
 
             }
         },function errorCallback(response) {
-            $scope.likePostComment(comment_id, post_id,commented_user_id);
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id,commented_user_id);
+            },200);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
@@ -9936,7 +10126,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                     $('.new-comment-'+post_id).show();
                 }
             },function errorCallback(response) {
-                $scope.sendEditComment(comment_id,post_id,user_id);
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -10047,7 +10239,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                     },500);
                 }
             },function errorCallback(response) {
-                $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -10079,7 +10273,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                     $('.new-comment-'+post_id).show();
                 }                
             },function errorCallback(response) {
-                $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },200);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -10111,7 +10307,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $scope.postData.splice(index, 1);
             }
         },function errorCallback(response) {
-            $scope.deletedPost(post_id, index);
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },200);
         });
     }
     
@@ -10182,7 +10380,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $('#likeusermodal').modal('show');
             }
         },function errorCallback(response) {
-            $scope.like_user_list(post_id);
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },200);
         });
 
     }
@@ -10210,7 +10410,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $scope.postData[index].is_user_saved_post = result.status;
             }
         },function errorCallback(response) {
-            $scope.save_post(post_id,index,postData);
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },200);
         });
     };
 
@@ -10287,7 +10489,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 $("#save_report_spam_loader").hide();
                 $("#report-spam .modal-close").click();
             },function errorCallback(response) {
-                $scope.save_report_spam();
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },200);
             });
         }
     };
@@ -10369,7 +10573,9 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
         },function errorCallback(response) {
-            $scope.share_post_fnc(post_index);
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },200);
         });
     };
 
@@ -10499,7 +10705,9 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");            
         },function errorCallback(response) {
-            $scope.businessData(pagenum);
+            setTimeout(function(){
+                $scope.businessData(pagenum);
+            },200);
         });
     };
     $scope.businessData(pagenum);
@@ -10585,7 +10793,9 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
             },function errorCallback(response) {
-                $scope.main_search_function();
+                setTimeout(function(){
+                    $scope.main_search_function();
+                },200);
             });
         }
     };
@@ -10618,7 +10828,9 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
                 $('#main_loader').hide();
                 $('body').removeClass("body-loader");
             },function errorCallback(response) {
-                $scope.main_search_mob_function();
+                setTimeout(function(){
+                    $scope.main_search_mob_function();
+                },200);
             });
         }
     };
