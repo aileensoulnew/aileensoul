@@ -562,7 +562,7 @@ border-radius: 50%;font-size: 10px;line-height: 1.8;position: absolute; right: 7
 .search-profiles .profile-data{padding:0 10px; /*min-height:110px;*/ width:405px; float:left;}
 .search-profiles .profile-data p{font-size:15px; font-weight:600;}
 .search-profiles .profile-data p a{color:#5c5c5c;}
-.search-profiles .profile-data p a:hover{color:#1b8ab9;}
+.search-profiles .profile-data p a:hover{text-decoration: underline;}
 .search-profiles .profile-data span{display:block; font-size:14px; color:#999;}
 .search-profiles .profile-btns{width:90px; float:left;}
 .search-profiles .profile-btns a{width:100%; padding:8px 10px; margin:10px 0;}

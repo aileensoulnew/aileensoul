@@ -126,12 +126,15 @@
 												</a>
 											</div>                                            
                                             <div class="user-info-text text-center">
-                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" data-toggle="popover" data-tooltip-content="#pending_tooltip_content_{{$index}}">
-                                                	<span title="{{contact.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="contact.fullname | capitalize"></span>
+                                                <p>
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" data-toggle="popover" data-tooltip-content="#pending_tooltip_content_{{$index}}">
+                                                    	<span title="{{contact.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="contact.fullname | capitalize"></span>
+                                                    </a>
+                                                </p>
 													<span class="user-des main_data_cq" title="{{contact.title_name}}" ng-if="contact.title_name != ''">{{contact.title_name}}</span>
 													<span class="user-des main_data_cq" title="{{contact.degree_name}}" ng-if="contact.degree_name != ''">{{contact.degree_name}}</span>
 													<span class="user-des main_data_cq" title="Current Work" ng-if="contact.title_name == null && contact.degree_name == null">Current Work</span>
-												</a>
+												
                                             </div>
                                             <div class="author-btn">
                                             	<p class="request-btn">
@@ -247,12 +250,15 @@
 												</a>
 											</div>
 											<div class="user-info-text text-center">
-												<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-toggle="popover" data-tooltip-content="#request_tooltip_content_{{$index}}">
-													<span title="{{suggest.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="suggest.fullname | capitalize"></span>
+    											<p>
+                                                    <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-toggle="popover" data-tooltip-content="#request_tooltip_content_{{$index}}">
+    													<span title="{{suggest.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="suggest.fullname | capitalize"></span>
+                                                    </a>
+                                                </p>    
                                                     <span class="user-des main_data_cq" title="{{suggest.title_name}}" ng-if="suggest.title_name">{{suggest.title_name}}</span>
                                                     <span class="user-des main_data_cq" title="{{suggest.degree_name}}" ng-if="suggest.degree_name">{{suggest.degree_name}}</span>
                                                     <span class="user-des main_data_cq" title="Current Work" ng-if="!suggest.title_name && !suggest.degree_name">Current Work</span>
-												</a>
+												
 											</div>
 											
 											<div class="author-btn">
