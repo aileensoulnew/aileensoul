@@ -30,11 +30,6 @@ $(document).ready(function () {
 });
     function notificatin_ajax_data(pagenum) {
     if (isProcessing) {
-        /*
-         *This won't go past this condition while
-         *isProcessing is true.
-         *You could even display a message.
-         **/
         return;
     }
     isProcessing = true;
@@ -75,6 +70,12 @@ $(document).ready(function () {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                isProcessing = false;
+                notificatin_ajax_data(pagenum);
+            },500);
         }
     });
 }

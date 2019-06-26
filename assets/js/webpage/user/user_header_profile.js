@@ -93,6 +93,10 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
                 }
             }
             $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
+        }, function (error) {
+            setTimeout(function(){
+                contactRequestCount();
+            },500);
         });
     }
 
@@ -119,6 +123,10 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             contact_request = success.data;
             $scope.contact_request_data = contact_request;
             $scope.contact_request_count = '0';
+        }, function (error) {
+            setTimeout(function(){
+                $scope.header_contact_request();
+            },500);
         });
     }
 
@@ -130,6 +138,10 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $scope.contact_request_data.splice(index, 1);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.confirmContactRequest(from_id,index);
+            },500);
         });
     }
 
@@ -141,6 +153,10 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $scope.contact_request_data.splice(index, 1);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.rejectContactRequest(from_id,index);
+            },500);
         });
     }
 

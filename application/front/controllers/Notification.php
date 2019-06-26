@@ -12,6 +12,7 @@ class Notification extends MY_Controller {
         $this->load->library('form_validation');
         $this->load->model('email_model');
         $this->load->model('notification_model');        
+        $this->load->model('business_model');        
         $this->load->model('user_model');
         $this->load->model('user_post_model');        
         $this->load->model('userprofile_model');        

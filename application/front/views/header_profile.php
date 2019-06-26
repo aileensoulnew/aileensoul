@@ -781,8 +781,11 @@ if($first_segment == "")
     });
 
     function Notificationheader() {
-        getNotification();
-        notheader();
+        if($('.notification_data_in').is(':visible') == false)
+        {
+            getNotification();
+            notheader();
+        }
     }
 
     function getNotification() {
@@ -803,9 +806,11 @@ if($first_segment == "")
                     $(".noti_count").hide();
                     $(".noti_count").html("");
                 }
-                //alert(data);
-                //update some fields with the updated data
-                //you can access the data like 'data["driver"]'
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    getNotification();
+                },500);
             }
         });
 
@@ -813,22 +818,29 @@ if($first_segment == "")
 
     function notheader()
     {
-        // $("#fad" + clicked_id).fadeOut(6000);
-        $("#not_loader").show();
-        $('.notification_data_in').hide();
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url() . "notification/not_header" ?>',
-            dataType: 'json',
-            data: '',
-            success: function (data) {
-                $("#not_loader").hide();
-                $('.notification_data_in').show();
-                $('.notification_data_in').html(data.notification);
-                $('#seenot').html(data.seeall);
-               
-            }
-        });
+        if($('.notification_data_in').is(':visible') == false)
+        {
+            $("#not_loader").show();
+            $('.notification_data_in').hide();
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url() . "notification/not_header" ?>',
+                dataType: 'json',
+                data: '',
+                success: function (data) {
+                    $("#not_loader").hide();
+                    $('.notification_data_in').show();
+                    $('.notification_data_in').html(data.notification);
+                    $('#seenot').html(data.seeall);
+                   
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    setTimeout(function(){
+                        notheader();
+                    },500);
+                }
+            });
+        }
     }    
     
     function sendmail() {
@@ -846,6 +858,11 @@ if($first_segment == "")
             success: function (response)
             {                
                 $("#vert_email").removeAttr("style");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    sendmail();
+                },500);
             }
         });
     }

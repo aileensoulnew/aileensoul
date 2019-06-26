@@ -119,6 +119,11 @@ function business_followers(slug_id, pagenum)
             },500);
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                business_followers(slug_id, pagenum);
+            },500);
         }
     });
 }
@@ -157,6 +162,11 @@ function followuser_two(clicked_id)
                 // $('#' + 'frfollow' + clicked_id).html(data);
                // $('.' + 'fr' + clicked_id).html(data);
             }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                followuser_two(clicked_id);
+            },500);
         }
     });
 }
@@ -178,6 +188,11 @@ function followuser_list_two(clicked_id)
                 // $('#' + 'frfollow' + clicked_id).html(data);
                // $('.' + 'fr' + clicked_id).html(data);
             }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                followuser_list_two(clicked_id);
+            },500);
         }
     });
 }
@@ -201,6 +216,11 @@ function unfollowuser_two(clicked_id)
                 $('#countfollow').html("("+res.unfollowing_count+")");
                // $('.' + 'fr' + clicked_id).html(data);
             }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                unfollowuser_two(clicked_id);
+            },500);
         }
     });
 }
@@ -220,6 +240,11 @@ function unfollowuser_list_two(clicked_id)
                 $('#countfollow').html("("+res.unfollowing_count+")");
                // $('.' + 'fr' + clicked_id).html(data);
             }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                unfollowuser_list_two(clicked_id);
+            },500);
         }
     });
 }
@@ -238,6 +263,11 @@ function contact_person_menu(clicked_id) {
         data: 'toid=' + clicked_id,
         success: function (data) {
             $('#' + 'statuschange' + clicked_id).html(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                contact_person_menu(clicked_id);
+            },500);
         }
     });
 }
@@ -259,6 +289,11 @@ function removecontactuser(clicked_id) {
                     $('#' + 'removecontact' + clicked_id).fadeOut(4000);
                 }
             }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                removecontactuser(clicked_id);
+            },500);
         }
     });
 }
@@ -282,6 +317,11 @@ function contact_person_query(clicked_id, status) {
         success: function (data) { //alert(data);
             // return data;
             contact_person_model(clicked_id, status, data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                contact_person_query(clicked_id, status);
+            },500);
         }
     });
 }
@@ -315,6 +355,11 @@ function contact_person(clicked_id) {
             //   alert(data);
             $('#contact_per').html(data);
 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                contact_person(clicked_id);
+            },500);
         }
     });
 }
@@ -340,6 +385,11 @@ function follow_user(id)
             setTimeout(function(){
                 $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
             },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                follow_user(id);
+            },500);
         }
     });
 }
@@ -355,6 +405,11 @@ function unfollow_user(id) {
             $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
                 $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                unfollow_user(id);
             },500);
         }
     });
@@ -381,6 +436,11 @@ function contact(elid)
             $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
                 $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+            },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                contact(elid);
             },500);
         }
     });

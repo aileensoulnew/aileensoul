@@ -238,7 +238,11 @@ app.controller('SearchDefaultController', function($scope, $http, $compile) {
     $scope.getContactSuggetion = function() {
         $http.get(base_url + "user_post/getContactSuggetion").then(function(success) {
             $scope.contactSuggetion = success.data;
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getContactSuggetion();
+            },500);
+        });
     };
     // $scope.search_job_title = [];
     // $scope.search_field = '';
@@ -262,6 +266,10 @@ app.controller('SearchDefaultController', function($scope, $http, $compile) {
                 $('.addtobtn-' + user_id).attr('style', 'pointer-events:none;');
                 // $('.owl-carousel').trigger('next.owl.carousel');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.addToContact(user_id);
+            },500);
         });
     };    
 });
@@ -744,6 +752,10 @@ app.controller('searchController', function($scope, $http, $compile) {
             }
         }).then(function(success) {
             $("#" + id).html($compile(success.data)($scope));
+        }, function (error) {
+            setTimeout(function(){
+                $scope.follow_user(id);
+            },500);
         });
     };
 
@@ -757,6 +769,10 @@ app.controller('searchController', function($scope, $http, $compile) {
             }
         }).then(function(success) {
             $("#" + id).html($compile(success.data)($scope));
+        }, function (error) {
+            setTimeout(function(){
+                $scope.unfollow_user(id);
+            },500);
         });
     };
 
@@ -772,6 +788,10 @@ app.controller('searchController', function($scope, $http, $compile) {
             if (success.data == 1) {
                 $('#search-profile-follow-' + user_id).html('Following');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.followSearch(user_id);
+            },500);
         });
     };
     /*$scope.post_like = function(post_id,parent_index) {
@@ -824,6 +844,10 @@ app.controller('searchController', function($scope, $http, $compile) {
 
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },500);
         });
     };
     $scope.cmt_handle_paste_edit = function(e) {
@@ -951,6 +975,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                         }, 100);
                     });
                 }, 1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -1021,6 +1049,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -1088,6 +1120,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -1136,6 +1172,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                 }, 100);
                 $(".new-comment-" + post_id).show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     };
     $scope.likePostComment = function(comment_id, post_id, comment_user_id) {
@@ -1161,6 +1201,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id, comment_user_id);
+            },500);
         });
     };
     $scope.editPostComment = function(comment_id, post_id, parent_index, index) {
@@ -1263,6 +1307,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                 $scope.ask.edit_post_id = post_id;
                 $("#ask-question").modal('show');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.EditPost(post_id, post_for, index);
+            },500);
         });
     };
     $scope.sendEditComment = function(comment_id, post_id, user_id) {
@@ -1295,6 +1343,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-' + post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id, post_id, user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -1398,6 +1450,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -1416,7 +1472,7 @@ app.controller('searchController', function($scope, $http, $compile) {
                 data: 'comment=' + comment + '&reply_comment_id=' + reply_comment_id + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (success) {                
+            .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
                     $('#comment-reply-dis-inner-' + reply_comment_id).show();
@@ -1427,6 +1483,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -1450,6 +1510,10 @@ app.controller('searchController', function($scope, $http, $compile) {
             if (data.message == '1') {
                 $scope.postData.splice(index, 1);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     };
     $scope.like_user_list = function(post_id) {
@@ -1517,6 +1581,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                 });
                 
             },300);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
     };
 
@@ -1580,7 +1648,7 @@ app.controller('searchController', function($scope, $http, $compile) {
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#report_spam_form")[0].reset();                
@@ -1591,6 +1659,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -1660,6 +1732,10 @@ app.controller('searchController', function($scope, $http, $compile) {
             {
                 $scope.postData[index].is_user_saved_post = result.status;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },500);
         });
     };
 
@@ -1739,6 +1815,10 @@ app.controller('searchController', function($scope, $http, $compile) {
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 
@@ -2125,7 +2205,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             $("#search-bus-tab").html('Business '+$scope.business_count);
             $("#search-article-tab").html('Article '+$scope.article_count);
             $("#search-que-tab").html('Question '+$scope.question_count);*/
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_search_total_count();
+            },500);
+        });
     };
 
     $scope.searchData(pagenum);
@@ -2412,6 +2496,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
 
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index, user_id);
+            },500);
         });
     };
     $scope.cmt_handle_paste_edit = function(e) {
@@ -2541,6 +2629,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     });
                     
                 }, 1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -2612,6 +2704,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -2679,6 +2775,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -2727,6 +2827,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 }, 100);
                 $(".new-comment-" + post_id).show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     };
     $scope.likePostComment = function(comment_id, post_id, comment_user_id) {
@@ -2752,6 +2856,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id, comment_user_id);
+            },500);
         });
     };
     $scope.editPostComment = function(comment_id, post_id, parent_index, index) {
@@ -2854,6 +2962,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $scope.ask.edit_post_id = post_id;
                 $("#ask-question").modal('show');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.EditPost(post_id, post_for, index);
+            },500);
         });
     };
     $scope.sendEditComment = function(comment_id, post_id, user_id) {
@@ -2882,6 +2994,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-' + post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id, post_id, user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -2985,6 +3101,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3003,7 +3123,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 data: 'comment=' + comment + '&reply_comment_id=' + reply_comment_id + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (success) {                
+            .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
                     $('#comment-reply-dis-inner-' + reply_comment_id).show();
@@ -3014,6 +3134,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3037,6 +3161,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             if (data.message == '1') {
                 $scope.postData.splice(index, 1);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     };
     $scope.like_user_list = function(post_id) {
@@ -3103,6 +3231,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     }, 100);
                 });
             },300);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
     };
     
@@ -3166,7 +3298,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#report_spam_form")[0].reset();                
@@ -3177,6 +3309,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -3246,6 +3382,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
             {
                 $scope.postData[index].is_user_saved_post = result.status;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },500);
         });
     };
 
@@ -3325,6 +3465,10 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 
@@ -3745,8 +3889,11 @@ app.controller('peopleController', function($scope, $http, $compile, $window, $l
             $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
 
             $scope.total_record = success.data.people_count;
-
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_search_total_count();
+            },500);
+        });
     };
 
     $scope.searchData(pagenum);
@@ -4272,7 +4419,11 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             
             $scope.total_record = success.data.simple_count;
 
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_search_total_count();
+            },500);
+        });
     };
 
     $scope.searchData(pagenum);
@@ -4348,6 +4499,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
 
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },500);
         });
     };
     $scope.cmt_handle_paste_edit = function(e) {
@@ -4475,6 +4630,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                         }, 100);
                     });
                 }, 1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4545,6 +4704,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -4612,6 +4775,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -4660,6 +4827,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 }, 100);
                 $(".new-comment-" + post_id).show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     };
     $scope.likePostComment = function(comment_id, post_id, comment_user_id) {
@@ -4685,6 +4856,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id, comment_user_id);
+            },500);
         });
     };
     $scope.editPostComment = function(comment_id, post_id, parent_index, index) {
@@ -4787,6 +4962,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 $scope.ask.edit_post_id = post_id;
                 $("#ask-question").modal('show');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.EditPost(post_id, post_for, index);
+            },500);
         });
     };
     $scope.sendEditComment = function(comment_id, post_id, user_id) {
@@ -4815,6 +4994,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-' + post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id, post_id, user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4919,6 +5102,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4948,6 +5135,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4971,6 +5162,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             if (data.message == '1') {
                 $scope.postData.splice(index, 1);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     };
     $scope.like_user_list = function(post_id) {
@@ -5038,6 +5233,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 });
                 
             },300);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
     };
     
@@ -5101,7 +5300,7 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#report_spam_form")[0].reset();                
@@ -5112,6 +5311,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -5181,6 +5384,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
             {
                 $scope.postData[index].is_user_saved_post = result.status;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },500);
         });
     };
 
@@ -5260,6 +5467,10 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 
@@ -5437,8 +5648,11 @@ app.controller('businessController', function($scope, $http, $compile, $window, 
             $scope.$parent.total_count = '('+parseInt(success.data.opp_count+success.data.people_count+success.data.simple_count+success.data.business_count+success.data.article_count+success.data.question_count)+')';
 
             $scope.total_record = success.data.business_count;
-
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_search_total_count();
+            },500);
+        });
     };
 
     if($scope.$parent.contactSuggetion.length == 0)
@@ -6078,7 +6292,11 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
 
             $scope.total_record = success.data.article_count;
 
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_search_total_count();
+            },500);
+        });
     };
 
     $scope.searchData(pagenum);
@@ -6154,6 +6372,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
 
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },500);
         });
     };
     $scope.cmt_handle_paste_edit = function(e) {
@@ -6281,6 +6503,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                         }, 100);
                     });
                 }, 1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -6351,6 +6577,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -6418,6 +6648,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -6466,6 +6700,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 }, 100);
                 $(".new-comment-" + post_id).show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     };
     $scope.likePostComment = function(comment_id, post_id, comment_user_id) {
@@ -6491,6 +6729,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id, comment_user_id);
+            },500);
         });
     };
     $scope.editPostComment = function(comment_id, post_id, parent_index, index) {
@@ -6593,6 +6835,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 $scope.ask.edit_post_id = post_id;
                 $("#ask-question").modal('show');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.EditPost(post_id, post_for, index);
+            },500);
         });
     };
     $scope.sendEditComment = function(comment_id, post_id, user_id) {
@@ -6621,6 +6867,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-' + post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id, post_id, user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -6724,6 +6974,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -6753,6 +7007,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -6776,6 +7034,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
             if (data.message == '1') {
                 $scope.postData.splice(index, 1);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     };
     $scope.like_user_list = function(post_id) {
@@ -6843,6 +7105,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 });
                 
             },300);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
     };
     
@@ -6906,7 +7172,7 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#report_spam_form")[0].reset();                
@@ -6917,6 +7183,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -6986,6 +7256,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
             {
                 $scope.postData[index].is_user_saved_post = result.status;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },500);
         });
     };
 
@@ -7065,6 +7339,10 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 
@@ -7479,7 +7757,11 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             
             $scope.total_record = success.data.question_count;
 
-        }, function(error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_search_total_count();
+            },500);
+        });
     };
 
     $scope.searchData();
@@ -7555,6 +7837,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
 
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },500);
         });
     };
     $scope.cmt_handle_paste_edit = function(e) {
@@ -7682,6 +7968,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                         }, 100);
                     });
                 }, 1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -7752,6 +8042,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     };
     $scope.viewLastComment = function(post_id, index, post) {
@@ -7819,6 +8113,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     };
     $scope.deletePostComment = function(comment_id, post_id, parent_index, index, post) {
@@ -7867,6 +8165,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                 }, 100);
                 $(".new-comment-" + post_id).show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     };
     $scope.likePostComment = function(comment_id, post_id, comment_user_id) {
@@ -7892,6 +8194,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                     $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id, comment_user_id);
+            },500);
         });
     };
     $scope.editPostComment = function(comment_id, post_id, parent_index, index) {
@@ -7994,6 +8300,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                 $scope.ask.edit_post_id = post_id;
                 $("#ask-question").modal('show');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.EditPost(post_id, post_for, index);
+            },500);
         });
     };
     $scope.sendEditComment = function(comment_id, post_id, user_id) {
@@ -8022,6 +8332,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-' + post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id, post_id, user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8125,6 +8439,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8154,6 +8472,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -8177,6 +8499,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             if (data.message == '1') {
                 $scope.postData.splice(index, 1);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     };
     $scope.like_user_list = function(post_id) {
@@ -8244,6 +8570,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                 });
                 
             },300);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
     };
     
@@ -8318,6 +8648,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -8387,6 +8721,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
             {
                 $scope.postData[index].is_user_saved_post = result.status;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_post(post_id,index,postData);
+            },500);
         });
     };
 
@@ -8466,6 +8804,10 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 
@@ -8505,6 +8847,11 @@ function follow_user(id)
             setTimeout(function(){
                 $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
             },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                follow_user(id);
+            },500);
         }
     });
 }
@@ -8520,6 +8867,11 @@ function unfollow_user(id) {
             $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
                 $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                unfollow_user(id);
             },500);
         }
     });
@@ -8538,6 +8890,11 @@ function follow_user_bus(id)
             setTimeout(function(){
                 $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
             },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                follow_user_bus(id);
+            },500);
         }
     });
 }
@@ -8553,6 +8910,11 @@ function unfollow_user_bus(id) {
             $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
                 $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                unfollow_user_bus(id);
             },500);
         }
     });

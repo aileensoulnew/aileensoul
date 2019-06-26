@@ -341,7 +341,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             data: updatedata,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-        .then(function (result) {                
+        .then(function (result) {
             // $('#main_page_load').show();                
             success = result.data.success;
             if(success == 1)
@@ -361,6 +361,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             var count_profile = profile_progress.user_process;
             $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_user_links();
+            },500);
         });
     };
 
@@ -391,7 +395,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             }
             $("#social-link-loader").hide();
             $("#social-link-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_links();
+            },500);
         });
     };
     $scope.get_user_links();
@@ -618,6 +625,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $("#Achiv-awards").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_award();
+                },500);
             });
         }
     };
@@ -640,7 +651,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#awards-loader").hide();
                 $("#awards-body").show();
             }
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_award();
+            },500);
         });
     }
     $scope.get_user_award();
@@ -748,6 +762,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_award();
+                },500);
             });
         }
     };
@@ -785,7 +803,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 data: insert_data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 if(success == 1)
@@ -796,6 +814,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#save_press_release").removeAttr("style");
                 $("#press_release_loader").hide();
                 $("#press-release").modal('hide');                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_press_release();
+                },500);
             });
         }
     };
@@ -818,7 +840,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#press-release-loader").hide();
                 $("#press-release-body").show();
             }
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_press_release();
+            },500);
         });
     };
     $scope.get_press_release();
@@ -889,6 +914,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $scope.reset_press_release();
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_press_release();
+                },500);
             });
         }
     };
@@ -970,6 +999,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $("#bus-portfolio").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_portfolio();
+                },500);
             });
         }
     };
@@ -992,7 +1025,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#portfolio-loader").hide();
                 $("#portfolio-body").show();
             }
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_portfolio();
+            },500);
         });
     }
     $scope.get_portfolio();
@@ -1086,6 +1122,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $scope.reset_portfolio();
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_portfolio();
+                },500);
             });
         }
     };
@@ -1115,6 +1155,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#review-body").show();
                 },1000);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_review();
+            },500);
         });
     };
     $scope.get_review();
@@ -1188,7 +1232,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined, 'Process-Data': false},
             })            
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#business_review")[0].reset();
@@ -1212,6 +1256,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 {                    
                     $("#reviews").modal("hide");
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_review();
+                },500);
             });
         }
     };
@@ -1274,7 +1322,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     data: insert_data,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
-                .then(function (result) {                
+                .then(function (result) {
                     // $('#main_page_load').show();                
                     success = result.data.success;
                     if(success == 1)
@@ -1289,6 +1337,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     var count_profile = profile_progress.user_process;
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
+                }, function (error) {
+                    setTimeout(function(){
+                        $scope.save_business_story();
+                    },500);
                 });
             });
         }
@@ -1310,6 +1362,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#story-loader").hide();
                 $("#story-body").show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_business_story();
+            },500);
         });
     };
     $scope.get_business_story();
@@ -1677,6 +1733,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#timeline-loader").hide();
                 $("#timeline-body").show();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_business_timeline();
+            },500);
         });
     };
     $scope.get_business_timeline();
@@ -1869,6 +1929,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_timeline();
+                },500);
             });
         }
     };
@@ -1962,6 +2026,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_timeline();
+                },500);
             });
         }
     };
@@ -2269,6 +2337,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             }
             $("#hours-loader").hide();
             $("#hours-body").show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_opening_hours();
+            },500);
         });
     };
     $scope.get_opening_hours();
@@ -2372,6 +2444,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }).then(function (success) {
             data = success.data;
             $scope.titleSearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.basic_job_title_list();
+            },500);
         });
     };
 
@@ -2473,6 +2549,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_member();
+                },500);
             });
         }
     };
@@ -2505,7 +2585,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             }
             $("#key-member-loader").hide();
             $("#key-member-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_key_member();
+            },500);
         });
     }
     $scope.get_key_member();
@@ -2590,6 +2673,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_member();
+                },500);
             });
         }
     };   
@@ -2624,7 +2711,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             }
             $("#contact-loader").hide();
             $("#contact-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_contact_info();
+            },500);
         });
     }
     $scope.get_contact_info();
@@ -2654,6 +2744,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }).then(function (success) {
             data = success.data;
             $scope.titleSearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.contact_job_title_list();
+            },500);
         });
     };
 
@@ -2716,7 +2810,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 data: insert_data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 if(success == 1)
@@ -2731,6 +2825,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 var count_profile = profile_progress.user_process;
                 $scope.progress_status = profile_progress.progress_status;
                 $scope.set_progress(count_profile_value,count_profile);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_contact_info();
+                },500);
             });
             
         }
@@ -2791,6 +2889,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     menu_formdata = new FormData();
                     $("#add-menu-img").modal('hide');
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_menu();
+                },500);
             });
         }
     };
@@ -2825,6 +2927,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#delete_menu_loader").hide();
                     $("#menu-delete-btn").show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_menu();
+                },500);
             });
         }
     };
@@ -2847,6 +2953,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $("#menu-loader").hide();
             $("#menu-body").show();
 
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_menu_info();
+            },500);
         });
     }
     $scope.get_menu_info();
@@ -2933,6 +3043,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $("#address-loader").hide();
             $("#address-body").show();
 
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_address_info();
+            },500);
         });
     }
     $scope.get_address_info();
@@ -2959,6 +3073,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $("#address_state_loader").hide();
             $scope.address_state_list = data.data;
             $scope.address_city_list = [];
+        }, function (error) {
+            setTimeout(function(){
+                $scope.address_country_change();
+            },500);
         });
     }
 
@@ -2979,6 +3097,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#save_address_info").removeAttr("style");
                 $("#address_city_loader").hide();
                 $scope.address_city_list = data.data;
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.address_state_change();
+                },500);
             });
         }
     };
@@ -2989,6 +3111,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             headers: {'Content-Type': 'application/json'},
         }).then(function (data) {
             $scope.country_list = data.data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_country();
+            },500);
         });
     };
     $scope.get_country();
@@ -3035,6 +3161,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     },100);
                     $("#save_address_info").removeAttr("style");
                 });        
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.edit_address_info();
+                },500);
             });
         }
         $("#address_address").val($scope.address_info_data.address);
@@ -3118,7 +3248,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 data: insert_data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 if(success == 1)
@@ -3133,6 +3263,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 var count_profile = profile_progress.user_process;
                 $scope.progress_status = profile_progress.progress_status;
                 $scope.set_progress(count_profile_value,count_profile);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_address_info();
+                },500);
             });
             
         }
@@ -3150,6 +3284,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
         }).then(function (success) {
             data = success.data;
             $scope.titleSearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.business_serve_area_list();
+            },500);
         });
     };
 
@@ -3188,7 +3326,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
             // load_add_detail();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_business_info();
+            },500);
         });
     }
     $scope.get_business_info();
@@ -3399,7 +3540,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 data: update_data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 if(success == 1)
@@ -3425,6 +3566,10 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $("#save_business").removeAttr("style");
                 $("#save_business_loader").hide();
                 $("#job-basic-info").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_business();
+                },500);
             });
             
         }

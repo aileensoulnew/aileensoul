@@ -328,7 +328,8 @@ app.controller('userProfileController', function ($scope, $http) {
     $scope.get_field_list();   
 
     $scope.get_user_detail = function(){
-        $http.get(base_url + "userprofile_page/get_user_data").then(function (success) {            
+        $http.get(base_url + "userprofile_page/get_user_data").then(function (success) {
+
             var professionData = success.data.professionData
             var studentData = success.data.studentData;
             
@@ -363,7 +364,11 @@ app.controller('userProfileController', function ($scope, $http) {
                     }
                 },500);
             }
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_detail();
+            },500);
+        });
     };
     $scope.get_user_detail();
     $scope.open_student = function()
@@ -392,6 +397,10 @@ app.controller('userProfileController', function ($scope, $http) {
         }).then(function (success) {
             data = success.data;
             $scope.titleSearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.basic_job_title_list();
+            },500);
         });
     };
 
@@ -404,6 +413,10 @@ app.controller('userProfileController', function ($scope, $http) {
         }).then(function (success) {
             data = success.data;
             $scope.citySearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.basic_info_city_list();
+            },500);
         });
     }
     // $scope.basic_info_city();
@@ -454,7 +467,7 @@ app.controller('userProfileController', function ($scope, $http) {
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#basicinfo")[0].reset();
@@ -468,6 +481,10 @@ app.controller('userProfileController', function ($scope, $http) {
                 $("#user_basicinfo").removeAttr("style");
                 $("#user_basicinfo_loader").hide();
                 $("#user-info-edit").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_basicinfo();
+                },500);
             });
         }
     };    
@@ -499,6 +516,10 @@ app.controller('userProfileController', function ($scope, $http) {
         .then(function (success) {
             data = success.data;
             $scope.degreeSearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.stud_info_study_list();
+            },500);
         });
     }
 
@@ -512,6 +533,10 @@ app.controller('userProfileController', function ($scope, $http) {
         .then(function (success) {
             data = success.data;
             $scope.citySearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.stud_info_city_list();
+            },500);
         });
     }
 
@@ -525,6 +550,10 @@ app.controller('userProfileController', function ($scope, $http) {
         .then(function (success) {
             data = success.data;
             $scope.universitySearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.stud_info_university_list();
+            },500);
         });
     }
 
@@ -596,6 +625,10 @@ app.controller('userProfileController', function ($scope, $http) {
                 $("#user_studinfo").removeAttr("style");
                 $("#user_studinfo_loader").hide();
                 $("#user-info-edit").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_studinfo();
+                },500);
             });
         }
     };
@@ -621,6 +654,10 @@ app.controller('userProfileController', function ($scope, $http) {
             }
             $scope.contact_value = success.data.trim();
             $scope.get_all_counter();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.contact(id, status, to_id, confirm);
+            },500);
         });
     };
 
@@ -638,6 +675,10 @@ app.controller('userProfileController', function ($scope, $http) {
             }
             $scope.contact_value = success.data.trim();
             $scope.get_all_counter();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.remove_contact(id, status, to_id);
+            },500);
         });
     };
 
@@ -653,6 +694,10 @@ app.controller('userProfileController', function ($scope, $http) {
                 socket.emit('user notification',from_id);
             }
             $scope.contact_value = 'confirm';
+        }, function (error) {
+            setTimeout(function(){
+                $scope.confirmContactRequestInnerHeader(from_id);
+            },500);
         });
     };
     $scope.follow = function (id, status, to_id) {
@@ -668,6 +713,10 @@ app.controller('userProfileController', function ($scope, $http) {
                 socket.emit('user notification',to_id);
             }
             $scope.follow_value = success.data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.follow(id, status, to_id);
+            },500);
         });
     };
 });
@@ -854,7 +903,11 @@ app.controller('profilesController', function ($scope, $http, $location) {
                 $('.monetize_earn').html('0');
             }
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -876,6 +929,10 @@ app.controller('profilesController', function ($scope, $http, $location) {
             $('body').removeClass("body-loader");
             details_data = success.data;
             $scope.details_data = details_data;
+        }, function (error) {
+            setTimeout(function(){
+                getFieldList();
+            },500);
         });
         
         $('footer').show();
@@ -1007,7 +1064,11 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 $('.monetize_earn').html('0');
             }
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -1060,6 +1121,10 @@ app.controller('dashboardArticleController', function ($scope, $http, $location,
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getDashboardArticle(pagenum);
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -1215,7 +1280,11 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $('.monetize_earn').html('0');
             }
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -1276,6 +1345,10 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getDashboardPdf(pagenum);
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -1432,9 +1505,12 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             {
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
-            }
-            
-        }, function (error) {});
+            }            
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -1515,6 +1591,10 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getDashboardAudios(pagenum);
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -1679,8 +1759,11 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
             }
-            
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -1832,6 +1915,11 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                isProcessing = false;
+                $scope.getDashboardVideos(pagenum);
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -1995,8 +2083,11 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
             }
-            
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -2107,6 +2198,10 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getDashboardPhotos(pagenum);
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -2190,14 +2285,6 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     $("#ask_field").focusout(function(){
         $('#ask_fieldtooltip').hide();
     });
-
-    setTimeout(function(){        
-        /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"  ad-class="infeed"></adsense>').appendTo('.tab-add');
-        $compile($el)($scope);*/
-
-        /*var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-            $compile($elm)($scope);*/
-    },2000);
 
     $scope.getHashTags = function(inputText) {  
         var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
@@ -2354,7 +2441,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         setModalsAndBackdropsOrder();
     });
 
-    function setModalsAndBackdropsOrder() {        
+    function setModalsAndBackdropsOrder() {
         var modalZIndex = 1040;
         $('.modal.in').each(function(index) {
             var $modal = $(this);
@@ -2498,7 +2585,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     var fileCountQue = 0;
     var fileNamesArrQue = [];
 
-    $(document).on('change','#fileInput2', function(e){        
+    $(document).on('change','#fileInput2', function(e){
         $.each($('#fileInput2')[0].files, function(i, f) {
             if(fileNamesArrQue.indexOf(f.name) < 0)
             {
@@ -2797,11 +2884,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         document.getElementById(myModal2Id).style.display = "block";
         $("body").addClass("modal-open");
     };
-    $scope.closeModal2 = function(myModal2Id) {    
+    $scope.closeModal2 = function(myModal2Id) {
         document.getElementById(myModal2Id).style.display = "none";
         $("body").removeClass("modal-open");
     };
-    $scope.closeModalShare = function(myModal2Id) {    
+    $scope.closeModalShare = function(myModal2Id) {
         document.getElementById(myModal2Id).style.display = "none";
         // $("body").removeClass("modal-open");
         if($('.modal.in').length > 0)
@@ -2983,7 +3070,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     }, 100);
                 });
             },1000);
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardPostLoad(pagenum);
+            },500);
+        });
     }
     var all_image_load = false;
     
@@ -2993,7 +3084,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postImageData = success.data.userDashboardImage;
             $scope.postAllImageData = success.data.userDashboardImage;//success.data.userDashboardImageAll;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardImage(pagenum);
+            },500);
+        });
     }
 
     $scope.load_more_photos = function()
@@ -3007,7 +3102,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 for (var i in success.data.userDashboardImageAll) {
                     $scope.postAllImageData.push(success.data.userDashboardImageAll[i]);
                 }
-            }, function (error) {});
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.load_more_photos(pagenum);
+                },500);
+            });
         }
     }
 
@@ -3049,7 +3148,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardVideo();
+            },500);
+        });
     }
 
     $scope.load_more_videos = function()
@@ -3093,7 +3196,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         }
                         // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
                     },1000);
-                }, function (error) {});
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.load_more_videos();
+                },500);
+            });
         }
     }
 
@@ -3103,7 +3210,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         {
             $('#loader').hide();
             $scope.postArticleData = success.data.userDashboardArticle;            
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardArticle();
+            },500);
+        });
     }
 
     function getUserDashboardInformation() {
@@ -3143,6 +3254,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $("#edit-profile-move").hide();
             }
             $scope.set_progress(count_profile_value,count_profile);
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardInformation();
+            },500);
         });
     }
 
@@ -3178,35 +3293,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $http.get(base_url + "user_post/getUserDashboardAudio?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             $scope.postAudioData = success.data.userDashboardAudio;
-            $scope.postAllAudioData = success.data.userDashboardAudioAll;
-            /*setTimeout(function(){
-                var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
-
-                for (i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        stretching: 'auto',
-                        pluginPath: '../../../build/',
-                        success: function (media) {
-                            var renderer = document.getElementById(media.id + '-rendername');
-
-                            media.addEventListener('loadedmetadata', function () {
-                                var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
-                                if (src !== null && src !== undefined) {
-                                    // renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
-                                    // renderer.querySelector('.renderer').innerHTML = media.rendererName;
-                                    // renderer.querySelector('.error').innerHTML = '';
-                                }
-                            });
-
-                            media.addEventListener('error', function (e) {
-                                renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
-                            });
-                        }
-                    });
-                }
-                // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-            },1000);*/
-        }, function (error) {});
+            $scope.postAllAudioData = success.data.userDashboardAudioAll;            
+         }, function (error) {
+            setTimeout(function(){
+                getUserDashboardAudio(pagenum);
+            },500);
+        });
     }
 
     function getUserDashboardPdf(pagenum) {
@@ -3214,14 +3306,22 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $http.get(base_url + "user_post/getUserDashboardPdf?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             $scope.postPdfData = success.data.userDashboardPdf;           
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardPdf(pagenum);
+            },500);
+        });
     }
 
     // getFieldList();
     function getFieldList() {
         $http.get(base_url + "general_data/getFieldList").then(function (success) {
             $scope.fieldList = success.data;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getFieldList();
+            },500);
+        });
     }
     if(user_id != "")
     {
@@ -3230,7 +3330,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
                 $scope.contactSuggetion = success.data;
                 //console.log($scope.contactSuggetion);
-            }, function (error) {});
+            }, function (error) {
+                setTimeout(function(){
+                    getContactSuggetion();
+                },500);
+            });
         }
     }
 
@@ -3298,19 +3402,20 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             } else {
                 $('.questionSuggetion').removeClass('question-available');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.questionList();
+            },500);
         });
     }   
        
     $scope.lightbox = function (idx) {
         //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
-            var ninjaSldr = document.getElementById("ninja-slider");
-            ninjaSldr.parentNode.style.display = "block";
-
-            nslider.init(idx);
-
-            var fsBtn = document.getElementById("fsBtn");
-            fsBtn.click();
-  
+        var ninjaSldr = document.getElementById("ninja-slider");
+        ninjaSldr.parentNode.style.display = "block";
+        nslider.init(idx);
+        var fsBtn = document.getElementById("fsBtn");
+        fsBtn.click();
     };
     
     function fsIconClick(isFullscreen, ninjaSldr) { 
@@ -3401,6 +3506,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('.addtobtn-' + user_id).attr('style','pointer-events:none;');
                // $('.owl-carousel').trigger('next.owl.carousel');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.addToContact(user_id, contact);
+            },500);
         });
     }
 
@@ -3451,6 +3560,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 }
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,like_user_id);
+            },500);
         });
     }
 
@@ -3612,6 +3725,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         }, 100);
                     });
                 },1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -3686,6 +3803,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     }
 
@@ -3757,6 +3878,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -3802,6 +3927,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 },100);
                 $(".new-comment-"+post_id).show();                
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     }
 
@@ -3830,6 +3959,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 }
 
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id);
+            },500);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
@@ -3982,6 +4115,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 
@@ -4014,6 +4151,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4125,6 +4266,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4144,7 +4289,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 data: 'comment=' + comment + '&reply_comment_id=' + reply_comment_id + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (success) {                
+            .then(function (success) {
                 data = success.data;
                 if (data.message == '1') {
                     $('#comment-reply-dis-inner-' + reply_comment_id).show();
@@ -4155,6 +4300,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -4191,6 +4340,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 getUserDashboardPost();
                 $scope.get_all_counter();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     }
 
@@ -4267,6 +4420,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     });
                 },500);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
 
     }
@@ -4296,7 +4453,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             $("#social-link-loader").hide();
             $("#social-link-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_links();
+            },500);
         });
     };
     
@@ -4319,6 +4479,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $scope.exp_years = result.data.exp_years;
                 $scope.exp_months = result.data.exp_months;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_experience();
+            },500);
         });
     }
     
@@ -4341,7 +4505,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
             $("#edution-loader").hide();
             $("#edution-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_education();
+            },500);
         });
     }
     
@@ -4407,7 +4574,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#report_spam_form")[0].reset();                
@@ -4418,6 +4585,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -4507,7 +4678,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $scope.get_user_experience();
             $scope.get_user_education();
 
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getUserDashboardPost(pagenum);
+            },500);
+        });
     }
 
     getUserDashboardPost();
@@ -4535,6 +4710,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             {
                 $scope.postData[index].is_user_saved_post = result.status;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_post();
+            },500);
         });
     };
 });
@@ -4668,29 +4847,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $('.monetize_earn').html('0');
             }
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
-    $scope.get_all_counter();
-
-    function load_add_detail()
-    {
-        setTimeout(function(){
-            /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
-            $compile($el)($scope);*/
-        },1000);        
-    }
-
-    function load_add()
-    {
-        /*setTimeout(function(){        
-        var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
-            $compile($el)($scope);
-
-        var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-            $compile($el)($scope);
-        },1000);*/        
-    }
-
+    $scope.get_all_counter();    
+    
     function getFieldList() {
         // $('#main_loader').hide();        
         if($scope.$parent.pade_reload == true)
@@ -4742,9 +4906,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#profile-loader").hide();
             $("#profile-body").show();
 
-            $scope.set_progress(count_profile_value,count_profile);
-            load_add();
-            load_add_detail();
+            $scope.set_progress(count_profile_value,count_profile);            
+        }, function (error) {            
+            setTimeout(function(){
+                getFieldList();
+            },500);
         });
         $('footer').show();
     }
@@ -4841,7 +5007,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#about-loader").hide();
             $("#about-body").show();
-
+        }, function (error) {            
+            setTimeout(function(){
+                getAboutUser();
+            },500);
         });
     }
     $scope.view_more_about = function(){
@@ -4875,7 +5044,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#social-link-loader").hide();
             $("#social-link-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                get_user_links();
+            },500);
         });
     }
     $scope.goMainLink = function (path) {
@@ -4898,7 +5070,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 if(success == 1)
@@ -4915,6 +5087,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $("#user_bio_save").removeAttr("style");
                 $("#user_bio_loader").hide();
                 $("#profile-overview").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_bio();
+                },500);
             });
         }
     };
@@ -4957,6 +5133,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#user_skills_loader").hide();
             // $("#skills").modal('hide');
             $("#skills .modal-close").click();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_user_skills();
+            },500);
         });
         
     };
@@ -4987,149 +5167,13 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             });
         });
     };
-
-    /*$scope.dob_fnc = function(dob_day,dob_month,dob_year){
-        $("#dateerror").hide();
-        $("#dateerror").html('');
-        var kcyear = document.getElementsByName("dob_year")[0],
-        kcmonth = document.getElementsByName("dob_month")[0],
-        kcday = document.getElementsByName("dob_day")[0];                
-        
-        var d = new Date();
-        var n = d.getFullYear();
-        year_opt = "";
-        for (var i = n; i >= 1950; i--) {
-            if(dob_year == i)
-            {
-                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
-            }
-            else
-            {                
-                year_opt += "<option value='"+i+"'>"+i+"</option>";
-            }            
-        }
-        $("#dob_year").html(year_opt);
-        
-        function validate_date(dob_day,dob_month,dob_year) {
-            var y = +kcyear.value;
-            if(dob_month != ""){
-                var m = dob_month;
-            }
-            else{
-            var m = kcmonth.value;
-            }
-
-            if(dob_day != ""){
-                var d = dob_day;
-            }
-            else{                
-                var d = kcday.value;
-            }
-            if (m === "02"){
-                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
-            }
-            else{
-                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
-            }
-
-            kcday.length = 0;
-            var day_opt = "";
-            for (var i = 1; i <= mlength; i++) {
-                if(dob_day == i)
-                {
-                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
-                }
-                else
-                {                
-                    day_opt += "<option value='"+i+"'>"+i+"</option>";
-                }
-            }
-            $("#dob_day").html(day_opt);
-        }
-        validate_date(dob_day,dob_month,dob_year);
-    };
-    $scope.dob_error = function()
-    {
-        $("#dateerror").hide();
-        $("#dateerror").html('');
-    };*/
-    // $scope.about_user_validate = {
-    //     rules: {
-    //         /*language: {
-    //             required: true,
-    //         },
-    //         proficiency: {
-    //             required: true,
-    //         },*/
-    //         user_fav_quote_headline: {
-    //             required: true,
-    //         },
-    //         user_fav_artist: {
-    //             required: true,
-    //         },
-    //         user_fav_book: {
-    //             required: true,
-    //         },
-    //         user_fav_sport: {
-    //             required: true,
-    //         },
-    //     },
-    //     messages: {
-    //         language: {
-    //             required: "Please enter language",
-    //         },
-    //         proficiency: {
-    //             required: "Please enter language proficiency",
-    //         },
-    //         user_fav_quote_headline: {
-    //             required: "Please enter favourite quotes, headline",
-    //         },         
-    //         user_fav_artist: {
-    //             required: "Please enter favourite artist",
-    //         },
-    //         user_fav_book: {
-    //             required: "Please enter favourite book",
-    //         },
-    //         user_fav_sport: {
-    //             required: "Please enter favourite sport",
-    //         },
-    //     },
-    // };
+    
     $scope.save_about_user = function(){
         //if ($scope.about_user_form.validate())
         {
             $("#about_user_loader").show();
             $("#save_about_user").attr("style","pointer-events:none;display:none;");
-            /*var dob_day_txt = $("#dob_day option:selected").val();
-            var dob_month_txt = $("#dob_month option:selected").val();
-            var dob_year_txt = $("#dob_year option:selected").val();
-
-            var todaydate = new Date();
-            var dd = todaydate.getDate();
-            var mm = todaydate.getMonth() + 1;
-            var yyyy = todaydate.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-
-            var todaydate = yyyy + '/' + mm + '/' + dd;
-            var value = dob_year_txt + '/' + dob_month_txt + '/' + dob_day_txt;
-
-            var d1 = Date.parse(todaydate);
-            var d2 = Date.parse(value);
-
-            if (d1 < d2) {
-                $("#dateerror").html("Date of birth always less than to today's date.");
-                $("#dateerror").show();
-
-                $("#save_about_user").removeAttr("style");
-                $("#about_user_loader").hide();
-                return false;
-            }*/
+            
             // var languages = $('.frm_language').serialize();
             var languages = $('.language').serializeArray();
             var proficiency = $('.proficiency').serializeArray();
@@ -5145,7 +5189,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 if(success == 1)
@@ -5175,6 +5219,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $("#save_about_user").removeAttr("style");
                 $("#about_user_loader").hide();
                 $("#detail-about").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_about_user();
+                },500);
             });
         }
     };
@@ -5206,6 +5254,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }).then(function(success) {
             data = success.data;
             $scope.lang_search_result = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_languages(id);
+            },500);
         });
     };
 
@@ -5430,6 +5482,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     $("#research_form")[0].reset();
                     $("#research").modal('hide');
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_research();
+                },500);
             });
         }
     };
@@ -5451,7 +5507,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#research-loader").hide();
             $("#research-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_research();
+            },500);
         });
     };
     $scope.get_user_research();
@@ -5571,6 +5630,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.reset_research_form();
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_research();
+                },500);
             });
         }
     };
@@ -5765,7 +5828,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             data: updatedata,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-        .then(function (result) {                
+        .then(function (result) {
             // $('#main_page_load').show();                
             success = result.data.success;
             if(success == 1)
@@ -5786,6 +5849,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#user_links_save").removeAttr("style");
             $("#user_links_loader").hide();
             $("#social-link").modal('hide');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.save_user_links();
+            },500);
         });
     };
     //Socila Links End
@@ -5881,6 +5948,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     $scope.set_progress(count_profile_value,count_profile);
                     $scope.get_all_counter();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_idol();
+                },500);
             });
         }
     };
@@ -5901,7 +5972,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#idol-loader").hide();
             $("#idol-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_idol();
+            },500);
         });
     };
     $scope.get_user_idol();
@@ -6002,6 +6076,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.reset_user_idols();
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_idol();
+                },500);
             });
         }
     };
@@ -6240,6 +6318,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#publication").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_publication();
+                },500);
             });
         }
     };
@@ -6262,7 +6344,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#publication-loader").hide();
             $("#publication-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_publication();
+            },500);
         });
     }
     $scope.get_user_publication();
@@ -6366,6 +6451,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.reset_publication_form();
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_publication();
+                },500);
             });
         }
     };
@@ -6614,6 +6703,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#patent").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_patent();
+                },500);
             });
         }
     };
@@ -6636,7 +6729,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#patent-loader").hide();
             $("#patent-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_patent();
+            },500);
         });
     }
     $scope.get_user_patent();
@@ -6741,6 +6837,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.reset_patent_form();
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_patent();
+                },500);
             });
         }
     };
@@ -6967,6 +7067,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#Achiv-awards").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_award();
+                },500);
             });
         }
     };
@@ -6989,7 +7093,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#awards-loader").hide();
             $("#awards-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_award();
+            },500);
         });
     }
     $scope.get_user_award();
@@ -7097,6 +7204,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_award();
+                },500);
             });
         }
     };
@@ -7311,6 +7422,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#extra-activity").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_activity();
+                },500);
             });
         }
     };
@@ -7334,6 +7449,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#activity-loader").hide();
             $("#activity-body").show();
 
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_activity();
+            },500);
         });
     }
     $scope.get_user_activity();
@@ -7449,6 +7568,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_activity();
+                },500);
             });
         }
     };
@@ -7660,6 +7783,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#additional-course").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_addicourse();
+                },500);
             });
         }
     };
@@ -7682,7 +7809,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#addicourse-loader").hide();
             $("#addicourse-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_addicourse();
+            },500);
         });
     }
     $scope.get_user_addicourse();
@@ -7798,6 +7928,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_addicourse();
+                },500);
             });
         }
     };
@@ -7823,6 +7957,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }).then(function (success) {
             data = success.data;
             $scope.titleSearchResult = data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.exp_job_title_list();
+            },500);
         });
     };
 
@@ -7833,6 +7971,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             headers: {'Content-Type': 'application/json'},
         }).then(function (data) {
             $scope.exp_country_list = data.data;
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_country();
+            },500);
         });
     };
     $scope.get_country();
@@ -7852,6 +7994,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#exp_state_loader").hide();
             $scope.exp_state_list = data.data;
             $scope.exp_city_list = [];
+        }, function (error) {
+            setTimeout(function(){
+                $scope.exp_country_change();
+            },500);
         });
     }
 
@@ -7870,6 +8016,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $("#exp_city").removeAttr("disabled");
                 $("#exp_city_loader").hide();
                 $scope.exp_city_list = data.data;
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.exp_state_change();
+                },500);
             });
         }
     }
@@ -8174,6 +8324,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     $scope.set_progress(count_profile_value,count_profile);
                     $scope.get_all_counter();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_exp();
+                },500);
             });
         }
     };
@@ -8223,7 +8377,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#exp-loader").hide();
             $("#exp-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_experience();
+            },500);
         });
     }
     $scope.get_user_experience();
@@ -8288,6 +8445,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.exp_city_list = data.data;
                 $scope.exp_city = $scope.user_experience[index].exp_city;
             });        
+        }, function (error) {
+            setTimeout(function(){
+                $scope.edit_user_exp();
+            },500);
         });
         // $scope.exp_state_change();        
 
@@ -8391,6 +8552,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_exp();
+                },500);
             });
         }
     };
@@ -8697,6 +8862,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#dtl-project").modal('hide');
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_project();
+                },500);
             });
         }
     };
@@ -8719,7 +8888,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#project-loader").hide();
             $("#project-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_project();
+            },500);
         });
     }
     $scope.get_user_project();
@@ -8880,6 +9052,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_project();
+                },500);
             });
         }
     };
@@ -8889,14 +9065,22 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.get_edu_degree = function(){
         $http.get(base_url + "userprofile_page/get_edu_degree").then(function (success) {
             $scope.degree_data = success.data.degree_data;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_edu_degree();
+            },500);
+        });
     };
     $scope.get_edu_degree();
 
     $scope.get_edu_university = function(){
         $http.get(base_url + "userprofile_page/get_edu_university").then(function (success) {
             $scope.university_data = success.data.university_data;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_edu_university();
+            },500);
+        });
     };
     $scope.get_edu_university();
 
@@ -8916,6 +9100,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $("#edu_stream").removeAttr("disabled");
                 $("#edu_stream_loader").hide();
                 $scope.stream_data = data.data.stream_data;
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.edu_degree_change();
+                },500);
             });
         }
         else
@@ -9202,6 +9390,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     $scope.set_progress(count_profile_value,count_profile);
                     $scope.get_all_counter();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_user_education();
+                },500);
             });
         }
     };
@@ -9224,7 +9416,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
             $("#edution-loader").hide();
             $("#edution-body").show();
-
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_education();
+            },500);
         });
     }
     $scope.get_user_education();
@@ -9373,6 +9568,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();                        
                     }
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.delete_user_edu();
+                },500);
             });
         }
     };
@@ -9603,9 +9802,12 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             {
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
-            }
-            
-        }, function (error) {});
+            }            
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -9627,6 +9829,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
             }
             $scope.get_all_counter();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.contact(id, status, to_id,indexCon,confirm);
+            },500);
         });
     }
 
@@ -9643,6 +9849,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
             }
             $scope.get_all_counter();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.remove_contact(id, status, to_id,indexCon);
+            },500);
         });
     }
 
@@ -9748,6 +9958,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getContacts();
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -9933,7 +10147,11 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $('.monetize_earn').html('0');
             }
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
     var isProcessing = false;
@@ -10037,6 +10255,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getFollowers();
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {
@@ -10078,6 +10300,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
         .then(function (success) {
             $scope.get_all_counter();
             $("#" + id).html($compile(success.data)($scope));
+        }, function (error) {
+            setTimeout(function(){
+                $scope.follow_user(id);
+            },500);
         });
     }
     $scope.unfollow_user = function (id) {
@@ -10090,6 +10316,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
         .then(function (success) {
             $scope.get_all_counter();
             $("#" + id).html($compile(success.data)($scope));
+        }, function (error) {
+            setTimeout(function(){
+                $scope.unfollow_user(id);
+            },500);
         });
     }
     $scope.goUserprofile = function (path) {
@@ -10235,9 +10465,12 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             {
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
-            }
-            
-        }, function (error) {});
+            }            
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
     var isProcessing = false;
@@ -10341,6 +10574,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getFollowing(pagenum);
+            },500);
         });
     }
     angular.element($window).bind("scroll", function (e) {        
@@ -10377,6 +10614,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
         })
         .then(function (success) {
             $("#" + id).html($compile(success.data)($scope));
+        }, function (error) {
+            setTimeout(function(){
+                $scope.follow_user(id);
+            },500);
         });
     }
     // PROFEETIONAL DATA
@@ -10404,6 +10645,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     }
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.unfollow_user(id);
+            },500);
         });
     }
 
@@ -10416,6 +10661,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
         })
         .then(function (success) {
             $("#buss-" + id).html($compile(success.data)($scope));
+        }, function (error) {
+            setTimeout(function(){
+                $scope.follow_business_user(id);
+            },500);
         });
     }
     
@@ -10443,6 +10692,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     }
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.unfollow_business_user(id);
+            },500);
         });
     }
     $scope.goUserprofile = function (path) {
@@ -10485,7 +10738,11 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     function getFieldList() {
         $http.get(base_url + "general_data/getFieldList").then(function (success) {
             $scope.fieldList = success.data;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getFieldList();
+            },500);
+        });
     }
 
     $scope.prettifyNumber = function(value) {
@@ -10603,9 +10860,12 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             {
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
-            }
-            
-        }, function (error) {});
+            }            
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }
     $scope.get_all_counter();
 
@@ -10685,6 +10945,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     });
                 },500);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
     }
 
@@ -10782,6 +11046,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $scope.showLoadmore = false;
             }
             $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getQuestions(pagenum);
+            },500);
         });
     }
     
@@ -10855,6 +11123,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 }
                 $scope.questionData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },500);
         });
     }
 
@@ -10906,6 +11178,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     $('.post-comment-count-' + post_id).html(data.comment_count);
                     $('.editable_text').html('');
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -10933,6 +11209,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $scope.getQuestions();
                 $scope.get_all_counter();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     }
 });
@@ -11054,8 +11334,11 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 //$('.monetize_earn').hide();
                 $('.monetize_earn').html('0');
             }
-            
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }    
 
     $("#job_title").focusin(function(){
@@ -11098,11 +11381,6 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
     $("#ask_field").focusout(function(){
         $('#ask_fieldtooltip').hide();
     });
-    
-    setTimeout(function(){
-        /*var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-            $compile($elm)($scope);*/
-    },2000);
 
     $scope.getHashTags = function(inputText) {  
         var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
@@ -11261,7 +11539,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
     var fileCountQue = 0;
     var fileNamesArrQue = [];
 
-    $(document).on('change','#fileInput2', function(e){        
+    $(document).on('change','#fileInput2', function(e){
         $.each($('#fileInput2')[0].files, function(i, f) {
             if(fileNamesArrQue.indexOf(f.name) < 0)
             {
@@ -11403,7 +11681,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
         });
     });
 
-    $scope.removeFile = function(rmId) {        
+    $scope.removeFile = function(rmId) {
         fileCountSim--;
         $("#fileCountSim").text(fileCountSim);
         if(fileCountSim <= 0)
@@ -11632,12 +11910,6 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
 
     function getUserSavedPostLoad(pagenum) {
         if (isLoadingData) {
-          
-            /*
-             *This won't go past this condition while
-             *isProcessing is true.
-             *You could even display a message.
-             **/
             return;
         }
         isLoadingData = true;
@@ -11738,14 +12010,22 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     }, 100);
                 });
             },500);
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getUserSavedPostLoad(pagenum);
+            },500);
+        });
     }
 
     // getFieldList();
     function getFieldList() {
         $http.get(base_url + "general_data/getFieldList").then(function (success) {
             $scope.fieldList = success.data;
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                getFieldList();
+            },500);
+        });
     }
     if(user_id != "")
     {
@@ -11754,7 +12034,11 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
                 $scope.contactSuggetion = success.data;
                 //console.log($scope.contactSuggetion);
-            }, function (error) {});
+            }, function (error) {
+                setTimeout(function(){
+                    getContactSuggetion();
+                },500);
+            });
         }
     }
 
@@ -11810,6 +12094,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             } else {
                 $('.questionSuggetion').removeClass('question-available');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.questionList();
+            },500);
         });
     }
     
@@ -11817,14 +12105,13 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
        
     $scope.lightbox = function (idx) {
         //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
-            var ninjaSldr = document.getElementById("ninja-slider");
-            ninjaSldr.parentNode.style.display = "block";
+        var ninjaSldr = document.getElementById("ninja-slider");
+        ninjaSldr.parentNode.style.display = "block";
 
-            nslider.init(idx);
+        nslider.init(idx);
 
-            var fsBtn = document.getElementById("fsBtn");
-            fsBtn.click();
-  
+        var fsBtn = document.getElementById("fsBtn");
+        fsBtn.click();  
     };
     
     function fsIconClick(isFullscreen, ninjaSldr) { 
@@ -11915,6 +12202,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     socket.emit('user notification',user_id);
                 }
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.addToContact(user_id, contact);
+            },500);
         });
     }
 
@@ -11965,6 +12256,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 }
                 $scope.postData[parent_index].user_like_list = success.data.user_like_list;
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.post_like(post_id,parent_index,user_id);
+            },500);
         });
     }
 
@@ -12128,6 +12423,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     });
             
                 },1000);
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendComment(post_id, index, post);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -12202,6 +12501,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewAllComment(post_id, index, post);
+            },500);
         });
     }
 
@@ -12273,6 +12576,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     }, 100);
                 });
             },500);
+        }, function (error) {
+            setTimeout(function(){
+                $scope.viewLastComment(post_id, index, post);
+            },500);
         });
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -12318,6 +12625,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 },100);
                 $(".new-comment-"+post_id).show();                
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deleteComment(comment_id, post_id, parent_index, index, post);
+            },500);
         });
     }
 
@@ -12350,6 +12661,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 }
 
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.likePostComment(comment_id, post_id,commented_user_id);
+            },500);
         });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
@@ -12457,6 +12772,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendEditComment(comment_id,post_id,user_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -12566,6 +12885,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                         });
                     },500);
                 }
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.sendCommentReply(comment_id,post_id,postIndex,commentIndex);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -12596,6 +12919,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $('.new-comment-'+post_id).show();
                 }                
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.send_edit_comment_reply(reply_comment_id,post_id);
+                },500);
             });
         } else {
             $scope.isMsgBoxEmpty = true;
@@ -12632,6 +12959,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 getUserDashboardPost();
                 $scope.get_all_counter();
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.deletedPost(post_id, index);
+            },500);
         });
     }
 
@@ -12708,6 +13039,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     });
                 },500);
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.like_user_list(post_id);
+            },500);
         });
 
     }
@@ -12774,7 +13109,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .then(function (result) {                
+            .then(function (result) {
                 // $('#main_page_load').show();                
                 success = result.data.success;
                 $("#report_spam_form")[0].reset();                
@@ -12785,6 +13120,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 $("#save_report_spam").removeAttr("style");
                 $("#save_report_spam_loader").hide();
                 $("#report-spam").modal('hide');
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.save_report_spam();
+                },500);
             });
         }
     };
@@ -12893,7 +13232,11 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     }, 100);
                 });
             },500);
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getUserSavedPost(pagenum);
+            },500);
+        });
     }
     if($scope.$parent.live_slug != $scope.$parent.segment2)
     {
@@ -12938,6 +13281,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 //$('.savedpost_counter').hide();
                 $('.savedpost_counter').html('0');
             }
+        }, function (error) {
+            setTimeout(function(){
+                $scope.unsave_post(post_id,index,postData);
+            },500);
         });
     };
 
@@ -12991,6 +13338,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 $('#posterrormodal').modal('show');
             }
             $('.post-popup-box').attr('style','pointer-events: all;');
+        }, function (error) {
+            setTimeout(function(){
+                $scope.share_post_fnc(post_index);
+            },500);
         });
     };
 });
@@ -13096,7 +13447,11 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
                 $('.monetize_earn').html('0');
             }
             
-        }, function (error) {});
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
     }    
 
     $scope.get_user_monetize = function(){
@@ -13143,6 +13498,10 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
                     $('.progress-bar-custom span .val').html('$'+(earn_process_value * progress));
                 }
             })
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_user_monetize();
+            },500);
         });
     };
     if($scope.$parent.live_slug != $scope.$parent.segment2)
@@ -13262,8 +13621,10 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
                 } else {
                     
                 }
-            }, function (error){
-
+            }, function (error) {
+                setTimeout(function(){
+                    $scope.submit_bank_info();
+                },500);
             });
         }
         else

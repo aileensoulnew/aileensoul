@@ -271,6 +271,11 @@ function follow_user(id)
             setTimeout(function(){
                 $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
             },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                follow_user(id);
+            },500);
         }
     });
 }
@@ -286,6 +291,11 @@ function unfollow_user(id) {
             $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
                 $(".follow-btn-user-" + uid.slice(0, -6)).html(data);
+            },500);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                unfollow_user(id);
             },500);
         }
     });
@@ -312,6 +322,11 @@ function contact(elid)
                 setTimeout(function(){
                     // $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
                 },500);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    contact(elid);
+                },500);
             }
         });
     }
@@ -329,6 +344,11 @@ function contact(elid)
                 $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
                 setTimeout(function(){
                     $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+                },500);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    contact(elid);
                 },500);
             }
         });
