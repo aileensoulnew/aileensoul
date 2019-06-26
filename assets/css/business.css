@@ -5048,6 +5048,8 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
     .add-comment .mob-comment{bottom: 3px !important;}
     .post-box-bottom p.bus-post-btn .btn1{width: auto;}
     .post-box-bottom p.bus-post-btn{width: auto; padding-top: 5px; padding-right: 0;}
+    .userlist-cus .profile-job-post-location-name{padding: 0;}
+    .job-saved-box .job-contact-frnd .profile-job-post-detail{border-top: 0px !important;}
 }
 @media screen and (max-width:639px){
     .modal.in .modal-dialog .mes .pop_content{
@@ -5472,16 +5474,11 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
         bottom:inherit;
         right:inherit
     }
-    .user_lst li .follow-li-text a{
-        font-size:16px
-    }
-    .post-editor .popup-social-icon ul li i{
-        font-size:12px
-    }
-    .follow-img{
-        height:50px;
-        width:50px
-    }
+    .user_lst li .follow-li-text a{font-size:13px;}
+    .user_lst li.folle_text a{font-size: 12px;}
+    .post-editor .popup-social-icon ul li i{font-size:12px;}
+    .user_lst li a.btn-new-1{font-size: 13px; padding: 8px 13px; width: 92px;}
+    .follow-img{height:40px; width:40px;}
     .profile-left{
         margin-left:5px
     }
@@ -5828,8 +5825,10 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
         width:25%
     }
     .user_lst li .follow-li-text a{
-        font-size:14px
+        font-size:13px
     }
+    .user_lst li a{font-size: 12px;}
+    .user_lst li .user_btn a{font-size: 13px; width: 92px;}
     .profile-job-post-location-name ul li .follow-li-text{
         padding:0
     }
@@ -5921,9 +5920,8 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', en
     .buisness-menu::before{
         bottom:40px
     }
-    .user-list .user_lst .folle_text{
-        width:64%
-    }
+    .user-list .user_lst .folle_text{width:53%;}
+    .profile-job-post-location-name ul li.folle_text{padding-left: 5px;}
     .popup-text textarea::-moz-placeholder{
         font-size:17px!important
     }
