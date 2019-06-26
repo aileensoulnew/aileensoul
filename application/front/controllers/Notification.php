@@ -14,6 +14,7 @@ class Notification extends MY_Controller {
         $this->load->model('notification_model');        
         $this->load->model('user_model');
         $this->load->model('user_post_model');        
+        $this->load->model('userprofile_model');        
         $this->load->model('data_model');
         $this->load->model('message_model');
         $this->lang->load('message', 'english');

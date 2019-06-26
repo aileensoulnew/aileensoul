@@ -1690,7 +1690,35 @@
             <div ng-if="postIndex == 1">
                 <div id="main-post-{{post.post_data.id}}" ng-if="promotedPostData.length != 0" class="all-post-box" ng-repeat="post in promotedPostData" ng-init="postIndex=$index">
                     <div id="tooltip_content_promoted_{{postIndex}}" class="tooltip_templates">
-                        <div class="user-tooltip">
+                        <div class="bus-tooltip" ng-if="post.post_data.user_type == '2'">
+                            <div class="user-tooltip">
+                                <div class="tooltip-cover-img">
+                                    <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}">
+                                    <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
+                                </div>
+                                <div class="tooltip-user-detail">
+                                    <div class="tooltip-user-img">
+                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image">                                
+                                        <img ng-if="!post.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
+                                    </div>
+                                    <div class="fw">
+                                        <div class="tooltip-detail">
+                                            <h4 ng-bind="post.user_data.company_name"></h4>
+                                            <p ng-if="post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
+                                            <p ng-if="!post.user_data.industry_name">CURRENT WORK</p>
+                                            <p>{{post.user_data.city_name}}{{post.user_data.city_name != '' ? ',' : ''}}{{post.user_data.state_name}}{{post.user_data.state_name != '' ? ',' : ''}}{{post.user_data.country_name}}</p>
+                                        </div>
+                                        
+                                        <div class="tooltip-btns follow-btn-bus-{{post.user_data.user_id}}">
+                                            <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{post.post_data.id}}">Following</a>
+
+                                            <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{post.post_data.id}}">Follow</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-tooltip" ng-if="post.post_data.user_type == '1'">
                             <div class="tooltip-cover-img">
                                 <img ng-if="post.post_data.user_type == '1' && post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
                                 <img ng-if="post.post_data.user_type == '2'" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}">

@@ -4163,8 +4163,8 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     };
 
-    $('#post_something,#post_opportunity input'). keydown(function (e) {
-        if (e. keyCode == 13) {
+    $('#post_something,#post_opportunity input'). keydown(function (e) {        
+        if (e. keyCode == 13 && !$(e.target).is('textarea')) {
             e. preventDefault();
             return false;
         }

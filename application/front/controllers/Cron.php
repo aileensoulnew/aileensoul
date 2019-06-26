@@ -16,10 +16,10 @@ class Cron extends MY_Controller {
     {
         $query = $this->db->query("SHOW FULL PROCESSLIST");
         $result = $query->result_array();
-        foreach ($result as $key => $value) {            
+        foreach ($result as $key => $value) {
             $process_id = $value['Id'];
-            if ($value["Time"] > 0 ) {
-                $sql="KILL $process_id";                
+            if ($value["Command"] == 'Sleep' ) {
+                $sql="KILL $process_id";
                 $query = $this->db->query($sql);
             }
             # code...

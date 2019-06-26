@@ -12,7 +12,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
     var isProcessing = false;
     
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.6) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) {
             // isLoadingData = true;
             var page = $scope.jobs.page_number;
             var total_record = $scope.jobs.total_record;
@@ -52,7 +52,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             method: 'POST',
             url: base_url + 'user_post/getContactAllSuggetion?page='+start,            
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (success) {            
+        }).then(function (success) {
             $(".sugg_post_load").hide();            
             
             if (success.data.con_sugg_data.length >0 ) {            
@@ -143,8 +143,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
-        }, function (error) {            
+        }, function (error) {
             $(".sugg_post_load").hide();
+            setTimeout(function(){
+                getContactSuggetion(start);
+            },500);
         }, 
         function (complete) {
             $(".sugg_post_load").hide();
@@ -161,6 +164,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             $("#contactlist").show();
             pending_contact_request = success.data;
             $scope.pending_contact_request_data = pending_contact_request;            
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                pending_contact_request();
+            },500);
         });
     }
     function contactRequestNotification() {
@@ -171,6 +179,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         }).then(function (success) {
             contactRequestNotification = success.data;
             $scope.contactRequestNotification = contactRequestNotification;
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                contactRequestNotification();
+            },500);
         });
     }
     $scope.confirmContact = function (from_id, index) {
@@ -187,6 +200,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
                     socket.emit('user notification',from_id);
                 }
             }
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.confirmContact(from_id, index);
+            },500);
         });
     }
 
@@ -204,6 +222,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
                     socket.emit('user notification',from_id);
                 }
             }
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.rejectContact(from_id, index);
+            },500);
         });
     }
     $scope.addToContact = function (user_id, suggest) {
@@ -221,6 +244,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
                 }
                 //$('.owl-carousel').trigger('next.owl.carousel');
             }
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.addToContact(user_id, suggest);
+            },500);
         });
     }
 });
@@ -271,20 +299,39 @@ function contact(elid)
     var to_id = params[2];
     var indexCon = params[3];
     var confirm = params[4];
+    if(status == 'confirm')
+    {
+        $("#pending-con-"+indexCon.slice(0,-6)).remove();
+        $.ajax({
+            url: base_url + "userprofile/contactRequestAction",        
+            type: "POST",
+            data: 'from_id='+to_id.slice(0,-6)+'&action=confirm',
+            dataType:"JSON",
+            success: function (data) {            
+                // $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
+                setTimeout(function(){
+                    // $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+                },500);
+            }
+        });
+    }
+    else
+    {        
+        $(".contact-btn-"+to_id.slice(0, -6)+' a').html('Request sent');
+        $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:none;');
 
+        $.ajax({
+            url: base_url + "userprofile_page/addToContactNewTooltip",        
+            type: "POST",
+            data: 'contact_id='+id+'&status='+status+'&to_id='+to_id+'&indexCon='+indexCon+'&elid='+elid,
+            dataType:"JSON",
+            success: function (data) {            
+                $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
+                setTimeout(function(){
+                    $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
+                },500);
+            }
+        });
+    }
     
-    $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:none;');
-
-    $.ajax({
-        url: base_url + "userprofile_page/addToContactNewTooltip",        
-        type: "POST",
-        data: 'contact_id='+id+'&status='+status+'&to_id='+to_id+'&indexCon='+indexCon+'&elid='+elid,
-        dataType:"JSON",
-        success: function (data) {            
-            $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
-            setTimeout(function(){
-                $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);
-            },500);
-        }
-    });
 }

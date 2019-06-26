@@ -37,7 +37,7 @@
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                 </div>                                
                                 <ul class="pendin-req" ng-class="pending_contact_request_data.length < '3' ? 'first-pending-req' : ''">
-                                    <li ng-repeat="contact in pending_contact_request_data">
+                                    <li id="pending-con-{{$index + 1}}" ng-repeat="contact in pending_contact_request_data">
                                         <div id="pending_tooltip_content_{{$index}}" class="tooltip_templates">
                                             <div class="user-tooltip">
                                                 <div class="tooltip-cover-img">
@@ -87,21 +87,13 @@
                                                     </ul>
                                                     <div class="tooltip-btns" ng-if="user_id != contact.from_id">
                                                         <ul>
-                                                            <li class="contact-btn-{{contact.user_id}}">
-                                                                <a class="btn-new-1" ng-if="contact.contact_value == 'new'" data-param="{{contact.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ contact.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{contact.user_id}}">Add to contact</a>
-                                                                
-                                                                <a class="btn-new-1" ng-if="contact.contact_value == 'confirm'" data-param="{{contact.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ contact.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{contact.user_id}}">In Contacts</a>
-                                                                
-                                                                <a class="btn-new-1" ng-if="contact.contact_value == 'pending'" data-param="{{contact.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ contact.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{contact.user_id}}">Request sent</a>
-                                                                
-                                                                <a class="btn-new-1" ng-if="contact.contact_value == 'cancel'" data-param="{{contact.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ contact.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{contact.user_id}}">Add to contact</a>
-                                                                
-                                                                <a class="btn-new-1" ng-if="contact.contact_value == 'reject'" data-param="{{contact.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ contact.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{contact.user_id}}">Add to contact</a>
+                                                            <li class="contact-btn-{{contact.from_id}}">
+                                                                <a class="btn-new-1" ng-if="contact.contact_value == 'pending'" data-param="{{contact.contact_id}}{{ today | date : 'hhmmss'}},confirm,{{ contact.from_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{contact.from_id}}">Confirm</a>
                                                             </li>
-                                                            <li class="follow-btn-user-{{contact.user_id}}">
-                                                                <a ng-if="contact.follow_status == 1" class="btn-new-1 following" data-uid="{{contact.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{contact.user_id}}">Following</a>
+                                                            <li class="follow-btn-user-{{contact.from_id}}">
+                                                                <a ng-if="contact.follow_status == 1" class="btn-new-1 following" data-uid="{{contact.from_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{contact.from_id}}">Following</a>
 
-                                                                <a ng-if="contact.follow_status == 0 || !contact.follow_status" class="btn-new-1 follow" data-uid="{{contact.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{contact.user_id}}">Follow</a>
+                                                                <a ng-if="contact.follow_status == 0 || !contact.follow_status" class="btn-new-1 follow" data-uid="{{contact.from_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{contact.from_id}}">Follow</a>
                                                             </li>
                                                             <li>
                                                                 <a href="<?php echo MESSAGE_URL; ?>user/{{contact.user_slug}}" class="btn-new-1" target="_blank">Message</a>
@@ -262,8 +254,10 @@
 											</div>
 											
 											<div class="author-btn">
-												<div id="item-{{suggest.user_id}}" class="user-btns">
-													<a class="btn3" ng-click="addToContact(suggest.user_id, suggest);">Add to Contacts</a>
+												<div id="item-{{suggest.user_id}}" class="user-btns contact-btn-{{suggest.user_id}}">
+                                                    <a class="btn-new-1" ng-if="suggest.contact_value == 'new'" data-param="{{suggest.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ suggest.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_bt_{{suggest.user_id}}">Add to contact</a>
+
+													<!-- <a class="btn3" ng-click="addToContact(suggest.user_id, suggest);">Add to Contacts</a> -->
 												</div>
 											</div>
 										</div>
