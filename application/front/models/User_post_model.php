@@ -5425,7 +5425,7 @@ class User_post_model extends CI_Model {
                 $post_count = $this->common->get_post_count($user_post['user_id']);
                 $result_array['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
 
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $user_post['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $user_post['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
                 $result_array['user_data']['follow_status'] = $follow_detail['status'];
 
                 $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $user_post['user_id']);
@@ -5460,8 +5460,16 @@ class User_post_model extends CI_Model {
 
                 $result_array['user_data']['contact_count'] = '';
                 $result_array['user_data']['post_count'] = '';
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $user_post['user_id'] . ' AND follow_from =' . $user_id . ')')->get()->row_array();
-                $result_array['user_data']['follow_status'] = $follow_detail['status'];
+                
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $user_post['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2"')->get()->row_array();
+                if($follow_detail)
+                {
+                    $result_array['user_data']['follow_status'] = $follow_detail['status'];
+                }
+                else
+                {
+                    $result_array['user_data']['follow_status'] = '';
+                }
             }
 
             if ($user_post['post_for'] == 'opportunity') {

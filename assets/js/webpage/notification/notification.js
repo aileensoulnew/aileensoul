@@ -3,6 +3,7 @@ var isProcessing = false;
 var main_page_number = "";
 var main_total_record = "";
 var main_perpage_record = "";
+var fail_count = 0;
 $(document).ready(function () {
     notificatin_ajax_data();
     
@@ -49,6 +50,7 @@ $(document).ready(function () {
             $('#loader').hide();
         },
         success: function (data) {
+            fail_count = 0;
             $('.loader').remove();
             $('.notification_data').append(data.notification);
             /*if(pagenum == undefined || pagenum == 'undefined')
@@ -74,6 +76,12 @@ $(document).ready(function () {
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             setTimeout(function(){
                 isProcessing = false;
+                if(fail_count == 2)
+                {
+                    fail_count = 0;
+                    pagenum = pagenum + 1;
+                }
+                fail_count = fail_count + 1;
                 notificatin_ajax_data(pagenum);
             },500);
         }
