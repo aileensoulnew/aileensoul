@@ -2075,7 +2075,7 @@ label.cameraButton:active{
     padding-left:0
 }
 .profile-job-post-location-name ul li.folle_text{
-    padding-top:5px;
+    padding-top:6px;
     padding-left:10px
 }
 .profile-job-post-location-name ul li .user_btn{
@@ -2088,9 +2088,9 @@ label.cameraButton:active{
     height:60px;
     width:60px
 }
-.user_lst li a{
-    color:#91949d!important
-}
+.user_lst li .follow-img a{padding: 0;}
+.user_lst li.folle_text a{padding: 0;}
+.user_lst li a{color:#9c9999!important; border-color: #d2d2d2; padding: 6px 15px; font-size: 14px; width: 100px; cursor: pointer; margin: 12px 0;}
 .profile-job-post-location-name ul li .follow-img img{
     height:100%;
     width:100%;
@@ -2103,9 +2103,7 @@ label.cameraButton:active{
     padding:7px 0 0;
     font-weight:400
 }
-.user_lst li .follow-li-text a{
-    color:#5c5c5c !important;
-}
+.user_lst li .follow-li-text a{color:#5c5c5c !important; font-weight: bold; line-height: 1;}
 .user_lst ul li button{
     font-weight:400;
     background:-moz-linear-gradient(bottom,#e9e9e9 5%,#f9f9f9 100%);

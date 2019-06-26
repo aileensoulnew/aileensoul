@@ -127,7 +127,7 @@ background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
 background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
 background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
 background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-background-color: #e9e9e9; color: #5c5c5c;}
+background-color: #e9e9e9; color: #9c9999;}
 .btn4{font-size: 15px; padding: 3px 13px !important; margin-right: 4px; margin-left: 4px; background: #ffffff; text-transform:capitalize; color: #1b8ab9; border:1px solid #1b8ab9; font-weight: normal; border-radius:4px; display:inline-block;}
 .btn4:hover{background:#1b8ab9; color:#fff;}
 .btn5{border:2px solid #fff; color:#fff; font-size:16px; padding:5px 15px; border-radius:4px; display:inline-block;}
@@ -564,8 +564,8 @@ border-radius: 50%;font-size: 10px;line-height: 1.8;position: absolute; right: 7
 .search-profiles .profile-data p a{color:#5c5c5c;}
 .search-profiles .profile-data p a:hover{text-decoration: underline;}
 .search-profiles .profile-data span{display:block; font-size:14px; color:#999;}
-.search-profiles .profile-btns{width:90px; float:left;}
-.search-profiles .profile-btns a{width:100%; padding:8px 10px; margin:10px 0;}
+.search-profiles .profile-btns{width:90px; float:left; text-align: right;}
+.search-profiles .profile-btns a{width:100%; padding:8px 10px; margin:11px 0;}
 .search-profiles .profile-btns a:focus{color:#fff;}
 .search-profiles .profile-btns a.btn1{border:1px solid #1b8ab9 !important;}
 .availabel-data-box h3.border-bottom-none{border-bottom:0px;}

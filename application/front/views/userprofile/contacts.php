@@ -112,7 +112,7 @@
                         <!-- <a class="btn3" id="{{contacts.user_id}}" ng-click="remove(contacts.user_id)">In Contacts</a> -->
 
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'new'" ng-click="contact(contacts.contact_detail.contact_id, 'pending', contacts.user_id,$index + 1)">Add to contact</a>
-                        <a class="btn1" ng-if="contacts.contact_detail.contact_value == 'confirm'" ng-click="contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1,1)">In Contacts</a>
+                        <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'confirm'" ng-click="contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1,1)">In Contacts</a>
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'pending'" ng-click="contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1)">Request sent</a>
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'cancel'" ng-click="contact(contacts.contact_detail.contact_id, 'pending', contacts.user_id,$index + 1)">Add to contact</a>
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'reject'" ng-click="contact(contacts.contact_detail.contact_id, 'pending', contacts.user_id,$index + 1)">Add to contact</a>
