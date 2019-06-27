@@ -960,6 +960,9 @@ header.profile-header .logo a{color:#5c5c5c;}
 .like-popup .modal-body{padding:0;}
 .article-preview header{background:none; position:inherit; }
 .like-popup-scroll{width: 100%; float: left; max-height: 425px; overflow-y: overlay;} 
+@-moz-document url-prefix() {
+    .like-popup-scroll{overflow-y:auto;}
+}
 
 /***  end article page  ***/
 .gradient-bg{
@@ -4803,7 +4806,10 @@ tags-input .tags{padding: 0;}
   .search-business-top .bus-search-top .job-top-detail{width:65%;}
   .search-business-top .job-top-detail h5.bus-ind{font-size: 14px;}
   .like-img a img{width: 40px; height: 40px;}
-  .like-popup .like-detail h4{font-size: 16px; padding-top: 3px;}
+  .like-popup .like-detail h4{font-size: 14px; padding-top: 3px; font-weight: bold;}
+  .like-popup .modal-content h3{font-size: 20px; line-height: 20px;}
+  .like-popup ul li a{margin-right: 10px;}
+  .like-popup .like-detail p{width: 100%; float: left; line-height: 1; padding-top: 4px; font-size: 13px;}
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}
