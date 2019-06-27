@@ -4237,7 +4237,6 @@
                 <div class="like-popup-scroll">
                     <ul>
                         <li class="like-img" ng-repeat="userlist in get_like_user_list">
-
                             <div id="like_tooltip_content_{{$index}}" class="tooltip_templates">
                                 <div class="user-tooltip">
                                     <div class="tooltip-cover-img">

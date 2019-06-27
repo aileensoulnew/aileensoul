@@ -334,7 +334,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .bus-tooltip .tooltip-detail h4{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .bus-tooltip .tooltip-detail p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns{padding-top: 12px;}
-.bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1{margin-right: 0;}
+.bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1{margin-right: 0; line-height: 1.42857143;}
 .bus-tooltip .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1:hover{border: 1px solid #d2d2d2;}
 
 .suggestion .arti-profile-box .user-info-text p{line-height: 1;}

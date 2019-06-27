@@ -2107,7 +2107,7 @@
                 <h3 ng-if="count_likeUser > 0 && count_likeUser < 2">{{count_likeUser}} Like</h3>
                 <h3 ng-if="count_likeUser > 1">{{count_likeUser}} Likes</h3>
                 <div class="modal-body padding_less_right">
-                    <div class="">
+                    <div class="like-popup-scroll">
                         <ul>
                             <li class="like-img" ng-repeat="userlist in get_like_user_list">
                                 <div id="like_tooltip_content_{{$index}}" class="tooltip_templates">
