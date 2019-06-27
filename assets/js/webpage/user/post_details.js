@@ -114,6 +114,13 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
     $scope.opp = {};
     loadPostData();
 
+    $scope.details_in_popup = function(url,div_id){
+        $http.get(base_url + url,{withCredentials:true}).then(function(success) {            
+            $('#'+div_id).html(success.data);
+        });        
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     function loadPostData() {
         $('#loader').show();
         $http.get(base_url + "user_post/post_data/?post_id=" + post_id).then(function(success) {
@@ -149,12 +156,16 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 }
 
                 $('[data-toggle="popover"]').popover({
+                    animation: true,
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        // console.log($(this).data('tooltip-url'));
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup($(this).data('tooltip-url'),div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {

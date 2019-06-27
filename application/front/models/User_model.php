@@ -626,4 +626,94 @@ class User_model extends CI_Model {
             return true;   
         }
     }
+
+    public function user_info_box($user_id,$user_type)
+    {
+        $user_id_login = $this->session->userdata('aileenuser');
+        if($user_type == '1')
+        {
+            $this->db->select("u.user_id,u.user_slug,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,ui.profile_background ,jt.name as title_name,d.degree_name")->from("user u");
+            $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+            $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+            $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+            $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+            $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+            $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+            $this->db->where('u.user_id', $user_id);
+            $query = $this->db->get();
+            $user_data = $query->row_array();
+            $result_array['user_data'] = $user_data;
+            
+            $follower_count = $this->common->getFollowerCount($user_id)[0];
+            $result_array['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+
+            $contact_count = $this->common->getContactCount($user_id)[0];
+            $result_array['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
+
+            $post_count = $this->common->get_post_count($user_id);
+            $result_array['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
+
+            if($user_id_login != '')
+            {                    
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $user_id . ' AND follow_from =' . $user_id_login . ') AND follow_type = "1"')->get()->row_array();
+                $result_array['user_data']['follow_status'] = $follow_detail['status'];
+
+                $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id_login, $user_id);
+                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+                {
+                    $result_array['user_data']['contact_status'] = 1;
+                    $result_array['user_data']['contact_value'] = $is_userContactInfo['status'];
+                    $result_array['user_data']['contact_id'] = $is_userContactInfo['id'];
+                }
+                else
+                {
+                    $result_array['user_data']['contact_status'] = 0;
+                    $result_array['user_data']['contact_value'] = 'new';
+                    $result_array['user_data']['contact_id'] = $is_userContactInfo['id'];   
+                }
+            }
+            else
+            {
+                $result_array['user_data']['follow_status'] = '';
+                $result_array['user_data']['contact_status'] = '';
+                $result_array['user_data']['contact_value'] = '';
+                $result_array['user_data']['contact_id'] = '';
+            }
+        }
+        else
+        {
+            $this->db->select("bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,IF(bp.industriyal = 0,bp.other_industrial,it.industry_name) as industry_name")->from("business_profile bp");
+            $this->db->join('user_login ul', 'ul.user_id = bp.user_id', 'left');
+            $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');            
+            $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
+            $this->db->join('states st', 'st.state_id = bp.state', 'left');
+            $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
+            $this->db->where('bp.user_id', $user_id);
+            $query = $this->db->get();
+            $user_data = $query->row_array();
+            $result_array['user_data'] = $user_data;
+            
+            $follower_count = $this->business_model->getFollowerCount($user_id)[0];
+            $result_array['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
+            if($user_id_login != '')
+            {
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $user_id . ' AND follow_from =' . $user_id_login . ') AND follow_type = "2" ')->get()->row_array();
+                $result_array['user_data']['follow_status'] = $follow_detail['status'];
+            }
+            else
+            {
+                $result_array['user_data']['follow_status'] = '';
+            }
+        }
+
+        if($user_id_login != $user_id)
+        {
+            $result_array['mutual_friend'] = $this->common->mutual_friend($user_id_login,$user_id);
+        }
+        else
+        {
+            $result_array['mutual_friend'] = array();
+        }
+        return $result_array;
+    }
 }

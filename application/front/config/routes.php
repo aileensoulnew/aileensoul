@@ -307,6 +307,9 @@ $route['searchelastic'] = "Searchelastic";
 $route['searchelastic/search'] = "Searchelastic/search";
 $route['searchelastic/search_opportunity_data'] = "Searchelastic/search_opportunity_data";
 
+
+$route['user-info-box'] = "user_post/user_info_box/$1";
+
 $route['(:any)'] = 'Userprofile';
 
 $route['company/userlist'] = "business_profile_live/userlist";

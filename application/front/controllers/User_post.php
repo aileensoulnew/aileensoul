@@ -4076,4 +4076,14 @@ class User_post extends MY_Controller {
             sleep(1);
         }
     }
+
+    public function user_info_box()
+    {        
+        $id = $this->input->get('id');
+        $type = $this->input->get('type');
+        $user_info_data = $this->user_model->user_info_box($id,$type);
+        $this->data['user_info_data'] = $user_info_data;
+        $this->data['type'] = $type;
+        $this->load->view('userprofile/user_info_box', $this->data);
+    }
 }
