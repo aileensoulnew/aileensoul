@@ -1969,12 +1969,24 @@ class User_post extends MY_Controller {
     
     public function likeuserlist() {
         $userid = $this->session->userdata('aileenuser');
-        $post_id = $_POST['post_id'];
-        $userListData = $this->user_post_model->getLikeUserList($post_id);
+        $post_id = $_POST['post_id'];        
+        $page = 1;
+        if (!empty($_POST['pagenum']) && $_POST['pagenum'] != 'undefined') {
+            $page = $_POST['pagenum'];
+        }
+
+        $limit = 7;
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $userListData = $this->user_post_model->getLikeUserList($post_id,$start,$limit);
+        $total_like = $this->user_post_model->likepost_count($post_id);
 
         $data = array(
-            'countlike' => count($userListData),
-            'likeuserlist' => $userListData
+            'countlike' => $total_like,
+            'likeuserlist' => $userListData,
+            'page' => $page
         );
         echo json_encode($data);
     }

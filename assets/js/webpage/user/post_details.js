@@ -111,7 +111,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
     $scope.ask = {};
     $scope.title = "Post | Aileensoul";
     $scope.user_id = user_id;
-    $scope.opp = {};
+    $scope.opp = {};    
+
     loadPostData();
 
     $scope.details_in_popup = function(url,div_id){
@@ -890,12 +891,19 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $('.post-popup-box').attr('style','pointer-events: all;');
         });
     };
+
+    $scope.l_page = 0;
+    $scope.l_total_record = 0;
+    $scope.l_perpage = 7;
     
+    $scope.like_post_id = 0;
     $scope.like_user_list = function(post_id) {
+        $scope.like_post_id = post_id;
+        pagenum = 1;
         $http({
             method: 'POST',
             url: base_url + "user_post/likeuserlist",
-            data: 'post_id=' + post_id,
+            data: 'post_id=' + post_id + '&pagenum='+pagenum,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -903,6 +911,8 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $scope.count_likeUser = success.data.countlike;
             $scope.get_like_user_list = success.data.likeuserlist;
             if (success.data.countlike > 0) {
+                $scope.l_page = success.data.page;
+                $scope.l_total_record = success.data.countlike;
                 $('#likeusermodal').modal('show');
                 setTimeout(function(){
                     $('[data-toggle="popover"]').popover({
@@ -959,6 +969,112 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             }
         });
     }
+
+    var is_processing = false;
+
+    $scope.like_user_list_loadmore = function(post_id,pagenum) {
+        if(is_processing)
+        {
+            return false;
+        }
+        is_processing = true;
+        $('#like_loader').show();
+        $http({
+            method: 'POST',
+            url: base_url + "user_post/likeuserlist",
+            data: 'post_id=' + post_id + '&pagenum='+pagenum,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            $('#like_loader').hide();
+            if(success.data.likeuserlist)
+            {
+                for (var i in success.data.likeuserlist) {
+                    $scope.get_like_user_list.push(success.data.likeuserlist[i]);
+                }
+
+                $scope.l_page = success.data.page;
+                $scope.l_total_record = success.data.countlike;
+                
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $($(this).data('tooltip-content')).html();                        
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
+                is_processing = false;
+            }
+            
+        });
+    }
+
+    $('.like-popup-scroll').on('scroll', function () {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            var page = $scope.l_page;
+            var total_record = $scope.l_total_record;
+            var perpage_record = $scope.l_perpage;
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.l_page) + 1;
+                    $scope.like_user_list_loadmore($scope.like_post_id,pagenum);
+                }
+            }
+        }
+    });
+
     $scope.IsVisible = false;
     $scope.ShowHide = function() {
         //If DIV is visible it will be hidden and vice versa.

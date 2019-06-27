@@ -1970,21 +1970,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-
-            <!-- <div class="modal fade message-box" id="likeusermodal" role="dialog">
-                <div class="modal-dialog modal-lm">
-                    <div class="modal-content">
-                        <button type="button" class="modal-close1" data-dismiss="modal">&times;</button>       
-                        <div class="modal-body">
-                            <span class="mes">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div> -->            
+            </div>        
 
             <div class="modal fade message-box" id="postedit" role="dialog">
                 <div class="modal-dialog modal-lm">
@@ -2911,6 +2897,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </div>
                                 </li>
                             </ul>
+                            <div id="like_loader" class="fw" style="text-align: center;display: none;position: absolute;bottom: 0;z-index: 9;">
+                                <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
+                            </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>

@@ -4412,7 +4412,7 @@ class User_post_model extends CI_Model {
     }
     
     
-    public function getLikeUserList($post_id = '') {
+    public function getLikeUserList($post_id = '',$start = '',$limit = '7') {
         $user_id = $this->session->userdata('aileenuser');
 
         $this->db->select("upl.id,upl.post_id,upl.user_id,upl.modify_date,u.user_slug,u.user_gender,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname, ui.user_image, ui.profile_background, jt.name as title_name,d.degree_name")->from("user_post_like upl");
@@ -4428,6 +4428,9 @@ class User_post_model extends CI_Model {
         $this->db->where('ul.status','1');
         $this->db->where('ul.is_delete', '0');
         $this->db->order_by('upl.id', 'DESC');
+        if ($limit != '') {
+            $this->db->limit($limit, $start);
+        }
         $query = $this->db->get();
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {

@@ -941,6 +941,9 @@
 
                         </li>
                     </ul>
+                    <div id="like_loader" class="fw" style="text-align: center;display: none;position: absolute;bottom: 0;z-index: 9;">
+                        <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
