@@ -116,6 +116,7 @@
                         </h3>
                     </div>					
                     <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
+                        <?php if($usre_id){ ?>
                         <div id="tooltip_content_bus_{{busIndex}}" class="tooltip_templates">
                             <div class="bus-tooltip">
                                 <div class="user-tooltip">
@@ -147,6 +148,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="all-job-box search-business">
                             <div class="search-business-top">
                                 <div class="bus-cover no-cover-upload">

@@ -105,7 +105,7 @@
                             <p ng-if="searchProfile.title_name == null && searchProfile.degree_name == null">Current Work</p>
                             <p ng-if="searchProfile.post_count != '' || searchProfile.contact_count != '' || searchProfile.follower_count != ''">
                                 <span ng-if="searchProfile.post_count != ''"><b>{{searchProfile.post_count}}</b> Posts</span>
-                                <span ng-if="searchProfile.contact_count != ''"><b>{{searchProfile.contact_count}}</b> Connections</span>
+                                <span ng-if="searchProfile.contact_count != ''"><b>{{searchProfile.contact_count}}</b> Contacts</span>
                                 <span ng-if="searchProfile.follower_count != ''"><b>{{searchProfile.follower_count}}</b> Followers</span>
                             </p>
 

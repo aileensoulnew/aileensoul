@@ -504,7 +504,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                 <p ng-if="post.user_data.post_count != '' || post.user_data.contact_count != '' || post.user_data.follower_count != ''">
                                                     <span ng-if="post.user_data.post_count != ''"><b>{{post.user_data.post_count}}</b> Posts</span>
-                                                    <span ng-if="post.user_data.contact_count != ''"><b>{{post.user_data.contact_count}}</b> Connections</span>
+                                                    <span ng-if="post.user_data.contact_count != ''"><b>{{post.user_data.contact_count}}</b> Contacts</span>
                                                     <span ng-if="post.user_data.follower_count != ''"><b>{{post.user_data.follower_count}}</b> Followers</span>
                                                 </p>
 
@@ -793,7 +793,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                                 <p ng-if="post.share_data.data.user_data.post_count != '' || post.share_data.data.user_data.contact_count != '' || post.share_data.data.user_data.follower_count != ''">
                                                                     <span ng-if="post.share_data.data.user_data.post_count != ''"><b>{{post.share_data.data.user_data.post_count}}</b> Posts</span>
-                                                                    <span ng-if="post.share_data.data.user_data.contact_count != ''"><b>{{post.share_data.data.user_data.contact_count}}</b> Connections</span>
+                                                                    <span ng-if="post.share_data.data.user_data.contact_count != ''"><b>{{post.share_data.data.user_data.contact_count}}</b> Contacts</span>
                                                                     <span ng-if="post.share_data.data.user_data.follower_count != ''"><b>{{post.share_data.data.user_data.follower_count}}</b> Followers</span>
                                                                 </p>
 
@@ -1270,7 +1270,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                                 <p ng-if="comment.post_count != '' || comment.contact_count != '' || comment.follower_count != ''">
                                                                     <span ng-if="comment.post_count != ''"><b>{{comment.post_count}}</b> Posts</span>
-                                                                    <span ng-if="comment.contact_count != ''"><b>{{comment.contact_count}}</b> Connections</span>
+                                                                    <span ng-if="comment.contact_count != ''"><b>{{comment.contact_count}}</b> Contacts</span>
                                                                     <span ng-if="comment.follower_count != ''"><b>{{comment.follower_count}}</b> Followers</span>
                                                                 </p>
 
@@ -1396,7 +1396,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                                     <p ng-if="commentreply.post_count != '' || commentreply.contact_count != '' || commentreply.follower_count != ''">
                                                                         <span ng-if="commentreply.post_count != ''"><b>{{commentreply.post_count}}</b> Posts</span>
-                                                                        <span ng-if="commentreply.contact_count != ''"><b>{{commentreply.contact_count}}</b> Connections</span>
+                                                                        <span ng-if="commentreply.contact_count != ''"><b>{{commentreply.contact_count}}</b> Contacts</span>
                                                                         <span ng-if="commentreply.follower_count != ''"><b>{{commentreply.follower_count}}</b> Followers</span>
                                                                     </p>
 
@@ -2847,7 +2847,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                 <p ng-if="userlist.post_count != '' || userlist.contact_count != '' || userlist.follower_count != ''">
                                                     <span ng-if="userlist.post_count != ''"><b>{{userlist.post_count}}</b> Posts</span>
-                                                    <span ng-if="userlist.contact_count != ''"><b>{{userlist.contact_count}}</b> Connections</span>
+                                                    <span ng-if="userlist.contact_count != ''"><b>{{userlist.contact_count}}</b> Contacts</span>
                                                     <span ng-if="userlist.follower_count != ''"><b>{{userlist.follower_count}}</b> Followers</span>
                                                 </p>
 

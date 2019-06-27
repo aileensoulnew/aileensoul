@@ -94,7 +94,7 @@
                             <p ng-if="people.title_name == null && people.degree_name == null">Current Work</p>
                             <p ng-if="people.post_count != '' || people.contact_count != '' || people.follower_count != ''">
                                 <span ng-if="people.post_count != ''"><b>{{people.post_count}}</b> Posts</span>
-                                <span ng-if="people.contact_count != ''"><b>{{people.contact_count}}</b> Connections</span>
+                                <span ng-if="people.contact_count != ''"><b>{{people.contact_count}}</b> Contacts</span>
                                 <span ng-if="people.follower_count != ''"><b>{{people.follower_count}}</b> Followers</span>
                             </p>
 

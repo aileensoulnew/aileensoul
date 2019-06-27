@@ -85,8 +85,10 @@
                         </div>
                         <?php 
                         if(isset($businessList) && !empty($businessList)):
+                            $userid = $this->session->userdata('aileenuser');
                             foreach($businessList as $index=>$_businessList): ?>
                                 <div class="all-job-box search-business">
+                                    <?php if($userid){ ?>
                                     <div id="tooltip_content_<?php echo $index;?>" class="tooltip_templates">
                                         <div class="bus-tooltip">
                                             <div class="user-tooltip">
@@ -142,6 +144,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                     <div class="search-business-top">
                                         <div class="bus-cover no-cover-upload">
                                             <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">

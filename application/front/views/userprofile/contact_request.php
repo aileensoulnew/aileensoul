@@ -62,7 +62,7 @@
 
                                                     <p ng-if="contact.post_count != '' || contact.contact_count != '' || contact.follower_count != ''">
                                                         <span ng-if="contact.post_count != ''"><b>{{contact.post_count}}</b> Posts</span>
-                                                        <span ng-if="contact.contact_count != ''"><b>{{contact.contact_count}}</b> Connections</span>
+                                                        <span ng-if="contact.contact_count != ''"><b>{{contact.contact_count}}</b> Contacts</span>
                                                         <span ng-if="contact.follower_count != ''"><b>{{contact.follower_count}}</b> Followers</span>
                                                     </p>
 
@@ -178,7 +178,7 @@
 
                                                     <p ng-if="suggest.post_count != '' || suggest.contact_count != '' || suggest.follower_count != ''">
                                                         <span ng-if="suggest.post_count != ''"><b>{{suggest.post_count}}</b> Posts</span>
-                                                        <span ng-if="suggest.contact_count != ''"><b>{{suggest.contact_count}}</b> Connections</span>
+                                                        <span ng-if="suggest.contact_count != ''"><b>{{suggest.contact_count}}</b> Contacts</span>
                                                         <span ng-if="suggest.follower_count != ''"><b>{{suggest.follower_count}}</b> Followers</span>
                                                     </p>
 

@@ -64,7 +64,7 @@ if ($total_record > 0) {
                                     echo '<span><b>'.$user['post_count'].'</b> Posts</span>';
                                 }
                                 if($user['contact_count'] != ''){
-                                    echo '<span><b>'.$user['contact_count'].'</b> Connections</span>';
+                                    echo '<span><b>'.$user['contact_count'].'</b> Contacts</span>';
                                 }
                                 if($user['follower_count'] != ''){
                                     echo '<span><b>'.$user['follower_count'].'</b> Followers</span>';
