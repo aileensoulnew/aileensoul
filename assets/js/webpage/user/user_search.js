@@ -805,6 +805,27 @@ app.controller('searchController', function($scope, $http, $compile) {
         $("#" + removeViewMore).remove();
     };
     $scope.post_like = function(post_id,parent_index,user_id) {
+        if($('#post-like-' + post_id).hasClass('like'))
+        {
+            $('#post-like-' + post_id).removeClass('like');
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            if(parseInt(like_cnt) - 1 < 1)
+            {
+                $('#post-like-count-' + post_id).hide();
+            }
+            else
+            {
+                $('#post-like-count-' + post_id).html(parseInt(like_cnt) - 1);
+            }
+        }
+        else
+        {
+            $('#post-like-' + post_id).addClass('like');
+            $('#post-like-count-' + post_id).show();
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            $('#post-like-count-' + post_id).html(parseInt(like_cnt) + 1);
+
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -2457,6 +2478,27 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
         $("#" + removeViewMore).remove();
     };
     $scope.post_like = function(post_id,parent_index, user_id) {
+        if($('#post-like-' + post_id).hasClass('like'))
+        {
+            $('#post-like-' + post_id).removeClass('like');
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            if(parseInt(like_cnt) - 1 < 1)
+            {
+                $('#post-like-count-' + post_id).hide();
+            }
+            else
+            {
+                $('#post-like-count-' + post_id).html(parseInt(like_cnt) - 1);
+            }
+        }
+        else
+        {
+            $('#post-like-' + post_id).addClass('like');
+            $('#post-like-count-' + post_id).show();
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            $('#post-like-count-' + post_id).html(parseInt(like_cnt) + 1);
+
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -4460,6 +4502,27 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
         $("#" + removeViewMore).remove();
     };
     $scope.post_like = function(post_id,parent_index,user_id) {
+        if($('#post-like-' + post_id).hasClass('like'))
+        {
+            $('#post-like-' + post_id).removeClass('like');
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            if(parseInt(like_cnt) - 1 < 1)
+            {
+                $('#post-like-count-' + post_id).hide();
+            }
+            else
+            {
+                $('#post-like-count-' + post_id).html(parseInt(like_cnt) - 1);
+            }
+        }
+        else
+        {
+            $('#post-like-' + post_id).addClass('like');
+            $('#post-like-count-' + post_id).show();
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            $('#post-like-count-' + post_id).html(parseInt(like_cnt) + 1);
+
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -6333,6 +6396,27 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
         $("#" + removeViewMore).remove();
     };
     $scope.post_like = function(post_id,parent_index,user_id) {
+        if($('#post-like-' + post_id).hasClass('like'))
+        {
+            $('#post-like-' + post_id).removeClass('like');
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            if(parseInt(like_cnt) - 1 < 1)
+            {
+                $('#post-like-count-' + post_id).hide();
+            }
+            else
+            {
+                $('#post-like-count-' + post_id).html(parseInt(like_cnt) - 1);
+            }
+        }
+        else
+        {
+            $('#post-like-' + post_id).addClass('like');
+            $('#post-like-count-' + post_id).show();
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            $('#post-like-count-' + post_id).html(parseInt(like_cnt) + 1);
+
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -7798,6 +7882,27 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
         $("#" + removeViewMore).remove();
     };
     $scope.post_like = function(post_id,parent_index,user_id) {
+        if($('#post-like-' + post_id).hasClass('like'))
+        {
+            $('#post-like-' + post_id).removeClass('like');
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            if(parseInt(like_cnt) - 1 < 1)
+            {
+                $('#post-like-count-' + post_id).hide();
+            }
+            else
+            {
+                $('#post-like-count-' + post_id).html(parseInt(like_cnt) - 1);
+            }
+        }
+        else
+        {
+            $('#post-like-' + post_id).addClass('like');
+            $('#post-like-count-' + post_id).show();
+            var like_cnt = $('#post-like-count-' + post_id).html();
+            $('#post-like-count-' + post_id).html(parseInt(like_cnt) + 1);
+
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
