@@ -4863,7 +4863,7 @@ class User_post_model extends CI_Model {
 
             $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
             $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-            if($user_id != '' && $userid_login != $value['user_id'])
+            if($userid_login != '' && $userid_login != $value['user_id'])
             {
                 $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $userid_login . ') AND follow_type = "2" ')->get()->row_array();
                 
