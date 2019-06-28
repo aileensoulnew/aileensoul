@@ -82,7 +82,7 @@
                         <img src="<?php echo base_url('assets/img/man-user.jpg'); ?>">
                     <?php
                     }
-                    if($user_info_data['user_data']['user_gender'] == 'M'){
+                    if($user_info_data['user_data']['user_gender'] == 'F'){
                     ?>
                         <img src="<?php echo base_url('assets/img/female-user.jpg'); ?>">
                     <?php
@@ -137,7 +137,7 @@
                                         <img src="<?php echo base_url('assets/img/man-user.jpg'); ?>">
                                     <?php
                                     }
-                                    elseif($value['user_gender'] == 'M'){
+                                    elseif($value['user_gender'] == 'F'){
                                     ?>
                                         <img src="<?php echo base_url('assets/img/female-user.jpg'); ?>">
                                     <?php

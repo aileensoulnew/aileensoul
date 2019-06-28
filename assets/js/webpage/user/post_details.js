@@ -1,16 +1,3 @@
-/*app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-    var original = $location.path;
-    $location.path = function (path, reload) {
-        if (reload === false) {
-            var lastRoute = $route.current;
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
-                $route.current = lastRoute;
-                un();
-            });
-        }
-        return original.apply($location, [path]);
-    };
-}]);*/
 app.directive('ddTextCollapse', ['$compile', function($compile) {
     return {
         restrict: 'A',
@@ -116,10 +103,11 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
     loadPostData();
 
     $scope.details_in_popup = function(url,div_id){
-        $http.get(base_url + url,{withCredentials:true}).then(function(success) {            
+        socket.emit('get user card',user_id);
+        /*$http.get(base_url + url,{withCredentials:true}).then(function(success) {            
             $('#'+div_id).html(success.data);
         });        
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';*/
     }
 
     function loadPostData() {

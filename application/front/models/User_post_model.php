@@ -1564,7 +1564,7 @@ class User_post_model extends CI_Model {
 
         if($user_id == 103 || $user_id == 29112)
         {
-            $sql = "SELECT COUNT(*) as total FROM (SELECT up.* FROM ailee_user_post up WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";   
+            $sql = "SELECT COUNT(*) as total FROM (SELECT up.* FROM ailee_user_post up WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";   
         }
         //End New Feed After 09-04-2019
         // echo $sql;exit();        
@@ -2122,7 +2122,7 @@ class User_post_model extends CI_Model {
         
         if($user_id == 103 || $user_id == 29112)
         {
-            $sql = "SELECT * FROM (SELECT up.* FROM ailee_user_post up WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY main.created_date DESC";   
+            $sql = "SELECT main.* FROM (SELECT up.* FROM ailee_user_post up WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY main.created_date DESC";   
         }
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
