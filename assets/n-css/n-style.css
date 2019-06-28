@@ -950,12 +950,13 @@ header.profile-header .logo a{color:#5c5c5c;}
 .like-popup ul{padding:0; width: 100%; float:left; margin: 0;}
 .like-popup ul li{padding:10px 15px; list-style-type:none; width:100%; border-bottom:1px solid #d2d2d2; float:left;}
 .like-popup ul li:last-child{border-bottom: 0px;}
-.like-popup ul li a{margin-right:18px;}
+.like-popup ul li:nth-last-child(2){border-bottom: 0px;}
+.like-popup ul li a{margin-right:15px;}
 .like-popup ul .like-img:last-child a{padding:0 !important;}
-.like-popup ul .like-img a{float:left; text-transform: capitalize; color: #5c5c5c}
+.like-popup ul .like-img a{float:left; text-transform: capitalize; color: #5c5c5c; font-size: 15px; font-weight: bold;}
 .like-popup ul .like-img a:hover{text-decoration: underline;}
 .like-popup .like-detail {width:86%; float:left;}
-.like-popup .like-detail h4{display:block; margin:0; width:100%; float:left; padding:5px 0 0px;}
+.like-popup .like-detail h4{display:block; margin:0; width:100%; float:left; padding:8px 0 0px;}
 .like-popup .like-detail p{font-size:14px;}
 .like-popup .modal-body{padding:0;}
 .article-preview header{background:none; position:inherit; }
@@ -4806,10 +4807,14 @@ tags-input .tags{padding: 0;}
   .search-business-top .bus-search-top .job-top-detail{width:65%;}
   .search-business-top .job-top-detail h5.bus-ind{font-size: 14px;}
   .like-img a img{width: 40px; height: 40px;}
-  .like-popup .like-detail h4{font-size: 14px; padding-top: 3px; font-weight: bold;}
+  .like-popup .like-detail h4{font-size: 14px; padding-top: 4px; font-weight: bold;}
   .like-popup .modal-content h3{font-size: 20px; line-height: 20px;}
-  .like-popup ul li a{margin-right: 10px;}
+  .like-popup ul li a{margin-right: 10px; font-size: 14px;}
   .like-popup .like-detail p{width: 100%; float: left; line-height: 1; padding-top: 4px; font-size: 13px;}
+  .like-popup .modal-dialog{padding: 0; margin: 0;}
+  .like-popup .modal-content{width: 100%; min-height: 100vh; border:0px; border-radius: 0;}
+  .like-popup-scroll{max-height: inherit;}
+
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}
@@ -4884,6 +4889,7 @@ tags-input .tags{padding: 0;}
   .monetize-popup .modal-content .modal-close{top:0;}
   #ans-point .modal-content:after{display: none;}
   #ans-point .modal-close{color: #5c5c5c; top:5px;}
+
 }
 @media screen and (max-width: 539px) {
   .fw-539{width:100%; float:left;}
@@ -5401,6 +5407,7 @@ tags-input .tags{padding: 0;}
   .bus-search-top .bus-follow .btn-new-1 {font-size: 13px; padding: 4px 15px; width: 92px;}
   .search-profiles .profile-btns .btn-new-1.follow, .search-profiles .profile-btns .btn-new-1.following {font-size: 13px; margin: 3px 0; padding: 7px 15px; width: 92px;}
   .custom-user-btn a.btn-new-1{font-size: 13px; width: 92px;}
+
 }
 @media screen and (max-width: 359px) {
   .main-banner{max-height:170px;}

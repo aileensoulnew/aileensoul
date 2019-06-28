@@ -4325,10 +4325,13 @@
                                 <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
                             </div>
                         </li>
+                        <li id="like_loader" style="text-align: center;display: none; text-align: center; padding: 0;">
+                            <div class="fw" style="border-top:1px solid #d2d2d2; padding: 10px;">
+                                <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
+                            </div>
+                        </li>
                     </ul>
-                    <div id="like_loader" class="fw" style="text-align: center;display: none;position: absolute;bottom: 0;z-index: 9;">
-                        <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
-                    </div>
+                   
                 </div>
                 <div class="clearfix"></div>
             </div>
