@@ -500,7 +500,7 @@
                     <div class="bus-tooltip" ng-if="post.post_data.user_type == '2'">
                         <div class="user-tooltip">
                             <div class="tooltip-cover-img">
-                                <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}">
+                                <img ng-if="post.user_data.profile_background" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}">
                                 <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
                             </div>
                             <div class="tooltip-user-detail">
